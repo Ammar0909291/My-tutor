@@ -1,0 +1,389 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.handwriting-and-formation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.handwriting-and-formation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1e46a65d1e3fd084253c9c956f07dc5c7e75132544778b4e5872be9fe6e48415",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md": "sha256:014695e821e23425572fa3ca150279171b4d19b77334aaf6422169668ed00248"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.handwriting-and-formation",
+    "name": "Handwriting and Letter Formation",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.alphabet-recognition"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.handwriting-and-formation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.handwriting-and-formation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md": "sha256:014695e821e23425572fa3ca150279171b4d19b77334aaf6422169668ed00248"
+      },
+      "contentHash": "sha256:d4ea60621a3a01081ed72720c9233206698b8ed5b12aabd1bb15cfbe280b388c",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.handwriting-and-formation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.handwriting-and-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.handwriting-and-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.handwriting-and-formation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.handwriting-and-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.handwriting-and-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.handwriting-and-formation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.handwriting-and-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.handwriting-and-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.handwriting-and-formation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.handwriting-and-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.handwriting-and-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.handwriting-and-formation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md#TA-5 (addresses MC-ANY-STROKE-ORDER-WORKS, MC-SIZE-AND-BASELINE-DONT-MATTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.handwriting-and-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.handwriting-and-formation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.handwriting-and-formation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Handwriting and Letter Formation — Conceptual Development Sequence",
+      "content": "**TA-1 — Stroke-Path Narration [C]**\n\nFor a small set of letters (starting with straight-line letters: l, t, i), student narrates the stroke path aloud while sky-writing or tracing (\"start at the top, pull straight down\").\n\n**TA-2 — Guided Tracing on Lines [C]**\n\nStudent traces pre-printed dotted letters on ruled paper (with baseline, midline, and top-line marked), following correct stroke order, then narrates what each line is for (baseline = where letters sit, x-height line = top of short letters).\n\n**TA-3 — Independent Formation with Line Support [C→P]**\n\nStudent writes letters independently on ruled paper without a dotted guide, self-checking against baseline/height rules learned in TA-2.\n\n**TA-4 — Letter Category Sorting by Height [P]**\n\nStudent sorts a mixed set of letters into three groups by their height category: ascenders (b, d, h, k, l, t — extend above x-height), x-height only (a, c, e, m, n, o, etimes r, s, u, v, w, x, z), and descenders (g, j, p, q, y — dip below baseline), reinforcing the size/baseline rule from Component 1.\n\n**TA-5 — Word-Level Formation with Spacing [P]**\n\nStudent writes a short word, applying correct stroke order for each letter AND consistent spacing between letters and between words (using a finger-width or spacer tool as a concrete spacing anchor).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/misconception/MC-ANY-STROKE-ORDER-WORKS",
+      "kind": "misconception",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "- **Trigger signal:** Student produces a recognizable letter shape but via an inconsistent, inefficient, or backward stroke sequence (e.g., drawing \"O\" starting from the bottom and going counter-clockwise, or drawing vertical strokes bottom-to-top), and resists correction because \"it looks the same anyway.",
+      "content": "### MC-ANY-STROKE-ORDER-WORKS\n- **Trigger signal:** Student produces a recognizable letter shape but via an inconsistent, inefficient, or backward stroke sequence (e.g., drawing \"O\" starting from the bottom and going counter-clockwise, or drawing vertical strokes bottom-to-top), and resists correction because \"it looks the same anyway.\"\n- **Conflict evidence [P28]:** \"Your 'O' looks fine right now — but let's try writing five 'o's in a row, fast, the way you just did it. Now watch me do it my way, fast. Whose hand gets tired first, and whose letters stay more even and joined-up?\"\n- **Bridge text [P30]:** \"Stroke order and direction don't just matter for how a single letter looks now — they matter for how smoothly, quickly, and legibly you'll write later, especially once letters need to connect (cursive) or you write for a long time. The 'right' order is the one that sets you up for that.\"\n- **Replacement text [P31]:** \"Always start each letter at its designated starting point and follow the standard stroke direction, even if an alternate order produces a similar-looking result right now.\"\n- **Discrimination pairs [P33]:**\n  - Standard top-to-bottom vertical stroke vs. bottom-to-top (same visual result at slow speed, diverges badly at speed/cursive).\n  - Standard clockwise/counter-clockwise convention for circular letters (e.g., \"c,\" \"o,\" \"a\" all start top-right, move counter-clockwise) vs. an arbitrary starting point — consistency across letters that share a curve shape matters for motor-pattern transfer.\n- **s6_path:** \"It's reasonable to think 'if it looks right, it IS right' — but handwriting is a motor skill, not just a visual one, and the habits we build now either help or hurt every letter you write for years. We'll build the efficient habit from the start.\"",
+      "localKey": "MC-ANY-STROKE-ORDER-WORKS",
+      "language": "en",
+      "refs": [
+        "MC-ANY-STROKE-ORDER-WORKS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/misconception/MC-SIZE-AND-BASELINE-DONT-MATTER",
+      "kind": "misconception",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "- **Trigger signal:** Student writes letters at inconsistent sizes or ignores the baseline/writing lines entirely (letters floating above the line, or wildly varying height between letters in the same word), treating handwriting lines as decorative rather than functional guides.",
+      "content": "### MC-SIZE-AND-BASELINE-DONT-MATTER\n- **Trigger signal:** Student writes letters at inconsistent sizes or ignores the baseline/writing lines entirely (letters floating above the line, or wildly varying height between letters in the same word), treating handwriting lines as decorative rather than functional guides.\n- **Conflict evidence [P28]:** \"Look at this word you wrote — some letters sit on the line, some float above it, and the tall letters aren't all the same height. Now look at this printed word in a book — do the letters all sit on the same line and match up in height?\"\n- **Bridge text [P30]:** \"The baseline and the other guide-lines exist to keep every letter the same size and sitting in the same place — this is what makes handwriting easy for OTHER PEOPLE (and future-you) to read quickly, not just a rule for its own sake.\"\n- **Replacement text [P31]:** \"Always place letters so their base sits exactly on the baseline, and check tall/short letter categories (ascenders, x-height, descenders) against the guide lines before moving on.\"\n- **Discrimination pairs [P33]:**\n  - A word with all letters correctly baseline-anchored and proportionally sized vs. the same word with letters floating/varying — legibility difference made explicit.\n  - \"b\" (ascender, tall) vs. \"a\" (x-height, short) vs. \"p\" (descender, dips below baseline) — three different height categories that must be visually distinguished.\n- **s6_path:** \"Lines on the page can feel like they're just there to make things harder — but they're actually a shortcut that keeps your writing consistent without you having to judge size by eye every single time.\"\n\n---",
+      "localKey": "MC-SIZE-AND-BASELINE-DONT-MATTER",
+      "language": "en",
+      "refs": [
+        "MC-SIZE-AND-BASELINE-DONT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Stroke-Path Narration",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Stroke-Path Narration\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Guided Tracing on Lines",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Guided Tracing on Lines\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Independent Formation with Line Support",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Independent Formation with Line Support\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Letter Category Sorting by Height",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Letter Category Sorting by Height\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Word-Level Formation with Spacing",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Word-Level Formation with Spacing\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ANY-STROKE-ORDER-WORKS\",\"MC-SIZE-AND-BASELINE-DONT-MATTER\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ANY-STROKE-ORDER-WORKS",
+        "MC-SIZE-AND-BASELINE-DONT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Stroke order, novel letter**\n\"Show me how to form the letter 'd' — what's the first stroke?\"\n*Target:* correct standard stroke order (e.g., circle first, then the tall vertical stroke, per the standard curriculum convention being followed), not just a correct final shape.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Baseline/height self-check**\n\"Look at this word you wrote. Which letters, if any, aren't sitting correctly on the baseline?\"\n*Target:* student independently identifies any misaligned letters without being told which ones to check.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Height category classification**\n\"Sort these letters by height: g, m, l, p, a, k.\"\n*Target:* correctly groups g/p as descenders, l/k as ascenders, m/a as x-height.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Independent formation, novel word**\n\"Write the word 'jump' on the lines.\"\n*Target:* legible, correctly stroke-ordered, baseline-anchored, with correct ascender (j... actually j is a descender — verify: student correctly forms all 4 letters with j and p as descenders, m at x-height, u at x-height) and consistent spacing.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the purpose of guide lines**\n\"In your own words: why do we write on lines with a baseline and other markings, instead of just writing anywhere on blank paper?\"\n*Target:* explains that lines keep letter size/placement consistent, which makes writing easier for others (and future-self) to read.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Adaptive Flags",
+      "content": "- **Process before product**: praise and assess correct stroke order/direction and line-placement explicitly as a separate, checkable criterion from how \"neat\" the final letter looks — a correct process with imperfect neatness is closer to mastery than a neat letter formed the wrong way.\n- **Pre-pencil rehearsal is not optional**: the sky-writing/tracing sequence in Component 3 should precede pencil-and-paper attempts for every genuinely new letter, not just the first one taught.\n- **Existing incorrect habits are harder to unlearn than new ones are to build**: for S1-type learners with pre-existing inconsistent formation, budget extra repetition and expect slower initial progress than a true S0 beginner — this is expected, not a sign of a different problem.\n- **Script-transfer neutrality**: for S9 learners transferring from a non-Latin script, frame Latin letter-formation conventions as a new, additional skill, never as a correction of the learner's L1 writing system.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.writing.handwriting-and-formation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.handwriting-and-formation",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — sky-writing warm-up on 2-3 known letters\n  ↓\n[P41] PD-1 (letter-recognition readiness)\n  ↓ PASS\n[P06] Anchor: sky-writing + finger-tracing (before pencil touches paper)\n  ↓\nTA-1: Stroke-path narration [C]\n  ↓\n[P28] Conflict: inconsistent/backward stroke order → MC-ANY-STROKE-ORDER-WORKS (if triggered)\n  ↓\nTA-2: Guided tracing on lines [C]\n  ↓\n[P28] Conflict: baseline/size disregard → MC-SIZE-AND-BASELINE-DONT-MATTER (if triggered)\n  ↓\nTA-3: Independent formation with line support [C→P]\n  ↓\nTA-4: Letter category sorting by height [P]\n  ↓\nTA-5: Word-level formation with spacing [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, write your name and check that every letter sits on the line correctly.\"\n[P68] Session close\n[P85] Regulation tail — praise correct process (stroke order, line-checking) over just final appearance\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior pencil-formation habits): full sky-writing/tracing sequence for every new letter, no shortcuts. S1 (has existing but inconsistent habits, e.g. self-taught letter formation): expect more resistance to MC-ANY-STROKE-ORDER-WORKS since existing habits feel \"already correct\" — use the speed/fatigue conflict evidence explicitly and patiently, allow extra repetition to overwrite the existing motor pattern. S6 (frustrated by fine-motor difficulty or perfectionism about \"messy\" letters): explicitly separate \"correct process\" (stroke order, starting point, line-checking) from \"neat result\" as two different, independently praiseable things — neatness improves with practice, but process correctness is checkable immediately. S9 (L1 uses a different script, e.g. Arabic, Devanagari, Chinese, with different directionality/stroke conventions): treat Latin-script letter formation as a fully new motor skill, explicitly note any conflicting directional habits (e.g. right-to-left writing direction) without treating them as errors — they are a different, valid system being set aside for this specific skill.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.consonant-sounds-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.consonant-sounds",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bee451f2357aba3d9a374c4ac29f8f348c8dca49fec7f28570d52ca22542fbb3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md": "sha256:d0a5c13442f1c92aa0f235d81e3e4c65c82c98fa07db99c3b68c8812ca8ccdc9"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.consonant-sounds",
+    "name": "Consonant Phoneme Classification",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.articulation-organs"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.consonant-sounds-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.consonant-sounds (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md": "sha256:d0a5c13442f1c92aa0f235d81e3e4c65c82c98fa07db99c3b68c8812ca8ccdc9"
+      },
+      "contentHash": "sha256:d45af26fb593c5d9b40b515fdf21ae9cd0526983ffe8e392682c86119f7c02e1",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.consonant-sounds.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.consonant-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.consonant-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.consonant-sounds.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.consonant-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.consonant-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.consonant-sounds.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.consonant-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.consonant-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.consonant-sounds.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md#TA-4 (addresses MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.consonant-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.consonant-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.consonant-sounds.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md#TA-5 (addresses MC-CLASSIFICATION-IS-JUST-LABELING, MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.consonant-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.consonant-sounds\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.consonant-sounds/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Consonant Phoneme Classification — Conceptual Development Sequence",
+      "content": "**TA-1 — Place of Articulation Full Inventory [C]**\n\nSystematically test and classify English consonants by place: bilabial (p,b,m), labiodental (f,v), dental (θ,ð), alveolar (t,d,n,s,z,l), post-alveolar (ʃ,ʒ,tʃ,dʒ), palatal (j), velar (k,g,ŋ), glottal (h). Student applies the touch/locate test to each.\n\n**TA-2 — Manner of Articulation Full Inventory [C]**\n\nSystematically test and classify by manner: stop/plosive (p,b,t,d,k,g), fricative (f,v,θ,ð,s,z,ʃ,ʒ,h), affricate (tʃ,dʒ), nasal (m,n,ŋ), liquid (l,r), glide/approximant (w,j). Student applies the airflow-shape test to each.\n\n**TA-3 — Voicing Across the Full Set [C→P]**\n\nSystematically test voicing for all consonants using the throat-buzz test, organizing into voiced/voiceless cognate pairs (p/b, t/d, k/g, f/v, θ/ð, s/z, ʃ/ʒ, tʃ/dʒ) plus always-voiced sounds (m,n,ŋ,l,r,w,j,h — noting h's variable status).\n\n**TA-4 — Three-Dimension Full Classification [P]**\n\nStudent produces a complete three-dimension classification (place + manner + voicing) for a set of sounds without scaffolding, directly targeting MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT by requiring all three together every time.\n\n**TA-5 — Classifying a Genuinely Novel Sound [P]**\n\nPresent a sound not previously drilled in this session (or a non-English sound the student can approximate, e.g., a click or uvular sound if relevant to the student's L1) and have them apply the three-test procedure live, directly targeting MC-CLASSIFICATION-IS-JUST-LABELING.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/misconception/MC-CLASSIFICATION-IS-JUST-LABELING",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "- **Trigger signal:** Student memorizes place/manner/voicing labels for specific sounds without being able to derive the classification of an unfamiliar or novel sound by testing it directly — treats the three-dimension system as a list to recall rather than a diagnostic method to apply.",
+      "content": "### MC-CLASSIFICATION-IS-JUST-LABELING\n- **Trigger signal:** Student memorizes place/manner/voicing labels for specific sounds without being able to derive the classification of an unfamiliar or novel sound by testing it directly — treats the three-dimension system as a list to recall rather than a diagnostic method to apply.\n- **Conflict evidence [P28]:** \"You correctly told me /p/ is a voiceless bilabial stop — but I didn't ask you about /p/, I asked about a sound you haven't classified before. Can you figure it out using the same throat-test, touch-test, and airflow-test methods, instead of trying to remember a label?\"\n- **Bridge text [P30]:** \"Place, manner, and voicing are not a fixed list to memorize per sound — they are three physical TESTS (where's the closure? how is airflow shaped? does the throat buzz?) you can apply to ANY consonant, including ones you've never classified before.\"\n- **Replacement text [P31]:** \"For any new consonant, run all three tests yourself — locate the place, observe the manner, check voicing — rather than searching memory for a pre-learned label.\"\n- **Discrimination pairs [P33]:**\n  - A previously drilled sound (/t/, label recalled from memory) vs. a genuinely novel/rare sound presented for the first time (student must apply the three tests live).\n  - Correctly testing an unfamiliar sound from an audio sample vs. guessing a label based on which letter is written.\n- **s6_path:** \"It's natural to want to just memorize the labels for the common sounds — but the real skill this concept builds is the ABILITY to classify any sound, which matters most for sounds you haven't drilled before.\"",
+      "localKey": "MC-CLASSIFICATION-IS-JUST-LABELING",
+      "language": "en",
+      "refs": [
+        "MC-CLASSIFICATION-IS-JUST-LABELING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/misconception/MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "- **Trigger signal:** Student treats place, manner, and voicing as three separate facts to check off individually without recognizing that a full description requires ALL THREE together to uniquely identify a sound, or conflates categories (e.g., calls a sound \"a fricative place\" or \"a bilabial manner\").",
+      "content": "### MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT\n- **Trigger signal:** Student treats place, manner, and voicing as three separate facts to check off individually without recognizing that a full description requires ALL THREE together to uniquely identify a sound, or conflates categories (e.g., calls a sound \"a fricative place\" or \"a bilabial manner\").\n- **Conflict evidence [P28]:** \"I'll tell you /p/ is voiceless and bilabial — can you tell me for certain which sound that is? What if I add 'stop'? Now can you? What changed?\"\n- **Bridge text [P30]:** \"Place, manner, and voicing are three SEPARATE dimensions that must be combined together — like height, width, and depth for a box — no single dimension (or even two) fully identifies a consonant; you need all three.\"\n- **Replacement text [P31]:** \"Always state all three dimensions together as a complete description — voicing + place + manner — never treat one alone as sufficient identification.\"\n- **Discrimination pairs [P33]:**\n  - \"voiceless + bilabial\" alone (still ambiguous between /p/ and other voiceless bilabial sounds if manner isn't specified) vs. \"voiceless bilabial stop\" (fully specifies /p/).\n  - Confusing \"fricative\" (a manner) with a place term, vs. correctly keeping the three category-types distinct.\n- **s6_path:** \"It's easy to think of these as three separate little facts, but the real power is in combining all three at once — that's what actually pins down exactly which sound you mean.\"\n\n---",
+      "localKey": "MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT",
+      "language": "en",
+      "refs": [
+        "MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Place of Articulation Full Inventory",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Place of Articulation Full Inventory\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Manner of Articulation Full Inventory",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Manner of Articulation Full Inventory\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Voicing Across the Full Set",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Voicing Across the Full Set\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Three-Dimension Full Classification",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Three-Dimension Full Classification\",\"primitives\":[],\"addresses\":[\"MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Classifying a Genuinely Novel Sound",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Classifying a Genuinely Novel Sound\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CLASSIFICATION-IS-JUST-LABELING\",\"MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CLASSIFICATION-IS-JUST-LABELING",
+        "MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Place, novel sound**\n\"What is the place of articulation for /ŋ/ (as in 'sing')?\"\n*Target:* velar.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Manner, novel sound**\n\"What is the manner of articulation for /tʃ/ (as in 'church')?\"\n*Target:* affricate.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Voicing cognate pair**\n\"What is the voiced counterpart of /θ/ (as in 'think')?\"\n*Target:* /ð/ (as in \"this\") — same place and manner, differing only in voicing.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Full three-dimension classification, novel sound**\n\"Give the full classification for /ʒ/ (as in 'measure').\"\n*Target:* voiced post-alveolar fricative — all three dimensions stated together.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Apply the method to an unfamiliar sound**\n\"Here is a sound you haven't classified today: [novel consonant]. Walk me through how you'd figure out its place, manner, and voicing.\"\n*Target:* correctly narrates and applies the three-test procedure (locate place, observe manner, check voicing) rather than guessing or recalling a memorized label.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Adaptive Flags",
+      "content": "- **Method over memorization**: this concept's mastery bar (Component 6 MP-5) explicitly requires demonstrating the LIVE classification method on a novel sound, not recall of previously drilled labels — session design must include at least one genuinely novel/untaught sound before mastery is assessed.\n- **Three dimensions must always co-occur in a full answer**: never accept a classification response citing fewer than all three dimensions as complete — this directly targets MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT.\n- **Cognate-pair chunking as a scalability aid**: organizing consonants by voiced/voiceless pairs sharing place+manner (rather than 24 independent facts) substantially reduces cognitive load — use this chunking explicitly in TA-3 and beyond.\n- **L1 sound systems as a teaching asset, not a distraction**: for S9 learners, deliberately incorporate a genuine L1 consonant into the classification practice (TA-5) — this both validates the learner's existing phonological knowledge and provides an excellent live test of the three-dimension method's generality.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.consonant-sounds/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.consonant-sounds",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — three-test detective routine demo on one familiar sound\n  ↓\n[P41] PD-1 (articulator/voicing-test readiness)\n  ↓ PASS\n[P06] Anchor: three-test detective routine on an unfamiliar sound (/ʃ/)\n  ↓\nTA-1: Place of articulation full inventory [C]\n  ↓\nTA-2: Manner of articulation full inventory [C]\n  ↓\nTA-3: Voicing across the full set [C→P]\n  ↓\nTA-4: Three-dimension full classification [P]\n  ↓\n[P28] Conflict: treating one/two dimensions as sufficient → MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT (if triggered)\n  ↓\nTA-5: Classifying a genuinely novel sound [P]\n  ↓\n[P28] Conflict: memorized-label reliance vs. live testing → MC-CLASSIFICATION-IS-JUST-LABELING (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, pick any consonant sound and classify it using all three tests.\"\n[P68] Session close\n[P85] Regulation tail — praise use of the three-test method over recalled labels\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on articulation-organs basics but new to systematic classification): move through TA-1/TA-2 methodically, one dimension fully before adding the next. S1 (already comfortable with place/manner separately, needs voicing integration): compress TA-1/TA-2, focus on TA-3/TA-4's combination work. S6 (overwhelmed by the size of the full consonant inventory — ~24 sounds): explicitly chunk by cognate pairs (voiced/voiceless partners sharing place+manner) as a memory aid, rather than presenting all 24 as an undifferentiated list. S9 (L1 consonant inventory differs substantially, e.g. has uvular/pharyngeal/click sounds not in English, or lacks certain English sounds like /θ/,/r/): use TA-5 explicitly to have the student classify a genuine L1 sound alongside English sounds, building the three-dimension framework as a general linguistic tool rather than an English-only system — this reframes L1 differences as an asset for deeper understanding, not an obstacle.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

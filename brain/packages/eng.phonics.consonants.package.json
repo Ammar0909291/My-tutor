@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.consonants-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.consonants",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d9d20c6bd63a4bb0d3e657f53e40c50a1ef418fcf6d79c6c84211e73d38cd7af",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.consonants.md": "sha256:e974cd20e6db48cbd411714983d908732f8df0498f800b69a796919481e7c6bb"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.consonants",
+    "name": "Consonant Sounds",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.letter-sound-correspondence"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.consonants-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.consonants (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.consonants.md": "sha256:e974cd20e6db48cbd411714983d908732f8df0498f800b69a796919481e7c6bb"
+      },
+      "contentHash": "sha256:28ec6816ef83faf802762ce267754cde8e3733a2bdbe4d6b698dc1168c60161d",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonants.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonants.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonants\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonants.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonants.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonants\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonants.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonants.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonants\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonants.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonants.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonants\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonants.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonants.md#TA-5 (addresses MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS, MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonants\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.consonants/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Consonant Sounds — Conceptual Development Sequence",
+      "content": "**TA-1 — Single Consonant Sound Production [C]**\n\nPresent each single-letter consonant (b, d, f, g, h, j, k, l, m, n, p, r, s, t, v, w, y, z — excluding c, x, q which need special handling) in isolation; student produces the correct sound for each.\n\n**TA-2 — Consonants in Word-Initial Position [C]**\n\nPresent simple words; student isolates and produces the initial consonant sound correctly before reading/blending the whole word.\n\n**TA-3 — Hard/Soft C and G Rule Discovery [C→P]**\n\nPresent word pairs contrasting hard and soft \"c\" (cat/cent) and hard and soft \"g\" (gum/gem). Guide the student to discover the vowel-following pattern (a/o/u → hard; e/i/y → soft) rather than stating the rule first.\n\n**TA-4 — Applying the Hard/Soft Rule to Novel Words [P]**\n\nPresent new, unseen words with \"c\" or \"g\" (e.g., \"cycle,\" \"giant,\" \"cot,\" \"gap\"); student predicts the correct sound before confirming, applying the rule from TA-3.\n\n**TA-5 — Reliable-Core vs. Exception Sorting [P]**\n\nPresent a mixed set of words, some following the simple one-letter-one-sound pattern (nap, sit, top) and some containing a silent consonant (knife, island, write). Student sorts into \"follows the reliable pattern\" vs. \"has an exception to learn separately,\" reinforcing that exceptions don't invalidate the core rule.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/misconception/MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.consonants",
+      "title": "- **Trigger signal:** Student assumes \"c\" and \"g\" each always represent one fixed sound (e.g., always /k/ for \"c,\" always /g/ (hard) for \"g\"), and is confused or produces errors when reading words like \"city,\" \"cent,\" \"gem,\" or \"giant\" where the sound shifts.",
+      "content": "### MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS\n- **Trigger signal:** Student assumes \"c\" and \"g\" each always represent one fixed sound (e.g., always /k/ for \"c,\" always /g/ (hard) for \"g\"), and is confused or produces errors when reading words like \"city,\" \"cent,\" \"gem,\" or \"giant\" where the sound shifts.\n- **Conflict evidence [P28]:** \"Say 'cat' — what sound does 'c' make? Now say 'city' — what sound does 'c' make there? Are they the same?\"\n- **Bridge text [P30]:** \"The letters 'c' and 'g' each represent TWO different sounds depending on which letter comes right after them — usually a hard sound before a, o, u (cat, cot, cut) and a soft sound before e, i, y (city, cent, gem, giant). This is a real, learnable pattern, not randomness.\"\n- **Replacement text [P31]:** \"Before saying the sound for 'c' or 'g', check the very next letter — that tells you whether to use the hard or soft sound.\"\n- **Discrimination pairs [P33]:**\n  - \"cat\" (hard /k/, followed by 'a') vs. \"cent\" (soft /s/, followed by 'e').\n  - \"gum\" (hard /g/, followed by 'u') vs. \"gem\" (soft /dʒ/, followed by 'e').\n- **s6_path:** \"This feels inconsistent at first, but it's actually a reliable pattern based on the letter that follows — once you know the rule, 'c' and 'g' become predictable instead of confusing.\"",
+      "localKey": "MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS",
+      "language": "en",
+      "refs": [
+        "MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/misconception/MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.consonants",
+      "title": "- **Trigger signal:** Student expects a strict one-letter-one-sound rule for all consonants and becomes confused by digraphs or silent letters within single-consonant-focused work (e.g., insists \"wh\" in \"who\" must make a /w/-then-/h/ sequence, or that the \"k\" in \"knife\" must be pronounced).",
+      "content": "### MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND\n- **Trigger signal:** Student expects a strict one-letter-one-sound rule for all consonants and becomes confused by digraphs or silent letters within single-consonant-focused work (e.g., insists \"wh\" in \"who\" must make a /w/-then-/h/ sequence, or that the \"k\" in \"knife\" must be pronounced).\n- **Conflict evidence [P28]:** \"Say 'knife' out loud, naturally, the way you'd say it in a sentence. Do you actually hear a /k/ sound at the start, or does it start right on the /n/?\"\n- **Bridge text [P30]:** \"Most single consonant letters do reliably represent one sound in isolation — but English also has silent letters and letter-combinations that don't follow the simple one-letter-one-sound pattern. Consonant sounds are the reliable foundation; letter-combination exceptions are learned separately, on top of this foundation.\"\n- **Replacement text [P31]:** \"Learn the reliable single-consonant sounds first and treat exceptions (silent letters, digraphs) as a separate, later layer — don't let the exceptions undermine confidence in the reliable core pattern.\"\n- **Discrimination pairs [P33]:**\n  - \"nap\" (n = reliably /n/) vs. \"knife\" (k is silent — an exception, not a broken rule).\n  - \"sit\" (s = reliably /s/) vs. \"island\" (s is silent — an exception).\n- **s6_path:** \"It can feel like the rules keep breaking, but the core single-consonant-sound pattern IS reliable for the vast majority of words — silent letters are a smaller, separate list to learn on top, not proof the whole system is unpredictable.\"\n\n---",
+      "localKey": "MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Single Consonant Sound Production",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Single Consonant Sound Production\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Consonants in Word-Initial Position",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Consonants in Word-Initial Position\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Hard/Soft C and G Rule Discovery",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Hard/Soft C and G Rule Discovery\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Applying the Hard/Soft Rule to Novel Words",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Applying the Hard/Soft Rule to Novel Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Reliable-Core vs. Exception Sorting",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Reliable-Core vs. Exception Sorting\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS\",\"MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS",
+        "MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonants",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Single consonant sound, novel letter**\n\"What sound does 'v' make?\"\n*Target:* /v/.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonants",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Word-initial isolation, novel word**\n\"What is the first sound in 'goat'?\"\n*Target:* /g/ (hard, since followed by \"o\").",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonants",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Hard/soft g rule, novel word**\n\"Is the 'g' in 'giant' hard or soft? How do you know?\"\n*Target:* soft (/dʒ/) — because \"g\" is followed by \"i.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonants",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Reliable pattern vs. exception**\n\"Does the 'w' in 'write' make its usual sound? What's happening here?\"\n*Target:* correctly identifies the \"w\" as silent — an exception, not proof that \"w\" is generally unreliable elsewhere.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonants",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the hard/soft rule**\n\"In your own words: how do you decide whether 'c' or 'g' should be hard or soft?\"\n*Target:* states or demonstrates the rule — check the letter immediately following; a/o/u → hard, e/i/y → soft.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Adaptive Flags",
+      "content": "- **Hard/soft c and g is a rule, not an exception list**: frame this pattern explicitly as learnable and predictable (based on the following letter) rather than as a set of irregular exceptions to memorize — this directly counters MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS.\n- **Silent letters are a separate later layer**: do not let a small number of true silent-letter exceptions (knife, island, write) undermine confidence in the otherwise highly reliable single-consonant-sound system — frame explicitly per Component 1's s6_path.\n- **q and x deferred**: \"q\" (almost always paired with \"u,\" /kw/) and \"x\" (usually /ks/, sometimes /z/ word-initially) are NOT covered as core single-consonant sounds in this concept — they involve blend/cluster behavior better addressed alongside consonant-blends content; do not introduce them here to avoid diluting the core 18-consonant focus.\n- **L1 phoneme-inventory transfer**: for S9 learners, anticipate specific substitution patterns from known L1-English phoneme contrasts (building on eng.phonetics.articulation-organs) rather than treating all consonant errors as equally likely or random.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonants/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.consonants",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — consonant sound wall warm-up (2-3 known sounds)\n  ↓\n[P41] PD-1 (basic letter-sound readiness)\n  ↓ PASS\n[P06] Anchor: consonant sound wall (picture-card matching)\n  ↓\nTA-1: Single consonant sound production [C]\n  ↓\nTA-2: Consonants in word-initial position [C]\n  ↓\nTA-3: Hard/soft c and g rule discovery [C→P]\n  ↓\n[P28] Conflict: c/g treated as single fixed sound → MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS (if triggered)\n  ↓\nTA-4: Applying the hard/soft rule to novel words [P]\n  ↓\nTA-5: Reliable-core vs. exception sorting [P]\n  ↓\n[P28] Conflict: rigid one-letter-one-sound expectation broken by exceptions → MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word with a soft 'c' or soft 'g' sound.\"\n[P68] Session close\n[P85] Regulation tail — praise pattern-checking (looking at the next letter) over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 85%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior consonant-sound instruction beyond basic letter-sound pairs): keep TA-1/TA-2 to a small, high-frequency subset before introducing hard/soft c/g. S1 (secure on basic consonants, struggles specifically with c/g): compress TA-1/TA-2, spend most of the session on TA-3/TA-4. S6 (frustrated that \"the rules keep changing\"): explicitly frame the hard/soft pattern as itself a reliable rule (not randomness) before teaching it — reducing the sense of arbitrary exceptions. S9 (L1 lacks certain English consonant sounds, e.g. no /θ/,/ð/,/r/-/l/ distinction, or no /v/-/w/ distinction): expect specific, predictable substitution errors tied to the learner's L1 phoneme inventory (already flagged conceptually in eng.phonetics.articulation-organs); treat these as transfer effects, not carelessness, and allow extra discrimination practice on the specific contrastive pair.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonants.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

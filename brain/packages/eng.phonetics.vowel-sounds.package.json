@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.vowel-sounds-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.vowel-sounds",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:154facb61771973f044384f42b1f820665f4199f08ad47b24f34296359c9911c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md": "sha256:151e9cdd20c3ceb63c7a6e19549ef4abe9edd36a1fce6e251c9115a9f8143ccc"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.vowel-sounds",
+    "name": "Vowel Phoneme Classification",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.articulation-organs"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.vowel-sounds-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.vowel-sounds (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md": "sha256:151e9cdd20c3ceb63c7a6e19549ef4abe9edd36a1fce6e251c9115a9f8143ccc"
+      },
+      "contentHash": "sha256:c1e2c2df004ac1662875b252661312e87c45e17c140bfe7594c826c93c6b60d2",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.vowel-sounds.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.vowel-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.vowel-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.vowel-sounds.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.vowel-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.vowel-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.vowel-sounds.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.vowel-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.vowel-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.vowel-sounds.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md#TA-4 (addresses MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.vowel-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.vowel-sounds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.vowel-sounds.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md#TA-5 (addresses MC-VOWELS-HAVE-NO-ARTICULATION-PLACE, MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.vowel-sounds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.vowel-sounds\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.vowel-sounds/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Vowel Phoneme Classification — Conceptual Development Sequence",
+      "content": "**TA-1 — Tongue Height Classification [C]**\n\nPresent vowel pairs contrasting height only (e.g., /iː/ high vs. /æ/ low, both front); student identifies which is higher/lower by feel.\n\n**TA-2 — Tongue Backness Classification [C]**\n\nPresent vowel pairs contrasting backness only (e.g., /iː/ front vs. /uː/ back, both high); student identifies which is more front/back by feel.\n\n**TA-3 — Lip Rounding Classification [C→P]**\n\nPresent vowel pairs contrasting rounding (e.g., /iː/ unrounded vs. /uː/ rounded); student identifies rounded vs. spread lips by touch/mirror-check.\n\n**TA-4 — Monophthong vs. Diphthong Discrimination [P]**\n\nUsing the slow-stretch technique from Component 1, student sorts a mixed set of vowel sounds (in words) into monophthongs (steady) vs. diphthongs (gliding), directly targeting MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME.\n\n**TA-5 — Full Three-Dimension Vowel Classification [P]**\n\nStudent produces a complete classification (height + backness + rounding) for a monophthong, and a start-point/end-point description for a diphthong, without scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/misconception/MC-VOWELS-HAVE-NO-ARTICULATION-PLACE",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "- **Trigger signal:** Student assumes vowels, unlike consonants, involve no specific physical positioning — treats vowel sounds as \"just open mouth noises\" with no locatable tongue position, unable to describe or feel any difference between vowel sounds beyond \"they sound different.",
+      "content": "### MC-VOWELS-HAVE-NO-ARTICULATION-PLACE\n- **Trigger signal:** Student assumes vowels, unlike consonants, involve no specific physical positioning — treats vowel sounds as \"just open mouth noises\" with no locatable tongue position, unable to describe or feel any difference between vowel sounds beyond \"they sound different.\"\n- **Conflict evidence [P28]:** \"Say 'ee' as in 'see', then 'ah' as in 'father'. Don't just listen — notice where your tongue is. Is it higher and further forward for one, and lower and further back for the other?\"\n- **Bridge text [P30]:** \"Vowels DO have a precise articulatory description, just like consonants — instead of place/manner/voicing, vowels are described by tongue HEIGHT (how high/low the tongue is), tongue BACKNESS (how front/back), and lip ROUNDING. There is no closure or blockage (that's what makes them vowels, not consonants), but there is still a specific, describable tongue position for each.\"\n- **Replacement text [P31]:** \"For any vowel, check three things: how high is the tongue, how far forward/back is it, and are the lips rounded or spread.\"\n- **Discrimination pairs [P33]:**\n  - \"ee\" /iː/ (high, front, unrounded) vs. \"ah\" /ɑː/ (low, back, unrounded) — a clear height+backness contrast.\n  - \"oo\" /uː/ (high, back, rounded) vs. \"ee\" /iː/ (high, front, unrounded) — same height, different backness and rounding.\n- **s6_path:** \"It's easy to think vowels are just 'open sounds' with nothing specific happening, since there's no blockage to feel like with consonants — but your tongue really is moving to a distinct position for each one, and once you notice it, the pattern becomes clear.\"",
+      "localKey": "MC-VOWELS-HAVE-NO-ARTICULATION-PLACE",
+      "language": "en",
+      "refs": [
+        "MC-VOWELS-HAVE-NO-ARTICULATION-PLACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/misconception/MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "- **Trigger signal:** Student treats all vowel sounds as single, unchanging positions, not recognizing that some English vowels (diphthongs) involve the tongue GLIDING from one position to another within a single vowel sound (e.g., treats \"boy\" /bɔɪ/ or \"time\" /taɪm/ as if the vowel is one static sound rather than a glide).",
+      "content": "### MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME\n- **Trigger signal:** Student treats all vowel sounds as single, unchanging positions, not recognizing that some English vowels (diphthongs) involve the tongue GLIDING from one position to another within a single vowel sound (e.g., treats \"boy\" /bɔɪ/ or \"time\" /taɪm/ as if the vowel is one static sound rather than a glide).\n- **Conflict evidence [P28]:** \"Say 'time' very slowly, stretching out the vowel. Does your tongue/mouth position stay exactly the same the whole time, or does it move partway through, from one shape toward another?\"\n- **Bridge text [P30]:** \"Most vowels (monophthongs) hold one steady tongue position for their whole duration — like /iː/ in 'see'. But some vowels (diphthongs) are actually a GLIDE — the tongue starts at one position and moves toward another within the same syllable, like /aɪ/ in 'time' (starts low-central, glides toward high-front).\"\n- **Replacement text [P31]:** \"Stretch out any vowel sound slowly and check whether the tongue position stays still (monophthong) or moves partway through (diphthong).\"\n- **Discrimination pairs [P33]:**\n  - \"see\" /siː/ (monophthong, steady /iː/) vs. \"say\" /seɪ/ (diphthong, glides from /e/ toward /ɪ/).\n  - \"boy\" /bɔɪ/ (diphthong, glides from /ɔ/ toward /ɪ/) vs. \"law\" /lɔː/ (monophthong, steady /ɔː/).\n- **s6_path:** \"This distinction is subtle because both types just sound like 'one vowel sound' to an untrained ear — stretching the sound out slowly is the key trick that reveals whether it's actually gliding.\"\n\n---",
+      "localKey": "MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME",
+      "language": "en",
+      "refs": [
+        "MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Tongue Height Classification",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Tongue Height Classification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Tongue Backness Classification",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Tongue Backness Classification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Lip Rounding Classification",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Lip Rounding Classification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Monophthong vs. Diphthong Discrimination",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Monophthong vs. Diphthong Discrimination\",\"primitives\":[],\"addresses\":[\"MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Full Three-Dimension Vowel Classification",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Three-Dimension Vowel Classification\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME\",\"MC-VOWELS-HAVE-NO-ARTICULATION-PLACE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-VOWELS-HAVE-NO-ARTICULATION-PLACE",
+        "MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Height, novel pair**\n\"Which is higher, /ʊ/ (as in 'book') or /ɒ/ (as in 'hot')?\"\n*Target:* /ʊ/ is higher; /ɒ/ is lower.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Backness, novel pair**\n\"Which is further back, /æ/ (as in 'cat') or /ɑː/ (as in 'father')?\"\n*Target:* /ɑː/ is further back; /æ/ is more front.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Rounding, novel vowel**\n\"Is /ɔː/ (as in 'law') rounded or unrounded?\"\n*Target:* rounded.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Monophthong vs. diphthong, novel word**\n\"Stretch out the vowel in 'house'. Monophthong or diphthong?\"\n*Target:* diphthong — /aʊ/, gliding from a low-central/front position toward a high-back rounded position.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full classification, novel monophthong**\n\"Give the full classification (height, backness, rounding) for /ɛ/ (as in 'bed').\"\n*Target:* mid-height, front, unrounded.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Adaptive Flags",
+      "content": "- **Vowels are genuinely describable, just differently from consonants**: this concept must establish upfront that \"no closure\" does not mean \"no describable position\" — directly countering MC-VOWELS-HAVE-NO-ARTICULATION-PLACE as the likely default assumption.\n- **The slow-stretch technique is the core diagnostic tool**: teach and reuse this technique (Component 1's diphthong conflict evidence) as the standing method for monophthong/diphthong discrimination throughout TA-4/TA-5 and beyond.\n- **Corner vowels before subtle contrasts**: sequence teaching from the four extreme \"corner\" vowels (high-front /iː/, low-front /æ/, high-back /uː/, low-back /ɑː/) — which are easiest to feel distinctly — before introducing closer mid-vowel contrasts (e.g., /ɛ/ vs. /æ/) that require finer discrimination.\n- **L1 vowel-system comparison as an asset**: for S9 learners, deliberately incorporate a genuine L1 vowel into classification practice, paralleling the consonant-sounds concept's approach — this validates existing phonological knowledge and tests the framework's generality.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-VOWELS-HAVE-NO-ARTICULATION-PLACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.vowel-sounds/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.vowel-sounds",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — vowel space map introduced, corner-to-corner warm-up\n  ↓\n[P41] PD-1 (articulator awareness readiness)\n  ↓ PASS\n[P06] Anchor: vowel space map (corner-to-corner tongue travel)\n  ↓\nTA-1: Tongue height classification [C]\n  ↓\n[P28] Conflict: \"vowels have no place\" assumption → MC-VOWELS-HAVE-NO-ARTICULATION-PLACE (if triggered)\n  ↓\nTA-2: Tongue backness classification [C]\n  ↓\nTA-3: Lip rounding classification [C→P]\n  ↓\nTA-4: Monophthong vs. diphthong discrimination [P]\n  ↓\n[P28] Conflict: diphthongs treated as static → MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME (if triggered)\n  ↓\nTA-5: Full three-dimension vowel classification [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, stretch out three vowel sounds from your own name or a favorite word and classify each.\"\n[P68] Session close\n[P85] Regulation tail — praise noticing tongue movement over guessing from spelling\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on articulation-organs basics, new to vowel-specific classification): move through TA-1/TA-2/TA-3 one dimension at a time, using clear corner-vowel contrasts before subtler mid-vowel distinctions. S1 (already aware vowels differ, lacks systematic vocabulary): compress TA-1-3, focus on TA-4/TA-5's integration and diphthong work. S6 (frustrated that vowel differences feel subtle/subjective compared to consonants): validate explicitly that vowel distinctions ARE more continuous/gradient than consonants' more categorical contrasts, and that the vowel-space map is a genuine simplification tool, not oversimplification. S9 (L1 vowel inventory differs substantially, e.g. 5 pure vowels with no diphthongs, or a very large vowel inventory with additional height/backness/rounding distinctions not in English): use TA-5 to have the student classify a genuine L1 vowel using the same three-dimension framework — reinforcing the system's generality and treating the L1 vowel system as a valid comparison point, never as a deficit.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

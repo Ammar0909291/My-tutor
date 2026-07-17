@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.short-vowels-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.short-vowels",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:55c7837fdd4c36905e7ece5501ad7d3ba2bbc791bc7f7fc8f68f42f2661cf023",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.short-vowels.md": "sha256:77f09018355d56e63c9e9a0d73507b105b5760a8413e8f936bc3884c2c481cb9"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.short-vowels",
+    "name": "Short Vowel Sounds",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.letter-sound-correspondence"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.short-vowels-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.short-vowels (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.short-vowels.md": "sha256:77f09018355d56e63c9e9a0d73507b105b5760a8413e8f936bc3884c2c481cb9"
+      },
+      "contentHash": "sha256:2185154fb811aeb20490ff90661453e8935d4c3d4d51b83d070cbd0cf484490f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.short-vowels.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.short-vowels.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.short-vowels"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.short-vowels\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.short-vowels.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.short-vowels.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.short-vowels"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.short-vowels\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.short-vowels.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.short-vowels.md#TA-3 (addresses MC-VOWEL-LETTER-NAME-IS-THE-SOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.short-vowels"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.short-vowels\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.short-vowels.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.short-vowels.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.short-vowels"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.short-vowels\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.short-vowels.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.short-vowels.md#TA-5 (addresses MC-VOWEL-LETTER-NAME-IS-THE-SOUND, MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.short-vowels"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.short-vowels\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.short-vowels/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Short Vowel Sounds — Conceptual Development Sequence",
+      "content": "**TA-1 — Isolated Short Vowel Sound Production [C]**\n\nUsing the Component 3 keyword anchors, student produces each of the five short vowel sounds in isolation when shown the letter.\n\n**TA-2 — Short Vowel in CVC Words [C]**\n\nPresent simple closed-syllable (CVC: consonant-vowel-consonant) words (cat, pen, sit, hot, cup); student identifies and correctly produces the short vowel sound within each word.\n\n**TA-3 — Letter Name vs. Letter Sound Contrast [C→P]**\n\nPresent pairs contrasting the vowel's alphabet name against its short sound in a real word (e.g., \"the letter 'i' says 'eye', but in 'sit' it says /ɪ/\"), directly targeting MC-VOWEL-LETTER-NAME-IS-THE-SOUND.\n\n**TA-4 — Closed vs. Open/Silent-E Syllable Discrimination [P]**\n\nPresent minimal pairs differing only by a final silent \"e\" (cap/cape, pin/pine, cut/cute); student identifies which member of each pair is closed (short vowel) vs. has silent e (long vowel), checking spelling before pronouncing.\n\n**TA-5 — Reading Novel CVC Words [P]**\n\nPresent unseen CVC words; student blends and reads them correctly using the short vowel sound, demonstrating generalization beyond the taught word set.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/misconception/MC-VOWEL-LETTER-NAME-IS-THE-SOUND",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "- **Trigger signal:** Student reads a short-vowel word by using the vowel LETTER NAME instead of its short sound (e.g., reads \"cat\" as sounding like \"cate,\" or \"pin\" like \"pine\"), substituting the alphabet-song name for the phoneme.",
+      "content": "### MC-VOWEL-LETTER-NAME-IS-THE-SOUND\n- **Trigger signal:** Student reads a short-vowel word by using the vowel LETTER NAME instead of its short sound (e.g., reads \"cat\" as sounding like \"cate,\" or \"pin\" like \"pine\"), substituting the alphabet-song name for the phoneme.\n- **Conflict evidence [P28]:** \"You said the letter 'a' as its name — 'ay', like in the alphabet song. Now say the word 'cat' out loud the way you normally talk. Does the middle sound in 'cat' sound like 'ay', or something shorter, like 'æ'?\"\n- **Bridge text [P30]:** \"Every vowel letter has a NAME (what you say when reciting the alphabet — 'a' says 'ay') and one or more SOUNDS it makes inside real words — in short closed syllables, it makes its short sound instead ('a' says /æ/ in 'cat').\"\n- **Replacement text [P31]:** \"In a short, closed one-syllable word (ending in a consonant, no silent e), use the vowel's SHORT sound, not its alphabet name.\"\n- **Discrimination pairs [P33]:**\n  - \"cat\" (short /æ/) vs. saying the letter name \"ay\" (incorrect for this word).\n  - \"pin\" (short /ɪ/) vs. \"pine\" (long /aɪ/, a different word entirely, one letter different).\n- **s6_path:** \"Mixing up the letter's name and its sound is extremely common at first, since the alphabet song only ever teaches names — we'll always double-check by saying the real word naturally and listening to what the vowel actually sounds like.\"",
+      "localKey": "MC-VOWEL-LETTER-NAME-IS-THE-SOUND",
+      "language": "en",
+      "refs": [
+        "MC-VOWEL-LETTER-NAME-IS-THE-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/misconception/MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "- **Trigger signal:** Student over-applies the short-vowel pattern to ALL one-syllable words, including those with long vowels (e.g., reads \"cake\" with a short /æ/ instead of long /eɪ/, ignoring the silent \"e\"), not yet recognizing that syllable STRUCTURE (open vs. closed), not just syllable count, determines vowel sound.",
+      "content": "### MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL\n- **Trigger signal:** Student over-applies the short-vowel pattern to ALL one-syllable words, including those with long vowels (e.g., reads \"cake\" with a short /æ/ instead of long /eɪ/, ignoring the silent \"e\"), not yet recognizing that syllable STRUCTURE (open vs. closed), not just syllable count, determines vowel sound.\n- **Conflict evidence [P28]:** \"Look at 'cap' and 'cape' — both are one syllable. Say them both slowly. Do they have the same vowel sound, or different ones? What's different about how they're spelled?\"\n- **Bridge text [P30]:** \"It's not just about how many syllables a word has — it's about whether the syllable is CLOSED (ends in a consonant, no final e → short vowel, like 'cap') or has a silent 'e' at the end that changes the vowel to its long sound (like 'cape'). Short vowels specifically belong to closed syllables without a silent e.\"\n- **Replacement text [P31]:** \"Before assuming a one-syllable word has a short vowel, check whether it ends in a silent 'e' — if it does, expect the long vowel sound instead.\"\n- **Discrimination pairs [P33]:**\n  - \"cap\" (closed syllable, no silent e → short /æ/) vs. \"cape\" (silent e → long /eɪ/).\n  - \"pin\" (short /ɪ/) vs. \"pine\" (long /aɪ/).\n- **s6_path:** \"This is genuinely tricky because both words look almost the same and are both one syllable — the silent 'e' is a small, easy-to-miss letter that completely changes the vowel sound, so we'll build the habit of always checking for it.\"\n\n---",
+      "localKey": "MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL",
+      "language": "en",
+      "refs": [
+        "MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Isolated Short Vowel Sound Production",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Isolated Short Vowel Sound Production\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Short Vowel in CVC Words",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Short Vowel in CVC Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Letter Name vs. Letter Sound Contrast",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Letter Name vs. Letter Sound Contrast\",\"primitives\":[],\"addresses\":[\"MC-VOWEL-LETTER-NAME-IS-THE-SOUND\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-VOWEL-LETTER-NAME-IS-THE-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Closed vs. Open/Silent-E Syllable Discrimination",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Closed vs. Open/Silent-E Syllable Discrimination\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Reading Novel CVC Words",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Reading Novel CVC Words\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL\",\"MC-VOWEL-LETTER-NAME-IS-THE-SOUND\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-VOWEL-LETTER-NAME-IS-THE-SOUND",
+        "MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Isolated sound, novel vowel**\n\"What sound does 'u' make, like in 'umbrella'?\"\n*Target:* /ʌ/.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — CVC word, novel word**\n\"Read the word 'mud'. What's the vowel sound?\"\n*Target:* short /ʌ/.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Letter name vs. sound**\n\"What is the NAME of the letter 'o'? What SOUND does it make in the word 'dog'?\"\n*Target:* name = \"oh\"; sound in \"dog\" = short /ɒ/ — correctly distinguishes the two.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Closed vs. silent-e discrimination, novel pair**\n\"Look at 'rip' and 'ripe'. Which one has the short vowel sound?\"\n*Target:* \"rip\" (short /ɪ/) — \"ripe\" has a silent e and a long vowel /aɪ/.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the short-vowel pattern**\n\"In your own words: when does a vowel make its short sound?\"\n*Target:* states or demonstrates that a vowel makes its short sound in a closed syllable — one vowel, followed by one or more consonants, with no silent e at the end.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Adaptive Flags",
+      "content": "- **Keyword anchors as a permanent reference**: the five short-vowel keywords (Component 3) should remain available as a standing reference throughout instruction, not just during initial teaching — students should be encouraged to self-check against them when uncertain.\n- **Letter name vs. sound must be explicitly separated early**: because alphabet-song instruction typically precedes phonics instruction, assume MC-VOWEL-LETTER-NAME-IS-THE-SOUND is a likely default starting point, not an unusual error.\n- **Silent-e awareness is prerequisite-adjacent, not fully taught here**: this concept introduces the closed-syllable/silent-e CONTRAST (TA-4) only to the extent needed to correctly bound \"short vowel,\" without fully teaching silent-e's long-vowel rules — that full treatment belongs to `eng.phonics.long-vowels-silent-e` (a downstream concept); do not over-teach silent-e mechanics here.\n- **L1 vowel-inventory transfer**: for S9 learners, anticipate specific vowel-merger errors based on the learner's L1 vowel system (building on eng.phonetics.vowel-sounds/articulation-organs groundwork) rather than treating all vowel errors as equally likely.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-VOWEL-LETTER-NAME-IS-THE-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonics.short-vowels/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.short-vowels",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — five short-vowel keyword picture review\n  ↓\n[P41] PD-1 (basic letter-sound readiness)\n  ↓ PASS\n[P06] Anchor: five short-vowel keyword pictures\n  ↓\nTA-1: Isolated short vowel sound production [C]\n  ↓\nTA-2: Short vowel in CVC words [C]\n  ↓\nTA-3: Letter name vs. letter sound contrast [C→P]\n  ↓\n[P28] Conflict: alphabet-name substituted for sound → MC-VOWEL-LETTER-NAME-IS-THE-SOUND (if triggered)\n  ↓\nTA-4: Closed vs. open/silent-e syllable discrimination [P]\n  ↓\n[P28] Conflict: short-vowel over-applied to silent-e words → MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL (if triggered)\n  ↓\nTA-5: Reading novel CVC words [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one CVC word and one silent-e word and compare their vowel sounds.\"\n[P68] Session close\n[P85] Regulation tail — praise checking spelling (for silent e) over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 85%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior vowel-sound instruction): keep to TA-1/TA-2 with the five keyword anchors heavily present before introducing the silent-e contrast. S1 (knows letter names confidently, struggles to separate sounds): expect strong MC-VOWEL-LETTER-NAME-IS-THE-SOUND interference; dwell on TA-3. S6 (frustrated by cap/cape-style near-identical word pairs): explicitly validate that this is one of the trickiest parts of English spelling, and that checking for a final \"e\" is a reliable, learnable habit, not guesswork. S9 (L1 has a smaller vowel inventory or different vowel-length conventions, e.g. Spanish's 5 pure vowels with no length distinction): expect specific short-vowel confusions tied to L1 vowel mapping (e.g., merging /ɪ/ and /iː/, or /ɛ/ and /æ/) — treat as a predictable transfer effect requiring extra discrimination practice on the specific contrastive pair, not a general difficulty.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.short-vowels.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
