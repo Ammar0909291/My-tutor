@@ -2081,7 +2081,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
           })
           if (learnerRequestHoisted) {
-            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier)
+            // P2 fix (remaining risk closed): whether a real-life example
+            // has already been established for THIS concept, computed from
+            // ConversationState's own counters (exampleRequests — set by an
+            // earlier explicit request; remediationCount > 2 — tier 2 of the
+            // ladder already ran on a prior turn) rather than asking the LLM
+            // to infer it from a conversation history that may already have
+            // scrolled past the example (client.ts forwards only the last 6
+            // messages).
+            const hasEstablishedExample =
+              conversationStateHoisted.exampleRequests > 0 || conversationStateHoisted.remediationCount > 2
+            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample)
           }
           // Bug 8 — the client reports whether the previous long (collapsed)
           // explanation was ever expanded; unread text is never assumed read.

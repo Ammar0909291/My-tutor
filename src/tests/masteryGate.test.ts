@@ -195,16 +195,32 @@ describe('learner-request → forced TeachingAction', () => {
 
   // P2 (teaching-quality refinement, example continuity): a real-life
   // example request must not cause the tutor to jump between unrelated
-  // scenarios (ruler → coffee → stroller) within the same concept.
-  it('real-life example directive instructs extending an established scenario, not switching to a new one', () => {
+  // scenarios (ruler → coffee → stroller) within the same concept. The
+  // signal is DETERMINISTIC (ConversationState's own counters, passed in by
+  // the caller), not "check your recent messages" — that phrasing was
+  // unreliable since the model only sees the last 6 messages and an example
+  // given earlier could already be out of view.
+  it('first example this lesson (hasEstablishedExample=false, the default): no continuity claim, sets the anchor', () => {
     const block = buildLearnerRequestBlock('real_life_example', null)
-    expect(block).toMatch(/EXTEND that SAME one/i)
-    expect(block).toMatch(/only .* .*new scenario .* clearly not worked|only introduce a genuinely new scenario/i)
+    expect(block).toContain('TEACHING ACTION: REAL_LIFE_EXAMPLE')
+    expect(block).toMatch(/first example for this concept this lesson/i)
+    expect(block).not.toMatch(/EXTEND that same scenario/i)
   })
 
-  it('the same continuity instruction reaches tier-2 of the explain_differently ladder (shared constant, not duplicated)', () => {
-    const tier2 = buildLearnerRequestBlock('explain_differently', null, 2)
-    expect(tier2).toMatch(/EXTEND that SAME one/i)
+  it('an already-established example (hasEstablishedExample=true) is stated as fact, not left to guesswork', () => {
+    const block = buildLearnerRequestBlock('real_life_example', null, 0, true)
+    expect(block).toMatch(/ALREADY been given earlier this lesson/i)
+    expect(block).toMatch(/tracked server-side, not something to guess from recent messages/i)
+    expect(block).toMatch(/EXTEND that same scenario further/i)
+  })
+
+  it('the same deterministic continuity signal reaches tier-2 of the explain_differently ladder (shared function, not duplicated)', () => {
+    const tier2Fresh = buildLearnerRequestBlock('explain_differently', null, 2, false)
+    expect(tier2Fresh).toMatch(/first example for this concept this lesson/i)
+
+    const tier2Established = buildLearnerRequestBlock('explain_differently', null, 2, true)
+    expect(tier2Established).toMatch(/ALREADY been given earlier this lesson/i)
+    expect(tier2Established).toMatch(/EXTEND that same scenario further/i)
   })
 
   it('request counters accumulate in the student state (Bug 11)', () => {

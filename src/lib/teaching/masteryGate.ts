@@ -181,25 +181,35 @@ export function detectLearnerRequest(message: string): LearnerRequest | null {
   return null
 }
 
-const REAL_LIFE_EXAMPLE_DIRECTIVE = (
-  '\n\nTEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move). ' +
-  'The student asked for a concrete application. Do NOT re-explain the theory. ' +
-  // P2 (teaching-quality refinement, example continuity): check your own
-  // recent turns in this conversation first. If you already gave this
-  // concept a scenario or analogy, EXTEND that same one — don't jump to an
-  // unrelated new scenario (e.g. a ruler, then coffee, then a stroller) just
-  // because a fresh example was asked for. Switch to a genuinely different
-  // scenario only if the established one has clearly failed to land.
-  'If you already used a scenario or analogy for this concept earlier in the ' +
-  'conversation, EXTEND that SAME one further rather than switching to an ' +
-  'unrelated new scenario — jumping between disconnected examples (a ruler, ' +
-  'then coffee, then a stroller) is more confusing than one scenario explored ' +
-  'more deeply. Only introduce a genuinely new scenario if the established ' +
-  'one has clearly not worked. ' +
-  'Give ONE vivid everyday scenario they have personally experienced, walk the ' +
-  'concept through that scenario start to finish, and connect back in one sentence. ' +
-  'No definitions this turn.'
-)
+/**
+ * P2 fix (remaining risk closed): the original version of this directive
+ * told the model to "check your own recent turns" for an established
+ * example before choosing a new one — purely advisory, AND unreliable by
+ * construction, since generateAIResponse only forwards the last 6 messages
+ * (client.ts's `messages.slice(-6)`) — an example given earlier in a longer
+ * lesson is literally invisible to the model by the time this fires, so the
+ * instruction could silently do nothing through no fault of the model.
+ * Replaced with a DETERMINISTIC signal computed server-side from
+ * ConversationState's own counters (exampleRequests, remediationCount —
+ * both already tracked, no new state added) — the caller passes whether an
+ * example has already been established for this concept, so the directive
+ * tells the model a FACT ("you already have one — extend it") instead of
+ * asking it to reconstruct that fact from a context window that may not
+ * contain it.
+ */
+function realLifeExampleDirective(hasEstablishedExample: boolean): string {
+  const continuity = hasEstablishedExample
+    ? 'An example or analogy for this concept has ALREADY been given earlier this lesson (this is tracked server-side, not something to guess from recent messages). EXTEND that same scenario further — do not introduce a new, unrelated one. Jumping between disconnected examples (a ruler, then coffee, then a stroller) is more confusing than exploring one scenario more deeply. Only switch to a genuinely different scenario if the established one has clearly not worked.'
+    : 'This is the first example for this concept this lesson — choose one clearly, since it will be the one you are expected to extend if the student needs another example later.'
+  return (
+    '\n\nTEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move). ' +
+    'The student asked for a concrete application. Do NOT re-explain the theory. ' +
+    continuity + ' ' +
+    'Give ONE vivid everyday scenario they have personally experienced, walk the ' +
+    'concept through that scenario start to finish, and connect back in one sentence. ' +
+    'No definitions this turn.'
+  )
+}
 
 /**
  * The forced TeachingAction directive for the turn. Injected AFTER the
@@ -214,11 +224,19 @@ const REAL_LIFE_EXAMPLE_DIRECTIVE = (
  * Visualization Registry's forced-render mechanism (visualRegistry.ts) —
  * no new teaching actions invented. Only applies to 'explain_differently';
  * ignored for 'diagram'/'real_life_example', which are already explicit.
+ *
+ * hasEstablishedExample (P2, example continuity): true when
+ * ConversationState.exampleRequests > 0 OR the ladder has already reached
+ * tier 2 on a prior turn (remediationCount > 2) — i.e. a real-life example
+ * has genuinely already been produced for this concept this lesson. Purely
+ * additive/optional so pre-existing callers default to false (first-example
+ * wording), matching prior behavior.
  */
 export function buildLearnerRequestBlock(
   request: LearnerRequest,
   availableVisualType: string | null,
   remediationTier = 0,
+  hasEstablishedExample = false,
 ): string {
   switch (request) {
     case 'diagram':
@@ -231,7 +249,7 @@ export function buildLearnerRequestBlock(
         ' No new abstract explanation this turn.'
       )
     case 'real_life_example':
-      return REAL_LIFE_EXAMPLE_DIRECTIVE
+      return realLifeExampleDirective(hasEstablishedExample)
     case 'explain_differently': {
       // Tier 0 (first time this concept has needed it): a different
       // explanation — same channel (prose), genuinely different content.
@@ -258,7 +276,7 @@ export function buildLearnerRequestBlock(
       // Tier 2: real-world example (reuses the existing directive verbatim —
       // same teaching action the learner gets by asking for one directly).
       if (remediationTier === 2) {
-        return REAL_LIFE_EXAMPLE_DIRECTIVE.replace(
+        return realLifeExampleDirective(hasEstablishedExample).replace(
           'TEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move).',
           'TEACHING ACTION: CHANGE_REPRESENTATION — REAL_LIFE_EXAMPLE (a different ' +
           'explanation and a worked example have both already failed to land this ' +

@@ -218,6 +218,73 @@ describe('Transcript Replay B — repeated confusion changes teaching behavior i
   })
 })
 
+// ── P2 refinement — example continuity (ruler → coffee → stroller pattern) ───
+
+describe('Transcript Replay — example continuity does not repeat/switch mid-concept (P2, deterministic)', () => {
+  it('full replay: an explicit example request, THEN a second one for the same concept, extends instead of switching', () => {
+    let state = initialConversationState('phys.mech.newtons-first-law')
+    expect(state.exampleRequests).toBe(0)
+
+    // Turn 1 — first "give me an example" for this concept. The directive
+    // must NOT claim continuity that doesn't exist yet.
+    const hasExampleTurn1 = state.exampleRequests > 0 || state.remediationCount > 2
+    expect(hasExampleTurn1).toBe(false)
+    const turn1 = buildLearnerRequestBlock('real_life_example', null, 0, hasExampleTurn1)
+    expect(turn1).toMatch(/first example for this concept this lesson/i)
+
+    // Fold the turn's evidence, exactly as route.ts does post-response.
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'real_life_example',
+    })
+    expect(state.exampleRequests).toBe(1)
+
+    // Turn 2 — the learner asks for ANOTHER example on the SAME concept.
+    // This must now be told, as a deterministic fact, to extend the first
+    // one rather than invent an unrelated new scenario (the ruler → coffee
+    // → stroller pattern this fix closes).
+    const hasExampleTurn2 = state.exampleRequests > 0 || state.remediationCount > 2
+    expect(hasExampleTurn2).toBe(true)
+    const turn2 = buildLearnerRequestBlock('real_life_example', null, 0, hasExampleTurn2)
+    expect(turn2).toMatch(/ALREADY been given earlier this lesson/i)
+    expect(turn2).toMatch(/EXTEND that same scenario further/i)
+    expect(turn2).not.toMatch(/first example for this concept this lesson/i)
+  })
+
+  it('the signal survives the escalation ladder reaching tier 2 without an explicit example request first', () => {
+    let state = initialConversationState('c')
+    // Two explain_differently turns without ever hitting 'real_life_example'
+    // directly — remediationCount climbs to 2, tier 2 fires next turn.
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(state.remediationCount).toBe(2)
+    expect(state.exampleRequests).toBe(0)
+
+    // Tier 2 fires now (remediationTier passed in is the PRE-turn count).
+    const hasEstablished = state.exampleRequests > 0 || state.remediationCount > 2
+    expect(hasEstablished).toBe(false) // this IS the first example — tier 2 hasn't run yet
+    const tier2 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount, hasEstablished)
+    expect(tier2).toMatch(/first example for this concept this lesson/i)
+
+    // Fold tier 2 (still counted as an explain_differently turn).
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(state.remediationCount).toBe(3)
+
+    // If the learner is STILL confused after tier 2 and somehow lands back
+    // on a real-life-example request, the system now correctly knows one
+    // was already given (remediationCount > 2).
+    const hasEstablishedAfter = state.exampleRequests > 0 || state.remediationCount > 2
+    expect(hasEstablishedAfter).toBe(true)
+    const followUp = buildLearnerRequestBlock('real_life_example', null, 0, hasEstablishedAfter)
+    expect(followUp).toMatch(/ALREADY been given earlier this lesson/i)
+  })
+})
+
 describe('Transcript Replay B — repeated failure forces demonstration over questioning (deterministic, not advisory)', () => {
   it('two consecutive recovery-fired turns force a SHOW move on turn three regardless of phase', () => {
     let state = initialConversationState('c')
