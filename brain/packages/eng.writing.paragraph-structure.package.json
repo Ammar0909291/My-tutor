@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.paragraph-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.paragraph-structure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3e7318026dedd568beca05cd19735581bc2a6fba3a56933bf83b4fdeca9dd28f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.paragraph-structure.md": "sha256:4b57ffa43e4138cc08075db6a5cd1337d030b3f4819fbb61fe9112828567be26"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.paragraph-structure",
+    "name": "Paragraph Structure",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.sentence-writing"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.paragraph-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.paragraph-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.paragraph-structure.md": "sha256:4b57ffa43e4138cc08075db6a5cd1337d030b3f4819fbb61fe9112828567be26"
+      },
+      "contentHash": "sha256:6372287053912862fc292b116c1d4db0307b12f3b64abc72e100e2876064cbbb",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.paragraph-structure.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md#TA-1 (addresses MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.paragraph-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.paragraph-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.paragraph-structure.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.paragraph-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.paragraph-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.paragraph-structure.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md#TA-3 (addresses MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.paragraph-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.paragraph-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.paragraph-structure.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.paragraph-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.paragraph-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.paragraph-structure.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md#TA-5 (addresses MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC, MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.paragraph-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.paragraph-structure\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.paragraph-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Paragraph Structure — Conceptual Development Sequence",
+      "content": "### TA-1: The Controlling-Idea Test\nPresent a \"paragraph\" with sentences only loosely connected by broad topic (as in the Conflict Evidence example) and have the student identify which sentences don't actually support one single controlling idea, then revise the set to genuinely unify around one idea — directly countering MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC.\n\n### TA-2: Topic Sentence First (Standard Structure)\nTeach the standard structure: topic sentence stating the controlling idea, followed by 3-4 supporting detail sentences, each directly relevant to that controlling idea. Student practices writing this standard structure on 2 assigned topics.\n\n### TA-3: Flexible Controlling-Idea Position\nUsing the discrimination pairs from MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE, present paragraphs with the controlling idea first, last (as a conclusion), and implied (never directly stated) and have the student confirm all three are legitimate as long as one controlling idea organizes every sentence.\n\n### TA-4: Detecting a Paragraph That Needs Splitting\nPresent a longer \"paragraph\" that actually contains two distinct controlling ideas mashed together and have the student identify the split point and divide it into two properly unified paragraphs.\n\n### TA-5: Composing an Original Structured Paragraph\nStudent writes an original paragraph on an assigned topic, choosing a controlling-idea position (first, last, or implied) deliberately and justifying the choice, then self-checks every sentence against the umbrella test — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": ": Controlling-Idea Test Application (Scaffolded)",
+      "content": "### WE-1: Controlling-Idea Test Application (Scaffolded)\n**Sentence set:** \"Reading builds vocabulary.\" / \"My favorite book has a blue cover.\" / \"Reading also improves focus and concentration.\" / \"Studies show regular readers perform better on tests.\"\n**Walkthrough:** Apply the umbrella test with a proposed controlling idea \"Reading offers several cognitive benefits.\" Confirm sentences 1, 3, and 4 fit; sentence 2 (about the book's cover color) does not belong and should be removed.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": ": Controlling Idea in Different Positions (Guided)",
+      "content": "### WE-2: Controlling Idea in Different Positions (Guided)\n**Paragraph A (first):** \"The old library needed major repairs. Its roof leaked during storms, several windows were cracked, and the heating system barely worked.\" **Paragraph B (last):** \"The roof leaked during storms. Several windows were cracked. The heating system barely worked. The old library clearly needed major repairs.\"\n**Walkthrough:** Confirm both paragraphs are equally well-structured around the same controlling idea, differing only in where that idea is stated.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": ": Splitting a Merged Paragraph (Independent)",
+      "content": "### WE-3: Splitting a Merged Paragraph (Independent)\n**Merged paragraph:** \"Soccer is a popular sport around the world, played in nearly every country. It requires teamwork, strategy, and physical stamina. Basketball, on the other hand, is especially popular in the United States and is known for its fast pace and high-scoring games.\"\n**Walkthrough:** Student identifies that this actually contains two controlling ideas (soccer's global popularity/demands, and basketball's US popularity/pace) and splits it into two properly unified paragraphs.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/misconception/MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC",
+      "kind": "misconception",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "- **Trigger signal:** Student writes a \"paragraph\" by stringing together several sentences that are loosely related to a broad subject but don't actually organize around one single controlling idea — jumping between different sub-points without a unifying thread, mistaking \"same general topic\" for \"one controlling idea.",
+      "content": "### MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC\n- **Trigger signal:** Student writes a \"paragraph\" by stringing together several sentences that are loosely related to a broad subject but don't actually organize around one single controlling idea — jumping between different sub-points without a unifying thread, mistaking \"same general topic\" for \"one controlling idea.\"\n- **Conflict evidence [P28]:** Present a \"paragraph\" about dogs that includes one sentence about dog breeds, one about dog food, one about a specific dog the writer once owned, and one about dog training — all \"about dogs\" but with no single controlling idea tying them together. Contrast with a paragraph where every sentence supports one specific claim (e.g., \"Golden retrievers make excellent family pets\") with each sentence providing a specific piece of evidence for that one claim.\n- **Bridge text [P30]:** \"Being 'about the same general topic' isn't enough — a real paragraph needs ONE controlling idea that every single sentence supports, the same way every supporting detail in a paragraph relates to its main idea when you're reading. If your sentences could each belong to a different paragraph about a different sub-point, you don't have one paragraph yet — you have several ideas competing for the same space.\"\n- **Replacement text [P31]:** \"Before writing, decide on ONE controlling idea for the paragraph. Then check every sentence you write: does this sentence directly support that one idea? If a sentence would fit just as well in a paragraph about something else, it doesn't belong in this one.\"\n- **Discrimination pairs [P33]:** (a) Same-general-topic sufficiency (any sentences loosely connected to a broad subject count as one paragraph) vs. (b) Single-controlling-idea requirement (a genuine paragraph organizes every sentence around one specific, unified idea, not just a shared broad topic).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's controlling-idea test before continuing.",
+      "localKey": "MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC",
+      "language": "en",
+      "refs": [
+        "MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/misconception/MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE",
+      "kind": "misconception",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "- **Trigger signal:** Student assumes the sentence stating the paragraph's controlling idea must always appear first, either forcing an awkward topic-sentence-first structure even when a different order would work better, or failing to recognize a controlling idea when it's placed at the end (as a concluding/summarizing statement) or is implied rather than directly stated.",
+      "content": "### MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE\n- **Trigger signal:** Student assumes the sentence stating the paragraph's controlling idea must always appear first, either forcing an awkward topic-sentence-first structure even when a different order would work better, or failing to recognize a controlling idea when it's placed at the end (as a concluding/summarizing statement) or is implied rather than directly stated.\n- **Conflict evidence [P28]:** Present a well-constructed paragraph where the controlling idea appears as the LAST sentence, functioning as a conclusion that ties together evidence presented first (e.g., three sentences describing a garden's features, followed by \"This garden truly is a peaceful retreat.\") Ask the student whether this paragraph is still well-organized around one controlling idea, even though it's not stated first.\n- **Bridge text [P30]:** \"A controlling idea usually appears first, since that helps the reader know what to expect — but it doesn't have to. Sometimes it works well as a concluding statement that ties the evidence together at the end, and sometimes it's not stated in any single sentence at all, but clearly implied by the details (just like an implied main idea when reading). The requirement is that ONE controlling idea organizes the whole paragraph — its position is flexible.\"\n- **Replacement text [P31]:** \"Check whether the paragraph has one controlling idea that all the sentences support — regardless of WHERE that idea appears. It can lead the paragraph, conclude it, or even stay unstated but clearly implied. Don't force a topic sentence into first position if a different structure serves the paragraph's purpose better.\"\n- **Discrimination pairs [P33]:** (a) Topic-sentence-must-be-first (the controlling idea sentence must always open the paragraph) vs. (b) Flexible-position controlling idea (a controlling idea can appear first, last, or remain implied, as long as it genuinely organizes every sentence in the paragraph).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's flexible-anchor-point framing before continuing to TA-3.",
+      "localKey": "MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE",
+      "language": "en",
+      "refs": [
+        "MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "The Controlling-Idea Test",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Controlling-Idea Test\",\"primitives\":[],\"addresses\":[\"MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Topic Sentence First (Standard Structure)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Topic Sentence First (Standard Structure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Flexible Controlling-Idea Position",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Flexible Controlling-Idea Position\",\"primitives\":[],\"addresses\":[\"MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Detecting a Paragraph That Needs Splitting",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Detecting a Paragraph That Needs Splitting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Composing an Original Structured Paragraph",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Composing an Original Structured Paragraph\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC\",\"MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC",
+        "MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject a same-topic-only sentence set**\nGiven 5 sentences loosely related to a broad topic but lacking one controlling idea, student identifies which sentences don't belong and states the actual controlling idea the remaining sentences share. *(Directly targets MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Recognize a valid non-first-position controlling idea**\nGiven a well-structured paragraph with the controlling idea stated last (as a conclusion) or implied, student confirms it is well-organized despite the non-standard position. *(Directly targets MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Standard structure composition**\nStudent writes a standard-structure paragraph (topic sentence first, 3-4 supporting details) on an assigned topic.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Split a merged paragraph**\nGiven a paragraph containing two distinct controlling ideas, student identifies the split point and produces two properly unified paragraphs.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original paragraph with deliberate structure choice**\nStudent writes an original paragraph, deliberately choosing and justifying a controlling-idea position (first, last, or implied).",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Adaptive Flags",
+      "content": "- If the student includes same-topic-but-unrelated sentences, weight remediation toward MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC's bridge text and re-run TA-1's controlling-idea test before returning to composition.\n- If the student rigidly forces topic-sentence-first structure or fails to recognize valid alternative positions, weight remediation toward MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE's bridge text and TA-3's flexible-position practice specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.topic-sentences`) — do not certify mastery without TA-5's deliberate structure-choice composition, since topic-sentence craft assumes the student already understands that a controlling idea's position is a deliberate writerly choice, not a fixed rule.\n- Reuse the \"paragraph umbrella\" framing explicitly when introducing `eng.writing.topic-sentences` — that concept refines the craft of writing the controlling-idea sentence itself, building on the position-flexibility principle established here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC",
+        "MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.writing.paragraph-structure/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.paragraph-structure",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Sentence-Writing Readiness Check]\n        |\n        v\n[Concrete Anchor: The Paragraph Umbrella, Revisited]\n        |\n        v\n[TA-1: The Controlling-Idea Test]\n        |\n        v\n[TA-2: Topic Sentence First (Standard Structure)]\n        |\n        v\n[TA-3: Flexible Controlling-Idea Position]\n        |\n        v\n[TA-4: Detecting a Paragraph That Needs Splitting]\n        |\n        v\n[TA-5: Composing an Original Structured Paragraph]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — paragraph structure organizes reliable sentence-level writing into a coherent unit, so weak sentence construction undermines the higher-level organizational task. During instruction (S1), watch for both misconception patterns: accepting same-topic-only unity (MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC) and assuming a fixed topic-sentence position (MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE) both substitute a surface heuristic for the real controlling-idea test — redirect both to the Paragraph Umbrella anchor. If the student includes an off-topic sentence or rigidly forces topic-sentence-first structure during TA-3/TA-4 (S6), drop back to the Concrete Anchor's umbrella test and flexible-position demonstration before returning to composition practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who writes standard-structure paragraphs correctly (MP-3) but cannot detect a same-topic-only violation or recognize a valid non-standard structure has not yet learned the underlying judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.paragraph-structure.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
