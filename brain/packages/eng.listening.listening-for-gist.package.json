@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.listening-for-gist-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.listening-for-gist",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:76a939bf19500ee3a412e69cbc0be55bc4593f0b6b9cb23d4aa5b2ecfc22ce19",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.listening-for-gist.md": "sha256:79d6b6e3afe3b22fb1b717747b31f4fd1e863e0f5fc7ee7d694c7897bfa153a8"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.listening.listening-for-gist",
+    "name": "Listening for Gist",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.listening.active-listening"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.listening-for-gist-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.listening-for-gist (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.listening-for-gist.md": "sha256:79d6b6e3afe3b22fb1b717747b31f4fd1e863e0f5fc7ee7d694c7897bfa153a8"
+      },
+      "contentHash": "sha256:3e374c2218b7a5c6cc31d40b1ee65d63f74ca0249f002b3c945850cf2431012b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-gist.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-gist"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-gist\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-gist.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md#TA-2 (addresses MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-gist"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-gist\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-gist.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md#TA-3 (addresses MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-gist"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-gist\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-gist.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md#TA-4 (addresses MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST, MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-gist"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-gist\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.listening-for-gist/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Listening for Gist — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Key Content Words in Fast Speech [C]**\n\nPresent audio/spoken passages at a natural, moderately fast pace; student identifies the key content words (nouns, main verbs) they catch, without worrying about every word.\n\n**TA-2 — Building General Topic Understanding from Partial Input [C]**\n\nUsing the Component 3 fishing-net technique, student uses only caught keywords to infer the overall topic/gist, directly targeting MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST.\n\n**TA-3 — Gist Listening as a Deliberate Strategy for Previewing [C→P]**\n\nPresent a scenario requiring the student to quickly gist-listen to several short audio segments to decide which one to focus on in detail, directly targeting MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING by demonstrating its strategic, purposeful use.\n\n**TA-4 — Practicing Gist Listening on Extended, Natural-Pace Audio [P]**\n\nStudent applies gist-listening skills to a longer, natural-pace audio passage, summarizing the overall topic/gist without requiring word-by-word understanding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 68,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/misconception/MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST",
+      "kind": "misconception",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "- **Trigger signal:** Student believes they must comprehend every single word of spoken input to understand the overall topic/general meaning, becoming anxious or giving up entirely when encountering unfamiliar words or fast speech, rather than recognizing that gist comprehension deliberately tolerates gaps — focusing on key content words and overall pattern rather than requiring complete word-by-word understanding.",
+      "content": "### MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST\n- **Trigger signal:** Student believes they must comprehend every single word of spoken input to understand the overall topic/general meaning, becoming anxious or giving up entirely when encountering unfamiliar words or fast speech, rather than recognizing that gist comprehension deliberately tolerates gaps — focusing on key content words and overall pattern rather than requiring complete word-by-word understanding.\n- **Conflict evidence [P28]:** \"You said you couldn't understand anything because of a few unfamiliar words. But did you catch the words 'weather,' 'rain,' and 'tomorrow' in that announcement? Even without every single word, can you guess the GENERAL topic?\"\n- **Bridge text [P30]:** \"Listening for GIST specifically means understanding the overall topic or general meaning WITHOUT needing to process every single word — this is a deliberately different, more tolerant listening mode than detailed comprehension. Catching key content words (nouns, main verbs) and overall context often gives enough information for gist, even with several unfamiliar words or fast speech in between.\"\n- **Replacement text [P31]:** \"For gist listening, focus on catching key content words and overall topic cues, and deliberately let go of needing to understand every single word.\"\n- **Discrimination pairs [P33]:**\n  - Catching \"weather,\" \"rain,\" \"tomorrow\" (key content words) and correctly inferring \"this is a weather forecast mentioning rain tomorrow\" (successful gist comprehension) vs. giving up because a few connecting words were unclear.\n  - A student who reports \"I understood nothing\" after missing 20% of words vs. a student who reports \"I got that it's about a weather forecast\" using the words they did catch.\n- **s6_path:** \"It's a very natural instinct to feel like missing any word means missing the whole message — but gist listening is specifically designed to work WITH incomplete understanding, using key words and context to build a general picture.\"",
+      "localKey": "MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST",
+      "language": "en",
+      "refs": [
+        "MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/misconception/MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING",
+      "kind": "misconception",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "- **Trigger signal:** Student treats gist listening as a lesser, \"easier\" skill only needed by weaker listeners, or something to move past quickly toward \"real\" detailed comprehension, missing that gist listening is a genuinely distinct, valuable STRATEGY used deliberately even by highly proficient listeners — for previewing content, deciding what's worth focused attention, or when full detail simply isn't necessary (e.g., quickly determining if a news segment is relevant before deciding whether to listen closely).",
+      "content": "### MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING\n- **Trigger signal:** Student treats gist listening as a lesser, \"easier\" skill only needed by weaker listeners, or something to move past quickly toward \"real\" detailed comprehension, missing that gist listening is a genuinely distinct, valuable STRATEGY used deliberately even by highly proficient listeners — for previewing content, deciding what's worth focused attention, or when full detail simply isn't necessary (e.g., quickly determining if a news segment is relevant before deciding whether to listen closely).\n- **Conflict evidence [P28]:** \"You said gist listening is just a 'lower level' skill for beginners. Do highly fluent English speakers ever quickly scan a conversation or news broadcast just to get the general idea, without focusing on every detail — like deciding whether a topic is worth their full attention?\"\n- **Bridge text [P30]:** \"Listening for gist is a genuinely distinct, valuable STRATEGY, not a lesser stage to outgrow — even highly proficient listeners deliberately use gist listening to quickly preview content, decide what deserves closer attention, or when full detail simply isn't necessary for the purpose at hand. It's a different TOOL for a different purpose than detailed listening, not a weaker version of the same skill.\"\n- **Replacement text [P31]:** \"Recognize gist listening as a deliberate, valuable strategy used by skilled listeners for previewing and filtering, not just a beginner-level fallback to move past.\"\n- **Discrimination pairs [P33]:**\n  - Quickly listening to several news headlines to decide which story to focus on in detail (gist listening, a deliberate strategic choice) vs. assuming this is only done by beginners who \"can't\" listen for detail.\n  - A fluent speaker skimming a long meeting recording for gist before deciding which section to relisten to carefully (strategic gist use) vs. treating gist as inherently inferior to full comprehension.\n- **s6_path:** \"Since gist listening tolerates more gaps than detailed listening, it's easy to assume it's the 'easier, lesser' skill for less capable listeners — but it's actually a deliberate, efficient strategy that skilled listeners use purposefully for previewing and filtering, alongside (not instead of) detailed listening skills.\"\n\n---",
+      "localKey": "MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING",
+      "language": "en",
+      "refs": [
+        "MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Identifying Key Content Words in Fast Speech",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Key Content Words in Fast Speech\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Building General Topic Understanding from Partial Input",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Building General Topic Understanding from Partial Input\",\"primitives\":[],\"addresses\":[\"MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Gist Listening as a Deliberate Strategy for Previewing",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Gist Listening as a Deliberate Strategy for Previewing\",\"primitives\":[],\"addresses\":[\"MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Practicing Gist Listening on Extended, Natural-Pace Audio",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Practicing Gist Listening on Extended, Natural-Pace Audio\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING\",\"MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST",
+        "MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 82,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Key content words, novel passage**\n\"Listen to this passage. What are 3-5 key words you caught?\"\n*Target:* correctly identifies several content words without requiring full comprehension.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Building gist from partial input, novel example**\n\"Using just the words you caught, what's the general topic of this passage?\"\n*Target:* correctly infers a reasonable general topic from the partial keyword set.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Strategic gist use, novel scenario**\n\"You're scanning through several podcast episodes to find one on a topic you're interested in. What listening strategy would you use?\"\n*Target:* correctly identifies gist listening as the appropriate strategy for this previewing/filtering purpose.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Tolerating gaps under fast/unfamiliar speech**\n\"You catch only about half the words in a fast-spoken weather report, including 'storm,' 'weekend,' and 'avoid travel.' Should you conclude you understood nothing, or can you state a gist?\"\n*Target:* correctly builds a reasonable gist (\"a storm is expected this weekend and travel should be avoided\") from the partial catch, rather than concluding comprehension failed.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain gist listening**\n\"In your own words: do you need to understand every word to get the gist of something, and is gist listening a lesser skill than detailed listening?\"\n*Target:* states or demonstrates that gist listening deliberately tolerates gaps in understanding (using key words and context), and that it's a genuinely valuable, distinct strategy used purposefully by skilled listeners, not merely a beginner fallback.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Adaptive Flags",
+      "content": "- **Deliberate tolerance for gaps is the core skill, not a compromise**: explicitly frame gist listening as INTENTIONALLY working with partial input, not a failure mode to feel bad about.\n- **Keyword-fishing technique as the standing practical method**: reuse this technique whenever gist-listening practice occurs, since it concretely demonstrates how partial word-catching builds general understanding.\n- **Gist listening as a strategic choice for skilled listeners, not a beginner crutch**: explicitly counter any framing that gist listening is inferior to detailed listening — teach it as a distinct, purposeful tool for previewing/filtering situations.\n- **Anxiety reduction is a key affective goal for EL learners**: for S9 learners, prioritize building genuine comfort with partial comprehension through repeated, low-stakes practice, since listening anxiety around \"missing words\" can otherwise become a significant barrier.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 170,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-gist/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.listening-for-gist",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — key-word fishing net warm-up\n  ↓\n[P41] PD-1 (active-listening readiness)\n  ↓ PASS\n[P06] Anchor: key-word fishing net (catch keywords, infer topic)\n  ↓\nTA-1: Identifying key content words in fast speech [C]\n  ↓\nTA-2: Building general topic understanding from partial input [C]\n  ↓\n[P28] Conflict: every word assumed necessary for gist → MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST (if triggered)\n  ↓\nTA-3: Gist listening as a deliberate strategy for previewing [C→P]\n  ↓\n[P28] Conflict: gist listening dismissed as a lesser skill → MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING (if triggered)\n  ↓\nTA-4: Practicing gist listening on extended, natural-pace audio [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, gist-listen to one audio clip and summarize the general topic from key words alone.\"\n[P68] Session close\n[P85] Regulation tail — praise catching key words and building a general picture over striving for complete word-by-word understanding\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on active listening, new to gist-specific strategy): dwell on TA-1/TA-2's keyword-fishing technique with clear, simple examples before introducing the strategic-preview framing. S1 (already gist-listens intuitively in daily life but lacks explicit strategy awareness): use TA-3 to build metalinguistic naming for an already-present intuitive skill. S6 (anxious about \"not understanding everything\" and prone to giving up on partial comprehension): explicitly validate that gist listening is DESIGNED to tolerate gaps, directly reducing the pressure to catch every word. S9 (English learner whose listening anxiety is heightened by unfamiliar vocabulary, or who has been taught in a comprehension-must-be-complete tradition): expect MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST to be a strong, deeply held belief requiring repeated, reassuring practice with the keyword-fishing technique to build genuine confidence in partial-input comprehension.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-gist.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
