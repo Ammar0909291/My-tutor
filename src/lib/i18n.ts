@@ -274,6 +274,7 @@ export const translations = {
     lesson_init: 'Подключаемся к репетитору...',
     lesson_back_base: '← База',
     lesson_scroll_down: '↓',
+    learn_loading_lesson: 'Загружаем ваш урок…',
 
     /* ── Auth navigation ── */
     nav_back_home: 'На главную',
@@ -1345,6 +1346,7 @@ export const translations = {
     lesson_init: 'Connecting to tutor...',
     lesson_back_base: '← Dashboard',
     lesson_scroll_down: '↓',
+    learn_loading_lesson: 'Loading your lesson…',
 
     /* ── Auth navigation ── */
     nav_back_home: 'Back to Home',
@@ -2416,6 +2418,7 @@ export const translations = {
     lesson_init: 'ट्यूटर से जुड़ रहे हैं...',
     lesson_back_base: '← डैशबोर्ड',
     lesson_scroll_down: '↓',
+    learn_loading_lesson: 'Aapka lesson load ho raha hai…',
 
     /* ── Auth navigation ── */
     nav_back_home: 'होम पर जाएं',
