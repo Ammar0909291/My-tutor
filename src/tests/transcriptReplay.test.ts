@@ -386,7 +386,15 @@ describe('Transcript Replay C — regression: Force lessons still receive Force 
     expect(visual).toBe('force_diagram')
   })
 
-  it('an unlisted dynamics concept with no exact entry still gets the domain default — the domain default itself was not touched', () => {
-    expect(getConceptVisualType('phys.mech.some-unlisted-dynamics-concept')).toBe('force_diagram')
+  // Superseded by the P2 pass (Eliminate Broad Domain-Default
+  // Visualization Misclassification): the 'phys.mech' domain default was
+  // removed entirely once every legitimate force/dynamics concept received
+  // an explicit Tier-1 entry (free-body-diagram, tension, normal-force,
+  // inclined-plane, equilibrium, conservative-forces, hookes-law, force,
+  // rotational-dynamics — see visualRegistry.test.ts's P2 section for full
+  // coverage). An unlisted phys.mech concept now correctly returns null
+  // (honest fallback) instead of inheriting force_diagram unconditionally.
+  it('an unlisted phys.mech concept now returns null — the domain default was removed, not just narrowed (P2)', () => {
+    expect(getConceptVisualType('phys.mech.some-unlisted-dynamics-concept')).toBeNull()
   })
 })

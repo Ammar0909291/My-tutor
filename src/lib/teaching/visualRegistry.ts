@@ -46,8 +46,88 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.mech.simple-harmonic-motion': { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.mech.torque':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },
-  'phys.mech.gravitation':            { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
-  'phys.mech.satellite-motion':       { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  // P2 fix: these two keys did not match any real KG concept ID ('phys.mech.
+  // gravitation' vs the KG's 'phys.mech.universal-gravitation'; 'phys.mech.
+  // satellite-motion' vs the KG's 'phys.mech.satellites') — the entries were
+  // correctly authored (right visual, right scene generator) but silently
+  // unreachable. Renamed to the real IDs so this already-existing content
+  // finally serves the concepts it was written for.
+  'phys.mech.universal-gravitation':  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  'phys.mech.satellites':             { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+
+  // Physics — Mechanics (P2: eliminate broad domain-default dependence).
+  // Audit of every phys.mech concept previously resolved ONLY through the
+  // 'phys.mech' → force_diagram domain default (see DOMAIN_VISUALS below,
+  // which no longer carries a 'phys.mech' entry at all — every concept that
+  // legitimately needs force_diagram now has an explicit entry here, so the
+  // over-broad default is removed rather than narrowed). Three outcomes per
+  // concept, each cited:
+  //   (a) force_diagram genuinely fits (force/equilibrium analysis) — kept.
+  //   (b) an existing, different visual type fits better — remapped.
+  //   (c) no existing visual fits (pure energy/fluids/advanced Lagrangian-
+  //       Hamiltonian formalism) — deliberately left OUT of this map, so
+  //       lookupConceptVisual returns null and the caller's existing
+  //       fallback chain (detectVisual's keyword match, then honest text)
+  //       runs instead of a wrong force_diagram substitution.
+
+  // (a) Force/equilibrium analysis — force_diagram is correct.
+  'phys.mech.force':                  { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.free-body-diagram':      { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.tension':                { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.normal-force':           { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.inclined-plane':         { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.equilibrium':            { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.conservative-forces':    { primary: 'force_diagram', all: ['force_diagram'] },
+  'phys.mech.hookes-law':             { primary: 'force_diagram', all: ['force_diagram'] },
+  // Rotational analog of force/dynamics — reuses the existing torque_diagram
+  // scene generator (already authored for phys.mech.torque above).
+  'phys.mech.rotational-dynamics':    { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },
+
+  // (b) A different existing visual type is the better fit.
+  // Work is force-times-displacement — best shown as an F–d graph (area
+  // under the curve = work), not a static force diagram.
+  'phys.mech.work':                   { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  // Angular kinematics (θ/ω/α vs t) is graph-shaped, exactly parallel to
+  // linear kinematics-1d/2d above — same reasoning, same visual type.
+  'phys.mech.angular-kinematics':     { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  // Rotational/rolling motion concepts pair naturally with the existing
+  // circular-motion 3D visual rather than a static force diagram.
+  'phys.mech.angular-momentum':       { primary: 'three_circular_motion', all: ['three_circular_motion'] },
+  'phys.mech.conservation-of-angular-momentum': { primary: 'three_circular_motion', all: ['three_circular_motion'] },
+  'phys.mech.rolling-motion':         { primary: 'three_circular_motion', all: ['three_circular_motion'] },
+  // Momentum/collision concepts pair with the existing momentum-collision
+  // visual already used by phys.mech.momentum/impulse above — collisions-
+  // elastic/inelastic also correctly inherit the 'collision' scene
+  // generator the orphaned 'phys.mech.collisions' key was clearly intended
+  // for but could never reach (KG has no 'phys.mech.collisions' concept).
+  'phys.mech.conservation-of-momentum': { primary: 'three_momentum_collision', all: ['three_momentum_collision'] },
+  'phys.mech.collisions-elastic':     { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
+  'phys.mech.collisions-inelastic':   { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
+  // Gravitation/orbital concepts pair with the same gravitation_orbit scene
+  // as universal-gravitation/satellites above — one visual family for the
+  // whole gravitation sub-area.
+  'phys.mech.gravitational-field':    { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  'phys.mech.orbital-mechanics':      { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  'phys.mech.keplers-laws':           { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  'phys.mech.escape-velocity':        { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+
+  // (c) No existing visual type fits — deliberately NOT mapped here:
+  //   Pure energy quantities/transformations (no force-diagram or graph
+  //   convention already established in this registry): kinetic-energy,
+  //   potential-energy, work-energy-theorem, conservation-of-energy, power,
+  //   gravitational-potential.
+  //   Mass-distribution/point concepts with no clear existing-type fit:
+  //   moment-of-inertia, center-of-mass.
+  //   Fluid mechanics (no pressure/fluid visual type exists in this
+  //   registry): stress-strain, pressure-fluids, buoyancy, bernoulli,
+  //   surface-tension, viscosity.
+  //   Advanced Lagrangian/Hamiltonian formalism (no visual convention
+  //   applies): generalized-coordinates, euler-lagrange-equation,
+  //   cyclic-coordinates-conservation-laws, hamiltonian, hamiltons-
+  //   equations, poisson-brackets, canonical-transformations, hamilton-
+  //   jacobi-equation.
+  //   These fall through to detectVisual()'s keyword fallback, then to an
+  //   honest text/no-visual response — never a substituted force_diagram.
 
   // Physics — Vectors
   'phys.meas.scalars-vectors':        { primary: 'three_vector_visualization', all: ['three_vector_visualization'], sceneGenerator: 'vector' },
@@ -212,7 +292,21 @@ function domainRule(prefix: string, primary: VisualType, all: VisualType[]): Dom
 
 const DOMAIN_VISUALS: DomainRule[] = [
   // Physics domains
-  domainRule('phys.mech',  'force_diagram', ['force_diagram', 'three_newton_forces']),
+  // P2 fix: 'phys.mech' USED TO default to force_diagram for every concept
+  // in this domain — correct for dynamics, wrong for the kinematics,
+  // energy, fluids, and advanced-formalism concepts also living here (the
+  // P0 fix for phys.mech.displacement and this P2 audit's classification
+  // of all 45 previously-domain-default-only concepts). That default is
+  // now REMOVED, not narrowed: every phys.mech concept for which
+  // force_diagram (or another existing visual) is genuinely correct now
+  // has an explicit CONCEPT_VISUALS entry above, so the domain default is
+  // no longer needed for anything legitimate. Concepts with no suitable
+  // existing visual (Bucket C in the CONCEPT_VISUALS comment above) now
+  // correctly fall through Tier 2 (a miss) to Tier 3 (detectVisual's
+  // keyword match) or an honest no-visual response, instead of silently
+  // inheriting an unrelated force diagram. The lookup ALGORITHM (three
+  // tiers, checked in this order) is unchanged — only this one row of
+  // domain-default DATA was removed.
   domainRule('phys.em',    'circuit_diagram', ['circuit_diagram']),
   domainRule('phys.opt',   'force_diagram', ['force_diagram']),
   domainRule('phys.wave',  'force_diagram', ['force_diagram']),
