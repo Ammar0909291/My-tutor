@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.cross-cultural-communication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.cross-cultural-communication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8b8db0a834ed58249445367f24c83112e914f29642de2689c21f1f8ad058dc2a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md": "sha256:21407884860c04155aaaa9e6010ed3e92924e72a62a81263ad235f2c42b7ee16"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.cross-cultural-communication",
+    "name": "Cross-Cultural Communication",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.sociolinguistics-intro",
+      "eng.communication.digital-communication"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.cross-cultural-communication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.cross-cultural-communication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md": "sha256:21407884860c04155aaaa9e6010ed3e92924e72a62a81263ad235f2c42b7ee16"
+      },
+      "contentHash": "sha256:54adf2d6e1fe6745eed05bcb22e79c60c531e36de062b3298831088e5c3e6c23",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.cross-cultural-communication.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md#TA-1 (addresses MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.cross-cultural-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.cross-cultural-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.cross-cultural-communication.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.cross-cultural-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.cross-cultural-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.cross-cultural-communication.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md#TA-3 (addresses MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.cross-cultural-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.cross-cultural-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.cross-cultural-communication.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md#TA-4 (addresses MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY, MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.cross-cultural-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.cross-cultural-communication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.cross-cultural-communication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Cross-Cultural Communication — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing One's Own Norms as a Convention, Not the Default (MC-A)\n\nUsing the driving-side-of-the-road anchor, teach identifying one's own communication norms as one\nvalid convention among several. Student practice: given a communication scenario from a different\nculture, describe its internal logic without evaluating it against one's own culture as the standard.\n\n### TA-2 — Adapting Communication Style Across Cultural Contexts\n\nExtend TA-1: teach adjusting one's own communication approach (directness, formality) when\ninteracting across a cultural boundary. Student practice: given a feedback scenario, adapt the\ndelivery style appropriately for a specified different cultural context.\n\n### TA-3 — Recognizing Variation Within a Cultural Group (MC-B)\n\nUsing the whole-country-one-accent anchor, teach that broad cultural tendencies coexist with real\ninternal variation. Student practice: given two individuals from the same broad cultural group who\ncommunicate differently, explain possible reasons for the difference.\n\n### TA-4 — Full Application: Navigating a Cross-Cultural Communication Scenario\n\nGive the student a new cross-cultural communication scenario. They must recognize their own norms as\none convention among several (TA-1), adapt their approach appropriately (TA-2), and remain attentive\nto individual variation rather than applying a fixed stereotype (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 149,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/misconception/MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY",
+      "kind": "misconception",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "**Trigger signal:** Student assumes their own culture's communication norms (a preference for direct",
+      "content": "### MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY\n\n**Trigger signal:** Student assumes their own culture's communication norms (a preference for direct\nversus indirect speech, a particular level of formality, specific turn-taking expectations) are the\nuniversal, \"correct\" default, treating other cultures' different norms as deviations, errors, or\n\"less clear\" communication rather than equally valid different conventions.\n\n**Conflict evidence [P28]:** Present two communication styles for delivering critical feedback: one\nculture's convention of direct, explicit criticism, and another culture's convention of indirect,\nface-saving feedback delivered through implication and context. Ask: \"Is the direct style objectively\n'more honest' or 'clearer,' or is it simply one convention among several equally valid ways different\ncultures handle feedback?\"\n\n**Bridge text [P30]:** \"Assuming your own culture's norms are the universal default is like assuming\nyour home country's traffic laws (which side of the road to drive on) are the objectively 'correct'\nside, and every other country's opposite convention is simply 'wrong' — both are actually valid,\ninternally consistent systems; neither is the universal truth. Communication norms work the same way:\ndifferent cultures' conventions for directness, formality, and turn-taking are different valid\nsystems, not one correct default and several deviations.\"\n\n**Replacement text [P31]:** \"Don't treat your own culture's communication norms as the universal\ndefault. Recognize that directness, formality, and turn-taking expectations vary by culture as\nequally valid conventions — a different norm isn't a worse or less clear one, just a different one.\"\n\n**Discrimination pairs [P33]:**\n1. A culture's convention of direct, explicit critical feedback treated as objectively \"more honest\"\n   (misconception — treats one convention as the universal standard) vs. recognizing that indirect,\n   face-saving feedback in another culture is an equally valid, different convention for the same\n   underlying goal (correct recognition).\n2. A student who describes another culture's communication style as \"less direct\" or \"vaguer\" as if\n   that were a deficiency (misconception, ethnocentric framing) vs. a student who describes it as a\n   different convention serving a different set of social priorities (correct, non-judgmental\n   framing).\n\n**s6_path:** If the student continues to treat their own norms as default after the bridge, give\nthem three communication scenarios from cultures other than their own and have them describe each\nconvention's internal logic and purpose without evaluating it against their own culture's norms as\nthe standard.",
+      "localKey": "MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY",
+      "language": "en",
+      "refs": [
+        "MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/misconception/MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION",
+      "kind": "misconception",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "**Trigger signal:** Student, in the course of trying to avoid ethnocentrism, overcorrects into",
+      "content": "### MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION\n\n**Trigger signal:** Student, in the course of trying to avoid ethnocentrism, overcorrects into\ntreating an entire culture or linguistic community as a single monolithic block with one uniform\ncommunication style, ignoring genuine regional, generational, contextual, and individual variation\nwithin any cultural group — stereotyping in the name of cultural awareness.\n\n**Conflict evidence [P28]:** Present two individuals from the same broadly-labeled cultural group who\ncommunicate quite differently from each other (one more direct, one more indirect, reflecting\nindividual, regional, or generational variation within that same culture). Ask: \"Do these two people\nshare a cultural label? Do they communicate identically? What does this tell you about assuming one\n'style' represents an entire culture?\"\n\n**Bridge text [P30]:** \"Assuming a whole culture shares one communication style is like assuming\neveryone from a single large country speaks with the exact same accent and uses the exact same slang\n— in reality, huge variation exists by region, generation, and individual personality within any\nnational or cultural group. Being culturally aware means recognizing broad tendencies AND their\ngenuine internal variation, not replacing one stereotype (my culture is the default) with another\n(their whole culture is one uniform style).\"\n\n**Replacement text [P31]:** \"Don't treat an entire culture as having one single communication style.\nRecognize broad tendencies as starting points for awareness, but expect genuine variation by region,\ngeneration, and individual within any cultural group — adapt to the actual person in front of you,\nnot an assumed uniform stereotype.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming every member of a cultural group communicates in exactly the same way (misconception —\n   monolithic stereotype) vs. recognizing broad tendencies exist alongside real individual, regional,\n   and generational variation within that group (correct, nuanced awareness).\n2. A student who prepares one fixed \"communication script\" for an entire cultural group regardless of\n   the individual (misconception) vs. a student who uses broad cultural awareness as a starting point\n   while remaining attentive to the actual individual's specific communication style (correct\n   approach).\n\n**s6_path:** If the student continues to treat cultures as monolithic after the bridge, give them a\nscenario involving two individuals from the same broad cultural group who communicate quite\ndifferently, and have them explain what factors (region, generation, individual personality) might\naccount for the difference, reinforcing that cultural awareness is a starting point, not a fixed\nrule.",
+      "localKey": "MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION",
+      "language": "en",
+      "refs": [
+        "MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 42,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Recognizing One's Own Norms as a Convention, Not the Default (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing One's Own Norms as a Convention, Not the Default (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Adapting Communication Style Across Cultural Contexts",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Adapting Communication Style Across Cultural Contexts\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Recognizing Variation Within a Cultural Group (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Recognizing Variation Within a Cultural Group (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 165,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Full Application: Navigating a Cross-Cultural Communication Scenario",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Navigating a Cross-Cultural Communication Scenario\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY\",\"MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY",
+        "MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 171,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Describing a Different Culture's Convention Without Ethnocentric Judgment**\nGiven a communication scenario from a different culture, describe its internal logic without\nevaluating it against one's own culture as the standard.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Adapting Communication Style Across a Cultural Context**\nGiven a feedback scenario, adapt the delivery style appropriately for a specified different cultural\ncontext.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explaining Variation Within a Cultural Group**\nGiven two individuals from the same broad cultural group who communicate differently, explain\npossible reasons for the difference.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting an Ethnocentric or Monolithic Assumption**\nGiven a statement treating one culture's norm as universal or an entire culture as uniform, identify\nwhich misconception is present and correct it.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Cross-Cultural Communication Navigation**\nGiven a new cross-cultural communication scenario, recognize convention validity, adapt\ncommunication appropriately, and remain attentive to individual variation.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly describes other cultures' conventions non-judgmentally in isolation\n  (MP-1) but reverts to ethnocentric framing in a new full scenario (MP-5), provide a mandatory \"am I\n  treating my norm as the standard?\" self-check before finalizing any cross-cultural analysis.\n- If the student's equal-validity recognition is strong (MP-1) but they apply a fixed, uniform\n  assumption to an entire cultural group in a new scenario (MP-5), require an explicit \"could this\n  specific person vary from the broad tendency?\" check before finalizing any adaptation strategy.\n- If the student struggles to adapt communication style concretely, provide a scaffolding template\n  contrasting direct and indirect feedback phrasing as a starting reference.\n- Students with strong performance in `eng.speaking.non-verbal-communication`'s cultural-variability\n  recognition (for gesture and eye contact) should transfer readily to verbal cross-cultural\n  communication, since both require recognizing culturally-variable convention rather than one\n  universal norm — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 251,
+        "endLine": 266
+      }
+    },
+    {
+      "assetId": "eng.communication.cross-cultural-communication/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.cross-cultural-communication",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: sociolinguistics check] --> [PD-2: digital communication check]\n   |                       |                              |\n   | (gap found)           |                              | (pass both)\n   v                        v                              v\n[Route to prerequisite]                        [Component 3: Driving-Side-of-the-Road /\n                                                 Whole-Country-One-Accent Anchor]\n                                                            |\n                                                            v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.70) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: equal-validity drills /\n                     terminal in current      internal-variation drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1/TA-2 (ethnocentric default assumption) and MC-B during TA-3 (monolithic-culture assumption) —\nthese are largely independent and often need separate, explicit correction. If either fires, branch\nto the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure:\nMP-1/MP-2 failures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more guided full-scenario\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md",
+        "startLine": 215,
+        "endLine": 251
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

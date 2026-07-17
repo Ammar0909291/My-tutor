@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.prose-nonfiction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.prose-nonfiction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c9ad4f7382e63ee7ba720bc452fd5c0cdb24954f19d5e94e5b1cf585207c7fca",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md": "sha256:984bed648d2c16a6393951d1f66e38c75a641e7a49ad81f18f52fbdc27eedccb"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.prose-nonfiction",
+    "name": "Prose Nonfiction",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.theme-and-message"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.prose-nonfiction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.prose-nonfiction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md": "sha256:984bed648d2c16a6393951d1f66e38c75a641e7a49ad81f18f52fbdc27eedccb"
+      },
+      "contentHash": "sha256:f4f7d4db9218fa137d71d65fb2d643ec7fb991f4d307d4384732267ad490d55c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-nonfiction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md#TA-1 (addresses MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-nonfiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-nonfiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-nonfiction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md#TA-2 (addresses MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-nonfiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-nonfiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-nonfiction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-nonfiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-nonfiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-nonfiction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md#TA-4 (addresses MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION, MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-nonfiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-nonfiction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.prose-nonfiction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Prose Nonfiction — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing Authorial Voice in Nonfiction (MC-A)\n\nUsing the photographer's-choices anchor, teach identifying deliberate authorial choices (selection,\nframing, interpretation) within a nonfiction passage. Student practice: given a memoir passage,\nidentify three specific authorial choices shaping the account.\n\n### TA-2 — Distinguishing the Four Major Subgenres (MC-B)\n\nUsing the diary-vs-biography-vs-news-vs-op-ed anchor, teach the distinct purpose of memoir,\nbiography, journalism, and the essay. Student practice: given four short unlabeled passages, match\neach to its subgenre with purpose-based reasoning.\n\n### TA-3 — Identifying Subgenre-Specific Conventions\n\nExtend TA-2: teach recognizing specific conventions within each subgenre (memoir's first-person\nretrospection, biography's researched third-person account, journalism's lead-and-detail structure,\nthe essay's argument or exploratory structure). Student practice: given one passage, identify two\nconventions specific to its subgenre.\n\n### TA-4 — Full Application: Analyzing a New Nonfiction Passage\n\nGive the student a new unlabeled nonfiction passage. They must identify authorial voice and shaping\nchoices (TA-1), determine its subgenre with purpose-based reasoning (TA-2), and identify its\nsubgenre-specific conventions (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 137,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/misconception/MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION",
+      "kind": "misconception",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "**Trigger signal:** Student assumes that because a text is \"nonfiction\" (based on real events), it",
+      "content": "### MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION\n\n**Trigger signal:** Student assumes that because a text is \"nonfiction\" (based on real events), it\nmust be purely objective and neutral, with no authorial voice, selection, or interpretation shaping\nit — failing to recognize that forms like memoir and the personal essay involve genuine authorial\nperspective, deliberate selection of which real events to include, and interpretive framing of their\nmeaning, not simply neutral transcription of fact.\n\n**Conflict evidence [P28]:** Show the student a passage from a memoir describing a childhood event,\nwritten with clear personal reflection, selective emphasis on certain details, and the author's own\ninterpretation of what the event meant to them. Ask: \"Is this text about real events? Does the author\nhave a personal voice and perspective shaping how those events are told, or is it a neutral,\nvoiceless list of facts?\"\n\n**Bridge text [P30]:** \"Assuming nonfiction has no author voice is like assuming a photograph taken\nby a person involves no choices — but the photographer chose the angle, the framing, what to include\nand exclude. A memoir or essay is 'true' in the sense that it deals with real events, but the author\nstill makes deliberate choices about what to include, how to frame it, and what it means — genuine\nvoice and interpretation, not neutral transcription.\"\n\n**Replacement text [P31]:** \"Don't assume nonfiction means voiceless, neutral fact-reporting.\nRecognize that forms like memoir and the personal essay carry real authorial voice, selective\nemphasis, and interpretation of real events — 'nonfiction' describes the subject matter's factual\nbasis, not the absence of a shaping perspective.\"\n\n**Discrimination pairs [P33]:**\n1. A raw list of dates and facts about an event (closer to voiceless, neutral reporting) vs. a\n   memoir passage on the same event, shaped by personal reflection, selective detail, and\n   interpretation (genuine nonfiction voice).\n2. A student who assumes a memoir's emotional, reflective language means it's \"not really\n   nonfiction\" (misconception) vs. a student who recognizes the memoir is nonfiction precisely\n   because it's grounded in real events, while still carrying genuine authorial voice (correct\n   understanding).\n\n**s6_path:** If the student continues to assume nonfiction is voiceless after the bridge, give them\na memoir passage and have them identify three specific choices the author made (what to include, how\nto frame it, what interpretation to offer) that show deliberate authorial shaping.",
+      "localKey": "MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION",
+      "language": "en",
+      "refs": [
+        "MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/misconception/MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING",
+      "kind": "misconception",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "**Trigger signal:** Student treats memoir, biography, journalism, and the essay as interchangeable,",
+      "content": "### MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING\n\n**Trigger signal:** Student treats memoir, biography, journalism, and the essay as interchangeable,\nundifferentiated \"nonfiction,\" failing to recognize that each subgenre has a distinct purpose and\nconvention set — memoir is personal, first-person reflection on one's own life; biography is a\nresearched account of someone else's life; journalism is timely reporting of current events; the\nessay explores or argues an idea — and confusing them leads to misapplying one form's conventions to\nanother.\n\n**Conflict evidence [P28]:** Show the student four short opening lines, one from each subgenre (a\nmemoir's first-person reflection, a biography's third-person researched account, a journalism\narticle's lead reporting a recent event, an essay's opening argument or exploration of an idea). Ask:\n\"Do all four have the same purpose? Which one is about the author's own life? Which one requires\nresearching someone else's life? Which one is tied to a recent, timely event?\"\n\n**Bridge text [P30]:** \"Treating all nonfiction subgenres as the same is like treating a diary, a\nbiography of a historical figure, a newspaper article, and a persuasive op-ed as identical just\nbecause they're all 'writing about real things' — each actually serves a distinct purpose with its\nown conventions. Confusing them leads to expecting a biography to read like a diary, or a news\narticle to argue a personal opinion the way an essay does.\"\n\n**Replacement text [P31]:** \"Don't treat memoir, biography, journalism, and the essay as\ninterchangeable. Ask: is this a personal reflection on the author's own life (memoir), a researched\naccount of someone else's life (biography), timely reporting of a current event (journalism), or an\nexploration or argument about an idea (essay)? Each has its own purpose and conventions.\"\n\n**Discrimination pairs [P33]:**\n1. A first-person passage reflecting on the author's own childhood (memoir) vs. a third-person,\n   researched account of a historical figure's life (biography) — different purposes, different\n   authorial relationship to the subject.\n2. A student who expects a news article to read like a personal essay's persuasive argument\n   (misconception, conflating journalism and the essay) vs. a student who recognizes journalism's\n   purpose is timely factual reporting, distinct from the essay's purpose of exploring or arguing an\n   idea (correct distinction).\n\n**s6_path:** If the student continues to conflate the subgenres after the bridge, give them four\nshort unlabeled passages, one from each subgenre, and have them correctly identify which subgenre\neach belongs to, stating the specific purpose-based reasoning behind each identification.",
+      "localKey": "MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING",
+      "language": "en",
+      "refs": [
+        "MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 41,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Recognizing Authorial Voice in Nonfiction (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing Authorial Voice in Nonfiction (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Distinguishing the Four Major Subgenres (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Distinguishing the Four Major Subgenres (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Identifying Subgenre-Specific Conventions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Subgenre-Specific Conventions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 153,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Full Application: Analyzing a New Nonfiction Passage",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing a New Nonfiction Passage\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION\",\"MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION",
+        "MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 160,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Authorial Choices in Nonfiction**\nGiven a memoir or essay passage, identify three specific authorial choices shaping the account.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 181,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Matching Passages to Subgenre**\nGiven four short unlabeled passages, match each to memoir, biography, journalism, or the essay with\npurpose-based reasoning.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 181,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Subgenre-Specific Conventions**\nGiven one nonfiction passage, identify two conventions specific to its subgenre.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 181,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Voiceless Reporting from Genuine Nonfiction Voice**\nGiven a raw factual list and a nonfiction passage on the same topic, explain what makes the second\none carry genuine authorial voice.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 181,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Analysis of a New Nonfiction Passage**\nGiven a new unlabeled nonfiction passage, identify authorial voice, determine its subgenre, and name\nits subgenre-specific conventions.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 181,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly identifies authorial choices on provided passages (MP-1) but treats a new\n  nonfiction passage as voiceless reporting (MP-5), provide a mandatory \"what did the author choose\n  to include, frame, or interpret here?\" check before concluding a passage is neutral.\n- If the student's subgenre matching is strong on isolated examples (MP-2) but they misapply one\n  subgenre's conventions to another in a new full analysis (MP-5), require explicitly naming the\n  subgenre and its distinct purpose before analyzing any conventions.\n- If the student struggles to distinguish subgenres at all, provide a one-line purpose summary for\n  each (memoir: my own life; biography: someone else's researched life; journalism: a timely current\n  event; essay: exploring or arguing an idea) as a reference card.\n- Students with strong performance in `eng.literature.theme-and-message`'s central-idea\n  identification should transfer readily to recognizing how nonfiction shapes real events around a\n  message, since both require looking past surface content to underlying authorial intent — draw\n  this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 236,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-nonfiction/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.prose-nonfiction",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: theme and message check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.theme-and-message]  [Component 3: Photographer's-Choices /\n                                               Diary-vs-Biography-vs-News-vs-Op-Ed Anchor]\n                                                            |\n                                                            v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: authorial-choice-identification\n                     terminal in current      drills / subgenre-sorting drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1 (assuming\nvoicelessness) and MC-B during TA-2/TA-3 (conflating subgenres) — these are largely independent and\noften need separate, explicit correction. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-4 failures indicate\nresidual MC-A; MP-2/MP-3 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-passage example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-nonfiction.md",
+        "startLine": 201,
+        "endLine": 236
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
