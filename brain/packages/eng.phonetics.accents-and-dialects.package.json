@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.accents-and-dialects-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.accents-and-dialects",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3231529f062c4210202bea6d07a297d5874bc43bc517f10d29a2a225c337f21b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md": "sha256:55214244a01206d8b572c4df97f733ea9b295bf14e3eed90ae0fa5114136ebe9"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.accents-and-dialects",
+    "name": "Accents and Dialects",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.rhythm-and-timing"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.accents-and-dialects-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.accents-and-dialects (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md": "sha256:55214244a01206d8b572c4df97f733ea9b295bf14e3eed90ae0fa5114136ebe9"
+      },
+      "contentHash": "sha256:44720edf2428efb931e48cf2442c962698d1b3c7711bbea905ec3ed398f18d59",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.accents-and-dialects.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.accents-and-dialects"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.accents-and-dialects\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.accents-and-dialects.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.accents-and-dialects"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.accents-and-dialects\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.accents-and-dialects.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md#TA-3 (addresses MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.accents-and-dialects"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.accents-and-dialects\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.accents-and-dialects.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.accents-and-dialects"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.accents-and-dialects\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.accents-and-dialects.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md#TA-5 (addresses MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH, MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.accents-and-dialects"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.accents-and-dialects\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Accents and Dialects — Conceptual Development Sequence",
+      "content": "### TA-1 — Accents as Systematic Sound Patterns\n\nTeach the core reframe: accent differences are patterned, predictable, rule-governed sound systems,\nnot careless deviations. Use the rhotic/non-rhotic example. Student practice: given three words in a\ndescribed accent's pattern, predict the pronunciation of two new words using the same rule.\n\n### TA-2 — Identifying Specific Phonetic Features (Rhoticity, Vowel Shifts)\n\nTeach two or three concrete, namable features that distinguish varieties of English (rhoticity,\nspecific vowel shifts, consonant variations). Student practice: given short audio-transcribed\nexamples (or described sound patterns) from two varieties, identify the specific feature that\ndiffers.\n\n### TA-3 — Prestige Is Social, Not Linguistic (MC-B)\n\nUsing the driving-side anchor's extension, teach that a \"standard\" accent's prestige is historically\nand socially constructed. Student practice: given three passages judging accents in explicitly social\nterms (\"uneducated,\" \"unprofessional,\" \"proper\"), rewrite each judgment as a neutral linguistic\ndescription instead.\n\n### TA-4 — Recognizing Consistency Across a Speaker's Own Accent\n\nTeach that any individual speaker's accent, including the \"standard\" one, follows its own internally\nconsistent rules just as much as any regional variety does — no accent is exempt from having rules.\nStudent practice: identify a consistent rule within the student's own accent or a widely familiar\none, showing that \"standard\" accents are equally rule-governed, not rule-free.\n\n### TA-5 — Full Application: Analyzing Two Varieties Without Ranking\n\nGive the student descriptions (or recordings) of two varieties of English. They must identify at\nleast two specific, rule-governed differences between them (TA-2), and explicitly state that neither\nvariety is linguistically superior, citing the social/historical basis for any prestige difference\n(TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 144,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/misconception/MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "**Trigger signal:** Student describes a regional or social accent different from their own as",
+      "content": "### MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH\n\n**Trigger signal:** Student describes a regional or social accent different from their own as\n\"mispronouncing\" words, \"lazy,\" or \"wrong,\" rather than recognizing it as a different, internally\nconsistent, rule-governed sound system.\n\n**Conflict evidence [P28]:** Present the same word (e.g., \"car\") as pronounced in a rhotic accent\n(where the \"r\" is pronounced) and a non-rhotic accent (where it is not, e.g., many varieties of\nBritish English). Ask: \"Is the speaker who doesn't pronounce the 'r' making a mistake, or following\na different, entirely consistent rule that applies to EVERY word with that sound pattern in their\nvariety?\" Show a second and third word from the same non-rhotic variety, demonstrating the omission\nis entirely predictable and systematic, not random or careless.\n\n**Bridge text [P30]:** \"An accent isn't a broken version of 'correct' English — it's a different,\ncomplete rule system, like how different regions drive on the left versus the right side of the\nroad. Neither side is objectively 'more correct' at driving; each is an internally consistent system\nthat works perfectly well as long as everyone following it applies the same rules. An accent applies\nits own consistent sound rules across every word, not just some words at random.\"\n\n**Replacement text [P31]:** \"Instead of asking 'is this pronunciation wrong?', ask 'what consistent\nRULE explains this pattern?' If the same sound difference appears predictably across many different\nwords in that variety, it's a systematic feature of that accent, not an error.\"\n\n**Discrimination pairs [P33]:**\n1. Calling a non-rhotic speaker's dropped \"r\" sounds \"sloppy\" or \"mistaken\" (treating a systematic\n   feature as an error) vs. recognizing that the same speaker consistently drops the \"r\" sound in\n   the identical phonetic environment across dozens of words (a predictable, rule-governed pattern).\n2. A one-time, genuinely random mispronunciation by an individual speaker (an actual speech error,\n   inconsistent even for that speaker) vs. a consistent, community-wide sound pattern that every\n   speaker of that regional variety produces the same way (a genuine dialectal/accentual feature).\n\n**s6_path:** If the student continues labeling accent features as errors after the bridge, have them\ntest the \"predictability\" criterion directly: give them three new words and ask them to predict how\na speaker of the accent in question would pronounce each, based on the pattern already shown — if\nthe prediction holds, the feature is rule-governed, not random.",
+      "localKey": "MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH",
+      "language": "en",
+      "refs": [
+        "MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/misconception/MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "**Trigger signal:** Student believes that a \"standard\" or broadcast-style accent is linguistically",
+      "content": "### MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT\n\n**Trigger signal:** Student believes that a \"standard\" or broadcast-style accent is linguistically\nsuperior or more objectively correct than a regional or social accent, rather than recognizing that\nits higher social prestige is a matter of social and historical power, not linguistic merit.\n\n**Conflict evidence [P28]:** Present two accents pronouncing the same sentence with equal\ngrammatical correctness and equal internal consistency — one a widely broadcast \"standard\" accent,\none a regional accent often stigmatized in media. Ask: \"Linguistically, does either sentence break\nany grammar rule or contain any actual error? If not, what specifically makes one considered more\n'proper' than the other?\" Guide the student to see that the judgment comes from social prestige and\nhistorical association with power (education, media, government), not from any linguistic flaw in\nthe other accent.\n\n**Bridge text [P30]:** \"Calling one accent 'more correct' is like saying one country's currency is\n'more real money' than another's just because it's more widely used in international trade — the\nwider use reflects historical and economic power, not that the other currency isn't genuinely money.\nA 'standard' accent became standard through social and historical processes — who had power, whose\nspeech got broadcast — not because it is linguistically superior.\"\n\n**Replacement text [P31]:** \"Ask: is this accent judged 'better' because of an actual grammar or\npronunciation error, or because of its social prestige and history? If you can't point to a genuine\nlinguistic error, the judgment is social, not linguistic — and social judgments about accents often\ncarry real, unfair consequences for speakers.\"\n\n**Discrimination pairs [P33]:**\n1. \"That accent sounds uneducated.\" (a social judgment presented as if it were a linguistic fact) vs.\n   \"That accent has a different, equally rule-governed vowel system than the one taught as\n   'standard' in broadcast media.\" (a linguistic description with no correctness ranking).\n2. Treating a prestige accent's grammar as the only \"real\" grammar (linguistic ranking) vs.\n   recognizing that a regional dialect's distinct grammatical features (e.g., certain verb\n   constructions) are equally rule-governed and equally systematic within that variety, just less\n   broadly prestigious.\n\n**s6_path:** If the student continues to rank accents as more or less \"correct\" after the bridge,\nhave them research (or be shown) one specific historical reason a particular accent became\nassociated with prestige in a given region (e.g., its association with a capital city, a royal\ncourt, or a broadcasting institution), making visible that the association is historical/social,\nnot a linguistic verdict.",
+      "localKey": "MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT",
+      "language": "en",
+      "refs": [
+        "MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 39,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Accents as Systematic Sound Patterns",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Accents as Systematic Sound Patterns\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 148,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Identifying Specific Phonetic Features (Rhoticity, Vowel Shifts)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Specific Phonetic Features (Rhoticity, Vowel Shifts)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 154,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Prestige Is Social, Not Linguistic (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prestige Is Social, Not Linguistic (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 161,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Recognizing Consistency Across a Speaker's Own Accent",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Recognizing Consistency Across a Speaker's Own Accent\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 168,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Full Application: Analyzing Two Varieties Without Ranking",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Analyzing Two Varieties Without Ranking\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH\",\"MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH",
+        "MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 175,
+        "endLine": 313
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Systematicity Recognition**\nGiven three words showing a consistent accent feature, predict how a fourth word would be\npronounced in that same accent, demonstrating the pattern is rule-governed rather than random.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Feature Identification**\nGiven two varieties of English, identify at least two specific, namable phonetic differences between\nthem (e.g., rhoticity, a specific vowel shift).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Distinguishing Social Judgment from Linguistic Fact**\nGiven three statements judging an accent (\"that sounds uneducated,\" \"that's not proper English,\"\n\"that's a lazy way of talking\"), rewrite each as a neutral linguistic description with no ranking.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Recognizing Rules in \"Standard\" Speech**\nIdentify one specific, consistent phonetic rule within a widely familiar \"standard\" accent, showing\nit is equally rule-governed rather than being an unmarked, rule-free baseline.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Comparative Analysis**\nGiven descriptions of two unfamiliar varieties of English, identify at least two specific,\nrule-governed differences and write a short analysis explicitly stating that neither is\nlinguistically superior, citing the social/historical basis for any prestige difference.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Adaptive Flags",
+      "content": "- If a student expresses personal shame, defensiveness, or embarrassment about their own or a family\n  member's accent during this concept, prioritize affective reassurance immediately (their accent is\n  a legitimate, rule-governed system, not a deficiency) before continuing with content — this topic\n  is more emotionally loaded than most phonetics content and deserves explicit sensitivity.\n- If the student masters feature identification (MP-2) but continues subtle ranking language in free\n  discussion (e.g., \"that one sounds nicer\" used as if it were a linguistic rather than aesthetic/\n  social preference judgment), gently distinguish personal aesthetic preference (a legitimate,\n  separate thing) from a claim of linguistic correctness (what this concept addresses) — the goal is\n  not to eliminate personal preference, only to stop treating it as objective linguistic fact.\n- If the student is a speaker of a stigmatized or minority dialect themselves, be especially careful\n  that this concept is taught as validating and empowering (a rule-governed system, worthy of\n  attention and paired with real names/features) rather than as an abstract academic exercise about\n  \"other people's\" speech.\n- Students with strong pattern-recognition skills from `eng.phonetics.rhythm-and-timing` should\n  transfer that skill readily to TA-1/TA-2; if this transfer doesn't occur, revisit whether the\n  prerequisite's stress-pattern skills were genuinely mastered or only surface-level.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 263,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "eng.phonetics.accents-and-dialects/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.accents-and-dialects",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: rhythm and timing check] --> [PD-2: variation-awareness check]\n   |                                                       |\n   | (gap found)                                           | (pass)\n   v                                                        v\n[Route to eng.phonetics.rhythm-and-timing]         [Component 3: Driving-Side Anchor]\n                                                             |\n                                                             v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                             |\n                                                             v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                             |\n                                                             v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                             |\n                                        (pass >= 0.75) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                          [Unlock: sociolinguistics-intro]  [S6 remediation: prediction-\n                                                              test / reframe-judgment drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a rhythm/timing gap routes back to\nthat prerequisite, a variation-awareness gap gets a short exposure activity. During Component 4 (S1,\nactive instruction), MC-A typically surfaces during TA-1/TA-2 (initial exposure to feature\ndifferences, often accompanied by value-laden language like \"wrong\") and MC-B during TA-3 (prestige\ndiscussion) — watch each TA for its matching trigger and branch to the relevant s6_path drill if it\nfires. Because this topic can touch on students' own or family accents, monitor affect closely — if a\nstudent expresses shame or defensiveness about their own accent during any TA, prioritize a\nreassuring, descriptive reframe (their accent is a legitimate rule system, full stop) before\ncontinuing content. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the\nsystematicity concept (TA-1) needs review; MP-2 failure alone indicates a feature-identification gap\n(TA-2) distinct from either misconception; MP-3 failure alone indicates residual MC-B; MP-4 failure\nalone indicates the \"standard accents have rules too\" extension (TA-4) specifically; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more fully-guided\ncomparative example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md",
+        "startLine": 223,
+        "endLine": 263
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

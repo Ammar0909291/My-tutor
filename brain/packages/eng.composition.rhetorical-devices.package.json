@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.rhetorical-devices-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.rhetorical-devices",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:83a97ba41a26942b78e4f9ab1c061157739436860980a6771d868700da2ef72d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md": "sha256:1d6c9aaa1a2888dcaeef312182e54f2053e9861a49231e39788a7d9be6016b01"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.rhetorical-devices",
+    "name": "Rhetorical Devices",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.rhetorical-appeals"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.rhetorical-devices-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.rhetorical-devices (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md": "sha256:1d6c9aaa1a2888dcaeef312182e54f2053e9861a49231e39788a7d9be6016b01"
+      },
+      "contentHash": "sha256:d0691e2ba75139fe7551961758ac27b52cfa02530793a2c9a703dd4b5769d10a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-devices.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-devices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-devices\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-devices.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md#TA-2 (addresses MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-devices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-devices\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-devices.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md#TA-3 (addresses MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-devices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-devices\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-devices.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md#TA-4 (addresses MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT, MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-devices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-devices\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.rhetorical-devices/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Rhetorical Devices — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing Repetition, Parallelism, and Antithesis\n\nIntroduce the three named devices with clear definitions and canonical examples (repetition of a\nword or phrase for emphasis; parallelism as matching grammatical structure across a series;\nantithesis as a balanced contrast of opposing ideas in parallel structure). Student practice: given\nsix short passages, identify which device (if any) each uses.\n\n### TA-2 — Distinguishing Deliberate Devices from Ordinary Repetition\n\nDirectly address MC-B using the \"would removing this change the impact?\" test. Student practice:\ngiven eight examples of repeated or patterned language, sort into \"deliberate device\" and \"ordinary,\nunavoidable repetition.\"\n\n### TA-3 — Explaining Effect, Not Just Naming (MC-A)\n\nUsing the sentence-stem requirement (\"This [device] creates the effect of ___ because ___\"), teach\nstudents to move from naming to explaining. Student practice: given five correctly-identified\ndevices with no effect explanation, write the missing effect explanation for each.\n\n### TA-4 — Using a Device Deliberately in Original Writing\n\nGive the student a short persuasive or expressive writing prompt and have them deliberately\nincorporate at least one rhetorical device, then explain in their own words what effect they intended\nit to produce — practicing production, not just analysis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 139,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/misconception/MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT",
+      "kind": "misconception",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "**Trigger signal:** Student correctly labels a rhetorical device (e.g., \"this is repetition\") but",
+      "content": "### MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT\n\n**Trigger signal:** Student correctly labels a rhetorical device (e.g., \"this is repetition\") but\nstops there, without explaining WHAT EFFECT the device produces in that specific passage — treating\nidentification as the entire task rather than the first half of it.\n\n**Conflict evidence [P28]:** Show the student a passage using repetition (e.g., a speech repeating\n\"we will...\" at the start of several sentences) and two student responses: one that says only \"this\nuses repetition\" and one that says \"this uses repetition of 'we will' at the start of each sentence,\nwhich builds a driving, escalating sense of momentum and collective determination as the list\ngrows.\" Ask: \"Which response actually tells us anything about why the writer chose this technique?\"\n\n**Bridge text [P30]:** \"Naming a device is like correctly identifying a tool as 'a hammer' — true,\nbut it doesn't tell anyone what the hammer actually DID in this specific situation. Did it build\nsomething, break something, drive in a specific nail? A rhetorical device analysis needs both parts:\nwhat tool was used, AND what job it did in this exact passage.\"\n\n**Replacement text [P31]:** \"After naming a device, always add: 'which creates the effect of ___' or\n'which makes the reader feel/think ___.' If your analysis stops at the device's name, you've done\nhalf the job.\"\n\n**Discrimination pairs [P33]:**\n1. \"This is an example of parallelism.\" (naming only, no effect explained) vs. \"This uses\n   parallelism — 'to fight, to build, to hope' — which places these three actions on equal footing,\n   suggesting they are all equally urgent and connected.\" (naming plus specific effect).\n2. A student analysis that lists five devices by name with zero explanation of effect (surface-level\n   labeling) vs. an analysis that identifies two devices, each with a specific, textually-grounded\n   explanation of its persuasive or expressive effect (deeper, effect-focused analysis).\n\n**s6_path:** If the student continues to stop at naming after the bridge, require them to complete\nthe sentence stem \"This [device name] creates the effect of ___ because ___\" for every device they\nidentify, making the effect-explanation step structurally unavoidable.",
+      "localKey": "MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT",
+      "language": "en",
+      "refs": [
+        "MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/misconception/MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE",
+      "kind": "misconception",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "**Trigger signal:** Student labels any incidental repetition or coincidentally balanced phrasing in a",
+      "content": "### MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE\n\n**Trigger signal:** Student labels any incidental repetition or coincidentally balanced phrasing in a\ntext as a deliberate rhetorical device, without considering whether the repetition/balance is\npurposeful and meaningful or simply an artifact of ordinary sentence construction — e.g., calling the\nrepetition of the word \"the\" throughout a paragraph \"repetition for effect.\"\n\n**Conflict evidence [P28]:** Show the student a passage with two kinds of repetition: the ordinary,\nfunctional repetition of small grammatical words (\"the,\" \"and,\" \"a\") that appear many times simply\nbecause language requires them, and a deliberate repetition of a meaningful phrase at structurally\nsignificant points (e.g., the same clause opening three consecutive sentences, each building toward\na climax). Ask: \"Both repeat words. Which repetition feels like it was chosen on purpose for an\neffect, and which is just how sentences normally work?\"\n\n**Bridge text [P30]:** \"Not every repeated word is a rhetorical choice — that's like calling every\nsingle brick in a building 'architecture' just because it repeats. Real rhetorical repetition is\nnoticeable, structurally placed (often at the start or end of parallel clauses), and tied to\nmeaning — it stands out from the ordinary background repetition that all language naturally has.\"\n\n**Replacement text [P31]:** \"Before calling something a deliberate device, ask: is this repetition or\npattern noticeable and structurally placed, or is it just ordinary words like 'the' or 'and'\nrepeating because language requires them? Devices are chosen; background repetition is just how\nsentences work.\"\n\n**Discrimination pairs [P33]:**\n1. The word \"the\" appearing eight times in a paragraph (ordinary, unavoidable repetition, not a\n   device) vs. the phrase \"I have a dream\" opening four consecutive sentences (deliberate,\n   structurally placed repetition — a genuine device).\n2. A coincidentally similar sentence length appearing twice in unrelated parts of a text (not\n   meaningfully connected, not a deliberate device) vs. two clauses of matching grammatical\n   structure placed side by side specifically to highlight a contrast (\"ask not what your country can\n   do for you — ask what you can do for your country\" — deliberate antithesis).\n\n**s6_path:** If the student continues to over-identify ordinary repetition as deliberate devices\nafter the bridge, have them apply a \"would removing this change the meaning or impact?\" test — genuine\ndevices, when removed or flattened into plain restatement, visibly weaken the passage's effect;\nordinary grammatical repetition does not.",
+      "localKey": "MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 36,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Recognizing Repetition, Parallelism, and Antithesis",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing Repetition, Parallelism, and Antithesis\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 143,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Distinguishing Deliberate Devices from Ordinary Repetition",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Distinguishing Deliberate Devices from Ordinary Repetition\",\"primitives\":[],\"addresses\":[\"MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Explaining Effect, Not Just Naming (MC-A)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Explaining Effect, Not Just Naming (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 156,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Using a Device Deliberately in Original Writing",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using a Device Deliberately in Original Writing\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT\",\"MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT",
+        "MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 162,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Device Identification with Evidence**\nGiven three passages, identify which rhetorical device (repetition, parallelism, or antithesis) each\nuses, citing the exact words that create the pattern.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Deliberate Device vs. Ordinary Repetition**\nGiven four examples of repeated or patterned language, sort into \"deliberate device\" and \"ordinary,\nunavoidable repetition,\" applying the \"would removing this change the impact?\" test.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explaining Effect**\nGiven a correctly-identified device with no effect explanation, write a specific, textually-grounded\nexplanation of the effect it produces.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Combined Identification and Effect Analysis**\nGiven a new passage, identify the device used, cite evidence, and explain its effect in one\ncombined response, without being prompted to do each step separately.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Deliberate Original Use**\nWrite two original sentences using a specified rhetorical device (assigned: parallelism or\nantithesis) for a self-chosen persuasive purpose, and explain the intended effect.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Adaptive Flags",
+      "content": "- If the student can identify and explain devices in others' writing (MP-1 through MP-4) but\n  struggles to deploy them naturally in original writing (MP-5), treat as a production gap and\n  provide an additional guided production example emphasizing that devices should serve the writer's\n  actual intended effect, not be forced in artificially.\n- If the student's own attempts at using devices (WE-3, MP-5) feel forced or ornamental rather than\n  purposeful, connect back to the rhetorical-appeals concept: which appeal is this device meant to\n  strengthen, and does it actually do so here?\n- If the student conflates rhetorical devices with the literary devices from\n  `eng.literature.literary-devices-overview` (assuming identical terminology and purpose), clarify\n  the distinction: rhetorical devices here serve persuasive/expressive composition purposes, while\n  the cross-linked literary devices concept covers a broader analytical toolkit for reading fiction\n  and poetry — related, not identical, vocabularies.\n- Students with strong pattern-recognition instincts but weak explanatory writing may benefit from\n  oral rehearsal of the effect-explanation (\"say the effect out loud before writing it down\") before\n  attempting MP-3/MP-4 in written form.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 245,
+        "endLine": 263
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-devices/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.rhetorical-devices",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: rhetorical appeals check] --> [PD-2: pattern-noticing check]\n   |                                                       |\n   | (gap found)                                           | (pass)\n   v                                                        v\n[Route to eng.composition.rhetorical-appeals]     [Component 3: Hammer-and-Job Anchor]\n                                                             |\n                                                             v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                             |\n                                                             v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                             |\n                                                             v\n                                         [MP-1 through MP-5 mastery probe set]\n                                                             |\n                                         (pass >= 0.75) -----+----- (fail)\n                                                |                      |\n                                                v                      v\n                       [Unlock: figurative-language-in-composition,  [S6 remediation:\n                        rhetorical-analysis]                          sentence-stem / removal-\n                                                                        test drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; an appeals gap routes back to that\nprerequisite, a pattern-noticing gap gets a brief primer. During Component 4 (S1, active instruction),\nMC-B typically surfaces during TA-1/TA-2 (over-identification during initial recognition practice)\nand MC-A during TA-3 (stopping at naming) — MC-B tends to appear first chronologically since students\nstart by over-eagerly spotting patterns before learning to explain effect. If either fires, branch to\nthe relevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1\nfailure indicates basic device recognition (TA-1) needs review; MP-2 failure alone indicates residual\nMC-B; MP-3 failure alone indicates residual MC-A; MP-4 failure with MP-1 through MP-3 passing\nindicates an integration gap between the separately-practiced skills; MP-5 failure alone indicates a\nproduction/transfer gap — provide one more guided production example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-devices.md",
+        "startLine": 208,
+        "endLine": 245
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

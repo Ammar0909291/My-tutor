@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.argumentation-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.argumentation-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0e3a75b7c1dbe0a5af1da33410084a4145ac6e42ce4a29ad1881f036b6919bbc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.argumentation-basics.md": "sha256:bcefe35ed996a4bab8b2e8889543220f8c7f22d959fee0029b6efabf30bd8e17"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.composition.argumentation-basics",
+    "name": "Argumentation Basics",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.composition.claim-evidence-reasoning"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.argumentation-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.argumentation-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.argumentation-basics.md": "sha256:bcefe35ed996a4bab8b2e8889543220f8c7f22d959fee0029b6efabf30bd8e17"
+      },
+      "contentHash": "sha256:8649e88a854b29ffa5b8c438c2fdcb4606f2f8e34f97617eaddd6d8e1a977735",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.argumentation-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.argumentation-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.argumentation-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.argumentation-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md#TA-2 (addresses MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.argumentation-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.argumentation-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.argumentation-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.argumentation-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.argumentation-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.argumentation-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md#TA-4 (addresses MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.argumentation-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.argumentation-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.argumentation-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md#TA-5 (addresses MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT, MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.argumentation-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.argumentation-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.argumentation-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Argumentation Basics — Conceptual Development Sequence",
+      "content": "### TA-1 — Distinguishing Genuinely Different Points from Restatements\n\nUsing the five-word-summary test, teach students to identify when supporting points are actually\ndistinct versus restatements of the same underlying idea. Student practice: given a five-point\noutline, identify which points overlap and which are genuinely distinct.\n\n### TA-2 — Selecting Two or Three Strong, Distinct Points\n\nTeach the \"quality over quantity\" principle directly addressing MC-A. Student practice: given five\ncandidate points for one position, select the two or three strongest, most distinct ones and justify\nthe selection.\n\n### TA-3 — Ranking Points by Strength\n\nTeach a ranking step (weakest to strongest) as a distinct, separate task from placement. Student\npractice: given three selected points, rank them from weakest to strongest with a one-sentence\njustification for each ranking.\n\n### TA-4 — Deliberate Ordering Strategies\n\nDirectly address MC-B: teach two common ordering strategies (strongest-first for immediate impact\nwith skeptical audiences; strongest-last for a memorable, building conclusion) and connect the\nchoice to audience (recalling the Audience and Purpose concept). Student practice: given three ranked\npoints and two different audience profiles, choose and justify a different order for each.\n\n### TA-5 — Constructing a Full Multi-Point Argument\n\nGive the student a position and raw material (five candidate points). They must select two or three\ngenuinely distinct points, develop each into a full CER unit, rank them, and arrange them in a\ndeliberate, justified order — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 142,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/misconception/MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT",
+      "kind": "misconception",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "**Trigger signal:** Student piles up as many supporting points as possible, believing sheer quantity",
+      "content": "### MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT\n\n**Trigger signal:** Student piles up as many supporting points as possible, believing sheer quantity\nof reasons makes an argument stronger, even when several of the \"reasons\" are really the same point\nrestated in different words or are individually weak — e.g., listing five reasons for a position\nwhere three are near-duplicates and the other two are barely developed.\n\n**Conflict evidence [P28]:** Show the student two argument outlines for the same position (school\nshould start later): one with five thin, overlapping points (tired students, tired teachers, tired\nparents, tired bus drivers, tired everyone) and one with two well-developed, genuinely distinct\npoints (sleep science research on adolescent circadian rhythms; a specific pilot program's measured\nattendance improvement). Ask: \"Which argument would actually change a skeptical school board\nmember's mind — five thin, overlapping points, or two well-developed different ones?\" Guide the\nstudent to notice the five-point version is actually one point repeated, while the two-point version\nbrings genuinely different kinds of evidence to bear.\n\n**Bridge text [P30]:** \"Piling up overlapping reasons is like trying to build a strong table by\nadding more legs of the exact same short length instead of making the legs actually reach the\nground — it doesn't add stability, it just adds clutter. A strong argument is built from a FEW\ngenuinely different, well-developed points, not the maximum possible number of points.\"\n\n**Replacement text [P31]:** \"Before adding another point, ask: is this genuinely a NEW kind of\nreason, or is it the same underlying point wearing different words? Two or three fully developed,\ntruly distinct points almost always beat five overlapping ones.\"\n\n**Discrimination pairs [P33]:**\n1. Five points about school start times that are really all restating \"everyone is tired\" (repetitive,\n   not genuinely distinct) vs. two points — one about adolescent sleep science, one about a specific\n   pilot program's attendance data — that bring genuinely different evidence types to the argument.\n2. A student adding a sixth reason to an already-strong argument just to \"have more\" (quantity\n   over quality) vs. a student stopping at three well-developed reasons because a fourth would\n   overlap with the first (recognizing diminishing, not additive, returns).\n\n**s6_path:** If the student still piles up overlapping points after the bridge, have them write each\npoint's core idea in exactly five words and physically compare the five-word summaries side by side\n— overlapping summaries reveal the repetition immediately.",
+      "localKey": "MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT",
+      "language": "en",
+      "refs": [
+        "MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/misconception/MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD",
+      "kind": "misconception",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "**Trigger signal:** Student assembles genuinely strong, distinct points but arranges them in a random",
+      "content": "### MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD\n\n**Trigger signal:** Student assembles genuinely strong, distinct points but arranges them in a random\nor arbitrary order, believing organization is a cosmetic afterthought rather than something that\naffects how convincing the argument feels — e.g., burying the single strongest point in the middle\nof the argument with no strategic reasoning behind the sequence.\n\n**Conflict evidence [P28]:** Show the student the SAME three strong points about a position,\narranged two different ways: once in a random, arbitrary order, and once with a deliberate structure\n(e.g., building from a broadly relatable point to the single strongest, most specific point placed\nlast, where it has maximum impact right before the conclusion). Ask: \"These have the identical three\npoints. Does the order change how convincing it feels to read?\" Guide the student to notice that\nplacement affects emphasis — the last point read often lands with the most weight, and a strong point\nburied in the middle can feel like an afterthought.\n\n**Bridge text [P30]:** \"Organizing your points is like planning where to put the courses in a meal —\nserving your best dish first might set high expectations that make the rest feel like a letdown;\nsaving it for last can build anticipation and end on your strongest note. The exact same three dishes\nserved in a different order create a different overall experience. Your argument's points work the\nsame way — the SAME points in a different order can feel more or less convincing.\"\n\n**Replacement text [P31]:** \"After choosing your points, deliberately decide an order and be able to\nexplain WHY: are you building toward your strongest point for a memorable ending, or leading with\nyour strongest point to hook a skeptical reader immediately? Either can work — but the order should\nbe a deliberate choice, not left to chance.\"\n\n**Discrimination pairs [P33]:**\n1. The same three-point argument arranged randomly (no explainable reason for the sequence) vs.\n   arranged with the strongest, most specific point saved for last, explicitly building toward it\n   (a deliberate, explainable structural choice).\n2. A student who can explain \"I put this point last because it's my strongest and most memorable\"\n   (deliberate ordering) vs. a student who says \"I just wrote them in the order I thought of them\"\n   (no ordering rationale at all).\n\n**s6_path:** If the student continues to order points arbitrarily after the bridge, have them rank\ntheir own points from weakest to strongest first, as a separate step, before deciding where each\npoint goes in the final argument — forcing the ranking to happen before the placement decision.",
+      "localKey": "MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD",
+      "language": "en",
+      "refs": [
+        "MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 40,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Distinguishing Genuinely Different Points from Restatements",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Distinguishing Genuinely Different Points from Restatements\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 146,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Selecting Two or Three Strong, Distinct Points",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Selecting Two or Three Strong, Distinct Points\",\"primitives\":[],\"addresses\":[\"MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Ranking Points by Strength",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Ranking Points by Strength\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Deliberate Ordering Strategies",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Deliberate Ordering Strategies\",\"primitives\":[],\"addresses\":[\"MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 164,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Constructing a Full Multi-Point Argument",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Constructing a Full Multi-Point Argument\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT\",\"MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT",
+        "MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 171,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinct vs. Overlapping Points**\nGiven a five-point outline, identify which points are genuinely distinct and which are restatements,\nusing the five-word-summary test.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Selecting Strong, Distinct Points**\nGiven five candidate points for a position, select the two or three strongest and most distinct,\njustifying the selection.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Ranking by Strength**\nGiven three selected points, rank them from weakest to strongest with a one-sentence justification\nfor each.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Deliberate Ordering for a Given Audience**\nGiven three ranked points and a specified audience (skeptical vs. sympathetic), choose and justify an\norder suited to that audience.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Multi-Point Argument Construction**\nGiven a new position and five candidate points, construct a complete multi-point argument: select\ntwo or three distinct points, develop each into a CER unit, rank them, and justify a deliberate order.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Adaptive Flags",
+      "content": "- If the student can select and rank points correctly (MP-1 through MP-3) but defaults to a single\n  ordering strategy regardless of audience (MP-4), revisit the audience-sensitivity connection to\n  `eng.composition.audience-and-purpose` alongside TA-4.\n- If the student produces genuinely strong individual CER units but struggles to see them as part of\n  ONE unified argument (treating each point as its own isolated mini-essay), flag this as a\n  cohesion gap for reinforcement alongside `eng.writing.transitions-and-cohesion`.\n- If the student over-applies the \"fewer is better\" lesson from MC-A and cuts a genuinely distinct,\n  valuable point just to minimize count, clarify that two or three is a guideline for typical\n  assignment lengths, not an absolute ceiling — the test is genuine distinctness, not a hard number.\n- Students who excel at generating candidate points but struggle with the selection/ranking\n  discipline may benefit from a \"brainstorm freely, then ruthlessly cut\" two-phase process made\n  explicit, rather than trying to select while still generating.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 253,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "eng.composition.argumentation-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.argumentation-basics",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: CER unit check] --> [PD-2: point-counting check]\n   |                                            |\n   | (gap found)                                | (pass)\n   v                                             v\n[Route to claim-evidence-reasoning]  [Component 3: Table-Legs-and-Meal-Courses Anchor]\n                                                 |\n                                                 v\n                                  [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                 |\n                                                 v\n                              [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                 |\n                                                 v\n                              [MP-1 through MP-5 mastery probe set]\n                                                 |\n                              (pass >= 0.75) -----+----- (fail)\n                                     |                      |\n                                     v                      v\n                  [Unlock: counterargument-and-rebuttal,  [S6 remediation: five-word\n                   logical-fallacies]                      summary / rank-first drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a CER gap routes back to that\nprerequisite, a point-counting gap gets a brief primer. During Component 4 (S1, active instruction),\nMC-A typically surfaces during TA-1/TA-2 (point selection) and MC-B during TA-4 (ordering) — these\nare somewhat sequential, since ordering only becomes a live question once genuinely distinct points\nexist to order. If either fires, branch to the relevant s6_path drill before resuming. At the mastery\nprobe stage (S9), route by failure: MP-1/MP-2 failures indicate residual MC-A; MP-3 failure alone\nindicates the ranking step itself (TA-3) needs review, distinct from either misconception; MP-4\nfailure alone indicates residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an\nintegration gap — provide one more fully-guided example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.argumentation-basics.md",
+        "startLine": 218,
+        "endLine": 253
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
