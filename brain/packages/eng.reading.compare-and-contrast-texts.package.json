@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.compare-and-contrast-texts-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.compare-and-contrast-texts",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:be5b63b8e289c3b560ad15bad0130f45c7e053d4913774d9be015e2e70fdb3b0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md": "sha256:97f4ca5ee48f15acc4900f4671cc5df11fd876e227897511d2fbb7a87918df07"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.compare-and-contrast-texts",
+    "name": "Comparing and Contrasting Texts",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.text-structure",
+      "eng.reading.summarizing"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.compare-and-contrast-texts-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.compare-and-contrast-texts (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md": "sha256:97f4ca5ee48f15acc4900f4671cc5df11fd876e227897511d2fbb7a87918df07"
+      },
+      "contentHash": "sha256:207f2e2f9ed6e939363d1d0fda65c6745da2c1801abbe8813be5f980dc4a335e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.compare-and-contrast-texts.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md#TA-1 (addresses MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.compare-and-contrast-texts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.compare-and-contrast-texts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.compare-and-contrast-texts.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.compare-and-contrast-texts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.compare-and-contrast-texts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.compare-and-contrast-texts.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md#TA-3 (addresses MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.compare-and-contrast-texts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.compare-and-contrast-texts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.compare-and-contrast-texts.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.compare-and-contrast-texts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.compare-and-contrast-texts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.compare-and-contrast-texts.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md#TA-5 (addresses MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER, MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.compare-and-contrast-texts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.compare-and-contrast-texts\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Comparing and Contrasting Texts — Conceptual Development Sequence",
+      "content": "### TA-1: Dimension-Based Comparison Practice\nPresent two short texts and have the student compare them explicitly on 3 assigned dimensions (theme, structure, tone), producing genuine comparison statements (\"both... but,\" \"unlike Text A...\") rather than sequential summaries. Directly counters MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER.\n\n### TA-2: Choosing Relevant Comparison Dimensions\nTeach the student to select dimensions appropriate to the two texts being compared (theme, structure, tone, purpose, character choices, setting) rather than a fixed generic list, matching the dimensions to what's actually meaningful for the specific text pair.\n\n### TA-3: Investigating Differences Under a Shared Topic\nUsing the discrimination pairs from MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME, present two same-topic texts with genuinely different structure/tone/purpose (as in the Conflict Evidence example) and have the student independently investigate each dimension rather than assuming similarity from shared topic.\n\n### TA-4: Building a Comparison Organizer\nTeach a simple graphic organizer (e.g., a Venn diagram or a dimension-by-dimension table) for tracking similarities and differences systematically across multiple dimensions before writing the comparison.\n\n### TA-5: Writing a Full Comparative Analysis\nStudent produces a complete written comparison of two novel texts, using an organizer, selecting relevant dimensions, and writing explicit point-by-point comparison statements — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": ": Dimension-Based Comparison (Scaffolded)",
+      "content": "### WE-1: Dimension-Based Comparison (Scaffolded)\n**Texts:** Two short fables, both about a slow-but-steady character succeeding over a fast-but-careless one, but one set in a forest with animal characters and one set in a modern school with student characters.\n**Walkthrough:** Compare on Theme dial (\"both texts share the theme that persistence beats natural talent without effort\"), Setting dial (\"Text A uses a forest/animal setting, Text B uses a modern school setting — very different contexts for the same theme\").",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": ": Same Topic, Different Treatment (Guided)",
+      "content": "### WE-2: Same Topic, Different Treatment (Guided)\n**Texts:** A neutral encyclopedia entry about a natural disaster and a first-person survivor's account of the same disaster.\n**Walkthrough:** Confirm shared topic (the disaster) but investigate Tone dial (neutral/factual vs. emotional/personal) and Purpose dial (inform vs. share personal experience/possibly persuade about preparedness) independently, revealing substantial differences despite the shared topic.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": ": Full Comparative Analysis (Independent)",
+      "content": "### WE-3: Full Comparative Analysis (Independent)\n**Texts:** Two persuasive essays arguing opposite positions on the same issue (e.g., school uniforms).\n**Walkthrough:** Student uses an organizer to track Theme (shared: student experience/expression), Structure (both may use similar persuasive structure — claim, evidence, counter-argument), Tone (may both be passionate, or one measured and one urgent), and Position (directly opposing), then writes a full comparison connecting all dimensions.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/misconception/MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER",
+      "kind": "misconception",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "- **Trigger signal:** Student, when asked to \"compare\" two texts, writes a summary of text A followed by a separate summary of text B, without ever directly connecting the two — producing two summaries side by side rather than genuine point-by-point comparison that draws relationships between them.",
+      "content": "### MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER\n- **Trigger signal:** Student, when asked to \"compare\" two texts, writes a summary of text A followed by a separate summary of text B, without ever directly connecting the two — producing two summaries side by side rather than genuine point-by-point comparison that draws relationships between them.\n- **Conflict evidence [P28]:** Present a \"comparison\" that is just two back-to-back summaries (Text A summary, then Text B summary, with no linking sentences) alongside a genuine comparison that explicitly states similarities and differences on shared dimensions (e.g., \"Both texts describe a character facing a difficult choice, but Text A's character chooses based on duty while Text B's character chooses based on personal desire\"). Ask which one actually helps a reader understand how the two texts relate.\n- **Bridge text [P30]:** \"Two summaries placed next to each other aren't a comparison — they're just two summaries. A genuine comparison requires you to explicitly connect the texts: identify shared dimensions (theme, structure, character type, tone) and state how the texts are similar or different on each dimension, using language like 'both... but' or 'unlike Text A, Text B...'\"\n- **Replacement text [P31]:** \"After summarizing each text separately (which is just the first step), go further: pick specific dimensions to compare (theme, structure, tone, character choices) and write sentences that explicitly connect the two texts on each dimension, using comparison language, not just two separate summaries.\"\n- **Discrimination pairs [P33]:** (a) Sequential-summary approach (comparing = summarizing text A, then summarizing text B, with no explicit connection) vs. (b) Point-by-point relational approach (comparing = explicitly identifying shared dimensions and stating similarities/differences between the texts on each one, using direct comparison language).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's dimension-based comparison practice before continuing.",
+      "localKey": "MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER",
+      "language": "en",
+      "refs": [
+        "MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/misconception/MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME",
+      "kind": "misconception",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "- **Trigger signal:** Student assumes that because two texts share a topic (both about the same historical event, both are fables about honesty, etc.), they must be largely similar in content, and either overlooks genuine differences in structure/tone/perspective or forces artificial similarities that aren't actually present, rather than genuinely investigating both similarities AND differences with equal rigor.",
+      "content": "### MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME\n- **Trigger signal:** Student assumes that because two texts share a topic (both about the same historical event, both are fables about honesty, etc.), they must be largely similar in content, and either overlooks genuine differences in structure/tone/perspective or forces artificial similarities that aren't actually present, rather than genuinely investigating both similarities AND differences with equal rigor.\n- **Conflict evidence [P28]:** Present two texts about the same historical event: one written as a neutral, fact-based news report and one written as a dramatic, emotionally-charged personal account from a survivor. Ask the student whether \"same topic\" means these two texts are mostly the same, then have them identify specific structural and tonal differences despite the shared topic.\n- **Bridge text [P30]:** \"Sharing a topic doesn't mean two texts are mostly alike — the SAME event or theme can be handled in completely different ways: different structures, different tones, different purposes, different perspectives. A genuine comparison investigates differences just as rigorously as similarities, rather than assuming shared topic guarantees shared treatment.\"\n- **Replacement text [P31]:** \"Don't assume same-topic means same-treatment. Investigate structure, tone, purpose, and perspective independently for each text, even when the topic is identical, and be prepared to find substantial differences alongside any similarities.\"\n- **Discrimination pairs [P33]:** (a) Same-topic-implies-similarity assumption (texts sharing a topic must be largely alike in treatment) vs. (b) Independent-dimension investigation (shared topic says nothing about structure/tone/purpose/perspective, which must each be independently examined and can differ substantially even under a shared topic).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's twin-lens framing before continuing to TA-3.",
+      "localKey": "MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME",
+      "language": "en",
+      "refs": [
+        "MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Dimension-Based Comparison Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Dimension-Based Comparison Practice\",\"primitives\":[],\"addresses\":[\"MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Choosing Relevant Comparison Dimensions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Choosing Relevant Comparison Dimensions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Investigating Differences Under a Shared Topic",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Investigating Differences Under a Shared Topic\",\"primitives\":[],\"addresses\":[\"MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Building a Comparison Organizer",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Building a Comparison Organizer\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Writing a Full Comparative Analysis",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Writing a Full Comparative Analysis\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER\",\"MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER",
+        "MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Produce genuine point-by-point comparison**\nGiven two texts, student writes explicit comparison statements connecting them on 2 dimensions, rather than producing two separate summaries. *(Directly targets MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Investigate differences under shared topic**\nGiven two same-topic texts with genuinely different tone/structure, student identifies the specific differences rather than assuming similarity from shared topic. *(Directly targets MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Select relevant comparison dimensions**\nGiven two texts, student selects and justifies 3 dimensions most relevant for comparing this specific pair.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Complete a comparison organizer**\nGiven two texts, student fills out a graphic organizer tracking similarities and differences across multiple dimensions.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Independent full comparative analysis**\nGiven two novel texts, student produces a complete written comparison using an organizer and explicit point-by-point comparison language.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Adaptive Flags",
+      "content": "- If the student produces sequential summaries instead of genuine comparison, weight remediation toward MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER's bridge text and re-run TA-1's dimension-based practice before returning to independent writing.\n- If the student assumes same-topic texts must be similar, weight remediation toward MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME's bridge text and TA-3's independent-investigation practice specifically.\n- This concept feeds one direct downstream unlock (`eng.reading.reading-across-genres`) — do not certify mastery without TA-5's full comparative analysis, since reading across genres requires the same dimension-based comparison skill applied to texts of entirely different forms.\n- Reuse the \"twin-lens viewer\" framing explicitly when introducing `eng.reading.reading-across-genres` — that concept adds genre-specific conventions as new dimensions to compare, building directly on this concept's dimension-dial framework.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER",
+        "MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.reading.compare-and-contrast-texts/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.compare-and-contrast-texts",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Text-Structure/Summarizing Readiness Check]\n        |\n        v\n[Concrete Anchor: The Twin-Lens Viewer]\n        |\n        v\n[TA-1: Dimension-Based Comparison Practice]\n        |\n        v\n[TA-2: Choosing Relevant Comparison Dimensions]\n        |\n        v\n[TA-3: Investigating Differences Under a Shared Topic]\n        |\n        v\n[TA-4: Building a Comparison Organizer]\n        |\n        v\n[TA-5: Writing a Full Comparative Analysis]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — comparison doubles the cognitive demand of structure identification and summarizing by applying both to two texts simultaneously, so weakness in either compounds quickly. During instruction (S1), watch for both misconception patterns: sequential summarizing instead of genuine comparison (MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER) and assuming same-topic-means-same-treatment (MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME) both avoid the actual relational analytical work — redirect both to the Twin-Lens Viewer anchor. If the student produces two separate summaries or assumes similarity without investigation during TA-1/TA-3 (S6), drop back to the Concrete Anchor's dimension-dial demonstration before returning to independent comparison. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who selects dimensions well (MP-3) but still produces sequential summaries or assumes topic-based similarity has not yet learned the genuine relational skill this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

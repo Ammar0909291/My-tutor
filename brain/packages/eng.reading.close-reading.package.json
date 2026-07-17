@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.close-reading-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.close-reading",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e9ec65258cb4235791a4d933c6af27e987bdda3b1787b376e89d912d8fb0d65a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.close-reading.md": "sha256:5a7b6ddcbe92f0c5af10c89b5c41fd3cd9ddefb8b781e8886e0ecf5fff41f4ab"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.close-reading",
+    "name": "Close Reading",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.reading.inference-in-reading",
+      "eng.reading.authors-purpose-and-tone"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.close-reading-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.close-reading (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.close-reading.md": "sha256:5a7b6ddcbe92f0c5af10c89b5c41fd3cd9ddefb8b781e8886e0ecf5fff41f4ab"
+      },
+      "contentHash": "sha256:8ea8f0b1a48f4d7bc9e908eedace50091f59e81bb3c858d55ad90db5aab052d9",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.close-reading.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.close-reading.md#TA-1 (addresses MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.close-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.close-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.close-reading.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.close-reading.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.close-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.close-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.close-reading.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.close-reading.md#TA-3 (addresses MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.close-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.close-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.close-reading.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.close-reading.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.close-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.close-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.close-reading.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.close-reading.md#TA-5 (addresses MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES, MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.close-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.close-reading\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.close-reading/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Close Reading — Conceptual Development Sequence",
+      "content": "### TA-1: Annotation-Based Analysis\nPresent a short passage and have the student annotate it (underline, margin notes) while asking analytical questions of specific details (\"why this word and not an obvious synonym?\" \"what does this structure emphasize?\"), demonstrating that genuine close reading involves active analytical engagement, not passive re-reading. Directly counters MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES.\n\n### TA-2: Identifying Standout Details\nTeach the categories of details that reward close attention: unusual/unexpected word choices, repeated words or images (motifs), structurally emphasized positions (sentence/paragraph beginnings and endings), and sudden shifts in tone, pacing, or perspective. Student practices spotting these in 3 new passages.\n\n### TA-3: Strategic vs. Uniform Attention\nUsing the discrimination pairs from MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED, present a passage and have the student first scan for standout details (per TA-2) before committing to deep analysis, contrasting this with an inefficient word-by-word uniform approach.\n\n### TA-4: Building a Close-Reading Argument\nTeach the student to connect 2-3 analyzed details into a single coherent interpretive claim about the passage (e.g., \"the repeated water imagery and the tone shift in the final sentence together suggest the character's growing sense of being overwhelmed\"), moving from isolated observations to a synthesized argument.\n\n### TA-5: Independent Close Reading of a Novel Passage\nStudent performs a full close reading of an unscaffolded passage: identifies 3 standout details, analyzes each, and synthesizes them into one coherent interpretive claim — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.close-reading",
+      "title": ": Annotation and Analytical Questioning (Scaffolded)",
+      "content": "### WE-1: Annotation and Analytical Questioning (Scaffolded)\n**Passage excerpt:** \"The old house groaned under the weight of years, its windows staring out like tired, half-closed eyes.\"\n**Walkthrough:** Annotate \"groaned\" (personification suggesting pain/age, more evocative than \"creaked\"), \"staring... like tired, half-closed eyes\" (extends the personification, suggesting weariness/watchfulness). Ask: why personify the house at all? What mood does this create?",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.close-reading",
+      "title": ": Spotting Standout Details (Guided)",
+      "content": "### WE-2: Spotting Standout Details (Guided)\n**Passage:** A short paragraph in which the word \"silence\" appears three times, once at the very end of the paragraph in its own short sentence: \"Silence.\"\n**Walkthrough:** Identify the repetition of \"silence\" as a motif and its final, isolated, sentence-final placement as structurally emphasized — both are standout details worth deep analysis over the paragraph's more routine descriptive language.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.close-reading",
+      "title": ": Synthesizing a Close-Reading Argument (Independent)",
+      "content": "### WE-3: Synthesizing a Close-Reading Argument (Independent)\n**Passage:** A short scene where a character's dialogue becomes increasingly clipped and short (shorter sentences as the scene progresses) while the surrounding narration notes the character repeatedly glancing at a clock.\n**Walkthrough:** Student identifies both standout details (shortening dialogue, repeated clock-glancing), analyzes each (clipped speech suggesting rising tension/urgency; clock-glancing suggesting time pressure), and synthesizes: \"the author uses both shortening dialogue and repeated clock imagery to build a sense of mounting urgency in the character.\"",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/misconception/MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES",
+      "kind": "misconception",
+      "conceptId": "eng.reading.close-reading",
+      "title": "- **Trigger signal:** Student equates \"close reading\" with mere repetition or slowed-down reading speed — re-reading a passage several times or reading it word-by-word — without actually performing any deeper analytical work (examining specific word choices, structural patterns, or layered meaning) during those extra passes, treating time-on-task as the goal rather than analytical depth.",
+      "content": "### MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES\n- **Trigger signal:** Student equates \"close reading\" with mere repetition or slowed-down reading speed — re-reading a passage several times or reading it word-by-word — without actually performing any deeper analytical work (examining specific word choices, structural patterns, or layered meaning) during those extra passes, treating time-on-task as the goal rather than analytical depth.\n- **Conflict evidence [P28]:** Present two students' approaches to the same short passage: Student A reads it slowly three times but afterward can only restate the literal plot; Student B reads it once but afterward can point to 3 specific word choices and explain what each contributes to tone, symbolism, or characterization. Ask which student actually did \"close reading.\"\n- **Bridge text [P30]:** \"Close reading isn't measured by how many times you read something or how slowly you go — it's measured by how deeply you analyze what's there. You could read something ten times and still only skim the surface, or read it once carefully and notice rich layers of meaning. The 'closeness' refers to analytical attention to specific details, not repetition.\"\n- **Replacement text [P31]:** \"Instead of just re-reading, actively annotate and question as you go: why did the author choose THIS specific word instead of an obvious alternative? What does this sentence structure emphasize? What does this detail foreshadow or symbolize? Speed and repetition don't matter — analytical attention to specific choices does.\"\n- **Discrimination pairs [P33]:** (a) Repetition/slowness-as-closeness (close reading is defined by reading speed or number of passes) vs. (b) Analytical-depth-as-closeness (close reading is defined by the depth of analysis applied to specific textual details, regardless of reading speed or pass count).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's annotation-based analysis before continuing.",
+      "localKey": "MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES",
+      "language": "en",
+      "refs": [
+        "MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/misconception/MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED",
+      "kind": "misconception",
+      "conceptId": "eng.reading.close-reading",
+      "title": "- **Trigger signal:** Student attempts to treat every single word and detail in a passage as equally deserving of deep analysis, producing an unfocused, exhausting close reading that misses the actual load-bearing details in favor of exhaustive but shallow coverage of everything — the inverse problem of not knowing which details actually reward close attention.",
+      "content": "### MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED\n- **Trigger signal:** Student attempts to treat every single word and detail in a passage as equally deserving of deep analysis, producing an unfocused, exhausting close reading that misses the actual load-bearing details in favor of exhaustive but shallow coverage of everything — the inverse problem of not knowing which details actually reward close attention.\n- **Conflict evidence [P28]:** Present a passage and ask the student to close-read every single word. Then contrast with a more strategic approach: identifying 2-3 specific words/phrases that are unusual, repeated, or structurally emphasized (e.g., placed at a sentence's end for emphasis, or an unexpected word choice that breaks a pattern) and analyzing those in depth. Ask which approach actually produces richer understanding in a reasonable amount of time.\n- **Bridge text [P30]:** \"Not every word rewards equal analytical attention — some words are functional and ordinary, while others are doing special work (unusual word choices, repeated motifs, emphasized positions, surprising shifts in tone). Skilled close readers develop an eye for WHICH details are worth digging into, rather than treating everything with the same exhaustive attention.\"\n- **Replacement text [P31]:** \"Scan first for details that stand out: unusual or surprising word choices, repeated words or images, structurally emphasized positions (sentence beginnings/endings), or sudden shifts in tone or pacing. Focus your deep analysis on these standout details rather than spreading equal effort across every single word.\"\n- **Discrimination pairs [P33]:** (a) Uniform-attention approach (every detail deserves equally deep analysis) vs. (b) Strategic-attention approach (some details — unusual word choices, repetitions, structurally emphasized positions — reward deeper analysis more than routine, functional language, and skilled close reading identifies these first).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's spotlight framing before continuing to TA-3.",
+      "localKey": "MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Annotation-Based Analysis",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Annotation-Based Analysis\",\"primitives\":[],\"addresses\":[\"MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Identifying Standout Details",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Standout Details\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Strategic vs. Uniform Attention",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Strategic vs. Uniform Attention\",\"primitives\":[],\"addresses\":[\"MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Building a Close-Reading Argument",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Building a Close-Reading Argument\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Independent Close Reading of a Novel Passage",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Independent Close Reading of a Novel Passage\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES\",\"MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES",
+        "MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.close-reading",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Demonstrate analytical depth over repetition**\nGiven a passage, student performs a single careful analytical pass (not multiple re-readings) and produces specific word-choice analysis, demonstrating that depth, not repetition, defines close reading. *(Directly targets MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.close-reading",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify standout details strategically**\nGiven a passage, student identifies 2-3 standout details (unusual word choice, repetition, structural emphasis) rather than attempting uniform analysis of every word. *(Directly targets MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.close-reading",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Standout-detail category recognition**\nGiven a passage, student correctly categorizes 3 standout details by type (unusual word choice, motif/repetition, structural emphasis, tone shift).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.close-reading",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Build a synthesized interpretive claim**\nGiven 2-3 analyzed details from a passage, student connects them into one coherent interpretive claim about the passage's meaning or effect.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.close-reading",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Independent full close reading**\nGiven a novel passage, student performs a complete close reading: identifies standout details, analyzes each, and synthesizes a coherent interpretive argument.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Adaptive Flags",
+      "content": "- If the student re-reads passively without generating new analysis, weight remediation toward MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES's bridge text and re-run TA-1's annotation practice before returning to independent close reading.\n- If the student attempts uniform, exhausting analysis of every word, weight remediation toward MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED's bridge text and TA-2/TA-3's standout-detail-spotting practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.reading.critical-reading`, `eng.literature.narrative-elements`) — do not certify mastery without TA-5's independent full close reading, since both downstream concepts assume the student can already perform sustained, strategic textual analysis without heavy scaffolding.\n- Reuse the \"museum spotlight\" framing explicitly when introducing `eng.literature.narrative-elements` — that concept applies the same strategic-attention principle to identifying which narrative elements (symbolism, foreshadowing, characterization techniques) deserve close analytical focus.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES",
+        "MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.reading.close-reading/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.close-reading",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Inference/Purpose-Tone Readiness Check]\n        |\n        v\n[Concrete Anchor: The Museum Spotlight]\n        |\n        v\n[TA-1: Annotation-Based Analysis]\n        |\n        v\n[TA-2: Identifying Standout Details]\n        |\n        v\n[TA-3: Strategic vs. Uniform Attention]\n        |\n        v\n[TA-4: Building a Close-Reading Argument]\n        |\n        v\n[TA-5: Independent Close Reading of a Novel Passage]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — close reading is a sustained, systematic combination of inference-making and tone/purpose analysis, so weakness in either undermines the more demanding combined task. During instruction (S1), watch for both misconception patterns: mistaking repetition for analysis (MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES) and attempting uniform exhaustive coverage (MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED) both avoid the actual skill of strategic, deep analytical attention — redirect both to the Museum Spotlight anchor. If the student re-reads without producing new analysis or tries to analyze every word equally during TA-1/TA-3 (S6), drop back to the Concrete Anchor's spotlight demonstration before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who categorizes standout-detail types correctly (MP-3) but cannot actually demonstrate analytical depth or strategic attention in live reading has not yet internalized the core skill this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.close-reading.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
