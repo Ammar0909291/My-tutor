@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.public-speaking-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.public-speaking-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2a4ebbb18662977c41c7a9a7b0547a31036f25784a6180a7b072353bae3901c3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md": "sha256:1432f40cdedcb55bfffba6aeb10f0df5bfb65896a9cb1e91c7b4ce590991864e"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.speaking.public-speaking-basics",
+    "name": "Public Speaking Basics",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.speaking.discussion-skills"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.public-speaking-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.public-speaking-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md": "sha256:1432f40cdedcb55bfffba6aeb10f0df5bfb65896a9cb1e91c7b4ce590991864e"
+      },
+      "contentHash": "sha256:936dc96184578c3c367d496aab673bb26924fbeace9ab2014899e6535c2f23bf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.public-speaking-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md#TA-1 (addresses MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.public-speaking-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.public-speaking-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.public-speaking-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.public-speaking-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.public-speaking-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.public-speaking-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md#TA-3 (addresses MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.public-speaking-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.public-speaking-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.public-speaking-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.public-speaking-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.public-speaking-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.public-speaking-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md#TA-5 (addresses MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY, MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.public-speaking-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.public-speaking-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.public-speaking-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Public Speaking Basics — Conceptual Development Sequence",
+      "content": "### TA-1: Reframing Nervousness as Normal\nPresent accounts of skilled speakers experiencing pre-speech nervousness (as in the Conflict Evidence example) and have the student practice reframing their own anticipated nervousness as a normal physiological response, not a performance predictor. Directly counters MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY.\n\n### TA-2: Basic Nervousness-Management Techniques\nTeach simple techniques for managing pre-speech nervousness (slow breathing, brief physical movement, positive self-talk, arriving early to acclimate to the space) and have the student select and practice one technique.\n\n### TA-3: Preparing Key Points Instead of a Verbatim Script\nUsing the discrimination pairs from MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY, present a short speech topic and have the student prepare a brief key-points outline rather than a word-for-word script, then practice delivering from it naturally.\n\n### TA-4: Vocal and Physical Delivery Basics\nTeach basic delivery techniques (appropriate volume/pace, eye contact, natural gestures, avoiding filler words) and have the student practice a short delivery applying at least 2 of these techniques.\n\n### TA-5: Delivering a Full Short Speech from Key Points\nStudent prepares and delivers (or narrates a plan for delivering) a complete short speech using a key-points outline, applying nervousness-management and delivery techniques — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": ": Nervousness Reframing (Scaffolded)",
+      "content": "### WE-1: Nervousness Reframing (Scaffolded)\n**Scenario:** A student feels their heart racing before a class presentation and thinks \"this means I'm going to mess up.\"\n**Walkthrough:** Reframe: \"My heart racing is just my body's normal response to a high-stakes moment — it doesn't predict how well I'll actually do. Plenty of skilled speakers feel this and still perform well.\"",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": ": Key-Points Outline Preparation (Guided)",
+      "content": "### WE-2: Key-Points Outline Preparation (Guided)\n**Topic:** A 2-minute speech about a favorite hobby.\n**Walkthrough:** Instead of writing a word-for-word script, prepare 3 key points (why I started, what I've learned, why I'd recommend it) and practice speaking naturally from these points, varying the exact wording each practice run.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": ": Full Speech Delivery (Independent)",
+      "content": "### WE-3: Full Speech Delivery (Independent)\n**Task:** Student delivers a short speech from a key-points outline, applying one nervousness-management technique beforehand and at least 2 delivery techniques (eye contact, appropriate pacing) during delivery.\n**Walkthrough:** Student demonstrates natural, flexible delivery from key points rather than rigid recitation, and manages visible nervousness without treating it as a failure signal.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/misconception/MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "- **Trigger signal:** Student interprets pre-speech nervousness (racing heart, sweaty palms, shaky voice feeling) as a reliable predictor of poor performance, leading to a self-fulfilling spiral of anxiety, rather than recognizing that nervousness is a nearly universal physiological response even among skilled, experienced speakers, and that it doesn't reliably predict the actual quality of the delivery.",
+      "content": "### MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY\n- **Trigger signal:** Student interprets pre-speech nervousness (racing heart, sweaty palms, shaky voice feeling) as a reliable predictor of poor performance, leading to a self-fulfilling spiral of anxiety, rather than recognizing that nervousness is a nearly universal physiological response even among skilled, experienced speakers, and that it doesn't reliably predict the actual quality of the delivery.\n- **Conflict evidence [P28]:** Present accounts from experienced, skilled public speakers describing genuine pre-speech nervousness (racing heart, nausea) before giving excellent, well-received talks. Ask the student whether nervousness prevented these speakers from doing well, or whether nervousness and good performance can coexist.\n- **Bridge text [P30]:** \"Nervousness before speaking is an almost universal physical response — even highly experienced, skilled speakers feel it. Feeling nervous doesn't predict how well you'll actually perform; many speakers give excellent talks while feeling quite anxious beforehand. Treating nervousness as a doom signal just adds a second layer of anxiety about the anxiety itself.\"\n- **Replacement text [P31]:** \"Notice nervousness without treating it as a prediction of failure. It's a normal bodily response to a high-stakes moment, not a reliable signal about how your speech will actually go. Skilled speakers manage the feeling; they don't wait for it to disappear before they can perform well.\"\n- **Discrimination pairs [P33]:** (a) Nervousness-as-failure-predictor (feeling nervous reliably signals the speech will go badly) vs. (b) Nervousness-as-normal-physiology (nervousness is a common bodily response that coexists with good performance and doesn't reliably predict outcome).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's nervousness-reframing practice before continuing.",
+      "localKey": "MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY",
+      "language": "en",
+      "refs": [
+        "MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/misconception/MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "- **Trigger signal:** Student believes effective public speaking requires memorizing a speech word-for-word and reciting it exactly, leading to either excessive rigid memorization anxiety or a flat, disconnected delivery when reciting from memory, rather than recognizing that skilled speakers typically work from key points or an outline, allowing for natural, flexible, conversational delivery rather than rigid verbatim recitation.",
+      "content": "### MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY\n- **Trigger signal:** Student believes effective public speaking requires memorizing a speech word-for-word and reciting it exactly, leading to either excessive rigid memorization anxiety or a flat, disconnected delivery when reciting from memory, rather than recognizing that skilled speakers typically work from key points or an outline, allowing for natural, flexible, conversational delivery rather than rigid verbatim recitation.\n- **Conflict evidence [P28]:** Present two approaches to preparing the same short speech: one where the speaker memorizes every word exactly and recites it in a flat, disconnected tone, and one where the speaker prepares key points/an outline and delivers it more naturally and conversationally, engaging with the audience. Ask which approach usually connects better with an audience.\n- **Bridge text [P30]:** \"Word-for-word memorization often produces a flat, disconnected delivery — if you forget one word, the whole recitation can fall apart, and even when it doesn't, it can sound robotic. Most skilled speakers instead prepare key points or a brief outline and speak more naturally and conversationally from that structure, which connects better with an audience and is more resilient if something is forgotten.\"\n- **Replacement text [P31]:** \"Instead of memorizing every word, prepare key points or a brief outline of your main ideas and practice speaking from that structure naturally, in your own words each time. This produces a more engaging, resilient delivery than word-for-word recitation.\"\n- **Discrimination pairs [P33]:** (a) Verbatim-memorization requirement (effective speaking requires memorizing and reciting an exact script) vs. (b) Key-points delivery (effective speaking typically works from key points/an outline, allowing natural, conversational, flexible delivery).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's map-vs-script framing before continuing to TA-3.",
+      "localKey": "MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Reframing Nervousness as Normal",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Reframing Nervousness as Normal\",\"primitives\":[],\"addresses\":[\"MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Basic Nervousness-Management Techniques",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Basic Nervousness-Management Techniques\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Preparing Key Points Instead of a Verbatim Script",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Preparing Key Points Instead of a Verbatim Script\",\"primitives\":[],\"addresses\":[\"MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Vocal and Physical Delivery Basics",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Vocal and Physical Delivery Basics\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Delivering a Full Short Speech from Key Points",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Delivering a Full Short Speech from Key Points\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY\",\"MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY",
+        "MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reframe nervousness as non-predictive**\nGiven a scenario describing pre-speech nervousness, student correctly reframes it as normal physiology rather than a performance prediction. *(Directly targets MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Prepare key points instead of a verbatim script**\nGiven a speech topic, student prepares a brief key-points outline rather than a word-for-word script and explains why this approach produces more natural delivery. *(Directly targets MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Apply a nervousness-management technique**\nStudent selects and describes applying one nervousness-management technique before a speaking task.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Apply delivery techniques**\nGiven a short speech, student applies at least 2 delivery techniques (eye contact, pacing, gesture, avoiding filler words).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Deliver a full short speech from key points**\nStudent prepares and delivers a complete short speech from a key-points outline, applying nervousness-management and delivery techniques.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Adaptive Flags",
+      "content": "- If the student catastrophizes pre-speech nervousness, weight remediation toward MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY's bridge text and re-run TA-1's reframing practice before returning to independent delivery practice.\n- If the student insists on word-for-word memorization, weight remediation toward MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY's bridge text and TA-3's key-points practice specifically.\n- This concept feeds one direct downstream unlock (`eng.speaking.presentation-skills`) — do not certify mastery without TA-5's full speech delivery, since presentation skills assume the student can already manage nervousness and deliver naturally from key points as a baseline.\n- Reuse the \"road map, not the script\" framing explicitly when introducing `eng.speaking.presentation-skills` — that concept extends key-points-based natural delivery to longer, more complex presentations, often supported by visual aids.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY",
+        "MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.speaking.public-speaking-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.public-speaking-basics",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Discussion-Skills Readiness Check]\n        |\n        v\n[Concrete Anchor: The Road Map, Not the Script]\n        |\n        v\n[TA-1: Reframing Nervousness as Normal]\n        |\n        v\n[TA-2: Basic Nervousness-Management Techniques]\n        |\n        v\n[TA-3: Preparing Key Points Instead of a Verbatim Script]\n        |\n        v\n[TA-4: Vocal and Physical Delivery Basics]\n        |\n        v\n[TA-5: Delivering a Full Short Speech from Key Points]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — public speaking extends baseline discussion confidence to a larger, more formal audience setting, so significant reluctance even in small groups should be addressed first. During instruction (S1), watch for both misconception patterns: treating nervousness as predictive of failure (MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY) and over-relying on verbatim memorization (MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY) both undermine confident, natural delivery — redirect both to the Road Map/Weather Gauge anchor. If the student catastrophizes nervousness or insists on word-for-word scripting during TA-1/TA-3 (S6), drop back to the Concrete Anchor's reframing demonstrations before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who applies delivery techniques well (MP-4) but still catastrophizes nervousness or clings to verbatim scripting has not learned the core confidence-and-flexibility judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

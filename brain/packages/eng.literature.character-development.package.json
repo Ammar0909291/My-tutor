@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.character-development-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.character-development",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:32d5df58938dd6a04bacc3e0faf282ab52f4fe8ed616a8a557431a8453f00b71",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.character-development.md": "sha256:4fa1dc3b918a8bb6e947b8bcd2469f03df281ba823e5c9e81f45e335cb6ee156"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.character-development",
+    "name": "Character Development",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.narrative-elements"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.character-development-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.character-development (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.character-development.md": "sha256:4fa1dc3b918a8bb6e947b8bcd2469f03df281ba823e5c9e81f45e335cb6ee156"
+      },
+      "contentHash": "sha256:c68a4938fc225aabdbd54a35fac434d3c2fb339bac9c232544b04c4da8e2fbef",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.character-development.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.character-development.md#TA-1 (addresses MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.character-development"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.character-development\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.character-development.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.character-development.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.character-development"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.character-development\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.character-development.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.character-development.md#TA-3 (addresses MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.character-development"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.character-development\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.character-development.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.character-development.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.character-development"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.character-development\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.character-development.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.character-development.md#TA-5 (addresses MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR, MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.character-development"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.character-development\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.character-development/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.character-development",
+      "title": "Character Development — Conceptual Development Sequence",
+      "content": "### TA-1: Show vs. Tell Trait Sorting\nPresent passages revealing character traits through action/dialogue/thought (show) and passages directly stating a trait (tell), and have the student identify which method is used and practice inferring traits from \"show\" passages specifically. Directly counters MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR.\n\n### TA-2: Inferring Traits from Multiple Evidence Types\nTeach the four evidence types (action, dialogue, thought, others' reactions) and have the student practice inferring a trait using each type separately across 4 short excerpts.\n\n### TA-3: Partial vs. Total Character Growth\nUsing the discrimination pairs from MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL, present a character who grows in one specific area while remaining unchanged elsewhere, and have the student identify the SPECIFIC area of growth rather than judging the character as either \"fully changed\" or \"unchanged.\"\n\n### TA-4: Tracing Character Growth Across a Story\nGiven a short story with a character's beginning and ending states, student traces the specific change (or confirms deliberate lack of change, for a static character) with textual evidence at each point.\n\n### TA-5: Full Character Analysis of a Novel Excerpt\nStudent analyzes a new story excerpt: infers 2 traits using show-not-tell evidence, and if applicable, identifies a specific (not necessarily total) area of character growth — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.character-development",
+      "title": ": Show vs. Tell Identification (Scaffolded)",
+      "content": "### WE-1: Show vs. Tell Identification (Scaffolded)\n**Tell:** \"Marcus was kind.\" **Show:** \"Marcus stopped his bike and spent ten minutes helping a stranger pick up spilled groceries, waving off her thanks.\"\n**Walkthrough:** Confirm the \"show\" passage requires inference (kindness) from action, while the \"tell\" passage states it directly — both reveal the same trait, but the show version is the more common and typically more powerful method.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.character-development",
+      "title": ": Multi-Evidence Trait Inference (Guided)",
+      "content": "### WE-2: Multi-Evidence Trait Inference (Guided)\n**Excerpt:** A character snaps at a waiter over a minor mistake (action), later says \"I just don't have patience for incompetence\" (dialogue), and a friend remarks \"you're always so hard on people\" (others' reaction).\n**Walkthrough:** Combine all three evidence types to infer the character is impatient or has a short temper, confirming multiple evidence types converging on one trait.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.character-development",
+      "title": ": Partial Growth Tracing (Independent)",
+      "content": "### WE-3: Partial Growth Tracing (Independent)\n**Story:** A character who is dismissive of a coworker's ideas throughout most of the story, but by the end, listens carefully to that ONE coworker's suggestion — while remaining just as dismissive toward everyone else.\n**Walkthrough:** Student identifies this as partial, specific growth (change in one relationship) rather than judging it as \"not real growth\" because it isn't total transformation.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/misconception/MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR",
+      "kind": "misconception",
+      "conceptId": "eng.literature.character-development",
+      "title": "- **Trigger signal:** Student expects character traits to be explicitly named by the author (\"John was brave.\") and struggles or gives up when a trait must instead be inferred from the character's actions, dialogue, thoughts, or how other characters react to them — missing that authors far more often SHOW character traits rather than directly telling them.",
+      "content": "### MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR\n- **Trigger signal:** Student expects character traits to be explicitly named by the author (\"John was brave.\") and struggles or gives up when a trait must instead be inferred from the character's actions, dialogue, thoughts, or how other characters react to them — missing that authors far more often SHOW character traits rather than directly telling them.\n- **Conflict evidence [P28]:** Present a passage where a character rushes into a burning building to save a pet without any narrator statement labeling them \"brave,\" and ask the student what trait this reveals. Contrast with a passage that directly states \"Maria was generous\" and ask which method the student trusts more as genuine characterization.\n- **Bridge text [P30]:** \"Authors usually reveal character traits through what a character DOES, SAYS, or THINKS, and how others react to them — not through a direct label. In fact, showing traits through action is usually considered stronger writing than simply telling the reader what a character is like. Expect to infer traits from behavior far more often than to find them stated outright.\"\n- **Replacement text [P31]:** \"When looking for a character trait, examine their actions, dialogue, thoughts, and how other characters respond to them — don't wait for or expect a direct label. If you find a directly-stated trait, treat it as one piece of evidence, not the only source.\"\n- **Discrimination pairs [P33]:** (a) Direct-statement-only expectation (character traits are only genuine if the author explicitly labels them) vs. (b) Show-through-action recognition (character traits are most commonly and most powerfully revealed through action, dialogue, thought, and others' reactions, requiring inference).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's show-vs-tell sort before continuing.",
+      "localKey": "MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/misconception/MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL",
+      "kind": "misconception",
+      "conceptId": "eng.literature.character-development",
+      "title": "- **Trigger signal:** Student treats character development/growth as binary — either a character undergoes total, dramatic transformation (dynamic character) or remains completely static with zero change — missing the more common reality that character growth is often partial, subtle, or limited to one specific aspect of the character rather than a complete personality overhaul, and that even \"static\" characters can show small moments of doubt or reflection without fully changing.",
+      "content": "### MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL\n- **Trigger signal:** Student treats character development/growth as binary — either a character undergoes total, dramatic transformation (dynamic character) or remains completely static with zero change — missing the more common reality that character growth is often partial, subtle, or limited to one specific aspect of the character rather than a complete personality overhaul, and that even \"static\" characters can show small moments of doubt or reflection without fully changing.\n- **Conflict evidence [P28]:** Present a character who begins the story impatient and, by the end, has learned patience specifically in ONE relationship (with a younger sibling) while remaining just as impatient in other areas of life (work, traffic). Ask the student whether this counts as \"character growth\" if the change isn't total and complete across every aspect of the character.\n- **Bridge text [P30]:** \"Real character growth is very often partial and specific, not a complete personality overhaul. A character can grow in one particular way — learning patience with a sibling — while remaining unchanged in other areas. This partial, specific growth is just as legitimate and often more realistic than an all-or-nothing transformation.\"\n- **Replacement text [P31]:** \"When assessing character change, look for SPECIFIC areas of growth rather than expecting total transformation. A character can grow in one relationship, one belief, or one specific behavior while staying the same elsewhere — that's still meaningful character development.\"\n- **Discrimination pairs [P33]:** (a) Binary transformation model (a character either fully changes or doesn't change at all) vs. (b) Partial/specific growth recognition (character development is often localized to a specific aspect, relationship, or belief, without requiring total personality overhaul).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's partial-repair framing before continuing to TA-3.",
+      "localKey": "MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.character-development",
+      "title": "Show vs. Tell Trait Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Show vs. Tell Trait Sorting\",\"primitives\":[],\"addresses\":[\"MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.character-development",
+      "title": "Inferring Traits from Multiple Evidence Types",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Inferring Traits from Multiple Evidence Types\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.character-development",
+      "title": "Partial vs. Total Character Growth",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Partial vs. Total Character Growth\",\"primitives\":[],\"addresses\":[\"MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.character-development",
+      "title": "Tracing Character Growth Across a Story",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Tracing Character Growth Across a Story\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.character-development",
+      "title": "Full Character Analysis of a Novel Excerpt",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Character Analysis of a Novel Excerpt\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL\",\"MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR",
+        "MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.character-development",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Infer a trait from show-not-tell evidence**\nGiven a passage revealing a trait only through action/dialogue/thought (no direct statement), student correctly infers the trait and cites the specific evidence. *(Directly targets MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.character-development",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify partial, specific character growth**\nGiven a character who grows in one specific area while remaining unchanged elsewhere, student correctly identifies this as genuine growth, not \"no growth.\" *(Directly targets MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.character-development",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Multi-evidence trait inference**\nGiven a passage with 2-3 evidence types (action, dialogue, others' reaction), student infers a trait using converging evidence.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.character-development",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Trace character growth across a story**\nGiven a story with beginning and ending character states, student traces the specific change with textual evidence.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.character-development",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full novel-excerpt character analysis**\nGiven a new excerpt, student infers 2 traits using show-not-tell evidence and identifies any specific area of character growth.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.character-development",
+      "title": "Adaptive Flags",
+      "content": "- If the student expects traits to be directly stated, weight remediation toward MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR's bridge text and re-run TA-1's show-vs-tell sort before returning to independent analysis.\n- If the student dismisses partial growth as \"not real\" character development, weight remediation toward MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL's bridge text and TA-3's partial-growth practice specifically.\n- This concept feeds one direct downstream unlock (`eng.literature.theme-and-message`) — do not certify mastery without TA-5's full excerpt analysis, since theme identification often depends on tracing exactly what a character learns or how they specifically change.\n- Reuse the \"evidence detective board\" framing explicitly when introducing `eng.literature.theme-and-message` — that concept extends the same evidence-based inference to identifying a story's larger message, often built from a character's specific growth.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR",
+        "MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.literature.character-development/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.character-development",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Narrative-Elements Readiness Check]\n        |\n        v\n[Concrete Anchor: Evidence Detective Board / Partial Repair Shop]\n        |\n        v\n[TA-1: Show vs. Tell Trait Sorting]\n        |\n        v\n[TA-2: Inferring Traits from Multiple Evidence Types]\n        |\n        v\n[TA-3: Partial vs. Total Character Growth]\n        |\n        v\n[TA-4: Tracing Character Growth Across a Story]\n        |\n        v\n[TA-5: Full Character Analysis of a Novel Excerpt]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — character-development analysis extends basic protagonist/antagonist identification and inference into tracing traits and growth, so weak foundational skill undermines the deeper analysis. During instruction (S1), watch for both misconception patterns: expecting direct-statement traits (MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR) and expecting all-or-nothing growth (MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL) both substitute an oversimplified expectation for the real inferential/nuanced analysis needed — redirect both to the Detective Board and Repair Shop anchors. If the student misses a show-not-tell trait or dismisses partial growth during TA-1/TA-3 (S6), drop back to the Concrete Anchor's demonstrations before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who infers traits from multiple evidence types well (MP-3) but still expects direct statements or dismisses partial growth has not learned the core analytical judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.character-development.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
