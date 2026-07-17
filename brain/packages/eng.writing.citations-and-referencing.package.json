@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.citations-and-referencing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.citations-and-referencing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:32545eb34067067634c05dc10a0be255efbc138195a8ed5eaba97fa7b7eac884",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md": "sha256:e2cdd051ceb6c57f435bfa0e1dff600de22c9eafc60c01118c6a388955108516"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.writing.citations-and-referencing",
+    "name": "Citations and Referencing",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.thesis-statements"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.citations-and-referencing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.citations-and-referencing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md": "sha256:e2cdd051ceb6c57f435bfa0e1dff600de22c9eafc60c01118c6a388955108516"
+      },
+      "contentHash": "sha256:2e54ed20d9756320366da461d26c253cf4081b91f55832c8c587ad12626fa0d8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.citations-and-referencing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.citations-and-referencing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.citations-and-referencing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.citations-and-referencing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md#TA-2 (addresses MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.citations-and-referencing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.citations-and-referencing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.citations-and-referencing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.citations-and-referencing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.citations-and-referencing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.citations-and-referencing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md#TA-4 (addresses MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE, MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.citations-and-referencing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.citations-and-referencing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.citations-and-referencing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "Citations and Referencing — Conceptual Development Sequence",
+      "content": "### TA-1 — What Requires a Citation (Common Knowledge vs. Specific Information)\n\nTeach the common-knowledge test: information widely known and not attributable to one specific\nsource (e.g., \"the sun rises in the east\") needs no citation; specific facts, data, direct quotes,\nparaphrased ideas, and unique arguments from an identifiable source always do. Student practice:\nsort ten example sentences into \"needs citation\" and \"common knowledge, no citation needed.\"\n\n### TA-2 — Paraphrasing Still Requires Citation\n\nDirectly address MC-A using the \"I learned this from ___\" margin test. Student practice: given five\nparaphrased sentences (with their original source sentences shown alongside), identify which still\nneed citations despite the reworded language.\n\n### TA-3 — In-Text Citation and Reference List Mechanics\n\nTeach the mechanical format: a brief in-text citation (author/year or equivalent, per the assigned\nstyle) paired with a full reference-list entry containing complete source information. Student\npractice: given source information (author, title, date, publisher) and a sentence using that\nsource, produce both the in-text citation and the reference-list entry correctly formatted.\n\n### TA-4 — Citation Format vs. Source Credibility\n\nDirectly address MC-B using the borrowed-car anchor's second question. Teach a basic four-question\ncredibility check (who wrote this, what's their expertise, do they have a bias or financial\ninterest, is it confirmed elsewhere). Student practice: given two correctly-cited sources on the\nsame claim, evaluate and compare their credibility separately from their citation formatting.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 147,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/misconception/MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION",
+      "kind": "misconception",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "**Trigger signal:** Student cites sources only when using a source's exact wording in quotation",
+      "content": "### MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION\n\n**Trigger signal:** Student cites sources only when using a source's exact wording in quotation\nmarks, but fails to cite when paraphrasing or summarizing a source's ideas, facts, or data in their\nown words — believing that changing the wording alone removes the need for attribution.\n\n**Conflict evidence [P28]:** Show the student a source sentence (\"Renewable energy costs have\nfallen 70% in the last decade, according to the International Energy Agency\") next to two student\nversions: one in quotation marks with a citation, and one paraphrased into different words with NO\ncitation (\"Solar and wind power have become much cheaper over the past ten years\"). Ask: \"Where did\nthis second student learn this fact? Did they discover it themselves, or did it come from the same\nplace as the quote?\" The student must recognize the idea/fact originated from the source either way\n— only the wording changed, not the ownership of the underlying information.\n\n**Bridge text [P30]:** \"Citation isn't about whether you used someone's exact WORDS — it's about\nwhether you used someone's IDEAS, FACTS, or DATA that you didn't discover or verify yourself. Think\nof it like borrowing a friend's car: whether you drive it exactly as they left it or repaint it a\ndifferent color first, it's still their car, and you still need to say you borrowed it. Changing the\nwording is repainting the car — it's still borrowed.\"\n\n**Replacement text [P31]:** \"Ask: could I have written this specific fact, statistic, or idea\nwithout having read or heard it somewhere? If no — if it came from a specific source, whether you\nquote it directly or put it in your own words — it needs a citation. Only genuinely common knowledge\n(facts widely known and not attributable to one specific source) is exempt.\"\n\n**Discrimination pairs [P33]:**\n1. A directly quoted sentence with a citation (obviously cited) vs. the same fact paraphrased into\n   different words with no citation (still requires one, since the FACT, not just the wording, came\n   from the source).\n2. \"Water boils at 100 degrees Celsius at sea level.\" (common knowledge, widely known, no single\n   attributable source, no citation needed) vs. \"This specific school's water fountain testing found\n   contamination levels 40% above the state limit.\" (a specific, non-common-knowledge finding that\n   requires citing wherever that specific data came from).\n\n**s6_path:** If the student still omits citations for paraphrased material after the bridge, have\nthem trace each fact or idea in their draft back to its origin by literally writing \"I learned this\nfrom ___\" in the margin next to every non-common-knowledge sentence — any sentence where that blank\ncannot be filled with \"my own direct observation/experience\" needs a citation, regardless of wording.",
+      "localKey": "MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION",
+      "language": "en",
+      "refs": [
+        "MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/misconception/MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE",
+      "kind": "misconception",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "**Trigger signal:** Student treats the mere presence of a citation as proof that the cited claim is",
+      "content": "### MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE\n\n**Trigger signal:** Student treats the mere presence of a citation as proof that the cited claim is\nreliable or that using the citation absolves them of evaluating the source's credibility — e.g.,\nciting an unreliable or biased source and treating the citation itself as sufficient justification\n(\"it's true because I cited it\").\n\n**Conflict evidence [P28]:** Show the student two properly formatted citations for the same claim\n(that a new food product is either healthy or unhealthy) — one from a peer-reviewed nutrition study,\none from a promotional blog post funded by a company that sells a competing product. Ask: \"Both are\ncited correctly, in the same format. Does correct citation formatting tell us anything about whether\neither source is trustworthy?\" The student must recognize that citation format and source\ncredibility are two entirely separate questions — a citation properly points to WHERE information\ncame from, but says nothing about whether that place is reliable.\n\n**Bridge text [P30]:** \"A citation is like an address on an envelope — it tells you exactly where a\npiece of mail came from, but it doesn't tell you whether what's inside the envelope is true or\ntrustworthy. You still have to open the envelope and evaluate what's inside. Citing a source\ncorrectly is a separate step from judging whether that source deserves to be trusted.\"\n\n**Replacement text [P31]:** \"A citation answers 'where did this come from?' — it does NOT answer\n'is this reliable?' Before using a source, separately ask: who wrote this, do they have relevant\nexpertise, do they have a bias or financial interest in the claim, and is this information confirmed\nelsewhere? Citation and credibility are two different jobs.\"\n\n**Discrimination pairs [P33]:**\n1. A properly formatted citation to a peer-reviewed scientific journal (format correct, source\n   generally credible) vs. an equally properly formatted citation to an anonymous blog with no stated\n   expertise or evidence (format correct, source credibility highly questionable) — same formatting\n   quality, very different reliability.\n2. \"It must be true, I cited it.\" (treating citation as proof of truth) vs. \"I cited it so you can\n   verify where this claim came from and judge its credibility yourself.\" (treating citation as\n   transparency, not proof).\n\n**s6_path:** If the student continues to conflate correct citation with source credibility after the\nbridge, give them two differently reliable sources on the same topic and have them write a\none-sentence credibility evaluation for EACH separately from writing the citation itself — making the\ntwo tasks physically distinct steps in their process.",
+      "localKey": "MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE",
+      "language": "en",
+      "refs": [
+        "MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 42,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "What Requires a Citation (Common Knowledge vs. Specific Information)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"What Requires a Citation (Common Knowledge vs. Specific Information)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 151,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "Paraphrasing Still Requires Citation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Paraphrasing Still Requires Citation\",\"primitives\":[],\"addresses\":[\"MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "In-Text Citation and Reference List Mechanics",
+      "content": "{\"id\":\"TA-3\",\"title\":\"In-Text Citation and Reference List Mechanics\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 164,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "Citation Format vs. Source Credibility",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Citation Format vs. Source Credibility\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION\",\"MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE",
+        "MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 171,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Common Knowledge vs. Citable Information**\nGiven six sentences, sort them into \"needs citation\" and \"common knowledge, no citation needed,\"\njustifying each classification in one phrase.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 194,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Paraphrase Still Needs Citation**\nGiven an original source sentence and a paraphrased version of it with no citation, identify that\nthe paraphrase still requires a citation and explain why in one sentence using the \"borrowed car\"\nreasoning.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 194,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Citation and Reference-List Mechanics**\nGiven source information (author, title, date, publisher) and a sentence using that source, produce\na correctly formatted in-text citation and its matching reference-list entry.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 194,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Credibility Evaluation Separate from Citation**\nGiven two correctly-cited sources making conflicting claims about the same topic, evaluate each\nsource's credibility separately using the four-question check, without treating either citation's\ncorrectness as proof of reliability.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 194,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Application**\nGiven a new claim and a new source passage, produce a properly paraphrased and cited sentence, its\nreference-list entry, and a one-sentence credibility evaluation of the source, all correctly\ndistinguished as separate steps.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 194,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters the mechanical formatting (MP-3) but repeatedly forgets citations on\n  paraphrased material in their own independent writing (WE-3, MP-5), treat this as a\n  habit-formation gap rather than a knowledge gap — require an explicit \"source check\" pass as a\n  mandatory step in their writing process for several subsequent assignments.\n- If the student becomes overly suspicious of all sources after learning the credibility check\n  (rejecting even well-established, reliable sources), recalibrate by showing that most textbooks,\n  peer-reviewed journals, and established reference works reliably pass the four-question check —\n  the goal is discernment, not blanket distrust.\n- If the student conflates \"properly cited\" with \"good writing\" broadly (assuming a heavily-cited\n  paper is automatically a strong paper regardless of the writer's own reasoning), clarify that\n  citation supports but does not replace the writer's own argument and reasoning — flag for\n  connection to `eng.composition.claim-evidence-reasoning`.\n- Students working in a context with an unfamiliar citation style (if the assigned style differs\n  from examples used in instruction) should be given one additional worked example in the specific\n  assigned style before independent practice, since the underlying logic transfers but the exact\n  format does not automatically.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 254,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "eng.writing.citations-and-referencing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.citations-and-referencing",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: thesis statement check] --> [PD-2: source-awareness check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to eng.writing.thesis-statements]        [Component 3: Borrowed-Car Anchor]\n                                                           |\n                                                           v\n                                            [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                       [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                       (pass >= 0.75) -----+----- (fail)\n                                              |                      |\n                                              v                      v\n                              [Unlock: research-paper-writing]  [S6 remediation: margin-trace\n                                                                  drill / credibility-check drill]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a thesis-structure gap routes back\nto that prerequisite, a source-awareness gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-2 (paraphrase practice) and MC-B during TA-4\n(credibility discussion) — watch each TA for its matching trigger and branch to the relevant s6_path\ndrill if it fires. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the\nbasic citation-need distinction (TA-1) needs review; MP-2 failure alone indicates residual MC-A;\nMP-3 failure alone indicates a mechanical formatting gap (TA-3), distinct from either misconception;\nMP-4 failure alone indicates residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an\nintegration gap — provide one more fully-guided combined example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.citations-and-referencing.md",
+        "startLine": 219,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

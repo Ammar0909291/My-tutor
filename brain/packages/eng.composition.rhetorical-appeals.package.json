@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.rhetorical-appeals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.rhetorical-appeals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:daace1443e8f319c1c99c10abf7ba373dcc3a2465b5a5611248b1d14e1f42b42",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md": "sha256:ee5d64f7a0724fccb9942d56a1e994e8339e30bfe56939aaeaaf06dee64ec68a"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.rhetorical-appeals",
+    "name": "\"Rhetorical Appeals: Ethos, Pathos, Logos\"",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.audience-and-purpose"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.rhetorical-appeals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.rhetorical-appeals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md": "sha256:ee5d64f7a0724fccb9942d56a1e994e8339e30bfe56939aaeaaf06dee64ec68a"
+      },
+      "contentHash": "sha256:d003b4acb8fb88b0726ad0783a456dcf165a9513ff87cb005ac34be162382e53",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-appeals.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-appeals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-appeals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-appeals.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-appeals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-appeals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-appeals.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-appeals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-appeals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-appeals.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md#TA-4 (addresses MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC, MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-appeals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-appeals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.rhetorical-appeals/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "\"Rhetorical Appeals: Ethos, Pathos, Logos\" — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying Ethos\n\nTeach ethos as an appeal to the speaker's credibility, expertise, or trustworthiness. Show examples\n(citing credentials, acknowledging counterarguments fairly, using measured and careful language).\nStudent practice: identify the ethos-building move in three short passages.\n\n### TA-2 — Identifying Pathos (Connected to Claim)\n\nTeach pathos using the lawyer's-closing-argument bridge text, emphasizing the connection test:\nemotion must link explicitly to the specific claim. Student practice: given five passages using\nemotional language, sort into \"connected to the claim\" and \"disconnected decoration\" using the\narrow-drawing test from the s6_path.\n\n### TA-3 — Identifying Logos (Connected to Claim)\n\nTeach logos using the support-beam bridge text, emphasizing the \"because\" bridge test between\nevidence and claim. Student practice: given five passages using statistics or facts, sort into\n\"explicitly reasoned to the claim\" and \"floating, disconnected numbers.\"\n\n### TA-4 — Combining Appeals Strategically\n\nTeach that strong persuasive writing typically layers more than one appeal, chosen deliberately\nbased on audience (an audience that already trusts the writer needs less ethos-building; a highly\nanalytical audience may need more logos than pathos). Student practice: given an audience profile\nand a claim, plan which one or two appeals would be most effective and justify the choice, then\ndraft a short passage using the planned combination.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 151,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/misconception/MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC",
+      "kind": "misconception",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "**Trigger signal:** Student equates pathos with any emotionally charged or dramatic language,",
+      "content": "### MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC\n\n**Trigger signal:** Student equates pathos with any emotionally charged or dramatic language,\nregardless of whether it's relevant to the argument — e.g., inserting an unrelated sad story into a\npersuasive essay about recycling policy simply because \"it has emotion,\" without connecting the\nemotion to the actual claim being argued.\n\n**Conflict evidence [P28]:** Show the student two passages that both use emotional language about\nthe same topic (school funding cuts): one links the emotion directly to the argument (a student\ndescribing losing access to counseling services because of a specific proposed cut, tied explicitly\nto why the cut should be reversed), and one uses emotional language that is disconnected from the\nactual claim (a vague, generic statement about \"how sad budget cuts are\" with no connection to the\nspecific policy argument). Ask: \"Both use emotion. Which one actually makes you more likely to agree\nwith a specific position, and which just makes you feel bad in general?\"\n\n**Bridge text [P30]:** \"Pathos isn't just 'add emotional language' — it's connecting a real feeling\nto the SPECIFIC claim you're making, so the emotion does persuasive work. Think of it like a lawyer's\nclosing argument: a lawyer who cries about 'how sad the whole situation is' in general convinces no\none. A lawyer who makes the jury feel the specific weight of a specific piece of evidence is using\npathos correctly — the emotion is aimed at something that matters to the verdict.\"\n\n**Replacement text [P31]:** \"Before adding emotional language, ask: does this emotion connect\ndirectly to the claim I'm making, or is it just general sad/happy/angry language floating nearby? If\na reader could feel the emotion and still not know what you want them to DO or BELIEVE, it's\ndecoration, not pathos.\"\n\n**Discrimination pairs [P33]:**\n1. \"It's just so sad how things have changed over the years.\" (generic emotional language, unclear\n   what claim it serves) vs. \"When the after-school program closed, twelve students lost their only\n   safe place to do homework before a parent got home from work — that's the direct cost of this\n   budget line.\" (emotion tied explicitly to the specific claim about the budget line).\n2. Inserting an unrelated tragic anecdote into an essay about traffic light timing (emotion\n   disconnected from the actual argument) vs. describing a specific near-miss accident caused by the\n   exact intersection's current timing, connected directly to the proposed change (emotion in\n   service of the specific claim).\n\n**s6_path:** If the student still adds disconnected emotional language after the bridge, have them\ndraw a literal arrow from the emotional sentence to the specific claim sentence it's supposed to\nsupport — if no arrow can honestly be drawn, the sentence must be revised or cut.",
+      "localKey": "MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC",
+      "language": "en",
+      "refs": [
+        "MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/misconception/MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS",
+      "kind": "misconception",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "**Trigger signal:** Student equates logos with the mere presence of any numbers or statistics,",
+      "content": "### MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS\n\n**Trigger signal:** Student equates logos with the mere presence of any numbers or statistics,\nregardless of whether the numbers are relevant, sufficient, or logically connected to the claim —\ne.g., citing an irrelevant or cherry-picked statistic as if its mere numerical nature made an\nargument \"logical.\"\n\n**Conflict evidence [P28]:** Show the student two passages using statistics about the same claim\n(that a new park would benefit the community): one uses a directly relevant statistic connected by\nclear reasoning (a specific figure on how many families in the surrounding neighborhood currently\nlack access to any green space within walking distance, explicitly reasoned to the benefit claim),\nand one uses an irrelevant or misleading statistic (a national average that has nothing to do with\nthe specific community in question, presented as if its mere existence proves the point). Ask:\n\"Both have numbers. Which one actually gives you a REASON to believe the claim, and which one is\njust a number sitting next to the claim?\"\n\n**Bridge text [P30]:** \"Logos isn't just 'include a statistic' — it's building a chain of REASONING\nwhere evidence logically connects to a conclusion, the way a bridge's support beams have to\nactually connect to both sides to hold weight. A number floating near a claim with no explained\nconnection is like a support beam propped up in mid-air, touching nothing — it looks like structure,\nbut it isn't holding anything up.\"\n\n**Replacement text [P31]:** \"Before using a statistic, ask: have I explained WHY this number\nsupports my specific claim, or did I just place it nearby and hope the reader connects the dots? A\nnumber needs an explicit 'because' bridging it to your claim, or it's not doing logical work.\"\n\n**Discrimination pairs [P33]:**\n1. \"Studies show 73% of people like parks.\" (vague, unsourced, not connected to the specific\n   community or claim) vs. \"A neighborhood survey found 68% of families within a half-mile of the\n   proposed site currently travel over twenty minutes to reach any green space — this specific gap is\n   what the new park would close.\" (specific, sourced, explicitly reasoned to the claim).\n2. Citing a national statistic about crime rates in general to argue for a specific local streetlight\n   proposal (mismatched scope, no explained connection) vs. citing the specific number of\n   after-dark incidents reported on the exact stretch of road in question, reasoned directly to the\n   proposal (matched scope, explicit connection).\n\n**s6_path:** If the student still treats any number as automatically \"logical\" after the bridge,\nhave them write out the missing reasoning step explicitly as a sentence starting with \"This number\nmatters to my claim because...\" — if they cannot complete that sentence honestly, the statistic\ndoes not belong in the argument as currently framed.",
+      "localKey": "MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS",
+      "language": "en",
+      "refs": [
+        "MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 43,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "Identifying Ethos",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Ethos\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 155,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "Identifying Pathos (Connected to Claim)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Pathos (Connected to Claim)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 161,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "Identifying Logos (Connected to Claim)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Logos (Connected to Claim)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 168,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "Combining Appeals Strategically",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Combining Appeals Strategically\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC\",\"MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC",
+        "MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 174,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Appeal Identification**\nGiven three short passages, each primarily using a different appeal, identify which appeal\n(ethos, pathos, or logos) each uses and cite the specific textual evidence.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Pathos Connection Test**\nGiven two passages using emotional language on the same topic, determine which one passes the\n\"connected to the claim\" test and explain why the other is decorative rather than persuasive.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Logos Connection Test**\nGiven two passages using statistics on the same topic, determine which one passes the \"because\"\nbridge test and explain why the other is a floating, disconnected number.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Strategic Combination Planning**\nGiven an audience profile (a skeptical, highly analytical audience) and a claim, plan which one or\ntwo appeals would be most effective and justify the choice in two sentences.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Persuasive Draft**\nGiven a new persuasive writing prompt with a stated audience, draft a short passage using at least\ntwo appeals, label each appeal used, and confirm each passes its respective connection test.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "Adaptive Flags",
+      "content": "- If the student can correctly IDENTIFY appeals in others' writing (MP-1 through MP-3) but cannot\n  PRODUCE connected appeals of their own (WE-3, MP-5), treat this as a production gap and provide an\n  additional guided drafting example before independent work.\n- If the student defaults to pathos-heavy writing regardless of audience (even for highly analytical\n  audiences where logos would be more persuasive), flag this as an audience-sensitivity gap — revisit\n  the audience-profiling connection from the prerequisite concept alongside TA-4.\n- If the student produces technically connected appeals that feel manipulative or dishonest (e.g.,\n  exaggerated emotional claims, cherry-picked statistics), flag this as an ethical-use concern\n  distinct from mechanical correctness — note for the downstream `persuasive-techniques` concept\n  rather than re-teaching this concept's connection tests.\n- Students with strong logical/analytical tendencies may over-rely on logos and resist adding pathos\n  even when justified — use the three-legged stool anchor concretely to show that a stool missing\n  the pathos leg still wobbles, even if the logos leg is strong.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 258,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-appeals/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.rhetorical-appeals",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: audience/purpose check] --> [PD-2: claim recognition check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to eng.composition.audience-and-purpose]  [Component 3: Three-Legged Stool Anchor]\n                                                           |\n                                                           v\n                                            [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                       [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                       (pass >= 0.75) -----+----- (fail)\n                                              |                      |\n                                              v                      v\n                              [Unlock: rhetorical-devices,  [S6 remediation: arrow-drawing\n                               persuasive-techniques]         / because-bridge drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; an audience/purpose gap routes\nback to that prerequisite, a claim-recognition gap gets a brief primer. During Component 4 (S1,\nactive instruction), MC-A typically surfaces during TA-2 and MC-B during TA-3 — watch each TA for its\nmatching trigger. If either fires, branch to the relevant s6_path drill (arrow-drawing for pathos,\n\"because\" sentence completion for logos) before resuming. At the mastery probe stage (S9), route by\nfailure: MP-1 failure indicates basic appeal-recognition (TA-1 through TA-3) needs review; MP-2\nfailure alone indicates residual MC-A; MP-3 failure alone indicates residual MC-B; MP-4 failure with\nMP-1 through MP-3 passing indicates a strategic-planning gap (TA-4) rather than a recognition gap;\nMP-5 failure alone indicates a production/transfer gap — provide one more guided combination example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md",
+        "startLine": 222,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.claim-evidence-reasoning-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.claim-evidence-reasoning",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7f7149427074b5d1d5aaff09477e089c8b48ead5ef0c78d6ce87a117e4d0db4e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md": "sha256:e5822a8c9cbb1486f9a57568bd022eff80e672e3cb527fd7d2b65bfbb466fa42"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.composition.claim-evidence-reasoning",
+    "name": "\"Claim, Evidence, and Reasoning\"",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.composition.audience-and-purpose"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.claim-evidence-reasoning-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.claim-evidence-reasoning (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md": "sha256:e5822a8c9cbb1486f9a57568bd022eff80e672e3cb527fd7d2b65bfbb466fa42"
+      },
+      "contentHash": "sha256:077d78ef0418928e7d8a72c38048a1757e6b01989149ba7785972e5ff185e8d8",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.claim-evidence-reasoning.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.claim-evidence-reasoning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.claim-evidence-reasoning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.claim-evidence-reasoning.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md#TA-2 (addresses MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.claim-evidence-reasoning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.claim-evidence-reasoning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.claim-evidence-reasoning.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md#TA-3 (addresses MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.claim-evidence-reasoning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.claim-evidence-reasoning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.claim-evidence-reasoning.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.claim-evidence-reasoning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.claim-evidence-reasoning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.claim-evidence-reasoning.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md#TA-5 (addresses MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH, MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.claim-evidence-reasoning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.claim-evidence-reasoning\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "\"Claim, Evidence, and Reasoning\" — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying Claim, Evidence, and Reasoning\n\nIntroduce the three components with clear definitions and examples. Student practice: given five\ncomplete argumentative paragraphs, underline and label the claim, evidence, and reasoning in each.\n\n### TA-2 — Detecting the Missing Bridge (MC-A)\n\nUsing the broken-bridge anchor, teach students to detect when a claim and evidence are present but\nreasoning is missing. Student practice: given five claim-evidence pairs with no reasoning, identify\nthe gap and explain what specific reasoning sentence would need to be added.\n\n### TA-3 — Writing Genuine Reasoning (Not an Echo) (MC-B)\n\nUsing the \"cover up the claim\" test, teach students to write reasoning sentences that add real\nexplanatory content rather than restating the claim. Student practice: given five reasoning\nsentences (some circular, some genuine), sort them and revise the circular ones into genuine\nreasoning.\n\n### TA-4 — Constructing a Full CER Unit from Scratch\n\nGive the student a claim and raw evidence (not yet reasoned) and have them construct the full\nthree-part unit, writing their own reasoning sentence that passes both the \"This shows that... because\n...\" test and the \"cover up the claim\" test.\n\n### TA-5 — Evaluating and Strengthening Weak Arguments\n\nGive the student five flawed CER units (mixing missing-reasoning and circular-reasoning problems,\nplus at least one where the evidence itself doesn't actually support the stated claim at all). For\neach, diagnose the specific flaw and revise. This is the synthesis task — diagnosis plus repair\nacross multiple flaw types, including a flaw type (evidence-claim mismatch) not directly covered by\neither misconception but requiring the same close-reading skill.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 149,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/misconception/MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH",
+      "kind": "misconception",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "**Trigger signal:** Student writes a claim followed immediately by a piece of evidence with no",
+      "content": "### MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH\n\n**Trigger signal:** Student writes a claim followed immediately by a piece of evidence with no\nexplicit sentence connecting the two — e.g., \"Students should have longer lunch periods. A survey\nfound 60% of students said they feel rushed at lunch.\" — leaving the logical connection implicit and\nassuming the reader will supply it.\n\n**Conflict evidence [P28]:** Show the student this exact claim-then-evidence pair with no reasoning,\nand ask: \"Does this survey result necessarily mean lunch periods should be LONGER? Could it instead\nmean lines move too slowly, or that students are distracted, or that the survey question was\nworded in a way that doesn't tell us the actual cause?\" Guide the student to see that without an\nexplicit reasoning sentence, several different, even contradictory, conclusions could be drawn from\nthe same evidence — the evidence alone doesn't do the connecting work.\n\n**Bridge text [P30]:** \"Evidence sitting next to a claim is like two ends of a broken bridge facing\neach other across a gap — a reader can SEE both sides, but nothing carries them across unless you\nbuild the middle section yourself. Reasoning is that middle section: the sentence that explicitly\nexplains why this specific evidence leads to this specific claim, so the reader doesn't have to\nguess or build the bridge themselves.\"\n\n**Replacement text [P31]:** \"After stating your evidence, always add a reasoning sentence that\nstarts with something like 'This shows that...' or 'This means that...' or 'Because of this...' — and\nfinish it by explicitly connecting the evidence back to your claim. If you can remove that sentence\nand the argument still makes exactly the same sense, you haven't actually written reasoning yet.\"\n\n**Discrimination pairs [P33]:**\n1. \"Students should have longer lunch periods. A survey found 60% of students feel rushed.\" (claim +\n   evidence, no reasoning — the connection is left to the reader) vs. \"Students should have longer\n   lunch periods. A survey found 60% of students feel rushed, which shows that current lunch periods\n   don't leave enough time to eat and socialize without stress — the exact problem a longer period\n   would directly solve.\" (claim + evidence + explicit reasoning).\n2. A paragraph where every piece of evidence is followed by an unstated assumption that the reader\n   will connect it to the claim (evidence-claim gap) vs. a paragraph where every piece of evidence is\n   followed by a sentence explicitly stating the logical link (reasoning present).\n\n**s6_path:** If the student still leaves the gap unexplained after the bridge, have them literally\ninsert the sentence stem \"This shows that ___ because ___\" directly after every piece of evidence in\ntheir draft and force themselves to complete both blanks before moving on.",
+      "localKey": "MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH",
+      "language": "en",
+      "refs": [
+        "MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/misconception/MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN",
+      "kind": "misconception",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "**Trigger signal:** Student attempts to write a reasoning sentence but simply restates the original",
+      "content": "### MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN\n\n**Trigger signal:** Student attempts to write a reasoning sentence but simply restates the original\nclaim in slightly different words rather than actually explaining the logical connection between the\nspecific evidence and the claim — e.g., \"This shows that lunch periods should be longer\" as the\nentire reasoning sentence, which adds no new explanatory content beyond the claim itself.\n\n**Conflict evidence [P28]:** Show the student a claim, evidence, and a \"reasoning\" sentence that\nmerely restates the claim (\"This shows lunch should be longer.\") alongside a genuine reasoning\nsentence that explains the mechanism connecting evidence to claim (\"This shows that current lunch\nperiods don't leave enough time to eat and socialize without stress, which is the specific problem a\nlonger period would solve.\") Ask: \"Does the first sentence tell us anything we didn't already know\nfrom the claim alone? Does the second?\" The student should notice the first sentence is circular —\nit just repeats the conclusion — while the second adds genuinely new explanatory content.\n\n**Bridge text [P30]:** \"A restated claim is like an echo — it sounds like an answer, but it's really\njust your own voice bouncing back at you, with nothing new added. Real reasoning has to add\nsomething the claim alone didn't already say: HOW or WHY the evidence specifically leads there. If\nyour reasoning sentence could be deleted and swapped for the claim itself with no real loss of\ninformation, it's an echo, not reasoning.\"\n\n**Replacement text [P31]:** \"Test your reasoning sentence: does it explain a MECHANISM or LOGICAL\nSTEP that connects the specific evidence to the claim — something new, not already stated in the\nclaim itself? If your reasoning sentence and your claim sentence are saying almost the same thing in\ndifferent words, rewrite the reasoning to explain the 'why' or 'how' instead.\"\n\n**Discrimination pairs [P33]:**\n1. \"This shows lunch should be longer.\" (restates the claim — an echo, not reasoning) vs. \"This shows\n   that the current time doesn't allow students to both eat and socialize without stress, and a\n   longer period directly targets that specific gap.\" (explains the actual mechanism connecting the\n   evidence to the claim).\n2. A student paragraph where the reasoning sentence is a near-verbatim repeat of the topic sentence\n   (circular, no new information) vs. one where the reasoning sentence introduces a new explanatory\n   idea (the specific cause-effect mechanism) not present in the claim itself.\n\n**s6_path:** If the student continues to write circular reasoning after the bridge, have them cover\nup the claim sentence entirely and ask: \"If someone only read your evidence and your reasoning\nsentence — without ever seeing the claim — could they figure out what the claim probably is?\" If the\nreasoning sentence is too generic or circular to allow that, it needs a more specific mechanism\nadded.",
+      "localKey": "MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN",
+      "language": "en",
+      "refs": [
+        "MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 42,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Identifying Claim, Evidence, and Reasoning",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Claim, Evidence, and Reasoning\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 153,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Detecting the Missing Bridge (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Detecting the Missing Bridge (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Writing Genuine Reasoning (Not an Echo) (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Writing Genuine Reasoning (Not an Echo) (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 164,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Constructing a Full CER Unit from Scratch",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Constructing a Full CER Unit from Scratch\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 171,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Evaluating and Strengthening Weak Arguments",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Evaluating and Strengthening Weak Arguments\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH\",\"MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH",
+        "MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 177,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Component Identification**\nGiven a complete argumentative paragraph, underline and label the claim, the evidence, and the\nreasoning.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 207,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Detecting Missing Reasoning**\nGiven a claim-evidence pair with no reasoning sentence, identify that reasoning is missing and write\nthe specific reasoning sentence needed to bridge the gap.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 207,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Circular Reasoning**\nGiven a claim, evidence, and a reasoning sentence that merely restates the claim, identify the\ncircularity using the \"cover up the claim\" test and revise it into genuine reasoning.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 207,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Constructing a Full CER Unit**\nGiven a claim and raw, unreasoned evidence, write a complete reasoning sentence that passes both the\n\"This shows that... because...\" test and the \"cover up the claim\" test.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 207,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Diagnosis and Repair**\nGiven a flawed argumentative paragraph with an unnamed defect (missing reasoning, circular\nreasoning, or evidence that doesn't actually support the claim), identify the specific flaw and\nrevise the paragraph into a sound CER unit.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 207,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Adaptive Flags",
+      "content": "- If the student passes MP-1 through MP-4 but fails MP-5 specifically on the evidence-claim mismatch\n  variant (evidence that doesn't actually support the stated claim at all, as opposed to missing or\n  circular reasoning), this is a distinct skill from the two taught misconceptions — provide one\n  additional worked example focused specifically on evaluating whether evidence is RELEVANT to a\n  claim, not just whether reasoning connects them.\n- If the student's reasoning sentences pass both tests but remain overly simplistic (correct but\n  thin), this indicates the mechanics are secure and readiness for the more sophisticated reasoning\n  chains in `eng.composition.argumentation-basics` — flag as a strength, not a gap.\n- If the student overcorrects into excessively long reasoning sentences that restate the evidence\n  multiple times rather than explaining it once clearly, redirect using the \"cover up the claim\" test\n  to check for genuine new content rather than volume.\n- Students who struggle with abstract claim-evidence-reasoning work may benefit from starting with\n  concrete, physical claims (e.g., \"This ball is bouncy\" with evidence of bounce height) before\n  moving to the abstract, opinion-based prompts used in TA-4/TA-5 and the Worked Examples.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 268,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "eng.composition.claim-evidence-reasoning/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.claim-evidence-reasoning",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: audience/purpose check] --> [PD-2: claim vs. fact check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to eng.composition.audience-and-purpose]  [Component 3: Broken-Bridge Anchor]\n                                                           |\n                                                           v\n                                     [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                           |\n                                                           v\n                                       [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                     [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                     (pass >= 0.75) -----+----- (fail)\n                                            |                      |\n                                            v                      v\n                             [Unlock: argumentation-basics]  [S6 remediation: sentence-stem\n                                                               drill / cover-the-claim drill]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; an audience/purpose gap routes back\nto that prerequisite, a claim-recognition gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-2 and MC-B during TA-3 — these often occur in\nsequence for the same student, since a student who first learns to ADD a reasoning sentence (fixing\nMC-A) frequently defaults to a circular one at first (triggering MC-B) before the distinction fully\nlands. Watch for this natural progression rather than treating a TA-3 trigger as a regression. At\nthe mastery probe stage (S9), route by failure: MP-1 failure indicates basic component identification\n(TA-1) needs review; MP-2 failure alone indicates residual MC-A; MP-3 failure alone indicates\nresidual MC-B; MP-4 failure with MP-1 through MP-3 passing indicates a production gap distinct from\nrecognition; MP-5 failure alone (with all others passing) indicates a diagnosis-under-ambiguity gap,\nparticularly if the failure involves the evidence-claim mismatch flaw not directly taught in TA-2/\nTA-3 — provide one more mixed-flaw worked example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md",
+        "startLine": 230,
+        "endLine": 268
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
