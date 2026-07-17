@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.end-punctuation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.end-punctuation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d80bc816e4fe1b57c9ac80ffd28d44b0508200008ee466f2f31f59b5bfc9fe15",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.end-punctuation.md": "sha256:d5bc1d1330862fc0996fe25048c8104d2d04c6c8f74cbab1dcc2eaf69104b104"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.end-punctuation",
+    "name": "End Punctuation",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.capitalization-rules"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.end-punctuation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.end-punctuation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.end-punctuation.md": "sha256:d5bc1d1330862fc0996fe25048c8104d2d04c6c8f74cbab1dcc2eaf69104b104"
+      },
+      "contentHash": "sha256:6ffa800d686143dd2805731c4570991957c0ab0aea961d0567b0505d6ed3e775",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.end-punctuation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.end-punctuation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.end-punctuation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.end-punctuation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md#TA-2 (addresses MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.end-punctuation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.end-punctuation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.end-punctuation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md#TA-3 (addresses MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.end-punctuation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.end-punctuation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.end-punctuation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md#TA-4 (addresses MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK, MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.end-punctuation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.end-punctuation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.end-punctuation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "End Punctuation — Conceptual Development Sequence",
+      "content": "**TA-1 — Periods for Declarative and Imperative Sentences [C]**\n\nPresent statements and commands; student applies the period correctly.\n\n**TA-2 — Question Marks for Genuine Interrogative Sentences [C]**\n\nPresent genuine questions (both wh-questions and yes/no questions); student applies the question mark correctly, including checking for wh-word sentences that are NOT actually questions, directly targeting MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK.\n\n**TA-3 — Exclamation Points for Strong Emotion (Not Just Loudness) [C→P]**\n\nPresent sentences varying in emotional intensity, including quiet-but-emotional and loud-but-flat examples; student applies the exclamation point based on emotional content, directly targeting MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL.\n\n**TA-4 — Mixed Sentence Set Requiring Function-Based Judgment [P]**\n\nPresent a mixed set including tricky cases (wh-word exclamations, quiet strong emotions); student applies the correct end punctuation based on genuine sentence function.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 68,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/misconception/MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "- **Trigger signal:** Student uses the exclamation point purely to indicate LOUDNESS (shouting) rather than recognizing it signals STRONG EMOTION or emphasis more broadly (excitement, surprise, urgency, fear — not necessarily loud volume), and conversely fails to use it for quietly-but-intensely emotional statements, or overuses it on sentences with no genuine strong emotion.",
+      "content": "### MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL\n- **Trigger signal:** Student uses the exclamation point purely to indicate LOUDNESS (shouting) rather than recognizing it signals STRONG EMOTION or emphasis more broadly (excitement, surprise, urgency, fear — not necessarily loud volume), and conversely fails to use it for quietly-but-intensely emotional statements, or overuses it on sentences with no genuine strong emotion.\n- **Conflict evidence [P28]:** \"You said exclamation points mean someone is shouting loudly. Could someone whisper 'I can't believe it!' with genuine shock or excitement, even quietly? Would that still deserve an exclamation point?\"\n- **Bridge text [P30]:** \"An exclamation point signals STRONG EMOTION or emphasis (excitement, surprise, urgency, fear, strong command) — not specifically loudness or volume. A quietly whispered 'I can't believe it!' can still carry genuine strong emotion deserving an exclamation point, while a loudly spoken but emotionally flat statement typically doesn't need one.\"\n- **Replacement text [P31]:** \"Use the exclamation point to signal genuine strong emotion or emphasis, regardless of whether the statement would be spoken loudly or quietly.\"\n- **Discrimination pairs [P33]:**\n  - A whispered \"I can't believe it!\" (quiet but genuinely emotional, deserves exclamation) vs. a loudly-stated but emotionally flat \"I am going to the store\" (no exclamation needed, despite volume).\n  - \"Watch out!\" (urgent warning, strong emotion, deserves exclamation) vs. \"I am fine.\" (no strong emotion, period is correct even if said firmly).\n- **s6_path:** \"Loudness and exclamation points often go together in everyday examples, which makes the connection feel natural — but the real signal is EMOTIONAL INTENSITY, not volume, and separating these two ideas helps use exclamation points more precisely.\"",
+      "localKey": "MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL",
+      "language": "en",
+      "refs": [
+        "MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/misconception/MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "- **Trigger signal:** Student automatically adds a question mark to any sentence beginning with a wh-word (what, who, where, when, why, how), without checking whether the sentence is GENUINELY interrogative (asking something) or is actually declarative/exclamatory despite starting with a wh-word (e.g., \"What a beautiful day!\" is exclamatory, not a real question, despite starting with \"What\"; \"I wonder what time it is.\" is declarative — it reports a thought, ending in a period, not a question mark, even though it contains \"what\").",
+      "content": "### MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK\n- **Trigger signal:** Student automatically adds a question mark to any sentence beginning with a wh-word (what, who, where, when, why, how), without checking whether the sentence is GENUINELY interrogative (asking something) or is actually declarative/exclamatory despite starting with a wh-word (e.g., \"What a beautiful day!\" is exclamatory, not a real question, despite starting with \"What\"; \"I wonder what time it is.\" is declarative — it reports a thought, ending in a period, not a question mark, even though it contains \"what\").\n- **Conflict evidence [P28]:** \"You put a question mark after 'What a beautiful day.' But is this sentence actually ASKING something, or is it expressing strong feeling about the day? Does it need an answer?\"\n- **Bridge text [P30]:** \"The presence of a wh-word doesn't automatically make a sentence a question requiring a question mark — check the sentence's actual FUNCTION: is it genuinely asking something that needs an answer (interrogative, question mark), or is it expressing strong feeling (exclamatory, exclamation point) or reporting a thought/statement (declarative, period), even though it contains a wh-word?\"\n- **Replacement text [P31]:** \"Check the sentence's actual function (genuinely asking vs. expressing emotion vs. stating a fact) rather than automatically using a question mark whenever a wh-word appears.\"\n- **Discrimination pairs [P33]:**\n  - \"What a beautiful day!\" (exclamatory — expresses feeling, not a genuine question) vs. \"What day is it?\" (interrogative — genuinely asking).\n  - \"I wonder what time it is.\" (declarative — reports a thought, ends in a period) vs. \"What time is it?\" (interrogative — a direct question, ends in a question mark).\n- **s6_path:** \"Since wh-words so often DO signal questions, it's a very reasonable shortcut to expect a question mark whenever one appears — but checking the sentence's true function (asking vs. exclaiming vs. stating) catches the genuine exceptions.\"\n\n---",
+      "localKey": "MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK",
+      "language": "en",
+      "refs": [
+        "MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "Periods for Declarative and Imperative Sentences",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Periods for Declarative and Imperative Sentences\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "Question Marks for Genuine Interrogative Sentences",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Question Marks for Genuine Interrogative Sentences\",\"primitives\":[],\"addresses\":[\"MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "Exclamation Points for Strong Emotion (Not Just Loudness)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Exclamation Points for Strong Emotion (Not Just Loudness)\",\"primitives\":[],\"addresses\":[\"MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "Mixed Sentence Set Requiring Function-Based Judgment",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Mixed Sentence Set Requiring Function-Based Judgment\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK\",\"MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK",
+        "MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 82,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Period, novel example**\n\"Punctuate: 'Please close the door'\"\n*Target:* \"Please close the door.\" — imperative, period.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Question mark, novel example**\n\"Punctuate: 'Did you finish your homework'\"\n*Target:* \"Did you finish your homework?\" — genuine yes/no question.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Exclamation point for quiet emotion**\n\"Punctuate this whispered statement of shock: 'I never expected that'\"\n*Target:* \"I never expected that!\" — exclamation point, since the emotional intensity (shock) matters, not volume.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Wh-word exclamatory trap**\n\"Punctuate: 'How wonderful this is' and 'How does this work'\"\n*Target:* \"How wonderful this is!\" (exclamatory, despite \"How\") and \"How does this work?\" (genuine question).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain end-punctuation rules**\n\"In your own words: does an exclamation point mean something was said loudly, and does every wh-word sentence need a question mark?\"\n*Target:* states or demonstrates that exclamation points signal strong emotion/emphasis (not necessarily loudness), and that sentence function (genuinely asking vs. exclaiming vs. stating) — not the mere presence of a wh-word — determines the correct end punctuation.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "Adaptive Flags",
+      "content": "- **Function over surface cues (loudness, wh-words) is the central lesson for both misconceptions**: consistently require checking the sentence's genuine communicative function before selecting punctuation, rather than relying on volume associations or word-presence shortcuts.\n- **Wh-word exclamatory sentences are a specific, teachable exception category**: \"What a...!\" and \"How...!\" exclamatory constructions deserve explicit, repeated practice since they're a common, systematic source of the wh-word-means-question-mark error.\n- **Emotional intensity, not volume, is the exclamation-point test**: use quiet-but-emotional and loud-but-flat contrasting examples explicitly to break the loudness association.\n- **Lower session_cap (4 TAs) reflects the concept's genuine scope**: this is a smaller, single-hour concept per the KG's `estimated_hours: 1` — the TA sequence is proportionally shorter, consistent with the established convention.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 170,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.grammar.end-punctuation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.end-punctuation",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — punctuation-mark match warm-up\n  ↓\n[P41] PD-1 (capitalization-rules readiness)\n  ↓ PASS\n[P06] Anchor: punctuation-mark match (function-based, including tricky wh-word cases)\n  ↓\nTA-1: Periods for declarative and imperative sentences [C]\n  ↓\nTA-2: Question marks for genuine interrogative sentences [C]\n  ↓\n[P28] Conflict: wh-word alone triggers question mark → MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK (if triggered)\n  ↓\nTA-3: Exclamation points for strong emotion (not just loudness) [C→P]\n  ↓\n[P28] Conflict: exclamation point equated with loudness → MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL (if triggered)\n  ↓\nTA-4: Mixed sentence set requiring function-based judgment [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, punctuate three sentences: one statement, one question, one exclamation.\"\n[P68] Session close\n[P85] Regulation tail — praise checking sentence function over surface cues like volume or wh-words\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on capitalization-rules, new to end-punctuation conventions): dwell on TA-1's straightforward period usage before introducing the more nuanced question-mark and exclamation-point judgments. S1 (already punctuates correctly in simple sentences but misses the wh-word exclamatory trap in more expressive writing): focus on TA-2/TA-4's function-based judgment tasks. S6 (frustrated by needing to judge emotional intensity for exclamation points, a less clear-cut rule than periods): validate that this genuinely does require more judgment than a mechanical rule, but that checking for real emotional content (not volume or habit) is a reliable guide. S9 (L1 uses different or additional punctuation marks, e.g. inverted question marks in Spanish, or no direct equivalent system): expect the specific English conventions (mark placement, the wh-word exclamatory exception) to require dedicated, explicit teaching rather than assumed transfer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.end-punctuation.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

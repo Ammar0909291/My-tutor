@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.conditionals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.conditionals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:94f92665acd992cb90d0c74e2423cb04b1e36093ec348c6a65bb1c093cff8a53",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.conditionals.md": "sha256:ad79fbe39abd5b6e8878050ca9082b7b3f6ebde2edda46c14f2069bba1b474a5"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.conditionals",
+    "name": "Conditional Sentences",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.modals",
+      "eng.grammar.past-tenses"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.conditionals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.conditionals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.conditionals.md": "sha256:ad79fbe39abd5b6e8878050ca9082b7b3f6ebde2edda46c14f2069bba1b474a5"
+      },
+      "contentHash": "sha256:4938a2109631f7e01298b3de2a6d2eba8319b5e13307061415d52e0b4bbad683",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conditionals.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conditionals.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conditionals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conditionals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conditionals.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conditionals.md#TA-2 (addresses MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conditionals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conditionals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conditionals.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conditionals.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conditionals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conditionals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conditionals.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conditionals.md#TA-4 (addresses MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conditionals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conditionals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conditionals.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conditionals.md#TA-5 (addresses MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME, MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conditionals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conditionals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.conditionals/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Conditional Sentences — Conceptual Development Sequence",
+      "content": "**TA-1 — Zero and First Conditionals (Real/Possible) [C]**\n\nPresent zero conditional (general truths: if + present, present) and first conditional (real future possibility: if + present, will + base) sentences; student identifies and produces both correctly.\n\n**TA-2 — Second Conditional (Hypothetical Present/Future) [C]**\n\nPresent second conditional sentences (if + past, would + base); student identifies the hypothetical/unreal meaning despite the past-tense form, directly targeting MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME.\n\n**TA-3 — Third Conditional (Counterfactual Past) [C→P]**\n\nPresent third conditional sentences (if + past perfect, would have + past participle); student identifies the counterfactual-past meaning (something that did NOT happen).\n\n**TA-4 — Selecting the Correct Conditional Type for a Given Scenario [P]**\n\nPresent real-world scenarios varying in reality/likelihood; student selects the appropriate conditional type and produces the correct tense pairing, directly targeting MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE.\n\n**TA-5 — Mixed Conditionals and Error Correction [P]**\n\nPresent sentences with mismatched tense pairings (a common error type); student identifies which conditional type was intended and corrects the tense mismatch.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 75,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/misconception/MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "- **Trigger signal:** Student assumes the PAST TENSE verb form used in the second conditional (\"If I had more money, I would travel\") refers to PAST TIME, when it actually expresses a HYPOTHETICAL/UNREAL present or future situation — the past-tense form here is grammatically \"past\" but semantically refers to an unreal present possibility, not something that already happened.",
+      "content": "### MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME\n- **Trigger signal:** Student assumes the PAST TENSE verb form used in the second conditional (\"If I had more money, I would travel\") refers to PAST TIME, when it actually expresses a HYPOTHETICAL/UNREAL present or future situation — the past-tense form here is grammatically \"past\" but semantically refers to an unreal present possibility, not something that already happened.\n- **Conflict evidence [P28]:** \"In 'If I had more money, I would travel more,' does 'had' mean I HAD money in the past and don't anymore? Or is this describing an imagined, unreal situation right NOW — that I currently don't have more money?\"\n- **Bridge text [P30]:** \"The second conditional uses PAST TENSE FORM (if + simple past) to express a HYPOTHETICAL or UNREAL condition about the PRESENT or FUTURE, not actual past time. 'If I had more money, I would travel' means: right now, I don't have more money, but IF I imagined having it, I would travel — the past-tense verb form is a grammatical convention signaling unreality/distance from fact, not literal past time.\"\n- **Replacement text [P31]:** \"In second-conditional sentences, treat the past-tense verb form as a signal of hypothetical/unreal PRESENT possibility, not as a reference to something that actually happened in the past.\"\n- **Discrimination pairs [P33]:**\n  - \"If I had more money, I would travel\" (second conditional — hypothetical present, not \"I used to have money\") vs. \"When I had more money, I traveled a lot\" (genuine past-time reference, different construction entirely).\n  - \"If she studied harder, she would pass\" (hypothetical — she's not currently studying hard enough) vs. a real past narrative using simple past for actual completed events.\n- **s6_path:** \"Since 'had' and 'studied' genuinely ARE past-tense verb forms, it's a very reasonable assumption that they refer to past time — but English uses this 'distancing' past-tense form specifically to signal something hypothetical or unreal about the present, a distinctive and initially counter-intuitive grammatical convention.\"",
+      "localKey": "MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME",
+      "language": "en",
+      "refs": [
+        "MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/misconception/MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "- **Trigger signal:** Student treats all \"if\" sentences as interchangeable, using one conditional pattern (often the first, most commonly taught) regardless of whether the situation is REAL/general (zero conditional), REAL/possible future (first conditional), HYPOTHETICAL present/future (second conditional), or COUNTERFACTUAL past (third conditional) — missing that each expresses a genuinely different degree of reality/likelihood requiring its own specific tense pairing.",
+      "content": "### MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE\n- **Trigger signal:** Student treats all \"if\" sentences as interchangeable, using one conditional pattern (often the first, most commonly taught) regardless of whether the situation is REAL/general (zero conditional), REAL/possible future (first conditional), HYPOTHETICAL present/future (second conditional), or COUNTERFACTUAL past (third conditional) — missing that each expresses a genuinely different degree of reality/likelihood requiring its own specific tense pairing.\n- **Conflict evidence [P28]:** \"You used the same structure for 'If it rains, I stay home' and for 'If I had studied, I would have passed.' Is the first one about something that's genuinely possible and could still happen, or is the second one about something in the PAST that definitely did NOT happen (since the exam is already over)?\"\n- **Bridge text [P30]:** \"The four conditional types express genuinely different degrees of reality: ZERO (if + present, present — general truths/facts: 'If you heat water, it boils'), FIRST (if + present, will + base — real future possibility: 'If it rains, I will stay home'), SECOND (if + past, would + base — hypothetical present/future: 'If I had more time, I would help'), THIRD (if + past perfect, would have + past participle — counterfactual PAST, something that did NOT happen: 'If I had studied, I would have passed'). Each requires its own specific tense pairing matching its degree of reality.\"\n- **Replacement text [P31]:** \"Before forming a conditional sentence, identify which of the four reality-types applies (general truth, real future possibility, hypothetical present, or counterfactual past) and use that type's specific tense pairing.\"\n- **Discrimination pairs [P33]:**\n  - \"If it rains, I will stay home\" (first conditional — real future possibility) vs. \"If I had studied, I would have passed\" (third conditional — counterfactual past, the exam is already over and this didn't happen).\n  - \"If you heat water, it boils\" (zero conditional — general scientific truth, always true) vs. \"If I won the lottery, I would travel\" (second conditional — a hypothetical, unlikely present/future scenario).\n- **s6_path:** \"Since all four types use the word 'if,' it's very natural to treat them as one interchangeable pattern — but each genuinely signals a different degree of reality/likelihood, and matching the correct tense pairing to the intended meaning is the core skill of this concept.\"\n\n---",
+      "localKey": "MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE",
+      "language": "en",
+      "refs": [
+        "MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Zero and First Conditionals (Real/Possible)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Zero and First Conditionals (Real/Possible)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 77,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Second Conditional (Hypothetical Present/Future)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Second Conditional (Hypothetical Present/Future)\",\"primitives\":[],\"addresses\":[\"MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 81,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Third Conditional (Counterfactual Past)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Third Conditional (Counterfactual Past)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 85,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Selecting the Correct Conditional Type for a Given Scenario",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Selecting the Correct Conditional Type for a Given Scenario\",\"primitives\":[],\"addresses\":[\"MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 89,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Mixed Conditionals and Error Correction",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Mixed Conditionals and Error Correction\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE\",\"MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME",
+        "MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 93,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Zero/first conditional, novel example**\n\"Complete: 'If it ___ (rain) tomorrow, we will cancel the picnic.'\"\n*Target:* \"rains\" — first conditional, real future possibility.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Second conditional, novel example**\n\"Complete: 'If I ___ (win) the lottery, I would buy a house.'\"\n*Target:* \"won\" — second conditional, hypothetical (unlikely) present/future.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Third conditional, novel example**\n\"Complete: 'If they ___ (leave) earlier, they would not have missed the train.'\"\n*Target:* \"had left\" — third conditional, counterfactual past (they didn't leave earlier and did miss the train).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Selecting the correct type, novel scenario**\n\"Describe a general scientific fact using the appropriate conditional type: what happens if you freeze water?\"\n*Target:* \"If you freeze water, it turns to ice\" — zero conditional, present + present.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the conditional system**\n\"In your own words: does the past-tense form in 'If I had more time...' mean something happened in the past, and are all four conditional types the same structure?\"\n*Target:* states or demonstrates that the second conditional's past-tense form signals hypothetical unreality about the present/future, not actual past time, and that the four conditional types (zero, first, second, third) each express a different degree of reality requiring a specific tense pairing.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Adaptive Flags",
+      "content": "- **Reality-distance ladder as the standing organizing framework**: reuse this visual/conceptual anchor throughout instruction, since it makes the four-way system's underlying logic (increasing distance from fact) concrete and memorable.\n- **Past-tense-for-unreality is a distinctive, teachable English convention**: explicitly name and repeat this insight (grammatical past form ≠ semantic past time) whenever second/third conditional confusion arises.\n- **Tense-pairing precision is the core mastery skill**: every practice task should require matching the correct tense pairing to the intended reality-degree, not just producing \"an if-sentence.\"\n- **This is genuinely one of English's most advanced grammar topics — pace accordingly**: for all learners, especially S9 learners from L1s with simpler conditional systems, budget significant, sustained, spaced practice, and treat partial mastery after one session as normal given the concept's advanced difficulty rating.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 185,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "eng.grammar.conditionals/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.conditionals",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — reality-distance ladder warm-up\n  ↓\n[P41] PD-1 (modals readiness)\n  ↓ PASS\n[P41] PD-2 (past-tenses readiness)\n  ↓ PASS\n[P06] Anchor: reality-distance ladder (four rungs, four conditional types)\n  ↓\nTA-1: Zero and first conditionals (real/possible) [C]\n  ↓\nTA-2: Second conditional (hypothetical present/future) [C]\n  ↓\n[P28] Conflict: past-tense form assumed to mean past time → MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME (if triggered)\n  ↓\nTA-3: Third conditional (counterfactual past) [C→P]\n  ↓\nTA-4: Selecting the correct conditional type for a given scenario [P]\n  ↓\n[P28] Conflict: all conditionals treated as one structure → MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE (if triggered)\n  ↓\nTA-5: Mixed conditionals and error correction [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, write one example of each of the four conditional types.\"\n[P68] Session close\n[P85] Regulation tail — praise matching tense pairing to the correct reality-degree over defaulting to one pattern\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on modals/past tenses, new to conditional sentence structures): dwell on TA-1's zero/first conditionals (closest to literal tense usage) before introducing the more counter-intuitive second/third conditionals. S1 (already produces conditionals fluently in speech but conflates types in formal writing/analysis): focus on TA-4/TA-5, since correctly matching tense pairing to intended reality-degree is a subtle, often-overlooked precision skill even for fluent speakers. S6 (overwhelmed by four distinct tense-pairing patterns): use the reality-distance ladder as a standing visual reference, since it converts an abstract four-way system into a concrete, ordered progression. S9 (L1 has a different or simpler conditional system, e.g. a single unified conditional mood marker, or lacks the second/third conditional distinction entirely): expect this concept, especially the second/third conditional distinction and the past-tense-for-unreality convention, to be one of the most advanced, challenging grammar areas in English, requiring substantial, sustained, dedicated practice — this is frequently among the last grammar structures L2 learners fully master.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conditionals.md",
+        "startLine": 145,
+        "endLine": 185
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
