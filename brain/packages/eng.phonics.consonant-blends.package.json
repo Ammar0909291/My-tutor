@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.consonant-blends-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.consonant-blends",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f2b018e68afee90f76816de44b0098624683b06abab4c7859bd61ea8d46191ca",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.consonant-blends.md": "sha256:8fa1cc14849d747e0d416d704ffeab0ac27a7ede048ae62015e1453c2239081b"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.consonant-blends",
+    "name": "Consonant Blends",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.consonants"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.consonant-blends-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.consonant-blends (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.consonant-blends.md": "sha256:8fa1cc14849d747e0d416d704ffeab0ac27a7ede048ae62015e1453c2239081b"
+      },
+      "contentHash": "sha256:1e373b48dbbe54e787a20e04ae9f10117f645f744b9d4e7c3ec4fd5d9206684e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonant-blends.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonant-blends"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonant-blends\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonant-blends.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonant-blends"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonant-blends\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonant-blends.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md#TA-3 (addresses MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonant-blends"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonant-blends\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonant-blends.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md#TA-4 (addresses MC-BLEND-IS-ONE-FUSED-SOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonant-blends"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonant-blends\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.consonant-blends.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md#TA-5 (addresses MC-BLEND-IS-ONE-FUSED-SOUND, MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.consonant-blends"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.consonant-blends\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.consonant-blends/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Consonant Blends — Conceptual Development Sequence",
+      "content": "**TA-1 — Blend Sound-Counting [C]**\n\nPresent a set of blend-initial words (stop, black, frog, spin); student claps/counts the number of distinct consonant sounds at the start before reading the whole word.\n\n**TA-2 — Slow-to-Fast Blending [C]**\n\nUsing the Component 3 clap technique, student practices saying each blend slowly (isolated sounds) then progressively faster until it merges into fluent speech, for a set of initial blends (bl, cr, st, sp, tr).\n\n**TA-3 — Blend vs. Digraph Sorting [C→P]**\n\nPresent a mixed set of two-letter consonant combinations (bl, sh, st, ch, sp, th); student sorts into \"blend\" (2+ sounds) vs. \"digraph\" (1 new sound) using the slow-sounding-out test, directly targeting MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING.\n\n**TA-4 — Final (Ending) Blends [P]**\n\nExtend to word-FINAL blends (desk, jump, hand, list) — student identifies and correctly pronounces both consonant sounds at the end of the word without dropping one, addressing a common site for MC-BLEND-IS-ONE-FUSED-SOUND to resurface (ending sounds are frequently under-articulated in natural speech).\n\n**TA-5 — Reading Novel Blend Words [P]**\n\nPresent unseen words containing blends (both initial and final); student reads them correctly, applying sound-counting and slow-to-fast blending strategies independently.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/misconception/MC-BLEND-IS-ONE-FUSED-SOUND",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "- **Trigger signal:** Student treats a consonant blend as a single new sound rather than two-or-three distinct sounds said in quick sequence (e.g., drops one consonant when reading \"stop\" as \"top,\" or \"black\" as \"bak\"), effectively merging or deleting a member of the blend.",
+      "content": "### MC-BLEND-IS-ONE-FUSED-SOUND\n- **Trigger signal:** Student treats a consonant blend as a single new sound rather than two-or-three distinct sounds said in quick sequence (e.g., drops one consonant when reading \"stop\" as \"top,\" or \"black\" as \"bak\"), effectively merging or deleting a member of the blend.\n- **Conflict evidence [P28]:** \"Say 'stop' very slowly, stretching the beginning: /s/... /t/... /ɒ/... /p/. Do you hear TWO separate consonant sounds at the start, or just one?\"\n- **Bridge text [P30]:** \"A consonant blend is two or three separate consonant sounds said right next to each other, each one still fully pronounced — unlike a digraph (like 'sh'), where two letters make ONE new sound, a blend keeps every sound in it.\"\n- **Replacement text [P31]:** \"For any blend, say each consonant sound separately and slowly first, then speed them up without dropping any — never skip a sound in the cluster.\"\n- **Discrimination pairs [P33]:**\n  - \"stop\" (blend: /s/+/t/, both pronounced) vs. \"top\" (single consonant — a genuinely different, shorter word, showing what's lost if /s/ is dropped).\n  - \"black\" (blend: /b/+/l/) vs. \"sh\" in \"ship\" (digraph — one new sound /ʃ/, not two).\n- **s6_path:** \"It's easy to accidentally drop one sound from a blend because saying two consonants quickly in a row is a genuinely harder motor task than a single consonant — we'll slow down and isolate each sound before blending them at speed.\"",
+      "localKey": "MC-BLEND-IS-ONE-FUSED-SOUND",
+      "language": "en",
+      "refs": [
+        "MC-BLEND-IS-ONE-FUSED-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/misconception/MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "- **Trigger signal:** Student confuses blends (bl, st, spr — multiple sounds, each pronounced) with digraphs (sh, ch, th — two letters, one new sound), applying the wrong strategy to one or the other (e.g., trying to pronounce \"sh\" as /s/+/h/, or trying to split \"st\" into a single new sound).",
+      "content": "### MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING\n- **Trigger signal:** Student confuses blends (bl, st, spr — multiple sounds, each pronounced) with digraphs (sh, ch, th — two letters, one new sound), applying the wrong strategy to one or the other (e.g., trying to pronounce \"sh\" as /s/+/h/, or trying to split \"st\" into a single new sound).\n- **Conflict evidence [P28]:** \"Say 'st' in 'stop' slowly — do you hear two different sounds, /s/ then /t/? Now say 'sh' in 'ship' slowly — do you hear an /s/ sound followed by an /h/ sound, or just ONE sound the whole time?\"\n- **Bridge text [P30]:** \"Blends keep all their individual sounds (st = /s/+/t/, two sounds). Digraphs merge into one brand-new sound that isn't just the two letters said in sequence (sh = /ʃ/, one sound, not /s/+/h/). They look similar on the page — two consonant letters together — but behave completely differently when spoken.\"\n- **Replacement text [P31]:** \"Test any two-consonant letter combination by saying it slowly: if you hear two separate sounds, it's a blend; if you hear one new sound, it's a digraph.\"\n- **Discrimination pairs [P33]:**\n  - \"bl\" in \"black\" (blend, 2 sounds: /b/+/l/) vs. \"ch\" in \"chip\" (digraph, 1 sound: /tʃ/).\n  - \"sk\" in \"skip\" (blend, 2 sounds: /s/+/k/) vs. \"th\" in \"thin\" (digraph, 1 sound: /θ/).\n- **s6_path:** \"Blends and digraphs look alike on paper — both are two consonant letters together — so this mix-up is extremely common; the slow-sounding-out test is the reliable way to tell them apart every time.\"\n\n---",
+      "localKey": "MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING",
+      "language": "en",
+      "refs": [
+        "MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Blend Sound-Counting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Blend Sound-Counting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Slow-to-Fast Blending",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Slow-to-Fast Blending\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Blend vs. Digraph Sorting",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Blend vs. Digraph Sorting\",\"primitives\":[],\"addresses\":[\"MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Final (Ending) Blends",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Final (Ending) Blends\",\"primitives\":[],\"addresses\":[\"MC-BLEND-IS-ONE-FUSED-SOUND\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-BLEND-IS-ONE-FUSED-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Reading Novel Blend Words",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Reading Novel Blend Words\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-BLEND-IS-ONE-FUSED-SOUND\",\"MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-BLEND-IS-ONE-FUSED-SOUND",
+        "MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Sound-counting, novel word**\n\"How many separate consonant sounds are at the start of 'brave'?\"\n*Target:* two — /b/ and /r/.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Reading with correct blend articulation**\n\"Read the word 'plant' — say every sound, including the ending.\"\n*Target:* correctly produces /p/-/l/-/æ/-/n/-/t/, retaining both the initial blend (pl) and final blend (nt) without dropping either member.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Blend vs. digraph, novel pair**\n\"Is 'gl' in 'glow' a blend or a digraph? Is 'wh' in 'whale' a blend or a digraph?\"\n*Target:* \"gl\" is a blend (two sounds); \"wh\" is a digraph (one sound, /w/ or /ʍ/ depending on dialect).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Final blend, novel word**\n\"Read 'desk' and tell me how many sounds are at the very end.\"\n*Target:* two — /s/ and /k/, both pronounced.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the difference**\n\"In your own words: how do you tell a blend apart from a digraph?\"\n*Target:* states or demonstrates: say it slowly — a blend has multiple separate sounds still audible, a digraph merges into one new single sound.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Adaptive Flags",
+      "content": "- **Slow-to-fast is the core teaching technique**: always teach a new blend by first isolating each consonant sound slowly, then progressively speeding up — never introduce a blend at full natural speed first.\n- **Final blends are a common regression site**: word-final blends (desk, jump, list) are more prone to sound-dropping in natural speech than initial blends and deserve explicit, separate practice (TA-4), not an assumption that initial-blend mastery transfers automatically.\n- **Blend vs. digraph confusion is expected, not unusual**: because both categories look like \"two consonant letters together\" in print, assume this confusion by default and always teach the slow-sounding-out test as the standing discrimination method.\n- **L1 phonotactic-cluster transfer difficulty**: for S9 learners whose L1 restricts consonant clusters, budget significantly more practice time and expect specific, predictable error patterns (vowel insertion, consonant deletion) — this is a transfer effect, not a general aptitude issue.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonics.consonant-blends/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.consonant-blends",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — two-beat clap warm-up on a known blend\n  ↓\n[P41] PD-1 (single consonant sound readiness)\n  ↓ PASS\n[P06] Anchor: two-beat clap (slow → fast blending)\n  ↓\nTA-1: Blend sound-counting [C]\n  ↓\n[P28] Conflict: dropped/merged consonant → MC-BLEND-IS-ONE-FUSED-SOUND (if triggered)\n  ↓\nTA-2: Slow-to-fast blending [C]\n  ↓\nTA-3: Blend vs. digraph sorting [C→P]\n  ↓\n[P28] Conflict: blend/digraph confusion → MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING (if triggered)\n  ↓\nTA-4: Final (ending) blends [P]\n  ↓\nTA-5: Reading novel blend words [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word that starts with a blend and one that ends with a blend.\"\n[P68] Session close\n[P85] Regulation tail — praise slow, careful sounding-out over rushed guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on single consonants, new to blends): keep to 2-consonant initial blends (bl, st, sp) before introducing 3-consonant blends (str, spl) or final blends. S1 (reads blends but drops sounds under speed): dwell on TA-2's slow-to-fast progression, deliberately slowing back down whenever a sound is dropped. S6 (frustrated by the extra motor difficulty of consonant clusters): explicitly validate that saying two consonants in a row is a genuinely harder physical task than a single consonant, and that slowing down is a legitimate strategy, not a failure. S9 (L1 phonotactics restrict consonant clusters, e.g. no word-initial /st-/, /sp-/, or no word-final clusters at all — common in several Asian and African language families): expect this concept to be substantially harder than for L1-cluster-permitting learners; explicitly allow more repetition, and treat vowel-insertion errors (e.g., \"sitop\" for \"stop\") as a predictable L1-transfer pattern requiring targeted practice, not carelessness.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.consonant-blends.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.ipa-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.ipa-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:312e64d4b2f25847048ff12b14d2d49e882199aee38ca9b88c34860660faf2bb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md": "sha256:3b43d263a722c50a7aae39d4a425b9982ae57caa155e76031f8bc553bdb0de3f"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.ipa-basics",
+    "name": "IPA Basics for English",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.consonant-sounds",
+      "eng.phonetics.vowel-sounds"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.ipa-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.ipa-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md": "sha256:3b43d263a722c50a7aae39d4a425b9982ae57caa155e76031f8bc553bdb0de3f"
+      },
+      "contentHash": "sha256:72da9ed98d734adfdfdd22fb680981d0deb00c45055e6e50e22c8ce0d1d570a0",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.ipa-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.ipa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.ipa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.ipa-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md#TA-2 (addresses MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.ipa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.ipa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.ipa-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.ipa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.ipa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.ipa-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md#TA-4 (addresses MC-IPA-MATCHES-ENGLISH-SPELLING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.ipa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.ipa-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.ipa-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md#TA-5 (addresses MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS, MC-IPA-MATCHES-ENGLISH-SPELLING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.ipa-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.ipa-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.ipa-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "IPA Basics for English — Conceptual Development Sequence",
+      "content": "**TA-1 — Familiar-Looking Symbol Recognition [C]**\n\nPresent IPA symbols that resemble their corresponding Latin letters (/p/, /b/, /t/, /d/, /k/, /g/, /m/, /n/, /f/, /v/, /s/, /z/, /l/, /r/, /h/, /w/, /j/); student produces the sound for each, building confidence before novel symbols.\n\n**TA-2 — Novel Symbol Recognition [C]**\n\nIntroduce symbols with no direct Latin-letter resemblance (/ʃ/, /ʒ/, /tʃ/, /dʒ/, /θ/, /ð/, /ŋ/, /ɪ/, /iː/, /ʊ/, /uː/, /ɑː/, /æ/, /ʌ/, /ɒ/, /ɔː/, /ɜː/, /ə/, and common diphthongs /eɪ/, /aɪ/, /ɔɪ/, /aʊ/, /əʊ/); student produces the corresponding sound for each, directly targeting MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS.\n\n**TA-3 — Transcribing Simple Regular Words [C→P]**\n\nStudent transcribes simple, phonetically regular words (cat, dog, fish, mat) into IPA, checking their transcription reflects sounds, not spelling letter-count.\n\n**TA-4 — Transcribing Words with Spelling-Sound Mismatch [P]**\n\nStudent transcribes words where spelling and sound diverge notably (knife, laugh, though, city), directly targeting MC-IPA-MATCHES-ENGLISH-SPELLING by requiring the student to transcribe only what is heard.\n\n**TA-5 — Reading (Decoding) IPA Transcriptions [P]**\n\nReverse direction: student is given an IPA transcription (not the spelled word) and must say the word aloud, demonstrating that the skill works bidirectionally (encoding sound→symbol and decoding symbol→sound).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/misconception/MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "- **Trigger signal:** Student reads IPA symbols using regular English letter-sound rules (e.g., reads /θ/ as \"theta\" or tries to sound it like the letter \"o\" with a line through it, or reads /ʃ/ as \"s\" followed by \"h\"), rather than treating each symbol as representing one single, specific phoneme already learned through place/manner/voicing classification.",
+      "content": "### MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS\n- **Trigger signal:** Student reads IPA symbols using regular English letter-sound rules (e.g., reads /θ/ as \"theta\" or tries to sound it like the letter \"o\" with a line through it, or reads /ʃ/ as \"s\" followed by \"h\"), rather than treating each symbol as representing one single, specific phoneme already learned through place/manner/voicing classification.\n- **Conflict evidence [P28]:** \"You read /ʃ/ as if it were two letters, 's' then 'h'. But you already know this exact sound from consonant classification — what did we call the sound at the start of 'ship'? Is /ʃ/ a NEW sound, or a symbol for a sound you already know?\"\n- **Bridge text [P30]:** \"Every IPA symbol stands for exactly ONE phoneme you've already learned to produce and classify — it's a one-symbol-one-sound NOTATION SYSTEM, unlike English spelling where letters can be ambiguous or combine unpredictably. Learning IPA means learning to recognize a new symbol for a sound you already know, not learning new sounds.\"\n- **Replacement text [P31]:** \"For any IPA symbol, first ask: which specific sound (already known from place/manner/voicing) does this single symbol represent — never try to sound out an IPA symbol using English letter-reading habits.\"\n- **Discrimination pairs [P33]:**\n  - \"/ʃ/\" (one symbol, one sound — the \"sh\" sound) vs. reading it as \"s-h\" (incorrect, applying English spelling habits).\n  - \"/θ/\" (one symbol, the \"th\" sound in \"think\") vs. mistaking it for the Greek letter theta's name or a modified \"o.\"\n- **s6_path:** \"IPA symbols can look intimidating or like a whole new alphabet to learn from scratch — but every single one just labels a sound you can already make and already classified by place/manner/voicing; the challenge is just matching a new symbol to already-known knowledge.\"",
+      "localKey": "MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS",
+      "language": "en",
+      "refs": [
+        "MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/misconception/MC-IPA-MATCHES-ENGLISH-SPELLING",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "- **Trigger signal:** Student assumes IPA transcription will mirror English spelling patterns (e.g., expects \"knife\" to transcribe with a symbol for silent \"k,\" or expects every letter in the written word to have a corresponding IPA symbol), not yet grasping that IPA transcribes SOUNDS only, stripping away spelling entirely.",
+      "content": "### MC-IPA-MATCHES-ENGLISH-SPELLING\n- **Trigger signal:** Student assumes IPA transcription will mirror English spelling patterns (e.g., expects \"knife\" to transcribe with a symbol for silent \"k,\" or expects every letter in the written word to have a corresponding IPA symbol), not yet grasping that IPA transcribes SOUNDS only, stripping away spelling entirely.\n- **Conflict evidence [P28]:** \"The word 'knife' has 5 letters. Let's transcribe what you actually SAY: /naɪf/ — how many symbols is that? Where did the 'k' letter go?\"\n- **Bridge text [P30]:** \"IPA transcribes only the sounds you actually pronounce — it completely ignores spelling, silent letters, and any mismatch between letters and sounds. A word's IPA transcription can have a different number of symbols than the word has letters, in either direction.\"\n- **Replacement text [P31]:** \"When transcribing a word into IPA, say the word aloud first and transcribe only what you actually hear — never transcribe letter-by-letter from the spelling.\"\n- **Discrimination pairs [P33]:**\n  - \"knife\" (5 letters) → /naɪf/ (4 symbols — silent 'k' dropped, \"i...e\" becomes one diphthong symbol).\n  - \"fish\" (4 letters) → /fɪʃ/ (3 symbols — \"sh\" digraph becomes one symbol /ʃ/).\n- **s6_path:** \"It's a natural assumption that a transcription should relate directly to spelling, since that's how we're used to reading and writing — but IPA is specifically designed to represent sound ALONE, which is exactly why it's useful for describing pronunciation independent of English's inconsistent spelling.\"\n\n---",
+      "localKey": "MC-IPA-MATCHES-ENGLISH-SPELLING",
+      "language": "en",
+      "refs": [
+        "MC-IPA-MATCHES-ENGLISH-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Familiar-Looking Symbol Recognition",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Familiar-Looking Symbol Recognition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Novel Symbol Recognition",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Novel Symbol Recognition\",\"primitives\":[],\"addresses\":[\"MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Transcribing Simple Regular Words",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Transcribing Simple Regular Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Transcribing Words with Spelling-Sound Mismatch",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Transcribing Words with Spelling-Sound Mismatch\",\"primitives\":[],\"addresses\":[\"MC-IPA-MATCHES-ENGLISH-SPELLING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IPA-MATCHES-ENGLISH-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Reading (Decoding) IPA Transcriptions",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Reading (Decoding) IPA Transcriptions\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-IPA-MATCHES-ENGLISH-SPELLING\",\"MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS",
+        "MC-IPA-MATCHES-ENGLISH-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Familiar symbol, novel context**\n\"What sound does /d/ represent?\"\n*Target:* the voiced alveolar stop, as in \"dog.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Novel symbol, novel context**\n\"What sound does /ŋ/ represent?\"\n*Target:* the velar nasal, as in the end of \"sing.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Transcription, regular word**\n\"Transcribe 'bed' into IPA.\"\n*Target:* /bɛd/ — 3 letters, 3 symbols (matches here, but student should not assume this always holds).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Transcription, spelling-sound mismatch**\n\"Transcribe 'laugh' into IPA.\"\n*Target:* /læf/ — 6 letters, 3 symbols, correctly dropping the silent \"gh\" letters and representing the actual /f/ sound they produce.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Decoding IPA back to a word**\n\"What word does /naɪt/ represent? (Note: could be more than one correct spelling.)\"\n*Target:* \"night\" or \"knight\" — both valid, since IPA represents sound only and cannot distinguish homophones by spelling; correctly recognizing this ambiguity is itself part of the target response.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Adaptive Flags",
+      "content": "- **IPA labels known sounds, doesn't teach new ones**: this concept is fundamentally a NOTATION skill built entirely on the phoneme knowledge from consonant-sounds/vowel-sounds — frame every new symbol explicitly as \"a name for a sound you already know,\" per Component 1's core distinction.\n- **Transcribe by ear, never by spelling**: every transcription task should explicitly instruct the student to say the word aloud first and transcribe what is heard — this is the single most important standing habit for this concept.\n- **Symbol introduction chunking**: introduce novel (non-Latin-resembling) symbols in small batches rather than the full IPA chart at once, to manage cognitive load (Component 8 S6 routing).\n- **Prior IPA exposure as an asset**: for learners with prior dictionary-based or foreign-language IPA exposure, assess and build on existing knowledge rather than re-teaching from zero.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.phonetics.ipa-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.ipa-basics",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — symbol-to-sound matching game warm-up (familiar symbols)\n  ↓\n[P41] PD-1 (consonant classification readiness)\n  ↓ PASS\n[P41] PD-2 (vowel classification readiness)\n  ↓ PASS\n[P06] Anchor: symbol-to-sound matching game (familiar → novel symbols)\n  ↓\nTA-1: Familiar-looking symbol recognition [C]\n  ↓\nTA-2: Novel symbol recognition [C]\n  ↓\n[P28] Conflict: IPA symbols read via English letter habits → MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS (if triggered)\n  ↓\nTA-3: Transcribing simple regular words [C→P]\n  ↓\nTA-4: Transcribing words with spelling-sound mismatch [P]\n  ↓\n[P28] Conflict: transcription forced to match spelling → MC-IPA-MATCHES-ENGLISH-SPELLING (if triggered)\n  ↓\nTA-5: Reading (decoding) IPA transcriptions [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, transcribe your own name into IPA.\"\n[P68] Session close\n[P85] Regulation tail — praise transcribing by ear over transcribing by spelling\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on consonant/vowel classification, new to IPA notation specifically): move through TA-1 with the familiar-looking symbols first to build confidence in the \"new symbol, known sound\" framing before novel symbols. S1 (has some prior exposure to IPA, e.g. from a dictionary): assess for pre-existing MC-IPA-MATCHES-ENGLISH-SPELLING or partial/incorrect symbol knowledge before assuming a clean slate. S6 (overwhelmed by the number of new symbols, ~24+ consonants and ~20 vowel symbols/diphthongs): explicitly chunk by familiar-vs-novel-shape (TA-1 vs. TA-2) and introduce novel symbols in small batches (4-5 per session) rather than all at once. S9 (multilingual learner already familiar with IPA from language-learning resources, or from a different transcription tradition, e.g. Cyrillic-based phonetic notation): treat this as an asset — check for and build on existing transcription-system familiarity rather than assuming no prior exposure.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.ipa-basics.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
