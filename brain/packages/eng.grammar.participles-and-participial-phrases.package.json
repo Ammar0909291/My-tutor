@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.participles-and-participial-phrases-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.participles-and-participial-phrases",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8a4fcf040f589993134b05212864ad4d20a11d1ea6ae4ce7c11fe042ad32d0bd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md": "sha256:663376e6a1d4373ea890c1994c0c7c099b8682f7f719f9666336d8ff8357a4e4"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.participles-and-participial-phrases",
+    "name": "Participles and Participial Phrases",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.gerunds-and-infinitives"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.participles-and-participial-phrases-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.participles-and-participial-phrases (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md": "sha256:663376e6a1d4373ea890c1994c0c7c099b8682f7f719f9666336d8ff8357a4e4"
+      },
+      "contentHash": "sha256:2b07f6dd8be728d4546062e23df8f89532312d8234403779809470d33ac576be",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.participles-and-participial-phrases.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md#TA-1 (addresses MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.participles-and-participial-phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.participles-and-participial-phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.participles-and-participial-phrases.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.participles-and-participial-phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.participles-and-participial-phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.participles-and-participial-phrases.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.participles-and-participial-phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.participles-and-participial-phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.participles-and-participial-phrases.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md#TA-4 (addresses MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.participles-and-participial-phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.participles-and-participial-phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.participles-and-participial-phrases.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md#TA-5 (addresses MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN, MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.participles-and-participial-phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.participles-and-participial-phrases\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Participles and Participial Phrases — Conceptual Development Sequence",
+      "content": "**TA-1 — Present Participles as Adjectives [C]**\n\nPresent sentences using present participles modifying nouns (the barking dog, a growing concern); student identifies the participle's adjective function, directly targeting MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN through explicit contrast with gerund examples.\n\n**TA-2 — Past Participles as Adjectives [C]**\n\nPresent sentences using past participles modifying nouns (the broken vase, a tired student); student identifies the past participle's adjective function.\n\n**TA-3 — Participial Phrases Modifying the Main Clause Subject [C→P]**\n\nPresent sentences with participial phrases correctly attached to the main clause subject (Exhausted from the trip, she went straight to bed); student identifies the logical subject-attachment relationship.\n\n**TA-4 — Identifying Dangling Participles [P]**\n\nPresent sentences with dangling participial phrases; student identifies the logical mismatch using the subject-attachment-arrow technique, directly targeting MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR.\n\n**TA-5 — Correcting Dangling Participles [P]**\n\nGiven a dangling-participle sentence, student rewrites it (by supplying the correct subject, or restructuring the sentence) to fix the logical mismatch.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/misconception/MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "- **Trigger signal:** Student confuses the present participle (-ing form functioning as an ADJECTIVE: \"the sleeping baby\") with the gerund (-ing form functioning as a NOUN: \"sleeping is healthy\"), treating both identical-looking -ing forms as the same grammatical category, missing that despite identical spelling, they occupy entirely different grammatical roles — participles modify nouns (adjective role), gerunds function as nouns themselves.",
+      "content": "### MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN\n- **Trigger signal:** Student confuses the present participle (-ing form functioning as an ADJECTIVE: \"the sleeping baby\") with the gerund (-ing form functioning as a NOUN: \"sleeping is healthy\"), treating both identical-looking -ing forms as the same grammatical category, missing that despite identical spelling, they occupy entirely different grammatical roles — participles modify nouns (adjective role), gerunds function as nouns themselves.\n- **Conflict evidence [P28]:** \"In 'the sleeping baby,' is 'sleeping' naming a thing (like a gerund would — 'Sleeping is healthy'), or is it DESCRIBING the noun 'baby' (an adjective's job)? What's the difference in job between this 'sleeping' and the one in 'I enjoy sleeping'?\"\n- **Bridge text [P30]:** \"A present participle (-ing form) can function as an ADJECTIVE, modifying a noun ('the sleeping baby' — 'sleeping' describes 'baby,' just like 'the tired baby' would). This is grammatically distinct from a GERUND (-ing form functioning as a NOUN: 'Sleeping is healthy' — 'sleeping' IS the subject). Same spelling, different grammatical roles — check whether the -ing word is describing a noun (participle/adjective) or acting AS a noun itself (gerund).\"\n- **Replacement text [P31]:** \"Check whether an -ing word modifies/describes another noun (participle, adjective role) or functions as a noun itself, being the subject/object of a sentence (gerund, noun role).\"\n- **Discrimination pairs [P33]:**\n  - \"the sleeping baby\" (participle — modifies \"baby,\" an adjective role) vs. \"Sleeping is healthy\" (gerund — is the subject, a noun role).\n  - \"a running stream\" (participle — modifies \"stream\") vs. \"Running keeps me fit\" (gerund — is the subject).\n- **s6_path:** \"Since both forms are spelled identically (base verb + -ing) and both come from verbs, it's very natural to conflate them — but checking whether the word describes another noun or IS the noun reliably distinguishes participles from gerunds.\"",
+      "localKey": "MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/misconception/MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "- **Trigger signal:** Student writes sentences with a DANGLING participial phrase — where the participial phrase's implied subject doesn't match (or has no clear connection to) the actual grammatical subject of the main clause, assuming the sentence is fine because the INTENDED meaning seems clear to the writer, without recognizing that this creates a genuinely illogical or confusing sentence for the reader (e.g., \"Walking down the street, the trees were beautiful\" illogically implies the TREES were doing the walking, since \"the trees\" is the subject the participial phrase attaches to).",
+      "content": "### MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR\n- **Trigger signal:** Student writes sentences with a DANGLING participial phrase — where the participial phrase's implied subject doesn't match (or has no clear connection to) the actual grammatical subject of the main clause, assuming the sentence is fine because the INTENDED meaning seems clear to the writer, without recognizing that this creates a genuinely illogical or confusing sentence for the reader (e.g., \"Walking down the street, the trees were beautiful\" illogically implies the TREES were doing the walking, since \"the trees\" is the subject the participial phrase attaches to).\n- **Conflict evidence [P28]:** \"In 'Walking down the street, the trees were beautiful,' who or what does the participial phrase 'Walking down the street' logically attach to — grammatically, what's the very next noun after the comma? Were the TREES walking?\"\n- **Bridge text [P30]:** \"A participial phrase must logically modify (describe an action performed by) the SUBJECT of the main clause that immediately follows it — if the subject doesn't match who/what is actually doing the participial action, the sentence is a 'dangling participle,' a genuine logical error, even if the writer's INTENDED meaning feels clear to them. 'Walking down the street, the trees were beautiful' illogically attaches the walking action to 'the trees' (the actual subject), not to the intended human walker, who is never mentioned. Correct: 'Walking down the street, I noticed the trees were beautiful' (now 'I' is the subject doing the walking).\"\n- **Replacement text [P31]:** \"Check that the participial phrase's implied action logically matches the very next noun (the main clause's subject) — if it doesn't, the sentence needs to be rewritten to supply the correct subject.\"\n- **Discrimination pairs [P33]:**\n  - \"Walking down the street, the trees were beautiful\" (dangling — trees can't walk) vs. \"Walking down the street, I noticed the trees were beautiful\" (correct — \"I\" is the subject doing the walking).\n  - \"Having finished the project, the team celebrated\" (correct — \"the team\" logically finished the project) vs. \"Having finished the project, the boss congratulated us\" (potentially dangling, if the boss didn't finish the project — depends on intended meaning, illustrating the ambiguity risk).\n- **s6_path:** \"As the writer, the intended meaning often feels obvious, since you know who you meant — but a dangling participle creates a genuinely illogical sentence for the reader, matching the participial action to whatever noun grammatically follows it, regardless of what the writer meant.\"\n\n---",
+      "localKey": "MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR",
+      "language": "en",
+      "refs": [
+        "MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Present Participles as Adjectives",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Present Participles as Adjectives\",\"primitives\":[],\"addresses\":[\"MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Past Participles as Adjectives",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Past Participles as Adjectives\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Participial Phrases Modifying the Main Clause Subject",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Participial Phrases Modifying the Main Clause Subject\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Identifying Dangling Participles",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Identifying Dangling Participles\",\"primitives\":[],\"addresses\":[\"MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Correcting Dangling Participles",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Correcting Dangling Participles\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR\",\"MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN",
+        "MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Present participle vs. gerund, novel example**\n\"In 'the singing children' vs. 'Singing is fun,' which 'singing' is a participle (adjective) and which is a gerund (noun)?\"\n*Target:* \"the singing children\" — participle (describes \"children\"); \"Singing is fun\" — gerund (subject, a noun).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Past participle as adjective, novel example**\n\"In 'the frightened cat,' what job is 'frightened' doing?\"\n*Target:* past participle functioning as an adjective, describing \"cat.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Correct participial-phrase attachment, novel example**\n\"In 'Smiling brightly, she accepted the award,' who is smiling?\"\n*Target:* \"she\" — the participial phrase correctly attaches to the subject \"she.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Dangling participle identification, novel example**\n\"Is there a problem with 'Driving through the mountains, the scenery was breathtaking'?\"\n*Target:* yes, dangling — the scenery can't drive; needs a human subject, e.g., \"Driving through the mountains, we found the scenery breathtaking.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain participles and dangling participles**\n\"In your own words: is an -ing word ending in '-ing' always a gerund, and is a dangling participle okay if you know what you meant?\"\n*Target:* states or demonstrates that -ing words can function as adjectives (participles) or nouns (gerunds) depending on their job in the sentence, and that a dangling participle is a genuine logical error (mismatched subject attachment) regardless of the writer's intended meaning.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Adaptive Flags",
+      "content": "- **Function (adjective vs. noun role) is the key participle/gerund discriminator**: always require checking grammatical function, not spelling, paralleling the same skill from the gerunds-and-infinitives concept.\n- **Dangling-participle detection is a genuine proofreading skill, not pedantry**: use the subject-attachment-arrow technique as the standing diagnostic — check what noun the participial phrase attaches to grammatically, regardless of the writer's intended meaning.\n- **This concept builds directly on prior gerund/infinitive function-analysis skills**: explicitly connect back to that concept's noun-role-vs-verb-role distinction, since participles extend the same \"identify the grammatical job\" skill to adjective functions.\n- **Advanced structural feature deserving proportionate practice time**: for all learners, especially S9 learners, recognize participial phrases (and dangling-participle avoidance specifically) as an advanced skill even native speakers commonly get wrong — budget accordingly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.participles-and-participial-phrases/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.participles-and-participial-phrases",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — subject-attachment check warm-up (correct vs. dangling example)\n  ↓\n[P41] PD-1 (gerunds-and-infinitives readiness)\n  ↓ PASS\n[P06] Anchor: subject-attachment check (arrow from participial phrase to subject)\n  ↓\nTA-1: Present participles as adjectives [C]\n  ↓\n[P28] Conflict: participle confused with gerund → MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN (if triggered)\n  ↓\nTA-2: Past participles as adjectives [C]\n  ↓\nTA-3: Participial phrases modifying the main clause subject [C→P]\n  ↓\nTA-4: Identifying dangling participles [P]\n  ↓\n[P28] Conflict: dangling participle excused if \"meaning is clear\" → MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR (if triggered)\n  ↓\nTA-5: Correcting dangling participles [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, write one sentence with a participial phrase and check its subject attachment.\"\n[P68] Session close\n[P85] Regulation tail — praise checking subject-attachment logic over assuming intended meaning is sufficient\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on gerunds/infinitives, new to participle-as-adjective function): dwell on TA-1's clear participle/gerund contrast before introducing participial phrase attachment logic. S1 (already uses participial phrases fluently in speech but writes dangling participles in more complex sentences): focus on TA-4/TA-5, since dangling participles are a common, persistent error even in otherwise sophisticated writing. S6 (frustrated by needing to check logical subject-attachment rather than relying on \"the meaning is obvious\"): validate that this is a real reader-comprehension issue, not a pedantic technicality, using the subject-attachment-arrow technique as a concrete, checkable proofreading tool. S9 (L1 doesn't use participial-phrase constructions, or attaches modifying phrases very differently): expect both the participle/gerund distinction and especially the dangling-participle logic to require substantial, dedicated, explicit practice, since this is an advanced structural feature even for native English speakers.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

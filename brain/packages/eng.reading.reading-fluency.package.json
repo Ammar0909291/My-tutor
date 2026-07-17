@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.reading-fluency-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.reading-fluency",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4cf09d7c076e1800f1087bdfd80422f2cbdb86e2f482852cd138cadc72f7884d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.reading-fluency.md": "sha256:e8e55395ddea0c9e48268b05f1691ff3eb5343e03efd359dd86ce0a8afc561ca"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.reading-fluency",
+    "name": "Reading Fluency",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.print-to-meaning"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.reading-fluency-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.reading-fluency (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.reading-fluency.md": "sha256:e8e55395ddea0c9e48268b05f1691ff3eb5343e03efd359dd86ce0a8afc561ca"
+      },
+      "contentHash": "sha256:09f0c11c219a4bbabfec88dc8f6f949dabb205096793f8ab559795942f2cd785",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-fluency.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-fluency.md#TA-1 (addresses MC-READING-FLUENCY-IS-JUST-SPEED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-fluency.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-fluency.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-fluency.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-fluency.md#TA-3 (addresses MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-fluency.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-fluency.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-fluency.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-fluency.md#TA-5 (addresses MC-READING-FLUENCY-IS-JUST-SPEED, MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-fluency\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.reading-fluency/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Reading Fluency — Conceptual Development Sequence",
+      "content": "**TA-1 — Assessing All Three Fluency Components Together [C]**\n\nPresent reading samples (recorded or modeled) varying in accuracy/rate/expression; student rates each on all three dimensions, directly targeting MC-READING-FLUENCY-IS-JUST-SPEED by requiring all three to be assessed, not rate alone.\n\n**TA-2 — Appropriate Phrasing and Expression [C]**\n\nStudent practices reading with phrasing that reflects punctuation and meaning (pausing at commas, expression matching sentence type), building the expression component specifically.\n\n**TA-3 — Repeated Reading Technique [C→P]**\n\nUsing the Component 3 technique, student rereads a short passage multiple times, tracking improvement across each pass, directly targeting MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE.\n\n**TA-4 — Self-Monitoring Rate (Not Too Fast, Not Too Slow) [P]**\n\nStudent practices reading at a deliberately appropriate pace — neither rushed (sacrificing accuracy/expression) nor unnecessarily slow (word-by-word) — self-correcting when either extreme occurs.\n\n**TA-5 — Fluent Reading of Novel Text with Comprehension Check [P]**\n\nStudent applies all fluency components to an unseen passage, followed by a comprehension check, demonstrating that genuine fluency (not just speed) supports understanding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/misconception/MC-READING-FLUENCY-IS-JUST-SPEED",
+      "kind": "misconception",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "- **Trigger signal:** Student equates \"reading fluency\" purely with reading FAST (words-per-minute), rushing through text at high speed while sacrificing accuracy and/or comprehension, or judging their own/others' fluency solely by pace — missing that fluency is a THREE-part construct (accuracy + appropriate rate + expression/prosody reflecting meaning), and that speed without the other two components isn't genuine fluency.",
+      "content": "### MC-READING-FLUENCY-IS-JUST-SPEED\n- **Trigger signal:** Student equates \"reading fluency\" purely with reading FAST (words-per-minute), rushing through text at high speed while sacrificing accuracy and/or comprehension, or judging their own/others' fluency solely by pace — missing that fluency is a THREE-part construct (accuracy + appropriate rate + expression/prosody reflecting meaning), and that speed without the other two components isn't genuine fluency.\n- **Conflict evidence [P28]:** \"You read that passage very fast — nice pace! But you skipped two words and read it in a flat monotone. If I asked you what it meant, or to read it in a way that showed you understood the emotion in the story, could you? Is speed alone the same as fluency?\"\n- **Bridge text [P30]:** \"Reading fluency has THREE components working together: ACCURACY (reading words correctly), appropriate RATE (not too slow, not rushed to the point of errors), and EXPRESSION/PROSODY (intonation, phrasing, and emphasis that reflects the text's meaning). Speed alone, without accuracy and meaningful expression, is not fluency — it can actually work against comprehension if words are skipped or garbled to go faster.\"\n- **Replacement text [P31]:** \"Judge fluency by all three components together — accuracy, appropriate (not maximum) rate, and expression reflecting meaning — not by speed alone.\"\n- **Discrimination pairs [P33]:**\n  - Fast, accurate, but flat/monotone reading (rate and accuracy present, expression missing — not fully fluent) vs. reading at a natural, appropriate pace with accuracy AND expressive phrasing (genuinely fluent).\n  - Rushed reading that skips or mumbles words to maximize speed (speed prioritized over accuracy — a fluency-undermining habit) vs. reading at a pace that preserves both accuracy and understanding.\n- **s6_path:** \"Speed is the most easily measured and often-praised aspect of reading, which makes it feel like the whole picture — but genuine fluency requires accuracy and meaningful expression working together with an appropriate (not maximum) pace.\"",
+      "localKey": "MC-READING-FLUENCY-IS-JUST-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-READING-FLUENCY-IS-JUST-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/misconception/MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE",
+      "kind": "misconception",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "- **Trigger signal:** Student (or a learner's general assumption) believes fluency will develop automatically from simply reading MORE text overall, without recognizing that REPEATED READING of the SAME passage (rereading a specific text multiple times) is a more targeted, evidence-based technique for building automaticity and expression on that text — reading many different new texts once each doesn't build the same targeted fluency gains as focused repeated practice.",
+      "content": "### MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE\n- **Trigger signal:** Student (or a learner's general assumption) believes fluency will develop automatically from simply reading MORE text overall, without recognizing that REPEATED READING of the SAME passage (rereading a specific text multiple times) is a more targeted, evidence-based technique for building automaticity and expression on that text — reading many different new texts once each doesn't build the same targeted fluency gains as focused repeated practice.\n- **Conflict evidence [P28]:** \"You've read many different books this month, one time each. Do you notice your reading getting smoother and more expressive on any SPECIFIC passage, the way it might if you read the SAME short passage several times in a row?\"\n- **Bridge text [P30]:** \"While reading widely builds vocabulary and general reading experience, REPEATED READING of the same specific passage (reading it multiple times in a row, or across several practice sessions) is a targeted, evidence-based technique that noticeably builds automaticity, accuracy, and expression on that text — a distinct benefit from simply reading many different texts once each.\"\n- **Replacement text [P31]:** \"To deliberately build fluency, practice repeated reading of the same short passage multiple times, in addition to (not instead of) reading widely for other purposes like vocabulary growth and enjoyment.\"\n- **Discrimination pairs [P33]:**\n  - Reading the same short passage three times in a row, noticing increasing smoothness/expression each time (targeted fluency-building) vs. reading three different passages once each (broader exposure, but not the same targeted fluency practice).\n  - A student who reads widely but never rereads anything (broad exposure, uneven fluency gains) vs. a student who also deliberately rereads challenging passages (targeted fluency practice on top of broad reading).\n- **s6_path:** \"It's a very reasonable assumption that more reading overall should build fluency proportionally — but the specific technique of REREADING the same passage is a distinct, additionally valuable practice, not something that happens automatically just from reading a large volume of different texts.\"\n\n---",
+      "localKey": "MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Assessing All Three Fluency Components Together",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Assessing All Three Fluency Components Together\",\"primitives\":[],\"addresses\":[\"MC-READING-FLUENCY-IS-JUST-SPEED\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-READING-FLUENCY-IS-JUST-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Appropriate Phrasing and Expression",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Appropriate Phrasing and Expression\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Repeated Reading Technique",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Repeated Reading Technique\",\"primitives\":[],\"addresses\":[\"MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Self-Monitoring Rate (Not Too Fast, Not Too Slow)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Self-Monitoring Rate (Not Too Fast, Not Too Slow)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Fluent Reading of Novel Text with Comprehension Check",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Fluent Reading of Novel Text with Comprehension Check\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE\",\"MC-READING-FLUENCY-IS-JUST-SPEED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-READING-FLUENCY-IS-JUST-SPEED",
+        "MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Three-component assessment, novel sample**\n\"Listen to this reading. Is it fluent? Assess accuracy, rate, and expression separately, not just overall speed.\"\n*Target:* provides a differentiated assessment across all three components.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Appropriate phrasing, novel sentence**\n\"Read this with appropriate expression: 'Watch out!'\"\n*Target:* reads with urgent, emphatic expression matching the exclamatory sentence type.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Repeated reading benefit**\n\"Why might rereading the same short passage three times build fluency better than reading three different passages once each?\"\n*Target:* correctly explains that repeated reading targets automaticity and expression on that specific text, a distinct benefit from broad, single-pass reading exposure.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Appropriate rate self-monitoring**\n\"You're reading too fast and skipping words. What should you do?\"\n*Target:* correctly identifies slowing down slightly to preserve accuracy, rather than continuing to prioritize speed alone.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain reading fluency**\n\"In your own words: is reading fluency just about speed, and does fluency develop automatically just from reading a lot of different books?\"\n*Target:* states or demonstrates that fluency requires accuracy, appropriate rate, AND expression together (not speed alone), and that targeted repeated-reading practice builds fluency in a way distinct from simply reading widely.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Adaptive Flags",
+      "content": "- **Three components must always be assessed together, never rate alone**: every fluency-judgment task should require separate consideration of accuracy, rate, AND expression, directly countering the speed-only default.\n- **Repeated reading is the core evidence-based technique for this concept**: explicitly teach and practice rereading the same passage multiple times as a distinct, valuable technique — reused directly from the prerequisite decoding-fluency concept's approach, now extended to a broader reading-fluency context.\n- **Appropriate rate, not maximum rate, is the goal**: explicitly counter any residual \"faster is always better\" framing — the goal is a pace that PRESERVES accuracy and supports expression, not the fastest possible reading.\n- **Expression/prosody may lag for EL learners with developing oral proficiency**: for S9 learners, recognize that expressive reading depends on oral language intonation skills that may still be developing separately from decoding accuracy — don't expect these to develop in lockstep.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-fluency/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.reading-fluency",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — three-dial fluency meter warm-up\n  ↓\n[P41] PD-1 (print-to-meaning readiness)\n  ↓ PASS\n[P06] Anchor: three-dial fluency meter + repeated-reading demonstration\n  ↓\nTA-1: Assessing all three fluency components together [C]\n  ↓\n[P28] Conflict: fluency judged by speed alone → MC-READING-FLUENCY-IS-JUST-SPEED (if triggered)\n  ↓\nTA-2: Appropriate phrasing and expression [C]\n  ↓\nTA-3: Repeated reading technique [C→P]\n  ↓\n[P28] Conflict: fluency assumed to develop from volume of different reading alone → MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE (if triggered)\n  ↓\nTA-4: Self-monitoring rate (not too fast, not too slow) [P]\n  ↓\nTA-5: Fluent reading of novel text with comprehension check [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, reread one short passage three times and notice what improves.\"\n[P68] Session close\n[P85] Regulation tail — praise balancing all three fluency components over prioritizing speed\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on print-to-meaning, new to fluency-specific practice): dwell on TA-1's three-component assessment before introducing repeated-reading technique. S1 (already reads accurately and at a reasonable pace but reads flatly/without expression): focus on TA-2's phrasing/expression work, since this component is often underdeveloped even when accuracy and rate are solid. S6 (previously praised mainly for reading speed, now needing to rebalance expectations): explicitly validate that speed was a reasonable thing to notice and build, while reframing the fuller three-component picture as a refinement, not a rejection of prior progress. S9 (English learner whose L1 reading fluency doesn't transfer directly, or whose oral English proficiency lags behind reading decoding, affecting expression specifically): expect TA-2's expression/phrasing component to be disproportionately challenging relative to accuracy/rate, since expressive reading draws on oral language intonation patterns that may still be developing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-fluency.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
