@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.counterargument-and-rebuttal-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.counterargument-and-rebuttal",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:40154a1986e8032964a0044ed3f8057320b3da3d713eb1b93a42d8b034022acf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md": "sha256:9cde0b9911140928fd594b4b8078f5063953eae2aa335b400e31e60f333fa6ec"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.counterargument-and-rebuttal",
+    "name": "Counterargument and Rebuttal",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.argumentation-basics"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.counterargument-and-rebuttal-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.counterargument-and-rebuttal (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md": "sha256:9cde0b9911140928fd594b4b8078f5063953eae2aa335b400e31e60f333fa6ec"
+      },
+      "contentHash": "sha256:cd4ad8a12eb4d2da8c0c74684b239d10af360140660aa371cc2958d621f531a2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.counterargument-and-rebuttal.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md#TA-1 (addresses MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.counterargument-and-rebuttal"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.counterargument-and-rebuttal\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.counterargument-and-rebuttal.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.counterargument-and-rebuttal"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.counterargument-and-rebuttal\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.counterargument-and-rebuttal.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md#TA-3 (addresses MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.counterargument-and-rebuttal"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.counterargument-and-rebuttal\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.counterargument-and-rebuttal.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md#TA-4 (addresses MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT, MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.counterargument-and-rebuttal"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.counterargument-and-rebuttal\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Counterargument and Rebuttal — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying the Strongest Opposing View (MC-A)\n\nUsing the \"would a real opponent recognize this?\" test and the boxing-champion anchor, teach students\nto find and articulate the strongest reasonable opposing argument rather than a strawman. Student\npractice: given a claim and three candidate opposing statements (one strawman, two more reasonable\nof varying strength), select and justify the strongest one.\n\n### TA-2 — Summarizing the Opposition Fairly\n\nTeach the skill of writing a fair, accurate summary of the opposing view before responding — a\ndistinct step from selecting it. Student practice: given a selected strong opposing view, write a\ntwo-to-three sentence fair summary of it, checked against the \"would they recognize their own\nposition?\" test.\n\n### TA-3 — Constructing a Genuine, Specific Rebuttal (MC-B)\n\nUsing the swap test, teach students to write rebuttals that specifically engage the substance just\nsummarized — refuting the reasoning, providing counter-evidence, or conceding a limited point while\nmaintaining the overall position. Student practice: given five generic, swappable rebuttals, identify\nwhich specific objection each SHOULD address and revise each into a targeted rebuttal.\n\n### TA-4 — Full Counterargument-and-Rebuttal Sequence\n\nGive the student a claim. They must identify the strongest opposing view (TA-1), summarize it fairly\n(TA-2), and construct a genuine, specific rebuttal (TA-3) — the full synthesis task, including\ndeciding whether to fully refute, partially concede, or redirect.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 149,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/misconception/MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT",
+      "kind": "misconception",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "**Trigger signal:** Student selects a weak, extreme, or unrepresentative version of the opposing",
+      "content": "### MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT\n\n**Trigger signal:** Student selects a weak, extreme, or unrepresentative version of the opposing\nargument (a \"strawman\") specifically because it's easy to knock down, rather than engaging with the\nstrongest, most reasonable form of the opposition — e.g., arguing against \"people who think homework\nshould be completely banned forever\" when the actual, more common opposing view is a specific,\nmoderate objection about excessive homework volume.\n\n**Conflict evidence [P28]:** Show the student two counterargument summaries for the same essay\ntopic (school uniforms): one that summarizes an extreme, easily-dismissed version (\"some people think\nuniforms are literally like a prison uniform\"), and one that summarizes the strongest, most common\nactual objection (\"uniforms remove a meaningful form of self-expression during a developmentally\nimportant stage, and the cost burden falls disproportionately on lower-income families\"). Ask: \"If a\nreader who actually holds an opposing view read the first summary, would they recognize their own\nposition in it? What about the second?\"\n\n**Bridge text [P30]:** \"Picking a weak version of the opposition to easily defeat is like challenging\na boxer to a match against your little brother instead of the actual champion — you might 'win,' but\nit proves nothing about whether your position can survive a real challenge. A genuine\ncounterargument has to be the STRONGEST reasonable version of the opposing view, or defeating it\nmeans nothing.\"\n\n**Replacement text [P31]:** \"Before writing your counterargument, ask: would someone who actually\nholds this opposing view recognize their position in my summary of it, and would they consider it a\nfair, strong representation — or would they say 'that's not what I actually think'? If it's the\nlatter, find the real, strongest version instead.\"\n\n**Discrimination pairs [P33]:**\n1. \"Some people think school shouldn't exist at all.\" (an extreme strawman no reasonable opponent\n   actually holds) vs. \"Opponents argue that longer school days reduce time for family, extracurricular\n   activities, and rest, which are also essential to learning and development.\" (the strongest,\n   most reasonable actual objection).\n2. A counterargument summary that a real opponent would reject as inaccurate or exaggerated\n   (strawman) vs. one a real opponent would recognize as a fair, even sympathetic, statement of their\n   own view (genuine counterargument).\n\n**s6_path:** If the student continues selecting weak opposing views after the bridge, have them\nactually attempt to argue FOR the opposing side for two minutes, as if they held that view\nthemselves — the strongest points they generate while doing so are the ones that belong in the\ncounterargument, not an easily-dismissed caricature.",
+      "localKey": "MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT",
+      "language": "en",
+      "refs": [
+        "MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/misconception/MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY",
+      "kind": "misconception",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "**Trigger signal:** Student, when writing a rebuttal, simply repeats or restates their own original",
+      "content": "### MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY\n\n**Trigger signal:** Student, when writing a rebuttal, simply repeats or restates their own original\nargument more emphatically rather than directly engaging with the SPECIFIC substance of the\nopposing argument just presented — e.g., following a fairly-summarized opposing view with \"But\nuniforms are still a good idea because they promote unity,\" without addressing the specific concern\njust raised (self-expression, cost burden) at all.\n\n**Conflict evidence [P28]:** Show the student a fairly-summarized opposing argument (about the cost\nburden of uniforms on low-income families) followed by two rebuttal attempts: one that simply\nrestates the original pro-uniform argument with more emphasis (\"uniforms really do promote unity and\nequality!\") without addressing the cost point at all, and one that directly engages the specific\nconcern (\"many schools address this exact concern through uniform exchange programs or subsidized\npurchases, which preserves the equality benefit while reducing the financial burden this objection\ncorrectly identifies\"). Ask: \"Which rebuttal actually responds to what the opposing argument said?\"\n\n**Bridge text [P30]:** \"Restating your original point louder in response to a specific objection is\nlike answering 'but this bridge might not hold the weight' with 'I still think we should cross the\nbridge!' — it doesn't address the actual concern raised. A real rebuttal has to engage with the\nSPECIFIC substance of the objection — refuting its reasoning, providing counter-evidence, or\nconceding the point partially while showing the overall position still holds.\"\n\n**Replacement text [P31]:** \"After summarizing the opposing view, your rebuttal must specifically\nname and respond to what was just said — not just repeat your own claim. Options: show the opposing\nevidence is flawed or incomplete, provide stronger counter-evidence, or concede the specific point\nis partly valid while explaining why your overall position still stands.\"\n\n**Discrimination pairs [P33]:**\n1. \"But uniforms are still a good idea!\" (restates original position, ignores the specific objection\n   raised) vs. \"This cost concern is valid, but many schools address it directly through subsidized\n   uniform programs, which preserves the benefits while removing the burden this objection\n   identifies.\" (directly engages the specific substance raised).\n2. A rebuttal that could be swapped in response to ANY objection with no changes (generic, not\n   actually responsive) vs. a rebuttal that only makes sense as a response to THIS SPECIFIC objection\n   (genuinely responsive, tailored).\n\n**s6_path:** If the student continues to write generic restatement-rebuttals after the bridge, apply\nthe \"swap test\": have them check whether their rebuttal sentence could be pasted, unchanged, as a\nresponse to a completely different objection — if yes, the rebuttal isn't actually engaging with the\nspecific point raised and needs to be rewritten to reference it directly.",
+      "localKey": "MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY",
+      "language": "en",
+      "refs": [
+        "MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 44,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Identifying the Strongest Opposing View (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Strongest Opposing View (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 153,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Summarizing the Opposition Fairly",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Summarizing the Opposition Fairly\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 160,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Constructing a Genuine, Specific Rebuttal (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Constructing a Genuine, Specific Rebuttal (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 167,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Full Counterargument-and-Rebuttal Sequence",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Counterargument-and-Rebuttal Sequence\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT\",\"MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT",
+        "MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 174,
+        "endLine": 307
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying the Strongest Opposition**\nGiven a claim and three candidate opposing statements of varying strength, select and justify the\nstrongest, most reasonable one.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Fair Summary**\nGiven a selected strong opposing view, write a two-to-three sentence summary a real holder of that\nview would recognize as fair and accurate.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Generic Rebuttals**\nGiven a rebuttal paragraph, apply the \"swap test\" to determine whether it specifically engages the\nobjection raised or could be pasted onto any objection unchanged.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Constructing a Targeted Rebuttal**\nGiven a fairly-summarized opposing view, write a genuine rebuttal that specifically engages its\nsubstance — refuting, countering with evidence, or partially conceding.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Counterargument-and-Rebuttal Sequence**\nGiven a new claim, identify the strongest opposing view, summarize it fairly, and construct a\ngenuine, specific rebuttal, demonstrating the complete sequence unaided.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 200,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Adaptive Flags",
+      "content": "- If the student can identify strong oppositions and summarize them fairly (MP-1, MP-2) but\n  consistently produces weak rebuttals specifically on topics they feel strongly about, this\n  parallels the affective challenge in rhetorical analysis — provide practice on emotionally\n  charged topics specifically, since fair engagement is hardest exactly where it matters most.\n  emotionally.\n- If the student's rebuttals consistently concede too much (agreeing the opposition is entirely\n  right, undermining their own position rather than refining it), clarify that a genuine rebuttal can\n  concede a LIMITED point while still showing why the overall position holds — full concession isn't\n  the only alternative to a swap-test-failing generic rebuttal.\n- If the student produces technically correct sequences but the fair-summary step (TA-2) reads as\n  grudging or subtly mocking in tone, flag this as a tone issue distinct from mechanical correctness —\n  connect to `eng.communication.negotiation-language`'s emphasis on genuinely respectful engagement.\n- Students who struggle to generate a strong opposing view independently (TA-1) may benefit from\n  being given a short list of common objection types (cost, feasibility, unintended consequences,\n  competing priorities) as a checklist to consider before settling on the strongest one.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 258,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "eng.composition.counterargument-and-rebuttal/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.counterargument-and-rebuttal",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: argumentation basics check] --> [PD-2: perspective-taking check]\n   |                                                        |\n   | (gap found)                                            | (pass)\n   v                                                         v\n[Route to eng.composition.argumentation-basics]  [Component 3: Boxing-Champion Anchor]\n                                                              |\n                                                              v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                              |\n                                                              v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                              |\n                                                              v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                              |\n                                        (pass >= 0.75) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                              [Unlock: persuasive-techniques]  [S6 remediation: two-minute\n                                                                 opposing-side / swap-test drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; an argumentation-basics gap routes\nback to that prerequisite, a perspective-taking gap gets a brief primer. During Component 4 (S1,\nactive instruction), MC-A typically surfaces during TA-1 and MC-B during TA-3 — these frequently\nco-occur in a student's early attempts, since a student who first learns to select a strong\nopposition often initially responds to it with a generic rebuttal before the distinctness of the\nrebuttal task lands. Watch for this natural progression. At the mastery probe stage (S9), route by\nfailure: MP-1 failure indicates residual MC-A; MP-2 failure alone indicates a fair-summary mechanics\ngap (TA-2), distinct from either misconception; MP-3/MP-4 failures indicate residual MC-B; MP-5\nfailure with MP-1 through MP-4 passing indicates an integration gap — provide one more fully-guided\nsequence example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md",
+        "startLine": 222,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

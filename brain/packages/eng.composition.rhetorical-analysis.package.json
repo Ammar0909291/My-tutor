@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.rhetorical-analysis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.rhetorical-analysis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b54e7025aad3a964c45d08ef40664a65bd0f83ee689ca4c353b113c8851eb26c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md": "sha256:c686cda27ce93aef166f9889e2c4facfd705444de822cd71d55f1a548d50d4e9"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.composition.rhetorical-analysis",
+    "name": "Rhetorical Analysis",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.composition.rhetorical-devices",
+      "eng.reading.critical-reading"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.rhetorical-analysis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.rhetorical-analysis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md": "sha256:c686cda27ce93aef166f9889e2c4facfd705444de822cd71d55f1a548d50d4e9"
+      },
+      "contentHash": "sha256:504213c1c8b46af2681c68968cceab5a45785c294cfd8a141aaa24f2399c040f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-analysis.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-analysis.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md#TA-2 (addresses MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-analysis.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md#TA-3 (addresses MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-analysis.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.rhetorical-analysis.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md#TA-5 (addresses MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND, MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.rhetorical-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.rhetorical-analysis\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.rhetorical-analysis/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Rhetorical Analysis — Conceptual Development Sequence",
+      "content": "### TA-1 — Cataloguing Rhetorical Choices (the Ingredient List Step)\n\nTeach students to first identify the individual appeals, devices, and structural choices present in\na text — this is a necessary but incomplete first step. Student practice: given a short speech,\ncatalogue every appeal and device present.\n\n### TA-2 — Synthesizing How Choices Work Together (MC-A)\n\nUsing the arrow-drawing test, teach students to explain how catalogued choices build on each other\ntoward a cumulative effect. Student practice: given the catalogue from TA-1, draw connecting arrows\nand write a synthesis paragraph explaining the combined strategy.\n\n### TA-3 — Separating Personal Agreement from Rhetorical Evaluation (MC-B)\n\nUsing the chess-judge framing, teach the two-separate-questions method. Student practice: given three\ntexts (one the student likely agrees with, one they likely disagree with, one neutral), answer both\nquestions separately for each.\n\n### TA-4 — Evaluating Audience Fit\n\nTeach that genuine rhetorical evaluation centers on whether the strategy suits the STATED audience,\nnot a generic \"is this well-written\" judgment. Student practice: given a text and its stated\naudience, evaluate specifically whether the chosen appeals and devices are well-matched to that\naudience's likely values and objections.\n\n### TA-5 — Full Rhetorical Analysis\n\nGive the student a complete, real persuasive text with a stated audience. They must catalogue its\nchoices (TA-1), synthesize how those choices work together (TA-2), and evaluate its effectiveness\nfor its specific audience independent of personal agreement (TA-3, TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 151,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/misconception/MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND",
+      "kind": "misconception",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "**Trigger signal:** Student treats rhetorical analysis as an exhaustive scavenger hunt — listing",
+      "content": "### MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND\n\n**Trigger signal:** Student treats rhetorical analysis as an exhaustive scavenger hunt — listing\nevery appeal and device found in a text with no discussion of how they work together or what\ncumulative effect they produce — e.g., \"This uses ethos, then pathos, then a metaphor, then\nrepetition, then logos,\" with no synthesis connecting these choices into a coherent account of the\ntext's overall persuasive strategy.\n\n**Conflict evidence [P28]:** Show the student two analyses of the same short speech: one that lists\nfive devices found with a sentence about each in isolation, and one that groups those same five\ndevices into a coherent account of how they build toward the speech's climax together (e.g., \"The\nearly credibility-building [ethos] earns trust, which the escalating repetition [device] later\nexploits to build emotional momentum [pathos] toward the closing call to action\"). Ask: \"Which\nanalysis actually explains how the SPEECH works as a whole, rather than just what's in it?\"\n\n**Bridge text [P30]:** \"A list of devices found in a text is like listing every ingredient in a\nmeal without ever describing how they combine into a dish — 'this has salt, this has garlic, this\nhas butter' tells you what's present, but not what it tastes like together or why the chef combined\nthem that way. Rhetorical analysis needs to explain the COMBINED effect, not just the ingredient\nlist.\"\n\n**Replacement text [P31]:** \"After identifying the devices and appeals present, always add a\nsynthesis step: how do these choices work TOGETHER to build one cumulative effect on the audience?\nWhich choice sets up which other choice? If your analysis is just a list with no connecting\nexplanation, it's an inventory, not an analysis.\"\n\n**Discrimination pairs [P33]:**\n1. \"This speech uses ethos, pathos, and repetition.\" (an inventory, no connection explained) vs.\n   \"This speech first establishes ethos to earn the audience's trust, then leverages that trust with\n   an escalating repetition that builds emotional momentum (pathos) toward its closing appeal — each\n   choice sets up the next.\" (a synthesized account of combined effect).\n2. A student essay organized device-by-device with no connecting thread (list structure) vs. a\n   student essay organized around the text's overall persuasive ARC, citing devices as evidence\n   along the way (synthesis structure).\n\n**s6_path:** If the student continues to produce inventories after the bridge, have them draw\nliteral arrows connecting each identified device to the one before and after it in the text, forcing\nthem to articulate what each arrow represents (what does device 1 set up for device 2 to use?)\nbefore writing any prose.",
+      "localKey": "MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND",
+      "language": "en",
+      "refs": [
+        "MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/misconception/MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT",
+      "kind": "misconception",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "**Trigger signal:** Student conflates evaluating a text's RHETORICAL effectiveness (how well its",
+      "content": "### MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT\n\n**Trigger signal:** Student conflates evaluating a text's RHETORICAL effectiveness (how well its\npersuasive strategy works ON ITS INTENDED AUDIENCE) with stating personal agreement or disagreement\nwith the text's position — e.g., \"This argument is not effective because I don't think school\nuniforms should be required,\" regardless of whether the text's rhetorical strategy is actually\nwell-suited to persuading its stated audience.\n\n**Conflict evidence [P28]:** Give the student a persuasive text whose position they personally\ndisagree with, but whose rhetorical strategy is genuinely well-matched to its stated audience (strong\nethos-building for a skeptical audience, well-connected pathos, relevant logos). Ask: \"Do you agree\nwith this argument's conclusion? Separately — regardless of whether you agree — is its rhetorical\nstrategy well-suited to persuading the specific audience it's aimed at?\" Guide the student to see\nthese are two entirely separate questions with potentially different answers — a text can be\nrhetorically skillful while arguing for a position the analyst personally rejects.\n\n**Bridge text [P30]:** \"Evaluating rhetorical effectiveness is like judging a chess move's quality\nregardless of which side you're rooting for — a brilliant move is brilliant whether you want that\nplayer to win or not. Rhetorical analysis asks 'does this strategy work well for its intended\naudience?' — a completely separate question from 'do I personally agree with the conclusion?'\"\n\n**Replacement text [P31]:** \"Before writing an evaluation, ask two SEPARATE questions: (1) Do I\npersonally agree with this argument's position? (2) Regardless of my answer to (1), is the\nrhetorical strategy well-matched to the stated audience and likely to persuade them? Answer both,\nand never let (1) silently substitute for (2).\"\n\n**Discrimination pairs [P33]:**\n1. \"This argument fails because I disagree with school uniforms.\" (agreement substituted for\n   rhetorical evaluation) vs. \"Regardless of my own view on uniforms, this argument's heavy reliance\n   on emotional appeals without any supporting data is unlikely to persuade the school board audience\n   it's aimed at, who has stated a preference for data-driven proposals.\" (genuine rhetorical\n   evaluation, independent of personal agreement).\n2. A student rating an argument they agree with as automatically \"effective\" without examining its\n   actual strategy (agreement-as-proxy) vs. a student rating an argument they agree with as\n   rhetorically WEAK because it fails to address its stated audience's specific concerns (genuine,\n   agreement-independent evaluation).\n\n**s6_path:** If the student continues to substitute agreement for evaluation after the bridge, have\nthem analyze a text arguing for a position they personally hold, deliberately looking for\nrhetorical WEAKNESSES in it — if they can identify weaknesses in an argument they agree with, this\nproves they can separate the two judgments.",
+      "localKey": "MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT",
+      "language": "en",
+      "refs": [
+        "MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 43,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Cataloguing Rhetorical Choices (the Ingredient List Step)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Cataloguing Rhetorical Choices (the Ingredient List Step)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 155,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Synthesizing How Choices Work Together (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Synthesizing How Choices Work Together (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 161,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Separating Personal Agreement from Rhetorical Evaluation (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Separating Personal Agreement from Rhetorical Evaluation (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 167,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Evaluating Audience Fit",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Evaluating Audience Fit\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 173,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Full Rhetorical Analysis",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Rhetorical Analysis\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND\",\"MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND",
+        "MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 180,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Cataloguing Choices**\nGiven a short persuasive passage, catalogue the specific appeals and devices present.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Synthesizing Combined Effect**\nGiven a catalogue of choices from a passage, write a synthesis explaining how at least two of them\nwork together to build a cumulative effect, not just listing them.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Separating Agreement from Evaluation**\nGiven a text arguing for a position the student is likely to personally hold, identify at least one\ngenuine rhetorical weakness in its strategy, demonstrating the two judgments are separable.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Audience-Fit Evaluation**\nGiven a text and its stated audience, evaluate whether the specific rhetorical choices are\nwell-matched to that audience's likely values and concerns.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Rhetorical Analysis**\nGiven a new complete persuasive text with a stated audience, produce a full analysis: catalogue the\nchoices, synthesize how they work together, and evaluate effectiveness for the specific audience,\nindependent of personal agreement.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Adaptive Flags",
+      "content": "- If the student can catalogue and synthesize (MP-1, MP-2) but struggles specifically with texts\n  whose position they hold strongly (MP-3, MP-5), this is expected and not a conceptual failure —\n  provide additional practice specifically with emotionally-charged topics the student cares about,\n  since the skill is hardest to apply exactly where it matters most.\n- If the student produces technically separated evaluations but their \"rhetorical weakness\" claims in\n  MP-3 are themselves weak or contrived (grasping for a flaw just to prove separation), clarify that\n  genuine critical distance sometimes means concluding a text they agree with IS rhetorically strong\n  — the goal is honest evaluation, not forced criticism.\n- If the student excels at analyzing texts on emotionally neutral topics but their skills don't\n  transfer to charged topics, treat this as evidence the separation skill (TA-3) needs more\n  scaffolded practice specifically under affective load, not that the underlying analytical skill is\n  absent.\n- Students moving quickly through cataloguing but producing thin synthesis paragraphs may benefit\n  from the arrow-drawing physical step (TA-2) as a mandatory intermediate artifact, not an optional\n  aid, until the synthesis habit is automatic.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 263,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "eng.composition.rhetorical-analysis/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.rhetorical-analysis",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: rhetorical devices check] --> [PD-2: critical reading check]\n   |                                                       |\n   | (gap found)                                           | (pass)\n   v                                                        v\n[Route to prerequisite concept]                  [Component 3: Recipe/Chess-Judge Anchor]\n                                                             |\n                                                             v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                             |\n                                                             v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                             |\n                                                             v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                             |\n                                        (pass >= 0.70) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                        [Unlock: comparative-essay-writing,  [S6 remediation: arrow-drawing /\n                         research-paper-writing]               two-questions drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1/TA-2 (inventory-only responses) and MC-B during TA-3 (agreement substituting for evaluation) —\nwatch each TA for its matching trigger. Because MC-B can surface strong personal reactions (a student\nmay resist evaluating a text they feel strongly about), maintain a neutral, curious tone rather than\nchallenging the student's personal position directly — the target is the SEPARATION of judgments, not\na change in the student's opinion. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates basic cataloguing (TA-1) needs review; MP-2 failure alone indicates residual MC-A; MP-3\nfailure alone indicates residual MC-B; MP-4 failure alone indicates the audience-fit extension (TA-4)\nspecifically; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one\nmore fully-guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md",
+        "startLine": 226,
+        "endLine": 263
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

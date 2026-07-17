@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.figurative-language-in-composition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.figurative-language-in-composition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d3ef32340515e7deaf9ed217755929f8b1cb374ae1a1611b0d1180d976aa0af3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md": "sha256:55bff1c89530e336202f57b9e53508ec66975b6ad95b3c87607d8f8ce5b4cf18"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.figurative-language-in-composition",
+    "name": "Figurative Language in Composition",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.rhetorical-devices"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.figurative-language-in-composition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.figurative-language-in-composition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md": "sha256:55bff1c89530e336202f57b9e53508ec66975b6ad95b3c87607d8f8ce5b4cf18"
+      },
+      "contentHash": "sha256:15bebadfe319be3a3171e948956b0687b811db79629ae0531541a6e10dfc4305",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.figurative-language-in-composition.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md#TA-1 (addresses MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.figurative-language-in-composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.figurative-language-in-composition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.figurative-language-in-composition.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.figurative-language-in-composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.figurative-language-in-composition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.figurative-language-in-composition.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md#TA-3 (addresses MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.figurative-language-in-composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.figurative-language-in-composition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.figurative-language-in-composition.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md#TA-4 (addresses MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY, MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.figurative-language-in-composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.figurative-language-in-composition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Figurative Language in Composition — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing Figurative Language in Expository/Persuasive Contexts (MC-A)\n\nUsing the inflation/leaking-tire example, teach students to recognize purposeful figurative language\nin non-fiction writing. Student practice: given three expository/persuasive excerpts (one using\nmetaphor purposefully, two purely literal), identify the figurative one and explain what it\nclarifies.\n\n### TA-2 — Evaluating Whether a Comparison Actually Maps\n\nTeach the mapping-test: does the structure of the comparison genuinely correspond to the structure of\nthe real concept? Student practice: given four candidate metaphors for one concept, evaluate which\nones have a genuine structural fit and which don't (e.g., \"explosion\" for a gradual process is a\npoor fit).\n\n### TA-3 — Developing One Consistent Comparison (MC-B)\n\nUsing the directions-to-one-house anchor, teach students to develop a single metaphor consistently\nacross several sentences rather than mixing multiple comparisons. Student practice: given a\nparagraph with three mixed metaphors, revise it to develop just one consistently.\n\n### TA-4 — Composing Original Figurative Language for an Abstract Idea\n\nGive the student an abstract concept from another subject area (a science or social studies concept)\nand have them compose an original, well-mapped, consistently-developed metaphor or extended image to\nexplain it within an expository paragraph.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 147,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/misconception/MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY",
+      "kind": "misconception",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "**Trigger signal:** Student believes metaphor, simile, and imagery are exclusively creative-writing",
+      "content": "### MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY\n\n**Trigger signal:** Student believes metaphor, simile, and imagery are exclusively creative-writing\ntools and have no place in expository or persuasive composition, producing flat, purely literal\nwriting even where a figurative comparison would clarify an abstract idea — or conversely, avoiding\nfigurative language in an essay because they believe it makes the writing seem \"less serious\" or\n\"less academic.\"\n\n**Conflict evidence [P28]:** Show the student two explanations of the same abstract concept\n(inflation) — one purely literal and technical, one that uses a controlled metaphor (\"Inflation is\nlike a slow leak in a tire: the car still runs, but every mile requires the engine to work slightly\nharder to compensate for the air you're steadily losing.\") in an otherwise expository passage from a\nrespected publication. Ask: \"Does the metaphor make this feel like fiction, or does it make a\ntechnical idea easier to understand while staying clearly expository?\"\n\n**Bridge text [P30]:** \"Figurative language isn't a costume that only belongs at a fiction party —\nit's a tool used across serious, respected expository and persuasive writing (economics columns,\nscientific explainers, political speeches) specifically because abstract ideas are hard to grasp in\npurely literal terms. A well-chosen metaphor doesn't make writing less serious — it makes a hard idea\neasier to hold onto.\"\n\n**Replacement text [P31]:** \"When explaining an abstract idea (a concept, a process, a relationship\nbetween things), consider whether a metaphor or vivid image would make it more concrete and\nmemorable for your reader — this is a legitimate expository and persuasive tool, not a fictional\nindulgence, as long as it clarifies rather than distracts.\"\n\n**Discrimination pairs [P33]:**\n1. A purely literal, technical explanation of a concept with no figurative language (valid, but\n   potentially harder to grasp) vs. the same explanation with one purposeful metaphor added,\n   remaining fully expository in tone and structure (figurative language used appropriately in a\n   non-fiction context).\n2. A student avoiding all figurative language in a science report because \"metaphors are for stories\"\n   (the misconception) vs. a student using a controlled analogy to explain a scientific process,\n   citing it as a legitimate explanatory tool used in published scientific writing (correct\n   understanding).\n\n**s6_path:** If the student continues avoiding figurative language in expository contexts after the\nbridge, show them three published expository or persuasive texts (a science article, an editorial, a\nspeech) each containing at least one deliberate metaphor, and have them identify the specific\nabstract idea each metaphor is clarifying.",
+      "localKey": "MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY",
+      "language": "en",
+      "refs": [
+        "MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/misconception/MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING",
+      "kind": "misconception",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "**Trigger signal:** Student adds figurative language indiscriminately, believing that more metaphors",
+      "content": "### MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING\n\n**Trigger signal:** Student adds figurative language indiscriminately, believing that more metaphors\nand vivid imagery automatically improve writing quality, without considering whether a given\ncomparison actually clarifies the abstract idea or is simply decorative, mixed, or confusing — e.g.,\npiling up multiple unrelated metaphors for the same idea in one paragraph, or using a comparison that\ndoesn't actually map onto the concept being explained.\n\n**Conflict evidence [P28]:** Show the student a paragraph explaining a concept with THREE different,\nunrelated metaphors crammed in (\"Inflation is a leaking tire, and also a runaway train, and also a\nhungry beast\") alongside a paragraph using ONE well-developed, consistent metaphor throughout. Ask:\n\"Does having three different comparisons for the same idea in one paragraph make it clearer, or does\nswitching comparisons partway through actually make it harder to follow?\"\n\n**Bridge text [P30]:** \"Piling up multiple unrelated metaphors for one idea is like giving someone\nthree different sets of directions to the same house, each using a different landmark — instead of\nhelping them arrive, it leaves them lost switching between mental maps. One well-chosen, consistently\ndeveloped comparison usually clarifies far more than several competing ones crammed together.\"\n\n**Replacement text [P31]:** \"Before adding figurative language, ask: does this specific comparison\nactually map clearly onto the idea I'm explaining, and am I sticking with ONE developed comparison\nrather than switching between several? If a comparison doesn't fit cleanly or if you're mixing\nmetaphors, cut or revise rather than adding more.\"\n\n**Discrimination pairs [P33]:**\n1. A paragraph mixing three unrelated metaphors for the same concept (confusing, decorative\n   overload) vs. a paragraph developing one metaphor consistently across several sentences\n   (clarifying, purposeful).\n2. A metaphor that doesn't actually map onto the concept's real structure (e.g., calling a gradual\n   process \"an explosion,\" which implies suddenness the concept doesn't have — a poor fit) vs. a\n   metaphor whose structure genuinely matches the concept (a slow leak for a gradual, continuous\n   process — a good fit).\n\n**s6_path:** If the student continues to add indiscriminate or mixed figurative language after the\nbridge, have them write out, in plain literal terms, exactly what their metaphor is supposed to map\nonto (which part of the metaphor represents which part of the real concept) — if the mapping breaks\ndown or contradicts itself, the metaphor needs to be revised or cut.",
+      "localKey": "MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 44,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Recognizing Figurative Language in Expository/Persuasive Contexts (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing Figurative Language in Expository/Persuasive Contexts (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 151,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Evaluating Whether a Comparison Actually Maps",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Evaluating Whether a Comparison Actually Maps\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 158,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Developing One Consistent Comparison (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Developing One Consistent Comparison (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 165,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Composing Original Figurative Language for an Abstract Idea",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Composing Original Figurative Language for an Abstract Idea\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY\",\"MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY",
+        "MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 171,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Recognizing Purposeful Figurative Language**\nGiven three expository/persuasive excerpts, identify which uses figurative language purposefully and\nexplain what abstract idea it clarifies.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Evaluating Structural Fit**\nGiven four candidate metaphors for one concept, evaluate which have genuine structural fit and which\ndon't, explaining the mismatch for the poor fits.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Mixed Metaphors**\nGiven a paragraph mixing multiple unrelated comparisons for the same idea, identify the mixing\nproblem and select which single comparison should be developed instead.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Revising for Consistency**\nGiven a paragraph with a mixed-metaphor problem, revise it to develop one well-mapped comparison\nconsistently throughout.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original Composition**\nGiven a new abstract concept, compose an original expository paragraph using one well-mapped,\nconsistently-developed metaphor or extended image.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Adaptive Flags",
+      "content": "- If the student can evaluate and revise others' figurative language (MP-1 through MP-4) but freezes\n  or produces flat, purely literal writing when composing original figurative language (MP-5), treat\n  this as a production-confidence gap — provide a partially-scaffolded composition task (given\n  concept plus a starting comparison to develop) before fully independent composition.\n- If the student's original metaphors are structurally clever but emotionally or tonally mismatched\n  to a persuasive purpose (e.g., a whimsical metaphor in a serious policy argument), connect this to\n  the Audience and Purpose concept — figurative language must fit not just the concept's structure\n  but the piece's overall tone and audience.\n- If the student over-corrects after learning MC-B and becomes reluctant to use ANY figurative\n  language for fear of \"mixing,\" clarify that the goal is one well-developed comparison, not zero\n  comparisons — the lesson is consistency, not avoidance.\n- Students who excel at generating original metaphors quickly but skip the structural mapping-check\n  step (TA-2) should be required to explicitly write out the point-by-point mapping before finalizing\n  any original figurative language, until the habit becomes automatic.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 254,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "eng.composition.figurative-language-in-composition/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.figurative-language-in-composition",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: rhetorical devices check] --> [PD-2: metaphor recognition check]\n   |                                                       |\n   | (gap found)                                           | (pass)\n   v                                                        v\n[Route to eng.composition.rhetorical-devices]     [Component 3: Directions-to-One-House Anchor]\n                                                             |\n                                                             v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                             |\n                                                             v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                             |\n                                                             v\n                                         [MP-1 through MP-5 mastery probe set]\n                                                             |\n                                         (pass >= 0.75) -----+----- (fail)\n                                                |                      |\n                                                v                      v\n                                  [Unlock: style-voice-and-tone]  [S6 remediation: published-\n                                                                    example / mapping-test drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a devices gap routes back to that\nprerequisite, a metaphor-recognition gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-1 (initial hesitation to use figurative language at\nall in expository contexts) and MC-B during TA-3 (once given permission, over-adding competing\ncomparisons) — these often occur in sequence as a student moves from under-using to over-using the\ntool. If either fires, branch to the relevant s6_path drill before resuming. At the mastery probe\nstage (S9), route by failure: MP-1 failure indicates residual MC-A; MP-2/MP-3 failures indicate\nresidual MC-B (mapping evaluation and mixing detection respectively); MP-4 failure alone (with MP-2/\nMP-3 passing) indicates a revision-mechanics gap distinct from the recognition skill; MP-5 failure\nwith MP-1 through MP-4 passing indicates a production/transfer gap — provide one more guided\ncomposition example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md",
+        "startLine": 217,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
