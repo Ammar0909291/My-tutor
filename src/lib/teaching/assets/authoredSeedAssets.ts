@@ -3740,6 +3740,253 @@ const PRES_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.temperature ──────────────────────────────────────────────────
+const TEMP = 'phys.therm.temperature'
+const TEMP_SRC = 'docs/curriculum/blueprints/phys.therm.temperature.md'
+
+const TEMP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TEMP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Temperature and heat are different quantities — here is the ' +
+      'puzzle that splits them. Take 1 kg of iron at 80\u00b0C and 10 kg ' +
+      'of water at 20\u00b0C. Which is hotter? The iron. Which holds more ' +
+      'thermal energy? The water, by far — it has ten times the mass. ' +
+      'Yet when they touch, heat flows FROM the iron TO the water: ' +
+      'from hot to cold, regardless of which side owns more energy. ' +
+      'Temperature is like pressure — it sets the DIRECTION of flow; ' +
+      'heat is the fluid that flows. A match flame is hotter than a ' +
+      'warm bath but stores far less energy. Temperature is intensive ' +
+      '(independent of amount); thermal energy is extensive (scales ' +
+      'with mass). Same temperature = zero net flow — that is ' +
+      'literally the definition.',
+    targetedMisconceptions: [`${TEMP}:MC-TEMPERATURE-IS-HEAT`],
+    source: `${TEMP_SRC} — MC-TEMPERATURE-IS-HEAT (P28 iron/water block puzzle + s6 pressure/fluid analogy)`,
+  },
+  {
+    conceptId: TEMP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Is 20\u00b0C \u201ctwice as hot\u201d as 10\u00b0C? Feed it to the gas law and ' +
+      'watch it fail: pressure should double if temperature doubles — ' +
+      'but convert to Kelvin (283 K \u2192 293 K) and the real change is ' +
+      '3.5%, nowhere near doubling. Celsius\u2019s zero is a convention ' +
+      '(water\u2019s ice point), not a physical zero — the true floor, ' +
+      'absolute zero, sits at \u2212273.15\u00b0C. Ratios measured from an ' +
+      'arbitrary zero mean nothing. The working rule: DIFFERENCES are ' +
+      'fine in Celsius (the offset cancels — thermal expansion \u0394T = ' +
+      '30\u00b0C is legitimate); RATIOS and multiplicative formulas (gas ' +
+      'laws, Carnot efficiency, KE \u221d T) demand Kelvin. Example of the ' +
+      'stakes: a \u201c200\u00b0C hot / 100\u00b0C cold\u201d engine looks 50% ' +
+      'efficient in Celsius; in Kelvin it is 1 \u2212 373/473 = 21%.',
+    targetedMisconceptions: [`${TEMP}:MC-CELSIUS-RATIO-VALID`],
+    source: `${TEMP_SRC} — MC-CELSIUS-RATIO-VALID (P28 gas-law check + P33 Carnot/expansion discrimination + s6 differences-vs-ratios rule)`,
+  },
+]
+
+const TEMP_PROBES: SeedProbe[] = [
+  {
+    conceptId: TEMP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 200\u00b0C steel nail is dropped into a 20\u00b0C swimming pool. Which way does heat flow?',
+    choices: [
+      { text: 'From nail to pool — heat flows from higher to lower temperature, even though the pool holds far more thermal energy', isCorrect: true },
+      { text: 'From pool to nail — the pool has much more heat to give', isCorrect: false, misconceptionId: `${TEMP}:MC-TEMPERATURE-IS-HEAT` },
+      { text: 'No flow — they balance because the pool\u2019s size compensates its lower temperature', isCorrect: false, misconceptionId: `${TEMP}:MC-TEMPERATURE-IS-HEAT` },
+    ],
+    correctValue: 'nail to pool',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TEMP}:MC-TEMPERATURE-IS-HEAT`],
+    source: `${TEMP_SRC} — P33 nail/pool discrimination pair as probe`,
+  },
+  {
+    conceptId: TEMP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gas is heated from 10\u00b0C to 20\u00b0C at constant volume. Its absolute pressure roughly:',
+    choices: [
+      { text: 'Rises about 3.5% — gas laws use Kelvin: 293/283 \u2248 1.035', isCorrect: true },
+      { text: 'Doubles — the temperature went from 10 to 20, twice as hot', isCorrect: false, misconceptionId: `${TEMP}:MC-CELSIUS-RATIO-VALID` },
+    ],
+    correctValue: '\u22483.5% rise',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TEMP}:MC-CELSIUS-RATIO-VALID`],
+    source: `${TEMP_SRC} — P28 gas-law conflict evidence as probe`,
+  },
+]
+
+// ─── phys.opt.refraction ─────────────────────────────────────────────────────
+const REFR = 'phys.opt.refraction'
+const REFR_SRC = 'docs/curriculum/blueprints/phys.opt.refraction.md'
+
+const REFR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REFR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Why does light bend toward the normal entering glass? March a ' +
+      'column of soldiers at an angle into a muddy field. The soldiers ' +
+      'who reach the mud first slow down while their row-mates are ' +
+      'still striding on dry ground — so the whole column pivots ' +
+      'toward the mud boundary\u2019s normal. Light does exactly this: the ' +
+      'edge of the wavefront that enters the denser (slower) medium ' +
+      'first lags, and the front swings toward the normal. Snell\u2019s ' +
+      'law just quantifies the pivot: with air\u2192glass at 45\u00b0, ' +
+      'sin\u03b8\u2082 = (1/1.5)\u00d7sin45\u00b0 gives \u03b8\u2082 = 28\u00b0 — closer to the ' +
+      'normal. Reverse the trip (glass\u2192air, soldiers leaving the mud) ' +
+      'and the front speeds up and bends AWAY from the normal. Into ' +
+      'denser \u2192 toward; into less dense \u2192 away.',
+    targetedMisconceptions: [`${REFR}:MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL`],
+    source: `${REFR_SRC} — MC-2 (P30 marching-soldiers bridge + P28 Snell 45\u00b0\u219228\u00b0 numeric check)`,
+  },
+  {
+    conceptId: REFR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'What actually changes when light crosses into water — speed, ' +
+      'wavelength, or frequency? Watch the boundary: every crest that ' +
+      'arrives from the air side produces exactly one crest on the ' +
+      'water side. If frequency changed, crests would pile up or run ' +
+      'out at the interface — they don\u2019t, ever. Frequency is fixed by ' +
+      'the SOURCE (the oscillating emitter) and no passive boundary ' +
+      'can change it. What changes is the speed (v = c/n) and, since ' +
+      'the same number of crests now travel slower, they bunch up: ' +
+      '\u03bb = \u03bb\u2080/n. Concretely: 600 nm orange light (f = 5\u00d710\u00b9\u2074 Hz) ' +
+      'enters water and keeps f = 5\u00d710\u00b9\u2074 Hz while \u03bb compresses to ' +
+      '451 nm. Even dispersion — violet bending more than red — is n ' +
+      'depending on frequency, never frequency changing.',
+    targetedMisconceptions: [`${REFR}:MC-REFRACTION-CHANGES-FREQUENCY`],
+    source: `${REFR_SRC} — MC-1 (P28 crest-conservation argument + 600\u2192451 nm measurement + P31 replacement)`,
+  },
+]
+
+const REFR_PROBES: SeedProbe[] = [
+  {
+    conceptId: REFR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Light passes from air into water. Which quantity is UNCHANGED?',
+    choices: [
+      { text: 'Frequency — it is set by the source; only speed and wavelength change (v = c/n, \u03bb = \u03bb\u2080/n)', isCorrect: true },
+      { text: 'Wavelength — colour cannot change, so \u03bb stays fixed', isCorrect: false },
+      { text: 'Nothing — speed, wavelength, and frequency all change in the new medium', isCorrect: false, misconceptionId: `${REFR}:MC-REFRACTION-CHANGES-FREQUENCY` },
+    ],
+    correctValue: 'frequency',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${REFR}:MC-REFRACTION-CHANGES-FREQUENCY`],
+    source: `${REFR_SRC} — MC-1 what-changes-at-boundary probe, distractor-mapped`,
+  },
+  {
+    conceptId: REFR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ray of light passes from air into glass at 45\u00b0 to the normal. The refracted ray:',
+    choices: [
+      { text: 'Bends TOWARD the normal (\u03b8\u2082 \u2248 28\u00b0) — entering a denser, slower medium turns the wavefront toward the normal', isCorrect: true },
+      { text: 'Bends AWAY from the normal — denser material pushes the light away', isCorrect: false, misconceptionId: `${REFR}:MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL` },
+    ],
+    correctValue: 'toward the normal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REFR}:MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL`],
+    source: `${REFR_SRC} — MC-2 bending-direction probe with Snell numbers, distractor-mapped`,
+  },
+]
+
+// ─── math.geom.triangle ──────────────────────────────────────────────────────
+const TRI = 'math.geom.triangle'
+const TRI_SRC = 'docs/curriculum/blueprints/math.geom.triangle.md'
+
+const TRI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TRI,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Every triangle\u2019s three angles add to exactly 180\u00b0 — tiny ' +
+      'triangle or billboard-sized, skinny or fat, always 180\u00b0. Prove ' +
+      'it to your own hands: cut any paper triangle, tear off the ' +
+      'three corners, and lay them point-to-point along a ruler\u2019s ' +
+      'edge — together they form a perfect straight line, and a ' +
+      'straight line is 180\u00b0. (360\u00b0 belongs to quadrilaterals and ' +
+      'full turns — a triangle is half of that.) This single fact is ' +
+      'the workhorse of triangle problems: given any two angles, the ' +
+      'third is forced — 180\u00b0 minus the two you know. It is also your ' +
+      'error detector: if your \u201canswers\u201d for a triangle\u2019s angles ' +
+      'total anything but 180\u00b0, something upstream is wrong.',
+    targetedMisconceptions: [`${TRI}:MC-1`],
+    source: `${TRI_SRC} — MC-1 ANGLE-SUM-NOT-180 (torn-corners concrete proof; 360\u00b0 contrast)`,
+  },
+  {
+    conceptId: TRI,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Can a triangle be BOTH right-angled AND isosceles? Draw it: ' +
+      'make a 90\u00b0 corner with two equal arms and join the ends — a ' +
+      '90-45-45 triangle. Two equal sides: isosceles \u2713. One right ' +
+      'angle: right-angled \u2713. Both at once. The trap is treating the ' +
+      'triangle labels as one exclusive menu. They are really two ' +
+      'independent questions: (1) By SIDES — scalene (all different), ' +
+      'isosceles (two equal), equilateral (all three equal). (2) By ' +
+      'ANGLES — acute (all under 90\u00b0), right (one exactly 90\u00b0), ' +
+      'obtuse (one over 90\u00b0). Every triangle answers BOTH questions: ' +
+      'a right scalene, an obtuse isosceles, an acute equilateral. ' +
+      'Classify twice, then combine.',
+    targetedMisconceptions: [`${TRI}:MC-2`],
+    source: `${TRI_SRC} — MC-2 TRIANGLE-TYPE-IS-EXCLUSIVE (B02 repair: 90-45-45 construction + two-axis classification)`,
+  },
+]
+
+const TRI_PROBES: SeedProbe[] = [
+  {
+    conceptId: TRI,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Two angles of a triangle are 65\u00b0 and 45\u00b0. What is the third angle?',
+    choices: [
+      { text: '70\u00b0 — the three angles sum to 180\u00b0: 180 \u2212 65 \u2212 45', isCorrect: true },
+      { text: '250\u00b0 — the angles sum to 360\u00b0: 360 \u2212 65 \u2212 45', isCorrect: false, misconceptionId: `${TRI}:MC-1` },
+      { text: 'It depends on the size of the triangle', isCorrect: false, misconceptionId: `${TRI}:MC-1` },
+    ],
+    correctValue: '70\u00b0',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${TRI}:MC-1`],
+    source: `${TRI_SRC} — MC-1 trigger item (two angles given), distractor-mapped`,
+  },
+  {
+    conceptId: TRI,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A triangle has angles 90\u00b0, 45\u00b0, 45\u00b0 and two equal sides. How should it be classified?',
+    choices: [
+      { text: 'Both right-angled AND isosceles — side-type and angle-type are independent classifications', isCorrect: true },
+      { text: 'That triangle is impossible — a triangle is either right-angled or isosceles, not both', isCorrect: false, misconceptionId: `${TRI}:MC-2` },
+    ],
+    correctValue: 'right isosceles',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TRI}:MC-2`],
+    source: `${TRI_SRC} — MC-2 trigger item (right isosceles), distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -3784,6 +4031,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...NOUN_EXPLANATIONS,
   ...ART_EXPLANATIONS,
   ...PRES_EXPLANATIONS,
+  ...TEMP_EXPLANATIONS,
+  ...REFR_EXPLANATIONS,
+  ...TRI_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -3828,4 +4078,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...NOUN_PROBES,
   ...ART_PROBES,
   ...PRES_PROBES,
+  ...TEMP_PROBES,
+  ...REFR_PROBES,
+  ...TRI_PROBES,
 ]
