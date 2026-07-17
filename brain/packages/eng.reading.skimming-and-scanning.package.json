@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.skimming-and-scanning-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.skimming-and-scanning",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:404c7d70c9007e35a00f4c1faab5c196b6946373ea36d8075d955ac81c52bfe5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md": "sha256:ae55ecf280e6cfd5f0c01ede5644dfee2d6130c6ca86ebd202ee257086e62e5a"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.reading.skimming-and-scanning",
+    "name": "Skimming and Scanning",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.reading.reading-fluency"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.skimming-and-scanning-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.skimming-and-scanning (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md": "sha256:ae55ecf280e6cfd5f0c01ede5644dfee2d6130c6ca86ebd202ee257086e62e5a"
+      },
+      "contentHash": "sha256:b913391fa8523c86a30bbabc75ed84757d9e4e49e7d7d93ca51072cfe3d6e9c7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.skimming-and-scanning.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md#TA-1 (addresses MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.skimming-and-scanning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.skimming-and-scanning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.skimming-and-scanning.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.skimming-and-scanning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.skimming-and-scanning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.skimming-and-scanning.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.skimming-and-scanning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.skimming-and-scanning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.skimming-and-scanning.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md#TA-4 (addresses MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING, MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.skimming-and-scanning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.skimming-and-scanning\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.skimming-and-scanning/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Skimming and Scanning — Conceptual Development Sequence",
+      "content": "### TA-1 — Choosing Skim vs. Scan for the Task (MC-A)\n\nUsing the telescope-vs-magnifying-glass anchor, teach matching the technique to the purpose. Student\npractice: given four reading tasks, state whether each calls for skimming or scanning.\n\n### TA-2 — Executing a Skim (Structural Sampling)\n\nTeach the mechanics of skimming: reading headings, topic sentences, first and last sentences of\nparagraphs, without reading every word. Student practice: given a passage, skim it and state its\ngeneral idea using only structural cues.\n\n### TA-3 — Executing a Scan (Targeted Search)\n\nTeach the mechanics of scanning: searching for a specific word, number, or name while deliberately\nignoring surrounding text. Student practice: given a passage and a specific fact to locate, scan for\nit without reading every word.\n\n### TA-4 — Recognizing When Careful Reading Is Required (MC-B)\n\nUsing the building-outline anchor, teach identifying tasks that require full comprehension rather\nthan skim/scan. Student practice: given a task requiring nuanced understanding, explain why skimming\nor scanning alone would be insufficient, then read the passage carefully to answer it.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 134,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/misconception/MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES",
+      "kind": "misconception",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "**Trigger signal:** Student uses skimming and scanning interchangeably, applying the wrong technique",
+      "content": "### MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES\n\n**Trigger signal:** Student uses skimming and scanning interchangeably, applying the wrong technique\nfor the task at hand — for example, scanning (hunting for one specific word or number) when the task\nactually requires understanding the text's overall gist (skimming), or skimming broadly for general\nsense when the task requires locating one specific fact (scanning) — failing to recognize these are\ntwo distinct techniques suited to two distinct purposes.\n\n**Conflict evidence [P28]:** Give the student a task: \"What is this article generally about?\" and a\ntask: \"What year did this event happen?\" using the same article. Ask: \"For the first question, do\nyou need to find one specific word, or get a general sense of the whole piece? For the second\nquestion, do you need the general sense, or one specific piece of information?\"\n\n**Bridge text [P30]:** \"Treating skimming and scanning as the same technique is like using a\ntelescope and a magnifying glass interchangeably — a telescope helps you see the big picture from far\naway (skimming for general idea), while a magnifying glass helps you zoom in on one tiny specific\ndetail (scanning for a specific fact). Using the wrong tool for the task wastes time and gives the\nwrong kind of result.\"\n\n**Replacement text [P31]:** \"Before rapidly reading a text, identify your actual purpose: do you\nneed the text's general idea (skim — read headings, topic sentences, first/last lines), or do you\nneed one specific piece of information (scan — search only for that specific word, number, or name,\nignoring everything else)?\"\n\n**Discrimination pairs [P33]:**\n1. \"What is this article generally about?\" (requires skimming — general idea) vs. \"What year did\n   this event happen?\" (requires scanning — one specific fact).\n2. A student who scans word-by-word for a general-idea question, missing the overall point\n   (misconception — wrong technique for the task) vs. a student who correctly skims headings and\n   topic sentences for a general-idea question (correct technique match).\n\n**s6_path:** If the student continues to confuse the two techniques after the bridge, give them four\nreading tasks, alternating between general-idea and specific-fact purposes, and have them state which\ntechnique (skim or scan) fits each task before beginning to read.",
+      "localKey": "MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES",
+      "language": "en",
+      "refs": [
+        "MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/misconception/MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING",
+      "kind": "misconception",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "**Trigger signal:** Student treats a quick skim or scan as sufficient for any reading task, including",
+      "content": "### MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING\n\n**Trigger signal:** Student treats a quick skim or scan as sufficient for any reading task, including\ntasks that genuinely require full, careful comprehension (understanding an author's nuanced argument,\nfollowing a complex multi-step explanation) — using surface-level rapid techniques where they don't\nbelong and missing understanding that only careful, complete reading would provide.\n\n**Conflict evidence [P28]:** Give the student a task: \"Explain the three reasons the author gives for\ntheir position, and how they relate to each other.\" Ask: \"If you only skim the headings and topic\nsentences, will you actually understand all three reasons and how they connect, or will you need to\nread the whole passage carefully?\"\n\n**Bridge text [P30]:** \"Assuming a skim or scan gives the same understanding as careful reading is\nlike assuming glancing at a building's outline from across the street tells you everything about its\ninterior layout — you get a rough shape, not the actual detail. Skimming and scanning are useful for\nlocating or previewing, but genuine comprehension of nuanced or complex content requires actually\nreading it carefully.\"\n\n**Replacement text [P31]:** \"Before deciding to skim or scan, ask: does this task need me to\ngenuinely understand nuance, connections, or complex reasoning? If so, skimming or scanning is not\nenough — switch to full, careful reading. Save skimming and scanning for previewing or locating\nspecific facts, not for deep comprehension tasks.\"\n\n**Discrimination pairs [P33]:**\n1. \"What is this article generally about?\" (skimming is genuinely sufficient) vs. \"Explain the three\n   reasons the author gives and how they connect.\" (requires full careful reading; skimming alone\n   would miss the connections).\n2. A student who skims a complex argument and then answers a nuanced comprehension question\n   incorrectly, missing the actual reasoning (misconception — used the wrong-depth technique) vs. a\n   student who recognizes the task requires careful reading and switches technique accordingly\n   (correct judgment).\n\n**s6_path:** If the student continues to rely on skim/scan for deep-comprehension tasks after the\nbridge, give them a task explicitly requiring nuanced understanding and have them first predict, from\na skim alone, what the answer might be — then read carefully and compare, confirming what the skim\nmissed.",
+      "localKey": "MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING",
+      "language": "en",
+      "refs": [
+        "MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 38,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Choosing Skim vs. Scan for the Task (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Choosing Skim vs. Scan for the Task (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 138,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Executing a Skim (Structural Sampling)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Executing a Skim (Structural Sampling)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 143,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Executing a Scan (Targeted Search)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Executing a Scan (Targeted Search)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 149,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Recognizing When Careful Reading Is Required (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Recognizing When Careful Reading Is Required (MC-B)\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES\",\"MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING",
+        "MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 155,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Matching Technique to Task Purpose**\nGiven four reading tasks, state whether each calls for skimming, scanning, or full careful reading.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 176,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Executing a Skim**\nGiven a passage, skim it and state its general idea using only structural cues.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 176,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Executing a Scan**\nGiven a passage and a specific fact to locate, scan for it without reading every word.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 176,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Recognizing a Task That Requires Careful Reading**\nGiven a nuanced comprehension task, explain why skimming or scanning alone would be insufficient.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 176,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Application Across Mixed Tasks**\nGiven a new passage with tasks of varying depth, select and execute the correct technique for each.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 176,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly matches technique to task in isolation (MP-1) but defaults to scanning\n  for every task type on a new mixed set (MP-5), provide a mandatory \"what is my actual purpose\n  here?\" question before beginning any rapid-reading task.\n- If the student's skim/scan mechanics are strong (MP-2, MP-3) but they still attempt to answer\n  nuanced questions from a skim alone (MP-4), require an explicit \"does this need connections or\n  reasoning, not just facts or gist?\" check before finalizing an answer.\n- If the student struggles to execute a skim without reading every word, provide a structural\n  checklist (title, headings, first sentence of each paragraph) as a scaffolding guide.\n- Students with strong performance in `eng.reading.reading-fluency`'s automatic word recognition\n  should transfer readily to rapid scanning, since both rely on quick visual processing rather than\n  effortful decoding — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 229,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "eng.reading.skimming-and-scanning/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.skimming-and-scanning",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: reading fluency check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.reading.reading-fluency]  [Component 3: Telescope-vs-Magnifying-Glass /\n                                          Building-Outline Anchor]\n                                                    |\n                                                    v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                    |\n                                                    v\n                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                    |\n                                                    v\n                          [MP-1 through MP-5 mastery probe set]\n                                                    |\n                          (pass >= 0.75) -----+----- (fail)\n                                 |                      |\n                                 v                      v\n            [No further unlocks —  [S6 remediation: technique-matching drills /\n             terminal in current      careful-reading-recognition drills]\n             curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2/TA-3\n(technique confusion) and MC-B during TA-4 (over-applying rapid techniques) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2/MP-3\nfailures indicate residual MC-A; MP-4 failure indicates residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided mixed-task example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md",
+        "startLine": 193,
+        "endLine": 229
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

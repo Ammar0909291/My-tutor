@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.storytelling-orally-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.storytelling-orally",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5cb80a8d5eb50d3c2249d57720bdad6246fd2d820d3ba9a9f6cff4b8a4cfa027",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md": "sha256:bd0d89b7dd1ac365dcd7b658f4ff7d92523bc810566efc3bd748340d0cc97e6c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.speaking.storytelling-orally",
+    "name": "Oral Storytelling",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.speaking.conversation-skills"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.storytelling-orally-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.storytelling-orally (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md": "sha256:bd0d89b7dd1ac365dcd7b658f4ff7d92523bc810566efc3bd748340d0cc97e6c"
+      },
+      "contentHash": "sha256:356b8b69f47d2790061a361e7b1f88b3b48da05664547771d0562fba089fb96b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.storytelling-orally.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md#TA-1 (addresses MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.storytelling-orally"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.storytelling-orally\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.storytelling-orally.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.storytelling-orally"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.storytelling-orally\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.storytelling-orally.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md#TA-3 (addresses MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.storytelling-orally"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.storytelling-orally\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.storytelling-orally.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md#TA-4 (addresses MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER, MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.storytelling-orally"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.storytelling-orally\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.storytelling-orally/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Oral Storytelling — Conceptual Development Sequence",
+      "content": "### TA-1 — Selecting Key Events for a Story (MC-A)\n\nUsing the blueprint-tour-guide anchor, teach identifying which events matter most for a story's\nimpact. Student practice: given an exhaustive retelling, cut it down to the 2-3 most important\nmoments.\n\n### TA-2 — Sequencing Selected Events for Engagement\n\nExtend TA-1: teach ordering and pacing the selected key events (buildup, turning point, resolution)\nfor maximum engagement. Student practice: given three selected key events out of order, sequence them\nfor the strongest narrative effect.\n\n### TA-3 — Matching Vocal Expression to Story Content (MC-B)\n\nUsing the flat-song-lyrics anchor, teach matching pacing, tone, and emphasis to the story's emotional\nshape. Student practice: given a short story passage, mark where pacing should quicken, where a pause\nbelongs, and where emphasis should land.\n\n### TA-4 — Full Application: Telling a Complete Oral Story\n\nGive the student a new event or prompt to recount. They must select and sequence key events (TA-1/\nTA-2) and deliver the retelling with matched vocal expression (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 129,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/misconception/MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "**Trigger signal:** Student recounts a narrative by including every detail, in strict chronological",
+      "content": "### MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER\n\n**Trigger signal:** Student recounts a narrative by including every detail, in strict chronological\norder, with equal weight given to minor and major events alike, rather than selecting and emphasizing\nthe events that actually matter for audience engagement — producing a flat, exhaustive info-dump\nrather than a shaped story.\n\n**Conflict evidence [P28]:** Present two retellings of the same simple event (a student getting lost\non the way to school): one listing every single detail in order (what time they woke up, what they\nate, every street they walked down, minor observations) with no emphasis, and one selecting only the\nkey turning points (realizing they were lost, the moment of panic, how they found their way) with\nclear emphasis on those moments. Ask: \"Which retelling would hold a listener's attention? Does\nincluding every single detail make a story better?\"\n\n**Bridge text [P30]:** \"Including every detail in exact order is like a tour guide reading every line\nof a building's blueprint aloud instead of pointing out what's actually interesting to see — technically\ncomplete, but nobody stays engaged. A good oral story selects and emphasizes the events that matter,\nleaving out or compressing the parts that don't add to the story's impact.\"\n\n**Replacement text [P31]:** \"Don't try to include every detail in exact order. Select the events that\nactually matter for your story's impact — a turning point, a moment of tension, a surprise — and\nemphasize those, compressing or cutting minor details that don't add anything.\"\n\n**Discrimination pairs [P33]:**\n1. A retelling listing every minor detail in exact chronological order with no emphasis (an\n   info-dump, hard to follow or care about) vs. a retelling selecting and emphasizing only the key\n   turning points (engaging, shaped narrative).\n2. A student who treats every event as equally important in their retelling (misconception) vs. a\n   student who identifies which 2-3 events matter most and gives them more time and emphasis\n   (correct selective structuring).\n\n**s6_path:** If the student continues to recite every detail flatly after the bridge, have them take\ntheir own exhaustive retelling and cut it down to only the three most important moments, explaining\nwhy each one matters to the story.",
+      "localKey": "MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/misconception/MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "**Trigger signal:** Student treats tone, pacing, and vocal emphasis as a decorative extra separate",
+      "content": "### MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY\n\n**Trigger signal:** Student treats tone, pacing, and vocal emphasis as a decorative extra separate\nfrom the \"real\" content of a story (the words and events), delivering even exciting or tense events in\na flat, unvarying monotone, failing to recognize that vocal expression is integral to how a story is\nactually received by a listener.\n\n**Conflict evidence [P28]:** Present a description of an exciting chase scene told in a flat,\nunvarying monotone, next to the same content told with vocal pacing changes (a quickened pace during\nthe chase, a pause before the resolution, emphasis on the key moment). Ask: \"Do both versions contain\nthe same events? Does the flat version actually feel exciting to the listener, even though the\ncontent is identical?\"\n\n**Bridge text [P30]:** \"Treating vocal expression as separate from the real content is like assuming\na song's melody doesn't matter as long as the lyrics are correct — but a flat, monotone delivery of\nexciting lyrics simply doesn't land as a song, and a flat, monotone retelling of an exciting event\ndoesn't land as an exciting story. How you say something is part of what you're actually\ncommunicating, not an optional add-on.\"\n\n**Replacement text [P31]:** \"Don't treat your voice as separate from your story's content. Match\nyour pacing, tone, and emphasis to what's happening — speed up for tension, pause before a big\nmoment, raise or lower your voice for emphasis — because how you say the story is part of what\nactually makes it land.\"\n\n**Discrimination pairs [P33]:**\n1. An exciting chase scene told in a flat, unvarying monotone (identical content, but the delivery\n   fails to convey the excitement) vs. the same content told with quickened pacing during the chase\n   and a pause before the resolution (delivery reinforces and conveys the excitement).\n2. A student who assumes accurate word choice alone will make their story land (misconception) vs. a\n   student who deliberately matches vocal pacing and emphasis to the story's emotional shape (correct\n   integration of expression and content).\n\n**s6_path:** If the student continues to deliver stories in flat monotone after the bridge, have them\nretell the same short story twice — once flatly, once with deliberate pacing and emphasis changes —\nand describe, from a listener's perspective, how differently the two versions actually land.",
+      "localKey": "MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY",
+      "language": "en",
+      "refs": [
+        "MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 38,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Selecting Key Events for a Story (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Selecting Key Events for a Story (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 133,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Sequencing Selected Events for Engagement",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Sequencing Selected Events for Engagement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 139,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Matching Vocal Expression to Story Content (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Matching Vocal Expression to Story Content (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 145,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Full Application: Telling a Complete Oral Story",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Telling a Complete Oral Story\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER\",\"MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER",
+        "MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 151,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Selecting Key Events from an Exhaustive Account**\nGiven an exhaustive retelling, cut it down to the 2-3 most important moments.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 170,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Sequencing Selected Events for Engagement**\nGiven three selected key events out of order, sequence them for the strongest narrative effect.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 170,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Marking Vocal Expression Cues**\nGiven a short story passage, mark where pacing should quicken, where a pause belongs, and where\nemphasis should land.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 170,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Why Flat Delivery Undermines a Story**\nGiven a description of an exciting event told in monotone, explain specifically why the flat\ndelivery fails to convey the excitement despite accurate content.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 170,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Oral Storytelling Application**\nGiven a new event or prompt, select and sequence key events and deliver the story with matched\nvocal expression.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 170,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly trims events on provided exhaustive drafts (MP-1) but reverts to\n  exhaustive retelling with a new original prompt (MP-5), provide a mandatory \"pick your 3 moments\n  first, before telling anything\" planning step.\n- If the student's event selection is strong (MP-1, MP-2) but their delivery (MP-3) stays flat\n  regardless of content, require an explicit pacing/pause/emphasis annotation on their story draft\n  before speaking it aloud.\n- If the student struggles to identify which events matter at all, provide a guiding question set\n  (\"what surprised you? what changed? how did it end?\") as a scaffolding aid for event selection.\n- Students with strong performance in `eng.speaking.conversation-skills`'s turn-taking and responding\n  should transfer readily to audience-engagement awareness, since both require attending to how a\n  listener is receiving what's being said — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 225,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "eng.speaking.storytelling-orally/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.storytelling-orally",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: conversation skills check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.speaking.conversation-skills]  [Component 3: Blueprint-Tour-Guide /\n                                               Flat-Song-Lyrics Anchor]\n                                                        |\n                                                        v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                        |\n                                                        v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                        |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: event-trimming drills /\n                     terminal in current      flat-vs-expressive delivery contrast drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (exhaustive,\nundifferentiated retelling) and MC-B during TA-3 (flat delivery) — these are largely independent and\noften need separate, explicit correction. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2 failures indicate\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-story example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.storytelling-orally.md",
+        "startLine": 190,
+        "endLine": 225
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

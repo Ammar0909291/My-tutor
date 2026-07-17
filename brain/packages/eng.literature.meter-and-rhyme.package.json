@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.meter-and-rhyme-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.meter-and-rhyme",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c31833a839d3acb2c32410535b11cee69367cd00fb0c44cc68c9005a37e96e0b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md": "sha256:144690d4b0b10f3b3adb91903f1c67d9ad2c76caae15b4347faf2260d27b3814"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.meter-and-rhyme",
+    "name": "Meter and Rhyme",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.poetic-forms"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.meter-and-rhyme-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.meter-and-rhyme (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md": "sha256:144690d4b0b10f3b3adb91903f1c67d9ad2c76caae15b4347faf2260d27b3814"
+      },
+      "contentHash": "sha256:9bfa8fbad8c66a5dbabf29fa28f3547ed86d25f655b9fd96ae4be41596252c0a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.meter-and-rhyme.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.meter-and-rhyme"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.meter-and-rhyme\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.meter-and-rhyme.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md#TA-2 (addresses MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.meter-and-rhyme"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.meter-and-rhyme\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.meter-and-rhyme.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.meter-and-rhyme"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.meter-and-rhyme\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.meter-and-rhyme.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md#TA-4 (addresses MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER, MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.meter-and-rhyme"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.meter-and-rhyme\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.meter-and-rhyme/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Meter and Rhyme — Conceptual Development Sequence",
+      "content": "### TA-1 — Rhyme Scheme as an Independent System\n\nTeach identifying a poem's rhyme scheme (labeling end sounds AABB, ABAB, and so on) as a standalone\nanalysis. Student practice: given a poem, label its rhyme scheme.\n\n### TA-2 — Rhyme and Meter Are Independent Dimensions (MC-A)\n\nUsing the song-chorus-vs-steady-beat anchor, teach that identifying rhyme does not determine meter.\nStudent practice: given a poem with clear rhyme but irregular meter, confirm the rhyme scheme and\nseparately assess whether the meter is regular.\n\n### TA-3 — Scanning a Line's Dominant Stress Pattern\n\nTeach marking stressed and unstressed syllables across several lines to identify the dominant\nmetrical pattern. Student practice: given four lines from a poem, mark stress patterns and state the\ndominant pattern.\n\n### TA-4 — Recognizing Accepted Metrical Substitution (MC-B)\n\nUsing the syncopated-measure anchor, teach that a line deviating from the dominant pattern is a\nnormal substitution, not proof of no meter. Student practice: given a poem with one substituted line\nwithin an otherwise consistent pattern, identify the dominant pattern and explain the substitution's\nlikely purpose.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 135,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/misconception/MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER",
+      "kind": "misconception",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "**Trigger signal:** Student assumes that identifying a poem's rhyme scheme is the same task as",
+      "content": "### MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER\n\n**Trigger signal:** Student assumes that identifying a poem's rhyme scheme is the same task as\nidentifying its meter, or that a poem with a clear, regular rhyme scheme must also have a regular,\nconsistent meter, failing to recognize that rhyme (end-sound repetition) and meter (stress pattern\nwithin lines) are independent dimensions that can vary separately from each other.\n\n**Conflict evidence [P28]:** Show the student a poem with a clear, consistent AABB rhyme scheme but\nlines of noticeably varying length and stress pattern (irregular meter), next to a poem with the same\nconsistent rhyme scheme and a genuinely regular, consistent meter throughout. Ask: \"Do both poems\nhave the same rhyme scheme? Do both poems have the same kind of rhythm when you read them aloud? What\ndoes this tell you about whether rhyme and meter always go together?\"\n\n**Bridge text [P30]:** \"Assuming rhyme implies regular meter is like assuming a song with a\nconsistent chorus melody must also have a steady, unchanging beat throughout every verse — the two\nare actually separate musical elements that can vary independently. Rhyme is about sound repetition\nat line-ends; meter is about the rhythm within lines. A poem can have one without the other, or both,\nor neither.\"\n\n**Replacement text [P31]:** \"Analyze rhyme and meter as two separate questions. First ask: what sound\npattern repeats at the ends of lines (rhyme scheme)? Then, separately, ask: what stress pattern\nrepeats within the lines (meter)? Don't assume finding one tells you the answer to the other.\"\n\n**Discrimination pairs [P33]:**\n1. A poem with a consistent AABB rhyme scheme but irregular, varying line rhythm (rhyme present,\n   meter irregular) vs. a poem with the same AABB rhyme scheme and a genuinely regular, consistent\n   meter (both rhyme and meter present and regular).\n2. A student who identifies a poem's rhyme scheme and assumes that settles its meter too\n   (misconception) vs. a student who separately scans the poem's stress pattern after identifying its\n   rhyme scheme, treating them as two distinct analyses (correct approach).\n\n**s6_path:** If the student continues to conflate rhyme and meter after the bridge, give them three\npoems — one with rhyme but irregular meter, one with meter but no rhyme (blank verse), and one with\nboth — and have them analyze rhyme scheme and meter separately for each, confirming the two do not\ndetermine each other.",
+      "localKey": "MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER",
+      "language": "en",
+      "refs": [
+        "MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/misconception/MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER",
+      "kind": "misconception",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "**Trigger signal:** Student treats any single line or syllable that deviates from a poem's otherwise",
+      "content": "### MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER\n\n**Trigger signal:** Student treats any single line or syllable that deviates from a poem's otherwise\ndominant stress pattern as proof the poem \"has no meter\" or \"doesn't really follow\" its metrical\nscheme, failing to recognize that poets commonly use accepted metrical substitutions and variations\nwithin an overall consistent pattern — a poem can be genuinely written in a meter while still\ncontaining occasional, deliberate departures from the strict pattern.\n\n**Conflict evidence [P28]:** Show the student a poem written predominantly in a consistent stressed/\nunstressed pattern across most lines, with one line containing a deliberate substitution (a reversed\nstress at the line's start, common for emphasis). Ask: \"Does the rest of the poem clearly follow one\nconsistent pattern? Does one line with a variation mean the whole poem has no meter, or could this be\na deliberate, accepted variation within an overall pattern?\"\n\n**Bridge text [P30]:** \"Treating any single deviation as proof of 'no meter' is like insisting a\nsong isn't really in 4/4 time just because one measure has a brief syncopated variation — a single\ndeliberate variation within an overall consistent pattern doesn't erase the pattern; it's a normal,\noften intentional part of how the pattern is used. Meter describes the DOMINANT, overall pattern, not\nan unbroken, rigid rule with zero exceptions.\"\n\n**Replacement text [P31]:** \"Don't conclude a poem has 'no meter' just because you find one line that\nvaries from the dominant pattern. Look at the overall, dominant stress pattern across most of the\npoem first — occasional substitutions are a normal, often deliberate variation within that pattern,\nnot proof the pattern doesn't exist.\"\n\n**Discrimination pairs [P33]:**\n1. A poem with one line containing a deliberate stress-reversal for emphasis, set within an otherwise\n   consistent metrical pattern across the rest of the poem (a genuine meter with an accepted\n   variation) vs. a poem with stress patterns that vary unpredictably line after line with no\n   dominant pattern at all (genuinely irregular, no consistent meter).\n2. A student who declares a poem \"has no meter\" after finding one varying line (misconception,\n   over-rigid expectation) vs. a student who identifies the dominant pattern across most lines first,\n   then notes the single variation as a deliberate substitution (correct analysis).\n\n**s6_path:** If the student continues to over-rigidly reject meter at the first deviation after the\nbridge, give them a poem with two deliberate substitutions within an otherwise consistent metrical\npattern, and have them first identify the dominant pattern across the majority of lines, then\nseparately note each substitution and its likely purpose (emphasis, meaning).",
+      "localKey": "MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 39,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Rhyme Scheme as an Independent System",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Rhyme Scheme as an Independent System\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 139,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Rhyme and Meter Are Independent Dimensions (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Rhyme and Meter Are Independent Dimensions (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 144,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Scanning a Line's Dominant Stress Pattern",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Scanning a Line's Dominant Stress Pattern\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Recognizing Accepted Metrical Substitution (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Recognizing Accepted Metrical Substitution (MC-B)\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER\",\"MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER",
+        "MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 156,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Labeling a Rhyme Scheme**\nGiven a poem, label its rhyme scheme (e.g., AABB, ABAB).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 178,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Confirming Rhyme-Meter Independence**\nGiven a poem with clear rhyme but irregular meter, confirm the rhyme scheme and separately assess\nwhether the meter is regular.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 178,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Scanning Dominant Stress Pattern**\nGiven four lines from a poem, mark stress patterns and state the dominant metrical pattern.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 178,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying an Accepted Metrical Substitution**\nGiven a poem with one substituted line within an otherwise consistent pattern, identify the dominant\npattern and explain the substitution's likely purpose.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 178,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Meter and Rhyme Analysis**\nGiven a new poem, label its rhyme scheme, scan its dominant meter separately, and correctly identify\nany substitutions.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 178,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly labels rhyme schemes on provided poems (MP-1) but assumes regular meter\n  follows automatically on a new poem (MP-5), provide a mandatory \"assess rhyme and meter as two\n  separate questions\" checklist step before concluding either.\n- If the student's stress-pattern scanning is strong (MP-3) but they reject meter entirely at the\n  first substitution on a new poem (MP-4), require identifying the dominant pattern across the\n  majority of lines FIRST, before evaluating any single varying line.\n- If the student struggles to mark stress patterns at all, provide a fully-marked example line as a\n  reference model before free scanning.\n- Students with strong performance in `eng.literature.poetic-forms`'s convention-recognition work\n  should transfer readily to meter/rhyme analysis, since both require recognizing an underlying\n  pattern a specific poem follows or varies from — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 234,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "eng.literature.meter-and-rhyme/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.meter-and-rhyme",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: poetic forms check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.poetic-forms]  [Component 3: Song-Chorus-vs-Steady-Beat /\n                                          Syncopated-Measure Anchor]\n                                                    |\n                                                    v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                    |\n                                                    v\n                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                    |\n                                                    v\n                          [MP-1 through MP-5 mastery probe set]\n                                                    |\n                          (pass >= 0.70) -----+----- (fail)\n                                 |                      |\n                                 v                      v\n            [No further unlocks —  [S6 remediation: rhyme-meter independence drills /\n             terminal in current      substitution-recognition drills]\n             curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (conflating\nrhyme and meter) and MC-B during TA-3/TA-4 (over-rigid rejection of meter at any deviation) — these\nare largely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2\nfailures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-poem example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md",
+        "startLine": 198,
+        "endLine": 234
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
