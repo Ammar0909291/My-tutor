@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.pronunciation-in-conversation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.pronunciation-in-conversation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6621c9e00e9f80b535da3443cf0366f8c2e2de65723a9557a3361f9b97b5237a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md": "sha256:32b216f0d2640e095d133b36998eb00d061f593d8667987fd38ed89d095c97a1"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.speaking.pronunciation-in-conversation",
+    "name": "Pronunciation in Conversation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.speaking.oral-fluency"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.pronunciation-in-conversation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.pronunciation-in-conversation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md": "sha256:32b216f0d2640e095d133b36998eb00d061f593d8667987fd38ed89d095c97a1"
+      },
+      "contentHash": "sha256:b1293f5185c9a45af434959c5617c6dfab21e89815d072eb03272b40001dd4dd",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.pronunciation-in-conversation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.pronunciation-in-conversation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.pronunciation-in-conversation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.pronunciation-in-conversation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md#TA-2 (addresses MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.pronunciation-in-conversation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.pronunciation-in-conversation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.pronunciation-in-conversation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.pronunciation-in-conversation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.pronunciation-in-conversation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.pronunciation-in-conversation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md#TA-4 (addresses MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.pronunciation-in-conversation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.pronunciation-in-conversation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.pronunciation-in-conversation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md#TA-5 (addresses MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION, MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.pronunciation-in-conversation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.pronunciation-in-conversation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Pronunciation in Conversation — Conceptual Development Sequence",
+      "content": "**TA-1 — Word Stress Accuracy in Conversational Words [C]**\n\nPresent common multisyllabic words used in conversation; student produces them with correct stress placement, building on prior word-stress knowledge in a spontaneous-speech context.\n\n**TA-2 — Prioritizing Stress/Intonation Over Segmental Perfection [C]**\n\nUsing the Component 3 sorting technique, student compares the intelligibility impact of stress errors vs. segmental errors, directly targeting MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION.\n\n**TA-3 — Applying Intonation Patterns in Spontaneous Conversation [C→P]**\n\nStudent practices applying appropriate intonation (statement/question patterns, emphasis) in unscripted, spontaneous conversational exchanges.\n\n**TA-4 — Setting Intelligibility, Not Native-Likeness, as the Goal [P]**\n\nPresent examples of highly intelligible speakers with noticeable accents; student discusses why intelligibility, not accent elimination, is the appropriate goal, directly targeting MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL.\n\n**TA-5 — Self-Monitoring for High-Impact Pronunciation Features in Real Conversation [P]**\n\nStudent engages in a short spontaneous conversation, then reflects on which pronunciation features (if any) may have affected the listener's understanding, prioritizing stress/intonation self-checks over segmental perfectionism.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 69,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/misconception/MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "- **Trigger signal:** Student prioritizes perfecting individual consonant/vowel sounds above all else in conversational pronunciation, believing that precise segmental accuracy is the most important factor for being understood, missing that WORD STRESS and INTONATION errors often disrupt comprehensibility MORE severely than individual sound imperfections — a listener can usually work around a slightly imprecise vowel sound, but misplaced word stress can make an otherwise correctly-pronounced word unrecognizable (e.g., stressing the wrong syllable in \"PHOtograph\" vs. \"phoTOGraphy\" vs. \"photoGRAPHic\" can genuinely confuse a listener even when every individual sound is accurate).",
+      "content": "### MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION\n- **Trigger signal:** Student prioritizes perfecting individual consonant/vowel sounds above all else in conversational pronunciation, believing that precise segmental accuracy is the most important factor for being understood, missing that WORD STRESS and INTONATION errors often disrupt comprehensibility MORE severely than individual sound imperfections — a listener can usually work around a slightly imprecise vowel sound, but misplaced word stress can make an otherwise correctly-pronounced word unrecognizable (e.g., stressing the wrong syllable in \"PHOtograph\" vs. \"phoTOGraphy\" vs. \"photoGRAPHic\" can genuinely confuse a listener even when every individual sound is accurate).\n- **Conflict evidence [P28]:** \"You've been focusing entirely on getting each individual sound exactly right. But if you say a word with perfect individual sounds but stress on the wrong syllable — like 'comPUter' instead of 'COMputer' — does the listener still recognize the word easily, or does it sound confusing despite the accurate sounds?\"\n- **Bridge text [P30]:** \"Research on spoken intelligibility consistently shows that WORD STRESS and INTONATION errors often disrupt listener comprehension MORE than individual sound (segmental) imperfections — a slightly imprecise vowel is usually still understandable in context, but wrong stress placement can make a word genuinely hard to recognize, even with perfect individual sounds. Prioritizing stress/intonation accuracy alongside (not instead of, but often ahead of) individual sound precision improves conversational intelligibility more effectively.\"\n- **Replacement text [P31]:** \"Prioritize correct word stress and intonation alongside individual sound accuracy — don't assume perfecting individual sounds alone is sufficient for being understood in conversation.\"\n- **Discrimination pairs [P33]:**\n  - \"COMputer\" (correct stress, even with a slightly imprecise vowel — generally understandable) vs. \"comPUter\" (wrong stress, even with perfectly accurate individual sounds — can genuinely confuse a listener).\n  - A word with one imprecise consonant but correct stress/rhythm (usually still intelligible in context) vs. a word with perfect segments but wrong stress (often harder to recognize).\n- **s6_path:** \"It's a very reasonable instinct to focus on getting each individual sound exactly right, since that feels like the most controllable, checkable target — but research and real listener experience both show that stress and intonation carry disproportionate weight for being understood in natural conversation.\"",
+      "localKey": "MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION",
+      "language": "en",
+      "refs": [
+        "MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/misconception/MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "- **Trigger signal:** Student (or their underlying belief) treats sounding exactly like a native speaker (eliminating all traces of accent) as the necessary goal of pronunciation practice, rather than recognizing that INTELLIGIBILITY (being clearly understood) is the actual functional goal — a speaker can have a noticeable accent while still being highly, even perfectly, intelligible, and pursuing \"accent elimination\" as the target can create unnecessary anxiety and isn't supported as a realistic or even desirable universal goal by current pronunciation-teaching research.",
+      "content": "### MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL\n- **Trigger signal:** Student (or their underlying belief) treats sounding exactly like a native speaker (eliminating all traces of accent) as the necessary goal of pronunciation practice, rather than recognizing that INTELLIGIBILITY (being clearly understood) is the actual functional goal — a speaker can have a noticeable accent while still being highly, even perfectly, intelligible, and pursuing \"accent elimination\" as the target can create unnecessary anxiety and isn't supported as a realistic or even desirable universal goal by current pronunciation-teaching research.\n- **Conflict evidence [P28]:** \"You said your goal is to sound exactly like a native English speaker with no accent at all. Do you think someone can have a noticeable accent and still be completely, clearly understood by listeners? Is 'no accent' actually necessary for good communication?\"\n- **Bridge text [P30]:** \"The realistic, research-supported goal of pronunciation instruction is INTELLIGIBILITY — being clearly understood by listeners — not eliminating all traces of accent to sound 'native-like.' Many highly intelligible, effective English speakers retain a noticeable accent; accent itself is not a communication problem, but specific pronunciation features that genuinely impede understanding (like wrong word stress, as covered in this concept) ARE worth targeted practice.\"\n- **Replacement text [P31]:** \"Set intelligibility (being clearly understood) as the pronunciation goal, not elimination of all accent — focus practice on features that genuinely affect understanding, not on erasing every trace of your natural accent.\"\n- **Discrimination pairs [P33]:**\n  - A speaker with a noticeable accent but correct word stress/clear articulation (highly intelligible, a legitimate communicative success) vs. a speaker straining to eliminate all accent markers as if that were the only valid goal.\n  - Targeted practice on a specific stress error that genuinely confuses listeners (worthwhile, intelligibility-focused) vs. broad, anxiety-driven attempts to sound \"completely native\" (an unrealistic, arguably unnecessary goal).\n- **s6_path:** \"Wanting to sound 'native-like' is an understandable aspiration, especially given common cultural messaging around accent — but genuine communicative success (being clearly understood) doesn't require eliminating accent, and setting intelligibility as the real goal is both more realistic and, according to current teaching research, the actually useful target.\"\n\n---",
+      "localKey": "MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL",
+      "language": "en",
+      "refs": [
+        "MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Word Stress Accuracy in Conversational Words",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Word Stress Accuracy in Conversational Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 71,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Prioritizing Stress/Intonation Over Segmental Perfection",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Prioritizing Stress/Intonation Over Segmental Perfection\",\"primitives\":[],\"addresses\":[\"MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 75,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Applying Intonation Patterns in Spontaneous Conversation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Applying Intonation Patterns in Spontaneous Conversation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 79,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Setting Intelligibility, Not Native-Likeness, as the Goal",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Setting Intelligibility, Not Native-Likeness, as the Goal\",\"primitives\":[],\"addresses\":[\"MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 83,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Self-Monitoring for High-Impact Pronunciation Features in Real Conversation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Self-Monitoring for High-Impact Pronunciation Features in Real Conversation\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL\",\"MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION",
+        "MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 87,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Word stress in conversation, novel example**\n\"Say 'important' with correct stress in a sentence.\"\n*Target:* \"imPORtant\" — correct stress on the second syllable.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Stress vs. segmental priority, novel example**\n\"If you say 'PHOtograph' with wrong stress (like 'phoTOgraph') but perfect individual sounds, is it still easily understood?\"\n*Target:* correctly identifies that wrong stress placement can genuinely impede recognition even with accurate individual sounds.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Intonation in spontaneous conversation**\n\"In a spontaneous conversation, how would you signal a yes/no question versus a statement using intonation alone?\"\n*Target:* correctly describes rising intonation for yes/no questions vs. falling for statements.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Intelligibility as the goal, novel scenario**\n\"Should your pronunciation goal be to eliminate your accent completely, or to be clearly understood?\"\n*Target:* correctly identifies intelligibility (being clearly understood) as the appropriate goal, not accent elimination.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain conversational pronunciation priorities**\n\"In your own words: is perfecting individual sounds the most important pronunciation goal, and should you aim to eliminate all traces of accent?\"\n*Target:* states or demonstrates that word stress and intonation often matter more for intelligibility than individual sound perfection, and that intelligibility (not native-like accent elimination) is the realistic, appropriate pronunciation goal.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Adaptive Flags",
+      "content": "- **Stress/intonation errors have outsized intelligibility impact — teach this explicitly, with evidence**: use direct comparison examples (Component 3) to make this counter-intuitive but well-supported finding concrete and convincing.\n- **Intelligibility, not native-likeness, is the appropriate goal — state this as an explicit, reassuring reframe**: this is as much an affective/motivational correction as an informational one, given how strongly \"sound native\" goals are often internalized.\n- **This concept builds directly on and applies prosody/oral-fluency knowledge in spontaneous, unscripted contexts**: emphasize the transfer from controlled practice (prior concepts) to genuine spontaneous conversation as the concept's unique value.\n- **Sustained, evidence-based counter-instruction needed for strongly-held prior beliefs**: for S9 learners from segmental-perfection-focused instructional traditions, budget repeated, patient reinforcement of the stress/intonation-priority and intelligibility-goal reframes, recognizing these may need to overcome significant prior instructional emphasis.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 177,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "eng.speaking.pronunciation-in-conversation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.pronunciation-in-conversation",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — intelligibility-priority sort warm-up\n  ↓\n[P41] PD-1 (oral-fluency readiness)\n  ↓ PASS\n[P06] Anchor: intelligibility-priority sort (stress error vs. segmental error impact)\n  ↓\nTA-1: Word stress accuracy in conversational words [C]\n  ↓\nTA-2: Prioritizing stress/intonation over segmental perfection [C]\n  ↓\n[P28] Conflict: individual sounds prioritized over stress/intonation → MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION (if triggered)\n  ↓\nTA-3: Applying intonation patterns in spontaneous conversation [C→P]\n  ↓\nTA-4: Setting intelligibility, not native-likeness, as the goal [P]\n  ↓\n[P28] Conflict: native-like accent treated as the necessary goal → MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL (if triggered)\n  ↓\nTA-5: Self-monitoring for high-impact pronunciation features in real conversation [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, check the stress placement of three multisyllabic words you use often.\"\n[P68] Session close\n[P85] Regulation tail — praise prioritizing stress/intonation and intelligibility over segmental perfectionism or accent anxiety\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on oral fluency, new to conversational pronunciation priorities specifically): dwell on TA-1's word-stress accuracy before introducing the stress-vs-segmental priority judgment. S1 (already speaks fluently but has developed a strong segmental-perfectionism habit from prior instruction): focus on TA-2's direct evidence-based comparison, since this may require revising a deeply held prior belief about pronunciation priorities. S6 (significant anxiety about accent, believing it must be eliminated): explicitly and repeatedly validate the intelligibility-over-native-likeness goal (Component 1 s6_path), since this can be an emotionally significant reframe requiring patient reassurance, not just informational correction. S9 (English learner from an instructional tradition heavily emphasizing individual-sound perfection and accent reduction, e.g. many traditional pronunciation-teaching approaches): expect both misconceptions to be strongly held, deeply practiced beliefs requiring sustained, evidence-based counter-instruction rather than a single correction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md",
+        "startLine": 139,
+        "endLine": 177
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

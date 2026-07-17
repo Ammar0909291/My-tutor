@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.connotation-denotation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.connotation-denotation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:55ba3c7bc382a1e5bdc2745c592d34b3ff73b8ff85e257a65fef45a1fe67f764",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md": "sha256:ecbc65416afba0cc7d0bb9c16bdd73bf41a54855d2891fa7818a9faba25a5b9b"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.connotation-denotation",
+    "name": "Connotation and Denotation",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.synonyms-antonyms"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.connotation-denotation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.connotation-denotation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md": "sha256:ecbc65416afba0cc7d0bb9c16bdd73bf41a54855d2891fa7818a9faba25a5b9b"
+      },
+      "contentHash": "sha256:e95cb3cd4c24c6758264c86229a09e7329eaae059d4d5fe43e448a5fd0317291",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.connotation-denotation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.connotation-denotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.connotation-denotation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.connotation-denotation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md#TA-2 (addresses MC-CONNOTATION-IS-JUST-PERSONAL-OPINION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.connotation-denotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.connotation-denotation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.connotation-denotation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md#TA-3 (addresses MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.connotation-denotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.connotation-denotation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.connotation-denotation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.connotation-denotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.connotation-denotation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.connotation-denotation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md#TA-5 (addresses MC-CONNOTATION-IS-JUST-PERSONAL-OPINION, MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.connotation-denotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.connotation-denotation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.connotation-denotation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Connotation and Denotation — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Shared Denotation Across Near-Synonyms [C]**\n\nPresent near-synonym sets sharing a core denotation; student confirms the shared literal meaning.\n\n**TA-2 — Placing Words on the Connotation Thermometer [C]**\n\nUsing the Component 3 technique, student places near-synonyms at their appropriate position on the positive/neutral/negative connotation scale, directly targeting MC-CONNOTATION-IS-JUST-PERSONAL-OPINION by treating this as a shared, analyzable pattern (checking for reasonable consensus, not personal idiosyncrasy).\n\n**TA-3 — Selecting the Appropriate Word for Intended Tone [C→P]**\n\nPresent a sentence with a blank and several denotation-matched word options with different connotations; student selects the word matching the intended tone (compliment, criticism, neutral report), directly targeting MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE.\n\n**TA-4 — Analyzing Connotation in Persuasive/Biased Text [P]**\n\nPresent short passages using connotatively-loaded word choices to persuade or bias the reader (e.g., \"regime\" vs. \"government,\" \"crowd\" vs. \"mob\"); student identifies the connotative choices and their persuasive effect.\n\n**TA-5 — Revising Writing for Appropriate Connotation [P]**\n\nGiven a piece of writing with a connotation mismatch (e.g., an unintentionally harsh or overly casual word choice in a formal context), student identifies and revises the word choice to better match the intended tone.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/misconception/MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "- **Trigger signal:** Student, having confirmed two words share the same DENOTATION (literal dictionary meaning), assumes they are therefore fully interchangeable in any context, missing that their different CONNOTATIONS (emotional/cultural associations) make them appropriate for different situations, tones, or audiences — using a word with an unintended connotation even though its literal definition is technically accurate (e.g., calling someone \"cheap\" instead of \"frugal\" when trying to compliment their financial discipline, since both denote \"spending little money\" but \"cheap\" carries a critical connotation while \"frugal\" carries an admiring one).",
+      "content": "### MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE\n- **Trigger signal:** Student, having confirmed two words share the same DENOTATION (literal dictionary meaning), assumes they are therefore fully interchangeable in any context, missing that their different CONNOTATIONS (emotional/cultural associations) make them appropriate for different situations, tones, or audiences — using a word with an unintended connotation even though its literal definition is technically accurate (e.g., calling someone \"cheap\" instead of \"frugal\" when trying to compliment their financial discipline, since both denote \"spending little money\" but \"cheap\" carries a critical connotation while \"frugal\" carries an admiring one).\n- **Conflict evidence [P28]:** \"You said 'cheap' and 'frugal' mean exactly the same thing, so you can use either. If you wanted to COMPLIMENT someone on their careful spending habits, would calling them 'cheap' land as a compliment, or would it sound critical, even though the dictionary definitions are similar?\"\n- **Bridge text [P30]:** \"Two words can share the same DENOTATION (literal meaning: both 'cheap' and 'frugal' denote spending little money) while carrying very different CONNOTATIONS (emotional/cultural associations: 'cheap' often connotes stinginess/criticism, while 'frugal' often connotes wise, admirable restraint). Choosing the wrong word for the intended tone — even with an accurate literal meaning — can completely misrepresent your intended message.\"\n- **Replacement text [P31]:** \"Before choosing between near-synonyms, check both their denotation (literal meaning) AND their connotation (emotional/cultural coloring) to ensure the word fits your intended tone.\"\n- **Discrimination pairs [P33]:**\n  - \"frugal\" (positive connotation — wise, admirable) vs. \"cheap\" (negative connotation — stingy, critical) — same core denotation (spending little).\n  - \"confident\" (positive connotation) vs. \"arrogant\" (negative connotation) — both can denote a strong sense of self-assurance, but very different emotional coloring.\n- **s6_path:** \"Once you've confirmed two words mean the same literal thing, it's very reasonable to treat them as interchangeable — but the emotional coloring (connotation) genuinely changes how a word lands with a listener, which is a further, equally important layer of meaning.\"",
+      "localKey": "MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE",
+      "language": "en",
+      "refs": [
+        "MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/misconception/MC-CONNOTATION-IS-JUST-PERSONAL-OPINION",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "- **Trigger signal:** Student treats connotation as a purely subjective, individual preference (as if each person's emotional reaction to a word is entirely their own private matter with no shared pattern), missing that connotations are largely CULTURALLY/SOCIALLY SHARED associations that most speakers of a language recognize similarly, making them a genuine, analyzable feature of the language itself (not just one person's private feelings) — this shared nature is exactly what makes connotation a teachable, predictable skill rather than random guessing.",
+      "content": "### MC-CONNOTATION-IS-JUST-PERSONAL-OPINION\n- **Trigger signal:** Student treats connotation as a purely subjective, individual preference (as if each person's emotional reaction to a word is entirely their own private matter with no shared pattern), missing that connotations are largely CULTURALLY/SOCIALLY SHARED associations that most speakers of a language recognize similarly, making them a genuine, analyzable feature of the language itself (not just one person's private feelings) — this shared nature is exactly what makes connotation a teachable, predictable skill rather than random guessing.\n- **Conflict evidence [P28]:** \"You said connotation is just whatever feeling YOU personally get from a word, different for everyone. If I asked ten different English speakers whether 'nosy' sounds more critical or more neutral compared to 'curious,' do you think they'd mostly agree, or would the answers be totally random and different for each person?\"\n- **Bridge text [P30]:** \"While individual reactions to specific words can vary somewhat, connotations are largely SHARED, socially/culturally established associations recognized by most speakers of a language community — this shared, predictable nature is exactly what makes connotation analyzable and teachable, not simply random personal opinion. Most English speakers would agree 'nosy' sounds more critical than 'curious,' even though both denote interest in others' affairs.\"\n- **Replacement text [P31]:** \"Treat connotation as a shared, culturally-recognized pattern most speakers agree on, not as purely individual, unpredictable personal opinion.\"\n- **Discrimination pairs [P33]:**\n  - \"nosy\" (widely recognized as more critical/negative) vs. \"curious\" (widely recognized as more neutral/positive) — a shared pattern most English speakers would agree on, not random individual variation.\n  - A genuinely idiosyncratic personal association (e.g., a word reminding one specific person of a bad childhood memory) vs. a broadly shared cultural connotation (e.g., \"home\" generally connoting warmth/safety across most speakers) — the latter is what this concept focuses on.\n- **s6_path:** \"It's reasonable to think of emotional reactions to words as personal, since feelings in general are subjective — but connotation specifically refers to the widely SHARED emotional coloring most speakers of a language recognize, which is what makes it a genuine, analyzable pattern rather than random guesswork.\"\n\n---",
+      "localKey": "MC-CONNOTATION-IS-JUST-PERSONAL-OPINION",
+      "language": "en",
+      "refs": [
+        "MC-CONNOTATION-IS-JUST-PERSONAL-OPINION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Identifying Shared Denotation Across Near-Synonyms",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Shared Denotation Across Near-Synonyms\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Placing Words on the Connotation Thermometer",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Placing Words on the Connotation Thermometer\",\"primitives\":[],\"addresses\":[\"MC-CONNOTATION-IS-JUST-PERSONAL-OPINION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-CONNOTATION-IS-JUST-PERSONAL-OPINION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Selecting the Appropriate Word for Intended Tone",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Selecting the Appropriate Word for Intended Tone\",\"primitives\":[],\"addresses\":[\"MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Analyzing Connotation in Persuasive/Biased Text",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Analyzing Connotation in Persuasive/Biased Text\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Revising Writing for Appropriate Connotation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Revising Writing for Appropriate Connotation\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CONNOTATION-IS-JUST-PERSONAL-OPINION\",\"MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CONNOTATION-IS-JUST-PERSONAL-OPINION",
+        "MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Shared denotation, novel pair**\n\"Do 'inquisitive' and 'nosy' share a similar literal meaning?\"\n*Target:* yes — both denote wanting to know about others' affairs.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Connotation thermometer placement, novel pair**\n\"Where would you place 'inquisitive' and 'nosy' on a positive-to-negative scale?\"\n*Target:* \"inquisitive\" — more positive/neutral (intellectually curious); \"nosy\" — more negative (intrusive).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Selecting for intended tone, novel scenario**\n\"You're writing a formal recommendation letter and want to describe someone's careful spending habits positively. Which word fits: 'cheap' or 'frugal'?\"\n*Target:* \"frugal\" — positive connotation appropriate for a recommendation letter.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Analyzing connotation in biased text**\n\"A news article calls protesters a 'mob' instead of a 'crowd.' What effect does this word choice have?\"\n*Target:* correctly identifies \"mob\" as carrying a more negative, threatening connotation than the neutral \"crowd,\" likely intended to bias the reader's perception.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain connotation and denotation**\n\"In your own words: if two words have the same denotation, are they always interchangeable, and is connotation just a personal, random opinion?\"\n*Target:* states or demonstrates that shared denotation doesn't guarantee interchangeability (connotation differences matter for appropriate tone), and that connotation is a largely shared, culturally-recognized pattern, not purely individual personal opinion.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Adaptive Flags",
+      "content": "- **Denotation and connotation are two separate, equally necessary checks**: never let confirmed shared denotation stand in for full interchangeability — always require a connotation check before word selection in tone-sensitive contexts.\n- **Connotation is shared and analyzable, not random personal opinion**: frame every connotation-judgment task around community consensus (would most speakers agree?), directly countering the purely-subjective misconception.\n- **Bias/persuasion analysis demonstrates real-world stakes**: TA-4's media-analysis task shows connotation isn't just an academic vocabulary distinction — it's actively used to shape perception in real communication, which motivates careful attention to this skill.\n- **Substantial, high-contrast practice needed for connotation-poor L1 backgrounds**: for S9 learners, prioritize very clear, high-contrast connotation examples (obviously positive vs. obviously negative pairs) before subtler distinctions, since this is one of the most culturally-embedded, slow-to-acquire vocabulary skills.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.vocab.connotation-denotation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.connotation-denotation",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — connotation thermometer warm-up\n  ↓\n[P41] PD-1 (synonyms-antonyms readiness)\n  ↓ PASS\n[P06] Anchor: connotation thermometer (near-synonym positioning)\n  ↓\nTA-1: Identifying shared denotation across near-synonyms [C]\n  ↓\nTA-2: Placing words on the connotation thermometer [C]\n  ↓\n[P28] Conflict: connotation treated as purely personal opinion → MC-CONNOTATION-IS-JUST-PERSONAL-OPINION (if triggered)\n  ↓\nTA-3: Selecting the appropriate word for intended tone [C→P]\n  ↓\n[P28] Conflict: same denotation assumed to mean full interchangeability → MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE (if triggered)\n  ↓\nTA-4: Analyzing connotation in persuasive/biased text [P]\n  ↓\nTA-5: Revising writing for appropriate connotation [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one pair of words with the same denotation but different connotations.\"\n[P68] Session close\n[P85] Regulation tail — praise checking connotation alongside denotation, not just literal meaning\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on synonyms-antonyms, new to formal connotation/denotation analysis): dwell on TA-1/TA-2's clear thermometer-placement examples before introducing tone-selection and bias-analysis tasks. S1 (already senses connotation intuitively in speech but hasn't formally analyzed it): use TA-2's explicit placement task to build metalinguistic vocabulary for an already-present intuitive skill. S6 (frustrated by the subjectivity feel of connotation after the more rule-based denotation concept): validate that connotation IS a genuine, shared, analyzable pattern (not random), using consensus-checking as evidence. S9 (English learner whose L1 near-synonyms carry different or no equivalent connotation distinctions, making English connotation nuances especially hard to perceive): expect this concept to require substantial, high-contrast practice, since connotation is one of the most subtle, culturally-embedded aspects of vocabulary and often lags far behind literal-meaning acquisition for L2 learners.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.connotation-denotation.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
