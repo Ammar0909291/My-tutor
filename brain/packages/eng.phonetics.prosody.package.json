@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.prosody-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.prosody",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:04bd3726e0f71f6269028b695168e79d5f3699c85b9a81a5547ca1db3320bbfc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.prosody.md": "sha256:85b19295dc1044f115f65038cd887c6913d31a128f963dc9c100d4e68add706e"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.prosody",
+    "name": "Prosody",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.intonation-patterns",
+      "eng.phonetics.phonetic-transcription"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.prosody-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.prosody (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.prosody.md": "sha256:85b19295dc1044f115f65038cd887c6913d31a128f963dc9c100d4e68add706e"
+      },
+      "contentHash": "sha256:d69054ffe84e4276f167cd83be5496979839f1d7717d5fddadc2070e3951fe8b",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.prosody.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.prosody.md#TA-1 (addresses MC-PROSODY-IS-JUST-INTONATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.prosody"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.prosody\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.prosody.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.prosody.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.prosody"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.prosody\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.prosody.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.prosody.md#TA-3 (addresses MC-PROSODY-ONLY-CONVEYS-GRAMMAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.prosody"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.prosody\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.prosody.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.prosody.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.prosody"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.prosody\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.prosody.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.prosody.md#TA-5 (addresses MC-PROSODY-IS-JUST-INTONATION, MC-PROSODY-ONLY-CONVEYS-GRAMMAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.prosody"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.prosody\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.prosody/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Prosody — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying the Three Prosodic Components Together [C]**\n\nPresent a recorded/modeled utterance; student identifies its stress pattern, rhythm, and intonation contour as three distinct but co-occurring features, directly targeting MC-PROSODY-IS-JUST-INTONATION by requiring all three to be named, not intonation alone.\n\n**TA-2 — Grammatical Function of Prosody [C]**\n\nReview/extend prior knowledge (question types, list intonation, contrastive stress) as the GRAMMATICAL function of prosody, explicitly naming this as one of two major functions this concept covers.\n\n**TA-3 — Attitudinal/Emotional Function of Prosody [C→P]**\n\nUsing the Component 3 same-sentence-many-feelings technique, student identifies and produces prosodic patterns conveying different attitudes/emotions with identical words, directly targeting MC-PROSODY-ONLY-CONVEYS-GRAMMAR.\n\n**TA-4 — Sarcasm and Irony Detection via Prosody [P]**\n\nPresent utterances where the literal words and the prosodic delivery conflict (sarcasm: positive words, mocking/exaggerated prosody signaling the opposite meaning); student identifies the true intended meaning from prosody, demonstrating prosody's power to override literal word meaning.\n\n**TA-5 — Full Prosodic Analysis of an Extended Utterance [P]**\n\nGiven a longer, natural spoken passage, student produces a full prosodic analysis: stress pattern, rhythmic structure, intonation contour, grammatical function(s) signaled, and attitudinal/emotional coloring — integrating all concept components into one comprehensive analysis.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 75,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/misconception/MC-PROSODY-IS-JUST-INTONATION",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "- **Trigger signal:** Student treats \"prosody\" as a synonym for intonation alone, missing that prosody is the INTEGRATED system combining stress, rhythm, AND intonation together — analyzes an utterance's pitch pattern only, ignoring how stress placement and rhythmic timing also contribute to the overall meaning/emotional effect.",
+      "content": "### MC-PROSODY-IS-JUST-INTONATION\n- **Trigger signal:** Student treats \"prosody\" as a synonym for intonation alone, missing that prosody is the INTEGRATED system combining stress, rhythm, AND intonation together — analyzes an utterance's pitch pattern only, ignoring how stress placement and rhythmic timing also contribute to the overall meaning/emotional effect.\n- **Conflict evidence [P28]:** \"You described the intonation of that sentence — rising, then falling. But what about how the words are TIMED and which ones are STRESSED? Do those also change how the sentence sounds and what it communicates?\"\n- **Bridge text [P30]:** \"Prosody is the combined, integrated system of THREE elements working together: stress (which syllables/words are emphasized), rhythm (the timing pattern across an utterance), and intonation (the pitch contour). Intonation is only one piece — analyzing prosody means considering all three together, since they interact to create the full emotional/attitudinal effect of an utterance.\"\n- **Replacement text [P31]:** \"When analyzing an utterance's prosody, check stress, rhythm, AND intonation together, not intonation alone.\"\n- **Discrimination pairs [P33]:**\n  - A sentence analyzed for intonation alone (rising/falling pitch) vs. the same sentence analyzed for its full prosody (pitch + which words are stressed + the rhythmic timing between stressed beats).\n  - Two utterances with identical intonation contours but different stress/rhythm patterns producing different overall attitudinal effects (e.g., sarcasm often relies on stress placement and exaggerated rhythm alongside pitch, not pitch alone).\n- **s6_path:** \"Since intonation is often taught first and is the most visually easy pattern to trace, it's natural to think of it as the whole picture — but prosody is genuinely the integration of stress, rhythm, and intonation together, and real communicative effects (like sarcasm or emphasis) usually depend on all three.\"",
+      "localKey": "MC-PROSODY-IS-JUST-INTONATION",
+      "language": "en",
+      "refs": [
+        "MC-PROSODY-IS-JUST-INTONATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/misconception/MC-PROSODY-ONLY-CONVEYS-GRAMMAR",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "- **Trigger signal:** Student analyzes prosody only for its grammatical/structural functions (statement vs. question, list phrasing) without recognizing prosody's equally important role in conveying ATTITUDE and EMOTION (sarcasm, boredom, excitement, doubt, genuine interest) that exist independent of, or layered on top of, grammatical structure.",
+      "content": "### MC-PROSODY-ONLY-CONVEYS-GRAMMAR\n- **Trigger signal:** Student analyzes prosody only for its grammatical/structural functions (statement vs. question, list phrasing) without recognizing prosody's equally important role in conveying ATTITUDE and EMOTION (sarcasm, boredom, excitement, doubt, genuine interest) that exist independent of, or layered on top of, grammatical structure.\n- **Conflict evidence [P28]:** \"You correctly identified that this sentence is grammatically a statement, based on its falling intonation. But listen again — does the SPEAKER sound genuinely interested, or bored and sarcastic? What in the prosody tells you that, beyond just 'statement vs. question'?\"\n- **Bridge text [P30]:** \"Prosody does double duty: it signals GRAMMATICAL/structural information (question vs. statement, list phrasing, emphasis on new information) AND it independently conveys ATTITUDE and EMOTION (sarcasm, excitement, boredom, genuine warmth, doubt) — often through exaggerated pitch range, unusual stress placement, or distinctive rhythm that goes beyond what's needed for basic grammatical signaling.\"\n- **Replacement text [P31]:** \"When analyzing prosody, check for both grammatical function (what structure is being signaled) AND attitudinal/emotional function (what feeling or stance is being conveyed) — don't stop at grammar alone.\"\n- **Discrimination pairs [P33]:**\n  - \"That's just great.\" said with flat, exaggeratedly wide pitch range and slow, deliberate rhythm (sarcastic — conveys the opposite of the literal words) vs. said with genuine warm, moderate pitch variation (sincere).\n  - A statement read with narrow pitch range and flat rhythm (bored/disengaged tone) vs. the same statement with wider pitch variation and lively rhythm (engaged/enthusiastic tone) — same grammatical structure, different emotional layer.\n- **s6_path:** \"It's a natural first step to focus on the grammatical signals prosody carries, since those are more clearly rule-based — but the emotional/attitudinal layer is just as real and important, even though it's more subtle and context-dependent to describe precisely.\"\n\n---",
+      "localKey": "MC-PROSODY-ONLY-CONVEYS-GRAMMAR",
+      "language": "en",
+      "refs": [
+        "MC-PROSODY-ONLY-CONVEYS-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Identifying the Three Prosodic Components Together",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Three Prosodic Components Together\",\"primitives\":[],\"addresses\":[\"MC-PROSODY-IS-JUST-INTONATION\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-PROSODY-IS-JUST-INTONATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 77,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Grammatical Function of Prosody",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Grammatical Function of Prosody\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 81,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Attitudinal/Emotional Function of Prosody",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Attitudinal/Emotional Function of Prosody\",\"primitives\":[],\"addresses\":[\"MC-PROSODY-ONLY-CONVEYS-GRAMMAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PROSODY-ONLY-CONVEYS-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 85,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Sarcasm and Irony Detection via Prosody",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Sarcasm and Irony Detection via Prosody\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 89,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Full Prosodic Analysis of an Extended Utterance",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Prosodic Analysis of an Extended Utterance\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PROSODY-IS-JUST-INTONATION\",\"MC-PROSODY-ONLY-CONVEYS-GRAMMAR\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PROSODY-IS-JUST-INTONATION",
+        "MC-PROSODY-ONLY-CONVEYS-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 93,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Three components, novel utterance**\n\"Describe the stress, rhythm, and intonation of this sentence: [novel example].\"\n*Target:* correctly names all three components, not just intonation.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Grammatical function, novel example**\n\"What grammatical information does the prosody of this question convey?\"\n*Target:* correctly identifies the relevant grammatical signal (e.g., yes/no question via rising intonation, or list phrasing).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Attitudinal function, novel example**\n\"Listen to this statement said twice, with different prosody each time. What different attitudes do you hear?\"\n*Target:* correctly identifies two distinct attitudes/emotions (e.g., genuine interest vs. boredom) conveyed by the same words through different prosody.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Sarcasm/irony detection, novel example**\n\"Listen: '[a novel example of prosodically-marked sarcasm].' What does the speaker really mean?\"\n*Target:* correctly identifies the ironic/sarcastic intended meaning, contrasting with the literal words.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain prosody's dual role**\n\"In your own words: what is prosody, and what are the two main things it can convey?\"\n*Target:* states or demonstrates that prosody is the combined system of stress, rhythm, and intonation, and that it conveys both grammatical/structural information and attitudinal/emotional meaning.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 121,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Adaptive Flags",
+      "content": "- **Always analyze all three components together**: never let intonation description stand in for full prosodic analysis — stress and rhythm must be explicitly named alongside pitch in every analysis task.\n- **Grammatical and attitudinal functions are equally real and should both be assessed**: mastery checks (Component 6) explicitly require both functions to be demonstrated, not just the more rule-based grammatical layer.\n- **Sarcasm/irony detection is the highest-value, most advanced application**: TA-4 exists because prosody's power to override literal word meaning is one of its most practically important (and often hardest) applications — give it dedicated, well-modeled practice time.\n- **Cross-cultural pragmatic variation in attitudinal prosody**: for S9 learners, explicitly acknowledge that different cultures/languages may signal sarcasm, boredom, or enthusiasm through different combinations of prosody and other cues (facial expression, explicit words) — approach this as a genuine cross-cultural skill-building area, not a simple correctness issue.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 185,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "eng.phonetics.prosody/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.prosody",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — same-sentence-many-feelings warm-up (one sentence, two contrasting emotions)\n  ↓\n[P41] PD-1 (intonation readiness)\n  ↓ PASS\n[P41] PD-2 (transcription readiness)\n  ↓ PASS\n[P06] Anchor: same-sentence-many-feelings (5 emotions, identical words)\n  ↓\nTA-1: Identifying the three prosodic components together [C]\n  ↓\n[P28] Conflict: prosody reduced to intonation alone → MC-PROSODY-IS-JUST-INTONATION (if triggered)\n  ↓\nTA-2: Grammatical function of prosody [C]\n  ↓\nTA-3: Attitudinal/emotional function of prosody [C→P]\n  ↓\n[P28] Conflict: prosody analyzed only for grammar, not attitude → MC-PROSODY-ONLY-CONVEYS-GRAMMAR (if triggered)\n  ↓\nTA-4: Sarcasm and irony detection via prosody [P]\n  ↓\nTA-5: Full prosodic analysis of an extended utterance [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, say one sentence with two different emotional deliveries and describe what changed.\"\n[P68] Session close\n[P85] Regulation tail — praise noticing the full stress+rhythm+intonation system, not pitch alone\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on intonation/transcription, new to the integrated prosody concept): dwell on TA-1's three-component identification with clear, simple examples before adding the grammatical/attitudinal function distinction. S1 (already distinguishes some emotional tones intuitively but lacks analytical vocabulary): use TA-3's structured practice to build the metalinguistic naming ability for an already-present perceptual skill. S6 (finds attitudinal prosody analysis subjective/hard to pin down compared to grammatical rules): validate that this IS a more interpretive, context-dependent skill than grammatical intonation rules, and that reasonable people may describe subtle attitudinal shades somewhat differently while still agreeing on clear cases (like obvious sarcasm). S9 (L1 has substantially different or fewer prosodic resources for signaling attitude/emotion, or relies more heavily on explicit lexical markers rather than prosody for sarcasm/attitude): expect TA-4's sarcasm-detection work in particular to be genuinely difficult and culturally variable — treat this as a legitimate cross-cultural pragmatics challenge requiring explicit, patient modeling, not an intonation-skill deficiency.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.prosody.md",
+        "startLine": 145,
+        "endLine": 185
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
