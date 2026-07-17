@@ -7771,6 +7771,168 @@ const MAXB_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.qm.spin ─────────────────────────────────────────────────────────────
+const SPIN = 'phys.qm.spin'
+const SPIN_SRC = 'docs/curriculum/blueprints/phys.qm.spin.md'
+
+const SPIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SPIN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Is the electron literally \u201cspinning\u201d like a tiny top? Run the ' +
+      'numbers and the picture explodes: if a particle of the ' +
+      'electron\u2019s known size (~10\u207b\u00b9\u2077 m) rotated fast enough to ' +
+      'produce angular momentum \u210f/2, its surface would need to move ' +
+      'at ~10\u00b9\u2070 m/s \u2014 thirty times the speed of light. Impossible, ' +
+      'so \u201cspin\u201d cannot be actual rotation. The name is a historical ' +
+      'accident: spin is a purely QUANTUM internal degree of freedom, ' +
+      'arising from the relativistic Dirac equation, with no spatial ' +
+      'motion behind it at all. Contrast with ORBITAL angular ' +
+      'momentum L, which genuinely comes from motion (p\u00d7r) and has ' +
+      'a classical limit — spin has neither a spatial source nor a ' +
+      'classical limit, and it persists even for a particle sitting ' +
+      'perfectly still.',
+    targetedMisconceptions: [`${SPIN}:MC-1`],
+    source: `${SPIN_SRC} — MC-1 Electron spin is literal rotation (P28 faster-than-light surface speed + P33 orbital-vs-spin contrast)`,
+  },
+  {
+    conceptId: SPIN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      '\u201cSpin-\u00bd\u201d does NOT mean the spin magnitude equals \u210f/2 — that ' +
+      'number is only the MAXIMUM z-projection, S_z. The actual ' +
+      'magnitude follows the general angular-momentum rule ' +
+      '|S\u20d7|\u00b2 = s(s+1)\u210f\u00b2: for s = \u00bd, |S\u20d7|\u00b2 = (\u00bd)(3/2)\u210f\u00b2 = ' +
+      '(3/4)\u210f\u00b2, so |S\u20d7| = (\u221a3/2)\u210f \u2248 0.866\u210f \u2014 LARGER than \u210f/2. If ' +
+      'the total magnitude really equaled the z-projection, all of ' +
+      'the spin would point exactly along z with zero transverse ' +
+      'component — but [\u015c_x, \u015c_z] \u2260 0 forbids that certainty. This ' +
+      'is the same pattern as orbital angular momentum: l = 1 gives ' +
+      '|L\u20d7| = \u221a2\u210f, not \u210f. The quantum number labels the LADDER ' +
+      'of allowed z-values, never the length of the full vector.',
+    targetedMisconceptions: [`${SPIN}:MC-2`],
+    source: `${SPIN_SRC} — MC-2 Spin-\u00bd means |S\u20d7|=\u210f/2 (s(s+1)\u210f\u00b2 formula; label-vs-magnitude distinction; commutator argument)`,
+  },
+]
+
+const SPIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: SPIN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'What is electron spin, physically?',
+    choices: [
+      { text: 'A purely quantum-mechanical intrinsic angular momentum with no spatial rotation — actual rotation would require faster-than-light surface speed', isCorrect: true },
+      { text: 'The electron literally spinning on its axis like a small top', isCorrect: false, misconceptionId: `${SPIN}:MC-1` },
+    ],
+    correctValue: 'intrinsic quantum property, not rotation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPIN}:MC-1`],
+    source: `${SPIN_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: SPIN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For a spin-\u00bd electron, what is the magnitude |S\u20d7| of its spin angular momentum?',
+    choices: [
+      { text: '(\u221a3/2)\u210f \u2248 0.866\u210f — from |S\u20d7|\u00b2 = s(s+1)\u210f\u00b2; \u210f/2 is only the maximum z-projection', isCorrect: true },
+      { text: '\u210f/2 — because the spin quantum number is \u00bd', isCorrect: false, misconceptionId: `${SPIN}:MC-2` },
+    ],
+    correctValue: '(\u221a3/2)\u210f',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPIN}:MC-2`],
+    source: `${SPIN_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.comparatives-and-superlatives ───────────────────────────────
+const COMP = 'eng.grammar.comparatives-and-superlatives'
+const COMP_SRC = 'docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md'
+
+const COMP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cBeautifuler\u201d and \u201cmore tall\u201d are both wrong, for opposite ' +
+      'reasons: English splits comparison by word LENGTH. Count the ' +
+      'syllables in \u201cbeautiful\u201d: beau-ti-ful, three — and longer ' +
+      'words (typically 3+ syllables, plus some 2-syllable endings ' +
+      'like -ful, -ous, -ing) take \u201cmore/most\u201d instead: more ' +
+      'beautiful, most beautiful. Short words (mostly 1 syllable, ' +
+      'plus many common 2-syllable ones) take -er/-est: tall \u2192 ' +
+      'taller \u2192 tallest; happy \u2192 happier \u2192 happiest. Before ' +
+      'comparing any adjective, count its syllables first: short \u2192 ' +
+      '-er/-est; long \u2192 more/most. It is a checkable test, not a ' +
+      'guess.',
+    targetedMisconceptions: [`${COMP}:MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST`],
+    source: `${COMP_SRC} — MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST (P28 beautifuler syllable-count conflict + P33 tall/beautiful, happy/careful pairs)`,
+  },
+  {
+    conceptId: COMP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cGooder\u201d and \u201cbaddest\u201d apply the regular rule correctly — to ' +
+      'the wrong words. A small, fixed set of very common words ' +
+      'refuse BOTH regular patterns and carry their own memorized ' +
+      'forms: good \u2192 better \u2192 best; bad \u2192 worse \u2192 worst; far \u2192 ' +
+      'farther/further \u2192 farthest/furthest; little \u2192 less \u2192 least; ' +
+      'much/many \u2192 more \u2192 most. These cannot be derived from ' +
+      'syllable-counting or any other rule — they simply must be ' +
+      'learned as a short list, the same way irregular past-tense ' +
+      'verbs (go\u2192went) must be. The reassuring part: the list is ' +
+      'genuinely short, and these words are so frequent that ' +
+      'exposure alone reinforces them quickly.',
+    targetedMisconceptions: [`${COMP}:MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES`],
+    source: `${COMP_SRC} — MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES (P28 gooder conflict + P31 fixed-list memorization framing)`,
+  },
+]
+
+const COMP_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is the correct comparative form of \u201cbeautiful\u201d?',
+    choices: [
+      { text: '\u201cMore beautiful\u201d — 3-syllable words take more/most', isCorrect: true },
+      { text: '\u201cBeautifuler\u201d — add -er to any adjective', isCorrect: false, misconceptionId: `${COMP}:MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST` },
+    ],
+    correctValue: 'more beautiful',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMP}:MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST`],
+    source: `${COMP_SRC} — P28 beautifuler conflict as probe`,
+  },
+  {
+    conceptId: COMP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is the correct comparative form of \u201cgood\u201d?',
+    choices: [
+      { text: '\u201cBetter\u201d — good is one of a small set of irregular, memorized forms', isCorrect: true },
+      { text: '\u201cGooder\u201d — apply the regular -er rule', isCorrect: false, misconceptionId: `${COMP}:MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES` },
+    ],
+    correctValue: 'better',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COMP}:MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES`],
+    source: `${COMP_SRC} — P28 gooder conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -7864,6 +8026,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CONDP_EXPLANATIONS,
   ...EXPV_EXPLANATIONS,
   ...MAXB_EXPLANATIONS,
+  ...SPIN_EXPLANATIONS,
+  ...COMP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -7957,4 +8121,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CONDP_PROBES,
   ...EXPV_PROBES,
   ...MAXB_PROBES,
+  ...SPIN_PROBES,
+  ...COMP_PROBES,
 ]
