@@ -4399,6 +4399,253 @@ const PAST_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.first-law ────────────────────────────────────────────────────
+const FLAW = 'phys.therm.first-law'
+const FLAW_SRC = 'docs/curriculum/blueprints/phys.therm.first-law.md'
+
+const FLAW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FLAW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Adiabatic does NOT mean constant temperature — a diesel engine ' +
+      'proves it every stroke. Compression is fast enough that no heat ' +
+      'gets in or out (Q = 0), yet the gas soars from 300 K to about ' +
+      '909 K — hot enough to ignite fuel with no spark plug. How can T ' +
+      'rise with zero heat? Because heat is only ONE way to change ' +
+      'internal energy; the first law reads \u0394U = Q + W_on, and the ' +
+      'piston\u2019s WORK pours straight into U, raising T. Keep the two ' +
+      'conditions apart: ISOTHERMAL means \u0394T = 0 — a thermostat ' +
+      'strategy that requires heat to leak in/out as work is done. ' +
+      'ADIABATIC means Q = 0 — an insulation strategy, with T free to ' +
+      'change and changing dramatically. Compress adiabatically: T ' +
+      'rises. Expand adiabatically: the gas spends its own internal ' +
+      'energy doing work, and T falls.',
+    targetedMisconceptions: [`${FLAW}:MC-ADIABATIC-MEANS-CONSTANT-TEMPERATURE`],
+    source: `${FLAW_SRC} — MC-ADIABATIC-MEANS-CONSTANT-TEMPERATURE (P28 diesel WE-2 + s6 insulated-vs-thermostat contrast)`,
+  },
+  {
+    conceptId: FLAW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'W = P\u0394V is not a new kind of work — it IS F \u00d7 d in disguise. ' +
+      'Check with numbers: gas at P = 2\u00d710\u2075 Pa pushes a piston of ' +
+      'area 0.01 m\u00b2 through 0.05 m. Mechanics way: F = PA = 2000 N, ' +
+      'W = Fd = 100 J. Thermodynamics way: \u0394V = A\u00d7d = 5\u00d710\u207b\u2074 m\u00b3, ' +
+      'W = P\u0394V = 100 J. Same number, same physics — P\u0394V just ' +
+      'rewrites F\u00d7d using P = F/A. The general truth is W = \u222bP dV: ' +
+      'the AREA under the process curve on a P-V diagram. Constant ' +
+      'pressure collapses it to P\u0394V; variable pressure does not — an ' +
+      'isothermal expansion needs W = nRT ln(V\u2082/V\u2081). Before using ' +
+      'the simple formula, always ask: is P actually constant along ' +
+      'this process?',
+    targetedMisconceptions: [`${FLAW}:MC-WORK-IS-ONLY-MECHANICAL`],
+    source: `${FLAW_SRC} — MC-WORK-IS-ONLY-MECHANICAL (P28 piston double-computation + P31 area-under-curve generalization)`,
+  },
+]
+
+const FLAW_PROBES: SeedProbe[] = [
+  {
+    conceptId: FLAW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An ideal gas in a perfectly insulated cylinder is rapidly compressed. What happens to its temperature?',
+    choices: [
+      { text: 'It rises — Q = 0, so all the work done on the gas becomes internal energy (\u0394U = W_on)', isCorrect: true },
+      { text: 'It stays constant — no heat enters, so the temperature cannot change', isCorrect: false, misconceptionId: `${FLAW}:MC-ADIABATIC-MEANS-CONSTANT-TEMPERATURE` },
+      { text: 'It falls — compression squeezes the heat out', isCorrect: false },
+    ],
+    correctValue: 'rises',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FLAW}:MC-ADIABATIC-MEANS-CONSTANT-TEMPERATURE`],
+    source: `${FLAW_SRC} — P33 insulated-compression pair as probe`,
+  },
+  {
+    conceptId: FLAW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An ideal gas expands isothermally from 10 L to 20 L. Can you compute the work as W = P\u0394V?',
+    choices: [
+      { text: 'No — P varies during an isothermal expansion; use W = nRT ln(V\u2082/V\u2081), the area under the P-V curve', isCorrect: true },
+      { text: 'Yes — W = P\u0394V works for every gas process', isCorrect: false, misconceptionId: `${FLAW}:MC-WORK-IS-ONLY-MECHANICAL` },
+    ],
+    correctValue: 'no — P varies',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FLAW}:MC-WORK-IS-ONLY-MECHANICAL`],
+    source: `${FLAW_SRC} — P33 isothermal-expansion pair as probe`,
+  },
+]
+
+// ─── math.geom.circle ────────────────────────────────────────────────────────
+const CIRCL = 'math.geom.circle'
+const CIRCL_SRC = 'docs/curriculum/blueprints/math.geom.circle.md'
+
+const CIRCL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CIRCL,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Anchor one fact and the circle formulas stop tangling: the ' +
+      'RADIUS r is the circle\u2019s own defining distance — centre to ' +
+      'edge — and the diameter is just two radii end to end, d = 2r. ' +
+      'The standard formulas are written in r: circumference C = 2\u03c0r, ' +
+      'area A = \u03c0r\u00b2. The classic slips — C = 2\u03c0d or A = \u03c0d\u00b2 — ' +
+      'double-count the 2 that is already inside d. Catch them with a ' +
+      'sanity check: for r = 1, C = 2\u03c0 \u2248 6.28; writing C = 2\u03c0d = 4\u03c0 ' +
+      'doubles it. Working habit: whatever the problem hands you, ' +
+      'convert to r FIRST (given d = 10, write r = 5 before touching ' +
+      'any formula), then use C = 2\u03c0r (equivalently \u03c0d) and A = \u03c0r\u00b2 ' +
+      '— never \u03c0d\u00b2.',
+    targetedMisconceptions: [`${CIRCL}:MC-1`],
+    source: `${CIRCL_SRC} — MC-1 RADIUS-DIAMETER-CONFUSION (convert-to-r-first discipline + double-counting diagnosis)`,
+  },
+  {
+    conceptId: CIRCL,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u03c0 is not 3.14 — 3.14 is a convenient approximation of \u03c0, the ' +
+      'way \u201cabout 6 feet\u201d approximates a person\u2019s height. \u03c0 is an ' +
+      'exact number (the true ratio of any circle\u2019s circumference to ' +
+      'its diameter) whose decimals never end and never repeat, so ' +
+      'ANY decimal you write is already rounded. That is why exact ' +
+      'answers keep the symbol: a circle of radius 3 has area 9\u03c0, ' +
+      'exactly — writing 28.26 is an approximation, and marking ' +
+      'schemes distinguish the two. Treat \u03c0 like x in algebra: it ' +
+      'multiplies, factors, and cancels symbolically (2\u03c0r \u00d7 3 = 6\u03c0r; ' +
+      '\u03c0r\u00b2/\u03c0 = r\u00b2). Reach for 3.14 only at the final step, and only ' +
+      'when the question asks for a decimal.',
+    targetedMisconceptions: [`${CIRCL}:MC-2`],
+    source: `${CIRCL_SRC} — MC-2 PI-IS-APPROXIMATE-ONLY (exact-symbol vs approximation; \u03c0-as-algebraic-symbol bridge)`,
+  },
+]
+
+const CIRCL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CIRCL,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A circle has diameter 10. What is its area?',
+    choices: [
+      { text: '25\u03c0 — first convert: r = 5, then A = \u03c0r\u00b2', isCorrect: true },
+      { text: '100\u03c0 — A = \u03c0d\u00b2 with d = 10', isCorrect: false, misconceptionId: `${CIRCL}:MC-1` },
+      { text: '10\u03c0 — A = \u03c0d', isCorrect: false, misconceptionId: `${CIRCL}:MC-1` },
+    ],
+    correctValue: '25\u03c0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CIRCL}:MC-1`],
+    source: `${CIRCL_SRC} — MC-1 formula-substitution probe, distractor-mapped`,
+  },
+  {
+    conceptId: CIRCL,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A question asks for the EXACT area of a circle with radius 3. Which answer is exact?',
+    choices: [
+      { text: '9\u03c0 — keeping the symbol keeps the value exact; any decimal is rounded', isCorrect: true },
+      { text: '28.26 — using \u03c0 = 3.14, which is what \u03c0 equals', isCorrect: false, misconceptionId: `${CIRCL}:MC-2` },
+    ],
+    correctValue: '9\u03c0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CIRCL}:MC-2`],
+    source: `${CIRCL_SRC} — MC-2 exact-vs-approximate probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.future-tenses ───────────────────────────────────────────────
+const FUT = 'eng.grammar.future-tenses'
+const FUT_SRC = 'docs/curriculum/blueprints/eng.grammar.future-tenses.md'
+
+const FUT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FUT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cWill\u201d and \u201cgoing to\u201d both point at the future, but they ' +
+      'carry different backstories. \u201cGoing to\u201d signals a PRIOR PLAN ' +
+      'or a prediction from visible present evidence: \u201cI\u2019m going to ' +
+      'visit my grandmother this weekend\u201d (already arranged); \u201cLook ' +
+      'at those dark clouds — it\u2019s going to rain\u201d (the evidence is in ' +
+      'front of you). \u201cWill\u201d signals a decision born THIS instant, a ' +
+      'promise, or a general belief: the phone rings and you say ' +
+      '\u201cI\u2019ll get it!\u201d — no plan existed two seconds ago; \u201cI think it ' +
+      'will rain this week\u201d — opinion, not visible evidence. Casual ' +
+      'speech blurs them constantly and that\u2019s fine; but when the ' +
+      'moment of decision matters, the forms disagree: \u201cI\u2019m going to ' +
+      'get it!\u201d for a ringing phone sounds oddly premeditated.',
+    targetedMisconceptions: [`${FUT}:MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE`],
+    source: `${FUT_SRC} — MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE (P30 plan/evidence vs spontaneous split + P33 clouds/phone pairs)`,
+  },
+  {
+    conceptId: FUT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Can a present-tense verb talk about the future? Read this: ' +
+      '\u201cThe train leaves at 6pm tonight.\u201d \u201cLeaves\u201d is grammatically ' +
+      'simple present — yet the departure hasn\u2019t happened. English ' +
+      'systematically borrows present forms for two future jobs: ' +
+      'simple present for SCHEDULED, timetabled events (\u201cthe movie ' +
+      'starts at 8\u201d, \u201cthe flight departs at noon\u201d) and present ' +
+      'continuous for CONFIRMED personal arrangements (\u201cI\u2019m meeting ' +
+      'her tomorrow\u201d). Context, not the verb form, carries the time: ' +
+      '\u201cI\u2019m meeting her right now\u201d is present; add \u201ctomorrow\u201d and ' +
+      'the same form is future. So the future toolbox has four tools ' +
+      '— will, going to, present continuous (arrangements), simple ' +
+      'present (schedules) — not two.',
+    targetedMisconceptions: [`${FUT}:MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME`],
+    source: `${FUT_SRC} — MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME (P28 train-leaves conflict + P33 now/tomorrow contrast)`,
+  },
+]
+
+const FUT_PROBES: SeedProbe[] = [
+  {
+    conceptId: FUT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'The phone suddenly rings while you are talking with a friend. What do you most naturally say?',
+    choices: [
+      { text: '\u201cI\u2019ll get it!\u201d — \u201cwill\u201d fits a decision made at the moment of speaking', isCorrect: true },
+      { text: 'Either — \u201cwill\u201d and \u201cgoing to\u201d always mean exactly the same thing', isCorrect: false, misconceptionId: `${FUT}:MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE` },
+      { text: '\u201cI get it!\u201d — simple present for present events', isCorrect: false },
+    ],
+    correctValue: "I'll get it",
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FUT}:MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE`],
+    source: `${FUT_SRC} — P28 spontaneous-decision scenario as probe`,
+  },
+  {
+    conceptId: FUT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u201cThe train leaves at 6pm tonight,\u201d what time does the sentence refer to?',
+    choices: [
+      { text: 'The future — simple present is used for scheduled/timetabled events even though the form is present', isCorrect: true },
+      { text: 'It must be wrong — only \u201cwill\u201d or \u201cgoing to\u201d can express future time', isCorrect: false, misconceptionId: `${FUT}:MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME` },
+    ],
+    correctValue: 'future (scheduled event)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FUT}:MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME`],
+    source: `${FUT_SRC} — P28 train-leaves conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -4451,6 +4698,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...HT_EXPLANATIONS,
   ...ANG_EXPLANATIONS,
   ...PAST_EXPLANATIONS,
+  ...FLAW_EXPLANATIONS,
+  ...CIRCL_EXPLANATIONS,
+  ...FUT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -4503,4 +4753,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...HT_PROBES,
   ...ANG_PROBES,
   ...PAST_PROBES,
+  ...FLAW_PROBES,
+  ...CIRCL_PROBES,
+  ...FUT_PROBES,
 ]
