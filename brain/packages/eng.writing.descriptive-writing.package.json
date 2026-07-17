@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.descriptive-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.descriptive-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:666902c6d6af6b986391cb04104e97f3979bf8c10376658aabfe559285788c52",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.descriptive-writing.md": "sha256:3822b3d482dac45604c354f5bcb8b4ae3f8178d934788272bef0ce412838831c"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.descriptive-writing",
+    "name": "Descriptive Writing",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.transitions-and-cohesion"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.descriptive-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.descriptive-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.descriptive-writing.md": "sha256:3822b3d482dac45604c354f5bcb8b4ae3f8178d934788272bef0ce412838831c"
+      },
+      "contentHash": "sha256:2368b5d22e45c7ba60b66dba48be2df0f09aef2eaafcd8634be8d61ae518166d",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.descriptive-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md#TA-1 (addresses MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.descriptive-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.descriptive-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.descriptive-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md#TA-2 (addresses MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.descriptive-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.descriptive-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.descriptive-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.descriptive-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.descriptive-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.descriptive-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.descriptive-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.descriptive-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.descriptive-writing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md#TA-5 (addresses MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID, MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.descriptive-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.descriptive-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.descriptive-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Descriptive Writing — Conceptual Development Sequence",
+      "content": "### TA-1: Precision vs. Quantity Sorting\nPresent pairs of descriptions, one adjective-piled and one precise/specific, and have the student identify which creates a clearer mental image and explain why redundant adjectives dilute rather than strengthen vividness. Directly counters MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID.\n\n### TA-2: The Five-Sense Check\nPresent a sight-only description and have the student add details from at least 2 additional senses, using the five-sense dial as a checklist. Directly counters MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS.\n\n### TA-3: Figurative Language for Precision\nTeach basic figurative devices (simile, metaphor, personification) as tools for precise, vivid description, and have the student convert 3 flat descriptions into more vivid ones using one figurative device each.\n\n### TA-4: Organizing a Description Spatially or by Impression\nTeach organizational strategies for description (spatial order — near to far, top to bottom; or order of dominant impression — most striking detail first or last) and have the student organize a set of details using one strategy.\n\n### TA-5: Composing a Full Original Multi-Sensory Description\nStudent writes a complete original descriptive passage about a chosen subject, using precise (not piled) language, at least 3 senses, and one figurative device, organized deliberately — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": ": Precision vs. Piling (Scaffolded)",
+      "content": "### WE-1: Precision vs. Piling (Scaffolded)\n**Piled:** \"The huge, giant, enormous, massive waves crashed on the shore.\" **Precise:** \"The waves crashed in thunderous walls of white foam against the shore.\"\n**Walkthrough:** Confirm the precise version, despite using fewer size-adjectives, creates a clearer and more powerful image through specific, sensory language (\"thunderous,\" \"walls of white foam\").",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": ": Five-Sense Expansion (Guided)",
+      "content": "### WE-2: Five-Sense Expansion (Guided)\n**Sight-only:** \"The forest had tall green trees and a narrow dirt path.\"\n**Walkthrough:** Expand: \"The forest's tall green trees rustled softly overhead, releasing the damp scent of pine, while the narrow dirt path crunched with fallen leaves underfoot.\" (adding sound, smell, touch alongside sight).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": ": Full Multi-Sensory Composition (Independent)",
+      "content": "### WE-3: Full Multi-Sensory Composition (Independent)\n**Subject:** A busy morning kitchen.\n**Walkthrough:** Student composes a passage using precise word choice (not piled adjectives), at least 3 senses (sizzling bacon sound, coffee smell, warm mug touch), one figurative device (e.g., \"the kitchen hummed like a small engine\"), organized by dominant impression (starting with the most striking sensory detail).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/misconception/MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID",
+      "kind": "misconception",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "- **Trigger signal:** Student piles on as many adjectives as possible (\"the big, tall, huge, enormous, gigantic tree\") believing quantity of descriptive words automatically creates vividness, rather than recognizing that a few precise, specific, well-chosen sensory details create a far more vivid impression than a pile of vague or redundant adjectives.",
+      "content": "### MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID\n- **Trigger signal:** Student piles on as many adjectives as possible (\"the big, tall, huge, enormous, gigantic tree\") believing quantity of descriptive words automatically creates vividness, rather than recognizing that a few precise, specific, well-chosen sensory details create a far more vivid impression than a pile of vague or redundant adjectives.\n- **Conflict evidence [P28]:** Present \"The big, tall, huge, enormous, gigantic, old, ancient tree stood in the yard.\" (adjective-piled, mostly redundant) alongside \"The oak's gnarled branches cast long shadows across the frost-covered yard.\" (fewer words, but specific and sensory). Ask which one actually creates a clearer, more vivid mental picture.\n- **Bridge text [P30]:** \"Piling on adjectives, especially near-synonyms, doesn't multiply vividness — it often dilutes it, since redundant words ('big, huge, enormous, gigantic') all say roughly the same thing without adding new information. A few precise, specific sensory details ('gnarled branches,' 'frost-covered') create a sharper, more vivid picture than a long list of vague size-words.\"\n- **Replacement text [P31]:** \"Instead of stacking multiple adjectives, choose ONE precise, specific detail that captures what makes this subject distinctive, and develop it with concrete sensory language. Quality and specificity beat quantity every time in descriptive writing.\"\n- **Discrimination pairs [P33]:** (a) Adjective-quantity-as-vividness (more descriptive words, especially adjectives, automatically create more vivid description) vs. (b) Precision-as-vividness (a few precise, specific, sensory details create genuine vividness; redundant or vague adjective-piling dilutes rather than enhances it).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's precision-vs-quantity sort before continuing.",
+      "localKey": "MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID",
+      "language": "en",
+      "refs": [
+        "MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/misconception/MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS",
+      "kind": "misconception",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "- **Trigger signal:** Student, when writing descriptively, relies almost exclusively on visual/sight details (color, shape, size) and neglects the other four senses (sound, smell, touch, taste), producing description that is visually complete but sensorially flat and less immersive than description drawing on multiple senses.",
+      "content": "### MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS\n- **Trigger signal:** Student, when writing descriptively, relies almost exclusively on visual/sight details (color, shape, size) and neglects the other four senses (sound, smell, touch, taste), producing description that is visually complete but sensorially flat and less immersive than description drawing on multiple senses.\n- **Conflict evidence [P28]:** Present a purely visual description of a bakery (\"The bakery had golden-brown bread and colorful pastries in the window.\") alongside a multi-sensory description (\"The bakery's golden-brown loaves crackled faintly as they cooled, filling the air with the warm scent of yeast and butter.\") Ask which one makes the reader feel more immersed in the scene.\n- **Bridge text [P30]:** \"Relying only on sight leaves out most of what makes an experience feel real and immersive — sound, smell, touch, and taste often carry as much or more sensory power than visual detail alone. A bakery description that includes the crackle of cooling bread and the scent of yeast pulls the reader into the scene far more completely than color and shape alone.\"\n- **Replacement text [P31]:** \"Before finishing a descriptive passage, check which senses you've used. If it's only sight, add at least one non-visual sensory detail (sound, smell, touch, or taste) to make the scene feel more fully realized and immersive.\"\n- **Discrimination pairs [P33]:** (a) Sight-only description (vivid description can be achieved through visual detail alone) vs. (b) Multi-sensory description (genuinely immersive description draws on multiple senses — sound, smell, touch, taste — not just sight).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's five-sense dial framing before continuing to TA-3.",
+      "localKey": "MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS",
+      "language": "en",
+      "refs": [
+        "MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Precision vs. Quantity Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Precision vs. Quantity Sorting\",\"primitives\":[],\"addresses\":[\"MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "The Five-Sense Check",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Five-Sense Check\",\"primitives\":[],\"addresses\":[\"MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Figurative Language for Precision",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Figurative Language for Precision\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Organizing a Description Spatially or by Impression",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Organizing a Description Spatially or by Impression\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Composing a Full Original Multi-Sensory Description",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Composing a Full Original Multi-Sensory Description\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS\",\"MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID",
+        "MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Choose precision over adjective-piling**\nGiven an adjective-piled description, student revises it into a precise, specific version using fewer but stronger words. *(Directly targets MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Expand a sight-only description to multiple senses**\nGiven a sight-only description, student adds details from at least 2 additional senses. *(Directly targets MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Apply a figurative device**\nGiven a flat description, student converts it using one figurative device (simile, metaphor, or personification).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Organize details spatially or by impression**\nGiven a set of unordered details, student organizes them using a stated spatial or impression-based strategy.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Compose a full multi-sensory description**\nStudent writes an original descriptive passage using precise language, multiple senses, and figurative language, deliberately organized.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student piles redundant adjectives, weight remediation toward MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID's bridge text and re-run TA-1's precision-vs-quantity sort before returning to composition.\n- If the student relies only on visual/sight details, weight remediation toward MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS's bridge text and TA-2's five-sense check specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.creative-writing-forms`) — do not certify mastery without TA-5's full multi-sensory composition, since creative writing forms assume the student can already produce vivid, precise, multi-sensory description as a base skill.\n- Reuse the \"five-sense dial\" framing explicitly when introducing `eng.writing.creative-writing-forms` — that concept extends multi-sensory precision to a wider range of creative writing genres beyond straightforward description.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID",
+        "MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.writing.descriptive-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.descriptive-writing",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Transitions-and-Cohesion Readiness Check]\n        |\n        v\n[Concrete Anchor: The Five-Sense Dial and the Precision Filter]\n        |\n        v\n[TA-1: Precision vs. Quantity Sorting]\n        |\n        v\n[TA-2: The Five-Sense Check]\n        |\n        v\n[TA-3: Figurative Language for Precision]\n        |\n        v\n[TA-4: Organizing a Description Spatially or by Impression]\n        |\n        v\n[TA-5: Composing a Full Original Multi-Sensory Description]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — descriptive writing layers multiple sensory details that need smooth cohesive connection, so weak cohesion undermines the layering this concept teaches. During instruction (S1), watch for both misconception patterns: adjective-piling (MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID) and sight-only description (MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS) both substitute a shallow quantity/single-channel heuristic for genuine sensory precision and richness — redirect both to the Five-Sense Dial and Precision Filter anchor. If the student piles adjectives or relies only on sight during TA-1/TA-2 (S6), drop back to the Concrete Anchor's funnel and dial demonstrations before returning to composition. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who applies figurative language and organization well (MP-3/MP-4) but still piles adjectives or stays sight-only has not learned the core sensory-precision judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.descriptive-writing.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

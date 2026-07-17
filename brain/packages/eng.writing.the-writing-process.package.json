@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.the-writing-process-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.the-writing-process",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4379bbb9f2a488911c52f32c392c77b12e6493b9ad73b38c669b22da4c1b4e0f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.the-writing-process.md": "sha256:156a6d5ea95d2a9fb01417a77c985d2f00ea1297fd36417847dfe93bc6abb83d"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.the-writing-process",
+    "name": "The Writing Process",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.narrative-writing",
+      "eng.writing.expository-writing"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.the-writing-process-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.the-writing-process (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.the-writing-process.md": "sha256:156a6d5ea95d2a9fb01417a77c985d2f00ea1297fd36417847dfe93bc6abb83d"
+      },
+      "contentHash": "sha256:c63a65257258dd74cab00063959161224ff6576695863408dd16f3233a9c4b59",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.the-writing-process.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.the-writing-process.md#TA-1 (addresses MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.the-writing-process"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.the-writing-process\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.the-writing-process.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.the-writing-process.md#TA-2 (addresses MC-EDITING-AND-REVISING-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.the-writing-process"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.the-writing-process\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.the-writing-process.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.the-writing-process.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.the-writing-process"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.the-writing-process\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.the-writing-process.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.the-writing-process.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.the-writing-process"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.the-writing-process\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.the-writing-process.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.the-writing-process.md#TA-5 (addresses MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS, MC-EDITING-AND-REVISING-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.the-writing-process"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.the-writing-process\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.the-writing-process/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "The Writing Process — Conceptual Development Sequence",
+      "content": "### TA-1: Draft Comparison — First Draft vs. Final Piece\nPresent a real or realistic first-draft and final-draft pair (with visible substantial revision between them) and have the student identify the differences, confirming multiple drafts and substantial revision is the normal path, not a sign of initial failure. Directly counters MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS.\n\n### TA-2: Distinguishing Revision from Editing\nUsing the discrimination pairs from MC-EDITING-AND-REVISING-ARE-THE-SAME-THING, present a checklist of potential fixes to a draft (reorganize a confusing paragraph, fix a spelling error, clarify an unclear argument, correct a comma splice) and have the student sort each as \"revision\" (big-picture) or \"editing\" (surface-level).\n\n### TA-3: The Planning Stage\nTeach basic planning strategies (brainstorming, simple outlining) and have the student create a brief plan for an assigned writing topic before drafting.\n\n### TA-4: Revising Before Editing, in Order\nGiven a sample draft with both organizational/clarity issues and surface-level errors, student first revises the big-picture issues, THEN edits the surface-level errors, practicing the correct order.\n\n### TA-5: Full Writing-Process Cycle\nStudent completes a full cycle (plan, draft, revise, edit) on an original short piece, documenting or narrating what happened at each stage — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": ": Draft Comparison (Scaffolded)",
+      "content": "### WE-1: Draft Comparison (Scaffolded)\n**First draft excerpt:** A confusing, under-organized paragraph about a topic. **Revised excerpt:** The same content, reorganized with a clear topic sentence and logical detail order.\n**Walkthrough:** Confirm the revision required substantial rework, not just polish, and that this is the expected normal process, not evidence the first draft was a \"failure.\"",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": ": Revision vs. Editing Sort (Guided)",
+      "content": "### WE-2: Revision vs. Editing Sort (Guided)\n**Fixes list:** \"Reorganize paragraph 2 so the argument builds logically\" (revision) / \"Fix 'recieve' to 'receive'\" (editing) / \"Clarify what 'this' refers to in sentence 4\" (revision) / \"Add a missing comma\" (editing).\n**Walkthrough:** Sort each fix, confirming revision addresses content/clarity/organization while editing addresses surface-level correctness, and revision should generally happen first.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": ": Full Cycle Application (Independent)",
+      "content": "### WE-3: Full Cycle Application (Independent)\n**Task:** Student plans, drafts, revises, and edits a short piece on an assigned topic.\n**Walkthrough:** Student documents each stage: a brief plan/outline, a rough first draft, substantive revision notes (reorganizing, clarifying), and finally surface-level editing corrections — demonstrating the full process in the correct order.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/misconception/MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS",
+      "kind": "misconception",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "- **Trigger signal:** Student believes skilled writers compose a polished final piece straight through in a single draft, treating any need for revision as a sign of inadequate skill rather than a normal, expected, universal part of how all writing — including professional and published writing — actually gets made.",
+      "content": "### MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS\n- **Trigger signal:** Student believes skilled writers compose a polished final piece straight through in a single draft, treating any need for revision as a sign of inadequate skill rather than a normal, expected, universal part of how all writing — including professional and published writing — actually gets made.\n- **Conflict evidence [P28]:** Present a well-known author's account of extensive revision (multiple drafts, editor feedback, cut passages) for a published, celebrated work. Ask the student whether this author \"wasn't good enough\" to get it right the first time, or whether extensive revision is simply how all serious writing gets made, regardless of skill level.\n- **Bridge text [P30]:** \"Even the most skilled, experienced, published writers go through multiple drafts, revision, and editing — nobody produces a finished, polished piece in one pass, no matter how talented they are. Needing to revise isn't a sign you're bad at writing; it's simply what the process of writing actually looks like for everyone.\"\n- **Replacement text [P31]:** \"Expect to revise, every time, regardless of how strong your first draft feels. Treat your first draft as a rough sketch meant to be reshaped, not a final product that either succeeds or fails on the first attempt.\"\n- **Discrimination pairs [P33]:** (a) One-pass-mastery expectation (skilled writers produce a finished piece correctly on the first attempt) vs. (b) Universal-revision recognition (multiple drafts and revision are a normal, expected, universal part of the writing process for all writers, regardless of skill).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's draft-comparison practice before continuing.",
+      "localKey": "MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/misconception/MC-EDITING-AND-REVISING-ARE-THE-SAME-THING",
+      "kind": "misconception",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "- **Trigger signal:** Student treats \"revising\" and \"editing\" as interchangeable terms for the same activity — usually collapsing both into surface-level correction (fixing spelling, punctuation, grammar) — and neglects the distinct, often more substantial work of revision proper: reconsidering content, organization, clarity of ideas, and overall effectiveness, which should generally happen BEFORE fine-grained editing.",
+      "content": "### MC-EDITING-AND-REVISING-ARE-THE-SAME-THING\n- **Trigger signal:** Student treats \"revising\" and \"editing\" as interchangeable terms for the same activity — usually collapsing both into surface-level correction (fixing spelling, punctuation, grammar) — and neglects the distinct, often more substantial work of revision proper: reconsidering content, organization, clarity of ideas, and overall effectiveness, which should generally happen BEFORE fine-grained editing.\n- **Conflict evidence [P28]:** Present a draft with a strong, well-organized argument but several spelling errors, alongside a draft with perfect spelling/grammar but a confusing, poorly-organized argument. Ask the student which draft has bigger problems to fix, and whether \"fixing spelling\" would solve the second draft's real issue.\n- **Bridge text [P30]:** \"Revising and editing are two different jobs. Revising means reconsidering the big-picture things — is my argument clear, is my organization logical, do my ideas actually work — often requiring real rewriting. Editing means fixing surface-level errors — spelling, punctuation, grammar — after the big-picture content is already solid. Doing them in the wrong order (polishing spelling on a poorly-organized draft) wastes effort on the wrong problem first.\"\n- **Replacement text [P31]:** \"Do the big-picture revision work first: check whether your ideas, organization, and clarity actually work, and rewrite as needed. Only after the content is solid should you move to editing — the fine-grained correction of spelling, grammar, and punctuation errors.\"\n- **Discrimination pairs [P33]:** (a) Revising-equals-editing (both terms refer to the same surface-level correction activity) vs. (b) Revising-then-editing distinction (revising addresses big-picture content/organization/clarity and should happen first; editing addresses surface-level correctness and should happen after content is solid).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's house-vs-paint-job framing before continuing to TA-3.",
+      "localKey": "MC-EDITING-AND-REVISING-ARE-THE-SAME-THING",
+      "language": "en",
+      "refs": [
+        "MC-EDITING-AND-REVISING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "Draft Comparison — First Draft vs. Final Piece",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Draft Comparison — First Draft vs. Final Piece\",\"primitives\":[],\"addresses\":[\"MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "Distinguishing Revision from Editing",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Distinguishing Revision from Editing\",\"primitives\":[],\"addresses\":[\"MC-EDITING-AND-REVISING-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-EDITING-AND-REVISING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "The Planning Stage",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Planning Stage\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "Revising Before Editing, in Order",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Revising Before Editing, in Order\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "Full Writing-Process Cycle",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Writing-Process Cycle\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-EDITING-AND-REVISING-ARE-THE-SAME-THING\",\"MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS",
+        "MC-EDITING-AND-REVISING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Confirm multi-draft normalcy**\nGiven a first-draft/final-draft comparison showing substantial revision, student confirms this is the normal writing process, not evidence of initial failure. *(Directly targets MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Sort revision vs. editing fixes**\nGiven a list of potential fixes to a draft, student correctly sorts each as revision (big-picture) or editing (surface-level). *(Directly targets MC-EDITING-AND-REVISING-ARE-THE-SAME-THING.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-EDITING-AND-REVISING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Create a basic writing plan**\nGiven a topic, student creates a brief plan or outline before drafting.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Revise before editing, in correct order**\nGiven a draft with both organizational and surface-level issues, student addresses revision issues first, then editing issues.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Complete a full writing-process cycle**\nStudent completes plan, draft, revise, and edit stages on an original short piece, demonstrating the correct order and distinct nature of each stage.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "Adaptive Flags",
+      "content": "- If the student treats a rough first draft as a sign of failure, weight remediation toward MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS's bridge text and re-run TA-1's draft-comparison practice before returning to independent composition.\n- If the student conflates revision with editing or edits before revising, weight remediation toward MC-EDITING-AND-REVISING-ARE-THE-SAME-THING's bridge text and TA-2/TA-4's ordering practice specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.outlining-and-planning`) — do not certify mastery without TA-5's full-cycle application, since outlining/planning specifically deepens the planning stage established here as part of a complete process.\n- Reuse the \"building the house, then painting it\" framing explicitly when introducing `eng.writing.outlining-and-planning` — that concept deepens the planning/blueprint stage of this process.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS",
+        "MC-EDITING-AND-REVISING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.writing.the-writing-process/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.the-writing-process",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Narrative/Expository Writing Readiness Check]\n        |\n        v\n[Concrete Anchor: Building the House, Then Painting It]\n        |\n        v\n[TA-1: Draft Comparison]\n        |\n        v\n[TA-2: Distinguishing Revision from Editing]\n        |\n        v\n[TA-3: The Planning Stage]\n        |\n        v\n[TA-4: Revising Before Editing, in Order]\n        |\n        v\n[TA-5: Full Writing-Process Cycle]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — the writing process organizes work the student must already be capable of producing independently in narrative and expository forms. During instruction (S1), watch for both misconception patterns: expecting one-pass mastery (MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS) and conflating revision with editing (MC-EDITING-AND-REVISING-ARE-THE-SAME-THING) both reflect an incomplete model of how real writing gets made — redirect both to the House-Building anchor. If the student treats a rough first draft as a failure or edits before revising during TA-1/TA-4 (S6), drop back to the Concrete Anchor's frame-then-paint demonstration before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who plans well (MP-3) but still expects one-pass perfection or edits before revising has not learned the process discipline this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.the-writing-process.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

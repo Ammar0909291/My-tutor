@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.prose-fiction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.prose-fiction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0f21d53a5e0af72346a7ca0ea59b3ba8120063c7205733de6c75fcae46e1a026",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.prose-fiction.md": "sha256:32d16739db1179a86754002b3fd2e4a11d274e584092d3b2a27ef717434b18df"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.prose-fiction",
+    "name": "Prose Fiction",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.plot-structure"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.prose-fiction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.prose-fiction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.prose-fiction.md": "sha256:32d16739db1179a86754002b3fd2e4a11d274e584092d3b2a27ef717434b18df"
+      },
+      "contentHash": "sha256:bb79adaa04a584a1138991cabff3efa98d42bca7df4819746e1a7e359e5b1eb1",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-fiction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-fiction.md#TA-1 (addresses MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-fiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-fiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-fiction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-fiction.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-fiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-fiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-fiction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-fiction.md#TA-3 (addresses MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-fiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-fiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-fiction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-fiction.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-fiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-fiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.prose-fiction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.prose-fiction.md#TA-5 (addresses MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL, MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.prose-fiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.prose-fiction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.prose-fiction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Prose Fiction — Conceptual Development Sequence",
+      "content": "### TA-1: Scope Comparison — Short Story vs. Novel\nPresent a short story summary and a novel summary side by side and have the student identify the SCOPE differences (number of characters, timespan, subplot complexity) as deliberate structural choices, not deficiencies. Directly counters MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL.\n\n### TA-2: The Single Unified Effect\nTeach the concept of a short story's \"single unified effect\" — the one focused emotional or thematic impression the whole story builds toward — and have the student identify this unified effect in 2 short stories.\n\n### TA-3: Realistic vs. Non-Realistic Modes\nUsing the discrimination pairs from MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD, present a realistic and a non-realistic short story excerpt exploring similar themes and have the student identify the human truth each explores despite their different realism levels.\n\n### TA-4: Identifying Novel-Scale Structural Features\nTeach novel-specific structural features (multiple subplots, a larger cast, chapters/parts as organizational units, extended character development over time) and have the student identify these in a novel excerpt or summary, contrasting with the short story's tighter scope.\n\n### TA-5: Analyzing a Novel Prose-Fiction Excerpt for Form and Mode\nStudent analyzes a new excerpt (short story or novel chapter), identifying its form-appropriate scope, its realism/non-realism mode, and the human truth or unified effect it's building toward — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": ": Scope Comparison (Scaffolded)",
+      "content": "### WE-1: Scope Comparison (Scaffolded)\n**Short story summary:** A single encounter between two strangers on a train reveals a moment of unexpected connection. **Novel summary:** A family's story spanning three generations, multiple subplots, and a large ensemble cast.\n**Walkthrough:** Identify the short story's tight focus (one encounter, two characters, brief timespan) as a deliberate structural choice suited to achieving one unified effect, not a \"missing\" novel.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": ": Realistic vs. Non-Realistic Truth (Guided)",
+      "content": "### WE-2: Realistic vs. Non-Realistic Truth (Guided)\n**Realistic excerpt:** A character quietly grieves a loss through ordinary daily routines. **Non-realistic excerpt:** A character's grief is represented by objects in their house literally fading in color.\n**Walkthrough:** Identify both as exploring the same human truth (the process of grief) through different modes — one through realistic ordinary detail, one through symbolic non-realistic imagery — neither \"more serious\" than the other.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": ": Full Excerpt Analysis (Independent)",
+      "content": "### WE-3: Full Excerpt Analysis (Independent)\n**Excerpt:** A short story opening establishing a single character, a specific tense situation, and a distinctly non-realistic element (a talking object, a shifted sense of time).\n**Walkthrough:** Student identifies the tight short-story scope, names the non-realistic element, and hypothesizes what human truth or theme that non-realistic element might be helping to explore.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/misconception/MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL",
+      "kind": "misconception",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "- **Trigger signal:** Student treats the short story as merely a length-reduced novel, expecting it to contain the same scope of plot complexity, number of characters, and subplot development as a novel but compressed, rather than recognizing that the short story is a genuinely distinct form with its own characteristic constraints — typically a single unified effect, one central conflict, and a small, tightly-focused cast, rather than a novel's expansive scope simply trimmed down.",
+      "content": "### MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL\n- **Trigger signal:** Student treats the short story as merely a length-reduced novel, expecting it to contain the same scope of plot complexity, number of characters, and subplot development as a novel but compressed, rather than recognizing that the short story is a genuinely distinct form with its own characteristic constraints — typically a single unified effect, one central conflict, and a small, tightly-focused cast, rather than a novel's expansive scope simply trimmed down.\n- **Conflict evidence [P28]:** Present a novel's plot summary (multiple subplots, a large cast, events spanning years) alongside a short story's plot summary (one tightly-focused conflict, 2-3 characters, events spanning a single day or encounter). Ask the student whether the short story is \"missing\" content that a \"real\" (novel-length) story would have, or whether it's built around a genuinely different, more compressed structural principle.\n- **Bridge text [P30]:** \"A short story isn't a novel with content cut out — it's built around a different principle entirely: a single unified effect or insight, often centered on one conflict and a small cast, achieved within a limited scope. Expecting novel-scale complexity from a short story means missing what the form is actually designed to do well: intense focus, not broad scope.\"\n- **Replacement text [P31]:** \"When reading or analyzing a short story, don't expect novel-scale complexity. Look for how it achieves a single unified effect through a tightly-focused conflict and small cast — that focus is the short story's actual strength, not a limitation compared to a novel.\"\n- **Discrimination pairs [P33]:** (a) Short-story-as-compressed-novel (short stories are simply novels with content removed, missing the scope a \"complete\" story should have) vs. (b) Short-story-as-distinct-form (short stories are built around a genuinely different structural principle — single unified effect, focused conflict, small cast — not a scaled-down novel).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's scope-comparison sort before continuing.",
+      "localKey": "MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/misconception/MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD",
+      "kind": "misconception",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "- **Trigger signal:** Student judges the quality or validity of prose fiction by how \"realistic\" or true-to-life it is, dismissing fantastical, surreal, or clearly non-realistic fiction (magical realism, science fiction, fable-like narratives) as somehow lesser or not \"real\" literature, rather than recognizing that prose fiction encompasses a wide range of realism levels, each capable of exploring genuine human truths through different means.",
+      "content": "### MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD\n- **Trigger signal:** Student judges the quality or validity of prose fiction by how \"realistic\" or true-to-life it is, dismissing fantastical, surreal, or clearly non-realistic fiction (magical realism, science fiction, fable-like narratives) as somehow lesser or not \"real\" literature, rather than recognizing that prose fiction encompasses a wide range of realism levels, each capable of exploring genuine human truths through different means.\n- **Conflict evidence [P28]:** Present a realistic short story about a family conflict alongside a fantastical short story where a character's grief is represented by a literal shrinking of their house. Ask the student whether the fantastical story is \"less serious\" or \"less true\" about human experience than the realistic one, or whether it explores genuine emotional truth through a different, non-realistic method.\n- **Bridge text [P30]:** \"Prose fiction doesn't need to be realistic to explore genuine human truths — fantastical, surreal, or symbolic elements can illuminate emotional or thematic truths just as powerfully as strict realism, sometimes more so, by making an abstract feeling (like grief) concrete and visible in a way realism can't. Realism is one legitimate mode among several, not the standard all 'serious' fiction must meet.\"\n- **Replacement text [P31]:** \"When evaluating fiction, don't dismiss non-realistic elements as less serious. Ask instead: what human truth or theme is this fantastical or symbolic element helping to explore, and how effectively does it do that job? Realism and non-realism are different tools, not a hierarchy of seriousness.\"\n- **Discrimination pairs [P33]:** (a) Realism-as-quality-standard (only realistic fiction counts as serious/good literature) vs. (b) Multi-mode legitimacy (realistic and non-realistic fiction are both legitimate modes for exploring genuine human truths, judged by effectiveness, not by adherence to realism).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's lens-collection framing before continuing to TA-3.",
+      "localKey": "MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD",
+      "language": "en",
+      "refs": [
+        "MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Scope Comparison — Short Story vs. Novel",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Scope Comparison — Short Story vs. Novel\",\"primitives\":[],\"addresses\":[\"MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "The Single Unified Effect",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Single Unified Effect\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Realistic vs. Non-Realistic Modes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Realistic vs. Non-Realistic Modes\",\"primitives\":[],\"addresses\":[\"MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Identifying Novel-Scale Structural Features",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Identifying Novel-Scale Structural Features\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Analyzing a Novel Prose-Fiction Excerpt for Form and Mode",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Analyzing a Novel Prose-Fiction Excerpt for Form and Mode\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL\",\"MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL",
+        "MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Recognize appropriate short-story scope**\nGiven a short story with a tightly-focused plot, student confirms this scope is a deliberate structural strength, not a deficiency compared to novel scope. *(Directly targets MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify truth in non-realistic fiction**\nGiven a non-realistic short story excerpt, student identifies the human truth or theme it explores, confirming non-realism doesn't diminish its seriousness. *(Directly targets MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identify the single unified effect**\nGiven a short story, student identifies its single unified emotional or thematic effect.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identify novel-scale structural features**\nGiven a novel excerpt or summary, student identifies at least 2 novel-specific structural features (multiple subplots, larger cast, extended timespan).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full novel-excerpt analysis**\nGiven a new prose-fiction excerpt, student identifies its form-appropriate scope, realism mode, and the human truth it explores.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Adaptive Flags",
+      "content": "- If the student expects novel-scale complexity from short stories, weight remediation toward MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL's bridge text and re-run TA-1's scope-comparison practice before returning to independent analysis.\n- If the student dismisses non-realistic fiction as less serious, weight remediation toward MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD's bridge text and TA-3's realistic/non-realistic truth-identification practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.literature.short-story-study`, `eng.literature.literary-genres-overview`) — do not certify mastery without TA-5's full excerpt analysis, since short-story study specifically deepens the single-unified-effect analysis established here.\n- Reuse the \"camera lens collection\" framing explicitly when introducing `eng.literature.literary-genres-overview` — that concept extends the same form-appropriate-scope and multi-mode-legitimacy principles across the full range of literary genres.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL",
+        "MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.literature.prose-fiction/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.prose-fiction",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Plot-Structure Readiness Check]\n        |\n        v\n[Concrete Anchor: The Camera Lens Collection]\n        |\n        v\n[TA-1: Scope Comparison — Short Story vs. Novel]\n        |\n        v\n[TA-2: The Single Unified Effect]\n        |\n        v\n[TA-3: Realistic vs. Non-Realistic Modes]\n        |\n        v\n[TA-4: Identifying Novel-Scale Structural Features]\n        |\n        v\n[TA-5: Analyzing a Novel Prose-Fiction Excerpt]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — prose-fiction analysis builds directly on the five-stage plot arc, applied now across different forms (short story, novel) and modes (realistic, non-realistic). During instruction (S1), watch for both misconception patterns: treating short stories as incomplete novels (MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL) and dismissing non-realistic fiction as less serious (MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD) both undervalue legitimate, deliberate structural and stylistic choices — redirect both to the Camera Lens Collection anchor. If the student expects novel-scale complexity from a short story or dismisses a non-realistic excerpt during TA-1/TA-3 (S6), drop back to the Concrete Anchor's lens-comparison demonstration before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who identifies structural features correctly (MP-3/MP-4) but still judges short stories as incomplete or dismisses non-realism has not learned the core appreciative judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.prose-fiction.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
