@@ -3002,6 +3002,255 @@ const WAV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.friction ──────────────────────────────────────────────────────
+const FRIC = 'phys.mech.friction'
+const FRIC_SRC = 'docs/curriculum/blueprints/phys.mech.friction.md'
+
+const FRIC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FRIC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Friction is f = \u03bcN — and the N is where students lose marks. N ' +
+      'is the NORMAL force: how hard the two surfaces actually press ' +
+      'together, read off the free-body diagram every single time. On ' +
+      'flat ground with no vertical push it happens to equal the ' +
+      'weight, mg — which is why the shortcut \u201cfriction is \u03bc times ' +
+      'weight\u201d ever seems to work. Tilt the surface and the shortcut ' +
+      'breaks: on a 30\u00b0 incline the block presses in with only ' +
+      'mg cos\u03b8, so friction shrinks as the slope steepens. Push that ' +
+      'shortcut to the limit — a block against a near-vertical wall ' +
+      'would still \u201chave\u201d huge friction from its full weight, yet it ' +
+      'barely touches the wall at all. Weight pulls DOWN; friction ' +
+      'cares only about the press INTO the surface.',
+    targetedMisconceptions: [`${FRIC}:MC-FRICTION-USES-WEIGHT`],
+    source: `${FRIC_SRC} — \u00a76 MC-FRICTION-USES-WEIGHT (P28 near-vertical-wall limit + P30 read-N-off-the-diagram rule)`,
+  },
+  {
+    conceptId: FRIC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'You push a box with 20 N. It doesn\u2019t move. Maximum static ' +
+      'friction \u03bc_sN is 40 N — so is friction 40 N right now? Run the ' +
+      'check: 40 N of friction against your 20 N push would leave a ' +
+      'net 20 N BACKWARD — the box would accelerate into your hand. It ' +
+      'doesn\u2019t. So friction must be exactly 20 N: static friction is a ' +
+      'RESPONSIVE force that supplies just enough to prevent sliding ' +
+      'and not a newton more. \u03bc_sN is its ceiling, reached only at the ' +
+      'instant of slipping. Procedure: compute what force balance ' +
+      'requires first; if that is \u2264 \u03bc_sN, that IS the friction; only ' +
+      'if the demand exceeds the ceiling does the object slide (and ' +
+      'friction drops to kinetic, \u03bc_kN — which is why a stuck crate ' +
+      'suddenly feels easier once it starts moving).',
+    targetedMisconceptions: [`${FRIC}:MC-STATIC-ALWAYS-MAX`],
+    source: `${FRIC_SRC} — \u00a76 MC-STATIC-ALWAYS-MAX (P28 backward-acceleration conflict + P30 responsive-force bridge; P79 \u03bc_s>\u03bc_k tie-in)`,
+  },
+]
+
+const FRIC_PROBES: SeedProbe[] = [
+  {
+    conceptId: FRIC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A box rests on a 30\u00b0 incline. What normal force does the surface exert?',
+    choices: [
+      { text: 'N = mg cos 30\u00b0 — only the component pressing into the slope', isCorrect: true },
+      { text: 'N = mg — the surface always supports the full weight', isCorrect: false, misconceptionId: `${FRIC}:MC-FRICTION-USES-WEIGHT` },
+      { text: 'N = mg sin 30\u00b0 — the component along the slope', isCorrect: false },
+    ],
+    correctValue: 'mg cos 30\u00b0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FRIC}:MC-FRICTION-USES-WEIGHT`],
+    source: `${FRIC_SRC} — P74 classify probe (incline normal force), distractor-mapped`,
+  },
+  {
+    conceptId: FRIC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You push a stationary box with 20 N. Maximum static friction is 40 N. How large is the friction force right now?',
+    choices: [
+      { text: '20 N — static friction matches the push, up to its 40 N ceiling', isCorrect: true },
+      { text: '40 N — static friction always equals \u03bc_sN', isCorrect: false, misconceptionId: `${FRIC}:MC-STATIC-ALWAYS-MAX` },
+    ],
+    correctValue: '20 N',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FRIC}:MC-STATIC-ALWAYS-MAX`],
+    source: `${FRIC_SRC} — P33 discrimination pair (20 N push / 40 N max) as probe`,
+  },
+]
+
+// ─── phys.mech.circular-motion ───────────────────────────────────────────────
+const CIRC = 'phys.mech.circular-motion'
+const CIRC_SRC = 'docs/curriculum/blueprints/phys.mech.circular-motion.md'
+
+const CIRC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CIRC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Drive around a roundabout at a perfectly steady 30 km/h. Your ' +
+      'speedometer never moves — yet you are accelerating the entire ' +
+      'time. How? Acceleration is the rate of change of VELOCITY, and ' +
+      'velocity is a vector: magnitude AND direction. On the circle ' +
+      'your direction changes every instant, so your velocity changes ' +
+      'every instant, so there must be an acceleration — pointed ' +
+      'toward the centre, magnitude v\u00b2/r. You can feel its cause: the ' +
+      'seat and door pushing you sideways, the net inward force ' +
+      'F = mv\u00b2/r that keeps bending your path. Constant speed does ' +
+      'NOT mean constant velocity — that one distinction unlocks all ' +
+      'of circular motion.',
+    targetedMisconceptions: [`${CIRC}:MC-CONSTANT-SPEED-NO-ACCELERATION`],
+    source: `${CIRC_SRC} — MC-CONSTANT-SPEED-NO-ACCELERATION (P30 roundabout bridge + P28 vector-velocity evidence)`,
+  },
+  {
+    conceptId: CIRC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Swing a ball on a string and cut the string: which way does the ' +
+      'ball fly? If a \u201ccentrifugal force\u201d were really pushing it ' +
+      'outward, it would shoot radially away from the centre. It ' +
+      'doesn\u2019t — it flies off along the TANGENT, continuing the ' +
+      'straight line it was on when released. That outward \u201cpush\u201d you ' +
+      'feel in a turning car is your inertia trying to go straight ' +
+      'while the car turns under you; it is the door pushing you IN, ' +
+      'not a force pushing you OUT. Rule for free-body diagrams in an ' +
+      'inertial frame: draw only real forces — tension, weight, ' +
+      'normal, friction — and their net inward component supplies the ' +
+      'centripetal mv\u00b2/r. Never draw a centrifugal arrow: if it ' +
+      'existed, it would cancel the tension and the ball would move in ' +
+      'a straight line, not a circle.',
+    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-REAL`],
+    source: `${CIRC_SRC} — MC-CENTRIFUGAL-REAL (P28 cut-string tangent evidence + P31 real-forces-only diagram rule)`,
+  },
+]
+
+const CIRC_PROBES: SeedProbe[] = [
+  {
+    conceptId: CIRC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ball whirls in a horizontal circle on a string at constant speed. The string is cut. The ball initially flies:',
+    choices: [
+      { text: 'Along the tangent — it keeps the straight-line velocity it had at release', isCorrect: true },
+      { text: 'Radially outward — the centrifugal force flings it away from the centre', isCorrect: false, misconceptionId: `${CIRC}:MC-CENTRIFUGAL-REAL` },
+      { text: 'It stops — nothing is making it move anymore', isCorrect: false },
+    ],
+    correctValue: 'tangent',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-REAL`],
+    source: `${CIRC_SRC} — P28 cut-string scenario as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CIRC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car rounds a curve at constant speed. Is it accelerating?',
+    choices: [
+      { text: 'Yes — its direction (hence velocity) changes; centripetal acceleration v\u00b2/r points toward the centre', isCorrect: true },
+      { text: 'No — constant speed means zero acceleration, so the net force is zero', isCorrect: false, misconceptionId: `${CIRC}:MC-CONSTANT-SPEED-NO-ACCELERATION` },
+    ],
+    correctValue: 'yes, centripetal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CIRC}:MC-CONSTANT-SPEED-NO-ACCELERATION`],
+    source: `${CIRC_SRC} — MC-CONSTANT-SPEED-NO-ACCELERATION probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.electric-current ────────────────────────────────────────────────
+const CUR = 'phys.em.electric-current'
+const CUR_SRC = 'docs/curriculum/blueprints/phys.em.electric-current.md'
+
+const CUR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CUR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Does a bulb \u201cuse up\u201d current? Measure it: put an ammeter before ' +
+      'the bulb and after it — same reading. In a series circuit with ' +
+      'two bulbs, every ammeter along the loop agrees. Charge cannot ' +
+      'pile up inside a device (where would it go?), so every electron ' +
+      'that enters comes back out. Think of marbles flowing through a ' +
+      'pipe: the pipe resists the flow but consumes no marbles. What ' +
+      'the bulb actually spends is ENERGY — each coulomb drops some ' +
+      'potential energy crossing the bulb (that is the voltage drop) ' +
+      'and it leaves as light and heat. So in series: current is the ' +
+      'same everywhere; voltage is what gets divided among the ' +
+      'devices. Current is the messenger; voltage \u00d7 charge is the ' +
+      'payload.',
+    targetedMisconceptions: [`${CUR}:MC-CURRENT-USED-UP-BY-DEVICES`],
+    source: `${CUR_SRC} — MC-CURRENT-USED-UP-BY-DEVICES (P28 ammeter-both-sides evidence + P30 marble-pipe bridge)`,
+  },
+  {
+    conceptId: CUR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Which way do electrons actually go around a circuit? They are ' +
+      'negative, so they are ATTRACTED to the + terminal: electrons ' +
+      'flow from \u2212 through the external wire to +. Conventional ' +
+      'current is defined the other way (+ to \u2212) because the ' +
+      'convention was fixed a century before the electron was ' +
+      'discovered — an unlucky but harmless guess. Keep two arrows in ' +
+      'your head (draw them in different colours once and the ' +
+      'confusion dies): red for conventional current + \u2192 \u2212, blue for ' +
+      'electron flow \u2212 \u2192 +, always opposite. Circuit analysis ' +
+      'always uses the red arrow, and the physics comes out identical ' +
+      'either way — just never claim the two arrows are the same ' +
+      'direction.',
+    targetedMisconceptions: [`${CUR}:MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS`],
+    source: `${CUR_SRC} — MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS (P28 attraction argument + s6 two-colour arrow exercise)`,
+  },
+]
+
+const CUR_PROBES: SeedProbe[] = [
+  {
+    conceptId: CUR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two bulbs are connected in series. An ammeter reads 0.5 A before the first bulb. What does an ammeter read after the second bulb?',
+    choices: [
+      { text: '0.5 A — current is the same everywhere in a series loop; charge is conserved', isCorrect: true },
+      { text: 'Less than 0.5 A — each bulb uses up some of the current', isCorrect: false, misconceptionId: `${CUR}:MC-CURRENT-USED-UP-BY-DEVICES` },
+      { text: '0.25 A — the two bulbs share the current equally', isCorrect: false, misconceptionId: `${CUR}:MC-CURRENT-USED-UP-BY-DEVICES` },
+    ],
+    correctValue: '0.5 A',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CUR}:MC-CURRENT-USED-UP-BY-DEVICES`],
+    source: `${CUR_SRC} — P28 series-ammeter evidence as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CUR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the external wire of a battery circuit, which way do the ELECTRONS move?',
+    choices: [
+      { text: 'From the \u2212 terminal to the + terminal — opposite to conventional current', isCorrect: true },
+      { text: 'From the + terminal to the \u2212 terminal, the same direction as conventional current', isCorrect: false, misconceptionId: `${CUR}:MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS` },
+    ],
+    correctValue: 'minus to plus',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CUR}:MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS`],
+    source: `${CUR_SRC} — MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -3037,6 +3286,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...OHM_EXPLANATIONS,
   ...SHM_EXPLANATIONS,
   ...WAV_EXPLANATIONS,
+  ...FRIC_EXPLANATIONS,
+  ...CIRC_EXPLANATIONS,
+  ...CUR_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -3072,4 +3324,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...OHM_PROBES,
   ...SHM_PROBES,
   ...WAV_PROBES,
+  ...FRIC_PROBES,
+  ...CIRC_PROBES,
+  ...CUR_PROBES,
 ]
