@@ -7030,6 +7030,255 @@ const PRIME_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.astro.black-holes ──────────────────────────────────────────────────
+const BH = 'phys.astro.black-holes'
+const BH_SRC = 'docs/curriculum/blueprints/phys.astro.black-holes.md'
+
+const BH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BH,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'If the Sun instantly became a black hole of the same mass, ' +
+      'would Earth get \u201csucked in\u201d? No — Earth\u2019s orbit would not ' +
+      'change AT ALL. Gravity at a fixed distance depends only on ' +
+      'mass and distance, F = GMm/r\u00b2, not on how compact that mass ' +
+      'is (Birkhoff\u2019s theorem: outside a spherical mass, the field ' +
+      'looks identical whether that mass is a diffuse star or a ' +
+      'collapsed point). At 1 AU from a 1-solar-mass black hole, g = ' +
+      '5.9\u00d710\u207b\u00b3 m/s\u00b2 — the exact number Earth feels today. \u201cBlack ' +
+      'hole\u201d sounds like a cosmic vacuum cleaner, but the extreme GR ' +
+      'effects only kick in within a few Schwarzschild radii — for ' +
+      'the Sun\u2019s mass, about 3 km. Everything beyond that behaves ' +
+      'exactly like ordinary gravity from an ordinary star.',
+    targetedMisconceptions: [`${BH}:MC-2`],
+    source: `${BH_SRC} — MC-2 (P28 Birkhoff\u2019s-theorem argument + 1 AU numeric check)`,
+  },
+  {
+    conceptId: BH,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Would crossing a black hole\u2019s event horizon feel like hitting a ' +
+      'wall? Depends entirely on the black hole\u2019s SIZE — a fact most ' +
+      'popular depictions skip. Tidal force at the horizon scales as ' +
+      '1/M\u00b2: for a stellar-mass black hole (horizon ~30 km), tidal ' +
+      'forces there are ~10\u00b9\u2070 g — you would be spaghettified before ' +
+      'crossing. But for a supermassive black hole (horizon billions ' +
+      'of km across), tidal forces at the horizon are utterly ' +
+      'negligible — you would cross with NO local sensation at all. ' +
+      'The horizon is a causal boundary (a point of no return for ' +
+      'information), not a physical surface with any stress-energy ' +
+      'concentrated there. What becomes irreversible is your future, ' +
+      'not your body.',
+    targetedMisconceptions: [`${BH}:MC-1`],
+    source: `${BH_SRC} — MC-1 (P28 tidal-force 1/M\u00b2 scaling + stellar vs. supermassive contrast)`,
+  },
+]
+
+const BH_PROBES: SeedProbe[] = [
+  {
+    conceptId: BH,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'If the Sun instantly collapsed into a 1-solar-mass black hole, what would happen to Earth\u2019s orbit?',
+    choices: [
+      { text: 'Nothing — gravity at 1 AU depends only on mass and distance, identical to before (Birkhoff\u2019s theorem)', isCorrect: true },
+      { text: 'Earth would be sucked in almost immediately', isCorrect: false, misconceptionId: `${BH}:MC-2` },
+    ],
+    correctValue: 'orbit unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BH}:MC-2`],
+    source: `${BH_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: BH,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'An astronaut crosses the event horizon of a supermassive black hole. What do they feel locally at that moment?',
+    choices: [
+      { text: 'Nothing unusual — tidal forces at a supermassive black hole\u2019s horizon are negligible; the horizon is a causal boundary, not a physical surface', isCorrect: true },
+      { text: 'They are instantly crushed or destroyed on contact with the horizon', isCorrect: false, misconceptionId: `${BH}:MC-1` },
+    ],
+    correctValue: 'nothing locally',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BH}:MC-1`],
+    source: `${BH_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── phys.astro.cosmology ────────────────────────────────────────────────────
+const COSM = 'phys.astro.cosmology'
+const COSM_SRC = 'docs/curriculum/blueprints/phys.astro.cosmology.md'
+
+const COSM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COSM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Where did the Big Bang happen? The question itself assumes a ' +
+      'location — and there isn\u2019t one. If the Big Bang were an ' +
+      'ordinary explosion with a center, galaxies would recede mostly ' +
+      'AWAY from that center. Instead Hubble\u2019s law is isotropic: every ' +
+      'galaxy recedes proportional to its distance, in every ' +
+      'direction, from EVERY vantage point — no preferred center ' +
+      'shows up anywhere we look. That is because the Big Bang was ' +
+      'not matter exploding INTO space; it was SPACE ITSELF expanding. ' +
+      'Picture dots glued to a rubber sheet being stretched: every ' +
+      'dot sees every other dot receding, and no dot is special — ' +
+      'that is the universe, with every point in today\u2019s cosmos once ' +
+      'part of the same compact starting state.',
+    targetedMisconceptions: [`${COSM}:MC-1`],
+    source: `${COSM_SRC} — MC-1 (P28 isotropic-Hubble-law evidence + s6 rubber-sheet analogy)`,
+  },
+  {
+    conceptId: COSM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Is the cosmic microwave background \u201cthe afterglow of the Big ' +
+      'Bang\u201d — light from the very moment of creation? Close, but ' +
+      'the actual origin is 380,000 years LATER. Before that, the ' +
+      'universe was hot plasma, opaque to light (photons constantly ' +
+      'scattered off free electrons) — no photon from t=0 could ever ' +
+      'reach us; that era is permanently hidden. At 380,000 years, ' +
+      'the universe cooled to ~3000 K and protons finally captured ' +
+      'electrons (recombination), turning the universe transparent in ' +
+      'an instant. The CMB is light released AT that transition — the ' +
+      '\u201coldest light we can see,\u201d not light from the singularity — ' +
+      'since redshifted by a factor of ~1100 down to today\u2019s 2.73 K. ' +
+      'A separate trap: don\u2019t call this redshift a Doppler effect — ' +
+      'it is space itself stretching the photon\u2019s wavelength as it ' +
+      'travels, which is why redshift can correspond to an apparent ' +
+      'recession faster than light with no contradiction.',
+    targetedMisconceptions: [`${COSM}:MC-2`, `${COSM}:MC-3`],
+    source: `${COSM_SRC} — MC-2 CMB-is-Big-Bang-light + MC-3 cosmological-redshift-is-Doppler (recombination timeline + expansion-stretching bridge)`,
+  },
+]
+
+const COSM_PROBES: SeedProbe[] = [
+  {
+    conceptId: COSM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Where in space did the Big Bang occur?',
+    choices: [
+      { text: 'Nowhere in particular — space itself expanded from every point; there is no center (Hubble\u2019s law looks the same from any vantage point)', isCorrect: true },
+      { text: 'At the center of the universe, and everything expanded outward from there', isCorrect: false, misconceptionId: `${COSM}:MC-1` },
+    ],
+    correctValue: 'no center — everywhere',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COSM}:MC-1`],
+    source: `${COSM_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: COSM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Is the cosmic microwave background light from the exact moment of the Big Bang (t = 0)?',
+    choices: [
+      { text: 'No — it is light released at recombination, about 380,000 years later; the earlier universe was opaque and its light can never reach us', isCorrect: true },
+      { text: 'Yes — it is literally the afterglow from the instant of the Big Bang explosion', isCorrect: false, misconceptionId: `${COSM}:MC-2` },
+    ],
+    correctValue: 'no — from recombination, t\u2248380,000 yr',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COSM}:MC-2`],
+    source: `${COSM_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.modals ──────────────────────────────────────────────────────
+const MOD = 'eng.grammar.modals'
+const MOD_SRC = 'docs/curriculum/blueprints/eng.grammar.modals.md'
+
+const MOD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MOD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Does \u201cmust\u201d always mean \u201chave to\u201d? Compare: \u201cYou must wear a ' +
+      'seatbelt\u201d (a rule, an obligation) versus \u201cShe must be tired ' +
+      'after that trip\u201d — nobody is ORDERING her to be tired; the ' +
+      'speaker is making a confident GUESS from evidence. Same word, ' +
+      'two different jobs: obligation vs. deduction. Most modals ' +
+      'carry several distinct meanings this way: \u201ccan\u201d covers ability ' +
+      '(\u201cI can swim\u201d) AND permission (\u201cCan I leave early?\u201d); \u201cmay\u201d ' +
+      'covers permission (\u201cYou may leave\u201d) AND possibility (\u201cIt may ' +
+      'rain\u201d). Context — not the word alone — tells you which sense ' +
+      'is active. Before translating or explaining a modal, ask: is ' +
+      'this granting permission, stating ability, issuing an order, ' +
+      'or making an inference?',
+    targetedMisconceptions: [`${MOD}:MC-EACH-MODAL-HAS-ONLY-ONE-MEANING`],
+    source: `${MOD_SRC} — MC-EACH-MODAL-HAS-ONLY-ONE-MEANING (P28 must-obligation-vs-deduction conflict + P33 can/may pairs)`,
+  },
+  {
+    conceptId: MOD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cYou must exercise more\u201d and \u201cyou should exercise more\u201d — same ' +
+      'strength? No: modals expressing obligation sit on a real ' +
+      'STRENGTH SPECTRUM. \u201cMust\u201d/\u201chave to\u201d signal strong, often ' +
+      'non-negotiable requirement (\u201cSubmit by Friday or you\u2019ll fail\u201d); ' +
+      '\u201cshould\u201d/\u201cought to\u201d signal weaker, advisory recommendation ' +
+      '(\u201cyou\u2019d be wise to, but it\u2019s not required\u201d). The same ladder ' +
+      'exists for possibility: \u201cmight\u201d/\u201ccould\u201d are tentative (\u201cIt ' +
+      'might rain\u201d), while \u201cmust\u201d as deduction signals near-certainty ' +
+      '(\u201cIt must be raining — everyone\u2019s soaked\u201d). Swapping words on ' +
+      'the same rung is fine; swapping across rungs changes how ' +
+      'strongly you actually mean it — treat modals as a dial, not a ' +
+      'single switch.',
+    targetedMisconceptions: [`${MOD}:MC-MODAL-STRENGTH-IS-ALL-THE-SAME`],
+    source: `${MOD_SRC} — MC-MODAL-STRENGTH-IS-ALL-THE-SAME (P28 must-vs-should conflict + P30 strength-spectrum bridge)`,
+  },
+]
+
+const MOD_PROBES: SeedProbe[] = [
+  {
+    conceptId: MOD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u201cShe must be tired after that long trip,\u201d what does \u201cmust\u201d express?',
+    choices: [
+      { text: 'A confident deduction/guess from evidence — not an obligation', isCorrect: true },
+      { text: 'An obligation — she is being told she has to be tired', isCorrect: false, misconceptionId: `${MOD}:MC-EACH-MODAL-HAS-ONLY-ONE-MEANING` },
+    ],
+    correctValue: 'confident deduction',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MOD}:MC-EACH-MODAL-HAS-ONLY-ONE-MEANING`],
+    source: `${MOD_SRC} — P28 must-be-tired conflict as probe`,
+  },
+  {
+    conceptId: MOD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Do \u201cYou must submit this by Friday\u201d and \u201cYou should submit this by Friday\u201d express the same strength of obligation?',
+    choices: [
+      { text: 'No — \u201cmust\u201d signals a strong, non-negotiable requirement; \u201cshould\u201d signals advisory recommendation, not a strict requirement', isCorrect: true },
+      { text: 'Yes — both modals express obligation, so they are interchangeable', isCorrect: false, misconceptionId: `${MOD}:MC-MODAL-STRENGTH-IS-ALL-THE-SAME` },
+    ],
+    correctValue: 'no — different strength',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MOD}:MC-MODAL-STRENGTH-IS-ALL-THE-SAME`],
+    source: `${MOD_SRC} — P28 must-vs-should conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -7114,6 +7363,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PASV_EXPLANATIONS,
   ...TDIL_EXPLANATIONS,
   ...PRIME_EXPLANATIONS,
+  ...BH_EXPLANATIONS,
+  ...COSM_EXPLANATIONS,
+  ...MOD_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -7198,4 +7450,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PASV_PROBES,
   ...TDIL_PROBES,
   ...PRIME_PROBES,
+  ...BH_PROBES,
+  ...COSM_PROBES,
+  ...MOD_PROBES,
 ]
