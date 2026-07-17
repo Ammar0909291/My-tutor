@@ -213,10 +213,35 @@ describe('explain-differently remediation', () => {
     expect(detectLearnerRequest("I don't understand the diagram")).toBe('explain_differently')
   })
 
-  it('directive forbids repeating similar wording and forces a new channel', () => {
+  it('directive forbids repeating similar wording and forces a genuinely different explanation', () => {
     const block = buildLearnerRequestBlock('explain_differently', null)
     expect(block).toMatch(/repeating similar wording is forbidden/i)
-    expect(block).toMatch(/DIFFERENT channel/i)
+    expect(block).toMatch(/different explanation/i)
+  })
+
+  // P1 (task 3): escalation ladder — repeated explain_differently on the
+  // SAME concept progresses through different representations instead of
+  // repeating the same "try something different" instruction indefinitely.
+  it('escalates: different explanation → worked example → real-world example → visualization → guided step-by-step', () => {
+    const tier0 = buildLearnerRequestBlock('explain_differently', null, 0)
+    expect(tier0).toMatch(/different explanation/i)
+
+    const tier1 = buildLearnerRequestBlock('explain_differently', null, 1)
+    expect(tier1).toMatch(/worked example/i)
+
+    const tier2 = buildLearnerRequestBlock('explain_differently', null, 2)
+    expect(tier2).toMatch(/real.life.example/i)
+
+    const tier3WithVisual = buildLearnerRequestBlock('explain_differently', 'number_line', 3)
+    expect(tier3WithVisual).toMatch(/VISUALIZATION/i)
+    expect(tier3WithVisual).toContain('VISUAL:number_line')
+
+    const tier3NoVisual = buildLearnerRequestBlock('explain_differently', null, 3)
+    expect(tier3NoVisual).toMatch(/no registered visual/i)
+
+    const tier4 = buildLearnerRequestBlock('explain_differently', null, 4)
+    expect(tier4).toMatch(/guided step-by-step/i)
+    expect(tier4).toMatch(/never asks?.*infer|not already shown/i)
   })
 
   it('fold: remediation count up, confidence down, phase re-shows, never advances', () => {

@@ -28,6 +28,11 @@
 export type FailureStateKey =
   | 'dont_know' | 'dont_understand' | 'confused' | 'forgot' | 'guessing'
   | 'too_hard' | 'give_up' | 'hate_subject' | 'scared' | 'stupid' | 'cant'
+  // P1 (confusion-detection coverage gap): the learner isn't confused about
+  // the CONCEPT — they're objecting to the teaching METHOD itself (repeated
+  // Socratic questioning). Distinct failure state, distinct script: stop
+  // asking, start showing, this turn and the next one.
+  | 'too_many_questions'
 
 const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['give_up',      /\bi\s+(just\s+)?(give|gave)\s+up\b/i],
@@ -39,16 +44,43 @@ const STRONG_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   // Absolute-ignorance signals — strong because they leave no ambiguity
   ['dont_know',    /\bi\s+(know\s+)?nothing\s+(about\s+\S+\s+)?at\s+all\b|\bi\s+know\s+absolutely\s+nothing\b/i],
   ['dont_know',    /\b(i\s+have\s+no\s+idea|no\s+clue|how\s+would\s+i\s+know)\b/i],
+  // P1: the learner is objecting to the questioning itself, not the concept
+  // — matches with or without a leading "I" ("why do you keep asking me
+  // questions", "stop asking me so many questions", "too many questions").
+  ['too_many_questions', /\bwhy\s+(do\s+you|are\s+you)\s+(keep\s+asking|asking\s+(me\s+)?so\s+many)\b/i],
+  ['too_many_questions', /\b(stop|quit)\s+asking\s+(me\s+)?(so\s+many\s+)?questions\b/i],
+  ['too_many_questions', /\btoo\s+many\s+questions\b/i],
+  ['too_many_questions', /\bwhy\s+(do\s+you\s+)?keep\s+(quizzing|questioning|testing)\s+me\b/i],
 ]
 
 const MILD_PATTERNS: Array<[FailureStateKey, RegExp]> = [
   ['dont_understand', /\bi\s+(really\s+|just\s+)?(don'?t|do\s+not)\s+understand\b/i],
   ['confused',        /\bi(?:'?m|\s+am)\s+(so\s+|really\s+|totally\s+)?(confused|lost)\b/i],
   ['confused',        /\b(really\s+confusing|this\s+is\s+confusing)\b/i],
+  // P1: "makes no sense" was already covered elsewhere (masteryGate.ts's
+  // explain-differently detector) but NOT the far more common phrasing
+  // "this/that doesn't make sense" — the recovery guard, being the
+  // preemptive classifier, needs it directly.
+  ['confused',        /\b(this|that|it)\s+(doesn'?t|does\s+not)\s+make\s+(any\s+)?sense\b/i],
+  ['confused',        /\bmakes?\s+no\s+sense\b/i],
   ['dont_know',       /\bi\s+(don'?t|do\s+not)\s+know\b/i],
   ['dont_know',       /\bi\s+know\s+nothing\b/i],
+  // P1: bare "don't know" / "dunno" with no subject pronoun — a common
+  // terse reply the "I ..." patterns above miss entirely. Whole-message
+  // match only (never a substring) so "don't know if that's it, but..."
+  // doesn't false-fire.
+  ['dont_know',       /^(i\s+)?(don'?t|do\s+not|dunno)\s*(know)?[.!?…\s]*$/i],
+  // P1: present-tense "don't get it" — the existing masteryGate.ts pattern
+  // only matched the past tense ("didn't get it"); this is the far more
+  // common live phrasing.
+  ['dont_understand', /\b(i\s+)?(still\s+)?(don'?t|do\s+not)\s+get\s+(it|that|this)\b/i],
   ['forgot',          /\bi\s+(forgot|forget)\b|\bi\s+can'?t\s+remember\b/i],
   ['guessing',        /\bi(?:'?m|\s+was)\s+(just\s+)?guessing\b|\bthat\s+was\s+a\s+guess\b/i],
+  // P1: a terse one-word interrogative echo, and ONLY that echo, is a
+  // strong signal the learner doesn't have enough to answer with — not a
+  // genuine substantive question (those come with content: "why does it
+  // fall down?"). Whole-message match, optional punctuation only.
+  ['dont_understand', /^(where|what|why|how)\s*[?!.…]*$/i],
 ]
 
 /** Mild utterances only fire when the message is short enough to BE the
@@ -174,6 +206,24 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string }> 
       'it together — you don\'t have to do anything alone yet"). Arguing with ' +
       '"I can\'t" grants it a debate; thirty seconds of doing it together ' +
       'hands them the counter-evidence: "you just did."',
+  },
+  // P1: the complaint is about the METHOD (Socratic questioning), not the
+  // concept — do not defend the method, do not ask a clarifying question
+  // about the complaint itself (that would BE another question). Acknowledge
+  // once, then switch immediately to direct demonstration/explanation.
+  too_many_questions: {
+    general:
+      'Acknowledge it plainly and briefly ("fair — let\'s switch it up"), then ' +
+      'STOP asking questions. Teach the next piece directly: show or explain ' +
+      'it outright, worked-example style, with no question attached to the ' +
+      'end of your response. Do not ask them to predict, guess, or infer ' +
+      'anything they have not already been taught — that is what triggered ' +
+      'this. Earn the right to ask again only after at least one full turn ' +
+      'of pure demonstration.',
+    lessonOne:
+      'STOP asking anything this turn and the next. Demonstrate the idea once, ' +
+      'plainly, start to finish, with zero questions attached. A beginner who ' +
+      'says this has been asked to infer something before being shown it.',
   },
 }
 

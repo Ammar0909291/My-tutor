@@ -47,8 +47,84 @@ describe('detectFailureState — benign messages never fire', () => {
     'yes',
     'The answer is 12',
     'Can we do harder ones?',
+    // Substantive questions carry content and must not match the terse
+    // one-word echo pattern.
+    'Why does it fall down faster?',
+    'What is the formula for kinetic energy?',
+    'Where does the electron go after that?',
   ])('%s → null', (msg) => {
     expect(detectFailureState(msg)).toBeNull()
+  })
+})
+
+// P1 (Student Confusion Detection & Teaching Strategy Adaptation):
+// closes the detection gap the bug transcript surfaced — phrases the
+// learner actually used that the pre-existing patterns missed entirely.
+describe('detectFailureState — P1 coverage extension', () => {
+  it.each([
+    ['I know nothing', 'dont_know'],
+    ["Don't know", 'dont_know'],
+    ['dont know', 'dont_know'],
+    ['dunno', 'dont_know'],
+    ['Where?', 'dont_understand'],
+    ['What?', 'dont_understand'],
+    ['Why?', 'dont_understand'],
+    ['This doesn\'t make sense', 'confused'],
+    ["that doesn't make sense", 'confused'],
+    ["I don't get it", 'dont_understand'],
+    ["I still don't get it", 'dont_understand'],
+  ] as const)('%s → %s', (msg, key) => {
+    expect(detectFailureState(msg)).toBe(key)
+  })
+
+  it.each([
+    'Why do you keep asking me questions?',
+    'why are you asking me so many questions',
+    'stop asking me questions',
+    'quit asking so many questions',
+    'too many questions',
+    'why do you keep quizzing me',
+  ])('too_many_questions: %s', (msg) => {
+    expect(detectFailureState(msg)).toBe('too_many_questions')
+  })
+
+  it('a terse echo must be the WHOLE message, not part of a real question', () => {
+    expect(detectFailureState('Where?')).toBe('dont_understand')
+    expect(detectFailureState('Where does the river start?')).toBeNull()
+    expect(detectFailureState('What am I supposed to do with this number?')).toBeNull()
+  })
+
+  it('a bare "don\'t know" (no subject pronoun) fires as its own short reply', () => {
+    expect(detectFailureState("don't know")).toBe('dont_know')
+    expect(detectFailureState('dunno')).toBe('dont_know')
+  })
+  it('the new bare-echo pattern does not fire on a longer message that merely starts with "don\'t know"', () => {
+    // The existing "I don't know" MILD pattern (unchanged by this fix) still
+    // fires within its 120-char window regardless of trailing content — this
+    // asserts only that the NEW bare-echo pattern is whole-message-anchored
+    // and contributes no additional false positives beyond that pre-existing
+    // behavior. A message long enough to exceed MILD_MAX_LENGTH never fires.
+    const over120Chars = "I don't know if that is really the right way to think about it, could you maybe walk through the whole derivation from the start please"
+    expect(over120Chars.length).toBeGreaterThan(120)
+    expect(detectFailureState(over120Chars)).toBeNull()
+  })
+})
+
+describe('buildRecoveryBlock — too_many_questions (P1)', () => {
+  it('stops questioning and switches to direct demonstration, general script', () => {
+    const block = buildRecoveryBlock('too_many_questions', false)
+    expect(block).toMatch(/STOP asking questions/i)
+    expect(block).toMatch(/no question attached/i)
+    expect(block).toMatch(/never asked to infer|not already been taught/i)
+  })
+  it('lesson-one variant bans questions for this turn and the next', () => {
+    const block = buildRecoveryBlock('too_many_questions', true)
+    expect(block).toMatch(/this turn and the next/i)
+  })
+  it('still preempts and bans answering with a question, like every other script', () => {
+    const block = buildRecoveryBlock('too_many_questions', false)
+    expect(block).toMatch(/PREEMPTS EVERYTHING/)
+    expect(block).toMatch(/never answer it with a question/i)
   })
 })
 

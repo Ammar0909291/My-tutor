@@ -163,14 +163,32 @@ export function detectLearnerRequest(message: string): LearnerRequest | null {
   return null
 }
 
+const REAL_LIFE_EXAMPLE_DIRECTIVE = (
+  '\n\nTEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move). ' +
+  'The student asked for a concrete application. Do NOT re-explain the theory. ' +
+  'Give ONE vivid everyday scenario they have personally experienced, walk the ' +
+  'concept through that scenario start to finish, and connect back in one sentence. ' +
+  'No definitions this turn.'
+)
+
 /**
  * The forced TeachingAction directive for the turn. Injected AFTER the
  * turn directive so it overrides the phase's default move — an explicit
  * learner request outranks the machine's own pacing.
+ *
+ * remediationTier (P1, task 3): how many times THIS concept has already
+ * triggered explain_differently this session (ConversationState.
+ * remediationCount) — drives an escalating representation ladder instead of
+ * repeating the same "try something different" instruction indefinitely.
+ * Reuses the already-existing REAL_LIFE_EXAMPLE directive and the
+ * Visualization Registry's forced-render mechanism (visualRegistry.ts) —
+ * no new teaching actions invented. Only applies to 'explain_differently';
+ * ignored for 'diagram'/'real_life_example', which are already explicit.
  */
 export function buildLearnerRequestBlock(
   request: LearnerRequest,
   availableVisualType: string | null,
+  remediationTier = 0,
 ): string {
   switch (request) {
     case 'diagram':
@@ -183,22 +201,67 @@ export function buildLearnerRequestBlock(
         ' No new abstract explanation this turn.'
       )
     case 'real_life_example':
+      return REAL_LIFE_EXAMPLE_DIRECTIVE
+    case 'explain_differently': {
+      // Tier 0 (first time this concept has needed it): a different
+      // explanation — same channel (prose), genuinely different content.
+      if (remediationTier <= 0) {
+        return (
+          '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — DIFFERENT EXPLANATION ' +
+          '(learner said they did not understand). Your previous explanation did ' +
+          'not land — repeating similar wording is forbidden. Give a genuinely ' +
+          'different explanation: different angle, different words, different ' +
+          'starting point. Shorter than before, one idea only, no new vocabulary. ' +
+          'Do not ask a question this turn; end with an invitation.'
+        )
+      }
+      // Tier 1 (still confused after a different explanation): worked example.
+      if (remediationTier === 1) {
+        return (
+          '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — WORKED EXAMPLE (this concept ' +
+          'has already needed one different explanation and it still did not land — ' +
+          'stop explaining in the abstract). Show ONE complete worked example, start ' +
+          'to finish, stating the reason for each step. No new theory, no question ' +
+          'this turn.'
+        )
+      }
+      // Tier 2: real-world example (reuses the existing directive verbatim —
+      // same teaching action the learner gets by asking for one directly).
+      if (remediationTier === 2) {
+        return REAL_LIFE_EXAMPLE_DIRECTIVE.replace(
+          'TEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move).',
+          'TEACHING ACTION: CHANGE_REPRESENTATION — REAL_LIFE_EXAMPLE (a different ' +
+          'explanation and a worked example have both already failed to land this ' +
+          'concept — try the concrete, personal angle next).',
+        )
+      }
+      // Tier 3: visualization, through the existing Visualization Registry —
+      // the caller (route.ts) is responsible for force-rendering
+      // availableVisualType via shouldForceVisualRender/resolveResponseVisual
+      // exactly as it already does for an explicit 'diagram' request; this
+      // text only carries the instruction when no visual is registered.
+      if (remediationTier === 3) {
+        return (
+          '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — VISUALIZATION (three different ' +
+          'explanations of this concept have not landed — words are not working; SHOW ' +
+          'it instead). ' +
+          (availableVisualType
+            ? `Lead with the visual: emit the VISUAL:${availableVisualType} tag first, then at most two short sentences.`
+            : 'No registered visual exists for this concept — build the clearest possible text diagram or step-by-step visual description instead.') +
+          ' No new prose explanation this turn.'
+        )
+      }
+      // Tier 4+: guided step-by-step — hand-holding, minimal questioning
+      // (task 4/5: repeated confusion reduces Socratic questioning and never
+      // asks the learner to infer something not yet taught).
       return (
-        '\n\nTEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move). ' +
-        'The student asked for a concrete application. Do NOT re-explain the theory. ' +
-        'Give ONE vivid everyday scenario they have personally experienced, walk the ' +
-        'concept through that scenario start to finish, and connect back in one sentence. ' +
-        'No definitions this turn.'
+        '\n\nTEACHING ACTION: CHANGE_REPRESENTATION — GUIDED STEP-BY-STEP (four prior ' +
+        'attempts at this concept have not landed). Switch to full co-production: walk ' +
+        'ONE micro-step at a time, doing it WITH the learner rather than asking them to ' +
+        'produce it. Do not ask them to predict, guess, or infer anything not already ' +
+        'shown. At most one very small confirming check, never an open question.'
       )
-    case 'explain_differently':
-      return (
-        '\n\nTEACHING ACTION: CHANGE_REPRESENTATION (learner said they did not understand). ' +
-        'Your previous explanation did not land — repeating similar wording is forbidden. ' +
-        'Switch to a genuinely DIFFERENT channel than your last turn: a concrete physical ' +
-        'analogy, a story, a worked numeric example, or a visual — whichever you have NOT ' +
-        'used yet for this idea. Shorter than before, one idea only, no new vocabulary. ' +
-        'Do not ask a question this turn; end with an invitation.'
-      )
+    }
   }
 }
 

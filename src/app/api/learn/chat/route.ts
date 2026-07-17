@@ -1558,6 +1558,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             } catch {
               // non-fatal — mirrors the Library path's error handling
             }
+
+            // P1 fix: School Mode never ran the recovery guard (that
+            // detection is Library-only, `if (!schoolCtx)` above) — an
+            // explicit failure-state utterance ("I don't understand", "why
+            // do you keep asking me questions", a bare "don't know") had no
+            // effect at all, so Tutor Max continued with near-identical
+            // questioning. Narrow, additive fix: reuse the same
+            // detectFailureState()/buildRecoveryBlock() pair Library uses,
+            // injected LAST (preempts everything above, same contract).
+            // School's multi-turn escalation ladder (sessionFailureCount)
+            // is Library-only infrastructure (contextSnapshot persistence
+            // scoped to `!schoolCtx && ENABLE_LIBRARY_CONCEPT_TRACKING`) and
+            // is intentionally NOT extended here — this fix stops the
+            // immediate repeated-questioning symptom on detection; it does
+            // not give School the same escalating-severity ladder Library
+            // has across turns (see deliverable's Remaining Risks).
+            try {
+              const { detectFailureState, buildRecoveryBlock } = await import('@/lib/teaching/recoveryGuard')
+              const schoolRecoveryKey = detectFailureState(message)
+              if (schoolRecoveryKey) {
+                // School Mode has no first-lesson detection (that's a
+                // Library-only concept, isFirstLessonContext({isSchoolMode:
+                // false, ...}) below) — false is the correct, safe default.
+                systemPrompt += buildRecoveryBlock(schoolRecoveryKey, false, 0)
+              }
+            } catch {
+              // non-fatal — recovery injection is purely additive
+            }
           }
 
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
@@ -2033,18 +2061,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // request with a known visual is FORCED to render server-side —
           // never left to the LLM's discretion to emit (or skip) the tag.
           const { shouldForceVisualRender } = await import('@/lib/teaching/visualRegistry')
-          forceVisualRenderHoisted = shouldForceVisualRender(learnerRequestHoisted, availableVisual)
+          // P1 (task 3): tier 3 of the explain_differently escalation ladder
+          // ("Visualization, through the existing Visualization Registry") is
+          // force-rendered exactly like an explicit diagram request once this
+          // concept has needed remediation 3+ times this session — reuses the
+          // same registry-first force-render mechanism, never a new pipeline.
+          const remediationTier = conversationStateHoisted.remediationCount
+          const explainDifferentlyNeedsVisual =
+            learnerRequestHoisted === 'explain_differently' && remediationTier >= 3 && availableVisual !== null
+          forceVisualRenderHoisted =
+            shouldForceVisualRender(learnerRequestHoisted, availableVisual) || explainDifferentlyNeedsVisual
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
             maxParagraphs: responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures),
             workedExampleFirst,
-            visualType: learnerRequestHoisted === 'diagram'
+            visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
               ? availableVisual
               : decideVisualFirst(availableVisual, conversationStateHoisted, nextMove),
           })
           if (learnerRequestHoisted) {
-            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual)
+            systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier)
           }
           // Bug 8 — the client reports whether the previous long (collapsed)
           // explanation was ever expanded; unread text is never assumed read.
