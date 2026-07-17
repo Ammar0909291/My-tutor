@@ -1,0 +1,412 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.simple-sentences-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.simple-sentences",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:01cfc88d3fc8d7669215e7189f486cb547c1cdd8d8581b235bc201a627da10b7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.simple-sentences.md": "sha256:d71aa29d87b2b3dc9099336b8adf017a331558d6ae65852525e527559fb12ab7"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.simple-sentences",
+    "name": "Simple Sentences",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.clauses"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.simple-sentences-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.simple-sentences (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.simple-sentences.md": "sha256:d71aa29d87b2b3dc9099336b8adf017a331558d6ae65852525e527559fb12ab7"
+      },
+      "contentHash": "sha256:07578af9c1dca98277190a17862b792c7bb34bd33ad233a6f3491e7fc25c9c1c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.simple-sentences.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md#TA-1 (addresses MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.simple-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.simple-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.simple-sentences.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.simple-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.simple-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.simple-sentences.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md#TA-3 (addresses MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.simple-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.simple-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.simple-sentences.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md#TA-4 (addresses MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE, MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.simple-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.simple-sentences\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.simple-sentences/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "Simple Sentences — Conceptual Development Sequence",
+      "content": "### TA-1: Length Is Not the Test\nPresent pairs like the Conflict Evidence example (long simple vs. short compound) and have the student apply the \"count the engines\" test from the Concrete Anchor to each, confirming that length does not predict clause count. Directly counters MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE.\n\n### TA-2: Compound Subjects, Verbs, and Objects Within One Clause\nTeach that a simple sentence can still have a compound subject (\"Maya and Diego ran\"), compound verb (\"She sang and danced\"), or compound object (\"He ate rice and beans\") while remaining ONE clause — because there is still only one subject-verb PAIRING relationship, not two independent subject-verb pairs. Student practices marking compound elements within otherwise-simple sentences and confirming clause count stays at one.\n\n### TA-3: The Conjunction-Function Test\nUsing the discrimination pairs from MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE, present sentences containing \"and\"/\"or\"/\"but\" and have the student check both sides of the conjunction for a complete subject-verb pair before classifying the sentence as simple or compound.\n\n### TA-4: Building and Classifying Original Sentences\nStudent writes 4 original sentences to a specification (one long simple sentence with a compound subject and object; one short compound sentence; one simple sentence with a prepositional-phrase modifier; one sentence containing \"and\" that stays simple) and self-checks each using the engine-counting test — the generative capstone confirming independent construction, not just recognition.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 56,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": ": Long Simple vs. Short Compound (Scaffolded)",
+      "content": "### WE-1: Long Simple vs. Short Compound (Scaffolded)\n**Sentences:** \"The tired, hungry travelers from the delayed flight finally reached their hotel rooms and collapsed onto the beds.\" / \"She smiled. He waved.\"\n**Walkthrough:** Sentence 1 has one subject (\"travelers,\" modified by describing phrases) and one compound predicate (\"reached...and collapsed\") — one clause, so simple despite its length. Sentence 2 has two separate subject-verb pairs (\"she smiled\" / \"he waved\") — two clauses, so compound despite being short.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 70,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": ": Compound Elements Within One Clause (Guided)",
+      "content": "### WE-2: Compound Elements Within One Clause (Guided)\n**Sentence:** \"Lions and tigers hunt and rest throughout the day.\"\n**Walkthrough:** Identify the compound subject (\"lions and tigers\") and compound verb (\"hunt and rest\"). Ask: is there more than one COMPLETE subject-verb pairing, or just one pairing with multiple parts on each side? Confirm: one pairing (lions-and-tigers / hunt-and-rest together), so this is simple.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 70,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": ": Conjunction-Function Classification (Independent)",
+      "content": "### WE-3: Conjunction-Function Classification (Independent)\n**Sentences to classify:** (a) \"Ben and Sara study every evening and pass every test.\" (b) \"Ben studies every evening, and Sara passes every test.\" Student applies the both-sides-subject-verb-pair test to each and classifies (a) as simple (compound subject + compound verb, one clause) and (b) as compound (two full independent clauses joined by \"and\").",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 70,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/misconception/MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "- **Trigger signal:** Student judges whether a sentence is \"simple\" by counting words or estimating length, calling long sentences \"not simple\" and short ones \"simple\" regardless of how many clauses they actually contain.",
+      "content": "### MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE\n- **Trigger signal:** Student judges whether a sentence is \"simple\" by counting words or estimating length, calling long sentences \"not simple\" and short ones \"simple\" regardless of how many clauses they actually contain.\n- **Conflict evidence [P28]:** Present a long simple sentence with a compound subject and compound predicate but only ONE independent clause (e.g., \"The exhausted, determined marathon runners from twelve different countries crossed the finish line together and collapsed onto the grass in relief.\") alongside a short compound sentence with two independent clauses (e.g., \"She left. He stayed.\"). Ask which is \"simple\" by the student's length rule, then apply the subject-verb-pair count from `eng.grammar.clauses` to both.\n- **Bridge text [P30]:** \"Length is a trap here — a simple sentence can be long and dressed up with lots of describing words, and a compound sentence can be short and plain. 'Simple' isn't about word count at all; it's about how many independent clauses are doing the work.\"\n- **Replacement text [P31]:** \"Count independent clauses, not words. If there is exactly ONE independent clause — one genuine subject-verb pair standing alone, however many extra describing words or objects surround it — it's a simple sentence, no matter how long it looks.\"\n- **Discrimination pairs [P33]:** (a) Simple = short sentence (word count is the deciding test) vs. (b) Simple = exactly one independent clause (structure, not length, is the deciding test; a simple sentence can be long via compound subjects/objects/modifiers while still containing only one clause).\n- **s6_path:** If detected, drop to PD-1 re-check on clause counting, then re-run TA-1 with the long-simple/short-compound contrast pair before continuing.",
+      "localKey": "MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/misconception/MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "- **Trigger signal:** Student assumes the presence of the word \"and\" (or \"or\"/\"but\") anywhere in a sentence automatically makes it compound, without checking whether \"and\" is joining two independent clauses versus joining two subjects, two verbs, or two objects within a single clause.",
+      "content": "### MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE\n- **Trigger signal:** Student assumes the presence of the word \"and\" (or \"or\"/\"but\") anywhere in a sentence automatically makes it compound, without checking whether \"and\" is joining two independent clauses versus joining two subjects, two verbs, or two objects within a single clause.\n- **Conflict evidence [P28]:** Present \"Maya and Diego finished the race and celebrated together.\" alongside \"Maya finished the race, and Diego celebrated.\" Ask the student to count subject-verb pairs in each. In the first, \"Maya and Diego\" is one compound subject and \"finished...and celebrated\" is one compound predicate — still just one clause (simple). In the second, there are two full subject-verb pairs joined by \"and\" — two clauses (compound).\n- **Bridge text [P30]:** \"'And' has more than one job. It can join two whole clauses (making a compound sentence), but it can also just join two subjects or two verbs inside ONE clause (keeping it simple). The word alone doesn't decide — check what's on each side of it.\"\n- **Replacement text [P31]:** \"When you see 'and,' 'or,' or 'but,' ask: is there a complete subject-verb pair on BOTH sides, or is it just joining two subjects/two verbs/two objects within one subject-verb pair? Only two full clauses joined by 'and' makes it compound; anything less keeps it simple.\"\n- **Discrimination pairs [P33]:** (a) Conjunction-presence rule (any \"and\"/\"or\"/\"but\" signals a compound sentence) vs. (b) Conjunction-function rule (only a conjunction joining two independent clauses — full subject-verb pairs on both sides — signals compound; joining subjects/verbs/objects within one clause keeps it simple).\n- **s6_path:** If detected, drop to PD-1, then re-present TA-2's compound-subject/compound-predicate contrast before continuing.",
+      "localKey": "MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "Length Is Not the Test",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Length Is Not the Test\",\"primitives\":[],\"addresses\":[\"MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "Compound Subjects, Verbs, and Objects Within One Clause",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compound Subjects, Verbs, and Objects Within One Clause\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "The Conjunction-Function Test",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Conjunction-Function Test\",\"primitives\":[],\"addresses\":[\"MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "Building and Classifying Original Sentences",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Building and Classifying Original Sentences\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE\",\"MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE",
+        "MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 69,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Long simple sentence recognition**\nGiven a long sentence with a compound subject, compound object, and several modifying phrases but only one true subject-verb pairing, student correctly classifies it as simple and explains why length doesn't matter. *(Directly targets MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Conjunction-function test**\nGiven a sentence containing \"and\" that joins two subjects (not two clauses), student correctly classifies it as simple by checking both sides of the conjunction for complete subject-verb pairs. *(Directly targets MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Short compound sentence recognition**\nGiven a short two-clause sentence (e.g., \"I ran. She won.\"), student correctly classifies it as compound despite its brevity.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Original sentence construction**\nStudent writes an original long simple sentence containing a compound subject and a compound predicate, then verifies it against the engine-counting test.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Mixed batch classification**\nGiven a mixed batch of 5 unlabeled sentences (long simple, short compound, simple with compound object, simple with prepositional modifier, compound joined by \"but\"), student classifies all 5 correctly and justifies each using clause count, not length or conjunction presence alone.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "Adaptive Flags",
+      "content": "- If the student consistently misclassifies by length, weight remediation toward MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE's bridge text and re-run TA-1 with progressively longer simple sentences before returning to mixed batches.\n- If the student consistently misclassifies any \"and\"-containing sentence as compound, weight remediation toward MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE's bridge text and the conjunction-function test specifically, isolating that variable before mixing it back with length variation.\n- This concept is foundational for three direct downstream unlocks (`eng.grammar.compound-sentences`, `eng.grammar.sentence-fragments`, `eng.writing.sentence-writing`) — do not certify mastery without MP-5's mixed-batch probe, since compound-sentence instruction assumes the student can already reliably tell a compound sentence apart from a long simple one.\n- Reuse the \"count the engines, not the words\" framing explicitly when introducing `eng.grammar.compound-sentences` — that concept's core distinction (one clause vs. two joined clauses) is the direct extension of this concept's classification test.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE",
+        "MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 129,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "eng.grammar.simple-sentences/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.simple-sentences",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Clause Identification Check]\n        |\n        v\n[Concrete Anchor: One-Engine Train]\n        |\n        v\n[TA-1: Length Is Not the Test]\n        |\n        v\n[TA-2: Compound Elements Within One Clause]\n        |\n        v\n[TA-3: Conjunction-Function Test]\n        |\n        v\n[TA-4: Building and Classifying Original Sentences]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — simple-sentence classification is entirely dependent on reliable subject-verb-pair counting from `eng.grammar.clauses`, so a student who cannot count clauses will misclassify by guesswork rather than structure. During instruction (S1), watch for length-based judgments (MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE) and conjunction-presence judgments (MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE) as the two dominant error patterns at this level — both are shortcuts that avoid actually counting subject-verb pairs, and both must be redirected to the engine-counting test rather than simply marked wrong. If the student guesses on WE-3-style mixed examples (S6), drop back to the Concrete Anchor's train metaphor and re-run TA-1/TA-3 with one variable isolated at a time before returning to mixed practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 (long-simple) and MP-2 (and-does-not-mean-compound) both pass independently — a student who only classifies short, conjunction-free sentences correctly has not yet demonstrated the actual discriminating skill.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.simple-sentences.md",
+        "startLine": 100,
+        "endLine": 129
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

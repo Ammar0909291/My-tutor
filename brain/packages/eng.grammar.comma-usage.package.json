@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.comma-usage-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.comma-usage",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2bb69b010c2929741cf6236c576ad561462768a79261e1f36f51b4c387f1e4d5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.comma-usage.md": "sha256:0cc93948f2e89f636a4e418c58b874f72f5a125b7cc4cd02f3ccc9762737a605"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.comma-usage",
+    "name": "Comma Usage",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.end-punctuation",
+      "eng.grammar.clauses"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.comma-usage-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.comma-usage (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.comma-usage.md": "sha256:0cc93948f2e89f636a4e418c58b874f72f5a125b7cc4cd02f3ccc9762737a605"
+      },
+      "contentHash": "sha256:25045d5b641d0e4c06dcfe7184a91a857c54500ee864c066d6b24b9328f280ab",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comma-usage.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comma-usage.md#TA-1 (addresses MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comma-usage"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comma-usage\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comma-usage.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comma-usage.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comma-usage"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comma-usage\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comma-usage.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comma-usage.md#TA-3 (addresses MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comma-usage"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comma-usage\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comma-usage.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comma-usage.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comma-usage"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comma-usage\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comma-usage.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comma-usage.md#TA-5 (addresses MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING, MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comma-usage"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comma-usage\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.comma-usage/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "Comma Usage — Conceptual Development Sequence",
+      "content": "### TA-1: The Four-Jobs Sort\nPresent 8 sentences (2 per comma job) and have the student sort each into one of the four toolbox categories, explicitly naming which comma rule applies. Directly counters MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING by anchoring every decision to a named structural job rather than a pause.\n\n### TA-2: Introductory Elements and Nonessential Information\nDeepen the Intro Flag and Nonessential Bracket rules: teach that introductory words/phrases/clauses (\"However,\" \"After the storm passed,\" \"Running quickly,\") always take a comma after them, and that nonessential information (removable without changing the sentence's core meaning) is bracketed by commas on both sides, while essential/restrictive information (which changes meaning if removed) takes no commas. Student practices the \"lift it out\" test from the Concrete Anchor on new nonessential/essential pairs.\n\n### TA-3: The Clause-Joiner Both-Sides Test\nUsing the discrimination pairs from MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA, present sentences with \"and\"/\"but\"/\"or\" and have the student check both sides for a complete independent clause before deciding whether the comma belongs. Directly counters MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA's over-application pattern.\n\n### TA-4: List Separator Edge Cases\nExtend list-comma practice to include the Oxford/serial comma before the final \"and\" in a list of three or more items, and clarify that this differs from the clause-joiner comma (a list-final \"and\" does not require two independent clauses on both sides — it is joining list items, not clauses).\n\n### TA-5: Multi-Rule Sentences and Original Construction\nPresent sentences requiring more than one comma rule simultaneously (e.g., an introductory phrase AND a nonessential clause AND a list, all in one sentence) and have the student punctuate correctly, naming each comma's job. Then have the student write 4 original sentences, one per comma job, and self-check each against the four-tool test — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 58,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": ": Four-Jobs Identification (Scaffolded)",
+      "content": "### WE-1: Four-Jobs Identification (Scaffolded)\n**Sentences:** \"We packed sandwiches, chips, and juice boxes.\" (list) / \"After the rain stopped, we went outside.\" (intro) / \"My brother, who loves soccer, plays every weekend.\" (nonessential) / \"I finished my homework, and I watched a movie.\" (clause joiner)\n**Walkthrough:** For each sentence, name which of the four toolbox jobs the comma(s) perform and verify using the matching test (list-item count, intro-phrase-then-comma, lift-out test, both-sides-clause test).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 75,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": ": Comma-by-Pause Trap (Guided)",
+      "content": "### WE-2: Comma-by-Pause Trap (Guided)\n**Sentence pair:** \"The book that I borrowed from the library / is due tomorrow.\" (no comma belongs before \"is,\" despite a natural speaking pause, because \"that I borrowed from the library\" is essential/restrictive — removing it changes which book is meant) vs. \"My favorite book, which I borrowed from the library, is due tomorrow.\" (commas correctly bracket nonessential information, since \"which I borrowed from the library\" can be lifted out without changing which book is meant — \"my favorite book\" already identifies it uniquely).\n**Walkthrough:** Apply the lift-out test to both. In sentence 1, removing \"that I borrowed from the library\" would leave ambiguity about which book — so it's essential, no commas. In sentence 2, \"my favorite book\" is already specific, so the \"which\" clause is just extra, removable information — nonessential, commas required.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 75,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": ": Multi-Rule Sentence (Independent)",
+      "content": "### WE-3: Multi-Rule Sentence (Independent)\n**Sentence to punctuate:** \"After the concert ended fans lined up outside the stage door hoping to meet the band and several even brought posters gifts and handwritten letters.\"\n**Walkthrough:** Student inserts commas correctly: \"After the concert ended, fans lined up outside the stage door hoping to meet the band, and several even brought posters, gifts, and handwritten letters.\" — identifying the introductory clause comma, the clause-joiner comma before \"and several,\" and the list-separator commas, all within one sentence.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 75,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/misconception/MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "- **Trigger signal:** Student places commas based on where they would naturally take a breath or pause when reading a sentence aloud, rather than based on structural rules (list items, joined independent clauses, introductory elements, nonessential information) — leading to commas dropped in grammatically required spots and inserted in ungrammatical ones.",
+      "content": "### MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING\n- **Trigger signal:** Student places commas based on where they would naturally take a breath or pause when reading a sentence aloud, rather than based on structural rules (list items, joined independent clauses, introductory elements, nonessential information) — leading to commas dropped in grammatically required spots and inserted in ungrammatical ones.\n- **Conflict evidence [P28]:** Give the student a sentence where a natural speaking pause occurs at a spot with NO comma rule (e.g., \"The dog that lives next door / barked all night\" — many speakers pause before \"barked\" but no comma belongs there since \"that lives next door\" is a restrictive/essential clause), alongside a sentence where a required comma falls at a spot with no natural pause (e.g., \"Yesterday, before the sun rose, we left.\" — the comma after \"Yesterday\" is often not where a casual reader would pause). Ask the student to punctuate both by ear, then check against the four structural rules.\n- **Bridge text [P30]:** \"Breath pauses and comma rules overlap often, which is why the 'pause test' feels like it works — but they're not the same thing. A comma marks a specific grammatical job: separating list items, joining two independent clauses, setting off an introductory element, or marking nonessential information. If none of those four jobs apply, no comma belongs there, breath or no breath.\"\n- **Replacement text [P31]:** \"Instead of listening for a pause, ask: is this comma doing one of its four real jobs — separating items in a list, joining two independent clauses (with a conjunction), setting off something introductory, or bracketing nonessential information? If yes to one of those, the comma belongs. If no, leave it out even if it feels like a natural pause spot.\"\n- **Discrimination pairs [P33]:** (a) Comma-by-pause (comma placement follows the reader's natural breath/pause rhythm) vs. (b) Comma-by-structural-job (comma placement follows one of four specific grammatical functions regardless of how the sentence sounds read aloud).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1 (the four-jobs sort) with the pause-mismatch pair before continuing.",
+      "localKey": "MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING",
+      "language": "en",
+      "refs": [
+        "MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/misconception/MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "- **Trigger signal:** Student inserts a comma before every \"and\" (or \"or\"/\"but\") regardless of whether it joins two independent clauses (comma required) or joins two elements within a single clause — compound subject, compound verb, or compound object (no comma) — over-applying the compound-sentence comma rule from `eng.grammar.simple-sentences`'s clause-counting distinction.",
+      "content": "### MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA\n- **Trigger signal:** Student inserts a comma before every \"and\" (or \"or\"/\"but\") regardless of whether it joins two independent clauses (comma required) or joins two elements within a single clause — compound subject, compound verb, or compound object (no comma) — over-applying the compound-sentence comma rule from `eng.grammar.simple-sentences`'s clause-counting distinction.\n- **Conflict evidence [P28]:** Present \"Maya ran, and jumped over the hurdle.\" (incorrect — comma incorrectly inserted before a compound verb, not two clauses) alongside \"Maya ran the race, and she won first place.\" (correct — comma correctly joins two independent clauses). Ask the student to check both sides of \"and\" for a complete subject-verb pair in each.\n- **Bridge text [P30]:** \"The comma-before-'and' rule only applies when 'and' is joining two COMPLETE clauses — two full subject-verb pairs that could each stand alone as their own sentence. If 'and' is just joining two verbs, two subjects, or two objects within ONE clause, no comma goes there, even though it looks similar.\"\n- **Replacement text [P31]:** \"Before adding a comma in front of 'and,' 'or,' or 'but,' check both sides: is there a complete subject-verb pair on the left AND a complete subject-verb pair on the right? Only then does the comma belong. If one side is missing a subject (like a second verb without its own subject), skip the comma.\"\n- **Discrimination pairs [P33]:** (a) Conjunction-presence comma rule (any \"and\"/\"or\"/\"but\" gets a comma before it) vs. (b) Conjunction-function comma rule (comma only precedes a conjunction joining two complete independent clauses; joining compound verbs/subjects/objects within one clause takes no comma).\n- **s6_path:** If detected, drop to PD-1, then re-present TA-3's both-sides-clause-check before continuing.",
+      "localKey": "MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA",
+      "language": "en",
+      "refs": [
+        "MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "The Four-Jobs Sort",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Four-Jobs Sort\",\"primitives\":[],\"addresses\":[\"MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "Introductory Elements and Nonessential Information",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Introductory Elements and Nonessential Information\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "The Clause-Joiner Both-Sides Test",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Clause-Joiner Both-Sides Test\",\"primitives\":[],\"addresses\":[\"MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "List Separator Edge Cases",
+      "content": "{\"id\":\"TA-4\",\"title\":\"List Separator Edge Cases\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 71,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "Multi-Rule Sentences and Original Construction",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Multi-Rule Sentences and Original Construction\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA\",\"MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING",
+        "MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 74,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Pause-trap rejection**\nGiven a sentence with a natural speaking pause at a location with no comma rule (a restrictive/essential clause), student correctly withholds the comma and explains using the lift-out test. *(Directly targets MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Compound-verb comma rejection**\nGiven a sentence with \"and\" joining a compound verb (not two independent clauses), student correctly withholds the comma and explains using the both-sides-clause test. *(Directly targets MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Four-jobs identification**\nGiven 4 unlabeled sentences (one per comma job), student correctly punctuates each and names which of the four toolbox jobs applies.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Multi-rule sentence punctuation**\nGiven an unpunctuated sentence requiring 3 different comma rules simultaneously, student inserts all commas correctly and names each rule used.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original sentence construction**\nStudent writes one original sentence per comma job (4 total) and self-verifies each using the matching structural test from the Concrete Anchor.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "Adaptive Flags",
+      "content": "- If the student over-inserts commas at every natural pause, weight remediation toward MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING's bridge text and re-run TA-1's four-jobs sort in isolation before reintroducing pause-tempting sentences.\n- If the student over-inserts commas before every \"and\"/\"or\"/\"but,\" weight remediation toward MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA's bridge text and TA-3's both-sides-clause test specifically.\n- This concept is foundational for four direct downstream unlocks (`eng.grammar.apostrophes`, `eng.grammar.quotation-marks`, `eng.grammar.colons-semicolons-dashes`, `eng.grammar.run-on-sentences-and-comma-splices`) — do not certify mastery without TA-5's multi-rule integration, since `eng.grammar.run-on-sentences-and-comma-splices` specifically depends on the clause-joiner rule being solid (a comma splice is exactly the clause-joiner rule's comma without its required conjunction).\n- Reuse the \"four toolbox jobs\" framing explicitly when introducing `eng.grammar.colons-semicolons-dashes` — that concept extends the same job-based (not pause-based) punctuation-placement logic to a different set of marks.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING",
+        "MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 138,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.comma-usage/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.comma-usage",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: End Punctuation + Clause Check]\n        |\n        v\n[Concrete Anchor: Four Comma Jobs Toolbox]\n        |\n        v\n[TA-1: Four-Jobs Sort]\n        |\n        v\n[TA-2: Intro Elements + Nonessential Info]\n        |\n        v\n[TA-3: Clause-Joiner Both-Sides Test]\n        |\n        v\n[TA-4: List Separator Edge Cases]\n        |\n        v\n[TA-5: Multi-Rule Sentences + Original Construction]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — every comma rule in this concept depends on both clause-counting and sentence-completeness judgment, so a student weak in either prerequisite will punctuate by guesswork. During instruction (S1), watch for the two dominant shortcut patterns: pause-based placement (MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING) and conjunction-presence placement (MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA) — both bypass checking the actual structural job a comma is meant to do, and both should be redirected to the four-tool test rather than corrected item-by-item. If the student defaults to \"when in doubt, add a comma\" during probes (S6), drop back to the Concrete Anchor's toolbox and re-run TA-1 with one rule isolated at a time before returning to multi-rule sentences. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 (the two counterexample-rejection probes) both pass — a student who only adds commas correctly but never withholds one when the pause or conjunction \"feels\" comma-worthy has not yet internalized the structural test.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comma-usage.md",
+        "startLine": 106,
+        "endLine": 138
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

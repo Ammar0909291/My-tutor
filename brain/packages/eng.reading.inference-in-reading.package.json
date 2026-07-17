@@ -1,0 +1,449 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.inference-in-reading-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.inference-in-reading",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0bde7e12e5e8c9c9e66b83bf4e9fa888ad1083799db1973216583d2b8c0d611c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.inference-in-reading.md": "sha256:708e892a2622f4803f48be4a9b6daf16e2c5edac4df3a0971ec0b598fa49d037"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.inference-in-reading",
+    "name": "Inference in Reading",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.reading.main-idea-and-details"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.inference-in-reading-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.inference-in-reading (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.inference-in-reading.md": "sha256:708e892a2622f4803f48be4a9b6daf16e2c5edac4df3a0971ec0b598fa49d037"
+      },
+      "contentHash": "sha256:9e8c7a90270ff74a38b4c8d59bc67b19855785bc251bb7c2da93424a68ebc1c4",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.inference-in-reading.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md#TA-1 (addresses MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.inference-in-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.inference-in-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.inference-in-reading.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.inference-in-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.inference-in-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.inference-in-reading.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md#TA-3 (addresses MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE, MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.inference-in-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.inference-in-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.inference-in-reading.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md#TA-4 (addresses MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.inference-in-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.inference-in-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.inference-in-reading.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md#TA-5 (addresses MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE, MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.inference-in-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.inference-in-reading\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.inference-in-reading/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Inference in Reading — Conceptual Development Sequence",
+      "content": "### TA-1: Highlighting Textual Clues\nPresent short passages and have the student physically underline or highlight every specific detail (not the whole passage) that could support an inference, before drawing any conclusion — building the habit of clue-identification as a distinct first step, directly countering MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE's ungrounded-guess pattern.\n\n### TA-2: The \"Text Says / I Know / So\" Chain\nTeach the explicit three-part inference sentence frame: \"The text says ___, and I know ___, so I can infer ___.\" Student practices completing this frame for 4 short passages, making the clue-plus-knowledge combination visible and checkable.\n\n### TA-3: Legitimate Inference vs. Wild Guess\nUsing the discrimination pairs from both misconceptions, present pairs of candidate conclusions for the same passage — one clue-supported, one either ungrounded (MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE) or an over-cautious refusal to conclude anything (MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT) — and have the student identify which is the legitimate inference and justify why, citing specific text evidence either present or absent.\n\n### TA-4: Character Feeling and Motive Inference\nExtend to inferring characters' unstated feelings and motives from actions and dialogue (as in the Conflict Evidence example), directly countering MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT's refusal to interpret behavior — reinforcing that behavior-to-feeling inference is a normal, expected reading move, not overreach.\n\n### TA-5: Multi-Clue Synthesis Across a Longer Passage\nPresent a longer passage (2-3 paragraphs) with several inference opportunities requiring the student to combine clues from different parts of the text (not just one sentence) into a single well-supported conclusion, then independently generate one original inference with full \"text says / I know / so\" justification — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": ": Simple Clue-to-Inference (Scaffolded)",
+      "content": "### WE-1: Simple Clue-to-Inference (Scaffolded)\n**Passage:** \"Jenna's stomach growled loudly. She glanced at the clock — 11:55 — and started packing up her books.\"\n**Walkthrough:** Clues: stomach growling, checking the clock near midday, packing up books. Frame: \"The text says Jenna's stomach growled and she checked the clock near lunchtime, and I know people get hungry around midday and check the time before a break, so I can infer Jenna is getting ready for lunch.\"",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 73,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": ": Legitimate vs. Wild Guess (Guided)",
+      "content": "### WE-2: Legitimate vs. Wild Guess (Guided)\n**Passage:** \"The coach blew the whistle twice and pointed to the bench. Marcus walked off the field with his head down, not looking at anyone.\"\n**Candidate inferences to evaluate:** (a) \"Marcus is probably being taken out of the game and isn't happy about it\" (supported: whistle-to-bench signal, head down, avoiding eye contact) vs. (b) \"Marcus has been playing badly all season\" (unsupported: nothing in this passage indicates anything about his season-long performance).\n**Walkthrough:** Confirm (a) is a legitimate inference traceable to specific clues; confirm (b) is an ungrounded guess with no textual support, even though it's a \"plausible\" idea about soccer players in general.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 73,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": ": Multi-Clue Synthesis (Independent)",
+      "content": "### WE-3: Multi-Clue Synthesis (Independent)\n**Passage (2 paragraphs):** A family arrives at a campsite, unpacks in silence, and the youngest child keeps looking back toward the car; later, the parents exchange a look when the child asks \"are we staying the whole week?\"\n**Walkthrough:** Student combines clues across both paragraphs (silence while unpacking, child looking back at the car, parents' exchanged look at the question) to infer something is emotionally unresolved for this family about the trip (e.g., possibly connected to leaving someone/something behind), using the full \"text says / I know / so\" frame and citing evidence from both paragraphs.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 73,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/misconception/MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE",
+      "kind": "misconception",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "- **Trigger signal:** Student produces an answer to \"what can you infer?\" that is plausible in the real world but is not actually supported by evidence in the specific text — essentially free-associating from prior knowledge rather than combining textual clues with prior knowledge.",
+      "content": "### MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE\n- **Trigger signal:** Student produces an answer to \"what can you infer?\" that is plausible in the real world but is not actually supported by evidence in the specific text — essentially free-associating from prior knowledge rather than combining textual clues with prior knowledge.\n- **Conflict evidence [P28]:** Give a short passage where a character \"grabbed her coat, checked the sky, and slammed the door on her way out\" with no mention of weather. Ask the student what can be inferred. If they answer something plausible but untethered (e.g., \"she was late for work\"), ask them to point to the specific textual evidence that supports that inference versus the evidence that actually supports a different, text-grounded inference (\"it might rain\" — checking the sky, grabbing a coat).\n- **Bridge text [P30]:** \"A good inference isn't just a plausible guess about life in general — it's a conclusion you can defend by pointing to specific clues IN THE TEXT plus something you already know, combined together. If you can't point to the textual evidence that led you there, it's not an inference from this text — it's a guess from somewhere else.\"\n- **Replacement text [P31]:** \"Before stating an inference, find the specific clue(s) in the text first, then ask what that clue plus your background knowledge logically suggests. Every inference should be traceable back to: 'The text said ___, and I know ___, so I can conclude ___.'\"\n- **Discrimination pairs [P33]:** (a) Free-association guessing (any real-world-plausible idea counts as an inference, regardless of textual support) vs. (b) Evidence-clue-plus-knowledge inference (a valid inference must be traceable to specific textual clues combined with background knowledge, in an explicit \"text says X, I know Y, so Z\" chain).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's clue-highlighting task before returning to inference-drawing.",
+      "localKey": "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE",
+      "language": "en",
+      "refs": [
+        "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/misconception/MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT",
+      "kind": "misconception",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "- **Trigger signal:** Student refuses to draw any conclusion beyond what is literally printed in the text, treating any interpretation as illegitimate \"making things up\" — the opposite failure from MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE, collapsing inference back into pure literal comprehension and refusing to synthesize.",
+      "content": "### MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT\n- **Trigger signal:** Student refuses to draw any conclusion beyond what is literally printed in the text, treating any interpretation as illegitimate \"making things up\" — the opposite failure from MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE, collapsing inference back into pure literal comprehension and refusing to synthesize.\n- **Conflict evidence [P28]:** Present a passage stating only \"Tom's hands shook as he opened the envelope. He read the letter twice before setting it down without a word.\" Ask what Tom might be feeling. If the student says \"we can't know, it doesn't say,\" point out that the text never says Tom is a person at all in so many words either — readers routinely and legitimately combine explicit details (shaking hands, reading twice, silence) with background knowledge (these are physical signs of strong emotion) to reasonably conclude Tom is nervous or shocked, without the text ever using the word \"nervous.\"\n- **Bridge text [P30]:** \"You're right that the text never says 'Tom felt nervous' — and that's exactly what makes this an inference instead of a literal fact. Authors deliberately show behavior and let readers connect it to feelings; that connecting step is a real, legitimate reading skill, not 'making things up,' as long as your conclusion is well-supported by the details actually given.\"\n- **Replacement text [P31]:** \"You don't need the text to state something in exact words to reasonably conclude it. If specific details point clearly toward a conclusion — the way shaking hands and reading something twice point toward strong emotion — drawing that conclusion is a real reading skill, not guessing, as long as you can name the details that support it.\"\n- **Discrimination pairs [P33]:** (a) Literal-only stance (only what is printed word-for-word counts as \"knowing\"; anything else is illegitimate speculation) vs. (b) Evidence-supported inference stance (a conclusion not literally stated can still be legitimately \"known\" if specific textual details clearly and reasonably point to it).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's detective framing, emphasizing that detectives routinely \"know\" things suspects never said aloud.",
+      "localKey": "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT",
+      "language": "en",
+      "refs": [
+        "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Highlighting Textual Clues",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Highlighting Textual Clues\",\"primitives\":[],\"addresses\":[\"MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "The \"Text Says / I Know / So\" Chain",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The \\\"Text Says / I Know / So\\\" Chain\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Legitimate Inference vs. Wild Guess",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Legitimate Inference vs. Wild Guess\",\"primitives\":[],\"addresses\":[\"MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT\",\"MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE",
+        "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Character Feeling and Motive Inference",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Character Feeling and Motive Inference\",\"primitives\":[],\"addresses\":[\"MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Multi-Clue Synthesis Across a Longer Passage",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Multi-Clue Synthesis Across a Longer Passage\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT\",\"MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE",
+        "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 72,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject ungrounded guess**\nGiven a passage and two candidate inferences (one clue-supported, one plausible-but-ungrounded), student identifies the ungrounded one and explains what evidence it lacks. *(Directly targets MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Draw a feeling/motive inference from behavior alone**\nGiven a short passage describing only actions and physical details (no stated emotions), student infers a character's feeling or motive and justifies it using the \"text says / I know / so\" frame. *(Directly targets MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Clue highlighting**\nGiven a new short passage, student underlines the specific clues that support a given inference and explains how each clue contributes.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Multi-paragraph synthesis**\nGiven a 2-paragraph passage, student combines clues from both paragraphs into one well-supported inference.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Independent inference generation**\nGiven a novel passage with no candidate inference provided, student generates an original inference from scratch and justifies it fully using the three-part frame, citing specific textual evidence.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Adaptive Flags",
+      "content": "- If the student produces plausible-but-untethered answers, weight remediation toward MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE's bridge text and re-run TA-1/TA-2 (clue-highlighting and sentence-frame) before returning to open-ended inference tasks.\n- If the student refuses to draw any conclusion not explicitly stated, weight remediation toward MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT's bridge text and TA-4's behavior-to-feeling practice, emphasizing that this is a normal, expected reading move rather than overreach.\n- This concept is foundational for three direct downstream unlocks (`eng.reading.predicting-and-confirming`, `eng.reading.authors-purpose-and-tone`, `eng.reading.close-reading`) — do not certify mastery without TA-5's multi-clue, multi-paragraph synthesis, since all three downstream concepts require combining evidence across more than a single sentence.\n- Reuse the \"text says / I know / so\" frame explicitly when introducing `eng.reading.authors-purpose-and-tone` — that concept's tone/purpose judgments are inference conclusions about the author rather than about a character, using the identical evidence-plus-knowledge reasoning chain.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE",
+        "MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 137,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.inference-in-reading/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.inference-in-reading",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Main Idea Synthesis Check]\n        |\n        v\n[Concrete Anchor: The Detective's Notebook]\n        |\n        v\n[TA-1: Highlighting Textual Clues]\n        |\n        v\n[TA-2: The \"Text Says / I Know / So\" Chain]\n        |\n        v\n[TA-3: Legitimate Inference vs. Wild Guess]\n        |\n        v\n[TA-4: Character Feeling and Motive Inference]\n        |\n        v\n[TA-5: Multi-Clue Synthesis Across a Longer Passage]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — inference is the same clue-synthesis move as implied-main-idea detection, applied more narrowly and to a wider range of conclusion types, so a student weak in that synthesis skill will either guess wildly or refuse to conclude anything. During instruction (S1), watch for which direction the student errs: MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE (guessing beyond the evidence) and MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT (refusing to conclude anything beyond literal text) are opposite failures of the same missing skill — combining explicit clues with background knowledge in a checkable chain — and both should be redirected to the \"text says / I know / so\" frame rather than simply marked wrong. If the student freezes or free-associates during TA-3's discrimination task (S6), drop back to the Detective's Notebook anchor and re-run TA-2's sentence-frame practice with a single, very clear clue set before returning to ambiguous passages. At mastery-probe stage (S9), do not certify mastery unless MP-1 (rejecting ungrounded guesses) and MP-2 (drawing a legitimate unstated conclusion) both pass — a student who passes only one demonstrates only half of the required judgment.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.inference-in-reading.md",
+        "startLine": 105,
+        "endLine": 137
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
