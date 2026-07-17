@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.parallel-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.parallel-structure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:977800ed35b6e650a4bfe87cb54d8b2ad0076ec19b4f4a23ed3054c921c47f21",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.parallel-structure.md": "sha256:20f7f71224d67dfcde683d81655ff152433ed6d71843acd2ed190b89a19a59bb"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.parallel-structure",
+    "name": "Parallel Structure",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.compound-sentences"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.parallel-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.parallel-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.parallel-structure.md": "sha256:20f7f71224d67dfcde683d81655ff152433ed6d71843acd2ed190b89a19a59bb"
+      },
+      "contentHash": "sha256:38c6e04c5c0fb816be835fe956e58bc23574d8ae3989d282a842a3f1235ced3c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.parallel-structure.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.parallel-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.parallel-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.parallel-structure.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md#TA-2 (addresses MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.parallel-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.parallel-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.parallel-structure.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md#TA-3 (addresses MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.parallel-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.parallel-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.parallel-structure.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md#TA-4 (addresses MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS, MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.parallel-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.parallel-structure\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.parallel-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Parallel Structure — Conceptual Development Sequence",
+      "content": "### TA-1 — Parallel Structure in Simple Word Lists\n\nIntroduce the basic principle with simple word-list examples (matching nouns, matching adjectives).\nStudent practice: given four simple word-list sentences, identify which are parallel and which are\nnot.\n\n### TA-2 — Parallel Structure Extends to Phrases and Clauses (MC-A)\n\nUsing the place-settings anchor, teach that the same principle applies to gerund phrases, infinitive\nphrases, and full clauses in a series. Student practice: given four phrase-level or clause-level\nseries, label each item's grammatical form and identify any mismatches.\n\n### TA-3 — Precise Grammatical Matching, Not Surface Similarity (MC-B)\n\nUsing the instrument-tuning anchor, teach students to identify the exact matching form needed and\nrevise precisely to it. Student practice: given three non-parallel sentences with an attempted but\nincomplete \"surface\" fix, identify why the fix still fails and correct it to genuinely match the form.\n\n### TA-4 — Full Application: Identifying and Correcting Parallel Structure Violations\n\nGive the student five sentences (a mix of word-list, phrase-level, and clause-level series, some\nparallel and some not). They must identify any violations at any level of complexity (TA-1, TA-2) and\ncorrect them by matching the exact grammatical form (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 143,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/misconception/MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "**Trigger signal:** Student correctly applies parallel structure to simple word lists (e.g., \"I like",
+      "content": "### MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS\n\n**Trigger signal:** Student correctly applies parallel structure to simple word lists (e.g., \"I like\napples, oranges, and bananas\") but fails to recognize that the SAME principle applies to lists of\nPHRASES or CLAUSES (e.g., gerund phrases, infinitive phrases, or full clauses joined in a series),\nmissing violations like \"She likes swimming, to run, and biking\" where the grammatical forms of the\nthree items don't match.\n\n**Conflict evidence [P28]:** Show the student a correctly parallel list of single words (\"I like\napples, oranges, and bananas\" — all nouns) alongside a non-parallel list of PHRASES (\"She likes\nswimming, to run, and biking\" — a gerund, an infinitive, and another gerund, mismatched). Ask: \"Does\nthe same 'matching forms' principle that makes the first sentence work also apply to the second, even\nthough the items are phrases rather than single words?\"\n\n**Bridge text [P30]:** \"Parallel structure isn't just a rule for simple word lists — it's a general\nprinciple that applies any time you join items in a series or comparison, whether those items are\nsingle words, phrases, or entire clauses. Think of it like matching place settings at a dinner table:\nwhether you're setting out spoons, forks, and knives (single items) or entire place-setting bundles\n(matched combinations), the principle is the same — everything in the set should follow the same\npattern.\"\n\n**Replacement text [P31]:** \"When checking for parallel structure, don't just check single-word\nlists — check ANY series or comparison, including ones made of phrases (gerund phrases like\n'swimming,' infinitive phrases like 'to swim') or full clauses. Every item in the series needs to\nshare the same grammatical form, no matter how long or complex each item is.\"\n\n**Discrimination pairs [P33]:**\n1. \"She likes swimming, to run, and biking.\" (a gerund, an infinitive, and another gerund — mismatched\n   phrase forms) vs. \"She likes swimming, running, and biking.\" (all gerunds — matched phrase forms).\n2. A student who catches \"I like apples, oranges, and running\" (an obvious single-word/phrase mismatch)\n   but misses \"She enjoys reading books, to write essays, and studying grammar\" (a more subtle\n   phrase-level mismatch) — showing the principle wasn't generalized beyond simple cases.\n\n**s6_path:** If the student continues to miss phrase-level violations after the bridge, have them\nunderline each item in a series (regardless of length) and label its grammatical form (noun, gerund\nphrase, infinitive phrase, clause) directly above it, making any mismatch visually obvious before\nattempting a fix.",
+      "localKey": "MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS",
+      "language": "en",
+      "refs": [
+        "MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/misconception/MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "**Trigger signal:** Student attempts to fix a parallel structure violation by making the items sound",
+      "content": "### MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR\n\n**Trigger signal:** Student attempts to fix a parallel structure violation by making the items sound\nmore similar in a surface, informal way (e.g., adding similar-sounding words) without actually\nmatching their underlying GRAMMATICAL FORM (part of speech, verb form, phrase type) — producing a\nrevision that still contains a genuine structural mismatch despite superficially \"sounding better.\"\n\n**Conflict evidence [P28]:** Show the student a non-parallel sentence (\"The coach asked the team to\npractice harder, to focus more, and improving their communication.\") alongside two \"fixes\": one that\nonly superficially adjusts wording without fixing the actual grammatical mismatch (\"The coach asked\nthe team to practice harder, to focus more, and to try improving their communication.\" — still mixing\nan infinitive-plus-gerund construction with two plain infinitives), and one that correctly matches all\nthree items to the same infinitive form (\"...to practice harder, to focus more, and to improve their\ncommunication.\"). Ask: \"Does the first 'fix' actually match the grammatical FORM of all three items,\nor does it just add some similar-sounding words without truly fixing the structural mismatch?\"\n\n**Bridge text [P30]:** \"Fixing parallel structure by just making items 'sound similar' without\nchecking the actual grammatical form is like tuning three instruments to roughly the same volume\nwithout checking they're actually in the same musical key — it might sound closer at a glance, but\nthe underlying structure is still mismatched. A true fix requires identifying the EXACT grammatical\nform (infinitive, gerund, specific verb tense) and making every item in the series match that exact\nform precisely.\"\n\n**Replacement text [P31]:** \"When fixing a parallel structure error, don't just adjust wording until\nit 'sounds better' — identify the specific grammatical form of the items that DO match, and revise\nthe mismatched item(s) to that exact same form (same part of speech, same phrase type, same verb\nform).\"\n\n**Discrimination pairs [P33]:**\n1. \"...to practice harder, to focus more, and to try improving their communication.\" (superficially\n   adjusted, but still structurally mismatched — the third item isn't a simple infinitive like the\n   first two) vs. \"...to practice harder, to focus more, and to improve their communication.\" (all\n   three items are now simple infinitives — genuinely matched).\n2. A student who revises a non-parallel sentence by adding filler words until it \"reads more smoothly\"\n   without checking actual grammatical form (surface fix) vs. a student who identifies the exact\n   matching form needed and revises precisely to that form (structural fix).\n\n**s6_path:** If the student continues to apply surface-level fixes after the bridge, have them label\nthe exact grammatical form of the two items that DO match in a non-parallel sentence, then revise ONLY\nthe mismatched item to that exact labeled form, with no other wording changes permitted — isolating\nthe structural-matching skill from general sentence polishing.",
+      "localKey": "MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR",
+      "language": "en",
+      "refs": [
+        "MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 41,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Parallel Structure in Simple Word Lists",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Parallel Structure in Simple Word Lists\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Parallel Structure Extends to Phrases and Clauses (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Parallel Structure Extends to Phrases and Clauses (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Precise Grammatical Matching, Not Surface Similarity (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Precise Grammatical Matching, Not Surface Similarity (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Full Application: Identifying and Correcting Parallel Structure Violations",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Identifying and Correcting Parallel Structure Violations\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS\",\"MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS",
+        "MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 165,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Simple Word-List Violations**\nGiven three simple word-list sentences, identify which contain a parallel structure violation.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 190,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Phrase-Level Violations**\nGiven three sentences containing series of phrases (gerund, infinitive, or clause-level), identify\nwhich contain a parallel structure violation, labeling each item's grammatical form.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 190,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Incomplete Surface Fixes**\nGiven a non-parallel sentence with an attempted but still-mismatched \"fix,\" identify why the fix does\nnot actually achieve grammatical matching.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 190,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Precise Correction**\nGiven a non-parallel sentence, revise it by matching all items to one exact, identified grammatical\nform.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 190,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Identification and Correction**\nGiven a new sentence containing a parallel structure violation at any level of complexity (word,\nphrase, or clause), identify the violation and correct it to genuinely matching grammatical form.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 190,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters simple word-list parallel structure (MP-1) but consistently misses phrase-\n  level and clause-level violations (MP-2), continue extending practice specifically at those higher\n  complexity levels rather than assuming the underlying principle has generalized.\n- If the student's corrections (MP-4) are grammatically parallel but awkward or unnatural-sounding,\n  clarify that correct parallel structure sometimes requires choosing a DIFFERENT but still-matching\n  form for all items (not necessarily forcing the mismatched item into the other items' exact form) —\n  connect this flexibility to `eng.composition.style-voice-and-tone`'s emphasis on natural, effective\n  phrasing.\n- If the student over-applies parallel structure to items that are NOT actually part of the same\n  series or comparison (forcing unrelated sentence elements into artificial matching), clarify that\n  the principle only applies to genuine series/comparison structures, not to every pair of nearby\n  phrases.\n- Students who struggle with abstract grammatical labeling (identifying \"gerund phrase\" vs.\n  \"infinitive phrase\" by name) may still successfully identify mismatches by ear/intuition — allow\n  this as a valid entry point, then connect it to the formal labels for the more precise correction\n  work in TA-3/TA-4.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 249,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "eng.grammar.parallel-structure/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.parallel-structure",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: compound sentences check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.grammar.compound-sentences]  [Component 3: Matched-Place-Settings /\n                                             Instrument-Tuning Anchor]\n                                                        |\n                                                        v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                        |\n                                                        v\n                              [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                              [MP-1 through MP-5 mastery probe set]\n                                                        |\n                              (pass >= 0.75) -----+----- (fail)\n                                     |                      |\n                                     v                      v\n                        [No further unlocks —  [S6 remediation: label-the-form /\n                         terminal in current     exact-match-only-fix drills]\n                         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-2 (missing phrase-level\nviolations after mastering simple word lists) and MC-B during TA-3 (surface-only fixes) — MC-A\ngenerally needs resolving first since a student who cannot even detect phrase-level violations has\nnothing yet to practice fixing precisely. If either fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the basic\nprinciple (TA-1) needs review, distinct from either misconception; MP-2 failure alone indicates\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-identification-and-correction example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.parallel-structure.md",
+        "startLine": 211,
+        "endLine": 249
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

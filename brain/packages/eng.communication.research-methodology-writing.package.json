@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.research-methodology-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.research-methodology-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:05fdc5ff420d2d64c7642fac1f7b89c211f09de74ab3f0f88892f70973d683d6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md": "sha256:b3f0bee9f76a33acb9455bc89644e6440a0891b2e984ffc461fdd8fbd99eeee5"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.communication.research-methodology-writing",
+    "name": "Writing Research Methodology",
+    "difficultyRaw": "expert",
+    "bloom": "create",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.communication.academic-writing-advanced"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.research-methodology-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.research-methodology-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md": "sha256:b3f0bee9f76a33acb9455bc89644e6440a0891b2e984ffc461fdd8fbd99eeee5"
+      },
+      "contentHash": "sha256:a9ce598e34c1fc00b1f1077da159c6c9064cc69f72a5403b983bd3955a24122a",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.research-methodology-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.research-methodology-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.research-methodology-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.research-methodology-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md#TA-2 (addresses MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.research-methodology-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.research-methodology-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.research-methodology-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.research-methodology-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.research-methodology-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.research-methodology-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md#TA-4 (addresses MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.research-methodology-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.research-methodology-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.research-methodology-writing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md#TA-5 (addresses MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION, MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.research-methodology-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.research-methodology-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.research-methodology-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Writing Research Methodology — Conceptual Development Sequence",
+      "content": "### TA-1 — Describing Methods with Precise, Replicable Detail\n\nTeach the level of specificity needed for a method description to be genuinely replicable (exact\nnumbers, timeframes, procedures — not vague generalities). Student practice: given a vague method\ndescription, revise it to include specific, replicable detail.\n\n### TA-2 — Justifying Method Choices Relative to the Research Question (MC-A)\n\nUsing the recipe-technique anchor, teach the \"...because...\" justification habit for every\nsignificant methodological choice. Student practice: given three bare method descriptions, add an\nexplicit justification connecting each choice to the specific research question.\n\n### TA-3 — Identifying Genuine Limitations\n\nTeach students to identify real, specific limitations of a given method (sample size, self-report\naccuracy, generalizability) rather than vague, generic caveats. Student practice: given three method\ndescriptions, identify at least one genuine, specific limitation for each.\n\n### TA-4 — Acknowledging Limitations While Defending Overall Appropriateness (MC-B)\n\nUsing the honest-mechanic anchor, teach students to state a limitation directly while still defending\nthe method's overall suitability for the research question — not retracting the method, just being\ntransparent about its bounds. Student practice: given a method and an identified limitation from\nTA-3, write a sentence that acknowledges the limitation while defending the method's continued\nappropriateness.\n\n### TA-5 — Full Application: Writing a Complete Methodology Section\n\nGive the student a research question and a chosen method with rough procedural notes. They must\nwrite a full methodology description with precise, replicable detail (TA-1), explicit justification\nfor the choice (TA-2), and an honest, specific acknowledgment of at least one limitation while\ndefending the method's overall appropriateness (TA-3, TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 145,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/misconception/MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION",
+      "kind": "misconception",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "**Trigger signal:** Student writes a methods description as a bare list of steps performed (\"We",
+      "content": "### MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION\n\n**Trigger signal:** Student writes a methods description as a bare list of steps performed (\"We\nsurveyed 50 students. We analyzed the results using a chi-square test.\") with no explanation of WHY\nthese specific choices (this sample size, this particular statistical test, this particular method\nrather than an alternative) suit the research question being investigated.\n\n**Conflict evidence [P28]:** Show the student two methods descriptions for the same study: one that\nlists only the steps taken with no rationale (\"We surveyed 50 students about their study habits.\"),\nand one that also justifies the choices (\"We surveyed 50 students, a sample size sufficient to detect\nmeaningful differences given the study's exploratory scope, about their study habits, since\nself-report is the most direct way to capture the subjective time-allocation decisions this\nresearch question is centrally concerned with.\"). Ask: \"Which version helps a reader understand not\njust WHAT was done, but WHY these particular choices were the right ones for this specific question?\"\n\n**Bridge text [P30]:** \"A bare list of method steps with no justification is like a recipe that lists\ningredients and steps but never explains why a particular technique was chosen (why fold, not stir;\nwhy bake at this temperature) — a fellow cook can follow the steps, but has no way to judge whether\nthe technique actually suits the dish, or to adapt it intelligently if something changes. A methods\nsection needs to explain not just what was done, but why those specific choices suit this specific\nresearch question.\"\n\n**Replacement text [P31]:** \"For every significant methodological choice you describe (sample size,\nmethod of data collection, type of analysis), add a brief justification: why does THIS choice suit\nTHIS specific research question, compared to plausible alternatives? A methods section should read as\nreasoned choices, not just a procedural checklist.\"\n\n**Discrimination pairs [P33]:**\n1. \"We surveyed 50 students about their study habits.\" (bare procedural description, no\n   justification) vs. \"We surveyed 50 students about their study habits, using self-report because\n   the research question concerns subjective time-allocation decisions best captured directly from\n   participants.\" (procedural description plus explicit justification).\n2. A student who lists a statistical test used with no explanation of why it fits the data type or\n   research question (unjustified procedure) vs. a student who explains why that specific test is\n   appropriate given the specific type of data collected (justified, reasoned method choice).\n\n**s6_path:** If the student continues to write bare procedural lists after the bridge, have them go\nthrough their own draft and add, after every methodological choice, an explicit \"...because ___\"\nclause justifying it relative to the specific research question.",
+      "localKey": "MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION",
+      "language": "en",
+      "refs": [
+        "MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/misconception/MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS",
+      "kind": "misconception",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "**Trigger signal:** Student writes a methodology section that presents the chosen method as if it",
+      "content": "### MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS\n\n**Trigger signal:** Student writes a methodology section that presents the chosen method as if it\nwere flawless and beyond question, omitting any acknowledgment of the method's real limitations (e.g.,\na small sample size, a self-report method's potential for inaccurate recall, a specific population\nthat limits how broadly the findings generalize) — believing that acknowledging limitations would\nweaken the research's credibility.\n\n**Conflict evidence [P28]:** Show the student two methodology sections for the same study: one that\npresents the method with no acknowledged limitations at all, and one that transparently acknowledges a\nspecific limitation (e.g., \"self-reported study time may not perfectly reflect actual time spent, a\nlimitation inherent to this data collection method\") while still defending the method's overall\nappropriateness for the research question. Ask: \"Which version actually seems more credible and\nrigorous to a careful reader — the one that claims perfection, or the one that's honest about a\nspecific, real limitation while still defending its overall choices?\"\n\n**Bridge text [P30]:** \"Presenting a method as flawless is like a mechanic claiming a car repair has\nliterally zero possible failure points — a careful customer trusts the mechanic MORE, not less, when\nthey honestly note 'this part should hold for years, but it's the one component we can't fully test\nunder all conditions,' because it signals genuine expertise and honesty rather than salesmanship.\nAcknowledging a real, specific limitation while still defending the method's overall suitability\nsignals genuine methodological rigor, not weakness.\"\n\n**Replacement text [P31]:** \"After justifying your method, identify at least one genuine limitation\n(sample size, self-report accuracy, generalizability to other populations) and state it directly,\nrather than presenting the method as flawless. Acknowledging a real limitation, while still defending\nthe method's overall appropriateness, is a sign of rigor, not weakness.\"\n\n**Discrimination pairs [P33]:**\n1. A methodology section presenting the chosen sample as if it perfectly represents the entire\n   population with no caveat (implausible, undermines credibility to a careful reader) vs. one that\n   acknowledges the sample's specific limitations (e.g., drawn from one school, not necessarily\n   representative of all students) while still defending its adequacy for the study's specific,\n   narrower purpose (honest, credible).\n2. A student avoiding any mention of limitations out of fear of \"weakening\" the research\n   (misconception) vs. a student transparently naming a real limitation as evidence of careful,\n   honest methodological thinking (correct understanding).\n\n**s6_path:** If the student continues to omit limitations after the bridge, have them list every\nmethodological choice made in their own study and, for each, identify at least one genuine trade-off\nor limitation it involves — forcing explicit consideration of limitations as a required step, not an\noptional afterthought.",
+      "localKey": "MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS",
+      "language": "en",
+      "refs": [
+        "MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 43,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Describing Methods with Precise, Replicable Detail",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Describing Methods with Precise, Replicable Detail\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 149,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Justifying Method Choices Relative to the Research Question (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Justifying Method Choices Relative to the Research Question (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 155,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Identifying Genuine Limitations",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Genuine Limitations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 161,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Acknowledging Limitations While Defending Overall Appropriateness (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Acknowledging Limitations While Defending Overall Appropriateness (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 167,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Full Application: Writing a Complete Methodology Section",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Writing a Complete Methodology Section\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION\",\"MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION",
+        "MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 175,
+        "endLine": 307
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Precise, Replicable Description**\nGiven a vague method description, revise it to include specific, replicable detail (numbers,\ntimeframes, exact procedures).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 201,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Justifying a Method Choice**\nGiven a bare method description and its research question, write an explicit justification\nconnecting the method choice to the specific question.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 201,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying a Genuine Limitation**\nGiven a method description, identify at least one genuine, specific limitation (not a vague, generic\ncaveat).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 201,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Acknowledging a Limitation While Defending the Method**\nGiven a method and an identified limitation, write a sentence that acknowledges the limitation\ndirectly while still defending the method's overall appropriateness for the research question.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 201,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Methodology Section**\nGiven a new research question and rough method notes, write a complete methodology section with\nprecise detail, explicit justification, and an honest limitation acknowledgment.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 201,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated justification and limitation-identification (MP-2, MP-3) but\n  reverts to bare, unjustified, limitation-free writing under the combined demand of MP-5, provide a\n  structured checklist (describe precisely, justify with \"because,\" name one real limitation, defend\n  overall choice) as scaffolding before removing it.\n- If the student's identified \"limitations\" (MP-3) are actually vague, generic hedges (\"no method is\n  perfect\") rather than specific, real trade-offs of THIS method, push for concrete specificity tied\n  to the actual study design.\n- If the student overcorrects after MC-B into undermining their own method entirely (treating the\n  limitation as disqualifying rather than a bounded, acknowledged trade-off), clarify that the goal is\n  honest transparency plus continued defense, not self-sabotage.\n- Given this concept's expert-level difficulty, students without prior exposure to any real research\n  design (even informally, e.g., a science fair project) may benefit from a concrete, hands-on\n  example of an actual small study before attempting the abstract methodology-writing task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 260,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "eng.communication.research-methodology-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.research-methodology-writing",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: academic writing advanced check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.communication.academic-writing-advanced]  [Component 3: Recipe-Technique /\n                                                           Honest-Mechanic Anchor]\n                                                                     |\n                                                                     v\n                                             [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                                     |\n                                                                     v\n                                    [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                     |\n                                                                     v\n                                    [MP-1 through MP-5 mastery probe set]\n                                                                     |\n                                    (pass >= 0.70) -----+----- (fail)\n                                           |                      |\n                                           v                      v\n                    [Unlock: editing-for-publication]  [S6 remediation: because-clause /\n                                                          real-limitation-listing drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (bare procedural\nlisting) and MC-B during TA-3/TA-4 (avoiding limitations) — MC-A generally needs resolving first since\na student who hasn't learned to justify choices at all often hasn't developed the analytical habit\nneeded to identify genuine limitations either. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the\nprecision/replicability step (TA-1) needs review, distinct from either misconception; MP-2 failure\nalone indicates residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-section example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.research-methodology-writing.md",
+        "startLine": 223,
+        "endLine": 260
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

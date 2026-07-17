@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.pragmatics-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.pragmatics-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b877df93e4c77311bcdb6896a77ca3fc6e1b03285e48f0473864cb2578361214",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md": "sha256:3a44f41823756bbd0c75353b0dc7d5c0838ab052efc807d3a9a70b9425859d49"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.pragmatics-intro",
+    "name": "Introduction to Pragmatics",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.semantics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.pragmatics-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.pragmatics-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md": "sha256:3a44f41823756bbd0c75353b0dc7d5c0838ab052efc807d3a9a70b9425859d49"
+      },
+      "contentHash": "sha256:0f84d2ccaf2963a4baa08a3cf287e09470d8b1311e1f831d70c7a14985bee8c5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.pragmatics-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md#TA-1 (addresses MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.pragmatics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.pragmatics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.pragmatics-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.pragmatics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.pragmatics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.pragmatics-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md#TA-3 (addresses MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.pragmatics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.pragmatics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.pragmatics-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md#TA-4 (addresses MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN, MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.pragmatics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.pragmatics-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "Introduction to Pragmatics — Conceptual Development Sequence",
+      "content": "### TA-1 — Literal Meaning vs. Speaker Intent: Indirect Speech Acts (MC-A)\n\nUsing the door-knock anchor, teach the concept of indirect speech acts, where a sentence's literal\nform (a question, a statement) conventionally accomplishes a different communicative purpose (a\nrequest, a suggestion). Student practice: given four common indirect speech act examples, identify the\nliteral meaning and the actual communicative intent for each.\n\n### TA-2 — The Cooperative Principle: Why Listeners Can Reliably Infer Beyond the Literal\n\nIntroduce the basic idea that conversation relies on speakers being expected to be relevant,\ninformative, and cooperative, which is what allows listeners to reliably infer meaning beyond the\nliteral words. Student practice: given three conversational exchanges, identify what conversational\nexpectation (relevance, sufficient information) is being relied upon for the inference to work.\n\n### TA-3 — Implicature as Reliable, Not Vague (MC-B)\n\nUsing the chess-move anchor and the \"would ten listeners agree\" test, teach that implicature is a\nprecise, reliable inference, distinct from genuine ambiguity. Student practice: given four exchanges\n(some genuine implicature, some genuinely ambiguous), classify each and justify using the\nten-listeners test.\n\n### TA-4 — Full Application: Analyzing Context-Dependent Meaning\n\nGive the student a new conversational exchange or short dialogue. They must identify any indirect\nspeech act present (TA-1), explain the conversational expectation enabling the inference (TA-2), and\nconfirm whether an implicature present is genuinely reliable rather than merely ambiguous (TA-3) —\nthe full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 148,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/misconception/MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "**Trigger signal:** Student assumes a speaker's literal, semantic sentence meaning is always",
+      "content": "### MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN\n\n**Trigger signal:** Student assumes a speaker's literal, semantic sentence meaning is always\nidentical to their actual communicative intent, failing to recognize indirect speech acts — where a\nspeaker uses a sentence with one literal meaning (a question about ability) to accomplish a different\ncommunicative purpose (a request) — e.g., interpreting \"Can you pass the salt?\" purely as a literal\nyes/no question about physical ability, missing that it functions as a request.\n\n**Conflict evidence [P28]:** Show the student the sentence \"Can you pass the salt?\" asked at a dinner\ntable, and ask: \"Is the speaker actually just curious about whether you're PHYSICALLY CAPABLE of\npassing the salt, or are they asking you to actually pass it? If someone literally just answered 'Yes,\nI can' and did nothing else, would that satisfy what the speaker wanted?\" Guide the student to see\nthe literal question and the actual communicative intent (a polite request) are systematically\ndifferent.\n\n**Bridge text [P30]:** \"Assuming literal meaning always equals intended meaning is like assuming a\nknock on a door is JUST the physical sound of knuckles on wood, with no communicative purpose beyond\nthat — but everyone understands a knock is actually a request ('let me in' or 'I'm here'), a\nconventional signal that goes beyond its literal physical nature. 'Can you pass the salt?' works the\nsame way: its literal form (a question about ability) is a conventional way of accomplishing a\ndifferent communicative act (a request).\"\n\n**Replacement text [P31]:** \"When interpreting an utterance, ask: is the speaker's literal, semantic\nquestion or statement actually what they intend to communicate, or are they using a conventional\nINDIRECT form to accomplish something else (like a request, a suggestion, or a criticism)? Context and\nconvention often signal this gap between literal form and actual intent.\"\n\n**Discrimination pairs [P33]:**\n1. \"Can you pass the salt?\" answered literally with just \"Yes\" and no action (missing the indirect\n   request) vs. correctly recognizing this as a conventional indirect request and passing the salt\n   (correct pragmatic inference).\n2. A student who cannot explain why \"It's cold in here\" at a party often functions as an indirect\n   request to close a window (missing the pragmatic layer) vs. a student who recognizes the literal\n   statement about temperature is being used to accomplish a request (correct pragmatic\n   understanding).\n\n**s6_path:** If the student continues to interpret utterances purely literally after the bridge, give\nthem three more indirect speech act examples (\"Do you know what time it is?\", \"I wonder if there's\nany coffee left\", \"This soup needs salt\") and have them identify the actual communicative intent\nbehind each literal form.",
+      "localKey": "MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN",
+      "language": "en",
+      "refs": [
+        "MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/misconception/MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "**Trigger signal:** Student conflates \"implicature\" (meaning that is systematically, predictably",
+      "content": "### MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR\n\n**Trigger signal:** Student conflates \"implicature\" (meaning that is systematically, predictably\nconveyed but not literally stated, inferred based on shared conversational expectations) with simple\nvagueness, ambiguity, or unclear communication — failing to recognize that implicature is a precise,\nRELIABLE, and predictable inference a competent listener draws, not a fuzzy guess about unclear\nspeech.\n\n**Conflict evidence [P28]:** Show the student an exchange: \"Are you coming to the party?\" \"I have to\nwork that night.\" Ask: \"Did the second speaker literally say 'no'? Yet would almost any listener\nconfidently infer 'no' from this response? Is this confident, reliable inference the same thing as\nthe response being vague or unclear?\" Guide the student to see that the inference (\"no, I'm not\ncoming\") is actually highly reliable and predictable, based on the conversational expectation that an\nanswer should be relevant to the question — this is the OPPOSITE of vague or unclear communication.\n\n**Bridge text [P30]:** \"Confusing implicature with vagueness is like confusing a chess player's subtle\nbut deliberate strategic move with a random, confused mistake — both might not be the 'obvious' most\ndirect move, but one is a precise, calculated communication within the rules of the game (the\nconversational expectation that answers should be relevant), while genuine vagueness is actually\nunclear or ambiguous. Implicature is a RELIABLE inference competent listeners confidently draw, not\nfuzzy guesswork.\"\n\n**Replacement text [P31]:** \"Implicature is meaning that's reliably CONVEYED but not literally\nSTATED, based on a shared expectation that speakers will be relevant, informative, and cooperative.\nTest it: would a competent listener confidently and consistently draw this inference, or is the\nstatement genuinely ambiguous with no clear intended meaning? Only the former is implicature.\"\n\n**Discrimination pairs [P33]:**\n1. \"I have to work that night.\" in response to a party invitation (reliably implicates 'no,' a\n   genuine, confident implicature) vs. a genuinely ambiguous statement with no clear intended\n   meaning that different listeners would interpret in incompatible ways (actual vagueness, not\n   implicature).\n2. A student treating any indirect or non-literal response as \"just being vague\" (misconception) vs.\n   a student recognizing that a specific indirect response reliably conveys a precise inferred\n   meaning that virtually any competent listener would draw (correct understanding of implicature).\n\n**s6_path:** If the student continues conflating implicature with vagueness after the bridge, have\nthem test three example exchanges by asking \"would ten different listeners all draw the SAME\ninference from this response?\" — a consistent yes across listeners indicates genuine, reliable\nimplicature; genuine disagreement indicates actual ambiguity.",
+      "localKey": "MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR",
+      "language": "en",
+      "refs": [
+        "MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 44,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "Literal Meaning vs. Speaker Intent: Indirect Speech Acts (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Literal Meaning vs. Speaker Intent: Indirect Speech Acts (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 152,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "The Cooperative Principle: Why Listeners Can Reliably Infer Beyond the Literal",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Cooperative Principle: Why Listeners Can Reliably Infer Beyond the Literal\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 159,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "Implicature as Reliable, Not Vague (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Implicature as Reliable, Not Vague (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 166,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "Full Application: Analyzing Context-Dependent Meaning",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing Context-Dependent Meaning\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN\",\"MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN",
+        "MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 173,
+        "endLine": 306
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Indirect Speech Acts**\nGiven three sentences with conventional indirect uses, identify the literal meaning and the likely\nactual communicative intent for each.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 198,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Explaining the Enabling Conversational Expectation**\nGiven a conversational exchange relying on implicature, identify what conversational expectation\n(relevance, sufficient information) makes the inference possible.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 198,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Testing Implicature Reliability**\nGiven two exchanges (one genuine implicature, one genuinely ambiguous), apply the \"would ten\nlisteners agree\" test to classify each correctly.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 198,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Implicature from Vagueness**\nGiven a statement, determine whether a specific inferred meaning is a reliable implicature or\nwhether the statement is actually too ambiguous to support a confident inference.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 198,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Contextual Meaning Analysis**\nGiven a new conversational exchange, identify any indirect speech act, explain the enabling\nconversational expectation, and confirm whether any implicature present is genuinely reliable.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 198,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated indirect-speech-act identification (MP-1) but struggles to explain\n  WHY the inference is reliable (MP-2), this indicates the cooperative-principle mechanism needs more\n  concrete grounding — return to the door-knock anchor's \"conventional signal\" framing rather than\n  advancing to more examples.\n- If the student is multilingual and their other language(s) have different indirect-request\n  conventions than English (some languages are more direct, others more indirect in comparable\n  situations), leverage this as a powerful comparative example, since pragmatic conventions are\n  notably variable across languages and cultures even when the underlying cooperative principle is\n  universal.\n- If the student conflates politeness or social tact with pragmatics broadly (assuming pragmatics is\n  just \"being polite\"), clarify that pragmatics is the broader systematic study of context-dependent\n  meaning, of which politeness-motivated indirectness is just one application.\n- Students who found the cross-linked `eng.vocab.idioms` concept engaging (if completed) may\n  transfer well to this concept's non-literal-meaning focus — draw the connection explicitly, since\n  idioms are a related but distinct phenomenon (conventionalized non-literal meaning at the phrase\n  level, versus pragmatic inference at the utterance/context level).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 256,
+        "endLine": 275
+      }
+    },
+    {
+      "assetId": "eng.linguistics.pragmatics-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.pragmatics-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: semantics intro check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.semantics-intro]  [Component 3: Door-Knock / Chess-Move Anchor]\n                                                        |\n                                                        v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                        |\n                                                        v\n                              [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                              [MP-1 through MP-5 mastery probe set]\n                                                        |\n                              (pass >= 0.75) -----+----- (fail)\n                                     |                      |\n                                     v                      v\n              [Unlock: discourse-analysis-intro,  [S6 remediation: indirect-speech-act /\n               sociolinguistics-intro]              ten-listeners-test drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1 (purely literal\ninterpretation) and MC-B during TA-3 (conflating implicature with vagueness) — MC-A generally needs\nresolving first since implicature discussion in TA-2/TA-3 assumes the student already accepts that\nliteral and intended meaning can diverge. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates residual\nMC-A; MP-2 failure alone indicates the conversational-expectation mechanism (TA-2) needs review,\ndistinct from either misconception; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with\nMP-1 through MP-4 passing indicates an integration gap — provide one more guided full-analysis\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md",
+        "startLine": 220,
+        "endLine": 256
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
