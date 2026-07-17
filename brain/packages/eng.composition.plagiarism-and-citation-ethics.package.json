@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.plagiarism-and-citation-ethics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0064f7f28a9491e584eb92699e169b8b4b184a44572d37615b3a534f59fa4a40",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md": "sha256:53dcbd3fba55c42ae2328d49a3ea846f18bca85daaecf8855cb666a400717c12"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+    "name": "Plagiarism and Citation Ethics",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.composition.academic-writing-conventions"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.plagiarism-and-citation-ethics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.plagiarism-and-citation-ethics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md": "sha256:53dcbd3fba55c42ae2328d49a3ea846f18bca85daaecf8855cb666a400717c12"
+      },
+      "contentHash": "sha256:96b45bfcccb95bd835fc5eac56deca40d8204068716800acfc9706d9702d45aa",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.plagiarism-and-citation-ethics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md#TA-1 (addresses MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.plagiarism-and-citation-ethics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.plagiarism-and-citation-ethics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.plagiarism-and-citation-ethics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md#TA-2 (addresses MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.plagiarism-and-citation-ethics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.plagiarism-and-citation-ethics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.plagiarism-and-citation-ethics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.plagiarism-and-citation-ethics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.plagiarism-and-citation-ethics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.plagiarism-and-citation-ethics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md#TA-4 (addresses MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE, MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.plagiarism-and-citation-ethics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.plagiarism-and-citation-ethics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Plagiarism and Citation Ethics — Conceptual Development Sequence",
+      "content": "### TA-1 — Plagiarism as a Genuine Ethical Violation (MC-A)\n\nUsing the signed-check anchor, teach that plagiarism is fundamentally about misrepresenting\nauthorship, a real ethical harm, not an arbitrary formatting rule. Student practice: given three\nscenarios (academic and non-academic), identify the shared underlying ethical violation across\ncontexts.\n\n### TA-2 — Distinguishing Genuine Plagiarism from Honest Citation Errors (MC-B)\n\nUsing the parking-permit-vs-stolen-car anchor, teach students to distinguish honest, minor citation\nmistakes from genuine, uncredited misrepresentation. Student practice: given five citation scenarios,\nrank each by severity and justify the ranking based on presence or absence of a genuine attribution\nattempt.\n\n### TA-3 — Self-Plagiarism as a Related Integrity Concern\n\nIntroduce self-plagiarism (resubmitting one's own previous work as new, without disclosure) as a\nrelated but distinct integrity concern. Student practice: given three scenarios involving reused\nwork, identify which constitute self-plagiarism and explain why disclosure would resolve the concern.\n\n### TA-4 — Full Application: Evaluating a Set of Academic Integrity Scenarios\n\nGive the student a new set of scenarios (mixing genuine plagiarism, honest citation errors, and\nself-plagiarism cases). They must correctly classify each (TA-1, TA-2, TA-3) and explain the reasoning\nbehind each classification — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 143,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/misconception/MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE",
+      "kind": "misconception",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "**Trigger signal:** Student treats plagiarism as an arbitrary academic formatting rule to follow",
+      "content": "### MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE\n\n**Trigger signal:** Student treats plagiarism as an arbitrary academic formatting rule to follow\n(like a specific citation style's exact punctuation) rather than recognizing it as a genuine ethical\nviolation — misrepresenting someone else's ideas, research, or words as one's own, which is a form of\ndishonesty with real consequences for the original author and for the integrity of the shared\nacademic/intellectual record.\n\n**Conflict evidence [P28]:** Show the student two scenarios: a student submitting an essay entirely\ncopied from an online source with no attribution, presented as their own original analysis, alongside\na scenario of a business person taking credit for a colleague's original idea in a meeting without\nacknowledgment. Ask: \"Is the academic case fundamentally different in KIND from the business case, or\nis it the same underlying ethical issue (taking credit for someone else's work) just occurring in a\ndifferent context?\"\n\n**Bridge text [P30]:** \"Treating plagiarism as just a formatting technicality is like treating\nsigning someone else's name on a check as just a technical paperwork issue — but it's not really about\nthe SIGNATURE'S formatting, it's about falsely claiming ownership of something that isn't yours.\nPlagiarism is the same underlying ethical violation as taking credit for someone else's work in any\ncontext — it just happens to occur in academic writing.\"\n\n**Replacement text [P31]:** \"Understand plagiarism as a genuine ethical issue — misrepresenting\nsomeone else's ideas or words as your own — not merely a technical citation-formatting rule. The harm\nis real: it deprives the original author of credit and undermines the honesty of the shared\nintellectual record.\"\n\n**Discrimination pairs [P33]:**\n1. A student viewing plagiarism as just \"forgetting to add a citation,\" a minor technical slip with\n   no real ethical weight (misconception) vs. a student recognizing that submitting someone else's\n   work as your own is a genuine act of taking credit for something you didn't do (correct, ethically\n   grounded understanding).\n2. Comparing academic plagiarism to a business person taking credit for a colleague's idea and seeing\n   them as unrelated issues (missing the underlying parallel) vs. recognizing both as the same\n   underlying ethical violation of misrepresenting authorship, occurring in different contexts\n   (correct, principle-level understanding).\n\n**s6_path:** If the student continues to view plagiarism as merely technical after the bridge, have\nthem articulate, in their own words, who is specifically harmed when a piece of writing is plagiarized\n(the original author, whose work goes uncredited; the reader, who is misled about the source of the\nideas; the broader academic community, whose trust in attributed work is undermined).",
+      "localKey": "MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE",
+      "language": "en",
+      "refs": [
+        "MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/misconception/MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM",
+      "kind": "misconception",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "**Trigger signal:** Student, having learned that plagiarism is a serious ethical violation,",
+      "content": "### MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM\n\n**Trigger signal:** Student, having learned that plagiarism is a serious ethical violation,\nover-generalizes and treats EVERY citation mistake — including minor, honest formatting errors made\nwhile genuinely attempting to attribute a source correctly — as equally serious as deliberate,\nuncredited copying, failing to distinguish genuine misrepresentation of authorship from an honest\nattempt at attribution that simply contains a technical error.\n\n**Conflict evidence [P28]:** Show the student two scenarios: a student who copies an entire paragraph\nfrom a source with no citation at all, presenting it as their own original writing (genuine\nplagiarism), and a student who correctly paraphrases a source's idea, genuinely attempts to cite it,\nbut makes a minor formatting mistake in the citation format (e.g., a missing page number, or an\nincorrect punctuation mark in the citation). Ask: \"Are these two situations the same kind of\nviolation, or does one represent a genuine attempt at honest attribution with a minor technical slip,\nwhile the other represents an actual misrepresentation of authorship?\"\n\n**Bridge text [P30]:** \"Treating every citation mistake as equally serious as deliberate plagiarism is\nlike treating a driver who makes a minor paperwork error on a parking permit the same as a driver who\ndeliberately steals a car — both involve a car-related 'mistake,' but the intent and the actual harm\nare completely different. A genuine, honest attempt to attribute a source, even with a minor technical\nerror, is fundamentally different from deliberately presenting someone else's work as your own.\"\n\n**Replacement text [P31]:** \"When evaluating a citation issue, ask: was there a genuine, honest attempt\nto attribute the source, with only a minor technical or formatting slip? Or is there no attempt at\nattribution at all, with the source's work presented as if it were the writer's own? These are\ndifferent in kind, not just degree, and should be treated differently.\"\n\n**Discrimination pairs [P33]:**\n1. A citation missing a page number, but clearly and correctly crediting the right source and author\n   (an honest, minor formatting error) vs. an entire paragraph copied with absolutely no attribution\n   at all, presented as original writing (genuine plagiarism, a real misrepresentation).\n2. A student who treats a minor citation formatting slip as equally severe as deliberate, uncredited\n   copying (over-generalized misconception) vs. a student who recognizes the fundamental difference in\n   intent and actual misrepresentation between the two (correct, nuanced understanding).\n\n**s6_path:** If the student continues to conflate minor errors with genuine plagiarism after the\nbridge, give them five example citation scenarios (ranging from honest minor formatting slips to\negregious, uncredited copying) and have them rank each by severity, articulating what specifically\nmakes the more severe cases worse (absence of any genuine attribution attempt, versus a technical\nslip within a genuine attempt).",
+      "localKey": "MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 44,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Plagiarism as a Genuine Ethical Violation (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Plagiarism as a Genuine Ethical Violation (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 147,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Distinguishing Genuine Plagiarism from Honest Citation Errors (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Distinguishing Genuine Plagiarism from Honest Citation Errors (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 154,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Self-Plagiarism as a Related Integrity Concern",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Self-Plagiarism as a Related Integrity Concern\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 161,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Full Application: Evaluating a Set of Academic Integrity Scenarios",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Evaluating a Set of Academic Integrity Scenarios\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE\",\"MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE",
+        "MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 167,
+        "endLine": 298
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Explaining the Ethical Harm of Plagiarism**\nExplain, in the student's own words, who is specifically harmed by plagiarism and why it constitutes a\ngenuine ethical violation rather than a mere formatting rule.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 191,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguishing Plagiarism from Honest Citation Errors**\nGiven two scenarios (one genuine plagiarism, one an honest minor citation error), correctly classify\neach and explain the key distinguishing factor.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 191,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Ranking Citation Scenarios by Severity**\nGiven four citation scenarios of varying severity, rank them and justify the ranking based on the\npresence or absence of a genuine attribution attempt.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 191,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying Self-Plagiarism**\nGiven three scenarios involving reused work, identify which constitute self-plagiarism and explain\nwhat disclosure step would resolve the concern.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 191,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Scenario Classification**\nGiven a new set of academic integrity scenarios, classify each as genuine plagiarism, an honest\ncitation error, or self-plagiarism, and justify each classification.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 191,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Adaptive Flags",
+      "content": "- If the student's severity-ranking (MP-3) shows genuine understanding but they remain anxious about\n  ever making an honest citation mistake, reassure them explicitly that the goal of this concept is\n  informed, careful attribution practice, not fear — honest, good-faith effort with an occasional\n  minor slip is categorically different from what this concept treats as a real integrity concern.\n- If the student conflates group-work collaboration (a legitimate, disclosed collaborative process)\n  with plagiarism, clarify that properly disclosed and permitted collaboration is a distinct, non-\n  problematic category from misrepresenting SOLE, uncredited authorship.\n- If the student's self-plagiarism classifications (MP-4) miss cases where reuse would be genuinely\n  fine with simple disclosure (e.g., building on one's own previously graded project with the\n  instructor's knowledge), emphasize that disclosure — not avoidance of all reuse — is the resolving\n  action.\n- Students preparing for or already engaged in original research work should be encouraged to apply\n  this concept's distinctions directly to their own citation practices going forward, since the\n  ethical stakes become more concrete and personally relevant in genuine research writing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 250,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "eng.composition.plagiarism-and-citation-ethics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.plagiarism-and-citation-ethics",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: academic writing conventions check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.composition.academic-writing-conventions]  [Component 3: Signed-Check /\n                                                            Parking-Permit-vs-Stolen-Car Anchor]\n                                                                     |\n                                                                     v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                     |\n                                                                     v\n                                     [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                     |\n                                                                     v\n                                     [MP-1 through MP-5 mastery probe set]\n                                                                     |\n                                     (pass >= 0.80) -----+----- (fail)\n                                            |                      |\n                                            v                      v\n                    [No further unlocks —  [S6 remediation: who-is-harmed / rank-\n                     terminal in current      by-severity drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (viewing plagiarism as\npurely technical) and MC-B during TA-2 (over-generalizing severity) — MC-A generally needs resolving\nfirst since establishing plagiarism as a genuine ethical issue is the foundation for the more nuanced\nseverity distinctions in TA-2. If either fires, branch to the relevant s6_path drill before resuming.\nAt the mastery probe stage (S9), route by failure: MP-1 failure indicates residual MC-A; MP-2/MP-3\nfailures indicate residual MC-B; MP-4 failure alone indicates the self-plagiarism extension (TA-3)\nneeds review, distinct from either misconception; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided classification example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md",
+        "startLine": 213,
+        "endLine": 250
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.run-on-sentences-and-comma-splices-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b852c4b96ffd086f4800dd174a092024f41bca4de48e4dc8571551cf5fa10efd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md": "sha256:63afa3535073fef7c2d79dbd22acc68466657061cb3c614156114c29fa7568d7"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+    "name": "Run-On Sentences and Comma Splices",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.compound-sentences",
+      "eng.grammar.comma-usage"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.run-on-sentences-and-comma-splices-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.run-on-sentences-and-comma-splices (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md": "sha256:63afa3535073fef7c2d79dbd22acc68466657061cb3c614156114c29fa7568d7"
+      },
+      "contentHash": "sha256:3901015ac838188dc9eb5e6984d838fe90999655e1bd4f8d49382851d35be1d7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.run-on-sentences-and-comma-splices.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.run-on-sentences-and-comma-splices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.run-on-sentences-and-comma-splices\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.run-on-sentences-and-comma-splices.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md#TA-2 (addresses MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.run-on-sentences-and-comma-splices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.run-on-sentences-and-comma-splices\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.run-on-sentences-and-comma-splices.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md#TA-3 (addresses MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.run-on-sentences-and-comma-splices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.run-on-sentences-and-comma-splices\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.run-on-sentences-and-comma-splices.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md#TA-4 (addresses MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA, MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.run-on-sentences-and-comma-splices"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.run-on-sentences-and-comma-splices\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "Run-On Sentences and Comma Splices — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying True Run-Ons (No Punctuation at All)\n\nIntroduce the true run-on: two independent clauses joined with absolutely no punctuation or\nconjunction. Student practice: given four sentences, identify which are true run-ons.\n\n### TA-2 — Identifying Comma Splices (MC-A)\n\nUsing the chain-clasp anchor, teach students to identify comma splices — a comma alone joining two\nindependent clauses with no conjunction. Student practice: given four sentences (mixing comma\nsplices and correct compound sentences), identify which are comma splices.\n\n### TA-3 — The Three Valid Fix Strategies (MC-B)\n\nUsing the torn-seam anchor, teach the three valid fixes: splitting into two sentences, adding a\ncomma-plus-conjunction, and using a semicolon. Student practice: given three run-ons/splices, generate\nall three valid fixes for each and compare their rhythm and effect.\n\n### TA-4 — Full Application: Identifying and Correcting Errors in Context\n\nGive the student a short passage containing a mix of true run-ons, comma splices, and correctly formed\nsentences. They must identify each error (TA-1, TA-2) and correct each using the most contextually\nappropriate fix from the three valid strategies (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 138,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/misconception/MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "**Trigger signal:** Student believes that placing a comma between two independent clauses is",
+      "content": "### MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA\n\n**Trigger signal:** Student believes that placing a comma between two independent clauses is\nsufficient on its own to correctly join them, not recognizing that a comma ALONE (with no\ncoordinating conjunction like \"and,\" \"but,\" or \"so\" following it) creates a comma splice — an error —\nrather than a correctly formed compound sentence, which requires the comma AND a conjunction together.\n\n**Conflict evidence [P28]:** Show the student two sentences: \"The rain stopped, we went outside.\"\n(comma splice — comma alone, no conjunction) and \"The rain stopped, and we went outside.\" (correct\ncompound sentence — comma plus the conjunction \"and\"). Ask: \"Both use a comma between two complete\nideas. Is the comma alone actually enough to correctly join them, or is something else required?\"\n\n**Bridge text [P30]:** \"Assuming a comma alone can correctly join two independent clauses is like\nassuming a single link of chain, with no connecting clasp, can hold two heavy objects together — the\ncomma is doing some of the connecting work, but on its own, without the 'clasp' of a coordinating\nconjunction (and, but, so, or, nor, for, yet), the connection isn't actually secure. Two independent\nclauses need the comma PLUS a conjunction together, not the comma alone.\"\n\n**Replacement text [P31]:** \"Never join two independent clauses with a comma alone. Always add a\ncoordinating conjunction (and, but, so, or, nor, for, yet) after the comma, or use a different fix\n(a semicolon, or splitting into two sentences) instead.\"\n\n**Discrimination pairs [P33]:**\n1. \"The rain stopped, we went outside.\" (comma splice — comma alone, an error) vs. \"The rain stopped,\n   and we went outside.\" (correct compound sentence — comma plus conjunction).\n2. A student who believes any comma between two complete ideas is automatically correct\n   (misconception) vs. a student who checks specifically for a coordinating conjunction following the\n   comma before accepting the sentence as correctly formed (correct, precise understanding).\n\n**s6_path:** If the student continues to accept comma splices as correct after the bridge, have them\ntake five comma-spliced sentences and, for each, identify the missing conjunction that would need to\nbe added directly after the comma to correctly fix it.",
+      "localKey": "MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA",
+      "language": "en",
+      "refs": [
+        "MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/misconception/MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "**Trigger signal:** Student, upon identifying a run-on sentence or comma splice, always defaults to",
+      "content": "### MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES\n\n**Trigger signal:** Student, upon identifying a run-on sentence or comma splice, always defaults to\nthe single fix of splitting the two clauses into two completely separate sentences, missing that\nthere are multiple equally valid fixes (adding a coordinating conjunction after a comma, using a\nsemicolon, or splitting into two sentences) that may suit the specific context and desired sentence\nrhythm differently.\n\n**Conflict evidence [P28]:** Show the student a run-on sentence (\"The rain stopped we went outside\")\nalongside THREE different valid fixes: splitting into two sentences (\"The rain stopped. We went\noutside.\"), adding a comma and conjunction (\"The rain stopped, and we went outside.\"), and using a\nsemicolon (\"The rain stopped; we went outside.\"). Ask: \"Are all three of these valid, correct fixes?\nDo they all read exactly the same, or does each create a slightly different rhythm or emphasis?\"\n\n**Bridge text [P30]:** \"Assuming splitting into two sentences is the only fix is like assuming there's\nonly one way to repair a torn seam in fabric — sewing, using fabric glue, or applying a patch might all\ngenuinely fix the tear, each with a slightly different look and durability. A run-on or comma splice\ncan be fixed by splitting into two sentences, adding a conjunction after a comma, or using a semicolon\n— all valid, with the best choice depending on the specific rhythm and relationship you want to convey\nbetween the two ideas.\"\n\n**Replacement text [P31]:** \"When fixing a run-on or comma splice, consider all three valid options —\nsplitting into two sentences, adding a comma plus conjunction, or using a semicolon — and choose based\non which best fits the relationship between the two ideas and the rhythm you want, rather than\nautomatically defaulting to just one fix every time.\"\n\n**Discrimination pairs [P33]:**\n1. Always splitting every run-on/splice into two separate sentences regardless of context (rigid,\n   single-strategy approach) vs. considering all three valid fixes (splitting, comma-plus-\n   conjunction, semicolon) and choosing the one that best fits the specific sentence's relationship and\n   rhythm (flexible, context-aware approach).\n2. A student who cannot generate any fix for a run-on other than splitting it (limited toolkit) vs. a\n   student who can generate and compare all three valid fix options for the same run-on (full toolkit,\n   flexible application).\n\n**s6_path:** If the student continues to default only to splitting after the bridge, have them take\nthree run-on sentences and generate ALL THREE valid fixes for each, then choose which fix they think\nreads best for that specific sentence and explain why.",
+      "localKey": "MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES",
+      "language": "en",
+      "refs": [
+        "MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 36,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "Identifying True Run-Ons (No Punctuation at All)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying True Run-Ons (No Punctuation at All)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 142,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "Identifying Comma Splices (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Comma Splices (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "The Three Valid Fix Strategies (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Three Valid Fix Strategies (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "Full Application: Identifying and Correcting Errors in Context",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Identifying and Correcting Errors in Context\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA\",\"MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA",
+        "MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 159,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying True Run-Ons**\nGiven three sentences, identify which are true run-ons (no punctuation or conjunction joining two\nindependent clauses).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Comma Splices**\nGiven three sentences, identify which are comma splices (comma alone, no conjunction) as distinct\nfrom correctly formed compound sentences.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Generating Multiple Valid Fixes**\nGiven one run-on or comma splice, generate all three valid fixes (splitting, comma-plus-conjunction,\nsemicolon) and briefly explain the different effect of each.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Choosing the Most Appropriate Fix**\nGiven a run-on or comma splice in context, select and justify the fix (from the three valid options)\nthat best matches the relationship between the two ideas.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Passage Correction**\nGiven a new short passage containing a mix of true run-ons, comma splices, and correct sentences,\nidentify and correct each error using an appropriate, contextually justified fix.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters each error type and fix strategy in isolation (MP-1 through MP-4) but\n  reverts to errors when all types are mixed together (MP-5), provide a structured two-step checklist\n  (identify the error type, then select among the three valid fixes) as scaffolding during mixed\n  practice.\n- If the student's own writing shows a pattern of comma splices specifically (a very common real-\n  world error even among otherwise skilled writers), flag this for targeted, ongoing attention in\n  future writing assignments beyond this concept's mastery probes.\n- If the student always chooses the semicolon fix regardless of whether the relationship between\n  ideas actually suits a semicolon's typically close, parallel connection, clarify that semicolons\n  work best for closely related independent clauses — very different ideas may read more naturally\n  simply split into two sentences.\n- Students with a strong ear for spoken sentence rhythm may intuitively sense when a sentence \"runs\n  together\" awkwardly even before formally identifying the grammatical structure — allow this\n  intuition as a valid entry point, then connect it to the formal subject/verb/independent-clause\n  analysis for precision.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 243,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "eng.grammar.run-on-sentences-and-comma-splices/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.run-on-sentences-and-comma-splices",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: compound sentences check] --> [PD-2: comma usage check]\n   |                                                      |\n   | (gap found)                                          | (pass)\n   v                                                       v\n[Route to prerequisite concept]           [Component 3: Chain-Clasp / Torn-Seam-Repair Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: missing-conjunction /\n                     terminal in current      generate-all-three-fixes drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-2 (accepting comma splices as correct) and MC-B during TA-3 (single-fix rigidity) — MC-A generally\nneeds resolving first since a student who can't recognize a splice as an error has nothing yet to\npractice fixing correctly. If either fires, branch to the relevant s6_path drill before resuming. At\nthe mastery probe stage (S9), route by failure: MP-1 failure indicates the basic true-run-on\nrecognition (TA-1) needs review, distinct from either misconception; MP-2 failure alone indicates\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap across error types and fix strategies — provide one more guided full-\npassage example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md",
+        "startLine": 206,
+        "endLine": 243
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

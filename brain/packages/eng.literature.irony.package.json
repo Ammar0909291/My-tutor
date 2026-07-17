@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.irony-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.irony",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a9e43e3c7baa08b2eb4966cf503caaaee73434ffd6edffdecd5a379909f9d30e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.irony.md": "sha256:c070e44c1b55e4906d07fb92347939a294b27726101cbf50c0ab078eefa8d7fb"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.irony",
+    "name": "Irony",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.literary-devices-overview"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.irony-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.irony (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.irony.md": "sha256:c070e44c1b55e4906d07fb92347939a294b27726101cbf50c0ab078eefa8d7fb"
+      },
+      "contentHash": "sha256:9c7e49166b9e24f10084bd11fb3bfd0ca70d098b37f0cb926e8850e9966c4ecc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.irony.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.irony.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.irony"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.irony\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.irony.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.irony.md#TA-2 (addresses MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.irony"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.irony\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.irony.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.irony.md#TA-3 (addresses MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.irony"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.irony\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.irony.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.irony.md#TA-4 (addresses MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM, MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.irony"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.irony\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.irony/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.irony",
+      "title": "Irony — Conceptual Development Sequence",
+      "content": "### TA-1 — Verbal Irony: Saying the Opposite of What Is Meant\n\nIntroduce verbal irony with clear examples across a range of tones. Student practice: given four\nstatements, identify which use verbal irony (saying something contrary to literal meaning).\n\n### TA-2 — Verbal Irony vs. Sarcasm: The Mocking Subset (MC-B)\n\nUsing the boxing-is-exercise anchor, teach the broader-category/narrower-subset relationship between\nverbal irony and sarcasm. Student practice: given four verbal irony examples varying in tone,\nclassify each as \"verbal irony only\" or \"verbal irony and sarcasm.\"\n\n### TA-3 — Situational Irony: Meaningful Contrast, Not Just Bad Luck (MC-A)\n\nUsing the thunder-specificity anchor, teach the \"what specific contrast is being made?\" test for\ngenuine situational irony. Student practice: given five scenarios, identify which involve genuine\nsituational irony and which are merely unlucky coincidences.\n\n### TA-4 — Dramatic Irony: The Audience Knows What the Character Doesn't\n\nIntroduce dramatic irony and its characteristic tension-creating effect. Student practice: given a\nshort scene description where the reader/audience has information a character lacks, identify the\ndramatic irony and explain the specific tension or effect it creates.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 143,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/misconception/MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY",
+      "kind": "misconception",
+      "conceptId": "eng.literature.irony",
+      "title": "**Trigger signal:** Student labels ANY surprising, unlucky, or coincidental event as \"situational",
+      "content": "### MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY\n\n**Trigger signal:** Student labels ANY surprising, unlucky, or coincidental event as \"situational\nirony,\" regardless of whether the event actually involves a meaningful, pointed CONTRAST with a\nreasonable expectation — e.g., calling a random rainstorm on a picnic day merely \"bad luck,\" and\nseparately over-labeling any unlucky coincidence as \"ironic\" without checking for the specific,\nmeaningful contrast that defines genuine situational irony.\n\n**Conflict evidence [P28]:** Show the student two scenarios: a fire station burning down (a\nmeaningful, pointed contrast — the very institution meant to prevent fires is destroyed by one, a\ngenuine irony) and a person's car breaking down on the way to a job interview (unlucky and\ninconvenient, but not really a pointed CONTRAST between what the situation represents and what\nhappens to it). Ask: \"Does the fire station scenario involve a specific, meaningful contradiction\nrelated to what a fire station IS FOR? Does the car breakdown scenario involve that same kind of\npointed contrast, or is it just bad luck?\"\n\n**Bridge text [P30]:** \"Labeling any unlucky coincidence as 'ironic' is like calling any loud noise\n'thunder' just because it's startling — thunder is a SPECIFIC kind of loud noise with a specific\ncause; not every loud noise qualifies. Genuine situational irony requires a specific, meaningful\ncontrast between what a situation represents or is expected to be, and what actually happens — not\njust any unlucky or surprising turn of events.\"\n\n**Replacement text [P31]:** \"Before calling something 'ironic,' check: is there a specific, meaningful\nCONTRADICTION between what something is supposed to represent or what was reasonably expected, and\nwhat actually happens? If it's just bad luck or a random coincidence with no pointed contrast, it's\nnot situational irony — it's just misfortune or coincidence.\"\n\n**Discrimination pairs [P33]:**\n1. A fire station burning down (a meaningful, pointed contrast with its very purpose — genuine\n   situational irony) vs. a car breaking down on the way to an interview (unlucky, but no meaningful,\n   pointed contrast with anything the situation represents — not irony, just bad luck).\n2. A student who calls a random rainy day \"ironic\" simply because it was inconvenient\n   (over-application) vs. a student who reserves \"ironic\" for situations with a genuine, pointed\n   contrast (correct, precise application).\n\n**s6_path:** If the student continues to over-apply \"ironic\" to any unlucky event after the bridge,\nhave them apply the \"what specific contrast is being made here?\" test to five candidate scenarios,\narticulating the exact contradiction for the genuinely ironic ones and explaining why the others are\njust coincidence or bad luck.",
+      "localKey": "MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/misconception/MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM",
+      "kind": "misconception",
+      "conceptId": "eng.literature.irony",
+      "title": "**Trigger signal:** Student treats verbal irony and sarcasm as fully interchangeable terms, failing",
+      "content": "### MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM\n\n**Trigger signal:** Student treats verbal irony and sarcasm as fully interchangeable terms, failing\nto recognize that sarcasm is typically a MOCKING, often cutting or mean-spirited SUBSET of verbal\nirony specifically intended to criticize or ridicule, while verbal irony more broadly can be gentle,\nhumorous, or even affectionate — saying the opposite of what's literally meant without necessarily\nbeing mocking or harsh.\n\n**Conflict evidence [P28]:** Show the student two examples of verbal irony: a gentle, affectionate\nverbal irony (\"Oh yes, running a marathon sounds SO relaxing,\" said warmly to tease a friend training\nfor one, with no real mockery intended) and a genuinely mocking, sarcastic remark (\"Oh, GREAT job,\"\nsaid with a sharp, cutting tone to criticize someone's obvious mistake). Ask: \"Are both of these\nexamples of saying the opposite of what's literally meant? Is the TONE and INTENT (gentle teasing\nversus cutting mockery) the same in both?\"\n\n**Bridge text [P30]:** \"Assuming verbal irony and sarcasm are exactly the same is like assuming\n'exercise' and 'boxing' are exactly the same — boxing IS a form of exercise, but not all exercise is\nboxing. Sarcasm IS a form of verbal irony (specifically the MOCKING, often harsh kind), but verbal\nirony more broadly includes gentler, non-mocking uses too — saying the opposite of what's meant\nwithout necessarily intending cutting criticism.\"\n\n**Replacement text [P31]:** \"Recognize verbal irony (saying the opposite of what's literally meant) as\nthe BROADER category, with sarcasm as one specific, mocking SUBSET of it. When you identify verbal\nirony, also ask: is this gentle and playful, or mocking and cutting? Both are verbal irony, but only\nthe mocking kind is properly called sarcasm.\"\n\n**Discrimination pairs [P33]:**\n1. \"Oh yes, running a marathon sounds SO relaxing,\" said warmly and affectionately to a friend\n   (verbal irony, but gentle and not mocking — not quite sarcasm in the harsher sense) vs. \"Oh,\n   GREAT job,\" said with a sharp, cutting tone to criticize an obvious mistake (verbal irony AND\n   sarcasm, since it's specifically mocking).\n2. A student who labels every instance of \"saying the opposite of what's meant\" as sarcasm regardless\n   of tone (over-narrow, misconception) vs. a student who recognizes verbal irony as the broader\n   category, with sarcasm reserved for the specifically mocking cases (correct, precise\n   understanding).\n\n**s6_path:** If the student continues to conflate the two terms after the bridge, give them four\nexamples of verbal irony varying in tone (gentle to cutting) and have them classify each as \"verbal\nirony only\" or \"verbal irony AND sarcasm,\" justifying each based on the presence or absence of mocking\nintent.",
+      "localKey": "MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM",
+      "language": "en",
+      "refs": [
+        "MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 43,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.irony",
+      "title": "Verbal Irony: Saying the Opposite of What Is Meant",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Verbal Irony: Saying the Opposite of What Is Meant\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 147,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.irony",
+      "title": "Verbal Irony vs. Sarcasm: The Mocking Subset (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Verbal Irony vs. Sarcasm: The Mocking Subset (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.irony",
+      "title": "Situational Irony: Meaningful Contrast, Not Just Bad Luck (MC-A)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Situational Irony: Meaningful Contrast, Not Just Bad Luck (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.irony",
+      "title": "Dramatic Irony: The Audience Knows What the Character Doesn't",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Dramatic Irony: The Audience Knows What the Character Doesn't\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY\",\"MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM",
+        "MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 164,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.irony",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Verbal Irony**\nGiven three statements, identify which use verbal irony (saying something contrary to literal\nmeaning).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 191,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.irony",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguishing Verbal Irony from Sarcasm**\nGiven three verbal irony examples varying in tone, classify each as \"verbal irony only\" or \"verbal\nirony and sarcasm,\" justifying based on mocking intent.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 191,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.irony",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Distinguishing Situational Irony from Coincidence**\nGiven four scenarios, identify which involve genuine situational irony (a meaningful, pointed\ncontrast) and which are merely unlucky coincidences with no pointed contrast.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 191,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.irony",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying Dramatic Irony and Its Effect**\nGiven a short scene where the reader knows something a character doesn't, identify the dramatic irony\nand explain the specific tension or effect it creates.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 191,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.irony",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Irony Analysis**\nGiven a new short passage containing at least two of the three irony types, identify each type present\nand explain its specific effect, correctly distinguishing genuine irony from mere coincidence or\nsarcasm where relevant.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 191,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.irony",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters each irony type in isolation (MP-1 through MP-4) but struggles to distinguish\n  them when multiple types appear together in one passage (MP-5), provide a structured checklist\n  (which contrast is this — words vs. meaning, expectation vs. outcome, or reader vs. character\n  knowledge?) as scaffolding during mixed practice.\n- If the student's situational-irony judgments (MP-3) remain overly permissive despite the contrast\n  test, have them explicitly articulate the SPECIFIC thing being contradicted for every candidate — if\n  they cannot name a specific \"X is supposed to represent Y, but instead Z happened\" contrast, the\n  scenario is not situational irony.\n- If the student conflates dramatic irony with simple foreshadowing or suspense generally, clarify\n  that dramatic irony specifically requires an ASYMMETRY OF KNOWLEDGE between reader and character —\n  not just tension about what will happen, but the reader specifically knowing something the character\n  does not.\n- Students who enjoy satire or dark comedy may have strong intuitive engagement with situational\n  irony specifically — draw on genre examples they already enjoy as a motivating entry point, since\n  satire relies heavily on pointed, meaningful contrasts.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 252,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "eng.literature.irony/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.irony",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: literary devices overview check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.literary-devices-overview]  [Component 3: Thunder-Specificity /\n                                                        Boxing-Is-Exercise Anchor]\n                                                                  |\n                                                                  v\n                                             [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                  |\n                                                                  v\n                                       [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                  |\n                                                                  v\n                                       [MP-1 through MP-5 mastery probe set]\n                                                                  |\n                                       (pass >= 0.75) -----+----- (fail)\n                                              |                      |\n                                              v                      v\n                        [No further unlocks —  [S6 remediation: name-the-contrast /\n                         terminal in current      classify-by-tone drills]\n                         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-B typically surfaces during TA-2 (conflating irony with\nsarcasm) and MC-A during TA-3 (over-applying \"ironic\" to bad luck) — these are largely independent and\noften need separate, explicit correction. If either fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates basic verbal-irony\nrecognition (TA-1) needs review, distinct from either misconception; MP-2 failure alone indicates\nresidual MC-B; MP-3 failure alone indicates residual MC-A; MP-4 failure alone indicates the dramatic-\nirony extension (TA-4) needs review; MP-5 failure with MP-1 through MP-4 passing indicates an\nintegration gap across all three irony types — provide one more guided full-analysis example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.irony.md",
+        "startLine": 214,
+        "endLine": 252
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
