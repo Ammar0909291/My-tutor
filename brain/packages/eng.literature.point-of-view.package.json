@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.point-of-view-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.point-of-view",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb1db93f299f7d692a74dcb94eb2333d4437c6181feb1b22544dcf228253f496",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.point-of-view.md": "sha256:56d596d8b51f918fc76a9efdff70398bb3287298357532cb2f455b5190ec1e6c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.point-of-view",
+    "name": "Point of View",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.narrative-elements"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.point-of-view-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.point-of-view (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.point-of-view.md": "sha256:56d596d8b51f918fc76a9efdff70398bb3287298357532cb2f455b5190ec1e6c"
+      },
+      "contentHash": "sha256:3ee2b6132a87662d9b634dd94ae29c1fc961b9035be36abe6162e0811e765fd5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.point-of-view.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.point-of-view.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.point-of-view"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.point-of-view\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.point-of-view.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.point-of-view.md#TA-2 (addresses MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.point-of-view"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.point-of-view\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.point-of-view.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.point-of-view.md#TA-3 (addresses MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.point-of-view"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.point-of-view\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.point-of-view.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.point-of-view.md#TA-4 (addresses MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS, MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.point-of-view"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.point-of-view\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.point-of-view/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "Point of View — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying the Four Points of View by Pronoun and Access\n\nIntroduce the four points of view with their defining textual features: first person (\"I,\" a\ncharacter narrates), second person (\"you,\" rare), third person limited (\"he/she,\" one character's\nthoughts accessible), third person omniscient (\"he/she,\" multiple characters' thoughts accessible).\nStudent practice: given four short passages, identify each point of view using specific textual\nevidence.\n\n### TA-2 — First-Person Narrators Can Be Incomplete or Biased (MC-A)\n\nUsing the single-eyewitness anchor, teach students to read first-person narration critically, watching\nfor gaps or self-serving framing. Student practice: given a first-person passage with a subtle\ninconsistency, identify the textual clue revealing the narrator's limitation or bias.\n\n### TA-3 — Distinguishing Third Person Limited from Omniscient by Scope (MC-B)\n\nUsing the security-camera-scope anchor, teach students to classify third-person narration by SCOPE of\naccess to characters' inner thoughts, not by pronoun alone. Student practice: given three third-person\npassages, track whose thoughts are revealed in each and classify as limited or omniscient accordingly.\n\n### TA-4 — Full Application: Analyzing Point of View's Effect on the Reader's Knowledge\n\nGive the student a new short passage. They must identify its point of view using specific textual\nevidence (TA-1), and explain what the reader can and cannot know as a result of that specific point of\nview choice — including any potential unreliability if first-person (TA-2), or the specific scope of\naccess if third-person (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 145,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/misconception/MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS",
+      "kind": "misconception",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "**Trigger signal:** Student assumes a first-person narrator's account is automatically complete,",
+      "content": "### MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS\n\n**Trigger signal:** Student assumes a first-person narrator's account is automatically complete,\nobjective, and fully reliable, simply because the story is being told directly by a character in\ntheir own words — failing to recognize that a first-person narrator's knowledge is inherently limited\nto their own perspective, and their account can be incomplete, mistaken, or even deliberately\nmisleading (an \"unreliable narrator\").\n\n**Conflict evidence [P28]:** Show the student a first-person narrative passage where the narrator\ndescribes their own actions in a flattering light, alongside a detail elsewhere in the text that\nsubtly contradicts or complicates the narrator's self-description (e.g., another character's reaction\nthat doesn't match how the narrator claims the event went). Ask: \"Is the narrator's account of events\nnecessarily the complete, objective truth, or could their own perspective be incomplete or biased in\na way the reader has to notice independently?\"\n\n**Bridge text [P30]:** \"Assuming a first-person narrator always tells the complete, unbiased truth is\nlike assuming a single eyewitness's account of a car accident, given in their own words, must be the\nfull and completely accurate picture — but eyewitnesses have limited viewpoints, personal biases, and\nsometimes even reasons to shade the truth in their own favor. A first-person narrator is exactly this\nkind of single, limited witness — their account is worth taking seriously, but a careful reader\nwatches for gaps, inconsistencies, or self-serving framing.\"\n\n**Replacement text [P31]:** \"When reading first-person narration, don't assume the narrator's account\nis automatically complete or objectively true. Watch for details elsewhere in the text (other\ncharacters' reactions, inconsistencies) that might complicate or contradict the narrator's own framing\nof events — the narrator only knows and reports their own limited, potentially biased perspective.\"\n\n**Discrimination pairs [P33]:**\n1. Accepting a first-person narrator's self-flattering account of an argument at face value (naive,\n   uncritical reading) vs. noticing that another character's described reaction doesn't match the\n   narrator's self-description, prompting a more critical, questioning read (careful, analytical\n   reading).\n2. A student who treats every first-person narrator as automatically reliable (misconception) vs. a\n   student who actively looks for evidence of the narrator's limitations or potential bias while still\n   using their account as the primary source of information (correct, critical approach).\n\n**s6_path:** If the student continues to accept first-person accounts uncritically after the bridge,\ngive them a first-person passage containing a clear self-serving distortion or omission and have them\nidentify the specific textual clue (another character's reaction, a detail that doesn't add up)\nthat reveals the gap between the narrator's account and the fuller picture.",
+      "localKey": "MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS",
+      "language": "en",
+      "refs": [
+        "MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/misconception/MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE",
+      "kind": "misconception",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "**Trigger signal:** Student, correctly identifying that both third person limited and third person",
+      "content": "### MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE\n\n**Trigger signal:** Student, correctly identifying that both third person limited and third person\nomniscient use third-person pronouns (\"he,\" \"she,\" \"they\") rather than \"I,\" assumes these are\nbasically the same point of view, failing to recognize the crucial difference in SCOPE OF KNOWLEDGE —\nthird person limited restricts the narrator to one character's inner thoughts, while third person\nomniscient grants the narrator unrestricted access to MULTIPLE characters' inner thoughts and\nknowledge beyond what any single character could know.\n\n**Conflict evidence [P28]:** Show the student two passages using third-person pronouns: one that\nonly reveals what a single character is thinking and feeling (never entering another character's\nmind), and one that shifts between revealing multiple different characters' inner thoughts within the\nsame scene, or reveals information no single character present could know. Ask: \"Both use 'he' and\n'she' instead of 'I.' Does the narrator's ACCESS to characters' inner thoughts work the same way in\nboth passages?\"\n\n**Bridge text [P30]:** \"Assuming third person limited and omniscient are the same because both use\n'he/she' is like assuming two security camera setups are identical because both use the word 'camera' —\nbut one might be a single fixed camera showing only one room's feed, while the other is a full\nsecurity system with access to every room's feed simultaneously. The pronoun used ('he/she') is just\nthe shared label; the actual SCOPE of what the narrator can access — one character's mind, or many —\nis the real distinguishing feature.\"\n\n**Replacement text [P31]:** \"Don't classify point of view just by which pronouns are used. For any\nthird-person narration, ask: does the narrator have access to ONLY ONE character's inner thoughts\n(limited), or MULTIPLE characters' inner thoughts, or information beyond what any character present\ncould know (omniscient)?\"\n\n**Discrimination pairs [P33]:**\n1. A third-person narrative that only ever reveals one character's private thoughts and feelings,\n   consistently, throughout (third person limited) vs. a third-person narrative that reveals multiple\n   different characters' private thoughts within the same scene, or narrates information no single\n   character could know (third person omniscient).\n2. A student who calls both passages \"the same point of view\" just because both avoid \"I\"\n   (misconception) vs. a student who identifies the difference in scope of access to different\n   characters' minds as the deciding factor (correct, scope-focused classification).\n\n**s6_path:** If the student continues to conflate the two after the bridge, give them three more\nthird-person passages and have them specifically track, for each, WHOSE inner thoughts are revealed —\nonly one character consistently, or more than one — to classify each correctly by scope rather than by\npronoun alone.",
+      "localKey": "MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE",
+      "language": "en",
+      "refs": [
+        "MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 44,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "Identifying the Four Points of View by Pronoun and Access",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Four Points of View by Pronoun and Access\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 149,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "First-Person Narrators Can Be Incomplete or Biased (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"First-Person Narrators Can Be Incomplete or Biased (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 157,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "Distinguishing Third Person Limited from Omniscient by Scope (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Distinguishing Third Person Limited from Omniscient by Scope (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 163,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "Full Application: Analyzing Point of View's Effect on the Reader's Knowledge",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing Point of View's Effect on the Reader's Knowledge\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS\",\"MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS",
+        "MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 169,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Point of View by Textual Evidence**\nGiven three short passages, identify each one's point of view (first person, second person, third\nperson limited, or third person omniscient) citing specific textual evidence.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Detecting First-Person Narrator Bias**\nGiven a first-person passage with a subtle self-serving framing or inconsistency, identify the\nspecific textual clue revealing the narrator's potential bias or incompleteness.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Classifying Third-Person Scope**\nGiven two third-person passages, track whose inner thoughts each reveals and classify each as third\nperson limited or third person omniscient based on that scope.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining the Reader's Knowledge Limits**\nGiven a passage's identified point of view, explain what the reader can and cannot know as a result of\nthat specific narrative choice.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Point-of-View Analysis**\nGiven a new short passage, identify its point of view with textual evidence and explain what the\nreader can and cannot know as a result, including any potential narrator unreliability if applicable.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters point-of-view identification (MP-1) but struggles specifically with\n  detecting first-person bias (MP-2), this is a close-reading/inference gap rather than a\n  classification gap — provide additional practice specifically looking for contradicting details from\n  other characters or narrative clues.\n- If the student conflates \"unreliable narrator\" with \"lying narrator\" (assuming unreliability always\n  means deliberate deception), clarify that unreliability can also stem from innocent limitation\n  (simply not knowing everything) or self-deception, not only intentional dishonesty.\n- If the student's third-person scope classification (MP-3) is thrown off by a text that briefly shifts\n  from one character's perspective to another's between scenes or chapters (a legitimate omniscient or\n  multiple-limited-viewpoint technique), clarify that consistent single-character access WITHIN one\n  scene still counts as limited, even if the narration shifts to a different character's limited\n  perspective in another scene.\n- Students who enjoy detective or mystery fiction may have strong intuitive engagement with\n  unreliable-narrator concepts — draw on this interest explicitly if relevant, since it's a natural,\n  motivating entry point for MC-A's critical-reading skill.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 254,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "eng.literature.point-of-view/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.point-of-view",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: narrative elements check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.narrative-elements]  [Component 3: Single-Eyewitness / Security-\n                                                Camera-Scope Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: find-the-contradicting-\n                     terminal in current      detail / track-whose-thoughts drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-2 (first-person over-trust)\nand MC-B during TA-3 (pronoun-based conflation) — these are largely independent and often need\nseparate, explicit correction. If either fires, branch to the relevant s6_path drill before resuming.\nAt the mastery probe stage (S9), route by failure: MP-1 failure indicates basic point-of-view\nidentification (TA-1) needs review, distinct from either misconception; MP-2 failure alone indicates\nresidual MC-A; MP-3 failure alone indicates residual MC-B; MP-4 failure alone indicates the reader-\nknowledge-limits extension (TA-4) specifically; MP-5 failure with MP-1 through MP-4 passing indicates\nan integration gap — provide one more guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.point-of-view.md",
+        "startLine": 217,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

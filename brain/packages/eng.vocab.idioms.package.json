@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.idioms-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.idioms",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bf34903d46eed353782a3689595219ca37aa095ec0399cadb6f7c2bc9115028b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.idioms.md": "sha256:6b03532b91c37cbc49d334b8d76c50601898dec139925f93af8f5e71d587f9f1"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.vocab.idioms",
+    "name": "Idioms",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.collocations"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.idioms-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.idioms (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.idioms.md": "sha256:6b03532b91c37cbc49d334b8d76c50601898dec139925f93af8f5e71d587f9f1"
+      },
+      "contentHash": "sha256:b3399f300371883e24d8d1415f7ae3ec3eda7b28f66879fb7f51334cf25a3a5c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.idioms.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.idioms.md#TA-1 (addresses MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.idioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.idioms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.idioms.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.idioms.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.idioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.idioms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.idioms.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.idioms.md#TA-3 (addresses MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.idioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.idioms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.idioms.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.idioms.md#TA-4 (addresses MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY, MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.idioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.idioms\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.idioms/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Idioms — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing When an Expression Is Idiomatic (MC-A)\n\nUsing the national-flag anchor, teach students to recognize when a phrase's literal meaning doesn't\nfit its context, signaling an idiom. Student practice: given four sentences containing idioms in\nclear context, identify each idiom and infer its overall conventional meaning from context.\n\n### TA-2 — Learning Common Idiom Meanings\n\nIntroduce five to six common English idioms with their conventional meanings directly. Student\npractice: given six sentences using these idioms, match each to its correct meaning.\n\n### TA-3 — Idioms Are Fixed Expressions (MC-B)\n\nUsing the chemical-formula anchor, teach that idioms cannot be freely altered with synonyms. Student\npractice: given three idioms and a synonym-substituted version of each, determine whether the\nsubstituted version still carries the idiomatic meaning.\n\n### TA-4 — Full Application: Interpreting and Using Idioms Correctly\n\nGive the student a new short text containing two or three idioms in context. They must identify each\nas idiomatic (TA-1), state its correct conventional meaning (TA-2), and confirm they can use each\nidiom's exact, fixed wording correctly in an original sentence (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 135,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/misconception/MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.idioms",
+      "title": "**Trigger signal:** Student attempts to interpret an idiom by combining the literal meanings of its",
+      "content": "### MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY\n\n**Trigger signal:** Student attempts to interpret an idiom by combining the literal meanings of its\nindividual words, rather than recognizing the expression must be learned as a whole, fixed unit of\nmeaning — e.g., interpreting \"it's raining cats and dogs\" as somehow involving actual animals falling\nfrom the sky, or being confused when the literal, word-by-word meaning doesn't match the context.\n\n**Conflict evidence [P28]:** Show the student the sentence \"It's raining cats and dogs outside, so\nbring an umbrella.\" and ask: \"Does this sentence make sense if you imagine actual cats and dogs falling\nfrom the sky? What does the SENTENCE'S CONTEXT (bringing an umbrella) suggest the phrase actually\nmeans?\" Guide the student to see that the phrase means \"raining heavily,\" a meaning with no\nderivable connection to the literal words \"cats\" and \"dogs.\"\n\n**Bridge text [P30]:** \"Trying to translate an idiom word-by-word is like trying to understand a\ncountry's national flag by analyzing the literal properties of its individual colors (blue means sad,\nred means angry) — but a flag's overall meaning as a SYMBOL of that nation has nothing to do with what\neach color might mean on its own. An idiom's overall meaning is a fixed, conventional symbol for a\nconcept, not a sum of its individual words' literal meanings.\"\n\n**Replacement text [P31]:** \"When you encounter a phrase that doesn't make literal sense in context,\nconsider that it might be an idiom — a fixed expression that must be learned as a WHOLE unit of\nmeaning, not decoded word-by-word. Use the surrounding context to infer the overall, conventional\nmeaning instead.\"\n\n**Discrimination pairs [P33]:**\n1. \"It's raining cats and dogs.\" interpreted as literally involving falling animals (word-by-word,\n   incorrect) vs. correctly understood as meaning \"raining heavily\" (whole-unit, conventional\n   meaning).\n2. A student confused by an idiom because the literal words don't add up (misconception) vs. a\n   student who recognizes the mismatch as a signal to treat the phrase as a fixed, non-literal\n   expression and infer its meaning from context (correct approach).\n\n**s6_path:** If the student continues to attempt word-by-word translation after the bridge, give them\nthree more idioms in clear context and have them first attempt (and fail) a literal interpretation,\nthen use the surrounding context to infer the actual conventional meaning, reinforcing that this\n\"literal attempt fails, context succeeds\" pattern is expected for idioms.",
+      "localKey": "MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY",
+      "language": "en",
+      "refs": [
+        "MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/misconception/MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.idioms",
+      "title": "**Trigger signal:** Student assumes idioms are flexible expressions where individual words can be",
+      "content": "### MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR\n\n**Trigger signal:** Student assumes idioms are flexible expressions where individual words can be\nfreely substituted with synonyms as long as the general topic stays similar, failing to recognize\nthat most idioms are FIXED expressions — altering even one word (even to an apparent synonym)\ntypically breaks the idiom, either making it meaningless or sounding wrong to a fluent speaker.\n\n**Conflict evidence [P28]:** Show the student the correct idiom \"kick the bucket\" (meaning to die)\nalongside an altered version using an apparent synonym, \"kick the pail\" (using \"pail,\" a genuine\nsynonym for \"bucket\"). Ask: \"Does 'kick the pail' still mean 'to die' to a fluent English speaker, or\ndoes changing even this one word to a synonym break the idiom entirely?\"\n\n**Bridge text [P30]:** \"Assuming you can freely swap synonyms into an idiom is like assuming you can\nfreely substitute one ingredient for a very similar one in a chemical formula and get the same\nreaction — but a formula's specific combination is fixed and precise; substituting even a very similar\nelement can produce a completely different (or no) result. Idioms are similarly FIXED expressions —\ntheir exact wording is conventionally locked in, and substituting even a close synonym typically\nbreaks the expression entirely.\"\n\n**Replacement text [P31]:** \"Treat idioms as fixed, memorized units — don't assume you can substitute\nindividual words with synonyms and preserve the idiomatic meaning. Learn the exact conventional wording\nof each idiom, since altering it usually breaks it.\"\n\n**Discrimination pairs [P33]:**\n1. \"Kick the bucket\" (the fixed, correct idiom, meaning to die) vs. \"Kick the pail\" (a synonym\n   substitution that breaks the idiom entirely, no longer understood as meaning \"to die\" by fluent\n   speakers).\n2. A student assuming idiom wording is flexible as long as the general meaning is preserved\n   (misconception) vs. a student who recognizes idioms as fixed expressions requiring exact,\n   memorized wording (correct understanding).\n\n**s6_path:** If the student continues to assume idiom flexibility after the bridge, give them three\nmore idioms and have them generate a synonym-substituted version of each, then check with a reference\nor fluent-speaker judgment whether the substituted version still carries the idiomatic meaning,\nconfirming the pattern that substitution typically breaks the expression.",
+      "localKey": "MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR",
+      "language": "en",
+      "refs": [
+        "MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 40,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Recognizing When an Expression Is Idiomatic (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing When an Expression Is Idiomatic (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 139,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Learning Common Idiom Meanings",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Learning Common Idiom Meanings\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 145,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Idioms Are Fixed Expressions (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Idioms Are Fixed Expressions (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Full Application: Interpreting and Using Idioms Correctly",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Interpreting and Using Idioms Correctly\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY\",\"MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY",
+        "MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 156,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.idioms",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Recognizing Idiomatic Use in Context**\nGiven three sentences, identify which contain an idiom (non-literal, fixed expression) based on\ncontext, and infer each one's overall meaning.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 178,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.idioms",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Matching Idioms to Meanings**\nGiven five common idioms, match each to its correct conventional meaning.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 178,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.idioms",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Testing Fixed Wording**\nGiven an idiom and a synonym-substituted version, determine whether the substituted version still\ncarries the idiomatic meaning, explaining why or why not.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 178,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.idioms",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Using an Idiom Correctly**\nGiven a common idiom's meaning, use the idiom correctly (with its exact, fixed wording) in an\noriginal sentence.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 178,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.idioms",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Contextual Idiom Analysis**\nGiven a new short text containing two or three idioms, identify each, state its correct meaning, and\nconfirm fixed wording for at least one by testing a synonym substitution.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 178,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Adaptive Flags",
+      "content": "- If the student is a language learner whose first language has different idioms for similar\n  concepts, leverage this as a comparative example — most languages have idioms, and comparing across\n  languages can make the \"fixed, non-literal, conventional expression\" concept feel less arbitrary.\n- If the student masters recognition and meaning (MP-1, MP-2) but struggles to actively USE idioms\n  correctly in their own writing (MP-4), treat this as a production gap — provide more guided practice\n  generating original sentences with a given idiom before independent use.\n- If the student becomes overly cautious and starts flagging every non-literal or figurative phrase\n  as an \"idiom\" (over-generalizing), clarify that idioms are a specific category of FIXED,\n  conventional expressions, distinct from other figurative language like metaphor or simile, which are\n  more flexible and original to the writer.\n- Students with strong metaphor/simile skills from `eng.composition.figurative-language-in-\n  composition` should be shown the distinction explicitly: idioms are conventional and fixed, while\n  original metaphors are created and can vary — the two are related but not identical categories of\n  non-literal language.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 235,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "eng.vocab.idioms/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.idioms",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: collocations check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.vocab.collocations]  [Component 3: National-Flag / Chemical-Formula Anchor]\n                                               |\n                                               v\n                            [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                               |\n                                               v\n                      [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                               |\n                                               v\n                      [MP-1 through MP-5 mastery probe set]\n                                               |\n                      (pass >= 0.75) -----+----- (fail)\n                             |                      |\n                             v                      v\n        [No further unlocks —  [S6 remediation: context-first / synonym-\n         terminal in current      substitution-test drills]\n         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (word-by-word attempts) and\nMC-B during TA-3 (assuming flexible substitution) — MC-A generally needs resolving first since\nrecognizing an expression AS idiomatic is a prerequisite to learning that its wording is fixed. If\neither fires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9),\nroute by failure: MP-1 failure indicates residual MC-A; MP-2 failure alone indicates the meaning-\nmemorization step (TA-2) needs review, distinct from either misconception; MP-3/MP-4 failures indicate\nresidual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one\nmore guided contextual example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.idioms.md",
+        "startLine": 199,
+        "endLine": 235
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

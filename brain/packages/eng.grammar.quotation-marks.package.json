@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.quotation-marks-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.quotation-marks",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a158d01db3c8cf68707e76aee5c4d4f9c49054eb4d223fe3484dc8c17b958a78",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.quotation-marks.md": "sha256:a1eb9aca5f61746600afafc88091e8774133890611f3cb2cd10494e74f3f2b78"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.quotation-marks",
+    "name": "Quotation Marks",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.direct-and-indirect-speech",
+      "eng.grammar.comma-usage"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.quotation-marks-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.quotation-marks (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.quotation-marks.md": "sha256:a1eb9aca5f61746600afafc88091e8774133890611f3cb2cd10494e74f3f2b78"
+      },
+      "contentHash": "sha256:e5010492a7e6fcc22e812a1262e7b9845c11a4bd19b384ccd18dbfe394a64f90",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.quotation-marks.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md#TA-1 (addresses MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.quotation-marks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.quotation-marks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.quotation-marks.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md#TA-2 (addresses MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.quotation-marks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.quotation-marks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.quotation-marks.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.quotation-marks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.quotation-marks\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.quotation-marks.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md#TA-4 (addresses MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO, MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.quotation-marks"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.quotation-marks\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.quotation-marks/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Quotation Marks — Conceptual Development Sequence",
+      "content": "### TA-1 — Never Quoting Indirect Speech (MC-A)\n\nUsing the museum-authenticity anchor, teach that quotation marks are reserved exclusively for direct,\nexact speech. Student practice: given six sentences (mixing direct and indirect speech), identify\nwhich should and should not be quoted.\n\n### TA-2 — Comma and End Punctuation Placement in Dialogue (MC-B)\n\nUsing the drive-on-one-side anchor, teach the standard American convention of placing commas and\nperiods inside the closing quotation mark. Student practice: given four dialogue sentences with\nmissing or misplaced punctuation, correctly punctuate each.\n\n### TA-3 — Quoting Titles of Short Works\n\nIntroduce the second, distinct use of quotation marks: marking titles of short works (poems, articles,\nshort stories), as distinct from longer, standalone works (which use italics). Student practice: given\nsix titles of varying work types, correctly apply quotation marks or note that italics would be used\ninstead.\n\n### TA-4 — Full Application: Punctuating Dialogue and Titles Correctly\n\nGive the student a short passage containing dialogue (mixing direct and indirect speech) and a\nreference to a short work's title. They must correctly quote only direct speech (TA-1), correctly\nplace commas/periods relative to quotation marks (TA-2), and correctly quote the short work's title\n(TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 137,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/misconception/MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "**Trigger signal:** Student places quotation marks around indirect/reported speech (a paraphrase of",
+      "content": "### MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO\n\n**Trigger signal:** Student places quotation marks around indirect/reported speech (a paraphrase of\nwhat someone said, not their exact words) — e.g., writing \"She said that she was tired.\" with\nquotation marks around \"that she was tired,\" when indirect speech should NEVER be quoted, since it is\nby definition a paraphrase, not the speaker's exact words.\n\n**Conflict evidence [P28]:** Show the student two sentences: \"She said, 'I am tired.'\" (direct speech,\nher exact words, correctly quoted) and \"She said that she was tired.\" (indirect speech, a paraphrase —\nnotice the pronoun and verb tense have changed from what she would have actually said). Ask: \"Are the\nexact words 'she was tired' something she literally said out loud, or is this a paraphrased report of\nwhat she said? Should paraphrased, reported content ever be placed in quotation marks?\"\n\n**Bridge text [P30]:** \"Placing quotation marks around indirect speech is like putting a museum's\n'authentic artifact' label on a modern replica — quotation marks are a specific promise to the reader\nthat these are someone's EXACT, verbatim words, not a paraphrase. Indirect speech is, by definition, a\nparaphrase (with pronouns and tenses shifted), so it can never honestly carry that 'exact words'\npromise.\"\n\n**Replacement text [P31]:** \"Only ever place quotation marks around a speaker's EXACT, word-for-word\nstatement (direct speech). If the sentence is reporting what someone said in your own paraphrased\nwords (indirect speech, often signaled by 'that' and shifted pronouns/tenses), never use quotation\nmarks.\"\n\n**Discrimination pairs [P33]:**\n1. \"She said, 'I am tired.'\" (direct speech, exact words, correctly quoted) vs. \"She said that she was\n   tired.\" (indirect speech, a paraphrase, correctly NOT quoted).\n2. A student who writes \"He said 'that he would be late.'\" (incorrectly quoting a paraphrase) vs. a\n   student who correctly writes \"He said, 'I will be late.'\" (quoting only the genuine direct\n   quotation) or \"He said that he would be late.\" (correctly unquoted indirect speech).\n\n**s6_path:** If the student continues to quote indirect speech after the bridge, have them convert\nfive direct-speech sentences into indirect speech (adjusting pronouns and tenses as needed) and\nexplicitly remove the quotation marks each time, reinforcing that the shift to paraphrase removes the\nquoting requirement.",
+      "localKey": "MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO",
+      "language": "en",
+      "refs": [
+        "MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/misconception/MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "**Trigger signal:** Student places commas and periods OUTSIDE the closing quotation mark in",
+      "content": "### MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE\n\n**Trigger signal:** Student places commas and periods OUTSIDE the closing quotation mark in\nAmerican English conventions (e.g., writing \"I am tired\", she said. instead of \"I am tired,\" she\nsaid.), applying a punctuation-outside convention that may be common in some other English varieties\nor simply guessed incorrectly, rather than the standard American convention of placing commas and\nperiods INSIDE the closing quotation mark.\n\n**Conflict evidence [P28]:** Show the student two versions: \"I am tired\", she said. (comma placed\noutside the closing quotation mark) and \"I am tired,\" she said. (comma placed inside the closing\nquotation mark, the standard American convention). Ask: \"In standard American English writing\nconvention, which placement is correct for the comma relative to the closing quotation mark?\"\n\n**Bridge text [P30]:** \"Punctuation placement relative to quotation marks is a fixed convention, like\nwhich side of the road to drive on — there's no universal 'correct by nature' answer, but within one\nsystem (standard American English), the convention is consistently applied: commas and periods go\nINSIDE the closing quotation mark, every time, regardless of whether the punctuation is logically 'part\nof' the quotation.\"\n\n**Replacement text [P31]:** \"In standard American English convention, always place a comma or period\ndirectly before the closing quotation mark (inside it), even when the punctuation isn't logically part\nof the quoted words themselves. Treat this as a fixed, memorized rule for this specific writing\nconvention.\"\n\n**Discrimination pairs [P33]:**\n1. \"I am tired\", she said. (comma outside the closing quotation mark — not standard American\n   convention) vs. \"I am tired,\" she said. (comma inside the closing quotation mark — correct standard\n   American convention).\n2. A student who places the period outside the closing quotation mark at the end of a quoted\n   sentence (incorrect for standard American convention) vs. a student who places it inside (correct).\n\n**s6_path:** If the student continues to place commas/periods outside the closing quotation mark\nafter the bridge, have them punctuate five dialogue sentences, checking each one specifically for\ncorrect comma/period placement relative to the closing quotation mark before checking anything else.",
+      "localKey": "MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE",
+      "language": "en",
+      "refs": [
+        "MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 39,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Never Quoting Indirect Speech (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Never Quoting Indirect Speech (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Comma and End Punctuation Placement in Dialogue (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Comma and End Punctuation Placement in Dialogue (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Quoting Titles of Short Works",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Quoting Titles of Short Works\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 153,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Full Application: Punctuating Dialogue and Titles Correctly",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Punctuating Dialogue and Titles Correctly\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO\",\"MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO",
+        "MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 160,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing Direct from Indirect Speech for Quoting**\nGiven four sentences, identify which are direct speech (requiring quotation marks) and which are\nindirect speech (never quoted).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 183,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Correct Comma/Period Placement**\nGiven three dialogue sentences with missing punctuation, correctly place commas and periods relative\nto the closing quotation mark following standard American convention.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 183,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Quoting Titles of Short Works**\nGiven four titles of varying work types (poem, novel, short story, article), correctly identify which\nrequire quotation marks and which would use italics instead.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 183,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Correcting Quotation Errors**\nGiven three sentences with quotation mark errors (indirect speech incorrectly quoted, or misplaced\npunctuation), identify and correct each error.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 183,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Passage Punctuation**\nGiven a new short passage containing direct speech, indirect speech, and a short work title, correctly\napply all quotation mark conventions throughout.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 183,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters each rule in isolation (MP-1 through MP-3) but reverts to errors when all\n  three are mixed together (MP-5), provide a structured checklist (is this direct speech? where does\n  the comma go? is this a short-work title?) as scaffolding during mixed practice before removing it.\n- If the student has been exposed to British/other English conventions (where punctuation placement\n  relative to quotation marks can differ), acknowledge this explicitly as a genuine, valid alternative\n  convention in a different variety of English, while confirming which specific convention (standard\n  American) this concept and their assigned writing context requires.\n- If the student confuses italics-worthy longer works (novels, plays, albums) with quotation-mark-\n  worthy short works (poems, articles, short stories, songs) beyond the practiced examples, provide a\n  quick-reference list of common work types sorted into each category.\n- Students with strong narrative-writing interests should be encouraged to apply these rules\n  immediately in their own dialogue-heavy creative writing, since sustained authentic practice\n  reinforces the mechanical rules more durably than isolated drills alone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 242,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "eng.grammar.quotation-marks/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.quotation-marks",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: direct/indirect speech check] --> [PD-2: comma usage check]\n   |                                                          |\n   | (gap found)                                              | (pass)\n   v                                                           v\n[Route to prerequisite concept]           [Component 3: Museum-Authenticity / Drive-on-\n                                            One-Side Anchor]\n                                                               |\n                                                               v\n                                          [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                               |\n                                                               v\n                                     [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                               |\n                                                               v\n                                     [MP-1 through MP-5 mastery probe set]\n                                                               |\n                                     (pass >= 0.75) -----+----- (fail)\n                                            |                      |\n                                            v                      v\n                            [No further unlocks —  [S6 remediation: convert-to-indirect /\n                             terminal in current      punctuation-placement-only drills]\n                             curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (over-quoting indirect speech) and MC-B during TA-2 (punctuation placement) — these are largely\nindependent conventions and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2 failure alone indicates residual MC-B; MP-3 failure alone indicates the\ntitle-quoting extension (TA-3) needs review, distinct from either misconception; MP-4/MP-5 failures\nwith MP-1 through MP-3 passing indicate an integration gap — provide one more guided full-passage\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.quotation-marks.md",
+        "startLine": 205,
+        "endLine": 242
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
