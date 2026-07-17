@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.critical-listening-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.critical-listening",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8ad1f9c5c801d3c1182d3b9f1791b7125cb247a0e2d8522b366b03fa10c1a1b5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.critical-listening.md": "sha256:485e3aaa71648f3b30e7f6b9c37f35599bf54c857e5e87df50b4f1ee8adb581f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.listening.critical-listening",
+    "name": "Critical Listening",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.listening.listening-comprehension-strategies"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.critical-listening-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.critical-listening (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.critical-listening.md": "sha256:485e3aaa71648f3b30e7f6b9c37f35599bf54c857e5e87df50b4f1ee8adb581f"
+      },
+      "contentHash": "sha256:76478e86aa69c5d763f89b6ebb0d23e91afbc4b56b4e7d9e1b8adb4581d83ea1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.critical-listening.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.critical-listening.md#TA-1 (addresses MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.critical-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.critical-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.critical-listening.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.critical-listening.md#TA-2 (addresses MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.critical-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.critical-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.critical-listening.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.critical-listening.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.critical-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.critical-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.critical-listening.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.critical-listening.md#TA-4 (addresses MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT, MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.critical-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.critical-listening\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.critical-listening/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Critical Listening — Conceptual Development Sequence",
+      "content": "### TA-1 — Separating Delivery Confidence from Argument Strength (MC-A)\n\nUsing the shiny-paint-bridge anchor, teach evaluating an argument's actual evidence and reasoning\nindependent of delivery polish. Student practice: given a confidently-delivered weak argument and a\nhesitantly-delivered strong one, list the actual evidence in each before judging.\n\n### TA-2 — Evaluating Source Credibility (MC-B)\n\nUsing the notarized-document anchor, teach assessing whether cited evidence comes from a credible,\ndocumented source or an unsupported anecdote. Student practice: given three pieces of cited evidence\nof varying quality, rank them by credibility.\n\n### TA-3 — Evaluating Relevance of Evidence to the Specific Claim\n\nExtend TA-2: teach checking whether cited evidence, even if credible, actually supports the specific\nclaim being made (rather than a related but different point). Student practice: given a claim and a\npiece of credible but only tangentially relevant evidence, explain the mismatch.\n\n### TA-4 — Full Application: Critically Evaluating a Spoken Argument\n\nGive the student a new short spoken argument (as audio or transcript) citing two or three pieces of\nevidence. They must evaluate the argument's strength independent of delivery (TA-1), assess each\npiece of evidence's credibility (TA-2), and check its relevance to the specific claim (TA-3) — the\nfull synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 131,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/misconception/MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT",
+      "kind": "misconception",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "**Trigger signal:** Student judges an argument's quality by the speaker's confidence, fluency, or",
+      "content": "### MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT\n\n**Trigger signal:** Student judges an argument's quality by the speaker's confidence, fluency, or\ndelivery polish rather than by the actual logical strength and evidentiary support of what is being\nsaid, mistaking eloquence for correctness — a confidently-delivered weak argument is rated as\nstronger than a hesitant but well-supported one.\n\n**Conflict evidence [P28]:** Play (or present as transcript) two short arguments on the same topic:\none delivered with confident, fluent, persuasive-sounding language but resting on a single unsupported\npersonal anecdote, and one delivered more hesitantly but citing a specific study with named\nmethodology. Ask: \"Which speaker sounded more convincing? Which speaker's argument is actually better\nsupported by evidence?\"\n\n**Bridge text [P30]:** \"Judging an argument by how confidently it's delivered is like judging a\nbridge's safety by how shiny its paint job is — the paint tells you nothing about whether the\nstructure underneath can hold weight. A confident, fluent delivery can wrap around a weak,\nunsupported argument, and a hesitant delivery can carry a well-supported one. Evaluate the structure\n(the evidence and reasoning), not the paint (the delivery).\"\n\n**Replacement text [P31]:** \"Don't rate an argument's quality by how confidently or fluently it's\ndelivered. Ask separately: what evidence is actually being offered, and does the reasoning connect\nthat evidence to the conclusion? A polished delivery and a strong argument are two different things\nthat don't always travel together.\"\n\n**Discrimination pairs [P33]:**\n1. A confidently, fluently delivered argument resting on one unsupported personal anecdote (polished\n   delivery, weak evidentiary support) vs. a more hesitant argument citing a specific named study\n   (less polished delivery, strong evidentiary support).\n2. A student who rates the confident speaker as \"more convincing\" without examining the evidence\n   (misconception) vs. a student who separately evaluates delivery and evidentiary strength, and\n   rates the argument by the evidence (correct critical-listening discipline).\n\n**s6_path:** If the student continues to conflate confidence with correctness after the bridge, give\nthem a confidently-delivered weak argument and a hesitantly-delivered strong one, and have them list\nthe actual evidence offered in each, independent of delivery style, before judging which argument is\nbetter supported.",
+      "localKey": "MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/misconception/MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL",
+      "kind": "misconception",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "**Trigger signal:** Student treats any evidence a speaker cites as equally strong support for their",
+      "content": "### MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL\n\n**Trigger signal:** Student treats any evidence a speaker cites as equally strong support for their\nclaim, failing to evaluate the credibility of the source, the relevance of the evidence to the\nspecific claim, or whether it is a single unsupported anecdote versus a well-documented, credible\nsource — accepting \"they cited something\" as proof the point is established.\n\n**Conflict evidence [P28]:** Present two spoken claims each with cited \"evidence\": one citing \"my\nneighbor told me this happened to them\" as support for a broad general claim, and one citing a\nnamed, peer-reviewed study with a clear sample size as support for a similar claim. Ask: \"Are both of\nthese equally strong evidence for their claims? What's different about the credibility of each\nsource?\"\n\n**Bridge text [P30]:** \"Treating any mentioned evidence as equally strong is like treating a single\nhandwritten note and an official notarized document as equally valid proof of the same claim — both\nare technically 'evidence,' but they carry very different weight. A single anecdote from one person\nis far weaker evidence than a documented, credible, relevant source — evaluate the source and\nrelevance, not just whether something was cited at all.\"\n\n**Replacement text [P31]:** \"When a speaker cites evidence, don't just note that evidence was\nmentioned — ask: how credible is this source? Is it a single anecdote or a documented study? Is it\nactually relevant to the specific claim being made? Weigh the evidence's quality, not just its\npresence.\"\n\n**Discrimination pairs [P33]:**\n1. \"My neighbor told me this happened to them.\" (a single unsupported anecdote, weak evidence for a\n   broad claim) vs. \"A peer-reviewed study of 500 participants found...\" (a credible, documented,\n   relevant source, strong evidence).\n2. A student who accepts any cited evidence as equally proving the point (misconception) vs. a\n   student who evaluates each piece of cited evidence for source credibility and relevance before\n   weighing how much it actually supports the claim (correct discipline).\n\n**s6_path:** If the student continues to treat all cited evidence as equally strong after the\nbridge, give them a spoken argument citing three different pieces of \"evidence\" of varying quality\n(an anecdote, an unnamed \"expert,\" and a specific documented study) and have them rank the three by\ncredibility and relevance to the claim.",
+      "localKey": "MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 40,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Separating Delivery Confidence from Argument Strength (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Separating Delivery Confidence from Argument Strength (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 135,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Evaluating Source Credibility (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Evaluating Source Credibility (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Evaluating Relevance of Evidence to the Specific Claim",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Evaluating Relevance of Evidence to the Specific Claim\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Full Application: Critically Evaluating a Spoken Argument",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Critically Evaluating a Spoken Argument\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT\",\"MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT",
+        "MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 153,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Separating Delivery from Argument Strength**\nGiven a confidently-delivered weak argument and a hesitantly-delivered strong one, identify which\nargument is actually better supported, independent of delivery style.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 175,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Ranking Evidence by Source Credibility**\nGiven three pieces of cited evidence of varying quality, rank them by credibility.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 175,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Evaluating Evidence Relevance**\nGiven a claim and a piece of credible but only tangentially relevant evidence, explain why the\nevidence does not fully support the specific claim.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 175,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting the Eloquence-Equals-Truth Trap**\nGiven a transcript of a highly polished but evidence-thin argument, identify specifically what\nevidence is missing despite the confident delivery.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 175,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Critical Evaluation of a Spoken Argument**\nGiven a new spoken argument citing two or three pieces of evidence, evaluate its overall strength,\nassessing delivery independence, evidence credibility, and evidence relevance.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 175,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly separates delivery from strength on provided contrastive pairs (MP-1) but\n  reverts to trusting a confident speaker on a new, unscaffolded argument (MP-5), provide a mandatory\n  \"list the actual evidence first, before rating convincingness\" step until the habit is automatic.\n- If the student's credibility ranking is strong (MP-2) but relevance evaluation (MP-3) remains weak,\n  require an explicit \"does this evidence address this specific claim, or a different one?\" check\n  before accepting any piece of evidence as support.\n- If the student struggles to evaluate source credibility at all, provide a starter credibility\n  hierarchy (documented study > named expert testimony > single anecdote) as a scaffolding reference.\n- Students with strong performance in `eng.speaking.debate-skills`'s evidence-evaluation work should\n  transfer readily to critical listening, since both require assessing argument and evidence quality\n  independent of presentation — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 232,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "eng.listening.critical-listening/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.critical-listening",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: listening comprehension check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.listening.listening-comprehension-strategies]  [Component 3: Shiny-Paint-Bridge /\n                                                                Notarized-Document Anchor]\n                                                                            |\n                                                                            v\n                                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                            |\n                                                                            v\n                                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                            |\n                                                                            v\n                                          [MP-1 through MP-5 mastery probe set]\n                                                                            |\n                                          (pass >= 0.75) -----+----- (fail)\n                                                 |                      |\n                                                 v                      v\n                            [No further unlocks —  [S6 remediation: delivery-vs-evidence\n                             terminal in current      contrast drills / credibility-ranking\n                             curriculum sequence]     drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1 (rating confident\ndelivery as stronger) and MC-B during TA-2/TA-3 (accepting any cited evidence uncritically) — these\nare largely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-4\nfailures indicate residual MC-A; MP-2/MP-3 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-argument example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.critical-listening.md",
+        "startLine": 196,
+        "endLine": 232
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

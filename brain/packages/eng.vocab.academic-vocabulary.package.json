@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.academic-vocabulary-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.academic-vocabulary",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3fac3182a9ca0abf401a8bae53a23656c4386ddfd920183abe95add33b5aad65",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md": "sha256:98b72974614a32ef0b24a238133b0002393d53c8be0b55d4b97960e098c28c07"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.academic-vocabulary",
+    "name": "Academic Vocabulary",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.vocab.register-and-formality",
+      "eng.vocab.word-formation-processes"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.academic-vocabulary-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.academic-vocabulary (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md": "sha256:98b72974614a32ef0b24a238133b0002393d53c8be0b55d4b97960e098c28c07"
+      },
+      "contentHash": "sha256:8f43566ef4027d125d8d54f44feb2e81f6ffd818168ea09c462de9d792aa23a8",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.academic-vocabulary.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md#TA-1 (addresses MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.academic-vocabulary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.academic-vocabulary\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.academic-vocabulary.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md#TA-2 (addresses MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.academic-vocabulary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.academic-vocabulary\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.academic-vocabulary.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.academic-vocabulary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.academic-vocabulary\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.academic-vocabulary.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.academic-vocabulary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.academic-vocabulary\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.academic-vocabulary.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md#TA-5 (addresses MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY, MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.academic-vocabulary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.academic-vocabulary\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.academic-vocabulary/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "Academic Vocabulary — Conceptual Development Sequence",
+      "content": "### TA-1 — General Academic Vocabulary vs. Technical Jargon (MC-A)\n\nUsing the screwdriver-vs-soldering-iron anchor, teach the cross-subject-recurrence test for\nidentifying general academic vocabulary. Student practice: given a passage, sort unfamiliar words\ninto \"recurs across subjects\" and \"belongs to this subject only.\"\n\n### TA-2 — The Academic Sense vs. the Everyday Sense (MC-B)\n\nUsing the trial anchor, teach that common words can carry a sharper academic sense. Student\npractice: given five common words each in an everyday and an academic sentence, explain the meaning\nshift.\n\n### TA-3 — Recognizing Academic Vocabulary in Context\n\nExtend TA-1/TA-2: give the student an unfamiliar academic passage and have them identify all general\nacademic vocabulary present, distinguishing it from any technical jargon and confirming each word's\nacademic sense.\n\n### TA-4 — Producing Academic Vocabulary in Original Writing\n\nStudent writes two or three sentences of their own on a given topic, deliberately using at least\nthree general academic vocabulary words in their correct academic sense.\n\n### TA-5 — Full Application: Reading and Writing with Academic Vocabulary\n\nGive the student a new academic passage from an unfamiliar subject. They must identify its general\nacademic vocabulary (TA-1/TA-3), confirm each word's academic sense (TA-2), and then write a short\nresponse using at least four of the identified words correctly (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 136,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/misconception/MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "**Trigger signal:** Student treats any unfamiliar, complex, or subject-specific technical term",
+      "content": "### MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY\n\n**Trigger signal:** Student treats any unfamiliar, complex, or subject-specific technical term\nencountered in an academic text (e.g., \"mitochondria,\" \"photosynthesis,\" \"iambic pentameter\") as\n\"academic vocabulary,\" failing to distinguish general academic words that recur across every\ndiscipline from technical jargon that belongs to one specific field only.\n\n**Conflict evidence [P28]:** Show the student a biology passage containing both \"mitochondria\"\n(technical, biology-only) and \"significant\" (general academic, appears in biology, history, and\nliterature alike). Ask: \"If you read a history essay or a literature essay, would you expect to see\nthe word 'mitochondria'? Would you expect to see the word 'significant'?\"\n\n**Bridge text [P30]:** \"Treating every unfamiliar academic-sounding word as 'academic vocabulary' is\nlike calling every specialized tool in a workshop a 'general-purpose tool' — a soldering iron only\nbelongs in an electronics workshop, but a screwdriver is used in nearly every workshop there is.\nGeneral academic vocabulary is the screwdriver: words that recur across every subject. Technical\njargon is the soldering iron: it belongs to one field.\"\n\n**Replacement text [P31]:** \"Before calling a word 'academic vocabulary,' ask: would this word\nplausibly appear in an essay about a completely different subject too? If yes, it's general academic\nvocabulary. If it only makes sense within one specific field, it's technical jargon for that field,\nnot general academic vocabulary.\"\n\n**Discrimination pairs [P33]:**\n1. \"Mitochondria\" (technical, biology-only — would not appear in a history essay) vs. \"significant\"\n   (general academic — appears naturally in biology, history, and literature essays alike).\n2. A student who lists every complex word from a science passage as \"academic vocabulary\"\n   (misconception) vs. a student who separates the passage's general academic words from its\n   subject-specific technical terms (correct distinction).\n\n**s6_path:** If the student continues to conflate technical jargon with academic vocabulary after\nthe bridge, give them passages from three different subjects and have them sort all unfamiliar words\ninto two columns — \"appears across subjects\" and \"belongs to this subject only\" — confirming the\ndistinction empirically.",
+      "localKey": "MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/misconception/MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "**Trigger signal:** Student applies a common word's everyday, casual meaning when the word appears",
+      "content": "### MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH\n\n**Trigger signal:** Student applies a common word's everyday, casual meaning when the word appears\nin academic context, failing to recognize that many academic words carry a more precise, technical\nsense in formal writing than their everyday sense suggests (e.g., \"argument\" as a fight/disagreement\nvs. \"argument\" as a reasoned case supported by evidence; \"significant\" as important/big vs.\n\"significant\" as a specific measure of a non-random effect).\n\n**Conflict evidence [P28]:** Show the student the sentence \"They had an argument about the results\"\nin a casual context (a disagreement) next to \"The essay's argument is supported by three pieces of\nevidence\" in an academic context (a reasoned case, not a fight). Ask: \"Does 'argument' mean the same\nthing in both sentences? What does it mean in each?\"\n\n**Bridge text [P30]:** \"Assuming an academic word means exactly what it means casually is like\nassuming a 'trial' in a science class means the same thing as a courtroom 'trial' — related, but not\nidentical. Academic writing often narrows or sharpens a common word's meaning into a more precise\nsense; using only the everyday sense in academic writing can create real confusion or imprecision.\"\n\n**Replacement text [P31]:** \"When you meet a familiar word in an academic text, check whether it's\nbeing used in its ordinary everyday sense or a more precise academic sense — 'argument' as a reasoned\ncase, not a fight; 'significant' as a specific measured effect, not just 'big' or 'important.' Use the\nacademic sense when writing academically.\"\n\n**Discrimination pairs [P33]:**\n1. \"They had an argument about the results.\" (everyday sense: a disagreement) vs. \"The essay's\n   argument is supported by three pieces of evidence.\" (academic sense: a reasoned case).\n2. A student who writes \"the data showed a significant improvement\" meaning only \"a big one\"\n   (everyday sense, imprecise in an academic context) vs. a student who understands \"significant\" in\n   a research context implies a specific, non-random measured effect (correct academic sense).\n\n**s6_path:** If the student continues to apply only everyday senses after the bridge, give them five\ncommon academic words (argument, significant, context, evidence, interpret) each in one everyday\nsentence and one academic sentence, and have them explain how the meaning shifts between the two.",
+      "localKey": "MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH",
+      "language": "en",
+      "refs": [
+        "MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 38,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "General Academic Vocabulary vs. Technical Jargon (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"General Academic Vocabulary vs. Technical Jargon (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 140,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "The Academic Sense vs. the Everyday Sense (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Academic Sense vs. the Everyday Sense (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 146,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "Recognizing Academic Vocabulary in Context",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Recognizing Academic Vocabulary in Context\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "Producing Academic Vocabulary in Original Writing",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Producing Academic Vocabulary in Original Writing\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 158,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "Full Application: Reading and Writing with Academic Vocabulary",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Reading and Writing with Academic Vocabulary\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY\",\"MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY",
+        "MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 163,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Sorting Academic Vocabulary from Technical Jargon**\nGiven a passage, sort unfamiliar words into \"recurs across subjects\" (academic vocabulary) and\n\"belongs to this subject only\" (technical jargon).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying the Academic Sense of a Familiar Word**\nGiven a common word used in both an everyday and an academic sentence, explain how its meaning\nshifts between the two.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Recognizing Academic Vocabulary in an Unfamiliar Passage**\nGiven a new academic passage, identify all general academic vocabulary present.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Confirming Correct Academic Sense in Use**\nGiven a sentence using an academic word, state whether it is used in its academic sense or its\neveryday sense, and correct it if needed.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Reading-and-Writing Application**\nGiven a new academic passage, identify its academic vocabulary and write a short original response\nusing at least four of the words in their correct academic sense.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly sorts vocabulary on provided passages (MP-1) but reverts to listing\n  technical jargon as \"academic vocabulary\" in a new subject (MP-3), provide a mandatory cross-\n  subject-recurrence check for every candidate word until the habit is automatic.\n- If the student's sorting is strong (MP-1, MP-3) but their own original writing (MP-5) misuses\n  academic words in their everyday sense, require an explicit sense-check step (\"is this the academic\n  sense or the everyday sense?\") before finalizing each sentence.\n- If the student struggles to generate original sentences using academic vocabulary at all, provide a\n  sentence-starter template using one academic word per starter as scaffolding before free writing.\n- Students with strong performance in `eng.vocab.register-and-formality`'s formal/informal\n  distinction should transfer readily to the everyday-vs-academic sense distinction, since both\n  require recognizing that context shifts a word's appropriate meaning — draw this parallel\n  explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 241,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "eng.vocab.academic-vocabulary/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.academic-vocabulary",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: register/formality check] --> [PD-2: word-formation check]\n   |                       |                                |\n   | (gap found)           |                                | (pass both)\n   v                        v                                v\n[Route to prerequisite]                        [Component 3: Screwdriver/Soldering-Iron /\n                                                 Trial Anchor]\n                                                            |\n                                                            v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                            |\n                                                            v\n                              [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                              [MP-1 through MP-5 mastery probe set]\n                                                            |\n                              (pass >= 0.75) -----+----- (fail)\n                                     |                      |\n                                     v                      v\n                [No further unlocks —  [S6 remediation: cross-subject sorting drills /\n                 terminal in current      everyday-vs-academic-sense contrast drills]\n                 curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (conflating jargon with academic vocabulary) and MC-B during TA-2 (applying only everyday\nsenses) — these are largely independent and often need separate, explicit correction. If either\nfires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route\nby failure: MP-1/MP-3 failures indicate residual MC-A; MP-2/MP-4 failures indicate residual MC-B;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull passage-and-writing example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md",
+        "startLine": 205,
+        "endLine": 241
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

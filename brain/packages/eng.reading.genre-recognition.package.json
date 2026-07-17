@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.genre-recognition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.genre-recognition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:81216b4987c94e5e7b32927b783b16409c1a9f426e884b40d2491cea16e31962",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.genre-recognition.md": "sha256:e98c6ea1c926243c3068d485086402d6a44e94be38bf424bea74970538117eef"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.reading.genre-recognition",
+    "name": "Genre Recognition",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.text-structure"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.genre-recognition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.genre-recognition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.genre-recognition.md": "sha256:e98c6ea1c926243c3068d485086402d6a44e94be38bf424bea74970538117eef"
+      },
+      "contentHash": "sha256:3c7b9b7ad06c13c064c23744d9e8d0c8a34e99e6b3f866862e483a5d4cb1bb88",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.genre-recognition.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.genre-recognition.md#TA-1 (addresses MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.genre-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.genre-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.genre-recognition.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.genre-recognition.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.genre-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.genre-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.genre-recognition.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.genre-recognition.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.genre-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.genre-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.genre-recognition.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.genre-recognition.md#TA-4 (addresses MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP, MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.genre-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.genre-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.genre-recognition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "Genre Recognition — Conceptual Development Sequence",
+      "content": "### TA-1 — Purpose and Convention, Not One Surface Feature (MC-A)\n\nUsing the pointed-roof anchor, teach checking a text's overall purpose and multiple structural\nconventions together. Student practice: given a text with one misleading surface feature, identify\nits actual genre using purpose and full convention instead.\n\n### TA-2 — The Major Genres and Their Core Conventions\n\nExtend TA-1: teach the core purpose and structural conventions of fiction, nonfiction, poetry, and\ndrama. Student practice: given four short unlabeled texts, match each to its genre and state the\nconvention that confirms it.\n\n### TA-3 — Recognizing Genre Subtypes\n\nExtend TA-2 into subtypes within a genre (e.g., within nonfiction: biography, informational text,\npersuasive essay). Student practice: given three nonfiction texts, identify each one's specific\nsubtype.\n\n### TA-4 — Recognizing Hybrid and Blended Texts (MC-B)\n\nUsing the sweet-and-savory anchor, teach identifying texts that deliberately blend conventions from\nmore than one genre. Student practice: given a narrative-nonfiction text, identify which\nconventions come from which genre rather than forcing it into one category.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 137,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/misconception/MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE",
+      "kind": "misconception",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "**Trigger signal:** Student identifies genre by a single superficial surface feature (line breaks",
+      "content": "### MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE\n\n**Trigger signal:** Student identifies genre by a single superficial surface feature (line breaks\nmean poetry; dialogue in quotation marks means fiction; a serious tone means nonfiction) rather than\nby the text's overall purpose and structural conventions, leading to genre misidentification when a\nsurface feature appears in an unexpected genre (a nonfiction book written with line breaks; a\nfictionalized biography that reads \"seriously\").\n\n**Conflict evidence [P28]:** Show the student a nonfiction informational text about ocean animals\nwritten with poetic line breaks for young readers, next to an actual poem. Ask: \"Does having line\nbreaks automatically make a text a poem? What does the ocean-animals text's actual PURPOSE tell you\nabout its real genre, regardless of its line breaks?\"\n\n**Conflict evidence continued:** Also show a fictionalized biography (a novel based on a real\nperson's life, containing invented dialogue) next to a factual biography. Ask: \"Does sounding\n'serious' or being about a real person automatically make a text nonfiction?\"\n\n**Bridge text [P30]:** \"Identifying genre from one surface feature is like assuming any building with\na pointed roof must be a church — plenty of houses have pointed roofs too. A single surface feature\ncan appear in many different genres; genre is really determined by the text's overall purpose (to\ninform, to tell an invented story, to persuade) and its full set of structural conventions, not any\none visible trait.\"\n\n**Replacement text [P31]:** \"Don't identify genre from one surface feature alone. Ask: what is this\ntext's overall PURPOSE — to inform with verified facts, to tell an invented story, to persuade, to\nevoke feeling through condensed language? Check multiple structural conventions together, not just\none visible trait like line breaks or dialogue.\"\n\n**Discrimination pairs [P33]:**\n1. A nonfiction informational text about ocean animals written with poetic line breaks (surface\n   feature suggests poetry, but purpose and content are informational nonfiction) vs. an actual poem\n   using line breaks to shape rhythm and meaning (genuine poetry).\n2. A student who calls any text with dialogue \"fiction\" (misconception — surface feature only) vs. a\n   student who checks whether the dialogue is invented (fiction) or a verified quotation from a real\n   source (nonfiction) before deciding (correct, purpose-based check).\n\n**s6_path:** If the student continues to rely on single surface features after the bridge, give them\nthree texts each with one misleading surface feature (a nonfiction text with line breaks, a fiction\ntext with a serious tone, a play script with narrative-style stage directions) and have them identify\nthe actual genre using purpose and full structural convention instead.",
+      "localKey": "MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/misconception/MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP",
+      "kind": "misconception",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "**Trigger signal:** Student assumes genre categories are fixed, mutually exclusive boxes, failing to",
+      "content": "### MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP\n\n**Trigger signal:** Student assumes genre categories are fixed, mutually exclusive boxes, failing to\nrecognize that some texts deliberately blend conventions from more than one genre (a narrative-\nnonfiction memoir using story structure to tell true events; a graphic novel that can be fiction or\nnonfiction depending on content) — forcing a hybrid text into a single ill-fitting category rather\nthan recognizing its blended nature.\n\n**Conflict evidence [P28]:** Show the student a memoir that uses a clear narrative arc (rising\naction, climax, resolution) to tell a true, factual story of the author's life. Ask: \"Is this text\ntelling a true story (nonfiction) or does it use story-shaped structure (usually associated with\nfiction)? Can a text be both factual AND structured like a story at the same time?\"\n\n**Bridge text [P30]:** \"Assuming every text fits exactly one genre box is like assuming every dish\nmust be purely 'sweet' or purely 'savory' — but plenty of dishes are deliberately both. Narrative\nnonfiction deliberately borrows story structure to tell true events; some texts are genuinely\nhybrids, blending conventions from more than one genre rather than belonging cleanly to just one.\"\n\n**Replacement text [P31]:** \"Don't force every text into exactly one fixed genre box. Ask: does this\ntext combine conventions from more than one genre — for example, true content told with story\nstructure? If so, name it as a hybrid (like narrative nonfiction) rather than picking just one\ncategory that doesn't fully fit.\"\n\n**Discrimination pairs [P33]:**\n1. A memoir using narrative arc structure to tell factual events (a genuine fiction-nonfiction\n   hybrid: narrative nonfiction) vs. a purely informational nonfiction text with no story structure\n   at all (straightforward nonfiction, no hybrid).\n2. A student who forces a narrative-nonfiction memoir into either \"pure fiction\" or \"pure nonfiction\"\n   (misconception — ignoring its blended nature) vs. a student who correctly names it as narrative\n   nonfiction, a recognized hybrid genre (correct recognition).\n\n**s6_path:** If the student continues to force hybrid texts into single categories after the bridge,\ngive them three genuinely hybrid texts (a graphic memoir, a narrative-nonfiction article, a\ndocudrama script) and have them identify specifically which conventions from which genres each one\ncombines.",
+      "localKey": "MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 44,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "Purpose and Convention, Not One Surface Feature (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Purpose and Convention, Not One Surface Feature (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "The Major Genres and Their Core Conventions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Major Genres and Their Core Conventions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "Recognizing Genre Subtypes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Recognizing Genre Subtypes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "Recognizing Hybrid and Blended Texts (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Recognizing Hybrid and Blended Texts (MC-B)\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE\",\"MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP",
+        "MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 159,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Avoiding the Single-Surface-Feature Trap**\nGiven a text with one misleading surface feature, identify its actual genre using purpose and full\nstructural convention.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 180,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Matching Texts to Major Genres**\nGiven four short unlabeled texts, match each to fiction, nonfiction, poetry, or drama and state the\nconfirming convention.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 180,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Genre Subtypes**\nGiven three texts within one genre, identify each one's specific subtype.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 180,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Recognizing a Hybrid Text**\nGiven a narrative-nonfiction or other hybrid text, identify which conventions come from which\ngenre.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 180,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Genre Identification Across a New Text Set**\nGiven a new set of unlabeled texts including at least one hybrid, identify each one's genre or\nhybrid classification.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 180,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly identifies genre on texts with obvious conventions (MP-2) but reverts to\n  surface-feature judgments on a text with one misleading trait (MP-1), provide a mandatory\n  purpose-first checklist step before checking any surface feature.\n- If the student's major-genre identification is strong (MP-2) but subtype identification (MP-3)\n  remains shaky, provide a reference list of common subtypes within each major genre as a scaffolding\n  aid.\n- If the student struggles to recognize hybrid texts at all, provide one fully-annotated hybrid\n  example showing exactly which conventions come from which genre before asking them to analyze a\n  new one independently.\n- Students with strong performance in `eng.reading.text-structure`'s structural-pattern recognition\n  should transfer readily to genre-convention recognition, since both require identifying underlying\n  organizational patterns rather than surface details — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 237,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "eng.reading.genre-recognition/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.genre-recognition",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: text structure check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.reading.text-structure]  [Component 3: Pointed-Roof-House /\n                                         Sweet-and-Savory-Dish Anchor]\n                                                    |\n                                                    v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                    |\n                                                    v\n                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                    |\n                                                    v\n                          [MP-1 through MP-5 mastery probe set]\n                                                    |\n                          (pass >= 0.75) -----+----- (fail)\n                                 |                      |\n                                 v                      v\n            [No further unlocks —  [S6 remediation: misleading-surface-feature drills /\n             terminal in current      hybrid-convention-identification drills]\n             curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (surface-\nfeature reliance) and MC-B during TA-4 (forcing hybrids into one box) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2/MP-3\nfailures indicate residual MC-A; MP-4 failure indicates residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-set example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.genre-recognition.md",
+        "startLine": 201,
+        "endLine": 237
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
