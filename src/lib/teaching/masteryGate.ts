@@ -184,6 +184,18 @@ export function detectLearnerRequest(message: string): LearnerRequest | null {
 const REAL_LIFE_EXAMPLE_DIRECTIVE = (
   '\n\nTEACHING ACTION: REAL_LIFE_EXAMPLE (learner-requested — overrides the turn move). ' +
   'The student asked for a concrete application. Do NOT re-explain the theory. ' +
+  // P2 (teaching-quality refinement, example continuity): check your own
+  // recent turns in this conversation first. If you already gave this
+  // concept a scenario or analogy, EXTEND that same one — don't jump to an
+  // unrelated new scenario (e.g. a ruler, then coffee, then a stroller) just
+  // because a fresh example was asked for. Switch to a genuinely different
+  // scenario only if the established one has clearly failed to land.
+  'If you already used a scenario or analogy for this concept earlier in the ' +
+  'conversation, EXTEND that SAME one further rather than switching to an ' +
+  'unrelated new scenario — jumping between disconnected examples (a ruler, ' +
+  'then coffee, then a stroller) is more confusing than one scenario explored ' +
+  'more deeply. Only introduce a genuinely new scenario if the established ' +
+  'one has clearly not worked. ' +
   'Give ONE vivid everyday scenario they have personally experienced, walk the ' +
   'concept through that scenario start to finish, and connect back in one sentence. ' +
   'No definitions this turn.'

@@ -193,6 +193,20 @@ describe('learner-request → forced TeachingAction', () => {
     expect(block).toMatch(/Do NOT re-explain the theory/i)
   })
 
+  // P2 (teaching-quality refinement, example continuity): a real-life
+  // example request must not cause the tutor to jump between unrelated
+  // scenarios (ruler → coffee → stroller) within the same concept.
+  it('real-life example directive instructs extending an established scenario, not switching to a new one', () => {
+    const block = buildLearnerRequestBlock('real_life_example', null)
+    expect(block).toMatch(/EXTEND that SAME one/i)
+    expect(block).toMatch(/only .* .*new scenario .* clearly not worked|only introduce a genuinely new scenario/i)
+  })
+
+  it('the same continuity instruction reaches tier-2 of the explain_differently ladder (shared constant, not duplicated)', () => {
+    const tier2 = buildLearnerRequestBlock('explain_differently', null, 2)
+    expect(tier2).toMatch(/EXTEND that SAME one/i)
+  })
+
   it('request counters accumulate in the student state (Bug 11)', () => {
     let s = stateWith({})
     s = advanceConversationState(s, { askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'diagram' })
