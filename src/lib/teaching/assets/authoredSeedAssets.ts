@@ -9175,6 +9175,169 @@ const CAP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.geom.coordinate-plane ──────────────────────────────────────────────
+const COORD = 'math.geom.coordinate-plane'
+const COORD_SRC = 'docs/curriculum/blueprints/math.geom.coordinate-plane.md'
+
+const COORD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COORD,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'To plot (3, \u22122): move HORIZONTALLY first, then VERTICALLY \u2014 ' +
+      'never the reverse. The first number, x, is always the ' +
+      'left-right position; the second number, y, is always the ' +
+      'up-down position. Plotting \u201cup 3, then left 2\u201d for (3,\u22122) ' +
+      'lands you at a completely different spot than the intended ' +
+      'one. Memory anchor: x comes before y alphabetically, matching ' +
+      '\u201cacross before up\u201d in the reading order of the pair. Practice ' +
+      'the ritual every time: read the FIRST number, move that many ' +
+      'units left or right; read the SECOND number, move that many ' +
+      'units up or down. Order is not decoration in (x, y) \u2014 it IS ' +
+      'the entire instruction.',
+    targetedMisconceptions: [`${COORD}:MC-1`],
+    source: `${COORD_SRC} — MC-1 AXIS-SWAP (horizontal-then-vertical reading order; alphabetical x-before-y mnemonic)`,
+  },
+  {
+    conceptId: COORD,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Two more traps once plotting is solid. First: is (\u22124, 2) in ' +
+      'Quadrant IV? No \u2014 derive quadrants from the AXES directly, ' +
+      'never memorize them as isolated facts: left of the y-axis ' +
+      'means x < 0; above the x-axis means y > 0; (negative, ' +
+      'positive) is Quadrant II, not IV. Re-derive the sign pattern ' +
+      'every time rather than guessing from a half-remembered ' +
+      'number. Second: is the origin the BOTTOM-LEFT corner of the ' +
+      'plane, like a ruler that starts at zero? No \u2014 the origin is ' +
+      'the CENTER, and axes extend in BOTH directions from it. A ' +
+      'point like (\u22123, 2) is not \u201cimpossible\u201d or \u201coff the grid\u201d \u2014 ' +
+      'it sits 3 units LEFT of and 2 units ABOVE the origin, exactly ' +
+      'as valid as any positive-coordinate point.',
+    targetedMisconceptions: [`${COORD}:MC-2`, `${COORD}:MC-3`],
+    source: `${COORD_SRC} — MC-2 QUADRANT-SIGN-ERROR (re-derive-from-axes rule) + MC-3 ORIGIN-AS-CORNER (origin-as-center reframe)`,
+  },
+]
+
+const COORD_PROBES: SeedProbe[] = [
+  {
+    conceptId: COORD,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'To plot the point (3, \u22122), which movement is correct?',
+    choices: [
+      { text: 'Move 3 units right, then 2 units down', isCorrect: true },
+      { text: 'Move 3 units up, then 2 units left', isCorrect: false, misconceptionId: `${COORD}:MC-1` },
+    ],
+    correctValue: '3 right, 2 down',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${COORD}:MC-1`],
+    source: `${COORD_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: COORD,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which quadrant contains the point (\u22124, 2)?',
+    choices: [
+      { text: 'Quadrant II — left of the y-axis (x<0) and above the x-axis (y>0)', isCorrect: true },
+      { text: 'Quadrant IV — negative x means the right side', isCorrect: false, misconceptionId: `${COORD}:MC-2` },
+    ],
+    correctValue: 'Quadrant II',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COORD}:MC-2`],
+    source: `${COORD_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.geom.vectors-2d ────────────────────────────────────────────────────
+const VEC2 = 'math.geom.vectors-2d'
+const VEC2_SRC = 'docs/curriculum/blueprints/math.geom.vectors-2d.md'
+
+const VEC2_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VEC2,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Is the vector (3,4) the same thing as the POINT (3,4)? No \u2014 ' +
+      'and this distinction unlocks everything about vectors. A ' +
+      'point is a fixed LOCATION. A vector (3,4) is a DISPLACEMENT: ' +
+      '\u201cmove 3 right and 4 up,\u201d regardless of where you start. Draw ' +
+      'that arrow starting at the origin, or starting at (10, 20), ' +
+      'or starting at (\u22125, \u22125) \u2014 all three arrows have the same ' +
+      'length and the same direction, so they are ALL the SAME ' +
+      'vector (3,4), just drawn (or \u201cplaced\u201d) at different tails. A ' +
+      'vector is \u201cfree\u201d \u2014 it can slide anywhere in the plane without ' +
+      'changing what it IS, because what defines it is the ' +
+      'change-in-position it represents, never a fixed spot.',
+    targetedMisconceptions: [`${VEC2}:MC-1`],
+    source: `${VEC2_SRC} — MC-1 VECTOR-IS-A-POINT (TA-B01: displacement-not-location; free-vector translation invariance)`,
+  },
+  {
+    conceptId: VEC2,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps in vector arithmetic. First: the magnitude of ' +
+      '(3,4) is NOT 3+4=7 \u2014 the components are the legs of a right ' +
+      'triangle, and the vector\u2019s length is the HYPOTENUSE: ' +
+      '|v| = \u221a(3\u00b2+4\u00b2) = \u221a25 = 5 (the Pythagorean theorem, applied ' +
+      'to the arrow\u2019s own right-triangle shape). Second: does ' +
+      'multiplying by a negative scalar make the magnitude negative? ' +
+      'No \u2014 \u22122\u00d7(3,4) = (\u22126,\u22128), and its magnitude is ' +
+      '\u221a((\u22126)\u00b2+(\u22128)\u00b2) = \u221a100 = 10, POSITIVE, exactly double the ' +
+      'original length 5. The negative sign REVERSES the DIRECTION ' +
+      '(the arrow now points the opposite way) but never touches the ' +
+      'MAGNITUDE, which is a length \u2014 lengths are never negative, by ' +
+      'definition. Keep direction and magnitude as two completely ' +
+      'separate properties.',
+    targetedMisconceptions: [`${VEC2}:MC-2`, `${VEC2}:MC-3`],
+    source: `${VEC2_SRC} — MC-2 MAGNITUDE-IS-COORDINATE-SUM (Pythagorean hypotenuse) + MC-3 NEGATIVE-SCALAR-REVERSES-MAGNITUDE (direction-vs-magnitude separation)`,
+  },
+]
+
+const VEC2_PROBES: SeedProbe[] = [
+  {
+    conceptId: VEC2,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the magnitude of the vector (3, 4)?',
+    choices: [
+      { text: '5 — \u221a(3\u00b2+4\u00b2) = \u221a25', isCorrect: true },
+      { text: '7 — 3 + 4', isCorrect: false, misconceptionId: `${VEC2}:MC-2` },
+    ],
+    correctValue: '5',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VEC2}:MC-2`],
+    source: `${VEC2_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VEC2,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Vector (3,4) has magnitude 5. What is the magnitude of \u22122\u00d7(3,4)?',
+    choices: [
+      { text: '10 — magnitude is always non-negative; the scalar\u2019s sign only reverses direction, and |\u22122|\u00d75 = 10', isCorrect: true },
+      { text: '\u221210 — the negative scalar makes the magnitude negative', isCorrect: false, misconceptionId: `${VEC2}:MC-3` },
+    ],
+    correctValue: '10',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VEC2}:MC-3`],
+    source: `${VEC2_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -9285,6 +9448,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SIM_EXPLANATIONS,
   ...SLOPE_EXPLANATIONS,
   ...CAP_EXPLANATIONS,
+  ...COORD_EXPLANATIONS,
+  ...VEC2_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -9395,4 +9560,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SIM_PROBES,
   ...SLOPE_PROBES,
   ...CAP_PROBES,
+  ...COORD_PROBES,
+  ...VEC2_PROBES,
 ]
