@@ -2593,6 +2593,253 @@ const INT_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── phys.em.electric-charge ─────────────────────────────────────────────────
+const CHG = 'phys.em.electric-charge'
+const CHG_SRC = 'docs/curriculum/blueprints/phys.em.electric-charge.md'
+
+const CHG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electric charge obeys strict bookkeeping: every electron that ' +
+      'appears somewhere came from somewhere. Rub a rubber rod with fur ' +
+      'and the rod ends up at −40e while the fur reads +40e — add them ' +
+      'and you get exactly zero, the same total as before you started. ' +
+      'Rubbing did not CREATE charge; it moved loosely bound electrons ' +
+      'from the fur onto the rod. One object is negative because it ' +
+      'gained electrons, the other positive because it lost the very ' +
+      'same electrons. That is conservation of charge, and it is ' +
+      'absolute: no physical process — friction, chemistry, even ' +
+      'nuclear reactions — changes the net charge of an isolated ' +
+      'system. Charging is always redistribution, never creation.',
+    targetedMisconceptions: [`${CHG}:MC-CHARGE-IS-CREATED-BY-RUBBING`],
+    source: `${CHG_SRC} — MC-CHARGE-IS-CREATED-BY-RUBBING (P28 rod/fur ledger + P31 replacement as teaching text)`,
+  },
+  {
+    conceptId: CHG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Here is an honest historical accident: "conventional current" ' +
+      'points from + to −, but in a metal wire nothing positive is ' +
+      'moving at all. Protons are locked in the crystal lattice; only ' +
+      'electrons are free, and they drift OPPOSITE to the conventional ' +
+      'arrow. Benjamin Franklin picked the sign convention a century ' +
+      'before anyone discovered the electron — he guessed, and the ' +
+      'guess stuck. The convention still works perfectly for circuit ' +
+      'math (the equations are consistent either way), so we keep it. ' +
+      'Just hold both facts at once: the arrows on a circuit diagram ' +
+      'are a useful fiction; the physical carriers in metals are ' +
+      'electrons going the other way. (In salt solutions both ion ' +
+      'signs move; only in semiconductors do "holes" act like real ' +
+      'positive carriers.)',
+    targetedMisconceptions: [`${CHG}:MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE`],
+    source: `${CHG_SRC} — MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE (P28/P30 Franklin-convention bridge, s6 historical framing)`,
+  },
+]
+
+const CHG_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A rubber rod rubbed with fur ends up with charge −40e. What is the charge on the fur?',
+    choices: [
+      { text: '+40e — the electrons the rod gained came from the fur; total charge is conserved', isCorrect: true },
+      { text: '0 — the fur is unchanged; the rubbing created the rod\'s charge', isCorrect: false, misconceptionId: `${CHG}:MC-CHARGE-IS-CREATED-BY-RUBBING` },
+      { text: '−40e — both objects become negative from friction', isCorrect: false, misconceptionId: `${CHG}:MC-CHARGE-IS-CREATED-BY-RUBBING` },
+    ],
+    correctValue: '+40e',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CHG}:MC-CHARGE-IS-CREATED-BY-RUBBING`],
+    source: `${CHG_SRC} — P28 conflict-evidence scenario as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CHG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a copper wire carrying conventional current to the right, what is physically moving?',
+    choices: [
+      { text: 'Electrons drifting to the LEFT — conventional current direction is a historical convention', isCorrect: true },
+      { text: 'Positive charges (protons) moving to the right, as the current arrow shows', isCorrect: false, misconceptionId: `${CHG}:MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE` },
+    ],
+    correctValue: 'electrons drifting left',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CHG}:MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE`],
+    source: `${CHG_SRC} — MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.coulombs-law ────────────────────────────────────────────────────
+const COUL = 'phys.em.coulombs-law'
+const COUL_SRC = 'docs/curriculum/blueprints/phys.em.coulombs-law.md'
+
+const COUL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COUL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Coulomb\'s law is a recipe in two separate parts — and mixing ' +
+      'them is the classic error. Part 1, the magnitude: ' +
+      'F = k|q₁||q₂|/r², computed with ABSOLUTE values, always a ' +
+      'positive number (a "negative amount of force" is meaningless). ' +
+      'Part 2, the direction: read it from the signs — like charges ' +
+      'repel, opposite charges attract. If you plug signed charges ' +
+      'into the scalar formula and get F < 0, you haven\'t discovered ' +
+      'attraction, you\'ve broken the recipe. Signed charges belong ' +
+      'only in the vector form F⃗ = kq₁q₂/r² r̂, where the sign of the ' +
+      'product q₁q₂ automatically flips the direction vector — there ' +
+      'the sign has a job; in the scalar magnitude it has none.',
+    targetedMisconceptions: [`${COUL}:MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE`],
+    source: `${COUL_SRC} — MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE (P30 two-part recipe bridge + P31 replacement)`,
+  },
+  {
+    conceptId: COUL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Quick prediction: double BOTH charges — what happens to the ' +
+      'force? If you said "doubles," run the math: ' +
+      'F = k(2q₁)(2q₂)/r² = 4·kq₁q₂/r². It QUADRUPLES. The formula ' +
+      'multiplies the charges (q₁ × q₂), it doesn\'t add them — so each ' +
+      'charge scales the force independently and the factors multiply: ' +
+      'doubling one charge doubles F; doubling both is 2 × 2 = 4. Same ' +
+      'logic handles any combination: triple one and halve the other ' +
+      'and F becomes 3 × 0.5 = 1.5 times as large. Whenever a formula ' +
+      'has a product, think "multiply the scale factors," never "add ' +
+      'the changes."',
+    targetedMisconceptions: [`${COUL}:MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE`],
+    source: `${COUL_SRC} — MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE (P28 algebra conflict + P31 scale-factor rule)`,
+  },
+]
+
+const COUL_PROBES: SeedProbe[] = [
+  {
+    conceptId: COUL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two charges attract with force F. Both charges are doubled (distance unchanged). The new force is:',
+    choices: [
+      { text: '4F — force is proportional to the PRODUCT q₁q₂, so the factors multiply: 2 × 2', isCorrect: true },
+      { text: '2F — doubling the charges doubles the force', isCorrect: false, misconceptionId: `${COUL}:MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE` },
+      { text: 'F — the changes cancel out', isCorrect: false },
+    ],
+    correctValue: '4F',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COUL}:MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE`],
+    source: `${COUL_SRC} — MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE probe, distractor-mapped`,
+  },
+  {
+    conceptId: COUL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student computes F = kq₁q₂/r² with q₁ = +2 μC and q₂ = −3 μC and reports "the force magnitude is negative." What is the correct reading?',
+    choices: [
+      { text: 'Magnitude uses absolute values and is always positive; the opposite signs tell you separately that the force is attractive', isCorrect: true },
+      { text: 'The negative result is correct — a negative force means attraction', isCorrect: false, misconceptionId: `${COUL}:MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE` },
+    ],
+    correctValue: 'positive magnitude; direction from signs',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COUL}:MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE`],
+    source: `${COUL_SRC} — signed-magnitude error-analysis probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.ohms-law ────────────────────────────────────────────────────────
+const OHM = 'phys.em.ohms-law'
+const OHM_SRC = 'docs/curriculum/blueprints/phys.em.ohms-law.md'
+
+const OHM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OHM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Get the grammar right and half of circuit confusion disappears: ' +
+      'current flows THROUGH a component; voltage appears ACROSS it. ' +
+      'Current (amps) is a flow rate — how much charge passes per ' +
+      'second, like litres per second through a pipe. Voltage (volts) ' +
+      'is a pressure difference between two points — energy per unit ' +
+      'of charge. They are different kinds of quantity, which is why ' +
+      'you measure them differently: an ammeter sits IN the path ' +
+      '(series — the flow must pass through it), a voltmeter connects ' +
+      'to TWO points (parallel — it compares them). "12 V flows ' +
+      'through the resistor" is a category error, like saying "the ' +
+      'pressure flows through the pipe." Ohm\'s law V = IR RELATES the ' +
+      'two — it does not make them interchangeable.',
+    targetedMisconceptions: [`${OHM}:MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE`],
+    source: `${OHM_SRC} — MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE (P30 water analogy + s6 through/across language rule)`,
+  },
+  {
+    conceptId: OHM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ohm\'s "law" is not a law of nature — it is a good description ' +
+      'of certain materials. Test it on a silicon diode: below about ' +
+      '0.7 V, almost no current; at 0.7 V, current surges; compute ' +
+      'R = V/I along the way and you get 700 Ω, then 100 Ω, then ' +
+      '10 Ω — the "resistance" collapses as voltage rises. V = IR with ' +
+      'constant R simply fails there. A material is OHMIC when its I-V ' +
+      'graph is a straight line through the origin (metals and ' +
+      'ordinary resistors at steady temperature); diodes, LEDs, ' +
+      'transistors, and thermistors are deliberately NON-ohmic — that ' +
+      'is what makes rectifiers and amplifiers possible. So use V = IR ' +
+      'confidently on resistors, and check the I-V curve before ' +
+      'trusting it on anything else.',
+    targetedMisconceptions: [`${OHM}:MC-OHMS-LAW-IS-UNIVERSAL`],
+    source: `${OHM_SRC} — MC-OHMS-LAW-IS-UNIVERSAL (P28 diode measurement conflict + s6 I-V graph discrimination)`,
+  },
+]
+
+const OHM_PROBES: SeedProbe[] = [
+  {
+    conceptId: OHM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which statement uses current and voltage correctly?',
+    choices: [
+      { text: '"2 A flows through the resistor, and 12 V appears across it"', isCorrect: true },
+      { text: '"12 V flows through the resistor"', isCorrect: false, misconceptionId: `${OHM}:MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE` },
+      { text: '"2 A of voltage drops across the resistor"', isCorrect: false, misconceptionId: `${OHM}:MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE` },
+    ],
+    correctValue: 'through for current, across for voltage',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${OHM}:MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE`],
+    source: `${OHM_SRC} — P33 discrimination pairs rendered as probe`,
+  },
+  {
+    conceptId: OHM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A diode passes 1 mA at 0.7 V and 100 mA at 1.0 V. Does Ohm\'s law (constant R) describe this device?',
+    choices: [
+      { text: 'No — R = V/I changes from 700 Ω to 10 Ω; the diode is non-ohmic and V = IR with fixed R does not apply', isCorrect: true },
+      { text: 'Yes — V = IR is a universal law that applies to every electrical device', isCorrect: false, misconceptionId: `${OHM}:MC-OHMS-LAW-IS-UNIVERSAL` },
+    ],
+    correctValue: 'non-ohmic',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OHM}:MC-OHMS-LAW-IS-UNIVERSAL`],
+    source: `${OHM_SRC} — P28 conflict-evidence measurement as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -2623,6 +2870,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...LE1_EXPLANATIONS,
   ...NAT_EXPLANATIONS,
   ...INT_EXPLANATIONS,
+  ...CHG_EXPLANATIONS,
+  ...COUL_EXPLANATIONS,
+  ...OHM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -2653,4 +2903,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...LE1_PROBES,
   ...NAT_PROBES,
   ...INT_PROBES,
+  ...CHG_PROBES,
+  ...COUL_PROBES,
+  ...OHM_PROBES,
 ]
