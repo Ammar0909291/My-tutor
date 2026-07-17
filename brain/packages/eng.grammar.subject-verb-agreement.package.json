@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.subject-verb-agreement-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.subject-verb-agreement",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b3ea10cf4812365d5ebb3a7e6e9d7726adbdab3d347208155719b0328cb510c4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md": "sha256:b98ee60d5a27ac198e2c90852e25af483e797900e07045742c97c64969256b98"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.subject-verb-agreement",
+    "name": "Subject-Verb Agreement",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.nouns",
+      "eng.grammar.verbs",
+      "eng.grammar.present-tenses"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.subject-verb-agreement-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.subject-verb-agreement (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md": "sha256:b98ee60d5a27ac198e2c90852e25af483e797900e07045742c97c64969256b98"
+      },
+      "contentHash": "sha256:04f2ac421c1deb535d2a30774b3eafc695da9f2ff870c986d8af55ed69bb4774",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-verb-agreement.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-verb-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-verb-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-verb-agreement.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md#TA-2 (addresses MC-AGREE-WITH-THE-NEAREST-NOUN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-verb-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-verb-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-verb-agreement.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md#TA-3 (addresses MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-verb-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-verb-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-verb-agreement.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-verb-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-verb-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-verb-agreement.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md#TA-5 (addresses MC-AGREE-WITH-THE-NEAREST-NOUN, MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-verb-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-verb-agreement\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Subject-Verb Agreement — Conceptual Development Sequence",
+      "content": "**TA-1 — Basic Singular/Plural Agreement [C]**\n\nPresent simple sentences (no interrupting phrases); student selects the correctly agreeing verb form based on singular/plural subject.\n\n**TA-2 — Agreement with Interrupting Phrases [C]**\n\nPresent sentences with prepositional phrases or modifiers between subject and verb; student uses the cross-out technique to find the true subject and agree correctly, directly targeting MC-AGREE-WITH-THE-NEAREST-NOUN.\n\n**TA-3 — Collective Noun Agreement [C→P]**\n\nPresent sentences with collective nouns (team, family, committee, audience); student applies standard singular agreement, directly targeting MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS.\n\n**TA-4 — Compound Subject Agreement (And vs. Or) [P]**\n\nPresent compound subjects joined by \"and\" (typically plural: \"Tom and Jerry ARE friends\") vs. \"or/nor\" (agrees with the nearer subject: \"Neither the teacher nor the students ARE ready\" / \"Neither the students nor the teacher IS ready\"); student applies the correct rule for each conjunction type.\n\n**TA-5 — Indefinite Pronoun Agreement [P]**\n\nPresent sentences using indefinite pronoun subjects (everyone, someone, each — typically singular; several, many, few — typically plural); student applies correct agreement based on the specific indefinite pronoun's number.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 80,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/misconception/MC-AGREE-WITH-THE-NEAREST-NOUN",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "- **Trigger signal:** Student makes the verb agree with whichever noun is CLOSEST to it, rather than the TRUE subject, especially when a prepositional phrase or other modifier sits between the subject and verb (e.g., \"The box of toys ARE on the floor\" — incorrectly agreeing with the nearby plural \"toys\" instead of the true singular subject \"box\").",
+      "content": "### MC-AGREE-WITH-THE-NEAREST-NOUN\n- **Trigger signal:** Student makes the verb agree with whichever noun is CLOSEST to it, rather than the TRUE subject, especially when a prepositional phrase or other modifier sits between the subject and verb (e.g., \"The box of toys ARE on the floor\" — incorrectly agreeing with the nearby plural \"toys\" instead of the true singular subject \"box\").\n- **Conflict evidence [P28]:** \"You said 'The box of toys ARE on the floor.' What's the TRUE subject of this sentence — is it 'box' or 'toys'? Does 'of toys' change what the main subject is?\"\n- **Bridge text [P30]:** \"The verb must agree with the TRUE subject, not whichever noun happens to sit closest to it. Prepositional phrases (of toys, in the room, with her friends) and other modifiers between the subject and verb don't change what the real subject is — mentally 'crossing out' these interrupting phrases helps identify the true subject to agree with.\"\n- **Replacement text [P31]:** \"Identify the TRUE subject first (ignoring any prepositional phrases or modifiers between subject and verb), then make the verb agree with that true subject, not the nearest noun.\"\n- **Discrimination pairs [P33]:**\n  - \"The box of toys IS on the floor\" (true subject \"box,\" singular, correct agreement) vs. \"The box of toys ARE on the floor\" (incorrectly agrees with \"toys\").\n  - \"One of the students HAS finished\" (true subject \"one,\" singular) vs. \"One of the students HAVE finished\" (incorrectly agrees with \"students\").\n- **s6_path:** \"Agreeing with the closest noun is a very understandable shortcut, since it's right next to the verb — but mentally crossing out the interrupting phrase to find the TRUE subject is a reliable, learnable check.\"",
+      "localKey": "MC-AGREE-WITH-THE-NEAREST-NOUN",
+      "language": "en",
+      "refs": [
+        "MC-AGREE-WITH-THE-NEAREST-NOUN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/misconception/MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "- **Trigger signal:** Student assumes collective nouns (team, family, group, committee — nouns naming a group treated as one unit) always take a plural verb because they refer to multiple individuals, when standard American English usage treats them as SINGULAR when the group acts as one unit (\"The team IS playing well\"), reserving plural verbs for cases emphasizing the individual members acting separately (less common, and more typical of British English usage in some contexts).",
+      "content": "### MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS\n- **Trigger signal:** Student assumes collective nouns (team, family, group, committee — nouns naming a group treated as one unit) always take a plural verb because they refer to multiple individuals, when standard American English usage treats them as SINGULAR when the group acts as one unit (\"The team IS playing well\"), reserving plural verbs for cases emphasizing the individual members acting separately (less common, and more typical of British English usage in some contexts).\n- **Conflict evidence [P28]:** \"You said 'The team ARE playing well' because a team has many players. In standard American usage, when we're thinking of the team as ONE unit, do we usually use 'is' or 'are'?\"\n- **Bridge text [P30]:** \"Collective nouns (team, family, group, committee, audience) name a group of individuals treated as a SINGLE unit — in standard American English, they typically take a SINGULAR verb when the group acts together as one ('The team IS playing well,' 'The family IS coming to dinner'). This may differ in British English, which more often uses plural verbs with collective nouns to emphasize the individual members, but standard American usage treats them as singular by default.\"\n- **Replacement text [P31]:** \"Treat collective nouns as singular (matching a singular verb) by default in standard American usage, since they represent a group acting as one unit.\"\n- **Discrimination pairs [P33]:**\n  - \"The team IS practicing\" (standard American usage, singular) vs. \"The team ARE practicing\" (this pattern is more typical of British English usage, not the American default).\n  - \"The committee HAS decided\" (singular, group acting as one) vs. \"The committee HAVE decided\" (typical British usage variant).\n- **s6_path:** \"It feels logical that a word referring to many people should take a plural verb — but English (especially American usage) treats these group-words as singular units by convention, which is a specific, learnable rule rather than a logical derivation.\"\n\n---",
+      "localKey": "MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS",
+      "language": "en",
+      "refs": [
+        "MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Basic Singular/Plural Agreement",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Basic Singular/Plural Agreement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Agreement with Interrupting Phrases",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Agreement with Interrupting Phrases\",\"primitives\":[],\"addresses\":[\"MC-AGREE-WITH-THE-NEAREST-NOUN\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-AGREE-WITH-THE-NEAREST-NOUN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 86,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Collective Noun Agreement",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Collective Noun Agreement\",\"primitives\":[],\"addresses\":[\"MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 90,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Compound Subject Agreement (And vs. Or)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Compound Subject Agreement (And vs. Or)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 94,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Indefinite Pronoun Agreement",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Indefinite Pronoun Agreement\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-AGREE-WITH-THE-NEAREST-NOUN\",\"MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-AGREE-WITH-THE-NEAREST-NOUN",
+        "MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 98,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Basic agreement, novel sentence**\n\"Fill in: 'The birds ___ (sing/sings) every morning.'\"\n*Target:* \"sing\" — plural subject \"birds\" takes the base form.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 126,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Interrupting phrase, novel example**\n\"Fill in: 'One of the answers ___ (is/are) incorrect.'\"\n*Target:* \"is\" — true subject \"one\" is singular, despite the plural \"answers\" nearby.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 126,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Collective noun, novel example**\n\"Fill in: 'The audience ___ (was/were) cheering loudly.'\"\n*Target:* \"was\" — standard American usage treats \"audience\" as singular.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 126,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Compound subject with or/nor**\n\"Fill in: 'Neither the manager nor the employees ___ (was/were) available.'\"\n*Target:* \"were\" — agrees with the nearer subject \"employees\" (plural) in a \"nor\" construction.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 126,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain subject-verb agreement**\n\"In your own words: how do you find the TRUE subject when there's a phrase in between, and are collective nouns like 'team' singular or plural?\"\n*Target:* states or demonstrates that the true subject (found by mentally crossing out interrupting phrases) determines agreement, not the nearest noun, and that collective nouns are typically treated as singular in standard American usage.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 126,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Adaptive Flags",
+      "content": "- **Cross-out-the-interrupter is the single most valuable, reusable strategy**: teach this technique explicitly and revisit it whenever any agreement confusion arises, since it resolves the majority of complex agreement cases.\n- **Collective nouns follow a specific American-English convention worth naming explicitly**: frame the singular-by-default rule as a specific convention (not pure logic) to reduce the sense of arbitrariness, and note the British-English variation for completeness without requiring mastery of dialect-switching.\n- **And vs. or/nor produce genuinely different agreement rules**: teach compound-subject agreement as two distinct sub-rules (and = typically plural; or/nor = agrees with the nearer element) rather than a single unified rule.\n- **Persistent, well-documented challenge area deserving sustained practice**: for S9 learners (and many native speakers in complex writing), budget ongoing practice specifically for interrupting-phrase and collective-noun agreement, since these remain common errors even at advanced proficiency.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 192,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-verb-agreement/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.subject-verb-agreement",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — cross-out-the-interrupter check warm-up\n  ↓\n[P41] PD-1 (noun readiness)\n  ↓ PASS\n[P41] PD-2 (verb readiness)\n  ↓ PASS\n[P41] PD-3 (present-tenses readiness)\n  ↓ PASS\n[P06] Anchor: cross-out-the-interrupter check (reveal the true subject)\n  ↓\nTA-1: Basic singular/plural agreement [C]\n  ↓\nTA-2: Agreement with interrupting phrases [C]\n  ↓\n[P28] Conflict: agreeing with the nearest noun → MC-AGREE-WITH-THE-NEAREST-NOUN (if triggered)\n  ↓\nTA-3: Collective noun agreement [C→P]\n  ↓\n[P28] Conflict: collective nouns assumed always plural → MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS (if triggered)\n  ↓\nTA-4: Compound subject agreement (and vs. or) [P]\n  ↓\nTA-5: Indefinite pronoun agreement [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one sentence with an interrupting phrase and check subject-verb agreement.\"\n[P68] Session close\n[P85] Regulation tail — praise finding the true subject over agreeing with the nearest noun\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on nouns/verbs/present-tenses, new to agreement rules specifically): dwell on TA-1's basic agreement before introducing interrupting phrases and collective nouns. S1 (already produces correct agreement fluently in simple sentences but errs on complex/interrupted structures): focus on TA-2/TA-4, since these are common, persistent error sources even for fluent speakers, especially in writing. S6 (frustrated by the number of agreement sub-rules): explicitly frame the cross-out technique as the single unifying strategy underlying most cases, reducing the sense of needing separate memorized rules for every situation. S9 (L1 doesn't mark subject-verb agreement the same way, e.g. many languages have no or different agreement systems, or marks agreement differently for collective/group nouns): expect this concept, especially interrupting-phrase and collective-noun cases, to require substantial dedicated practice, since these are well-documented persistent error areas even among advanced L2 English learners and writers.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md",
+        "startLine": 150,
+        "endLine": 192
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

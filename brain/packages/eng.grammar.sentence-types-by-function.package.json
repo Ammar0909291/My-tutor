@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.sentence-types-by-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.sentence-types-by-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9b0c18c012487e4f14a576c6789fc283822a77b69f2bb5f7f3093f6c6ac056f6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md": "sha256:5f2488f1ac15a2cbbbe04a5aefad9bcfa3b370fa7c0034b62b0a380f18a07450"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.sentence-types-by-function",
+    "name": "Sentence Types by Function",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.word-order"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.sentence-types-by-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.sentence-types-by-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md": "sha256:5f2488f1ac15a2cbbbe04a5aefad9bcfa3b370fa7c0034b62b0a380f18a07450"
+      },
+      "contentHash": "sha256:0f94243032d6bba91af94b96d2ce996d4d4d786d1bce4fae27486c3a5b1b7e5f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-types-by-function.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-types-by-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-types-by-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-types-by-function.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md#TA-2 (addresses MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-types-by-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-types-by-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-types-by-function.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-types-by-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-types-by-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-types-by-function.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md#TA-4 (addresses MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-types-by-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-types-by-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-types-by-function.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md#TA-5 (addresses MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD, MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-types-by-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-types-by-function\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Sentence Types by Function — Conceptual Development Sequence",
+      "content": "**TA-1 — Declarative Sentences (Statements) [C]**\n\nPresent sentences making statements; student identifies them as declarative and notes the standard period ending.\n\n**TA-2 — Interrogative Sentences (Both Types) [C]**\n\nPresent both wh-questions and yes/no (inversion) questions; student identifies both as interrogative, directly targeting MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD.\n\n**TA-3 — Imperative Sentences (Commands) [C→P]**\n\nPresent commands/requests, including some with implied \"you\" subject (\"Close the door\" = \"[You] close the door\"); student identifies these as imperative regardless of politeness level or punctuation.\n\n**TA-4 — Exclamatory Sentences (Strong Emotion) [P]**\n\nPresent sentences expressing strong emotion; student identifies these as exclamatory and distinguishes them from a similarly-punctuated imperative or declarative sentence, directly targeting MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE.\n\n**TA-5 — Classifying Mixed Sentence Sets by Function, Not Punctuation Alone [P]**\n\nPresent a mixed set including sentences where punctuation could mislead (a command ending in a period; an exclamatory statement); student classifies each by underlying function, integrating all four types.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/misconception/MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "- **Trigger signal:** Student classifies sentence type purely by the ending punctuation mark rather than by the sentence's grammatical FUNCTION/STRUCTURE, missing that the same content can sometimes be punctuated differently for emphasis, and that function (statement, question, command, exclamation) is the true defining feature, with punctuation as a supporting signal, not the sole determinant (e.g., \"Stop!\" is an imperative regardless of whether it ends in \"!\" or \".\" — \"Stop.\" is still a command/imperative).",
+      "content": "### MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE\n- **Trigger signal:** Student classifies sentence type purely by the ending punctuation mark rather than by the sentence's grammatical FUNCTION/STRUCTURE, missing that the same content can sometimes be punctuated differently for emphasis, and that function (statement, question, command, exclamation) is the true defining feature, with punctuation as a supporting signal, not the sole determinant (e.g., \"Stop!\" is an imperative regardless of whether it ends in \"!\" or \".\" — \"Stop.\" is still a command/imperative).\n- **Conflict evidence [P28]:** \"You said 'Stop!' is exclamatory because it has an exclamation point. But is this sentence actually giving a command (telling someone to do something), or expressing strong emotion about a fact? What if I wrote 'Stop.' instead — would it still be a command?\"\n- **Bridge text [P30]:** \"Sentence type is defined by grammatical FUNCTION — declarative (states a fact), interrogative (asks a question), imperative (gives a command, often with an implied 'you' subject), and exclamatory (expresses strong emotion) — not simply by which punctuation mark appears at the end. Punctuation supports and signals the function, but a command stays a command whether it ends in a period or an exclamation point; the underlying structure and purpose is what actually defines the type.\"\n- **Replacement text [P31]:** \"Determine sentence type by its grammatical structure and communicative purpose (statement, question, command, strong emotion) first, then treat punctuation as a supporting signal, not the sole test.\"\n- **Discrimination pairs [P33]:**\n  - \"Stop!\" (imperative — a command, punctuated with emphasis) vs. \"Stop.\" (still imperative — a command, just less emphatic punctuation) — same function, different punctuation.\n  - \"What a wonderful day!\" (exclamatory — expresses strong feeling) vs. \"What is today?\" (interrogative — asks a genuine question, despite both starting with \"What\").\n- **s6_path:** \"Punctuation is a very visible, easy-to-check signal, so it's natural to rely on it heavily — but the underlying grammatical function (and communicative purpose) is what truly defines the sentence type, with punctuation as a helpful but secondary clue.\"",
+      "localKey": "MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE",
+      "language": "en",
+      "refs": [
+        "MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/misconception/MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "- **Trigger signal:** Student assumes all interrogative sentences must start with a wh-word (who, what, where, when, why, how), missing yes/no questions that invert the subject and auxiliary verb without any question word at all (\"Are you coming?\" \"Did she leave?\" \"Can they help?\") — these are equally genuine interrogative sentences.",
+      "content": "### MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD\n- **Trigger signal:** Student assumes all interrogative sentences must start with a wh-word (who, what, where, when, why, how), missing yes/no questions that invert the subject and auxiliary verb without any question word at all (\"Are you coming?\" \"Did she leave?\" \"Can they help?\") — these are equally genuine interrogative sentences.\n- **Conflict evidence [P28]:** \"You said questions always start with a question word like 'who' or 'what.' Does 'Are you coming?' start with one of those words? Is it still a question?\"\n- **Bridge text [P30]:** \"Interrogative sentences (questions) can be formed in TWO main ways: with a wh-word at the start (What is your name?) OR by inverting the subject and auxiliary/helping verb with no question word at all (Are you ready? Did she call? Can he swim?) — both are genuine, equally common question structures.\"\n- **Replacement text [P31]:** \"Recognize a sentence as interrogative if it either starts with a wh-word OR inverts the subject and auxiliary verb, not just the wh-word pattern alone.\"\n- **Discrimination pairs [P33]:**\n  - \"What time is it?\" (wh-question) vs. \"Is it late?\" (yes/no question via subject-auxiliary inversion, no question word).\n  - \"Where did you go?\" (wh-question) vs. \"Did you go somewhere?\" (yes/no question, inversion only).\n- **s6_path:** \"Wh-questions are often taught and noticed first since the question word is such a clear signal — but yes/no questions (formed by inversion alone) are just as common and genuinely interrogative, even without a question word.\"\n\n---",
+      "localKey": "MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD",
+      "language": "en",
+      "refs": [
+        "MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Declarative Sentences (Statements)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Declarative Sentences (Statements)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Interrogative Sentences (Both Types)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Interrogative Sentences (Both Types)\",\"primitives\":[],\"addresses\":[\"MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Imperative Sentences (Commands)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Imperative Sentences (Commands)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Exclamatory Sentences (Strong Emotion)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Exclamatory Sentences (Strong Emotion)\",\"primitives\":[],\"addresses\":[\"MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Classifying Mixed Sentence Sets by Function, Not Punctuation Alone",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Classifying Mixed Sentence Sets by Function, Not Punctuation Alone\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE\",\"MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD",
+        "MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Declarative, novel sentence**\n\"What type is 'The library closes at 9pm'?\"\n*Target:* declarative.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Interrogative, novel yes/no question**\n\"Is 'Have you finished?' interrogative, even without a wh-word?\"\n*Target:* yes — interrogative via subject-auxiliary inversion.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Imperative, novel example**\n\"What type is 'Turn off the lights before you leave'?\"\n*Target:* imperative — a command with an implied \"you\" subject.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Exclamatory vs. punctuation-alone judgment**\n\"Is 'What a beautiful sunset!' exclamatory or interrogative, even though it starts with 'What'?\"\n*Target:* exclamatory — despite starting with \"What,\" it expresses strong emotion/reaction rather than asking a genuine question.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the four sentence types**\n\"In your own words: what are the four sentence types by function, and does punctuation alone determine the type?\"\n*Target:* states or demonstrates the four types (declarative, interrogative, imperative, exclamatory) defined by grammatical function/purpose, and that punctuation supports but doesn't solely determine the type — and that questions can be formed either with a wh-word or via subject-auxiliary inversion.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Adaptive Flags",
+      "content": "- **Function over punctuation is the central lesson**: every classification task should require identifying grammatical structure/purpose first, with punctuation treated as a secondary, supporting signal — directly countering the natural punctuation-first shortcut.\n- **Both question-formation types deserve equal, explicit attention**: wh-questions and inversion-based yes/no questions are equally legitimate and common — don't let the more visually obvious wh-word pattern dominate instruction.\n- **Implied subjects in imperatives are a genuine structural feature worth naming**: explicitly teach that imperative sentences have an implied \"you\" subject, connecting this concept back to the subject-and-predicate foundation.\n- **Subject-auxiliary inversion for questions is a distinctive English structural feature**: for S9 learners from L1s using question particles or intonation-only marking, treat this as a genuinely novel structural pattern requiring dedicated practice, not an assumed intuitive transfer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-types-by-function/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.sentence-types-by-function",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — four-function sorting boxes warm-up\n  ↓\n[P41] PD-1 (word-order readiness)\n  ↓ PASS\n[P06] Anchor: four-function sorting boxes (including punctuation-mismatched examples)\n  ↓\nTA-1: Declarative sentences (statements) [C]\n  ↓\nTA-2: Interrogative sentences (both types) [C]\n  ↓\n[P28] Conflict: questions assumed to require a question word → MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD (if triggered)\n  ↓\nTA-3: Imperative sentences (commands) [C→P]\n  ↓\nTA-4: Exclamatory sentences (strong emotion) [P]\n  ↓\n[P28] Conflict: punctuation alone determines type → MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE (if triggered)\n  ↓\nTA-5: Classifying mixed sentence sets by function, not punctuation alone [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one example of each of the four sentence types.\"\n[P68] Session close\n[P85] Regulation tail — praise checking function/structure over punctuation alone\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word order, new to sentence-function classification): dwell on TA-1's declarative sentences before introducing the more nuanced interrogative/imperative/exclamatory distinctions. S1 (already produces all four types fluently but hasn't formally classified them): use this concept to build explicit, transferable labels for an already-present intuitive skill. S6 (frustrated by punctuation-vs-function mismatches after relying on punctuation as a simple shortcut): validate that punctuation IS a useful supporting signal most of the time, just not the sole determinant — this refines rather than replaces the prior strategy. S9 (L1 forms questions very differently, e.g. using a question particle rather than word-order inversion, or has different imperative-marking conventions): expect TA-2's subject-auxiliary inversion pattern specifically to require dedicated, explicit contrastive teaching, since English's yes/no-question inversion structure is a distinctive, often non-intuitive feature for learners from languages using question particles or intonation-only question marking.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
