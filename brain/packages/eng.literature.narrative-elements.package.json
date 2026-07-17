@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.narrative-elements-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.narrative-elements",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ff13ee6bfd6cca5d0365226c8b1cfd5bad718edcc990edbe512e1cc9ecc6532a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.narrative-elements.md": "sha256:eaad896030d53597978d085f1e5c718fa0b05654d66d9ab7de0c4c25959761fb"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.narrative-elements",
+    "name": "Narrative Elements",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.close-reading"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.narrative-elements-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.narrative-elements (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.narrative-elements.md": "sha256:eaad896030d53597978d085f1e5c718fa0b05654d66d9ab7de0c4c25959761fb"
+      },
+      "contentHash": "sha256:9e4759fefc1a92b0f375d1c50edabe07dd5fb837da2ae6846bcbf54c8656bdca",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.narrative-elements.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.narrative-elements.md#TA-1 (addresses MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.narrative-elements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.narrative-elements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.narrative-elements.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.narrative-elements.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.narrative-elements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.narrative-elements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.narrative-elements.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.narrative-elements.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.narrative-elements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.narrative-elements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.narrative-elements.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.narrative-elements.md#TA-4 (addresses MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.narrative-elements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.narrative-elements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.narrative-elements.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.narrative-elements.md#TA-5 (addresses MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY, MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.narrative-elements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.narrative-elements\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.narrative-elements/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Narrative Elements — Conceptual Development Sequence",
+      "content": "### TA-1: The Plot-Chain Test\nPresent a story summary with both plot-critical and incidental events mixed together and have the student sort them, keeping only the causally-connected chain leading to conflict resolution. Directly counters MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY.\n\n### TA-2: Character Identification and Basic Traits\nTeach the basic distinction between protagonist (the central character driving/experiencing the conflict) and antagonist (the force or character opposing them), along with identifying character traits from actions and dialogue (echoing inference skills). Student practices on 2 short excerpts.\n\n### TA-3: Conflict Types\nTeach the basic conflict types (character vs. character, character vs. self, character vs. nature/society) and have the student identify the central conflict type in 3 short story excerpts.\n\n### TA-4: Setting as an Active Narrative Tool\nUsing the discrimination pairs from MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT, present the same basic scenario in two contrasting settings (as in the Conflict Evidence example) and have the student analyze how setting shapes atmosphere and character possibility in each version.\n\n### TA-5: Identifying All Four Elements in a Novel Story\nStudent reads a new, unscaffolded short story and identifies its plot chain, main characters (protagonist/antagonist), central conflict type, and setting's narrative function — the generative capstone integrating all four elements.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 58,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": ": Plot-Chain Sorting (Scaffolded)",
+      "content": "### WE-1: Plot-Chain Sorting (Scaffolded)\n**Story summary elements:** \"A girl finds an old key in her attic (plot-critical: discovery). She remembers her grandmother liked tea in the afternoon (incidental, not causally connected). She uses the key to open a locked chest (plot-critical: consequence of discovery). Outside, birds were singing that morning (incidental). She finds a letter revealing a family secret (plot-critical: climax/resolution setup).\"\n**Walkthrough:** Sort out the plot chain (discovery → uses key → finds letter) from the incidental details (grandmother's tea habits, birds singing), confirming only causally-connected events belong to plot.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 75,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": ": Setting's Active Function (Guided)",
+      "content": "### WE-2: Setting's Active Function (Guided)\n**Scenario:** A character must decide whether to trust a stranger, set once in a busy, brightly-lit marketplace and once in an empty, fog-covered alley.\n**Walkthrough:** Analyze how the marketplace setting might support a more cautiously optimistic reading (safety in numbers, visibility) while the foggy alley setting heightens tension and vulnerability (isolation, obscured visibility) — the SAME decision plot point, differently shaped by setting.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 75,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": ": Full Narrative-Element Identification (Independent)",
+      "content": "### WE-3: Full Narrative-Element Identification (Independent)\n**Story:** A short story about a young inventor competing against a rival for a science prize, set in a cramped, cluttered workshop during a thunderstorm the night before the deadline.\n**Walkthrough:** Student identifies plot chain (build invention → rival sabotages/complicates → resolution), protagonist/antagonist (inventor/rival), conflict type (character vs. character, with an element of character vs. self if self-doubt is present), and setting's function (the storm and deadline pressure heighten urgency; the cramped workshop reinforces isolation/pressure).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 75,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/misconception/MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY",
+      "kind": "misconception",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "- **Trigger signal:** Student, when asked to identify \"the plot,\" recounts every single event and detail in the story indiscriminately (including minor incidental actions), rather than identifying the sequence of causally-connected major events that drive the central conflict toward resolution — confusing \"everything that happens\" with \"the events that matter to the story's central problem.",
+      "content": "### MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY\n- **Trigger signal:** Student, when asked to identify \"the plot,\" recounts every single event and detail in the story indiscriminately (including minor incidental actions), rather than identifying the sequence of causally-connected major events that drive the central conflict toward resolution — confusing \"everything that happens\" with \"the events that matter to the story's central problem.\"\n- **Conflict evidence [P28]:** Present a short story summary that includes both plot-critical events (a character discovers a secret, confronts a rival, resolves the conflict) and incidental details (what the character had for breakfast, a passing description of the weather on an unrelated day). Ask the student to identify \"the plot\" and see if they include the incidental details as equally plot-relevant.\n- **Bridge text [P30]:** \"Plot isn't a list of every single thing that happens — it's specifically the chain of events connected to the story's central conflict, each event causing or leading to the next, building toward a resolution. A story can include many incidental details (breakfast, weather, background color) that aren't part of the plot at all — they're just texture, not plot.\"\n- **Replacement text [P31]:** \"To identify the plot, trace the events connected to the central conflict: what problem does the character face, what causally-connected events happen because of that problem, and how does it resolve? Skip incidental details that don't feed into that causal chain.\"\n- **Discrimination pairs [P33]:** (a) Plot-as-everything (any event mentioned in the story counts as part of the plot) vs. (b) Plot-as-causal-conflict-chain (plot is specifically the sequence of events causally connected to the central conflict and its resolution, excluding incidental non-causal details).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's plot-vs-incidental-detail sort before continuing.",
+      "localKey": "MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY",
+      "language": "en",
+      "refs": [
+        "MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/misconception/MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT",
+      "kind": "misconception",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "- **Trigger signal:** Student treats setting as a purely neutral, background fact (a label: \"it happens in a forest in 1800s England\") without recognizing that setting actively shapes atmosphere, constrains character choices, and often symbolically reinforces the story's themes — reducing a functionally important narrative element to mere factual scaffolding.",
+      "content": "### MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT\n- **Trigger signal:** Student treats setting as a purely neutral, background fact (a label: \"it happens in a forest in 1800s England\") without recognizing that setting actively shapes atmosphere, constrains character choices, and often symbolically reinforces the story's themes — reducing a functionally important narrative element to mere factual scaffolding.\n- **Conflict evidence [P28]:** Present two versions of the same basic plot (a character makes a difficult decision alone at night): one set in a warm, familiar kitchen with soft lighting, and one set in an abandoned, storm-battered building. Ask the student whether the setting is \"just background\" in both cases, or whether it's actively shaping the mood, tension, and even plausible character choices in each version.\n- **Bridge text [P30]:** \"Setting isn't just a factual label of where and when — it actively shapes atmosphere (the emotional mood a scene creates), constrains what characters can plausibly do, and often reinforces the story's themes symbolically. The same plot event feels completely different in a warm kitchen versus a storm-battered ruin because setting is doing real narrative work, not just providing background facts.\"\n- **Replacement text [P31]:** \"When analyzing setting, ask not just 'where and when' but 'what mood does this setting create, and how does it shape what's possible or believable for the characters here?' Setting is an active narrative tool, not passive scaffolding.\"\n- **Discrimination pairs [P33]:** (a) Setting-as-neutral-fact (setting is just a where/when label with no further narrative function) vs. (b) Setting-as-active-narrative-tool (setting actively shapes atmosphere, constrains character action, and can reinforce theme symbolically).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's stage-lighting framing before continuing to TA-4.",
+      "localKey": "MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT",
+      "language": "en",
+      "refs": [
+        "MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "The Plot-Chain Test",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Plot-Chain Test\",\"primitives\":[],\"addresses\":[\"MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Character Identification and Basic Traits",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Character Identification and Basic Traits\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Conflict Types",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Types\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Setting as an Active Narrative Tool",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Setting as an Active Narrative Tool\",\"primitives\":[],\"addresses\":[\"MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 71,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Identifying All Four Elements in a Novel Story",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Identifying All Four Elements in a Novel Story\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY\",\"MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY",
+        "MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 74,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Sort plot from incidental detail**\nGiven a story summary with mixed plot-critical and incidental events, student correctly identifies only the causally-connected plot chain. *(Directly targets MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Analyze setting's active function**\nGiven the same basic scenario in two contrasting settings, student explains how each setting actively shapes atmosphere or character possibility, rather than treating setting as neutral background. *(Directly targets MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identify protagonist, antagonist, and conflict type**\nGiven a short story excerpt, student identifies the protagonist, antagonist, and conflict type with textual evidence.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Plot chain construction**\nGiven a jumbled list of story events, student arranges them into the correct causal plot chain, excluding incidental events.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full novel-story analysis**\nGiven a novel short story, student identifies all four narrative elements (plot chain, characters, conflict type, setting's function) independently.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Adaptive Flags",
+      "content": "- If the student over-includes incidental detail as plot, weight remediation toward MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY's bridge text and re-run TA-1's plot-chain sort before returning to full-story analysis.\n- If the student describes setting only factually (where/when) without analyzing its function, weight remediation toward MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT's bridge text and TA-4's active-function analysis specifically.\n- This concept feeds five direct downstream unlocks (`eng.literature.plot-structure`, `eng.literature.character-development`, `eng.literature.setting-and-atmosphere`, `eng.literature.point-of-view`, `eng.literature.drama-basics`) — do not certify mastery without TA-5's full novel-story analysis, since each downstream concept deepens exactly one of these four foundational elements and assumes basic competent identification is already solid.\n- Reuse the \"story stage set\" framing explicitly across all five downstream concepts — `eng.literature.plot-structure` zooms into the event-card chain, `eng.literature.character-development` zooms into the character figures, `eng.literature.setting-and-atmosphere` zooms into the backdrop, and `eng.literature.point-of-view` and `eng.literature.drama-basics` extend the stage metaphor to narrative perspective and dramatic form respectively.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY",
+        "MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 138,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.literature.narrative-elements/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.narrative-elements",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Close-Reading Readiness Check]\n        |\n        v\n[Concrete Anchor: The Story Stage Set]\n        |\n        v\n[TA-1: The Plot-Chain Test]\n        |\n        v\n[TA-2: Character Identification and Basic Traits]\n        |\n        v\n[TA-3: Conflict Types]\n        |\n        v\n[TA-4: Setting as an Active Narrative Tool]\n        |\n        v\n[TA-5: Identifying All Four Elements in a Novel Story]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — narrative-element analysis applies close-reading's evidence-based analytical habit to four specific story components, so weak close-reading skill undermines all four analyses. During instruction (S1), watch for both misconception patterns: over-including incidental detail as plot (MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY) and treating setting as inert background (MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT) both under-analyze the causal/functional structure actually present in the story — redirect both to the Story Stage Set anchor. If the student includes incidental events in the plot chain or describes setting only factually during TA-1/TA-4 (S6), drop back to the Concrete Anchor's card-removal and backdrop-swap demonstrations before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who identifies characters and conflict types correctly (MP-3) but cannot isolate the true plot chain or analyze setting's active function has not yet learned the discriminating judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.narrative-elements.md",
+        "startLine": 106,
+        "endLine": 138
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

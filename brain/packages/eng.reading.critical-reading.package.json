@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.critical-reading-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.critical-reading",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:33cc95488979cbda2fcd36e7a36ef5f39e7a44f4f8f734057a2cd995fd15881e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.critical-reading.md": "sha256:e771c28fea1250e60d394c31ea5108707abf09068d908bcedd88fb3878dadf30"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.critical-reading",
+    "name": "Critical Reading",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.reading.close-reading"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.critical-reading-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.critical-reading (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.critical-reading.md": "sha256:e771c28fea1250e60d394c31ea5108707abf09068d908bcedd88fb3878dadf30"
+      },
+      "contentHash": "sha256:22e15818b4a6bc921129bf9307dc1d1f521f85b247da58bedd19d2f486fdaf7d",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.critical-reading.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.critical-reading.md#TA-1 (addresses MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.critical-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.critical-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.critical-reading.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.critical-reading.md#TA-2 (addresses MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.critical-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.critical-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.critical-reading.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.critical-reading.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.critical-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.critical-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.critical-reading.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.critical-reading.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.critical-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.critical-reading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.critical-reading.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.critical-reading.md#TA-5 (addresses MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT, MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.critical-reading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.critical-reading\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.critical-reading/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Critical Reading — Conceptual Development Sequence",
+      "content": "### TA-1: Evaluation, Not a Predetermined Verdict\nPresent a well-argued text and have the student conduct a genuine critical evaluation, allowing for the honest conclusion that the text is credible and well-supported. Directly counters MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT.\n\n### TA-2: Evidence Credential Checks\nUsing the discrimination pairs from MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE, present 4 evidence citations of varying quality (as in the Concrete Anchor) and have the student cross-examine each using the specificity/relevance/currency/qualification checklist.\n\n### TA-3: Identifying Unstated Assumptions\nTeach the student to identify assumptions an argument relies on but never states explicitly (e.g., an argument for a policy that assumes, without stating, that cost is the only relevant factor). Student practices surfacing hidden assumptions in 3 short arguments.\n\n### TA-4: Detecting Bias and Perspective\nTeach signals of potential bias (one-sided evidence presentation, loaded language, omission of counterarguments, funding/interest conflicts) and have the student identify these signals in 2 passages with detectable bias.\n\n### TA-5: Full Critical Evaluation of a Novel Text\nStudent conducts a complete critical reading of a new, unscaffolded argumentative text: evaluates evidence credibility, identifies assumptions, checks for bias, and produces an overall credibility judgment with justification — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.critical-reading",
+      "title": ": Genuine Evaluation (Scaffolded)",
+      "content": "### WE-1: Genuine Evaluation (Scaffolded)\n**Text:** A well-researched article about a health topic, citing specific, recent, peer-reviewed studies from qualified researchers, addressing likely counterarguments.\n**Walkthrough:** Conduct a critical reading and arrive at the honest conclusion: \"this text is well-supported — the evidence is specific, recent, and from qualified sources, and counterarguments are addressed,\" demonstrating that critical evaluation validly supports a positive credibility verdict.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.critical-reading",
+      "title": ": Evidence Credential Check (Guided)",
+      "content": "### WE-2: Evidence Credential Check (Guided)\n**Citations to evaluate:** \"Studies show most people prefer this option\" (vague, no source) vs. \"A 2024 survey of 2,000 participants published in [named journal] found 68% preferred this option\" (specific, recent, sourced).\n**Walkthrough:** Apply the cross-examination checklist; confirm the second citation earns significantly more trust due to its specificity, currency, and identifiable source.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.critical-reading",
+      "title": ": Full Critical Reading (Independent)",
+      "content": "### WE-3: Full Critical Reading (Independent)\n**Text:** An opinion article arguing for a controversial policy change, citing one outdated statistic, omitting any counterarguments, and using emotionally loaded language throughout.\n**Walkthrough:** Student identifies the outdated statistic as weak evidence, notes the omission of counterarguments as a bias signal, flags the loaded language, and produces a critical verdict: \"this argument is weakly supported due to outdated evidence, one-sided presentation, and biased language\" — a genuine evaluative conclusion, not a predetermined judgment.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/misconception/MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT",
+      "kind": "misconception",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "- **Trigger signal:** Student interprets \"critical\" reading as meaning the reader must find something wrong with, disagree with, or criticize the text — searching for flaws even when a text is genuinely well-argued and credible, rather than understanding \"critical\" in its analytical sense (evaluating evidence, assumptions, and credibility, which may lead to agreement, disagreement, or qualified acceptance).",
+      "content": "### MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT\n- **Trigger signal:** Student interprets \"critical\" reading as meaning the reader must find something wrong with, disagree with, or criticize the text — searching for flaws even when a text is genuinely well-argued and credible, rather than understanding \"critical\" in its analytical sense (evaluating evidence, assumptions, and credibility, which may lead to agreement, disagreement, or qualified acceptance).\n- **Conflict evidence [P28]:** Present a well-researched, carefully-argued article with strong evidence and no significant flaws. Ask the student to \"critically read\" it. If the student forces some manufactured criticism to satisfy the \"critical\" label, contrast this with a critical reading that concludes \"this argument is well-supported because the evidence comes from credible sources and addresses likely counterarguments\" — a genuine critical evaluation that happens to result in a positive assessment.\n- **Bridge text [P30]:** \"'Critical' in critical reading doesn't mean 'negative' or 'fault-finding' — it means evaluative: carefully examining evidence, assumptions, and credibility rather than accepting claims at face value. Sometimes that careful examination leads you to conclude a text IS credible and well-argued — that's still critical reading, because you evaluated it rather than just believing it automatically.\"\n- **Replacement text [P31]:** \"Don't force disagreement to prove you're 'being critical.' Instead, genuinely evaluate: what evidence supports this claim? Is the evidence credible? Are there unstated assumptions? Your conclusion — agreement, disagreement, or something in between — should follow from that genuine evaluation, not be decided in advance.\"\n- **Discrimination pairs [P33]:** (a) Critical-as-fault-finding (critical reading requires identifying flaws or disagreeing with the text) vs. (b) Critical-as-evaluative-analysis (critical reading means genuinely evaluating evidence/assumptions/credibility, which can validly conclude the text is credible and well-argued).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's evaluation-not-verdict framing before continuing.",
+      "localKey": "MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT",
+      "language": "en",
+      "refs": [
+        "MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/misconception/MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE",
+      "kind": "misconception",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "- **Trigger signal:** Student treats the mere presence of citations, statistics, or expert quotations as sufficient proof of credibility, without examining whether those sources are actually relevant, current, unbiased, or correctly interpreted — accepting a text's evidentiary trappings uncritically rather than evaluating the evidence itself.",
+      "content": "### MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE\n- **Trigger signal:** Student treats the mere presence of citations, statistics, or expert quotations as sufficient proof of credibility, without examining whether those sources are actually relevant, current, unbiased, or correctly interpreted — accepting a text's evidentiary trappings uncritically rather than evaluating the evidence itself.\n- **Conflict evidence [P28]:** Present a passage citing \"a study\" to support a claim, without naming the study, its sample size, its date, or its source — versus a passage citing a specific, recent, peer-reviewed study with a reasonable sample size from a relevant field. Ask the student whether both citations deserve equal trust just because both \"cite a source.\"\n- **Bridge text [P30]:** \"Citing something isn't the same as citing something credible. A vague reference to 'a study' with no details is far weaker evidence than a specific, well-sourced, relevant citation — even though both LOOK like they're backing up a claim with evidence. You have to evaluate the quality of the citation itself, not just its presence.\"\n- **Replacement text [P31]:** \"When you see a citation or statistic, ask: is the source specific and identifiable? Is it recent and relevant to the claim? Is it from a credible, relevant field? A vague or outdated citation doesn't earn the same trust as a well-specified, relevant one, even though both 'have a source.'\"\n- **Discrimination pairs [P33]:** (a) Citation-presence-equals-credibility (any cited source or statistic automatically makes a claim credible) vs. (b) Citation-quality-evaluation (credibility depends on evaluating the source's specificity, relevance, currency, and reliability, not merely whether a citation exists).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's credential-check framing before continuing to TA-3.",
+      "localKey": "MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Evaluation, Not a Predetermined Verdict",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Evaluation, Not a Predetermined Verdict\",\"primitives\":[],\"addresses\":[\"MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Evidence Credential Checks",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Evidence Credential Checks\",\"primitives\":[],\"addresses\":[\"MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Identifying Unstated Assumptions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Unstated Assumptions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Detecting Bias and Perspective",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Detecting Bias and Perspective\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Full Critical Evaluation of a Novel Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Critical Evaluation of a Novel Text\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT\",\"MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT",
+        "MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Produce a genuine positive credibility verdict**\nGiven a well-argued, well-supported text, student conducts a critical evaluation and honestly concludes the text is credible, rather than manufacturing criticism. *(Directly targets MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguish citation quality**\nGiven two citations of differing quality (vague vs. specific/recent/sourced), student correctly evaluates and ranks their credibility rather than trusting both equally. *(Directly targets MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identify an unstated assumption**\nGiven an argument, student identifies at least one assumption the argument relies on without stating it explicitly.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detect bias signals**\nGiven a passage with detectable bias, student identifies at least 2 specific bias signals (loaded language, omitted counterarguments, one-sided evidence).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full novel-text critical evaluation**\nGiven a novel argumentative text, student produces a complete critical evaluation covering evidence quality, assumptions, and bias, with an overall justified credibility verdict.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Adaptive Flags",
+      "content": "- If the student manufactures criticism of well-argued texts, weight remediation toward MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT's bridge text and re-run TA-1's genuine-evaluation practice before returning to independent critical reading.\n- If the student trusts any cited source equally regardless of quality, weight remediation toward MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE's bridge text and TA-2's credential-check practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.reading.evaluating-sources`, `eng.composition.rhetorical-analysis`) — do not certify mastery without TA-5's full novel-text evaluation, since both downstream concepts assume the student can already independently evaluate credibility without heavy scaffolding.\n- Reuse the \"evidence credential check\" framing explicitly when introducing `eng.reading.evaluating-sources` — that concept formalizes the same source-quality evaluation into a systematic source-evaluation framework for research contexts.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT",
+        "MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.reading.critical-reading/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.critical-reading",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Close-Reading Readiness Check]\n        |\n        v\n[Concrete Anchor: The Evidence Credential Check]\n        |\n        v\n[TA-1: Evaluation, Not a Predetermined Verdict]\n        |\n        v\n[TA-2: Evidence Credential Checks]\n        |\n        v\n[TA-3: Identifying Unstated Assumptions]\n        |\n        v\n[TA-4: Detecting Bias and Perspective]\n        |\n        v\n[TA-5: Full Critical Evaluation of a Novel Text]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — critical reading extends close reading's evidence-based analytical habit into evaluative judgment about credibility, so weak close-reading skill undermines the more demanding evaluative task. During instruction (S1), watch for both misconception patterns: forcing fault-finding (MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT) and accepting citations uncritically (MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE) both substitute a shortcut for genuine evaluation — redirect both to the Evidence Credential Check anchor. If the student manufactures criticism of a strong text or accepts a weak citation during TA-1/TA-2 (S6), drop back to the Concrete Anchor's cross-examination checklist before returning to independent evaluation. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who identifies assumptions and bias correctly (MP-3/MP-4) but still forces a predetermined verdict or trusts weak citations has not learned the core evaluative judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.critical-reading.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
