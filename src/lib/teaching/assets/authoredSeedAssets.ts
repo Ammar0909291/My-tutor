@@ -4150,6 +4150,255 @@ const GRAV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.heat-transfer ────────────────────────────────────────────────
+const HT = 'phys.therm.heat-transfer'
+const HT_SRC = 'docs/curriculum/blueprints/phys.therm.heat-transfer.md'
+
+const HT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Heat is a verb, not a noun. If heat were a substance stored ' +
+      'inside things, a hot metal block would weigh more than a cold ' +
+      'one — put it on a precision balance and it doesn\u2019t, ever. (The ' +
+      '18th-century \u201ccaloric fluid\u201d theory died on exactly this kind ' +
+      'of evidence.) What an object HAS is internal energy — the total ' +
+      'thermal energy of its jiggling atoms. HEAT is the name for ' +
+      'energy IN TRANSIT from a hotter body to a colder one. Say \u201cthe ' +
+      'metal transferred 100 J of heat to the water\u201d — correct; say ' +
+      '\u201cthe water now contains 100 J of heat\u201d — malformed: once the ' +
+      'transfer ends there is no heat left, only the water\u2019s raised ' +
+      'internal energy. (Work can raise internal energy too — rubbing ' +
+      'your hands warms them with zero heat transfer.)',
+    targetedMisconceptions: [`${HT}:MC-HEAT-IS-A-SUBSTANCE`],
+    source: `${HT_SRC} — MC-HEAT-IS-A-SUBSTANCE (P28 weigh-the-heat conflict + s6 verb-not-noun rule + P33 work pair)`,
+  },
+  {
+    conceptId: HT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A thermos flask is a three-part proof that conduction, ' +
+      'convection, and radiation are genuinely different processes. ' +
+      'The vacuum gap blocks conduction AND convection — both need a ' +
+      'medium (atoms coupling; fluid circulating) and a vacuum has ' +
+      'none. But heat still leaks by RADIATION, which needs no medium ' +
+      'at all — so the walls are silvered to reflect it. You could not ' +
+      'block two mechanisms and separately blunt the third if they ' +
+      'were the same physics. They even scale differently: conduction ' +
+      'goes as \u0394T, radiation as T\u2074 — negligible at room temperature, ' +
+      'dominant in a furnace. Sorting question for any scenario: is ' +
+      'there matter connecting the bodies (conduction)? A moving ' +
+      'fluid (convection)? Or nothing but space — like the Sun ' +
+      'heating Earth across 150 million km of vacuum (radiation)?',
+    targetedMisconceptions: [`${HT}:MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE`],
+    source: `${HT_SRC} — MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE (P28 thermos design analysis + P30 \u0394T vs T\u2074 scaling)`,
+  },
+]
+
+const HT_PROBES: SeedProbe[] = [
+  {
+    conceptId: HT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Sun heats the Earth across 150 million km of vacuum. Which mechanism carries the energy?',
+    choices: [
+      { text: 'Radiation — electromagnetic waves need no medium; vacuum rules out conduction and convection', isCorrect: true },
+      { text: 'Convection — hot solar material rises toward the Earth', isCorrect: false, misconceptionId: `${HT}:MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE` },
+      { text: 'Conduction — space transmits the vibrations from atom to atom', isCorrect: false, misconceptionId: `${HT}:MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE` },
+    ],
+    correctValue: 'radiation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HT}:MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE`],
+    source: `${HT_SRC} — P33 Sun-Earth discrimination pair as probe`,
+  },
+  {
+    conceptId: HT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Hot metal transfers 100 J to cool water. Which statement is correctly phrased?',
+    choices: [
+      { text: '\u201cThe water\u2019s internal energy increased by 100 J; heat was the transfer\u201d', isCorrect: true },
+      { text: '\u201cThe water now contains 100 J of heat\u201d — the heat is stored inside it', isCorrect: false, misconceptionId: `${HT}:MC-HEAT-IS-A-SUBSTANCE` },
+    ],
+    correctValue: 'internal energy increased',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HT}:MC-HEAT-IS-A-SUBSTANCE`],
+    source: `${HT_SRC} — P33 malformed-question pair as probe`,
+  },
+]
+
+// ─── math.geom.angle ─────────────────────────────────────────────────────────
+const ANG = 'math.geom.angle'
+const ANG_SRC = 'docs/curriculum/blueprints/math.geom.angle.md'
+
+const ANG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANG,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'An angle measures TURN — how far one ray has rotated from the ' +
+      'other — and nothing else. The drawn rays are just arrows ' +
+      'showing direction; their length is an artist\u2019s choice. Open a ' +
+      'small pocket fan and a giant stage fan to the same spread: ' +
+      'same angle, wildly different sizes. Extend an angle\u2019s rays ' +
+      'twice as long with a ruler — the opening between them hasn\u2019t ' +
+      'turned any further, so the angle is unchanged. When comparing ' +
+      'two angles, ignore how long the sides are drawn and how much ' +
+      'paper sits between them; ask only: which pair of rays is ' +
+      'rotated further apart? A tiny drawn 90\u00b0 beats a huge drawn ' +
+      '60\u00b0 every time.',
+    targetedMisconceptions: [`${ANG}:MC-1`],
+    source: `${ANG_SRC} — MC-1 ANGLE-DEPENDS-ON-RAY-LENGTH (TA-B01 repair: turn-not-length; extend-the-rays demonstration)`,
+  },
+  {
+    conceptId: ANG,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'In the name \u2220ABC, where is the corner? At B — always the ' +
+      'MIDDLE letter, never the first. The three letters trace a ' +
+      'path: start at a point on one ray (A), travel to the vertex ' +
+      '(B), leave along the other ray (C). The turn happens at the ' +
+      'middle of the journey, so the middle letter names the vertex. ' +
+      'Reading left-to-right makes A feel special — resist it: \u2220ABC ' +
+      'and \u2220CBA are the SAME angle (same journey, walked backwards), ' +
+      'which only works because the vertex letter stays in the ' +
+      'middle. So for \u2220PQR, the vertex is Q; to draw \u2220XYZ, put the ' +
+      'corner at Y. Middle letter = the point of the V.',
+    targetedMisconceptions: [`${ANG}:MC-3`],
+    source: `${ANG_SRC} — MC-3 ANGLE-VERTEX-IS-FIRST-LETTER (TA-B03 repair: path-through-the-vertex reading + \u2220ABC=\u2220CBA check)`,
+  },
+]
+
+const ANG_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANG,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Angle 1 is drawn with 10 cm rays opened 60\u00b0. Angle 2 is drawn with 2 cm rays opened 90\u00b0. Which angle is bigger?',
+    choices: [
+      { text: 'Angle 2 — an angle measures the turn between the rays; drawn length is irrelevant', isCorrect: true },
+      { text: 'Angle 1 — its sides are much longer, so it is the bigger angle', isCorrect: false, misconceptionId: `${ANG}:MC-1` },
+      { text: 'They cannot be compared without knowing the areas', isCorrect: false, misconceptionId: `${ANG}:MC-1` },
+    ],
+    correctValue: 'Angle 2 (90\u00b0)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ANG}:MC-1`],
+    source: `${ANG_SRC} — MC-1 comparison probe, distractor-mapped`,
+  },
+  {
+    conceptId: ANG,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u2220PQR, at which point is the vertex?',
+    choices: [
+      { text: 'Q — the middle letter always names the vertex (\u2220PQR = \u2220RQP)', isCorrect: true },
+      { text: 'P — the first letter names the vertex', isCorrect: false, misconceptionId: `${ANG}:MC-3` },
+    ],
+    correctValue: 'Q',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ANG}:MC-3`],
+    source: `${ANG_SRC} — MC-3 trigger item (\u2220PQR), distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.past-tenses ─────────────────────────────────────────────────
+const PAST = 'eng.grammar.past-tenses'
+const PAST_SRC = 'docs/curriculum/blueprints/eng.grammar.past-tenses.md'
+
+const PAST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PAST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Most English verbs form the past with -ed: walk \u2192 walked, ' +
+      'play \u2192 played. But a set of very common verbs refuse the rule ' +
+      'and carry their own past forms: go \u2192 went (never \u201cgoed\u201d), ' +
+      'eat \u2192 ate, see \u2192 saw, have \u2192 had, be \u2192 was/were. Here is ' +
+      'the encouraging part: saying \u201cgoed\u201d is not a random mistake — ' +
+      'it is proof you have correctly learned the general -ed ' +
+      'pattern, the same over-regularizing stage every child ' +
+      'acquiring English passes through. The next step is simply a ' +
+      'memorized list: the irregulars are few enough to learn and ' +
+      'frequent enough that you meet them constantly. Habit to build: ' +
+      'before adding -ed, ask \u201cis this one of the irregular ' +
+      'regulars?\u201d',
+    targetedMisconceptions: [`${PAST}:MC-ALL-PAST-TENSE-VERBS-ADD-ED`],
+    source: `${PAST_SRC} — MC-ALL-PAST-TENSE-VERBS-ADD-ED (P30 regular/irregular split + s6 over-regularization-as-progress framing)`,
+  },
+  {
+    conceptId: PAST,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Compare: \u201cI was eating dinner when the phone rang\u201d vs \u201cI ate ' +
+      'dinner, then answered the phone.\u201d Different movies. The past ' +
+      'continuous (was/were + -ing) films an action ALREADY IN ' +
+      'PROGRESS at a past moment — the perfect background for an ' +
+      'interruption: eating was ongoing, the ring cut in. The simple ' +
+      'past films completed actions in sequence — one finished, the ' +
+      'next began. Choose by asking: was the action mid-flow at that ' +
+      'moment (continuous), or done-and-dusted (simple)? Two ongoing ' +
+      'actions at once take double continuous: \u201cWhile she was ' +
+      'studying, her sister was cooking.\u201d A chain of finished events ' +
+      'takes simple past: \u201cShe studied, then cooked dinner.\u201d The ' +
+      'interrupted-action sentence is where the choice changes the ' +
+      'meaning — reserve was/were + -ing for the action that got ' +
+      'interrupted.',
+    targetedMisconceptions: [`${PAST}:MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE`],
+    source: `${PAST_SRC} — MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE (P28 in-progress-vs-completed conflict + P33 pairs)`,
+  },
+]
+
+const PAST_PROBES: SeedProbe[] = [
+  {
+    conceptId: PAST,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is the past tense of \u201cgo\u201d?',
+    choices: [
+      { text: '\u201cWent\u201d — go is irregular and keeps its own memorized past form', isCorrect: true },
+      { text: '\u201cGoed\u201d — past tense verbs add -ed', isCorrect: false, misconceptionId: `${PAST}:MC-ALL-PAST-TENSE-VERBS-ADD-ED` },
+      { text: '\u201cGoned\u201d — add -ed to the participle', isCorrect: false, misconceptionId: `${PAST}:MC-ALL-PAST-TENSE-VERBS-ADD-ED` },
+    ],
+    correctValue: 'went',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PAST}:MC-ALL-PAST-TENSE-VERBS-ADD-ED`],
+    source: `${PAST_SRC} — P28 goed conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PAST,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Your dinner was interrupted by a phone call. Which sentence shows that eating was still in progress when the phone rang?',
+    choices: [
+      { text: '\u201cI was eating dinner when the phone rang\u201d — past continuous marks the ongoing, interrupted action', isCorrect: true },
+      { text: 'Either sentence — \u201cI ate dinner when the phone rang\u201d means exactly the same thing', isCorrect: false, misconceptionId: `${PAST}:MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE` },
+    ],
+    correctValue: 'I was eating dinner when the phone rang',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PAST}:MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE`],
+    source: `${PAST_SRC} — P28 interrupted-action conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -4199,6 +4448,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...TRI_EXPLANATIONS,
   ...PROJ_EXPLANATIONS,
   ...GRAV_EXPLANATIONS,
+  ...HT_EXPLANATIONS,
+  ...ANG_EXPLANATIONS,
+  ...PAST_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -4248,4 +4500,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...TRI_PROBES,
   ...PROJ_PROBES,
   ...GRAV_PROBES,
+  ...HT_PROBES,
+  ...ANG_PROBES,
+  ...PAST_PROBES,
 ]
