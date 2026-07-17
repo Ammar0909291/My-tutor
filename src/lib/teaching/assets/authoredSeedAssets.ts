@@ -2052,6 +2052,249 @@ const PE_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── phys.mech.conservation-of-energy ────────────────────────────────────────
+const COE = 'phys.mech.conservation-of-energy'
+const COE_SRC = 'docs/curriculum/blueprints/phys.mech.conservation-of-energy.md'
+
+const COE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: energy accounting; friction doesn't destroy, it converts
+    content:
+      'Conservation of energy is an accounting law: energy is never ' +
+      'created or destroyed, only moved between accounts. For a sliding ' +
+      'or falling object the two big accounts are motion (KE) and height ' +
+      '(PE), and on a frictionless ramp the books are simple: every joule ' +
+      'leaving the height account arrives in the motion account, so ' +
+      'KE + PE stays constant. Add friction and students often think the ' +
+      'law breaks — it doesn\'t. Friction is a third account: HEAT. The ' +
+      'joules that go missing from KE + PE show up, to the last one, as ' +
+      'warmth in the surfaces (touch a bike brake after a long descent). ' +
+      'So the honest ledger reads KE_i + PE_i = KE_f + PE_f + heat ' +
+      'dissipated. Total energy: always conserved. MECHANICAL energy ' +
+      '(KE + PE alone): conserved only when nothing like friction is ' +
+      'skimming into the heat account.',
+    targetedMisconceptions: [`${COE}:MC-FRICTION-CONSERVES`],
+    source: `${COE_SRC} — MC-FRICTION-CONSERVES (mechanical-vs-total ledger, heat as the third account, brake-heat anchor)`,
+  },
+  {
+    conceptId: COE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: path independence for gravity
+    content:
+      'Ball A slides down a steep, short frictionless ramp; Ball B slides ' +
+      'down a long, gentle frictionless slope. Both start from rest at ' +
+      '4 m. Which is faster at the bottom? The pull to say "A — steeper!" ' +
+      'is strong, but energy accounting doesn\'t read maps: gravity banks ' +
+      'energy by HEIGHT alone, mgh, and both balls cashed in exactly the ' +
+      'same 4 m of height. Equal deposits, equal withdrawals: identical ' +
+      'final speeds (√(2gh) ≈ 8.9 m/s). The steep ramp gets there SOONER ' +
+      '— bigger acceleration, shorter trip — but arrival speed is fixed ' +
+      'by the height drop, not the route. This is what makes gravity a ' +
+      '"conservative" force: only start and end positions matter. The ' +
+      'exception proves the rule: add friction and path suddenly DOES ' +
+      'matter, because a longer path gives friction more metres to skim ' +
+      'heat from the ledger.',
+    targetedMisconceptions: [`${COE}:MC-PATH-MATTERS`],
+    source: `${COE_SRC} — MC-PATH-MATTERS (steep-vs-gentle ramp conflict evidence, conservative-force boundary incl. the friction exception)`,
+  },
+]
+
+const COE_PROBES: SeedProbe[] = [
+  {
+    conceptId: COE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block slides down a ramp WITH friction. Comparing the bottom to the top, which is true?',
+    choices: [
+      { text: 'Total energy is conserved, but mechanical energy (KE+PE) decreased — the difference became heat', isCorrect: true },
+      { text: 'KE + PE at the bottom equals KE + PE at the top — conservation always holds for KE+PE', isCorrect: false, misconceptionId: `${COE}:MC-FRICTION-CONSERVES` },
+      { text: 'Energy was destroyed by friction', isCorrect: false },
+    ],
+    correctValue: 'total conserved; mechanical decreased into heat',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COE}:MC-FRICTION-CONSERVES`],
+    source: `${COE_SRC} — MC-FRICTION-CONSERVES, distractor-mapped`,
+  },
+  {
+    conceptId: COE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two frictionless slides start at the same height: one steep and short, one long and gentle. How do the exit speeds compare?',
+    choices: [
+      { text: 'Equal — gravity pays out by height drop alone; the path does not matter', isCorrect: true },
+      { text: 'The steep slide gives a higher exit speed', isCorrect: false, misconceptionId: `${COE}:MC-PATH-MATTERS` },
+    ],
+    correctValue: 'equal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COE}:MC-PATH-MATTERS`],
+    source: `${COE_SRC} — MC-PATH-MATTERS conflict scenario as the probe`,
+  },
+]
+
+// ─── phys.mech.conservation-of-momentum ──────────────────────────────────────
+const COM = 'phys.mech.conservation-of-momentum'
+const COM_SRC = 'docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md'
+
+const COM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: momentum transfers, never vanishes — check the TOTAL
+    content:
+      'In any collision, momentum behaves like money changing hands: it ' +
+      'moves between the objects but the TOTAL never changes. Car A ' +
+      '(1000 kg at 15 m/s) rams stationary Car B (2000 kg) and they ' +
+      'lock together. A slowed down dramatically — did its momentum ' +
+      '"get lost in the crash"? Follow the books: before, the total was ' +
+      '1000 × 15 = 15,000 kg·m/s. After, the 3000 kg wreck moves at ' +
+      '15,000 / 3000 = 5 m/s — total still exactly 15,000. Everything A ' +
+      'lost, B gained, joule-for-joule... no — momentum-for-momentum: ' +
+      'this works even in crashes where kinetic ENERGY really is lost to ' +
+      'heat and crumpling. The habit to build: never audit one object; ' +
+      'always sum the whole system before and after, with directions. ' +
+      'The single-object ledger lies; the total never does.',
+    targetedMisconceptions: [`${COM}:MC-MOMENTUM-LOST`],
+    source: `${COM_SRC} — MC-MOMENTUM-LOST (sticking-cars conflict evidence P28, transferred-not-lost bridge)`,
+  },
+  {
+    conceptId: COM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: the no-external-force fine print (ball vs wall)
+    content:
+      'Conservation of momentum has fine print, and here\'s the case that ' +
+      'reads it aloud: a 3 kg ball flies east at 10 m/s, hits a wall, and ' +
+      'bounces back west at 10 m/s. Before: +30 kg·m/s. After: −30. The ' +
+      'total flipped by 60 — momentum was NOT conserved for the ball. ' +
+      'Broken law? No: the law only applies to systems with NO net ' +
+      'EXTERNAL force, and the wall — bolted to the building, bolted to ' +
+      'the Earth — is outside the "ball system", hammering it with an ' +
+      'external impulse. Widen the ledger to ball + wall + Earth and ' +
+      'conservation returns (the planet absorbed that 60, its unmeasurably ' +
+      'tiny recoil hidden by its enormous mass). Practical rule: before ' +
+      'invoking conservation, draw the system boundary and ask "is ' +
+      'anything OUTSIDE it pushing in?" Colliding ice pucks: no — ' +
+      'conserve away. Ball vs wall, ball in mid-fall under gravity: yes — ' +
+      'the shortcut is off the table, or the system must grow.',
+    targetedMisconceptions: [`${COM}:MC-INTERNAL-EXTERNAL`],
+    source: `${COM_SRC} — MC-INTERNAL-EXTERNAL (ball-vs-wall conflict evidence P28 + system-boundary rule)`,
+  },
+]
+
+const COM_PROBES: SeedProbe[] = [
+  {
+    conceptId: COM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 2 kg cart moving east at 6 m/s hits and sticks to a 4 kg cart at rest (frictionless track). What is the final speed of the pair?',
+    choices: [
+      { text: '2 m/s — total momentum 12 kg·m/s shared by 6 kg', isCorrect: true },
+      { text: '6 m/s — the moving cart keeps its speed', isCorrect: false },
+      { text: '3 m/s — the average of 6 and 0', isCorrect: false, misconceptionId: `${COM}:MC-MOMENTUM-LOST` },
+    ],
+    correctValue: '2 m/s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COM}:MC-MOMENTUM-LOST`],
+    source: `${COM_SRC} — mastery-bank sticking-carts item, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.work-energy-theorem ───────────────────────────────────────────
+const WET = 'phys.mech.work-energy-theorem'
+const WET_SRC = 'docs/curriculum/blueprints/phys.mech.work-energy-theorem.md'
+
+const WET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WET,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: W_net = ΔKE, every force gets a vote
+    content:
+      'The work-energy theorem is the bridge between forces and motion ' +
+      'energy: the NET work done on an object equals its change in ' +
+      'kinetic energy, W_net = ΔKE. The word to respect is NET: every ' +
+      'force acting gets a vote, not just the one you\'re pushing with. ' +
+      'A 5 kg box pushed with 30 N against 10 N of friction over 4 m: ' +
+      'your push contributes +120 J, friction votes −40 J, so the box\'s ' +
+      'KE grows by only the net +80 J. Skip friction\'s vote and you\'ll ' +
+      'predict speeds the box never reaches. The theorem is really the ' +
+      'energy version of Newton\'s second law — and its power is that it ' +
+      'skips the play-by-play: no acceleration, no time needed. Total up ' +
+      'the work, and the speed change falls out.',
+    targetedMisconceptions: [`${WET}:MC-PARTIAL-WORK`],
+    source: `${WET_SRC} — MC-PARTIAL-WORK (30 N / 10 N / 4 m conflict scenario, every-force-votes framing)`,
+  },
+  {
+    conceptId: WET,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: W_net = 0 means KE unchanged, not zero
+    content:
+      'A box slides at a steady 5 m/s while you push with 8 N against ' +
+      'exactly 8 N of friction. Net force zero, so net work zero — does ' +
+      'the theorem say the box must be at rest? Read the equation ' +
+      'carefully: W_net = ΔKE — the CHANGE in kinetic energy. Zero net ' +
+      'work means KE didn\'t CHANGE, not that KE is zero: the box keeps ' +
+      'every joule it already had and cruises on at 5 m/s. (That\'s the ' +
+      "First Law wearing energy clothing: balanced forces, unchanged " +
+      'motion.) The confusion is reading Δ as a value instead of a ' +
+      'difference. KE_final = KE_initial + W_net — zero net work just ' +
+      'freezes the account balance; only NEGATIVE net work drains it ' +
+      'toward rest.',
+    targetedMisconceptions: [`${WET}:MC-WET-ZERO-SPEED`],
+    source: `${WET_SRC} — MC-WET-ZERO-SPEED (balanced 8 N cruise conflict evidence, Δ-is-a-difference repair)`,
+  },
+]
+
+const WET_PROBES: SeedProbe[] = [
+  {
+    conceptId: WET,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A moving box experiences zero NET work over some displacement. What do we know about the box at the end?',
+    choices: [
+      { text: 'Its speed is unchanged — ΔKE = 0 means the KE it had is the KE it keeps', isCorrect: true },
+      { text: 'It is at rest — zero work means zero kinetic energy', isCorrect: false, misconceptionId: `${WET}:MC-WET-ZERO-SPEED` },
+      { text: 'No forces acted on it at all', isCorrect: false },
+    ],
+    correctValue: 'speed unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WET}:MC-WET-ZERO-SPEED`],
+    source: `${WET_SRC} — MC-WET-ZERO-SPEED, distractor-mapped`,
+  },
+  {
+    conceptId: WET,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 4 kg box starts at rest. Applied force 20 N, friction 8 N, displacement 5 m. What is the change in its kinetic energy?',
+    choices: [
+      { text: '+60 J — net work: (20 − 8) × 5', isCorrect: true },
+      { text: '+100 J — the applied force did 20 × 5', isCorrect: false, misconceptionId: `${WET}:MC-PARTIAL-WORK` },
+    ],
+    correctValue: '+60 J',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WET}:MC-PARTIAL-WORK`],
+    source: `${WET_SRC} — mastery-bank item (20 N / 8 N / 5 m), distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -2076,6 +2319,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...WORK_EXPLANATIONS,
   ...KE_EXPLANATIONS,
   ...PE_EXPLANATIONS,
+  ...COE_EXPLANATIONS,
+  ...COM_EXPLANATIONS,
+  ...WET_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -2100,4 +2346,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...WORK_PROBES,
   ...KE_PROBES,
   ...PE_PROBES,
+  ...COE_PROBES,
+  ...COM_PROBES,
+  ...WET_PROBES,
 ]
