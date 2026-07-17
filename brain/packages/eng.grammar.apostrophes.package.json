@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.apostrophes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.apostrophes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d9c1963d12fda0c66f779bf9620e2719b9dfd34728b1d5b66d0ac003875de67f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.apostrophes.md": "sha256:06f0b182e957b370a17b4fd8e7cefe28e976b355793cdec110f29498599dc0a7"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.apostrophes",
+    "name": "Apostrophes",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.comma-usage"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.apostrophes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.apostrophes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.apostrophes.md": "sha256:06f0b182e957b370a17b4fd8e7cefe28e976b355793cdec110f29498599dc0a7"
+      },
+      "contentHash": "sha256:6853865a60aab65a93b3fa04220a244ab94c21350e29ed591610e703e658f15e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.apostrophes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.apostrophes.md#TA-1 (addresses MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.apostrophes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.apostrophes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.apostrophes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.apostrophes.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.apostrophes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.apostrophes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.apostrophes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.apostrophes.md#TA-3 (addresses MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.apostrophes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.apostrophes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.apostrophes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.apostrophes.md#TA-4 (addresses MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS, MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.apostrophes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.apostrophes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.apostrophes/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Apostrophes — Conceptual Development Sequence",
+      "content": "### TA-1 — Simple Plurals Never Take an Apostrophe (MC-A)\n\nUsing the fragile-sticker anchor, teach the \"belonging or shortening?\" test to rule out apostrophes on\nsimple plurals. Student practice: given six sentences with words ending in \"s,\" identify which are\nsimple plurals needing no apostrophe.\n\n### TA-2 — Singular Possessive: Apostrophe Before the S\n\nTeach the singular possessive rule (add apostrophe-then-s to a singular noun to show possession).\nStudent practice: given four sentences describing one person/thing possessing something, correctly\nform the singular possessive.\n\n### TA-3 — Plural Possessive: Apostrophe After the S (MC-B)\n\nUsing the adjustable-lock anchor, teach the plural possessive rule (add the apostrophe after an\nexisting plural \"s,\" with no additional s). Student practice: given four sentences describing\nmultiple people/things possessing something, correctly form the plural possessive.\n\n### TA-4 — Contractions: Apostrophes Marking Omitted Letters\n\nTeach the contraction use of apostrophes (marking where letters have been omitted when two words are\nshortened into one, e.g., \"do not\" → \"don't\"). Student practice: given six pairs of words, form the\ncorrect contraction with the apostrophe placed exactly where letters are omitted.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 129,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/misconception/MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "**Trigger signal:** Student adds an apostrophe before the \"s\" whenever a word ends in \"s,\" including",
+      "content": "### MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS\n\n**Trigger signal:** Student adds an apostrophe before the \"s\" whenever a word ends in \"s,\" including\nsimple plurals with no possession or contraction involved (e.g., writing \"I have three dog's\" instead\nof \"I have three dogs\"), treating the apostrophe as a generic marker for \"s\" rather than a mark with\ntwo SPECIFIC jobs.\n\n**Conflict evidence [P28]:** Show the student two sentences: \"I have three dog's.\" (an\napostrophe incorrectly inserted before a simple plural \"s\") and \"The dog's bone is missing.\" (an\napostrophe correctly showing the bone belongs to the dog — possession). Ask: \"Does the first sentence\nshow that something belongs to the dog, or is it just saying there are three dogs? Does it need an\napostrophe at all?\"\n\n**Bridge text [P30]:** \"Adding an apostrophe to any word ending in 's' is like putting a 'FRAGILE'\nsticker on every box you ship, regardless of whether it actually contains something fragile — the\nsticker (apostrophe) has a SPECIFIC job (marking possession or a contraction), and slapping it on\neverything that happens to end in 's' misuses it. A simple plural (more than one of something) never\nneeds an apostrophe at all.\"\n\n**Replacement text [P31]:** \"Before adding an apostrophe, ask: am I showing that something BELONGS to\nsomeone/something (possession), or am I SHORTENING two words into one (a contraction)? If neither is\ntrue — if I'm just saying there's more than one of something — no apostrophe is needed.\"\n\n**Discrimination pairs [P33]:**\n1. \"I have three dog's.\" (incorrect — no possession or contraction, just a simple plural, no\n   apostrophe needed) vs. \"I have three dogs.\" (correct simple plural, no apostrophe).\n2. \"The dog's bone is missing.\" (correct — apostrophe shows the bone belongs to the dog, a genuine\n   possessive) vs. \"The dogs ran in the yard.\" (correct simple plural, no possession, no apostrophe).\n\n**s6_path:** If the student continues to add apostrophes to simple plurals after the bridge, have\nthem apply the \"does this show belonging, or shortening two words?\" test directly to five sentences\ncontaining words ending in \"s,\" inserting an apostrophe ONLY when the test confirms one of those two\nspecific jobs.",
+      "localKey": "MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS",
+      "language": "en",
+      "refs": [
+        "MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 3,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/misconception/MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "**Trigger signal:** Student applies one fixed rule for possessive apostrophe placement regardless of",
+      "content": "### MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL\n\n**Trigger signal:** Student applies one fixed rule for possessive apostrophe placement regardless of\nwhether the possessing noun is singular or plural, failing to distinguish singular possessive (\"the\ndog's bone\" — one dog, apostrophe before the s) from plural possessive (\"the dogs' bones\" — multiple\ndogs, apostrophe after the s), producing errors like \"the dogs's bones\" or using the singular pattern\nfor a plural possessor.\n\n**Conflict evidence [P28]:** Show the student two sentences: \"The dog's bone is missing.\" (one dog\npossesses the bone) and \"The dogs' bones are missing.\" (multiple dogs each possess a bone). Ask: \"Does\nthe apostrophe go in the same place in both sentences? What's different about how many dogs are being\ndiscussed, and does that change the correct placement?\"\n\n**Bridge text [P30]:** \"Applying one fixed apostrophe-placement rule regardless of singular versus\nplural is like using the same size lock for a single door and a set of double doors — the basic\nprinciple (secure the door) is the same, but the mechanism needs to adapt to how many doors there\nactually are. For a SINGULAR possessor, the apostrophe goes before the 's' ('the dog's bone'). For a\nPLURAL possessor already ending in 's,' the apostrophe goes AFTER the 's' ('the dogs' bones') — the\nplacement depends on whether one or many are doing the possessing.\"\n\n**Replacement text [P31]:** \"Before placing a possessive apostrophe, ask: is the possessor SINGULAR\n(one dog) or PLURAL (multiple dogs, already ending in 's')? For singular, add apostrophe-then-s. For\nplural nouns already ending in 's,' add the apostrophe AFTER the existing 's,' with no additional s.\"\n\n**Discrimination pairs [P33]:**\n1. \"The dog's bone is missing.\" (singular possessor — one dog — apostrophe before the s) vs. \"The\n   dogs' bones are missing.\" (plural possessor — multiple dogs, the noun already ends in 's' —\n   apostrophe after the s, no additional s added).\n2. A student writing \"the dogs's bones\" (incorrectly adding both the plural 's' and a redundant\n   possessive 's' after the apostrophe) vs. correctly writing \"the dogs' bones\" (apostrophe placed\n   directly after the existing plural 's,' nothing added).\n\n**s6_path:** If the student continues to misplace possessive apostrophes for plural nouns after the\nbridge, have them convert five singular possessive phrases into their plural possessive equivalents\n(e.g., \"the cat's toy\" → \"the cats' toys\"), explicitly tracking where the apostrophe moves as the\nnoun shifts from singular to plural.",
+      "localKey": "MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL",
+      "language": "en",
+      "refs": [
+        "MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 37,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Simple Plurals Never Take an Apostrophe (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Simple Plurals Never Take an Apostrophe (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 133,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Singular Possessive: Apostrophe Before the S",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Singular Possessive: Apostrophe Before the S\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 139,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Plural Possessive: Apostrophe After the S (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Plural Possessive: Apostrophe After the S (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 145,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Contractions: Apostrophes Marking Omitted Letters",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Contractions: Apostrophes Marking Omitted Letters\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS\",\"MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS",
+        "MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 151,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Simple Plurals**\nGiven four sentences with words ending in \"s,\" identify which are simple plurals requiring no\napostrophe.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 174,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Forming Singular Possessives**\nGiven three sentences describing one person/thing possessing something, correctly form the singular\npossessive.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 174,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Forming Plural Possessives**\nGiven three sentences describing multiple people/things possessing something, correctly form the\nplural possessive.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 174,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Forming Contractions**\nGiven four word pairs, form the correct contraction with the apostrophe placed exactly where letters\nare omitted.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 174,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Mixed Application**\nGiven a new sentence set containing simple plurals, singular possessives, plural possessives, and\ncontractions mixed together, correctly apply (or correctly omit) apostrophes throughout.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 174,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters each apostrophe rule in isolation (MP-1 through MP-4) but reverts to errors\n  when all four scenarios are mixed together (MP-5), provide a structured decision-tree checklist\n  (plural, no apostrophe → possession? → singular or plural possessor? → contraction?) as scaffolding\n  during mixed practice before removing it.\n- If the student's plural possessive errors (MP-3) specifically involve irregular plurals that don't\n  end in \"s\" (e.g., \"children,\" \"people\"), note that these follow the SINGULAR possessive pattern\n  (apostrophe-then-s: \"the children's toys\") since they don't already end in \"s\" — flag this as a\n  distinct sub-case requiring separate practice.\n- If the student confuses \"its\" (possessive, no apostrophe) with \"it's\" (contraction of \"it is,\"\n  apostrophe required) — one of the most persistent errors even among skilled writers — give this\n  specific pair dedicated, repeated practice beyond the general rules.\n- Younger or less experienced writers may benefit from reading their own sentences aloud and\n  mentally expanding any contraction to its full two-word form as a check that the apostrophe is\n  correctly placed where letters were genuinely omitted.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 234,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "eng.grammar.apostrophes/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.apostrophes",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: comma usage check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.grammar.comma-usage]  [Component 3: Fragile-Sticker / Adjustable-Lock Anchor]\n                                                |\n                                                v\n                             [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                |\n                                                v\n                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                |\n                                                v\n                          [MP-1 through MP-5 mastery probe set]\n                                                |\n                          (pass >= 0.80) -----+----- (fail)\n                                 |                      |\n                                 v                      v\n              [No further unlocks —  [S6 remediation: belonging-or-shortening-test /\n               terminal in current     singular-to-plural-conversion drills]\n               curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (before the simple-plural\nrule is established) and MC-B during TA-3 (plural possessive placement) — MC-A generally needs\nresolving first since a student who over-applies apostrophes to plurals often continues that habit\ninto possessive formation as well. If either fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates residual MC-A;\nMP-2 failure alone indicates the singular-possessive mechanics (TA-2) need review, distinct from\neither misconception; MP-3 failure alone indicates residual MC-B; MP-4 failure alone indicates the\ncontraction mechanics (TA-4) specifically; MP-5 failure with MP-1 through MP-4 passing indicates an\nintegration gap across all four rules simultaneously — provide one more guided mixed-application\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.apostrophes.md",
+        "startLine": 196,
+        "endLine": 234
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

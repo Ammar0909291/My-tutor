@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.sentence-fragments-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.sentence-fragments",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b4ba474cfc0fcd86527b3d1a59c594f9412b1d423a50d6258d2e22f7c982ac04",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md": "sha256:994e18a749d95bf70efc1d51995fa3d58b193f708291f438be7a3eae0f1c6b71"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.sentence-fragments",
+    "name": "Sentence Fragments",
+    "difficultyRaw": "developing",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.simple-sentences"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.sentence-fragments-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.sentence-fragments (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md": "sha256:994e18a749d95bf70efc1d51995fa3d58b193f708291f438be7a3eae0f1c6b71"
+      },
+      "contentHash": "sha256:0b4bb8de50f8fc04af9ea86f14019ffff2a06db5271f5d05661d962846933971",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-fragments.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-fragments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-fragments\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-fragments.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md#TA-2 (addresses MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-fragments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-fragments\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-fragments.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md#TA-3 (addresses MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-fragments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-fragments\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-fragments.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md#TA-4 (addresses MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT, MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-fragments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-fragments\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.sentence-fragments/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Sentence Fragments — Conceptual Development Sequence",
+      "content": "### TA-1 — Fragments Missing a Subject or a Verb\n\nIntroduce the most basic fragment type: a group of words missing a subject entirely, or missing a\nverb entirely. Student practice: given four groups of words, identify which are missing a subject,\nwhich are missing a verb, and which are complete.\n\n### TA-2 — Subordinate Clause Fragments (MC-A)\n\nUsing the flour-and-water anchor and the \"does this feel finished?\" test, teach the subtler fragment\ntype: a subordinate clause with both a subject and verb, still incomplete because of a dependent\nword like \"because,\" \"although,\" \"when.\" Student practice: given five clauses beginning with\nsubordinating words, identify which stand as fragments and which are followed by enough content to be\ncomplete.\n\n### TA-3 — Fixing a Fragment by Joining to an Adjacent Sentence (MC-B)\n\nUsing the puzzle-piece anchor, teach students to check whether a fragment naturally joins to an\nadjacent sentence before considering other fixes. Student practice: given three fragments in context,\njoin each to the more appropriate adjacent sentence (before or after).\n\n### TA-4 — Full Application: Identifying and Correcting Fragments\n\nGive the student a short passage containing a mix of complete sentences and both fragment types\n(missing subject/verb, and subordinate-clause-alone). They must identify each fragment (TA-1, TA-2)\nand correct it using the most natural fix — joining to an adjacent sentence where appropriate, or\nsupplying the missing element (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 136,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/misconception/MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "**Trigger signal:** Student believes that any group of words containing a subject and a verb",
+      "content": "### MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT\n\n**Trigger signal:** Student believes that any group of words containing a subject and a verb\nsomewhere within it must be a complete sentence, missing the subtler fragment type where a\nsubordinate/dependent clause DOES contain a subject and a verb but still fails to express a complete\nthought because it depends on something else to complete its meaning (e.g., \"Because the rain\nstarted.\" has a subject \"rain\" and a verb \"started,\" but is still a fragment, since \"because\" makes\nthe reader expect more information to follow).\n\n**Conflict evidence [P28]:** Show the student \"Because the rain started.\" (containing a subject and a\nverb, but still a fragment) alongside \"The rain started.\" (a genuinely complete sentence with the same\nsubject and verb, minus \"because\"). Ask: \"Both have a subject and a verb. Does the first one feel\nfinished, or does it leave you expecting more information — like 'because the rain started... WHAT\nhappened'?\"\n\n**Bridge text [P30]:** \"Having a subject and verb somewhere in a group of words is like having flour\nand water somewhere in your kitchen — necessary ingredients, but not automatically a finished dish. A\nword like 'because,' 'although,' or 'when' at the start of a clause creates an expectation that MORE\nis coming — the clause depends on something else to complete the thought, even though it has its own\nsubject and verb. That dependence is what makes it a fragment, not a complete sentence.\"\n\n**Replacement text [P31]:** \"Don't just check for a subject and a verb — check whether the group of\nwords expresses a genuinely COMPLETE thought that doesn't leave the reader expecting more. If it starts\nwith a word like 'because,' 'although,' 'when,' or 'since' and stands alone with nothing following, it's\nvery likely a fragment, even with a subject and verb present.\"\n\n**Discrimination pairs [P33]:**\n1. \"Because the rain started.\" (has a subject and verb, but is a fragment — leaves the reader\n   expecting what happened as a result) vs. \"The rain started.\" (a genuinely complete sentence,\n   subject and verb, no dangling expectation).\n2. A student who accepts \"Because the rain started.\" as complete simply because it has a subject and\n   verb (misconception) vs. a student who recognizes the \"because\" creates an unfulfilled expectation,\n   making it a fragment despite having a subject and verb (correct, deeper understanding).\n\n**s6_path:** If the student continues to accept subordinate-clause fragments as complete after the\nbridge, have them read five candidate sentences aloud and physically pause at the end of each,\nasking \"does this feel finished, or am I still waiting for something?\" — using the felt sense of\nincompleteness as a concrete, repeatable test.",
+      "localKey": "MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/misconception/MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "**Trigger signal:** Student, when correcting a fragment, always attempts to fix it by adding more",
+      "content": "### MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP\n\n**Trigger signal:** Student, when correcting a fragment, always attempts to fix it by adding more\nwords to make the fragment stand alone as its own complete sentence, even in cases where the more\nnatural and effective fix is to JOIN the fragment to an adjacent sentence (often the one right before\nor after it) rather than padding it out into an artificially separate, complete sentence.\n\n**Conflict evidence [P28]:** Show the student a fragment in context: \"The team celebrated. Because\nthey had finally won the championship.\" alongside two fix options: one that awkwardly pads the\nfragment into its own artificial sentence (\"Because they had finally won the championship, it was\ntrue.\"), and one that joins the fragment to the adjacent sentence it clearly belongs with (\"The team\ncelebrated because they had finally won the championship.\"). Ask: \"Which fix actually reads naturally,\nand which feels forced and artificial?\"\n\n**Bridge text [P30]:** \"Always trying to pad a fragment into its own standalone sentence is like\ntrying to repair a puzzle piece that clearly belongs attached to its neighbor by gluing random extra\ncardboard onto it instead of just connecting it to the piece it was always meant to join. Often, the\nmost natural fix for a fragment is to JOIN it to the adjacent sentence it logically belongs with, not\nto artificially inflate it into its own separate sentence.\"\n\n**Replacement text [P31]:** \"When you find a fragment, first check: does it logically belong attached\nto the sentence right before or after it? If so, the most natural fix is usually to JOIN them into one\nsentence, rather than padding the fragment out to stand alone.\"\n\n**Discrimination pairs [P33]:**\n1. \"Because they had finally won the championship, it was true.\" (an awkward, padded standalone fix\n   that doesn't read naturally) vs. \"The team celebrated because they had finally won the\n   championship.\" (a natural join to the adjacent sentence the fragment clearly belonged with).\n2. A student who always tries to make a fragment stand alone by adding filler content (misconception)\n   vs. a student who checks whether joining to an adjacent sentence produces a more natural result\n   before considering other fixes (correct, flexible approach).\n\n**s6_path:** If the student continues to pad fragments into artificial standalone sentences after the\nbridge, have them take three fragments in context and try BOTH fixes (join to adjacent sentence,\nversus pad into a standalone sentence) for each, then identify which fix reads more naturally in every\ncase.",
+      "localKey": "MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP",
+      "language": "en",
+      "refs": [
+        "MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 42,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Fragments Missing a Subject or a Verb",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Fragments Missing a Subject or a Verb\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 140,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Subordinate Clause Fragments (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Subordinate Clause Fragments (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 146,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Fixing a Fragment by Joining to an Adjacent Sentence (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Fixing a Fragment by Joining to an Adjacent Sentence (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 154,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Full Application: Identifying and Correcting Fragments",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Identifying and Correcting Fragments\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT\",\"MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT",
+        "MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 160,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Missing Subject/Verb Fragments**\nGiven four groups of words, identify which are missing a subject, which are missing a verb, and which\nare complete sentences.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Subordinate Clause Fragments**\nGiven four clauses beginning with subordinating words (because, although, when, since), identify\nwhich stand as fragments and which are followed by enough content to be complete.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Choosing Between Joining and Standalone Fixes**\nGiven a fragment in context, determine whether joining it to an adjacent sentence or supplying a\nmissing element independently produces the more natural fix.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Correcting by Joining**\nGiven a fragment and its adjacent sentence, join them into one correctly punctuated, complete\nsentence.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Identification and Correction**\nGiven a new short passage containing a mix of complete sentences and both fragment types, identify\nand correct each fragment using the most natural fix.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters basic missing-subject/verb fragments (MP-1) but consistently misses\n  subordinate clause fragments (MP-2), continue extending practice specifically with subordinating\n  words (because, although, when, since, if) until the \"feels finished?\" test becomes automatic.\n- If the student's corrections default to always joining to the PREVIOUS sentence even when joining to\n  the FOLLOWING sentence would be more natural, explicitly practice checking both directions before\n  choosing a fix.\n- If the student over-applies fragment detection to intentional, stylistically effective fragments used\n  by professional writers for emphasis (a legitimate but advanced stylistic choice, distinct from the\n  unintentional error this concept addresses), note this as a genuine exception worth a brief\n  mention, without diluting the core rule for standard academic writing.\n- Students with a strong ear for spoken language rhythm may find the \"does this feel finished?\" test\n  from TA-2 more intuitive than the formal subject/verb identification from TA-1 — allow this as a\n  valid entry point, then connect it to the formal grammatical explanation for precision.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 242,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-fragments/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.sentence-fragments",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: simple sentences check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.grammar.simple-sentences]  [Component 3: Flour-and-Water / Puzzle-Piece Anchor]\n                                                     |\n                                                     v\n                                  [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                     |\n                                                     v\n                            [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                     |\n                                                     v\n                            [MP-1 through MP-5 mastery probe set]\n                                                     |\n                            (pass >= 0.75) -----+----- (fail)\n                                   |                      |\n                                   v                      v\n                [No further unlocks —  [S6 remediation: feels-finished-test /\n                 terminal in current      try-both-fixes drills]\n                 curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-2 (subordinate clause\nfragments, the subtler case) and MC-B during TA-3 (fixing preference) — MC-A generally needs\nresolving first since a student who can't identify the subtler fragment type has nothing yet to\npractice fixing correctly. If either fires, branch to the relevant s6_path drill before resuming. At\nthe mastery probe stage (S9), route by failure: MP-1 failure indicates the basic missing-subject/verb\nrecognition (TA-1) needs review, distinct from either misconception; MP-2 failure alone indicates\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-passage example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-fragments.md",
+        "startLine": 206,
+        "endLine": 242
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

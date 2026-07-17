@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.bilingualism-and-multilingualism-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c3009bbeb0cc82bdea89a31ccbf3991901ec9ee7aaa8a765fa4f224ce2b58045",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md": "sha256:fd516302b9bb1410993c6b83f2779af11b69aed098306076f19c4340f421f0ca"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+    "name": "Bilingualism and Multilingualism",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.applied-linguistics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.bilingualism-and-multilingualism-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.bilingualism-and-multilingualism (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md": "sha256:fd516302b9bb1410993c6b83f2779af11b69aed098306076f19c4340f421f0ca"
+      },
+      "contentHash": "sha256:80169053dbdbdaef2c081feed3a967b9a9caba3229910990b22e019f3c77e30d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.bilingualism-and-multilingualism.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.bilingualism-and-multilingualism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.bilingualism-and-multilingualism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.bilingualism-and-multilingualism.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md#TA-2 (addresses MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.bilingualism-and-multilingualism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.bilingualism-and-multilingualism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.bilingualism-and-multilingualism.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md#TA-3 (addresses MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.bilingualism-and-multilingualism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.bilingualism-and-multilingualism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.bilingualism-and-multilingualism.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md#TA-4 (addresses MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY, MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.bilingualism-and-multilingualism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.bilingualism-and-multilingualism\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Bilingualism and Multilingualism — Conceptual Development Sequence",
+      "content": "### TA-1 — Bilingualism as the Global Norm\n\nIntroduce the fact that most of the world's population uses more than one language regularly, framing\nmonolingualism (not bilingualism) as the less common global pattern. Student practice: given three\nscenarios, identify which reflects a realistic, common bilingual language-use pattern.\n\n### TA-2 — Holistic, Domain-Specific Competence (MC-A)\n\nUsing the two-toolset anchor, teach that bilingual competence naturally distributes unevenly across\ndomains and should be evaluated holistically. Student practice: given a bilingual speaker's profile\n(strong in certain domains in each language), evaluate their overall competence holistically rather\nthan requiring identical mastery in each language.\n\n### TA-3 — Code-Mixing as Normal Bilingual Development (MC-B)\n\nUsing the two-bicycles anchor, teach that childhood code-mixing is a normal, temporary developmental\npattern. Student practice: given three examples of bilingual children's language use (some\ncode-mixing, one showing a genuine, broader difficulty), distinguish normal code-mixing from a\ndifferent underlying issue.\n\n### TA-4 — Full Application: Evaluating a Bilingual Scenario\n\nGive the student a new scenario describing a bilingual individual or child. They must evaluate their\ncompetence holistically across domains (TA-2) and correctly interpret any code-mixing observed as\nnormal developmental pattern rather than confusion (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 148,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/misconception/MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "**Trigger signal:** Student assumes \"real\" bilingualism requires perfectly equal, native-like fluency",
+      "content": "### MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY\n\n**Trigger signal:** Student assumes \"real\" bilingualism requires perfectly equal, native-like fluency\nin both languages considered SEPARATELY and identically, failing to recognize that most bilingual\nindividuals have different strengths in different languages for different domains (e.g., stronger\nvocabulary for cooking-related topics in one language learned at home, stronger academic vocabulary in\nthe other learned at school) — a well-documented, normal pattern called differential/domain-specific\ncompetence, not a deficiency in either language.\n\n**Conflict evidence [P28]:** Show the student a description of a bilingual speaker who discusses\nfamily and home life fluently and comfortably in their heritage language but discusses academic or\ntechnical topics more comfortably in the language of their schooling. Ask: \"Does this speaker's\ndifferent strength in each domain mean they're not truly bilingual — or does it reflect the normal way\nbilingual competence develops, shaped by which language is used in which contexts?\"\n\n**Bridge text [P30]:** \"Expecting identical, equal fluency in every domain across both languages is\nlike expecting a person who cooks with one set of tools at home and uses another specialized set at\nwork to be equally skilled with EVERY tool in BOTH sets — but skill naturally develops around actual\nuse, and a bilingual speaker's competence naturally distributes across domains based on which language\nthey actually use for which purposes. This domain-specific pattern is the NORM, not a sign of\nincomplete bilingualism.\"\n\n**Replacement text [P31]:** \"Evaluate a bilingual person's overall communicative competence\nholistically, across both languages together — not by requiring identical, equal mastery of every\nsingle domain in each language separately. Different strengths in different domains across the two\nlanguages is the normal, well-documented pattern, not a deficiency.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming a bilingual speaker with stronger academic vocabulary in one language and stronger\n   everyday/family vocabulary in the other \"isn't really fluent\" in either (rigid, single-language\n   comparison standard) vs. recognizing their combined, holistic competence across both domains and\n   languages represents genuine, complete bilingual competence (correct, holistic understanding).\n2. A student who believes bilingualism requires passing an identical, separate fluency test in each\n   language at a \"native\" level (misconception) vs. a student who recognizes that real-world bilingual\n   competence is normally distributed unevenly across domains and languages, reflecting actual patterns\n   of language use (correct understanding).\n\n**s6_path:** If the student continues to expect equal, domain-identical fluency after the bridge, have\nthem map out which domains (home, school, work, hobbies) a hypothetical bilingual speaker might use\neach language for, and explain why competence would naturally develop unevenly across these domains\nrather than identically in both languages.",
+      "localKey": "MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 3,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/misconception/MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "**Trigger signal:** Student assumes a bilingual child who mixes elements from both languages within a",
+      "content": "### MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED\n\n**Trigger signal:** Student assumes a bilingual child who mixes elements from both languages within a\nsingle utterance or conversation (code-mixing) is confused, has incomplete language development, or is\nexperiencing a developmental delay, failing to recognize that code-mixing during bilingual acquisition\nis a normal, well-documented developmental pattern that does NOT indicate confusion or delay, and\ntypically resolves as the child's ability to separate the two systems for different contexts develops.\n\n**Conflict evidence [P28]:** Show the student an example of a young bilingual child code-mixing within\na single sentence (using a word from one language embedded in a sentence otherwise in the other\nlanguage) alongside documented research showing this pattern is common, systematic, and temporary\nacross bilingually-raised children generally, typically resolving with age and increased separation\nskill — not correlated with any language delay or confusion. Ask: \"Does this pattern indicate the\nchild doesn't know either language properly, or does it reflect a normal, temporary stage that most\nbilingual children go through?\"\n\n**Bridge text [P30]:** \"Assuming code-mixing in a bilingual child means confusion is like assuming a\nchild learning to ride two different bicycles (one with hand brakes, one with pedal brakes)\ntemporarily mixing up which brake to use on which bike means they don't understand either bike properly\n— but this is a normal, temporary phase of learning to keep two systems separate, which resolves with\npractice. Bilingual code-mixing follows the same well-documented, temporary developmental pattern, not\na sign of confusion or delay.\"\n\n**Replacement text [P31]:** \"When you observe a bilingual child mixing elements of both languages, don't\nassume confusion or delay. Recognize this as a well-documented, normal developmental pattern that\ntypically resolves as the child's ability to keep the two language systems separate for different\ncontexts develops with age and experience.\"\n\n**Discrimination pairs [P33]:**\n1. A young bilingual child mixing vocabulary from both languages within one sentence, following a\n   well-documented, temporary developmental pattern (normal bilingual development) vs. a genuine\n   language delay unrelated to bilingualism, which would show as a broader, non-improving pattern of\n   difficulty across BOTH languages over time (a different phenomenon requiring different attention).\n2. A parent or teacher assuming a bilingual child's code-mixing means the child should be restricted\n   to one language only to \"avoid confusion\" (misconception-driven intervention) vs. an understanding\n   that this pattern is temporary and normal, resolving naturally without needing to suppress either\n   language (correct, evidence-based understanding).\n\n**s6_path:** If the student continues to view child code-mixing as confusion after the bridge, have\nthem research (or be shown) the typical age range at which bilingual children's code-mixing\nsignificantly decreases as language-separation skill develops, connecting this to\n`eng.linguistics.language-acquisition-intro`'s broader developmental-stage framework.",
+      "localKey": "MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED",
+      "language": "en",
+      "refs": [
+        "MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 45,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Bilingualism as the Global Norm",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Bilingualism as the Global Norm\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Holistic, Domain-Specific Competence (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Holistic, Domain-Specific Competence (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 158,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Code-Mixing as Normal Bilingual Development (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Code-Mixing as Normal Bilingual Development (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 165,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Full Application: Evaluating a Bilingual Scenario",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Evaluating a Bilingual Scenario\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY\",\"MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY",
+        "MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 172,
+        "endLine": 307
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Recognizing Bilingualism as Common**\nGiven three scenarios, identify which reflects a realistic, common global bilingual language-use\npattern.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 197,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Holistic Competence Evaluation**\nGiven a bilingual speaker's domain-specific strengths across two languages, evaluate their overall\ncompetence holistically rather than requiring identical mastery in each language separately.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 197,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Distinguishing Code-Mixing from Genuine Difficulty**\nGiven three examples of bilingual children's language use, distinguish normal, temporary code-mixing\nfrom a genuine, broader language difficulty unrelated to bilingualism.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 197,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Evaluating an Intervention Recommendation**\nGiven a recommendation to restrict a bilingual child to one language to \"avoid confusion,\" evaluate\nwhether this recommendation is well-supported by the evidence on bilingual development.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 197,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Bilingual Scenario Analysis**\nGiven a new scenario describing a bilingual individual or child, evaluate their competence\nholistically and correctly interpret any code-mixing observed as normal or as warranting further\nattention.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 197,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Adaptive Flags",
+      "content": "- If the student is themselves bilingual or multilingual, or has bilingual family members, connect\n  this concept explicitly and validatingly to their own experience — this content can carry\n  significant personal relevance and is an opportunity to counter any internalized misconceptions\n  about their own or their family's language use.\n- If the student conflates code-mixing (a normal bilingual acquisition pattern) with genuine language\n  delay, revisit `eng.linguistics.language-acquisition-intro`'s developmental-stage framework\n  explicitly, since this concept assumes that foundational, non-judgmental developmental lens is\n  already in place.\n- If the student's holistic-competence reasoning (MP-2) still implicitly ranks one language as\n  \"primary\" and the other as \"secondary\" based on which has more prestige or more school use, gently\n  challenge this ranking — holistic evaluation means neither language is inherently more \"complete\"\n  just because it's used in more prestigious domains.\n- Students with strong prior engagement in `eng.linguistics.sociolinguistics-intro`'s code-switching\n  content should transfer that understanding readily to this concept's related but distinct\n  phenomenon (code-mixing during ACQUISITION, versus code-switching as a mature social competency) —\n  clarify the terminological distinction explicitly if confusion arises.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 257,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "eng.linguistics.bilingualism-and-multilingualism/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.bilingualism-and-multilingualism",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: applied linguistics check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.applied-linguistics-intro]  [Component 3: Two-Toolset /\n                                                         Two-Bicycles Anchor]\n                                                                   |\n                                                                   v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                   |\n                                                                   v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                   |\n                                                                   v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                                   |\n                                        (pass >= 0.70) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                    [Unlock: translation-studies-intro]  [S6 remediation: domain-mapping /\n                                                            distinguish-mixing-from-delay\n                                                            drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-2 (rigid equal-fluency\nexpectation) and MC-B during TA-3 (pathologizing code-mixing) — these are largely independent and\noften need separate, explicit correction. If either fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the basic\n\"bilingualism is common\" framing (TA-1) needs review, distinct from either misconception; MP-2 failure\nalone indicates residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-scenario example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md",
+        "startLine": 220,
+        "endLine": 257
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
