@@ -7526,6 +7526,251 @@ const GRD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.prob.conditional-probability ───────────────────────────────────────
+const CONDP = 'math.prob.conditional-probability'
+const CONDP_SRC = 'docs/curriculum/blueprints/math.prob.conditional-probability.md'
+
+const CONDP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONDP,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'P(A|B) does NOT equal P(A \u2229 B) — that is skipping the whole ' +
+      'point of \u201cgiven.\u201d P(A \u2229 B) asks: out of EVERYTHING, what ' +
+      'fraction is both A and B? P(A|B) asks a narrower question: ' +
+      'once we already know B happened, shrink the universe down to ' +
+      'just B\u2019s outcomes — what fraction of THAT smaller world is ' +
+      'also A? The formula P(A|B) = P(A\u2229B)/P(B) is exactly this ' +
+      'rescaling: it divides by P(B) to re-normalize B\u2019s outcomes ' +
+      'into a new 100%. Concretely: 20% of people have a disease AND ' +
+      'a positive test (P(A\u2229B) = 0.20), and 25% test positive overall ' +
+      '(P(B) = 0.25) \u2014 given a positive test, P(disease|positive) = ' +
+      '0.20/0.25 = 0.80, not 0.20. \u201cGiven B\u201d always means: rescale ' +
+      'inside B.',
+    targetedMisconceptions: [`${CONDP}:MC-1`],
+    source: `${CONDP_SRC} — MC-1 CONDITIONAL-IS-JOINT (rescaling-inside-B interpretation; disease/positive-test worked numbers)`,
+  },
+  {
+    conceptId: CONDP,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two guard rails for conditional probability. First: P(A|B) and ' +
+      'P(B|A) are usually DIFFERENT numbers — \u201cP(rain | clouds)\u201d and ' +
+      '\u201cP(clouds | rain)\u201d ask different questions (most rainy days ' +
+      'are cloudy, but not every cloudy day rains), so never assume ' +
+      'swapping the condition preserves the value; this asymmetry is ' +
+      'the entire reason Bayes\u2019 theorem exists — to convert one ' +
+      'direction into the other correctly. Second: P(A|B) is simply ' +
+      'undefined if P(B) = 0 — conditioning on an impossible event is ' +
+      'a divide-by-zero, not a valid probability. Before writing ANY ' +
+      'conditional probability, check that the condition\u2019s ' +
+      'probability is actually positive; if it isn\u2019t, the expression ' +
+      'has no meaning to compute.',
+    targetedMisconceptions: [`${CONDP}:MC-2`, `${CONDP}:MC-3`],
+    source: `${CONDP_SRC} — MC-2 REVERSING-CONDITIONING + MC-3 ZERO-DENOMINATOR-IGNORED (asymmetry-motivates-Bayes argument + P(B)>0 validity check)`,
+  },
+]
+
+const CONDP_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONDP,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'P(disease AND positive test) = 0.20. P(positive test) = 0.25. What is P(disease | positive test)?',
+    choices: [
+      { text: '0.80 — rescale inside B: 0.20/0.25', isCorrect: true },
+      { text: '0.20 — that\u2019s already the conditional probability', isCorrect: false, misconceptionId: `${CONDP}:MC-1` },
+      { text: '0.05 — multiply the two probabilities', isCorrect: false },
+    ],
+    correctValue: '0.80',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CONDP}:MC-1`],
+    source: `${CONDP_SRC} — MC-1 disease/test numeric case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CONDP,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is P(clouds | rain) generally equal to P(rain | clouds)?',
+    choices: [
+      { text: 'No — they answer different questions and are usually different numbers; this asymmetry is why Bayes\u2019 theorem exists', isCorrect: true },
+      { text: 'Yes — \u201cgiven\u201d is symmetric, so swapping the condition doesn\u2019t change the value', isCorrect: false, misconceptionId: `${CONDP}:MC-2` },
+    ],
+    correctValue: 'no, generally different',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONDP}:MC-2`],
+    source: `${CONDP_SRC} — MC-2 rain/clouds trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.prob.expected-value ────────────────────────────────────────────────
+const EXPV = 'math.prob.expected-value'
+const EXPV_SRC = 'docs/curriculum/blueprints/math.prob.expected-value.md'
+
+const EXPV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EXPV,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A lottery pays $0 with 90% chance and $100 with 10% chance. Is ' +
+      'the expected value (0 + 100)/2 = $50? No — that formula ' +
+      'silently assumes both outcomes are EQUALLY likely, which they ' +
+      'are not. Expected value WEIGHTS each outcome by its own ' +
+      'probability: E[X] = \u03a3 x\u00b7P(X=x) = 0(0.90) + 100(0.10) = $10. ' +
+      'The plain average (x\u2081+\u2026+x\u2099)/n is only correct in the special ' +
+      'case where every outcome truly is equally likely (like a fair ' +
+      'die) — the moment probabilities differ, you must multiply ' +
+      'each value by ITS OWN probability and sum, never divide by a ' +
+      'flat count.',
+    targetedMisconceptions: [`${EXPV}:MC-1`],
+    source: `${EXPV_SRC} — MC-1 ARITHMETIC-AVERAGE-CONFUSION (lottery 90/10 weighting example)`,
+  },
+  {
+    conceptId: EXPV,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A die-based game has expected value $3.50 — can any single ' +
+      'roll actually pay out $3.50? No, and that is completely fine: ' +
+      'expected value is a LONG-RUN AVERAGE, not a promise about any ' +
+      'one trial. It describes what the average payout converges to ' +
+      'over thousands of repetitions, not a value you should expect ' +
+      'to see on any given play. Rejecting a fractional or ' +
+      'unreachable E[X] as \u201cimpossible\u201d confuses the summary ' +
+      'statistic with an actual outcome. (Separately: E[X] = ' +
+      '\u03a3x\u00b7P(X=x) is the DISCRETE formula — for a continuous random ' +
+      'variable described by a density f(x), the sum becomes an ' +
+      'integral, E[X] = \u222bx\u00b7f(x)dx, since there are no individual point ' +
+      'probabilities to sum over a continuum.)',
+    targetedMisconceptions: [`${EXPV}:MC-3`, `${EXPV}:MC-2`],
+    source: `${EXPV_SRC} — MC-3 EXPECTED-MUST-BE-ACHIEVABLE (long-run-average reframe) + MC-2 DISCRETE-FORMULA-FOR-CONTINUOUS (sum-to-integral note)`,
+  },
+]
+
+const EXPV_PROBES: SeedProbe[] = [
+  {
+    conceptId: EXPV,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A lottery pays $0 with probability 0.9 and $100 with probability 0.1. What is E[X]?',
+    choices: [
+      { text: '$10 — weight each value by its own probability: 0(0.9) + 100(0.1)', isCorrect: true },
+      { text: '$50 — average the two payout values', isCorrect: false, misconceptionId: `${EXPV}:MC-1` },
+    ],
+    correctValue: '$10',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EXPV}:MC-1`],
+    source: `${EXPV_SRC} — MC-1 lottery trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EXPV,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A game has E[X] = $3.50, but no single roll can pay exactly $3.50. Is this a valid expected value?',
+    choices: [
+      { text: 'Yes — expected value is a long-run average, not a value any single trial must produce', isCorrect: true },
+      { text: 'No — an expected value that no outcome can actually achieve is impossible', isCorrect: false, misconceptionId: `${EXPV}:MC-3` },
+    ],
+    correctValue: 'yes, valid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXPV}:MC-3`],
+    source: `${EXPV_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.maxwell-boltzmann ─────────────────────────────────────────────
+const MAXB = 'phys.stat.maxwell-boltzmann'
+const MAXB_SRC = 'docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md'
+
+const MAXB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MAXB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'The Maxwell-Boltzmann distribution has THREE distinct \u201ctypical ' +
+      'speeds,\u201d and they are not the same number — a common shortcut ' +
+      'treats them as interchangeable. The most PROBABLE speed v_p ' +
+      'is where the distribution peaks (the single most common ' +
+      'value); the MEAN speed \u27e8v\u27e9 averages every molecule\u2019s speed; ' +
+      'the RMS speed v_rms = \u221a\u27e8v\u00b2\u27e9 is used in pressure and kinetic ' +
+      'energy formulas. Because the distribution is skewed (a long ' +
+      'tail toward high speeds, a hard floor at zero), these three ' +
+      'measures come out in a fixed order: v_p < \u27e8v\u27e9 < v_rms — ' +
+      'always, for any temperature. Using v_p where a formula needs ' +
+      'v_rms (or vice versa) introduces a real, calculable error, not ' +
+      'just a rounding difference.',
+    targetedMisconceptions: [`${MAXB}:MC-1`],
+    source: `${MAXB_SRC} — MC-1 (P28/P30: skewed-distribution ordering v_p < \u27e8v\u27e9 < v_rms)`,
+  },
+  {
+    conceptId: MAXB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Does doubling the temperature double the mean molecular ' +
+      'speed? No — speed scales with the SQUARE ROOT of temperature, ' +
+      'not temperature itself: \u27e8v\u27e9 \u221d \u221aT. Doubling T multiplies the ' +
+      'mean speed by \u221a2 \u2248 1.41, not 2. This comes straight from ' +
+      'equipartition: average kinetic energy \u00bdm\u27e8v\u00b2\u27e9 \u221d T, so \u27e8v\u00b2\u27e9 ' +
+      '\u221d T and \u27e8v\u27e9 \u221d \u221aT \u2014 energy is linear in T, but speed is ' +
+      'energy\u2019s square root. A second trap: the high-speed \u201ctail\u201d of ' +
+      'the distribution looks negligible on a graph but is never ' +
+      'truly zero — it is exactly that tail that lets a small ' +
+      'fraction of molecules escape a planet\u2019s atmosphere or clear ' +
+      'the activation-energy barrier in a chemical reaction. \u201cSmall\u201d ' +
+      'is not \u201czero\u201d in a distribution with infinite support.',
+    targetedMisconceptions: [`${MAXB}:MC-4`, `${MAXB}:MC-3`],
+    source: `${MAXB_SRC} — MC-4 (\u27e8v\u27e9\u221d\u221aT scaling, equipartition argument) + MC-3 (high-speed-tail-is-negligible; escape/activation-energy consequence)`,
+  },
+]
+
+const MAXB_PROBES: SeedProbe[] = [
+  {
+    conceptId: MAXB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For a Maxwell-Boltzmann speed distribution, which ordering is correct?',
+    choices: [
+      { text: 'v_p < \u27e8v\u27e9 < v_rms — the most probable, mean, and RMS speeds are three distinct values in this fixed order', isCorrect: true },
+      { text: 'v_p = \u27e8v\u27e9 = v_rms — the most probable, mean, and RMS speeds are the same value', isCorrect: false, misconceptionId: `${MAXB}:MC-1` },
+    ],
+    correctValue: 'v_p < \u27e8v\u27e9 < v_rms',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MAXB}:MC-1`],
+    source: `${MAXB_SRC} — MC-1 ordering trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MAXB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'If the absolute temperature of a gas is doubled, what happens to the mean molecular speed?',
+    choices: [
+      { text: 'It increases by a factor of \u221a2 \u2248 1.41 — mean speed scales as \u221aT, not T', isCorrect: true },
+      { text: 'It doubles — mean speed is directly proportional to temperature', isCorrect: false, misconceptionId: `${MAXB}:MC-4` },
+    ],
+    correctValue: '\u00d7\u221a2',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MAXB}:MC-4`],
+    source: `${MAXB_SRC} — MC-4 doubling-temperature trigger as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -7616,6 +7861,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...MIR_EXPLANATIONS,
   ...CHAIN_EXPLANATIONS,
   ...GRD_EXPLANATIONS,
+  ...CONDP_EXPLANATIONS,
+  ...EXPV_EXPLANATIONS,
+  ...MAXB_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -7706,4 +7954,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...MIR_PROBES,
   ...CHAIN_PROBES,
   ...GRD_PROBES,
+  ...CONDP_PROBES,
+  ...EXPV_PROBES,
+  ...MAXB_PROBES,
 ]
