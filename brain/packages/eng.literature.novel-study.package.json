@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.novel-study-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.novel-study",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3318bf0d1c2a8d5de86b8772a3b90b70b12bae4959684fde71113eb5cd87215c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.novel-study.md": "sha256:c06a63992481dc35259fe450d3983a2ba53c7f48d246dcb4be7b0bd0fdef3f21"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.novel-study",
+    "name": "Novel Study",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "eng.literature.short-story-study"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.novel-study-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.novel-study (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.novel-study.md": "sha256:c06a63992481dc35259fe450d3983a2ba53c7f48d246dcb4be7b0bd0fdef3f21"
+      },
+      "contentHash": "sha256:c8af5149b9d899a2f4acabfc8dd904a68ba04af7832ec8cf483cebca02ebc12b",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.novel-study.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.novel-study.md#TA-1 (addresses MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.novel-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.novel-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.novel-study.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.novel-study.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.novel-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.novel-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.novel-study.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.novel-study.md#TA-3 (addresses MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.novel-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.novel-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.novel-study.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.novel-study.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.novel-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.novel-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.novel-study.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.novel-study.md#TA-5 (addresses MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS, MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.novel-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.novel-study\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.novel-study/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Novel Study — Conceptual Development Sequence",
+      "content": "### TA-1 — Recalibrating from Short Story Economy to Novel Scope (MC-A)\n\nUsing the feature-film anchor, teach students to expect and value subplots and fully developed\nsecondary characters as legitimate novel-length structural choices. Student practice: given a\ndescription of a subplot or secondary character, articulate what it contributes that a compressed\nshort story couldn't support.\n\n### TA-2 — Tracing a Subplot's Relationship to the Main Plot\n\nTeach students to trace a subplot across multiple points in a novel and characterize its relationship\nto the main plot (supporting, contrasting, complicating). Student practice: given subplot summaries at\nthree points in a novel, characterize the subplot's relationship to the main plot's development.\n\n### TA-3 — Theme as Developmental, Not Fixed From a Single Passage (MC-B)\n\nUsing the long-running-study anchor, teach students to track a theme's development and revise their\ntheme statement as the novel progresses. Student practice: given an early \"apparent theme\" passage\nand a later complicating passage, revise the theme statement to account for both.\n\n### TA-4 — Sustained Character Development Across an Extended Narrative\n\nTeach students to track how a character develops (not just changes, but develops in ways only visible\nacross many chapters) across an extended novel, distinct from the more limited scope of change\npossible in a short story's single protagonist arc. Student practice: given character moments at three\npoints in a novel, characterize the specific development shown.\n\n### TA-5 — Full Application: Sustained Analysis of a Novel's Elements\n\nGive the student excerpts and summaries from across a full novel. They must analyze a subplot's\nrelationship to the main plot (TA-2), track a theme's development and state a full-arc theme\nstatement (TA-3), and characterize a character's sustained development (TA-4), explicitly recognizing\nthe novel-length structural possibilities involved (TA-1) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 148,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/misconception/MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS",
+      "kind": "misconception",
+      "conceptId": "eng.literature.novel-study",
+      "title": "**Trigger signal:** Student, having internalized the short story's economy-driven analytical habits,",
+      "content": "### MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS\n\n**Trigger signal:** Student, having internalized the short story's economy-driven analytical habits,\nassumes a novel is simply a longer version of the same compressed form — expecting every element to\nbe doing similarly tight, singular narrative work, and either missing the legitimate value of\nsubplots/digressions/fully-developed secondary characters, or dismissing them as \"padding\" the way an\noverly-padded SHORT piece would be criticized.\n\n**Conflict evidence [P28]:** Show the student a subplot from a novel involving a secondary character\nwhose storyline doesn't directly advance the main plot's central conflict, but who is given\nsubstantial development in their own right. Ask: \"In a short story, would there be room for this kind\nof fully-developed secondary storyline? Does its presence here mean the novel is 'padded' or poorly\nfocused, or is this a legitimate structural possibility unique to the novel's greater length?\"\n\n**Bridge text [P30]:** \"Assuming a novel is just a stretched-out short story is like assuming a\nfeature film is just a stretched-out short film — but a feature film's length allows entirely\ndifferent structural possibilities (subplots, an ensemble cast, a slower emotional build) that aren't\nsimply 'more of the same compression,' they're a genuinely different set of storytelling tools\navailable BECAUSE of the greater length. A novel's subplots and fully developed secondary characters\nare legitimate uses of its form, not padding.\"\n\n**Replacement text [P31]:** \"When a novel includes a subplot or a fully developed secondary character\nthat doesn't directly serve the main plot's central conflict, don't assume this is padding or a lack of\nfocus. Ask instead: what does this novel's greater length allow it to do here that a short story\ncouldn't — and how does this element relate to (support, contrast, complicate) the whole?\"\n\n**Discrimination pairs [P33]:**\n1. Dismissing a well-developed subplot as \"unnecessary padding\" because it doesn't directly advance\n   the main conflict (short-story-economy standard misapplied to a novel) vs. recognizing the subplot\n   as a legitimate structural choice made possible by the novel's length, and asking how it relates to\n   the whole (correct, form-appropriate reading).\n2. A student expecting every secondary character in a novel to serve one narrow function, the way a\n   short story's economy would require (misapplied standard) vs. a student expecting and appreciating\n   that a novel can afford to develop secondary characters more fully, each becoming a real,\n   multidimensional presence (correct expectation).\n\n**s6_path:** If the student continues to view novel-length elements as padding after the bridge, have\nthem identify a specific subplot or secondary character and explicitly articulate what it contributes\n(a thematic contrast, a fuller picture of the story's world, an emotional counterpoint) that would\ngenuinely be lost if the novel were compressed to short-story length.",
+      "localKey": "MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS",
+      "language": "en",
+      "refs": [
+        "MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/misconception/MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER",
+      "kind": "misconception",
+      "conceptId": "eng.literature.novel-study",
+      "title": "**Trigger signal:** Student attempts to state a novel's theme based on a single passage or early",
+      "content": "### MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER\n\n**Trigger signal:** Student attempts to state a novel's theme based on a single passage or early\nchapter, treating the theme as a fixed, fully-formed statement establishable from any one part of the\ntext, rather than recognizing that a novel's theme typically DEVELOPS and DEEPENS across its extended\nlength — early statements of a theme may be complicated, qualified, or even partially reversed by\nlater developments, and the full complexity only becomes visible by tracking the theme's treatment\nacross many chapters.\n\n**Conflict evidence [P28]:** Show the student an early passage in a novel that seems to state a\nsimple, clear theme (e.g., an early chapter suggesting \"hard work always leads to success\"), alongside\na later passage that complicates or qualifies this apparent theme (e.g., a later chapter showing hard\nwork failing due to circumstances beyond the character's control, or succeeding only with additional,\nunacknowledged privilege). Ask: \"Does the early passage give you the COMPLETE picture of what the novel\nultimately says about this theme, or does the full picture only emerge by tracking how the theme\ndevelops across the whole book?\"\n\n**Bridge text [P30]:** \"Assuming a novel's theme is fully visible from any single passage is like\nassuming you can understand a long-running research study's full conclusion from its first data point\n— the first data point might suggest a pattern, but the STUDY'S full, more nuanced conclusion only\nemerges by tracking how the pattern develops, gets complicated, or changes across all the data\ncollected. A novel's theme works the same way: its full complexity develops across the extended\nnarrative, not from any single passage.\"\n\n**Replacement text [P31]:** \"Don't finalize a novel's theme based on an early passage or a single\nchapter. Track how the apparent theme is reinforced, complicated, qualified, or even reversed as the\nnovel progresses, and state the theme based on this FULL developmental arc, not a single snapshot.\"\n\n**Discrimination pairs [P33]:**\n1. Concluding \"this novel's theme is that hard work always leads to success\" based only on an early\n   chapter (single-snapshot theme statement) vs. tracking the theme across the whole novel and\n   concluding something more nuanced, like \"the novel suggests hard work matters, but success also\n   depends on circumstances and privilege the early chapters don't yet acknowledge\" (developmental,\n   full-arc theme statement).\n2. A student who treats their first theme statement as final and unrevisable regardless of later plot\n   developments (rigid, premature closure) vs. a student who actively revises their theme statement as\n   they encounter later complicating chapters (correct, developmental tracking).\n\n**s6_path:** If the student continues to finalize themes prematurely after the bridge, have them\nwrite down their theme statement after an early chapter, then revisit and explicitly revise that\nstatement after reading a later, complicating chapter, articulating exactly what changed and why.",
+      "localKey": "MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER",
+      "language": "en",
+      "refs": [
+        "MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 44,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Recalibrating from Short Story Economy to Novel Scope (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recalibrating from Short Story Economy to Novel Scope (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 152,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Tracing a Subplot's Relationship to the Main Plot",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Tracing a Subplot's Relationship to the Main Plot\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Theme as Developmental, Not Fixed From a Single Passage (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Theme as Developmental, Not Fixed From a Single Passage (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 165,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Sustained Character Development Across an Extended Narrative",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Sustained Character Development Across an Extended Narrative\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 171,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Full Application: Sustained Analysis of a Novel's Elements",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Sustained Analysis of a Novel's Elements\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS\",\"MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS",
+        "MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 178,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.novel-study",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Appreciating Novel-Scope Structural Choices**\nGiven a subplot or secondary character description, articulate what it contributes that a compressed\nshort story's economy couldn't support.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 203,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.novel-study",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Tracing a Subplot's Relationship to the Main Plot**\nGiven subplot summaries at two points in a novel, characterize the subplot's relationship to the main\nplot's development.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 203,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.novel-study",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Revising a Theme Statement Across the Novel**\nGiven an early \"apparent theme\" passage and a later complicating passage, revise the theme statement\nto account for both.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 203,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.novel-study",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Characterizing Sustained Character Development**\nGiven character moments at two points in a novel, characterize the specific development shown across\nthat span.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 203,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.novel-study",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Sustained Analysis**\nGiven new excerpts from across a novel, analyze a subplot's relationship to the main plot, track theme\ndevelopment into a full-arc statement, and characterize sustained character development.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 203,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Adaptive Flags",
+      "content": "- Given this concept's 4-hour length and expert difficulty, actively monitor for fatigue across the\n  extended TA sequence — split across multiple sessions if needed, resuming with a brief review of\n  what's been covered rather than restarting from TA-1.\n- If the student masters short excerpts and passage pairs (MP-1 through MP-4) but struggles to\n  integrate all threads when working with a genuinely complete, lengthy novel (MP-5 at full scale),\n  this reflects the added working-memory demand of tracking multiple threads across hundreds of pages\n  — provide a running notes/tracking template (subplot notes, theme-revision log, character-\n  development log) as scaffolding for real novel-length reading assignments.\n- If the student's theme revisions (MP-3) swing to the opposite extreme of never settling on any\n  theme statement at all (paralyzed by the expectation that everything might be complicated later),\n  clarify that revising a theme statement as evidence accumulates is different from refusing to state\n  any working theme at all — a working, revisable theme statement is still valuable throughout the\n  reading process.\n- Students who have completed multiple novels independently (personal reading history) should be\n  encouraged to apply this concept's analytical framework retroactively to a favorite novel, since\n  personal familiarity with the full text can make the sustained-tracking skills more concrete and\n  motivating than working only with provided excerpts.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 265,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "eng.literature.novel-study/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.novel-study",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: short story study check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.short-story-study]  [Component 3: Feature-Film / Long-Running-\n                                               Study Anchor]\n                                                          |\n                                                          v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                          |\n                                                          v\n                                [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                          |\n                                                          v\n                                [MP-1 through MP-5 mastery probe set]\n                                                          |\n                                (pass >= 0.70) -----+----- (fail)\n                                       |                      |\n                                       v                      v\n                  [No further unlocks —  [S6 remediation: name-the-contribution /\n                   terminal in current      revise-the-theme-statement drills]\n                   curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (dismissing novel-length\nelements as padding) and MC-B during TA-3 (premature theme closure) — these are largely independent\nrecalibrations from short-story habits and often need separate, explicit correction. If either fires,\nbranch to the relevant s6_path drill before resuming. Given this concept's 4-hour length and expert\ndifficulty, monitor cognitive load across the TA sequence — this is an appropriate concept to split\nacross multiple sessions, resuming at the next TA with a brief recap. At the mastery probe stage (S9),\nroute by failure: MP-1 failure indicates residual MC-A; MP-2 failure alone indicates the subplot-\ntracing mechanics (TA-2) need review, distinct from either misconception; MP-3 failure alone indicates\nresidual MC-B; MP-4 failure alone indicates the sustained-character-development extension (TA-4);\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap at full-novel scale — provide\none more guided sustained-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.novel-study.md",
+        "startLine": 225,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

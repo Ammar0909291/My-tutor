@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.phrasal-verbs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.phrasal-verbs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1272fde0526cfef84ab3c6bfb3e1a0a3c94048abdff33337d2c1d3ef7a082a73",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md": "sha256:cdfedb9b82d9e540c71599834843b7d083c986915a8a62676999d293d9635640"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.vocab.phrasal-verbs",
+    "name": "Phrasal Verbs",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.collocations"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.phrasal-verbs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.phrasal-verbs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md": "sha256:cdfedb9b82d9e540c71599834843b7d083c986915a8a62676999d293d9635640"
+      },
+      "contentHash": "sha256:8c8cf80e902c9a5baaa7e6e5b85af37a8002ec6fe3e931e4fe9e06604b2d370c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.phrasal-verbs.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md#TA-1 (addresses MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.phrasal-verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.phrasal-verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.phrasal-verbs.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md#TA-2 (addresses MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.phrasal-verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.phrasal-verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.phrasal-verbs.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.phrasal-verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.phrasal-verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.phrasal-verbs.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md#TA-4 (addresses MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS, MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.phrasal-verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.phrasal-verbs\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.phrasal-verbs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Phrasal Verbs — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing Phrasal Verbs as Single Semantic Units (MC-A)\n\nUsing the breakfast-fusion anchor, teach students to treat verb-plus-particle combinations as whole\nunits rather than attempting literal derivation. Student practice: given five sentences containing\nphrasal verbs, state the whole-unit meaning of each.\n\n### TA-2 — Separable vs. Inseparable Phrasal Verbs (MC-B)\n\nUsing the zipper anchor, teach students to test each phrasal verb for separability. Student practice:\ngiven six phrasal verbs in context, test both object placements (between parts, after whole unit) and\nclassify each as separable or inseparable.\n\n### TA-3 — Pronoun Objects Must Split Separable Phrasal Verbs\n\nExtend TA-2: for separable phrasal verbs specifically, a PRONOUN object must always go between the\nverb and particle (never after the whole unit). Student practice: given four separable phrasal verbs\nwith a noun object, convert the noun to a pronoun and correctly place it.\n\n### TA-4 — Full Application: Using Phrasal Verbs Correctly in Context\n\nGive the student a new short passage or set of sentences using phrasal verbs with various object\ntypes (nouns, pronouns, or no object). They must identify each phrasal verb's meaning (TA-1),\ndetermine separability (TA-2), and correctly place any pronoun object (TA-3) — the full synthesis\ntask.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 137,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/misconception/MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "**Trigger signal:** Student attempts to interpret a phrasal verb by combining the literal meanings of",
+      "content": "### MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS\n\n**Trigger signal:** Student attempts to interpret a phrasal verb by combining the literal meanings of\nthe verb and the particle separately, rather than recognizing the combination as a fixed semantic\nunit with its own, often non-derivable meaning — e.g., interpreting \"give up\" (meaning \"to quit or\nsurrender\") as somehow related to physically giving something in an upward direction.\n\n**Conflict evidence [P28]:** Show the student the sentence \"After trying for hours, she finally gave\nup.\" and ask: \"Does 'gave up' here involve physically giving anything, or moving anything upward?\nWhat does the WHOLE phrase mean as a single unit?\" Guide the student to see the phrase means \"to quit\nor stop trying,\" a meaning with no direct, derivable connection to \"give\" or \"up\" individually.\n\n**Bridge text [P30]:** \"Trying to derive a phrasal verb's meaning from its individual parts is like\ntrying to understand the word 'breakfast' by combining the literal meanings of 'break' and 'fast' —\ntechnically related historically (breaking an overnight fast), but a modern speaker just learns\n'breakfast' as one whole word with one meaning. Phrasal verbs work the same way: learn the WHOLE\ncombination as one semantic unit, not a sum of its two literal parts.\"\n\n**Replacement text [P31]:** \"When you encounter a verb-plus-particle combination, don't try to\nderive its meaning from the individual words. Learn the WHOLE combination's meaning as a single\nvocabulary unit, the same way you'd learn any new word.\"\n\n**Discrimination pairs [P33]:**\n1. \"She gave up.\" (a phrasal verb meaning \"quit,\" with no literal connection to physically giving\n   something upward) vs. \"She gave the ball up to the referee.\" (a literal reading where \"gave\" and\n   \"up\" happen to appear near each other but aren't functioning as one fixed phrasal-verb unit in the\n   same idiomatic way — context and specific usage determine which reading applies).\n2. A student attempting to guess \"look after\" means something about looking in a direction called\n   \"after\" (literal, incorrect derivation) vs. a student who has learned \"look after\" as a fixed unit\n   meaning \"to take care of\" (correct, whole-unit learning).\n\n**s6_path:** If the student continues to attempt literal derivation after the bridge, give them three\nmore common phrasal verbs in clear context and have them first attempt (and notice the failure of) a\nliteral interpretation, then learn and confirm the actual, non-derivable meaning from context or a\nreference.",
+      "localKey": "MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS",
+      "language": "en",
+      "refs": [
+        "MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/misconception/MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "**Trigger signal:** Student assumes ALL phrasal verbs allow the object to be placed either between the",
+      "content": "### MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS\n\n**Trigger signal:** Student assumes ALL phrasal verbs allow the object to be placed either between the\nverb and particle or after the whole unit, failing to recognize that some phrasal verbs are\nINSEPARABLE (the object must always follow the whole unit, e.g., \"look after her,\" never \"look her\nafter\") while others are SEPARABLE (allowing both orders with a noun object, e.g., \"give up the fight\"\nor \"give the fight up\") — and that pronoun objects specifically REQUIRE the separated position for\nseparable phrasal verbs.\n\n**Conflict evidence [P28]:** Show the student \"She looked after the children.\" alongside the\nincorrect attempted alternative \"She looked the children after.\" and ask: \"Does this second version\nsound correct to a fluent speaker? Now compare 'She gave up the fight' with 'She gave the fight up' —\nare both of THESE versions acceptable?\" Guide the student to see that \"look after\" never allows the\nobject to split it, while \"give up\" allows the object either way (with a noun object).\n\n**Bridge text [P30]:** \"Assuming every phrasal verb allows the object to move around freely is like\nassuming every zipper can be opened from either end — some zippers genuinely can (separable), but\nothers are fixed and can only be operated one specific way (inseparable). Each phrasal verb has its\nown specific behavior that must be learned individually — some allow the object to split the verb and\nparticle, others require the object to always follow the whole unit together.\"\n\n**Replacement text [P31]:** \"For each phrasal verb you learn, also learn whether it is SEPARABLE\n(object can go between the verb and particle, or after both, if it's a noun) or INSEPARABLE (object\nmust always follow the whole unit). Don't assume all phrasal verbs behave the same way.\"\n\n**Discrimination pairs [P33]:**\n1. \"She looked after the children.\" (correct — \"look after\" is inseparable) vs. \"She looked the\n   children after.\" (incorrect — the object cannot split this inseparable phrasal verb).\n2. \"She gave up the fight.\" and \"She gave the fight up.\" (both correct — \"give up\" is separable,\n   allowing a noun object either position) vs. only one of these orders being correct for an\n   inseparable phrasal verb like \"look after.\"\n\n**s6_path:** If the student continues to assume uniform behavior after the bridge, give them five\nphrasal verbs with example sentences and have them test each one by attempting both object placements\n(between the parts, and after the whole unit), determining separable versus inseparable status for\neach based on which placements sound correct to a reference or fluent-speaker check.",
+      "localKey": "MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS",
+      "language": "en",
+      "refs": [
+        "MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 39,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Recognizing Phrasal Verbs as Single Semantic Units (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing Phrasal Verbs as Single Semantic Units (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Separable vs. Inseparable Phrasal Verbs (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Separable vs. Inseparable Phrasal Verbs (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Pronoun Objects Must Split Separable Phrasal Verbs",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Pronoun Objects Must Split Separable Phrasal Verbs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Full Application: Using Phrasal Verbs Correctly in Context",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Using Phrasal Verbs Correctly in Context\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS\",\"MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS",
+        "MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 159,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Whole-Unit Meaning**\nGiven three sentences containing phrasal verbs, state the whole-unit meaning of each, confirming it\nis not simply derivable from the individual words.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Testing Separability**\nGiven three phrasal verbs in context with a noun object, test both possible object placements and\nclassify each as separable or inseparable.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Correct Pronoun Placement**\nGiven three separable phrasal verbs with a noun object, convert the noun to a pronoun and correctly\nplace it between the verb and particle.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Separable from Inseparable**\nGiven four phrasal verbs, correctly identify which are separable (allowing both object placements\nwith a noun) and which are inseparable (requiring the object to follow the whole unit).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Contextual Application**\nGiven a new short passage using phrasal verbs with various object types, identify each phrasal verb's\nmeaning, determine separability, and correctly place any pronoun objects.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Adaptive Flags",
+      "content": "- If the student is a language learner whose first language lacks phrasal verbs or has a very\n  different equivalent structure, expect this concept to require more repetition than for a native\n  speaker, since the whole-unit, non-derivable nature of phrasal verbs is often genuinely\n  unfamiliar cross-linguistically.\n- If the student masters separability testing (MP-2, MP-4) but consistently forgets the pronoun-\n  specific rule (MP-3), provide additional dedicated practice on this specific sub-rule, since it is a\n  common, persistent error even among otherwise proficient speakers.\n- If the student's own speech or writing already uses phrasal verbs fluently and correctly\n  (common for native or highly proficient speakers), focus mastery probes on the EXPLICIT\n  articulation of the separability rules rather than production, since implicit correct use doesn't\n  guarantee explicit metalinguistic awareness.\n- Students with strong performance in `eng.vocab.idioms` should transfer the \"learn as a whole unit,\n  don't derive from parts\" principle readily to phrasal verbs — draw this parallel explicitly, since\n  both concepts share this core insight about fixed, non-compositional expressions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 244,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "eng.vocab.phrasal-verbs/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.phrasal-verbs",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: collocations check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.vocab.collocations]  [Component 3: Breakfast-Fusion / Fixed-vs-Openable-\n                                     Zipper Anchor]\n                                               |\n                                               v\n                            [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                               |\n                                               v\n                      [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                               |\n                                               v\n                      [MP-1 through MP-5 mastery probe set]\n                                               |\n                      (pass >= 0.75) -----+----- (fail)\n                             |                      |\n                             v                      v\n        [No further unlocks —  [S6 remediation: literal-attempt-fails-context-\n         terminal in current      succeeds / test-both-placements drills]\n         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (literal derivation\nattempts) and MC-B during TA-2 (assuming uniform separability) — MC-A generally needs resolving first\nsince a student who hasn't accepted the whole-unit meaning principle has less motivation to carefully\nlearn each phrasal verb's individual separability behavior. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-3 failure alone indicates the\npronoun-placement extension (TA-3) needs review, distinct from either misconception; MP-5 failure with\nMP-1 through MP-4 passing indicates an integration gap — provide one more guided contextual example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md",
+        "startLine": 206,
+        "endLine": 244
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

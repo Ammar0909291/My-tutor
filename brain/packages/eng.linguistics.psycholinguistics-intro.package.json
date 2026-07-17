@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.psycholinguistics-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.psycholinguistics-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:70c4652effadc9f619049bcdb09d0c8f2179b92c3dc585adca73d08cf32ca85c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md": "sha256:2093e96010bb751c4d270eeb6c6e90207cfd88d29ff4ec5b6d708b06f36116f2"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.psycholinguistics-intro",
+    "name": "Introduction to Psycholinguistics",
+    "difficultyRaw": "research",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.language-acquisition-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.psycholinguistics-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.psycholinguistics-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md": "sha256:2093e96010bb751c4d270eeb6c6e90207cfd88d29ff4ec5b6d708b06f36116f2"
+      },
+      "contentHash": "sha256:a30b24f382298b30dbb89a3646dff7af8a545cfc3c05c6c439e9713e978fecdf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.psycholinguistics-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md#TA-1 (addresses MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.psycholinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.psycholinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.psycholinguistics-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md#TA-2 (addresses MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.psycholinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.psycholinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.psycholinguistics-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.psycholinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.psycholinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.psycholinguistics-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.psycholinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.psycholinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.psycholinguistics-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md#TA-5 (addresses MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN, MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.psycholinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.psycholinguistics-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Introduction to Psycholinguistics — Conceptual Development Sequence",
+      "content": "### TA-1 — Experimental Evidence vs. Introspection (MC-A)\n\nUsing the heart-rate-monitor anchor, teach that psycholinguistics relies on controlled experimental\nevidence rather than introspection alone. Student practice: given three claims about mental language\nprocessing, identify which are supported by experimental evidence and which are merely introspective\nassumptions.\n\n### TA-2 — Speech Errors as Systematic Data (MC-B)\n\nUsing the printing-press anchor, teach that speech errors reveal systematic patterns about language\nplanning. Student practice: given four documented speech-error examples, identify the systematic\npattern in each (same sound category, same grammatical category).\n\n### TA-3 — Incremental Sentence Comprehension\n\nIntroduce the finding that comprehension happens incrementally, word by word, in real time, rather\nthan waiting until a sentence's end. Student practice: given a description of an experiment showing\nincremental processing (e.g., reaction times changing at specific points within a sentence, before it\nends), explain what the timing pattern reveals about comprehension.\n\n### TA-4 — Stages of Language Production\n\nIntroduce the general idea that speech production involves distinct planning stages (conceptualizing\na message, selecting words, planning sounds) rather than happening as one undifferentiated process,\nconnecting back to what speech-error patterns reveal about these stages. Student practice: given a\nspeech error, identify which stage of production it likely reveals information about.\n\n### TA-5 — Full Application: Evaluating Psycholinguistic Evidence\n\nGive the student a new psycholinguistic scenario (a speech error example and a description of a\nreaction-time experiment). They must evaluate the evidence type as experimental rather than\nintrospective (TA-1), identify the systematic pattern in the speech error (TA-2), and explain what the\nreaction-time data reveals about incremental processing (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 150,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/misconception/MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "**Trigger signal:** Student assumes that simply introspecting — thinking carefully about how",
+      "content": "### MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES\n\n**Trigger signal:** Student assumes that simply introspecting — thinking carefully about how\nunderstanding or producing language subjectively \"feels\" — is a reliable, sufficient method for\nstudying the actual underlying mental processes, failing to recognize that psycholinguists rely on\ncontrolled EXPERIMENTAL evidence (measuring reaction times, analyzing patterns in speech errors)\nspecifically because introspection is notoriously unreliable at revealing what's actually happening\nbeneath conscious awareness.\n\n**Conflict evidence [P28]:** Present the student with the fact that reading comprehension FEELS\ninstantaneous and effortless to the reader (introspectively, a sentence's meaning seems to arrive all\nat once), but carefully controlled reaction-time experiments reveal comprehension actually happens\nincrementally, word by word, in measurable time. Ask: \"Does introspection alone reveal this\nincremental, word-by-word process? What method actually revealed it?\"\n\n**Bridge text [P30]:** \"Relying on introspection to study mental language processes is like relying\non a person's subjective sense of how fast their heart is beating instead of actually measuring it with\na monitor — subjective impressions can be wildly inaccurate about processes happening automatically,\nbeneath conscious awareness. Psycholinguists use controlled experiments (reaction-time measurements,\nerror-pattern analysis) precisely because these reveal what's actually happening, which introspection\nalone often cannot access.\"\n\n**Replacement text [P31]:** \"When studying how the mind processes language, don't rely on introspection\nalone (how it subjectively feels). Look for controlled EXPERIMENTAL evidence — reaction-time\nmeasurements, systematic patterns in speech errors — which can reveal processes that happen\nautomatically, beneath what a person can consciously notice or accurately report.\"\n\n**Discrimination pairs [P33]:**\n1. \"Understanding a sentence feels instant, so it must happen all at once.\" (an introspective claim,\n   not supported by reaction-time evidence) vs. \"Reaction-time experiments show comprehension happens\n   incrementally, word by word, even though it subjectively feels instant.\" (a claim supported by\n   controlled experimental evidence).\n2. A student who assumes their own subjective sense of how they process language must be accurate\n   (over-reliance on introspection) vs. a student who recognizes that experimental methods can reveal\n   processes inconsistent with subjective impressions (correct, evidence-based understanding).\n\n**s6_path:** If the student continues to over-rely on introspection after the bridge, present them\nwith a second example where introspection and experimental evidence diverge (e.g., speakers typically\ncannot accurately report which specific word they were about to say right before a slip of the\ntongue occurs, even though the error itself reveals real information about the planning process), and\nhave them articulate why the experimental evidence, not the introspective report, is the more\nreliable source.",
+      "localKey": "MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES",
+      "language": "en",
+      "refs": [
+        "MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 3,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/misconception/MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "**Trigger signal:** Student assumes speech errors (slips of the tongue, like swapping the initial",
+      "content": "### MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN\n\n**Trigger signal:** Student assumes speech errors (slips of the tongue, like swapping the initial\nsounds of two words, \"tips of the slung\" instead of \"slips of the tongue\") are simply random noise or\ncarelessness with no systematic pattern, failing to recognize that psycholinguists have found speech\nerrors follow highly SYSTEMATIC patterns (e.g., swapped sounds are almost always the same TYPE of\nsound — consonants swap with consonants, vowels with vowels — revealing that speech is planned in\nstructured stages, not produced as an undifferentiated stream).\n\n**Conflict evidence [P28]:** Show the student several real documented speech-error examples (sound\nswaps, word-order swaps, blend errors) and highlight the systematic pattern across them (e.g.,\nconsonants consistently swap with other consonants, never randomly with vowels). Ask: \"If these errors\nwere truly random noise, would we expect this consistent pattern — consonants only swapping with\nconsonants — across many different speakers and error instances? What does this pattern suggest about\nhow speech is actually planned?\"\n\n**Bridge text [P30]:** \"Assuming speech errors are random noise is like assuming a printing press's\noccasional misprints are pure randomness rather than revealing something systematic about how the\npress's mechanical parts are organized — but if misprints consistently show the same TYPE of\nmechanical slip (always a specific row of type sliding, say), that reveals real information about the\npress's actual structure. Speech errors work the same way: their systematic patterns reveal real\ninformation about how language is planned and produced in structured stages, not random noise.\"\n\n**Replacement text [P31]:** \"Treat speech errors as genuine DATA revealing how language is planned,\nnot as meaningless noise. Look for the systematic pattern in what actually gets swapped, blended, or\nmisordered — these patterns are a real window into the mental stages of speech production.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming a sound-swap error (\"tips of the slung\" for \"slips of the tongue\") is just careless,\n   random noise (misconception) vs. recognizing that the swap consistently involves consonants\n   swapping with consonants (not with vowels), revealing a systematic pattern about how sounds are\n   organized during speech planning (correct, evidence-based understanding).\n2. A student dismissing all speech errors as equally meaningless mistakes (missing the systematic\n   pattern) vs. a student who notices and can articulate the specific TYPE of pattern (sound type,\n   word category) that recurs across many different error instances (correct, pattern-focused\n   understanding).\n\n**s6_path:** If the student continues to view speech errors as random after the bridge, give them\nthree more documented speech-error examples and have them identify the specific systematic pattern in\neach (same sound type swapped, same grammatical category swapped), reinforcing that genuine\nrandomness would not produce this level of consistency.",
+      "localKey": "MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN",
+      "language": "en",
+      "refs": [
+        "MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 46,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Experimental Evidence vs. Introspection (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Experimental Evidence vs. Introspection (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 154,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Speech Errors as Systematic Data (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Speech Errors as Systematic Data (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 161,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Incremental Sentence Comprehension",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Incremental Sentence Comprehension\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 167,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Stages of Language Production",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Stages of Language Production\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 174,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Full Application: Evaluating Psycholinguistic Evidence",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Evaluating Psycholinguistic Evidence\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES\",\"MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN",
+        "MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 181,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Experimental Evidence vs. Introspective Claims**\nGiven three claims about mental language processing, identify which are supported by controlled\nexperimental evidence and which are merely introspective assumptions.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 209,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Systematic Speech Error Patterns**\nGiven three documented speech-error examples, identify the systematic pattern in each (same sound\ncategory, same grammatical category being swapped).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 209,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Interpreting Incremental Comprehension Evidence**\nGiven a description of a reaction-time or eye-tracking experiment, explain what the timing pattern\nreveals about how comprehension unfolds within a sentence, not just at its end.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 209,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Connecting Speech Errors to Production Stages**\nGiven a speech error, identify which stage of language production (conceptualizing the message,\nselecting words, planning sounds) it likely reveals information about.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 209,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Psycholinguistic Evidence Evaluation**\nGiven a new speech error example and a new experimental description, evaluate the evidence type,\nidentify the systematic error pattern, and explain what the data reveals about incremental processing.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 209,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated evidence-type evaluation and error-pattern identification (MP-1,\n  MP-2) but struggles to connect these to the broader production-stages framework (MP-4), revisit TA-4\n  with additional concrete examples linking specific error types to specific planning stages.\n- If the student finds their own speech errors or those of people around them and wants to analyze\n  them personally, encourage this as excellent, motivating real-world application — personal specimen\n  collection is a genuine (if informal) psycholinguistic practice.\n- If the student conflates \"introspection is unreliable for studying mental PROCESSES\" with\n  \"introspection is worthless for everything,\" clarify that introspection remains valuable for many\n  purposes (reporting subjective experience, preferences) — the specific claim here is narrower:\n  automatic, below-awareness language processes are often inaccessible to accurate introspective\n  report.\n- Given this concept's research-level difficulty, students without prior exposure to experimental\n  methodology in any science course may need a brief primer on what \"controlled experiment\" and\n  \"reaction time\" mean as general research concepts before the linguistics-specific content will land\n  fully.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 269,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "eng.linguistics.psycholinguistics-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.psycholinguistics-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: language acquisition check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.language-acquisition-intro]  [Component 3: Heart-Rate-Monitor /\n                                                          Printing-Press Anchor]\n                                                                     |\n                                                                     v\n                                            [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                                     |\n                                                                     v\n                                   [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                     |\n                                                                     v\n                                   [MP-1 through MP-5 mastery probe set]\n                                                                     |\n                                   (pass >= 0.70) -----+----- (fail)\n                                          |                      |\n                                          v                      v\n                     [No further unlocks —  [S6 remediation: introspection-vs-\n                      terminal in current      experiment-comparison / pattern-\n                      curriculum sequence]      identification drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (over-relying on\nintrospection) and MC-B during TA-2 (viewing errors as random) — MC-A generally needs resolving first\nsince accepting experimental evidence as more reliable than introspection is the foundational\nmethodological stance the rest of the concept depends on. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-3 failure alone indicates the\nincremental-comprehension extension (TA-3) needs review, distinct from either misconception; MP-5\nfailure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided full-\nevaluation example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md",
+        "startLine": 231,
+        "endLine": 269
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
