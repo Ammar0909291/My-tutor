@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.semantics-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.semantics-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3cfbdad94a315a318cc56c02b11d1788e7359dd5154a6cb6dd9c551c385d5b08",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md": "sha256:2a3ddf90d07ac3b835e55a04f97927bb04d22d636a80b8ae68e1a96679d26b9a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.semantics-intro",
+    "name": "Introduction to Semantics",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.syntax-theory-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.semantics-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.semantics-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md": "sha256:2a3ddf90d07ac3b835e55a04f97927bb04d22d636a80b8ae68e1a96679d26b9a"
+      },
+      "contentHash": "sha256:9dc03241c913c11199a7054477e096462d44baa7bd6bf5b563a34d4d022b45cf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.semantics-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md#TA-1 (addresses MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.semantics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.semantics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.semantics-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.semantics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.semantics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.semantics-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md#TA-3 (addresses MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.semantics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.semantics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.semantics-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.semantics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.semantics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.semantics-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md#TA-5 (addresses MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS, MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.semantics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.semantics-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.semantics-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Introduction to Semantics — Conceptual Development Sequence",
+      "content": "### TA-1 — Hyponymy: Category Relationships Between Words (MC-A)\n\nUsing the library-organization anchor, teach the hyponymy test (\"an X is always a Y, but a Y is not\nalways an X\"). Student practice: given six word pairs, apply the test to confirm or deny a hyponymy\nrelationship.\n\n### TA-2 — Synonymy and Antonymy as Systematic Relationships\n\nExtend TA-1 to synonymy (near-identical meaning) and antonymy (opposite meaning) as similarly\nsystematic, testable relationships. Student practice: given eight word pairs, classify each as\nsynonym, antonym, hyponym-hypernym, or unrelated.\n\n### TA-3 — Compositional Meaning and Structural Ambiguity (MC-B)\n\nUsing the recipe-combination anchor and the classic ambiguous sentence, teach that sentence meaning\nis built from word meanings AND their structural combination, and that structural ambiguity produces\ngenuinely different meanings from identical words. Student practice: given three structurally\nambiguous sentences, identify both possible meanings for each and explain the underlying structural\ndifference.\n\n### TA-4 — Literal Meaning vs. Contextual Use (Preview of Pragmatics)\n\nIntroduce the distinction between a sentence's literal, context-independent semantic meaning and how\nit might be interpreted or used in an actual conversational context (without fully developing\npragmatics, which is the next concept). Student practice: given a sentence with a clear literal\nmeaning that could nonetheless be used non-literally in context (e.g., \"Can you pass the salt?\" as a\nrequest, not a literal question about ability), identify the literal semantic meaning separately from\nthe likely contextual use.\n\n### TA-5 — Full Application: Analyzing Word and Sentence Meaning Together\n\nGive the student a new short text. They must identify at least one hyponymy or synonymy/antonymy\nrelationship among its words (TA-1, TA-2), identify or construct a structurally ambiguous sentence\nand explain its two meanings (TA-3), and distinguish a sentence's literal meaning from a likely\ncontextual interpretation (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 145,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/misconception/MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "**Trigger signal:** Student treats each word's meaning as an isolated, unstructured label with no",
+      "content": "### MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS\n\n**Trigger signal:** Student treats each word's meaning as an isolated, unstructured label with no\nsystematic relationship to other words' meanings, failing to recognize formal semantic relationships\nlike hyponymy (a word being a specific type of a more general category, e.g., \"robin\" is a hyponym of\n\"bird\") or the systematic, testable nature of synonymy and antonymy.\n\n**Conflict evidence [P28]:** Show the student the word \"robin\" and ask what larger category it\nbelongs to, then ask if \"robin\" and \"bird\" mean \"the same thing\" or if one is a specific TYPE of the\nother, with a systematic, testable relationship (\"a robin is a bird\" is always true; \"a bird is a\nrobin\" is not always true). Ask: \"Is this a random fact about these two words, or does this same\n'X is a type of Y, but not vice versa' pattern apply systematically to lots of other word pairs\n(rose/flower, oak/tree)?\"\n\n**Bridge text [P30]:** \"Treating word meanings as isolated, unrelated labels is like assuming a\nlibrary's books are just scattered randomly with no organizing system — but words, like books, have\nsystematic organizational relationships (broader categories and specific types within them, opposites,\nsynonyms) that can be tested and verified, not just intuited randomly.\"\n\n**Replacement text [P31]:** \"When examining a word's meaning, ask: does this word have a broader\ncategory it belongs to (hyponymy — testable with 'an X is always a Y, but a Y is not always an X'), a\nnear-synonym, or an opposite? These are systematic, testable semantic relationships, not just\nisolated facts about individual words.\"\n\n**Discrimination pairs [P33]:**\n1. Treating \"robin\" and \"bird\" as two unrelated, separate labels (no structural relationship\n   recognized) vs. recognizing \"robin\" as a hyponym of \"bird,\" testable via \"a robin is always a\n   bird, but a bird is not always a robin\" (systematic relationship recognized).\n2. A student who cannot generate the category a specific word belongs to when asked (no relational\n   thinking) vs. a student who can identify the hyponymy test and apply it to new word pairs\n   (correct, systematic understanding).\n\n**s6_path:** If the student continues treating word meanings as isolated after the bridge, have them\napply the \"an X is always a Y, but not vice versa\" test to five new word pairs, confirming or denying\na hyponymy relationship for each.",
+      "localKey": "MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS",
+      "language": "en",
+      "refs": [
+        "MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/misconception/MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "**Trigger signal:** Student assumes sentence meaning is simply the accumulation of individual word",
+      "content": "### MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER\n\n**Trigger signal:** Student assumes sentence meaning is simply the accumulation of individual word\nmeanings regardless of how those words are structurally combined, failing to recognize that HOW words\ncombine (structural ambiguity, scope, grouping) can produce genuinely different sentence meanings from\nthe exact same set of words — e.g., not recognizing that \"I saw the man with the telescope\" has two\ngenuinely different meanings depending on how its parts are grouped (did I use the telescope to see\nhim, or did he have the telescope?).\n\n**Conflict evidence [P28]:** Show the student the classic ambiguous sentence \"I saw the man with the\ntelescope\" and ask them to identify the two different possible meanings. Then ask: \"Do these two\nmeanings come from different WORDS being used, or from the exact same words being GROUPED differently\nin the underlying structure?\" Guide the student to see that the word meanings themselves haven't\nchanged — what's changed is how they combine structurally.\n\n**Bridge text [P30]:** \"Assuming sentence meaning is just the sum of word meanings, regardless of\norder or grouping, is like assuming a recipe's outcome depends only on WHICH ingredients are used,\nnever on how they're combined or in what sequence — but the same ingredients combined differently\n(mixed together first versus added in stages) produce genuinely different dishes. Sentence meaning is\n'compositional' — built from word meanings AND the specific way they're structurally combined; change\nthe combination, and the meaning can change even with identical words.\"\n\n**Replacement text [P31]:** \"When you encounter a sentence with more than one possible meaning, ask:\nare the different meanings coming from different possible groupings or scope relationships among the\nSAME words (structural ambiguity), rather than assuming meaning is a fixed sum unaffected by how parts\ncombine?\"\n\n**Discrimination pairs [P33]:**\n1. Assuming \"I saw the man with the telescope\" has only one possible meaning because \"the words mean\n   what they mean\" (missing structural ambiguity) vs. correctly identifying the two distinct meanings\n   arising from two different structural groupings of the identical words (correct compositional\n   understanding).\n2. A student unable to explain WHY a sentence is ambiguous beyond \"it just sounds like it could mean\n   two things\" (surface-level recognition without structural explanation) vs. a student who can\n   identify the specific structural grouping difference underlying the ambiguity (deeper,\n   compositional understanding).\n\n**s6_path:** If the student continues to view sentence meaning as order/structure-independent after\nthe bridge, give them the same set of words rearranged into two genuinely different sentences (not\njust re-punctuated) and have them confirm the meanings differ, then return to the single ambiguous\nsentence and identify the TWO different underlying groupings producing its two meanings without any\nword changes at all.",
+      "localKey": "MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER",
+      "language": "en",
+      "refs": [
+        "MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 39,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Hyponymy: Category Relationships Between Words (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Hyponymy: Category Relationships Between Words (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 149,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Synonymy and Antonymy as Systematic Relationships",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Synonymy and Antonymy as Systematic Relationships\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 155,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Compositional Meaning and Structural Ambiguity (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Compositional Meaning and Structural Ambiguity (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 161,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Literal Meaning vs. Contextual Use (Preview of Pragmatics)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Literal Meaning vs. Contextual Use (Preview of Pragmatics)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 169,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Full Application: Analyzing Word and Sentence Meaning Together",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Analyzing Word and Sentence Meaning Together\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS\",\"MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS",
+        "MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 178,
+        "endLine": 306
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Applying the Hyponymy Test**\nGiven four word pairs, apply the \"always an X, not always a Y\" test to confirm or deny a hyponymy\nrelationship for each.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 201,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Classifying Word-Meaning Relationships**\nGiven six word pairs, classify each as synonym, antonym, hyponym-hypernym, or unrelated.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 201,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explaining Structural Ambiguity**\nGiven a structurally ambiguous sentence, identify both possible meanings and explain the underlying\nstructural grouping difference producing each.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 201,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Separating Literal Meaning from Contextual Use**\nGiven a sentence that could be interpreted non-literally in context, state its literal semantic\nmeaning and its likely contextual interpretation as two separate things.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 201,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Semantic Analysis**\nGiven a new short text, identify a word-meaning relationship, analyze a structurally ambiguous\nsentence, and distinguish literal from contextual meaning for at least one sentence.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 201,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated hyponymy/synonymy classification (MP-1, MP-2) but struggles to\n  explain structural ambiguity (MP-3), this indicates the compositional-meaning insight needs more\n  concrete grouping exercises (e.g., physically bracketing which words group together under each\n  reading) rather than more word-relationship drilling.\n- If the student conflates the literal/contextual distinction (TA-4) with simple politeness or\n  sarcasm recognition, clarify that this is a preview of a much broader systematic distinction\n  (semantics vs. pragmatics) that the next concept will develop fully — not required to master deeply\n  here, just to recognize as a real, separate question.\n- If the student's cross-link to `eng.grammar.conditionals` surfaces naturally (e.g., recognizing\n  that conditional sentences' meaning also depends heavily on structural scope), acknowledge and\n  reinforce this connection explicitly rather than treating it as a tangent.\n- Students with strong performance in `eng.linguistics.syntax-theory-intro`'s syntax/semantics\n  separation should transfer that distinction readily to TA-3's structural-ambiguity work; if this\n  transfer doesn't occur, revisit whether that prior distinction was genuinely internalized.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 258,
+        "endLine": 275
+      }
+    },
+    {
+      "assetId": "eng.linguistics.semantics-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.semantics-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: syntax theory check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.syntax-theory-intro]  [Component 3: Library-Organization /\n                                                  Recipe-Combination Anchor]\n                                                            |\n                                                            v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                            |\n                                                            v\n                                [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                (pass >= 0.75) -----+----- (fail)\n                                       |                      |\n                                       v                      v\n                [Unlock: pragmatics-intro,           [S6 remediation: hyponymy-test /\n                 translation-studies-intro]            regroup-the-same-words drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (isolated word-\nmeaning view) and MC-B during TA-3 (order/structure-independent sentence meaning view) — these are\nlargely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2\nfailures indicate residual MC-A; MP-3 failure alone indicates residual MC-B; MP-4 failure alone\nindicates the literal/contextual distinction (TA-4) needs review, distinct from either misconception;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.semantics-intro.md",
+        "startLine": 222,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

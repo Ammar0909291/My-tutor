@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.language-acquisition-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.language-acquisition-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:52bd70e264c06d2e800cfdc0e23b14f121745e15b4dbbb66f68efea94c12242a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md": "sha256:2237d006fa09c420697a90becb4dc492ead1f74b6a93b5e938052125c46624f5"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.language-acquisition-intro",
+    "name": "Introduction to Language Acquisition",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.syntax-theory-intro",
+      "eng.linguistics.phonology-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.language-acquisition-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.language-acquisition-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md": "sha256:2237d006fa09c420697a90becb4dc492ead1f74b6a93b5e938052125c46624f5"
+      },
+      "contentHash": "sha256:be6458b879a2f34c800747e60fbee0ad360102b555e07dee7028edb604ef6030",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-acquisition-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md#TA-1 (addresses MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-acquisition-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-acquisition-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-acquisition-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-acquisition-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-acquisition-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-acquisition-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md#TA-3 (addresses MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-acquisition-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-acquisition-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-acquisition-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md#TA-4 (addresses MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY, MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-acquisition-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-acquisition-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "Introduction to Language Acquisition — Conceptual Development Sequence",
+      "content": "### TA-1 — Overregularization as Evidence of Rule-Construction (MC-A)\n\nUsing the Lego-pattern anchor, teach that systematic child \"errors\" like \"goed\" reveal active rule-\nconstruction, since these forms are essentially never heard from adults. Student practice: given\nthree child utterances (some overregularized, some correct), identify which reveal active rule-\napplication and explain why they couldn't be pure imitation.\n\n### TA-2 — General Stages in First-Language Acquisition\n\nIntroduce a general developmental sequence common across children acquiring their first language\n(e.g., babbling, one-word stage, two-word/telegraphic stage, increasingly complex grammar). Student\npractice: given four example utterances at different developmental levels, order them by likely\ndevelopmental stage.\n\n### TA-3 — Different Strengths in Later Language Acquisition (MC-B)\n\nUsing the painter's-toolkit anchor, teach that acquiring a language later in life draws on genuinely\ndifferent cognitive resources with different strengths and challenges, not a uniformly weaker\nprocess. Student practice: given four observations about learners of different ages, classify each as\nreflecting a child-acquisition strength or a later-learner strength.\n\n### TA-4 — Full Application: Analyzing Acquisition Evidence\n\nGive the student a set of language samples from both a young child and an older second-language\nlearner. They must identify evidence of rule-construction (TA-1), situate the child's utterances\nwithin a developmental stage (TA-2), and identify at least one genuine strength each learner\ndemonstrates relative to the other, without ranking one as simply \"better\" (TA-3) — the full synthesis\ntask.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 157,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/misconception/MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "**Trigger signal:** Student believes children acquire language purely through imitation — copying",
+      "content": "### MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY\n\n**Trigger signal:** Student believes children acquire language purely through imitation — copying\nexactly what adults say — failing to recognize that children produce systematic errors (like\n\"goed,\" \"foots,\" or \"I falled down\") that they could NOT have simply copied from adult speech, since\nadults essentially never say these forms; these errors instead reveal the child actively applying a\nregular rule (add \"-ed\" for past tense, add \"-s\" for plural) even to irregular cases.\n\n**Conflict evidence [P28]:** Show the student a young child saying \"I goed to the park\" and ask:\n\"Has this child ever heard an adult say 'goed'? If not, where did this specific word come from, if not\nfrom imitation?\" Guide the student to see that the child must be actively applying a rule they've\nextracted (regular past tense = add \"-ed\") even to a verb where that rule doesn't apply in adult\nEnglish — proving the child is constructing rules, not just copying sounds.\n\n**Bridge text [P30]:** \"If language acquisition were pure imitation, a child would only ever produce\nexactly what they've heard — but children regularly produce forms like 'goed' or 'foots' that\nliterally no adult around them says. This is like a child who's never seen a specific complex Lego\nstructure nonetheless building a similar one using rules they've extracted from simpler structures\nthey HAVE seen — they're not copying, they're actively figuring out and applying an underlying\npattern, sometimes over-applying it to cases where it doesn't quite work.\"\n\n**Replacement text [P31]:** \"When you see a child's language 'error,' first ask: could this specific\nform have come from simply copying an adult? If the answer is no (like 'goed'), the error is actually\nevidence of active RULE-BUILDING — proof the child has extracted and is applying a genuine pattern,\nnot proof of failed imitation.\"\n\n**Discrimination pairs [P33]:**\n1. A child saying \"goed\" (a form no adult produces, revealing active over-application of the regular\n   past-tense rule) vs. a child saying \"went\" correctly after enough exposure has led them to learn\n   the irregular exception (a later stage, still not proof of pure imitation, since the rule-then-\n   exception-learning sequence itself is systematic).\n2. A student assuming a child's grammatical errors are just \"not listening carefully enough\" to\n   adults (misconception) vs. a student recognizing that systematic errors like \"goed\" are direct\n   evidence of the child's own internal rule system, actively constructed, not passively absorbed\n   (correct understanding).\n\n**s6_path:** If the student continues to view acquisition as pure imitation after the bridge, have\nthem generate a list of three other \"errors\" a child might plausibly produce by over-applying a\nregular rule they've learned (e.g., \"mouses\" instead of \"mice,\" \"runned\" instead of \"ran\"),\ndemonstrating they understand the rule-construction mechanism well enough to predict its outputs.",
+      "localKey": "MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY",
+      "language": "en",
+      "refs": [
+        "MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/misconception/MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "**Trigger signal:** Student assumes that acquiring an additional language later in life (as a teen or",
+      "content": "### MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION\n\n**Trigger signal:** Student assumes that acquiring an additional language later in life (as a teen or\nadult) is simply a diminished, less effective version of the same process children use, framing older\nlearners as uniformly \"worse\" at language learning overall, rather than recognizing that older\nlearners bring genuinely different cognitive resources (explicit reasoning, existing language\nknowledge, metalinguistic awareness) that create different strengths and challenges, not simply a\nweaker version of childhood acquisition.\n\n**Conflict evidence [P28]:** Show the student two facts side by side: young children typically\nacquire native-like pronunciation of a new language more easily than adults, WHILE adult learners\noften acquire new GRAMMAR rules and vocabulary faster than young children, because adults can use\nexplicit reasoning, existing knowledge of how languages work, and conscious study strategies that\nyoung children cannot yet use. Ask: \"Is one group simply 'better' at language learning overall, or\ndoes each group have different strengths in different areas?\"\n\n**Bridge text [P30]:** \"Assuming older learners are just a 'weaker' version of child learners is like\nassuming a skilled adult learning to paint is simply a 'worse painter' than a young child who's\nnaturally uninhibited with color — but the adult brings genuinely different resources (technique,\nplanning, understanding of composition) that create different strengths, not simply a diminished\nversion of the child's approach. Language acquisition later in life draws on different cognitive\ntools (explicit reasoning, existing language knowledge) that create real advantages in some areas,\nalongside real challenges in others (like pronunciation).\"\n\n**Replacement text [P31]:** \"When comparing child and adult/teen language learners, don't ask 'who's\nbetter overall?' Ask: what SPECIFIC advantages and challenges does each group have, based on the\ndifferent cognitive tools available to them? Older learners aren't a weaker version of child\nacquisition — they're using a genuinely different process with its own strengths.\"\n\n**Discrimination pairs [P33]:**\n1. \"Adults are just worse at learning languages than kids.\" (treats one group as uniformly superior)\n   vs. \"Adults often learn grammar rules faster using explicit study, while children often achieve\n   more native-like pronunciation — each has different strengths.\" (recognizes genuinely different\n   processes and outcomes).\n2. A student assuming an adult struggling with a new language's pronunciation must be \"bad at\n   languages\" in general (overgeneralized weakness assumption) vs. a student recognizing this\n   specific challenge (pronunciation) as one area where child acquisition has an edge, while the same\n   adult might be excelling at vocabulary and grammar (accurate, area-specific understanding).\n\n**s6_path:** If the student continues to view older learners as simply weaker after the bridge, have\nthem list two specific advantages an older learner might have (using existing language knowledge to\nunderstand grammar concepts explicitly; noticing patterns consciously) alongside two specific\nadvantages a young child might have (less self-consciousness about pronunciation errors; more total\nexposure time available before other academic demands increase), to concretely map genuinely\ndifferent strengths.",
+      "localKey": "MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION",
+      "language": "en",
+      "refs": [
+        "MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 44,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "Overregularization as Evidence of Rule-Construction (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Overregularization as Evidence of Rule-Construction (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 161,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "General Stages in First-Language Acquisition",
+      "content": "{\"id\":\"TA-2\",\"title\":\"General Stages in First-Language Acquisition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 168,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "Different Strengths in Later Language Acquisition (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Different Strengths in Later Language Acquisition (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 175,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "Full Application: Analyzing Acquisition Evidence",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing Acquisition Evidence\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY\",\"MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY",
+        "MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 182,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Overregularization**\nGiven three child utterances, identify which reveal overregularization (evidence of active rule-\nconstruction) and explain why these forms could not simply be imitation.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 207,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Ordering Developmental Stages**\nGiven four child utterances at different developmental levels, order them by likely developmental\nstage and justify the ordering.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 207,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Area-Specific Strengths**\nGiven observations about a child learner and an older learner, identify at least one specific area of\nstrength for each, without ranking one as generally superior.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 207,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Rule-Construction from Simple Error**\nGiven a child utterance, determine whether it reflects rule-construction (a systematic pattern\napplied incorrectly) or could plausibly be a random performance slip, and justify the determination.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 207,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Acquisition Analysis**\nGiven new language samples from a child and an older learner, identify rule-construction evidence,\ndevelopmental staging, and area-specific strengths for each.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 207,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student is themselves a multilingual learner or has personal experience learning a language\n  later in life, connect MC-B's reframe explicitly and validatingly to their own experience —\n  this concept's content can carry real personal significance beyond the abstract analysis.\n- If the student masters overregularization recognition (MP-1) but struggles to generalize the rule-\n  construction principle to NEW error types not explicitly modeled, provide additional prediction\n  practice (generating plausible novel overregularized forms) to test genuine generalization versus\n  memorized examples.\n- If the student's area-specific strength analysis (MP-3) defaults to vague generalities (\"kids are\n  better at some things, adults at others\") without specific, named areas, push for the concrete\n  pronunciation-versus-explicit-grammar-reasoning distinction as the minimum specificity bar.\n- Given this concept's expert-level difficulty and reliance on two prerequisites, students with only\n  shallow mastery of either phonology or syntax theory may need brief re-grounding before TA-3's\n  cross-domain comparison (which draws on both sound and grammar acquisition evidence) will land\n  meaningfully.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 264,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-acquisition-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.language-acquisition-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: syntax theory check] --> [PD-2: phonology check]\n   |                                                 |\n   | (gap found)                                     | (pass)\n   v                                                  v\n[Route to prerequisite concept]        [Component 3: Lego-Pattern / Painter's-Toolkit Anchor]\n                                                      |\n                                                      v\n                                   [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                      |\n                                                      v\n                             [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                      |\n                                                      v\n                             [MP-1 through MP-5 mastery probe set]\n                                                      |\n                             (pass >= 0.70) -----+----- (fail)\n                                    |                      |\n                                    v                      v\n       [Unlock: psycholinguistics-intro,        [S6 remediation: predict-the-error /\n        applied-linguistics-intro]                area-specific-strength-mapping drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (viewing errors as failed imitation) and MC-B during TA-3 (ranking learners hierarchically) —\nthese are largely independent and often need separate, explicit correction. If either fires, branch\nto the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure:\nMP-1/MP-4 failures indicate residual MC-A; MP-2 failure alone indicates the developmental-staging\nstep (TA-2) needs review, distinct from either misconception; MP-3 failure alone indicates residual\nMC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more\nguided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md",
+        "startLine": 229,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

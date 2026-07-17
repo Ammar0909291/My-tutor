@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.professional-communication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.professional-communication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:26924cb1e6b247dfe939163e5b083662866ecab4c5da62c4146008d9240a3d9a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.professional-communication.md": "sha256:fa2775d27f7a06ee69827235114f0948a67f2e2c4c0a6b8b865181bb1d545a3e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.professional-communication",
+    "name": "Professional Communication",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.communication.business-writing",
+      "eng.speaking.presentation-skills"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.professional-communication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.professional-communication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.professional-communication.md": "sha256:fa2775d27f7a06ee69827235114f0948a67f2e2c4c0a6b8b865181bb1d545a3e"
+      },
+      "contentHash": "sha256:99e6d476f37a936acb4e38ede86a2cf57dbbe9d0800b609ef7ce8d2b0ce72113",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.professional-communication.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.professional-communication.md#TA-1 (addresses MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.professional-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.professional-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.professional-communication.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.professional-communication.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.professional-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.professional-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.professional-communication.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.professional-communication.md#TA-3 (addresses MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.professional-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.professional-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.professional-communication.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.professional-communication.md#TA-4 (addresses MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT, MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.professional-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.professional-communication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.professional-communication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Professional Communication — Conceptual Development Sequence",
+      "content": "### TA-1 — Channel Selection Criteria (MC-A)\n\nUsing the shout-vs-letter anchor, teach the three key channel-selection criteria: urgency, need for a\ndocumented record, and sensitivity/privacy. Student practice: given five professional scenarios,\nselect and justify the most appropriate channel for each based on these criteria.\n\n### TA-2 — Maintaining Content Consistency Across Channels\n\nTeach that written and spoken versions of the same professional message must convey the same key\npoints and overall tone, even when phrasing differs. Student practice: given a written document\nexcerpt, identify the 2-3 key points that must remain consistent if presented spoken as well.\n\n### TA-3 — Adapting Delivery for Spoken Convention (MC-B)\n\nUsing the map-description anchor, teach spoken-delivery adaptations: shorter sentences, verbal\nsignposts, and strategic repetition of key points. Student practice: given a dense written sentence,\norally paraphrase it into spoken-friendly phrasing while preserving the core content.\n\n### TA-4 — Full Application: Coordinating a Written and Spoken Professional Communication\n\nGive the student a professional scenario requiring both a written component (e.g., a brief report or\nemail) and an accompanying spoken component (e.g., a short verbal summary or presentation). They must\nselect appropriate channels (TA-1), ensure the written and spoken versions share consistent key\npoints (TA-2), and adapt the spoken delivery appropriately rather than reading verbatim (TA-3) — the\nfull synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 147,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/misconception/MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT",
+      "kind": "misconception",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "**Trigger signal:** Student treats channel choice (email versus a phone call versus an in-person",
+      "content": "### MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT\n\n**Trigger signal:** Student treats channel choice (email versus a phone call versus an in-person\nconversation versus a formal written report) as an arbitrary or irrelevant decision, believing that as\nlong as the message content is accurate, it doesn't matter which channel delivers it — e.g., sending\nan urgent, time-sensitive message by email when a phone call would reach the recipient immediately, or\ndelivering a sensitive personal matter by a impersonal group email rather than a private conversation.\n\n**Conflict evidence [P28]:** Show the student two scenarios with the same content delivered through\ndifferent channels: an urgent same-day deadline change sent via email (which the recipient might not\ncheck for hours) versus the same message delivered via a quick phone call or instant message (reaching\nthem immediately), and a sensitive piece of critical feedback delivered via a group email (public,\nimpersonal, potentially embarrassing) versus the same feedback delivered in a private one-on-one\nconversation (appropriately private and personal). Ask: \"Does the channel choice actually affect\nwhether this message achieves its purpose, even with identical content?\"\n\n**Bridge text [P30]:** \"Assuming channel doesn't matter as long as content is accurate is like\nassuming it doesn't matter whether you deliver an urgent warning by shouting it directly at someone or\nby mailing them a letter — the WORDS could be identical, but one reaches them in time to act and one\ndoesn't. Channel choice is a functional decision (urgency, privacy, need for a record), not a cosmetic\none, and gets it wrong even with perfect content.\"\n\n**Replacement text [P31]:** \"Before communicating, ask: how urgent is this, does it need a\ndocumented written record, and how sensitive or personal is the content? These questions should\ndetermine your channel choice (email, phone call, in-person conversation, formal report) — channel\nchoice is itself a communication decision, not an afterthought.\"\n\n**Discrimination pairs [P33]:**\n1. An urgent same-day deadline change sent only by email, which the recipient doesn't see in time\n   (wrong channel for urgency) vs. the same message delivered by an immediate phone call or instant\n   message (channel matched to urgency).\n2. Sensitive critical feedback delivered via a public group email (wrong channel for sensitivity) vs.\n   the same feedback delivered in a private conversation (channel matched to sensitivity).\n\n**s6_path:** If the student continues treating channel as irrelevant after the bridge, have them\nevaluate five professional scenarios and select the most appropriate channel for each based\nexplicitly on urgency, need for a record, and sensitivity, articulating the specific reasoning for\neach choice.",
+      "localKey": "MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT",
+      "language": "en",
+      "refs": [
+        "MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/misconception/MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT",
+      "kind": "misconception",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "**Trigger signal:** Student, when asked to present spoken content that accompanies a written document",
+      "content": "### MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT\n\n**Trigger signal:** Student, when asked to present spoken content that accompanies a written document\n(a report, a proposal), simply reads the written text aloud verbatim, failing to recognize that spoken\ndelivery has different natural conventions (shorter sentences, more repetition of key points for a\nlistening audience, conversational transitions) even when conveying identical underlying content and\nmaintaining consistency with the written document.\n\n**Conflict evidence [P28]:** Show the student a written report excerpt with a dense, complex sentence\nstructure appropriate for a reader who can pause and re-read, alongside a spoken version of the SAME\ncontent adapted for a listening audience (shorter sentences, a brief verbal signpost like \"so here's\nthe key takeaway,\" slight repetition of the main point). Ask: \"If you read the written version aloud\nexactly as written, would a listening audience follow it as easily as a reader could follow it on the\npage?\"\n\n**Bridge text [P30]:** \"Reading a written document aloud verbatim is like showing someone a detailed\nmap by holding it up briefly instead of describing the route in a way suited to someone who can't\npause and study it — a reader can re-read a dense sentence if needed, but a listener only gets one\npass and needs the structure adapted for real-time listening (shorter units, verbal signposts,\nstrategic repetition of the most important points). Spoken delivery of written content needs genuine\nadaptation, not verbatim reading.\"\n\n**Replacement text [P31]:** \"When presenting spoken content based on a written document, keep the\nKEY POINTS and overall message consistent, but adapt the delivery: use shorter sentences, add verbal\nsignposts ('the main point here is...'), and consider repeating the most important information once\nfor a listening audience that can't pause or re-read.\"\n\n**Discrimination pairs [P33]:**\n1. Reading a dense, complex written sentence aloud verbatim, word for word (unadapted, hard for\n   listeners to follow) vs. presenting the same underlying point in shorter, spoken-friendly phrasing\n   with a verbal signpost (adapted for listening, same core content).\n2. A student assuming consistency between written and spoken versions means using identical wording\n   (misconception) vs. a student recognizing that consistency means matching KEY POINTS and tone\n   while adapting sentence-level phrasing for each channel's natural conventions (correct\n   understanding).\n\n**s6_path:** If the student continues reading written text verbatim after the bridge, have them take\none dense sentence from their own written document and orally paraphrase it in shorter, more\nconversational spoken phrasing while confirming the core content and key point remain identical.",
+      "localKey": "MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT",
+      "language": "en",
+      "refs": [
+        "MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 42,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Channel Selection Criteria (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Channel Selection Criteria (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 151,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Maintaining Content Consistency Across Channels",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Maintaining Content Consistency Across Channels\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 157,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Adapting Delivery for Spoken Convention (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Adapting Delivery for Spoken Convention (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 163,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Full Application: Coordinating a Written and Spoken Professional Communication",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Coordinating a Written and Spoken Professional Communication\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT\",\"MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT",
+        "MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 169,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Channel Selection**\nGiven three professional scenarios, select and justify the most appropriate channel(s) for each\nbased on urgency, record-keeping need, and sensitivity.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Consistent Key Points**\nGiven a written document excerpt, identify the 2-3 key points that must remain consistent if the same\ncontent were also delivered spoken.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Adapting a Sentence for Spoken Delivery**\nGiven a dense written sentence, orally (or in writing, transcribed) paraphrase it into spoken-friendly\nphrasing while preserving the core content.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting Verbatim-Reading Problems**\nGiven a spoken presentation script that is a word-for-word reading of a written document, identify at\nleast one place where it should be adapted for listening rather than read verbatim.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Coordinated Communication**\nGiven a new professional scenario requiring both channels, select appropriate channels, ensure\nconsistent key points across written and spoken versions, and adapt spoken delivery appropriately.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters channel selection and spoken adaptation in isolation (MP-1, MP-3) but\n  struggles to keep written and spoken versions genuinely consistent under the combined demand of\n  MP-5, provide a structured checklist (select channel, list key points, then draft each version\n  against that shared list) as scaffolding.\n- If the student's spoken adaptations (MP-3, MP-4) drift so far from the written content that\n  consistency is lost (over-correcting MC-B into an unrelated, inconsistent spoken version), clarify\n  that adaptation means changing PHRASING and PACING, not changing the actual key points or overall\n  message.\n- If the student defaults to email/written channels even for scenarios requiring urgency or\n  sensitivity (a comfort-zone bias toward the previously-mastered written register), explicitly\n  prompt with the three-criteria checklist (urgency, record-need, sensitivity) until channel selection\n  becomes more balanced.\n- Students with real group-project or extracurricular leadership experience may already have\n  intuitive channel-selection habits — leverage this directly by having them recall a real example\n  and analyze the channel choice against this concept's criteria.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 252,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "eng.communication.professional-communication/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.professional-communication",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: business writing check] --> [PD-2: presentation skills check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to prerequisite concept]           [Component 3: Shout-vs-Letter / Map-Description Anchor]\n                                                          |\n                                                          v\n                                       [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                          |\n                                                          v\n                                 [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                          |\n                                                          v\n                                 [MP-1 through MP-5 mastery probe set]\n                                                          |\n                                 (pass >= 0.75) -----+----- (fail)\n                                        |                      |\n                                        v                      v\n                [Unlock: negotiation-language]  [S6 remediation: criteria-checklist /\n                                                  oral-paraphrase drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (arbitrary channel choice) and MC-B during TA-3 (verbatim spoken reading) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2 failure alone indicates the key-point-identification step (TA-2) needs\nreview, distinct from either misconception; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more guided coordinated\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.professional-communication.md",
+        "startLine": 217,
+        "endLine": 252
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
