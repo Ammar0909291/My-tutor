@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.thesaurus-and-dictionary-skills-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cf0f61b495f3027991483cb5e0d3a62a201c09010804490950bed39392fd1db1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md": "sha256:c5f00fa88937ee819abe310b49b447387b22e60e0607da8130df53220b40e701"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+    "name": "Thesaurus and Dictionary Skills",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.vocab.synonyms-antonyms",
+      "eng.vocab.multiple-meaning-words"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.thesaurus-and-dictionary-skills-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.thesaurus-and-dictionary-skills (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md": "sha256:c5f00fa88937ee819abe310b49b447387b22e60e0607da8130df53220b40e701"
+      },
+      "contentHash": "sha256:204bc00d1b1fc988742385e6091ae4ab1491e0c0321514c663e50b8c377f39c1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.thesaurus-and-dictionary-skills.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.thesaurus-and-dictionary-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.thesaurus-and-dictionary-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.thesaurus-and-dictionary-skills.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md#TA-2 (addresses MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.thesaurus-and-dictionary-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.thesaurus-and-dictionary-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.thesaurus-and-dictionary-skills.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md#TA-3 (addresses MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.thesaurus-and-dictionary-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.thesaurus-and-dictionary-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.thesaurus-and-dictionary-skills.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md#TA-4 (addresses MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE, MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.thesaurus-and-dictionary-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.thesaurus-and-dictionary-skills\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Thesaurus and Dictionary Skills — Conceptual Development Sequence",
+      "content": "### TA-1 — Reading a Dictionary Entry (Part of Speech, Definition, Usage Label)\n\nTeach students to locate and interpret the parts of a dictionary entry: the part-of-speech label, the\ndefinition(s), and usage labels (informal, formal, archaic, regional). Student practice: given three\ndictionary entries, identify the part of speech and usage label for each.\n\n### TA-2 — Checking a Thesaurus Option Against Context, Not Just Grabbing the First (MC-A)\n\nUsing the shirt-rack anchor and the read-aloud comparison test, teach students to check multiple\nthesaurus options against their specific sentence before choosing. Student practice: given a sentence\nand a thesaurus entry with four options, test each option in the sentence and select the best fit,\nexplaining why the others don't work as well.\n\n### TA-3 — Recognizing Connotation and Register Differences Among \"Synonyms\" (MC-B)\n\nUsing the paint-chip anchor, teach students to check dictionary usage labels and connotation for\nthesaurus-grouped words before assuming interchangeability. Student practice: given three\nthesaurus-grouped synonyms, look up each in a dictionary and identify at least one connotation,\nregister, or shade-of-meaning difference between them.\n\n### TA-4 — Full Application: Selecting the Best Word for a Specific Sentence\n\nGive the student a sentence needing a more precise word choice and a thesaurus entry with five\noptions. They must check several options against the sentence's context (TA-2), verify the\nconnotation/register fit using a dictionary (TA-3), and select and justify the single best choice.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 146,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/misconception/MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "**Trigger signal:** Student automatically substitutes the FIRST synonym listed in a thesaurus entry",
+      "content": "### MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE\n\n**Trigger signal:** Student automatically substitutes the FIRST synonym listed in a thesaurus entry\ninto their sentence without checking whether it actually fits the specific context, tone, or\nregister — e.g., looking up \"happy\" and inserting the first listed synonym \"content\" even in a\nsentence describing someone jumping with excitement, where \"content\" implies a much calmer, quieter\nfeeling.\n\n**Conflict evidence [P28]:** Show the student a sentence (\"She was so happy she jumped up and down\nand screamed with joy.\") alongside a thesaurus entry for \"happy\" listing several synonyms in some\norder (e.g., \"content, pleased, joyful, elated, thrilled\"). Ask: \"If you swap in the FIRST word on\nthe list, 'content,' does the sentence still make sense with someone jumping and screaming? What\nabout 'elated' or 'thrilled'?\" Guide the student to see that thesaurus entries are not ranked by\nbest-fit for any particular sentence — they're just a list of related words, and the writer must\nstill choose based on context.\n\n**Bridge text [P30]:** \"A thesaurus entry is like a rack of shirts in roughly the same color family —\nthey're not sorted by which one fits YOU best, they're just grouped by similarity. You still have to\ntry each one against your specific situation (the sentence's tone and context) to find the actual\nbest fit, not just grab whichever one happens to be first on the rack.\"\n\n**Replacement text [P31]:** \"Never substitute the first word listed without checking it against your\nspecific sentence. Read several of the listed options, and ask which one matches the exact intensity,\ntone, and context you need — sometimes that's the first one, but often it isn't.\"\n\n**Discrimination pairs [P33]:**\n1. \"She was content.\" (accurate for a calm, quiet satisfaction) vs. \"She was content she jumped up\n   and down and screamed with joy.\" (a mismatch — \"content\" doesn't fit the intensity of the\n   described action, even though it's a synonym of \"happy\" in general).\n2. A student who checks three or four thesaurus options against their sentence before choosing\n   (careful selection) vs. a student who always uses the first word listed regardless of fit\n   (careless substitution).\n\n**s6_path:** If the student continues to grab the first-listed synonym after the bridge, have them\nphysically read each sentence aloud with three different synonym options substituted in, and choose\nbased on which one sounds most natural and accurately matches the intended meaning — making the\ncomparison process unavoidable rather than optional.",
+      "localKey": "MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE",
+      "language": "en",
+      "refs": [
+        "MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/misconception/MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "**Trigger signal:** Student believes that because a thesaurus groups words together as synonyms,",
+      "content": "### MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION\n\n**Trigger signal:** Student believes that because a thesaurus groups words together as synonyms,\nthose words must be perfectly interchangeable in ALL contexts, ignoring differences in connotation\n(positive/negative shading), register (formal/informal), or precise shade of meaning — e.g., treating\n\"skinny,\" \"slim,\" and \"gaunt\" as fully interchangeable despite very different connotations (positive,\nneutral, and negative respectively).\n\n**Conflict evidence [P28]:** Show the student three words a thesaurus lists as synonyms for \"thin\"\n(e.g., \"slim,\" \"skinny,\" \"gaunt\") used in three sentences, and ask which sentence sounds like a\ncompliment, which sounds neutral, and which sounds like a description of someone unhealthily\nunderweight or unwell. Guide the student to see that despite being grouped together, these words\ncarry very different emotional shading (connotation) that changes the sentence's overall effect\nsignificantly.\n\n**Bridge text [P30]:** \"Grouping words together as 'synonyms' is like grouping different shades of\nred paint together in one paint-store section — they're related, but 'crimson' and 'pink' are not\ninterchangeable just because they're both reddish. Each synonym in a thesaurus entry carries its own\nspecific shade of connotation, formality, or intensity, and swapping between them can change your\nsentence's meaning or tone in ways you didn't intend.\"\n\n**Replacement text [P31]:** \"Before treating two thesaurus-listed synonyms as interchangeable, check\na dictionary for each one's usage label and example sentences — does one feel more positive,\nnegative, formal, or informal than the other? If the connotation, register, or precise meaning\ndiffers, they are NOT freely interchangeable, even though a thesaurus lists them together.\"\n\n**Discrimination pairs [P33]:**\n1. \"She has a slim figure.\" (neutral-to-positive connotation) vs. \"She has a gaunt figure.\" (negative\n   connotation, implies unhealthy or worn-down) — both thesaurus-listed synonyms of \"thin,\" but not\n   interchangeable without changing the sentence's implied meaning.\n2. A student who checks the dictionary's usage label before substituting a thesaurus synonym\n   (careful, connotation-aware) vs. a student who assumes all listed synonyms carry identical\n   connotations because they appear in the same thesaurus entry (careless, connotation-blind).\n\n**s6_path:** If the student continues treating grouped synonyms as fully interchangeable after the\nbridge, have them look up dictionary usage labels and example sentences for three thesaurus-grouped\nsynonyms side by side, and write one sentence for each that would ONLY work with that specific word,\ndemonstrating the real difference between them.",
+      "localKey": "MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION",
+      "language": "en",
+      "refs": [
+        "MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 41,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Reading a Dictionary Entry (Part of Speech, Definition, Usage Label)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Reading a Dictionary Entry (Part of Speech, Definition, Usage Label)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Checking a Thesaurus Option Against Context, Not Just Grabbing the First (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Checking a Thesaurus Option Against Context, Not Just Grabbing the First (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Recognizing Connotation and Register Differences Among \"Synonyms\" (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Recognizing Connotation and Register Differences Among \\\"Synonyms\\\" (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 163,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Full Application: Selecting the Best Word for a Specific Sentence",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Selecting the Best Word for a Specific Sentence\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE\",\"MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE",
+        "MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 170,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reading a Dictionary Entry**\nGiven a dictionary entry, identify its part of speech, primary definition, and usage label (if\npresent).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 195,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Rejecting the First-Listed Option When It Doesn't Fit**\nGiven a sentence and a thesaurus entry, identify why the first-listed synonym does NOT fit the\nsentence's context and select a better-fitting option instead.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 195,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Connotation Differences**\nGiven three thesaurus-grouped synonyms, identify at least one connotation or register difference\nbetween two of them, using dictionary usage labels as evidence.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 195,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Context and Connotation Combined Check**\nGiven a sentence and a thesaurus entry with four options, select the best-fitting word by checking\nboth contextual fit and connotation/register, explaining the rejection of at least one option on each\nbasis.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 195,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Independent Word Selection**\nGiven a new sentence needing a more precise word and a thesaurus entry with five options, select and\njustify the single best word choice using both the context-check and the connotation-check.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 195,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated context-checking and connotation-checking (MP-2, MP-3) but\n  struggles to apply both simultaneously in MP-4/MP-5, this indicates the two skills need explicit\n  combined practice — provide a checklist format (\"Step 1: does it fit the context? Step 2: does it\n  fit the connotation/register?\") as scaffolding until the combination becomes automatic.\n  automatic.\n- If the student develops good dictionary/thesaurus habits but is slow and effortful in applying\n  them (checking every single word choice exhaustively even for simple, unambiguous cases), this is\n  expected at this stage — fluency and speed develop through the more advanced\n  `eng.vocab.semantic-fields` concept, not required for mastery here.\n- If the student's own writing shows no transfer of these lookup skills (continuing to use imprecise\n  or first-guess word choices in independent writing despite passing mastery probes in isolation),\n  flag this as a habit-formation gap and connect explicitly to writing-revision practice.\n- Younger or less independent readers may need explicit modeling of the physical or digital\n  dictionary/thesaurus navigation (how entries are alphabetized, how to use a digital search) before\n  focusing on the interpretive skills this concept targets — a brief tool-navigation primer may\n  precede Component 3 if needed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 254,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "eng.vocab.thesaurus-and-dictionary-skills/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.thesaurus-and-dictionary-skills",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: synonyms/antonyms check] --> [PD-2: multiple-meaning-words check]\n   |                                                      |\n   | (gap found)                                          | (pass)\n   v                                                       v\n[Route to prerequisite concept]              [Component 3: Shirt-Rack/Paint-Chip Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.80) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                          [Unlock: semantic-fields]  [S6 remediation: read-aloud-comparison\n                                                       / connotation-lookup drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-2 and MC-B during TA-3 — these are related but distinct habits (checking fit vs. checking\nconnotation) and often need separate reinforcement even after one is corrected. If either fires,\nbranch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by\nfailure: MP-1 failure indicates basic dictionary-reading mechanics (TA-1) needs review; MP-2 failure\nalone indicates residual MC-A; MP-3 failure alone indicates residual MC-B; MP-4 failure with MP-2/\nMP-3 passing indicates a combination gap — the two checks aren't yet integrated into one habit; MP-5\nfailure with MP-1 through MP-4 passing indicates a transfer gap — provide one more guided selection\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md",
+        "startLine": 218,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.research-paper-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.research-paper-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6b78b0b8aea43ac8eed0d53d73ba704b19244cdf9b67a28ff6e2230b66936ecc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.research-paper-writing.md": "sha256:dd542714f10dc048de37567cb63b60bb26f329d2e9e817663957263b60b05154"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.composition.research-paper-writing",
+    "name": "Research Paper Writing",
+    "difficultyRaw": "expert",
+    "bloom": "create",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "eng.writing.citations-and-referencing",
+      "eng.composition.rhetorical-analysis"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.research-paper-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.research-paper-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.research-paper-writing.md": "sha256:dd542714f10dc048de37567cb63b60bb26f329d2e9e817663957263b60b05154"
+      },
+      "contentHash": "sha256:b452f9edda8fa646968aaef95bb776190f5d2e0268df6f193ab107c051e00637",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.research-paper-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.research-paper-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.research-paper-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.research-paper-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md#TA-2 (addresses MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.research-paper-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.research-paper-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.research-paper-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.research-paper-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.research-paper-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.research-paper-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md#TA-4 (addresses MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.research-paper-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.research-paper-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.research-paper-writing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md#TA-5 (addresses MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES, MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.research-paper-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.research-paper-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.research-paper-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Research Paper Writing — Conceptual Development Sequence",
+      "content": "### TA-1 — Formulating an Original, Arguable Thesis from Multiple Sources\n\nTeach students to develop a thesis that emerges from considering several sources together, not\nborrowed wholesale from one source. Student practice: given three source summaries on one research\nquestion, draft an original thesis that isn't simply restating any single source's conclusion.\n\n### TA-2 — Outlining by Idea, Not by Source (MC-A)\n\nUsing the witness-testimony table method, teach students to build an idea-first outline. Student\npractice: given four sources and three candidate sub-arguments, build a source-by-idea table showing\nwhich sources support which sub-argument.\n\n### TA-3 — Synthesizing Multiple Sources Within One Paragraph\n\nTeach the mechanics of weaving two or more sources together within a single paragraph to support one\npoint, rather than summarizing each source in its own paragraph. Student practice: given two source\nexcerpts supporting the same sub-argument, write one synthesized paragraph using both.\n\n### TA-4 — Engaging Complicating or Disagreeing Sources (MC-B)\n\nUsing the doctor's-test-results bridge text, teach students to actively seek out and address sources\nthat complicate their thesis. Student practice: given a thesis and a complicating source, write a\nparagraph that acknowledges the complication and explains how the overall argument accounts for it.\n\n### TA-5 — Full Research Paper Section Construction\n\nGive the student a research question, a thesis, and five sources (a mix of supporting and\ncomplicating). They must build an idea-organized outline, write at least one fully synthesized\nparagraph combining multiple sources, and explicitly address at least one complicating source — the\nfull synthesis task at a section, not full-paper, scale given the time constraint.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 146,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/misconception/MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES",
+      "kind": "misconception",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "**Trigger signal:** Student organizes their paper source-by-source (\"Source A says X. Source B says",
+      "content": "### MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES\n\n**Trigger signal:** Student organizes their paper source-by-source (\"Source A says X. Source B says\nY. Source C says Z.\") rather than idea-by-idea, producing a paper that reads as a series of book\nreports strung together rather than a unified argument that draws on multiple sources within each\npoint.\n\n**Conflict evidence [P28]:** Show the student two paper outlines on the same research question\n(the effects of screen time on adolescent sleep): one organized source-by-source (paragraph 1\nsummarizes Source A entirely, paragraph 2 summarizes Source B entirely, paragraph 3 summarizes\nSource C entirely), and one organized by sub-argument (paragraph 1 uses evidence from Sources A and C\ntogether to establish the physiological mechanism; paragraph 2 uses Source B alongside a rebuttal\nfrom Source A to address a complicating factor). Ask: \"Which paper is making its OWN argument, and\nwhich is just reporting what each source said in turn?\"\n\n**Bridge text [P30]:** \"Organizing by source is like writing a book report for each of three\nwitnesses in a trial, one at a time, and never actually building a case — a lawyer instead organizes\nby ARGUMENT, pulling relevant testimony from whichever witnesses support each specific point, in\nwhatever order the case needs. A research paper needs the same idea-first structure: organize by\nYOUR points, and pull in whichever sources support (or complicate) each one.\"\n\n**Replacement text [P31]:** \"Before writing, outline your paper by SUB-ARGUMENT or IDEA, not by\nsource. For each section, ask: which of my sources have something relevant to say about THIS\nspecific point — not 'what does this source say overall,' but 'what does this source contribute to\nthis specific piece of my argument?'\"\n\n**Discrimination pairs [P33]:**\n1. An outline with headings \"Source A,\" \"Source B,\" \"Source C\" (source-organized, book-report\n   structure) vs. an outline with headings \"The physiological mechanism,\" \"The behavioral factor,\"\n   \"The counterargument and response\" (idea-organized, argument structure).\n2. A paragraph that fully summarizes one source before moving to the next (sequential source\n   reporting) vs. a paragraph that weaves two sources together to build one point, citing each where\n   relevant (synthesized, idea-driven writing).\n\n**s6_path:** If the student continues organizing source-by-source after the bridge, have them\nphysically create a table with sources as COLUMNS and their own sub-arguments as ROWS, filling in\nwhich source contributes to which row — this literally requires them to think in terms of ideas the\nsources serve rather than the sources themselves as the organizing unit.",
+      "localKey": "MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES",
+      "language": "en",
+      "refs": [
+        "MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/misconception/MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE",
+      "kind": "misconception",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "**Trigger signal:** Student selects and cites only sources that agree with their thesis, ignoring or",
+      "content": "### MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE\n\n**Trigger signal:** Student selects and cites only sources that agree with their thesis, ignoring or\nomitting sources that complicate, partially contradict, or offer a different angle on the question —\nbelieving that acknowledging disagreement among sources would weaken their own argument, rather than\nrecognizing that addressing genuine complexity strengthens credibility.\n\n**Conflict evidence [P28]:** Show the student two paper excerpts on the same claim: one that cites\nonly agreeing sources and presents the question as if there were no complexity or disagreement in the\nresearch, and one that acknowledges a source presenting a complicating finding, then explains how the\nstudent's argument accounts for or responds to that complication. Ask: \"Which paper seems more\ncredible and more like it has actually engaged with the full body of research, rather than\ncherry-picking only what supports one side?\"\n\n**Bridge text [P30]:** \"Citing only sources that agree with you is like a doctor only reading test\nresults that confirm their initial guess and ignoring the ones that don't fit — it feels safer in the\nmoment, but it produces a less accurate, less trustworthy diagnosis. A truly strong research paper\nengages with the FULL, sometimes messy picture the sources present, and shows why your argument still\nholds even accounting for the complications.\"\n\n**Replacement text [P31]:** \"As you research, deliberately look for sources that complicate, qualify,\nor partially disagree with your thesis — and address them directly in your paper, either by showing\nwhy the disagreement doesn't undermine your overall point or by refining your thesis to account for\nit. Omitting inconvenient evidence doesn't strengthen an argument; it just makes it fragile once a\nreader finds the missing piece.\"\n\n**Discrimination pairs [P33]:**\n1. A paper that presents a claim as if universally supported by all research, citing only agreeing\n   sources (selective, fragile) vs. a paper that acknowledges a genuine complicating finding and\n   explains how the overall argument accounts for it (engaged, credible).\n2. A student choosing to simply not cite a source they found because it complicated their thesis\n   (avoidance) vs. a student citing that same source and using a limited concession plus a\n   qualification to strengthen the overall argument's precision (genuine synthesis).\n\n**s6_path:** If the student continues omitting complicating sources after the bridge, require them\nto find and cite at least one source that complicates or partially disagrees with their thesis as an\nexplicit, non-negotiable step in their research process, before drafting any section of the paper.",
+      "localKey": "MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE",
+      "language": "en",
+      "refs": [
+        "MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 42,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Formulating an Original, Arguable Thesis from Multiple Sources",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Formulating an Original, Arguable Thesis from Multiple Sources\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Outlining by Idea, Not by Source (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Outlining by Idea, Not by Source (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 156,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Synthesizing Multiple Sources Within One Paragraph",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Synthesizing Multiple Sources Within One Paragraph\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 162,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Engaging Complicating or Disagreeing Sources (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Engaging Complicating or Disagreeing Sources (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 168,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Full Research Paper Section Construction",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Research Paper Section Construction\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES\",\"MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES",
+        "MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 174,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Original Thesis Formulation**\nGiven three source summaries on a research question, draft an original thesis that synthesizes them\nrather than restating any single source.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Idea-Organized Outlining**\nGiven four sources and three candidate sub-arguments, build a table or outline organized by idea,\nshowing which sources support which sub-argument.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Synthesizing Multiple Sources in One Paragraph**\nGiven two source excerpts supporting the same point, write one paragraph that weaves both together\nrather than summarizing each separately.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Engaging a Complicating Source**\nGiven a thesis and a source that complicates or partially disagrees with it, write a paragraph that\nacknowledges the complication and explains how the argument accounts for it.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Section Construction**\nGiven a new research question, a thesis, and five sources (mixed supporting and complicating),\nproduce an idea-organized outline, one fully synthesized paragraph, and one paragraph directly\nengaging a complicating source.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 200,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Adaptive Flags",
+      "content": "- Given the 4-hour length and expert difficulty of this concept, actively monitor for fatigue or\n  cognitive overload across the TA sequence — this is an explicitly appropriate concept to split\n  across two or more sessions, resuming at the next TA with a brief review of the prior session's\n  work rather than restarting from TA-1.\n- If the student can synthesize sources correctly at the paragraph level (MP-3) but their full\n  section (MP-5) reverts to source-by-source organization under the added complexity, treat this as\n  a load-related regression, not a conceptual gap — provide one additional worked example at full\n  section scale before re-attempting independent work.\n- If the student's complicating-source paragraphs (MP-4) devolve into fully abandoning the original\n  thesis rather than refining or qualifying it, clarify that engaging a complication can mean\n  narrowing or qualifying a thesis's scope, not necessarily abandoning the argument altogether.\n- Students with strong single-source analytical skills (from Rhetorical Analysis) but weak\n  multi-source integration should be given explicit practice with the source-by-idea table (TA-2) as\n  a mandatory planning artifact for several subsequent assignments, since this is a genuinely new\n  cognitive demand beyond single-text analysis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 261,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "eng.composition.research-paper-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.research-paper-writing",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: citations check] --> [PD-2: rhetorical analysis / source evaluation check]\n   |                                              |\n   | (gap found)                                  | (pass)\n   v                                               v\n[Route to prerequisite concept]        [Component 3: Trial-Lawyer Anchor]\n                                                   |\n                                                   v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                   |\n                                                   v\n                             [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                   |\n                                                   v\n                             [MP-1 through MP-5 mastery probe set]\n                                                   |\n                             (pass >= 0.70) -----+----- (fail)\n                                    |                      |\n                                    v                      v\n                [Unlock: academic-writing-conventions]  [S6 remediation: source-by-idea\n                                                          table / mandatory-complication drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-2 (outlining) and MC-B during TA-4 (complicating sources) — these are largely independent failure\nmodes and can surface in either order depending on the student's research habits. If either fires,\nbranch to the relevant s6_path drill before resuming. Given this concept's length (4 hours) and\nexpert difficulty, monitor cognitive load carefully across TAs — this is an appropriate concept to\nsplit across multiple sessions if fatigue signals appear, resuming at the next TA rather than\nrestarting. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the thesis-\nformulation step (TA-1) needs review; MP-2 failure alone indicates residual MC-A; MP-3 failure alone\nindicates the synthesis-mechanics step (TA-3), distinct from either misconception; MP-4 failure alone\nindicates residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap at\nscale — provide one more fully-guided section-construction example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.research-paper-writing.md",
+        "startLine": 223,
+        "endLine": 261
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

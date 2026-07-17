@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.style-voice-and-tone-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.style-voice-and-tone",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:20faa8f8df12c00d34741d7524e758b1cea228e6ec5ffa3e9a77ced1ac9e8435",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md": "sha256:cc5828fda47c823befc4d00245dad769dc46725e4f26e6de18d900aa114475af"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.style-voice-and-tone",
+    "name": "\"Style, Voice, and Tone\"",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.figurative-language-in-composition"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.style-voice-and-tone-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.style-voice-and-tone (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md": "sha256:cc5828fda47c823befc4d00245dad769dc46725e4f26e6de18d900aa114475af"
+      },
+      "contentHash": "sha256:90dcd2d8afafcd940370c0ec78bac0a102c700fc701439be22d1b7bfb986ffab",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.style-voice-and-tone.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.style-voice-and-tone"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.style-voice-and-tone\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.style-voice-and-tone.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md#TA-2 (addresses MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.style-voice-and-tone"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.style-voice-and-tone\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.style-voice-and-tone.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md#TA-3 (addresses MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.style-voice-and-tone"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.style-voice-and-tone\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.style-voice-and-tone.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md#TA-4 (addresses MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY, MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.style-voice-and-tone"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.style-voice-and-tone\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.style-voice-and-tone/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "\"Style, Voice, and Tone\" — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying Stylistic Elements (Diction, Sentence Structure, Attitude)\n\nTeach the three core components of style: diction (word choice level and precision), sentence\nstructure patterns (length, complexity, rhythm), and attitude/tone. Student practice: given two\ncontrasting short passages, identify the specific diction, sentence structure, and tone choices in\neach.\n\n### TA-2 — Precision Over Complexity (MC-A)\n\nUsing the simple-dog-sentence comparison, teach that precise, well-chosen simple language often\ncreates stronger style than complicated vocabulary. Student practice: given three overly elaborate\nsentences, revise each into simpler, more precise language and compare the effect.\n\n### TA-3 — Core Habits vs. Flexible Choices (MC-B)\n\nUsing the musician's-range anchor, teach students to distinguish a writer's core, recognizable habits\nfrom the surface choices that should flex by purpose and audience. Student practice: given two pieces\nby the same writer for different purposes, identify what stays consistent (core) and what changes\n(flexible).\n\n### TA-4 — Evaluating Style-Purpose Fit and Deliberate Adjustment\n\nGive the student a piece of writing and a stated purpose/audience mismatch (e.g., an overly casual\npiece meant for a formal audience). They must evaluate the mismatch, identify which core habits could\nbe preserved, and revise the flexible elements to better fit the stated purpose while keeping some\nrecognizable voice.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 148,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/misconception/MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY",
+      "kind": "misconception",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "**Trigger signal:** Student equates having \"a strong style\" with using elaborate, unusual, or",
+      "content": "### MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY\n\n**Trigger signal:** Student equates having \"a strong style\" with using elaborate, unusual, or\ncomplicated vocabulary regardless of fit, believing more sophisticated-sounding word choices\nautomatically improve a piece's style — e.g., replacing simple, clear words with obscure synonyms\nthroughout a piece for no purpose beyond sounding impressive.\n\n**Conflict evidence [P28]:** Show the student two short passages describing the same simple scene:\none using needlessly elaborate vocabulary that obscures the meaning (\"The perambulating canine\ntraversed the verdant expanse\"), and one using simple, precise, and vivid word choice that has a\nclear, confident voice (\"The dog trotted across the green field, nose down, tail up\"). Ask: \"Which\none actually has a stronger, clearer STYLE — even though the words are simpler?\"\n\n**Bridge text [P30]:** \"Style isn't about using the fanciest available word — it's about making\nDELIBERATE, CONSISTENT choices that create a specific effect, the way a chef's signature dish isn't\ndefined by using the most exotic ingredient in every recipe, but by a recognizable, consistent\napproach to flavor and technique. Simple word choices, used precisely and consistently, can create a\nmuch stronger style than needlessly complicated ones.\"\n\n**Replacement text [P31]:** \"Instead of asking 'is this a fancy enough word?', ask 'is this the most\nPRECISE and EFFECTIVE word for the effect I want, and is it consistent with the voice I'm building\nthroughout this piece?' Simple, well-chosen words used consistently often create a stronger, more\nrecognizable style than scattered attempts at sounding impressive.\"\n\n**Discrimination pairs [P33]:**\n1. \"The perambulating canine traversed the verdant expanse.\" (obscure vocabulary obscuring simple\n   meaning, no clear consistent voice) vs. \"The dog trotted across the green field, nose down, tail\n   up.\" (simple, precise, vivid — a clear, confident voice).\n2. A student replacing every \"said\" with an elaborate synonym regardless of fit (\"ejaculated,\"\n   \"vociferated\") to sound sophisticated (style-as-decoration) vs. a student choosing one consistent,\n   simple approach to dialogue tags that supports the piece's overall tone (style-as-consistent-\n   choice).\n\n**s6_path:** If the student continues equating style with complicated vocabulary after the bridge,\nhave them take one of their own overly elaborate sentences and rewrite it using only simple,\ncommon words, then compare which version communicates more clearly and confidently — often the\nsimpler version reveals a clearer voice underneath the vocabulary decoration.",
+      "localKey": "MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY",
+      "language": "en",
+      "refs": [
+        "MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/misconception/MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE",
+      "kind": "misconception",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "**Trigger signal:** Student believes a \"true\" personal style must remain identical regardless of",
+      "content": "### MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE\n\n**Trigger signal:** Student believes a \"true\" personal style must remain identical regardless of\npurpose or audience, resisting adjusting diction, sentence structure, or tone for different writing\ntasks (e.g., using the same casual, humorous voice in both a personal blog post and a formal lab\nreport), treating any adjustment as \"inauthentic\" or a betrayal of their real voice.\n\n**Conflict evidence [P28]:** Show the student two pieces by the same accomplished writer — one a\ncasual personal essay with short, punchy sentences and colloquial diction, one a formal analytical\npiece with longer, more measured sentences and precise technical vocabulary — both recognizably by\nthe same writer (sharing certain habits: a preference for concrete imagery, a particular rhythm) but\nclearly adjusted for their different purposes and audiences. Ask: \"Is this the same writer in both\npieces? What stays the same, and what changes?\"\n\n**Bridge text [P30]:** \"A skilled writer's style is like a musician who can play both a gentle\nacoustic ballad and an energetic rock song — the SAME musician, with recognizable habits and\ntechnique underneath, but deliberately adjusting volume, tempo, and instrumentation to fit each\nsong's purpose. Adjusting your style for a different purpose or audience isn't fake — it's exactly\nwhat skilled writers do; some core habits stay recognizable while surface choices flex.\"\n\n**Replacement text [P31]:** \"Ask: what parts of my style are truly core (a preference for certain\nkinds of imagery, a typical sentence rhythm, a characteristic way of noticing detail) versus what\nshould flex for this specific purpose and audience (formality level, sentence complexity, humor)?\nAdjusting the flexible parts while keeping the core recognizable is skilled style, not betrayal of\nyour voice.\"\n\n**Discrimination pairs [P33]:**\n1. A student refusing to remove casual slang from a formal lab report because \"that's just how I\n   write\" (rigid, purpose-blind style) vs. a student adjusting formality for the lab report while\n   keeping their characteristic precise, concrete word choices recognizable underneath (flexible,\n   purpose-aware style).\n2. Two pieces by the same writer that read as completely unrelated with no shared habits at all\n   (potentially a sign of inconsistent craft rather than adaptability) vs. two pieces by the same\n   writer that are clearly adjusted for purpose yet share identifiable underlying habits (genuine\n   stylistic flexibility with a recognizable core).\n\n**s6_path:** If the student continues resisting stylistic adjustment after the bridge, have them\nwrite the same short passage twice for two very different stated purposes and audiences (a text to a\nfriend and a note to a school principal on the same topic), then identify explicitly which elements\nthey kept consistent (their core habits) and which they deliberately changed (the flexible surface\nchoices).",
+      "localKey": "MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE",
+      "language": "en",
+      "refs": [
+        "MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 41,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "Identifying Stylistic Elements (Diction, Sentence Structure, Attitude)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Stylistic Elements (Diction, Sentence Structure, Attitude)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 152,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "Precision Over Complexity (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Precision Over Complexity (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "Core Habits vs. Flexible Choices (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Core Habits vs. Flexible Choices (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 165,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "Evaluating Style-Purpose Fit and Deliberate Adjustment",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Evaluating Style-Purpose Fit and Deliberate Adjustment\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY\",\"MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY",
+        "MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 172,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Stylistic Elements**\nGiven a short passage, identify its specific diction level, sentence structure pattern, and overall\ntone/attitude.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Precision vs. Complexity**\nGiven an overly elaborate sentence, revise it into simpler, more precise language and explain why the\nrevision creates a stronger, clearer voice.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Core Habits vs. Flexible Choices**\nGiven two pieces by the same writer for different purposes, identify at least one core habit that\nstays consistent and at least one flexible choice that changes.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Style-Purpose Fit Evaluation**\nGiven a passage and its stated audience/purpose, evaluate whether the style is well-matched, citing\nspecific diction or structural choices as evidence.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Deliberate Stylistic Adjustment**\nGiven a passage with a stated purpose/audience mismatch, revise its flexible stylistic elements to\nbetter fit the purpose while preserving at least one recognizable core habit.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "Adaptive Flags",
+      "content": "- If the student can analyze others' style accurately (MP-1 through MP-4) but their own writing\n  remains stylistically flat or inconsistent (MP-5, independent writing generally), treat this as a\n  production gap — provide explicit practice identifying the student's OWN core habits across\n  several of their past pieces before asking them to deliberately preserve/adjust in new writing.\n- If the student strongly resists any stylistic adjustment, framing it as inauthentic (a deep form of\n  MC-B), address this with particular care — validate that their core voice matters while showing\n  concretely (via admired writers or their own past successful adjustments) that flexibility is a\n  skill, not a compromise of identity.\n- If the student overcorrects after MC-A and becomes needlessly plain or flat, avoiding vivid or\n  precise word choice out of fear of seeming \"too fancy,\" recalibrate: precision, not simplicity for\n  its own sake, is the goal — a well-chosen vivid word is not the same as an unnecessarily obscure\n  one.\n- Students with strong grammatical control (particularly of `eng.grammar.parallel-structure`) may be\n  ready to explore how structural patterns like parallelism contribute to a recognizable stylistic\n  \"signature,\" connecting this concept's cross-link explicitly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B",
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 255,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "eng.composition.style-voice-and-tone/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.style-voice-and-tone",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: figurative language check] --> [PD-2: diction/tone awareness check]\n   |                                                        |\n   | (gap found)                                            | (pass)\n   v                                                         v\n[Route to figurative-language-in-composition]     [Component 3: Musician's-Range Anchor]\n                                                              |\n                                                              v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                              |\n                                                              v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                              |\n                                                              v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                              |\n                                        (pass >= 0.75) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                                 [Unlock: editing-for-style]  [S6 remediation: simplify-sentence\n                                                                / two-purpose-rewrite drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a figurative-language gap routes\nback to that prerequisite, a diction/tone gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-1/TA-2 (initial attempts to \"sound sophisticated\")\nand MC-B during TA-3 (resistance to adjusting voice for different purposes) — these can surface\nindependently and don't have a strong sequential relationship. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1\nfailure indicates basic element-identification (TA-1) needs review; MP-2 failure alone indicates\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B or the fit-evaluation extension\nrespectively; MP-5 failure with MP-1 through MP-4 passing indicates a production/transfer gap —\nprovide one more guided adjustment example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md",
+        "startLine": 219,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
