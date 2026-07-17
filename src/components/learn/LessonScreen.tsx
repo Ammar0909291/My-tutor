@@ -1742,15 +1742,54 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         : null
       const opening = teachingLanguage === 'ru'
         ? (pastSessionsSummary || lessonRef
-          ? `Привет! ${lessonRef ? `Ты работал над темой ${lessonRef}. ` : ''}${pastSessionsSummary ? `В прошлый раз: "${pastSessionsSummary}". ` : ''}Продолжи с того места. Уровень: "${levelDescription}". 3-4 предложения.`
-          : `Начни урок по "${subjectName}". Уровень: "${levelDescription}". Представься как "Репетитор Макс", поприветствуй и начни объяснение. 3-4 предложения.`)
+          // Returning learner — warm recap then continue
+          ? `Студент вернулся. ${lessonRef ? `Тема: ${lessonRef}. ` : ''}${pastSessionsSummary ? `Прошлый раз: "${pastSessionsSummary}". ` : ''}
+Поприветствуй тепло, в 1–2 предложениях напомни что было пройдено, затем продолжай обучение с того места. Если урок сменился — сначала дай краткое вступление по новому уроку. Уровень: "${levelDescription}".`
+          // New learner — full 7-step lesson opening
+          : `Начинается новый урок. Открой урок точно по этой структуре — не пропускай ни одного раздела:
+
+1. ПРИВЕТСТВИЕ — Представься как "Репетитор Макс". Назови тему урока (из контекста урока в твоих инструкциях) и его номер в курсе.
+2. ЦЕЛЬ УРОКА — 3–5 конкретных пунктов: что именно студент сможет делать после этого урока.
+3. ЗАЧЕМ ЭТО ВАЖНО — один короткий мотивирующий абзац: как эта тема применяется в жизни или что она открывает дальше.
+4. ЧТО НУЖНО ЗНАТЬ ЗАРАНЕЕ — перечисли предварительные знания. Если completedLessons показывает, что нужные темы уже пройдены — скажи об этом.
+5. ПЛАН УРОКА — покажи путь сегодня: Интуиция → Объяснение → Примеры → Практика → Проверка → Итог.
+6. КРЮЧОК ЛЮБОПЫТСТВА — одна неожиданная или контринтуитивная мысль о теме, которая хочется распутать.
+7. НАЧИНАЙ ОБУЧЕНИЕ — стартуй с интуиции: конкретный жизненный сценарий, который студент уже знает.
+
+Уровень студента: "${levelDescription}". Пиши под его уровень.`)
         : teachingLanguage === 'hi'
         ? (pastSessionsSummary || lessonRef
-          ? `Namaste! ${lessonRef ? `Aap ${lessonRef} par kaam kar rahe the. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue karein. Level: "${levelDescription}". 3-4 sentences.`
-          : `"${subjectName}" ka lesson shuru karo. Level: "${levelDescription}". Apna parichay do aur pehla explanation do. 3-4 sentences.`)
+          // Returning learner — warm recap then continue
+          ? `Student wapas aa gaya. ${lessonRef ? `Topic: ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}
+Warmly greet karein, 1–2 sentences mein pichla session recap karein, phir wahan se aage padhana shuru karein. Agar lesson badal gaya ho to pehle naye lesson ka brief introduction dein. Level: "${levelDescription}".`
+          // New learner — full 7-step lesson opening
+          : `Naya lesson shuru ho raha hai. Is exact structure mein lesson open karein — koi bhi section skip mat karein:
+
+1. SWAGAT — "Tutor Max" ke roop mein apna parichay dein. Aaj ka topic (apne instructions ke lesson context se) aur course mein uska number batayein.
+2. LESSON GOAL — 3–5 specific bullet points: is lesson ke baad student exactly kya kar paayega.
+3. YEH KYUN ZAROORI HAI — ek chhota motivating paragraph: yeh topic real life mein kahan kaam aata hai ya aage kya kholta hai.
+4. PREREQUISITES — kya jaanna chahiye pehle se. Agar completedLessons se pata chale ki related topics cover ho chuke hain to woh bata dein.
+5. AAJ KA ROADMAP — aaj ka safar dikhayein: Intuition → Explanation → Examples → Practice → Mastery Check → Summary.
+6. CURIOSITY HOOK — ek aisa fact jo surprising ya counterintuitive lage aur student jaanna chahey.
+7. PADHANA SHURU KAREIN — intuition se start karein: koi real-life scenario jo student pehle se jaanta ho.
+
+Student level: "${levelDescription}". Unke level ke hisaab se likhein.`)
         : (pastSessionsSummary || lessonRef
-          ? `Hi! ${lessonRef ? `You were working on ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}Continue from there. Level: "${levelDescription}". 3-4 sentences.`
-          : `Start the lesson on "${subjectName}". Level: "${levelDescription}". Introduce yourself as "Tutor Max" and begin teaching. 3-4 sentences.`)
+          // Returning learner — warm recap then continue
+          ? `The student has returned. ${lessonRef ? `They were on: ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}
+Greet them warmly. In 1–2 sentences recap what was covered last time, then continue teaching from where they left off. If the lesson has changed, give a brief opening for the new lesson first. Student level: "${levelDescription}".`
+          // New learner — full 7-step lesson opening
+          : `A new lesson is beginning. Open the lesson in exactly this structure — do not skip any section:
+
+1. WELCOME — Introduce yourself as "Tutor Max". State today's topic (use the lesson title from the lesson context in your instructions) and its number in the course.
+2. LEARNING GOAL — 3–5 specific bullet points: exactly what the student will be able to do by the end of this lesson.
+3. WHY THIS MATTERS — one short motivating paragraph: how this topic is used in real life or what it unlocks next.
+4. PREREQUISITES — list what the student should already know before this lesson. If completedLessons shows they have covered the relevant prior topics, say so.
+5. LESSON ROADMAP — show today's journey: Intuition → Explanation → Examples → Guided Practice → Mastery Check → Summary.
+6. CURIOSITY HOOK — one surprising or counterintuitive thought about today's topic that makes the student want to find out more.
+7. BEGIN TEACHING — start with intuition: a concrete, real-life scenario the student already knows.
+
+Student level: "${levelDescription}". Write at a level appropriate for them.`)
       await sendMessage(sid, opening, false)
       if (initialPrompt) await sendMessage(sid, initialPrompt, true)
     } catch { setInitError('Connection failed. Please refresh the page.') }
