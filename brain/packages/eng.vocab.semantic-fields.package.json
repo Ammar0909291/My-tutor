@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.semantic-fields-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.semantic-fields",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3e53a71497385636ff8806ccaa4d797df6371de27d07ea8d32cb57cc1c3f6733",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.semantic-fields.md": "sha256:dc0eba69bf149de32b71efa023dc83c8653de62c493f06c5a7800d4489e8b0f6"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.vocab.semantic-fields",
+    "name": "Semantic Fields",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.thesaurus-and-dictionary-skills",
+      "eng.vocab.etymology"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.semantic-fields-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.semantic-fields (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.semantic-fields.md": "sha256:dc0eba69bf149de32b71efa023dc83c8653de62c493f06c5a7800d4489e8b0f6"
+      },
+      "contentHash": "sha256:a3aa28283a62ed6ff3513f6672b480ada7720a8d9b9d4f49205f21337fb5a331",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.semantic-fields.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md#TA-1 (addresses MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.semantic-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.semantic-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.semantic-fields.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md#TA-2 (addresses MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.semantic-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.semantic-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.semantic-fields.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.semantic-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.semantic-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.semantic-fields.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md#TA-4 (addresses MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD, MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.semantic-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.semantic-fields\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.semantic-fields/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Semantic Fields — Conceptual Development Sequence",
+      "content": "### TA-1 — Semantic Fields vs. Synonym Sets (MC-A)\n\nUsing the family-resemblance anchor, teach that a semantic field's words share a conceptual domain,\nnot a meaning. Student practice: given a semantic field (emotion: joy, anger, fear, sadness), explain\nwhy the words are not synonyms despite sharing a domain.\n\n### TA-2 — Semantic Fields vs. Collocation (MC-B)\n\nUsing the lifeguard-vs-ocean anchor, teach distinguishing shared conceptual domain from mere\nfrequent co-occurrence. Student practice: given word pairs that frequently co-occur, determine\nwhether both words share a semantic field or are merely contextually associated.\n\n### TA-3 — Mapping a Semantic Field\n\nExtend TA-1/TA-2: given a conceptual domain (e.g., cooking), generate a list of words that genuinely\nbelong to that semantic field, excluding words that are merely associated with cooking contexts\n(e.g., \"kitchen,\" a location, not a cooking action).\n\n### TA-4 — Full Application: Analyzing an Unfamiliar Semantic Field\n\nGive the student a new conceptual domain (e.g., movement: walk, run, sprint, amble, trudge). They\nmust confirm the words are not synonyms but share the domain (TA-1), exclude any merely-associated\nwords that don't belong (TA-2), and produce a mapped semantic field (TA-3) — the full synthesis\ntask.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 141,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/misconception/MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "**Trigger signal:** Student treats a semantic field as equivalent to a synonym list, assuming all",
+      "content": "### MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD\n\n**Trigger signal:** Student treats a semantic field as equivalent to a synonym list, assuming all\nwords within a semantic field must mean nearly the same thing, rather than recognizing that a\nsemantic field contains many distinct, often quite different words that are connected not by shared\nmeaning but by belonging to the same broader conceptual domain (e.g., \"emotion\" includes joy, anger,\nfear, and sadness — none of which are synonyms of each other).\n\n**Conflict evidence [P28]:** Show the student the words \"joy,\" \"anger,\" \"fear,\" and \"sadness.\" Ask:\n\"Do 'joy' and 'anger' mean the same thing, or anything close to the same thing? Do they belong to the\nsame broader category — emotion?\" Contrast this with an actual synonym set: \"happy,\" \"joyful,\"\n\"elated,\" \"delighted\" — words that DO mean nearly the same thing.\n\n**Bridge text [P30]:** \"Assuming a semantic field is a synonym list is like assuming everyone in a\nsingle family must look identical — a family shares a connection (they're related), but the members\ncan look completely different from each other. A semantic field's words share a conceptual domain\n(emotion, weather, cooking) without needing to mean the same thing at all — in fact, they usually\ndon't.\"\n\n**Replacement text [P31]:** \"Don't expect words in a semantic field to mean the same thing. Ask\ninstead: do these words all belong to the same broader conceptual domain, even if their individual\nmeanings are quite different from each other? That shared domain — not shared meaning — is what\ndefines a semantic field.\"\n\n**Discrimination pairs [P33]:**\n1. \"Joy,\" \"anger,\" \"fear,\" \"sadness\" (a genuine semantic field — the emotion domain — despite having\n   very different individual meanings) vs. \"happy,\" \"joyful,\" \"elated,\" \"delighted\" (a synonym set —\n   all meaning nearly the same thing).\n2. A student who expects every word in the \"weather\" semantic field to mean roughly \"rain\"\n   (misconception, treating the field as a synonym set) vs. a student who recognizes \"rain,\" \"wind,\"\n   \"sunshine,\" and \"storm\" all belong to the weather domain despite meaning very different things\n   (correct semantic-field recognition).\n\n**s6_path:** If the student continues to conflate semantic fields with synonym sets after the\nbridge, give them a semantic field (cooking: bake, boil, fry, roast, simmer) and have them explain,\nfor each pair of words, why they are NOT synonyms even though they share the same conceptual domain.",
+      "localKey": "MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD",
+      "language": "en",
+      "refs": [
+        "MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/misconception/MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "**Trigger signal:** Student assumes any two words that frequently co-occur in the same sentences or",
+      "content": "### MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD\n\n**Trigger signal:** Student assumes any two words that frequently co-occur in the same sentences or\ncontexts (collocations) must belong to the same semantic field, failing to distinguish genuine\nshared-domain membership from mere frequent co-occurrence — for example, treating \"umbrella\" as part\nof the weather semantic field because it often appears alongside \"rain,\" when \"umbrella\" actually\nbelongs to the objects/tools domain.\n\n**Conflict evidence [P28]:** Show the student the sentence \"I grabbed my umbrella because of the\nrain.\" Ask: \"Does 'umbrella' describe a weather phenomenon, the way 'rain,' 'wind,' and 'storm' do?\nOr is 'umbrella' actually an object — a tool people use in response to weather? Just because two\nwords often appear together, does that mean they belong to the same conceptual domain?\"\n\n**Bridge text [P30]:** \"Assuming words that often appear together must share a semantic field is\nlike assuming 'lifeguard' and 'ocean' belong to the same category just because they're always\nmentioned together — a lifeguard is a person, the ocean is a body of water; they're related in\ncontext, not in conceptual domain. Frequent co-occurrence (collocation) is a different relationship\nthan genuine shared-domain membership (semantic field).\"\n\n**Replacement text [P31]:** \"Don't assume two words share a semantic field just because they often\nappear near each other. Ask: do these words describe the same KIND of thing — both weather\nphenomena, both emotions, both cooking actions? If one word is a tool or object used in response to\nthe other, they're related by context, not by shared conceptual domain.\"\n\n**Discrimination pairs [P33]:**\n1. \"Umbrella\" and \"rain\" (frequently co-occur, but \"umbrella\" is an object/tool, not a weather\n   phenomenon — different semantic fields) vs. \"rain\" and \"storm\" (both genuine weather phenomena —\n   same semantic field).\n2. A student who groups \"umbrella\" into the weather semantic field because of frequent co-occurrence\n   (misconception) vs. a student who recognizes \"umbrella\" belongs to the objects/tools field despite\n   its strong contextual association with weather words (correct distinction).\n\n**s6_path:** If the student continues to conflate collocation with semantic-field membership after\nthe bridge, give them five word pairs that frequently co-occur (doctor/hospital, teacher/classroom,\nrain/umbrella) and have them determine, for each pair, whether both words share the same conceptual\ndomain or whether one is merely contextually associated with the other.",
+      "localKey": "MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 40,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Semantic Fields vs. Synonym Sets (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Semantic Fields vs. Synonym Sets (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 145,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Semantic Fields vs. Collocation (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Semantic Fields vs. Collocation (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 151,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Mapping a Semantic Field",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Mapping a Semantic Field\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 157,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Full Application: Analyzing an Unfamiliar Semantic Field",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing an Unfamiliar Semantic Field\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD\",\"MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD",
+        "MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 163,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing a Semantic Field from a Synonym Set**\nGiven a semantic field's word list, explain why the words are not synonyms despite sharing a\nconceptual domain.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguishing Semantic-Field Membership from Collocation**\nGiven a word pair that frequently co-occurs, determine whether both words share a semantic field or\nare merely contextually associated.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Mapping a Semantic Field**\nGiven a conceptual domain, generate a list of words that genuinely belong to that semantic field.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Excluding a False Member**\nGiven a candidate word list for a semantic field that includes one merely-associated collocation,\nidentify and exclude the word that doesn't actually belong.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Analysis of an Unfamiliar Semantic Field**\nGiven a new conceptual domain, confirm the words share the domain without being synonyms, exclude\nany merely-associated words, and produce a mapped semantic field.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 184,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly distinguishes fields from synonym sets on provided examples (MP-1) but\n  reverts to synonym-style thinking when mapping a new domain (MP-5), provide a mandatory\n  \"do these words mean the same thing, or just share a category?\" check for every candidate word.\n- If the student's field-vs-synonym distinction is strong (MP-1) but they still admit collocations\n  into their mapped fields (MP-3, MP-4), require an explicit \"is this the SAME KIND of thing, or just\n  something associated with it?\" check before adding any word to a field.\n- If the student struggles to generate field members at all, provide a partial starter list for the\n  conceptual domain as scaffolding before free generation.\n- Students with strong performance in `eng.vocab.etymology`'s word-history tracing should transfer\n  readily to recognizing that a domain's words can have entirely separate origins yet still share a\n  conceptual field — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 241,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "eng.vocab.semantic-fields/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.semantic-fields",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: thesaurus/dictionary check] --> [PD-2: etymology check]\n   |                       |                                |\n   | (gap found)           |                                | (pass both)\n   v                        v                                v\n[Route to prerequisite]                        [Component 3: Family-Resemblance /\n                                                 Lifeguard-vs-Ocean Anchor]\n                                                            |\n                                                            v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: field-vs-synonym contrast drills /\n                     terminal in current      field-vs-collocation sorting drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (expecting synonymy) and MC-B during TA-2 (accepting collocations as field members) — these are\nlargely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1\nfailure indicates residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-3/MP-5 failure with\nMP-1/MP-2 passing indicates an integration gap — provide one more guided full-domain mapping example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.semantic-fields.md",
+        "startLine": 205,
+        "endLine": 241
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.following-instructions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.following-instructions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6076f383662719f5bdb8154301165a9523946bc4105e7070d66448ae19338981",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.following-instructions.md": "sha256:e1745dcbf001b7fe8685d5539f238c5e3e356fe9629bb784d1f492f4af408be2"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.listening.following-instructions",
+    "name": "Following Spoken Instructions",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.listening.listening-for-detail"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.following-instructions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.following-instructions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.following-instructions.md": "sha256:e1745dcbf001b7fe8685d5539f238c5e3e356fe9629bb784d1f492f4af408be2"
+      },
+      "contentHash": "sha256:092b844e1311393145b74a2f9f7cedc4190cd4b73e62aca9968db5c117dc292a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.following-instructions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.following-instructions.md#TA-1 (addresses MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.following-instructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.following-instructions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.following-instructions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.following-instructions.md#TA-2 (addresses MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.following-instructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.following-instructions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.following-instructions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.following-instructions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.following-instructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.following-instructions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.following-instructions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.following-instructions.md#TA-4 (addresses MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH, MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.following-instructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.following-instructions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.following-instructions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Following Spoken Instructions — Conceptual Development Sequence",
+      "content": "### TA-1 — Listening to the Full Instruction Before Acting (MC-A)\n\nUsing the incomplete-phone-number anchor, teach holding a complete multi-step instruction in mind\nbefore beginning any action. Student practice: given a three-step spoken instruction, repeat back\nall three steps before performing any of them.\n\n### TA-2 — Recognizing Sequence Markers (MC-B)\n\nUsing the movie-credits anchor, teach identifying \"before,\" \"after,\" and \"once you have\" as markers\nthat can reorder steps relative to their mention order. Student practice: given an instruction using\none of these markers, identify which step actually happens first.\n\n### TA-3 — Determining True Execution Order\n\nExtend TA-2: given a multi-step instruction mixing markers, write out the full correct execution\norder (not the mention order). Student practice: given a four-step instruction with one reordering\nmarker, list the steps in true execution order.\n\n### TA-4 — Full Application: Listening and Executing a Complete Instruction\n\nGive the student a new multi-step spoken instruction including at least one reordering marker. They\nmust hold the full instruction in mind (TA-1), identify the marker and determine true execution\norder (TA-2/TA-3), and correctly execute (or state) the steps in that order — the full synthesis\ntask.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 128,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/misconception/MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH",
+      "kind": "misconception",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "**Trigger signal:** Student begins acting on the first spoken instruction the moment it is heard,",
+      "content": "### MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH\n\n**Trigger signal:** Student begins acting on the first spoken instruction the moment it is heard,\nrather than listening to the full multi-step sequence first — causing later steps to be forgotten or\nmissed because attention shifted to executing the first step before the rest of the instruction was\neven given.\n\n**Conflict evidence [P28]:** Give the student a three-step spoken instruction (\"Open the drawer,\ntake out the blue folder, and put it on the desk.\") but stop the student partway through to ask what\nthey are already doing. Ask: \"If you started opening the drawer the instant you heard 'open the\ndrawer,' were you still listening carefully to the rest of the instruction, or did your attention\nmove to the action?\"\n\n**Bridge text [P30]:** \"Acting on the first instruction before hearing the rest is like starting to\ndial a phone number after hearing only the first two digits — you're acting on incomplete\ninformation, and you'll likely get it wrong or have to start over. A full instruction needs to be\nheld in mind, complete, before any part of it is executed.\"\n\n**Replacement text [P31]:** \"Listen to the entire instruction before beginning any action. Hold all\nthe steps in mind first, then execute them in the correct order — don't let hearing the first step\ntrigger immediate action before you've heard the rest.\"\n\n**Discrimination pairs [P33]:**\n1. A listener who starts opening the drawer the instant \"open the drawer\" is heard, missing the\n   remaining two steps (acting on incomplete information) vs. a listener who waits to hear the full\n   three-step instruction before beginning to act (complete information, correct approach).\n2. A student who can only recall the first step of a three-step instruction because they started\n   acting immediately (misconception) vs. a student who recalls all three steps because they listened\n   to the whole instruction first (correct discipline).\n\n**s6_path:** If the student continues to act on partial instructions after the bridge, give them\nthree multi-step instructions in a row, explicitly instructing them to repeat back the full sequence\nbefore performing any action, to build the habit of complete listening before execution.",
+      "localKey": "MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH",
+      "language": "en",
+      "refs": [
+        "MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 3,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/misconception/MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED",
+      "kind": "misconception",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "**Trigger signal:** Student assumes the order in which steps are mentioned in a spoken instruction",
+      "content": "### MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED\n\n**Trigger signal:** Student assumes the order in which steps are mentioned in a spoken instruction\nalways matches the order in which they must be executed, failing to track sequence markers (\"before\nyou,\" \"after,\" \"once you have\") that can reorder steps relative to their mention order — for example,\n\"Before you close the window, turn off the light\" requires turning off the light FIRST, despite\n\"close the window\" being mentioned first.\n\n**Conflict evidence [P28]:** Give the student the instruction \"Before you close the window, turn off\nthe light.\" Ask: \"Which action was mentioned first in the sentence? Which action should actually\nhappen first?\" Confirm that \"turn off the light\" is mentioned second but must happen first, because\nof the word \"before.\"\n\n**Bridge text [P30]:** \"Assuming mention order always equals execution order is like assuming the\ncredits at the end of a movie tell you what happened first in the story — the order something is\npresented in doesn't always match the order it actually occurs in. Words like 'before,' 'after,' and\n'once you have' are signals that can reverse or reorder steps relative to how they were mentioned —\ntrack these markers, not just the mention order.\"\n\n**Replacement text [P31]:** \"Don't assume steps happen in the order they're mentioned. Listen for\nsequence markers like 'before,' 'after,' and 'once you have' — these words tell you the TRUE order of\nexecution, which can be different from the order the steps were spoken in.\"\n\n**Discrimination pairs [P33]:**\n1. \"Before you close the window, turn off the light.\" (light-off must happen first, despite being\n   mentioned second, because of \"before\") vs. \"Turn off the light, then close the window.\" (mention\n   order and execution order match here).\n2. A student who closes the window first because it was mentioned first (misconception, ignoring the\n   \"before\" marker) vs. a student who identifies \"before\" and correctly turns off the light first\n   (correct sequence-marker tracking).\n\n**s6_path:** If the student continues to default to mention order after the bridge, give them three\ninstructions using \"before,\" \"after,\" and \"once you have\" respectively, each reordering steps\nrelative to mention order, and have them state the correct execution order for each while explicitly\nnaming the marker that determined it.",
+      "localKey": "MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED",
+      "language": "en",
+      "refs": [
+        "MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 37,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Listening to the Full Instruction Before Acting (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Listening to the Full Instruction Before Acting (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 132,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Recognizing Sequence Markers (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Recognizing Sequence Markers (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 138,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Determining True Execution Order",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Determining True Execution Order\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 144,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Full Application: Listening and Executing a Complete Instruction",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Listening and Executing a Complete Instruction\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH\",\"MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH",
+        "MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 150,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Repeating Back a Full Instruction Before Acting**\nGiven a three-step spoken instruction, repeat back all three steps before indicating any action.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 172,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying a Reordering Marker**\nGiven an instruction using \"before,\" \"after,\" or \"once you have,\" identify which step actually\nhappens first.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 172,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Writing the True Execution Order**\nGiven a four-step instruction with one reordering marker, list the steps in true execution order.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 172,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting a Mention-Order Error**\nGiven an incorrect execution sequence based on mention order alone, identify the error and state the\ncorrect order.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 172,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Instruction Comprehension and Execution**\nGiven a new multi-step instruction including at least one reordering marker, state the complete\ncorrect execution order.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 172,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly repeats back instructions on short two-step sequences (MP-1) but loses\n  track on longer four-step sequences (MP-5), provide a mandatory pause-and-repeat-back checkpoint\n  after every instruction before allowing execution.\n- If the student correctly identifies markers in isolation (MP-2) but reverts to mention order when\n  determining a full sequence (MP-3), require writing out each step on a separate line in mention\n  order first, then explicitly renumbering based on markers.\n- If the student struggles to notice sequence markers at all, provide a reference list of common\n  reordering words (\"before,\" \"after,\" \"once you have,\" \"prior to\") as a listening aid.\n- Students with strong performance in `eng.listening.listening-for-detail`'s specific-detail\n  catching should transfer readily to marker detection, since both require attending to small but\n  meaning-changing words within a longer spoken passage — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 228,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "eng.listening.following-instructions/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.following-instructions",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: listening-for-detail check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.listening.listening-for-detail]  [Component 3: Incomplete-Phone-Number /\n                                                 Movie-Credits-Order Anchor]\n                                                            |\n                                                            v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: full-repeat-back drills /\n                     terminal in current      marker-identification drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1 (acting before the\ninstruction finishes) and MC-B during TA-2/TA-3 (defaulting to mention order) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-instruction example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.following-instructions.md",
+        "startLine": 192,
+        "endLine": 228
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

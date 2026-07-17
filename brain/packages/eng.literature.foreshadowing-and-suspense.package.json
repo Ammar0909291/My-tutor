@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.foreshadowing-and-suspense-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.foreshadowing-and-suspense",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a4b3c72e4eb6e5f4e6e67c1f94dadd051f61a37b14bd2f0b10487b30019172b8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md": "sha256:1f93858f14b7c612404baf09210a9263f5e7248f0acdb22d2f5a509908c16d43"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.foreshadowing-and-suspense",
+    "name": "Foreshadowing and Suspense",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.literature.plot-structure"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.foreshadowing-and-suspense-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.foreshadowing-and-suspense (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md": "sha256:1f93858f14b7c612404baf09210a9263f5e7248f0acdb22d2f5a509908c16d43"
+      },
+      "contentHash": "sha256:10e85921c0a58a44d0e51817e6d17764a04d08b656fbbc038d3c4ef29c0c59a8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.foreshadowing-and-suspense.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md#TA-1 (addresses MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.foreshadowing-and-suspense"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.foreshadowing-and-suspense\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.foreshadowing-and-suspense.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md#TA-2 (addresses MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.foreshadowing-and-suspense"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.foreshadowing-and-suspense\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.foreshadowing-and-suspense.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.foreshadowing-and-suspense"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.foreshadowing-and-suspense\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.foreshadowing-and-suspense.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md#TA-4 (addresses MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING, MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.foreshadowing-and-suspense"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.foreshadowing-and-suspense\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Foreshadowing and Suspense — Conceptual Development Sequence",
+      "content": "### TA-1 — Foreshadowing vs. Explicit Flash-Forward (MC-A)\n\nUsing the coded-message-vs-road-sign anchor, teach that foreshadowing is subtle and only makes sense\nin retrospect, unlike a direct flash-forward. Student practice: given two passages, identify which is\nan explicit flash-forward and which is genuine subtle foreshadowing.\n\n### TA-2 — Suspense vs. Dramatic Irony (MC-B)\n\nUsing the live-game-vs-recording anchor, teach identifying whether the reader shares the character's\nuncertainty (suspense) or has information the character lacks (dramatic irony). Student practice:\ngiven two tense scenes, classify each as suspense or dramatic irony.\n\n### TA-3 — Identifying Foreshadowing's Retrospective Payoff\n\nExtend TA-1: given a full short story, identify an early subtle detail and the later event that\nreveals its significance, explaining how the detail only became meaningful in retrospect.\n\n### TA-4 — Full Application: Analyzing Foreshadowing and Suspense in a New Text\n\nGive the student a new short story excerpt. They must identify any genuine foreshadowing (excluding\nexplicit flash-forwards) (TA-1/TA-3), and classify any tense moments as suspense or dramatic irony\n(TA-2) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 141,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/misconception/MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING",
+      "kind": "misconception",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "**Trigger signal:** Student treats any early reference to a later plot event — including a direct,",
+      "content": "### MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING\n\n**Trigger signal:** Student treats any early reference to a later plot event — including a direct,\nexplicit, unambiguous statement of what will happen — as \"foreshadowing,\" failing to recognize that\nforeshadowing works specifically through subtle, often ambiguous hints that only become clearly\nsignificant in retrospect, once the later event has actually occurred.\n\n**Conflict evidence [P28]:** Show the student two early passages from different stories: one stating\ndirectly, \"Little did she know, this would be the last time she saw her hometown\" (an explicit\nflash-forward, unambiguous), and one describing a character pausing oddly at a doorway with no\nexplanation given at the time (a subtle detail that only makes sense once, much later, the reader\nlearns the doorway leads somewhere significant). Ask: \"Which passage tells you directly and clearly\nwhat's going to happen? Which one only makes sense in hindsight, after you've read further?\"\n\n**Bridge text [P30]:** \"Calling any early mention of a later event 'foreshadowing' is like calling\nany road sign a 'coded message' — a road sign that says 'Bridge Ahead' directly and clearly tells you\nwhat's coming; a coded message only reveals its meaning once you have the key. Foreshadowing works\nlike the coded message: it's a subtle detail whose significance only becomes clear in retrospect, not\na direct, explicit statement of what will happen.\"\n\n**Replacement text [P31]:** \"Don't call every early reference to a later event 'foreshadowing.' Ask:\nis this a direct, clear statement of what will happen (a flash-forward or spoiler), or a subtle\ndetail that only reveals its significance once you've read further and the later event has actually\noccurred? Only the second is true foreshadowing.\"\n\n**Discrimination pairs [P33]:**\n1. \"Little did she know, this would be the last time she saw her hometown.\" (an explicit\n   flash-forward, unambiguous, spells out the future directly) vs. a character pausing oddly at a\n   doorway with no explanation, which only makes sense once the doorway's significance is revealed\n   much later (genuine foreshadowing — subtle, retrospective).\n2. A student who labels an author's direct statement \"years later, war would break out\" as\n   foreshadowing (misconception — this is an explicit flash-forward) vs. a student who identifies a\n   character's unexplained unease near a specific object as foreshadowing once its later significance\n   is revealed (correct recognition).\n\n**s6_path:** If the student continues to conflate explicit flash-forwards with foreshadowing after\nthe bridge, give them three passages — one explicit flash-forward, one genuine subtle foreshadowing,\nand one passage with no forward-looking content — and have them sort all three correctly.",
+      "localKey": "MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/misconception/MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING",
+      "kind": "misconception",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "**Trigger signal:** Student conflates suspense (tension generated by the reader NOT knowing what",
+      "content": "### MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING\n\n**Trigger signal:** Student conflates suspense (tension generated by the reader NOT knowing what\nwill happen next) with dramatic irony (tension generated by the reader KNOWING something a character\ndoes not), treating both as the same technique because both create tension, rather than recognizing\nthey operate through opposite information structures — one withholds information from the reader, the\nother gives the reader information the character lacks.\n\n**Conflict evidence [P28]:** Present two scenarios: in one, neither the reader nor the character\nknows whether a rescue will arrive in time (suspense — information withheld from both); in the\nother, the reader has already seen the villain hiding in the closet, but the character walking toward\nthat closet has no idea (dramatic irony — the reader has information the character lacks). Ask: \"In\nwhich scenario does the reader know something the character doesn't? In which scenario is the reader\njust as uncertain as the character?\"\n\n**Bridge text [P30]:** \"Treating suspense and dramatic irony as the same technique is like confusing\nthe tension of not knowing if your team will win a game you're watching live with the tension of\nwatching a recording where you already know the villain is about to jump out, but the character on\nscreen doesn't. Both are tense, but the information you have is completely opposite in each case —\nsuspense withholds information from the reader; dramatic irony gives the reader information the\ncharacter lacks.\"\n\n**Replacement text [P31]:** \"Don't treat suspense and dramatic irony as the same thing just because\nboth create tension. Ask: does the reader know something the character doesn't (dramatic irony), or\nis the reader just as uncertain about what happens next as the character is (suspense)? The\ninformation structure is the opposite in each case.\"\n\n**Discrimination pairs [P33]:**\n1. Neither the reader nor the character knows whether the rescue will arrive in time (suspense —\n   shared uncertainty) vs. the reader has already seen the villain hiding, but the character does not\n   know (dramatic irony — reader has information the character lacks).\n2. A student who calls a scene \"suspenseful\" when the reader actually already knows the outcome the\n   character doesn't (misconception — this is dramatic irony, not suspense) vs. a student who\n   correctly identifies that both the reader and character share the same uncertainty in a genuinely\n   suspenseful scene (correct distinction).\n\n**s6_path:** If the student continues to conflate suspense with dramatic irony after the bridge, give\nthem three tense scenes and have them determine, for each, whether the reader knows something the\ncharacter does not (dramatic irony) or whether the reader is equally uncertain (suspense).",
+      "localKey": "MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING",
+      "language": "en",
+      "refs": [
+        "MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 42,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Foreshadowing vs. Explicit Flash-Forward (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Foreshadowing vs. Explicit Flash-Forward (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 145,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Suspense vs. Dramatic Irony (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Suspense vs. Dramatic Irony (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 151,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Identifying Foreshadowing's Retrospective Payoff",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Foreshadowing's Retrospective Payoff\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 157,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Full Application: Analyzing Foreshadowing and Suspense in a New Text",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing Foreshadowing and Suspense in a New Text\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING\",\"MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING",
+        "MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 162,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing Foreshadowing from an Explicit Flash-Forward**\nGiven two passages, identify which is an explicit flash-forward and which is genuine subtle\nforeshadowing.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Classifying Suspense vs. Dramatic Irony**\nGiven two tense scenes, classify each as suspense (shared uncertainty) or dramatic irony (reader\nknows more than the character).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying a Foreshadowing Detail's Retrospective Payoff**\nGiven a full short story, identify an early subtle detail and the later event that reveals its\nsignificance.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining the Information Structure of a Tense Scene**\nGiven a tense scene, explain specifically what the reader knows relative to what the character\nknows, and classify the scene accordingly.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Analysis of Foreshadowing and Suspense in a New Text**\nGiven a new short story excerpt, identify any genuine foreshadowing and classify any tense moments\nas suspense or dramatic irony.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly sorts explicit flash-forwards from foreshadowing on provided pairs (MP-1)\n  but misidentifies a subtle detail's foreshadowing role in a new full story (MP-3), provide a\n  mandatory \"does this make sense NOW, or only once I know what happens later?\" check for every\n  candidate detail.\n- If the student's suspense/dramatic-irony classification is strong on isolated scenes (MP-2) but\n  falters in a longer new text with multiple tense moments (MP-5), require an explicit\n  \"what does the reader know here, compared to the character?\" statement for every tense moment\n  before classifying it.\n- If the student struggles to notice subtle foreshadowing details at all, flag the specific detail\n  explicitly before asking them to explain its later significance.\n- Students with strong performance in `eng.literature.plot-structure`'s climax-identification work\n  should transfer readily to recognizing suspense's buildup toward that climax, since both require\n  tracking how tension develops across a story's shape — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 242,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "eng.literature.foreshadowing-and-suspense/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.foreshadowing-and-suspense",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: plot structure check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.plot-structure]  [Component 3: Coded-Message-vs-Road-Sign /\n                                            Live-Game-vs-Recording Anchor]\n                                                        |\n                                                        v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                        |\n                                                        v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                        |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: flash-forward-vs-foreshadowing\n                     terminal in current      sorting drills / suspense-vs-irony\n                     curriculum sequence]     classification drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-3 (conflating\nflash-forwards with foreshadowing) and MC-B during TA-2 (conflating suspense with dramatic irony) —\nthese are largely independent and often need separate, explicit correction. If either fires, branch\nto the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure:\nMP-1/MP-3 failures indicate residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more guided full-text\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md",
+        "startLine": 206,
+        "endLine": 242
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
