@@ -3251,6 +3251,245 @@ const CUR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.alg.quadratic-equation ─────────────────────────────────────────────
+const QUAD = 'math.alg.quadratic-equation'
+const QUAD_SRC = 'docs/curriculum/blueprints/math.alg.quadratic-equation.md'
+
+const QUAD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QUAD,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Before solving any quadratic ax\u00b2 + bx + c = 0, make one ' +
+      'decision: which tool? Factoring is fast — WHEN the roots are ' +
+      'nice. Try factoring first only if the numbers look friendly; if ' +
+      'no integer pair works, do not sit there hunting — compute the ' +
+      'discriminant \u0394 = b\u00b2 \u2212 4ac and let it route you. \u0394 a perfect ' +
+      'square (0, 1, 4, 9, \u2026): factoring would have worked, and the ' +
+      'formula gives the same rational roots. \u0394 positive but not a ' +
+      'perfect square: two irrational roots — factoring over integers ' +
+      'was never possible; the formula x = (\u2212b \u00b1 \u221a\u0394)/2a is the ' +
+      'only path. \u0394 negative: no real roots at all. The quadratic ' +
+      'formula always works; factoring is an optional shortcut for the ' +
+      'friendly cases — never a dead end you are trapped in.',
+    targetedMisconceptions: [`${QUAD}:MC-1`],
+    source: `${QUAD_SRC} — MC-1 FACTORING-IS-UNIVERSAL (A01 decision tree + A03 discriminant cases rendered as teaching text)`,
+  },
+  {
+    conceptId: QUAD,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The most common quadratic-formula error is a sign slip on b. ' +
+      'Solve x\u00b2 \u2212 5x + 6 = 0: here a = 1, b = \u22125, c = 6. The formula ' +
+      'starts with \u2212b, and \u2212(\u22125) = +5 — the minus in the formula and ' +
+      'the minus in b cancel. Writing \u2212b = \u22125 double-counts the sign ' +
+      'and wrecks both roots. Armour against it: before substituting, ' +
+      'write the three values on their own line (a = 1, b = \u22125, ' +
+      'c = 6), then substitute with brackets around every value: ' +
+      'x = (\u2212(\u22125) \u00b1 \u221a((\u22125)\u00b2 \u2212 4\u00b71\u00b76))/(2\u00b71) = (5 \u00b1 \u221a1)/2, ' +
+      'giving x = 3 and x = 2. Check by factoring: (x \u2212 2)(x \u2212 3) — ' +
+      'same answer. The brackets are not decoration; they are the fix.',
+    targetedMisconceptions: [`${QUAD}:MC-2`],
+    source: `${QUAD_SRC} — MC-2 NEGATIVE-b-FORMULA-ERROR (B02 repair: bracket-substitution discipline, factoring cross-check)`,
+  },
+]
+
+const QUAD_PROBES: SeedProbe[] = [
+  {
+    conceptId: QUAD,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In solving x\u00b2 \u2212 7x + 10 = 0 with the quadratic formula, what is the value of \u2212b?',
+    choices: [
+      { text: '+7 — b is \u22127, so \u2212b = \u2212(\u22127) = 7', isCorrect: true },
+      { text: '\u22127 — b stays as it appears in the equation', isCorrect: false, misconceptionId: `${QUAD}:MC-2` },
+      { text: '10 — b is the constant term', isCorrect: false },
+    ],
+    correctValue: '+7',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${QUAD}:MC-2`],
+    source: `${QUAD_SRC} — MC-2 probe, distractor-mapped`,
+  },
+  {
+    conceptId: QUAD,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You try to factor x\u00b2 + 3x + 1 = 0 and no integer pair works. What is the right next move?',
+    choices: [
+      { text: 'Compute \u0394 = 9 \u2212 4 = 5 (not a perfect square) and use the quadratic formula — integer factoring was never possible', isCorrect: true },
+      { text: 'Keep trying factor pairs — every quadratic factors if you search long enough', isCorrect: false, misconceptionId: `${QUAD}:MC-1` },
+    ],
+    correctValue: 'discriminant then formula',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QUAD}:MC-1`],
+    source: `${QUAD_SRC} — MC-1 FACTORING-IS-UNIVERSAL probe (non-factorable trigger), distractor-mapped`,
+  },
+]
+
+// ─── math.arith.exponentiation ───────────────────────────────────────────────
+const EXP = 'math.arith.exponentiation'
+const EXP_SRC = 'docs/curriculum/blueprints/math.arith.exponentiation.md'
+
+const EXP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EXP,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Fold a sheet of paper once: 2 layers. Fold again: 4. Again: 8. ' +
+      'That is exponentiation — 2\u00b3 means the layer count DOUBLED three ' +
+      'times: 2 \u00d7 2 \u00d7 2 = 8. The exponent counts MULTIPLICATIONS, not ' +
+      'anything else: it is not 2 \u00d7 3 = 6 (that multiplies the base by ' +
+      'the exponent) and not 2 + 2 + 2 = 6 (that is repeated addition, ' +
+      'which is multiplication\u2019s job). The safe habit while learning: ' +
+      'expand every power into its chain before computing — ' +
+      '5\u00b2 = 5 \u00d7 5 = 25, 3\u2074 = 3 \u00d7 3 \u00d7 3 \u00d7 3 = 81. Ten seconds of ' +
+      'writing the chain beats every shortcut error, and after enough ' +
+      'chains the correct meaning becomes automatic.',
+    targetedMisconceptions: [`${EXP}:MC-1`, `${EXP}:MC-2`],
+    source: `${EXP_SRC} — Component 3 paper-folding anchor + MC-1/MC-2 expand-the-chain repair`,
+  },
+  {
+    conceptId: EXP,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Why is a\u2070 = 1 and not 0? Walk DOWN the powers of 2 and watch ' +
+      'the pattern: 2\u00b3 = 8, 2\u00b2 = 4, 2\u00b9 = 2 — each step down divides ' +
+      'by 2. Keep the pattern going one more step: 2\u2070 = 2 \u00f7 2 = 1. ' +
+      'Not zero — one. The intuition \u201cno factors means nothing, so ' +
+      'zero\u201d picks the wrong \u201cnothing\u201d: an empty PRODUCT is 1 (the ' +
+      'number that changes nothing under multiplication), just as an ' +
+      'empty sum is 0 (the number that changes nothing under ' +
+      'addition). The convention also keeps the exponent rules ' +
+      'working: a\u00b3 \u00f7 a\u00b3 must equal a\u2070, and anything divided by ' +
+      'itself is 1.',
+    targetedMisconceptions: [`${EXP}:MC-3`],
+    source: `${EXP_SRC} — MC-3 ZERO-EXPONENT-GIVES-ZERO (B03 repair: divide-down pattern + empty-product identity)`,
+  },
+]
+
+const EXP_PROBES: SeedProbe[] = [
+  {
+    conceptId: EXP,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is 2\u00b3?',
+    choices: [
+      { text: '8 — three multiplications: 2 \u00d7 2 \u00d7 2', isCorrect: true },
+      { text: '6 — multiply the base by the exponent: 2 \u00d7 3', isCorrect: false, misconceptionId: `${EXP}:MC-1` },
+      { text: '9 — the exponent squares the base', isCorrect: false },
+    ],
+    correctValue: '8',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${EXP}:MC-1`, `${EXP}:MC-2`],
+    source: `${EXP_SRC} — MC-1 trigger item (2\u00b3), distractor-mapped`,
+  },
+  {
+    conceptId: EXP,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is 7\u2070?',
+    choices: [
+      { text: '1 — stepping down the powers divides by 7 each time, and 7\u00b9 \u00f7 7 = 1; the empty product is 1', isCorrect: true },
+      { text: '0 — with no sevens multiplied, there is nothing, so zero', isCorrect: false, misconceptionId: `${EXP}:MC-3` },
+    ],
+    correctValue: '1',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EXP}:MC-3`],
+    source: `${EXP_SRC} — MC-3 probe, distractor-mapped`,
+  },
+]
+
+// ─── math.arith.fraction-equivalence ─────────────────────────────────────────
+const FEQ = 'math.arith.fraction-equivalence'
+const FEQ_SRC = 'docs/curriculum/blueprints/math.arith.fraction-equivalence.md'
+
+const FEQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FEQ,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'To make a fraction equivalent to 1/3, you MULTIPLY top and ' +
+      'bottom by the same number: 1/3 = 2/6 = 3/9 — cutting every ' +
+      'piece into smaller pieces without changing how much you have. ' +
+      'The tempting shortcut — ADD the same number to top and bottom — ' +
+      'feels fair but changes the amount: 1/3 is about 0.333, while ' +
+      '(1+1)/(3+1) = 2/4 = 0.5. Half a pizza is more than a third! ' +
+      '\u201cSame thing to both parts\u201d is an equation-solving rule; a ' +
+      'fraction is a RATIO, and only scaling (multiplying or dividing ' +
+      'both parts) keeps a ratio the same. Adding shifts the balance ' +
+      'between top and bottom — multiplying preserves it.',
+    targetedMisconceptions: [`${FEQ}:MC-1`],
+    source: `${FEQ_SRC} — MC-1 (root cause: symmetry heuristic from equations; P28 conflict 1/3 vs 2/4 + P30 ratio-scaling bridge)`,
+  },
+  {
+    conceptId: FEQ,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Is 6/8 \u201cwrong\u201d because it isn\u2019t simplified? No — 6/8 and 3/4 ' +
+      'are two NAMES for the same amount. Put both on a number line ' +
+      'and they land on exactly the same point; cross-multiply and ' +
+      '6 \u00d7 4 = 24 = 8 \u00d7 3 confirms it. \u201cAlways simplify your answer\u201d ' +
+      'is a tidiness convention — like writing your name instead of ' +
+      'your full legal name — not a rule that the other forms are ' +
+      'false. In fact you constantly need the NON-simplified names: to ' +
+      'add 3/4 + 1/8 you must first rename 3/4 as 6/8. Simplified = ' +
+      'simplest name; equivalent = any correct name for the same ' +
+      'value.',
+    targetedMisconceptions: [`${FEQ}:MC-2`],
+    source: `${FEQ_SRC} — MC-2 (root cause: always-simplify instruction; P07 number-line + P30 many-names bridge + P33 discrimination)`,
+  },
+]
+
+const FEQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: FEQ,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Which fraction is equivalent to 1/3?',
+    choices: [
+      { text: '3/9 — multiply top and bottom by 3', isCorrect: true },
+      { text: '2/4 — add 1 to the top and 1 to the bottom', isCorrect: false, misconceptionId: `${FEQ}:MC-1` },
+      { text: '3/1 — swap the top and bottom', isCorrect: false },
+    ],
+    correctValue: '3/9',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FEQ}:MC-1`],
+    source: `${FEQ_SRC} — DB-2 diagnostic item, distractor-mapped`,
+  },
+  {
+    conceptId: FEQ,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Is 6/8 equivalent to 3/4?',
+    choices: [
+      { text: 'Yes — they are two names for the same value (6\u00d74 = 8\u00d73); simplifying just finds the simplest name', isCorrect: true },
+      { text: 'No — 6/8 is not simplified, so it is a different (or invalid) fraction', isCorrect: false, misconceptionId: `${FEQ}:MC-2` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FEQ}:MC-2`],
+    source: `${FEQ_SRC} — MC-2 diagnostic trigger as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -3289,6 +3528,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FRIC_EXPLANATIONS,
   ...CIRC_EXPLANATIONS,
   ...CUR_EXPLANATIONS,
+  ...QUAD_EXPLANATIONS,
+  ...EXP_EXPLANATIONS,
+  ...FEQ_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -3327,4 +3569,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FRIC_PROBES,
   ...CIRC_PROBES,
   ...CUR_PROBES,
+  ...QUAD_PROBES,
+  ...EXP_PROBES,
+  ...FEQ_PROBES,
 ]
