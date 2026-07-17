@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.syllable-stress-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.syllable-stress",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:095adc129e01ed2f9ec60cf75c65f5accbc5feed62fc5b41f066529a095e7506",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md": "sha256:5ea21ee68c32576ffb9435b2e6d5599f25add410cc27052cf43eb0465aef815f"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.syllable-stress",
+    "name": "Word Stress",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonetics.ipa-basics"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.syllable-stress-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.syllable-stress (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md": "sha256:5ea21ee68c32576ffb9435b2e6d5599f25add410cc27052cf43eb0465aef815f"
+      },
+      "contentHash": "sha256:35f78550228c60365f441d92be590191477932562ad45800424bb14f494a190b",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.syllable-stress.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.syllable-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.syllable-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.syllable-stress.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.syllable-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.syllable-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.syllable-stress.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md#TA-3 (addresses MC-STRESS-IS-JUST-LOUDNESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.syllable-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.syllable-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.syllable-stress.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md#TA-4 (addresses MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.syllable-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.syllable-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.syllable-stress.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md#TA-5 (addresses MC-STRESS-IS-JUST-LOUDNESS, MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.syllable-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.syllable-stress\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.syllable-stress/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Word Stress — Conceptual Development Sequence",
+      "content": "**TA-1 — Two-Syllable Stress Identification [C]**\n\nPresent two-syllable words (table, happy, about, begin); student identifies which syllable is stressed by ear, using length/pitch/vowel-clarity cues rather than volume alone.\n\n**TA-2 — Stress Marking in IPA Transcription [C]**\n\nStudent adds the primary stress mark (ˈ) to IPA transcriptions of words already practiced, connecting stress identification to the IPA notation system learned previously.\n\n**TA-3 — Schwa Recognition in Unstressed Syllables [C→P]**\n\nPresent words where an unstressed syllable's vowel reduces to schwa (/ə/) (e.g., \"about\" /əˈbaʊt/, \"banana\" /bəˈnænə/); student identifies the reduced vowel, reinforcing that unstressed ≠ just \"quieter\" but often means \"vowel quality changes,\" directly targeting MC-STRESS-IS-JUST-LOUDNESS.\n\n**TA-4 — Noun/Verb Stress-Shift Pairs [P]**\n\nPresent the classic stress-shift word set (record, present, object, produce, permit — each used as both noun and verb); student produces the correct stress for each grammatical role and observes the pattern, directly targeting MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING.\n\n**TA-5 — Stress Identification in Longer/Novel Words [P]**\n\nPresent three-or-more-syllable words (photograph, photography, photographic — deliberately chosen to show how stress SHIFTS as suffixes are added) or other unseen multisyllabic words; student identifies primary stress by ear/pattern-application.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/misconception/MC-STRESS-IS-JUST-LOUDNESS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "- **Trigger signal:** Student marks stress purely by shouting/increasing volume on a syllable, missing that stress is a combination of loudness, pitch change, vowel length, and vowel quality (unstressed syllables often reduce to schwa /ə/) — produces \"stress\" that sounds unnatural or robotic, or fails to correctly identify stress in recorded natural speech where volume alone doesn't reliably mark it.",
+      "content": "### MC-STRESS-IS-JUST-LOUDNESS\n- **Trigger signal:** Student marks stress purely by shouting/increasing volume on a syllable, missing that stress is a combination of loudness, pitch change, vowel length, and vowel quality (unstressed syllables often reduce to schwa /ə/) — produces \"stress\" that sounds unnatural or robotic, or fails to correctly identify stress in recorded natural speech where volume alone doesn't reliably mark it.\n- **Conflict evidence [P28]:** \"Say 'banana' shouting the middle syllable as loud as you can: 'ba-NA-na'. Now say it the way a natural speaker would, just leaning into that syllable with pitch and length, not volume. Which one sounds like real English?\"\n- **Bridge text [P30]:** \"Stress is a bundle of several cues working together — the stressed syllable is usually longer, has a pitch change, and keeps its full vowel quality, while unstressed syllables are shorter and often reduce to a weak, unclear /ə/ (schwa) sound. Pure loudness is only one small piece, and overusing it alone sounds unnatural.\"\n- **Replacement text [P31]:** \"Identify stress by checking length, pitch change, and vowel clarity together — not by volume alone.\"\n- **Discrimination pairs [P33]:**\n  - \"banana\" (stress on middle syllable via length/pitch/full vowel: /bəˈnænə/) vs. an unnatural all-loud rendition.\n  - Comparing a stressed vowel that stays full quality (e.g., the 'a' in \"PHOto\") vs. an unstressed vowel reduced to schwa (the 'o' in \"phoTO,\" /fəˈtoʊ/).\n- **s6_path:** \"Loudness is an intuitive first guess for 'emphasis,' since that's how emphasis often works in isolated word contexts — but natural English stress relies more on length, pitch, and vowel quality together, and we'll train the ear to notice all three.\"",
+      "localKey": "MC-STRESS-IS-JUST-LOUDNESS",
+      "language": "en",
+      "refs": [
+        "MC-STRESS-IS-JUST-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/misconception/MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "- **Trigger signal:** Student assumes stress placement can be reliably predicted just from a word's spelling/letters alone with no exceptions, or conversely assumes stress is entirely random and unpredictable, missing that (a) stress is NOT marked by any letter in English spelling (unlike some languages with written accent marks), and (b) stress placement, while genuinely variable, follows some patterns (e.g., many two-syllable nouns stress the first syllable, matching verbs often stress the second — the noun/verb stress shift, as in \"REcord\" (noun) vs. \"reCORD\" (verb)).",
+      "content": "### MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING\n- **Trigger signal:** Student assumes stress placement can be reliably predicted just from a word's spelling/letters alone with no exceptions, or conversely assumes stress is entirely random and unpredictable, missing that (a) stress is NOT marked by any letter in English spelling (unlike some languages with written accent marks), and (b) stress placement, while genuinely variable, follows some patterns (e.g., many two-syllable nouns stress the first syllable, matching verbs often stress the second — the noun/verb stress shift, as in \"REcord\" (noun) vs. \"reCORD\" (verb)).\n- **Conflict evidence [P28]:** \"Look at the word 'record' — no accent marks, no special letters showing stress. Say 'I need to reCORD this' — where's the stress? Now say 'This is my REcord collection' — where's the stress now? Same spelling, same letters — what changed?\"\n- **Bridge text [P30]:** \"English spelling never marks stress directly — you have to learn or listen for it. But it isn't random either: many two-syllable words shift their stress depending on whether they're used as a noun or a verb (REcord/reCORD, PREsent/preSENT), and there are other partial patterns to notice, even though the full system requires memorization/listening rather than a spelling rule.\"\n- **Replacement text [P31]:** \"Never expect spelling alone to show you stress — check listening/dictionary sources, and watch specifically for noun/verb stress-shift pairs, which are a real, learnable pattern.\"\n- **Discrimination pairs [P33]:**\n  - \"REcord\" (noun — stress on syllable 1) vs. \"reCORD\" (verb — stress on syllable 2) — identical spelling, different stress by grammatical role.\n  - \"haPPY\" — a word with genuinely no alternate stress pattern (unlike record/present), showing not every word participates in the noun/verb shift.\n- **s6_path:** \"It's confusing that English doesn't write stress down at all — that really does mean you have to learn each word's stress by ear or from a dictionary — but the noun/verb shift pattern for words like 'record' and 'present' is a real, useful shortcut for a whole category of words.\"\n\n---",
+      "localKey": "MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING",
+      "language": "en",
+      "refs": [
+        "MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Two-Syllable Stress Identification",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two-Syllable Stress Identification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Stress Marking in IPA Transcription",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Stress Marking in IPA Transcription\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Schwa Recognition in Unstressed Syllables",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Schwa Recognition in Unstressed Syllables\",\"primitives\":[],\"addresses\":[\"MC-STRESS-IS-JUST-LOUDNESS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-STRESS-IS-JUST-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Noun/Verb Stress-Shift Pairs",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Noun/Verb Stress-Shift Pairs\",\"primitives\":[],\"addresses\":[\"MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Stress Identification in Longer/Novel Words",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Stress Identification in Longer/Novel Words\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-STRESS-IS-JUST-LOUDNESS\",\"MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-STRESS-IS-JUST-LOUDNESS",
+        "MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Stress identification, novel word**\n\"Say 'computer.' Which syllable is stressed?\"\n*Target:* second syllable — \"comPUter.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Stress marking in transcription**\n\"Transcribe 'again' into IPA, marking the stress.\"\n*Target:* /əˈɡɛn/ — stress mark before the second syllable.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Schwa identification**\n\"Say 'sofa.' Which syllable is unstressed, and what does its vowel sound like?\"\n*Target:* second syllable is unstressed, reducing to schwa /ə/ — /ˈsoʊfə/.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Noun/verb stress shift, novel pair**\n\"Say 'object' as a noun (a thing) and as a verb (to disagree). What's different?\"\n*Target:* \"OBject\" (noun) stresses the first syllable; \"obJECT\" (verb) stresses the second syllable.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the stress system**\n\"In your own words: how do you figure out which syllable is stressed in an English word, since spelling doesn't show it?\"\n*Target:* states or demonstrates that stress must be learned by ear/reference rather than read from spelling, that it involves length/pitch/vowel-quality (not just volume), and that some words (noun/verb pairs) shift predictably.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Adaptive Flags",
+      "content": "- **Stress is a multi-cue bundle, not pure volume**: explicitly teach length + pitch + vowel-quality together as the real signal, directly countering the likely default MC-STRESS-IS-JUST-LOUDNESS assumption.\n- **Schwa reduction is the clearest teachable marker of \"unstressed\"**: use TA-3's schwa recognition as the single most reliable, concrete signal students can learn to listen for, since it's easier to detect than subtle pitch/length differences alone.\n- **Noun/verb stress-shift as a genuine, bounded pattern**: teach the record/present/object-style shift explicitly as a real pattern (not every word participates, but it's common enough and useful enough to name directly) — this gives students one concrete foothold in an otherwise largely unpredictable system.\n- **L1-specific stress/tone transfer**: for S9 learners, anticipate concrete transfer patterns from the learner's L1 prosodic system (fixed-stress languages defaulting to one position; tonal languages potentially conflating tone and stress) and address explicitly rather than treating all stress errors as equally likely.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-STRESS-IS-JUST-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.syllable-stress/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.syllable-stress",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — stress-clap-and-stretch warm-up (correct vs. wrong stress placement)\n  ↓\n[P41] PD-1 (IPA transcription readiness)\n  ↓ PASS\n[P06] Anchor: stress-clap-and-stretch (feel the length/loudness/pitch bundle)\n  ↓\nTA-1: Two-syllable stress identification [C]\n  ↓\nTA-2: Stress marking in IPA transcription [C]\n  ↓\nTA-3: Schwa recognition in unstressed syllables [C→P]\n  ↓\n[P28] Conflict: stress judged by loudness alone → MC-STRESS-IS-JUST-LOUDNESS (if triggered)\n  ↓\nTA-4: Noun/verb stress-shift pairs [P]\n  ↓\n[P28] Conflict: stress assumed spelling-fixed or fully random → MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING (if triggered)\n  ↓\nTA-5: Stress identification in longer/novel words [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one noun/verb word pair with a stress shift, like 'record'.\"\n[P68] Session close\n[P85] Regulation tail — praise noticing length/pitch/vowel-clarity over just volume\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on IPA, new to stress specifically): dwell on TA-1's two-syllable identification with the clap-and-stretch anchor before introducing IPA stress-marking. S1 (marks stress by volume only, from informal prior exposure): dwell on TA-3's schwa work to broaden the cue set beyond loudness. S6 (frustrated that stress isn't written down anywhere): validate this explicitly as a genuine, sometimes-frustrating feature of English (Component 1 s6_path) rather than something the learner is failing to notice. S9 (L1 has fixed word-stress rules, e.g. French final-syllable stress, or is a syllable-timed rather than stress-timed language, e.g. Spanish, or uses lexical tone instead of stress, e.g. Mandarin): expect specific, predictable difficulty — French-background learners often default to final-syllable stress on English words; tonal-language speakers may need extra explicit contrast between English stress (length/pitch/loudness bundle) and their L1's tone (pitch-contour-as-meaning) to avoid conflating the two systems.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.syllable-stress.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.minimal-pairs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.minimal-pairs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:52f09633c933f28b9f19e8040a1f5314593145c3c68c062eb01c56cb6eef7e6d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md": "sha256:3bcd780a0377cdc7b4af265f4e2bb41806f1eca7f0027bd7e17efbf032b82174"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.minimal-pairs",
+    "name": "Minimal Pairs",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonetics.ipa-basics"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.minimal-pairs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.minimal-pairs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md": "sha256:3bcd780a0377cdc7b4af265f4e2bb41806f1eca7f0027bd7e17efbf032b82174"
+      },
+      "contentHash": "sha256:8c5d9a2c8f77716526f7c99c83b87e72abac350d90abba0fb828ff9716f8ccc5",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.minimal-pairs.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md#TA-1 (addresses MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.minimal-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.minimal-pairs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.minimal-pairs.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md#TA-2 (addresses MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.minimal-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.minimal-pairs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.minimal-pairs.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.minimal-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.minimal-pairs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.minimal-pairs.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.minimal-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.minimal-pairs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.minimal-pairs.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md#TA-5 (addresses MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS, MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.minimal-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.minimal-pairs\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.minimal-pairs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Minimal Pairs — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying True Minimal Pairs [C]**\n\nPresent pairs of words, some true minimal pairs (cat/bat, ship/sheep, pen/pin) and some near-misses differing by 2+ sounds (cat/bad, ship/chop); student transcribes both into IPA and determines true/false minimal-pair status, directly targeting MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS.\n\n**TA-2 — Minimal Pairs Despite Spelling Mismatch [C]**\n\nPresent pairs where spelling misleads (night/knight as a homophone non-pair; a genuine minimal pair with very different-looking spelling if available, e.g. \"of\"/\"off\" is NOT one but illustrates the trap — use genuinely available contrastive examples); student transcribes first, then judges, directly targeting MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE.\n\n**TA-3 — Perception Training: Which Word Did You Hear? [C→P]**\n\nAuditory-only task (no spelling shown): student hears one word from a minimal pair spoken aloud and identifies which of the two it was (e.g., hears /ʃɪp/ or /tʃɪp/, says \"ship\" or \"chip\"), building genuine perceptual discrimination, not just written analysis.\n\n**TA-4 — Generating Minimal Pairs [P]**\n\nGiven one word, student generates a valid minimal-pair partner by changing exactly one phoneme (e.g., given \"pen\" /pɛn/, generate \"pin\" /pɪn/ by changing only the vowel, or \"hen\" /hɛn/ by changing only the first consonant).\n\n**TA-5 — Minimal Pairs for a Specific Target Contrast [P]**\n\nGiven a specific phoneme contrast to test (e.g., /l/ vs. /r/, a classically difficult contrast for some L1 backgrounds), student identifies or generates a minimal pair that isolates exactly that contrast (light/right), connecting this concept to its diagnostic PURPOSE — testing perception/production of a specific sound distinction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/misconception/MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "- **Trigger signal:** Student labels any two similar-sounding or similar-looking words as a \"minimal pair\" regardless of how many phonemes actually differ (e.g., calls \"cat\" and \"bad\" a minimal pair, when they differ in TWO phonemes — the first and last sound — not one), diluting the precise definition.",
+      "content": "### MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS\n- **Trigger signal:** Student labels any two similar-sounding or similar-looking words as a \"minimal pair\" regardless of how many phonemes actually differ (e.g., calls \"cat\" and \"bad\" a minimal pair, when they differ in TWO phonemes — the first and last sound — not one), diluting the precise definition.\n- **Conflict evidence [P28]:** \"You said 'cat' and 'bad' are a minimal pair. Let's transcribe both: /kæt/ and /bæd/. Line up the sounds — how many positions are actually different?\"\n- **Bridge text [P30]:** \"A true minimal pair differs by EXACTLY ONE phoneme, in the same position, with every other sound identical — not just 'similar sounding' or 'a couple of sounds different.' The precision matters because minimal pairs are a diagnostic TOOL for isolating exactly one sound contrast at a time.\"\n- **Replacement text [P31]:** \"Before calling two words a minimal pair, transcribe both into IPA and check that exactly one sound position differs — if two or more differ, it's not a minimal pair.\"\n- **Discrimination pairs [P33]:**\n  - \"cat\" /kæt/ vs. \"bat\" /bæt/ (true minimal pair — differ only in the first sound) vs. \"cat\" /kæt/ vs. \"bad\" /bæd/ (differ in TWO positions — not a minimal pair).\n  - \"ship\" /ʃɪp/ vs. \"chip\" /tʃɪp/ (true minimal pair — differ only in the first sound, /ʃ/ vs /tʃ/) vs. \"ship\" /ʃɪp/ vs. \"chop\" /tʃɒp/ (differ in two positions).\n- **s6_path:** \"It's tempting to call any two similar words a 'minimal pair' since they sound alike overall — but the strict one-sound-difference definition is what makes minimal pairs useful for testing a very specific contrast, so precision here really matters.\"",
+      "localKey": "MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS",
+      "language": "en",
+      "refs": [
+        "MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/misconception/MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "- **Trigger signal:** Student judges minimal-pair status by counting LETTER differences in spelling rather than sound differences in pronunciation (e.g., assumes \"night\" and \"knight\" are NOT a minimal pair — or even the same word — because \"knight\" has an extra letter, when they are actually pronounced identically/homophonically; or assumes two words spelled very differently can't be a minimal pair even when they sound like one, e.g. \"physics\" vs. \"fix-icks\"-type constructed comparisons).",
+      "content": "### MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE\n- **Trigger signal:** Student judges minimal-pair status by counting LETTER differences in spelling rather than sound differences in pronunciation (e.g., assumes \"night\" and \"knight\" are NOT a minimal pair — or even the same word — because \"knight\" has an extra letter, when they are actually pronounced identically/homophonically; or assumes two words spelled very differently can't be a minimal pair even when they sound like one, e.g. \"physics\" vs. \"fix-icks\"-type constructed comparisons).\n- **Conflict evidence [P28]:** \"Look at 'night' and 'knight' — different number of letters, right? Now transcribe both into IPA using what you actually say. Are they actually different sounds, or the exact same?\"\n- **Bridge text [P30]:** \"Minimal pairs are defined by SOUND (phonemes), not by spelling or letter count — English spelling is unreliable enough that some 'different-looking' words are pronounced identically (homophones, not a minimal pair, since there's zero sound difference), while some 'similar-looking' words have several sound differences hidden by similar spelling.\"\n- **Replacement text [P31]:** \"Always judge minimal-pair status from the IPA transcription (or careful listening), never from the spelled letters — transcribe first, then compare sound-by-sound.\"\n- **Discrimination pairs [P33]:**\n  - \"night\" /naɪt/ vs. \"knight\" /naɪt/ (identical pronunciation — a homophone pair, NOT a minimal pair, since there's no sound difference at all).\n  - \"though\" /ðoʊ/ vs. \"through\" /θruː/ (very similar spelling, but actually differ in far more than one sound when transcribed — not a minimal pair despite the visual similarity).\n- **s6_path:** \"English spelling is a genuinely unreliable guide to sound, so this mix-up is very understandable — transcribing to IPA first, before judging, removes the guesswork.\"\n\n---",
+      "localKey": "MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Identifying True Minimal Pairs",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying True Minimal Pairs\",\"primitives\":[],\"addresses\":[\"MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Minimal Pairs Despite Spelling Mismatch",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Minimal Pairs Despite Spelling Mismatch\",\"primitives\":[],\"addresses\":[\"MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Perception Training: Which Word Did You Hear?",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Perception Training: Which Word Did You Hear?\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Generating Minimal Pairs",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Generating Minimal Pairs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Minimal Pairs for a Specific Target Contrast",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Minimal Pairs for a Specific Target Contrast\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS\",\"MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS",
+        "MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — True vs. false minimal pair, novel words**\n\"Is 'log' and 'dog' a minimal pair? Is 'log' and 'lot' a minimal pair?\"\n*Target:* \"log\"/\"dog\" — yes (differ only in the first consonant); \"log\"/\"lot\" — yes (differ only in the final consonant) — both true minimal pairs, correctly verified by transcription.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Spelling trap, novel pair**\n\"Are 'route' and 'root' a minimal pair?\" (Note: for many dialects, pronounced identically.)\n*Target:* correctly identifies them as homophones in the relevant dialect (not a minimal pair), reasoning from pronunciation rather than the differing spelling.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Auditory discrimination**\n\"[Say 'chip' or 'ship' aloud] Which word did you hear?\"\n*Target:* correctly identifies the word from sound alone.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Generating a pair for a novel word**\n\"Give me a minimal pair for 'cot.'\"\n*Target:* any valid single-phoneme-change word, e.g., \"cat,\" \"cop,\" \"hot.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the purpose of minimal pairs**\n\"In your own words: what is a minimal pair, and why are they useful for studying pronunciation?\"\n*Target:* states or demonstrates the one-phoneme-difference definition and explains they isolate a single sound contrast for targeted perception/production practice.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Adaptive Flags",
+      "content": "- **Precision is the point**: the strict one-phoneme-difference definition is not pedantry — it is what makes minimal pairs useful as a diagnostic tool; do not accept loosely-similar word pairs as satisfying mastery checks.\n- **Transcribe before judging, always**: every minimal-pair judgment task should route through IPA transcription (or careful auditory attention) rather than visual spelling comparison — this is the standing habit this concept is built to instill.\n- **Auditory-only practice is essential, not optional**: TA-3's no-spelling-shown task is necessary because real-world listening comprehension doesn't come with spelling — written-only practice would not fully build the intended skill.\n- **Personalize to the learner's known difficult contrast**: for S9 learners, identify the specific phoneme contrast most relevant to their L1 background (per articulation-organs/consonant-sounds groundwork) and prioritize minimal-pair practice on exactly that contrast (TA-5) as the highest-value application of this concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.minimal-pairs/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.minimal-pairs",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — one-slot-swap game warm-up (cat → bat)\n  ↓\n[P41] PD-1 (IPA transcription readiness)\n  ↓ PASS\n[P06] Anchor: one-slot-swap game (one change = pair, two changes = not)\n  ↓\nTA-1: Identifying true minimal pairs [C]\n  ↓\n[P28] Conflict: loosely-similar words called minimal pairs → MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS (if triggered)\n  ↓\nTA-2: Minimal pairs despite spelling mismatch [C]\n  ↓\n[P28] Conflict: judging by spelling instead of sound → MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE (if triggered)\n  ↓\nTA-3: Perception training — which word did you hear? [C→P]\n  ↓\nTA-4: Generating minimal pairs [P]\n  ↓\nTA-5: Minimal pairs for a specific target contrast [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, generate a minimal pair for your own name's first sound.\"\n[P68] Session close\n[P85] Regulation tail — praise verifying via transcription over guessing from spelling\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on IPA basics, new to the minimal-pair concept specifically): dwell on TA-1's true/false sorting with the slot-swap anchor before moving to generation. S1 (already loosely understands \"similar words\" informally): explicitly tighten the definition via TA-1's precise one-slot check before building further, since a loose prior understanding needs correcting, not just supplementing. S6 (frustrated by the precision required): validate that this precision is intentional and purposeful (a diagnostic tool), not arbitrary pedantry. S9 (L1 lacks a specific English phoneme contrast, e.g. /l/-/r/ for many East Asian L1 backgrounds, /b/-/v/ for Spanish, /iː/-/ɪ/ for many L1s without a length/quality distinction): use TA-5 explicitly to target the learner's own known difficult contrast with dedicated minimal-pair practice — this is the concept's most direct practical application for this learner.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

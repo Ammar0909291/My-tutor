@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.digraphs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.digraphs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9c474b3ccd9d27f687a5c4bd02e61f971df736eb74521dcbcabac5aff5f18ec1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.digraphs.md": "sha256:26ab6d65cb51be752b5df20ef9f71a6b003c9f477c99c16a02f92d76e604d2b3"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.digraphs",
+    "name": "Consonant and Vowel Digraphs",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.consonant-blends",
+      "eng.phonics.short-vowels"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.digraphs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.digraphs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.digraphs.md": "sha256:26ab6d65cb51be752b5df20ef9f71a6b003c9f477c99c16a02f92d76e604d2b3"
+      },
+      "contentHash": "sha256:ba58368e0cba1ba09d26f9c82e09f5651ff71d3b0e22b4bca123d7d309f0e8ad",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.digraphs.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.digraphs.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.digraphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.digraphs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.digraphs.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.digraphs.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.digraphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.digraphs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.digraphs.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.digraphs.md#TA-3 (addresses MC-DIGRAPH-IS-A-BLEND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.digraphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.digraphs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.digraphs.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.digraphs.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.digraphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.digraphs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.digraphs.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.digraphs.md#TA-5 (addresses MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES, MC-DIGRAPH-IS-A-BLEND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.digraphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.digraphs\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.digraphs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Consonant and Vowel Digraphs — Conceptual Development Sequence",
+      "content": "**TA-1 — Consonant Digraph Sound Production [C]**\n\nPresent each common consonant digraph (sh, ch, th [voiced and voiceless], wh, ph, ck) in isolation; student produces the single corresponding sound for each.\n\n**TA-2 — Consonant Digraphs in Words [C]**\n\nPresent simple words containing consonant digraphs (ship, chip, thin, this, when, phone); student reads them, correctly treating the digraph as one sound.\n\n**TA-3 — Blend vs. Digraph Re-Discrimination [C→P]**\n\nPresent a mixed set of two-letter combinations from both categories (sh, sp, ch, cl, th, tr); student sorts into blend vs. digraph using the slow-sounding-out test, reinforcing and extending the discrimination first built in `eng.phonics.consonant-blends`, directly targeting MC-DIGRAPH-IS-A-BLEND.\n\n**TA-4 — Vowel Digraph Introduction (Long-First-Vowel Pattern) [P]**\n\nIntroduce common vowel digraphs (ai, ay, ea, ee, oa, ow) via the \"two vowels go walking\" pattern; student reads a set of regular vowel-team words (rain, day, bead, tree, boat, snow) applying the long-first-vowel rule.\n\n**TA-5 — Vowel Digraph Exception Recognition [P]**\n\nPresent a small set of vowel-team exception words (said, bread, head, again) alongside regular ones; student identifies which follow the pattern and which don't, directly targeting MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES's underlying over-rigid expectation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/misconception/MC-DIGRAPH-IS-A-BLEND",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "- **Trigger signal:** Student applies blend-style sounding-out to a digraph, trying to pronounce both letters separately (e.g., says \"s\" then \"h\" for \"sh,\" or \"t\" then \"h\" for \"th\"), carrying over the consonant-blends strategy inappropriately.",
+      "content": "### MC-DIGRAPH-IS-A-BLEND\n- **Trigger signal:** Student applies blend-style sounding-out to a digraph, trying to pronounce both letters separately (e.g., says \"s\" then \"h\" for \"sh,\" or \"t\" then \"h\" for \"th\"), carrying over the consonant-blends strategy inappropriately.\n- **Conflict evidence [P28]:** \"You just tried to say 's' then 'h' separately for 'sh'. Say the word 'ship' the way you normally talk — is there really a full /s/ sound followed by a full /h/ sound, or is it one single sound the whole time?\"\n- **Bridge text [P30]:** \"Digraphs are the opposite of blends: TWO letters that together make just ONE brand-new sound, not two sounds said in sequence. 'Sh' is not /s/+/h/ — it's a single sound, /ʃ/, that doesn't sound like either letter alone.\"\n- **Replacement text [P31]:** \"For a digraph, treat the two letters as ONE unit representing ONE sound — never try to sound out each letter separately.\"\n- **Discrimination pairs [P33]:**\n  - \"sh\" in \"ship\" (digraph, one sound /ʃ/) vs. \"sp\" in \"spin\" (blend, two sounds /s/+/p/).\n  - \"th\" in \"this\" (digraph, one sound /ð/) vs. \"tw\" in \"twin\" (blend, two sounds /t/+/w/).\n- **s6_path:** \"It makes sense to try the blend strategy since it worked for two-consonant combinations before — digraphs look similar on the page but behave completely oppositely, so we'll practice spotting which is which.\"",
+      "localKey": "MC-DIGRAPH-IS-A-BLEND",
+      "language": "en",
+      "refs": [
+        "MC-DIGRAPH-IS-A-BLEND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/misconception/MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "- **Trigger signal:** Student applies single-short-vowel sound expectations to vowel digraphs/teams (e.g., tries to sound \"ai\" in \"rain\" as a short /æ/ followed by a short vowel, or reads \"ea\" in \"bread\" the same way as \"ea\" in \"bead\"), not yet recognizing that vowel digraphs/teams have their OWN sound (often, but not always, the long sound of the first vowel) and can be inconsistent across different words.",
+      "content": "### MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES\n- **Trigger signal:** Student applies single-short-vowel sound expectations to vowel digraphs/teams (e.g., tries to sound \"ai\" in \"rain\" as a short /æ/ followed by a short vowel, or reads \"ea\" in \"bread\" the same way as \"ea\" in \"bead\"), not yet recognizing that vowel digraphs/teams have their OWN sound (often, but not always, the long sound of the first vowel) and can be inconsistent across different words.\n- **Conflict evidence [P28]:** \"Read 'rain' — what sound does the 'ai' make together? Now read 'said' — does 'ai' make the same sound there?\"\n- **Bridge text [P30]:** \"A vowel digraph is two vowel letters working together to make ONE vowel sound — often following the pattern 'when two vowels go walking, the first one does the talking' (its long sound), like in 'rain' or 'boat.' But some vowel-team words are exceptions to this pattern (like 'said' or 'bread'), so vowel digraphs need more flexible checking than consonant digraphs, which are highly reliable.\"\n- **Replacement text [P31]:** \"For a vowel digraph, first try the long-first-vowel-sound pattern, but stay ready to adjust for known exception words — vowel teams are less perfectly reliable than consonant digraphs.\"\n- **Discrimination pairs [P33]:**\n  - \"rain\" (ai = long /eɪ/, follows the pattern) vs. \"said\" (ai = /ɛ/, an exception).\n  - \"boat\" (oa = long /oʊ/, follows the pattern) vs. \"bread\" (ea = /ɛ/, does not follow the \"long e\" pattern that \"bead\" follows).\n- **s6_path:** \"Vowel teams are genuinely less consistent than consonant digraphs, which can feel unfair after consonant digraphs worked so reliably — we'll learn the common pattern as a strong first guess, while keeping a short list of known exceptions in mind.\"\n\n---",
+      "localKey": "MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES",
+      "language": "en",
+      "refs": [
+        "MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Consonant Digraph Sound Production",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Consonant Digraph Sound Production\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Consonant Digraphs in Words",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Consonant Digraphs in Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Blend vs. Digraph Re-Discrimination",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Blend vs. Digraph Re-Discrimination\",\"primitives\":[],\"addresses\":[\"MC-DIGRAPH-IS-A-BLEND\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-DIGRAPH-IS-A-BLEND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Vowel Digraph Introduction (Long-First-Vowel Pattern)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Vowel Digraph Introduction (Long-First-Vowel Pattern)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Vowel Digraph Exception Recognition",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Vowel Digraph Exception Recognition\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-DIGRAPH-IS-A-BLEND\",\"MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES",
+        "MC-DIGRAPH-IS-A-BLEND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Consonant digraph, novel word**\n\"Read 'whale.' What sound does 'wh' make?\"\n*Target:* /w/ (or /ʍ/ in dialects that distinguish it) — one sound.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Blend vs. digraph, novel pair**\n\"Is 'ph' in 'phone' a blend or a digraph? Is 'fl' in 'flag' a blend or a digraph?\"\n*Target:* \"ph\" is a digraph (one sound, /f/); \"fl\" is a blend (two sounds, /f/+/l/).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Vowel digraph, regular pattern, novel word**\n\"Read 'tray.' What's the vowel sound?\"\n*Target:* long /eɪ/ — \"ay\" follows the long-first-vowel pattern.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Vowel digraph exception, novel word**\n\"Read 'again.' Does the vowel team here follow the usual pattern?\"\n*Target:* identifies \"ai\" in \"again\" as an exception in many dialects (commonly /ɛ/ rather than the expected long /eɪ/), or correctly notes dialect variation — reasoning explicitly checked rather than blindly applying the rule.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain digraphs vs. blends**\n\"In your own words: what's the difference between a digraph and a blend?\"\n*Target:* states or demonstrates that a digraph is two letters making one new sound, while a blend is two (or more) letters each keeping their own separate sound said in sequence.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Adaptive Flags",
+      "content": "- **Consonant digraphs are highly reliable; vowel digraphs are not**: explicitly teach this asymmetry — consonant digraphs (sh, ch, th, wh, ph) almost always produce their one expected sound, while vowel digraphs/teams require the \"strong first guess\" framing with known exceptions.\n- **Physical merge-vs-slide contrast reinforces the core distinction**: reuse the Component 3 card technique whenever blend/digraph confusion resurfaces (MC-DIGRAPH-IS-A-BLEND is a very likely default given the immediately prior blends concept).\n- **\"Two vowels go walking\" as a memorable, revisitable mnemonic**: teach this rhyme explicitly as the standing strategy for vowel digraphs, paired with an equally explicit acknowledgment of its exceptions.\n- **L1 phoneme-contrast transfer for specific digraphs**: for S9 learners, anticipate specific digraph-sound substitution errors tied to known L1-English contrasts (e.g., a language without /θ/-/ð/ leading to substitution with /s/-/z/ or /t/-/d/ on \"th\" words) — treat as predictable, not general difficulty.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-DIGRAPH-IS-A-BLEND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.phonics.digraphs/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.digraphs",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — merge-into-one demonstration (sh vs. sp contrast)\n  ↓\n[P41] PD-1 (consonant blend readiness)\n  ↓ PASS\n[P41] PD-2 (short vowel readiness)\n  ↓ PASS\n[P06] Anchor: merge-into-one demonstration (digraph vs. blend card-slide)\n  ↓\nTA-1: Consonant digraph sound production [C]\n  ↓\n[P28] Conflict: digraph sounded out as two letters → MC-DIGRAPH-IS-A-BLEND (if triggered)\n  ↓\nTA-2: Consonant digraphs in words [C]\n  ↓\nTA-3: Blend vs. digraph re-discrimination [C→P]\n  ↓\nTA-4: Vowel digraph introduction (long-first-vowel pattern) [P]\n  ↓\nTA-5: Vowel digraph exception recognition [P]\n  ↓\n[P28] Conflict: vowel digraph forced into a rigid rule → MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word with a consonant digraph and one with a vowel digraph.\"\n[P68] Session close\n[P85] Regulation tail — praise checking whether one sound or two before reading\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on blends, new to digraphs): dwell on TA-1's isolated sound production and the merge-into-one demonstration before moving to words. S1 (confuses blends and digraphs from the start): spend extra time on TA-3's direct re-discrimination task, using the physical card-slide anchor repeatedly. S6 (frustrated that vowel digraphs are less reliable than consonant digraphs): explicitly validate this asymmetry — consonant digraphs are highly reliable, vowel digraphs need the \"strong first guess, stay flexible\" approach — rather than expecting uniform reliability across both categories. S9 (L1 lacks a distinction between certain digraph sounds and their blend \"components,\" e.g. no /θ/,/ð/ distinction, or no /w/-/v/ distinction affecting \"wh\"): expect specific transfer-based substitution errors on particular digraphs; treat these as predictable L1-contrast effects requiring targeted discrimination practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.digraphs.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
