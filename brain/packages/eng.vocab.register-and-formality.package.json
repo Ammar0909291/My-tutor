@@ -1,0 +1,445 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.register-and-formality-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.register-and-formality",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f0510e68e2b7e8fa795e2ade7facdb33fa8cb4d86c29116950d331975ba99bf6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.register-and-formality.md": "sha256:7497cdfd056d1107173adc69b78cf386d301f3cca5bb537cc8ec1aecc26df880"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.register-and-formality",
+    "name": "Register and Formality",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.connotation-denotation"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.register-and-formality-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.register-and-formality (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.register-and-formality.md": "sha256:7497cdfd056d1107173adc69b78cf386d301f3cca5bb537cc8ec1aecc26df880"
+      },
+      "contentHash": "sha256:8063018dc82b89326d4d63b444a1937b9a126cb2b870132bec06e08ab5b99011",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.register-and-formality.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.register-and-formality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.register-and-formality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.register-and-formality.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.register-and-formality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.register-and-formality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.register-and-formality.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md#TA-3 (addresses MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT, MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.register-and-formality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.register-and-formality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.register-and-formality.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.register-and-formality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.register-and-formality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.register-and-formality.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md#TA-5 (addresses MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT, MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.register-and-formality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.register-and-formality\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.register-and-formality/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Register and Formality — Conceptual Development Sequence",
+      "content": "### TA-1: Audience and Purpose Sorting\nPresent 6 short language samples (a text to a friend, a cover letter opening, a diary entry, a scientific abstract sentence, a birthday card message, a courtroom statement) without labels. Student sorts each into \"very informal / neutral / very formal\" and names the likely audience and purpose for each, reinforcing that register is read off audience+purpose, not off some inherent word quality.\n\n### TA-2: Register Markers — What Signals Formality\nTeach the concrete linguistic markers of register: contractions vs. full forms (\"can't\" vs. \"cannot\"), first/second person vs. passive/impersonal constructions, slang/idiom vs. precise/technical vocabulary, sentence fragments vs. complete complex sentences, direct address vs. formal titles. Student highlights these markers in the TA-1 samples.\n\n### TA-3: Register Mismatch Detection (Both Directions)\nPresent paired scenarios where register is deliberately mismatched in BOTH directions: an overly formal text to a sibling, and an overly casual email to a school principal requesting a meeting. Student identifies what's wrong in each and explains that the direction of mismatch differs but both are genuine errors — directly targeting MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT (over-formal isn't automatically \"better\") and MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING (under-formal isn't automatically \"worse,\" only mismatched).\n\n### TA-4: Register Conversion Practice\nGive the student one message in one register and ask them to rewrite it into two other registers (e.g., take a casual text \"can u send the notes? thx\" and convert it to a formal email to a professor, and to a mid-register message to a classmate group chat), preserving the same core content/request across all three versions.\n\n### TA-5: Choosing Register for a Novel Situation\nPresent a new, unscripted scenario (e.g., \"you need to ask your new part-time boss for next Tuesday off\") and have the student independently decide the appropriate register, draft the message, and justify their register choice by naming the audience/relationship/purpose factors that drove it — the generative capstone linking directly to `eng.communication.digital-communication`'s real-world register decisions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": ": Sorting by Register (Scaffolded)",
+      "content": "### WE-1: Sorting by Register (Scaffolded)\n**Samples:** \"yo, u coming tonight??\" / \"Dear Hiring Manager, I am writing to apply for the position of...\" / \"Once upon a time, in a village by the sea...\"\n**Walkthrough:** Sample 1 has slang (\"yo\"), no capitalization/punctuation norms, abbreviation (\"u\") — informal, peer audience. Sample 2 has a formal salutation, full sentences, professional vocabulary — formal, employer audience. Sample 3 is narrative/neutral register, aimed at a general reader — neither casual slang nor institutional formality.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 72,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": ": Detecting Mismatch (Guided)",
+      "content": "### WE-2: Detecting Mismatch (Guided)\n**Scenario:** A student texts their teacher: \"Yo teach, wuts the hw for 2nite lol.\" Ask what's mismatched (slang/abbreviations to an authority-relationship audience in a request context) and have the student rewrite it appropriately (\"Hi Ms. Rivera, could you let me know tonight's homework? Thank you!\"), preserving the same request.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 72,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": ": Full Register Conversion (Independent)",
+      "content": "### WE-3: Full Register Conversion (Independent)\n**Base message:** \"Can't make it Friday, something came up, sorry!\" Student converts this into: (a) a formal email to a professor explaining an absence, (b) a mid-register message to a study group chat, (c) confirms the original casual version is appropriate for a close friend — demonstrating that all three registers are legitimate for their respective contexts, none inherently superior.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 72,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/misconception/MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "- **Trigger signal:** Student rewrites every sentence into the most formal/elevated phrasing possible regardless of audience or context — e.g., insisting a text message to a friend should read \"I would be delighted to accompany you\" instead of \"sure, I'm in\" — treating formality as a quality scale (more formal = more correct English) rather than a fit-to-context scale.",
+      "content": "### MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT\n- **Trigger signal:** Student rewrites every sentence into the most formal/elevated phrasing possible regardless of audience or context — e.g., insisting a text message to a friend should read \"I would be delighted to accompany you\" instead of \"sure, I'm in\" — treating formality as a quality scale (more formal = more correct English) rather than a fit-to-context scale.\n- **Conflict evidence [P28]:** Show the student two versions of the same message sent to a best friend: one casual (\"hey, wanna grab pizza later?\") and one maximally formal (\"I am writing to inquire whether you would be amenable to sharing a meal consisting of pizza at a mutually convenient time\"). Ask which one the friend would find normal, and which one would make the friend worried something was wrong or being made fun of.\n- **Bridge text [P30]:** \"Formal English isn't 'better' English — it's a different *tool* for a different *job*. Using a hyper-formal register with a close friend doesn't sound more correct, it sounds strange or even sarcastic, the same way showing up to a beach party in a tuxedo isn't 'more correct' than swim trunks — it's the wrong outfit for the occasion.\"\n- **Replacement text [P31]:** \"Ask first: who is this for, and what's the relationship? Register should match the audience and situation, not maximize formality. The 'best' register is the one that fits — sometimes that's casual, sometimes formal, and neither is inherently superior English.\"\n- **Discrimination pairs [P33]:** (a) Formality as inherent correctness (a single \"proper English\" scale where more formal always scores higher) vs. (b) Formality as context-fit (a register is correct when it matches audience/purpose/relationship, and a mismatched register — in either direction — is the actual error).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1 (audience-sorting task) with exaggerated mismatched examples before returning to probes.",
+      "localKey": "MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT",
+      "language": "en",
+      "refs": [
+        "MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/misconception/MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "- **Trigger signal:** Student treats casual/informal register choices (contractions, sentence fragments used for effect, colloquial vocabulary, starting sentences with \"and\"/\"but\") as grammar errors to be corrected, rather than as deliberate, appropriate register choices for informal contexts.",
+      "content": "### MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING\n- **Trigger signal:** Student treats casual/informal register choices (contractions, sentence fragments used for effect, colloquial vocabulary, starting sentences with \"and\"/\"but\") as grammar errors to be corrected, rather than as deliberate, appropriate register choices for informal contexts.\n- **Conflict evidence [P28]:** Present a well-written informal text message (\"omw, running like 5 min late, save me a seat!\") and ask the student to \"fix\" what's wrong with it. Then ask: would fixing it into \"I am on my way; I will be arriving approximately five minutes late. Please reserve a seat for me\" actually improve the message for its real purpose (a quick heads-up to a friend)?\n- **Bridge text [P30]:** \"Informal writing follows its own real rules — it isn't 'grammar gone wrong,' it's a different, equally legitimate set of conventions suited to speed, closeness, and everyday contexts. A text message that reads like a legal letter has failed at its job just as much as a job application that reads like a text message.\"\n- **Replacement text [P31]:** \"Before calling something an error, check which register it's written in and whether it fits that register's own conventions. Contractions, fragments, and casual word choices are correct informal-register choices, not mistakes — the real error is only when the register doesn't match the situation.\"\n- **Discrimination pairs [P33]:** (a) Informal = incorrect/sloppy (any deviation from formal conventions is a grammar mistake needing correction) vs. (b) Informal = a distinct, rule-governed register (has its own legitimate conventions suited to casual/close/fast-paced contexts, judged by fit rather than by formal-register rules).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's outfit-matching framing before continuing to TA-2.",
+      "localKey": "MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING",
+      "language": "en",
+      "refs": [
+        "MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Audience and Purpose Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Audience and Purpose Sorting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Register Markers — What Signals Formality",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Register Markers — What Signals Formality\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Register Mismatch Detection (Both Directions)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Register Mismatch Detection (Both Directions)\",\"primitives\":[],\"addresses\":[\"MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT\",\"MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT",
+        "MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Register Conversion Practice",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Register Conversion Practice\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Choosing Register for a Novel Situation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Choosing Register for a Novel Situation\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT\",\"MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT",
+        "MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 71,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Over-formal mismatch**\nGiven a hyper-formal message sent in a casual peer context, student identifies the register mismatch and explains why \"more formal\" was not \"more correct\" here. *(Directly targets MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 84,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Informal is not an error**\nGiven a casual, contraction-heavy, fragment-using text message, student confirms it is NOT a grammar error and explains why it correctly fits its informal context. *(Directly targets MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 84,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Register spectrum ranking**\nGiven 4 unlabeled short samples spanning the register spectrum, student ranks them from most informal to most formal and names the audience/purpose evidence used for each ranking.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 84,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Register-shift rewrite**\nGiven one message and a target audience change (e.g., \"rewrite this restaurant complaint text for a formal written complaint to management\"), student produces an appropriately-registered rewrite preserving the original content.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 84,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Novel-situation register choice**\nGiven a novel real-world scenario with no register specified, student chooses and justifies an appropriate register from scratch, explicitly naming the audience/relationship/purpose factors driving the choice.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 84,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Adaptive Flags",
+      "content": "- If the student shows a one-directional bias (always over-correcting toward formality), weight remediation toward MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING's bridge text and TA-3's informal-is-legitimate examples specifically.\n- If the student shows the opposite bias (treating all formal writing as stuffy/wrong), weight remediation toward MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT's bridge text and TA-3's over-casual-to-authority examples.\n- This concept directly feeds `eng.vocab.academic-vocabulary` (which assumes the student already accepts formal register as situationally appropriate, not \"try-hard\") and `eng.communication.digital-communication` (which requires real-time register judgment across platforms) — do not certify mastery without TA-5's novel-situation generative task, since both downstream concepts require independent register choice, not just recognition.\n- Reuse the \"outfit fits the event\" framing explicitly when introducing `eng.communication.digital-communication` — that concept's platform-switching register decisions (text vs. email vs. formal document) are the same skill applied across communication channels rather than just written genres.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING",
+        "MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 130,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "eng.vocab.register-and-formality/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.register-and-formality",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Connotation-Denotation Check]\n        |\n        v\n[Concrete Anchor: The Outfit Closet]\n        |\n        v\n[TA-1: Audience/Purpose Sorting] --> [TA-2: Register Markers]\n        |                                    |\n        v                                    v\n[TA-3: Mismatch Detection, Both Directions] <+\n        |\n        v\n[TA-4: Register Conversion Practice]\n        |\n        v\n[TA-5: Choosing Register for a Novel Situation]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — a student who cannot detect connotation/formality shading in near-synonyms will not reliably judge register either, since register is largely built from connotation-consistent word patterns. During instruction (S1), watch closely for the direction of any register-judgment error: correcting only \"sloppy\" informal writing (MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING) while praising over-formal writing (MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT) as automatically better are mirror-image failures of the same underlying misconception (formality-as-correctness-scale) and both must be addressed via TA-3's paired both-directions examples, not just one direction. If the student defaults to rating everything by a single \"more formal = better\" axis during probes (S6), drop to the Concrete Anchor's outfit-matching framing and re-run TA-3 before continuing. At mastery-probe stage (S9), do not certify mastery unless both MP-1 (over-formal mismatch) and MP-2 (informal-is-not-an-error) are passed — passing only one of the two paired misconception probes indicates the student has only learned half of the symmetric lesson.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.register-and-formality.md",
+        "startLine": 101,
+        "endLine": 130
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

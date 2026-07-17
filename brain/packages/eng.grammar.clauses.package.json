@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.clauses-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.clauses",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d49ce34ad54bd8d9c6853a8d92f066d53215767bd90b87608fe6302296e2f496",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.clauses.md": "sha256:8290b706c9a75035ad513f394bb5ee31f7c436a43d716a86986cbb50e18c9fa7"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.clauses",
+    "name": "Independent and Dependent Clauses",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.phrases"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.clauses-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.clauses (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.clauses.md": "sha256:8290b706c9a75035ad513f394bb5ee31f7c436a43d716a86986cbb50e18c9fa7"
+      },
+      "contentHash": "sha256:0d6f5ea00dc8061a4450bdca7b185f2067a64bb53f7f4a074eee00914b27850d",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.clauses.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.clauses.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.clauses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.clauses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.clauses.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.clauses.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.clauses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.clauses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.clauses.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.clauses.md#TA-3 (addresses MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.clauses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.clauses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.clauses.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.clauses.md#TA-4 (addresses MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.clauses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.clauses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.clauses.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.clauses.md#TA-5 (addresses MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE, MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.clauses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.clauses\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.clauses/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Independent and Dependent Clauses — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying the Subject-Verb Pair in Any Clause [C]**\n\nPresent a mixed set of independent and dependent clauses; student identifies the subject-verb pair in each, confirming both types are genuine clauses.\n\n**TA-2 — Independent Clauses (Standing Alone) [C]**\n\nPresent independent clauses; student confirms they can stand alone as complete sentences.\n\n**TA-3 — Dependent Clauses (Cannot Stand Alone) [C→P]**\n\nPresent dependent clauses (with subordinating words); student confirms they contain a subject-verb pair but cannot stand alone, directly targeting MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE.\n\n**TA-4 — Independent Clauses Within Compound and Complex Sentences [P]**\n\nPresent compound sentences (two independent clauses) and complex sentences (independent + dependent clause); student identifies each clause within the larger sentence structure, directly targeting MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY.\n\n**TA-5 — Building Sentences by Combining Clauses [P]**\n\nStudent combines given independent and dependent clauses into compound and complex sentences, applying correct combination and punctuation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/misconception/MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.clauses",
+      "title": "- **Trigger signal:** Student assumes that adding a subordinating word (because, although, when, if) to a subject-verb group somehow removes its \"clause\" status, treating dependent clauses as not genuinely being clauses at all — missing that a dependent clause STILL contains a subject-verb pair (the defining feature of a clause) and is only \"dependent\" in the sense that it cannot stand alone as a complete sentence, not in the sense that it lacks clause structure.",
+      "content": "### MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE\n- **Trigger signal:** Student assumes that adding a subordinating word (because, although, when, if) to a subject-verb group somehow removes its \"clause\" status, treating dependent clauses as not genuinely being clauses at all — missing that a dependent clause STILL contains a subject-verb pair (the defining feature of a clause) and is only \"dependent\" in the sense that it cannot stand alone as a complete sentence, not in the sense that it lacks clause structure.\n- **Conflict evidence [P28]:** \"In 'because she was tired,' is there still a subject ('she') and a verb ('was')? Does adding 'because' remove that subject-verb pair, or does it just change whether this group of words can stand alone as a complete sentence?\"\n- **Bridge text [P30]:** \"A dependent clause STILL genuinely contains a subject-verb pair — that's what makes it a clause at all, just like an independent clause. The word 'dependent' refers specifically to its INABILITY TO STAND ALONE as a complete sentence (because of the subordinating word), not to any lack of clause structure. 'Because she was tired' is absolutely a clause (subject 'she' + verb 'was'), just a dependent one.\"\n- **Replacement text [P31]:** \"Check for a subject-verb pair to confirm clause status first — then separately determine whether it can stand alone (independent) or not (dependent) due to a subordinating word.\"\n- **Discrimination pairs [P33]:**\n  - \"She was tired\" (independent clause — subject-verb pair, stands alone) vs. \"because she was tired\" (dependent clause — SAME subject-verb pair, still a genuine clause, just can't stand alone due to \"because\").\n  - \"The dog barked\" (independent) vs. \"when the dog barked\" (dependent — still has \"dog\" + \"barked,\" a genuine clause).\n- **s6_path:** \"It's a very reasonable assumption that adding a word like 'because' somehow changes the fundamental nature of the group of words — but the subject-verb pair is still there, making it genuinely a clause; the subordinating word only affects whether it can stand alone.\"",
+      "localKey": "MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE",
+      "language": "en",
+      "refs": [
+        "MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/misconception/MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.clauses",
+      "title": "- **Trigger signal:** Student assumes \"independent clause\" is synonymous with \"simple sentence\" (a single independent clause with no other clauses attached), missing that independent clauses can also appear WITHIN more complex sentence structures — a compound sentence has TWO (or more) independent clauses joined together, and a complex sentence has an independent clause combined with one or more dependent clauses; the term \"independent clause\" describes a STRUCTURAL UNIT, not a whole-sentence category.",
+      "content": "### MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY\n- **Trigger signal:** Student assumes \"independent clause\" is synonymous with \"simple sentence\" (a single independent clause with no other clauses attached), missing that independent clauses can also appear WITHIN more complex sentence structures — a compound sentence has TWO (or more) independent clauses joined together, and a complex sentence has an independent clause combined with one or more dependent clauses; the term \"independent clause\" describes a STRUCTURAL UNIT, not a whole-sentence category.\n- **Conflict evidence [P28]:** \"In 'I was tired, so I went to bed,' are there two separate independent clauses joined together ('I was tired' and 'I went to bed'), or is this just one single simple sentence made of one independent clause?\"\n- **Bridge text [P30]:** \"'Independent clause' describes a STRUCTURAL UNIT (a subject-verb group that COULD stand alone), not a whole-sentence category. A single sentence can contain multiple independent clauses (a compound sentence: 'I was tired, so I went to bed' — TWO independent clauses joined by 'so'), or an independent clause plus a dependent clause (a complex sentence: 'I went to bed because I was tired'). 'Simple sentence' specifically refers to a sentence with ONLY ONE independent clause and no dependent clauses — a narrower, more specific category.\"\n- **Replacement text [P31]:** \"Recognize that a sentence can contain multiple independent clauses (compound) or a mix of independent and dependent clauses (complex) — 'independent clause' is a building-block unit, not a synonym for 'whole sentence.'\"\n- **Discrimination pairs [P33]:**\n  - \"I was tired, so I went to bed\" (compound sentence — TWO independent clauses joined by \"so\") vs. \"I went to bed\" alone (a simple sentence — ONE independent clause).\n  - \"I went to bed because I was tired\" (complex sentence — one independent clause + one dependent clause) vs. treating this as containing only one clause total.\n- **s6_path:** \"It's a reasonable simplification to think of 'independent clause' as just another name for 'a whole simple sentence,' since a standalone independent clause IS a complete simple sentence — but recognizing that independent clauses can also combine with other clauses within larger sentence structures is the key insight for understanding compound and complex sentences.\"\n\n---",
+      "localKey": "MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY",
+      "language": "en",
+      "refs": [
+        "MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Identifying the Subject-Verb Pair in Any Clause",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Subject-Verb Pair in Any Clause\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Independent Clauses (Standing Alone)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Independent Clauses (Standing Alone)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Dependent Clauses (Cannot Stand Alone)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Dependent Clauses (Cannot Stand Alone)\",\"primitives\":[],\"addresses\":[\"MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Independent Clauses Within Compound and Complex Sentences",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Independent Clauses Within Compound and Complex Sentences\",\"primitives\":[],\"addresses\":[\"MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Building Sentences by Combining Clauses",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Building Sentences by Combining Clauses\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE\",\"MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE",
+        "MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.clauses",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Subject-verb pair in dependent clause, novel example**\n\"Identify the subject and verb in 'when the bell rang.'\"\n*Target:* subject \"bell,\" verb \"rang\" — confirming it's a genuine clause despite being dependent.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.clauses",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Independent vs. dependent, novel example**\n\"Can 'since she arrived late' stand alone as a sentence?\"\n*Target:* no — dependent, due to \"since,\" despite containing a subject-verb pair (\"she arrived\").",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.clauses",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Clauses within a compound sentence**\n\"In 'The rain stopped, and the sun came out,' how many independent clauses are there?\"\n*Target:* two — \"The rain stopped\" and \"the sun came out,\" joined by \"and.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.clauses",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Clauses within a complex sentence**\n\"In 'She finished her homework before she went to bed,' identify the independent and dependent clauses.\"\n*Target:* \"She finished her homework\" (independent); \"before she went to bed\" (dependent).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.clauses",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain clauses**\n\"In your own words: does adding a word like 'because' or 'when' to a subject-verb group mean it's no longer a clause, and is 'independent clause' just another name for a whole simple sentence?\"\n*Target:* states or demonstrates that dependent clauses still contain a genuine subject-verb pair (they're real clauses, just unable to stand alone), and that independent clauses are structural units that can combine with other clauses to form compound or complex sentences, not simply a synonym for \"simple sentence.\"\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Adaptive Flags",
+      "content": "- **Subject-verb pair confirms clause status regardless of subordinating words**: always require this check first, directly countering the misconception that \"because\"/\"although\"/etc. remove clause status.\n- **Independent clause is a structural building block, not a synonym for \"sentence\"**: explicitly teach that sentences can contain multiple clauses (compound, complex), reinforcing \"independent clause\" as a component, not a whole-sentence category.\n- **This concept is foundational for sentence-combining and comma-usage skills**: for all learners, especially S9 learners, ensure genuine mastery here, since the downstream concepts (simple sentences, comma usage, syntax theory) all depend directly on the independent/dependent clause distinction established here.\n- **Reuse the phrase/clause subject-verb-pair test as a direct extension**: explicitly connect this concept's foundational test back to the prerequisite phrases concept, building continuity rather than presenting this as an unrelated new skill.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.clauses/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.clauses",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — stand-alone test warm-up\n  ↓\n[P41] PD-1 (phrases readiness)\n  ↓ PASS\n[P06] Anchor: stand-alone test (both piles confirmed as genuine clauses)\n  ↓\nTA-1: Identifying the subject-verb pair in any clause [C]\n  ↓\nTA-2: Independent clauses (standing alone) [C]\n  ↓\nTA-3: Dependent clauses (cannot stand alone) [C→P]\n  ↓\n[P28] Conflict: subordinating word assumed to remove clause status → MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE (if triggered)\n  ↓\nTA-4: Independent clauses within compound and complex sentences [P]\n  ↓\n[P28] Conflict: independent clause equated with whole simple sentence → MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY (if triggered)\n  ↓\nTA-5: Building sentences by combining clauses [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one sentence with two clauses and identify each one's type.\"\n[P68] Session close\n[P85] Regulation tail — praise checking subject-verb pairs and stand-alone status over surface word cues\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on phrases, new to clause-level analysis): dwell on TA-1/TA-2's basic subject-verb-pair confirmation before introducing dependent clauses and combination structures. S1 (already writes compound/complex sentences fluently but hasn't formally analyzed clause structure): use this concept to build explicit, transferable structural vocabulary for an already-present intuitive skill. S6 (overwhelmed by the independent/dependent distinction after just mastering phrase/clause discrimination): explicitly connect back to the phrase/clause subject-verb-pair test from the prerequisite concept, framing this as an extension, not a new unrelated skill. S9 (L1 doesn't use subordinating conjunctions the same way, or organizes clause combination very differently): expect this concept, especially the compound/complex sentence structure (TA-4/TA-5), to be foundational and require dedicated, explicit practice, since it directly enables the sentence-combining and comma-usage skills that follow.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.clauses.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

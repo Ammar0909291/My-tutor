@@ -1,0 +1,445 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.main-idea-and-details-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.main-idea-and-details",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:55afce440793575992e2e4eacf586b14b06cdd629af76fe9660a55fca930aa98",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md": "sha256:ff59e3eccb7289a4366bd9eb659f7c0eb18b0c03d2c4ec617191c10121cc5c7b"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.main-idea-and-details",
+    "name": "Main Idea and Supporting Details",
+    "difficultyRaw": "developing",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.literal-comprehension"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.main-idea-and-details-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.main-idea-and-details (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md": "sha256:ff59e3eccb7289a4366bd9eb659f7c0eb18b0c03d2c4ec617191c10121cc5c7b"
+      },
+      "contentHash": "sha256:5f976623ecc79899230295b09e41bfa0437776b33b9037983396e642876b9603",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.main-idea-and-details.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.main-idea-and-details"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.main-idea-and-details\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.main-idea-and-details.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md#TA-2 (addresses MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.main-idea-and-details"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.main-idea-and-details\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.main-idea-and-details.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md#TA-3 (addresses MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.main-idea-and-details"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.main-idea-and-details\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.main-idea-and-details.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.main-idea-and-details"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.main-idea-and-details\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.main-idea-and-details.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md#TA-5 (addresses MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA, MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.main-idea-and-details"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.main-idea-and-details\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.main-idea-and-details/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Main Idea and Supporting Details — Conceptual Development Sequence",
+      "content": "### TA-1: Identifying Supporting Details\nPresent short paragraphs with an already-given main idea sentence, e.g., \"Bees are important to gardens. [Main idea]\" followed by 3-4 detail sentences. Ask the student to point out which sentences are details (specific, narrower pieces of evidence) rather than restatements of the main idea itself. Reinforce: a detail is always more specific/narrower than the main idea it supports.\n\n### TA-2: Stated vs. Implied Main Idea\nUsing the discrimination pairs from MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE, give the student pairs of paragraphs — one with a clearly stated main-idea sentence, one where the main idea must be inferred from the pattern of details. Student labels each \"stated\" or \"implied\" and, for implied examples, writes the main idea in their own words.\n\n### TA-3: The Umbrella/Exclusion Test\nGive the student a candidate main-idea sentence and 5 detail sentences, one of which does NOT belong (an off-topic detail, echoing the ice-cream card from the Concrete Anchor). Student must identify the detail that doesn't fit under the \"umbrella\" and explain why (it isn't sheltered by/relevant to the proposed main idea) — directly countering MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA's word-order shortcut by forcing a coverage check across every sentence.\n\n### TA-4: Main Idea at the Paragraph vs. Whole-Text Level\nExtend to a short multi-paragraph passage (3 paragraphs, each with its own main idea, forming one overall passage main idea). Student first identifies each paragraph's main idea, then synthesizes those three into one overall main idea for the whole passage — introducing the idea that main-idea identification operates at more than one level of a text (paragraph-level and passage-level), a distinction this concept's downstream unlock `eng.reading.summarizing` depends on directly.\n\n### TA-5: Constructing a Main Idea Sentence From Scratch\nGiven only a set of detail sentences (no candidate main idea provided at all), the student writes their own main-idea sentence that covers all of them, then self-checks it against the umbrella/exclusion test from TA-3. This is the generative capstone task — moving from recognizing a given main idea to constructing one independently.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": ": Stated Main Idea (Scaffolded)",
+      "content": "### WE-1: Stated Main Idea (Scaffolded)\n**Paragraph:** \"Recycling helps the environment in several ways. It reduces the amount of trash sent to landfills. It saves natural resources like trees and water. It also uses less energy than making new products from scratch.\"\n**Walkthrough:** Sentence 1 directly states the main idea (\"Recycling helps the environment\"). Sentences 2-4 are each a specific way (detail) that supports sentence 1. Apply the umbrella test: do all three details fit under \"recycling helps the environment\"? Yes — reducing landfill trash, saving resources, and using less energy are all specific instances of environmental help.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 73,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": ": Implied Main Idea (Guided)",
+      "content": "### WE-2: Implied Main Idea (Guided)\n**Paragraph:** \"Maria arrived twenty minutes early and reviewed her notes one more time. She had practiced her speech in front of a mirror every night that week. Before walking on stage, she took three slow breaths to calm her nerves.\"\n**Walkthrough:** No sentence states \"Maria prepared carefully for her speech\" — that idea is implied. Ask: what do arriving early, practicing nightly, and calming breaths all have in common? All are preparation behaviors. Construct the implied main idea in the student's own words and check it against the umbrella test.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 73,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": ": Multi-Paragraph Synthesis (Independent)",
+      "content": "### WE-3: Multi-Paragraph Synthesis (Independent)\n**Passage (3 short paragraphs):** Paragraph 1 describes a town's old, crumbling bridge; Paragraph 2 describes residents raising money and volunteering labor; Paragraph 3 describes the new bridge's opening day celebration. Student first states each paragraph's own main idea, then synthesizes an overall passage main idea (e.g., \"A town worked together to replace its unsafe bridge\"). This exercises TA-4's paragraph-vs-passage distinction independently.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 73,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/misconception/MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA",
+      "kind": "misconception",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "- **Trigger signal:** Student answers \"what is this paragraph mostly about?\" by quoting or paraphrasing only the first sentence, even when that sentence is a hook, a scene-setter, or a specific example rather than the controlling idea.",
+      "content": "### MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA\n- **Trigger signal:** Student answers \"what is this paragraph mostly about?\" by quoting or paraphrasing only the first sentence, even when that sentence is a hook, a scene-setter, or a specific example rather than the controlling idea.\n- **Conflict evidence [P28]:** Present a paragraph whose first sentence is a vivid but narrow detail (e.g., \"The lion's roar shook the grass.\") and whose main idea only becomes clear across sentences 2-5 (the paragraph is really about lion pride hierarchy). Ask the student to state the main idea using only sentence 1, then read the whole paragraph aloud and ask whether that main idea covers what sentences 2-5 talk about.\n- **Bridge text [P30]:** \"The first sentence often *grabs* you, but the main idea has to be the one thing that *every* sentence in the paragraph is helping to explain. A detail earns the paragraph's opening spot too, sometimes — position doesn't tell you the job a sentence is doing.\"\n- **Replacement text [P31]:** \"To find the main idea, don't just read sentence one. Read the whole paragraph and ask: 'What is the one idea that ALL of these sentences are supporting?' The main idea is a summary big enough to cover every detail; a detail only covers itself.\"\n- **Discrimination pairs [P33]:** (a) First sentence = main idea (paragraph is literally defined by/organized around what sentence 1 says) vs. (b) First sentence = attention-grabbing detail (paragraph's real controlling idea only emerges after reading everything, and sentence 1 is just one supporting or introductory piece).\n- **s6_path:** If detected mid-probe, redirect to PD-1 re-check, then re-run MP-1 with feedback highlighting the \"does this cover every sentence?\" test before allowing advance.",
+      "localKey": "MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA",
+      "language": "en",
+      "refs": [
+        "MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/misconception/MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE",
+      "kind": "misconception",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "- **Trigger signal:** Student searches the paragraph for a sentence that literally IS the main idea and either freezes when no single sentence states it directly, or forces an awkward quote-only answer, treating \"the main idea\" as a find-and-copy task rather than a synthesis task.",
+      "content": "### MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE\n- **Trigger signal:** Student searches the paragraph for a sentence that literally IS the main idea and either freezes when no single sentence states it directly, or forces an awkward quote-only answer, treating \"the main idea\" as a find-and-copy task rather than a synthesis task.\n- **Conflict evidence [P28]:** Give a paragraph with an implied main idea (three sentences each describing a different way people in a town helped after a flood, with no sentence saying \"the town came together to help each other\"). Ask the student to find \"the sentence that states the main idea.\" When they can't, ask what all three sentences have in common.\n- **Bridge text [P30]:** \"Sometimes a writer states the main idea in one sentence — that's a stated main idea. But often the writer just shows you three or four pieces of evidence and expects YOU to notice the pattern and put it into your own words. That's an implied main idea, and it's just as real, even though you won't find it quoted anywhere.\"\n- **Replacement text [P31]:** \"Ask yourself: is there one sentence that already says the big idea (stated), or do I need to notice the pattern across all the sentences and say it myself (implied)? Both are valid main ideas — an implied main idea in your own words counts just as much as a quoted one.\"\n- **Discrimination pairs [P33]:** (a) Stated main idea (one sentence in the text explicitly names the controlling idea, quotable verbatim) vs. (b) Implied main idea (no single sentence states it; the reader must synthesize the pattern across all details into an idea not written anywhere in those exact words).\n- **s6_path:** If detected, drop to PD-1, then re-present TA-2 (stated vs. implied) with an easier stated-only example before returning to implied examples.",
+      "localKey": "MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE",
+      "language": "en",
+      "refs": [
+        "MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Identifying Supporting Details",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Supporting Details\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Stated vs. Implied Main Idea",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Stated vs. Implied Main Idea\",\"primitives\":[],\"addresses\":[\"MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "The Umbrella/Exclusion Test",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Umbrella/Exclusion Test\",\"primitives\":[],\"addresses\":[\"MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Main Idea at the Paragraph vs. Whole-Text Level",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Main Idea at the Paragraph vs. Whole-Text Level\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Constructing a Main Idea Sentence From Scratch",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Constructing a Main Idea Sentence From Scratch\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA\",\"MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA",
+        "MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 72,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Main idea not in first position**\nGiven a paragraph with a clearly stated main-idea sentence NOT in the first position (main idea appears in sentence 3 of 4), student identifies the main idea and explains why the first sentence is a detail, not the main idea. *(Directly targets MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Implied main idea**\nGiven a paragraph with only implied main idea (no sentence states it), student writes the main idea in their own words. *(Directly targets MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Exclusion detection**\nGiven a main-idea sentence and 5 detail sentences (one irrelevant/off-topic), student identifies the detail that does not belong and justifies the exclusion using the umbrella test.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Paragraph vs. passage level**\nGiven a 3-paragraph passage, student states each paragraph's main idea and then the overall passage main idea, demonstrating the two-level distinction from TA-4.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Construct main idea from scratch**\nGiven only a set of 4 detail sentences with no candidate main idea, student constructs an original main-idea sentence covering all four and self-verifies it against the umbrella/exclusion test.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Adaptive Flags",
+      "content": "- If the student consistently defaults to quoting the first sentence regardless of paragraph structure, weight remediation toward MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA's bridge text and re-run TA-3 (umbrella/exclusion) before allowing progress to implied-idea work.\n- If the student can identify stated main ideas but cannot construct implied ones, treat this as a synthesis gap (not a comprehension gap) — repeat TA-2 and TA-5 with easier detail sets before re-attempting MP-2/MP-5.\n- This concept is foundational for three direct downstream unlocks (`eng.reading.inference-in-reading`, `eng.reading.summarizing`, `eng.reading.text-structure`) — do not certify mastery on stated-idea performance alone; implied-idea and multi-paragraph synthesis (TA-4/TA-5) must both be demonstrated, since summarizing in particular depends on the passage-level synthesis skill built in TA-4.\n- Reuse the umbrella/exclusion test vocabulary explicitly when introducing `eng.reading.summarizing` later — it is the same coverage-check operation applied to a full passage rather than a paragraph.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 132,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.reading.main-idea-and-details/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.main-idea-and-details",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Literal Comprehension Check]\n        |\n        v\n[Concrete Anchor: Umbrella Test]\n        |\n        v\n[TA-1: Supporting Details] --> [TA-2: Stated vs. Implied]\n        |                              |\n        v                              v\n[TA-3: Umbrella/Exclusion Test] <------+\n        |\n        v\n[TA-4: Paragraph vs. Passage Level]\n        |\n        v\n[TA-5: Constructing Main Idea From Scratch]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes before touching main-idea content; a student who cannot extract literal facts will fabricate main ideas from misremembered details rather than genuine synthesis. During instruction (S1), route any word-order or find-the-quote behavior immediately to the matching misconception's bridge/replacement text rather than simply marking answers wrong — both misconceptions are common enough at this difficulty level to expect at least one to surface. If the student appears to guess or freeze during implied-main-idea tasks (S6), drop back to PD-1-adjacent literal work, then re-approach TA-2 with an easier stated-only example before reintroducing implied examples. At mastery-probe stage (S9), do not certify mastery unless MP-2 (implied) and MP-5 (constructive) are both passed independently — a student who only succeeds on stated-main-idea items (MP-1) has not yet demonstrated the synthesis skill this concept is built around.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.main-idea-and-details.md",
+        "startLine": 103,
+        "endLine": 132
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
