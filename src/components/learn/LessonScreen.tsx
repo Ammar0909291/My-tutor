@@ -1145,6 +1145,43 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         }
       }
     } catch { /* ignore */ }
+
+    // Production-readiness fix: a genuine (mastered=true) completion must also
+    // mark the underlying knowledge-graph TopicProgress row COMPLETE/MASTERED,
+    // not just the sequential StudentProgress counter above — otherwise the
+    // Roadmap tree's prerequisite-based unlocking (availableTopicSlugs, read
+    // from /api/topic-progress) and every other TopicProgress-driven system
+    // (spaced review, weak-topic detection, evidence/analytics) never learn
+    // this lesson was completed. Previously this write only happened when the
+    // AI's own [LESSON_COMPLETE] tag was detected (see the parseLessonCompletionTag
+    // handler below) — the manual "Complete Lesson" button called this function
+    // directly and skipped it entirely. Centralized here so both trigger paths
+    // (automatic tag detection and the manual button) stay in sync by
+    // construction. "Skip Anyway" (mastered=false) already records SKIPPED
+    // server-side inside the /api/curriculum/progress PATCH itself, so it must
+    // not also be marked complete here.
+    if (mastered && lesson?.topicSlug) {
+      const topicSlug = lesson.topicSlug
+      try {
+        const tpRes = await fetch('/api/topic-progress', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subjectSlug, topicSlug, action: 'complete' }),
+        })
+        const tpData = await tpRes.json()
+        if (tpData.success) {
+          setTopicProgressMap((prev) => ({
+            ...prev,
+            [topicSlug]: { status: tpData.topicProgress.status, masteryPct: tpData.topicProgress.masteryPct },
+          }))
+          // Re-query available nodes so newly-unlocked topics appear immediately
+          fetch(`/api/topic-progress?subject=${subjectSlug}`)
+            .then((r) => r.json())
+            .then((d) => { if (d.availableNodes) setAvailableTopicSlugs(d.availableNodes) })
+            .catch(() => {})
+        }
+      } catch { /* ignore — same best-effort semantics as the rest of this handler */ }
+    }
   }, [subjectSlug, curriculumLessons.length])
 
   // P0-4 fix: "Skip Anyway" used to call handleLessonComplete directly —
@@ -1430,30 +1467,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       full = textAfterCompletion
       if (hasCompletion) {
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
-        if (currentLessonData) {
-          handleLessonComplete(currentLessonData.order, currentLessonData)
-          // Update knowledge-graph TopicProgress and recompute unlocked nodes
-          if (currentLessonData.topicSlug) {
-            const topicSlug = currentLessonData.topicSlug
-            fetch('/api/topic-progress', {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ subjectSlug, topicSlug, action: 'complete' }),
-            }).then((r) => r.json()).then((d) => {
-              if (d.success) {
-                setTopicProgressMap((prev) => ({
-                  ...prev,
-                  [topicSlug]: { status: d.topicProgress.status, masteryPct: d.topicProgress.masteryPct },
-                }))
-                // Re-query available nodes so newly-unlocked topics appear immediately
-                fetch(`/api/topic-progress?subject=${subjectSlug}`)
-                  .then((r) => r.json())
-                  .then((data) => { if (data.availableNodes) setAvailableTopicSlugs(data.availableNodes) })
-                  .catch(() => {})
-              }
-            }).catch(() => {})
-          }
-        }
+        // handleLessonComplete() also marks the knowledge-graph TopicProgress
+        // row complete and recomputes unlocked nodes — centralized there so
+        // this automatic path and the manual "Complete Lesson" button stay in
+        // sync by construction (see handleLessonComplete's own comment).
+        if (currentLessonData) handleLessonComplete(currentLessonData.order, currentLessonData)
       }
 
       // Collect deterministic check tags ([MATH_ANSWER] / [CODE_ANSWER]) before stripping
