@@ -2295,6 +2295,304 @@ const WET_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.alg.linear-equation-1var ───────────────────────────────────────────
+const LE1 = 'math.alg.linear-equation-1var'
+const LE1_SRC = 'docs/curriculum/blueprints/math.alg.linear-equation-1var.md'
+
+const LE1_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LE1,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A linear equation like 3x + 5 = 20 is a balance scale that is ' +
+      'currently level: whatever is on the left weighs exactly the same ' +
+      'as whatever is on the right. Solving means finding what x must ' +
+      'weigh — and the ONE rule is that anything you do to one pan, you ' +
+      'must do identically to the other, or the scale tips and the ' +
+      'equation stops being true. Take 5 off the left? Take 5 off the ' +
+      'right too: 3x = 15. Split the left pan into 3 equal parts? Split ' +
+      'the right the same way: x = 5. Check by putting 5 back in the ' +
+      'original: 3(5) + 5 = 20. It balances — that substitution check is ' +
+      'how YOU know the answer is right without asking anyone.',
+    targetedMisconceptions: [`${LE1}:MC-1`],
+    source: `${LE1_SRC} — Component 1 threshold concept (balance invariant) + WE-1; guards MC-1 BALANCE-NOT-MAINTAINED`,
+  },
+  {
+    conceptId: LE1,
+    subjectSlug: 'mathematics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Solve 3x + 5 = 20 step by step. Goal: get x alone. Step 1 — the ' +
+      '+5 is in the way, so undo it with its inverse: subtract 5 from ' +
+      'BOTH sides. Left: 3x + 5 − 5 = 3x. Right: 20 − 5 = 15. Now ' +
+      '3x = 15. Step 2 — x is multiplied by 3, so undo with the inverse: ' +
+      'divide BOTH sides by 3. x = 5. Notice the order: constant first, ' +
+      'coefficient second. If you divide by 3 first you get ' +
+      'x + 5/3 = 20/3 — still true, but now everything is fractions. ' +
+      'Subtracting the constant first keeps the arithmetic clean. ' +
+      'Step 3 — verify: 3(5) + 5 = 15 + 5 = 20. ✓',
+    targetedMisconceptions: [`${LE1}:MC-2`],
+    source: `${LE1_SRC} — WE-1 (P07 worked example progression); repairs MC-2 WRONG-OPERATION-ORDER via the fractional-intermediate contrast`,
+  },
+  {
+    conceptId: LE1,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Try this: from 3x + 5 = 20, a student "moves the 5 over" and ' +
+      'writes 3x = 20 + 5 = 25, so x = 25/3. Check it: 3(25/3) + 5 = ' +
+      '25 + 5 = 30 — not 20. The scale tipped. Here is the trap: there ' +
+      'is no "moving" in algebra. What LOOKS like a term hopping across ' +
+      'the equals sign is really the same operation applied to both ' +
+      'sides: subtracting 5 from both sides makes the +5 vanish on the ' +
+      'left and turns 20 into 20 − 5 on the right. The sign "changes" ' +
+      'only because the term arrives on the other side already ' +
+      'subtracted. If you always write the both-sides step instead of ' +
+      'teleporting terms, this error becomes impossible.',
+    targetedMisconceptions: [`${LE1}:MC-3`, `${LE1}:MC-1`],
+    source: `${LE1_SRC} — MC-3 SIGN-ERROR-TRANSPOSING (root cause: moving-as-relocation; repair via substitution conflict evidence + both-sides reframe)`,
+  },
+]
+
+const LE1_PROBES: SeedProbe[] = [
+  {
+    conceptId: LE1,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Solve: 4x + 7 = 31. What is x?',
+    choices: [
+      { text: 'x = 6 — subtract 7 from both sides (4x = 24), then divide by 4', isCorrect: true },
+      { text: 'x = 9.5 — move the 7 over: 4x = 31 + 7 = 38', isCorrect: false, misconceptionId: `${LE1}:MC-3` },
+      { text: 'x = 24 — subtract 7 from the left side only', isCorrect: false, misconceptionId: `${LE1}:MC-1` },
+    ],
+    correctValue: 'x = 6',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LE1}:MC-1`, `${LE1}:MC-3`],
+    source: `${LE1_SRC} — two-step ladder rung 4, distractors mapped to MC-1/MC-3`,
+  },
+  {
+    conceptId: LE1,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student solving 5x − 3 = 12 writes "5x = 12 − 3 = 9" as their first step. What went wrong?',
+    choices: [
+      { text: 'The −3 must be undone by ADDING 3 to both sides: 5x = 15', isCorrect: true },
+      { text: 'Nothing — terms change sign when they cross the equals sign, so −3 becomes part of the right side', isCorrect: false, misconceptionId: `${LE1}:MC-3` },
+    ],
+    correctValue: '5x = 15',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LE1}:MC-3`],
+    source: `${LE1_SRC} — MC-3 error-analysis probe (subtraction-side variant)`,
+  },
+]
+
+// ─── math.found.natural-numbers ──────────────────────────────────────────────
+const NAT = 'math.found.natural-numbers'
+const NAT_SRC = 'docs/curriculum/blueprints/math.found.natural-numbers.md'
+
+const NAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NAT,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'The natural numbers are the counting numbers — but "does ℕ ' +
+      'include 0?" has no universal answer, and that is a feature to ' +
+      'learn, not a bug. Two live conventions coexist: many school ' +
+      'curricula define ℕ = {1, 2, 3, …}, while ISO 80000-2 and most ' +
+      'set theory and computer science define ℕ = {0, 1, 2, …} (0 is ' +
+      'the natural size of the empty collection). Neither is "the" ' +
+      'truth; a proof or textbook simply declares its convention up ' +
+      'front, and careful writers use ℕ⁺ or ℤ⁺ when they mean strictly ' +
+      'positive. The mature habit: before using ℕ in any argument, ' +
+      'check which convention the source fixed — several classic ' +
+      '"errors" are really two texts using different ℕ.',
+    targetedMisconceptions: [`${NAT}:MC-1`],
+    source: `${NAT_SRC} — MC-1 ZERO-MEMBERSHIP (NCERT vs ISO 80000-2 convention conflict rendered as convention-awareness teaching)`,
+  },
+  {
+    conceptId: NAT,
+    subjectSlug: 'mathematics',
+    familyKind: 'faq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Why bother with Peano axioms when everyone can count? Because ' +
+      'informal counting leaves the structure unspecified in ways that ' +
+      'matter. Try to define "the counting numbers" without axioms and ' +
+      'nothing you say rules out a number line that loops back on ' +
+      'itself, or has two separate chains. Peano nails it down: there ' +
+      'is a first element; every element has a unique successor; the ' +
+      'successor is never the first element (no loops); distinct ' +
+      'elements have distinct successors (no merging); and — the ' +
+      'payoff axiom — any property that holds for the first element ' +
+      'and is preserved by succession holds for ALL of them. That last ' +
+      'one, induction, is not decoration: it is the license behind ' +
+      'every proof-by-induction you will ever write. Counting tells ' +
+      'you what ℕ feels like; the axioms tell you what you may PROVE ' +
+      'about it.',
+    targetedMisconceptions: [`${NAT}:MC-2`],
+    source: `${NAT_SRC} — MC-2 PEANO-INFORMAL (repair: what informal counting fails to rule out — cycles/merging — and P5 induction as the payoff)`,
+  },
+  {
+    conceptId: NAT,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      '"Well-ordered" trips people up: it sounds like it should mean ' +
+      '"neatly finite." It actually means every NON-EMPTY SUBSET has a ' +
+      'least element — it says nothing about a greatest one. ℕ is ' +
+      'well-ordered AND infinite: pick any subset (the even numbers, ' +
+      'the primes, numbers above a trillion) and it has a smallest ' +
+      'member, yet the whole set marches on forever. Contrast ℤ: the ' +
+      'set of ALL integers has no smallest element (…−3, −2, −1 keeps ' +
+      'descending), so ℤ is NOT well-ordered — having a floor at one ' +
+      'end is a special property of ℕ, and it is exactly what makes ' +
+      '"take the least counterexample" proofs work there.',
+    targetedMisconceptions: [`${NAT}:MC-3`],
+    source: `${NAT_SRC} — MC-3 WELL-ORDER-FINITE (min-of-every-subset vs finite conflation; ℤ contrast as discrimination evidence)`,
+  },
+]
+
+const NAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: NAT,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Is 0 a natural number?',
+    choices: [
+      { text: 'It depends on the convention in use: ISO/set theory include 0; many school curricula start at 1 — a careful text declares which', isCorrect: true },
+      { text: 'No — natural numbers always start at 1, in every text', isCorrect: false, misconceptionId: `${NAT}:MC-1` },
+      { text: 'Yes — every modern definition includes 0', isCorrect: false, misconceptionId: `${NAT}:MC-1` },
+    ],
+    correctValue: 'convention-dependent',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NAT}:MC-1`],
+    source: `${NAT_SRC} — MC-1 probe; both absolutist answers are distractors`,
+  },
+  {
+    conceptId: NAT,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'ℕ is well-ordered: every non-empty subset has a least element. Does that mean ℕ is finite?',
+    choices: [
+      { text: 'No — well-ordering guarantees a minimum for each subset, not a maximum for the set; ℕ is well-ordered and infinite', isCorrect: true },
+      { text: 'Yes — a set with a smallest element must end somewhere', isCorrect: false, misconceptionId: `${NAT}:MC-3` },
+    ],
+    correctValue: 'no — well-ordered and infinite',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NAT}:MC-3`],
+    source: `${NAT_SRC} — MC-3 probe, distractor-mapped`,
+  },
+]
+
+// ─── math.found.integers ─────────────────────────────────────────────────────
+const INT = 'math.found.integers'
+const INT_SRC = 'docs/curriculum/blueprints/math.found.integers.md'
+
+const INT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INT,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      '−3 is not an instruction to take something away — it is a ' +
+      'NUMBER, as real a citizen of ℤ as 3 is. The cleanest way to see ' +
+      'it: −3 is defined as THE number that, added to 3, gives 0. A ' +
+      'debt of $3 is not "a subtraction waiting to happen"; it is a ' +
+      'balance you can hold, compare, and add: owing 3 and owning 3 ' +
+      'cancels to exactly nothing, (−3) + 3 = 0. Once negatives are ' +
+      'first-class elements, ℤ = {…, −2, −1, 0, 1, 2, …} becomes one ' +
+      'unified line where every element has an additive opposite — ' +
+      'which is precisely the property ℕ lacked and the reason ℤ was ' +
+      'built: in ℤ, every subtraction problem finally has an answer.',
+    targetedMisconceptions: [`${INT}:MC-1`],
+    source: `${INT_SRC} — MC-1 NEGATIVE-AS-SUBTRACTION (element-not-operation repair; (−n)+n=0 as the defining property)`,
+  },
+  {
+    conceptId: INT,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      '"ℤ is just ℕ with negatives bolted on, same rules" — tempting, ' +
+      'and wrong in both directions. ℤ GAINS a property ℕ lacks: ' +
+      'closure under subtraction (5 − 9 = −4 stays inside ℤ). But ℤ ' +
+      'also LOSES one: well-ordering — ℤ itself has no least element, ' +
+      'so least-counterexample arguments that work in ℕ fail in ℤ. And ' +
+      'one thing NEITHER set has: closure under division — 1 ÷ 3 lands ' +
+      'outside both, which is exactly the gap the rationals will fill. ' +
+      'Extending a number system is always a trade, never a pure ' +
+      'upgrade: audit which properties survive the extension instead ' +
+      'of assuming they all do.',
+    targetedMisconceptions: [`${INT}:MC-2`],
+    source: `${INT_SRC} — MC-2 RING-CONFUSION (property audit: gains subtraction-closure, loses well-ordering, never had division-closure)`,
+  },
+  {
+    conceptId: INT,
+    subjectSlug: 'mathematics',
+    familyKind: 'faq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Quick check: is every integer either positive or negative? No — ' +
+      'and the exception is the most important element in the set. 0 ' +
+      'is neither positive nor negative, yet it is fully an integer: ' +
+      'it is the additive identity, the fixed point the whole line is ' +
+      'built around (n + 0 = n, and each pair n, −n cancels TO 0). ' +
+      'Thinking of ℤ as "positives ∪ negatives" silently deletes 0 and ' +
+      'breaks arguments that quantify over all integers — "every ' +
+      'integer has a sign" is false at exactly one point. Say instead: ' +
+      'ℤ = negatives ∪ {0} ∪ positives, three parts, with 0 doing the ' +
+      'load-bearing work.',
+    targetedMisconceptions: [`${INT}:MC-3`],
+    source: `${INT_SRC} — MC-3 ZERO-ASYMMETRY (0 as additive identity, not a missing category)`,
+  },
+]
+
+const INT_PROBES: SeedProbe[] = [
+  {
+    conceptId: INT,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Which operation is ℤ NOT closed under?',
+    choices: [
+      { text: 'Division — 1 ÷ 3 is not an integer', isCorrect: true },
+      { text: 'Subtraction — 5 − 9 leaves the integers', isCorrect: false, misconceptionId: `${INT}:MC-1` },
+      { text: 'None — ℤ is closed under all four operations', isCorrect: false, misconceptionId: `${INT}:MC-2` },
+    ],
+    correctValue: 'division',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${INT}:MC-1`, `${INT}:MC-2`],
+    source: `${INT_SRC} — MC-2 closure probe, distractor-mapped`,
+  },
+  {
+    conceptId: INT,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'True or false: every integer is either positive or negative.',
+    choices: [
+      { text: 'False — 0 is an integer and is neither; it is the additive identity', isCorrect: true },
+      { text: 'True — the integers are the positive and negative whole numbers', isCorrect: false, misconceptionId: `${INT}:MC-3` },
+    ],
+    correctValue: 'false — 0 is neither',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${INT}:MC-3`],
+    source: `${INT_SRC} — MC-3 probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -2322,6 +2620,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...COE_EXPLANATIONS,
   ...COM_EXPLANATIONS,
   ...WET_EXPLANATIONS,
+  ...LE1_EXPLANATIONS,
+  ...NAT_EXPLANATIONS,
+  ...INT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -2349,4 +2650,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...COE_PROBES,
   ...COM_PROBES,
   ...WET_PROBES,
+  ...LE1_PROBES,
+  ...NAT_PROBES,
+  ...INT_PROBES,
 ]
