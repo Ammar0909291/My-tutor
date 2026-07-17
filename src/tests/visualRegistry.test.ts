@@ -195,7 +195,6 @@ describe('visualRegistry', () => {
     ['phys.mech.gravitational-field', 'force_diagram'],
     ['phys.mech.orbital-mechanics', 'force_diagram'],
     ['phys.mech.keplers-laws', 'force_diagram'],
-    ['phys.mech.escape-velocity', 'force_diagram'],
   ] as const)('%s resolves to %s (existing type, not force_diagram-by-default)', (conceptId, expected) => {
     expect(getConceptVisualType(conceptId)).toBe(expected)
   })
@@ -207,11 +206,18 @@ describe('visualRegistry', () => {
 
   it('gravitation/orbital concepts reuse the existing gravitation_orbit scene generator', () => {
     for (const id of [
-      'phys.mech.gravitational-field', 'phys.mech.orbital-mechanics',
-      'phys.mech.keplers-laws', 'phys.mech.escape-velocity',
+      'phys.mech.gravitational-field', 'phys.mech.orbital-mechanics', 'phys.mech.keplers-laws',
     ]) {
       expect(getConceptSceneGenerator(id)).toBe('gravitation_orbit')
     }
+  })
+
+  // Removed after the visualCoverageValidator flagged it as 🔴 Incorrect
+  // Mapping (a pure kinematics/energy quantity assigned force_diagram) —
+  // this concept now correctly falls through to null (Category C).
+  it('escape-velocity has no exact mapping — falls through to honest fallback (Category C)', () => {
+    expect(getConceptVisualType('phys.mech.escape-velocity')).toBeNull()
+    expect(getConceptSceneGenerator('phys.mech.escape-velocity')).toBeNull()
   })
 
   // Orphaned-key fix: these entries existed before but under keys that
@@ -235,6 +241,9 @@ describe('visualRegistry', () => {
     'phys.mech.conservation-of-energy',
     'phys.mech.power',
     'phys.mech.gravitational-potential',
+    // Kinematics/energy-threshold quantity — removed after the validator
+    // flagged it as an incorrect force_diagram mapping (see above)
+    'phys.mech.escape-velocity',
     // Mass-distribution/point concepts
     'phys.mech.moment-of-inertia',
     'phys.mech.center-of-mass',

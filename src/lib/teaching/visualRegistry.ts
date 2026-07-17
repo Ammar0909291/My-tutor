@@ -109,7 +109,14 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.gravitational-field':    { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
   'phys.mech.orbital-mechanics':      { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
   'phys.mech.keplers-laws':           { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
-  'phys.mech.escape-velocity':        { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  // 'phys.mech.escape-velocity' was flagged 🔴 Incorrect Mapping by the new
+  // visualCoverageValidator: "Escape Velocity" is fundamentally a kinematics/
+  // energy-threshold quantity (a scalar speed), not a force-diagram or
+  // orbit-shape concept — the P2 pass's own classification of it as
+  // gravitation_orbit was already noted as "marginal" at the time. Removed
+  // rather than kept on a stretched justification; falls through to Category
+  // C (no visualization, honest fallback), consistent with "an incorrect
+  // visualization is worse than showing no visualization."
 
   // (c) No existing visual type fits — deliberately NOT mapped here:
   //   Pure energy quantities/transformations (no force-diagram or graph

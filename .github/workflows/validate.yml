@@ -62,3 +62,13 @@ jobs:
           for prefix in $(ls brain/packages/ | sed 's/\..*//' | sort -u); do
             npm run compile:package -- --prefix "${prefix}." --check
           done
+
+      # Visualization Registry coverage gate: catches the P0/P2 bug class
+      # (a KG concept silently resolving to an unrelated visual) before it
+      # ships. Read-only over visualRegistry.ts's source text and every
+      # committed docs/*/kg/graph.json — never touches runtime behavior.
+      # Fails only on Incorrect Mapping / Broken References / Duplicate
+      # Mappings; Expected Null / Intentional Fallback / Orphan Entries are
+      # warnings the report surfaces but do not block CI.
+      - name: Visualization Registry coverage
+        run: npx tsx scripts/validate-visualization-coverage.ts

@@ -18,6 +18,7 @@
     "seed:brain-assets": "tsx scripts/brain/seed-knowledge-assets.ts",
     "compile:package": "tsx scripts/brain/compile-educational-package.ts",
     "evidence:report": "tsx scripts/brain/evidence-report.ts",
+    "validate:visuals": "tsx scripts/validate-visualization-coverage.ts",
     "postinstall": "prisma generate && node scripts/copy-dynamic-visual-vendor.mjs",
     "test": "vitest run",
     "e2e:seed": "tsx e2e/seed-test-user.ts",
