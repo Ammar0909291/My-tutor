@@ -5876,6 +5876,256 @@ const FUNC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.photoelectric-effect ───────────────────────────────────────────
+const PHOT = 'phys.mod.photoelectric-effect'
+const PHOT_SRC = 'docs/curriculum/blueprints/phys.mod.photoelectric-effect.md'
+
+const PHOT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHOT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Double the brightness of the light on a metal surface — do the ' +
+      'ejected electrons come out faster? No. The experiment is ' +
+      'unambiguous: doubling intensity doubles the NUMBER of ' +
+      'electrons per second (photocurrent) and leaves their maximum ' +
+      'kinetic energy exactly unchanged. The photon model explains ' +
+      'it: intensity = photons per second; each photon still carries ' +
+      'the same energy E = h\u03bd, set by FREQUENCY alone. One photon ' +
+      'ejects one electron with KE_max = h\u03bd \u2212 \u03c6 (the work function ' +
+      '\u03c6 is the escape fee). More photons \u2192 more electrons, same ' +
+      'energy each. The clean split to memorize: frequency controls ' +
+      'the ENERGY of each electron; intensity controls the COUNT.',
+    targetedMisconceptions: [`${PHOT}:MC-BRIGHTER-LIGHT-FASTER-ELECTRONS`],
+    source: `${PHOT_SRC} — MC-1 (P28 intensity-doubling experiment + P30 photon-count bridge; KE_max = h\u03bd \u2212 \u03c6)`,
+  },
+  {
+    conceptId: PHOT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Shine an extremely bright red lamp (below the threshold ' +
+      'frequency) on the metal for an hour. Electrons eventually? ' +
+      'Never — not one, ever, and this refusal broke classical ' +
+      'physics. The wave picture said energy accumulates in the ' +
+      'surface until an electron saves up enough; it predicted a ' +
+      'delay, then emission. Reality: below threshold, nothing, at ' +
+      'any intensity, for any duration — and above threshold, ' +
+      'emission is essentially instantaneous even in dim light. The ' +
+      'photon story: each red photon carries h\u03bd_red < \u03c6 — it knocks ' +
+      'on the door without the key, and photons do NOT pool their ' +
+      'energy. A billion underpowered knocks opens nothing; one ' +
+      'photon with h\u03bd \u2265 \u03c6 opens the door immediately. Energy comes ' +
+      'in indivisible packets — that is the whole revolution.',
+    targetedMisconceptions: [`${PHOT}:MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY`],
+    source: `${PHOT_SRC} — MC-2 (P28 no-emission-below-threshold + instantaneous emission + P30 no-pooling bridge)`,
+  },
+]
+
+const PHOT_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHOT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Light above threshold frequency shines on a metal. The intensity is doubled (same frequency). What changes?',
+    choices: [
+      { text: 'The photocurrent doubles; KE_max is unchanged — each photon still carries the same h\u03bd', isCorrect: true },
+      { text: 'The electrons come out with twice the kinetic energy — brighter light, faster electrons', isCorrect: false, misconceptionId: `${PHOT}:MC-BRIGHTER-LIGHT-FASTER-ELECTRONS` },
+      { text: 'Both the current and KE_max double', isCorrect: false, misconceptionId: `${PHOT}:MC-BRIGHTER-LIGHT-FASTER-ELECTRONS` },
+    ],
+    correctValue: 'current doubles, KE_max unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOT}:MC-BRIGHTER-LIGHT-FASTER-ELECTRONS`],
+    source: `${PHOT_SRC} — MC-1 P33 discrimination options as probe`,
+  },
+  {
+    conceptId: PHOT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A very bright red lamp (below threshold frequency) shines on a metal for one hour. Are electrons emitted?',
+    choices: [
+      { text: 'No — each photon carries h\u03bd < \u03c6 and photons never pool energy; below threshold there is no emission at any intensity or duration', isCorrect: true },
+      { text: 'Yes, eventually — the energy accumulates in the surface until electrons have enough', isCorrect: false, misconceptionId: `${PHOT}:MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY` },
+    ],
+    correctValue: 'no — never',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOT}:MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY`],
+    source: `${PHOT_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── math.trig.right-triangle-trig ───────────────────────────────────────────
+const RTT = 'math.trig.right-triangle-trig'
+const RTT_SRC = 'docs/curriculum/blueprints/math.trig.right-triangle-trig.md'
+
+const RTT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RTT,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'SOH-CAH-TOA only works if you label the sides correctly — and ' +
+      'the labels are RELATIVE TO THE ANGLE, not to how the triangle ' +
+      'is drawn. From your chosen angle \u03b8: the HYPOTENUSE is fixed ' +
+      '(always across from the right angle, always the longest); the ' +
+      'OPPOSITE side is the one \u03b8 does NOT touch — across the ' +
+      'triangle from it; the ADJACENT side is the one \u03b8 DOES touch ' +
+      'that isn\u2019t the hypotenuse. Switch to the other acute angle ' +
+      'and opposite/adjacent swap jobs — that is why sin(30\u00b0) = ' +
+      'cos(60\u00b0). Ritual for every problem: mark \u03b8, mark the right ' +
+      'angle, find the hypotenuse first, then ask \u201cdoes \u03b8 touch this ' +
+      'side?\u201d — touches \u2192 adjacent, doesn\u2019t \u2192 opposite. Never ' +
+      'label by position on the page; rotated triangles are the ' +
+      'standard exam trap.',
+    targetedMisconceptions: [`${RTT}:MC-1`],
+    source: `${RTT_SRC} — MC-1 OPPOSITE-ADJACENT-SWAP (TA-B01: relative-to-angle labelling ritual; sin30=cos60 check)`,
+  },
+  {
+    conceptId: RTT,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two guard rails for SOH-CAH-TOA. First: it applies to RIGHT ' +
+      'triangles only. \u201cHypotenuse\u201d is literally defined as the side ' +
+      'opposite the 90\u00b0 angle — a triangle without a right angle has ' +
+      'no hypotenuse, so opposite/hypotenuse is meaningless there ' +
+      '(the longest side is not a substitute; non-right triangles ' +
+      'need the sine or cosine rule instead). Check for the little ' +
+      'square before writing any ratio. Second: keep TOA separate ' +
+      'from SOH — tan \u03b8 = opposite/ADJACENT, not ' +
+      'opposite/hypotenuse. In a 3-4-5 triangle at the angle ' +
+      'opposite the 3: sin = 3/5, tan = 3/4. The prominent 5 lures ' +
+      'every ratio toward it; only sine and cosine are allowed to ' +
+      'use it. Quick self-check: tan must exceed sin for the same ' +
+      'angle (its denominator is smaller).',
+    targetedMisconceptions: [`${RTT}:MC-2`, `${RTT}:MC-3`],
+    source: `${RTT_SRC} — MC-2 TRIG-APPLIES-TO-ALL-TRIANGLES + MC-3 TAN-IS-OPP-OVER-HYP (TA-B02/B03: no-hypotenuse argument + 3-4-5 contrast)`,
+  },
+]
+
+const RTT_PROBES: SeedProbe[] = [
+  {
+    conceptId: RTT,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a 3-4-5 right triangle, consider the angle opposite the side of length 3. What is tan of that angle?',
+    choices: [
+      { text: '3/4 — tan = opposite/adjacent', isCorrect: true },
+      { text: '3/5 — tan = opposite/hypotenuse', isCorrect: false, misconceptionId: `${RTT}:MC-3` },
+      { text: '4/5 — tan = adjacent/hypotenuse', isCorrect: false },
+    ],
+    correctValue: '3/4',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RTT}:MC-3`],
+    source: `${RTT_SRC} — MC-3 trigger item (3-4-5), distractor-mapped`,
+  },
+  {
+    conceptId: RTT,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A triangle has sides 5, 7, 8 and NO right angle. Can you find an angle with sin \u03b8 = 5/8 (opposite over longest side)?',
+    choices: [
+      { text: 'No — SOH-CAH-TOA requires a right triangle; without a 90\u00b0 angle there is no hypotenuse (use the sine/cosine rule instead)', isCorrect: true },
+      { text: 'Yes — the longest side acts as the hypotenuse in any triangle', isCorrect: false, misconceptionId: `${RTT}:MC-2` },
+    ],
+    correctValue: 'no — right triangles only',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RTT}:MC-2`],
+    source: `${RTT_SRC} — MC-2 surface form as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.trig.trig-functions ────────────────────────────────────────────────
+const TRIG = 'math.trig.trig-functions'
+const TRIG_SRC = 'docs/curriculum/blueprints/math.trig.trig-functions.md'
+
+const TRIG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TRIG,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Is sin(120\u00b0) undefined because 120\u00b0 is \u201ctoo big for a ' +
+      'triangle\u201d? Only if you stop at the right-triangle definition. ' +
+      'The unit circle upgrades it: put an angle\u2019s arm at the origin, ' +
+      'sweep counterclockwise from the positive x-axis, and read off ' +
+      'the arm\u2019s tip — cos is its x-coordinate, sin its ' +
+      'y-coordinate. Now EVERY angle works: sin(120\u00b0) = \u221a3/2 (the ' +
+      'tip is high in the second quadrant), sin(270\u00b0) = \u22121, ' +
+      'sin(\u221230\u00b0) = \u22121/2 (sweep clockwise), sin(400\u00b0) = sin(40\u00b0) ' +
+      '(a full lap plus 40\u00b0). The right-triangle picture survives ' +
+      'inside the first quadrant as a special case; the circle is ' +
+      'the real definition, and it is what lets sin and cos describe ' +
+      'waves, rotations, and anything periodic.',
+    targetedMisconceptions: [`${TRIG}:MC-3`],
+    source: `${TRIG_SRC} — MC-3 DOMAIN-RESTRICTED-TO-FIRST-QUADRANT (TA-B03: unit-circle extension; right-triangle as special case)`,
+  },
+  {
+    conceptId: TRIG,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two period traps. First: \u201csin repeats every 360\u201d is only true ' +
+      'in DEGREES. In radians — the default for real-number inputs — ' +
+      'the period is 2\u03c0 \u2248 6.28, because 360\u00b0 IS 2\u03c0 radians. ' +
+      'sin(x + 360) with x in radians adds 57+ full laps plus a bit ' +
+      '— not a period. Always ask which unit the variable is in ' +
+      'before quoting a period. Second: not every trig function has ' +
+      'period 2\u03c0. tan repeats every \u03c0, half as often as you\u2019d ' +
+      'guess: moving half a circle flips BOTH sin and cos (both gain ' +
+      'a minus sign), and in the ratio tan = sin/cos the two minus ' +
+      'signs cancel — tan(x + \u03c0) = (\u2212sin x)/(\u2212cos x) = tan x. So: ' +
+      'sin, cos \u2192 period 2\u03c0 (or 360\u00b0); tan \u2192 period \u03c0 (or 180\u00b0).',
+    targetedMisconceptions: [`${TRIG}:MC-1`, `${TRIG}:MC-2`],
+    source: `${TRIG_SRC} — MC-1 PERIOD-IS-360-IN-RADIANS + MC-2 TAN-PERIOD-IS-2PI (TA-B01/B02: unit check + sign-cancellation trace)`,
+  },
+]
+
+const TRIG_PROBES: SeedProbe[] = [
+  {
+    conceptId: TRIG,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Working in radians, what is the period of sin(x)?',
+    choices: [
+      { text: '2\u03c0 — the radian equivalent of 360\u00b0', isCorrect: true },
+      { text: '360 — sine always repeats every 360 units', isCorrect: false, misconceptionId: `${TRIG}:MC-1` },
+      { text: '\u03c0 — half a circle', isCorrect: false, misconceptionId: `${TRIG}:MC-2` },
+    ],
+    correctValue: '2\u03c0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TRIG}:MC-1`],
+    source: `${TRIG_SRC} — MC-1 trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TRIG,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is sin(120\u00b0) defined?',
+    choices: [
+      { text: 'Yes — on the unit circle sin is the y-coordinate of the angle\u2019s tip, defined for every angle; sin(120\u00b0) = \u221a3/2', isCorrect: true },
+      { text: 'No — sine only exists for angles under 90\u00b0, inside a right triangle', isCorrect: false, misconceptionId: `${TRIG}:MC-3` },
+    ],
+    correctValue: 'yes, \u221a3/2',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TRIG}:MC-3`],
+    source: `${TRIG_SRC} — MC-3 surface form as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -5946,6 +6196,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...LIM_EXPLANATIONS,
   ...DRV_EXPLANATIONS,
   ...FUNC_EXPLANATIONS,
+  ...PHOT_EXPLANATIONS,
+  ...RTT_EXPLANATIONS,
+  ...TRIG_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -6016,4 +6269,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...LIM_PROBES,
   ...DRV_PROBES,
   ...FUNC_PROBES,
+  ...PHOT_PROBES,
+  ...RTT_PROBES,
+  ...TRIG_PROBES,
 ]
