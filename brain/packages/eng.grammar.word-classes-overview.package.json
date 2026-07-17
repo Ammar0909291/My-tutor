@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.word-classes-overview-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.word-classes-overview",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6f4d4b65a4b5035de303b242df3f462153879f08dae4ce7919a1e1e93fa481fd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md": "sha256:b3233c8ec57da8188c429a6deec2197b5b645c5a41f172511d526b89fe19a315"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.word-classes-overview",
+    "name": "Overview of Word Classes",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.word-recognition"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.word-classes-overview-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.word-classes-overview (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md": "sha256:b3233c8ec57da8188c429a6deec2197b5b645c5a41f172511d526b89fe19a315"
+      },
+      "contentHash": "sha256:f8baebdbf86c6e8f1c2d5cb913efce13edd1b7a6baae35b10d40c8a29fbe449f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-classes-overview.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-classes-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-classes-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-classes-overview.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-classes-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-classes-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-classes-overview.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-classes-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-classes-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-classes-overview.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md#TA-4 (addresses MC-WORD-CLASS-IS-FIXED-PER-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-classes-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-classes-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-classes-overview.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md#TA-5 (addresses MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE, MC-WORD-CLASS-IS-FIXED-PER-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-classes-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-classes-overview\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.word-classes-overview/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Overview of Word Classes — Conceptual Development Sequence",
+      "content": "**TA-1 — Naming Words vs. Action Words (Nouns and Verbs) [C]**\n\nPresent simple sentences; student identifies the noun(s) (naming a person/place/thing/idea) and verb(s) (showing action or being) in each, the two most foundational classes.\n\n**TA-2 — Describing Words (Adjectives and Adverbs) [C]**\n\nPresent sentences; student identifies adjectives (describing nouns) and adverbs (describing verbs/adjectives/other adverbs), practicing the function-based distinction between the two.\n\n**TA-3 — Connecting and Substituting Words (Pronouns, Prepositions, Conjunctions) [C→P]**\n\nPresent sentences; student identifies pronouns (standing in for nouns), prepositions (showing relationships, often of location/time), and conjunctions (joining words/clauses).\n\n**TA-4 — Context-Dependent Classification (Same Word, Different Class) [P]**\n\nPresent sentence pairs using the SAME word in two different word classes (run/run, light/light, book/book); student classifies each instance by its function in that specific sentence, directly targeting MC-WORD-CLASS-IS-FIXED-PER-WORD.\n\n**TA-5 — Grammatical Signal Detection (Function Over Meaning) [P]**\n\nPresent tricky cases where meaning might mislead (arrival/arrive, quickly/quick, a noun derived from a verb-feeling concept); student uses grammatical signals (determiners, tense markers, modification targets) rather than surface meaning to classify correctly, directly targeting MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/misconception/MC-WORD-CLASS-IS-FIXED-PER-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "- **Trigger signal:** Student assumes a word belongs permanently to exactly one word class regardless of how it's used in a sentence (e.g., insists \"run\" is always a verb, becoming confused when it functions as a noun in \"I went for a run\"), not recognizing that many English words can shift word class depending on their function in a specific sentence.",
+      "content": "### MC-WORD-CLASS-IS-FIXED-PER-WORD\n- **Trigger signal:** Student assumes a word belongs permanently to exactly one word class regardless of how it's used in a sentence (e.g., insists \"run\" is always a verb, becoming confused when it functions as a noun in \"I went for a run\"), not recognizing that many English words can shift word class depending on their function in a specific sentence.\n- **Conflict evidence [P28]:** \"You said 'run' is always a verb. Look at this sentence: 'I went for a run this morning.' Is 'run' doing a verb's job here (an action) or a noun's job (a thing)?\"\n- **Bridge text [P30]:** \"Word class is determined by how a word FUNCTIONS in a specific sentence, not by some fixed label attached to the word forever. Many English words (run, light, fast, cut, book) can serve as different word classes depending on their role in context — 'run' is a verb in 'I run every day' but a noun in 'I went for a run.'\"\n- **Replacement text [P31]:** \"Before labeling a word's class, check what JOB it's doing in THIS specific sentence — don't assume a fixed class based on the word alone.\"\n- **Discrimination pairs [P33]:**\n  - \"run\" as a verb (\"I run every day\" — an action) vs. \"run\" as a noun (\"I went for a run\" — a thing/activity being referred to).\n  - \"light\" as an adjective (\"a light backpack\") vs. \"light\" as a noun (\"turn on the light\") vs. \"light\" as a verb (\"light the candle\").\n- **s6_path:** \"It's a very reasonable assumption that each word has one fixed job, since many words genuinely do stay in one class most of the time — but recognizing that some common words shift class by context is an important, learnable pattern in English.\"",
+      "localKey": "MC-WORD-CLASS-IS-FIXED-PER-WORD",
+      "language": "en",
+      "refs": [
+        "MC-WORD-CLASS-IS-FIXED-PER-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/misconception/MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "- **Trigger signal:** Student tries to classify a word purely by its meaning/topic (e.g., \"it's about an action, so it must be a verb\") rather than by its grammatical FUNCTION and position in the sentence, leading to misclassification of words whose meaning suggests one class but whose grammatical role indicates another (e.g., classifying \"the arrival\" as a verb because \"arrive\" feels action-like, when \"arrival\" is functioning as a noun — the subject of the sentence, taking a determiner \"the\").",
+      "content": "### MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE\n- **Trigger signal:** Student tries to classify a word purely by its meaning/topic (e.g., \"it's about an action, so it must be a verb\") rather than by its grammatical FUNCTION and position in the sentence, leading to misclassification of words whose meaning suggests one class but whose grammatical role indicates another (e.g., classifying \"the arrival\" as a verb because \"arrive\" feels action-like, when \"arrival\" is functioning as a noun — the subject of the sentence, taking a determiner \"the\").\n- **Conflict evidence [P28]:** \"You said 'arrival' must be a verb because it's about an action. But look at the sentence: 'The arrival surprised everyone.' Does 'arrival' have 'the' in front of it, the way nouns often do? Is it DOING the surprising, or is it the THING that surprised everyone?\"\n- **Bridge text [P30]:** \"Word class is determined by grammatical FUNCTION and POSITION in a sentence (does it take a determiner like 'the'? does it show action or being? does it modify another word?) — not by whether the underlying concept feels action-like or thing-like. 'Arrival' names an event but functions grammatically as a noun, since it takes 'the' and acts as the sentence's subject.\"\n- **Replacement text [P31]:** \"Classify a word by checking its grammatical signals (does it take 'the/a'? does it show tense? does it describe a noun?) and its position/role in the sentence, not by whether its meaning feels like an action or a thing.\"\n- **Discrimination pairs [P33]:**\n  - \"arrival\" (noun — takes \"the,\" acts as subject) vs. \"arrive\" (verb — shows tense: \"arrived,\" \"arrives\").\n  - \"quickly\" (adverb — modifies the verb \"ran\" in \"she ran quickly\") vs. \"quick\" (adjective — modifies the noun \"runner\" in \"a quick runner\") — same core meaning, different grammatical signal and function.\n- **s6_path:** \"It's natural to classify words by what they seem to be 'about' — but grammatical signals (determiners, tense markers, position) are the more reliable test, and checking those directly is a skill worth building deliberately.\"\n\n---",
+      "localKey": "MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE",
+      "language": "en",
+      "refs": [
+        "MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Naming Words vs. Action Words (Nouns and Verbs)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Naming Words vs. Action Words (Nouns and Verbs)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Describing Words (Adjectives and Adverbs)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Describing Words (Adjectives and Adverbs)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Connecting and Substituting Words (Pronouns, Prepositions, Conjunctions)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Connecting and Substituting Words (Pronouns, Prepositions, Conjunctions)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Context-Dependent Classification (Same Word, Different Class)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Context-Dependent Classification (Same Word, Different Class)\",\"primitives\":[],\"addresses\":[\"MC-WORD-CLASS-IS-FIXED-PER-WORD\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-WORD-CLASS-IS-FIXED-PER-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Grammatical Signal Detection (Function Over Meaning)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Grammatical Signal Detection (Function Over Meaning)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE\",\"MC-WORD-CLASS-IS-FIXED-PER-WORD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE",
+        "MC-WORD-CLASS-IS-FIXED-PER-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Noun/verb identification, novel sentence**\n\"In 'The bird sang,' which word is the noun and which is the verb?\"\n*Target:* \"bird\" (noun); \"sang\" (verb).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Adjective/adverb identification, novel sentence**\n\"In 'The tall man spoke softly,' find the adjective and the adverb.\"\n*Target:* \"tall\" (adjective, describes \"man\"); \"softly\" (adverb, describes \"spoke\").",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Pronoun/preposition/conjunction identification**\n\"In 'She put the book on the table, and he smiled,' find a pronoun, a preposition, and a conjunction.\"\n*Target:* \"she\"/\"he\" (pronouns); \"on\" (preposition); \"and\" (conjunction).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Context-dependent classification, novel example**\n\"In 'I light the candle' and 'The room needs more light,' is 'light' the same word class both times?\"\n*Target:* correctly identifies \"light\" as a verb in the first (an action) and a noun in the second (a thing) — different classes based on function.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain word classes**\n\"In your own words: how do you figure out what word class a word belongs to, and can the same word ever belong to different classes?\"\n*Target:* states or demonstrates that word class depends on a word's grammatical FUNCTION in a specific sentence (not fixed meaning alone), and that many words can shift class depending on how they're used.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Adaptive Flags",
+      "content": "- **Function over meaning is the central lesson**: every classification task should train the habit of checking grammatical signals and sentence role, actively countering the intuitive but unreliable strategy of classifying by surface meaning/topic.\n- **Class-shifting is common and expected, not an exception**: many everyday English words (run, light, book, cut, fast) shift class by context — treat this as a standard feature to expect, not a rare edge case.\n- **Chunked introduction by function-group**: introduce the eight word classes in three intuitive groups (naming/action; describing; connecting/substituting) rather than all at once, to manage cognitive load.\n- **English-specific grammatical signals may not transfer from L1**: for S9 learners, explicitly teach the specific English signals (determiners like \"the/a,\" tense marking, adverb endings like \"-ly\") as concrete, learnable tests, rather than assuming intuitive transfer from the learner's L1 grammatical system.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-classes-overview/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.word-classes-overview",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — word-class sorting stations warm-up\n  ↓\n[P41] PD-1 (word-recognition readiness)\n  ↓ PASS\n[P06] Anchor: word-class sorting stations (sort a sentence's words, then re-sort with a shifted-class word)\n  ↓\nTA-1: Naming words vs. action words (nouns and verbs) [C]\n  ↓\nTA-2: Describing words (adjectives and adverbs) [C]\n  ↓\nTA-3: Connecting and substituting words (pronouns, prepositions, conjunctions) [C→P]\n  ↓\nTA-4: Context-dependent classification (same word, different class) [P]\n  ↓\n[P28] Conflict: word class assumed fixed regardless of use → MC-WORD-CLASS-IS-FIXED-PER-WORD (if triggered)\n  ↓\nTA-5: Grammatical signal detection (function over meaning) [P]\n  ↓\n[P28] Conflict: classification by meaning/topic alone → MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word that can be two different word classes and give an example sentence for each.\"\n[P68] Session close\n[P85] Regulation tail — praise checking grammatical function over guessing from meaning\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word recognition, new to grammatical classification): dwell on TA-1/TA-2's most intuitive classes (noun/verb/adjective/adverb) before introducing the more abstract connecting-word classes (pronoun/preposition/conjunction). S1 (already has informal grammar sense from reading/speaking but lacks formal vocabulary): use this concept to build explicit, transferable labels for already-present intuitions, moving relatively quickly through TA-1-3. S6 (overwhelmed by eight categories introduced at once): explicitly sequence and chunk by function-type groups (naming/action, describing, connecting) rather than presenting all eight simultaneously, per the TA sequence. S9 (L1 grammar system organizes word classes very differently, e.g. no article system affecting noun-signal detection, or a different core parts-of-speech framework): expect this concept to require careful, explicit contrastive teaching rather than assumed transfer — particularly for TA-5's grammatical-signal detection, which often relies on English-specific signals (articles, do-support, etc.) that may not have a direct L1 parallel.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-classes-overview.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
