@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.conjunctions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.conjunctions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:67bf480bcbc496c6bc1dd3fd87bb9c0584fd0c2a85badaf54c83c9ba192aa472",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.conjunctions.md": "sha256:8fc5a23a1b3f83daa184b12000d5a0aecdcd228fbbc0d669a5101263bd1a7234"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.conjunctions",
+    "name": "Conjunctions",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.word-classes-overview"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.conjunctions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.conjunctions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.conjunctions.md": "sha256:8fc5a23a1b3f83daa184b12000d5a0aecdcd228fbbc0d669a5101263bd1a7234"
+      },
+      "contentHash": "sha256:60669dcbfbec4bc70ac23b67e79b3d7f466c699ea50c981f74014060817f1415",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conjunctions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conjunctions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conjunctions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conjunctions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conjunctions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conjunctions.md#TA-2 (addresses MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conjunctions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conjunctions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conjunctions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conjunctions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conjunctions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conjunctions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conjunctions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conjunctions.md#TA-4 (addresses MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conjunctions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conjunctions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.conjunctions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.conjunctions.md#TA-5 (addresses MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY, MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.conjunctions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.conjunctions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.conjunctions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Conjunctions — Conceptual Development Sequence",
+      "content": "**TA-1 — Coordinating Conjunctions (FANBOYS) [C]**\n\nPresent sentence pairs; student joins them using coordinating conjunctions (for, and, nor, but, or, yet, so), confirming both original sentences could stand alone independently.\n\n**TA-2 — Subordinating Conjunctions [C]**\n\nPresent sentence pairs; student joins them using subordinating conjunctions (because, although, when, if, since, while), identifying which clause becomes dependent, directly targeting MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY.\n\n**TA-3 — Correlative Conjunctions [C→P]**\n\nIntroduce correlative conjunction pairs (either...or, neither...nor, both...and, not only...but also); student uses them correctly to join parallel elements.\n\n**TA-4 — Comma Placement with Coordinating Conjunctions [P]**\n\nStudent practices placing commas correctly before coordinating conjunctions joining two independent clauses, directly targeting MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM.\n\n**TA-5 — Comma Placement with Subordinating Conjunctions (Clause Order) [P]**\n\nStudent practices placing commas correctly based on subordinate-clause position (comma after a fronted subordinate clause; no comma when it follows the independent clause), completing the comma-placement pattern.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/misconception/MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "- **Trigger signal:** Student treats all conjunctions as interchangeable connectors without recognizing that coordinating conjunctions (and, but, or, so — joining EQUAL, grammatically independent elements) behave differently from subordinating conjunctions (because, although, when, if — joining a dependent/subordinate clause to an independent one, creating an unequal relationship), leading to errors like joining two independent clauses with a subordinating conjunction and expecting it to work exactly like \"and.",
+      "content": "### MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY\n- **Trigger signal:** Student treats all conjunctions as interchangeable connectors without recognizing that coordinating conjunctions (and, but, or, so — joining EQUAL, grammatically independent elements) behave differently from subordinating conjunctions (because, although, when, if — joining a dependent/subordinate clause to an independent one, creating an unequal relationship), leading to errors like joining two independent clauses with a subordinating conjunction and expecting it to work exactly like \"and.\"\n- **Conflict evidence [P28]:** \"You joined 'I was tired' and 'I went to bed' with 'because,' making 'Because I was tired, I went to bed.' Now try replacing 'because' with 'and.' Does 'I was tired and I went to bed' mean quite the same thing as showing a CAUSE-and-effect relationship?\"\n- **Bridge text [P30]:** \"Coordinating conjunctions (and, but, or, so — remember 'FANBOYS': for, and, nor, but, or, yet, so) join two EQUAL, independent ideas that could each stand alone. Subordinating conjunctions (because, although, when, if, since, while) join a DEPENDENT clause to an independent one, creating a specific logical relationship (cause, contrast, time, condition) — the dependent clause can't stand alone as a full sentence.\"\n- **Replacement text [P31]:** \"Check whether a conjunction joins two equal, independently-standing ideas (coordinating) or creates a dependent relationship showing cause/time/contrast/condition (subordinating) — they work differently and aren't simply interchangeable.\"\n- **Discrimination pairs [P33]:**\n  - \"I was tired, AND I went to bed\" (coordinating — two equal, independent statements) vs. \"BECAUSE I was tired, I went to bed\" (subordinating — shows cause, \"because I was tired\" can't stand alone).\n  - \"She studied, BUT she still failed\" (coordinating — contrast between two equal statements) vs. \"ALTHOUGH she studied, she still failed\" (subordinating — \"although she studied\" is dependent).\n- **s6_path:** \"It's a reasonable first assumption that all connecting words work the same way, since they're all called 'conjunctions' — but coordinating and subordinating conjunctions create genuinely different grammatical relationships, and telling them apart is a real, useful skill.\"",
+      "localKey": "MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY",
+      "language": "en",
+      "refs": [
+        "MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/misconception/MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "- **Trigger signal:** Student places commas around conjunctions inconsistently/randomly rather than following the systematic rules — a comma typically comes BEFORE a coordinating conjunction joining two independent clauses (\"I was tired, but I kept working\"), while a comma typically comes AFTER a subordinating clause that STARTS the sentence (\"Although I was tired, I kept working\") but is often omitted when the subordinate clause comes second (\"I kept working although I was tired\").",
+      "content": "### MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM\n- **Trigger signal:** Student places commas around conjunctions inconsistently/randomly rather than following the systematic rules — a comma typically comes BEFORE a coordinating conjunction joining two independent clauses (\"I was tired, but I kept working\"), while a comma typically comes AFTER a subordinating clause that STARTS the sentence (\"Although I was tired, I kept working\") but is often omitted when the subordinate clause comes second (\"I kept working although I was tired\").\n- **Conflict evidence [P28]:** \"You put a comma after 'but' in 'I was tired but, I kept working.' Let's check: does the comma usually go BEFORE 'but' when joining two full sentences, or after it?\"\n- **Bridge text [P30]:** \"Comma placement with conjunctions follows learnable patterns, not randomness: a comma goes BEFORE a coordinating conjunction joining two independent clauses ('I was tired, but I kept working'). For subordinating conjunctions, a comma goes AFTER the subordinate clause when it comes FIRST ('Although I was tired, I kept working'), but is typically omitted when the subordinate clause comes SECOND ('I kept working although I was tired').\"\n- **Replacement text [P31]:** \"Check the conjunction TYPE and clause ORDER to determine comma placement, rather than placing commas by feel.\"\n- **Discrimination pairs [P33]:**\n  - \"I was tired, but I kept working\" (comma before coordinating conjunction) vs. \"I was tired but, I kept working\" (incorrect placement).\n  - \"Although I was tired, I kept working\" (comma after a fronted subordinate clause) vs. \"I kept working although I was tired\" (no comma needed, subordinate clause comes second).\n- **s6_path:** \"Comma placement can feel like guesswork since native speakers often place them 'by ear' — but there are genuine, learnable patterns tied to conjunction type and clause order that make this far more predictable than it seems.\"\n\n---",
+      "localKey": "MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM",
+      "language": "en",
+      "refs": [
+        "MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Coordinating Conjunctions (FANBOYS)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Coordinating Conjunctions (FANBOYS)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Subordinating Conjunctions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Subordinating Conjunctions\",\"primitives\":[],\"addresses\":[\"MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Correlative Conjunctions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Correlative Conjunctions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Comma Placement with Coordinating Conjunctions",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Comma Placement with Coordinating Conjunctions\",\"primitives\":[],\"addresses\":[\"MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Comma Placement with Subordinating Conjunctions (Clause Order)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Comma Placement with Subordinating Conjunctions (Clause Order)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY\",\"MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY",
+        "MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Coordinating conjunction, novel pair**\n\"Join these with 'but': 'She studied hard.' 'She still failed.'\"\n*Target:* \"She studied hard, but she still failed.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Subordinating conjunction, novel pair**\n\"Join these using 'when': 'The phone rang.' 'I was cooking.'\"\n*Target:* \"The phone rang when I was cooking\" or \"When I was cooking, the phone rang.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Correlative conjunction, novel example**\n\"Use 'either...or' to combine: 'We can go to the beach.' 'We can go to the park.'\"\n*Target:* \"We can either go to the beach or go to the park\" (or similar correct parallel structure).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Comma placement, coordinating conjunction**\n\"Where does the comma go in: 'I finished my homework and I watched TV'?\"\n*Target:* \"I finished my homework, and I watched TV\" — comma before \"and.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain conjunction types and comma rules**\n\"In your own words: what's the difference between a coordinating and a subordinating conjunction, and how does that affect comma placement?\"\n*Target:* states or demonstrates that coordinating conjunctions join equal independent clauses (comma before the conjunction), while subordinating conjunctions create a dependent relationship (comma depends on clause order — after the subordinate clause if it comes first, often omitted if it comes second).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Adaptive Flags",
+      "content": "- **Equal vs. dependent is the core structural distinction**: always frame coordinating vs. subordinating conjunctions around whether the joined clauses are grammatically equal/independent or one depends on the other — this is the conceptual anchor for the whole concept.\n- **Comma rules are systematic, tied to conjunction type and clause order**: teach comma placement as a checkable rule (not a feel-based judgment), directly countering the perception of randomness.\n- **FANBOYS as a memory aid**: the coordinating-conjunction mnemonic (for, and, nor, but, or, yet, so) is a genuinely useful, concrete memory tool worth explicitly teaching and reusing.\n- **Comma-with-conjunction conventions are English-specific and need explicit teaching for L1 punctuation-system mismatches**: for S9 learners, don't assume punctuation conventions transfer from L1 — teach the specific English comma rules explicitly and with dedicated practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.conjunctions/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.conjunctions",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — equal-bridge vs. leaning-bridge warm-up\n  ↓\n[P41] PD-1 (word-classes-overview readiness)\n  ↓ PASS\n[P06] Anchor: equal-bridge (coordinating) vs. leaning-bridge (subordinating)\n  ↓\nTA-1: Coordinating conjunctions (FANBOYS) [C]\n  ↓\nTA-2: Subordinating conjunctions [C]\n  ↓\n[P28] Conflict: all conjunctions treated as interchangeable → MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY (if triggered)\n  ↓\nTA-3: Correlative conjunctions [C→P]\n  ↓\nTA-4: Comma placement with coordinating conjunctions [P]\n  ↓\n[P28] Conflict: comma placement treated as random → MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM (if triggered)\n  ↓\nTA-5: Comma placement with subordinating conjunctions (clause order) [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, join two sentences using a subordinating conjunction and place the comma correctly.\"\n[P68] Session close\n[P85] Regulation tail — praise checking conjunction type and clause order over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word-classes-overview, new to conjunction subtypes): dwell on TA-1's coordinating conjunctions before introducing the more complex subordinating relationship. S1 (already joins clauses fluently in speech but writes run-ons or comma splices): focus on TA-4/TA-5's comma-placement rules, since spoken fluency doesn't guarantee correct written punctuation. S6 (frustrated that comma rules feel arbitrary): validate that the rules ARE systematic and tied to clause order/conjunction type (Component 1 s6_path), giving a concrete checklist rather than \"just a feel.\" S9 (L1 has a different clause-joining/punctuation convention, e.g. different comma norms, or a language that doesn't distinguish coordinating/subordinating relationships the same way): expect this concept to require explicit, dedicated contrastive teaching, since comma-with-conjunction rules are English-specific conventions that don't reliably transfer from other punctuation systems.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.conjunctions.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

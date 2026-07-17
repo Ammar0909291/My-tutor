@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.interjections-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.interjections",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:83a706e12c32d49c846d1e1ea887b0b1131b22f09ff88af0e5e5d8ef0c96288d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.interjections.md": "sha256:26df27bd7dc4e2a6506a238517ab1c5287a60a8656713af2927996444ac9f868"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.interjections",
+    "name": "Interjections",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.word-classes-overview"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.interjections-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.interjections (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.interjections.md": "sha256:26df27bd7dc4e2a6506a238517ab1c5287a60a8656713af2927996444ac9f868"
+      },
+      "contentHash": "sha256:a651d605e3c9d6eb53b09c74b59fd98bc818f4f7b50285881c69785512972c3f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.interjections.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.interjections.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.interjections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.interjections\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.interjections.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.interjections.md#TA-2 (addresses MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.interjections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.interjections\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.interjections.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.interjections.md#TA-3 (addresses MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.interjections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.interjections\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.interjections.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.interjections.md#TA-4 (addresses MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS, MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.interjections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.interjections\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.interjections/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Interjections — Conceptual Development Sequence",
+      "content": "**TA-1 — Strong/Exclamatory Interjections [C]**\n\nPresent sentences with strong interjections (Wow! Ouch! Hooray!); student identifies them and their emotional meaning.\n\n**TA-2 — Mild/Conversational Interjections [C]**\n\nPresent sentences with mild interjections (well, oh, hmm, um) using commas rather than exclamation points; student identifies these as interjections too, directly targeting MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS.\n\n**TA-3 — Interjections' Grammatical Independence [C→P]**\n\nStudent examines sentences with interjections removed (e.g., \"Wow, that's incredible!\" → \"That's incredible!\") noting that the remaining sentence is still grammatically complete — demonstrating the interjection's independent status while still carrying real meaning, directly targeting MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS.\n\n**TA-4 — Choosing Appropriate Interjections for Context [P]**\n\nStudent selects an appropriate interjection for various described scenarios (stubbing a toe, hearing surprising news, considering a request thoughtfully), matching the interjection's specific communicative meaning to context.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 68,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/misconception/MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.interjections",
+      "title": "- **Trigger signal:** Student assumes interjections always require an exclamation point and express only strong/loud emotion (Wow! Ouch!), missing that interjections can also express mild, quiet emotions or reactions and can appear with a comma and no exclamation point at all in more subdued contexts (e.g., \"Well, I suppose that's true.\" or \"Oh, I didn't know that.\").",
+      "content": "### MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS\n- **Trigger signal:** Student assumes interjections always require an exclamation point and express only strong/loud emotion (Wow! Ouch!), missing that interjections can also express mild, quiet emotions or reactions and can appear with a comma and no exclamation point at all in more subdued contexts (e.g., \"Well, I suppose that's true.\" or \"Oh, I didn't know that.\").\n- **Conflict evidence [P28]:** \"Look at 'Well, I suppose that's true.' Is 'well' expressing a big, loud emotion with an exclamation point, or a mild, thoughtful reaction with just a comma? Is it still an interjection?\"\n- **Bridge text [P30]:** \"Interjections express a range of emotions or reactions — from strong and sudden (Wow! Ouch!) to mild and conversational (well, oh, hmm) — and can be punctuated with either an exclamation point (for strong emotion) or a comma (for milder, more conversational reactions). Both are genuine interjections; the punctuation matches the intensity, not a fixed rule requiring exclamation points always.\"\n- **Replacement text [P31]:** \"Check whether a word stands independently expressing emotion/reaction, regardless of whether it's followed by an exclamation point or a comma — both signal interjection use depending on intensity.\"\n- **Discrimination pairs [P33]:**\n  - \"Wow! That's amazing!\" (strong emotion, exclamation point) vs. \"Well, that's interesting.\" (mild reaction, comma) — both \"wow\" and \"well\" are interjections.\n  - \"Ouch! That hurt!\" (strong, exclamatory) vs. \"Hmm, let me think about that.\" (mild, contemplative) — both function as interjections.\n- **s6_path:** \"It's natural to associate interjections with loud, exciting exclamations since those are the most memorable examples — but quieter conversational interjections (well, oh, hmm) are just as real and common, especially in everyday speech.\"",
+      "localKey": "MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS",
+      "language": "en",
+      "refs": [
+        "MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/misconception/MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.interjections",
+      "title": "- **Trigger signal:** Student dismisses interjections as meaningless \"filler noise\" with no real grammatical identity, rather than recognizing them as a genuine word class that stands grammatically independent from the rest of the sentence (not connected by normal syntax to a subject/verb) but still carries real communicative/emotional meaning.",
+      "content": "### MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS\n- **Trigger signal:** Student dismisses interjections as meaningless \"filler noise\" with no real grammatical identity, rather than recognizing them as a genuine word class that stands grammatically independent from the rest of the sentence (not connected by normal syntax to a subject/verb) but still carries real communicative/emotional meaning.\n- **Conflict evidence [P28]:** \"You said 'oh' and 'wow' are just meaningless sounds, not real words. But do they communicate something specific — surprise, realization, pain? Is that meaningless, or does it carry real information about how the speaker feels?\"\n- **Bridge text [P30]:** \"Interjections ARE a genuine word class — they just work differently from other classes: they stand grammatically independent (not tied into the sentence's normal subject-verb structure) rather than functioning as a subject, verb, object, or modifier. But they still carry real, specific communicative meaning (surprise: 'wow'; pain: 'ouch'; realization: 'oh'; hesitation: 'um') — they are not meaningless filler.\"\n- **Replacement text [P31]:** \"Recognize interjections as a real word class with genuine communicative meaning, even though they stand independently from a sentence's normal grammatical structure.\"\n- **Discrimination pairs [P33]:**\n  - \"Ouch!\" (a real interjection conveying pain, grammatically independent) vs. a true meaningless filler sound with no communicative content.\n  - \"Wow, that's incredible!\" (\"wow\" independently conveys surprise, distinct from the main sentence structure) vs. treating \"wow\" as equivalent to random noise.\n- **s6_path:** \"Because interjections don't fit into the usual subject-verb sentence pattern, it's easy to dismiss them as unimportant extras — but they're a real, named word class doing real communicative work, just with a different grammatical role than the other seven classes.\"\n\n---",
+      "localKey": "MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS",
+      "language": "en",
+      "refs": [
+        "MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Strong/Exclamatory Interjections",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Strong/Exclamatory Interjections\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Mild/Conversational Interjections",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Mild/Conversational Interjections\",\"primitives\":[],\"addresses\":[\"MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Interjections' Grammatical Independence",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Interjections' Grammatical Independence\",\"primitives\":[],\"addresses\":[\"MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Choosing Appropriate Interjections for Context",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Choosing Appropriate Interjections for Context\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS\",\"MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS",
+        "MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 82,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.interjections",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Strong interjection, novel example**\n\"In 'Hooray! We won!' what's the interjection, and what does it express?\"\n*Target:* \"Hooray\" — expresses joy/celebration.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.interjections",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Mild interjection, novel example**\n\"In 'Hmm, I'm not sure about that,' what's the interjection?\"\n*Target:* \"Hmm\" — a mild, contemplative interjection.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.interjections",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Grammatical independence check**\n\"Remove the interjection from 'Oh, I forgot my keys.' Is the rest still a complete sentence?\"\n*Target:* \"I forgot my keys\" — yes, complete; \"Oh\" was independent.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.interjections",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Choosing an appropriate interjection**\n\"You just heard some very surprising news. What interjection might you use?\"\n*Target:* any appropriate surprise interjection (e.g., \"Wow,\" \"Oh my,\" \"Whoa\").",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.interjections",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain interjections**\n\"In your own words: what are interjections, and do they only show strong emotion with exclamation points?\"\n*Target:* states or demonstrates that interjections express emotion/reaction (strong or mild), stand grammatically independent from the rest of the sentence, and can be punctuated with either an exclamation point or a comma depending on intensity.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Adaptive Flags",
+      "content": "- **Mild interjections deserve equal attention to exclamatory ones**: explicitly teach comma-punctuated, conversational interjections (well, oh, hmm) alongside vivid exclamatory ones, directly countering the exclamation-point-only default.\n- **Grammatical independence does not mean meaninglessness**: reinforce that interjections carry real, specific communicative content despite standing outside the sentence's normal syntax — this is the key distinction from true meaningless filler.\n- **Culturally-specific interjection vocabulary for L1 learners**: for S9 learners, treat English interjections as new vocabulary items to learn directly, since interjections often don't translate cleanly and carry culture-specific connotations.\n- **Lower session_cap (4 TAs) reflects the concept's genuine scope**: interjections is a smaller, single-hour concept per the KG's `estimated_hours: 1` — the TA sequence is proportionally shorter than richer 2-3 hour concepts, consistent with the established convention (cf. eng.phonics.rhyming's similar scaling).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 170,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.grammar.interjections/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.interjections",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — emotion-word cards warm-up (match interjection to expression)\n  ↓\n[P41] PD-1 (word-classes-overview readiness)\n  ↓ PASS\n[P06] Anchor: emotion-word cards (strong and mild interjections)\n  ↓\nTA-1: Strong/exclamatory interjections [C]\n  ↓\nTA-2: Mild/conversational interjections [C]\n  ↓\n[P28] Conflict: interjections assumed always exclamatory → MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS (if triggered)\n  ↓\nTA-3: Interjections' grammatical independence [C→P]\n  ↓\n[P28] Conflict: interjections dismissed as meaningless filler → MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS (if triggered)\n  ↓\nTA-4: Choosing appropriate interjections for context [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, notice one interjection you or someone else uses and identify what it expresses.\"\n[P68] Session close\n[P85] Regulation tail — praise recognizing both strong and mild interjections\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word-classes-overview, new to interjections specifically): dwell on TA-1's strong, vivid interjections before introducing mild conversational ones. S1 (already uses interjections naturally in speech but doesn't recognize them as a formal category): use this concept to build explicit labeling for an already-present intuitive skill. S6 (finds this concept \"silly\" or less serious than other grammar topics): validate that interjections are a genuine, named word class with real communicative function, not a lesser category. S9 (L1 has different interjections/exclamations that don't map directly to English ones, e.g. different culturally-specific reaction words): explicitly teach English-specific interjections as new vocabulary items with their specific emotional associations, rather than assuming direct translation from L1 equivalents (which often carry different connotations or don't exist as direct parallels).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.interjections.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
