@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.conversation-skills-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.conversation-skills",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:27c9b3f0c9cdec63814bad95582ad691fdc3312d2c92b87a72201981f7fc22d9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.conversation-skills.md": "sha256:6aa5a70bea614cfe254685725bb2454e8e0190e0158e96fe46985834525383af"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.speaking.conversation-skills",
+    "name": "Conversation Skills",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.speaking.pronunciation-in-conversation"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.conversation-skills-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.conversation-skills (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.conversation-skills.md": "sha256:6aa5a70bea614cfe254685725bb2454e8e0190e0158e96fe46985834525383af"
+      },
+      "contentHash": "sha256:9539459ddc1e50a3d88e31e2697876d9e57f0ae20653b9ba1e8142271a9c9458",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.conversation-skills.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md#TA-1 (addresses MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.conversation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.conversation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.conversation-skills.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.conversation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.conversation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.conversation-skills.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md#TA-3 (addresses MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.conversation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.conversation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.conversation-skills.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.conversation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.conversation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.conversation-skills.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md#TA-5 (addresses MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT, MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.conversation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.conversation-skills\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.conversation-skills/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Conversation Skills — Conceptual Development Sequence",
+      "content": "### TA-1: Observing Turn-Balance\nPresent a transcript or audio sample of a monopolized conversation (one speaker dominating) and a balanced one. Student identifies which is balanced and estimates the turn-count/time ratio in each, directly countering MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT.\n\n### TA-2: Responsive Turns — Building on What Was Said\nTeach the difference between a responsive turn (references or builds on the previous speaker's content: \"That reminds me of...\" / \"How did that make you feel?\") and a topic-hijacking turn (ignores what was just said and pivots to an unrelated topic about the listener's own interests). Student practices generating responsive follow-ups to sample statements.\n\n### TA-3: Reading Silence — Thinking Pause vs. Stalled Conversation\nUsing the discrimination pairs from MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG, present short scenario descriptions of pauses and have the student classify each as \"normal/comfortable\" or \"genuinely stalled — needs a rescue\" and, for the stalled case, generate an appropriate rescue move (a follow-up question, a new related topic).\n\n### TA-4: Initiating and Closing Conversations\nTeach appropriate conversation openers (context-appropriate greetings, shared-context references) and closers (signaling the conversation is ending without an abrupt cutoff: \"Well, I should get going, but it was great catching up!\"). Student practices both in role-play scenarios.\n\n### TA-5: Full Conversation Simulation\nStudent engages in or narrates a full short simulated conversation (5-6 turns) incorporating balanced turn-taking, at least one responsive follow-up, appropriate handling of a natural pause, and an appropriate closing — the generative capstone integrating all four prior TAs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": ": Balanced vs. Monopolized Turn-Taking (Scaffolded)",
+      "content": "### WE-1: Balanced vs. Monopolized Turn-Taking (Scaffolded)\n**Sample A (monopolized):** Speaker 1 talks for six sentences about their weekend without pausing; Speaker 2 never gets a turn. **Sample B (balanced):** Speaker 1 and 2 exchange 2-3 sentences each, alternating.\n**Walkthrough:** Count turns and estimate speaking time in each sample. Sample A shows a 6:0 imbalance — a monopoly. Sample B shows roughly even alternation — balanced, healthy turn-taking.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 73,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": ": Responsive vs. Hijacking Follow-Up (Guided)",
+      "content": "### WE-2: Responsive vs. Hijacking Follow-Up (Guided)\n**Statement:** \"I finally finished reading that mystery novel — the ending completely surprised me.\"\n**Two possible follow-ups:** (a) \"Oh, that reminds me, I need to return my library books today.\" (hijacking — ignores the content, pivots to an unrelated topic) vs. (b) \"Really? What was the twist — did you see it coming at all?\" (responsive — builds directly on what was said).\n**Walkthrough:** Identify (b) as responsive and (a) as a topic hijack, even though (a) is grammatically fine and socially \"polite\" on the surface.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 73,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": ": Pause Classification and Rescue (Independent)",
+      "content": "### WE-3: Pause Classification and Rescue (Independent)\n**Scenario 1:** Two old friends finish reminiscing about a shared trip; there's a comfortable 4-second pause before one says, \"Anyway, we should plan another one sometime.\" **Scenario 2:** Two people who just met run out of things to say; both look away, and 8 seconds pass with visible discomfort.\n**Walkthrough:** Student classifies Scenario 1 as a normal/comfortable pause (no rescue needed) and Scenario 2 as genuinely stalled, then generates an appropriate rescue move for Scenario 2 (e.g., a new question about a shared context, like the event they're both at).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 73,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/misconception/MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "- **Trigger signal:** Student equates conversational skill with volume of speech — talking at length, filling every silence, and treating pauses as failures to be avoided — rather than recognizing turn-taking and balanced participation as the actual measure of a good conversationalist.",
+      "content": "### MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT\n- **Trigger signal:** Student equates conversational skill with volume of speech — talking at length, filling every silence, and treating pauses as failures to be avoided — rather than recognizing turn-taking and balanced participation as the actual measure of a good conversationalist.\n- **Conflict evidence [P28]:** Play or describe two short conversation samples: one where Speaker A talks continuously for two minutes without pausing for Speaker B to respond, and one where Speaker A and B exchange shorter turns, each responding to and building on what the other said. Ask which conversation the OTHER person would likely enjoy more and feel more heard in.\n- **Bridge text [P30]:** \"A conversation is a turn-taking activity, like a game of catch — if one person holds the ball the whole time, it stops being a game. Good conversationalists don't talk the most; they create space for both people to contribute roughly equally and build on what the other person says.\"\n- **Replacement text [P31]:** \"Instead of measuring conversation success by how much you said, measure it by whether both people got a fair turn and whether you responded to what the other person actually said, rather than just waiting for your turn to talk about something else.\"\n- **Discrimination pairs [P33]:** (a) Volume-based success (talking more/longer signals conversational skill) vs. (b) Turn-balance-based success (roughly equal, responsive turn-taking signals conversational skill, regardless of who talks more in raw word count).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's turn-taking observation task before returning to practice.",
+      "localKey": "MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/misconception/MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "- **Trigger signal:** Student treats any pause or silence during a conversation as an awkward failure requiring an immediate rescue (blurting out a new topic, filling with nervous chatter), rather than recognizing brief natural pauses as a normal, even comfortable, part of real conversation, especially between people who know each other.",
+      "content": "### MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG\n- **Trigger signal:** Student treats any pause or silence during a conversation as an awkward failure requiring an immediate rescue (blurting out a new topic, filling with nervous chatter), rather than recognizing brief natural pauses as a normal, even comfortable, part of real conversation, especially between people who know each other.\n- **Conflict evidence [P28]:** Describe a scenario: two friends are talking, one finishes a story, and there's a 3-second pause before the other responds thoughtfully. Ask the student whether something \"went wrong\" in that pause, then contrast with an example where an awkward silence really does signal a problem (both people have clearly run out of anything to say and seem uncomfortable, avoiding eye contact).\n- **Bridge text [P30]:** \"Not all silence is the same. A short pause while someone thinks about what to say next, or a comfortable quiet moment between people who know each other, is completely normal — it's not a sign of failure. The kind of silence that IS a problem is different: it comes with visible discomfort, avoided eye contact, and no one seeming to know what to do next.\"\n- **Replacement text [P31]:** \"Before rushing to fill a silence, ask: is this a thinking pause or a comfortable moment (normal, leave it alone), or does it come with visible discomfort and a stuck feeling (worth addressing, e.g., with a follow-up question)? Only the second kind needs rescuing.\"\n- **Discrimination pairs [P33]:** (a) All-silence-is-failure (any pause signals something has gone wrong and must be immediately filled) vs. (b) Silence-type discrimination (a thinking/comfortable pause is normal and healthy; only a visibly uncomfortable, stuck silence signals a real problem worth addressing).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's tennis-rally framing with its built-in pause example before continuing to TA-3.",
+      "localKey": "MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG",
+      "language": "en",
+      "refs": [
+        "MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Observing Turn-Balance",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Observing Turn-Balance\",\"primitives\":[],\"addresses\":[\"MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Responsive Turns — Building on What Was Said",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Responsive Turns — Building on What Was Said\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Reading Silence — Thinking Pause vs. Stalled Conversation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Reading Silence — Thinking Pause vs. Stalled Conversation\",\"primitives\":[],\"addresses\":[\"MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Initiating and Closing Conversations",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Initiating and Closing Conversations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Full Conversation Simulation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Conversation Simulation\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT\",\"MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT",
+        "MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 72,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identify a turn-monopoly**\nGiven a conversation sample where one speaker dominates, student identifies the imbalance and explains why it undermines the conversation, regardless of how interesting the content was. *(Directly targets MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Classify a pause correctly**\nGiven two pause scenarios (one comfortable, one genuinely stalled), student correctly classifies each and explains the distinguishing signals (visible discomfort vs. thoughtful quiet). *(Directly targets MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Generate a responsive follow-up**\nGiven a statement, student generates a follow-up that builds on the specific content rather than pivoting to an unrelated topic.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Initiate and close a conversation appropriately**\nGiven a scenario (running into an acquaintance), student produces an appropriate opener and, after a short simulated exchange, an appropriate closer.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full conversation simulation**\nStudent conducts or narrates a 5-6 turn simulated conversation demonstrating balanced turn-taking, at least one responsive follow-up, and an appropriate close.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Adaptive Flags",
+      "content": "- If the student dominates conversation practice, weight remediation toward MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT's bridge text and re-run TA-1's turn-balance observation before returning to open dialogue practice.\n- If the student rushes to fill every pause anxiously, weight remediation toward MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG's bridge text and TA-3's pause-classification practice specifically, building tolerance for brief comfortable silence.\n- This concept is foundational for three direct downstream unlocks (`eng.speaking.asking-and-answering-questions`, `eng.speaking.storytelling-orally`, `eng.speaking.non-verbal-communication`) — do not certify mastery without TA-5's full simulation, since all three downstream concepts assume the student can already sustain a balanced, responsive multi-turn exchange.\n- Reuse the \"tennis rally\" turn-taking framing explicitly when introducing `eng.speaking.asking-and-answering-questions` — that concept refines one specific type of conversational turn (the question-answer exchange) within the same balanced-rally structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT",
+        "MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 137,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.speaking.conversation-skills/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.conversation-skills",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Pronunciation-in-Conversation Check]\n        |\n        v\n[Concrete Anchor: The Tennis Rally]\n        |\n        v\n[TA-1: Observing Turn-Balance]\n        |\n        v\n[TA-2: Responsive Turns]\n        |\n        v\n[TA-3: Reading Silence]\n        |\n        v\n[TA-4: Initiating and Closing Conversations]\n        |\n        v\n[TA-5: Full Conversation Simulation]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — conversational turn-taking and responsiveness are meaningless to assess if the student's basic speech intelligibility is unreliable. During instruction (S1), watch for both misconception patterns: a student who dominates practice exchanges (MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT) or who rushes to fill every pause (MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG) is applying the same underlying \"more talking = better\" heuristic in two different situations, and both should be redirected to the Tennis Rally anchor's turn-balance framing. If the student struggles to distinguish a comfortable pause from a stalled one during TA-3 (S6), drop back to the Concrete Anchor's explicit discomfort-signal contrast before returning to open-ended scenarios. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who can generate good responsive turns (MP-3) but still over-talks or panics at silence has not internalized the core turn-taking judgment this concept teaches.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.conversation-skills.md",
+        "startLine": 105,
+        "endLine": 137
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.compound-sentences-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.compound-sentences",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:51c3b138745d88960c1d19b9b9bec7e0cd03baa377243a06fb3b4f87cf99d62e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.compound-sentences.md": "sha256:75a5ea4616f010f75e09d4bd381b70b1fcba522ff189543a039cea7fe1d41c4f"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.compound-sentences",
+    "name": "Compound Sentences",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.simple-sentences",
+      "eng.grammar.conjunctions"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.compound-sentences-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.compound-sentences (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.compound-sentences.md": "sha256:75a5ea4616f010f75e09d4bd381b70b1fcba522ff189543a039cea7fe1d41c4f"
+      },
+      "contentHash": "sha256:28d78ed11f6a999df649531402a80dac1c1e75020d34396aa48c8cf5ccf3548a",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.compound-sentences.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md#TA-1 (addresses MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.compound-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.compound-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.compound-sentences.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.compound-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.compound-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.compound-sentences.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md#TA-3 (addresses MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.compound-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.compound-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.compound-sentences.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.compound-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.compound-sentences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.compound-sentences.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md#TA-5 (addresses MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE, MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.compound-sentences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.compound-sentences\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.compound-sentences/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "Compound Sentences — Conceptual Development Sequence",
+      "content": "### TA-1: Both-Sides Independent-Clause Check\nPresent sentences containing \"and\"/\"or\"/\"but\" and have the student check both sides for a complete, standalone subject-verb pair before classifying as simple or compound — directly extending PD-1's skill and countering MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE.\n\n### TA-2: The Comma + Coordinating Conjunction Method\nTeach Bridge 1 in depth: comma immediately before one of the seven FANBOYS words, with complete independent clauses on both sides. Student practices joining pairs of simple sentences using this method correctly.\n\n### TA-3: The Semicolon-Alone and Semicolon + Conjunctive-Adverb Methods\nTeach Bridges 2 and 3: a semicolon alone (no conjunction, no comma) correctly joins two closely related independent clauses; a semicolon followed by a conjunctive adverb (\"however,\" \"therefore,\" \"moreover,\" \"consequently\") and a comma is the three-part version. Directly counters MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS by treating all three methods as structurally distinct and complete on their own.\n\n### TA-4: Detecting and Fixing Comma Splices\nPresent sentences with the broken \"bridge\" (comma alone joining two independent clauses — a comma splice) and have the student identify the error and repair it using one of the three correct methods, reinforcing that a bare comma is never sufficient.\n\n### TA-5: Choosing the Best Method and Constructing Original Compound Sentences\nGiven pairs of related simple sentences, student chooses the most appropriate joining method (considering relationship closeness/formality) and constructs an original compound sentence for each of the three methods — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 64,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": ": Both-Sides Check (Scaffolded)",
+      "content": "### WE-1: Both-Sides Check (Scaffolded)\n**Sentences:** \"The team practiced hard and won the championship.\" (simple — compound verb, one clause) / \"The team practiced hard, and they won the championship.\" (compound — two full clauses joined by comma + \"and\")\n**Walkthrough:** Mark subject-verb pairs in both. Sentence 1 has one subject (\"the team\") with a compound verb (\"practiced...and won\") — one clause, simple. Sentence 2 has two full subject-verb pairs (\"the team practiced\" / \"they won\") joined by comma + \"and\" — two clauses, compound.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 81,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": ": Three Joining Methods (Guided)",
+      "content": "### WE-2: Three Joining Methods (Guided)\n**Base clauses:** \"The museum was closing\" / \"we hurried through the last exhibit.\"\n**Walkthrough:** Method 1: \"The museum was closing, so we hurried through the last exhibit.\" Method 2: \"The museum was closing; we hurried through the last exhibit.\" Method 3: \"The museum was closing; therefore, we hurried through the last exhibit.\" Confirm all three are grammatically complete and correct, differing only in tone/formality, not correctness.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 81,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": ": Comma Splice Detection and Repair (Independent)",
+      "content": "### WE-3: Comma Splice Detection and Repair (Independent)\n**Sentence with error:** \"The lights flickered, the power went out completely.\"\n**Walkthrough:** Student identifies this as a comma splice (comma alone joining two independent clauses) and repairs it using any of the three methods, e.g., \"The lights flickered, and the power went out completely.\" or \"The lights flickered; the power went out completely.\"",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 81,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/misconception/MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "- **Trigger signal:** Student labels any sentence containing \"and,\" \"or,\" or \"but\" as compound, without checking whether the conjunction is joining two independent clauses (compound) versus joining two words or phrases within one clause — repeating the exact clause-vs-conjunction confusion from `eng.grammar.simple-sentences` at a new, more advanced level where three joining methods (conjunction, semicolon, conjunctive adverb) must now all be checked.",
+      "content": "### MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE\n- **Trigger signal:** Student labels any sentence containing \"and,\" \"or,\" or \"but\" as compound, without checking whether the conjunction is joining two independent clauses (compound) versus joining two words or phrases within one clause — repeating the exact clause-vs-conjunction confusion from `eng.grammar.simple-sentences` at a new, more advanced level where three joining methods (conjunction, semicolon, conjunctive adverb) must now all be checked.\n- **Conflict evidence [P28]:** Present \"Ben and Sara studied hard and passed the exam.\" (simple: compound subject + compound verb, still one clause) beside \"Ben studied hard, and Sara passed the exam.\" (compound: two full independent clauses joined by \"and\"). Ask the student to mark subject-verb pairs in each before classifying.\n- **Bridge text [P30]:** \"A compound sentence needs TWO complete independent clauses joined together — not just any sentence that happens to contain 'and.' Check both sides of the joining word: is there a full subject-verb pair on each side that could stand alone as its own sentence?\"\n- **Replacement text [P31]:** \"Before calling a sentence compound, isolate what's on each side of the conjunction, semicolon, or conjunctive adverb. If both sides are complete, standalone sentences on their own, it's compound. If one side is missing its own subject or verb, it's still simple.\"\n- **Discrimination pairs [P33]:** (a) Conjunction-presence rule (any joining word makes a sentence compound) vs. (b) Independent-clause-count rule (compound requires exactly two — or more — complete independent clauses joined together; a joining word alone proves nothing without checking both sides).\n- **s6_path:** If detected, drop to PD-1 re-check on clause counting from `eng.grammar.simple-sentences`, then re-run TA-1's both-sides test before continuing.",
+      "localKey": "MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE",
+      "language": "en",
+      "refs": [
+        "MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/misconception/MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "- **Trigger signal:** Student treats a semicolon and a comma as freely swappable when joining two independent clauses, either using a bare comma with no conjunction to join two full clauses (comma splice) or using a semicolon together with a coordinating conjunction (\"; and\") as if both were required together.",
+      "content": "### MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS\n- **Trigger signal:** Student treats a semicolon and a comma as freely swappable when joining two independent clauses, either using a bare comma with no conjunction to join two full clauses (comma splice) or using a semicolon together with a coordinating conjunction (\"; and\") as if both were required together.\n- **Conflict evidence [P28]:** Present three versions of the same two clauses: \"The rain stopped, the sun came out.\" (comma splice — incorrect, a comma alone cannot join two independent clauses), \"The rain stopped; the sun came out.\" (correct — semicolon alone joins them), and \"The rain stopped, and the sun came out.\" (correct — comma PLUS coordinating conjunction together joins them). Ask which are grammatically complete joins and which is missing something.\n- **Bridge text [P30]:** \"A comma by itself is too weak to join two full independent clauses — that's called a comma splice, and it's a real error. You need either a semicolon ALONE, or a comma PLUS a coordinating conjunction (and/but/or/so/yet/for/nor) together. A semicolon never needs a conjunction added after it for this job — it's already strong enough by itself.\"\n- **Replacement text [P31]:** \"There are exactly three correct ways to join two independent clauses into one compound sentence: (1) comma + coordinating conjunction, (2) semicolon alone, (3) semicolon + conjunctive adverb + comma (e.g., '; however,'). A bare comma with no conjunction is never enough, and a semicolon never needs a conjunction added right after it.\"\n- **Discrimination pairs [P33]:** (a) Comma-alone-is-sufficient / semicolon-needs-a-conjunction-too (both are treated as needing an added conjunction, or neither is seen as needing one) vs. (b) The three-method rule (comma+conjunction, semicolon alone, or semicolon+conjunctive-adverb+comma — each method complete and correct on its own, never mixed).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's three-bridge framing before continuing to TA-3.",
+      "localKey": "MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS",
+      "language": "en",
+      "refs": [
+        "MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "Both-Sides Independent-Clause Check",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Both-Sides Independent-Clause Check\",\"primitives\":[],\"addresses\":[\"MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "The Comma + Coordinating Conjunction Method",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Comma + Coordinating Conjunction Method\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 71,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "The Semicolon-Alone and Semicolon + Conjunctive-Adverb Methods",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Semicolon-Alone and Semicolon + Conjunctive-Adverb Methods\",\"primitives\":[],\"addresses\":[\"MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 74,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "Detecting and Fixing Comma Splices",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Detecting and Fixing Comma Splices\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 77,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "Choosing the Best Method and Constructing Original Compound Sentences",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Choosing the Best Method and Constructing Original Compound Sentences\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS\",\"MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE",
+        "MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 80,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject conjunction-presence-only classification**\nGiven a simple sentence with a compound verb joined by \"and\" (not two independent clauses), student correctly classifies it as simple and explains the both-sides check. *(Directly targets MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 95,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Comma splice identification and repair**\nGiven a sentence with a comma splice, student identifies the error and repairs it using one of the three correct joining methods. *(Directly targets MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 95,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Three-method construction**\nGiven one pair of related simple sentences, student joins them correctly using all three methods (comma+conjunction, semicolon alone, semicolon+conjunctive adverb).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 95,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Mixed-batch classification**\nGiven 5 unlabeled sentences (mix of simple-with-compound-elements, correctly joined compound via each method, and one comma splice), student classifies each correctly and identifies the comma splice specifically.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 95,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original construction with method justification**\nStudent writes two original compound sentences on a topic of their choice, using two different joining methods, and explains why each method suits the relationship between the two clauses.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 95,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "Adaptive Flags",
+      "content": "- If the student over-classifies sentences as compound based on conjunction presence alone, weight remediation toward MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE's bridge text and re-run TA-1's both-sides check before returning to method instruction.\n- If the student produces or misses comma splices, weight remediation toward MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS's bridge text and TA-4's detection-and-repair practice specifically.\n- This concept is foundational for four direct downstream unlocks (`eng.grammar.complex-sentences`, `eng.grammar.parallel-structure`, `eng.grammar.colons-semicolons-dashes`, `eng.grammar.run-on-sentences-and-comma-splices`) — do not certify mastery without MP-2's comma-splice probe, since `eng.grammar.run-on-sentences-and-comma-splices` is built entirely on recognizing this exact error pattern.\n- Reuse the \"three bridges\" framing explicitly when introducing `eng.grammar.colons-semicolons-dashes` — that concept adds a fourth and fifth joining/punctuation option to the same underlying \"how do independent clauses connect\" question.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE",
+        "MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 144,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.grammar.compound-sentences/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.compound-sentences",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Clause-Counting Check] --> [PD-2: Coordinating Conjunction Check]\n        |\n        v\n[Concrete Anchor: The Three Bridges]\n        |\n        v\n[TA-1: Both-Sides Independent-Clause Check]\n        |\n        v\n[TA-2: Comma + Coordinating Conjunction Method]\n        |\n        v\n[TA-3: Semicolon Methods]\n        |\n        v\n[TA-4: Detecting and Fixing Comma Splices]\n        |\n        v\n[TA-5: Choosing Method + Original Construction]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm both PD-1 and PD-2 pass — compound-sentence work is unreachable without reliable clause counting and coordinating-conjunction recognition, both imported directly from prerequisite concepts. During instruction (S1), the two misconceptions target different error directions: MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE over-classifies sentences as compound (repeating the simple-sentences confusion at a harder level), while MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS under-punctuates joins (the comma splice) or over-punctuates them (semicolon + redundant conjunction) — both should be redirected to the Three Bridges anchor rather than corrected as isolated punctuation slips. If the student produces or accepts a comma splice during probes (S6), drop back to TA-3/TA-4's bridge-collapse demonstration before returning to mixed practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass independently — a student who can construct compound sentences correctly (MP-3) but cannot detect a comma splice (MP-2) has not yet learned the full boundary of correctness this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.compound-sentences.md",
+        "startLine": 112,
+        "endLine": 144
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
