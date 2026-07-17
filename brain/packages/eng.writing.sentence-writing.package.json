@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.sentence-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.sentence-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a2c963bbf5018d42e2fb5c995d4fe64d62857301752c5cf14598b483f1cb5276",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.sentence-writing.md": "sha256:8963990b32bf2f6d9c899b0984bd075a058f73094f67c0a1a462e32c5dc7cc35"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.sentence-writing",
+    "name": "Sentence Writing",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.simple-sentences",
+      "eng.writing.spelling-strategies"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.sentence-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.sentence-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.sentence-writing.md": "sha256:8963990b32bf2f6d9c899b0984bd075a058f73094f67c0a1a462e32c5dc7cc35"
+      },
+      "contentHash": "sha256:43b81cdf944d050f43f5e9fdd52882c302a8c224a3ecc050361469d36158b652",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.sentence-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.sentence-writing.md#TA-1 (addresses MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.sentence-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.sentence-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.sentence-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.sentence-writing.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.sentence-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.sentence-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.sentence-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.sentence-writing.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.sentence-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.sentence-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.sentence-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.sentence-writing.md#TA-4 (addresses MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.sentence-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.sentence-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.sentence-writing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.sentence-writing.md#TA-5 (addresses MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD, MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.sentence-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.sentence-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.sentence-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Sentence Writing — Conceptual Development Sequence",
+      "content": "### TA-1: The Subject-Verb Hunt for Completeness\nPresent a mixed batch of complete sentences and fragments, all correctly capitalized and punctuated, and have the student hunt for an actual subject-verb pair in each before judging completeness — directly countering MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD.\n\n### TA-2: Building Sentences from a Word Bank\nGiven a small word bank (a subject, a verb, and optional details), student constructs multiple different complete sentences, checking each for genuine subject-verb completeness using the TA-1 test.\n\n### TA-3: Precision Over Padding\nPresent a padded, wordy sentence and have the student identify and remove unnecessary filler words/phrases while preserving the core meaning, producing a clearer, more precise version.\n\n### TA-4: Choosing Appropriate Sentence Length for the Idea\nUsing the discrimination pairs from MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING, present a set of ideas of varying complexity and have the student write an appropriately-sized sentence for each — a short punchy sentence for a simple idea, a longer well-structured sentence for a genuinely complex idea — rather than defaulting to maximal length for all.\n\n### TA-5: Composing Original Sentences on a Topic\nStudent writes 5 original sentences on an assigned topic, varying in length and structure but each independently verified as complete (subject-verb hunt) and clear (no unnecessary padding) — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": ": Fragment vs. Complete Sentence Detection (Scaffolded)",
+      "content": "### WE-1: Fragment vs. Complete Sentence Detection (Scaffolded)\n**Examples:** \"Walking to school every morning.\" (fragment — no subject-verb pair, just a participial phrase) / \"I walk to school every morning.\" (complete — clear subject \"I,\" verb \"walk\").\n**Walkthrough:** Apply the subject-verb hunt to both; confirm the first has no genuine subject performing an action as the main clause, despite proper capitalization and punctuation.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": ": Removing Padding (Guided)",
+      "content": "### WE-2: Removing Padding (Guided)\n**Padded sentence:** \"It was the case that the weather that day was something that could be described as extremely rainy and wet.\"\n**Walkthrough:** Identify unnecessary filler (\"it was the case that,\" \"something that could be described as\") and rewrite: \"The weather that day was extremely rainy.\" Confirm the meaning is preserved with far greater clarity.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": ": Appropriate Length for the Idea (Independent)",
+      "content": "### WE-3: Appropriate Length for the Idea (Independent)\n**Task:** Write a sentence about (a) a simple fact (the sun rose) and (b) a more complex situation (a student who studied hard for an exam but still felt nervous walking in).\n**Walkthrough:** Student produces a short sentence for (a) (\"The sun rose over the hills.\") and an appropriately longer, well-structured sentence for (b) (\"Even though she had studied hard for weeks, she still felt a flutter of nerves as she walked into the exam room.\"), confirming length matched the idea's actual complexity rather than being padded or truncated arbitrarily.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/misconception/MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD",
+      "kind": "misconception",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "- **Trigger signal:** Student judges sentence completeness purely by surface formatting (starts with a capital letter, ends with a period) rather than by checking for an actual complete subject-verb pair expressing a full thought — producing fragments punctuated as if they were complete sentences (e.g., \"Running through the park.\" or \"Because I was tired.\").",
+      "content": "### MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD\n- **Trigger signal:** Student judges sentence completeness purely by surface formatting (starts with a capital letter, ends with a period) rather than by checking for an actual complete subject-verb pair expressing a full thought — producing fragments punctuated as if they were complete sentences (e.g., \"Running through the park.\" or \"Because I was tired.\").\n- **Conflict evidence [P28]:** Present \"Running through the park.\" (capitalized, period-ended, but no subject-verb pair — a fragment) alongside \"She ran through the park.\" (a genuine complete sentence). Ask the student what the difference is if both \"look\" like sentences by capitalization and punctuation.\n- **Bridge text [P30]:** \"Capital letters and periods are just the packaging — they don't make something a complete sentence any more than gift wrap makes an empty box a real present. A true sentence needs a genuine subject doing a genuine verb, expressing a complete thought that could stand alone and make sense by itself.\"\n- **Replacement text [P31]:** \"Before trusting the capital-letter-and-period formatting, check inside: is there an actual subject and verb pair? Does it express a complete thought that makes sense on its own, without needing anything before or after it? If not, it's a fragment wearing sentence clothing, not a real sentence.\"\n- **Discrimination pairs [P33]:** (a) Formatting-based completeness (capital letter + period = complete sentence) vs. (b) Structure-based completeness (a genuine subject-verb pair expressing a standalone complete thought = complete sentence, regardless of formatting, which fragments can also wear).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's subject-verb hunt before continuing.",
+      "localKey": "MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/misconception/MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING",
+      "kind": "misconception",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "- **Trigger signal:** Student equates sentence quality with sentence length, deliberately padding sentences with unnecessary words, redundant phrases, or run-together ideas in an attempt to seem more sophisticated, rather than valuing clarity and precision — sometimes producing a run-on sentence or comma splice in the process of over-lengthening.",
+      "content": "### MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING\n- **Trigger signal:** Student equates sentence quality with sentence length, deliberately padding sentences with unnecessary words, redundant phrases, or run-together ideas in an attempt to seem more sophisticated, rather than valuing clarity and precision — sometimes producing a run-on sentence or comma splice in the process of over-lengthening.\n- **Conflict evidence [P28]:** Present two sentences describing the same event: a padded, wordy version (\"The thing that happened was that the dog, which was a very big and also quite furry dog, ran extremely fast in the direction of the ball that had been thrown by the boy.\") and a clear, appropriately-sized version (\"The big, furry dog raced toward the ball the boy had thrown.\"). Ask which communicates the same information more clearly and which sounds more like skilled writing.\n- **Bridge text [P30]:** \"A longer sentence isn't automatically better writing — it's often just less disciplined writing. Skilled writers choose the sentence length that best fits the idea: sometimes short and punchy, sometimes longer for a complex idea, but always as clear and precise as the content allows. Padding for length usually makes writing worse, not more impressive.\"\n- **Replacement text [P31]:** \"Write the sentence that most clearly and precisely expresses your idea — don't add extra words just to make it longer. If a shorter sentence says the same thing just as well, use the shorter one. Save longer sentences for ideas that genuinely need the extra structure to connect related information.\"\n- **Discrimination pairs [P33]:** (a) Length-as-quality (longer sentences signal more sophisticated or better writing) vs. (b) Clarity-as-quality (sentence quality is measured by how clearly and precisely it expresses the intended idea, independent of length; unnecessary padding reduces quality).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's clear-window framing before continuing to TA-4.",
+      "localKey": "MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING",
+      "language": "en",
+      "refs": [
+        "MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "The Subject-Verb Hunt for Completeness",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Subject-Verb Hunt for Completeness\",\"primitives\":[],\"addresses\":[\"MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Building Sentences from a Word Bank",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Building Sentences from a Word Bank\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Precision Over Padding",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Precision Over Padding\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Choosing Appropriate Sentence Length for the Idea",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Choosing Appropriate Sentence Length for the Idea\",\"primitives\":[],\"addresses\":[\"MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Composing Original Sentences on a Topic",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Composing Original Sentences on a Topic\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD\",\"MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD",
+        "MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Detect a formatted fragment**\nGiven a properly capitalized and punctuated fragment, student correctly identifies it as incomplete using the subject-verb hunt, rejecting the formatting-based shortcut. *(Directly targets MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Remove unnecessary padding**\nGiven a padded, wordy sentence, student rewrites it more concisely while preserving the original meaning, explaining why the shorter version is better writing, not worse. *(Directly targets MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Word bank sentence construction**\nGiven a small word bank, student constructs 2 different complete, correct sentences.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Length-appropriate composition**\nGiven one simple idea and one complex idea, student writes an appropriately-sized sentence for each.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original topic composition**\nStudent writes 4 original sentences on an assigned topic, each verified complete and free of unnecessary padding.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student produces properly formatted fragments, weight remediation toward MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD's bridge text and re-run TA-1's subject-verb hunt before returning to free composition.\n- If the student pads sentences unnecessarily, weight remediation toward MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING's bridge text and TA-3's precision-editing practice specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.paragraph-structure`) — do not certify mastery without TA-5's original topic composition, since paragraph structure assumes the student can already reliably produce multiple clear, complete, appropriately-varied sentences before combining them into a coherent paragraph.\n- Reuse the \"clear window, not foggy window\" framing explicitly when introducing `eng.writing.paragraph-structure` — that concept extends the same clarity-over-padding principle from the sentence level to the paragraph level.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD",
+        "MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.writing.sentence-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.sentence-writing",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Simple-Sentence/Spelling Readiness Check]\n        |\n        v\n[Concrete Anchor: The Clear Window vs. the Foggy Window]\n        |\n        v\n[TA-1: The Subject-Verb Hunt for Completeness]\n        |\n        v\n[TA-2: Building Sentences from a Word Bank]\n        |\n        v\n[TA-3: Precision Over Padding]\n        |\n        v\n[TA-4: Choosing Appropriate Sentence Length]\n        |\n        v\n[TA-5: Composing Original Sentences on a Topic]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — sentence writing combines clause-completeness judgment and basic spelling accuracy into original composition, so weakness in either undermines the writing task itself. During instruction (S1), watch for both misconception patterns: trusting surface formatting over genuine structure (MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD) and equating length with quality (MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING) both substitute a surface signal for the real underlying judgment — redirect both to the Clear/Foggy Window anchor. If the student produces a formatted fragment or a padded sentence during TA-3/TA-4 (S6), drop back to the Concrete Anchor's subject-verb hunt and clarity demonstration before returning to composition practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who constructs correct sentences from a provided word bank (MP-3) but still produces fragments or padding in free composition has not yet internalized the completeness and clarity judgments this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.sentence-writing.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,412 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.asking-and-answering-questions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.asking-and-answering-questions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b89387c8e0ae02424589cc6079402be8a710cf2391f4826f05f6854e51c5398c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md": "sha256:398c93ddf4c9149ab0483a98c2894a7afed0fa89bee155cd208ff6339c5c8ff9"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.speaking.asking-and-answering-questions",
+    "name": "Asking and Answering Questions",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.speaking.conversation-skills"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.asking-and-answering-questions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.asking-and-answering-questions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md": "sha256:398c93ddf4c9149ab0483a98c2894a7afed0fa89bee155cd208ff6339c5c8ff9"
+      },
+      "contentHash": "sha256:908ce7a51cb978d31dbc42a16bf7e37f9d0c2d6522dbe0171f13444e03eb03ca",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.asking-and-answering-questions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md#TA-1 (addresses MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.asking-and-answering-questions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.asking-and-answering-questions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.asking-and-answering-questions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md#TA-2 (addresses MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.asking-and-answering-questions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.asking-and-answering-questions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.asking-and-answering-questions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.asking-and-answering-questions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.asking-and-answering-questions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.asking-and-answering-questions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md#TA-4 (addresses MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER, MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.asking-and-answering-questions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.asking-and-answering-questions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "Asking and Answering Questions — Conceptual Development Sequence",
+      "content": "### TA-1: Question-Type Sorting\nPresent a mixed batch of questions (yes/no type and open wh-type) and have the student sort each into the correct basket, then generate an appropriately-shaped answer type (short confirmation vs. explanation) for a sample from each — directly countering MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER.\n\n### TA-2: The Bullseye Test for Answer Relevance\nUsing the discrimination pairs from MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC, present a specific question and 3 candidate answers (bullseye, near-miss, off-topic) and have the student rank them using the dartboard test, explaining what specifically makes the bullseye answer superior.\n\n### TA-3: Formulating Clear Questions\nTeach the student to formulate their own clear, specific questions (rather than vague ones) that would elicit a genuine bullseye answer — e.g., converting a vague question (\"Tell me about your day\") into a more specific one (\"What was the best part of your day?\") when a specific answer is actually wanted.\n\n### TA-4: Full Question-Answer Exchange Practice\nStudent engages in or narrates a short exchange (4-6 question-answer pairs) on an assigned topic, both asking clear questions and providing bullseye-accurate, appropriately-typed answers — the generative capstone integrating both prior skills.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 54,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": ": Question-Type Matching (Scaffolded)",
+      "content": "### WE-1: Question-Type Matching (Scaffolded)\n**Questions:** \"Did you eat breakfast?\" (yes/no) / \"Why were you late?\" (open — requires explanation).\n**Walkthrough:** For the first, confirm \"Yes, I had cereal.\" is a complete, well-matched answer (a short confirmation plus optional detail). For the second, confirm a bare \"Yes\" makes no sense — the question requires \"Because my alarm didn't go off.\"",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 68,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": ": Bullseye vs. Near-Miss Answers (Guided)",
+      "content": "### WE-2: Bullseye vs. Near-Miss Answers (Guided)\n**Question:** \"How much does the ticket cost?\"\n**Candidate answers:** (a) \"It's a really popular show, lots of people go.\" (near-miss — related to the topic but doesn't state a cost) vs. (b) \"It's $15.\" (bullseye — directly answers the specific question).\n**Walkthrough:** Apply the dartboard test; confirm (b) is the only true answer to what was actually asked, even though (a) is topically related and might feel like a reasonable response.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 68,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": ": Full Exchange Practice (Independent)",
+      "content": "### WE-3: Full Exchange Practice (Independent)\n**Scenario:** Student conducts a 4-question interview with a partner about their favorite hobby, asking specific questions (\"What do you like most about it?\" \"How long have you been doing it?\") and evaluating whether the partner's answers hit the bullseye or drifted to near-miss topic-adjacent responses.\n**Walkthrough:** Student both formulates specific questions and self-checks the responses received (or given) against the bullseye standard.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 68,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/misconception/MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "- **Trigger signal:** Student answers every question, including ones clearly seeking elaboration or explanation, with a bare \"yes\" or \"no\" (or a one-word answer), treating minimal response as sufficient regardless of what the question actually requires — even when the question uses \"why,\" \"how,\" or \"what\" and genuinely can't be fully answered with a single word.",
+      "content": "### MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER\n- **Trigger signal:** Student answers every question, including ones clearly seeking elaboration or explanation, with a bare \"yes\" or \"no\" (or a one-word answer), treating minimal response as sufficient regardless of what the question actually requires — even when the question uses \"why,\" \"how,\" or \"what\" and genuinely can't be fully answered with a single word.\n- **Conflict evidence [P28]:** Present the question \"Why were you late today?\" and two candidate answers: \"Yes.\" (nonsensical — the question isn't yes/no at all) and \"Because my bus was delayed.\" Then present \"Did you finish your homework?\" and note that \"Yes.\" IS a genuinely complete answer here, since this question specifically asks for a yes/no confirmation.\n- **Bridge text [P30]:** \"Not all questions want the same kind of answer. A question starting with 'did,' 'is,' 'can,' or 'will' is often asking for a yes/no confirmation, and a short answer can be complete there. But a question starting with 'why,' 'how,' or 'what' is asking you to explain or describe something — a bare 'yes' or 'no' doesn't even make sense as an answer to those.\"\n- **Replacement text [P31]:** \"Before answering, check what TYPE of question was asked. If it's a yes/no question (starts with 'did/is/can/will/does'), a short confirming answer can be complete. If it's an open question (starts with 'why/how/what/where/when'), give an actual explanation or description — a single word won't answer it.\"\n- **Discrimination pairs [P33]:** (a) One-word-answer-always-sufficient (any question can be answered with a minimal response) vs. (b) Question-type-matched response (yes/no questions can take short confirming answers; open wh-questions require explanatory or descriptive responses matched to what's actually being asked).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's question-type sort before continuing.",
+      "localKey": "MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER",
+      "language": "en",
+      "refs": [
+        "MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/misconception/MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "- **Trigger signal:** Student, when asking a question, accepts any tangentially topic-related response as satisfying, and when answering, provides information that's loosely related to the general subject but doesn't actually address what was specifically asked — treating \"on-topic\" as equivalent to \"relevant to the question.",
+      "content": "### MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC\n- **Trigger signal:** Student, when asking a question, accepts any tangentially topic-related response as satisfying, and when answering, provides information that's loosely related to the general subject but doesn't actually address what was specifically asked — treating \"on-topic\" as equivalent to \"relevant to the question.\"\n- **Conflict evidence [P28]:** Present the question \"What time does the movie start?\" and two candidate answers: \"The movie theater is really nice and has great popcorn.\" (topic-related but doesn't answer the actual question) versus \"It starts at 7:30.\" (directly relevant, actually answers what was asked). Ask which response actually satisfies the question that was asked.\n- **Bridge text [P30]:** \"Being 'about the same topic' isn't the same as actually answering the specific question. A relevant answer directly addresses what was asked — the specific piece of information requested — not just anything connected to the general subject. If someone asks a specific question and gets a topic-adjacent non-answer, they haven't actually been answered.\"\n- **Replacement text [P31]:** \"Before giving your answer, re-check the exact question that was asked and make sure your response directly addresses that specific request — not just something related to the general topic. If you notice you've drifted to related-but-different information, redirect back to the actual question.\"\n- **Discrimination pairs [P33]:** (a) Topic-relatedness sufficiency (any response connected to the general subject area counts as answering) vs. (b) Question-specificity requirement (a genuine answer must directly address the specific information requested by the question, not merely share its general topic).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's dartboard framing before continuing to TA-3.",
+      "localKey": "MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "Question-Type Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Question-Type Sorting\",\"primitives\":[],\"addresses\":[\"MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "The Bullseye Test for Answer Relevance",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Bullseye Test for Answer Relevance\",\"primitives\":[],\"addresses\":[\"MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "Formulating Clear Questions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formulating Clear Questions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "Full Question-Answer Exchange Practice",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Question-Answer Exchange Practice\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC\",\"MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER",
+        "MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 67,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Match answer type to question type**\nGiven one yes/no question and one open wh-question, student produces an appropriately-shaped answer for each (a short confirmation for the first, a full explanation for the second). *(Directly targets MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify the bullseye answer**\nGiven a specific question and 3 candidate answers (bullseye, near-miss, off-topic), student correctly ranks them and explains why the bullseye answer is the only true answer. *(Directly targets MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Formulate a clear question**\nGiven a vague question, student rewrites it as a specific question that would elicit a precise, useful answer.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Full exchange demonstration**\nStudent conducts or narrates a 4-question exchange, producing both well-formed questions and bullseye-accurate, type-matched answers throughout.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Self-correct a drifted answer**\nGiven a scenario where the student's own draft answer has drifted to a near-miss, topic-adjacent response, student catches the drift and revises it into a bullseye answer that directly addresses the original question.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "Adaptive Flags",
+      "content": "- If the student defaults to bare yes/no answers regardless of question type, weight remediation toward MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER's bridge text and re-run TA-1's question-type sort before returning to full exchange practice.\n- If the student gives or accepts topic-adjacent non-answers, weight remediation toward MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC's bridge text and TA-2's bullseye-ranking practice specifically.\n- This concept feeds one direct downstream unlock (`eng.speaking.discussion-skills`) — do not certify mastery without TA-4's full exchange practice, since group discussion depends on the same precise question-formulation and bullseye-answering skills applied across multiple participants.\n- Reuse the \"question dartboard\" framing explicitly when introducing `eng.speaking.discussion-skills` — that concept extends the same bullseye-answer standard to multi-participant exchanges where staying on-question matters even more.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER",
+        "MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 129,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "eng.speaking.asking-and-answering-questions/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.asking-and-answering-questions",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Conversation-Skills Readiness Check]\n        |\n        v\n[Concrete Anchor: The Question Dartboard]\n        |\n        v\n[TA-1: Question-Type Sorting]\n        |\n        v\n[TA-2: The Bullseye Test for Answer Relevance]\n        |\n        v\n[TA-3: Formulating Clear Questions]\n        |\n        v\n[TA-4: Full Question-Answer Exchange Practice]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — question-answer exchanges are a specific, structured application of the general turn-taking and responsiveness skill from conversation skills, so weakness there undermines this more targeted skill. During instruction (S1), watch for both misconception patterns: mismatching answer type to question type (MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER) and accepting topic-adjacent non-answers (MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC) both stem from under-attending to the exact question asked — redirect both to the Question Dartboard anchor's bullseye framing. If the student gives a bare yes/no to an open question or accepts a near-miss answer during TA-1/TA-2 (S6), drop back to the Concrete Anchor's basket-sorting and dartboard-ranking exercises before returning to full exchange practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who formulates clear questions (MP-3) but still mismatches answer types or accepts vague answers has not internalized the precision this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md",
+        "startLine": 100,
+        "endLine": 129
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
