@@ -1,0 +1,412 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.metaphor-and-simile-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.metaphor-and-simile",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:050700390f2c4ed6fd9d4c11838c4c822dbaccbae6535e1edef8aa2c0df19676",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md": "sha256:c67ea37a783cfa8409825af2616d7239edca618adc394eadffc20939a396cf6e"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.metaphor-and-simile",
+    "name": "Metaphor and Simile",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.literature.literary-devices-overview"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.metaphor-and-simile-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.metaphor-and-simile (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md": "sha256:c67ea37a783cfa8409825af2616d7239edca618adc394eadffc20939a396cf6e"
+      },
+      "contentHash": "sha256:1aae3feebae2814ec4431bf75da7d7d60b2b3f7def64f6f895a557771a550d29",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.metaphor-and-simile.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md#TA-1 (addresses MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.metaphor-and-simile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.metaphor-and-simile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.metaphor-and-simile.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md#TA-2 (addresses MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.metaphor-and-simile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.metaphor-and-simile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.metaphor-and-simile.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.metaphor-and-simile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.metaphor-and-simile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.metaphor-and-simile.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md#TA-4 (addresses MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS, MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.metaphor-and-simile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.metaphor-and-simile\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.metaphor-and-simile/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "Metaphor and Simile — Conceptual Development Sequence",
+      "content": "### TA-1: Directness Comparison Practice\nPresent pairs of the same comparison as both metaphor and simile (as in the Conflict Evidence example) and have the student describe the difference in directness/boldness each version creates, beyond just correctly labeling them. Directly counters MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS.\n\n### TA-2: The Figurative-Function Check for \"Like\"/\"As\"\nUsing the discrimination pairs from MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE, present 6 sentences using \"like\"/\"as\" in different functions (simile, causal \"as,\" literal similarity) and have the student sort them using the word-job table, confirming only the figurative-unlike-things comparisons are genuine similes.\n\n### TA-3: Explaining Metaphor/Simile Effect\nGiven a metaphor or simile in a passage, student explains the specific effect it creates (what quality is being transferred/emphasized from the comparison) rather than just naming the device.\n\n### TA-4: Identifying and Explaining Devices in a Novel Passage\nStudent analyzes a new passage containing both a metaphor and a simile (or a \"like\"/\"as\" false-positive to reject), correctly identifying each, explaining directness differences, and confirming genuine figurative function — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 55,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": ": Directness Comparison (Scaffolded)",
+      "content": "### WE-1: Directness Comparison (Scaffolded)\n**Metaphor:** \"The city was a jungle.\" **Simile:** \"The city was like a jungle.\"\n**Walkthrough:** Both compare the city to a jungle (implying chaos, danger, density), but the metaphor asserts this boldly and directly as if it were literally true, while the simile explicitly signals a comparison, feeling slightly more measured/explicit about the figurative nature.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 69,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": ": Figurative-Function Sorting (Guided)",
+      "content": "### WE-2: Figurative-Function Sorting (Guided)\n**Sentences:** \"He fought like a lion.\" (simile — figurative) / \"As the sun set, they packed up.\" (\"as\" = \"when/because,\" not a comparison) / \"Her shoes were like her mother's — same brand, same color.\" (literal similarity, not figurative).\n**Walkthrough:** Sort each using the word-job table, confirming only the first is a genuine simile.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 69,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": ": Full Passage Analysis (Independent)",
+      "content": "### WE-3: Full Passage Analysis (Independent)\n**Passage:** \"Her thoughts were a swarm of bees, buzzing and impossible to settle. She felt as restless as a child waiting for a storm to pass.\"\n**Walkthrough:** Student identifies \"thoughts were a swarm of bees\" as a metaphor (bold, direct identity claim emphasizing chaotic, buzzing mental activity) and \"restless as a child waiting for a storm\" as a simile (explicit comparison emphasizing anticipatory unease), explaining both effects.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 69,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/misconception/MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS",
+      "kind": "misconception",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "- **Trigger signal:** Student correctly memorizes the surface rule (simile uses \"like\"/\"as,\" metaphor doesn't) but treats this as a purely mechanical word-spotting task, missing that the presence/absence of \"like\"/\"as\" reflects a genuine difference in how directly the comparison asserts identity — a metaphor claims something IS another thing, while a simile explicitly signals it's a comparison, not identity — which shapes how strongly/directly each device asserts its comparison.",
+      "content": "### MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS\n- **Trigger signal:** Student correctly memorizes the surface rule (simile uses \"like\"/\"as,\" metaphor doesn't) but treats this as a purely mechanical word-spotting task, missing that the presence/absence of \"like\"/\"as\" reflects a genuine difference in how directly the comparison asserts identity — a metaphor claims something IS another thing, while a simile explicitly signals it's a comparison, not identity — which shapes how strongly/directly each device asserts its comparison.\n- **Conflict evidence [P28]:** Present \"Her voice was music.\" (metaphor — directly asserts identity, no hedge) alongside \"Her voice was like music.\" (simile — explicitly signals a comparison, not identity). Ask the student whether these two sentences make claims of equal directness/strength, or whether the metaphor's lack of \"like\" actually changes something about how forcefully the comparison lands.\n- **Bridge text [P30]:** \"The word difference isn't just a spelling rule to spot — it reflects a real difference in directness. A metaphor says something IS another thing, asserting the comparison boldly and directly. A simile explicitly signals 'this is LIKE that,' clearly marking it as a comparison rather than identity. That difference in directness genuinely changes the effect, not just the wording.\"\n- **Replacement text [P31]:** \"When you spot 'like' or 'as,' don't just label it a simile and move on — notice that a simile explicitly marks the comparison as a comparison, which often feels gentler or more explicit than a metaphor's direct, bold claim of identity. The word isn't decoration; it's doing real rhetorical work.\"\n- **Discrimination pairs [P33]:** (a) Surface-word-spotting (metaphor/simile classification is just checking for the presence of \"like\"/\"as\") vs. (b) Directness-as-meaningful-difference (the presence/absence of \"like\"/\"as\" reflects a genuine difference in how directly/boldly the comparison is asserted, affecting the device's rhetorical effect).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's directness-comparison practice before continuing.",
+      "localKey": "MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS",
+      "language": "en",
+      "refs": [
+        "MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/misconception/MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE",
+      "kind": "misconception",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "- **Trigger signal:** Student flags any sentence containing \"like\" or \"as\" as a simile, without checking whether the word is actually functioning to make a figurative comparison between two essentially unlike things, versus being used in its ordinary literal sense (e.g., \"as\" meaning \"because,\" or \"like\" meaning \"similar to\" in a literal, non-figurative comparison of genuinely similar things, such as \"her dress was like her sister's dress\" — comparing two dresses, not a figurative leap).",
+      "content": "### MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE\n- **Trigger signal:** Student flags any sentence containing \"like\" or \"as\" as a simile, without checking whether the word is actually functioning to make a figurative comparison between two essentially unlike things, versus being used in its ordinary literal sense (e.g., \"as\" meaning \"because,\" or \"like\" meaning \"similar to\" in a literal, non-figurative comparison of genuinely similar things, such as \"her dress was like her sister's dress\" — comparing two dresses, not a figurative leap).\n- **Conflict evidence [P28]:** Present \"She ran like the wind.\" (simile — figurative comparison between running speed and wind, two genuinely unlike things) alongside \"As it was raining, we stayed inside.\" (\"as\" meaning \"because\" — not a comparison at all) and \"Her coat was similar to mine, like a matching set.\" (literal similarity between two actual coats, not a figurative leap). Ask the student to identify which uses of \"like\"/\"as\" are actually similes.\n- **Bridge text [P30]:** \"'Like' and 'as' have other everyday jobs beyond signaling similes — 'as' often just means 'because,' and 'like' can describe genuine, literal similarity between similar things rather than a figurative comparison between two essentially DIFFERENT kinds of things. A simile specifically makes a figurative leap between unlike things; not every 'like' or 'as' is doing that job.\"\n- **Replacement text [P31]:** \"Before calling something a simile, check: is 'like' or 'as' actually comparing two ESSENTIALLY DIFFERENT things in a figurative way, or is it doing an ordinary job (meaning 'because,' or describing two genuinely similar/identical things literally)? Only the figurative, unlike-things comparison counts as a simile.\"\n- **Discrimination pairs [P33]:** (a) Word-presence-equals-simile (any sentence containing \"like\" or \"as\" is a simile) vs. (b) Figurative-function-check (a simile requires \"like\"/\"as\" to be functioning as a figurative comparison between essentially unlike things, not its literal/causal/genuinely-similar everyday uses).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's word-job-sorting framing before continuing to TA-3.",
+      "localKey": "MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE",
+      "language": "en",
+      "refs": [
+        "MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "Directness Comparison Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Directness Comparison Practice\",\"primitives\":[],\"addresses\":[\"MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "The Figurative-Function Check for \"Like\"/\"As\"",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Figurative-Function Check for \\\"Like\\\"/\\\"As\\\"\",\"primitives\":[],\"addresses\":[\"MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "Explaining Metaphor/Simile Effect",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Explaining Metaphor/Simile Effect\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "Identifying and Explaining Devices in a Novel Passage",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Identifying and Explaining Devices in a Novel Passage\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE\",\"MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS",
+        "MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 68,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Describe directness difference**\nGiven the same comparison as both metaphor and simile, student describes how directness/boldness differs between the two versions, not just labeling them. *(Directly targets MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Reject a non-figurative \"like\"/\"as\"**\nGiven a sentence using \"like\" or \"as\" in a non-figurative function (causal or literal similarity), student correctly identifies it as NOT a simile. *(Directly targets MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explain a metaphor's specific effect**\nGiven a metaphor, student explains the specific quality being emphasized through the comparison.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Full passage identification and explanation**\nGiven a novel passage with a metaphor and simile (and possibly a false-positive \"like\"/\"as\"), student correctly identifies each, explains their effects, and rejects any non-figurative uses.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Convert between metaphor and simile forms**\nGiven one figurative comparison stated as a metaphor, student rewrites it as a simile (and vice versa), explaining how the directness/boldness shifts between the two forms.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 83,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "Adaptive Flags",
+      "content": "- If the student treats metaphor/simile distinction as purely mechanical word-spotting, weight remediation toward MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS's bridge text and re-run TA-1's directness-comparison practice before returning to independent analysis.\n- If the student over-flags non-figurative \"like\"/\"as\" uses as similes, weight remediation toward MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE's bridge text and TA-2's word-job sorting practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.literature.symbolism`, `eng.literature.imagery`) — do not certify mastery without TA-4's full passage analysis, since both downstream concepts assume the student can already distinguish genuine figurative comparison from literal or coincidental language use.\n- Reuse the \"word-job sorting table\" framing explicitly when introducing `eng.literature.symbolism` — that concept requires the same figurative-vs-literal function check applied to recurring images/objects rather than single comparisons.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS",
+        "MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 129,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "eng.literature.metaphor-and-simile/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.metaphor-and-simile",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Literary-Devices-Overview Readiness Check]\n        |\n        v\n[Concrete Anchor: Word-Job Sorting Table / Bold-Claim vs. Soft-Signal Dial]\n        |\n        v\n[TA-1: Directness Comparison Practice]\n        |\n        v\n[TA-2: The Figurative-Function Check for \"Like\"/\"As\"]\n        |\n        v\n[TA-3: Explaining Metaphor/Simile Effect]\n        |\n        v\n[TA-4: Identifying and Explaining Devices in a Novel Passage]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — this concept applies the general name-then-explain and removal-test disciplines specifically to metaphor and simile, so weak general device analysis undermines the specific application. During instruction (S1), watch for both misconception patterns: treating the word difference as merely mechanical (MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS) and over-flagging any \"like\"/\"as\" as a simile (MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE) both under-analyze the actual function of the comparison — redirect both to the Word-Job Table/Bold-Claim Dial anchor. If the student mislabels a non-figurative \"like\"/\"as\" or fails to describe directness differences during TA-1/TA-2 (S6), drop back to the Concrete Anchor's demonstrations before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who explains effect well (MP-3) but still treats word-spotting as sufficient or over-flags non-similes has not learned the core discriminating judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md",
+        "startLine": 100,
+        "endLine": 129
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

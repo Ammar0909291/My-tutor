@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.poetry-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.poetry-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:25caaec59523810cbba8637f40ecc028d7cc2076c7c4bfdde844509f89ada6d4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.poetry-basics.md": "sha256:f9747148bde89b9d53593f399989ddd706e216f70e49272a3409b3c704fd424f"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.poetry-basics",
+    "name": "Poetry Basics",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.literary-devices-overview"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.poetry-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.poetry-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.poetry-basics.md": "sha256:f9747148bde89b9d53593f399989ddd706e216f70e49272a3409b3c704fd424f"
+      },
+      "contentHash": "sha256:63117555cc26a8cf865d773f033d9b62f59ab3fa262eb56c5b2df3c9452c9a51",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetry-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetry-basics.md#TA-1 (addresses MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetry-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetry-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetry-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetry-basics.md#TA-2 (addresses MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetry-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetry-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetry-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetry-basics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetry-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetry-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetry-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetry-basics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetry-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetry-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetry-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetry-basics.md#TA-5 (addresses MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES, MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetry-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetry-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.poetry-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Poetry Basics — Conceptual Development Sequence",
+      "content": "### TA-1: Line-Break Effect Practice\nPresent the same content as prose and as a poem with specific line breaks (as in the Conflict Evidence example) and have the student identify which words receive emphasis from the line breaks and what pacing effect is created. Directly counters MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES.\n\n### TA-2: Poetry's Core Features vs. Optional Features\nUsing the discrimination pairs from MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER, present a free verse poem and a rhymed/metered poem side by side and have the student identify poetry's core features (present in both) versus optional features (rhyme/meter, present in only one).\n\n### TA-3: Stanza Function\nTeach that stanzas (poetry's paragraph-equivalent) group related lines and often mark a shift in idea, tone, or focus, and have the student identify stanza boundaries and their function in a sample poem.\n\n### TA-4: Condensed Language and Word Choice\nPresent a poem excerpt and have the student identify how the poet compresses meaning into few, carefully chosen words compared to how the same idea might be expressed in a longer prose sentence.\n\n### TA-5: Analyzing a Novel Poem's Structure\nStudent analyzes a new poem: identifies 2 deliberate line-break effects, determines whether it uses rhyme/meter or is free verse (confirming either is legitimate), and identifies stanza function — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": ": Line-Break Effect (Scaffolded)",
+      "content": "### WE-1: Line-Break Effect (Scaffolded)\n**Poem excerpt:** \"I waited / for the phone / to ring.\"\n**Walkthrough:** The line breaks isolate \"waited,\" \"for the phone,\" and \"to ring\" into separate emphasized beats, creating a sense of drawn-out anticipation that a single prose sentence (\"I waited for the phone to ring.\") would not convey as strongly.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": ": Core Features vs. Optional Features (Guided)",
+      "content": "### WE-2: Core Features vs. Optional Features (Guided)\n**Free verse excerpt** (no rhyme/meter, but deliberate line breaks and condensed imagery) versus **rhymed/metered excerpt** (regular rhyme scheme and meter).\n**Walkthrough:** Identify both as genuine poetry through their shared core features (condensed language, deliberate lines) while noting the rhymed piece additionally uses the optional rhyme/meter tools.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": ": Full Structural Analysis (Independent)",
+      "content": "### WE-3: Full Structural Analysis (Independent)\n**Poem:** A 2-stanza free verse poem where stanza 1 describes a physical scene and stanza 2 shifts to an emotional reflection.\n**Walkthrough:** Student identifies the stanza break as marking the shift from physical description to emotional reflection, identifies 2 specific line-break emphasis effects, and confirms the poem is genuine poetry despite lacking rhyme/meter.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/misconception/MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES",
+      "kind": "misconception",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "- **Trigger signal:** Student treats a poem's line breaks as arbitrary or purely visual/decorative, not recognizing that line breaks are a deliberate structural tool poets use to control pacing, emphasis, and meaning — a word placed at a line's end or beginning often carries deliberate emphasis, and a line break can create meaningful ambiguity or a pause that a prose sentence wouldn't have.",
+      "content": "### MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES\n- **Trigger signal:** Student treats a poem's line breaks as arbitrary or purely visual/decorative, not recognizing that line breaks are a deliberate structural tool poets use to control pacing, emphasis, and meaning — a word placed at a line's end or beginning often carries deliberate emphasis, and a line break can create meaningful ambiguity or a pause that a prose sentence wouldn't have.\n- **Conflict evidence [P28]:** Present the same content as a prose sentence (\"The bird flew away suddenly, leaving only silence.\") and as a poem with a deliberate line break emphasizing isolation (\"The bird flew away— / suddenly, / leaving only / silence.\"). Ask the student whether the line breaks are just random visual chopping, or whether they create specific pauses and emphasis (on \"suddenly,\" on the final isolated word \"silence\") that the prose version doesn't have.\n- **Bridge text [P30]:** \"Line breaks in poetry aren't random or purely decorative — they're a deliberate structural tool. A word placed right before a line break, or standing alone at a line's start, often gets extra emphasis or creates a meaningful pause. The SAME words in prose versus in a poem with specific line breaks can create genuinely different emphasis and rhythm.\"\n- **Replacement text [P31]:** \"When you see a poem's line breaks, ask why the poet chose to break THERE specifically. What word gets extra emphasis from ending or starting a line? What pause or pacing effect does the break create that continuous prose wouldn't have?\"\n- **Discrimination pairs [P33]:** (a) Line-breaks-as-arbitrary (line breaks are just where the text happens to wrap, with no deliberate meaning) vs. (b) Line-breaks-as-deliberate-tool (line breaks are a purposeful structural choice controlling emphasis, pacing, and meaning).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's line-break-effect practice before continuing.",
+      "localKey": "MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES",
+      "language": "en",
+      "refs": [
+        "MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/misconception/MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER",
+      "kind": "misconception",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "- **Trigger signal:** Student assumes rhyme and strict, regular meter are required features of \"real\" poetry, dismissing free verse (poetry without rhyme or fixed metrical pattern) as not genuinely poetic, or failing to recognize that a poem's structural choices (including the choice NOT to rhyme) are still deliberate and analyzable.",
+      "content": "### MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER\n- **Trigger signal:** Student assumes rhyme and strict, regular meter are required features of \"real\" poetry, dismissing free verse (poetry without rhyme or fixed metrical pattern) as not genuinely poetic, or failing to recognize that a poem's structural choices (including the choice NOT to rhyme) are still deliberate and analyzable.\n- **Conflict evidence [P28]:** Present a well-known free verse poem (no rhyme, no fixed meter, but deliberate line breaks and condensed, evocative language) alongside a rhymed, metered poem. Ask the student whether the free verse piece \"counts\" as real poetry, and what specifically makes it poetry if not rhyme/meter.\n- **Bridge text [P30]:** \"Rhyme and strict meter are OPTIONS poets can choose, not requirements for something to count as poetry. Free verse deliberately abandons regular rhyme/meter but still uses poetry's core features — condensed, carefully chosen language, meaningful line breaks, and often heightened imagery — making deliberate structural choices just as much as rhymed poetry does, just different ones.\"\n- **Replacement text [P31]:** \"Don't judge whether something is 'real poetry' by checking for rhyme or strict meter. Instead, look for poetry's core features: condensed and carefully chosen language, deliberate line/stanza breaks, and heightened use of imagery or figurative language — free verse can have all of these without rhyme or fixed meter.\"\n- **Discrimination pairs [P33]:** (a) Rhyme-and-meter-required (poetry must have rhyme and a strict metrical pattern to count as genuine poetry) vs. (b) Core-features recognition (poetry is defined by condensed language, deliberate line/stanza structure, and heightened figurative/imagistic language — rhyme and meter are optional stylistic choices, not requirements).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's poetry-toolkit framing before continuing to TA-3.",
+      "localKey": "MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER",
+      "language": "en",
+      "refs": [
+        "MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Line-Break Effect Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Line-Break Effect Practice\",\"primitives\":[],\"addresses\":[\"MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Poetry's Core Features vs. Optional Features",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Poetry's Core Features vs. Optional Features\",\"primitives\":[],\"addresses\":[\"MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Stanza Function",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Stanza Function\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Condensed Language and Word Choice",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Condensed Language and Word Choice\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Analyzing a Novel Poem's Structure",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Analyzing a Novel Poem's Structure\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER\",\"MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES",
+        "MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identify a deliberate line-break effect**\nGiven a poem excerpt, student identifies a specific word emphasized by a line break and explains the effect. *(Directly targets MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Confirm free verse as genuine poetry**\nGiven a free verse poem with no rhyme/meter, student confirms it is genuine poetry by identifying its core features (condensed language, deliberate lines). *(Directly targets MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identify stanza function**\nGiven a multi-stanza poem, student identifies stanza boundaries and explains what shift each stanza marks.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identify condensed language**\nGiven a poem excerpt, student identifies how meaning is compressed compared to an equivalent prose expansion.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full novel-poem structural analysis**\nGiven a new poem, student identifies line-break effects, confirms its rhyme/meter status (or free verse), and identifies stanza function.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Adaptive Flags",
+      "content": "- If the student treats line breaks as arbitrary, weight remediation toward MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES's bridge text and re-run TA-1's line-break-effect practice before returning to independent analysis.\n- If the student dismisses free verse as not \"real\" poetry, weight remediation toward MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER's bridge text and TA-2's core-vs-optional-features practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.literature.poetic-forms`, `eng.literature.literary-genres-overview`) — do not certify mastery without TA-5's full structural analysis, since poetic forms specifically deepens the rhyme/meter/stanza patterns established here as options within a larger toolkit.\n- Reuse the \"poet's toolkit\" framing explicitly when introducing `eng.literature.poetic-forms` — that concept catalogs the specific named forms (sonnet, haiku, etc.) as particular tool combinations poets can choose from this same toolkit.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES",
+        "MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.literature.poetry-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.poetry-basics",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Literary-Devices-Overview Readiness Check]\n        |\n        v\n[Concrete Anchor: The Poet's Toolkit / Prose-to-Poem Cutting]\n        |\n        v\n[TA-1: Line-Break Effect Practice]\n        |\n        v\n[TA-2: Poetry's Core Features vs. Optional Features]\n        |\n        v\n[TA-3: Stanza Function]\n        |\n        v\n[TA-4: Condensed Language and Word Choice]\n        |\n        v\n[TA-5: Analyzing a Novel Poem's Structure]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — poetry analysis applies the general device-identification-and-effect-explanation discipline specifically to poetic structural features, so weak general device analysis undermines the specific application. During instruction (S1), watch for both misconception patterns: treating line breaks as arbitrary (MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES) and requiring rhyme/meter for \"real\" poetry (MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER) both under-value poetry's actual, deliberate structural choices — redirect both to the Poet's Toolkit anchor. If the student ignores line-break effects or dismisses free verse during TA-1/TA-2 (S6), drop back to the Concrete Anchor's demonstrations before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who identifies stanza function well (MP-3) but still treats line breaks as arbitrary or dismisses free verse has not learned the core structural judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetry-basics.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.editing-and-proofreading-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.editing-and-proofreading",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b9e771503c6b6693c23fe04de953885d16e70f07ecb5a3fe8034937bc6b855ed",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md": "sha256:548d855b2f88e0b09078c1863f9eecabfd5d39d402fb630054800700f893d364"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.editing-and-proofreading",
+    "name": "Editing and Proofreading",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.revising-for-content"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.editing-and-proofreading-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.editing-and-proofreading (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md": "sha256:548d855b2f88e0b09078c1863f9eecabfd5d39d402fb630054800700f893d364"
+      },
+      "contentHash": "sha256:091465616811ac27ea56a020a2a992e130d70e21a86bea1a85796642ca123a9c",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.editing-and-proofreading.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md#TA-1 (addresses MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.editing-and-proofreading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.editing-and-proofreading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.editing-and-proofreading.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md#TA-2 (addresses MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.editing-and-proofreading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.editing-and-proofreading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.editing-and-proofreading.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.editing-and-proofreading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.editing-and-proofreading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.editing-and-proofreading.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.editing-and-proofreading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.editing-and-proofreading\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.editing-and-proofreading.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md#TA-5 (addresses MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS, MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.editing-and-proofreading"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.editing-and-proofreading\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.editing-and-proofreading/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Editing and Proofreading — Conceptual Development Sequence",
+      "content": "### TA-1: Multi-Technique Proofreading Practice\nPresent a paragraph with 4 planted errors and have the student proofread using 3 different techniques (silent read, read-aloud, backward sentence-order read), tracking how many errors each technique catches. Directly counters MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS.\n\n### TA-2: Spell-Check's Blind Spots\nUsing the discrimination pairs from MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR, present a passage with homophone and context-dependent errors that a spell-checker would miss, and have the student identify these specifically, confirming spell-check alone is insufficient.\n\n### TA-3: Single-Error-Type Passes\nTeach the technique of doing separate proofreading passes, each focused on just one error type (e.g., one pass just for subject-verb agreement, one pass just for comma usage), and have the student apply this to a sample draft.\n\n### TA-4: Common Error Pattern Recognition\nTeach a checklist of commonly-missed error types (homophones, subject-verb agreement, comma splices, repeated words, missing words) and have the student proofread a passage systematically checking each pattern.\n\n### TA-5: Full Proofreading of an Original Draft\nStudent proofreads their own or a provided near-final draft using multiple techniques (read-aloud, single-error-type passes) and the common-error checklist, correcting all found errors — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": ": Technique Comparison (Scaffolded)",
+      "content": "### WE-1: Technique Comparison (Scaffolded)\n**Passage with errors:** \"The the students walked to they're classroom and sat down at there desks.\"\n**Walkthrough:** A quick silent read may miss the repeated \"the the\" and the homophone errors (\"they're\"/\"there\" used incorrectly). Reading aloud slowly and checking word-by-word catches all three errors.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": ": Spell-Check Blind Spot Identification (Guided)",
+      "content": "### WE-2: Spell-Check Blind Spot Identification (Guided)\n**Passage:** \"Its a beautiful day, and the dog wagged it's tail happily.\"\n**Walkthrough:** Confirm a spell-checker would not flag either \"Its\" or \"it's\" as misspelled (both are valid spellings) — the student must recognize that \"Its\" should be \"It's\" (contraction of \"it is\") and \"it's\" should be \"its\" (possessive), a context-dependent error spell-check misses.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": ": Full Systematic Proofreading (Independent)",
+      "content": "### WE-3: Full Systematic Proofreading (Independent)\n**Task:** Student proofreads a near-final draft using the common-error checklist (homophones, subject-verb agreement, comma usage, repeated/missing words), doing at least 2 separate single-focus passes.\n**Walkthrough:** Student identifies and corrects errors across multiple categories, demonstrating that systematic, multi-pass proofreading catches more than a single read-through.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/misconception/MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS",
+      "kind": "misconception",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "- **Trigger signal:** Student proofreads by reading through their piece silently a single time at normal reading speed, assuming this reliably catches all remaining errors, without recognizing that the brain automatically \"auto-corrects\" familiar text while reading silently and quickly, meaning many errors (especially typos and small omissions) are genuinely easy to miss this way — multiple passes and different techniques (reading aloud, reading backward sentence-by-sentence, checking one error type at a time) catch errors a single silent read misses.",
+      "content": "### MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS\n- **Trigger signal:** Student proofreads by reading through their piece silently a single time at normal reading speed, assuming this reliably catches all remaining errors, without recognizing that the brain automatically \"auto-corrects\" familiar text while reading silently and quickly, meaning many errors (especially typos and small omissions) are genuinely easy to miss this way — multiple passes and different techniques (reading aloud, reading backward sentence-by-sentence, checking one error type at a time) catch errors a single silent read misses.\n- **Conflict evidence [P28]:** Present a paragraph with 3 planted errors (a missing word, a repeated word, a homophone mix-up like \"their/there\") and have the student read it silently once at normal speed. Then have them read it aloud slowly. Compare how many errors were caught each way.\n- **Bridge text [P30]:** \"Your brain is very good at automatically 'filling in' or 'correcting' familiar text as you read silently and quickly — which is exactly why a single silent read-through misses so many small errors. Reading aloud slowly, reading backward sentence-by-sentence, or checking specifically for one error type at a time forces you to actually see each word rather than let your brain autocomplete it.\"\n- **Replacement text [P31]:** \"Don't rely on a single silent read-through to catch everything. Use multiple techniques: read aloud slowly, read sentences out of normal order (or backward) to disrupt the brain's autocomplete tendency, or do separate passes checking for just one error type at a time.\"\n- **Discrimination pairs [P33]:** (a) Single-silent-read sufficiency (one normal-speed silent read-through reliably catches remaining errors) vs. (b) Multi-technique necessity (reliable proofreading requires multiple techniques — reading aloud, disrupted-order reading, single-error-type passes — since a normal silent read lets the brain auto-correct past real errors).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's multi-technique practice before continuing.",
+      "localKey": "MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS",
+      "language": "en",
+      "refs": [
+        "MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/misconception/MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR",
+      "kind": "misconception",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "- **Trigger signal:** Student relies entirely on automated spell-check/grammar-check tools to catch all errors, without recognizing these tools have significant blind spots — they cannot catch correctly-spelled wrong words (homophone errors like \"their/there/they're,\" or wrong-but-valid word choices), and often miss context-dependent grammar issues or flag correct constructions as errors, meaning human proofreading is still necessary even after running these tools.",
+      "content": "### MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR\n- **Trigger signal:** Student relies entirely on automated spell-check/grammar-check tools to catch all errors, without recognizing these tools have significant blind spots — they cannot catch correctly-spelled wrong words (homophone errors like \"their/there/they're,\" or wrong-but-valid word choices), and often miss context-dependent grammar issues or flag correct constructions as errors, meaning human proofreading is still necessary even after running these tools.\n- **Conflict evidence [P28]:** Present a sentence with a homophone error (\"Their going to the store.\") and confirm that a spell-checker would NOT flag \"Their\" as misspelled, since it's a correctly-spelled word — just the wrong one for this context. Ask the student whether relying solely on spell-check would catch this error.\n- **Bridge text [P30]:** \"Spell-check and grammar-check tools are useful but genuinely limited — they check whether a word is spelled correctly, not whether it's the RIGHT word for the context. Homophone errors ('their/there/they're,' 'its/it's') are perfectly spelled but often wrong, and these tools frequently miss them entirely, or flag correct sentences as errors due to limited context understanding. Human proofreading remains necessary even after running these tools.\"\n- **Replacement text [P31]:** \"Use spell-check and grammar-check as a helpful first pass, not the final word. Always proofread yourself afterward, paying special attention to homophones and context-dependent word choices these tools commonly miss.\"\n- **Discrimination pairs [P33]:** (a) Automated-tools-are-sufficient (spell-check/grammar-check tools catch all errors, making human proofreading redundant) vs. (b) Automated-tools-as-first-pass (these tools have real blind spots, especially homophones and context-dependent errors, requiring human proofreading afterward).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's blind-spot-mirror framing before continuing to TA-3.",
+      "localKey": "MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR",
+      "language": "en",
+      "refs": [
+        "MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Multi-Technique Proofreading Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Multi-Technique Proofreading Practice\",\"primitives\":[],\"addresses\":[\"MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Spell-Check's Blind Spots",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Spell-Check's Blind Spots\",\"primitives\":[],\"addresses\":[\"MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Single-Error-Type Passes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Single-Error-Type Passes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Common Error Pattern Recognition",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Common Error Pattern Recognition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Full Proofreading of an Original Draft",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Proofreading of an Original Draft\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS\",\"MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS",
+        "MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Catch errors missed by a single silent read**\nGiven a passage, student demonstrates that reading aloud or using a disrupted-order technique catches errors a normal silent read missed. *(Directly targets MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify a spell-check blind spot**\nGiven a passage with a homophone or context-dependent error a spell-checker would miss, student identifies and corrects it. *(Directly targets MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Apply a single-error-type pass**\nGiven a draft, student performs a proofreading pass focused on just one error type and reports findings.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Apply the common-error checklist**\nGiven a passage, student systematically checks for each common error type (homophones, subject-verb agreement, comma usage) and identifies any present.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full proofreading of an original draft**\nStudent proofreads a near-final draft using multiple techniques and the common-error checklist, correcting all found errors.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Adaptive Flags",
+      "content": "- If the student relies on a single silent read-through, weight remediation toward MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS's bridge text and re-run TA-1's multi-technique practice before returning to independent proofreading.\n- If the student over-trusts automated spell/grammar-check tools, weight remediation toward MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR's bridge text and TA-2's blind-spot-identification practice specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.essay-structure`) — do not certify mastery without TA-5's full proofreading of an original draft, since essay structure assumes the student can already produce a clean, error-free piece as the final step of the writing process.\n- Reuse the \"blind spot mirror\" framing explicitly when introducing `eng.writing.essay-structure` — that concept's final polish stage depends on the same proofreading discipline established here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS",
+        "MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.writing.editing-and-proofreading/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.editing-and-proofreading",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Revising-for-Content Readiness Check]\n        |\n        v\n[Concrete Anchor: The Blind Spot Mirror / Multi-Pass Flashlight]\n        |\n        v\n[TA-1: Multi-Technique Proofreading Practice]\n        |\n        v\n[TA-2: Spell-Check's Blind Spots]\n        |\n        v\n[TA-3: Single-Error-Type Passes]\n        |\n        v\n[TA-4: Common Error Pattern Recognition]\n        |\n        v\n[TA-5: Full Proofreading of an Original Draft]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — editing/proofreading assumes content revision is already complete, so a student who hasn't yet distinguished revision from editing may prematurely proofread unstable content. During instruction (S1), watch for both misconception patterns: trusting a single silent read (MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS) and over-relying on automated tools (MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR) both underestimate how easily errors slip past insufficient proofreading methods — redirect both to the Blind Spot Mirror/Multi-Pass Flashlight anchor. If the student misses errors using only one technique or trusts spell-check blindly during TA-1/TA-2 (S6), drop back to the Concrete Anchor's demonstrations before returning to independent proofreading. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who applies systematic checklists well (MP-3/MP-4) but still relies on a single read or trusts spell-check fully has not learned the core proofreading discipline this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
