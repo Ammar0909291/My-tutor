@@ -5625,6 +5625,257 @@ const SVA_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.calc.limits ────────────────────────────────────────────────────────
+const LIM = 'math.calc.limits'
+const LIM_SRC = 'docs/curriculum/blueprints/math.calc.limits.md'
+
+const LIM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LIM,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'A limit asks where a function is HEADING, not where it IS. ' +
+      'Take f(x) = (x\u00b2\u22121)/(x\u22121) at x = 1: plugging in gives 0/0 — ' +
+      'undefined. Yet walk x toward 1 and watch the outputs: f(0.9) = ' +
+      '1.9, f(0.99) = 1.99, f(1.01) = 2.01 — the function is heading ' +
+      'to 2 from both sides, so lim_{x\u21921} f(x) = 2, even though f(1) ' +
+      'does not exist. (Algebraically the ratio simplifies to x + 1 ' +
+      'everywhere except the single missing point — the graph is a ' +
+      'line with a hole in it.) The limit and the value are separate ' +
+      'questions: for nice continuous functions they happen to agree, ' +
+      'which is why the habit \u201climit = plug in\u201d forms — and exactly ' +
+      'why holes, jumps, and piecewise functions break it. A limit ' +
+      'never requires f(a) to be defined; it only requires the ' +
+      'approach to settle.',
+    targetedMisconceptions: [`${LIM}:MC-1`, `${LIM}:MC-2`],
+    source: `${LIM_SRC} — MC-1 LIMIT-IS-THE-FUNCTION-VALUE + MC-2 LIMIT-REQUIRES-f(a)-DEFINED (TA-B01: hole-in-the-line construction)`,
+  },
+  {
+    conceptId: LIM,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'A two-sided limit exists only when BOTH one-sided approaches ' +
+      'agree — checking one side is half a proof. The standard trap: ' +
+      'f(x) = |x|/x near 0. From the right, every value is +1, so ' +
+      'lim_{x\u21920\u207a} = 1. Report that as \u201cthe limit\u201d and you\u2019ve missed ' +
+      'the left side: for negative x, |x|/x = \u22121, so lim_{x\u21920\u207b} = ' +
+      '\u22121. The two sides disagree \u2192 lim_{x\u21920} does NOT exist — the ' +
+      'graph jumps. Procedure to internalize: compute left, compute ' +
+      'right, compare. Equal \u2192 that shared value is the limit. ' +
+      'Different \u2192 no two-sided limit, full stop. One-sided limits ' +
+      'are real, useful objects — but only their agreement earns the ' +
+      'unqualified word \u201climit.\u201d',
+    targetedMisconceptions: [`${LIM}:MC-3`],
+    source: `${LIM_SRC} — MC-3 ONE-SIDED-EQUALS-TWO-SIDED (TA-B02: |x|/x jump case + left-right-compare procedure)`,
+  },
+]
+
+const LIM_PROBES: SeedProbe[] = [
+  {
+    conceptId: LIM,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'f(x) = (x\u00b2\u22124)/(x\u22122) is undefined at x = 2. What is lim_{x\u21922} f(x)?',
+    choices: [
+      { text: '4 — the ratio simplifies to x + 2 away from the point; the approach settles at 4 even though f(2) is undefined', isCorrect: true },
+      { text: 'It does not exist — a limit requires f(2) to be defined', isCorrect: false, misconceptionId: `${LIM}:MC-2` },
+      { text: '0/0 — plug in x = 2', isCorrect: false, misconceptionId: `${LIM}:MC-1` },
+    ],
+    correctValue: '4',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LIM}:MC-1`, `${LIM}:MC-2`],
+    source: `${LIM_SRC} — MC-2 surface-form case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LIM,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For f(x) = |x|/x, the right-hand limit at 0 is +1. What is lim_{x\u21920} f(x)?',
+    choices: [
+      { text: 'It does not exist — the left-hand limit is \u22121, and the two sides must agree', isCorrect: true },
+      { text: '+1 — the right-hand limit is the limit', isCorrect: false, misconceptionId: `${LIM}:MC-3` },
+    ],
+    correctValue: 'does not exist',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LIM}:MC-3`],
+    source: `${LIM_SRC} — MC-3 surface-form case as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.calc.derivative-intro ──────────────────────────────────────────────
+const DRV = 'math.calc.derivative-intro'
+const DRV_SRC = 'docs/curriculum/blueprints/math.calc.derivative-intro.md'
+
+const DRV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DRV,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      '\u201cSpeed at one instant makes no sense — you need a time ' +
+      'interval!\u201d That objection is correct about measurement and is ' +
+      'exactly the puzzle the derivative solves. Your speedometer ' +
+      'reads 60 km/h RIGHT NOW — what does that even mean? Not change ' +
+      'divided by zero time. It means: measure the average speed over ' +
+      'a shrinking window — the last second, the last tenth, the last ' +
+      'thousandth — and watch the averages HEAD somewhere: 59.1, ' +
+      '59.9, 59.99\u2026 \u2192 60. The derivative is that destination — the ' +
+      'LIMIT of average rates as the window shrinks — never a ' +
+      'division by an interval of zero. The same move builds the ' +
+      'tangent slope: you truly cannot make a slope from one point, ' +
+      'so take a second point on the curve, compute the two-point ' +
+      'slope, and slide the second point toward the first; the ' +
+      'slopes\u2019 destination is the tangent\u2019s slope. The limit ' +
+      'manufactures the missing second point.',
+    targetedMisconceptions: [`${DRV}:MC-2`, `${DRV}:MC-1`],
+    source: `${DRV_SRC} — MC-2 INSTANTANEOUS-IS-UNDEFINED + MC-1 TANGENT-IS-JUST-ONE-POINT (TA-B01/B02: shrinking-window + sliding-secant constructions)`,
+  },
+  {
+    conceptId: DRV,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Computing [f(x+h)\u2212f(x)]/h at h = 0.001 and calling the result ' +
+      'the derivative confuses an APPROXIMATION with the exact value. ' +
+      'For f(x) = x\u00b2 at x = 1, h = 0.001 gives 2.001 — close to 2, ' +
+      'but 2.001 is not the derivative; it is one secant slope. Do ' +
+      'the algebra with h left as a symbol: [(x+h)\u00b2 \u2212 x\u00b2]/h = ' +
+      '(2xh + h\u00b2)/h = 2x + h. NOW take the limit as h \u2192 0: exactly ' +
+      '2x, so exactly 2 at x = 1. The limit is a PROCESS completed ' +
+      'symbolically, not a small number plugged in: any specific h, ' +
+      'however tiny, leaves a leftover +h in the answer. Small-h ' +
+      'evaluation is how computers approximate; the limit is how ' +
+      'mathematics gets it exact.',
+    targetedMisconceptions: [`${DRV}:MC-3`],
+    source: `${DRV_SRC} — MC-3 DIFFERENCE-QUOTIENT-IS-THE-DERIVATIVE (TA-B02: symbolic 2x + h computation vs numeric 2.001)`,
+  },
+]
+
+const DRV_PROBES: SeedProbe[] = [
+  {
+    conceptId: DRV,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For f(x) = x\u00b2, a student computes [f(1.001) \u2212 f(1)]/0.001 = 2.001 and reports \u201cthe derivative at 1 is 2.001.\u201d What is right?',
+    choices: [
+      { text: 'The derivative is exactly 2 — the difference quotient simplifies to 2 + h, and the LIMIT as h \u2192 0 removes the leftover h', isCorrect: true },
+      { text: '2.001 is the derivative — h = 0.001 is small enough to be exact', isCorrect: false, misconceptionId: `${DRV}:MC-3` },
+    ],
+    correctValue: 'exactly 2',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DRV}:MC-3`],
+    source: `${DRV_SRC} — MC-3 surface form as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DRV,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: '\u201cYou can\u2019t find the slope of a tangent — it only touches ONE point, and slope needs two.\u201d How does calculus answer this?',
+    choices: [
+      { text: 'Take a second point on the CURVE, compute the secant slope, and slide it toward the first: the limit of those slopes defines the tangent slope', isCorrect: true },
+      { text: 'It can\u2019t be answered — tangent lines genuinely have no slope', isCorrect: false, misconceptionId: `${DRV}:MC-1` },
+    ],
+    correctValue: 'limit of secant slopes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DRV}:MC-1`],
+    source: `${DRV_SRC} — MC-1 surface form as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.func.function-concept ──────────────────────────────────────────────
+const FUNC = 'math.func.function-concept'
+const FUNC_SRC = 'docs/curriculum/blueprints/math.func.function-concept.md'
+
+const FUNC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FUNC,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'f(x) is NOT f times x. In algebra, side-by-side letters ' +
+      'multiply (2x, 3a) — function notation breaks that convention ' +
+      'and nobody warns you. Here f is a RULE\u2019S NAME, and f(x) reads ' +
+      '\u201cthe output of rule f at input x.\u201d If f(x) = x + 2, then f(3) ' +
+      'means \u201cfeed 3 into the rule\u201d: 3 + 2 = 5. Try the ' +
+      'multiplication reading instead — f(3) = 3f — and you get an ' +
+      'equation with an unknown number f that leads nowhere: the ' +
+      'notation was never arithmetic. Picture f as a machine with a ' +
+      'slot: f(3) is what falls out when you drop 3 in. That reading ' +
+      'makes sense of everything later: f(a+1) means feed in a+1, ' +
+      'f(g(x)) means chain two machines — none of it is ' +
+      'multiplication.',
+    targetedMisconceptions: [`${FUNC}:MC-3`],
+    source: `${FUNC_SRC} — MC-3 f(x)-means-f-times-x (P28 contradiction + P30 rule-name bridge + machine model)`,
+  },
+  {
+    conceptId: FUNC,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Is f(x) = x\u00b2 disqualified as a function because f(2) and ' +
+      'f(\u22122) both equal 4? Read the definition carefully: each INPUT ' +
+      'gets exactly one output. Check: does 2 have one output? Yes — ' +
+      '4. Does \u22122 have one output? Yes — 4. Every input behaves; x\u00b2 ' +
+      'is a function. Two inputs SHARING an output is perfectly ' +
+      'legal. The stricter property — each output coming from only ' +
+      'one input — has its own name: ONE-TO-ONE, and x\u00b2 is a ' +
+      'function that is not one-to-one. The two ideas are ' +
+      'independent axes, giving four kinds of relation: function & ' +
+      'one-to-one (x\u00b3), function & not one-to-one (x\u00b2), not a ' +
+      'function at all (x = y\u00b2 read as y in terms of x, one input \u2192 ' +
+      'two outputs). The arrow direction is everything: function ' +
+      'restricts INPUT\u2192output; one-to-one restricts output\u2190input.',
+    targetedMisconceptions: [`${FUNC}:MC-4`],
+    source: `${FUNC_SRC} — MC-4 one-to-one-is-the-definition (P28 input-by-input check + P30 orthogonal-axes bridge + P31 2\u00d72 table)`,
+  },
+]
+
+const FUNC_PROBES: SeedProbe[] = [
+  {
+    conceptId: FUNC,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If f(x) = x + 2, what is f(3)?',
+    choices: [
+      { text: '5 — feed 3 into the rule: 3 + 2', isCorrect: true },
+      { text: '3f — f(3) means f multiplied by 3', isCorrect: false, misconceptionId: `${FUNC}:MC-3` },
+      { text: '3x + 2 — multiply the rule by 3', isCorrect: false, misconceptionId: `${FUNC}:MC-3` },
+    ],
+    correctValue: '5',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FUNC}:MC-3`],
+    source: `${FUNC_SRC} — DB-3 evaluation task as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FUNC,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'f(2) = 4 and f(\u22122) = 4 for f(x) = x\u00b2. Is x\u00b2 a function?',
+    choices: [
+      { text: 'Yes — each input has exactly one output; two inputs may share an output (it just isn\u2019t one-to-one)', isCorrect: true },
+      { text: 'No — the same output appearing twice violates the definition of a function', isCorrect: false, misconceptionId: `${FUNC}:MC-4` },
+    ],
+    correctValue: 'yes — not one-to-one, still a function',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FUNC}:MC-4`],
+    source: `${FUNC_SRC} — MC-4 diagnostic trigger as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -5692,6 +5943,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...DCC_EXPLANATIONS,
   ...LENS_EXPLANATIONS,
   ...SVA_EXPLANATIONS,
+  ...LIM_EXPLANATIONS,
+  ...DRV_EXPLANATIONS,
+  ...FUNC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -5759,4 +6013,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...DCC_PROBES,
   ...LENS_PROBES,
   ...SVA_PROBES,
+  ...LIM_PROBES,
+  ...DRV_PROBES,
+  ...FUNC_PROBES,
 ]
