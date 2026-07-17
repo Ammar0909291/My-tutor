@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.theme-and-message-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.theme-and-message",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:03819cd43a83b6b9af4601a85606cc279353131d86a08f3ce2694ef96f30dd56",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.theme-and-message.md": "sha256:8db95ff2b0d7acc22979cb35cb6446713dd2b6cff496af474b7403bae2d1c6b4"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.theme-and-message",
+    "name": "Theme and Message",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.plot-structure",
+      "eng.literature.character-development"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.theme-and-message-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.theme-and-message (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.theme-and-message.md": "sha256:8db95ff2b0d7acc22979cb35cb6446713dd2b6cff496af474b7403bae2d1c6b4"
+      },
+      "contentHash": "sha256:e750fabc044589eaa07e4546ba0ee7753b83c3776647904ae1649735780c9f3e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.theme-and-message.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.theme-and-message.md#TA-1 (addresses MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.theme-and-message"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.theme-and-message\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.theme-and-message.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.theme-and-message.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.theme-and-message"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.theme-and-message\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.theme-and-message.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.theme-and-message.md#TA-3 (addresses MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.theme-and-message"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.theme-and-message\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.theme-and-message.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.theme-and-message.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.theme-and-message"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.theme-and-message\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.theme-and-message.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.theme-and-message.md#TA-5 (addresses MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY, MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.theme-and-message"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.theme-and-message\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.theme-and-message/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Theme and Message — Conceptual Development Sequence",
+      "content": "### TA-1: Topic vs. Theme Sorting\nPresent 4 story summaries and have the student first name each story's topic (a word/phrase), then push further to state a specific theme (a full claim/insight) for each, confirming theme requires more than topic-naming. Directly counters MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY.\n\n### TA-2: Deriving Theme from Plot Resolution and Character Growth\nTeach the process of deriving theme: examine how the central conflict resolves and what the protagonist specifically learns or fails to learn, then state a claim connecting those to a larger insight about life/human nature.\n\n### TA-3: Multiple Valid Theme Interpretations\nUsing the discrimination pairs from MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME, present a story supporting two different theme statements (as in the Conflict Evidence example) and have the student confirm both are valid if each cites specific textual evidence.\n\n### TA-4: Evidence-Testing a Theme Statement\nGiven a proposed theme statement for a story, student tests it against specific plot events and character arcs, confirming or revising the statement if the evidence doesn't fully support it.\n\n### TA-5: Deriving and Defending an Original Theme Statement\nStudent reads a new short story, derives an original theme statement, and defends it with specific plot/character evidence, acknowledging that an alternative valid theme statement might also be possible — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": ": Topic vs. Theme (Scaffolded)",
+      "content": "### WE-1: Topic vs. Theme (Scaffolded)\n**Story:** A character loses a competition after months of preparation but discovers new friendships along the way.\n**Walkthrough:** Topic: \"competition\" or \"friendship\" (too vague). Theme: \"the process of pursuing a goal can be valuable even without achieving the intended outcome\" (a specific, derivable claim).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": ": Deriving Theme from Resolution and Growth (Guided)",
+      "content": "### WE-2: Deriving Theme from Resolution and Growth (Guided)\n**Story:** A stubborn character refuses help throughout a survival ordeal, nearly fails, then accepts a stranger's help and survives.\n**Walkthrough:** Trace the resolution (survival only happens after accepting help) and the character's growth (from refusing help to accepting it) to derive: \"true strength includes knowing when to accept help from others.\"",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": ": Multiple Valid Themes (Independent)",
+      "content": "### WE-3: Multiple Valid Themes (Independent)\n**Story:** A story about a team overcoming a difficult loss, where one subplot emphasizes the coach's mentorship and another emphasizes a player's personal growth in handling failure.\n**Walkthrough:** Student derives two potentially valid themes — one focused on mentorship's importance, one on resilience in the face of failure — and confirms both are legitimate if each cites specific supporting evidence from the respective subplot.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/misconception/MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY",
+      "kind": "misconception",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "- **Trigger signal:** Student states a story's \"theme\" as simply its topic or subject matter (e.g., \"the theme is war\" or \"the theme is friendship\") rather than the deeper insight or claim the story makes ABOUT that subject (e.g., \"war destroys innocence\" or \"true friendship requires honesty even when it's uncomfortable\") — confusing the general subject area with the specific insight the work develops about it.",
+      "content": "### MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY\n- **Trigger signal:** Student states a story's \"theme\" as simply its topic or subject matter (e.g., \"the theme is war\" or \"the theme is friendship\") rather than the deeper insight or claim the story makes ABOUT that subject (e.g., \"war destroys innocence\" or \"true friendship requires honesty even when it's uncomfortable\") — confusing the general subject area with the specific insight the work develops about it.\n- **Conflict evidence [P28]:** Present \"the theme is family\" (a topic, not an insight) alongside \"family bonds can survive even severe conflict if built on genuine respect\" (a specific claim/insight about family, derivable from a particular story's plot and character arcs). Ask which one actually tells you something the story is arguing or revealing, versus which one just names a subject area.\n- **Bridge text [P30]:** \"A topic ('family,' 'war,' 'friendship') just names what the story is about — it could apply to almost any story on that subject. A theme is a specific INSIGHT or CLAIM the particular story makes about that topic, developed through its plot and characters. Two stories about 'friendship' could have completely different, even opposite, themes.\"\n- **Replacement text [P31]:** \"Don't stop at naming the topic. Ask: what specific insight or claim does THIS story make about that topic, based on how the plot resolves and what the characters learn? State the theme as a full claim/sentence, not a one-word or one-phrase topic label.\"\n- **Discrimination pairs [P33]:** (a) Theme-as-topic (theme is simply the general subject area the story is about) vs. (b) Theme-as-specific-insight (theme is the particular claim or insight the story develops about its topic, stated as a full idea, not a subject label).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's topic-vs-theme sort before continuing.",
+      "localKey": "MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY",
+      "language": "en",
+      "refs": [
+        "MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/misconception/MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME",
+      "kind": "misconception",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "- **Trigger signal:** Student assumes there is exactly one single \"correct\" theme for any story and either forces a rigid single interpretation or panics when they and a peer arrive at differently-worded (but both textually-supportable) theme statements, rather than recognizing that complex literary works often support multiple valid thematic interpretations, as long as each is genuinely grounded in specific textual evidence.",
+      "content": "### MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME\n- **Trigger signal:** Student assumes there is exactly one single \"correct\" theme for any story and either forces a rigid single interpretation or panics when they and a peer arrive at differently-worded (but both textually-supportable) theme statements, rather than recognizing that complex literary works often support multiple valid thematic interpretations, as long as each is genuinely grounded in specific textual evidence.\n- **Conflict evidence [P28]:** Present a story that could support two different, textually-grounded theme statements (e.g., \"perseverance leads to success\" and \"success sometimes requires accepting help from others,\" both supported by different plot/character evidence in the same story). Ask whether only one of these can be \"the\" theme, or whether both are legitimate as long as each is evidence-supported.\n- **Bridge text [P30]:** \"Complex stories often support more than one valid thematic reading — different readers can reasonably emphasize different evidence and arrive at different, equally legitimate theme statements. What makes a theme statement valid isn't matching one 'correct' answer key — it's being genuinely supported by specific textual evidence from the plot and characters.\"\n- **Replacement text [P31]:** \"Don't assume there's exactly one right theme to find. If your theme statement is genuinely supported by specific evidence from the story's plot and character arcs, it's a legitimate reading, even if a peer's differently-worded theme statement is also legitimate and evidence-supported.\"\n- **Discrimination pairs [P33]:** (a) Single-correct-theme assumption (every story has exactly one right theme to identify) vs. (b) Multiple-valid-interpretation recognition (complex stories can legitimately support multiple theme statements, each valid if genuinely evidence-supported).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's multi-angle-photograph framing before continuing to TA-3.",
+      "localKey": "MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME",
+      "language": "en",
+      "refs": [
+        "MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Topic vs. Theme Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Topic vs. Theme Sorting\",\"primitives\":[],\"addresses\":[\"MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Deriving Theme from Plot Resolution and Character Growth",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Deriving Theme from Plot Resolution and Character Growth\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Multiple Valid Theme Interpretations",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Multiple Valid Theme Interpretations\",\"primitives\":[],\"addresses\":[\"MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Evidence-Testing a Theme Statement",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Evidence-Testing a Theme Statement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Deriving and Defending an Original Theme Statement",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Deriving and Defending an Original Theme Statement\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME\",\"MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY",
+        "MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguish theme from topic**\nGiven a story, student states both its topic (word/phrase) and its theme (a full claim), confirming the theme goes beyond the topic. *(Directly targets MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Accept multiple valid theme interpretations**\nGiven a story supporting two different theme statements, student confirms both are legitimate if each cites specific evidence, rather than insisting on one \"correct\" theme. *(Directly targets MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Derive theme from plot resolution and character growth**\nGiven a story's resolution and character arc, student derives a theme statement connecting the two.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Evidence-test a proposed theme**\nGiven a proposed theme statement, student tests it against specific plot/character evidence, confirming or revising it.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Derive and defend an original theme statement**\nGiven a novel short story, student derives an original theme statement and defends it with specific evidence.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Adaptive Flags",
+      "content": "- If the student states a topic instead of a theme, weight remediation toward MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY's bridge text and re-run TA-1's topic-vs-theme sort before returning to independent derivation.\n- If the student insists on one single correct theme and rejects valid alternatives, weight remediation toward MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME's bridge text and TA-3's multiple-interpretation practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.literature.literary-devices-overview`, `eng.literature.prose-nonfiction`) — do not certify mastery without TA-5's original theme derivation and defense, since both downstream concepts assume the student can already synthesize a work's larger meaning from its component parts.\n- Reuse the \"X-ray insight, not the subject label\" framing explicitly when introducing `eng.literature.literary-devices-overview` — that concept examines HOW authors use specific devices to develop and reinforce the theme identified here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY",
+        "MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.literature.theme-and-message/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.theme-and-message",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Plot-Structure/Character-Development Readiness Check]\n        |\n        v\n[Concrete Anchor: Subject Label vs. X-Ray / Multi-Angle Photograph]\n        |\n        v\n[TA-1: Topic vs. Theme Sorting]\n        |\n        v\n[TA-2: Deriving Theme from Plot Resolution and Character Growth]\n        |\n        v\n[TA-3: Multiple Valid Theme Interpretations]\n        |\n        v\n[TA-4: Evidence-Testing a Theme Statement]\n        |\n        v\n[TA-5: Deriving and Defending an Original Theme Statement]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — theme is derived directly from plot resolution and character growth, so weak identification of either undermines the deeper analytical task. During instruction (S1), watch for both misconception patterns: conflating theme with topic (MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY) and insisting on a single correct theme (MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME) both substitute a simpler, less demanding judgment for the real analytical synthesis required — redirect both to the Subject Label/X-Ray and Multi-Angle Photograph anchors. If the student states a topic instead of a theme or rejects a valid alternative interpretation during TA-1/TA-3 (S6), drop back to the Concrete Anchor's demonstrations before returning to independent derivation. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who derives theme from plot/character evidence well (MP-3) but still conflates theme with topic or insists on single correctness has not learned the core synthesis judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.theme-and-message.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

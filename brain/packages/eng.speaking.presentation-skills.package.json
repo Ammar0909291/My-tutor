@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.presentation-skills-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.presentation-skills",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f3d32ea3c7f7e40845e2994a34af7e8968dd36633d0157507b5968437070c1df",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.presentation-skills.md": "sha256:dab9f0f5cf6f1d5a076e997f3d48ee01deb107935a853c70b24f0c0a02e90c88"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.speaking.presentation-skills",
+    "name": "Presentation Skills",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.speaking.public-speaking-basics"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.presentation-skills-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.presentation-skills (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.presentation-skills.md": "sha256:dab9f0f5cf6f1d5a076e997f3d48ee01deb107935a853c70b24f0c0a02e90c88"
+      },
+      "contentHash": "sha256:990f083bc39e7dbcda89a0beb73a48c244ffbee3c57cee286898f70c01b1d746",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.presentation-skills.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md#TA-1 (addresses MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.presentation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.presentation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.presentation-skills.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md#TA-2 (addresses MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.presentation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.presentation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.presentation-skills.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.presentation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.presentation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.presentation-skills.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.presentation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.presentation-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.presentation-skills.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md#TA-5 (addresses MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY, MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.presentation-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.presentation-skills\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.presentation-skills/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Presentation Skills — Conceptual Development Sequence",
+      "content": "### TA-1: Slide-Density Evaluation\nPresent slides of varying text density (full-sentence-packed vs. key-phrase-and-image) and have the student identify which supports spoken delivery versus which competes with it. Directly counters MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY.\n\n### TA-2: Selecting Key Points for the Audience and Purpose\nGiven a large pool of information on a topic and a specified audience/purpose, student selects the 3-4 most important points to develop, explaining why the rest were excluded or briefly mentioned. Directly counters MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE.\n\n### TA-3: Structuring a Presentation (Opening, Body, Closing)\nTeach basic presentation structure (an engaging opening establishing purpose, a body organized around the selected key points, a closing that reinforces the main takeaway) and have the student outline this structure for a sample topic.\n\n### TA-4: Designing Supportive Visual Aids\nStudent creates 2-3 sample slides for a topic, applying the key-phrase/image support principle (not full-sentence duplication) established in TA-1.\n\n### TA-5: Delivering a Full Structured Presentation\nStudent prepares and delivers (or narrates a plan for) a complete short presentation with selected key points, a clear opening/body/closing structure, and supportive (not duplicative) visual aids — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": ": Slide-Density Comparison (Scaffolded)",
+      "content": "### WE-1: Slide-Density Comparison (Scaffolded)\n**Dense slide:** A slide with 5 full sentences explaining a historical event in complete detail. **Supportive slide:** The same event represented by a single key date, a 3-word phrase, and a relevant image.\n**Walkthrough:** Confirm the supportive slide lets the speaker explain verbally while the slide reinforces with minimal, memorable visual anchors, whereas the dense slide invites the audience to read instead of listen.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": ": Selective Content Choice (Guided)",
+      "content": "### WE-2: Selective Content Choice (Guided)\n**Topic:** A presentation about renewable energy for a general community audience (not energy experts).\n**Walkthrough:** From a large pool of possible technical points, select 3-4 accessible, high-impact points (cost savings, environmental benefit, local job creation) relevant to THIS audience, excluding highly technical engineering details better suited to a specialist audience.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": ": Full Presentation Structure and Delivery (Independent)",
+      "content": "### WE-3: Full Presentation Structure and Delivery (Independent)\n**Task:** Student prepares a 3-minute presentation about a school initiative, with an opening hook, 3 key body points, a closing takeaway, and 3 supportive (non-duplicative) slides.\n**Walkthrough:** Student demonstrates the full structure, selective content, and appropriately-designed visual aids working together.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/misconception/MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "- **Trigger signal:** Student creates visual aids (slides) packed with full sentences and dense text, essentially duplicating everything the speaker plans to say, rather than recognizing that visual aids should support and reinforce spoken content with key points, images, or data — not replace or duplicate the spoken delivery, which causes the audience to read the slide instead of listening to the speaker.",
+      "content": "### MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY\n- **Trigger signal:** Student creates visual aids (slides) packed with full sentences and dense text, essentially duplicating everything the speaker plans to say, rather than recognizing that visual aids should support and reinforce spoken content with key points, images, or data — not replace or duplicate the spoken delivery, which causes the audience to read the slide instead of listening to the speaker.\n- **Conflict evidence [P28]:** Present a slide packed with 6 full sentences of dense text alongside a slide with 3 short key phrases and one relevant image, supporting the same spoken content. Ask which slide the audience is more likely to read instead of listening to the speaker, and which better supports (without replacing) the spoken delivery.\n- **Bridge text [P30]:** \"When a slide contains everything you're going to say, the audience reads the slide instead of listening to you — the visual aid competes with your spoken delivery instead of supporting it. Good visual aids show key points, images, or data that reinforce what you're saying aloud, leaving the actual explanation and detail to your spoken words.\"\n- **Replacement text [P31]:** \"Keep your slides to key phrases, images, or data — not full sentences duplicating your spoken content. Let the visual aid support your words, not replace them; the audience should be listening to you, glancing at the slide for reinforcement, not reading the slide instead of you.\"\n- **Discrimination pairs [P33]:** (a) Visual-aid-as-full-script (slides should contain complete sentences matching everything the speaker will say) vs. (b) Visual-aid-as-support (slides should show key points, images, or data that reinforce spoken content without duplicating or replacing it).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's slide-density practice before continuing.",
+      "localKey": "MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY",
+      "language": "en",
+      "refs": [
+        "MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/misconception/MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "- **Trigger signal:** Student tries to cram as much information as possible into a presentation, believing more content demonstrates more thorough preparation or knowledge, rather than recognizing that effective presentations are selective — choosing the most important points for the specific audience and purpose, and cutting or summarizing less critical information to keep the presentation focused and retainable.",
+      "content": "### MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE\n- **Trigger signal:** Student tries to cram as much information as possible into a presentation, believing more content demonstrates more thorough preparation or knowledge, rather than recognizing that effective presentations are selective — choosing the most important points for the specific audience and purpose, and cutting or summarizing less critical information to keep the presentation focused and retainable.\n- **Conflict evidence [P28]:** Present two presentation outlines on the same topic: one covering 12 different points superficially, and one covering 4 points in depth with clear examples. Ask which presentation the audience is likely to actually remember and understand better afterward.\n- **Bridge text [P30]:** \"Cramming in more information doesn't make a presentation better — it usually makes it harder to follow and less memorable, since the audience can't absorb everything at once. Effective presentations are selective: choosing the most important points for this specific audience and purpose, and developing those well, rather than superficially covering everything you know.\"\n- **Replacement text [P31]:** \"Before finalizing your presentation content, ask: what are the 3-4 most important points my audience needs, given my specific purpose? Cut or briefly mention less critical information rather than trying to include everything — depth on fewer points beats superficial coverage of many.\"\n- **Discrimination pairs [P33]:** (a) Comprehensive-coverage value (a good presentation includes as much information as possible to show thoroughness) vs. (b) Selective-focus value (a good presentation selects the most important points for the specific audience/purpose and develops them well, deliberately excluding less critical content).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's suitcase-for-the-trip framing before continuing to TA-3.",
+      "localKey": "MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Slide-Density Evaluation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Slide-Density Evaluation\",\"primitives\":[],\"addresses\":[\"MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Selecting Key Points for the Audience and Purpose",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Selecting Key Points for the Audience and Purpose\",\"primitives\":[],\"addresses\":[\"MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Structuring a Presentation (Opening, Body, Closing)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Structuring a Presentation (Opening, Body, Closing)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Designing Supportive Visual Aids",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Designing Supportive Visual Aids\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Delivering a Full Structured Presentation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Delivering a Full Structured Presentation\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE\",\"MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY",
+        "MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identify a supportive vs. duplicative slide**\nGiven two slides on the same content (one dense/duplicative, one key-phrase/supportive), student correctly identifies which supports spoken delivery and explains why. *(Directly targets MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Select points for a specific audience**\nGiven a large information pool and a specified audience/purpose, student selects 3-4 appropriate key points and justifies the exclusions. *(Directly targets MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Structure a presentation outline**\nGiven a topic, student outlines an opening, body (with selected key points), and closing.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Design a supportive visual aid**\nGiven a key point, student designs a slide using key phrases/images rather than full sentences.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Deliver a full structured presentation**\nStudent prepares and delivers a complete short presentation with selected content, clear structure, and supportive visual aids.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Adaptive Flags",
+      "content": "- If the student creates dense, text-heavy slides, weight remediation toward MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY's bridge text and re-run TA-1's slide-density evaluation before returning to independent design.\n- If the student tries to cover excessive content, weight remediation toward MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE's bridge text and TA-2's audience-specific selection practice specifically.\n- This concept feeds three direct downstream unlocks (`eng.speaking.debate-skills`, `eng.communication.professional-communication`, `eng.communication.presentation-design`) — do not certify mastery without TA-5's full presentation delivery, since all three downstream concepts assume the student can already select content and design supportive visuals independently.\n- Reuse the \"suitcase for the trip, photo album not novel\" framing explicitly across the downstream concepts — presentation design specifically deepens the visual-aid-support principle established here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY",
+        "MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.speaking.presentation-skills/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.presentation-skills",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Public-Speaking-Basics Readiness Check]\n        |\n        v\n[Concrete Anchor: The Suitcase / Photo Album, Not the Novel]\n        |\n        v\n[TA-1: Slide-Density Evaluation]\n        |\n        v\n[TA-2: Selecting Key Points for Audience and Purpose]\n        |\n        v\n[TA-3: Structuring a Presentation]\n        |\n        v\n[TA-4: Designing Supportive Visual Aids]\n        |\n        v\n[TA-5: Delivering a Full Structured Presentation]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — presentation skills extend key-points-based delivery from public speaking basics into a more structured, visually-supported format, so reliance on verbatim scripting undermines the flexibility this concept requires. During instruction (S1), watch for both misconception patterns: dense duplicative slides (MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY) and comprehensive-coverage content (MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE) both reflect a \"more is better\" instinct that undermines effective presentation — redirect both to the Suitcase/Photo Album anchor. If the student creates dense slides or tries to cover too much content during TA-1/TA-2 (S6), drop back to the Concrete Anchor's packing and photo-album demonstrations before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who structures a presentation well (MP-3) but still creates dense slides or over-includes content has not learned the selective-and-supportive judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.presentation-skills.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

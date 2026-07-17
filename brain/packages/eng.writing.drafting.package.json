@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.drafting-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.drafting",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b9d9bbea42a1b02f1efae2fe139e4bab4d50ba7d2f07ed5c2f4c4fb91e67375b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.drafting.md": "sha256:bdf2483fde6df0b52b382c61b0054e65871600d284034a81704a277a533bae40"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.drafting",
+    "name": "Drafting",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.outlining-and-planning"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.drafting-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.drafting (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.drafting.md": "sha256:bdf2483fde6df0b52b382c61b0054e65871600d284034a81704a277a533bae40"
+      },
+      "contentHash": "sha256:39d70d78dee9a68b459a374de34e0611f63a04832de4c76531c6faefc4ff19b0",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.drafting.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.drafting.md#TA-1 (addresses MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.drafting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.drafting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.drafting.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.drafting.md#TA-2 (addresses MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.drafting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.drafting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.drafting.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.drafting.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.drafting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.drafting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.drafting.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.drafting.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.drafting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.drafting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.drafting.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.drafting.md#TA-5 (addresses MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING, MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.drafting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.drafting\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.drafting/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.drafting",
+      "title": "Drafting — Conceptual Development Sequence",
+      "content": "### TA-1: Flow-Preservation Practice\nStudent drafts a short passage with instructions to mark (not fix) any uncertain spots (spelling, word choice) with a simple symbol and continue writing without stopping. Directly counters MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING.\n\n### TA-2: Placeholder and Skip-Ahead Strategies\nUsing the discrimination pairs from MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE, present a drafting scenario where the student hits a difficult section and practices using a placeholder note or skip-ahead strategy rather than stopping entirely.\n\n### TA-3: Drafting from an Outline\nGiven a simple outline, student drafts full content for each outlined point, maintaining forward momentum and using flow-preservation and push-through strategies as needed.\n\n### TA-4: Distinguishing Draft-Stage Concerns from Editing-Stage Concerns\nPresent a list of writing concerns (content gaps, unclear transitions, spelling errors, word repetition) and have the student sort which belong to drafting's content-focus versus editing's correctness-focus.\n\n### TA-5: Completing a Full Draft from an Original Outline\nStudent drafts a complete short piece from their own outline, using flow-preservation, push-through strategies, and marking (not fixing) minor issues along the way — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.drafting",
+      "title": ": Flow-Preservation in Action (Scaffolded)",
+      "content": "### WE-1: Flow-Preservation in Action (Scaffolded)\n**Draft excerpt with marked uncertainty:** \"The scientist discovered [not sure if 'discovered' or 'found' is better] a new species during her expedition.\"\n**Walkthrough:** Confirm the writer marked the uncertain word choice and kept writing, rather than stopping to deliberate over the exact word during drafting — that decision is deferred to editing.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.drafting",
+      "title": ": Push-Through Strategy (Guided)",
+      "content": "### WE-2: Push-Through Strategy (Guided)\n**Scenario:** A writer is stuck on how to open their essay's introduction.\n**Walkthrough:** Rather than stopping, the writer writes a placeholder (\"[INTRO TO BE WRITTEN — MAIN POINT: X]\") and moves on to draft the body paragraphs, returning to the introduction once the rest of the content clarifies what the introduction needs to set up.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.drafting",
+      "title": ": Full Draft from Outline (Independent)",
+      "content": "### WE-3: Full Draft from Outline (Independent)\n**Task:** Student drafts a complete short piece from a 3-point outline, marking 2 uncertain word choices and using a placeholder for one difficult transition, without stopping the overall drafting process.\n**Walkthrough:** Student demonstrates sustained content-focused drafting, deferring both error-fixing and full stuck-point resolution to later stages.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/misconception/MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING",
+      "kind": "misconception",
+      "conceptId": "eng.writing.drafting",
+      "title": "- **Trigger signal:** Student stops mid-draft repeatedly to fix spelling, grammar, or word-choice issues, disrupting the flow of getting ideas down on paper and often losing momentum or forgetting what they were about to write — treating drafting as if it must simultaneously achieve polished correctness, rather than recognizing that drafting's primary job is capturing content and ideas, with error-correction properly belonging to the later editing stage.",
+      "content": "### MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING\n- **Trigger signal:** Student stops mid-draft repeatedly to fix spelling, grammar, or word-choice issues, disrupting the flow of getting ideas down on paper and often losing momentum or forgetting what they were about to write — treating drafting as if it must simultaneously achieve polished correctness, rather than recognizing that drafting's primary job is capturing content and ideas, with error-correction properly belonging to the later editing stage.\n- **Conflict evidence [P28]:** Present two drafting approaches to the same writing task: one where the writer stops every few words to fix minor issues, losing their train of thought repeatedly, and one where the writer pushes through capturing ideas, marking a few uncertain spots to fix later, and finishes with more complete content. Ask which approach produces more actual content and preserves the writer's flow of ideas.\n- **Bridge text [P30]:** \"Drafting's job is getting your ideas and content down — not achieving polished correctness. Stopping to fix every small error disrupts your flow of thought and often means losing track of the larger idea you were developing. Save error-correction for the editing stage; during drafting, keep moving and just mark uncertain spots to revisit later.\"\n- **Replacement text [P31]:** \"While drafting, if you notice a small error or aren't sure of a word choice, just mark it (underline it, put a note in brackets) and keep writing. Don't stop your flow of ideas to fix it now — that's editing's job, which comes later, after your content is down.\"\n- **Discrimination pairs [P33]:** (a) Simultaneous-correctness requirement (drafting must achieve polished correctness as you go, stopping to fix every error immediately) vs. (b) Content-first drafting (drafting's primary job is capturing ideas and content; error-correction is deferred to the later editing stage).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's flow-preservation practice before continuing.",
+      "localKey": "MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING",
+      "language": "en",
+      "refs": [
+        "MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/misconception/MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE",
+      "kind": "misconception",
+      "conceptId": "eng.writing.drafting",
+      "title": "- **Trigger signal:** Student, upon hitting a difficult or uncertain section while drafting, stops entirely and waits until they've fully figured out exactly what to write before continuing, rather than using strategies to push through the stuck point (writing a placeholder note, skipping ahead to an easier section, writing a rough approximate version to revise later) that keep momentum going and avoid a complete drafting stall.",
+      "content": "### MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE\n- **Trigger signal:** Student, upon hitting a difficult or uncertain section while drafting, stops entirely and waits until they've fully figured out exactly what to write before continuing, rather than using strategies to push through the stuck point (writing a placeholder note, skipping ahead to an easier section, writing a rough approximate version to revise later) that keep momentum going and avoid a complete drafting stall.\n- **Conflict evidence [P28]:** Present a scenario where a writer gets stuck on how to phrase a difficult transition between two sections, and two responses: stopping drafting entirely for the day to \"figure it out,\" versus writing a placeholder note (\"[TRANSITION NEEDED HERE]\") and continuing to draft the rest of the piece, returning to the transition later. Ask which approach keeps the overall drafting process moving forward.\n- **Bridge text [P30]:** \"Getting stuck on one specific section doesn't mean you need to stop the whole drafting process. Skilled writers use strategies to push through — placeholder notes, skipping to an easier section and coming back, writing a rough approximate version to refine later — keeping momentum on the rest of the piece rather than letting one stuck spot halt everything.\"\n- **Replacement text [P31]:** \"When you get stuck on a section, don't stop drafting entirely. Try a placeholder note, skip ahead to a section you find easier and come back later, or write a rough approximate version now to refine during revision. Keep the overall drafting process moving.\"\n- **Discrimination pairs [P33]:** (a) Full-stop-until-resolved (getting stuck on one section means stopping the entire drafting process until it's fully figured out) vs. (b) Push-through strategies (getting stuck on one section calls for a workaround — placeholder, skip-ahead, rough approximation — to keep overall drafting momentum going).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's road-detour framing before continuing to TA-3.",
+      "localKey": "MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE",
+      "language": "en",
+      "refs": [
+        "MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.drafting",
+      "title": "Flow-Preservation Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Flow-Preservation Practice\",\"primitives\":[],\"addresses\":[\"MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.drafting",
+      "title": "Placeholder and Skip-Ahead Strategies",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Placeholder and Skip-Ahead Strategies\",\"primitives\":[],\"addresses\":[\"MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.drafting",
+      "title": "Drafting from an Outline",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Drafting from an Outline\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.drafting",
+      "title": "Distinguishing Draft-Stage Concerns from Editing-Stage Concerns",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Distinguishing Draft-Stage Concerns from Editing-Stage Concerns\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.drafting",
+      "title": "Completing a Full Draft from an Original Outline",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Completing a Full Draft from an Original Outline\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE\",\"MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING",
+        "MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.drafting",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Preserve flow by marking, not fixing**\nGiven a drafting scenario with a minor uncertainty, student marks it and continues rather than stopping to resolve it immediately. *(Directly targets MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.drafting",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Apply a push-through strategy when stuck**\nGiven a scenario where the student is stuck on a specific section, student applies a placeholder or skip-ahead strategy rather than stopping the entire drafting process. *(Directly targets MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.drafting",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Sort drafting concerns from editing concerns**\nGiven a list of writing concerns, student correctly sorts each as belonging to drafting (content) or editing (correctness).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.drafting",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Draft from an outline maintaining momentum**\nGiven a simple outline, student drafts content for each point without stopping for minor issues.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.drafting",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Complete a full original draft**\nStudent drafts a complete short piece from their own outline, using flow-preservation and push-through strategies throughout.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.drafting",
+      "title": "Adaptive Flags",
+      "content": "- If the student stops repeatedly to fix minor errors during drafting, weight remediation toward MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING's bridge text and re-run TA-1's flow-preservation practice before returning to independent drafting.\n- If the student halts entirely when stuck on a section, weight remediation toward MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE's bridge text and TA-2's push-through strategy practice specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.revising-for-content`) — do not certify mastery without TA-5's full draft completion, since content revision assumes the student has already produced a complete draft to revise, however rough.\n- Reuse the \"road trip with detour signs\" framing explicitly when introducing `eng.writing.revising-for-content` — that concept is where the marked uncertain spots and placeholder notes from drafting finally get resolved.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING",
+        "MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.writing.drafting/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.drafting",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Outlining-and-Planning Readiness Check]\n        |\n        v\n[Concrete Anchor: The Road Trip with Detour Signs, Not a Stop Sign]\n        |\n        v\n[TA-1: Flow-Preservation Practice]\n        |\n        v\n[TA-2: Placeholder and Skip-Ahead Strategies]\n        |\n        v\n[TA-3: Drafting from an Outline]\n        |\n        v\n[TA-4: Distinguishing Draft-Stage from Editing-Stage Concerns]\n        |\n        v\n[TA-5: Completing a Full Draft from an Original Outline]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — drafting fills in an already-planned structure with full content, so weak outlining undermines the drafting task itself. During instruction (S1), watch for both misconception patterns: stopping to fix every error (MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING) and halting entirely when stuck (MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE) both disrupt the momentum drafting depends on — redirect both to the Road Trip with Detour Signs anchor. If the student stops repeatedly to fix minor issues or halts entirely at a stuck point during TA-1/TA-2 (S6), drop back to the Concrete Anchor's dashboard-light and detour-sign demonstrations before returning to independent drafting. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who sorts drafting/editing concerns correctly (MP-3) but still stops for every error or halts when stuck has not learned the momentum-preserving discipline this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.drafting.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
