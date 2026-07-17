@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.short-story-study-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.short-story-study",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:83bf3d8b483059fb22109533b2dd0f058ed9e07a64f8b92d93f4a31f2e8d7dc2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.short-story-study.md": "sha256:287234f89848d36ef5a758f72a36b0d92c956a838bae886be0813b61fcc00765"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.short-story-study",
+    "name": "Short Story Study",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.literature.prose-fiction",
+      "eng.literature.symbolism"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.short-story-study-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.short-story-study (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.short-story-study.md": "sha256:287234f89848d36ef5a758f72a36b0d92c956a838bae886be0813b61fcc00765"
+      },
+      "contentHash": "sha256:94e24f4c3739bfa3de84cf36eece87640d90d4c4da61229eecd4d687280d6422",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.short-story-study.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.short-story-study.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.short-story-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.short-story-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.short-story-study.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.short-story-study.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.short-story-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.short-story-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.short-story-study.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.short-story-study.md#TA-3 (addresses MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.short-story-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.short-story-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.short-story-study.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.short-story-study.md#TA-4 (addresses MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.short-story-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.short-story-study\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.short-story-study.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.short-story-study.md#TA-5 (addresses MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL, MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.short-story-study"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.short-story-study\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.short-story-study/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "Short Story Study — Conceptual Development Sequence",
+      "content": "### TA-1 — The Constraint of Compression\n\nIntroduce short story length as a deliberate formal constraint, using the suitcase anchor. Discuss\nhow compression forces choices: a single setting rather than several, a small cast, one central\nconflict rather than interwoven subplots. Student practice: given a short story's opening paragraph,\nidentify what scope-narrowing choices the author has already made (how many characters introduced,\nhow the setting is established quickly).\n\n### TA-2 — The Single Turning Point\n\nTeach that most short stories organize around one decisive turning point or moment of change, rather\nthan the multiple rising-and-falling arcs a novel can sustain. Student practice: map a short story's\nplot onto a simple single-peak structure diagram, marking the one turning point.\n\n### TA-3 — Reading the Ending's Ambiguity as a Choice\n\nDirectly address MC-A: teach that many short story endings are deliberately unresolved, and that\nthis is a craft choice, not an incompleteness. Student practice: given two possible endings for the\nsame story situation (one fully resolved, one deliberately ambiguous), argue which is more effective\nand why, using evidence from the story's tone and themes.\n\n### TA-4 — Evidence-Based Symbol Identification Under Compression\n\nDirectly address MC-B: teach the two-column evidence-sorting method from the s6_path (details\nmentioned once vs. details that repeat or carry structural emphasis). Student practice: sort a list\nof details from a given short story into the two columns before attempting any symbolic claims.\n\n### TA-5 — Full Short Story Analysis\n\nGive the student a complete short story. They must (a) identify the scope-narrowing choices (TA-1),\n(b) map the single turning point (TA-2), (c) evaluate the ending's ambiguity or resolution as a\ncraft choice (TA-3), and (d) identify and justify, with textual evidence, at least one genuine\nsymbolic detail (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 159,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/misconception/MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL",
+      "kind": "misconception",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "**Trigger signal:** Student treats a short story as an incomplete or abbreviated novel — saying",
+      "content": "### MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL\n\n**Trigger signal:** Student treats a short story as an incomplete or abbreviated novel — saying\nthings like \"this story needed more chapters\" or \"I wish it explained what happened to the other\ncharacters\" — expecting novel-scale resolution and scope from a form that isn't attempting it.\n\n**Conflict evidence [P28]:** Show the student the ending of a tightly compressed short story (e.g.,\none that ends on a single ambiguous image or unresolved moment) alongside the ending of a novel they\nknow that resolves multiple subplots. Ask: \"If this short story kept going for 200 more pages and\ntied up every loose end, would it still have the same impact?\" Guide them to notice that the\nstory's power often comes FROM its refusal to over-explain — a novel-style extended resolution\nwould dilute, not improve, the effect.\n\n**Bridge text [P30]:** \"A short story isn't a novel that ran out of pages — it's a different kind of\ncontainer built for a different kind of impact, like the difference between a photograph and a\ndocumentary film. A photograph can't show you what happened five minutes before or after, and it\nisn't trying to — its power is in what it captures in that one compressed frame. A short story is\nbuilt the same way: compressed on purpose, not incomplete by accident.\"\n\n**Replacement text [P31]:** \"Ask 'what does the story's compression DO for it?' instead of 'what is\nthe story missing?' A short story often ends on an unresolved or suggestive moment because that\nambiguity IS the effect — extending it into full novel-style resolution would usually weaken it, not\ncomplete it.\"\n\n**Discrimination pairs [P33]:**\n1. \"This story should have explained what happened to the sister after the ending.\" (novel-scale\n   expectation) vs. \"This story ends right before the confrontation because the anticipation is the\n   point — resolving it would deflate the tension.\" (form-appropriate reading of compression as a\n   choice).\n2. A student complaint that a story's minor character \"wasn't developed enough\" vs. a recognition\n   that the minor character's single defining trait is deliberately all we're given, because the\n   story's economy requires every character beyond the protagonist to serve one clear function.\n\n**s6_path:** If the student still expects novel-scale resolution after the bridge, have them\nliterally attempt to rewrite the story's ending with a full novel-style resolution (a new paragraph\ntying up every loose thread), then compare the emotional effect of their expanded version against\nthe original's compressed ending side by side, asking which version they actually find more\npowerful and why.",
+      "localKey": "MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/misconception/MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL",
+      "kind": "misconception",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "**Trigger signal:** Student, having learned symbol-reading from the Symbolism prerequisite,",
+      "content": "### MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL\n\n**Trigger signal:** Student, having learned symbol-reading from the Symbolism prerequisite,\nover-applies it inside the short story's dense form — insisting that literally every object, color,\nor minor detail must carry profound hidden meaning, producing forced or unsupported symbolic\nreadings (e.g., \"the blue coat represents the character's deep sadness\" with no textual evidence\nconnecting blue to sadness anywhere in the story).\n\n**Conflict evidence [P28]:** Give the student a short story passage with one genuinely significant\nrecurring symbolic detail (reinforced by repetition, structural placement, or explicit connection to\ntheme) alongside several incidental descriptive details (a character's shirt color mentioned once,\nnever returned to). Ask them to rank all the details by how much textual evidence supports a\nsymbolic reading for each. The incidental details will have zero supporting evidence — no\nrepetition, no thematic echo, no structural emphasis — while the genuine symbol will show multiple\nreinforcing threads.\n\n**Bridge text [P30]:** \"A short story's compression means important details often ARE doing double\nduty — but not every single detail is a hidden code to crack. Think of it like a well-organized\ntoolbox: every tool that's IN the box has a purpose, but that doesn't mean the exact color of the\ntoolbox handle is secretly meaningful too. Look for details the story returns to, echoes, or builds\nits structure around — those are the real symbols. A detail mentioned once, in passing, with no\ncallback, is usually just a detail.\"\n\n**Replacement text [P31]:** \"Before claiming a detail is symbolic, find the EVIDENCE: does the story\nrepeat it, connect it explicitly to a character's emotional state or the theme, or give it\nstructural emphasis (appearing at the opening and the ending, for instance)? If you can't point to\nat least one of these, it's probably just a realistic detail, not a symbol.\"\n\n**Discrimination pairs [P33]:**\n1. A single, unrepeated mention that a character \"wore a green scarf\" once (no supporting evidence\n   for symbolism) vs. a recurring image of a specific tree that appears in the opening paragraph AND\n   the final paragraph, each time tied to the protagonist's sense of home (structural repetition —\n   genuine symbolic weight).\n2. Reading every color mentioned in a story as automatically symbolic (over-application) vs. reading\n   ONLY the one color explicitly and repeatedly linked to the story's central emotional conflict as\n   symbolic, while treating other incidental color mentions as ordinary description.\n\n**s6_path:** If the student continues assigning symbolic weight to every detail after the bridge,\ngive them a full short story and have them create a two-column list — \"details mentioned once\" and\n\"details that repeat or get structural emphasis\" — physically sorting every notable detail in the\nstory before attempting any symbolic interpretation, so the evidence-gathering step happens BEFORE\nthe interpretive claim, not after.",
+      "localKey": "MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 42,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "The Constraint of Compression",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Constraint of Compression\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 163,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "The Single Turning Point",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Single Turning Point\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 171,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "Reading the Ending's Ambiguity as a Choice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Reading the Ending's Ambiguity as a Choice\",\"primitives\":[],\"addresses\":[\"MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 177,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "Evidence-Based Symbol Identification Under Compression",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Evidence-Based Symbol Identification Under Compression\",\"primitives\":[],\"addresses\":[\"MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 184,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "Full Short Story Analysis",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Short Story Analysis\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL\",\"MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL",
+        "MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 190,
+        "endLine": 329
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Scope-Narrowing Identification**\nGiven a short story, identify at least two specific choices the author made to narrow scope (number\nof characters, settings, or timeframe) and explain what each choice allowed the story to focus on\ninstead.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 216,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Turning Point Mapping**\nGiven a short story, identify the single central turning point and explain why it functions as the\nstory's structural peak rather than one of several equal moments.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 216,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Ending Evaluation**\nGiven a short story's ending, determine whether it is fully resolved or deliberately ambiguous, and\nargue what effect that choice produces that a novel-style full resolution would not.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 216,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Evidence-Based Symbol Sort**\nGiven a list of eight details from a short story, sort them into \"supported by repetition/structural\nevidence\" and \"incidental, no supporting evidence\" columns, and justify the two most clearly\nsupported symbolic details.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 216,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Independent Analysis**\nGiven a complete, previously unseen short story, produce a full four-part analysis: scope-narrowing\nchoices, the single turning point, an evaluation of the ending as a deliberate craft choice, and one\nevidence-supported symbolic reading.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 216,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "Adaptive Flags",
+      "content": "- If the student passes MP-1 through MP-4 individually but fails MP-5 (full synthesis), this\n  indicates a transfer/integration gap rather than a conceptual gap in any single skill — provide one\n  additional fully-guided four-part analysis before re-attempting independent synthesis.\n- If the student's symbolic readings in MP-4/MP-5 are technically evidence-supported but overly\n  literal (missing the thematic connection even when the repetition is correctly identified), this\n  suggests the Symbolism prerequisite's interpretive depth, not just detection, needs brief\n  reinforcement — flag for light review rather than re-teaching this concept's compression-specific\n  content.\n- Advanced readers who complete the sequence quickly and produce sophisticated symbolic readings\n  should be extended with a genuinely ambiguous story where even literary critics disagree on the\n  central symbol, to practice defending an interpretation with evidence rather than assuming a single\n  \"correct\" reading — this stretches analyze-level work toward evaluate-level reasoning.\n- Students still working through `eng.literature.prose-fiction` concepts in adjacent lessons may\n  conflate short story analysis with general fiction analysis — watch for confusion about which\n  skills are form-specific (compression, single turning point) versus general (character, setting,\n  conflict) and clarify explicitly when it arises.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 279,
+        "endLine": 298
+      }
+    },
+    {
+      "assetId": "eng.literature.short-story-study/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.short-story-study",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: prose fiction check] --> [PD-2: symbolism check]\n   |                                                  |\n   | (gap found)                                      | (pass)\n   v                                                   v\n[Route to prerequisite concept]          [Component 3: Suitcase-versus-Moving-Van Anchor]\n                                                        |\n                                                        v\n                                      [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                        |\n                                                        v\n                                      [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                        |\n                                      (pass >= 0.70) -----+----- (fail)\n                                             |                      |\n                                             v                      v\n                                [Unlock: novel-study]     [S6 remediation: rewrite-ending\n                                                            drill / evidence-sort drill]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite\nroutes back before Component 3, since this concept explicitly builds on both rather than\nre-teaching them. During Component 4 (S1, active instruction), the two misconceptions typically\nsurface at different points — MC-A most often triggers during TA-3 (ending discussion) and MC-B\nduring TA-4 (symbol identification) — so watch each TA for its most likely trigger rather than\nexpecting both simultaneously. If a trigger fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by which probes fail: MP-1/MP-2 failures indicate\nthe compression/structure stage (TA-1/TA-2) needs review; MP-3 failure alone indicates the\nending-as-choice reasoning (TA-3, likely MC-A residue) needs review; MP-4 failure alone indicates\nsymbol evidence-sorting (TA-4, likely MC-B residue) needs review; MP-5 failure with MP-1 through\nMP-4 passing indicates a synthesis gap — provide one more fully-guided WE-2-style example before\nre-probing, not a full re-teach of any single skill.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.short-story-study.md",
+        "startLine": 241,
+        "endLine": 279
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.thesis-statements-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.thesis-statements",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:99de4446f8f50d8944565cf68e0689f19a85088f9564693c01eacdac8506a835",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.thesis-statements.md": "sha256:f448963fb305f162cb8594b92c2fed02f70f4751df506018dc748af59352f311"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.thesis-statements",
+    "name": "Thesis Statements",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.essay-structure"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.thesis-statements-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.thesis-statements (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.thesis-statements.md": "sha256:f448963fb305f162cb8594b92c2fed02f70f4751df506018dc748af59352f311"
+      },
+      "contentHash": "sha256:38911fc33ed3053e603e92332a9ad7857abdd8f8c15aaea8dac03cda6662b34e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.thesis-statements.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.thesis-statements.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.thesis-statements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.thesis-statements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.thesis-statements.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.thesis-statements.md#TA-2 (addresses MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.thesis-statements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.thesis-statements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.thesis-statements.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.thesis-statements.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.thesis-statements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.thesis-statements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.thesis-statements.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.thesis-statements.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.thesis-statements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.thesis-statements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.thesis-statements.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.thesis-statements.md#TA-5 (addresses MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT, MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.thesis-statements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.thesis-statements\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.thesis-statements/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Thesis Statements — Conceptual Development Sequence",
+      "content": "### TA-1 — Claim vs. Announcement\n\nTeach the \"disagree test\": a thesis must be a claim a reasonable person could push back on, not a\nbare announcement that a topic exists. Practice: sort ten sentences into \"announcement\" and \"claim\"\npiles.\n\n### TA-2 — Sizing a Thesis (Too Broad, Too Narrow, Just Right)\n\nTeach the \"list your body paragraphs\" sizing test from Bridge Text MC-B. Practice: given three\ntheses (one too broad, one too narrow, one well-sized) for the same general topic, sort and explain\neach classification.\n\n### TA-3 — Building a Thesis from Evidence Up\n\nReverse the process: give the student three pieces of evidence/observations about a single topic and\nhave them write ONE sentence that ties all three together as a claim — practicing the \"ribs before\nspine\" method from the s6_path fallback, now taught as a primary strategy rather than only a repair.\n\n### TA-4 — Previewing Structure Within the Thesis\n\nTeach the \"preview\" function — a strong thesis often signals, in miniature, the shape of the body\nparagraphs to come (e.g., naming the 2-3 reasons directly in the sentence). Practice: expand three\nbare claims into full previewing theses by adding \"because...\" clauses that name the supporting\nreasons.\n\n### TA-5 — Revising a Weak Thesis\n\nGive the student five flawed theses (mixing announcement-only, too-broad, too-narrow, and\nnon-previewing problems). For each, diagnose the specific flaw and revise it into a strong thesis.\nThis is the synthesis task — diagnosis plus repair, not just production from scratch.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 147,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/misconception/MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT",
+      "kind": "misconception",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "**Trigger signal:** Student writes a \"thesis\" that only announces the topic — e.g., \"In this essay",
+      "content": "### MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT\n\n**Trigger signal:** Student writes a \"thesis\" that only announces the topic — e.g., \"In this essay\nI will talk about the causes of the American Revolution\" or \"This essay is about video game\nviolence\" — with no actual claim or position stated.\n\n**Conflict evidence [P28]:** Show the student two sentences: \"This essay is about school lunch\nprograms\" and \"School lunch programs should offer more plant-based options because they cost less\nand reduce food waste.\" Ask: \"If I only read the first sentence, do I know what the essay is going\nto ARGUE? If I only read the second, do I?\" The student discovers the first sentence promises a\ntopic but makes no commitment about what will be said about it — a reader cannot predict the essay's\ncontent or take a position to agree or disagree with.\n\n**Bridge text [P30]:** \"Announcing a topic is like saying 'I'm going to talk about weather' before a\nweather report — it tells the listener the general subject but gives them nothing to hold onto. A\nthesis is the actual forecast: 'It will rain heavily this afternoon.' That's a specific, checkable\nclaim. Your thesis needs to be the forecast, not just the announcement that a forecast is coming.\"\n\n**Replacement text [P31]:** \"A thesis makes a CLAIM — something a reasonable person could disagree\nwith, or something specific the essay will prove or explain — not just a preview that a topic exists.\nTest your thesis: could someone respond 'I disagree' or 'prove it'? If not, it's still just an\nannouncement.\"\n\n**Discrimination pairs [P33]:**\n1. \"This essay will discuss climate change.\" (announcement — no claim) vs. \"Individual recycling\n   habits matter less to climate change than corporate emissions policy.\" (thesis — a specific,\n   arguable claim).\n2. \"There are many types of renewable energy.\" (a fact, not disputable, not a claim about anything\n   specific) vs. \"Solar energy is the most viable renewable option for suburban homeowners because of\n   falling installation costs and available tax incentives.\" (a specific, defensible claim with\n   built-in reasons).\n\n**s6_path:** If the student still writes announcements after the bridge, use the \"disagree test\"\ndirectly and mechanically: hand them their own sentence and ask them to write a one-sentence\nrebuttal to it. If they cannot write a rebuttal because there is nothing to rebut, the sentence is\nan announcement, not a thesis — have them add the missing claim before moving on.",
+      "localKey": "MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT",
+      "language": "en",
+      "refs": [
+        "MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/misconception/MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION",
+      "kind": "misconception",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "**Trigger signal:** Student writes a thesis that IS an opinion but is too broad or too narrow to be",
+      "content": "### MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION\n\n**Trigger signal:** Student writes a thesis that IS an opinion but is too broad or too narrow to be\nsupported by the essay's actual length — e.g., \"Social media is bad\" (unsupportable in any length\nwithout massive qualification) or \"My friend's Instagram post last Tuesday got 12 likes\" (too narrow\nto sustain multiple body paragraphs), believing that having \"an opinion\" alone makes a thesis\ncorrect.\n\n**Conflict evidence [P28]:** Give the student the thesis \"Social media is bad\" and ask them to list\nevery possible body paragraph topic that could support it. They typically generate an unmanageable,\nsprawling list (mental health, privacy, misinformation, addiction, cyberbullying...) that no single\nessay could cover. Then give them \"That one Instagram post got 12 likes\" and ask the same — they\nfind almost nothing to say beyond restating the fact. Both fail, for opposite reasons — one is\nun-shrinkable, one is un-expandable.\n\n**Bridge text [P30]:** \"A good thesis is like a properly sized container for water — too big (like\n'social media is bad') and the water (your evidence) spreads too thin to fill it in the space you\nhave. Too small (a single tiny fact) and there's nothing left to pour in after the first sentence.\nYour thesis has to be sized to exactly fit the essay you're actually going to write — not a whole\nbook's worth of claim, not a single fact's worth.\"\n\n**Replacement text [P31]:** \"Test your thesis by listing the 2-4 body paragraphs it would require.\nIf you can't limit the list to a manageable few, the thesis is too broad — narrow it by adding a\nspecific reason, angle, or context. If you can't find more than one thing to say, it's too narrow —\nbroaden it by connecting the fact to a larger claim.\"\n\n**Discrimination pairs [P33]:**\n1. \"Social media is bad.\" (too broad — supports dozens of unrelated paragraphs) vs. \"Social media\n   use before bedtime harms teenagers' sleep quality by increasing screen exposure and mental\n   stimulation.\" (properly scoped — supports 2-3 specific paragraphs: screen exposure, mental\n   stimulation, resulting sleep effects).\n2. \"My friend's post got 12 likes.\" (too narrow — one fact, no further development possible) vs.\n   \"Posts with personal storytelling, like my friend's recent one, consistently earn more engagement\n   than posts with only images.\" (broadened into a claim with a pattern to support across multiple\n   paragraphs).\n\n**s6_path:** If the student cannot resize their thesis after the bridge, use the \"list your body\nparagraphs\" test directly: have them write three lines, one per intended body paragraph topic,\nBEFORE finalizing the thesis wording — then write the thesis as the sentence that ties those three\nlines together, rather than trying to invent the paragraphs after writing the thesis.",
+      "localKey": "MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION",
+      "language": "en",
+      "refs": [
+        "MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 40,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Claim vs. Announcement",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Claim vs. Announcement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 151,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Sizing a Thesis (Too Broad, Too Narrow, Just Right)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Sizing a Thesis (Too Broad, Too Narrow, Just Right)\",\"primitives\":[],\"addresses\":[\"MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 157,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Building a Thesis from Evidence Up",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Building a Thesis from Evidence Up\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 163,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Previewing Structure Within the Thesis",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Previewing Structure Within the Thesis\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 169,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Revising a Weak Thesis",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Revising a Weak Thesis\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT\",\"MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT",
+        "MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 176,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Claim vs. Announcement**\nGiven four sentences, identify which are bare topic announcements and which are actual arguable\nclaims, and rewrite one announcement into a claim.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 200,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Sizing Diagnosis**\nGiven three thesis statements on the same topic (one too broad, one too narrow, one well-sized),\nlabel each and explain the sizing flaw for the two flawed ones using the \"list your body paragraphs\"\ntest.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 200,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Build a Thesis from Evidence**\nGiven three related observations about a topic, write one sentence that ties them together into a\nsingle properly scoped claim.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 200,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Add a Preview Clause**\nGiven a bare claim with no preview (\"Recess time should be extended.\"), revise it to add a\n\"because...\" clause that previews at least two specific supporting reasons.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 200,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Diagnosis and Revision**\nGiven a flawed thesis statement with an unnamed defect (could be an announcement, too broad, too\nnarrow, or missing a preview), identify the specific flaw type and revise the sentence into a\nfully qualifying thesis statement.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 200,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Adaptive Flags",
+      "content": "- If the student can correctly critique OTHERS' theses (as in MP-2 and MP-5) but cannot produce a\n  well-sized thesis of their own from scratch (WE-3), this indicates a production-versus-recognition\n  gap — have them explicitly use the \"list your body paragraphs first\" method (TA-3) as a required\n  scaffold rather than assuming free production.\n- If the student consistently defaults to overly broad theses regardless of topic, suspect they are\n  equating \"important-sounding\" with \"well-scoped\" — anchor sizing concretely with the rib-count test\n  every time until the habit transfers without prompting.\n- If the student produces claims that pass the disagree test but are factually indefensible or\n  extreme (not just broad, but untrue), flag this as an evidence-quality issue distinct from thesis\n  mechanics — note it for the downstream `claim-evidence-reasoning` concept rather than re-teaching\n  thesis structure itself.\n- Students who struggle with abstract claim generation may benefit from starting at TA-3 (building\n  from evidence up) before attempting TA-1's abstract claim/announcement sort — reorder the sequence\n  for concrete-first learners while keeping all five TAs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 262,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "eng.writing.thesis-statements/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.thesis-statements",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: essay structure check] --> [PD-2: claim vs. fact check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to eng.writing.essay-structure]        [Component 3: Spine-and-Ribs Anchor]\n                                                           |\n                                                           v\n                                         [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                           |\n                                                           v\n                                         [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                     [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                         (pass >= 0.75) -----+----- (fail)\n                                                |                      |\n                                                v                      v\n                                  [Unlock: citations-and-referencing]  [S6 remediation:\n                                                                        disagree test / rib\n                                                                        listing drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a structural gap routes to Essay\nStructure, a claim-recognition gap gets a brief primer rather than a full detour. During Component 4\n(S1, active instruction), monitor for both misconception signals — a student who writes bare\nannouncements (MC-A) often also mis-sizes their first genuine claim attempt (MC-B) once they learn\nto make a claim at all, since sizing only becomes visible after a claim exists to size. If a trigger\nfires mid-sequence, branch to the relevant s6_path drill before resuming. At the mastery probe stage\n(S9), route by which probes fail: MP-1 failure alone indicates the claim/announcement distinction\n(TA-1) needs review; MP-2/MP-3 failures indicate sizing (TA-2/TA-3) needs review; MP-4 failure alone\nindicates the preview mechanism (TA-4) specifically, not the underlying claim; MP-5 failure with\nMP-1 through MP-4 passing indicates a diagnosis-under-ambiguity gap — provide one more mixed-flaw\nworked example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.thesis-statements.md",
+        "startLine": 224,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

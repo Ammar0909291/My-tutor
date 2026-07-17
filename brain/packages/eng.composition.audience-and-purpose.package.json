@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.audience-and-purpose-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.audience-and-purpose",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:467dfd20df5d049f49309ce601f0195748c8f9f3afb2b19a24587cf9b376dfda",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md": "sha256:fd8c598846e1abc5cf70fa2a2f195c766a9ff7bd616f018a8352313b94b29c76"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.composition.audience-and-purpose",
+    "name": "Audience and Purpose",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.essay-structure"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.audience-and-purpose-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.audience-and-purpose (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md": "sha256:fd8c598846e1abc5cf70fa2a2f195c766a9ff7bd616f018a8352313b94b29c76"
+      },
+      "contentHash": "sha256:a55be2a261af3cae015d0a44859c671beb7da9bded2b850799bbd93dbd9eea31",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.audience-and-purpose.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md#TA-1 (addresses MC-A-PURPOSE-IS-THE-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.audience-and-purpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.audience-and-purpose\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.audience-and-purpose.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.audience-and-purpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.audience-and-purpose\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.audience-and-purpose.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.audience-and-purpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.audience-and-purpose\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.audience-and-purpose.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.audience-and-purpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.audience-and-purpose\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.audience-and-purpose.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md#TA-5 (addresses MC-A-PURPOSE-IS-THE-TOPIC, MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.audience-and-purpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.audience-and-purpose\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.audience-and-purpose/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "Audience and Purpose — Conceptual Development Sequence",
+      "content": "### TA-1 — Separating Topic from Purpose\n\nIntroduce the four communicative purposes (inform, persuade, entertain, express) as answers to \"what\ndo I want this reading to DO to my reader?\" — distinct from topic, which answers \"what is this\nabout?\" Use the school-uniform same-topic/different-purpose pair from MC-A's conflict evidence.\nStudent practice: given five short texts on one shared topic, label each with its purpose.\n\n### TA-2 — Profiling an Audience\n\nTeach the three-question audience profile: what do they know, what do they care about, what's our\nrelationship? Apply it to profile three audiences (a younger sibling, a school principal, a\nstranger online) for the same message. Student practice: write a one-sentence audience profile for\neach of three given writing prompts.\n\n### TA-3 — How Purpose Shapes Evidence and Tone\n\nShow how the SAME claim needs different supporting evidence depending on purpose: to inform, use\nverifiable facts and neutral tone; to persuade, use facts PLUS emotional or ethical appeals and a\nmore urgent tone; to entertain, use vivid or surprising details and a playful tone; to express, use\npersonal detail and an intimate tone. Student practice: given one claim, draft one supporting\nsentence for each of the four purposes.\n\n### TA-4 — How Audience Shapes Word Choice and Formality\n\nTeach the formality spectrum (casual → neutral → formal) and connect it to audience relationship —\nclose/informal audiences allow slang and contractions; distant/formal audiences require full\nsentences and precise vocabulary. Student practice: rewrite one sentence at three formality levels\nfor three named audiences.\n\n### TA-5 — Full Audience-Purpose Analysis and Application\n\nGive the student a full writing prompt with no audience/purpose stated. They must (a) choose a\nspecific audience and purpose, (b) justify the choice in one sentence, and (c) write one paragraph\nthat visibly reflects at least three concrete choices (vocabulary, tone, evidence type, or\nformality) driven by that choice. This is the synthesis task that proves transfer beyond the\nscaffolded practice of TA-1 through TA-4.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 147,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/misconception/MC-A-PURPOSE-IS-THE-TOPIC",
+      "kind": "misconception",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "**Trigger signal:** Student says the \"purpose\" of an essay is its topic — e.g., \"the purpose of my",
+      "content": "### MC-A-PURPOSE-IS-THE-TOPIC\n\n**Trigger signal:** Student says the \"purpose\" of an essay is its topic — e.g., \"the purpose of my\nessay is dogs\" or \"my purpose is climate change\" — conflating subject matter with communicative\nintent.\n\n**Conflict evidence [P28]:** Show the student two essays with the identical topic (school uniforms)\nbut opposite purposes: one argues FOR a uniform policy (persuade), one explains HOW the policy works\n(inform). Ask: \"These have the same topic. Are they doing the same job?\" The student must notice the\njob — what the writer wants to happen in the reader's mind — is different even though the subject is\nidentical.\n\n**Bridge text [P30]:** \"Topic is WHAT you're writing about. Purpose is WHAT YOU WANT THE READING TO\nDO — change the reader's mind, teach them something, make them feel something, or share your own\nfeelings. Two essays can share a topic and have completely different purposes, the way two chefs can\nuse the same ingredient — chicken — to make soup or to make a sandwich. Same ingredient, different\njob.\"\n\n**Replacement text [P31]:** \"Topic answers 'what is this about?' Purpose answers 'what is this\nFOR?' — to inform, to persuade, to entertain, or to express. Always name both, separately, before\nwriting.\"\n\n**Discrimination pairs [P33]:**\n1. \"The topic is recycling.\" vs. \"The purpose is to persuade the reader to start recycling.\" — first\n   names subject matter, second names the intended effect on the reader.\n2. Two essays on the same topic (video games) with different purposes (one informs about game\n   design careers, one persuades parents to allow more game time) — same topic, different purpose,\n   proven by asking what each essay wants the reader to DO after reading.\n\n**s6_path:** If the student cannot separate topic from purpose after the bridge, use the \"same\ningredient, different dish\" analogy concretely: hand them a single fact (\"video games are popular\namong teenagers\") and have them write one sentence that informs and one sentence that persuades\nusing that exact fact, then compare the two sentences side by side.",
+      "localKey": "MC-A-PURPOSE-IS-THE-TOPIC",
+      "language": "en",
+      "refs": [
+        "MC-A-PURPOSE-IS-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 3,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/misconception/MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT",
+      "kind": "misconception",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "**Trigger signal:** Student treats \"audience\" as a passive fact (\"anyone could read this\") rather",
+      "content": "### MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT\n\n**Trigger signal:** Student treats \"audience\" as a passive fact (\"anyone could read this\") rather\nthan an active design constraint, producing writing with no adjustment for reader knowledge or\nvalues — e.g., using technical jargon in a letter meant for young children, or explaining basic\nvocabulary to an expert reader.\n\n**Conflict evidence [P28]:** Present the same explanation of \"photosynthesis\" written for a\n7-year-old and written for a biology professor. Ask the student to identify which is which and WHY —\nwhat specific words or explanations gave it away. The student discovers audience isn't just \"who\nhappens to read it\" but a set of assumptions the writer must actively build in — the professor\nversion assumes chemical formulas are already known; the child version cannot assume that.\n\n**Bridge text [P30]:** \"Audience isn't just 'whoever picks this up' — it's a set of choices YOU make\nabout what your reader already knows, cares about, and needs from you. Think of it like packing a\nsuitcase for someone else's trip: you pack differently for a toddler's trip to the beach than for a\nbusinessperson's trip to a conference, even if it's the same suitcase. The reader is a person with\nspecific needs, not a blank slate.\"\n\n**Replacement text [P31]:** \"Before writing, ask three questions about your audience: What do they\nalready know about this topic? What do they care about? What is their relationship to me (stranger,\npeer, authority figure)? Your answers should visibly change your word choice and what you explain\nversus assume.\"\n\n**Discrimination pairs [P33]:**\n1. A note to a close friend (\"ngl this movie was mid\") vs. a note to a teacher (\"I found the film's\n   pacing to be somewhat uneven\") on the identical opinion — same content, different audience\n   relationship driving different register.\n2. An instruction manual passage assuming no prior knowledge (\"First, locate the power button on the\n   right side of the device\") vs. one assuming expert knowledge (\"Power on and initialize per\n   standard boot sequence\") — the second fails a beginner audience even though both are\n   grammatically fine.\n\n**s6_path:** If the student still writes \"one-size-fits-all\" prose after the bridge, have them\nwrite the SAME two-sentence explanation of a simple process (e.g., \"how to make a paper airplane\")\ntwice — once for a kindergartner, once for an adult who has never seen paper — and then read both\naloud, asking which words changed and why.",
+      "localKey": "MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT",
+      "language": "en",
+      "refs": [
+        "MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 37,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "Separating Topic from Purpose",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Separating Topic from Purpose\",\"primitives\":[],\"addresses\":[\"MC-A-PURPOSE-IS-THE-TOPIC\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-PURPOSE-IS-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 151,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "Profiling an Audience",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Profiling an Audience\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 158,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "How Purpose Shapes Evidence and Tone",
+      "content": "{\"id\":\"TA-3\",\"title\":\"How Purpose Shapes Evidence and Tone\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 165,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "How Audience Shapes Word Choice and Formality",
+      "content": "{\"id\":\"TA-4\",\"title\":\"How Audience Shapes Word Choice and Formality\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 173,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "Full Audience-Purpose Analysis and Application",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Audience-Purpose Analysis and Application\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-PURPOSE-IS-THE-TOPIC\",\"MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-PURPOSE-IS-THE-TOPIC",
+        "MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 180,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Topic vs. Purpose Identification**\nGiven three short texts on the identical topic (recess time at school) — one argues for longer\nrecess, one explains the school's recess schedule, one is a funny anecdote about a recess mishap —\nidentify the shared topic and the three DIFFERENT purposes.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 208,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Audience Profiling**\nGiven a single writing prompt (\"Write about why bicycles are useful\"), produce a two-sentence\naudience profile for a specified reader (a 6-year-old) versus a different specified reader (a city\ncouncil member deciding on bike lane funding), naming at least one concrete difference in what each\nreader already knows or cares about.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 208,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Evidence and Tone Matching**\nGiven the claim \"Our school should start 30 minutes later,\" write one supporting sentence suited to\nan informing purpose (neutral, factual) and one supporting sentence suited to a persuading purpose\n(uses an emotional or values-based appeal), and label which is which.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 208,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Formality Rewrite**\nRewrite the sentence \"I think we should not have this rule anymore\" three times: casually (for a\nclose friend), neutrally (for a classmate you don't know well), and formally (for a school\nprincipal), and name what changed in each version.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 208,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Analysis and Application**\nGiven an unstated writing prompt (\"Write about a change you'd like to see in your community\"),\nchoose and state a specific audience and purpose, then write one paragraph and underline three\nplaces where the writing was visibly shaped by that choice (a word, a piece of evidence, or a\ntone shift), explaining each underline in one phrase.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 208,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "Adaptive Flags",
+      "content": "- If the student is a strong essay-structure performer but freezes when no audience/purpose is\n  given (as in WE-3 or MP-5), this indicates transfer difficulty rather than conceptual gap — provide\n  one additional worked model at the independent level before re-attempting, not a full concept\n  re-teach.\n- If the student defaults to the same formal, neutral tone regardless of audience (flattening every\n  assignment into \"school essay voice\"), suspect MC-B is only partially resolved — the audience\n  profile step (TA-2) may need to be re-anchored concretely (e.g., \"read this paragraph out loud as\n  if you were talking to your grandmother, then as if you were texting your best friend\").\n- If the student over-corrects into inappropriate informality for formal prompts (e.g., using slang\n  in a persuasive letter to an official), treat this as evidence the formality spectrum (TA-4) needs\n  a second, more explicit anchor rather than assuming audience awareness itself has failed.\n- English language learners or students with limited exposure to varied registers may need the\n  formality spectrum (TA-4) modeled with more explicit side-by-side examples before attempting\n  independent rewrites — extend WE-2 with an additional guided formality-rewrite example before\n  moving to WE-3.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 276,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "eng.composition.audience-and-purpose/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.audience-and-purpose",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: essay structure check] --> [PD-2: purpose vocabulary check]\n   |                                                      |\n   | (gap found)                                          | (pass)\n   v                                                       v\n[Route to eng.writing.essay-structure]         [Component 3: Letter-Rewrite Anchor]\n                                                            |\n                                                            v\n                                          [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                            |\n                                                            v\n                                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                      [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                          (pass >= 0.75) -----+----- (fail)\n                                                 |                      |\n                                                 v                      v\n                                    [Unlock: claim-evidence-reasoning,   [S6 remediation:\n                                     rhetorical-appeals]                 concrete rewrite\n                                                                          drills per MC path]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a structural gap routes back to\nEssay Structure, a vocabulary gap gets a brief primer rather than a full prerequisite detour. During\nComponent 4 (S1, active instruction), watch for both misconception trigger signals simultaneously\nsince they often co-occur — a student conflating topic/purpose (MC-A) frequently ALSO treats\naudience passively (MC-B), because both stem from underspecifying \"what is this writing supposed to\nDO.\" If either signal fires mid-sequence, branch to that misconception's s6_path drill before\nresuming the TA sequence; do not let both remain unaddressed simultaneously going into Component 5.\nIf a student fails the mastery probe set (S9 evaluation), route based on WHICH probes failed: MP-1/\nMP-2 failures indicate the analysis stage (Component 4 TA-1/TA-2) needs review; MP-3/MP-4 failures\nindicate the application stage (TA-3/TA-4) needs review; MP-5 failure alone, with MP-1 through MP-4\npassing, indicates a transfer gap — route to one additional independent-application example before\nre-probing, not a full re-teach.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.audience-and-purpose.md",
+        "startLine": 237,
+        "endLine": 276
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
