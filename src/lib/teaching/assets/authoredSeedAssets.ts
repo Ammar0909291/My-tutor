@@ -8178,6 +8178,253 @@ const WORD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.bohr-model ──────────────────────────────────────────────────────
+const BOHR = 'phys.mod.bohr-model'
+const BOHR_SRC = 'docs/curriculum/blueprints/phys.mod.bohr-model.md'
+
+const BOHR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BOHR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Which has higher energy: n=1 (ground state) or n=3? The ' +
+      'instinct \u201cn=1 is innermost, so highest energy\u201d gets it ' +
+      'backwards. E\u2081 = \u221213.6 eV; E\u2083 = \u221213.6/9 = \u22121.51 eV. Since ' +
+      '\u22121.51 > \u221213.6, E\u2083 is the HIGHER energy \u2014 higher n means ' +
+      'LESS negative energy, meaning less tightly bound. Picture the ' +
+      'energy-level diagram literally: higher n sits physically higher ' +
+      'on the page, climbing toward E_\u221e = 0 (a free, just-barely-unbound ' +
+      'electron). n=1 sits at the very bottom, the MOST negative, the ' +
+      'tightest binding \u2014 the ground state IS the minimum-energy ' +
+      'state. Confirming evidence: it takes 13.6 eV to ionize from ' +
+      'n=1, but only 1.51 eV from n=3 \u2014 far easier to knock the ' +
+      'electron out of the higher, less-bound state.',
+    targetedMisconceptions: [`${BOHR}:MC-1`],
+    source: `${BOHR_SRC} — MC-1 MC-HIGHER-N-IS-LOWER-ENERGY (P28 E\u2081/E\u2083 numeric comparison + P30 diagram-height bridge)`,
+  },
+  {
+    conceptId: BOHR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Bohr model is not a universal atom formula \u2014 it works ' +
+      'ONLY for hydrogen-like systems: exactly one electron orbiting ' +
+      'a nucleus (H, He\u207a, Li\u00b2\u207a). Add a second electron and ' +
+      'electron-electron repulsion breaks the clean single-particle ' +
+      'orbit picture the model depends on \u2014 helium\u2019s actual spectrum ' +
+      'cannot be derived from Bohr\u2019s formula. A second boundary: the ' +
+      'Balmer series (visible-light lines, transitions ending at n=2) ' +
+      'is only ONE piece of hydrogen\u2019s full spectrum \u2014 the Lyman ' +
+      'series (ending at n=1, ultraviolet) and Paschen series (ending ' +
+      'at n=3, infrared) are equally real transitions, just outside ' +
+      'the visible range historians first noticed. \u201cHydrogen\u2019s ' +
+      'spectrum\u201d means every possible n\u2192n\u2032 transition, not just the ' +
+      'visible slice.',
+    targetedMisconceptions: [`${BOHR}:MC-3`, `${BOHR}:MC-4`],
+    source: `${BOHR_SRC} — MC-3 MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS + MC-4 MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM (hydrogen-like scope limit + Lyman/Paschen completeness)`,
+  },
+]
+
+const BOHR_PROBES: SeedProbe[] = [
+  {
+    conceptId: BOHR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which hydrogen energy level has HIGHER energy: n=1 or n=3?',
+    choices: [
+      { text: 'n=3 (E\u2083 = \u22121.51 eV) — higher n means less negative energy, less tightly bound', isCorrect: true },
+      { text: 'n=1 (E\u2081 = \u221213.6 eV) — it is the innermost orbit, closest to the nucleus', isCorrect: false, misconceptionId: `${BOHR}:MC-1` },
+    ],
+    correctValue: 'n=3',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BOHR}:MC-1`],
+    source: `${BOHR_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: BOHR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can the Bohr model formula correctly predict the spectrum of a helium atom (2 electrons)?',
+    choices: [
+      { text: 'No — the Bohr model applies only to hydrogen-like (single-electron) systems; electron-electron repulsion breaks its single-particle-orbit assumption', isCorrect: true },
+      { text: 'Yes — the Bohr model applies to all atoms with the same formula', isCorrect: false, misconceptionId: `${BOHR}:MC-3` },
+    ],
+    correctValue: 'no — hydrogen-like only',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOHR}:MC-3`],
+    source: `${BOHR_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.de-broglie ──────────────────────────────────────────────────────
+const DEB = 'phys.mod.de-broglie'
+const DEB_SRC = 'docs/curriculum/blueprints/phys.mod.de-broglie.md'
+
+const DEB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DEB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Is de Broglie\u2019s idea that matter behaves as a wave just an ' +
+      'untested theoretical guess? No \u2014 it was directly MEASURED just ' +
+      'three years after being proposed. De Broglie hypothesized ' +
+      '\u03bb = h/(mv) in 1924; in 1927, Davisson and Germer fired ' +
+      'electrons at a nickel crystal and measured the SCATTERING ' +
+      'pattern \u2014 the diffraction maxima landed exactly where Bragg\u2019s ' +
+      'law predicted using de Broglie\u2019s wavelength formula. George ' +
+      'Thomson independently confirmed electron diffraction the same ' +
+      'era; the discovery won the 1937 Nobel Prize. Modern electron ' +
+      'microscopes routinely image at sub-nanometer resolution using ' +
+      'exactly these matter waves. This is not a model or an ' +
+      'assumption \u2014 it is a measured, repeatedly confirmed physical ' +
+      'fact.',
+    targetedMisconceptions: [`${DEB}:MC-1`],
+    source: `${DEB_SRC} — MC-1 MC-MATTER-WAVES-ONLY-THEORETICAL (P28 Davisson-Germer 1927 diffraction evidence + Nobel Prize citation)`,
+  },
+  {
+    conceptId: DEB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Does a thrown baseball have a de Broglie wavelength? YES \u2014 ' +
+      'every moving object does, by \u03bb = h/(mv). The reason you never ' +
+      'SEE a baseball diffract is scale, not exemption: a 0.15 kg ' +
+      'ball at 40 m/s gives \u03bb = 6.6\u00d710\u207b\u00b3\u2074/(0.15\u00d740) \u2248 ' +
+      '1.1\u00d710\u207b\u00b3\u2074 m \u2014 vastly smaller than any slit or obstacle a ' +
+      'baseball could ever encounter, so no observable diffraction ' +
+      'ever shows up. Compare an electron: tiny mass makes its ' +
+      'wavelength comparable to atomic spacings, so diffraction is ' +
+      'easily seen (that is exactly the Davisson-Germer result). ' +
+      'Every particle has SOME wave nature \u2014 whether it is ' +
+      'observable depends entirely on whether \u03bb is large enough ' +
+      'relative to the obstacles around it, not on some macroscopic ' +
+      'exemption from quantum rules.',
+    targetedMisconceptions: [`${DEB}:MC-2`],
+    source: `${DEB_SRC} — MC-2 MC-BASEBALL-HAS-NO-WAVE-NATURE (\u03bb = h/mv numeric baseball calculation vs. electron contrast)`,
+  },
+]
+
+const DEB_PROBES: SeedProbe[] = [
+  {
+    conceptId: DEB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Has de Broglie\u2019s matter-wave hypothesis been experimentally confirmed?',
+    choices: [
+      { text: 'Yes — Davisson and Germer (1927) measured electron diffraction matching \u03bb = h/(mv); it won the 1937 Nobel Prize', isCorrect: true },
+      { text: 'No — it remains an unverified theoretical assumption', isCorrect: false, misconceptionId: `${DEB}:MC-1` },
+    ],
+    correctValue: 'yes — Davisson-Germer 1927',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DEB}:MC-1`],
+    source: `${DEB_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: DEB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a thrown baseball have a de Broglie wavelength?',
+    choices: [
+      { text: 'Yes — every moving object does (\u03bb = h/mv), but a baseball\u2019s \u03bb is so tiny (~10\u207b\u00b3\u2074 m) that no diffraction is ever observable', isCorrect: true },
+      { text: 'No — macroscopic objects like baseballs have no wave nature at all', isCorrect: false, misconceptionId: `${DEB}:MC-2` },
+    ],
+    correctValue: 'yes, but unobservably tiny',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DEB}:MC-2`],
+    source: `${DEB_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.question-formation ──────────────────────────────────────────
+const QF = 'eng.grammar.question-formation'
+const QF_SRC = 'docs/curriculum/blueprints/eng.grammar.question-formation.md'
+
+const QF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cDoes she is coming?\u201d stacks TWO helping verbs where only one ' +
+      'belongs. The do/does/did rule has a condition attached: use ' +
+      'it ONLY when the statement has NO other auxiliary or \u201cbe\u201d verb ' +
+      'already. \u201cShe likes tea\u201d has no helper \u2192 add \u201cdoes\u201d and ' +
+      'invert: \u201cDoes she like tea?\u201d (verb drops to base form). But ' +
+      '\u201cShe is coming\u201d ALREADY has \u201cis\u201d \u2014 just invert that existing ' +
+      'word with the subject: \u201cIs she coming?\u201d Adding \u201cdoes\u201d on top ' +
+      'creates a double-auxiliary error. Same logic for \u201ccan\u201d: \u201cThey ' +
+      'can swim\u201d \u2192 invert \u201ccan\u201d \u2192 \u201cCan they swim?\u201d, never \u201cDo they ' +
+      'can swim?\u201d Check for an existing helper FIRST; only reach ' +
+      'for do/does/did when the cupboard is bare.',
+    targetedMisconceptions: [`${QF}:MC-JUST-ADD-DO-TO-ANY-STATEMENT`],
+    source: `${QF_SRC} — MC-JUST-ADD-DO-TO-ANY-STATEMENT (P28 double-auxiliary conflict + P33 likes-tea/is-coming pair)`,
+  },
+  {
+    conceptId: QF,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cWhere you are going?\u201d puts the question word up front and ' +
+      'stops there \u2014 but the question word ALONE never finishes the ' +
+      'job. Wh-questions need the question word PLUS the exact same ' +
+      'inversion (or do/does/did) that yes/no questions use: \u201cWhere ' +
+      'ARE you going?\u201d (invert \u201care\u201d with \u201cyou\u201d), never \u201cWhere you ' +
+      'are going?\u201d (statement order left untouched after the ' +
+      'question word). Same for do-insertion cases: \u201cWhat does she ' +
+      'want?\u201d (does + base verb), not \u201cWhat she wants?\u201d The question ' +
+      'word signals \u201cthis is a question\u201d to the ear, but the ' +
+      'grammar still requires the inversion step \u2014 skipping it is ' +
+      'the single most common wh-question error.',
+    targetedMisconceptions: [`${QF}:MC-WH-QUESTIONS-DONT-NEED-INVERSION`],
+    source: `${QF_SRC} — MC-WH-QUESTIONS-DONT-NEED-INVERSION (P28 where-you-are-going conflict + P33 what-does-she-want pair)`,
+  },
+]
+
+const QF_PROBES: SeedProbe[] = [
+  {
+    conceptId: QF,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'How do you correctly turn \u201cShe is coming\u201d into a question?',
+    choices: [
+      { text: '\u201cIs she coming?\u201d — invert the existing auxiliary \u201cis\u201d with the subject', isCorrect: true },
+      { text: '\u201cDoes she is coming?\u201d — add \u201cdoes\u201d in front', isCorrect: false, misconceptionId: `${QF}:MC-JUST-ADD-DO-TO-ANY-STATEMENT` },
+    ],
+    correctValue: 'Is she coming?',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${QF}:MC-JUST-ADD-DO-TO-ANY-STATEMENT`],
+    source: `${QF_SRC} — P28 double-auxiliary conflict as probe`,
+  },
+  {
+    conceptId: QF,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which is the correct wh-question for \u201cYou are going [somewhere]\u201d?',
+    choices: [
+      { text: '\u201cWhere are you going?\u201d — question word plus inversion of \u201care\u201d with the subject', isCorrect: true },
+      { text: '\u201cWhere you are going?\u201d — the question word alone is enough to signal a question', isCorrect: false, misconceptionId: `${QF}:MC-WH-QUESTIONS-DONT-NEED-INVERSION` },
+    ],
+    correctValue: 'Where are you going?',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${QF}:MC-WH-QUESTIONS-DONT-NEED-INVERSION`],
+    source: `${QF_SRC} — P28 where-you-are-going conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -8276,6 +8523,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ANTID_EXPLANATIONS,
   ...NEG_EXPLANATIONS,
   ...WORD_EXPLANATIONS,
+  ...BOHR_EXPLANATIONS,
+  ...DEB_EXPLANATIONS,
+  ...QF_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -8374,4 +8624,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ANTID_PROBES,
   ...NEG_PROBES,
   ...WORD_PROBES,
+  ...BOHR_PROBES,
+  ...DEB_PROBES,
+  ...QF_PROBES,
 ]
