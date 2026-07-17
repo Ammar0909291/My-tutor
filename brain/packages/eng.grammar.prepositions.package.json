@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.prepositions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.prepositions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5614befdd39a2705dbd3aebcdbb96181317261a113079b040b80ef2d52491dde",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.prepositions.md": "sha256:ef6bf7cb589839ba7070f81aa5d08a5e9e744052a7ced971492a0a365fb6f41e"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.prepositions",
+    "name": "Prepositions",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.word-classes-overview"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.prepositions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.prepositions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.prepositions.md": "sha256:ef6bf7cb589839ba7070f81aa5d08a5e9e744052a7ced971492a0a365fb6f41e"
+      },
+      "contentHash": "sha256:9799b3f0d254565c1aa9339148a382ad9cb2ddd2deed7a955c3703eb24ccce77",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.prepositions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.prepositions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.prepositions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.prepositions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.prepositions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.prepositions.md#TA-2 (addresses MC-PREPOSITIONS-ONLY-SHOW-LOCATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.prepositions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.prepositions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.prepositions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.prepositions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.prepositions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.prepositions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.prepositions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.prepositions.md#TA-4 (addresses MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.prepositions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.prepositions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.prepositions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.prepositions.md#TA-5 (addresses MC-PREPOSITIONS-ONLY-SHOW-LOCATION, MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.prepositions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.prepositions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.prepositions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Prepositions — Conceptual Development Sequence",
+      "content": "**TA-1 — Location Prepositions [C]**\n\nUsing the Component 3 physical demonstration, student identifies and produces location prepositions (in, on, under, behind, between, near) correctly describing spatial relationships.\n\n**TA-2 — Time Prepositions [C]**\n\nStudent identifies and produces time prepositions (at for specific times/points, on for days/dates, in for months/years/longer periods), directly targeting MC-PREPOSITIONS-ONLY-SHOW-LOCATION.\n\n**TA-3 — Other Relationship Prepositions [C→P]**\n\nPresent sentences using prepositions for manner/means (by, with), accompaniment (with), and other relationships (of, for, about, despite, without); student identifies the relationship each shows.\n\n**TA-4 — Adjective + Preposition Collocations [P]**\n\nPresent common adjective + preposition pairs (good at, interested in, afraid of, proud of, tired of); student practices the correct conventional pairing, directly targeting MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING.\n\n**TA-5 — Verb + Preposition Collocations [P]**\n\nPresent common verb + preposition pairs (depend on, believe in, listen to, look for, wait for); student practices correct conventional pairing, extending the collocation-learning skill from TA-4 to another word class.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/misconception/MC-PREPOSITIONS-ONLY-SHOW-LOCATION",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "- **Trigger signal:** Student defines prepositions only as location words (on, in, under, behind), missing that prepositions also express TIME (at, on, in, during, since), and other relationships (of, for, with, without, about, despite), leading to confusion when a preposition doesn't describe physical position.",
+      "content": "### MC-PREPOSITIONS-ONLY-SHOW-LOCATION\n- **Trigger signal:** Student defines prepositions only as location words (on, in, under, behind), missing that prepositions also express TIME (at, on, in, during, since), and other relationships (of, for, with, without, about, despite), leading to confusion when a preposition doesn't describe physical position.\n- **Conflict evidence [P28]:** \"You said prepositions show location. In 'The meeting is AT 3pm,' is 'at' showing where something is, or something else?\"\n- **Bridge text [P30]:** \"Prepositions show the relationship between a noun/pronoun and another word in the sentence — this includes LOCATION (in, on, under) but also TIME (at, on, in — used differently for time than for place), manner/means (by, with), and other relationships (of, for, about, despite, without). Location is the most vivid, common category, but far from the only one.\"\n- **Replacement text [P31]:** \"Check whether a preposition shows location, time, or another kind of relationship — don't assume it must be about physical position.\"\n- **Discrimination pairs [P33]:**\n  - \"in the box\" (location) vs. \"in 2020\" (time) — same preposition, different relationship type.\n  - \"with a hammer\" (manner/means) vs. \"with my friend\" (accompaniment) — both \"with,\" different relationships.\n- **s6_path:** \"Location prepositions are the easiest to picture and often taught first, which makes them feel like the whole category — but time and other relationship prepositions are just as central, and expecting them helps avoid confusion.\"",
+      "localKey": "MC-PREPOSITIONS-ONLY-SHOW-LOCATION",
+      "language": "en",
+      "refs": [
+        "MC-PREPOSITIONS-ONLY-SHOW-LOCATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/misconception/MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "- **Trigger signal:** Student assumes preposition choice can always be logically derived from meaning (e.g., assuming \"interested in\" should be \"interested on\" or \"interested at\" based on some perceived logical fit), not recognizing that many preposition + word combinations (especially with adjectives and verbs — \"interested IN,\" \"good AT,\" \"afraid OF,\" \"depend ON\") are largely CONVENTIONAL/idiomatic and must be learned as fixed collocations, not derived from pure logic.",
+      "content": "### MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING\n- **Trigger signal:** Student assumes preposition choice can always be logically derived from meaning (e.g., assuming \"interested in\" should be \"interested on\" or \"interested at\" based on some perceived logical fit), not recognizing that many preposition + word combinations (especially with adjectives and verbs — \"interested IN,\" \"good AT,\" \"afraid OF,\" \"depend ON\") are largely CONVENTIONAL/idiomatic and must be learned as fixed collocations, not derived from pure logic.\n- **Conflict evidence [P28]:** \"You said 'good in math' should make sense because math is like a subject you're 'in.' But English speakers say 'good AT math.' Is there a logical reason it has to be 'at' rather than 'in,' or is this just the conventional pairing that has to be learned?\"\n- **Bridge text [P30]:** \"Many preposition choices, especially after certain adjectives (good AT, interested IN, afraid OF, proud OF) and verbs (depend ON, believe IN, listen TO), are CONVENTIONAL/idiomatic combinations that must be learned individually — they often can't be reliably derived from pure logic or direct translation from another language. This is a genuine, bounded memorization task, not a rule you can always reason your way to.\"\n- **Replacement text [P31]:** \"For adjective/verb + preposition combinations, learn the specific conventional pairing directly, rather than trying to logically derive which preposition 'should' fit.\"\n- **Discrimination pairs [P33]:**\n  - \"good AT math\" (conventional, not \"good in/on math\") vs. a logically-reasoned but incorrect guess.\n  - \"afraid OF spiders\" (conventional) vs. \"afraid FROM spiders\" (a common L1-transfer error in some languages, incorrect in English).\n- **s6_path:** \"It's very reasonable to expect prepositions to follow logical, derivable rules like other grammar patterns — but many adjective/verb + preposition combinations are genuinely idiomatic and need to be learned as fixed pairs, which is a completely normal part of vocabulary acquisition, not a sign you're missing an underlying rule.\"\n\n---",
+      "localKey": "MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING",
+      "language": "en",
+      "refs": [
+        "MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Location Prepositions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Location Prepositions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Time Prepositions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Time Prepositions\",\"primitives\":[],\"addresses\":[\"MC-PREPOSITIONS-ONLY-SHOW-LOCATION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-PREPOSITIONS-ONLY-SHOW-LOCATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Other Relationship Prepositions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Other Relationship Prepositions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Adjective + Preposition Collocations",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Adjective + Preposition Collocations\",\"primitives\":[],\"addresses\":[\"MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Verb + Preposition Collocations",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Verb + Preposition Collocations\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING\",\"MC-PREPOSITIONS-ONLY-SHOW-LOCATION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PREPOSITIONS-ONLY-SHOW-LOCATION",
+        "MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Location preposition, novel context**\n\"Where is the cat if it's sitting between two chairs? What preposition describes this?\"\n*Target:* \"between.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Time preposition, novel context**\n\"Fill in the blank: 'My birthday is ___ July.'\"\n*Target:* \"in\" (used for months).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Other relationship preposition**\n\"In 'He wrote the letter with a pen,' what relationship does 'with' show?\"\n*Target:* manner/means (the tool/instrument used).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Adjective + preposition collocation, novel example**\n\"Fill in the blank: 'I am proud ___ my work.'\"\n*Target:* \"of\" — the conventional pairing \"proud of.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain prepositions and their learnability**\n\"In your own words: what do prepositions show, and can you always figure out the right one just from logic?\"\n*Target:* states or demonstrates that prepositions show relationships (location, time, manner, and others), and that many adjective/verb + preposition combinations are conventional/idiomatic pairings that must be learned directly rather than logically derived.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Adaptive Flags",
+      "content": "- **Time and other-relationship prepositions deserve equal weight to location**: explicitly teach all three major categories (location, time, other relationships) from early instruction, directly countering the vivid but incomplete \"prepositions = location\" default.\n- **Collocations are a genuine, bounded memorization task, not a logic puzzle**: frame adjective/verb + preposition pairings explicitly as conventional combinations to learn directly — this reduces frustration and redirects effort toward effective memorization strategies (spaced repetition, example sentences) rather than futile logical derivation.\n- **This concept has no downstream KG unlock** — it is a leaf node in the current graph (unlocks: none) — but remains foundational vocabulary/grammar knowledge feeding into general reading/writing/speaking fluency across the curriculum.\n- **Preposition errors are among the most persistent, universal L2 English challenges**: for S9 learners, budget substantial ongoing practice (well beyond this single concept's session) on high-frequency collocations, since preposition mastery is well-documented to lag behind other grammar areas even at advanced proficiency levels.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.prepositions/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.prepositions",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — preposition obstacle course warm-up (location props)\n  ↓\n[P41] PD-1 (word-classes-overview readiness)\n  ↓ PASS\n[P06] Anchor: preposition obstacle course (location, then time props)\n  ↓\nTA-1: Location prepositions [C]\n  ↓\nTA-2: Time prepositions [C]\n  ↓\n[P28] Conflict: prepositions assumed location-only → MC-PREPOSITIONS-ONLY-SHOW-LOCATION (if triggered)\n  ↓\nTA-3: Other relationship prepositions [C→P]\n  ↓\nTA-4: Adjective + preposition collocations [P]\n  ↓\n[P28] Conflict: preposition choice assumed logically derivable → MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING (if triggered)\n  ↓\nTA-5: Verb + preposition collocations [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one adjective + preposition pair (like 'good at') and use it in a sentence.\"\n[P68] Session close\n[P85] Regulation tail — praise learning conventional pairings directly over forcing logical derivation\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word-classes-overview, new to prepositions specifically): dwell on TA-1's physically-demonstrated location prepositions before introducing time/other relationships. S1 (already uses prepositions fluently in speech but struggles with formal/written collocations): focus on TA-4/TA-5's collocation practice, since spoken fluency doesn't guarantee conscious awareness of these fixed pairings. S6 (frustrated that prepositions \"don't follow logical rules\"): explicitly validate that collocations are a genuine, bounded memorization category (Component 1 s6_path), not a sign of a missing logical rule to find. S9 (L1 preposition system maps very differently onto English, a near-universal, well-documented L2 English challenge — e.g., \"afraid FROM\" instead of \"afraid OF,\" \"married WITH\" instead of \"married TO,\" \"depend FROM\" instead of \"depend ON\"): expect prepositions overall, and adjective/verb collocations especially, to be one of the single most persistent, high-frequency error sources for this learner across all proficiency levels; dedicate substantial, ongoing, spaced practice specifically to the most common collocations rather than treating this as a quickly-resolved topic.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.prepositions.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
