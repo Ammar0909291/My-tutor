@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.direct-and-indirect-speech-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.direct-and-indirect-speech",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8dc79c2007fc0854419d1e541232f8accdd331489b8b002b58470210bbf0ccb6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md": "sha256:39332eb227db3d703999251ae683277f792d303266518d6bee1df40c92296f53"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.direct-and-indirect-speech",
+    "name": "Direct and Indirect Speech",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.tense-consistency"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.direct-and-indirect-speech-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.direct-and-indirect-speech (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md": "sha256:39332eb227db3d703999251ae683277f792d303266518d6bee1df40c92296f53"
+      },
+      "contentHash": "sha256:07f8ecac6a3cbfeceda7da7e7ab876fb7310bdc5c7b80c587b257b06b144a190",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.direct-and-indirect-speech.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.direct-and-indirect-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.direct-and-indirect-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.direct-and-indirect-speech.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md#TA-2 (addresses MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.direct-and-indirect-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.direct-and-indirect-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.direct-and-indirect-speech.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.direct-and-indirect-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.direct-and-indirect-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.direct-and-indirect-speech.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md#TA-4 (addresses MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.direct-and-indirect-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.direct-and-indirect-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.direct-and-indirect-speech.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md#TA-5 (addresses MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS, MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.direct-and-indirect-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.direct-and-indirect-speech\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Direct and Indirect Speech — Conceptual Development Sequence",
+      "content": "**TA-1 — Tense Backshift in Indirect Speech [C]**\n\nPresent direct-speech statements in various tenses; student converts to indirect speech applying the correct tense backshift.\n\n**TA-2 — Pronoun and Time/Place Shifts [C]**\n\nPresent direct-speech statements requiring pronoun and time/place word shifts (today→that day, here→there); student applies these shifts correctly, directly targeting MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS.\n\n**TA-3 — Combining All Three Shifts Together [C→P]**\n\nPresent direct-speech statements requiring all three shift types simultaneously; student produces fully correct indirect speech.\n\n**TA-4 — Exceptions: Still-True Facts and Ongoing Situations [P]**\n\nPresent direct-speech statements reporting general truths or still-current situations; student correctly identifies when backshift can be skipped, directly targeting MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS.\n\n**TA-5 — Reporting Questions and Commands [P]**\n\nIntroduce indirect speech for questions (using \"if/whether\" for yes/no, or the question word for wh-questions, with statement word order) and commands (using \"to + base verb\"); student converts direct questions/commands to indirect form.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 69,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/misconception/MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "- **Trigger signal:** Student converts direct speech to indirect (reported) speech by simply removing the quotation marks and changing \"said\" if needed, without applying the required TENSE SHIFT (backshift) and PRONOUN changes, producing errors like: direct \"She said, 'I am tired,'\" incorrectly converted to \"She said I am tired\" (missing the required backshift to \"She said she was tired\").",
+      "content": "### MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS\n- **Trigger signal:** Student converts direct speech to indirect (reported) speech by simply removing the quotation marks and changing \"said\" if needed, without applying the required TENSE SHIFT (backshift) and PRONOUN changes, producing errors like: direct \"She said, 'I am tired,'\" incorrectly converted to \"She said I am tired\" (missing the required backshift to \"She said she was tired\").\n- **Conflict evidence [P28]:** \"You converted 'She said, \\\"I am tired\\\"' to 'She said I am tired' by just removing the quotation marks. But the reporting verb 'said' is in the PAST — does the pronoun 'I' still make sense when we're not quoting her directly anymore? And should the tense of 'am' shift too?\"\n- **Bridge text [P30]:** \"Converting direct speech to indirect speech requires THREE coordinated changes, not just removing quotation marks: (1) TENSE BACKSHIFT — present becomes past, past becomes past perfect, etc., since we're now reporting from a later vantage point ('I am tired' → 'she was tired'); (2) PRONOUN SHIFT — first/second person pronouns often shift to match the reporting perspective ('I' → 'she,' 'you' → 'I/he/she' depending on context); (3) TIME/PLACE WORD SHIFT — 'today' → 'that day,' 'here' → 'there,' 'tomorrow' → 'the next day,' since the reporting happens at a different time/place than the original statement.\"\n- **Replacement text [P31]:** \"When converting direct to indirect speech, apply all three required shifts together — tense backshift, pronoun shift, and time/place word shift — not just remove quotation marks.\"\n- **Discrimination pairs [P33]:**\n  - \"She said, 'I am tired'\" → \"She said she was tired\" (correct — tense backshift 'am'→'was,' pronoun shift 'I'→'she') vs. incorrectly leaving \"She said I am tired.\"\n  - \"He said, 'I will call you tomorrow'\" → \"He said he would call me the next day\" (correct — full three-part shift) vs. incorrectly leaving \"He said I will call you tomorrow.\"\n- **s6_path:** \"Removing quotation marks feels like the main visible change, so it's a very reasonable first step — but the full conversion requires simultaneously shifting tense, pronouns, and time/place references to reflect the reporting perspective.\"",
+      "localKey": "MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS",
+      "language": "en",
+      "refs": [
+        "MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/misconception/MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "- **Trigger signal:** Student applies the tense backshift rule universally, even when reporting a statement that remains TRUE/RELEVANT at the time of reporting (a general truth, scientific fact, or still-current situation), where English allows (and often prefers) KEEPING the original tense rather than backshifting (e.g., \"She said the Earth orbits the Sun\" — keeping present tense, since it's still true — rather than forcing \"She said the Earth orbited the Sun\").",
+      "content": "### MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS\n- **Trigger signal:** Student applies the tense backshift rule universally, even when reporting a statement that remains TRUE/RELEVANT at the time of reporting (a general truth, scientific fact, or still-current situation), where English allows (and often prefers) KEEPING the original tense rather than backshifting (e.g., \"She said the Earth orbits the Sun\" — keeping present tense, since it's still true — rather than forcing \"She said the Earth orbited the Sun\").\n- **Conflict evidence [P28]:** \"You said 'She said the Earth orbited the Sun,' backshifting to past. But is this fact still true right now? Does a universal truth like this need to shift to past tense, or can it stay present even in reported speech?\"\n- **Bridge text [P30]:** \"Tense backshift is the DEFAULT rule for indirect speech, but it can be OPTIONALLY skipped when reporting something still true/current at the time of reporting — general truths, scientific facts, or ongoing situations ('She said the Earth orbits the Sun,' 'He said he lives in Boston' [if he still does]). The backshift is not a mechanical requirement disconnected from meaning — it reflects whether the reported information's truth/relevance still holds.\"\n- **Replacement text [P31]:** \"Apply tense backshift as the default, but consider keeping the original tense when reporting a still-true general fact or an ongoing, still-current situation.\"\n- **Discrimination pairs [P33]:**\n  - \"She said the Earth orbits the Sun\" (present tense kept — a timeless scientific fact) vs. \"She said she was tired\" (backshifted — a specific, time-bound personal state, not a general truth).\n  - \"He said he lives in Boston\" (present kept, if he still lives there) vs. \"He said he lived in Boston\" (backshifted, if he's since moved and no longer does).\n- **s6_path:** \"Since backshift is the standard default rule, it's very reasonable to apply it universally — but recognizing the exception for still-true general facts and ongoing situations shows a more sophisticated understanding of why the rule exists in the first place.\"\n\n---",
+      "localKey": "MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS",
+      "language": "en",
+      "refs": [
+        "MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Tense Backshift in Indirect Speech",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Tense Backshift in Indirect Speech\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 71,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Pronoun and Time/Place Shifts",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pronoun and Time/Place Shifts\",\"primitives\":[],\"addresses\":[\"MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 75,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Combining All Three Shifts Together",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Combining All Three Shifts Together\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 79,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Exceptions: Still-True Facts and Ongoing Situations",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Exceptions: Still-True Facts and Ongoing Situations\",\"primitives\":[],\"addresses\":[\"MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 83,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Reporting Questions and Commands",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Reporting Questions and Commands\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS\",\"MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS",
+        "MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 87,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Tense backshift, novel example**\n\"Convert to indirect speech: He said, 'I am studying for the exam.'\"\n*Target:* \"He said he was studying for the exam.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Full three-shift conversion, novel example**\n\"Convert to indirect speech: She said, 'I will visit you here next week.'\"\n*Target:* \"She said she would visit me there the following week.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Still-true exception, novel example**\n\"Convert to indirect speech: My friend said, 'I live in Chicago' (and she still does).\"\n*Target:* \"My friend said she lives in Chicago\" — present tense appropriately kept, since it's still true.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Reporting a question, novel example**\n\"Convert to indirect speech: He asked, 'Where do you live?'\"\n*Target:* \"He asked where I lived\" — question word retained, statement word order (not inverted), tense backshifted.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain direct/indirect speech conversion**\n\"In your own words: what three things need to shift when converting direct speech to indirect speech, and is backshift always required?\"\n*Target:* states or demonstrates that tense, pronouns, and time/place words all need to shift together (not just removing quotation marks), and that backshift can be optionally skipped when reporting a still-true general fact or ongoing situation.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Adaptive Flags",
+      "content": "- **Three coordinated shifts, not a single quotation-mark removal**: every conversion task should require tracking all three shift types (tense, pronoun, time/place) together, directly countering the natural but incomplete simplification.\n- **Backshift reflects meaning, not mechanical habit**: teach the still-true-fact exception explicitly as evidence that backshift serves a communicative purpose (marking whether reported information remains current), not an arbitrary rule to apply blindly.\n- **Translation-booth checklist as the standing scaffold**: reuse this technique's explicit three-item checklist whenever conversion errors arise, since simultaneously tracking three changes is genuinely demanding.\n- **Backshift mechanism may be genuinely novel for some L1 backgrounds**: for S9 learners whose L1 doesn't require tense-shifting in reported speech, budget substantial, dedicated practice for this specific structural feature.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 177,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "eng.grammar.direct-and-indirect-speech/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.direct-and-indirect-speech",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — reporter's translation booth warm-up\n  ↓\n[P41] PD-1 (tense-consistency readiness)\n  ↓ PASS\n[P06] Anchor: reporter's translation booth (tense/pronoun/time-place checklist)\n  ↓\nTA-1: Tense backshift in indirect speech [C]\n  ↓\nTA-2: Pronoun and time/place shifts [C]\n  ↓\n[P28] Conflict: quotation marks removed without full shift → MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS (if triggered)\n  ↓\nTA-3: Combining all three shifts together [C→P]\n  ↓\nTA-4: Exceptions: still-true facts and ongoing situations [P]\n  ↓\n[P28] Conflict: backshift applied even to still-true statements → MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS (if triggered)\n  ↓\nTA-5: Reporting questions and commands [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, convert one direct-speech sentence you hear into indirect speech.\"\n[P68] Session close\n[P85] Regulation tail — praise applying all three shifts together over removing quotation marks alone\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on tense-consistency, new to reported-speech conversion specifically): dwell on TA-1's tense backshift alone before introducing the additional pronoun/time-place shift layers. S1 (already reports speech fluently in conversation but struggles with formal written conversion): focus on TA-3's combined three-shift practice, since fluent spoken paraphrase doesn't guarantee conscious awareness of all three grammatical changes. S6 (overwhelmed by tracking three simultaneous shifts): use the translation-booth checklist technique as a standing scaffold, explicitly working through each shift type in sequence rather than all at once. S9 (L1 has a different or no backshift convention for reported speech, e.g. some languages don't require tense shifting in indirect speech): expect this concept's tense-backshift mechanism specifically to be a genuinely novel, challenging structural feature requiring substantial, dedicated practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md",
+        "startLine": 139,
+        "endLine": 177
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

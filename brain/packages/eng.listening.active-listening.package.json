@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.active-listening-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.active-listening",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb261e6028083f66d2ba58fd13538a66bd201bd4e55fd27d888b5e8dfbe49df3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.active-listening.md": "sha256:3137762751285ef4e1c95d98b965d9982a634e13a466dbd305a9ef6751209814"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.listening.active-listening",
+    "name": "Active Listening",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.phonetics.prosody"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.active-listening-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.active-listening (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.active-listening.md": "sha256:3137762751285ef4e1c95d98b965d9982a634e13a466dbd305a9ef6751209814"
+      },
+      "contentHash": "sha256:fbcc870de7ebd64d846f04c7a62d354ccabfb87eab11ce5c2560414791633d03",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.active-listening.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.active-listening.md#TA-1 (addresses MC-HEARING-EQUALS-LISTENING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.active-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.active-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.active-listening.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.active-listening.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.active-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.active-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.active-listening.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.active-listening.md#TA-3 (addresses MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.active-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.active-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.active-listening.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.active-listening.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.active-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.active-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.active-listening.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.active-listening.md#TA-5 (addresses MC-HEARING-EQUALS-LISTENING, MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.active-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.active-listening\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.active-listening/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Active Listening — Conceptual Development Sequence",
+      "content": "**TA-1 — Distinguishing Hearing from Listening [C]**\n\nPresent a scenario (or have the student experience one) where they physically hear words without focused attention (e.g., a distracted listening condition), then compare to focused listening; student articulates the difference in what they can recall/understand, directly targeting MC-HEARING-EQUALS-LISTENING.\n\n**TA-2 — Nonverbal Engagement Signals [C]**\n\nStudent practices and identifies appropriate nonverbal engagement behaviors (eye contact, nodding, open posture) while listening to a short account.\n\n**TA-3 — Verbal Engagement Signals (Without Interrupting) [C→P]**\n\nStudent practices brief verbal acknowledgments (\"mm-hmm,\" \"I see,\" \"wow\") at appropriate pauses, distinguishing these from interruptions, directly targeting MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT.\n\n**TA-4 — Clarifying Questions at the Right Time [P]**\n\nStudent practices holding a clarifying question until the speaker reaches a natural pause/end of a thought, rather than interrupting mid-sentence, then asking it appropriately.\n\n**TA-5 — Summarizing to Confirm Understanding [P]**\n\nAfter listening to a short account, student summarizes back the key content and any noticed emotional/attitudinal tone, demonstrating the ultimate test of active listening — genuine comprehension, not just passive exposure to sound.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/misconception/MC-HEARING-EQUALS-LISTENING",
+      "kind": "misconception",
+      "conceptId": "eng.listening.active-listening",
+      "title": "- **Trigger signal:** Student treats passively hearing sounds/words as equivalent to actively listening, failing to engage with meaning, attend to nonverbal signals, or check understanding — can often repeat words heard but cannot summarize the speaker's point, or misses that the speaker expected some form of response/engagement.",
+      "content": "### MC-HEARING-EQUALS-LISTENING\n- **Trigger signal:** Student treats passively hearing sounds/words as equivalent to actively listening, failing to engage with meaning, attend to nonverbal signals, or check understanding — can often repeat words heard but cannot summarize the speaker's point, or misses that the speaker expected some form of response/engagement.\n- **Conflict evidence [P28]:** \"You heard every word I said in that story just now — you could probably repeat some of it back. But can you tell me what the story was actually ABOUT, or how I seemed to feel while telling it?\"\n- **Bridge text [P30]:** \"Hearing is a passive physical process — sound waves reaching your ears. Active listening is a deliberate, effortful process: attending to meaning, noticing tone/body language/emotional cues, and engaging (through eye contact, nodding, follow-up questions) to show and build genuine understanding. You can hear every word and still not be actively listening.\"\n- **Replacement text [P31]:** \"Don't just let words reach your ears — actively attend to meaning, watch for nonverbal cues, and engage by checking your understanding.\"\n- **Discrimination pairs [P33]:**\n  - Passively hearing a story while thinking about something else (can recall a few words, misses the point) vs. actively listening (attends to meaning, can summarize and describe the speaker's tone/feeling).\n  - A listener staring blankly with no engagement signals vs. a listener maintaining eye contact, nodding at key points, and asking a relevant follow-up question.\n- **s6_path:** \"It's easy to assume that if sound reached your ears, you were 'listening' — but active listening is a genuinely more effortful, engaged skill, and noticing the difference is the first step to building it.\"",
+      "localKey": "MC-HEARING-EQUALS-LISTENING",
+      "language": "en",
+      "refs": [
+        "MC-HEARING-EQUALS-LISTENING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/misconception/MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT",
+      "kind": "misconception",
+      "conceptId": "eng.listening.active-listening",
+      "title": "- **Trigger signal:** Student equates \"good listening\" with complete silence and passivity, avoiding any verbal or nonverbal engagement (no nodding, no eye contact, no clarifying questions, no back-channel responses like \"mm-hmm\") out of a belief that any response would be interrupting or rude — misses that appropriate engagement signals are actually PART of active listening, not a violation of it.",
+      "content": "### MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT\n- **Trigger signal:** Student equates \"good listening\" with complete silence and passivity, avoiding any verbal or nonverbal engagement (no nodding, no eye contact, no clarifying questions, no back-channel responses like \"mm-hmm\") out of a belief that any response would be interrupting or rude — misses that appropriate engagement signals are actually PART of active listening, not a violation of it.\n- **Conflict evidence [P28]:** \"You stayed completely still and silent while I told you that story, worried about interrupting. But did that make me feel like you were engaged and following along, or did it feel a little unclear whether you were even listening?\"\n- **Bridge text [P30]:** \"Active listening includes appropriate engagement signals — nodding, brief verbal acknowledgments ('mm-hmm,' 'I see'), eye contact, and well-timed clarifying questions AFTER the speaker finishes a thought, not during. These signals show the speaker you're engaged; complete silence and stillness can actually make a speaker unsure whether they're being heard at all.\"\n- **Replacement text [P31]:** \"Use appropriate nonverbal and brief verbal engagement signals while listening — this supports, rather than interrupts, active listening.\"\n- **Discrimination pairs [P33]:**\n  - Complete silence/stillness (can feel disengaged or unclear to the speaker) vs. nodding + occasional \"mm-hmm\" + eye contact (clearly signals engagement without interrupting).\n  - Interrupting mid-sentence with a question (poor timing, disruptive) vs. waiting for a natural pause to ask a clarifying question (well-timed engagement).\n- **s6_path:** \"Worrying about interrupting is a thoughtful instinct — but there's a real difference between interrupting and showing appropriate engagement, and learning that distinction actually makes you a BETTER listener, not a worse one.\"\n\n---",
+      "localKey": "MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT",
+      "language": "en",
+      "refs": [
+        "MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Distinguishing Hearing from Listening",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Distinguishing Hearing from Listening\",\"primitives\":[],\"addresses\":[\"MC-HEARING-EQUALS-LISTENING\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-HEARING-EQUALS-LISTENING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Nonverbal Engagement Signals",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Nonverbal Engagement Signals\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Verbal Engagement Signals (Without Interrupting)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Verbal Engagement Signals (Without Interrupting)\",\"primitives\":[],\"addresses\":[\"MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Clarifying Questions at the Right Time",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Clarifying Questions at the Right Time\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Summarizing to Confirm Understanding",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Summarizing to Confirm Understanding\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT\",\"MC-HEARING-EQUALS-LISTENING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-HEARING-EQUALS-LISTENING",
+        "MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.active-listening",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Hearing vs. listening distinction**\n\"In your own words: what's the difference between hearing someone and actively listening to them?\"\n*Target:* correctly explains that hearing is passive/automatic while active listening involves deliberate attention to meaning and engagement.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.active-listening",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Nonverbal engagement demonstration**\n\"While I share something with you, show your engagement without speaking.\"\n*Target:* demonstrates appropriate eye contact, nodding, and attentive posture.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.active-listening",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Verbal engagement timing**\n\"While I tell you this account, use verbal acknowledgments at the right moments, not mid-sentence.\"\n*Target:* correctly times brief verbal responses to natural pauses, not interrupting.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.active-listening",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Clarifying question timing**\n\"You have a question about something I said. When's the best time to ask it?\"\n*Target:* correctly identifies waiting for a natural pause/end of the speaker's thought, rather than interrupting immediately.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.active-listening",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Summarize to confirm understanding**\n\"After listening to this short account, summarize what I said and how I seemed to feel about it.\"\n*Target:* accurately summarizes the content and correctly identifies the emotional/attitudinal tone, demonstrating genuine comprehension rather than passive exposure.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Adaptive Flags",
+      "content": "- **Active listening is effortful and behavioral, not passive**: the core distinction (TA-1) between hearing and listening should be experientially demonstrated, not just stated, since it's easy to conflate the two.\n- **Engagement signals support rather than interrupt**: explicitly counter the belief that silence equals respect — teach specific, appropriately-timed nonverbal and verbal engagement behaviors as the actual respectful, engaged response.\n- **Cultural variation in listening norms must be respected**: eye contact, backchanneling frequency, and interruption tolerance vary meaningfully across cultures — adapt expectations for S6/S9 learners rather than enforcing one rigid template, while still teaching the mainstream English-conversational-context norms explicitly.\n- **Summarization is the ultimate mastery test**: Component 6's MP-5 requires genuine content + tone summarization as the real proof of active listening, not just performing engagement behaviors without actual comprehension.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.listening.active-listening/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.active-listening",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — listening mirror warm-up (distracted vs. focused listening contrast)\n  ↓\n[P41] PD-1 (prosody readiness)\n  ↓ PASS\n[P06] Anchor: listening mirror (eye contact → nodding → verbal ack → clarifying question, staged)\n  ↓\nTA-1: Distinguishing hearing from listening [C]\n  ↓\n[P28] Conflict: passive hearing treated as sufficient → MC-HEARING-EQUALS-LISTENING (if triggered)\n  ↓\nTA-2: Nonverbal engagement signals [C]\n  ↓\nTA-3: Verbal engagement signals (without interrupting) [C→P]\n  ↓\n[P28] Conflict: silence mistaken for good listening → MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT (if triggered)\n  ↓\nTA-4: Clarifying questions at the right time [P]\n  ↓\nTA-5: Summarizing to confirm understanding [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, actively listen to someone and summarize what they said and how they felt.\"\n[P68] Session close\n[P85] Regulation tail — praise genuine engagement and accurate summarization over passive silence\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on prosody, new to active-listening behaviors specifically): dwell on TA-1's hearing/listening contrast and TA-2's nonverbal signals before adding verbal engagement. S1 (already engages naturally in conversation but lacks explicit awareness of the skill): use this concept to build metalinguistic/metacognitive naming for an already-present social skill. S6 (socially anxious about eye contact, nodding, or speaking up, or from a cultural background with different engagement norms): explicitly validate that engagement signals are culturally variable, and adapt expectations (e.g., some cultures signal attentive listening with less direct eye contact) rather than enforcing one universal nonverbal template. S9 (L1 culture has different active-listening conventions, e.g. different norms around eye contact, backchanneling frequency, or interruption tolerance): explicitly discuss and contrast English-language-context listening norms with the learner's own cultural norms, framing both as valid within their respective contexts rather than positioning one as objectively correct.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.active-listening.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.pronoun-antecedent-agreement-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d43ab7739fd6359ecda53e2e33991a892b7f29af2ebe56c661d1d7c07443e4e2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md": "sha256:a64c11811f0f3c6ae8100681af69ad5a8c23b87fb04f577fb1a6ff7fc5f817cc"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+    "name": "Pronoun-Antecedent Agreement",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.pronouns",
+      "eng.grammar.subject-verb-agreement"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.pronoun-antecedent-agreement-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.pronoun-antecedent-agreement (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md": "sha256:a64c11811f0f3c6ae8100681af69ad5a8c23b87fb04f577fb1a6ff7fc5f817cc"
+      },
+      "contentHash": "sha256:d791ae23789e0c4fe6d45649c643e1fe8dea434250a7240046d84bd43c178e32",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronoun-antecedent-agreement.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronoun-antecedent-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronoun-antecedent-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronoun-antecedent-agreement.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md#TA-2 (addresses MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronoun-antecedent-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronoun-antecedent-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronoun-antecedent-agreement.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md#TA-3 (addresses MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronoun-antecedent-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronoun-antecedent-agreement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronoun-antecedent-agreement.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md#TA-4 (addresses MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL, MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronoun-antecedent-agreement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronoun-antecedent-agreement\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Pronoun-Antecedent Agreement — Conceptual Development Sequence",
+      "content": "**TA-1 — Basic Singular/Plural Pronoun-Antecedent Agreement [C]**\n\nPresent sentences with clear singular and plural antecedents; student selects the correctly agreeing pronoun.\n\n**TA-2 — Indefinite Pronoun Antecedents (Singular Status) [C→P]**\n\nPresent sentences with indefinite pronoun antecedents (everyone, someone, each); student confirms singular verb agreement first, then selects an appropriately agreeing pronoun (his/her, or singular \"their\" as an accepted gender-neutral option), directly targeting MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL.\n\n**TA-3 — Identifying Ambiguous Pronoun Reference [P]**\n\nPresent sentences with genuinely ambiguous pronoun antecedents (two possible referents); student identifies the ambiguity using the antecedent-arrow technique, directly targeting MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR.\n\n**TA-4 — Correcting Ambiguous Pronoun Reference [P]**\n\nGiven an ambiguous sentence, student rewrites it (using a name, restructuring, or adding clarifying detail) to eliminate the ambiguity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 74,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/misconception/MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "- **Trigger signal:** Student uses a plural pronoun to refer back to singular indefinite-pronoun antecedents (everyone, someone, each, everybody, anybody), reasoning that words like \"everyone\" refer to many people so should take a plural pronoun — e.g., \"Everyone brought their own lunch\" is common in casual usage, but in STRICT standard/formal grammar, \"everyone\" is singular and traditionally pairs with \"his or her\" (though \"their\" as a gender-neutral singular is increasingly accepted in modern standard usage — the key misconception is not recognizing indefinite pronouns' singular grammatical status at all).",
+      "content": "### MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL\n- **Trigger signal:** Student uses a plural pronoun to refer back to singular indefinite-pronoun antecedents (everyone, someone, each, everybody, anybody), reasoning that words like \"everyone\" refer to many people so should take a plural pronoun — e.g., \"Everyone brought their own lunch\" is common in casual usage, but in STRICT standard/formal grammar, \"everyone\" is singular and traditionally pairs with \"his or her\" (though \"their\" as a gender-neutral singular is increasingly accepted in modern standard usage — the key misconception is not recognizing indefinite pronouns' singular grammatical status at all).\n- **Conflict evidence [P28]:** \"You said 'everyone' should get a plural pronoun because it means a lot of people. But does 'everyone' pair with 'is' or 'are' — 'Everyone IS here' or 'Everyone ARE here'? What does that tell you about whether 'everyone' is grammatically singular or plural?\"\n- **Bridge text [P30]:** \"Indefinite pronouns like 'everyone,' 'someone,' 'each,' 'everybody,' 'anybody' are grammatically SINGULAR, even though they refer to a group of people conceptually — this is confirmed by their singular verb agreement ('Everyone IS here,' not 'ARE'). Traditionally, formal grammar pairs these with 'his or her'; modern standard usage increasingly accepts singular 'they/their' as a gender-neutral option, but recognizing these words' singular grammatical STATUS (regardless of which pronoun option you choose) is the key point.\"\n- **Replacement text [P31]:** \"Check an indefinite pronoun's verb agreement (is/are) to confirm it's grammatically singular before choosing an appropriately agreeing pronoun.\"\n- **Discrimination pairs [P33]:**\n  - \"Everyone IS here\" (singular verb, confirming \"everyone\" is singular) vs. incorrectly reasoning \"everyone\" must be plural because it means many people.\n  - \"Each student HAS their own locker\" (singular \"has,\" singular-grammatically-but-gender-neutral \"their,\" now broadly standard) vs. \"Each students HAVE their own lockers\" (incorrect double pluralization).\n- **s6_path:** \"It's a very reasonable, logical assumption that a word referring to a group of people should be grammatically plural — but 'everyone/someone/each' are treated as singular by English grammar convention, confirmed by checking their verb agreement.\"",
+      "localKey": "MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL",
+      "language": "en",
+      "refs": [
+        "MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/misconception/MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "- **Trigger signal:** Student writes sentences with an ambiguous pronoun (unclear which of two or more possible antecedents it refers to), assuming the intended meaning is \"obvious enough\" from context, without recognizing that a reader/listener without the writer's inside knowledge may genuinely be unable to determine which antecedent is meant (e.g., \"Sarah told Maria that she had won the award\" — \"she\" could refer to either Sarah or Maria, and only the writer knows which).",
+      "content": "### MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR\n- **Trigger signal:** Student writes sentences with an ambiguous pronoun (unclear which of two or more possible antecedents it refers to), assuming the intended meaning is \"obvious enough\" from context, without recognizing that a reader/listener without the writer's inside knowledge may genuinely be unable to determine which antecedent is meant (e.g., \"Sarah told Maria that she had won the award\" — \"she\" could refer to either Sarah or Maria, and only the writer knows which).\n- **Conflict evidence [P28]:** \"In 'Sarah told Maria that she had won the award,' who won the award — Sarah or Maria? Can you tell for certain just from this sentence, without already knowing the answer?\"\n- **Bridge text [P30]:** \"A pronoun must have a clear, single, unambiguous antecedent — when a sentence has two or more possible antecedents (like 'Sarah' and 'Maria,' both female singular nouns the pronoun 'she' could refer to), the reader genuinely cannot determine the intended meaning without additional information. This is a real communication failure, not something 'context makes obvious,' since the writer's inside knowledge isn't available to the reader.\"\n- **Replacement text [P31]:** \"Check whether a pronoun has exactly ONE possible antecedent in the sentence — if multiple candidates exist, rewrite the sentence (using a name instead of a pronoun, or restructuring) to eliminate the ambiguity.\"\n- **Discrimination pairs [P33]:**\n  - \"Sarah told Maria that she had won the award\" (ambiguous — \"she\" could be Sarah or Maria) vs. \"Sarah told Maria, 'You won the award'\" (unambiguous, rewritten to remove the ambiguous pronoun).\n  - \"When the plate hit the table, it broke\" (ambiguous — \"it\" could refer to the plate or the table) vs. \"The plate broke when it hit the table\" (clearer, since \"it\" now more naturally refers to \"the plate,\" the more recently established subject).\n- **s6_path:** \"As the writer, you already know which person or thing you mean, so the sentence can feel perfectly clear to you — but a reader without that inside knowledge may genuinely be unable to tell, which is exactly why checking for ambiguous antecedents is a valuable, separate proofreading step.\"\n\n---",
+      "localKey": "MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR",
+      "language": "en",
+      "refs": [
+        "MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Basic Singular/Plural Pronoun-Antecedent Agreement",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Basic Singular/Plural Pronoun-Antecedent Agreement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Indefinite Pronoun Antecedents (Singular Status)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Indefinite Pronoun Antecedents (Singular Status)\",\"primitives\":[],\"addresses\":[\"MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Identifying Ambiguous Pronoun Reference",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Ambiguous Pronoun Reference\",\"primitives\":[],\"addresses\":[\"MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Correcting Ambiguous Pronoun Reference",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Correcting Ambiguous Pronoun Reference\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR\",\"MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL",
+        "MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 88,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Basic agreement, novel example**\n\"Fill in: 'The students turned in ___ assignments.'\"\n*Target:* \"their\" — plural antecedent \"students.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Indefinite pronoun, novel example**\n\"Fill in: 'Each employee must submit ___ report by Friday.'\"\n*Target:* \"their\" (or \"his or her\") — \"each\" is grammatically singular.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying ambiguity, novel example**\n\"Is this clear? 'The manager told the intern that she needed more training.' Who needs more training?\"\n*Target:* correctly identifies the ambiguity — \"she\" could refer to the manager or the intern.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Correcting ambiguity, novel example**\n\"Rewrite to fix the ambiguity: 'When the ball hit the window, it shattered.'\"\n*Target:* a clarified version, e.g., \"The window shattered when the ball hit it\" (making \"it\" unambiguously refer to the window).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain pronoun-antecedent agreement**\n\"In your own words: are words like 'everyone' singular or plural, and why does an ambiguous pronoun matter even if you know what you meant?\"\n*Target:* states or demonstrates that indefinite pronouns like \"everyone/someone/each\" are grammatically singular (confirmed by verb agreement), and that ambiguous pronoun reference is a genuine communication problem since readers lack the writer's inside knowledge of intended meaning.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Adaptive Flags",
+      "content": "- **Verb-agreement test resolves indefinite-pronoun singular/plural confusion reliably**: teach \"check is/are\" as the standing diagnostic for any indefinite-pronoun antecedent question.\n- **Ambiguity is a genuine communication failure, not a stylistic nitpick**: frame TA-3/TA-4 around the reader's actual inability to determine meaning, not an arbitrary rule — this motivates the proofreading habit more effectively than treating it as a pedantic correctness issue.\n- **This is a proofreading skill as much as a grammar rule**: emphasize that catching ambiguous references requires deliberately re-reading one's own writing as if seeing it for the first time, without the writer's inside knowledge.\n- **Lower session_cap (4 TAs) reflects the concept's genuine scope**: this is a smaller, single-hour concept per the KG's `estimated_hours: 1` — the TA sequence is proportionally shorter, consistent with the established convention.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 178,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronoun-antecedent-agreement/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.pronoun-antecedent-agreement",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — antecedent-arrow trace warm-up (clear example)\n  ↓\n[P41] PD-1 (pronoun readiness)\n  ↓ PASS\n[P41] PD-2 (subject-verb-agreement readiness)\n  ↓ PASS\n[P06] Anchor: antecedent-arrow trace (clear vs. ambiguous — two possible arrows)\n  ↓\nTA-1: Basic singular/plural pronoun-antecedent agreement [C]\n  ↓\nTA-2: Indefinite pronoun antecedents (singular status) [C→P]\n  ↓\n[P28] Conflict: indefinite pronouns assumed plural → MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL (if triggered)\n  ↓\nTA-3: Identifying ambiguous pronoun reference [P]\n  ↓\n[P28] Conflict: ambiguity dismissed as \"obvious from context\" → MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR (if triggered)\n  ↓\nTA-4: Correcting ambiguous pronoun reference [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one sentence with 'everyone' or 'someone' and check pronoun agreement.\"\n[P68] Session close\n[P85] Regulation tail — praise checking verb agreement for indefinite pronouns and scanning for ambiguity\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on pronouns/subject-verb-agreement, new to pronoun-antecedent agreement specifically): dwell on TA-1's basic agreement before introducing indefinite-pronoun and ambiguity nuances. S1 (already agrees pronouns correctly in simple cases but writes ambiguous references in longer compositions): focus on TA-3/TA-4, since ambiguous reference is a common issue in more complex, multi-character writing. S6 (frustrated by the singular/plural \"logic mismatch\" for indefinite pronouns): validate that this is a genuine grammatical convention worth checking via the verb-agreement test, not an inconsistency to feel confused by. S9 (L1 doesn't require pronoun-antecedent number agreement, or handles ambiguous reference differently, e.g. relies more heavily on context/omission): expect indefinite-pronoun agreement and ambiguity-detection to require dedicated, explicit practice, since both rely on English-specific grammatical conventions and proofreading habits that may not transfer directly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md",
+        "startLine": 140,
+        "endLine": 178
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

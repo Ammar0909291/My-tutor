@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.future-tenses-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.future-tenses",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6a359cc6f1f4e5048d719152c44c4ebbb399e159484cf9afd7dd4e3a1a2b778b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.future-tenses.md": "sha256:1cf71fcfaa7a386276a334fa44d265794ad5a7ed88dd1456d94abf2dfcf0c201"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.future-tenses",
+    "name": "Future Tenses",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.present-tenses"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.future-tenses-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.future-tenses (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.future-tenses.md": "sha256:1cf71fcfaa7a386276a334fa44d265794ad5a7ed88dd1456d94abf2dfcf0c201"
+      },
+      "contentHash": "sha256:9fc47c7d5f8c8909624b91b29b55263ddd66936d6724a1b12e94758a13182db8",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.future-tenses.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.future-tenses.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.future-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.future-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.future-tenses.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.future-tenses.md#TA-2 (addresses MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.future-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.future-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.future-tenses.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.future-tenses.md#TA-3 (addresses MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.future-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.future-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.future-tenses.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.future-tenses.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.future-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.future-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.future-tenses.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.future-tenses.md#TA-5 (addresses MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE, MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.future-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.future-tenses\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.future-tenses/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "Future Tenses — Conceptual Development Sequence",
+      "content": "**TA-1 — \"Going to\" for Plans and Evidence-Based Predictions [C]**\n\nPresent scenarios involving prior plans or visible present evidence; student produces \"going to\" future forms correctly.\n\n**TA-2 — \"Will\" for Spontaneous Decisions, Promises, and General Predictions [C]**\n\nPresent scenarios involving spontaneous decisions, promises, or general opinions about the future; student produces \"will\" forms correctly, directly targeting MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE through explicit contrast with TA-1.\n\n**TA-3 — Present Continuous for Confirmed Future Plans [C→P]**\n\nPresent sentences describing confirmed personal arrangements; student produces present continuous forms with future meaning, directly targeting MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME.\n\n**TA-4 — Simple Present for Scheduled/Timetabled Events [P]**\n\nPresent sentences describing scheduled events (trains, movies, classes); student produces simple present forms with future meaning, completing the four-way future-expression system.\n\n**TA-5 — Future Continuous and Future Perfect [P]**\n\nIntroduce future continuous (will be + -ing, for an action in progress at a specific future time: \"I will be traveling next week\") and future perfect (will have + past participle, for an action completed before a specific future time: \"By next year, I will have graduated\"); student produces both forms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/misconception/MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "- **Trigger signal:** Student uses \"will\" and \"going to\" as if they always mean exactly the same thing in every context, missing that \"going to\" typically signals a PLANNED intention or a prediction based on PRESENT evidence (\"Look at those clouds — it's going to rain\"), while \"will\" typically signals a SPONTANEOUS decision made at the moment of speaking, a promise, or a prediction based on opinion/belief rather than visible present evidence (\"I think it will rain tomorrow\" — a general prediction; \"I'll help you with that\" — a spontaneous offer).",
+      "content": "### MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE\n- **Trigger signal:** Student uses \"will\" and \"going to\" as if they always mean exactly the same thing in every context, missing that \"going to\" typically signals a PLANNED intention or a prediction based on PRESENT evidence (\"Look at those clouds — it's going to rain\"), while \"will\" typically signals a SPONTANEOUS decision made at the moment of speaking, a promise, or a prediction based on opinion/belief rather than visible present evidence (\"I think it will rain tomorrow\" — a general prediction; \"I'll help you with that\" — a spontaneous offer).\n- **Conflict evidence [P28]:** \"You said 'I will go to the store' and 'I'm going to go to the store' mean exactly the same thing in every situation. If you just decided this second, in the middle of a conversation, to help a friend carry groceries, would you naturally say 'I will help you' or 'I'm going to help you'? What if you'd been planning to go to the store all week?\"\n- **Bridge text [P30]:** \"'Going to' typically signals a PRIOR PLAN or a prediction based on visible PRESENT evidence (I've already decided; I can see signs pointing to it now). 'Will' typically signals a SPONTANEOUS decision made right at the moment of speaking, a promise, or a more general prediction/opinion about the future without necessarily citing present evidence. They often overlap in casual use, but the nuance matters for precision.\"\n- **Replacement text [P31]:** \"Check whether the future action is a prior plan/visible-evidence prediction (going to) or a spontaneous decision/promise/general opinion (will) before choosing between them.\"\n- **Discrimination pairs [P33]:**\n  - \"Look at those dark clouds — it's going to rain\" (prediction from visible present evidence) vs. \"I think it will rain sometime this week\" (general opinion/prediction, no cited evidence).\n  - \"I'm going to visit my grandmother this weekend\" (a plan already made) vs. \"Oh, the phone's ringing — I'll get it!\" (a spontaneous decision made at the moment).\n- **s6_path:** \"Since both forms genuinely refer to future time and often work interchangeably in casual speech, it's very reasonable to treat them as identical — but noticing the plan/evidence-vs-spontaneous-decision distinction adds real precision and is worth learning.\"",
+      "localKey": "MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE",
+      "language": "en",
+      "refs": [
+        "MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/misconception/MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "- **Trigger signal:** Student assumes future time can ONLY be expressed with \"will\" or \"going to,\" missing that English also uses present continuous for confirmed future PLANS/arrangements (\"I'm meeting her tomorrow\") and simple present for SCHEDULED events, especially timetables (\"The train leaves at 6pm tonight\") — both genuinely refer to future time despite using present-tense verb forms.",
+      "content": "### MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME\n- **Trigger signal:** Student assumes future time can ONLY be expressed with \"will\" or \"going to,\" missing that English also uses present continuous for confirmed future PLANS/arrangements (\"I'm meeting her tomorrow\") and simple present for SCHEDULED events, especially timetables (\"The train leaves at 6pm tonight\") — both genuinely refer to future time despite using present-tense verb forms.\n- **Conflict evidence [P28]:** \"You said only 'will' or 'going to' can talk about the future. In 'The train leaves at 6pm tonight,' is 'leaves' a present-tense verb form? But is it talking about something that hasn't happened yet — the future?\"\n- **Bridge text [P30]:** \"English uses present-tense FORMS to express future time in two specific situations: present continuous for confirmed personal plans/arrangements ('I'm meeting her tomorrow' — already arranged), and simple present for scheduled events, especially timetabled ones ('The train leaves at 6pm,' 'The movie starts at 8'). Both genuinely refer to future time despite using grammatically present-tense verb forms.\"\n- **Replacement text [P31]:** \"Recognize that present continuous (for confirmed plans) and simple present (for schedules/timetables) can express future time, not just 'will' and 'going to.'\"\n- **Discrimination pairs [P33]:**\n  - \"I'm meeting her tomorrow\" (present continuous, confirmed personal plan, future meaning) vs. \"I'm meeting her right now\" (present continuous, current action, present meaning) — same grammatical form, different time reference from context.\n  - \"The train leaves at 6pm tonight\" (simple present, scheduled future event) vs. \"The train leaves the station\" (simple present, general/habitual truth) — same form, different time reference from context.\n- **s6_path:** \"It's very reasonable to think future time always needs an obviously 'future-looking' word like 'will' — but English genuinely repurposes present-tense forms for confirmed plans and schedules, which is a distinctive, learnable pattern.\"\n\n---",
+      "localKey": "MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "\"Going to\" for Plans and Evidence-Based Predictions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"\\\"Going to\\\" for Plans and Evidence-Based Predictions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "\"Will\" for Spontaneous Decisions, Promises, and General Predictions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"\\\"Will\\\" for Spontaneous Decisions, Promises, and General Predictions\",\"primitives\":[],\"addresses\":[\"MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "Present Continuous for Confirmed Future Plans",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Present Continuous for Confirmed Future Plans\",\"primitives\":[],\"addresses\":[\"MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "Simple Present for Scheduled/Timetabled Events",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Simple Present for Scheduled/Timetabled Events\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "Future Continuous and Future Perfect",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Future Continuous and Future Perfect\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME\",\"MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE",
+        "MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — \"Going to,\" novel scenario**\n\"You see someone about to trip. What do you say, using 'going to'?\"\n*Target:* \"You're going to trip!\" (prediction from visible present evidence).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — \"Will,\" novel scenario**\n\"Someone asks for help right now, and you spontaneously agree. What do you say?\"\n*Target:* \"I'll help you\" (will, spontaneous decision).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Present continuous for future plan, novel scenario**\n\"You have tickets already booked for a concert next month. How do you express this?\"\n*Target:* \"I'm going to the concert next month\" (present continuous, confirmed plan).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Simple present for schedule, novel scenario**\n\"The store opens at 9am tomorrow. Express this using simple present.\"\n*Target:* \"The store opens at 9am tomorrow.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the future-tense system**\n\"In your own words: are 'will' and 'going to' always interchangeable, and can present-tense forms ever express future time?\"\n*Target:* states or demonstrates that \"going to\" typically signals plans/evidence-based predictions while \"will\" signals spontaneous decisions/promises/general predictions, and that present continuous and simple present can express future time for confirmed plans and schedules respectively.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "Adaptive Flags",
+      "content": "- **Will/going-to distinction matters for precision, even amid casual overlap**: teach both the common casual interchangeability AND the more precise plan/evidence-vs-spontaneous distinction, since both are genuinely useful depending on context/register.\n- **Present-tense-for-future forms are a distinctive, teachable English pattern**: explicitly name and practice these (present continuous for plans, simple present for schedules) as legitimate, common future-expression strategies, not exceptions to avoid.\n- **Four-way scenario matching as the standing organizational framework**: reuse the Component 3 weather-report technique whenever future-form confusion arises, since matching concrete scenarios to forms is more durable than abstract rule memorization.\n- **Substantial dedicated practice needed for L1s with simpler future-marking systems**: for S9 learners whose L1 uses a single future marker regardless of nuance, budget significant, ongoing practice for the full English future-tense system, recognizing this as a genuinely complex, multi-form area.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.future-tenses/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.future-tenses",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — four future-forms weather report warm-up\n  ↓\n[P41] PD-1 (present-tenses readiness)\n  ↓ PASS\n[P06] Anchor: four future-forms weather report (match scenario to form)\n  ↓\nTA-1: \"Going to\" for plans and evidence-based predictions [C]\n  ↓\nTA-2: \"Will\" for spontaneous decisions, promises, and general predictions [C]\n  ↓\n[P28] Conflict: will/going to treated as fully interchangeable → MC-WILL-AND-GOING-TO-ARE-FULLY-INTERCHANGEABLE (if triggered)\n  ↓\nTA-3: Present continuous for confirmed future plans [C→P]\n  ↓\n[P28] Conflict: present tense assumed unable to express future → MC-PRESENT-TENSE-CANNOT-EXPRESS-FUTURE-TIME (if triggered)\n  ↓\nTA-4: Simple present for scheduled/timetabled events [P]\n  ↓\nTA-5: Future continuous and future perfect [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, describe one plan (going to), one spontaneous decision (will), and one schedule (simple present).\"\n[P68] Session close\n[P85] Regulation tail — praise matching form to the correct future-meaning nuance\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on present tenses, new to future-tense forms): dwell on TA-1/TA-2's core will/going-to distinction before introducing present-tense-for-future patterns. S1 (already uses future forms fluently in speech but conflates them in careful writing/analysis): focus on TA-1/TA-2's nuanced distinction, since casual speech often blurs it while precise contexts (promises, evidence-based predictions) benefit from the distinction. S6 (overwhelmed by four+ distinct ways to express future time): use the weather-report scenario-matching anchor as a standing reference, chunking by \"plan/evidence\" (going to) vs. \"spontaneous/general\" (will) vs. \"confirmed arrangement\" (continuous) vs. \"schedule\" (simple present). S9 (L1 has a single future marker/particle regardless of nuance, or lacks a present-tense-for-future pattern entirely): expect the full four-way system, and especially the present-tense-for-future patterns (which are genuinely distinctive to English and several related languages), to require substantial, dedicated practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.future-tenses.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

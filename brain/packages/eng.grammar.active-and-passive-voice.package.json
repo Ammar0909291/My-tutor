@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.active-and-passive-voice-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.active-and-passive-voice",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:33da3ceea7e0b9b6d85403a62c10925e0ac07ac14b36044eefc8a36d2c668886",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md": "sha256:e3e8ac016b939ad59144d7ba0ebf3f6a238eee93d49f4f416d006cb58264ae26"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.active-and-passive-voice",
+    "name": "Active and Passive Voice",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.tense-consistency"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.active-and-passive-voice-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.active-and-passive-voice (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md": "sha256:e3e8ac016b939ad59144d7ba0ebf3f6a238eee93d49f4f416d006cb58264ae26"
+      },
+      "contentHash": "sha256:191b668fb6f453eb57ab908801047400218976b59e090d0d2b5e18d347d04886",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.active-and-passive-voice.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.active-and-passive-voice"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.active-and-passive-voice\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.active-and-passive-voice.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md#TA-2 (addresses MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.active-and-passive-voice"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.active-and-passive-voice\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.active-and-passive-voice.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md#TA-3 (addresses MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.active-and-passive-voice"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.active-and-passive-voice\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.active-and-passive-voice.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.active-and-passive-voice"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.active-and-passive-voice\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.active-and-passive-voice.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md#TA-5 (addresses MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE, MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.active-and-passive-voice"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.active-and-passive-voice\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Active and Passive Voice — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Active vs. Passive Voice [C]**\n\nPresent sentence pairs (active/passive versions of the same event); student identifies which is active (subject does the action) and which is passive (subject receives the action).\n\n**TA-2 — Forming Passive Voice Correctly (Be + Past Participle) [C]**\n\nUsing the Component 3 spotlight technique, student transforms active sentences into passive, correctly restructuring the verb, directly targeting MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE.\n\n**TA-3 — Appropriate Uses of Passive Voice [C→P]**\n\nPresent scenarios where passive voice is genuinely appropriate (unknown doer, de-emphasized doer, scientific/technical convention); student identifies why passive voice serves the communicative purpose better than active in each case, directly targeting MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING.\n\n**TA-4 — Inappropriate/Needless Passive Voice Identification [P]**\n\nPresent sentences using passive voice needlessly (where active would be clearer/more direct, and the doer IS known and relevant); student identifies these cases and converts back to active voice.\n\n**TA-5 — Passive Voice Across Different Tenses [P]**\n\nStudent forms passive voice in various tenses (present, past, future, perfect), applying the be + past participle rule consistently across tense variations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/misconception/MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "- **Trigger signal:** Student treats passive voice as universally incorrect or weak writing to be eliminated in every case, missing that passive voice is genuinely USEFUL and often preferred in specific situations — when the DOER of the action is unknown, unimportant, or deliberately being de-emphasized (e.g., \"The window was broken\" when the breaker is unknown), or in formal/scientific writing where the focus is on the process/result rather than who performed it (\"The solution was heated to 100°C\").",
+      "content": "### MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING\n- **Trigger signal:** Student treats passive voice as universally incorrect or weak writing to be eliminated in every case, missing that passive voice is genuinely USEFUL and often preferred in specific situations — when the DOER of the action is unknown, unimportant, or deliberately being de-emphasized (e.g., \"The window was broken\" when the breaker is unknown), or in formal/scientific writing where the focus is on the process/result rather than who performed it (\"The solution was heated to 100°C\").\n- **Conflict evidence [P28]:** \"You said passive voice is always bad writing to avoid. In 'The Mona Lisa was painted in the early 1500s,' do we know or care WHO painted it specifically in this sentence, or is the painting itself the focus? Would 'Someone painted the Mona Lisa in the early 1500s' actually communicate this better?\"\n- **Bridge text [P30]:** \"Passive voice is a legitimate, useful structure — not inherently 'bad writing' — specifically valuable when the DOER is unknown, unimportant, or intentionally de-emphasized in favor of the ACTION/RESULT (scientific/technical writing, news reporting when a source is unnamed, or when the receiver of the action is the actual topic of interest). The advice to 'avoid passive voice' really means: don't use it needlessly when the active voice would be clearer and more direct, not that passive voice is always wrong.\"\n- **Replacement text [P31]:** \"Consider whether the doer of the action is unknown, unimportant, or intentionally de-emphasized before choosing passive voice — it's a legitimate stylistic and functional choice in the right context, not an error to eliminate universally.\"\n- **Discrimination pairs [P33]:**\n  - \"The bridge was built in 1930\" (passive, appropriate — the builder isn't the point, the bridge's age is) vs. \"Workers built the bridge in 1930\" (active, appropriate if the builders themselves are the focus).\n  - \"Mistakes were made\" (passive, potentially evasive — deliberately obscuring who's responsible, a genuine misuse) vs. \"The solution was heated to 100°C\" (passive, appropriate scientific convention — the process/result matters, not who did the heating).\n- **s6_path:** \"It's a very common piece of writing advice to 'avoid passive voice,' which makes it easy to treat as an absolute rule — but passive voice genuinely serves real communicative purposes in specific contexts, and the real skill is choosing the RIGHT voice for the situation, not eliminating passive voice entirely.\"",
+      "localKey": "MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING",
+      "language": "en",
+      "refs": [
+        "MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/misconception/MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "- **Trigger signal:** Student attempts to form the passive voice by simply swapping the subject and object positions without correctly restructuring the verb phrase (adding the appropriate form of \"be\" + past participle, and optionally a \"by\" phrase), producing ungrammatical results (e.g., attempting \"The cake ate the boy\" as if swapping words alone converts \"The boy ate the cake\" to passive, rather than \"The cake was eaten by the boy\").",
+      "content": "### MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE\n- **Trigger signal:** Student attempts to form the passive voice by simply swapping the subject and object positions without correctly restructuring the verb phrase (adding the appropriate form of \"be\" + past participle, and optionally a \"by\" phrase), producing ungrammatical results (e.g., attempting \"The cake ate the boy\" as if swapping words alone converts \"The boy ate the cake\" to passive, rather than \"The cake was eaten by the boy\").\n- **Conflict evidence [P28]:** \"You said swapping 'The boy ate the cake' to 'The cake ate the boy' makes it passive. Does this sentence still make logical sense — is the cake now doing the eating? What's actually missing from the verb to make this a correct passive sentence?\"\n- **Bridge text [P30]:** \"Forming the passive voice requires THREE changes together: (1) move the original OBJECT to the subject position, (2) change the verb to a form of 'be' + PAST PARTICIPLE (not just swap word order), and (3) optionally add 'by + [original subject]' if the doer is worth mentioning. 'The boy ate the cake' becomes 'The cake was eaten by the boy' — the verb genuinely changes form, it's not just a word-position swap.\"\n- **Replacement text [P31]:** \"To form passive voice, move the object to subject position, change the verb to be + past participle, and optionally add 'by + doer' — never just swap word positions while keeping the original active verb form.\"\n- **Discrimination pairs [P33]:**\n  - \"The cake ate the boy\" (incorrect — just swapped word positions, verb unchanged, nonsensical) vs. \"The cake was eaten by the boy\" (correct passive — verb restructured to be + past participle).\n  - \"The letter was written by Sarah\" (correct passive transformation of \"Sarah wrote the letter\") vs. an attempted \"The letter wrote Sarah\" (incorrect swap).\n- **s6_path:** \"Simply swapping word order feels like the most direct way to 'flip' a sentence — but the passive voice genuinely requires restructuring the VERB itself (be + past participle), not just moving words around.\"\n\n---",
+      "localKey": "MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE",
+      "language": "en",
+      "refs": [
+        "MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Identifying Active vs. Passive Voice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Active vs. Passive Voice\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Forming Passive Voice Correctly (Be + Past Participle)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Forming Passive Voice Correctly (Be + Past Participle)\",\"primitives\":[],\"addresses\":[\"MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Appropriate Uses of Passive Voice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Appropriate Uses of Passive Voice\",\"primitives\":[],\"addresses\":[\"MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Inappropriate/Needless Passive Voice Identification",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Inappropriate/Needless Passive Voice Identification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Passive Voice Across Different Tenses",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Passive Voice Across Different Tenses\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE\",\"MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE",
+        "MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Active vs. passive, novel example**\n\"Is 'The book was written by an unknown author' active or passive?\"\n*Target:* passive — subject \"book\" receives the action.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Forming passive correctly, novel example**\n\"Turn 'The company hired ten new employees' into passive voice.\"\n*Target:* \"Ten new employees were hired by the company\" (or \"...were hired,\" omitting the \"by\" phrase if the doer is unimportant).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Appropriate passive use, novel scenario**\n\"You're reporting a crime where the perpetrator is unknown. Should you write 'Someone stole the car' or 'The car was stolen'? Why?\"\n*Target:* \"The car was stolen\" — passive is appropriate since the doer is genuinely unknown.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Inappropriate passive identification, novel example**\n\"Is 'The ball was thrown by John' the clearest way to say this, if John's identity and role matter to the story?\"\n*Target:* correctly identifies that \"John threw the ball\" (active) would likely be clearer and more direct, since the doer is known and relevant.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain active/passive voice**\n\"In your own words: is passive voice always bad writing, and how do you correctly form it (not just swap words)?\"\n*Target:* states or demonstrates that passive voice is a legitimate choice for specific contexts (unknown/unimportant doer, process-focused writing), not inherently poor writing, and that forming it correctly requires restructuring the verb to be + past participle, not just swapping subject and object positions.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Adaptive Flags",
+      "content": "- **Passive voice is a legitimate tool, not universally bad writing**: directly counter the common but oversimplified \"avoid passive voice\" writing advice with concrete, evidence-based appropriate-use cases (unknown doer, scientific convention, deliberate de-emphasis).\n- **Full three-part transformation, not word-swapping**: always require verb restructuring (be + past participle) as part of correct passive formation, directly countering the naive swap-only error.\n- **Appropriateness judgment is the higher-order skill this concept builds**: beyond mechanical formation, the real goal is choosing the RIGHT voice for a given communicative purpose — emphasize this judgment throughout, not just correct-formation drilling.\n- **Formation mechanics need dedicated practice for L1s without a true passive construction**: for S9 learners, budget explicit, structured practice on the be+past-participle mechanism itself, since this specific grammatical structure may be genuinely novel.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.active-and-passive-voice/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.active-and-passive-voice",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — spotlight swap warm-up (doer/receiver spotlights)\n  ↓\n[P41] PD-1 (tense-consistency readiness)\n  ↓ PASS\n[P06] Anchor: spotlight swap (full three-part passive transformation)\n  ↓\nTA-1: Identifying active vs. passive voice [C]\n  ↓\nTA-2: Forming passive voice correctly (be + past participle) [C]\n  ↓\n[P28] Conflict: subject/object swapped without verb restructuring → MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE (if triggered)\n  ↓\nTA-3: Appropriate uses of passive voice [C→P]\n  ↓\n[P28] Conflict: passive voice treated as always bad → MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING (if triggered)\n  ↓\nTA-4: Inappropriate/needless passive voice identification [P]\n  ↓\nTA-5: Passive voice across different tenses [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one appropriate use of passive voice and one sentence that would be clearer in active voice.\"\n[P68] Session close\n[P85] Regulation tail — praise choosing the right voice for the context over blanket avoidance or overuse\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on tense-consistency, new to voice distinctions): dwell on TA-1's basic identification before introducing formation mechanics and appropriateness judgments. S1 (already avoids passive voice reflexively due to prior \"never use passive\" instruction): focus on TA-3, since unlearning an overly rigid prior rule requires explicit, evidence-based counter-examples. S6 (frustrated by needing to judge appropriateness rather than applying a simple avoid/use rule): validate that this judgment call, while requiring more thought than a blanket rule, produces genuinely better, more purposeful writing. S9 (L1 has a different or no passive-voice construction, e.g. some languages lack a true passive, or form it very differently): expect the be+past-participle formation mechanics to require dedicated, explicit practice, since this specific grammatical structure may not have a direct parallel.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

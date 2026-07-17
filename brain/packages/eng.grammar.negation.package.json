@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.negation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.negation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f276548ce72445a42b20443c4c3cb881bdcccc5388d37f0ab922ba210183d72e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.negation.md": "sha256:d238ef2f35bfad2bd0a722799f8ac4ab338a204104343def5d1df3d63f9a938a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.negation",
+    "name": "Negation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.sentence-types-by-function"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.negation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.negation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.negation.md": "sha256:d238ef2f35bfad2bd0a722799f8ac4ab338a204104343def5d1df3d63f9a938a"
+      },
+      "contentHash": "sha256:3961004ebfcaa6d4e89c4aa704bfef738dc2ddd6d13a0656b7dacbd84e011878",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.negation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.negation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.negation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.negation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.negation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.negation.md#TA-2 (addresses MC-JUST-ADD-NOT-ANYWHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.negation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.negation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.negation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.negation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.negation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.negation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.negation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.negation.md#TA-4 (addresses MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.negation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.negation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.negation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.negation.md#TA-5 (addresses MC-JUST-ADD-NOT-ANYWHERE, MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.negation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.negation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.negation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.negation",
+      "title": "Negation — Conceptual Development Sequence",
+      "content": "**TA-1 — Negating Sentences with Existing Auxiliaries [C]**\n\nPresent statements already containing an auxiliary/be verb; student negates by inserting \"not\" directly after it (including common contractions: isn't, aren't, can't, won't).\n\n**TA-2 — Negating Sentences Requiring Do/Does/Did [C]**\n\nPresent statements with no existing auxiliary; student inserts do/does/did + not, reverting the main verb to base form, directly targeting MC-JUST-ADD-NOT-ANYWHERE through explicit contrast with TA-1.\n\n**TA-3 — Negative Words Beyond \"Not\" (Never, No, Nobody, Nothing) [C→P]**\n\nPresent sentences using other negative words (never, no, nobody, nothing, nowhere); student produces and identifies these as alternative negation strategies.\n\n**TA-4 — Avoiding Double Negatives in Standard English [P]**\n\nPresent sentences with double negatives (non-standard); student corrects them to single-negative standard forms, directly targeting MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS.\n\n**TA-5 — Negation Across Different Tenses and Modals [P]**\n\nStudent applies negation rules across various tenses (past, present perfect, future) and modal-containing sentences, integrating all prior negation patterns.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/misconception/MC-JUST-ADD-NOT-ANYWHERE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.negation",
+      "title": "- **Trigger signal:** Student inserts \"not\" directly after the main verb regardless of whether an auxiliary/be verb is present, producing errors like \"She not likes tea\" (should be \"She does not like tea\") — mirroring the same auxiliary-awareness gap seen in question formation, but for negation instead.",
+      "content": "### MC-JUST-ADD-NOT-ANYWHERE\n- **Trigger signal:** Student inserts \"not\" directly after the main verb regardless of whether an auxiliary/be verb is present, producing errors like \"She not likes tea\" (should be \"She does not like tea\") — mirroring the same auxiliary-awareness gap seen in question formation, but for negation instead.\n- **Conflict evidence [P28]:** \"You said 'She not likes tea.' Does this sentence already have a helping verb like 'is' or 'does,' or do we need to ADD one before we can insert 'not'?\"\n- **Bridge text [P30]:** \"'Not' attaches to an AUXILIARY/helping verb or 'be' verb, not directly to the main verb. If the sentence already has an auxiliary (is, are, has, can, will), 'not' goes right after it (She is not coming). If there's no existing auxiliary (simple present/past main verb), you must INSERT do/does/did before adding 'not,' and revert the main verb to its base form (She does not like tea, not 'She not likes tea').\"\n- **Replacement text [P31]:** \"Check for an existing auxiliary/be verb first — attach 'not' after it, or insert do/does/did + 'not' + base verb if none exists — never attach 'not' directly to a conjugated main verb.\"\n- **Discrimination pairs [P33]:**\n  - \"She is not coming\" (existing \"is,\" \"not\" attaches directly) vs. \"She not likes tea\" (incorrect — no auxiliary to attach \"not\" to).\n  - \"They do not play soccer\" (do-insertion + not + base verb \"play\") vs. \"They not play soccer\" (incorrect, missing \"do\").\n- **s6_path:** \"This mirrors the same challenge as forming questions — checking for an existing auxiliary before deciding how to attach 'not' is the reliable, learnable first step.\"",
+      "localKey": "MC-JUST-ADD-NOT-ANYWHERE",
+      "language": "en",
+      "refs": [
+        "MC-JUST-ADD-NOT-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/misconception/MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.negation",
+      "title": "- **Trigger signal:** Student uses double negatives (two negative words in the same clause, e.g., \"I don't have no money,\" \"She didn't say nothing\") intending to intensify the negative meaning, not recognizing that in STANDARD English grammar, double negatives are considered non-standard/incorrect (unlike some other languages and some English dialects, where they function as intensified negation) — standard English treats two negatives as either canceling out logically or simply being ungrammatical, and uses a single negative word instead (\"I don't have any money,\" \"She didn't say anything\").",
+      "content": "### MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS\n- **Trigger signal:** Student uses double negatives (two negative words in the same clause, e.g., \"I don't have no money,\" \"She didn't say nothing\") intending to intensify the negative meaning, not recognizing that in STANDARD English grammar, double negatives are considered non-standard/incorrect (unlike some other languages and some English dialects, where they function as intensified negation) — standard English treats two negatives as either canceling out logically or simply being ungrammatical, and uses a single negative word instead (\"I don't have any money,\" \"She didn't say anything\").\n- **Conflict evidence [P28]:** \"You said 'I don't have no money' to mean you have zero money, even more strongly. In STANDARD English grammar (the kind typically expected in school writing and formal contexts), is this considered correct, or does it need to be 'I don't have ANY money'?\"\n- **Bridge text [P30]:** \"In STANDARD English grammar, a clause should contain only ONE negative word — 'I don't have any money,' not 'I don't have no money.' Double negatives (two negative words in one clause) are considered non-standard in formal/standard English, even though they function differently — and are perfectly grammatical as intensifiers — in some English dialects and many other world languages. For standard/formal contexts, replace the second negative word with a neutral equivalent (no→any, nothing→anything, never→ever).\"\n- **Replacement text [P31]:** \"In standard English, use only ONE negative word per clause — pair 'not/don't/doesn't/didn't' with neutral words like 'any/anything/anyone/ever,' not with additional negative words like 'no/nothing/nobody/never.'\"\n- **Discrimination pairs [P33]:**\n  - \"I don't have any money\" (one negative — standard) vs. \"I don't have no money\" (two negatives — non-standard in formal English, though grammatical as emphasis in some dialects).\n  - \"She didn't say anything\" (one negative) vs. \"She didn't say nothing\" (two negatives — non-standard).\n- **s6_path:** \"Using two negative words to emphasize a strong negative is a completely natural, logical pattern — and it's grammatically valid in many dialects and languages — but standard/formal written English specifically requires just one negative word per clause, a convention worth knowing especially for school and formal writing.\"\n\n---",
+      "localKey": "MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS",
+      "language": "en",
+      "refs": [
+        "MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.negation",
+      "title": "Negating Sentences with Existing Auxiliaries",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Negating Sentences with Existing Auxiliaries\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.negation",
+      "title": "Negating Sentences Requiring Do/Does/Did",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Negating Sentences Requiring Do/Does/Did\",\"primitives\":[],\"addresses\":[\"MC-JUST-ADD-NOT-ANYWHERE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-JUST-ADD-NOT-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.negation",
+      "title": "Negative Words Beyond \"Not\" (Never, No, Nobody, Nothing)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Negative Words Beyond \\\"Not\\\" (Never, No, Nobody, Nothing)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.negation",
+      "title": "Avoiding Double Negatives in Standard English",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Avoiding Double Negatives in Standard English\",\"primitives\":[],\"addresses\":[\"MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.negation",
+      "title": "Negation Across Different Tenses and Modals",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Negation Across Different Tenses and Modals\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS\",\"MC-JUST-ADD-NOT-ANYWHERE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-JUST-ADD-NOT-ANYWHERE",
+        "MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.negation",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Negation with existing auxiliary, novel example**\n\"Negate: 'She has finished her homework.'\"\n*Target:* \"She has not finished her homework\" (or \"hasn't\").",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.negation",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Negation requiring do-insertion, novel example**\n\"Negate: 'They study every day.'\"\n*Target:* \"They do not study every day\" (or \"don't\").",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.negation",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Other negative words**\n\"Rewrite using 'never': 'I don't ever go there.'\"\n*Target:* \"I never go there\" (single negative word replacing \"don't...ever\").",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.negation",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Double negative correction, novel example**\n\"Correct for standard English: 'She doesn't know nobody here.'\"\n*Target:* \"She doesn't know anybody here.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.negation",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain negation rules**\n\"In your own words: how do you decide where to put 'not,' and is it okay to use two negative words together in standard English?\"\n*Target:* states or demonstrates checking for an existing auxiliary (attach \"not\" after it) vs. inserting do/does/did if none exists, and that standard English uses only ONE negative word per clause, pairing negatives with neutral words (any/anything) rather than stacking two negative words.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.negation",
+      "title": "Adaptive Flags",
+      "content": "- **This concept directly parallels question-formation's auxiliary logic**: explicitly connect the invert-or-insert-do decision from question formation to negation's identical mechanism, reinforcing prior learning rather than re-teaching from scratch.\n- **Double-negative correction should be framed as standard-register convention, not \"your natural speech is wrong\"**: for learners from dialect backgrounds or L1s where double negatives are grammatical/emphatic, frame TA-4 as learning the standard/formal-English convention for school and formal writing, not correcting an error in their natural language variety.\n- **Negative-word alternatives (never, no, nobody, nothing) as a single-negative toolkit**: teach these as legitimate single-negative-word substitutes for \"not...any/anyone/anything,\" giving students expressive options within the single-negative rule.\n- **Substantial, non-judgmental practice needed for double-negative-permitting L1 backgrounds**: for S9 learners whose L1 uses double negatives for emphasis, budget dedicated, repeated, respectful practice toward the standard-English convention.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.negation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.negation",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — \"not\" attachment point warm-up\n  ↓\n[P41] PD-1 (sentence-types-by-function readiness)\n  ↓ PASS\n[P06] Anchor: \"not\" attachment point (existing auxiliary vs. do-insertion)\n  ↓\nTA-1: Negating sentences with existing auxiliaries [C]\n  ↓\nTA-2: Negating sentences requiring do/does/did [C]\n  ↓\n[P28] Conflict: \"not\" attached directly to main verb → MC-JUST-ADD-NOT-ANYWHERE (if triggered)\n  ↓\nTA-3: Negative words beyond \"not\" (never, no, nobody, nothing) [C→P]\n  ↓\nTA-4: Avoiding double negatives in standard English [P]\n  ↓\n[P28] Conflict: double negatives used as emphasis → MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS (if triggered)\n  ↓\nTA-5: Negation across different tenses and modals [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, negate one sentence with an existing auxiliary and one without.\"\n[P68] Session close\n[P85] Regulation tail — praise checking for existing auxiliaries and using one negative word per clause\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on sentence-types-by-function, new to negation mechanics specifically): dwell on TA-1's simpler existing-auxiliary case before introducing do-insertion. S1 (already negates fluently in speech but writes with errors, or uses double negatives naturally from a dialect background): focus on TA-4's standard-vs-dialect distinction, framing it as a register choice for formal contexts, not a correction of the learner's natural speech pattern. S6 (frustrated by the same invert-or-insert-do complexity as question formation): explicitly connect this concept back to the question-formation concept's identical underlying logic, leveraging prior learning rather than treating it as entirely new. S9 (L1 permits or requires double negatives for intensified negation, e.g. Spanish, Russian, many Slavic and Romance languages): expect MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS to be a very strong, persistent transfer pattern requiring explicit, repeated, non-judgmental correction toward the standard-English single-negative convention.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.negation.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

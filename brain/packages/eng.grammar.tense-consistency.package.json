@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.tense-consistency-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.tense-consistency",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3cdb4f5cc707f91523ab3610ef0867bb7a3980231c1add105dec0cb77cd9c3b6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.tense-consistency.md": "sha256:d985ccafef16857a58c8174d1b2af97076e0bec870cf6e59d75dbf8e761fb89a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.tense-consistency",
+    "name": "Tense Consistency",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.past-tenses",
+      "eng.grammar.future-tenses"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.tense-consistency-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.tense-consistency (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.tense-consistency.md": "sha256:d985ccafef16857a58c8174d1b2af97076e0bec870cf6e59d75dbf8e761fb89a"
+      },
+      "contentHash": "sha256:a5de634192ac9571771175f241526c7ee14dadab768a87679f3cec479d50426f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.tense-consistency.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md#TA-1 (addresses MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.tense-consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.tense-consistency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.tense-consistency.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.tense-consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.tense-consistency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.tense-consistency.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md#TA-3 (addresses MC-NARRATIVE-TENSE-CANT-BE-PRESENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.tense-consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.tense-consistency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.tense-consistency.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.tense-consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.tense-consistency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.tense-consistency.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md#TA-5 (addresses MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY, MC-NARRATIVE-TENSE-CANT-BE-PRESENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.tense-consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.tense-consistency\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.tense-consistency/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Tense Consistency — Conceptual Development Sequence",
+      "content": "**TA-1 — Detecting Unmotivated Tense Shifts [C]**\n\nPresent short passages with unmotivated tense shifts (mid-scene switches with no time-reference justification); student identifies and corrects the error, directly targeting MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY by first confirming they understand WHY it's wrong (unmotivated, not just \"different\").\n\n**TA-2 — Identifying Motivated (Correct) Tense Shifts [C]**\n\nPresent passages with genuinely motivated tense shifts (a passage correctly moving between past narration and a future plan, or timeless present-tense general truths within a past narrative); student confirms these shifts are correct because they reflect real time-reference changes.\n\n**TA-3 — Historical Present as a Valid Stylistic Choice [C→P]**\n\nPresent examples of consistent historical-present narration (storytelling, sports commentary); student recognizes this as a legitimate stylistic option, directly targeting MC-NARRATIVE-TENSE-CANT-BE-PRESENT.\n\n**TA-4 — Detecting Inconsistent Historical-Present Mixing [P]**\n\nPresent passages that inconsistently mix historical present with past tense mid-narration (a genuine error); student identifies and corrects these to maintain one consistent choice throughout the relevant stretch.\n\n**TA-5 — Full-Passage Tense-Consistency Proofreading [P]**\n\nStudent proofreads a longer, mixed passage containing both motivated shifts (correct) and unmotivated shifts (errors), applying the timeline-check technique to distinguish and correct only the genuine errors.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/misconception/MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "- **Trigger signal:** Student assumes every single verb in a passage must be in the EXACT same tense, treating any tense shift as automatically an error — missing that MOTIVATED tense shifts (genuinely reflecting different times being discussed) are correct and necessary, while only UNMOTIVATED shifts (arbitrary switching without a real time-reference reason) are actual errors (e.g., \"She walked to the store because she needs milk\" incorrectly shifts to present \"needs\" without reason, but \"She walked to the store yesterday; tomorrow she will walk to the gym\" correctly uses different tenses because the events genuinely occur at different times).",
+      "content": "### MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY\n- **Trigger signal:** Student assumes every single verb in a passage must be in the EXACT same tense, treating any tense shift as automatically an error — missing that MOTIVATED tense shifts (genuinely reflecting different times being discussed) are correct and necessary, while only UNMOTIVATED shifts (arbitrary switching without a real time-reference reason) are actual errors (e.g., \"She walked to the store because she needs milk\" incorrectly shifts to present \"needs\" without reason, but \"She walked to the store yesterday; tomorrow she will walk to the gym\" correctly uses different tenses because the events genuinely occur at different times).\n- **Conflict evidence [P28]:** \"You said every verb in a passage must be the exact same tense. But if a passage describes something that happened yesterday AND something that will happen tomorrow, should both actions use the identical tense, or does the change in actual TIME justify a tense change?\"\n- **Bridge text [P30]:** \"Tense consistency doesn't mean using ONE tense throughout — it means using tenses that logically and CONSISTENTLY reflect the actual TIME relationships of what's being described. A MOTIVATED shift (genuinely describing a different time) is correct: 'She walked to the store yesterday; tomorrow she will visit the gym.' An UNMOTIVATED shift (switching tense without any real change in time reference) is the actual error: 'She walked to the store because she needs milk' — both actions are happening in the same time-frame, so both should be past tense.\"\n- **Replacement text [P31]:** \"Check whether a tense shift reflects an actual change in the TIME being described (motivated, correct) or is an arbitrary switch within the same time-frame (unmotivated, an error).\"\n- **Discrimination pairs [P33]:**\n  - \"She walked to the store yesterday; tomorrow she will visit the gym\" (motivated shift — genuinely different times) vs. \"She walked to the store because she needs milk\" (unmotivated shift — both actions are in the same past time-frame, \"needs\" should be \"needed\").\n  - A narrative correctly using past tense throughout for past events, with present tense reserved only for a stated general truth (\"She walked to school, since exercise is good for health\") — here, \"is\" correctly stays present because it's a timeless general fact, not a shift error.\n- **s6_path:** \"It's a reasonable simplification to think 'consistency' means 'always the same word form' — but the real rule is about consistently reflecting actual TIME relationships, which sometimes requires different tenses and sometimes requires staying in one tense, depending on what's actually being described.\"",
+      "localKey": "MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY",
+      "language": "en",
+      "refs": [
+        "MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/misconception/MC-NARRATIVE-TENSE-CANT-BE-PRESENT",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "- **Trigger signal:** Student assumes narratives (stories, accounts of events) must always be told in PAST tense, treating present-tense narration (historical present) as automatically incorrect, missing that present tense is a legitimate, deliberate stylistic choice for narrating events vividly as if happening now (common in storytelling, sports commentary, and some literary styles) — as long as it's used CONSISTENTLY throughout the relevant stretch, not mixed arbitrarily with past tense.",
+      "content": "### MC-NARRATIVE-TENSE-CANT-BE-PRESENT\n- **Trigger signal:** Student assumes narratives (stories, accounts of events) must always be told in PAST tense, treating present-tense narration (historical present) as automatically incorrect, missing that present tense is a legitimate, deliberate stylistic choice for narrating events vividly as if happening now (common in storytelling, sports commentary, and some literary styles) — as long as it's used CONSISTENTLY throughout the relevant stretch, not mixed arbitrarily with past tense.\n- **Conflict evidence [P28]:** \"You said stories must always be past tense. Have you ever heard someone tell a story like 'So I walk into the room, and everyone looks at me...'? Is that grammatically wrong, or is it a stylistic choice some storytellers and writers use deliberately?\"\n- **Bridge text [P30]:** \"While past tense is the most common narrative choice, present tense ('historical present') is a legitimate, deliberate stylistic option for narrating past or fictional events vividly, as if unfolding in real time — used in storytelling, sports commentary, and some literary fiction. The key requirement is CONSISTENCY: if you choose present-tense narration, sustain it throughout the relevant passage rather than randomly mixing it with past tense.\"\n- **Replacement text [P31]:** \"Recognize present-tense narration as a valid stylistic choice, not an automatic error — the requirement is consistent use within a passage, not that all narratives must be past tense.\"\n- **Discrimination pairs [P33]:**\n  - \"So I walk into the room, and everyone stares at me\" (consistent historical present, a valid stylistic narrative choice) vs. \"I walked into the room, and everyone stares at me\" (inconsistent mixing — a genuine error, since it randomly switches mid-narration without a time-reference reason).\n  - Sports commentary: \"He shoots, he scores!\" (consistent present-tense narration of an ongoing event) — a standard, accepted convention.\n- **s6_path:** \"Since most stories and school writing default to past tense, it's a very reasonable assumption that this is the ONLY correct choice — but present-tense narration is a real, valid stylistic option, as long as it's applied consistently rather than mixed randomly.\"\n\n---",
+      "localKey": "MC-NARRATIVE-TENSE-CANT-BE-PRESENT",
+      "language": "en",
+      "refs": [
+        "MC-NARRATIVE-TENSE-CANT-BE-PRESENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Detecting Unmotivated Tense Shifts",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Detecting Unmotivated Tense Shifts\",\"primitives\":[],\"addresses\":[\"MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Identifying Motivated (Correct) Tense Shifts",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Motivated (Correct) Tense Shifts\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Historical Present as a Valid Stylistic Choice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Historical Present as a Valid Stylistic Choice\",\"primitives\":[],\"addresses\":[\"MC-NARRATIVE-TENSE-CANT-BE-PRESENT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-NARRATIVE-TENSE-CANT-BE-PRESENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Detecting Inconsistent Historical-Present Mixing",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Detecting Inconsistent Historical-Present Mixing\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Full-Passage Tense-Consistency Proofreading",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full-Passage Tense-Consistency Proofreading\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY\",\"MC-NARRATIVE-TENSE-CANT-BE-PRESENT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY",
+        "MC-NARRATIVE-TENSE-CANT-BE-PRESENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Unmotivated shift, novel example**\n\"Find and fix: 'They finished dinner and watch a movie.'\"\n*Target:* \"They finished dinner and watched a movie\" — same past time-frame, \"watch\" should be \"watched.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Motivated shift, novel example**\n\"Is there an error here? 'I studied hard all semester; tomorrow I will take the final exam.'\"\n*Target:* no error — genuinely different times (past studying, future exam) justify the tense shift.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Historical present recognition, novel example**\n\"Is 'The ball flies through the air, and the crowd goes wild' grammatically wrong because it's not past tense?\"\n*Target:* no — this is valid historical-present narration (e.g., sports commentary style), a legitimate stylistic choice, not an error.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Inconsistent historical-present mixing, novel example**\n\"Find and fix: 'He opens the door slowly. Then he saw the surprise party.'\"\n*Target:* \"Then he sees the surprise party\" — maintaining the established historical-present narration, rather than shifting to past mid-passage.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain tense consistency**\n\"In your own words: does tense consistency mean using only one tense throughout a passage, and can a story ever be told in present tense?\"\n*Target:* states or demonstrates that tense consistency means using tenses that logically match actual time relationships (motivated shifts are correct, unmotivated shifts are errors), and that present-tense (historical present) narration is a valid stylistic choice as long as it's applied consistently.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Adaptive Flags",
+      "content": "- **Motivated vs. unmotivated is the central analytical distinction**: every consistency-checking task should require this judgment, not a surface-level \"are the words identical\" check — this is the concept's core cognitive skill (bloom level: analyze).\n- **Timeline-check technique makes the judgment concrete**: reuse the Component 3 timeline-plotting technique whenever tense-consistency confusion arises, since it converts an abstract judgment into a visual, checkable process.\n- **Historical present is a legitimate, teachable stylistic register, not a default error**: explicitly validate this narrative choice while still requiring internal consistency once chosen.\n- **This is fundamentally a proofreading/analytical skill built on prior tense-formation mastery**: for S9 learners, ensure past/future tense FORMATION (the prerequisites) is genuinely secure before layering this analytical consistency-checking skill on top, since it depends heavily on fluent tense production as a foundation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.grammar.tense-consistency/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.tense-consistency",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — timeline-check proofread warm-up (unmotivated error example)\n  ↓\n[P41] PD-1 (past-tenses readiness)\n  ↓ PASS\n[P41] PD-2 (future-tenses readiness)\n  ↓ PASS\n[P06] Anchor: timeline-check proofread (motivated vs. unmotivated shift contrast)\n  ↓\nTA-1: Detecting unmotivated tense shifts [C]\n  ↓\n[P28] Conflict: any tense shift assumed to be an error → MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY (if triggered)\n  ↓\nTA-2: Identifying motivated (correct) tense shifts [C]\n  ↓\nTA-3: Historical present as a valid stylistic choice [C→P]\n  ↓\n[P28] Conflict: narratives assumed to require past tense always → MC-NARRATIVE-TENSE-CANT-BE-PRESENT (if triggered)\n  ↓\nTA-4: Detecting inconsistent historical-present mixing [P]\n  ↓\nTA-5: Full-passage tense-consistency proofreading [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, proofread one paragraph you've written for tense consistency.\"\n[P68] Session close\n[P85] Regulation tail — praise checking for motivated vs. unmotivated shifts over assuming all shifts are errors\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on past/future tenses, new to consistency analysis specifically): dwell on TA-1's clearest unmotivated-shift errors before introducing the more nuanced motivated-shift and historical-present concepts. S1 (already writes with generally consistent tense but occasionally slips on longer passages): focus on TA-5's full-passage proofreading, since sustained consistency across longer text is where errors typically emerge. S6 (frustrated by needing to judge \"motivated vs. unmotivated\" rather than applying a simple fixed rule): validate that the timeline-check technique makes this judgment concrete and checkable, not a vague intuition call. S9 (L1 has different or looser tense-consistency conventions, or doesn't require the same past/present narrative distinctions): expect this concept to require dedicated, explicit practice, since tense-consistency proofreading is an analytical, metalinguistic skill built on top of already-challenging tense-formation knowledge.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.tense-consistency.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

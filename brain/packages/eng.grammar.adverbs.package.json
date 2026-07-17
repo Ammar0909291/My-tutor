@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.adverbs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.adverbs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4280ef964941df3fb3abb0479712127b133ed3115d2f65c5aa05d49d11dd2932",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.adverbs.md": "sha256:57de2ba8a4673001bdd223a80985dcc6f06fdc5b86f19ab4d76449178ba2d3e0"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.adverbs",
+    "name": "Adverbs",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.verbs",
+      "eng.grammar.adjectives"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.adverbs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.adverbs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.adverbs.md": "sha256:57de2ba8a4673001bdd223a80985dcc6f06fdc5b86f19ab4d76449178ba2d3e0"
+      },
+      "contentHash": "sha256:37c88a927d430266e3c9d9f7d610443cd0bfcadb9dac20c4d0582cdbef68e6aa",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adverbs.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adverbs.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adverbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adverbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adverbs.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adverbs.md#TA-2 (addresses MC-ALL-ADVERBS-END-IN-LY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adverbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adverbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adverbs.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adverbs.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adverbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adverbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adverbs.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adverbs.md#TA-4 (addresses MC-ADVERBS-ONLY-MODIFY-VERBS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adverbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adverbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adverbs.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adverbs.md#TA-5 (addresses MC-ALL-ADVERBS-END-IN-LY, MC-ADVERBS-ONLY-MODIFY-VERBS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adverbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adverbs\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.adverbs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Adverbs — Conceptual Development Sequence",
+      "content": "**TA-1 — Adverbs Modifying Verbs (Manner) [C]**\n\nPresent sentences with adverbs of manner (quickly, quietly, carefully) modifying verbs; student identifies the adverb and the verb it modifies.\n\n**TA-2 — Non-\"-ly\" Adverbs [C]**\n\nPresent sentences using adverbs without \"-ly\" endings (fast, hard, well, soon, often, never); student identifies these as adverbs by function, directly targeting MC-ALL-ADVERBS-END-IN-LY.\n\n**TA-3 — \"-ly\" Adjectives (Non-Adverb Exceptions) [C→P]**\n\nPresent sentences using \"-ly\" words that are actually adjectives (friendly, lovely, lonely, silly) describing nouns; student correctly identifies these as adjectives, not adverbs, despite the ending, reinforcing the function-over-ending test from TA-2.\n\n**TA-4 — Adverbs Modifying Adjectives (Degree) [P]**\n\nPresent sentences with degree adverbs modifying adjectives (very tall, extremely difficult, quite good); student identifies the adverb and the adjective it modifies, directly targeting MC-ADVERBS-ONLY-MODIFY-VERBS.\n\n**TA-5 — Adverbs Modifying Other Adverbs (Degree) [P]**\n\nPresent sentences with degree adverbs modifying other adverbs (quite quickly, too slowly, very carefully); student identifies both adverbs and their modifying relationship, completing the three-target modification pattern.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/misconception/MC-ALL-ADVERBS-END-IN-LY",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "- **Trigger signal:** Student relies exclusively on the \"-ly\" ending to identify adverbs, missing that many common adverbs don't end in \"-ly\" (fast, hard, well, soon, often, always, never, very, too) and that some \"-ly\" words are actually adjectives, not adverbs (friendly, lovely, lonely — these describe nouns, not verbs).",
+      "content": "### MC-ALL-ADVERBS-END-IN-LY\n- **Trigger signal:** Student relies exclusively on the \"-ly\" ending to identify adverbs, missing that many common adverbs don't end in \"-ly\" (fast, hard, well, soon, often, always, never, very, too) and that some \"-ly\" words are actually adjectives, not adverbs (friendly, lovely, lonely — these describe nouns, not verbs).\n- **Conflict evidence [P28]:** \"In 'She ran fast,' does 'fast' end in '-ly'? Is it still describing HOW she ran — doing an adverb's job? Now look at 'a friendly dog' — does 'friendly' describe an action, or does it describe the noun 'dog'?\"\n- **Bridge text [P30]:** \"Many adverbs don't end in '-ly' at all (fast, hard, well, soon, often, never, very) — the '-ly' pattern is common but not universal. And some '-ly' words are actually adjectives (friendly, lovely, lonely, silly) describing NOUNS, not verbs. The real test is FUNCTION (does it modify a verb/adjective/adverb?), not the '-ly' ending.\"\n- **Replacement text [P31]:** \"Check what a word MODIFIES (a verb, adjective, or another adverb = likely an adverb; a noun = likely an adjective, even if it ends in '-ly') rather than relying on the ending alone.\"\n- **Discrimination pairs [P33]:**\n  - \"fast\" (no -ly, but modifies the verb \"ran\" — adverb) vs. \"friendly\" (-ly ending, but modifies the noun \"dog\" — adjective).\n  - \"She works hard\" (adverb, no -ly, modifies \"works\") vs. \"a lonely house\" (adjective, -ly ending, modifies \"house\").\n- **s6_path:** \"The '-ly' pattern is genuinely common and a useful first clue, which is exactly why it's easy to over-rely on — but checking what the word actually modifies is the more reliable test, since there are real exceptions in both directions.\"",
+      "localKey": "MC-ALL-ADVERBS-END-IN-LY",
+      "language": "en",
+      "refs": [
+        "MC-ALL-ADVERBS-END-IN-LY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/misconception/MC-ADVERBS-ONLY-MODIFY-VERBS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "- **Trigger signal:** Student assumes adverbs only modify verbs, missing that adverbs can also modify adjectives (\"very tall,\" \"extremely difficult\") and other adverbs (\"quite quickly,\" \"too slowly\") — treating these degree/intensity words as something else entirely, or misapplying adjective forms in these slots (e.g., \"she is real happy\" instead of \"really happy\").",
+      "content": "### MC-ADVERBS-ONLY-MODIFY-VERBS\n- **Trigger signal:** Student assumes adverbs only modify verbs, missing that adverbs can also modify adjectives (\"very tall,\" \"extremely difficult\") and other adverbs (\"quite quickly,\" \"too slowly\") — treating these degree/intensity words as something else entirely, or misapplying adjective forms in these slots (e.g., \"she is real happy\" instead of \"really happy\").\n- **Conflict evidence [P28]:** \"You said adverbs only describe verbs. In 'She is VERY tall,' is 'very' describing an action, or is it describing the adjective 'tall' — telling us HOW tall?\"\n- **Bridge text [P30]:** \"Adverbs modify THREE things: verbs (she runs quickly), adjectives (very tall, extremely difficult), and other adverbs (quite quickly, too slowly). When an adverb modifies an adjective or another adverb, it usually shows DEGREE or INTENSITY (very, extremely, quite, too, so, rather) rather than manner.\"\n- **Replacement text [P31]:** \"Check whether a modifying word is describing a verb (manner/time/place), an adjective (degree), or another adverb (degree) — all three are legitimate adverb functions.\"\n- **Discrimination pairs [P33]:**\n  - \"She sings beautifully\" (adverb modifying the verb \"sings\") vs. \"She is very talented\" (adverb \"very\" modifying the adjective \"talented\").\n  - \"He runs quickly\" (adverb modifying verb) vs. \"He runs quite quickly\" (adverb \"quite\" modifying the adverb \"quickly\").\n- **s6_path:** \"Since adverbs are often introduced through verb-modifying examples first, it's natural to think that's their only job — but degree-modifying adverbs before adjectives and other adverbs are just as common and important.\"\n\n---",
+      "localKey": "MC-ADVERBS-ONLY-MODIFY-VERBS",
+      "language": "en",
+      "refs": [
+        "MC-ADVERBS-ONLY-MODIFY-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Adverbs Modifying Verbs (Manner)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Adverbs Modifying Verbs (Manner)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Non-\"-ly\" Adverbs",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Non-\\\"-ly\\\" Adverbs\",\"primitives\":[],\"addresses\":[\"MC-ALL-ADVERBS-END-IN-LY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ALL-ADVERBS-END-IN-LY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "\"-ly\" Adjectives (Non-Adverb Exceptions)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"\\\"-ly\\\" Adjectives (Non-Adverb Exceptions)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Adverbs Modifying Adjectives (Degree)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Adverbs Modifying Adjectives (Degree)\",\"primitives\":[],\"addresses\":[\"MC-ADVERBS-ONLY-MODIFY-VERBS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ADVERBS-ONLY-MODIFY-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Adverbs Modifying Other Adverbs (Degree)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Adverbs Modifying Other Adverbs (Degree)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ADVERBS-ONLY-MODIFY-VERBS\",\"MC-ALL-ADVERBS-END-IN-LY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-ADVERBS-END-IN-LY",
+        "MC-ADVERBS-ONLY-MODIFY-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Adverb modifying verb, novel sentence**\n\"In 'They worked carefully,' what's the adverb, and what does it modify?\"\n*Target:* \"carefully\" — modifies \"worked.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Non-\"-ly\" adverb, novel sentence**\n\"In 'She rarely complains,' is 'rarely' an adverb? What about 'often' in 'He often visits'?\"\n*Target:* both \"rarely\" and \"often\" are adverbs (of frequency), despite one ending in \"-ly\" and the other not needing it to be an adverb — the key test is function, not ending.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — \"-ly\" adjective distinction**\n\"In 'a lovely garden,' is 'lovely' an adverb or an adjective? How do you know?\"\n*Target:* adjective — despite the \"-ly\" ending, it modifies the noun \"garden,\" not a verb/adjective/adverb.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Adverb modifying adjective or adverb**\n\"In 'He speaks quite fluently,' what does 'quite' modify?\"\n*Target:* \"quite\" modifies \"fluently\" (another adverb), showing degree.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain adverb function and the \"-ly\" trap**\n\"In your own words: how do you correctly identify an adverb, and is checking for '-ly' always reliable?\"\n*Target:* states or demonstrates that adverbs are identified by what they modify (verbs, adjectives, or other adverbs), and that the \"-ly\" ending is a common but unreliable shortcut — some adverbs lack it (fast, well, often) and some \"-ly\" words are adjectives (friendly, lovely).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Adaptive Flags",
+      "content": "- **Function over ending is the central lesson**: every adverb-identification task should train checking what a word MODIFIES, actively countering the unreliable but tempting \"-ly\" shortcut.\n- **The three-target modification pattern (verb/adjective/adverb) must be taught as a complete system**: don't stop at verb-modification alone — explicitly extend to adjective- and adverb-modification, since degree adverbs are extremely common in natural speech and writing.\n- **\"-ly\" adjectives are a specific, teachable exception category**: friendly, lovely, lonely, silly, and similar words deserve dedicated practice as a named exception group, not an incidental correction.\n- **Adjective/adverb confusion in informal registers deserves explicit attention**: for S9 learners (and often native speakers in casual speech), errors like \"she sings good\" or \"he did it real fast\" (using adjective forms where adverbs are needed) are common — address explicitly as a register/correctness distinction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.grammar.adverbs/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.adverbs",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — three-target modifier toss warm-up\n  ↓\n[P41] PD-1 (verb readiness)\n  ↓ PASS\n[P41] PD-2 (adjective readiness)\n  ↓ PASS\n[P06] Anchor: three-target modifier toss (verb/adjective/adverb targets)\n  ↓\nTA-1: Adverbs modifying verbs (manner) [C]\n  ↓\nTA-2: Non-\"-ly\" adverbs [C]\n  ↓\n[P28] Conflict: \"-ly\" ending treated as the only test → MC-ALL-ADVERBS-END-IN-LY (if triggered)\n  ↓\nTA-3: \"-ly\" adjectives (non-adverb exceptions) [C→P]\n  ↓\nTA-4: Adverbs modifying adjectives (degree) [P]\n  ↓\n[P28] Conflict: adverbs assumed to only modify verbs → MC-ADVERBS-ONLY-MODIFY-VERBS (if triggered)\n  ↓\nTA-5: Adverbs modifying other adverbs (degree) [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one adverb that doesn't end in '-ly' and one '-ly' word that's actually an adjective.\"\n[P68] Session close\n[P85] Regulation tail — praise checking function over relying on the \"-ly\" shortcut\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on verbs/adjectives, new to adverbs): dwell on TA-1's manner adverbs modifying verbs before introducing the \"-ly\" exceptions. S1 (already uses adverbs fluently in speech but over-relies on \"-ly\" for identification tasks): focus on TA-2/TA-3's exception cases, since spoken fluency doesn't guarantee reliable metalinguistic identification. S6 (frustrated by exceptions to the \"-ly\" pattern right after it seemed reliable): validate that the ending IS a useful first clue, just not a substitute for the function-based test. S9 (L1 doesn't distinguish adverbs from adjectives morphologically, e.g. some languages use the same form for both, or has a very different degree-modification system): expect this concept, especially the three-way modification pattern (verb/adjective/adverb) and the adjective-vs-adverb-form distinction (e.g., \"real happy\" vs. \"really happy\"), to require dedicated, explicit contrastive practice, since this is a well-documented persistent error area for many L2 English learners.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adverbs.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

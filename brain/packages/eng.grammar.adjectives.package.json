@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.adjectives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.adjectives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f03b4c427f743520f270aaaa24445233207c3144e9a01dfed7713a51a596c545",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.adjectives.md": "sha256:24dc4a7940e10d6e01812e12572c629050a3b2ef8b69c0ccc786a9217f45ca93"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.adjectives",
+    "name": "Adjectives",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.nouns"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.adjectives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.adjectives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.adjectives.md": "sha256:24dc4a7940e10d6e01812e12572c629050a3b2ef8b69c0ccc786a9217f45ca93"
+      },
+      "contentHash": "sha256:a57960b30bd6b2c12db24d5a38069b15b160bd5a265b95555280faff5a326ad8",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adjectives.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adjectives.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adjectives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adjectives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adjectives.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adjectives.md#TA-2 (addresses MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adjectives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adjectives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adjectives.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adjectives.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adjectives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adjectives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adjectives.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adjectives.md#TA-4 (addresses MC-ADJECTIVE-ORDER-DOESNT-MATTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adjectives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adjectives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.adjectives.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.adjectives.md#TA-5 (addresses MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN, MC-ADJECTIVE-ORDER-DOESNT-MATTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.adjectives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.adjectives\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.adjectives/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Adjectives — Conceptual Development Sequence",
+      "content": "**TA-1 — Attributive Adjectives (Before the Noun) [C]**\n\nPresent sentences with single adjectives directly before nouns; student identifies the adjective and the noun it describes.\n\n**TA-2 — Predicate Adjectives (After Linking Verbs) [C]**\n\nPresent sentences with adjectives after linking verbs (is, seems, looks, feels, becomes); student identifies these as adjectives describing the subject, directly targeting MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN.\n\n**TA-3 — Comparative and Superlative Forms [C→P]**\n\nPresent simple sentences using comparative (-er, more) and superlative (-est, most) adjective forms; student identifies the base adjective and its comparison form.\n\n**TA-4 — Adjective Order with Multiple Adjectives [P]**\n\nPresent sets of adjectives describing one noun; student arranges them in the conventional order (opinion, size, age, shape, color, origin, material, purpose), directly targeting MC-ADJECTIVE-ORDER-DOESNT-MATTER.\n\n**TA-5 — Identifying Adjectives in Extended Text [P]**\n\nStudent reads a short passage and identifies all adjectives, noting both attributive and predicate positions, integrating both patterns into a realistic reading context.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/misconception/MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "- **Trigger signal:** Student assumes adjectives always sit directly before the noun they modify (attributive position: \"the red ball\"), failing to recognize predicate adjectives that follow a linking verb and describe the subject from a distance (e.g., \"The ball IS red\" — \"red\" still modifies \"ball\" but sits after the verb \"is,\" not directly before the noun).",
+      "content": "### MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN\n- **Trigger signal:** Student assumes adjectives always sit directly before the noun they modify (attributive position: \"the red ball\"), failing to recognize predicate adjectives that follow a linking verb and describe the subject from a distance (e.g., \"The ball IS red\" — \"red\" still modifies \"ball\" but sits after the verb \"is,\" not directly before the noun).\n- **Conflict evidence [P28]:** \"In 'The ball is red,' does 'red' come right before 'ball,' the way it would in 'the red ball'? Is 'red' still describing 'ball,' just from a different position in the sentence?\"\n- **Bridge text [P30]:** \"Adjectives can appear directly before a noun (attributive position: 'the red ball') OR after a linking verb, describing the subject from a distance (predicate position: 'The ball IS red'). Both are genuine adjective uses — the position changes, but the describing job stays the same.\"\n- **Replacement text [P31]:** \"Check whether a word describes a noun, whether it sits directly before that noun OR appears after a linking verb (is, seems, looks, feels) describing the subject.\"\n- **Discrimination pairs [P33]:**\n  - \"the red ball\" (attributive — before the noun) vs. \"The ball is red\" (predicate — after the linking verb \"is\").\n  - \"a happy child\" (attributive) vs. \"The child seems happy\" (predicate, after \"seems\").\n- **s6_path:** \"It's a very natural first pattern to notice adjectives right before nouns, since that's the most common and visually obvious position — but predicate adjectives (after linking verbs) are just as valid and common, especially in descriptions and statements about how something IS.\"",
+      "localKey": "MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/misconception/MC-ADJECTIVE-ORDER-DOESNT-MATTER",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "- **Trigger signal:** Student places multiple adjectives before a noun in an arbitrary order, unaware that English has a strong (though usually unstated/unconscious for native speakers) conventional order — opinion, size, age, shape, color, origin, material, purpose (e.g., \"a lovely small old round red French wooden dining table\") — producing sentences that sound distinctly unnatural when the order is scrambled (e.g., \"a wooden red table\" sounds fine, but \"a red wooden nice small table\" sounds off).",
+      "content": "### MC-ADJECTIVE-ORDER-DOESNT-MATTER\n- **Trigger signal:** Student places multiple adjectives before a noun in an arbitrary order, unaware that English has a strong (though usually unstated/unconscious for native speakers) conventional order — opinion, size, age, shape, color, origin, material, purpose (e.g., \"a lovely small old round red French wooden dining table\") — producing sentences that sound distinctly unnatural when the order is scrambled (e.g., \"a wooden red table\" sounds fine, but \"a red wooden nice small table\" sounds off).\n- **Conflict evidence [P28]:** \"Say 'a wooden old table.' Now say 'an old wooden table.' Which one sounds more natural to a fluent English speaker?\"\n- **Bridge text [P30]:** \"When stacking multiple adjectives before a noun, English speakers follow a conventional order (roughly: opinion → size → age → shape → color → origin → material → purpose) even without consciously knowing the rule — 'a lovely old wooden table' sounds natural; 'a wooden old lovely table' sounds off, even though every individual word is correct.\"\n- **Replacement text [P31]:** \"When using multiple adjectives together, check them against the conventional order (opinion, size, age, shape, color, origin, material, purpose) rather than placing them arbitrarily.\"\n- **Discrimination pairs [P33]:**\n  - \"a beautiful small antique round French wooden table\" (follows conventional order — opinion, size, age, shape, origin, material) vs. a scrambled version like \"a wooden French round antique small beautiful table\" (same words, unnatural order).\n  - \"big red ball\" (size before color — natural) vs. \"red big ball\" (unnatural order).\n- **s6_path:** \"Most native speakers never consciously learn this rule — they just develop a 'feel' for it through exposure — but having the explicit order as a checklist gives you a genuine shortcut to sounding natural without needing years of exposure.\"\n\n---",
+      "localKey": "MC-ADJECTIVE-ORDER-DOESNT-MATTER",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVE-ORDER-DOESNT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Attributive Adjectives (Before the Noun)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Attributive Adjectives (Before the Noun)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Predicate Adjectives (After Linking Verbs)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Predicate Adjectives (After Linking Verbs)\",\"primitives\":[],\"addresses\":[\"MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Comparative and Superlative Forms",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Comparative and Superlative Forms\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Adjective Order with Multiple Adjectives",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Adjective Order with Multiple Adjectives\",\"primitives\":[],\"addresses\":[\"MC-ADJECTIVE-ORDER-DOESNT-MATTER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVE-ORDER-DOESNT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Identifying Adjectives in Extended Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Identifying Adjectives in Extended Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ADJECTIVE-ORDER-DOESNT-MATTER\",\"MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN",
+        "MC-ADJECTIVE-ORDER-DOESNT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Attributive adjective, novel sentence**\n\"In 'The tiny puppy slept,' what's the adjective?\"\n*Target:* \"tiny\" — describes \"puppy.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Predicate adjective, novel sentence**\n\"In 'The soup tastes delicious,' what's the adjective, and where does it sit?\"\n*Target:* \"delicious\" — describes \"soup,\" sits after the linking verb \"tastes.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Comparative/superlative, novel example**\n\"In 'This is the tallest building in the city,' what's the base adjective and its form?\"\n*Target:* base = \"tall\"; form = superlative (\"tallest\").",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Adjective order, novel set**\n\"Put these in natural order: 'French,' 'old,' 'beautiful' — with the noun 'painting.'\"\n*Target:* \"a beautiful old French painting\" (opinion → age → origin).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain adjective positions and order**\n\"In your own words: can adjectives come after a verb, not just before a noun? And does the order matter when you use several together?\"\n*Target:* states or demonstrates that adjectives can appear in predicate position (after linking verbs) as well as attributive position (before nouns), and that multiple adjectives follow a conventional order (opinion, size, age, shape, color, origin, material, purpose) for natural-sounding English.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Adaptive Flags",
+      "content": "- **Predicate adjectives deserve equal early attention**: explicitly teach the after-linking-verb position alongside the more visually obvious before-noun position, directly countering the natural single-position assumption.\n- **Adjective order is real, learnable, and usually unconscious even for native speakers**: presenting it as an explicit checklist (opinion-size-age-shape-color-origin-material-purpose) gives learners a genuine, high-value shortcut most native speakers never had access to.\n- **Comparative/superlative forms connect naturally to base adjectives**: teach these as adjective FORMS rather than a separate category, reinforcing that they're still doing the describing job.\n- **Adjective-position transfer for L1s with post-noun defaults**: for S9 learners from L1s that place adjectives after nouns by default, budget dedicated, explicit practice on English's pre-noun default position, treating this as a significant, well-documented transfer challenge rather than a minor detail.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.adjectives/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.adjectives",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — describing-word detective warm-up (generate descriptors for an object)\n  ↓\n[P41] PD-1 (noun readiness)\n  ↓ PASS\n[P06] Anchor: describing-word detective (before-noun and after-verb positions)\n  ↓\nTA-1: Attributive adjectives (before the noun) [C]\n  ↓\nTA-2: Predicate adjectives (after linking verbs) [C]\n  ↓\n[P28] Conflict: adjectives assumed only pre-noun → MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN (if triggered)\n  ↓\nTA-3: Comparative and superlative forms [C→P]\n  ↓\nTA-4: Adjective order with multiple adjectives [P]\n  ↓\n[P28] Conflict: adjective order treated as arbitrary → MC-ADJECTIVE-ORDER-DOESNT-MATTER (if triggered)\n  ↓\nTA-5: Identifying adjectives in extended text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, describe one object using three adjectives in the correct order.\"\n[P68] Session close\n[P85] Regulation tail — praise checking adjective order and position over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on nouns, new to adjectives): dwell on TA-1's attributive position before introducing predicate adjectives. S1 (already uses adjectives fluently in speech but lacks explicit order-awareness): focus on TA-4's adjective-order checklist, since native-like intuition often lacks explicit, teachable structure. S6 (frustrated by the seemingly arbitrary adjective-order rule): validate that this rule is genuinely unconscious even for native speakers, and that having it explicit is a real advantage, not remedial work. S9 (L1 has a different or no fixed adjective order, or places adjectives after nouns by default, e.g. French, Spanish for many descriptive adjectives): expect both TA-1's basic word-order pattern and TA-4's multi-adjective order to require deliberate, explicit practice, since English's pre-noun default and its specific stacking order are significant, well-documented transfer challenges.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.adjectives.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.oral-fluency-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.oral-fluency",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4585480745e8286199069ab812cc648b3b31c9ef1976bf8f9755090f4f98db0c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.oral-fluency.md": "sha256:670bf871bcc121eccdeab5960b9acf5148527261bc5abfd13c25e722a6b501b4"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.speaking.oral-fluency",
+    "name": "Oral Fluency",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonetics.connected-speech"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.oral-fluency-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.oral-fluency (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.oral-fluency.md": "sha256:670bf871bcc121eccdeab5960b9acf5148527261bc5abfd13c25e722a6b501b4"
+      },
+      "contentHash": "sha256:38b0e0f0cc1191bb02595ce654a28d815bffeef5f32e18ee59efab896def7656",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.oral-fluency.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md#TA-1 (addresses MC-FLUENCY-MEANS-ZERO-HESITATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.oral-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.oral-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.oral-fluency.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.oral-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.oral-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.oral-fluency.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md#TA-3 (addresses MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.oral-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.oral-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.oral-fluency.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.oral-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.oral-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.oral-fluency.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md#TA-5 (addresses MC-FLUENCY-MEANS-ZERO-HESITATION, MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.oral-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.oral-fluency\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.oral-fluency/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Oral Fluency — Conceptual Development Sequence",
+      "content": "**TA-1 — Recognizing Natural Hesitation in Fluent Speech [C]**\n\nUsing the Component 3 recording technique, student identifies pauses, fillers, and self-corrections in genuinely fluent speech samples, directly targeting MC-FLUENCY-MEANS-ZERO-HESITATION.\n\n**TA-2 — Strategic Pausing for Thinking Time [C]**\n\nStudent practices using brief, natural filler phrases (\"well,\" \"let me think,\" \"so\") to buy thinking time without long silent pauses, building a practical tool for maintaining flow while formulating a response.\n\n**TA-3 — Letting Minor Errors Pass [C→P]**\n\nStudent practices speaking on a simple topic, deliberately continuing past small self-noticed grammar slips rather than stopping to correct them, directly targeting MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR.\n\n**TA-4 — Self-Correction Without Disruption [P]**\n\nStudent practices brief, natural self-correction (a quick \"I mean...\" or repetition of the corrected word) for errors that would genuinely confuse a listener, without a long disruptive pause, balancing TA-3's flow-priority with genuine clarity needs.\n\n**TA-5 — Extended Spontaneous Speech [P]**\n\nStudent speaks for 1-2 minutes on a simple, familiar topic without a script, applying natural pausing, filler use, and selective error-passing to maintain overall flow and communicate clearly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/misconception/MC-FLUENCY-MEANS-ZERO-HESITATION",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "- **Trigger signal:** Student believes truly fluent speakers never pause, hesitate, or self-correct, and becomes anxious or avoids speaking when they notice any hesitation in their own speech — treating any pause as a failure of fluency rather than recognizing that natural, fluent speech includes strategic pausing, thinking time, and occasional self-correction.",
+      "content": "### MC-FLUENCY-MEANS-ZERO-HESITATION\n- **Trigger signal:** Student believes truly fluent speakers never pause, hesitate, or self-correct, and becomes anxious or avoids speaking when they notice any hesitation in their own speech — treating any pause as a failure of fluency rather than recognizing that natural, fluent speech includes strategic pausing, thinking time, and occasional self-correction.\n- **Conflict evidence [P28]:** \"Listen to this recording of a fluent native speaker giving an unscripted answer — do they pause at all? Do they ever restart a sentence or say 'um' while thinking?\"\n- **Bridge text [P30]:** \"Genuinely fluent speech is NOT hesitation-free — natural speakers pause to think, use filler words (um, well, so) while organizing their next thought, and sometimes self-correct mid-sentence. Fluency is about the OVERALL flow and appropriate pacing, not the complete absence of any pause or hesitation.\"\n- **Replacement text [P31]:** \"Judge fluency by overall flow and appropriate pausing (not zero pausing) — natural pauses for thinking are a normal, expected part of fluent speech, not a failure.\"\n- **Discrimination pairs [P33]:**\n  - A fluent speaker's brief thinking pause (\"Well... I think the best approach would be...\") vs. a genuinely disruptive, prolonged silence that breaks communication.\n  - Natural self-correction (\"I went to the store— actually, I mean the market\") vs. constant, disruptive restarting that prevents any complete thought.\n- **s6_path:** \"It's a very understandable goal to want speech with zero hesitation — but real fluent speakers do pause and self-correct, and expecting perfect, uninterrupted flow sets an unrealistic and unhelpful standard.\"",
+      "localKey": "MC-FLUENCY-MEANS-ZERO-HESITATION",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-MEANS-ZERO-HESITATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/misconception/MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "- **Trigger signal:** Student conflates oral fluency (natural pace, appropriate pausing, minimal disruptive hesitation) with grammatical perfection, becoming overly focused on avoiding any grammar error mid-speech — leading to excessive self-monitoring that actually SLOWS speech down and creates more disruptive hesitation than a minor grammar slip would have caused.",
+      "content": "### MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR\n- **Trigger signal:** Student conflates oral fluency (natural pace, appropriate pausing, minimal disruptive hesitation) with grammatical perfection, becoming overly focused on avoiding any grammar error mid-speech — leading to excessive self-monitoring that actually SLOWS speech down and creates more disruptive hesitation than a minor grammar slip would have caused.\n- **Conflict evidence [P28]:** \"You stopped mid-sentence for five seconds to fix a small grammar mistake. If you'd just kept going naturally with the small error, would the listener have understood you fine anyway? Which felt more disruptive — the small error, or the long pause to fix it?\"\n- **Bridge text [P30]:** \"Oral fluency is about maintaining natural PACE and FLOW in speech — it is a separate skill from grammatical accuracy. A minor grammar slip that doesn't disrupt communication is far less costly to fluency than a long pause to self-correct it. Skilled speakers often let small errors pass and keep the conversation moving, prioritizing flow over perfection.\"\n- **Replacement text [P31]:** \"Prioritize keeping your speech flowing at a natural pace — let small, non-disruptive grammar errors go rather than stopping to fix every one.\"\n- **Discrimination pairs [P33]:**\n  - A minor tense/agreement slip that doesn't affect understanding, followed by continuing smoothly, vs. a long self-correcting pause that disrupts the conversation's flow far more than the original error would have.\n  - An error that genuinely confuses the listener (worth a brief clarification) vs. a minor error that doesn't affect comprehension (not worth interrupting flow to fix).\n- **s6_path:** \"Wanting to speak correctly is a great instinct — but fluency and accuracy are genuinely separate goals, and for natural conversation, keeping the flow going usually matters more than catching every small error.\"\n\n---",
+      "localKey": "MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Recognizing Natural Hesitation in Fluent Speech",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing Natural Hesitation in Fluent Speech\",\"primitives\":[],\"addresses\":[\"MC-FLUENCY-MEANS-ZERO-HESITATION\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-MEANS-ZERO-HESITATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Strategic Pausing for Thinking Time",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Strategic Pausing for Thinking Time\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Letting Minor Errors Pass",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Letting Minor Errors Pass\",\"primitives\":[],\"addresses\":[\"MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Self-Correction Without Disruption",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Self-Correction Without Disruption\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Extended Spontaneous Speech",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Extended Spontaneous Speech\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-FLUENCY-MEANS-ZERO-HESITATION\",\"MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-MEANS-ZERO-HESITATION",
+        "MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Recognizing natural hesitation, novel sample**\n\"Listen to this speech sample. Is the speaker fluent, even though they pause a few times?\"\n*Target:* correctly judges the sample as fluent despite natural pauses, reasoning from overall flow rather than pause-count alone.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Strategic pausing, novel prompt**\n\"Answer 'What would you do with a free day?' using a filler if you need thinking time.\"\n*Target:* uses an appropriate filler phrase to maintain flow while thinking.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Letting minor errors pass, novel topic**\n\"Talk about your favorite hobby for 30 seconds. If you notice a small error, keep going.\"\n*Target:* continues past a minor self-noticed error without a disruptive stop.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Appropriate self-correction**\n\"If you say something that would genuinely confuse the listener, how should you fix it without breaking your flow too much?\"\n*Target:* correctly describes/demonstrates a brief, natural correction (quick restatement) rather than a long pause or ignoring a genuinely confusing error.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain oral fluency**\n\"In your own words: what does it mean to speak fluently, and does that mean never pausing or never making a mistake?\"\n*Target:* states or demonstrates that fluency means maintaining natural flow and pace, which is fully compatible with occasional pausing, filler use, and letting minor non-disruptive errors pass — not the same as zero hesitation or grammatical perfection.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Adaptive Flags",
+      "content": "- **Fluency and accuracy are genuinely separate skills**: this concept's central lesson is that natural pace/flow (fluency) is distinct from grammatical perfection (accuracy) — never conflate the two when giving feedback.\n- **Natural hesitation markers are evidence-based, not a lowered standard**: use real recorded/modeled fluent speech (Component 3) to concretely demonstrate that pausing and filler use are normal, not exceptions to be eliminated.\n- **Flow-preservation as an explicit strategic choice**: teach letting minor errors pass (TA-3) as a deliberate, skilled communication strategy, not carelessness — distinguishing it clearly from TA-4's genuine-confusion correction cases.\n- **Grammar-accuracy-first prior instruction may need active counter-teaching**: for S9 learners from instructional traditions emphasizing error-avoidance above all, expect and patiently address strong resistance to \"letting errors pass,\" since it may conflict with deeply held prior beliefs about correct language use.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.speaking.oral-fluency/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.oral-fluency",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — natural-pause recording warm-up (count pauses in a fluent sample)\n  ↓\n[P41] PD-1 (connected-speech readiness)\n  ↓ PASS\n[P06] Anchor: natural-pause recording (fluent speech still has pauses/fillers)\n  ↓\nTA-1: Recognizing natural hesitation in fluent speech [C]\n  ↓\n[P28] Conflict: zero-hesitation ideal → MC-FLUENCY-MEANS-ZERO-HESITATION (if triggered)\n  ↓\nTA-2: Strategic pausing for thinking time [C]\n  ↓\nTA-3: Letting minor errors pass [C→P]\n  ↓\n[P28] Conflict: grammar-perfectionism disrupting flow → MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR (if triggered)\n  ↓\nTA-4: Self-correction without disruption [P]\n  ↓\nTA-5: Extended spontaneous speech [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, speak for one minute on any topic and notice your own natural pauses.\"\n[P68] Session close\n[P85] Regulation tail — praise maintaining flow over perfectionist self-correction\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on connected speech, new to fluency-specific practice): dwell on TA-1's recognizing-hesitation-in-fluent-speech work before moving to production practice. S1 (already speaks with reasonable flow but is highly self-critical about small errors): focus on TA-3/TA-4, since MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR is the likely primary target for this profile. S6 (speech anxiety, fear of judgment for hesitating or making mistakes): explicitly validate that hesitation and minor errors are normal and expected even in fluent native speech (Component 3's recording evidence), directly reducing performance anxiety. S9 (English learner whose L1 speaking culture may have different norms around pausing/filler use, or who has been taught in a grammar-accuracy-first tradition that discourages any error): expect MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR to be an especially strong, ingrained belief from prior instruction; dedicate extra explicit reassurance and practice to TA-3's flow-over-perfection principle.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.oral-fluency.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

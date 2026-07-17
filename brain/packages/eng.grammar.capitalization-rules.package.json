@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.capitalization-rules-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.capitalization-rules",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:199ac0b173ff7b84606354af8feb37eb9837ea7ae0e93ae1baabe1af3587c79b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md": "sha256:e5c9228033a3e1a49bdc8a041ed6a6f3c4b0cde856c76fc71fce65e7d8e48de6"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.capitalization-rules",
+    "name": "Capitalization Rules",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.sentence-types-by-function"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.capitalization-rules-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.capitalization-rules (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md": "sha256:e5c9228033a3e1a49bdc8a041ed6a6f3c4b0cde856c76fc71fce65e7d8e48de6"
+      },
+      "contentHash": "sha256:65533acb624a516f2e96997baf321f8c28682ff9027bad542c3f44759e3afd01",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.capitalization-rules.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md#TA-1 (addresses MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.capitalization-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.capitalization-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.capitalization-rules.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.capitalization-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.capitalization-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.capitalization-rules.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md#TA-3 (addresses MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.capitalization-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.capitalization-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.capitalization-rules.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md#TA-4 (addresses MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT, MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.capitalization-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.capitalization-rules\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.capitalization-rules/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Capitalization Rules — Conceptual Development Sequence",
+      "content": "**TA-1 — Capitalizing the First Word of Every Sentence [C]**\n\nPresent multi-sentence passages; student capitalizes the first word of EACH sentence, directly targeting MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT.\n\n**TA-2 — Capitalizing Proper Nouns (Names, Places, Days, Months) [C]**\n\nPresent sentences with proper nouns (people's names, cities, countries, days of the week, months); student correctly capitalizes these specific, named entities.\n\n**TA-3 — Distinguishing Proper from Common Nouns [C→P]**\n\nPresent pairs contrasting common and proper nouns for similar concepts (mom/Mom, city/Paris, dog/Rex); student correctly capitalizes only the proper noun member, directly targeting MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD.\n\n**TA-4 — Capitalizing \"I\" and Titles [P]**\n\nPresent sentences using the pronoun \"I\" (always capitalized regardless of position) and titles (Dr., President, Aunt when used as part of a name); student applies these specific capitalization conventions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 68,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/misconception/MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "- **Trigger signal:** Student capitalizes common nouns that FEEL important or significant (e.g., \"I love my Mom\" — capitalizing \"Mom\" as if it were always a proper name, or \"We went to the Beach\" — capitalizing \"Beach\" because the trip felt special), rather than reserving capitalization for genuine PROPER nouns (specific, named individuals/places) as opposed to common nouns (general categories), regardless of how emotionally significant the word feels.",
+      "content": "### MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD\n- **Trigger signal:** Student capitalizes common nouns that FEEL important or significant (e.g., \"I love my Mom\" — capitalizing \"Mom\" as if it were always a proper name, or \"We went to the Beach\" — capitalizing \"Beach\" because the trip felt special), rather than reserving capitalization for genuine PROPER nouns (specific, named individuals/places) as opposed to common nouns (general categories), regardless of how emotionally significant the word feels.\n- **Conflict evidence [P28]:** \"You capitalized 'Beach' in 'We went to the Beach.' Is 'beach' naming one SPECIFIC, particular beach with its own official name (like 'Waikiki Beach'), or is it a general category of place, like 'park' or 'store'?\"\n- **Bridge text [P30]:** \"Capitalization for nouns follows the PROPER vs. COMMON distinction, not emotional importance — proper nouns (specific, named individuals: Sarah, Paris, Monday, the White House) are capitalized; common nouns (general categories: mom, beach, teacher, city), even ones you care about deeply, are NOT capitalized unless they're used as part of a direct address or title-substitute for a specific name ('I love my mom' — common noun, lowercase; 'I love you, Mom' — direct address, capitalized like a name).\"\n- **Replacement text [P31]:** \"Capitalize based on whether a word names a SPECIFIC, particular individual/place (proper noun) versus a general category (common noun) — not based on how important or significant the word feels emotionally.\"\n- **Discrimination pairs [P33]:**\n  - \"I love my mom\" (common noun, general category, lowercase) vs. \"I love you, Mom\" (direct address, functioning like a name, capitalized).\n  - \"We went to the beach\" (common noun, general category) vs. \"We went to Waikiki Beach\" (proper noun, specific named place, capitalized).\n- **s6_path:** \"It's a very natural instinct to capitalize words that feel emotionally significant — but the rule is specifically about proper (specific/named) vs. common (general category) nouns, not about how much you care about the thing.\"",
+      "localKey": "MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD",
+      "language": "en",
+      "refs": [
+        "MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/misconception/MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "- **Trigger signal:** Student capitalizes the first word of an entire piece of writing but fails to capitalize the first word of EACH new sentence within it, treating capitalization-at-the-start as a one-time, whole-document rule rather than a per-sentence rule that applies at every sentence boundary.",
+      "content": "### MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT\n- **Trigger signal:** Student capitalizes the first word of an entire piece of writing but fails to capitalize the first word of EACH new sentence within it, treating capitalization-at-the-start as a one-time, whole-document rule rather than a per-sentence rule that applies at every sentence boundary.\n- **Conflict evidence [P28]:** \"You capitalized the very first word of your paragraph, but not the first word of the second sentence. Does the capitalize-the-first-word rule apply just once for the whole paragraph, or does it apply again every time a NEW sentence starts?\"\n- **Bridge text [P30]:** \"The first-word-capitalization rule applies at the start of EVERY sentence, not just once at the beginning of an entire text — each new sentence (signaled by the period/question mark/exclamation point ending the previous one) needs its own capitalized first word.\"\n- **Replacement text [P31]:** \"Capitalize the first word after every sentence-ending punctuation mark (period, question mark, exclamation point), not just the very first word of the whole piece of writing.\"\n- **Discrimination pairs [P33]:**\n  - \"The dog barked. It ran to the door.\" (both sentences correctly capitalized at their start) vs. \"The dog barked. it ran to the door.\" (second sentence incorrectly left lowercase).\n  - A three-sentence paragraph with all three sentences correctly capitalized vs. only the very first sentence capitalized.\n- **s6_path:** \"Since the very first word of a text is the most obvious, prominent capitalization point, it's understandable to focus attention there — but the rule genuinely repeats at every single sentence boundary throughout the whole piece.\"\n\n---",
+      "localKey": "MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT",
+      "language": "en",
+      "refs": [
+        "MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Capitalizing the First Word of Every Sentence",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Capitalizing the First Word of Every Sentence\",\"primitives\":[],\"addresses\":[\"MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Capitalizing Proper Nouns (Names, Places, Days, Months)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Capitalizing Proper Nouns (Names, Places, Days, Months)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Distinguishing Proper from Common Nouns",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Distinguishing Proper from Common Nouns\",\"primitives\":[],\"addresses\":[\"MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Capitalizing \"I\" and Titles",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Capitalizing \\\"I\\\" and Titles\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD\",\"MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT",
+        "MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 82,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Every sentence's first word, novel passage**\n\"Capitalize correctly: 'she opened the box. inside was a surprise.'\"\n*Target:* \"She opened the box. Inside was a surprise.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Proper nouns, novel example**\n\"Capitalize correctly: 'my friend maria lives in canada.'\"\n*Target:* \"My friend Maria lives in Canada.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Common vs. proper, novel pair**\n\"Is it 'I love my Dog' or 'I love my dog'? What about 'I love Rex'?\"\n*Target:* \"I love my dog\" (common noun) and \"I love Rex\" (proper noun, the dog's specific name).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — \"I\" and titles**\n\"Capitalize correctly: 'i asked dr. smith a question.'\"\n*Target:* \"I asked Dr. Smith a question.\" — \"I\" always capitalized; \"Dr.\" as a title before a name capitalized.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain capitalization rules**\n\"In your own words: when do you capitalize a word — does it depend on how important the word feels, or something else? And does the first-word rule apply once per document or more often?\"\n*Target:* states or demonstrates that capitalization depends on whether a word is a proper noun (specific/named) versus a common noun (general category), not emotional importance, and that the first-word rule applies at the start of every sentence, not just once for the whole text.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Adaptive Flags",
+      "content": "- **Every-sentence-boundary rule, not once-per-document**: explicitly reinforce that first-word capitalization repeats at every sentence start throughout a passage — the most common early-writer gap.\n- **Proper vs. common is the defining test, not emotional significance**: teach this distinction explicitly and repeatedly, since the \"important things get capitals\" intuition is strong and persistent, especially for beloved people/places/pets.\n- **Direct-address exception as a bridge, not a contradiction**: the \"Mom\"/\"mom\" distinction (capitalized when used as a name-substitute in direct address, lowercase as a general common noun) validates the underlying instinct while teaching the correct rule.\n- **Foundational-level instruction for no-capitalization or all-caps L1 systems**: for S9 learners whose L1 has no case distinction or a different capitalization convention entirely (like German), treat this as needing full foundational teaching or active unlearning, not a quick review.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 170,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.grammar.capitalization-rules/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.capitalization-rules",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — capitalization checklist walk warm-up\n  ↓\n[P41] PD-1 (sentence-types-by-function readiness)\n  ↓ PASS\n[P06] Anchor: capitalization checklist walk (circle sentence starts, underline proper nouns)\n  ↓\nTA-1: Capitalizing the first word of every sentence [C]\n  ↓\n[P28] Conflict: only the very first word of a text capitalized → MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT (if triggered)\n  ↓\nTA-2: Capitalizing proper nouns (names, places, days, months) [C]\n  ↓\nTA-3: Distinguishing proper from common nouns [C→P]\n  ↓\n[P28] Conflict: important-feeling common nouns capitalized → MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD (if triggered)\n  ↓\nTA-4: Capitalizing \"I\" and titles [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, write two sentences with correct capitalization, including one proper noun.\"\n[P68] Session close\n[P85] Regulation tail — praise checking proper-vs-common status over capitalizing by feeling\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on sentence-types-by-function, new to capitalization conventions): dwell on TA-1's every-sentence rule before introducing proper/common noun distinctions. S1 (already capitalizes correctly in short writing but misses in longer multi-sentence passages): focus on TA-1's per-sentence application in extended text. S6 (frustrated by wanting to capitalize emotionally significant common nouns like \"mom\" or \"dog\"): validate the direct-address exception (capitalized when used AS a name-substitute, e.g., \"Thanks, Mom!\") to honor the underlying instinct within the correct rule. S9 (L1 has no capitalization system at all, e.g. many non-Latin-script languages, or a different capitalization convention, e.g. German capitalizes all nouns): expect this concept to require genuinely foundational instruction (not just a review), since the entire concept of case-based letter marking may be unfamiliar, or the German-style all-nouns-capitalized pattern may need explicit unlearning for English.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.capitalization-rules.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

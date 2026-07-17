@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.nouns-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.nouns",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b320ae9c2630f1d0ba5a598edf3c951177a70cfd770ce5e02977d057347cdb7c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.nouns.md": "sha256:5713b883bb8bb1454b7b5cc82cf574a3766e4597e529adbaeb70621f0fb20df3"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.nouns",
+    "name": "Nouns",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.word-classes-overview"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.nouns-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.nouns (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.nouns.md": "sha256:5713b883bb8bb1454b7b5cc82cf574a3766e4597e529adbaeb70621f0fb20df3"
+      },
+      "contentHash": "sha256:3aaee245e20025b3ebc3af1e49f5eb6efd5f70c68491e8f9632734b6ee6edce1",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.nouns.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.nouns.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.nouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.nouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.nouns.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.nouns.md#TA-2 (addresses MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.nouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.nouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.nouns.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.nouns.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.nouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.nouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.nouns.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.nouns.md#TA-4 (addresses MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.nouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.nouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.nouns.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.nouns.md#TA-5 (addresses MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS, MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.nouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.nouns\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.nouns/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Nouns — Conceptual Development Sequence",
+      "content": "**TA-1 — Concrete Noun Categories (Person, Place, Thing) [C]**\n\nPresent a set of words/pictures; student sorts into person, place, or thing categories, building the foundational concrete-noun recognition.\n\n**TA-2 — Abstract Nouns (Ideas, Qualities, States) [C]**\n\nPresent a set of abstract nouns (love, freedom, courage, honesty); student identifies them as nouns despite their non-physical nature, directly targeting MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS.\n\n**TA-3 — Common vs. Proper Nouns [C→P]**\n\nPresent pairs (dog/Rex, city/Paris, teacher/Ms. Smith); student identifies which is the general/common noun and which is the specific/proper noun (capitalized, naming a particular individual instance).\n\n**TA-4 — Countable vs. Uncountable Nouns [P]**\n\nPresent a mixed set of nouns (book, water, chair, rice, idea, furniture); student sorts into countable (can be pluralized/counted individually) vs. uncountable (measured as a mass/substance/category), directly targeting MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY.\n\n**TA-5 — Collective Nouns [P]**\n\nIntroduce collective nouns (team, flock, family, herd) — singular-form nouns naming a group treated as one unit; student identifies collective nouns and practices appropriate agreement (e.g., \"the team IS playing well\" vs. sometimes \"the team ARE\" in certain varieties, noting this is a more advanced/variable pattern).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/misconception/MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.nouns",
+      "title": "- **Trigger signal:** Student defines nouns only as physical, touchable objects (\"things you can hold\"), failing to recognize abstract nouns (ideas, qualities, states — \"happiness,\" \"freedom,\" \"honesty\") as a legitimate noun category, since they can't be seen or touched.",
+      "content": "### MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS\n- **Trigger signal:** Student defines nouns only as physical, touchable objects (\"things you can hold\"), failing to recognize abstract nouns (ideas, qualities, states — \"happiness,\" \"freedom,\" \"honesty\") as a legitimate noun category, since they can't be seen or touched.\n- **Conflict evidence [P28]:** \"You said nouns are only things you can touch. Can you touch 'happiness'? Can you touch 'freedom'? Do these words still name things — just not physical things?\"\n- **Bridge text [P30]:** \"Nouns name people, places, THINGS, and IDEAS — abstract nouns (happiness, freedom, honesty, courage) name concepts, qualities, or states that can't be physically touched but are still genuine 'things' in a grammatical sense — they can take articles ('the honesty', 'a feeling of freedom') and function as subjects/objects just like concrete nouns.\"\n- **Replacement text [P31]:** \"Check if a word names ANY kind of thing — a person, place, physical object, OR an idea/quality/state — not just physical objects.\"\n- **Discrimination pairs [P33]:**\n  - \"table\" (concrete noun, physical object) vs. \"happiness\" (abstract noun, an idea/state) — both function as nouns grammatically.\n  - \"book\" (concrete) vs. \"knowledge\" (abstract) — \"I have a book\" and \"I have knowledge\" both use the noun in the same grammatical slot.\n- **s6_path:** \"It's a very natural starting point to think of nouns as physical objects, since those are the easiest to picture — but abstract nouns are just as real a category, and recognizing them is an important expansion of the concept.\"",
+      "localKey": "MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS",
+      "language": "en",
+      "refs": [
+        "MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/misconception/MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.nouns",
+      "title": "- **Trigger signal:** Student treats the countable/uncountable distinction as random or unlearnable, applying plural forms or \"a/an\" incorrectly to uncountable nouns (e.g., \"an information,\" \"many furnitures\") without recognizing the underlying pattern — uncountable nouns typically name substances, abstract concepts, or collections treated as a single mass rather than individually countable units.",
+      "content": "### MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY\n- **Trigger signal:** Student treats the countable/uncountable distinction as random or unlearnable, applying plural forms or \"a/an\" incorrectly to uncountable nouns (e.g., \"an information,\" \"many furnitures\") without recognizing the underlying pattern — uncountable nouns typically name substances, abstract concepts, or collections treated as a single mass rather than individually countable units.\n- **Conflict evidence [P28]:** \"You said 'many furnitures.' Can you count 'one furniture, two furnitures'? Or do we usually think of furniture as a whole category/mass, like 'water' or 'rice' — things you measure rather than count as separate 'ones'?\"\n- **Bridge text [P30]:** \"Countable nouns name things that can be individually counted (one book, two books). Uncountable nouns typically name substances (water, rice), abstract concepts (information, advice), or categories treated as a whole mass (furniture, luggage) — these don't take plural '-s' or 'a/an' in standard usage, and are quantified differently ('some furniture,' 'a piece of furniture,' 'much information').\"\n- **Replacement text [P31]:** \"Before pluralizing a noun or adding 'a/an,' check whether it names individually countable units or a mass/substance/abstract category treated as a whole.\"\n- **Discrimination pairs [P33]:**\n  - \"chair\" (countable: \"one chair, two chairs\") vs. \"furniture\" (uncountable: \"furniture,\" \"a piece of furniture,\" never \"a furniture\" or \"furnitures\").\n  - \"fact\" (countable: \"one fact, several facts\") vs. \"information\" (uncountable: \"information,\" \"a piece of information,\" never \"an information\" or \"informations\").\n- **s6_path:** \"The countable/uncountable split can feel arbitrary since it's not always predictable from meaning alone — but recognizing the general pattern (substances, abstract concepts, and mass categories tend to be uncountable) makes it much more learnable than pure memorization word-by-word.\"\n\n---",
+      "localKey": "MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY",
+      "language": "en",
+      "refs": [
+        "MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Concrete Noun Categories (Person, Place, Thing)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Noun Categories (Person, Place, Thing)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Abstract Nouns (Ideas, Qualities, States)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Abstract Nouns (Ideas, Qualities, States)\",\"primitives\":[],\"addresses\":[\"MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Common vs. Proper Nouns",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Common vs. Proper Nouns\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Countable vs. Uncountable Nouns",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Countable vs. Uncountable Nouns\",\"primitives\":[],\"addresses\":[\"MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Collective Nouns",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Collective Nouns\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY\",\"MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS",
+        "MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.nouns",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Concrete noun identification, novel sentence**\n\"In 'The children played in the park,' identify the nouns and their categories (person/place/thing).\"\n*Target:* \"children\" (person), \"park\" (place).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.nouns",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Abstract noun identification, novel word**\n\"Is 'bravery' a noun? What kind?\"\n*Target:* yes, an abstract noun.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.nouns",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Common vs. proper noun, novel pair**\n\"In 'My friend Maria lives in Canada,' identify the common nouns and the proper nouns.\"\n*Target:* \"friend\" (common); \"Maria,\" \"Canada\" (proper).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.nouns",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Countable vs. uncountable, novel word**\n\"Is 'advice' countable or uncountable? How do you know?\"\n*Target:* uncountable — you can't say \"one advice, two advices\"; you'd say \"a piece of advice\" or \"some advice.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.nouns",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain noun categories**\n\"In your own words: what are the different kinds of nouns, and can a noun be something you can't touch?\"\n*Target:* states or demonstrates that nouns name people, places, things, and ideas (including abstract, untouchable concepts), and can be further classified as common/proper and countable/uncountable.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Adaptive Flags",
+      "content": "- **Abstract nouns are a core category, not an edge case**: always include abstract nouns explicitly alongside concrete ones from early instruction, rather than treating them as an advanced afterthought — this directly counters the intuitive \"nouns = physical things\" default.\n- **Countable/uncountable has a learnable pattern, not just an exception list**: teach the general semantic pattern (substances, abstracts, mass-categories tend uncountable) as a genuine aid, even though the mapping isn't 100% predictable from meaning alone.\n- **Proper noun capitalization should be taught alongside the common/proper distinction**: reinforce the visual/orthographic marker (capitalization) as a concrete signal supporting the common/proper category, useful for both reading and writing.\n- **Countability transfer errors are extremely common and worth dedicated practice**: for S9 learners, budget significant explicit practice time for the specific high-frequency uncountable nouns that are commonly miscounted (information, advice, furniture, luggage, news) since these transfer errors are persistent and well-documented across many L1 backgrounds.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.nouns/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.nouns",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — noun museum walkthrough warm-up\n  ↓\n[P41] PD-1 (word-classes-overview readiness)\n  ↓ PASS\n[P06] Anchor: noun museum (person/place/thing/idea exhibits)\n  ↓\nTA-1: Concrete noun categories (person, place, thing) [C]\n  ↓\nTA-2: Abstract nouns (ideas, qualities, states) [C]\n  ↓\n[P28] Conflict: nouns assumed only physical → MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS (if triggered)\n  ↓\nTA-3: Common vs. proper nouns [C→P]\n  ↓\nTA-4: Countable vs. uncountable nouns [P]\n  ↓\n[P28] Conflict: countable/uncountable treated as arbitrary → MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY (if triggered)\n  ↓\nTA-5: Collective nouns [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one abstract noun and one uncountable noun in something you read.\"\n[P68] Session close\n[P85] Regulation tail — praise recognizing abstract/uncountable patterns over rigid physical-object thinking\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word-classes-overview, new to noun subcategories): dwell on TA-1's concrete categories before introducing abstract nouns. S1 (already identifies concrete nouns confidently, needs subcategory nuance): compress TA-1, focus on TA-2/TA-4's more nuanced distinctions. S6 (frustrated by the seemingly arbitrary countable/uncountable rules): validate that the pattern IS learnable (substances/abstracts/mass-categories tend uncountable) rather than framing it as pure memorization. S9 (L1 has no countable/uncountable grammatical distinction, e.g. many languages don't mark this the same way, or L1 has different countability defaults for cognate concepts, e.g. \"information\" is countable in some languages): expect TA-4 to be a genuinely difficult, high-value area requiring explicit contrastive practice, since countability mismatches between L1 and English are a very common, persistent source of learner errors (\"informations,\" \"advices,\" \"furnitures\").\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.nouns.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

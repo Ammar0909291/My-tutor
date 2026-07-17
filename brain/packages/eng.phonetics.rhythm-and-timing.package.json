@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.rhythm-and-timing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.rhythm-and-timing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cd04ff296e64263002ae777543e4195842cc0c7788195a6793785fdcb16a2de4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md": "sha256:09f61a6449b06a05b3e100060e13dabddc1c81abe5b137ec0f959a95e1e63067"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.rhythm-and-timing",
+    "name": "Rhythm and Timing",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonetics.connected-speech"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.rhythm-and-timing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.rhythm-and-timing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md": "sha256:09f61a6449b06a05b3e100060e13dabddc1c81abe5b137ec0f959a95e1e63067"
+      },
+      "contentHash": "sha256:9cd428854a38e7dd876fbe748d0e349cb087cc2c17686c772c727f318f3b3383",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.rhythm-and-timing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.rhythm-and-timing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.rhythm-and-timing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.rhythm-and-timing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md#TA-2 (addresses MC-EACH-SYLLABLE-TAKES-EQUAL-TIME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.rhythm-and-timing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.rhythm-and-timing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.rhythm-and-timing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md#TA-3 (addresses MC-RHYTHM-IS-THE-SAME-AS-STRESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.rhythm-and-timing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.rhythm-and-timing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.rhythm-and-timing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.rhythm-and-timing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.rhythm-and-timing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.rhythm-and-timing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md#TA-5 (addresses MC-EACH-SYLLABLE-TAKES-EQUAL-TIME, MC-RHYTHM-IS-THE-SAME-AS-STRESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.rhythm-and-timing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.rhythm-and-timing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Rhythm and Timing — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying the Stressed-Syllable Beat [C]**\n\nUsing the Component 3 metronome technique, student identifies and claps/taps the stressed syllables in a sentence, feeling them land at roughly regular intervals.\n\n**TA-2 — Compression of Unstressed Syllables [C]**\n\nPresent sentence pairs with the same stressed words but a varying number of unstressed syllables between them (e.g., \"cats SLEPT\" vs. \"the CATS have SLEPT\"); student observes/produces that the time between stressed beats stays roughly similar despite more syllables needing to fit in, directly targeting MC-EACH-SYLLABLE-TAKES-EQUAL-TIME.\n\n**TA-3 — Stress vs. Rhythm Distinction [C→P]**\n\nStudent first identifies stress placement in a sentence (a static, one-time judgment), then separately taps/describes the TIMING pattern (a dynamic, temporal judgment) across the same sentence, directly targeting MC-RHYTHM-IS-THE-SAME-AS-STRESS by requiring both tasks explicitly.\n\n**TA-4 — Stress-Timed vs. Syllable-Timed Contrast [P]**\n\nPresent a brief comparison (e.g., a modeled English stress-timed rendition vs. a modeled or described syllable-timed rendition of similar content) so the student can directly contrast the two rhythmic systems and articulate the difference.\n\n**TA-5 — Producing Natural Rhythm in Extended Speech [P]**\n\nStudent reads or produces a longer sentence/short passage, applying stress-timed rhythm — landing stressed syllables at a natural, roughly regular pace while compressing unstressed syllables — demonstrating integrated production rather than isolated pattern recognition.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/misconception/MC-EACH-SYLLABLE-TAKES-EQUAL-TIME",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "- **Trigger signal:** Student assumes English rhythm works like some other languages' syllable-timed systems, where every syllable gets roughly equal duration — produces speech with mechanically even syllable spacing, ignoring that English compresses/stretches unstressed syllables to keep STRESSED syllables at roughly regular intervals instead.",
+      "content": "### MC-EACH-SYLLABLE-TAKES-EQUAL-TIME\n- **Trigger signal:** Student assumes English rhythm works like some other languages' syllable-timed systems, where every syllable gets roughly equal duration — produces speech with mechanically even syllable spacing, ignoring that English compresses/stretches unstressed syllables to keep STRESSED syllables at roughly regular intervals instead.\n- **Conflict evidence [P28]:** \"Say 'The CAT sat on the MAT' evenly, giving every syllable the same length. Now listen to a natural speaker say it — are all the syllables the same length, or do the stressed ones (CAT, MAT) stand out with steady timing while the little words between them get squeezed?\"\n- **Bridge text [P30]:** \"English is a STRESS-TIMED language: stressed syllables tend to recur at roughly EQUAL time intervals, regardless of how many unstressed syllables fall between them — the unstressed syllables get compressed or stretched to fit into that steady beat. This is different from syllable-timed languages (like Spanish or French), where each syllable gets roughly equal duration regardless of stress.\"\n- **Replacement text [P31]:** \"Listen for the STRESSED syllables landing at a steady, regular beat — expect the unstressed syllables between them to compress or stretch to fit, not to each take equal time.\"\n- **Discrimination pairs [P33]:**\n  - \"The CAT sat on the MAT\" (2 unstressed syllables between CAT and MAT) vs. \"CATS sat on MATS\" (0 unstressed syllables between) — in natural stress-timed English, the time from CAT-beat to MAT-beat stays roughly similar in both, even though the second has fewer total syllables to fit in.\n  - Syllable-timed rhythm (every syllable equal length, common in French/Spanish) vs. stress-timed rhythm (stressed syllables equally spaced, unstressed syllables compressed).\n- **s6_path:** \"It's a very natural assumption that timing should be even syllable-by-syllable, especially if your first language works that way — English's stress-timed rhythm is a genuinely different system, and tuning your ear to the STRESSED-syllable beat, rather than syllable count, is the key adjustment.\"",
+      "localKey": "MC-EACH-SYLLABLE-TAKES-EQUAL-TIME",
+      "language": "en",
+      "refs": [
+        "MC-EACH-SYLLABLE-TAKES-EQUAL-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/misconception/MC-RHYTHM-IS-THE-SAME-AS-STRESS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "- **Trigger signal:** Student conflates \"rhythm\" (the timing/pacing pattern across an utterance) with \"stress\" (which specific syllables are emphasized) as if they were the same concept, unable to describe rhythm as a distinct TEMPORAL phenomenon (the regular beat/interval pattern) built on top of, but not identical to, the stress pattern.",
+      "content": "### MC-RHYTHM-IS-THE-SAME-AS-STRESS\n- **Trigger signal:** Student conflates \"rhythm\" (the timing/pacing pattern across an utterance) with \"stress\" (which specific syllables are emphasized) as if they were the same concept, unable to describe rhythm as a distinct TEMPORAL phenomenon (the regular beat/interval pattern) built on top of, but not identical to, the stress pattern.\n- **Conflict evidence [P28]:** \"You correctly identified which syllables are stressed in this sentence. But now — say it and clap on each stressed syllable. Are the claps evenly spaced in TIME, or unevenly spaced? That timing pattern is rhythm — is that the same thing as just knowing which syllables are stressed?\"\n- **Bridge text [P30]:** \"Stress tells you WHICH syllables are emphasized. Rhythm is about the TIMING pattern this creates across the whole utterance — specifically, how stressed syllables recur at roughly regular intervals. You need to know stress first, but rhythm is the additional temporal/timing layer built on top of it.\"\n- **Replacement text [P31]:** \"Treat stress (which syllables) and rhythm (the timing pattern between stressed syllables) as two related but distinct things to identify separately.\"\n- **Discrimination pairs [P33]:**\n  - Correctly naming stressed syllables in a sentence (stress identification) vs. tapping out the actual timing pattern of those stresses (rhythm).\n  - Two sentences with the same stressed words but different numbers of unstressed syllables between them, both still fitting a similar regular beat (illustrating rhythm's temporal-compression mechanism, distinct from stress placement alone).\n- **s6_path:** \"Stress and rhythm are closely related, so it's easy to treat them as one thing — but separating 'which syllables are stressed' from 'how the timing works between those stresses' is exactly the distinction this concept is built to teach.\"\n\n---",
+      "localKey": "MC-RHYTHM-IS-THE-SAME-AS-STRESS",
+      "language": "en",
+      "refs": [
+        "MC-RHYTHM-IS-THE-SAME-AS-STRESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Identifying the Stressed-Syllable Beat",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Stressed-Syllable Beat\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Compression of Unstressed Syllables",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compression of Unstressed Syllables\",\"primitives\":[],\"addresses\":[\"MC-EACH-SYLLABLE-TAKES-EQUAL-TIME\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-EACH-SYLLABLE-TAKES-EQUAL-TIME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Stress vs. Rhythm Distinction",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Stress vs. Rhythm Distinction\",\"primitives\":[],\"addresses\":[\"MC-RHYTHM-IS-THE-SAME-AS-STRESS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-RHYTHM-IS-THE-SAME-AS-STRESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Stress-Timed vs. Syllable-Timed Contrast",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Stress-Timed vs. Syllable-Timed Contrast\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Producing Natural Rhythm in Extended Speech",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Producing Natural Rhythm in Extended Speech\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-EACH-SYLLABLE-TAKES-EQUAL-TIME\",\"MC-RHYTHM-IS-THE-SAME-AS-STRESS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-EACH-SYLLABLE-TAKES-EQUAL-TIME",
+        "MC-RHYTHM-IS-THE-SAME-AS-STRESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Stressed-syllable beat, novel sentence**\n\"Say '[novel sentence]' and clap on the stressed syllables.\"\n*Target:* correctly identifies and claps the stressed syllables at a roughly regular interval.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Compression, novel pair**\n\"Compare '[short stress pattern]' and '[same stress pattern with more unstressed syllables added]' — does the stressed-beat timing change much?\"\n*Target:* correctly recognizes the compression mechanism keeps stressed-beat timing relatively steady.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Stress vs. rhythm distinction, novel example**\n\"Identify the stress pattern of this sentence, then separately describe its rhythm.\"\n*Target:* completes both tasks distinctly, correctly treating them as related but different.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Stress-timed vs. syllable-timed contrast**\n\"In your own words: how is English's rhythm different from a syllable-timed language?\"\n*Target:* correctly explains that English keeps stressed syllables at roughly regular intervals (compressing unstressed syllables), while syllable-timed languages give each syllable roughly equal duration.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Producing natural rhythm, novel passage**\n\"Read this short passage aloud with natural English rhythm.\"\n*Target:* produces speech with stressed syllables landing at a natural, roughly regular pace and unstressed syllables appropriately compressed.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Adaptive Flags",
+      "content": "- **Stress-timed vs. syllable-timed is a genuine cross-linguistic difference, not a minor detail**: frame this explicitly, since it is one of the most impactful sources of a \"foreign accent\" perception and one of the hardest rhythmic patterns to acquire for syllable-timed-L1 speakers.\n- **Physical/kinesthetic anchoring is essential, not optional**: rhythm is fundamentally a temporal, felt phenomenon — clapping, tapping, or metronome-based practice should be the standing default technique, not a one-time novelty.\n- **Stress and rhythm are sequenced, not conflated**: always have students identify stress first, then separately address timing/rhythm, reinforcing the two are related but distinct skills.\n- **Syllable-timed L1 background requires the most sustained practice budget of any adaptive flag in this blueprint**: for S9 learners from syllable-timed L1s, this concept may need significantly more repeated exposure and practice sessions than the standard session_cap suggests — treat slow progress as expected, not a sign of a different problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.rhythm-and-timing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.rhythm-and-timing",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — metronome beat walk warm-up\n  ↓\n[P41] PD-1 (connected-speech readiness)\n  ↓ PASS\n[P06] Anchor: metronome beat walk (stressed syllables on the beat)\n  ↓\nTA-1: Identifying the stressed-syllable beat [C]\n  ↓\nTA-2: Compression of unstressed syllables [C]\n  ↓\n[P28] Conflict: equal-duration-per-syllable assumption → MC-EACH-SYLLABLE-TAKES-EQUAL-TIME (if triggered)\n  ↓\nTA-3: Stress vs. rhythm distinction [C→P]\n  ↓\n[P28] Conflict: rhythm and stress treated as identical → MC-RHYTHM-IS-THE-SAME-AS-STRESS (if triggered)\n  ↓\nTA-4: Stress-timed vs. syllable-timed contrast [P]\n  ↓\nTA-5: Producing natural rhythm in extended speech [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, clap the stressed-syllable beat in one sentence you say often.\"\n[P68] Session close\n[P85] Regulation tail — praise feeling the steady beat over even syllable-by-syllable timing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on connected speech, new to rhythm specifically): dwell on TA-1's beat-clapping with very simple, short sentences before introducing the compression concept. S1 (already speaks with natural rhythm but lacks analytical vocabulary): use TA-3's explicit stress/rhythm separation to build metalinguistic awareness of an already-present production skill. S6 (frustrated that rhythm feels harder to consciously control than word choice or grammar): validate that rhythm genuinely is a more subtle, physically-felt skill, and that the metronome/clapping technique is a legitimate, effective scaffold, not a childish exercise. S9 (L1 is syllable-timed, e.g. Spanish, French, Mandarin, Japanese — a very common and significant transfer challenge): expect this concept to require substantially more deliberate practice than for stress-timed-L1 speakers (e.g., some Germanic languages); treat the syllable-timed default as the learner's natural starting point requiring genuine retraining, not a simple correction, and prioritize physical/rhythmic anchoring techniques (clapping, metronome) heavily.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

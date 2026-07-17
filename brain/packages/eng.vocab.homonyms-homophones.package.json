@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.homonyms-homophones-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.homonyms-homophones",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3e86a206a4188952e824c476040d56f6334f290070f9ffff12cfb28abaed1a1c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md": "sha256:a793a81a2595b68ffdfda401e5b2380102b57a77f385437fbfd32eb4b1068cae"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.vocab.homonyms-homophones",
+    "name": "Homonyms and Homophones",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.vocab.context-clues"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.homonyms-homophones-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.homonyms-homophones (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md": "sha256:a793a81a2595b68ffdfda401e5b2380102b57a77f385437fbfd32eb4b1068cae"
+      },
+      "contentHash": "sha256:c4057a9638c6911c352d8db3fba96e43250223e4e26ac1711dc4c012bd639051",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.homonyms-homophones.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.homonyms-homophones"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.homonyms-homophones\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.homonyms-homophones.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md#TA-2 (addresses MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.homonyms-homophones"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.homonyms-homophones\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.homonyms-homophones.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md#TA-3 (addresses MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.homonyms-homophones"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.homonyms-homophones\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.homonyms-homophones.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md#TA-4 (addresses MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING, MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.homonyms-homophones"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.homonyms-homophones\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.homonyms-homophones/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Homonyms and Homophones — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Homonyms (Same Spelling, Different Meaning) [C]**\n\nPresent homonym pairs (bat, bank, bark, spring); student confirms identical spelling and identifies the two distinct meanings.\n\n**TA-2 — Identifying Homophones (Same Sound, Different Spelling) [C]**\n\nPresent homophone sets (their/there/they're; to/too/two; write/right); student confirms identical sound but different spelling, directly targeting MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING through explicit contrast with TA-1.\n\n**TA-3 — Using Context to Choose the Correct Homonym Meaning [C→P]**\n\nPresent sentences with homonyms in context; student determines which specific meaning is intended, directly targeting MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS.\n\n**TA-4 — Using Context to Choose the Correct Homophone Spelling [P]**\n\nPresent sentences with a blank requiring the correct homophone spelling (their/there/they're; to/too/two); student selects the grammatically/contextually correct spelling.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 68,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/misconception/MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "- **Trigger signal:** Student uses \"homonym\" and \"homophone\" interchangeably, not recognizing the distinction: homonyms are spelled IDENTICALLY but have different meanings and are often pronounced the same too (bat the animal / bat the sports equipment), while homophones SOUND identical but are spelled DIFFERENTLY (their/there/they're; to/too/two) — the two categories overlap in some cases but are defined by different criteria (spelling-based vs. sound-based).",
+      "content": "### MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING\n- **Trigger signal:** Student uses \"homonym\" and \"homophone\" interchangeably, not recognizing the distinction: homonyms are spelled IDENTICALLY but have different meanings and are often pronounced the same too (bat the animal / bat the sports equipment), while homophones SOUND identical but are spelled DIFFERENTLY (their/there/they're; to/too/two) — the two categories overlap in some cases but are defined by different criteria (spelling-based vs. sound-based).\n- **Conflict evidence [P28]:** \"You called 'their/there/they're' homonyms. Are these words spelled the SAME, or do they just SOUND the same but look different on the page?\"\n- **Bridge text [P30]:** \"Homonyms are words spelled IDENTICALLY (same letters) with different meanings — 'bat' (animal) and 'bat' (sports equipment) are true homonyms, spelled and often pronounced the same. Homophones are words that SOUND identical but are spelled DIFFERENTLY — 'their,' 'there,' and 'they're' all sound the same but look completely different. The key test is: check spelling for homonyms, check sound for homophones.\"\n- **Replacement text [P31]:** \"Check spelling first: if two words are spelled identically but mean different things, they're homonyms. If they're spelled differently but sound the same, they're homophones.\"\n- **Discrimination pairs [P33]:**\n  - \"bat\" (animal) / \"bat\" (sports equipment) — identical spelling, true homonyms.\n  - \"their\" / \"there\" / \"they're\" — identical sound, different spelling, true homophones.\n- **s6_path:** \"Since both categories involve words that 'sound the same' in some sense, it's easy to blur them together — but checking spelling first (same letters = homonym; different letters = homophone) reliably sorts them out.\"",
+      "localKey": "MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING",
+      "language": "en",
+      "refs": [
+        "MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/misconception/MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "- **Trigger signal:** Student, upon recognizing a word has multiple homonym/homophone meanings, becomes confused or defaults to only one meaning regardless of context, rather than using surrounding context to determine WHICH meaning or spelling is intended (e.g., always interprets \"bank\" as a financial institution even in \"the river bank,\" or always writes \"there\" regardless of whether \"their\" or \"they're\" is grammatically needed).",
+      "content": "### MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS\n- **Trigger signal:** Student, upon recognizing a word has multiple homonym/homophone meanings, becomes confused or defaults to only one meaning regardless of context, rather than using surrounding context to determine WHICH meaning or spelling is intended (e.g., always interprets \"bank\" as a financial institution even in \"the river bank,\" or always writes \"there\" regardless of whether \"their\" or \"they're\" is grammatically needed).\n- **Conflict evidence [P28]:** \"You said 'bank' always means a financial institution. In 'We sat on the river bank,' does that meaning make sense? What does the surrounding context tell you 'bank' means here?\"\n- **Bridge text [P30]:** \"When a word has multiple homonym meanings or homophone spellings, CONTEXT is exactly what tells you which one is intended — the surrounding words and the sentence's overall meaning point to the correct interpretation or spelling, the same way context clues help with any ambiguous or unfamiliar word.\"\n- **Replacement text [P31]:** \"When you recognize a homonym or homophone, use the surrounding context to determine which specific meaning or spelling is correct, rather than defaulting to one option.\"\n- **Discrimination pairs [P33]:**\n  - \"the river bank\" (context signals the landform meaning) vs. \"the bank downtown\" (context signals the financial institution meaning) — same spelling \"bank,\" different meaning determined by context.\n  - \"I saw ___ car\" (context requires the possessive \"their\") vs. \"___ going to the store\" (context requires the contraction \"they're\") — same sound, different correct spelling determined by grammatical context.\n- **s6_path:** \"It's understandable to lock onto the first or most familiar meaning of a word once you learn it has multiple senses — but this is exactly the situation where checking context (the same skill from context-clues work) becomes essential for choosing correctly.\"\n\n---",
+      "localKey": "MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS",
+      "language": "en",
+      "refs": [
+        "MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Identifying Homonyms (Same Spelling, Different Meaning)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Homonyms (Same Spelling, Different Meaning)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Identifying Homophones (Same Sound, Different Spelling)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Homophones (Same Sound, Different Spelling)\",\"primitives\":[],\"addresses\":[\"MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Using Context to Choose the Correct Homonym Meaning",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Using Context to Choose the Correct Homonym Meaning\",\"primitives\":[],\"addresses\":[\"MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Using Context to Choose the Correct Homophone Spelling",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using Context to Choose the Correct Homophone Spelling\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS\",\"MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING",
+        "MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 82,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Homonym identification, novel example**\n\"Is 'saw' (past tense of 'see') and 'saw' (a cutting tool) spelled the same? Are they homonyms?\"\n*Target:* yes — identical spelling, true homonyms.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Homophone identification, novel example**\n\"Do 'pair' and 'pear' sound the same? Are they spelled the same?\"\n*Target:* yes, sound the same; no, spelled differently — true homophones.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Context for homonym meaning, novel example**\n\"In 'I need to file this document,' does 'file' mean a folder/document, or the action of filing it away?\"\n*Target:* correctly determines the intended meaning from context (the action, since \"to file\" is used as a verb here).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Context for homophone spelling, novel example**\n\"Fill in the blank: '___ going to be late.' (they're/their/there)\"\n*Target:* \"They're\" — the contraction for \"they are,\" correctly selected based on grammatical context.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain homonyms vs. homophones**\n\"In your own words: what's the difference between a homonym and a homophone, and how do you know which meaning/spelling to use?\"\n*Target:* states or demonstrates that homonyms are spelled identically with different meanings, homophones sound identical but are spelled differently, and context determines which specific meaning or spelling is correct in a given sentence.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Adaptive Flags",
+      "content": "- **Spelling-based test is the primary discriminator between the two categories**: always teach \"check spelling first\" as the standing rule for distinguishing homonyms from homophones — this directly counters the natural tendency to conflate the two \"sounds the same\" categories.\n- **Context is essential, not optional, for disambiguation**: explicitly connect this concept back to the context-clues skill, reinforcing that recognizing ambiguity is only the first step — context resolution is the necessary second step.\n- **Common homophone sets (their/there/they're; to/too/two; your/you're) deserve dedicated, repeated practice**: these specific high-frequency sets are persistent writing-error sources even for native speakers and warrant focused attention beyond generic examples.\n- **Lower session_cap (4 TAs) reflects the concept's genuine scope**: this is a smaller, single-hour concept per the KG's `estimated_hours: 1` — the TA sequence is proportionally shorter, consistent with the established convention.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 170,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.vocab.homonyms-homophones/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.homonyms-homophones",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — spelling-check sort warm-up\n  ↓\n[P41] PD-1 (context-clues readiness)\n  ↓ PASS\n[P06] Anchor: spelling-check sort (homonym bin vs. homophone bin)\n  ↓\nTA-1: Identifying homonyms (same spelling, different meaning) [C]\n  ↓\nTA-2: Identifying homophones (same sound, different spelling) [C]\n  ↓\n[P28] Conflict: homonym/homophone terms conflated → MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING (if triggered)\n  ↓\nTA-3: Using context to choose the correct homonym meaning [C→P]\n  ↓\n[P28] Conflict: context ignored, one meaning defaulted to → MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS (if triggered)\n  ↓\nTA-4: Using context to choose the correct homophone spelling [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one homonym and one homophone pair and use each correctly in a sentence.\"\n[P68] Session close\n[P85] Regulation tail — praise checking spelling first and using context to disambiguate\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on context clues, new to homonym/homophone terminology): dwell on TA-1/TA-2's clear, contrasting examples before introducing context-based disambiguation. S1 (already navigates homonyms/homophones correctly in reading/writing but conflates the terms): use this concept to build explicit vocabulary for an already-present practical skill. S6 (frustrated by homophone spelling errors, e.g. their/there/they're confusion in writing): validate that this is one of the most common writing challenges even for native speakers, and that the context-based grammatical check (TA-4) is a reliable, learnable strategy. S9 (L1 has different or no homophone conventions, or a very different sound-spelling relationship making the concept of \"sounds the same, spelled differently\" less intuitive): expect this concept to require more concrete, repeated demonstration, since English's specific homophone abundance stems from its particular spelling-sound history and may not have a direct parallel in the learner's L1 experience.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

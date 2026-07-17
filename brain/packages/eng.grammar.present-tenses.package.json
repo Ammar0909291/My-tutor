@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.present-tenses-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.present-tenses",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d6063132ffd660c78b91690ef0316fe3fd8e9bd1a1dd2c0c8ef621b0868649ef",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.present-tenses.md": "sha256:aea8c016820d95a59915e907b693c2d81a9c21127dcb91280a06f9a90815fa93"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.present-tenses",
+    "name": "Present Tenses",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.verbs"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.present-tenses-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.present-tenses (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.present-tenses.md": "sha256:aea8c016820d95a59915e907b693c2d81a9c21127dcb91280a06f9a90815fa93"
+      },
+      "contentHash": "sha256:d5f02fb2f2a4024c50f063c517de84aeeb4aa3351a0d3f92ff3172cc520b552b",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.present-tenses.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.present-tenses.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.present-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.present-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.present-tenses.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.present-tenses.md#TA-2 (addresses MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.present-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.present-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.present-tenses.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.present-tenses.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.present-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.present-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.present-tenses.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.present-tenses.md#TA-4 (addresses MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.present-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.present-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.present-tenses.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.present-tenses.md#TA-5 (addresses MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW, MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.present-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.present-tenses\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.present-tenses/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Present Tenses — Conceptual Development Sequence",
+      "content": "**TA-1 — Simple Present for Habits and General Truths [C]**\n\nPresent sentences describing habits/routines/facts (I brush my teeth every morning; the Earth orbits the Sun); student identifies and produces correct simple present forms, including third-person singular \"-s\" agreement.\n\n**TA-2 — Present Continuous for In-Progress Actions [C]**\n\nPresent sentences describing actions happening right now (I am reading this sentence); student identifies and produces correct present continuous forms (am/is/are + -ing), directly targeting MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW.\n\n**TA-3 — Present Perfect for Experiences and Present Relevance [C→P]**\n\nPresent sentences using present perfect for unspecified-time experiences or present-relevant past actions (I have eaten sushi; she has finished her project); student identifies and produces correct present perfect forms (have/has + past participle).\n\n**TA-4 — Present Perfect vs. Simple Past Discrimination [P]**\n\nPresent sentence pairs contrasting present perfect (no specific time, present relevance) with simple past (specific time, disconnected from now); student chooses the correct form based on whether a specific time marker is present, directly targeting MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE.\n\n**TA-5 — Present Perfect Continuous for Ongoing Duration [P]**\n\nIntroduce present perfect continuous (have/has been + -ing) for actions that started in the past and are STILL ongoing, with emphasis on duration (I have been studying for three hours); student identifies and produces this form, distinguishing it from simple present perfect's completion focus.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/misconception/MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "- **Trigger signal:** Student uses the simple present tense (I walk, she works) to describe an action happening at THIS exact moment, when English actually uses the present CONTINUOUS (I am walking, she is working) for that — the simple present is reserved for habitual actions, general truths, and scheduled events, NOT momentary in-progress actions (e.g., says \"I eat dinner\" while eating right now, when \"I am eating dinner\" is correct for describing the ongoing action).",
+      "content": "### MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW\n- **Trigger signal:** Student uses the simple present tense (I walk, she works) to describe an action happening at THIS exact moment, when English actually uses the present CONTINUOUS (I am walking, she is working) for that — the simple present is reserved for habitual actions, general truths, and scheduled events, NOT momentary in-progress actions (e.g., says \"I eat dinner\" while eating right now, when \"I am eating dinner\" is correct for describing the ongoing action).\n- **Conflict evidence [P28]:** \"You said 'I eat dinner' while you're actually eating right now. Does 'I eat dinner' describe a habit (something you do regularly) or the exact action happening this second? Which sounds more natural for RIGHT NOW: 'I eat dinner' or 'I am eating dinner'?\"\n- **Bridge text [P30]:** \"The simple present (I walk, she works) is used for HABITS, ROUTINES, and GENERAL TRUTHS ('I walk to school every day,' 'Water boils at 100°C') — not for describing an action happening at this exact moment. For actions IN PROGRESS right now, English uses the present CONTINUOUS (I am walking, she is working).\"\n- **Replacement text [P31]:** \"Use simple present for habits/routines/general truths, and present continuous (am/is/are + -ing) for actions happening right now.\"\n- **Discrimination pairs [P33]:**\n  - \"I eat breakfast every day\" (habit — simple present) vs. \"I am eating breakfast right now\" (in-progress action — present continuous).\n  - \"The sun rises in the east\" (general truth — simple present) vs. \"Look, the sun is rising!\" (an observed, in-progress event — present continuous).\n- **s6_path:** \"It's a very natural assumption that 'present tense' should mean 'happening right now,' since that's the literal meaning of 'present' — but English specifically splits this into two different forms (simple vs. continuous) for habitual vs. in-progress actions.\"",
+      "localKey": "MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/misconception/MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "- **Trigger signal:** Student treats the present perfect (I have finished, she has arrived) as interchangeable with the simple past (I finished, she arrived), missing that the present perfect specifically connects a past action to the PRESENT moment — either because its effects continue now, it happened at an unspecified time relevant to now, or it's part of an experience up to now — while the simple past describes a completed action at a SPECIFIC, finished past time with no connection to now (e.g., \"I have visited Paris\" [experience, relevant now] vs. \"I visited Paris in 2019\" [specific completed past time]).",
+      "content": "### MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE\n- **Trigger signal:** Student treats the present perfect (I have finished, she has arrived) as interchangeable with the simple past (I finished, she arrived), missing that the present perfect specifically connects a past action to the PRESENT moment — either because its effects continue now, it happened at an unspecified time relevant to now, or it's part of an experience up to now — while the simple past describes a completed action at a SPECIFIC, finished past time with no connection to now (e.g., \"I have visited Paris\" [experience, relevant now] vs. \"I visited Paris in 2019\" [specific completed past time]).\n- **Conflict evidence [P28]:** \"You said 'I have visited Paris' and 'I visited Paris' mean exactly the same thing. Can you add 'in 2019' to 'I have visited Paris in 2019'? Why does that sound wrong, but 'I visited Paris in 2019' sounds fine?\"\n- **Bridge text [P30]:** \"The present perfect (have/has + past participle) connects a past action to the PRESENT — it's used for experiences without a specific time reference ('I have visited Paris' — at some point in my life, relevant to who I am now), or actions with present relevance ('I have finished my homework' — it's done now, ready to check). The simple past (visited, finished) describes a completed action at a SPECIFIC, stated or implied past time, disconnected from now. You typically can't combine the present perfect with a specific past time marker like 'in 2019' or 'yesterday.'\"\n- **Replacement text [P31]:** \"Use the present perfect for experiences/actions connected to NOW without a specific time stated, and the simple past for actions at a specific, completed past time — check whether a specific time marker is present or intended.\"\n- **Discrimination pairs [P33]:**\n  - \"I have visited Paris\" (experience, no specific time, present perfect) vs. \"I visited Paris in 2019\" (specific past time, simple past).\n  - \"She has lost her keys\" (present relevance — she doesn't have them now) vs. \"She lost her keys yesterday\" (specific past time, may or may not still be relevant).\n- **s6_path:** \"Both forms describe something that happened before now, which makes them feel interchangeable — but the present perfect's job is specifically to connect that past event to the present moment, which is a genuinely useful distinction once you notice it.\"\n\n---",
+      "localKey": "MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Simple Present for Habits and General Truths",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Simple Present for Habits and General Truths\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Present Continuous for In-Progress Actions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Present Continuous for In-Progress Actions\",\"primitives\":[],\"addresses\":[\"MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Present Perfect for Experiences and Present Relevance",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Present Perfect for Experiences and Present Relevance\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Present Perfect vs. Simple Past Discrimination",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Present Perfect vs. Simple Past Discrimination\",\"primitives\":[],\"addresses\":[\"MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Present Perfect Continuous for Ongoing Duration",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Present Perfect Continuous for Ongoing Duration\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE\",\"MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW",
+        "MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Simple present, novel context**\n\"How do you say 'the sun' + 'rise' + 'in the east' using simple present?\"\n*Target:* \"The sun rises in the east\" (third-person \"-s\").",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Present continuous, novel context**\n\"Describe someone cooking dinner right now, using present continuous.\"\n*Target:* \"She is cooking dinner\" (or similar, correctly using is + -ing).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Present perfect, novel context**\n\"Say that you have already finished your homework, using present perfect.\"\n*Target:* \"I have finished my homework.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Present perfect vs. simple past discrimination**\n\"Which is correct: 'I have visited London in 2020' or 'I visited London in 2020'?\"\n*Target:* \"I visited London in 2020\" — the specific time marker \"in 2020\" requires simple past, not present perfect.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the present tense system**\n\"In your own words: what's the difference between simple present, present continuous, and present perfect?\"\n*Target:* states or demonstrates that simple present describes habits/general truths, present continuous describes actions happening right now, and present perfect connects a past action/experience to the present without a specific time marker.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Adaptive Flags",
+      "content": "- **Timeline-shape visualization anchors the whole tense system**: the dots/point/arrow distinction (Component 3) should remain a standing visual reference throughout instruction and be explicitly invoked whenever a new tense form is introduced or confused.\n- **Present-perfect-vs-simple-past hinges on the specific-time-marker test**: teach this as a concrete, checkable rule (does a specific past time marker appear or apply?) rather than an abstract \"connection to the present\" feeling alone.\n- **Four related forms are genuinely complex — sequence deliberately**: this is a 3-hour concept per the KG for good reason; don't compress the simple/continuous/perfect/perfect-continuous sequence, since each builds conceptually on the prior distinction.\n- **Aspect distinctions (continuous, perfect) are a major transfer challenge for many L1 backgrounds**: for S9 learners whose L1 doesn't grammatically mark these distinctions, budget substantial, ongoing practice specifically for present-continuous and present-perfect usage, recognizing these as some of the most persistent error areas in learner English across proficiency levels.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.present-tenses/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.present-tenses",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — tense timeline warm-up (dots, point, arrow)\n  ↓\n[P41] PD-1 (verb readiness)\n  ↓ PASS\n[P06] Anchor: tense timeline (simple present dots, continuous point, perfect arrow)\n  ↓\nTA-1: Simple present for habits and general truths [C]\n  ↓\nTA-2: Present continuous for in-progress actions [C]\n  ↓\n[P28] Conflict: simple present used for right-now actions → MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW (if triggered)\n  ↓\nTA-3: Present perfect for experiences and present relevance [C→P]\n  ↓\nTA-4: Present perfect vs. simple past discrimination [P]\n  ↓\n[P28] Conflict: present perfect treated as identical to simple past → MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE (if triggered)\n  ↓\nTA-5: Present perfect continuous for ongoing duration [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, describe one habit (simple present) and one experience (present perfect) about yourself.\"\n[P68] Session close\n[P85] Regulation tail — praise checking the timeline shape (habit/now/connected-to-now) over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on verbs, new to tense distinctions): dwell on TA-1's simple present before introducing continuous/perfect forms, given the concept's genuine complexity (4 tense forms). S1 (already produces tenses fluently in speech but conflates them in analysis/writing): focus on TA-3/TA-4's present-perfect-vs-past distinction, since this is a common source of subtle errors even for fluent speakers. S6 (overwhelmed by four related but distinct present-tense forms): explicitly use the timeline-shape anchor (dots/point/arrow/ongoing-arrow) as a standing visual reference throughout, rather than presenting forms as an undifferentiated list. S9 (L1 lacks a present-perfect-equivalent distinction, e.g. many languages merge it with simple past, or lacks continuous aspect marking, e.g. many languages don't grammatically distinguish ongoing vs. habitual action): expect the present-perfect-vs-simple-past distinction (TA-3/TA-4) and the continuous aspect (TA-2) to be persistent, well-documented challenge areas requiring substantial dedicated practice, since these aspectual distinctions are often genuinely absent or differently organized in many world languages.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.present-tenses.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

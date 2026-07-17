@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.past-tenses-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.past-tenses",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:03c94a56c9cf1eab08febf9c1447ce82537252076ac51da1a7643d50121d362b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.past-tenses.md": "sha256:fcc769ec8bfde389e75e1f17ed7b612756a78d679a3541c3b366572f2ca3eb17"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.past-tenses",
+    "name": "Past Tenses",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.present-tenses"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.past-tenses-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.past-tenses (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.past-tenses.md": "sha256:fcc769ec8bfde389e75e1f17ed7b612756a78d679a3541c3b366572f2ca3eb17"
+      },
+      "contentHash": "sha256:16d89d5416b572ba5f6289e18fdcc271360fce2454e1cac5604501316df0bd33",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.past-tenses.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.past-tenses.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.past-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.past-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.past-tenses.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.past-tenses.md#TA-2 (addresses MC-ALL-PAST-TENSE-VERBS-ADD-ED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.past-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.past-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.past-tenses.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.past-tenses.md#TA-3 (addresses MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.past-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.past-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.past-tenses.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.past-tenses.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.past-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.past-tenses\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.past-tenses.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.past-tenses.md#TA-5 (addresses MC-ALL-PAST-TENSE-VERBS-ADD-ED, MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.past-tenses"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.past-tenses\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.past-tenses/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Past Tenses — Conceptual Development Sequence",
+      "content": "**TA-1 — Regular Simple Past (-ed) [C]**\n\nPresent regular verbs; student forms simple past by adding \"-ed\" (with attention to spelling rules: hope→hoped, stop→stopped, cry→cried).\n\n**TA-2 — Irregular Simple Past (Memorized Forms) [C]**\n\nPresent common irregular verbs (go, eat, see, have, be, take, make); student produces the correct irregular past forms, directly targeting MC-ALL-PAST-TENSE-VERBS-ADD-ED.\n\n**TA-3 — Past Continuous for Ongoing/Interrupted Actions [C→P]**\n\nUsing the Component 3 freeze-frame technique, student produces past continuous forms (was/were + -ing) for actions in progress at a specific past moment, especially interrupted ones, directly targeting MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE.\n\n**TA-4 — Past Perfect for Actions Before Another Past Action [P]**\n\nIntroduce past perfect (had + past participle) for an action completed BEFORE another past action/time (\"I had finished dinner before she arrived\"); student produces and identifies this \"past-before-past\" sequencing.\n\n**TA-5 — Past Perfect Continuous for Ongoing Duration Before a Past Point [P]**\n\nIntroduce past perfect continuous (had been + -ing) for an action ongoing for a duration up until another past point (\"I had been waiting for an hour when the bus finally came\"); student produces this form, completing the four-tense past system parallel to the present-tense system.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/misconception/MC-ALL-PAST-TENSE-VERBS-ADD-ED",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "- **Trigger signal:** Student applies the regular \"-ed\" ending to ALL verbs when forming the simple past, including irregular verbs that have their own distinct past forms (go→went, not \"goed\"; eat→ate, not \"eated\"; see→saw, not \"seed\") — over-regularizing a pattern that, while very common, doesn't apply universally.",
+      "content": "### MC-ALL-PAST-TENSE-VERBS-ADD-ED\n- **Trigger signal:** Student applies the regular \"-ed\" ending to ALL verbs when forming the simple past, including irregular verbs that have their own distinct past forms (go→went, not \"goed\"; eat→ate, not \"eated\"; see→saw, not \"seed\") — over-regularizing a pattern that, while very common, doesn't apply universally.\n- **Conflict evidence [P28]:** \"You said 'I goed to the store.' Is 'goed' a real word fluent English speakers use? What word do we actually use for the past tense of 'go'?\"\n- **Bridge text [P30]:** \"Most English verbs (called REGULAR verbs) do form their simple past by adding '-ed' (walk→walked, play→played). But a substantial set of very common verbs are IRREGULAR — they have their own unique past forms that must be memorized separately (go→went, eat→ate, see→saw, have→had, be→was/were). Interestingly, over-regularizing (saying 'goed' instead of 'went') is actually a normal, well-documented stage many children go through while first learning English, showing they've correctly learned the general '-ed' rule — the next step is learning the specific exceptions.\"\n- **Replacement text [P31]:** \"Before adding '-ed,' check whether the verb is one of the common irregular verbs with its own memorized past form.\"\n- **Discrimination pairs [P33]:**\n  - \"walk → walked\" (regular, add -ed) vs. \"go → went\" (irregular, memorized form, not \"goed\").\n  - \"play → played\" (regular) vs. \"eat → ate\" (irregular, not \"eated\").\n- **s6_path:** \"Over-applying the '-ed' rule to every verb is actually a sign you've correctly learned the general pattern — the next step is building a memorized list of the common exceptions, which is a normal and expected part of mastering English verbs.\"",
+      "localKey": "MC-ALL-PAST-TENSE-VERBS-ADD-ED",
+      "language": "en",
+      "refs": [
+        "MC-ALL-PAST-TENSE-VERBS-ADD-ED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/misconception/MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "- **Trigger signal:** Student treats simple past (I walked) and past continuous (I was walking) as fully interchangeable, missing that past continuous specifically describes an action IN PROGRESS at a specific past moment (often interrupted by another action or used for background/scene-setting), while simple past describes a completed action or sequence of completed actions — leading to confusion in sentences describing one action interrupting another (e.g., \"I ate dinner when the phone rang\" vs. the more precise \"I was eating dinner when the phone rang\").",
+      "content": "### MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE\n- **Trigger signal:** Student treats simple past (I walked) and past continuous (I was walking) as fully interchangeable, missing that past continuous specifically describes an action IN PROGRESS at a specific past moment (often interrupted by another action or used for background/scene-setting), while simple past describes a completed action or sequence of completed actions — leading to confusion in sentences describing one action interrupting another (e.g., \"I ate dinner when the phone rang\" vs. the more precise \"I was eating dinner when the phone rang\").\n- **Conflict evidence [P28]:** \"You said 'I ate dinner when the phone rang' and 'I was eating dinner when the phone rang' mean exactly the same thing. In the first one, did eating dinner happen completely BEFORE the phone rang, or was it still IN PROGRESS when the phone rang?\"\n- **Bridge text [P30]:** \"Past continuous (was/were + -ing) describes an action that was IN PROGRESS at a specific past moment — often used as background for another action that interrupts it ('I was eating dinner when the phone rang' — eating was ongoing, then interrupted). Simple past describes a completed action, often in a sequence ('I ate dinner, then I watched TV' — one thing finished, then the next started). The distinction matters especially for interrupted-action sentences.\"\n- **Replacement text [P31]:** \"Use past continuous for an action in progress at a specific past moment (especially when interrupted by another event), and simple past for completed actions or sequences of completed actions.\"\n- **Discrimination pairs [P33]:**\n  - \"I was eating dinner when the phone rang\" (eating was ongoing, interrupted by the ringing) vs. \"I ate dinner, then answered the phone\" (eating finished first, a sequence).\n  - \"While she was studying, her sister was cooking\" (two simultaneous ongoing actions, both continuous) vs. \"She studied, then cooked dinner\" (sequential completed actions, simple past).\n- **s6_path:** \"Both forms describe things that happened in the past, which makes the distinction feel subtle — but past continuous's special job of showing an ongoing background action (especially one that gets interrupted) is a genuinely useful, learnable distinction.\"\n\n---",
+      "localKey": "MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE",
+      "language": "en",
+      "refs": [
+        "MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Regular Simple Past (-ed)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Regular Simple Past (-ed)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Irregular Simple Past (Memorized Forms)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Irregular Simple Past (Memorized Forms)\",\"primitives\":[],\"addresses\":[\"MC-ALL-PAST-TENSE-VERBS-ADD-ED\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ALL-PAST-TENSE-VERBS-ADD-ED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Past Continuous for Ongoing/Interrupted Actions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Past Continuous for Ongoing/Interrupted Actions\",\"primitives\":[],\"addresses\":[\"MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Past Perfect for Actions Before Another Past Action",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Past Perfect for Actions Before Another Past Action\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Past Perfect Continuous for Ongoing Duration Before a Past Point",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Past Perfect Continuous for Ongoing Duration Before a Past Point\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-PAST-TENSE-VERBS-ADD-ED\",\"MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-PAST-TENSE-VERBS-ADD-ED",
+        "MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Regular simple past, novel verb**\n\"What's the past tense of 'play'? What about 'carry'?\"\n*Target:* \"played\"; \"carried\" (y→i before -ed, since y follows a consonant).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Irregular simple past, novel verb**\n\"What's the past tense of 'take'? What about 'see'?\"\n*Target:* \"took\"; \"saw.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Past continuous for interruption, novel context**\n\"Fill in: 'She ___ (read) a book when the lights ___ (go) out.'\"\n*Target:* \"was reading\" / \"went out.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Past perfect for past-before-past**\n\"Fill in: 'By the time we arrived, the movie ___ (already/start).'\"\n*Target:* \"had already started\" — the starting happened before the arriving, both in the past.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the past tense system**\n\"In your own words: do all verbs form the past tense by adding '-ed,' and what's the difference between simple past and past continuous?\"\n*Target:* states or demonstrates that many common verbs are irregular with memorized past forms (not just adding '-ed'), and that past continuous describes an action in progress at a specific past moment (often interrupted), while simple past describes completed actions or sequences.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Adaptive Flags",
+      "content": "- **Over-regularization is developmentally normal, not a deficiency**: explicitly reassure students (especially child learners) that saying \"goed\" shows correct rule-learning, and the next step is simply adding the irregular exceptions on top.\n- **Freeze-frame interruption technique anchors the continuous/simple distinction**: reuse this technique whenever past-continuous-vs-simple-past confusion resurfaces, since the \"ongoing background action + interrupting event\" structure is the clearest, most concrete way to teach this distinction.\n- **Four-tense parallel structure with present tenses aids retention**: explicitly connect each past tense form to its present-tense parallel (simple/continuous/perfect/perfect-continuous) to leverage prior learning rather than treating the past system as entirely new.\n- **Irregular verb memorization and aspectual distinctions compound for certain L1 backgrounds**: for S9 learners, budget substantial, sustained practice specifically for irregular past forms and the continuous/perfect aspectual distinctions, recognizing this as an extension of the present-tense system's already-significant transfer challenges.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.past-tenses/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.past-tenses",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — interrupted-action freeze-frame warm-up\n  ↓\n[P41] PD-1 (present-tenses readiness)\n  ↓ PASS\n[P06] Anchor: interrupted-action freeze-frame (ongoing + interruption vs. sequential actions)\n  ↓\nTA-1: Regular simple past (-ed) [C]\n  ↓\nTA-2: Irregular simple past (memorized forms) [C]\n  ↓\n[P28] Conflict: \"-ed\" over-applied to irregular verbs → MC-ALL-PAST-TENSE-VERBS-ADD-ED (if triggered)\n  ↓\nTA-3: Past continuous for ongoing/interrupted actions [C→P]\n  ↓\n[P28] Conflict: simple past and past continuous treated as interchangeable → MC-PAST-CONTINUOUS-AND-SIMPLE-PAST-ARE-INTERCHANGEABLE (if triggered)\n  ↓\nTA-4: Past perfect for actions before another past action [P]\n  ↓\nTA-5: Past perfect continuous for ongoing duration before a past point [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, describe one interrupted past action using past continuous + simple past together.\"\n[P68] Session close\n[P85] Regulation tail — praise checking irregular-verb lists and interruption structure over defaulting to -ed\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on present tenses, new to past-tense forms): dwell on TA-1's regular pattern before introducing irregular verbs and continuous/perfect forms. S1 (already produces past tenses fluently in speech but struggles with irregular forms in writing, or with the continuous/perfect distinctions): focus on TA-2/TA-3, since these are common, persistent error sources even for fluent speakers. S6 (frustrated by needing to memorize a long irregular-verb list right after mastering the regular rule): validate that over-regularization is a normal developmental stage, and that irregular verbs, while numerous, are a fixed, learnable, high-frequency set. S9 (L1 lacks a similar irregular/regular verb split, or doesn't grammatically distinguish continuous/perfect aspect in the past): expect the irregular-verb memorization task and the past-continuous/past-perfect aspectual distinctions to require substantial, dedicated, ongoing practice, mirroring the present-tense system's transfer challenges but compounded by needing separate past-tense-specific irregular forms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.past-tenses.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

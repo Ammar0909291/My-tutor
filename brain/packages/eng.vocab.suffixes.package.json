@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.suffixes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.suffixes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7b6ad1e5771b7b16a49d189ecf122592882c88b62dc0fe93b974a7a666c325aa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.suffixes.md": "sha256:4a956d41c77637d3a4f6f17e3bc2d0d222dea58ca6a00a6b308b98e4f38ba8be"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.suffixes",
+    "name": "Suffixes",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.word-families"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.suffixes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.suffixes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.suffixes.md": "sha256:4a956d41c77637d3a4f6f17e3bc2d0d222dea58ca6a00a6b308b98e4f38ba8be"
+      },
+      "contentHash": "sha256:887846a485ebfb7ca46a2e4b48ebbf5e60bdc6fec346e1f169bbedbbfe30bb86",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.suffixes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.suffixes.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.suffixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.suffixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.suffixes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.suffixes.md#TA-2 (addresses MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.suffixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.suffixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.suffixes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.suffixes.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.suffixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.suffixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.suffixes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.suffixes.md#TA-4 (addresses MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.suffixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.suffixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.suffixes.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.suffixes.md#TA-5 (addresses MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS, MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.suffixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.suffixes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.suffixes/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Suffixes — Conceptual Development Sequence",
+      "content": "**TA-1 — Noun-Forming Suffixes [C]**\n\nPresent base words with noun-forming suffixes (-tion, -ment, -ness, -ity: creation, movement, happiness, activity); student identifies the suffix and the resulting word class.\n\n**TA-2 — Adjective- and Adverb-Forming Suffixes [C]**\n\nPresent base words with adjective-forming (-ful, -ous, -ive, -able) and adverb-forming (-ly) suffixes; student identifies the suffix and resulting word class, directly targeting MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS by requiring explicit word-class identification.\n\n**TA-3 — Verb-Forming Suffixes [C→P]**\n\nPresent base words with verb-forming suffixes (-ize, -ify, -en: modernize, simplify, strengthen); student identifies the suffix and resulting word class, completing the four-word-class pattern.\n\n**TA-4 — Spelling Rule Application (Drop-E, Y-to-I, Double Consonant) [P]**\n\nPresent base words requiring specific spelling adjustments when a suffix is added; student correctly applies the drop-e, y-to-i, or double-consonant rule, directly targeting MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM.\n\n**TA-5 — Combining Word-Class Change with Correct Spelling [P]**\n\nStudent both identifies the word-class change AND correctly spells the suffixed form for a set of words requiring spelling adjustments, integrating both skill strands.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/misconception/MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "- **Trigger signal:** Student focuses only on meaning changes from suffixes (e.g., \"-less\" meaning \"without\") without recognizing that many suffixes primarily change the WORD CLASS (part of speech) of the base word, often with a more predictable grammatical function than a purely semantic one — e.g., \"-tion\" turns a verb into a noun (create → creation), \"-ive\" turns a verb/noun into an adjective (create → creative), \"-ly\" turns an adjective into an adverb (quick → quickly).",
+      "content": "### MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS\n- **Trigger signal:** Student focuses only on meaning changes from suffixes (e.g., \"-less\" meaning \"without\") without recognizing that many suffixes primarily change the WORD CLASS (part of speech) of the base word, often with a more predictable grammatical function than a purely semantic one — e.g., \"-tion\" turns a verb into a noun (create → creation), \"-ive\" turns a verb/noun into an adjective (create → creative), \"-ly\" turns an adjective into an adverb (quick → quickly).\n- **Conflict evidence [P28]:** \"You said '-tion' in 'creation' just adds meaning. But look at 'create' (a verb) and 'creation' (what word class is this now)? Did the suffix change more than just the meaning?\"\n- **Bridge text [P30]:** \"Many suffixes have a primarily GRAMMATICAL function — they change the word's CLASS (part of speech): '-tion/-ment/-ness' typically create nouns, '-ive/-ous/-ful' typically create adjectives, '-ly' typically creates adverbs, '-ize/-ify' typically create verbs. This grammatical-conversion function is often more predictable and important than any subtle meaning shift.\"\n- **Replacement text [P31]:** \"Check whether a suffix changes the word's grammatical CLASS (noun/verb/adjective/adverb), not just its shade of meaning — this is often the suffix's primary job.\"\n- **Discrimination pairs [P33]:**\n  - \"create\" (verb) + \"-tion\" → \"creation\" (noun) — word-class change from verb to noun.\n  - \"quick\" (adjective) + \"-ly\" → \"quickly\" (adverb) — word-class change from adjective to adverb.\n- **s6_path:** \"Focusing on meaning first is a natural instinct since meaning feels like the 'main point' — but noticing that many suffixes are really doing GRAMMATICAL conversion work (changing the word's job in a sentence) is an equally important, often more reliable pattern.\"",
+      "localKey": "MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS",
+      "language": "en",
+      "refs": [
+        "MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/misconception/MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "- **Trigger signal:** Student treats spelling changes that occur when adding a suffix (dropping a final \"e,\" changing \"y\" to \"i,\" doubling a final consonant) as unpredictable or random, rather than recognizing the systematic spelling rules governing these changes (e.g., drop silent final \"e\" before a vowel suffix: \"hope\" + \"-ing\" → \"hoping\"; change \"y\" to \"i\" before most suffixes when preceded by a consonant: \"happy\" + \"-ness\" → \"happiness\"; double a final consonant in specific stressed, short-vowel contexts: \"run\" + \"-ing\" → \"running\").",
+      "content": "### MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM\n- **Trigger signal:** Student treats spelling changes that occur when adding a suffix (dropping a final \"e,\" changing \"y\" to \"i,\" doubling a final consonant) as unpredictable or random, rather than recognizing the systematic spelling rules governing these changes (e.g., drop silent final \"e\" before a vowel suffix: \"hope\" + \"-ing\" → \"hoping\"; change \"y\" to \"i\" before most suffixes when preceded by a consonant: \"happy\" + \"-ness\" → \"happiness\"; double a final consonant in specific stressed, short-vowel contexts: \"run\" + \"-ing\" → \"running\").\n- **Conflict evidence [P28]:** \"You spelled 'hopeing' by just adding '-ing' to 'hope' without changing anything. But do we usually keep a silent 'e' right before another vowel sound, or does English typically drop it? What's the correct spelling?\"\n- **Bridge text [P30]:** \"Spelling changes when adding suffixes follow genuine, learnable rules, not randomness: drop a silent final 'e' before a vowel-starting suffix ('hope' + '-ing' = 'hoping'), change a final 'y' to 'i' before most suffixes when preceded by a consonant ('happy' + '-ness' = 'happiness,' but 'play' + '-ing' = 'playing' since 'y' follows a vowel), and double a final consonant in short, stressed, single-vowel-ending words ('run' + '-ing' = 'running').\"\n- **Replacement text [P31]:** \"Check the base word's ending (silent e? y after a consonant? single stressed short vowel + consonant?) against the specific spelling rule before adding a suffix, rather than just attaching it directly.\"\n- **Discrimination pairs [P33]:**\n  - \"hope\" + \"-ing\" = \"hoping\" (drop the silent e) vs. simply attaching to get the incorrect \"hopeing.\"\n  - \"run\" + \"-ing\" = \"running\" (double the final consonant, since \"run\" is short/stressed/single-vowel) vs. \"walk\" + \"-ing\" = \"walking\" (no doubling needed, since \"walk\" ends in two consonants already).\n- **s6_path:** \"Spelling changes can feel arbitrary since they interrupt the simple 'just add the suffix' pattern — but each rule (drop-e, y-to-i, double-consonant) applies to a specific, checkable pattern in the base word, making them genuinely learnable rather than memorized case-by-case.\"\n\n---",
+      "localKey": "MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM",
+      "language": "en",
+      "refs": [
+        "MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Noun-Forming Suffixes",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Noun-Forming Suffixes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Adjective- and Adverb-Forming Suffixes",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Adjective- and Adverb-Forming Suffixes\",\"primitives\":[],\"addresses\":[\"MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Verb-Forming Suffixes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Verb-Forming Suffixes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Spelling Rule Application (Drop-E, Y-to-I, Double Consonant)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Spelling Rule Application (Drop-E, Y-to-I, Double Consonant)\",\"primitives\":[],\"addresses\":[\"MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Combining Word-Class Change with Correct Spelling",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Combining Word-Class Change with Correct Spelling\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM\",\"MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS",
+        "MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Noun-forming suffix, novel word**\n\"What word class is 'activity,' and what suffix formed it from 'active'?\"\n*Target:* noun; suffix \"-ity.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Adjective-forming suffix, novel word**\n\"What word class is 'dangerous,' and what suffix formed it from 'danger'?\"\n*Target:* adjective; suffix \"-ous.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Verb-forming suffix, novel word**\n\"What word class is 'simplify,' and what suffix formed it from 'simple'?\"\n*Target:* verb; suffix \"-ify.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Spelling rule, novel word**\n\"Spell 'big' + '-est.' What spelling rule applies?\"\n*Target:* \"biggest\" — double the final consonant, since \"big\" is short, stressed, and ends in a single vowel + consonant.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain suffixes and spelling rules**\n\"In your own words: what's the main job of most suffixes, and are spelling changes when adding them random?\"\n*Target:* states or demonstrates that suffixes often change a word's grammatical CLASS (not just its meaning), and that spelling adjustments (drop-e, y-to-i, double-consonant) follow specific, learnable rules based on the base word's ending, not randomness.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Adaptive Flags",
+      "content": "- **Word-class conversion is often the suffix's PRIMARY function**: explicitly teach and test word-class identification alongside meaning, directly countering the meaning-only default.\n- **Spelling rules are systematic, tied to base-word endings**: teach the three core rules (drop-e, y-to-i, double-consonant) as checkable tests based on the base word's specific ending pattern, not arbitrary exceptions.\n- **Four word-class categories (noun/adjective/adverb/verb) give a complete, organized framework**: sequence suffix introduction by target word class, mirroring the prefix concept's category-based approach for consistency across the vocab-morphology strand.\n- **Morphological transfer for L1s without suffix-based word-class conversion**: for S9 learners whose L1 doesn't build words this way, provide foundational scaffolding on the very concept before assuming ready transfer of the pattern-recognition skill.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.vocab.suffixes/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.suffixes",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — suffix job-change costume warm-up (create → creation)\n  ↓\n[P41] PD-1 (word-families readiness)\n  ↓ PASS\n[P06] Anchor: suffix job-change costume (verb → noun → adjective transformations)\n  ↓\nTA-1: Noun-forming suffixes [C]\n  ↓\nTA-2: Adjective- and adverb-forming suffixes [C]\n  ↓\n[P28] Conflict: suffixes assumed to only add meaning → MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS (if triggered)\n  ↓\nTA-3: Verb-forming suffixes [C→P]\n  ↓\nTA-4: Spelling rule application (drop-e, y-to-i, double consonant) [P]\n  ↓\n[P28] Conflict: spelling changes treated as random → MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM (if triggered)\n  ↓\nTA-5: Combining word-class change with correct spelling [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word with a suffix and identify both its word class and any spelling change.\"\n[P68] Session close\n[P85] Regulation tail — praise checking word class and spelling rules over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word families, new to suffixes specifically): dwell on TA-1's noun-forming suffixes with clear examples before introducing other word classes. S1 (already recognizes suffixes intuitively for meaning but not word-class change): use TA-1-3 to build explicit grammatical-conversion awareness for an already-present pattern-recognition skill. S6 (frustrated by spelling-rule complexity after suffixes initially seemed simple): validate that each rule applies to a specific, checkable base-word pattern, making them learnable rather than case-by-case memorization. S9 (L1 doesn't mark word-class changes through suffixation, e.g. many isolating languages, or has very different spelling-adjustment conventions): expect both the word-class-conversion concept and the English-specific spelling rules to require dedicated, explicit teaching, since these may have no direct L1 parallel.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.suffixes.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

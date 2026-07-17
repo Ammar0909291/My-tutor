@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.compound-words-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.compound-words",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a6189a2bd4f7149efd69dab3d40eb874a4db65c7cae6a9a518c20f6dc5436d0c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.compound-words.md": "sha256:658406a30eef74a0501d5a50406e2a0e52d5e621d36022f06b7debb2c99b480e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.vocab.compound-words",
+    "name": "Compound Words",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.vocab.word-families"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.compound-words-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.compound-words (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.compound-words.md": "sha256:658406a30eef74a0501d5a50406e2a0e52d5e621d36022f06b7debb2c99b480e"
+      },
+      "contentHash": "sha256:aa8f31c643f8670f0987783cb62d99968ebacbd890995bec373708c151ec39aa",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.compound-words.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.compound-words.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.compound-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.compound-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.compound-words.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.compound-words.md#TA-2 (addresses MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.compound-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.compound-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.compound-words.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.compound-words.md#TA-3 (addresses MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.compound-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.compound-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.compound-words.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.compound-words.md#TA-4 (addresses MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM, MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.compound-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.compound-words\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.compound-words/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Compound Words — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Closed Compound Words [C]**\n\nPresent closed compounds (notebook, sunflower, doghouse); student identifies the two component words and confirms transparent meaning.\n\n**TA-2 — Transparent vs. Opaque Compound Meaning [C]**\n\nPresent a mixed set of transparent (predictable) and opaque (non-literal) compounds; student sorts them and explains the meaning relationship, directly targeting MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM.\n\n**TA-3 — Hyphenated and Open Compounds [C→P]**\n\nPresent hyphenated (well-known, mother-in-law) and open (ice cream, high school) compounds; student identifies these as genuine compounds despite their spelling differences, directly targeting MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD.\n\n**TA-4 — Generating and Classifying Compound Words [P]**\n\nStudent generates their own compound words from given word pairs and classifies each as closed/hyphenated/open and transparent/opaque.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 68,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/misconception/MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "- **Trigger signal:** Student assumes a compound word's meaning is always the literal, predictable sum of its two parts, missing that many compounds are OPAQUE (their meaning cannot be derived from the parts alone) rather than TRANSPARENT (e.g., \"butterfly\" is not \"butter\" + \"fly\" in any literal sense — it's an insect with its own established meaning; \"understand\" is not literally \"under\" + \"stand\"), while other compounds ARE transparent and predictable (\"doghouse\" = a house for a dog; \"notebook\" = a book for notes).",
+      "content": "### MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM\n- **Trigger signal:** Student assumes a compound word's meaning is always the literal, predictable sum of its two parts, missing that many compounds are OPAQUE (their meaning cannot be derived from the parts alone) rather than TRANSPARENT (e.g., \"butterfly\" is not \"butter\" + \"fly\" in any literal sense — it's an insect with its own established meaning; \"understand\" is not literally \"under\" + \"stand\"), while other compounds ARE transparent and predictable (\"doghouse\" = a house for a dog; \"notebook\" = a book for notes).\n- **Conflict evidence [P28]:** \"You said every compound word's meaning is just its two parts added together. Does 'butterfly' have anything to do with butter, or with the act of flying in the way 'birds fly'? What does 'butterfly' actually mean?\"\n- **Bridge text [P30]:** \"Some compound words are TRANSPARENT — their meaning is predictable from their parts (doghouse = house for a dog; notebook = book for notes; sunlight = light from the sun). Others are OPAQUE — their meaning has drifted away from a literal combination of the parts and must be learned as its own distinct word (butterfly is not about butter or flying in a literal sense; understand isn't about standing under something). Check whether a compound's meaning is actually derivable from its parts before assuming it always is.\"\n- **Replacement text [P31]:** \"For any compound word, check whether its meaning genuinely follows logically from combining its two parts (transparent) or whether it has become its own distinct, non-literal meaning (opaque) — don't assume every compound is predictable.\"\n- **Discrimination pairs [P33]:**\n  - \"doghouse\" (transparent — literally a house for a dog) vs. \"butterfly\" (opaque — an insect, unrelated to butter or literal flying-like-a-bird).\n  - \"sunflower\" (transparent — a flower associated with the sun) vs. \"understand\" (opaque — comprehending something, not literally standing under anything).\n- **s6_path:** \"It's a very reasonable expectation that combining two known words should give a predictable meaning — but many compounds have drifted in meaning over the history of the language, and recognizing which type you're dealing with (transparent vs. opaque) is a genuinely useful reading and vocabulary skill.\"",
+      "localKey": "MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM",
+      "language": "en",
+      "refs": [
+        "MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/misconception/MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "- **Trigger signal:** Student assumes all compound words are written as a single, unbroken word (like \"closed\" compounds: \"notebook,\" \"sunflower\"), missing that English compounds also appear as HYPHENATED forms (\"well-known,\" \"mother-in-law\") and as OPEN (separate-word) forms (\"ice cream,\" \"high school\") — all three are genuine compound word categories, and spelling convention varies by specific compound, sometimes even changing over time (e.g., \"e-mail\" → \"email\").",
+      "content": "### MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD\n- **Trigger signal:** Student assumes all compound words are written as a single, unbroken word (like \"closed\" compounds: \"notebook,\" \"sunflower\"), missing that English compounds also appear as HYPHENATED forms (\"well-known,\" \"mother-in-law\") and as OPEN (separate-word) forms (\"ice cream,\" \"high school\") — all three are genuine compound word categories, and spelling convention varies by specific compound, sometimes even changing over time (e.g., \"e-mail\" → \"email\").\n- **Conflict evidence [P28]:** \"You said 'ice cream' isn't a real compound word because it's written as two separate words. Do 'ice' and 'cream' combine to name one single, specific thing/concept, the same way 'notebook' does? Does writing it as two words change whether it's functioning as a compound?\"\n- **Bridge text [P30]:** \"Compound words appear in THREE written forms: CLOSED (one unbroken word: notebook, sunflower), HYPHENATED (joined with a hyphen: well-known, mother-in-law), and OPEN (written as separate words but functioning as one conceptual unit: ice cream, high school). All three are genuine compounds — the specific spelling convention for a given compound is often just a matter of established convention (and can even change over time, as 'e-mail' became 'email').\"\n- **Replacement text [P31]:** \"Recognize a compound word by whether two words combine to express ONE unified concept/meaning, regardless of whether it's written closed, hyphenated, or open (as separate words).\"\n- **Discrimination pairs [P33]:**\n  - \"notebook\" (closed compound) vs. \"ice cream\" (open compound, still one unified concept despite being two written words).\n  - \"well-known\" (hyphenated compound) vs. two unrelated words simply appearing next to each other with no unified compound meaning.\n- **s6_path:** \"Since 'compound word' sounds like it should mean 'one word,' it's very natural to expect all compounds to be written as a single unbroken word — but English genuinely has three different written conventions for compounds, and checking for a UNIFIED MEANING (not spacing) is the real test.\"\n\n---",
+      "localKey": "MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD",
+      "language": "en",
+      "refs": [
+        "MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Identifying Closed Compound Words",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Closed Compound Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Transparent vs. Opaque Compound Meaning",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Transparent vs. Opaque Compound Meaning\",\"primitives\":[],\"addresses\":[\"MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Hyphenated and Open Compounds",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Hyphenated and Open Compounds\",\"primitives\":[],\"addresses\":[\"MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Generating and Classifying Compound Words",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Generating and Classifying Compound Words\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM\",\"MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM",
+        "MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 82,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Closed compound, novel example**\n\"What two words make up 'toothbrush,' and is the meaning transparent?\"\n*Target:* \"tooth\" + \"brush\" = a brush for teeth — transparent.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Opaque compound, novel example**\n\"Is 'breakfast' a literal combination of 'break' and 'fast'? What does it actually mean?\"\n*Target:* somewhat opaque — historically related to \"breaking an overnight fast,\" but the modern meaning (the morning meal) isn't immediately obvious from the parts alone to most learners.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Hyphenated compound, novel example**\n\"Is 'well-known' a compound word, even with a hyphen?\"\n*Target:* yes — a hyphenated compound expressing one unified meaning (widely recognized).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Open compound, novel example**\n\"Is 'post office' a compound word, even though it's two separate words?\"\n*Target:* yes — an open compound naming one unified concept.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain compound words**\n\"In your own words: is a compound word's meaning always predictable from its parts, and must it always be written as one unbroken word?\"\n*Target:* states or demonstrates that compound meanings can be transparent (predictable) or opaque (non-literal, drifted meaning), and that compounds can be written closed, hyphenated, or open — the defining feature is a unified meaning, not spacing.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 110,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Adaptive Flags",
+      "content": "- **Transparent/opaque distinction should be explicit, not assumed**: teach both categories deliberately, since opaque compounds are common enough (butterfly, breakfast, understand) that assuming universal literal-sum meaning will produce frequent comprehension errors.\n- **Unified meaning, not spacing, is the defining test for \"compound\"**: explicitly counter the closed-word-only assumption by presenting all three forms (closed/hyphenated/open) as equally legitimate compound categories from early instruction.\n- **Compound spelling conventions can be inconsistent and change over time**: acknowledge this explicitly (e.g., email/e-mail) to reduce frustration when a specific compound's spelling convention doesn't match a learner's expectation.\n- **Lower session_cap (4 TAs) reflects the concept's genuine scope**: this is a smaller, single-hour concept per the KG's `estimated_hours: 1` — the TA sequence is proportionally shorter, consistent with the established convention.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 170,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.vocab.compound-words/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.compound-words",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — compound-word puzzle pieces warm-up\n  ↓\n[P41] PD-1 (word-families readiness)\n  ↓ PASS\n[P06] Anchor: compound-word puzzle pieces (transparent/opaque + three written forms)\n  ↓\nTA-1: Identifying closed compound words [C]\n  ↓\nTA-2: Transparent vs. opaque compound meaning [C]\n  ↓\n[P28] Conflict: compound meaning assumed always literal sum → MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM (if triggered)\n  ↓\nTA-3: Hyphenated and open compounds [C→P]\n  ↓\n[P28] Conflict: compounds assumed always written as one word → MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD (if triggered)\n  ↓\nTA-4: Generating and classifying compound words [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one open compound and one opaque compound word.\"\n[P68] Session close\n[P85] Regulation tail — praise checking unified meaning over assuming spelling or literal-sum patterns\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word families, new to compound-word concepts): dwell on TA-1's clear, transparent closed compounds before introducing opaque meaning and spelling-variation nuances. S1 (already recognizes compounds intuitively in reading but hasn't formally classified them): use TA-2/TA-3 to build explicit vocabulary and classification skill for an already-present pattern-recognition ability. S6 (frustrated by opaque compounds after transparent ones felt logically satisfying): validate that language change over time explains why some compounds' meanings have drifted, and that recognizing an opaque compound (rather than forcing a literal interpretation) is itself a valuable skill. S9 (L1 forms compounds very differently, e.g. no compounding at all, or a different open/closed/hyphenated convention system): expect this concept's specific English spelling-convention variability to require dedicated practice, since the closed/hyphenated/open distinction (and its inconsistency, e.g. \"email\" evolving from \"e-mail\") is a distinctively English-specific orthographic feature.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.compound-words.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

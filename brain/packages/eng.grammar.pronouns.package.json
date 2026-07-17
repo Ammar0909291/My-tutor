@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.pronouns-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.pronouns",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fd3fb7e2ad3bd0fbe5475f4591259af9b8b9200affa66dba45977804f3b09dc7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.pronouns.md": "sha256:dda5bc67f9b4a017ed4a09c4b184ed18c27a12446155e2f19c7df716e768201a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.pronouns",
+    "name": "Pronouns",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.nouns"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.pronouns-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.pronouns (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.pronouns.md": "sha256:dda5bc67f9b4a017ed4a09c4b184ed18c27a12446155e2f19c7df716e768201a"
+      },
+      "contentHash": "sha256:ff7a20cfaa03334c5f7da85cbedf4c671facf047bd6741101a8dcb8dea0e5b72",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronouns.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronouns.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronouns.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronouns.md#TA-2 (addresses MC-PRONOUNS-ONLY-REPLACE-PEOPLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronouns.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronouns.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronouns.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronouns.md#TA-4 (addresses MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronouns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.pronouns.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.pronouns.md#TA-5 (addresses MC-PRONOUNS-ONLY-REPLACE-PEOPLE, MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.pronouns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.pronouns\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.pronouns/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Pronouns — Conceptual Development Sequence",
+      "content": "**TA-1 — Personal Pronouns for People [C]**\n\nPresent sentences with repeated person-nouns; student replaces with personal pronouns (he, she, they, I, you, we).\n\n**TA-2 — Pronouns for Things, Places, and Ideas [C]**\n\nPresent sentences with repeated non-human nouns; student replaces with \"it,\" \"they,\" \"this,\" \"that,\" directly targeting MC-PRONOUNS-ONLY-REPLACE-PEOPLE.\n\n**TA-3 — Possessive Pronouns [C→P]**\n\nPresent sentences using possessive nouns (\"Maria's book\"); student replaces with possessive pronouns (her book, mine, yours, theirs).\n\n**TA-4 — Reflexive Pronouns (Same-Entity Rule) [P]**\n\nPresent sentence pairs contrasting correct reflexive use (subject = object, \"She hurt herself\") with incorrect overuse (\"Give it to herself\" when \"her\" is correct); student identifies and corrects misuse, directly targeting MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS.\n\n**TA-5 — Relative and Indefinite Pronouns [P]**\n\nIntroduce relative pronouns (who, which, that — introducing a clause describing a noun) and indefinite pronouns (someone, anything, everybody — not referring to a specific named noun); student identifies each in sentences.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/misconception/MC-PRONOUNS-ONLY-REPLACE-PEOPLE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "- **Trigger signal:** Student assumes pronouns only substitute for people (he, she, they), missing that pronouns also substitute for places, things, ideas, and groups of nouns (it, they, this, that, which), and struggling to use \"it\"/\"they\" correctly for non-human antecedents.",
+      "content": "### MC-PRONOUNS-ONLY-REPLACE-PEOPLE\n- **Trigger signal:** Student assumes pronouns only substitute for people (he, she, they), missing that pronouns also substitute for places, things, ideas, and groups of nouns (it, they, this, that, which), and struggling to use \"it\"/\"they\" correctly for non-human antecedents.\n- **Conflict evidence [P28]:** \"You said pronouns replace people. In 'I bought a book. IT was expensive,' what does 'it' replace? Is 'book' a person?\"\n- **Bridge text [P30]:** \"Pronouns substitute for ANY noun — people (he, she, they), things (it), places, ideas, or groups (they, these, those) — not just people. 'It' is one of the most frequently used pronouns and almost always refers to non-human things, places, or ideas.\"\n- **Replacement text [P31]:** \"Check what noun a pronoun is replacing — it could be a person, but just as often a thing, place, or idea.\"\n- **Discrimination pairs [P33]:**\n  - \"The book... IT was expensive\" (it = book, a thing) vs. \"Maria... SHE was excited\" (she = Maria, a person).\n  - \"The cities... THEY were beautiful\" (they = cities, places) vs. \"The children... THEY were playing\" (they = children, people).\n- **s6_path:** \"It's natural to think of pronouns first as replacing names of people, since 'he/she/they' come up so often in that role — but 'it' and other pronouns replacing things, places, and ideas are just as central to the category.\"",
+      "localKey": "MC-PRONOUNS-ONLY-REPLACE-PEOPLE",
+      "language": "en",
+      "refs": [
+        "MC-PRONOUNS-ONLY-REPLACE-PEOPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/misconception/MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "- **Trigger signal:** Student uses reflexive pronouns (myself, yourself, himself, herself, themselves) incorrectly as simple substitutes for personal pronouns in non-reflexive contexts (e.g., \"Me and myself went to the store,\" or \"Give the book to myself\" when \"me\" is grammatically correct), not recognizing that reflexive pronouns are only correct when the subject and object of the action are the SAME entity, or in specific emphatic constructions.",
+      "content": "### MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS\n- **Trigger signal:** Student uses reflexive pronouns (myself, yourself, himself, herself, themselves) incorrectly as simple substitutes for personal pronouns in non-reflexive contexts (e.g., \"Me and myself went to the store,\" or \"Give the book to myself\" when \"me\" is grammatically correct), not recognizing that reflexive pronouns are only correct when the subject and object of the action are the SAME entity, or in specific emphatic constructions.\n- **Conflict evidence [P28]:** \"You said 'Give the book to myself.' Who is doing the giving, and who is receiving the book? Are those the same person, the way they'd need to be for 'myself' to be correct?\"\n- **Bridge text [P30]:** \"Reflexive pronouns (myself, yourself, himself, herself, itself, ourselves, themselves) are correct specifically when the subject performing the action and the object receiving the action are the SAME entity ('I hurt myself') or for emphasis directly after the noun/pronoun they intensify ('I myself saw it'). They are NOT simply more formal or emphatic substitutes for regular object pronouns (me, you, him, her) in general — 'Give the book to me' is correct; 'Give the book to myself' is not, unless 'myself' is the one giving it to themselves.\"\n- **Replacement text [P31]:** \"Use a reflexive pronoun only when the subject and object refer to the same entity, or for direct emphasis — otherwise use the regular object pronoun (me, him, her, them).\"\n- **Discrimination pairs [P33]:**\n  - \"I hurt myself\" (subject and object are the same \"I\" — correct reflexive use) vs. \"Give the book to me\" (different entities — object pronoun, not reflexive).\n  - \"I myself will attend\" (emphatic reflexive, correct) vs. \"Please send it to myself\" (incorrect — should be \"to me\").\n- **s6_path:** \"Reflexive pronouns can feel more 'proper' or emphatic, which is why they get overused in formal-sounding requests — but they have a specific grammatical job (same subject/object, or direct emphasis) rather than being a general dressed-up substitute.\"\n\n---",
+      "localKey": "MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS",
+      "language": "en",
+      "refs": [
+        "MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Personal Pronouns for People",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Personal Pronouns for People\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Pronouns for Things, Places, and Ideas",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pronouns for Things, Places, and Ideas\",\"primitives\":[],\"addresses\":[\"MC-PRONOUNS-ONLY-REPLACE-PEOPLE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-PRONOUNS-ONLY-REPLACE-PEOPLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Possessive Pronouns",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Possessive Pronouns\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Reflexive Pronouns (Same-Entity Rule)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Reflexive Pronouns (Same-Entity Rule)\",\"primitives\":[],\"addresses\":[\"MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Relative and Indefinite Pronouns",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Relative and Indefinite Pronouns\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PRONOUNS-ONLY-REPLACE-PEOPLE\",\"MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PRONOUNS-ONLY-REPLACE-PEOPLE",
+        "MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Personal pronoun, novel sentence**\n\"Rewrite: 'Sarah is my friend. Sarah lives nearby.' using a pronoun.\"\n*Target:* \"Sarah is my friend. She lives nearby.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Pronoun for a non-human noun**\n\"Rewrite: 'The cities were beautiful. The cities had old buildings.' using a pronoun.\"\n*Target:* \"The cities were beautiful. They had old buildings.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Possessive pronoun**\n\"Rewrite: 'This is John's car' using a possessive pronoun for 'John's.'\"\n*Target:* \"This is his car.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Reflexive pronoun correctness**\n\"Is 'He bought himself a gift' using 'himself' correctly? Is 'He gave the gift to himself' the same situation?\"\n*Target:* correctly confirms \"He bought himself a gift\" is correct reflexive use (same subject/object); correctly analyzes whether the second example is also valid reflexive use (same entity giving and receiving) or would need \"him\" instead, depending on context.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain pronoun categories**\n\"In your own words: what do pronouns replace, and when should you use a reflexive pronoun like 'myself'?\"\n*Target:* states or demonstrates that pronouns replace any noun (people, things, places, ideas), and that reflexive pronouns are used specifically when the subject and object are the same entity, or for direct emphasis.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Adaptive Flags",
+      "content": "- **\"It\" and non-human pronouns deserve equal early emphasis**: explicitly teach non-human pronoun substitution alongside personal pronouns from the start, directly countering the intuitive \"pronouns = people\" default.\n- **Reflexive-pronoun overuse in formal contexts is a very common, persistent error**: dedicate explicit practice to the same-entity rule (TA-4), since \"to myself\"-style overuse is widespread even among educated native writers in formal registers (emails, business writing).\n- **Chunk pronoun subtypes by function**: present personal/possessive/reflexive/relative/indefinite pronouns in function-based groups rather than all at once, to manage the category's genuine complexity.\n- **Gendered-pronoun and reflexive-system transfer for specific L1 backgrounds**: anticipate and directly address the specific transfer pattern most relevant to a given S9 learner's L1 pronoun system, rather than treating all pronoun errors as generically difficult.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.pronouns/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.pronouns",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — pronoun swap game warm-up (rewriting a repetitive sentence)\n  ↓\n[P41] PD-1 (noun readiness)\n  ↓ PASS\n[P06] Anchor: pronoun swap game (person, thing, place examples)\n  ↓\nTA-1: Personal pronouns for people [C]\n  ↓\nTA-2: Pronouns for things, places, and ideas [C]\n  ↓\n[P28] Conflict: pronouns assumed to replace only people → MC-PRONOUNS-ONLY-REPLACE-PEOPLE (if triggered)\n  ↓\nTA-3: Possessive pronouns [C→P]\n  ↓\nTA-4: Reflexive pronouns (same-entity rule) [P]\n  ↓\n[P28] Conflict: reflexive pronouns overused as emphasis → MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS (if triggered)\n  ↓\nTA-5: Relative and indefinite pronouns [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, rewrite one repetitive sentence using pronouns.\"\n[P68] Session close\n[P85] Regulation tail — praise correctly choosing pronoun type over defaulting to \"myself\"-style forms\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on nouns, new to pronoun substitution): dwell on TA-1's personal pronouns before introducing non-human pronoun use. S1 (uses pronouns fluently in speech but overuses reflexive forms formally, e.g. \"myself\" in emails): focus on TA-4's same-entity rule, since MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS is a very common, persistent register-driven error. S6 (frustrated by the number of pronoun subtypes): explicitly chunk by function (replacing a noun directly, showing possession, reflecting back to the subject) rather than presenting all subtypes as an undifferentiated list. S9 (L1 has a different pronoun system, e.g. no grammatical gender distinction in pronouns, a different formality-based pronoun system like T-V distinctions, or no separate reflexive-pronoun category): expect specific transfer patterns (e.g., gender confusion between he/she for L1s without gendered pronouns, or reflexive-pronoun overuse for L1s using reflexives more broadly as a politeness marker) and address these explicitly and patiently.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.pronouns.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
