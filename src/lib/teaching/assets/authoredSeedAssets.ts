@@ -9338,6 +9338,603 @@ const VEC2_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.displacement ────────────────────────────────────────────────
+const DISP = 'phys.mech.displacement'
+const DISP_SRC = 'docs/curriculum/blueprints/phys.mech.displacement.md'
+
+const DISP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DISP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Walk 3 metres forward, then walk 3 metres back to exactly where you ' +
+      'started. How far did you travel? 6 metres — your feet covered 6 ' +
+      'metres of ground, and that total ground covered is called distance. ' +
+      'But where did you END UP compared to where you began? Right back at ' +
+      'the start — zero change in position. That "change in position, ' +
+      'start to finish, ignoring the journey" is displacement, and here ' +
+      'it is zero even though you walked a full 6 metres. Distance asks ' +
+      '"how much ground?"; displacement asks "how far, and which way, from ' +
+      'start to finish?" — two different questions about the same walk.',
+    targetedMisconceptions: [`${DISP}:MC-DISPLACEMENT-IS-DISTANCE`],
+    source: `${DISP_SRC} — §1 Learning Objective + MC-DISPLACEMENT-IS-DISTANCE (round-trip zero-displacement anchor)`,
+  },
+  {
+    conceptId: DISP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Displacement is a straight-line arrow from start position to finish ' +
+      'position — it never follows the road, the curve, or the zigzag you ' +
+      'actually travelled. If a hiker follows a winding trail from camp to ' +
+      'a lake 2 km away as the crow flies, but the trail itself is 5 km ' +
+      'long, the distance walked is 5 km while the displacement is 2 km in ' +
+      'the direction of the lake — a single vector, computed as ' +
+      'Δx = x_final − x_initial, that would be identical even if the ' +
+      'hiker had teleported straight there. Distance only ever adds up ' +
+      '(it can never decrease as you move); displacement can be positive, ' +
+      'negative, or exactly zero, because it depends only on the two ' +
+      'endpoints, never on the path connecting them.',
+    targetedMisconceptions: [`${DISP}:MC-DISPLACEMENT-IS-PATH`],
+    source: `${DISP_SRC} — MC-DISPLACEMENT-IS-PATH (straight-arrow vs. actual-route contrast)`,
+  },
+  {
+    conceptId: DISP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It feels natural to report "I walked 6 m, so my displacement is ' +
+      '6 m" — but that quietly answers the distance question while ' +
+      'labelling the answer "displacement." Test it on a round trip: walk ' +
+      '3 m east, then 3 m west, back to your exact starting tile. Distance ' +
+      '= 3 + 3 = 6 m (ground covered never uncounts). Displacement = ' +
+      'x_final − x_initial = 0 − 0 = 0 m (you are exactly where you began). ' +
+      'They cannot both be 6 m — one measures accumulated path length, the ' +
+      'other measures net position change. The giveaway signal that ' +
+      'distance has been substituted for displacement: a "displacement" ' +
+      'answer that stays positive and grows even on a trip that clearly ' +
+      'returns to the start.',
+    targetedMisconceptions: [`${DISP}:MC-DISPLACEMENT-IS-DISTANCE`],
+    source: `${DISP_SRC} — MC-DISPLACEMENT-IS-DISTANCE conflict_evidence [P28] rendered as teaching text`,
+  },
+]
+
+const DISP_PROBES: SeedProbe[] = [
+  {
+    conceptId: DISP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A runner jogs 400 m around a circular track and ends up back at the starting line. What is the runner’s displacement?',
+    choices: [
+      { text: '0 m — the runner returns to the exact starting position', isCorrect: true },
+      { text: '400 m — that is how far the runner ran', isCorrect: false, misconceptionId: `${DISP}:MC-DISPLACEMENT-IS-DISTANCE` },
+    ],
+    correctValue: '0 m',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${DISP}:MC-DISPLACEMENT-IS-DISTANCE`],
+    source: `${DISP_SRC} — MC-DISPLACEMENT-IS-DISTANCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DISP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A delivery van follows a winding road 12 km long to a depot that is 5 km away in a straight line from the start. What is the magnitude of the van’s displacement?',
+    choices: [
+      { text: '5 km — the straight-line separation between start and finish, regardless of the winding road', isCorrect: true },
+      { text: '12 km — that is the length of the road actually driven', isCorrect: false, misconceptionId: `${DISP}:MC-DISPLACEMENT-IS-PATH` },
+    ],
+    correctValue: '5 km',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DISP}:MC-DISPLACEMENT-IS-PATH`],
+    source: `${DISP_SRC} — MC-DISPLACEMENT-IS-PATH trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.free-body-diagram ───────────────────────────────────────────
+const FBD = 'phys.mech.free-body-diagram'
+const FBD_SRC = 'docs/curriculum/blueprints/phys.mech.free-body-diagram.md'
+
+const FBD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FBD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A free-body diagram answers exactly one question: for THIS object ' +
+      'alone, what is touching it or pulling on it right now? Isolate the ' +
+      'object — draw it as a dot or box, erase everything else from the ' +
+      'scene — and add one arrow for every real force acting ON it: ' +
+      'weight always (gravity never switches off), normal force if a ' +
+      'surface touches it, tension if a rope pulls it, friction if a rough ' +
+      'surface rubs it, an applied force if something pushes or pulls it ' +
+      'directly. Nothing else goes on the diagram — not the force the ' +
+      'object exerts on other things, not a leftover "force of the push" ' +
+      'after contact has ended. The finished diagram is the direct input ' +
+      'to ΣF = ma: add up the arrows along each axis and you have the net ' +
+      'force.',
+    targetedMisconceptions: [`${FBD}:MC-WRONG-OBJECT`],
+    source: `${FBD_SRC} — §1 Learning Objective + TA-1/TA-2 (isolate-the-body, force-inventory checklist)`,
+  },
+  {
+    conceptId: FBD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A puck slides across frictionless ice at constant velocity — no ' +
+      'hand, no rope, no engine touching it. A very common instinct is to ' +
+      'draw a forward-pointing arrow labelled "force of motion" in the ' +
+      'direction it is sliding. Test that arrow the same way you would ' +
+      'test any force: every force needs a source object exerting it — so ' +
+      'point to the object pushing the puck forward right now. There isn’t ' +
+      'one. Motion does not require an ongoing force to continue, only to ' +
+      'CHANGE (Newton’s First Law) — so the puck’s horizontal free-body ' +
+      'diagram is genuinely empty: no arrow at all in the direction of ' +
+      'travel. The only arrows are weight down and the ice’s normal force ' +
+      'up, and they cancel.',
+    targetedMisconceptions: [`${FBD}:MC-MOTION-FORCE`],
+    source: `${FBD_SRC} — MC-MOTION-FORCE conflict_evidence [P28] + TA-4 misconception probe`,
+  },
+  {
+    conceptId: FBD,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 5 kg crate is pulled right along a rough horizontal floor by a ' +
+      'rope with tension 20 N, while friction resists with 8 N. Isolate ' +
+      'the crate: four forces act on it — weight (mg = 49 N, down), normal ' +
+      'force (N, up), tension (20 N, right), friction (8 N, left, opposing ' +
+      'the slide). Horizontally: ΣF_x = T − f = 20 − 8 = 12 N, so ' +
+      'a = 12/5 = 2.4 m/s² to the right. Vertically: the crate does not ' +
+      'accelerate up or down, so ΣF_y = 0 → N − mg = 0 → N = 49 N. Notice ' +
+      'the diagram did the real work here: once every force is drawn with ' +
+      'the correct direction, splitting into x- and y-equations and ' +
+      'solving is almost mechanical — the hard part was refusing to add a ' +
+      'phantom "pull direction" force or to include the crate’s own push on ' +
+      'the floor.',
+    targetedMisconceptions: [`${FBD}:MC-MOTION-FORCE`, `${FBD}:MC-WRONG-OBJECT`],
+    source: `${FBD_SRC} — TA-3 "From Diagram to Equation" worked numbers`,
+  },
+]
+
+const FBD_PROBES: SeedProbe[] = [
+  {
+    conceptId: FBD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A puck slides across frictionless ice at constant velocity, with nothing touching it. Which horizontal force belongs on its free-body diagram?',
+    choices: [
+      { text: 'None — the horizontal diagram is empty; the puck coasts by inertia', isCorrect: true },
+      { text: 'A forward "force of motion" in the direction it is sliding', isCorrect: false, misconceptionId: `${FBD}:MC-MOTION-FORCE` },
+    ],
+    correctValue: 'none',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FBD}:MC-MOTION-FORCE`],
+    source: `${FBD_SRC} — TA-4 misconception probe, distractor-mapped`,
+  },
+  {
+    conceptId: FBD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block rests on a table. Does the force the block exerts DOWN on the table belong on the block’s own free-body diagram?',
+    choices: [
+      { text: 'No — that force acts on the table, not on the block; only forces acting ON the block belong on its diagram', isCorrect: true },
+      { text: 'Yes — it is one of the forces involving the block', isCorrect: false, misconceptionId: `${FBD}:MC-WRONG-OBJECT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FBD}:MC-WRONG-OBJECT`],
+    source: `${FBD_SRC} — MC-WRONG-OBJECT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.normal-force ─────────────────────────────────────────────────
+const NORM = 'phys.mech.normal-force'
+const NORM_SRC = 'docs/curriculum/blueprints/phys.mech.normal-force.md'
+
+const NORM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NORM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The normal force is a surface pushing back on whatever touches it, ' +
+      'always perpendicular to that surface — never along it, and not ' +
+      'necessarily straight up. Stand on flat ground and the floor pushes ' +
+      'straight up on you; stand on a 30° ramp and the ramp still pushes ' +
+      'perpendicular to ITS surface, which is now tilted 30° from vertical ' +
+      '— not straight up at all. "Normal" here means geometric, not ' +
+      '"ordinary": it is the force perpendicular (normal) to the contact ' +
+      'surface. Its size is found the same way every other unknown force ' +
+      'is found on a free-body diagram — by writing the equilibrium or ' +
+      'Second-Law equation perpendicular to the surface and solving for it ' +
+      '— it is never assumed in advance.',
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-EQUALS-WEIGHT`],
+    source: `${NORM_SRC} — §1 Learning Objective (perpendicular-to-surface definition, not always vertical)`,
+  },
+  {
+    conceptId: NORM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A block sits stationary on a 50° incline. Setting N = mg by habit ' +
+      'and checking it against Newton’s Second Law perpendicular to the ' +
+      'slope exposes the problem immediately: N − mg cos50° = 0, so the ' +
+      'correct value is N = mg cos50° ≈ 0.64 mg — noticeably LESS than mg, ' +
+      'not equal to it. If N really equalled mg here, there would be a ' +
+      'large unbalanced force driving the block straight into the slope, ' +
+      'which plainly does not happen. N = mg is a special-case result that ' +
+      'only holds on a flat horizontal surface with no other vertical ' +
+      'forces — on an incline, in an accelerating lift, or with a slanted ' +
+      'applied force, N must be resolved fresh from the diagram every ' +
+      'single time.',
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-EQUALS-WEIGHT`],
+    source: `${NORM_SRC} — MC-NORMAL-EQUALS-WEIGHT conflict_evidence [P28], 50°-incline numbers`,
+  },
+  {
+    conceptId: NORM,
+    subjectSlug: 'physics',
+    familyKind: 'common_misconception_note',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The normal force is NOT the Newton’s-Third-Law "reaction" to weight ' +
+      '— that pairing mixes up two completely separate interactions. ' +
+      'Weight is the Earth–body gravitational interaction: Earth pulls the ' +
+      'body down, and the body’s true Third-Law partner force is the body ' +
+      'pulling the EARTH up (acting on the Earth, not on the body). The ' +
+      'normal force belongs to a different interaction entirely — the ' +
+      'surface–body contact: the surface pushes the body up, and its true ' +
+      'partner is the body pushing the surface down. Weight and normal ' +
+      'force both happen to act on the same body and often balance on a ' +
+      'flat floor, but "acting on the same object and balancing" is a ' +
+      'Second-Law equilibrium fact, not a Third-Law pairing — true Third-' +
+      'Law pairs always act on two DIFFERENT objects.',
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-IS-REACTION`],
+    source: `${NORM_SRC} — MC-NORMAL-IS-REACTION bridge_text [P30] (two interactions, four forces)`,
+  },
+]
+
+const NORM_PROBES: SeedProbe[] = [
+  {
+    conceptId: NORM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block of mass m rests stationary on a frictionless incline at angle θ to the horizontal. What is the normal force N?',
+    choices: [
+      { text: 'N = mg cosθ — resolved perpendicular to the slope', isCorrect: true },
+      { text: 'N = mg — the normal force always equals the weight', isCorrect: false, misconceptionId: `${NORM}:MC-NORMAL-EQUALS-WEIGHT` },
+    ],
+    correctValue: 'mg cos(theta)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-EQUALS-WEIGHT`],
+    source: `${NORM_SRC} — MC-NORMAL-EQUALS-WEIGHT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NORM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the normal force on a body the Newton’s-Third-Law reaction to that body’s weight?',
+    choices: [
+      { text: 'No — weight’s Third-Law partner is the body pulling the Earth up; the normal force’s partner is the body pushing the surface down (a different interaction)', isCorrect: true },
+      { text: 'Yes — they are equal and opposite forces on the body', isCorrect: false, misconceptionId: `${NORM}:MC-NORMAL-IS-REACTION` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-IS-REACTION`],
+    source: `${NORM_SRC} — MC-NORMAL-IS-REACTION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.equilibrium ──────────────────────────────────────────────────
+const EQUIL = 'phys.mech.equilibrium'
+const EQUIL_SRC = 'docs/curriculum/blueprints/phys.mech.equilibrium.md'
+
+const EQUIL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EQUIL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A see-saw with two children sitting at different distances from the ' +
+      'pivot balances only when both the pushing and the twisting cancel. ' +
+      'Static equilibrium needs TWO independent conditions to both hold: ' +
+      'ΣF = 0 (the forces cancel, so nothing accelerates sideways or ' +
+      'vertically) AND Στ = 0 (the torques cancel, so nothing starts ' +
+      'spinning). Neither condition implies the other — two equal and ' +
+      'opposite forces acting at DIFFERENT points on a rigid body can ' +
+      'cancel perfectly as forces (ΣF = 0) while still producing a net ' +
+      'twist (Στ ≠ 0), a configuration called a couple. A body is only ' +
+      'truly in equilibrium when you have checked, and confirmed, both.',
+    targetedMisconceptions: [`${EQUIL}:MC-ONE-CONDITION`],
+    source: `${EQUIL_SRC} — Component 1 Concept Spine + MC-ONE-CONDITION conflict_evidence (100 N beam/torque example)`,
+  },
+  {
+    conceptId: EQUIL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 3 m beam is pivoted at its left end, carrying a 100 N weight at ' +
+      '2 m and a single upward support force R at the far end (3 m). ' +
+      'Force balance alone gives R = 100 N — looks solved. But check the ' +
+      'torque about the left end: the weight contributes ' +
+      'τ = −100×2 = −200 N·m, and R contributes ' +
+      'τ = +100×3 = +300 N·m, so Στ = +100 N·m — not zero. The forces ' +
+      'balance, yet the beam still rotates. Force balance prevents ' +
+      'translational acceleration; torque balance separately prevents ' +
+      'rotational acceleration — confirming one is never enough evidence ' +
+      'for the other, and a full equilibrium check always writes both ' +
+      'ΣF = 0 (each axis) and Στ = 0.',
+    targetedMisconceptions: [`${EQUIL}:MC-ONE-CONDITION`],
+    source: `${EQUIL_SRC} — MC-ONE-CONDITION conflict_evidence [P28], worked numbers`,
+  },
+  {
+    conceptId: EQUIL,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 4 m beam is supported at both ends (unknown upward forces R_A at ' +
+      'the left end and R_B at the right end), carrying a 300 N weight ' +
+      '1 m from the left. The key strategic freedom in equilibrium ' +
+      'problems: torque can be taken about ANY point, including a point ' +
+      'where an unknown force acts — that force then has zero moment arm ' +
+      'and drops out of the equation entirely. Taking the pivot at A: ' +
+      'Στ_A = 0 → R_B×4 − 300×1 = 0 → R_B = 75 N, solved in one line with ' +
+      'only one unknown. Taking the pivot at the beam’s centre instead ' +
+      'would leave BOTH R_A and R_B in the equation, needing a second ' +
+      'equation to finish — same physics, far more algebra. Choosing the ' +
+      'pivot at an unknown force is the standard efficiency trick.',
+    targetedMisconceptions: [`${EQUIL}:MC-PIVOT-FIXED`],
+    source: `${EQUIL_SRC} — MC-PIVOT-FIXED conflict_evidence [P28], "good pivot vs. bad pivot" comparison`,
+  },
+]
+
+const EQUIL_PROBES: SeedProbe[] = [
+  {
+    conceptId: EQUIL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two equal-magnitude, opposite-direction forces act at different points on a rigid rod (a couple). ΣF = 0 for this system. Is the rod in static equilibrium?',
+    choices: [
+      { text: 'Not necessarily — a couple can still produce a net torque (Στ ≠ 0) even though the forces cancel', isCorrect: true },
+      { text: 'Yes — since the forces cancel, ΣF = 0 is enough to guarantee equilibrium', isCorrect: false, misconceptionId: `${EQUIL}:MC-ONE-CONDITION` },
+    ],
+    correctValue: 'not necessarily',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EQUIL}:MC-ONE-CONDITION`],
+    source: `${EQUIL_SRC} — MC-ONE-CONDITION discrimination_pairs (couple case), distractor-mapped`,
+  },
+  {
+    conceptId: EQUIL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When solving a beam-equilibrium problem with two unknown support forces, must the torque pivot be placed at a physical support?',
+    choices: [
+      { text: 'No — torque about any point is zero in equilibrium; placing the pivot at an unknown force eliminates it from that equation', isCorrect: true },
+      { text: 'Yes — the pivot has to be at a real hinge or support', isCorrect: false, misconceptionId: `${EQUIL}:MC-PIVOT-FIXED` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EQUIL}:MC-PIVOT-FIXED`],
+    source: `${EQUIL_SRC} — MC-PIVOT-FIXED trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.hookes-law ───────────────────────────────────────────────────
+const HOOKE = 'phys.mech.hookes-law'
+const HOOKE_SRC = 'docs/curriculum/blueprints/phys.mech.hookes-law.md'
+
+const HOOKE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HOOKE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Hang weights on a spring and measure how far it stretches: double ' +
+      'the weight and it stretches almost exactly double, triple the ' +
+      'weight and it stretches almost exactly triple. That direct ' +
+      'proportionality is Hooke’s Law: F = kx, where x is the extension ' +
+      '(how much longer than natural length) and k is the spring constant ' +
+      '— a fixed number, measured in newtons per metre, that describes ' +
+      'how stiff that particular spring is. A large k means the spring ' +
+      'fights back hard for every millimetre of stretch (hard to extend, ' +
+      'a stiff spring); a small k means it gives way easily under the ' +
+      'same force (a soft spring). Rearranged as x = F/k, a bigger k ' +
+      'always produces a SMALLER extension for the same applied force, ' +
+      'never a bigger one.',
+    targetedMisconceptions: [`${HOOKE}:MC-KBIG-MEANS-MORE-EXTENSION`],
+    source: `${HOOKE_SRC} — Component 1 MC-KBIG-MEANS-MORE-EXTENSION (k as stiffness, x = F/k inverse relationship)`,
+  },
+  {
+    conceptId: HOOKE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Hooke’s Law is a model that only works inside a limited range, not ' +
+      'a universal law of springs. Stretch a spring gently and F = kx ' +
+      'tracks it perfectly — the force-vs-extension graph is a straight ' +
+      'line. But keep stretching past the elastic limit and the spring ' +
+      'deforms permanently: it no longer returns to its original length ' +
+      'when released, the graph curves away from that straight line, and ' +
+      'F = kx with the ORIGINAL k simply stops predicting the right ' +
+      'force. This is not a failure of physics — it is what it means to ' +
+      'know a model’s limits: F = kx is an excellent, precise description ' +
+      'within the elastic region, and a stress-strain analysis is needed ' +
+      'to describe what happens beyond it.',
+    targetedMisconceptions: [`${HOOKE}:MC-HOOKES-ALWAYS-LINEAR`],
+    source: `${HOOKE_SRC} — Component 1 MC-HOOKES-ALWAYS-LINEAR (elastic limit boundary)`,
+  },
+  {
+    conceptId: HOOKE,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 0.5 kg mass hangs at rest from a vertical spring. Before Hooke’s ' +
+      'Law can even be applied, the spring FORCE itself has to come from ' +
+      'equilibrium, not be assumed: since the mass is stationary, ' +
+      'ΣF = 0 → spring force (up) = weight (down) = mg = 0.5×9.8 = 4.9 N. ' +
+      'Now Hooke’s Law connects that force to the stretch: if the spring ' +
+      'constant is k = 49 N/m, then x = F/k = 4.9/49 = 0.1 m — the spring ' +
+      'stretches 10 cm to hold the mass in place. Notice the two-step ' +
+      'structure: equilibrium finds the force the spring must be exerting; ' +
+      'Hooke’s Law then converts that force into a physical extension.',
+    targetedMisconceptions: [],
+    source: `${HOOKE_SRC} — Component 2 PD-1 prerequisite worked numbers (equilibrium → F = kx chain)`,
+  },
+]
+
+const HOOKE_PROBES: SeedProbe[] = [
+  {
+    conceptId: HOOKE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A stiff spring (large k = 1000 N/m) and a soft spring (small k = 50 N/m) each feel the same 10 N force. Which stretches MORE?',
+    choices: [
+      { text: 'The soft spring (k = 50 N/m) — x = F/k, so the smaller k gives the larger extension', isCorrect: true },
+      { text: 'The stiff spring (k = 1000 N/m) — bigger k means it stretches more', isCorrect: false, misconceptionId: `${HOOKE}:MC-KBIG-MEANS-MORE-EXTENSION` },
+    ],
+    correctValue: 'the soft spring',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HOOKE}:MC-KBIG-MEANS-MORE-EXTENSION`],
+    source: `${HOOKE_SRC} — MC-KBIG-MEANS-MORE-EXTENSION discrimination_pairs, distractor-mapped`,
+  },
+  {
+    conceptId: HOOKE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A spring calibrated as F = kx for small extensions is stretched far past its elastic limit. Does F = kx (with the original k) still correctly predict the force?',
+    choices: [
+      { text: 'No — beyond the elastic limit the spring deforms permanently and the linear F = kx model no longer applies', isCorrect: true },
+      { text: 'Yes — Hooke’s Law applies to any extension of any spring', isCorrect: false, misconceptionId: `${HOOKE}:MC-HOOKES-ALWAYS-LINEAR` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HOOKE}:MC-HOOKES-ALWAYS-LINEAR`],
+    source: `${HOOKE_SRC} — MC-HOOKES-ALWAYS-LINEAR trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.power ─────────────────────────────────────────────────────────
+const POWR = 'phys.mech.power'
+const POWR_SRC = 'docs/curriculum/blueprints/phys.mech.power.md'
+
+const POWR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POWR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two cranes each lift an identical 500 kg load 10 m straight up — ' +
+      'Crane A takes 20 s, Crane B takes only 5 s. The WORK done is ' +
+      'identical for both: W = mgh = 500×9.8×10 = 49 000 J, because work ' +
+      'only depends on the force and the distance moved, not on how fast ' +
+      'it happened. But power — the RATE of doing work, P = W/t — tells a ' +
+      'completely different story: Crane A delivers 49 000/20 = 2450 W, ' +
+      'Crane B delivers 49 000/5 = 9800 W, four times more power for the ' +
+      'exact same job. Power measures speed of energy delivery, not total ' +
+      'energy delivered — a high-power machine does not necessarily do ' +
+      'more work, it does the same work faster.',
+    targetedMisconceptions: [`${POWR}:MC-POWER-IS-ENERGY`],
+    source: `${POWR_SRC} — Component 3 MC-POWER-IS-ENERGY conflict_evidence [P28] (two-crane comparison)`,
+  },
+  {
+    conceptId: POWR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A car cruises at a perfectly constant 30 m/s on a flat road, engine ' +
+      'exerting 4000 N to overcome air resistance and friction. Because ' +
+      'the acceleration is zero, it is tempting to think the power must be ' +
+      'zero too — but zero acceleration does not mean zero force, and the ' +
+      'engine is still actively doing work every second just to maintain ' +
+      'that speed against resistance. Using P = W/t: in 1 s the car moves ' +
+      '30 m, so W = 4000×30 = 120 000 J and P = 120 000 W. Using the ' +
+      'equivalent instantaneous formula P = Fv directly: ' +
+      '4000×30 = 120 000 W — exactly matching. P = Fv holds at ANY instant, ' +
+      'accelerating or not; it simply measures the force times the ' +
+      'velocity at that moment.',
+    targetedMisconceptions: [`${POWR}:MC-POWER-CONSTANT-V`],
+    source: `${POWR_SRC} — Component 3 MC-POWER-CONSTANT-V conflict_evidence [P28] (constant-velocity car, P=W/t vs P=Fv cross-check)`,
+  },
+  {
+    conceptId: POWR,
+    subjectSlug: 'physics',
+    familyKind: 'real_world_example',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A torch and a floodlight can both run off similar batteries — which ' +
+      'one drains its battery faster? The floodlight, because it draws far ' +
+      'more power: it converts stored chemical energy into light energy ' +
+      'at a much higher RATE every second, even though, left running long ' +
+      'enough, the dim torch could eventually use just as much total ' +
+      'energy. That is the everyday feel of power versus energy: a ' +
+      '2000 W kettle running for 3 minutes and a 40 W bulb running for ' +
+      '10 hours can use similar total energy, but the kettle demands its ' +
+      'energy in a fast, high-power burst while the bulb spreads the same ' +
+      'amount thin over a whole day.',
+    targetedMisconceptions: [`${POWR}:MC-POWER-IS-ENERGY`],
+    source: `${POWR_SRC} — Component 3 MC-POWER-IS-ENERGY s6_path analogy (torch vs. floodlight)`,
+  },
+]
+
+const POWR_PROBES: SeedProbe[] = [
+  {
+    conceptId: POWR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two cranes lift identical loads through the identical height. Crane A takes 20 s; Crane B takes 5 s. How do their WORK DONE and POWER compare?',
+    choices: [
+      { text: 'Same work done; Crane B has 4× the power of Crane A', isCorrect: true },
+      { text: 'Crane B did more work because it has more power', isCorrect: false, misconceptionId: `${POWR}:MC-POWER-IS-ENERGY` },
+    ],
+    correctValue: 'same work, 4x power',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POWR}:MC-POWER-IS-ENERGY`],
+    source: `${POWR_SRC} — MC-POWER-IS-ENERGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: POWR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car moves at a perfectly constant velocity on a flat road (acceleration = 0), with the engine exerting a nonzero force to overcome resistance. Is the power delivered by the engine zero?',
+    choices: [
+      { text: 'No — P = Fv is nonzero whenever both force and velocity are nonzero, regardless of acceleration', isCorrect: true },
+      { text: 'Yes — zero acceleration means zero power', isCorrect: false, misconceptionId: `${POWR}:MC-POWER-CONSTANT-V` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POWR}:MC-POWER-CONSTANT-V`],
+    source: `${POWR_SRC} — MC-POWER-CONSTANT-V trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -9450,6 +10047,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CAP_EXPLANATIONS,
   ...COORD_EXPLANATIONS,
   ...VEC2_EXPLANATIONS,
+  ...DISP_EXPLANATIONS,
+  ...FBD_EXPLANATIONS,
+  ...NORM_EXPLANATIONS,
+  ...EQUIL_EXPLANATIONS,
+  ...HOOKE_EXPLANATIONS,
+  ...POWR_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -9562,4 +10165,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CAP_PROBES,
   ...COORD_PROBES,
   ...VEC2_PROBES,
+  ...DISP_PROBES,
+  ...FBD_PROBES,
+  ...NORM_PROBES,
+  ...EQUIL_PROBES,
+  ...HOOKE_PROBES,
+  ...POWR_PROBES,
 ]
