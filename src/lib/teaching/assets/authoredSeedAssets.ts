@@ -4646,6 +4646,255 @@ const FUT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.arith.fraction-multiplication ──────────────────────────────────────
+const FMUL = 'math.arith.fraction-multiplication'
+const FMUL_SRC = 'docs/curriculum/blueprints/math.arith.fraction-multiplication.md'
+
+const FMUL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FMUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      '1/2 \u00d7 1/3 asks: what is a THIRD of a HALF? Draw a rectangle. ' +
+      'Cut it in half one way and shade a half; cut it in thirds the ' +
+      'other way and shade a third. The overlap — where both shadings ' +
+      'cross — is 1 cell out of 6: the grid has 2 \u00d7 3 = 6 cells total ' +
+      '(multiply the denominators) and 1 \u00d7 1 = 1 doubly-shaded cell ' +
+      '(multiply the numerators). So the rule multiply-top-times-top, ' +
+      'bottom-times-bottom is just reading the grid. The ' +
+      'addition-style answer \u201c2/5\u201d fails a sanity check that should ' +
+      'run every time: a fraction OF a half must be SMALLER than a ' +
+      'half, and 2/5 is not smaller than 1/2 the right way — the true ' +
+      'product 1/6 is. No common denominators here: that machinery ' +
+      'belongs to addition, where you combine like-sized pieces.',
+    targetedMisconceptions: [`${FMUL}:MC-1`],
+    source: `${FMUL_SRC} — MC-1 (P28 area-model conflict + smaller-than-either reasonableness check + P30 grid-count bridge)`,
+  },
+  {
+    conceptId: FMUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'What is 3 \u00d7 2/5? Three copies of two-fifths: 2/5 + 2/5 + 2/5 ' +
+      '= 6/5. The rule: the whole number multiplies the NUMERATOR ' +
+      '(3 \u00d7 2 = 6) and the denominator stays 5 — because the SIZE of ' +
+      'the pieces (fifths) hasn\u2019t changed, only how many you have. ' +
+      'Writing 3 \u00d7 2/5 = 2/15 slides the 3 under the bar, which ' +
+      'answers a totally different question (it divides by 3 instead ' +
+      'of multiplying). Anchor: any whole number is a fraction over ' +
+      '1 — write 3 as 3/1 and multiply straight across: 3/1 \u00d7 2/5 = ' +
+      '6/5. Sanity check: three copies of something must be BIGGER ' +
+      'than one copy — 6/5 is bigger than 2/5; 2/15 is smaller, so ' +
+      'it cannot be right.',
+    targetedMisconceptions: [`${FMUL}:MC-3`],
+    source: `${FMUL_SRC} — MC-3 (repeated-addition anchor + 3-as-3/1 bridge + bigger-than-one-copy check)`,
+  },
+]
+
+const FMUL_PROBES: SeedProbe[] = [
+  {
+    conceptId: FMUL,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 1/2 \u00d7 1/3?',
+    choices: [
+      { text: '1/6 — multiply tops (1\u00d71) and bottoms (2\u00d73); a third of a half is small', isCorrect: true },
+      { text: '2/5 — add the tops and add the bottoms', isCorrect: false, misconceptionId: `${FMUL}:MC-1` },
+      { text: '3/6 — make common denominators first', isCorrect: false, misconceptionId: `${FMUL}:MC-1` },
+    ],
+    correctValue: '1/6',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${FMUL}:MC-1`],
+    source: `${FMUL_SRC} — DB-1 diagnostic item, distractor-mapped`,
+  },
+  {
+    conceptId: FMUL,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 3 \u00d7 2/5?',
+    choices: [
+      { text: '6/5 — three copies of two-fifths: the numerator triples, the piece size (fifths) stays', isCorrect: true },
+      { text: '2/15 — the 3 multiplies the denominator', isCorrect: false, misconceptionId: `${FMUL}:MC-3` },
+    ],
+    correctValue: '6/5',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FMUL}:MC-3`],
+    source: `${FMUL_SRC} — MC-3 trigger item, distractor-mapped`,
+  },
+]
+
+// ─── math.geom.right-triangle ────────────────────────────────────────────────
+const RTRI = 'math.geom.right-triangle'
+const RTRI_SRC = 'docs/curriculum/blueprints/math.geom.right-triangle.md'
+
+const RTRI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RTRI,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The hypotenuse has exactly one definition: the side OPPOSITE ' +
+      'the right angle. Not \u201cthe longest-looking side in the ' +
+      'picture,\u201d not \u201cthe slanted one\u201d — textbook drawings usually ' +
+      'put the right angle at the bottom corner so the hypotenuse ' +
+      'happens to slope, and eyes learn the wrong shortcut. Rotate ' +
+      'the triangle so the hypotenuse sits flat on the ground and it ' +
+      'is still the hypotenuse. Finding it is a two-step ritual: ' +
+      '(1) locate the little square marking the 90\u00b0 corner; ' +
+      '(2) walk across the triangle to the side that does NOT touch ' +
+      'that corner. (It IS always the longest side — the biggest ' +
+      'angle faces the biggest side — but that is a consequence to ' +
+      'check with, not the definition to search by.)',
+    targetedMisconceptions: [`${RTRI}:MC-1`],
+    source: `${RTRI_SRC} — MC-1 HYPOTENUSE-NOT-OPPOSITE-RIGHT-ANGLE (B01: rotate-the-triangle + two-step ritual)`,
+  },
+  {
+    conceptId: RTRI,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'In a right triangle, one acute angle is 35\u00b0 — what is the ' +
+      'other? Not 180 \u2212 35 = 145\u00b0: a 145\u00b0 angle plus the 90\u00b0 right ' +
+      'angle already overflows the triangle\u2019s entire 180\u00b0 budget. ' +
+      'The right angle spends 90\u00b0 of the 180\u00b0 up front, leaving ' +
+      'exactly 90\u00b0 for the two acute angles TOGETHER: they are ' +
+      'complementary, so the other angle is 90 \u2212 35 = 55\u00b0. The same ' +
+      'budget argument kills a related idea — a triangle with TWO ' +
+      'right angles: 90 + 90 = 180 spends everything, leaving 0\u00b0 for ' +
+      'the third corner, and the two \u201csides\u201d would run parallel and ' +
+      'never meet. One right angle per triangle, and its acute pair ' +
+      'always sums to 90\u00b0.',
+    targetedMisconceptions: [`${RTRI}:MC-2`, `${RTRI}:MC-3`],
+    source: `${RTRI_SRC} — MC-2 ACUTE-ANGLES-SUM-TO-180 + MC-3 TWO-RIGHT-ANGLES-POSSIBLE (B02/B03: 180\u00b0-budget argument)`,
+  },
+]
+
+const RTRI_PROBES: SeedProbe[] = [
+  {
+    conceptId: RTRI,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A right triangle is drawn with its right angle at the TOP and one side vertical. Which side is the hypotenuse?',
+    choices: [
+      { text: 'The side opposite the right angle — regardless of how the triangle is rotated', isCorrect: true },
+      { text: 'The slanted side — the hypotenuse always slopes', isCorrect: false, misconceptionId: `${RTRI}:MC-1` },
+      { text: 'The vertical side — it looks longest in this drawing', isCorrect: false, misconceptionId: `${RTRI}:MC-1` },
+    ],
+    correctValue: 'opposite the right angle',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${RTRI}:MC-1`],
+    source: `${RTRI_SRC} — MC-1 non-standard-orientation probe, distractor-mapped`,
+  },
+  {
+    conceptId: RTRI,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'One acute angle of a right triangle is 35\u00b0. What is the other acute angle?',
+    choices: [
+      { text: '55\u00b0 — the right angle uses 90\u00b0, so the two acute angles share the remaining 90\u00b0', isCorrect: true },
+      { text: '145\u00b0 — subtract from 180\u00b0', isCorrect: false, misconceptionId: `${RTRI}:MC-2` },
+    ],
+    correctValue: '55\u00b0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RTRI}:MC-2`],
+    source: `${RTRI_SRC} — MC-2 trigger item, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.prepositions ────────────────────────────────────────────────
+const PREP = 'eng.grammar.prepositions'
+const PREP_SRC = 'docs/curriculum/blueprints/eng.grammar.prepositions.md'
+
+const PREP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PREP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Prepositions are relationship words — and location is only ' +
+      'their most photogenic job. \u201cThe keys are IN the box\u201d: ' +
+      'location, easy to picture. But \u201cthe meeting is AT 3pm\u201d places ' +
+      'nothing in space — it anchors an event in TIME. Same little ' +
+      'words, several kinds of relationship: place (in the box, on ' +
+      'the table, under the bed), time (at 3pm, on Monday, in 2020, ' +
+      'during lunch, since May), means (by train, with a hammer), ' +
+      'company (with my friend), topic (about physics), and more ' +
+      '(of, for, despite, without). Watch \u201cin\u201d switch hats: \u201cin the ' +
+      'kitchen\u201d is where, \u201cin January\u201d is when. When a preposition ' +
+      'refuses to make spatial sense, don\u2019t force a picture — ask ' +
+      'what RELATIONSHIP it is drawing instead.',
+    targetedMisconceptions: [`${PREP}:MC-PREPOSITIONS-ONLY-SHOW-LOCATION`],
+    source: `${PREP_SRC} — MC-PREPOSITIONS-ONLY-SHOW-LOCATION (P28 at-3pm conflict + P33 in-box/in-2020 pair)`,
+  },
+  {
+    conceptId: PREP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Why \u201cgood AT math\u201d and not \u201cgood IN math\u201d? Honestly: no deep ' +
+      'reason — it is the conventional pairing English settled on, ' +
+      'and that is the real lesson. Many adjective- and ' +
+      'verb-preposition combinations are IDIOMS to memorize as fixed ' +
+      'pairs, not puzzles to reason out: interested IN, afraid OF ' +
+      '(never \u201cafraid from,\u201d a classic transfer error from other ' +
+      'languages), proud OF, depend ON, believe IN, listen TO. Logic ' +
+      'and translation from your first language will both betray you ' +
+      'here — each language wired its own pairings. The good news: ' +
+      'the list is bounded, the pairs are extremely frequent (so ' +
+      'practice comes free), and learning them AS pairs — record ' +
+      '\u201cdepend on,\u201d never bare \u201cdepend\u201d — is a normal part of ' +
+      'vocabulary, not a failure to find the hidden rule. There ' +
+      'isn\u2019t one.',
+    targetedMisconceptions: [`${PREP}:MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING`],
+    source: `${PREP_SRC} — MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING (P28 good-at conflict + s6 bounded-memorization framing)`,
+  },
+]
+
+const PREP_PROBES: SeedProbe[] = [
+  {
+    conceptId: PREP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u201cThe meeting is at 3pm,\u201d what relationship does \u201cat\u201d express?',
+    choices: [
+      { text: 'Time — prepositions cover time, means, and other relationships, not just location', isCorrect: true },
+      { text: 'Location — prepositions always show where something is', isCorrect: false, misconceptionId: `${PREP}:MC-PREPOSITIONS-ONLY-SHOW-LOCATION` },
+      { text: 'None — \u201cat\u201d is not a preposition here', isCorrect: false },
+    ],
+    correctValue: 'time',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PREP}:MC-PREPOSITIONS-ONLY-SHOW-LOCATION`],
+    source: `${PREP_SRC} — P28 conflict item as probe`,
+  },
+  {
+    conceptId: PREP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which is the correct English expression?',
+    choices: [
+      { text: '\u201cShe is afraid OF spiders\u201d — afraid + of is a fixed conventional pairing to memorize', isCorrect: true },
+      { text: '\u201cShe is afraid FROM spiders\u201d — fear comes from the spiders, so logic says \u201cfrom\u201d', isCorrect: false, misconceptionId: `${PREP}:MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING` },
+    ],
+    correctValue: 'afraid of',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PREP}:MC-PREPOSITION-CHOICE-IS-PREDICTABLE-FROM-MEANING`],
+    source: `${PREP_SRC} — P33 afraid-of/afraid-from pair as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -4701,6 +4950,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FLAW_EXPLANATIONS,
   ...CIRCL_EXPLANATIONS,
   ...FUT_EXPLANATIONS,
+  ...FMUL_EXPLANATIONS,
+  ...RTRI_EXPLANATIONS,
+  ...PREP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -4756,4 +5008,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FLAW_PROBES,
   ...CIRCL_PROBES,
   ...FUT_PROBES,
+  ...FMUL_PROBES,
+  ...RTRI_PROBES,
+  ...PREP_PROBES,
 ]
