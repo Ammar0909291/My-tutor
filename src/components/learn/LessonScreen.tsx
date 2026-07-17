@@ -739,7 +739,7 @@ function QuickActionsAndCheck({
 const HISTORY_RENDER_WINDOW = 100
 
 export function LessonScreen({ subjectSlug, subjectName, levelDescription, voiceChoice, teachingLanguage: teachingLanguageProp = 'en', voiceSpeed = 1, memoryContext, pastSessionsSummary, subjects, displayName, userId, resumeLessonTitle, resumeUnitTitle, schoolChapterId, autoOpenPractice, initialPrompt }: Props) {
-  const { t, lang: uiLang } = useLanguage()
+  const { t, lang: uiLang, setLang: setUiLang } = useLanguage()
   const { country } = useCountry()
   const { theme } = useTheme()
 
@@ -784,11 +784,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // new language on the next message; this local state is just for the UI/voice.
   const [teachingLanguage, setTeachingLanguage] = useState<TeachingLang>(teachingLanguageProp)
   const [langMenuOpen, setLangMenuOpen] = useState(false)
+  // BUGFIX: teachingLanguage used to be initialized once from the server
+  // prop and never revisited, so it silently drifted out of sync with the
+  // app's actual selected language (useLanguage()'s `lang` — the single
+  // source of truth, set in Settings and persisted to the SAME
+  // Profile.teachingLanguage field). Any learner who changed language via
+  // Settings without a full reload of /learn kept seeing "Tutor Max" and
+  // every teachingLanguage-gated string in English. Reconcile: whenever the
+  // app-wide language changes, follow it here too (uiLang already reflects
+  // the persisted value once LanguageProvider has read it from
+  // localStorage/settings, so this only fires with a real, settled value).
+  useEffect(() => {
+    setTeachingLanguage((prev) => (prev === uiLang ? prev : uiLang))
+  }, [uiLang])
   const handleLanguageChange = useCallback((l: TeachingLang) => {
     setTeachingLanguage(l)
     setLangMenuOpen(false)
+    setUiLang(l)
     fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ teachingLanguage: l }) }).catch(() => {})
-  }, [])
+  }, [setUiLang])
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
 
@@ -970,7 +984,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Derived
   const language = LANG_MAP[subjectSlug] ?? 'plaintext'
-  const badge = LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
+  // "english" is a real subject name (translatable), unlike the programming-
+  // language badges (C/C++/Python/... stay in Latin script in every language,
+  // matching how dev communities always refer to them) — localize only that one.
+  const badge = subjectSlug === 'english'
+    ? { ...LANG_BADGE.english, label: t('subj_english_label') }
+    : LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
   const filename = FILENAME[subjectSlug] ?? 'lesson.txt'
   // Eagle UI alignment sprint: non-programming subjects render the lesson
   // canvas as a formatted learning document instead of a raw-markdown code
@@ -2312,7 +2331,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         </div>
                       </div>
                       {otherSubjects.map((s) => {
-                        const b = LANG_BADGE[s.slug] ?? { label: s.name, accent: '#F78166' }
+                        const b = s.slug === 'english'
+                          ? { ...LANG_BADGE.english, label: t('subj_english_label') }
+                          : LANG_BADGE[s.slug] ?? { label: s.name, accent: '#F78166' }
                         return (
                           <Link key={s.slug} href={`/learn?subject=${s.slug}`}
                             onClick={() => setSubjectMenuOpen(false)}
@@ -2323,7 +2344,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'var(--bg-hover)' }}
                             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent' }}>
                             <span style={{ width: 8, height: 8, borderRadius: '50%', background: b.accent, flexShrink: 0 }} />
-                            {s.name}
+                            {b.label}
                           </Link>
                         )
                       })}
