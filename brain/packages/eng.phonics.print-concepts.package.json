@@ -1,0 +1,353 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.print-concepts-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.print-concepts",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:81bb99122665becc9b643b477ada2fd7f45b84fdf922e569bca2ae4f4c1abcdf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.print-concepts.md": "sha256:c78833ffc2841ca4f7848b146820d0165f5eb44d0f5d4648a29214a80b88a5b2"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.phonics.print-concepts",
+    "name": "Print Concepts",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.print-concepts-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.print-concepts (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.print-concepts.md": "sha256:c78833ffc2841ca4f7848b146820d0165f5eb44d0f5d4648a29214a80b88a5b2"
+      },
+      "contentHash": "sha256:d7b03873f7752b837d199a9f156239762d9c1622322cfdd56d3381182a02cee2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.print-concepts.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.print-concepts.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.print-concepts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.print-concepts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.print-concepts.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.print-concepts.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.print-concepts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.print-concepts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.print-concepts.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.print-concepts.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.print-concepts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.print-concepts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.print-concepts.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.print-concepts.md#TA-4 (addresses MC-PICTURE-IS-THE-STORY, MC-SPACES-ARE-DECORATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.print-concepts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.print-concepts\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.print-concepts/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Print Concepts — Conceptual Development Sequence",
+      "content": "**TA-1 — Print Carries the Message, Not the Picture [C]**\n\nUsing two matching books (or one book pre-marked), demonstrate: cover the print, ask what the page says (varies); cover the picture, ask what the page says (student cannot yet decode it, but you read it aloud — same words every time). Establish: \"The print is the part that never changes.\"\n\n**TA-2 — Directionality: Left-to-Right, Top-to-Bottom, Return Sweep [C]**\n\nUsing a two-line printed passage, model with a finger sweep: start top-left, sweep right to the end of line 1, then jump back to the left edge and down to line 2 (the \"return sweep\"). Have the student physically trace the same path with their own finger on a fresh page. Repeat with a three-line passage to confirm the return-sweep habit, not just a single-line sweep.\n\n**TA-3 — Word Boundaries: Spaces Mark Words [C→P]**\n\nShow a sentence card. Ask the student to place a small token (a coin, a bead) in each gap between letter-clusters. Count tokens + 1 = word count. Contrast with the same sentence spaced-removed (\"Thecatsatonthemat\") to make the function of the space visible by its absence.\n\n**TA-4 — Letters vs. Words vs. Sentences [P]**\n\nIntroduce the three nested units using a single sentence card: circle one letter, box one word (a cluster of letters with no internal space), bracket the whole sentence (ending in a full stop / period). Establish the containment relationship: sentences contain words; words contain letters.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 72,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/misconception/MC-PICTURE-IS-THE-STORY",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "- **Trigger signal:** Student \"reads\" a page by describing the picture rather than attending to the print; cannot point to the words while narrating; retells a story differently each time based on the image, not the fixed text.",
+      "content": "### MC-PICTURE-IS-THE-STORY\n- **Trigger signal:** Student \"reads\" a page by describing the picture rather than attending to the print; cannot point to the words while narrating; retells a story differently each time based on the image, not the fixed text.\n- **Conflict evidence [P28]:** \"Cover the picture with a card, leaving only the print visible. Ask: can you still tell me what this page says? [Student typically cannot — proof the words, not the picture, carry the fixed content.] Now cover the WORDS, leaving only the picture. Ask the same. [Student can still describe a scene, but a different one each time.] Which one stays exactly the same every time someone reads it?\"\n- **Bridge text [P30]:** \"The picture helps you imagine the story, but the PRINT is what actually says the story — the same words, in the same order, every single time anyone reads this page, in any country, in any year.\"\n- **Replacement text [P31]:** \"Print carries the fixed message. A picture is a helpful clue but is not the text itself — this is why two people looking at the same page and reading the print will say the exact same words, while two people just looking at the picture might describe it differently.\"\n- **Discrimination pairs [P33]:**\n  - Page with print visible, picture covered vs. picture visible, print covered — only one produces the same retelling twice.\n  - A wordless picture book (no print) vs. a page with print — ask which one can be \"read\" the same way by a stranger who has never seen it before.\n- **s6_path:** \"It's a completely normal early mix-up — most children (and adults learning a new script) start by trusting pictures more than symbols. We're just going to practise noticing which one gives us the exact words.\"",
+      "localKey": "MC-PICTURE-IS-THE-STORY",
+      "language": "en",
+      "refs": [
+        "MC-PICTURE-IS-THE-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/misconception/MC-SPACES-ARE-DECORATION",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "- **Trigger signal:** Student points to each letter, or each syllable, calling it \"a word\"; does not use the white space between letter-clusters as the boundary marker for what counts as one word; miscounts words in a sentence by over- or under-counting.",
+      "content": "### MC-SPACES-ARE-DECORATION\n- **Trigger signal:** Student points to each letter, or each syllable, calling it \"a word\"; does not use the white space between letter-clusters as the boundary marker for what counts as one word; miscounts words in a sentence by over- or under-counting.\n- **Conflict evidence [P28]:** \"Look at this sentence: 'The big dog ran.' How many separate words are printed? [Student may say a number based on letters or syllables, not spaces.] Now look ONLY at the gaps — the white spaces between clusters of letters. Count the gaps plus one. Do you get the same number?\"\n- **Bridge text [P30]:** \"The blank spaces are not empty by accident — they are a signal. Everything between two spaces (or between a space and the start/end of the line) is exactly one word.\"\n- **Replacement text [P31]:** \"A word is defined in print by the spaces around it, not by how many letters or sounds it contains. 'A' is one word with one letter; 'elephant' is one word with eight letters — both are single words because each is surrounded by space.\"\n- **Discrimination pairs [P33]:**\n  - \"cat\" (3 letters, 1 word) vs. \"I am\" (2+2 characters, 2 words) — letter count does not predict word count.\n  - A sentence with normal spacing vs. the same sentence with spaces removed (\"Thebigdogran\") — ask which is easier to break into words, and why.\n- **s6_path:** \"This one trips up almost every beginner — spaces feel invisible until someone points out that they're doing a job. Once you see it, you can't un-see it.\"\n\n---",
+      "localKey": "MC-SPACES-ARE-DECORATION",
+      "language": "en",
+      "refs": [
+        "MC-SPACES-ARE-DECORATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Print Carries the Message, Not the Picture",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Print Carries the Message, Not the Picture\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Directionality: Left-to-Right, Top-to-Bottom, Return Sweep",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Directionality: Left-to-Right, Top-to-Bottom, Return Sweep\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Word Boundaries: Spaces Mark Words",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Word Boundaries: Spaces Mark Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Letters vs. Words vs. Sentences",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Letters vs. Words vs. Sentences\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PICTURE-IS-THE-STORY\",\"MC-SPACES-ARE-DECORATION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PICTURE-IS-THE-STORY",
+        "MC-SPACES-ARE-DECORATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 86,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Print vs. picture, novel page**\n\"Here is a page you have never seen. Point to the part that carries the fixed message, not the picture.\"\n*Target:* points to print, states the picture only \"helps.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Word count by spaces**\n\"How many words are in this sentence: 'The sun is hot.'?\"\n*Target:* 4 (three gaps + 1); demonstrates counting method (points to each space or each cluster), not letter-counting.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Directionality on an unfamiliar three-line passage**\n\"Trace with your finger exactly where reading starts and how it moves across all three lines.\"\n*Target:* correct start point (top-left), left-to-right sweeps, two correct return-sweeps.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Boundary generation**\n\"Say any short sentence out loud. Now tell me: if I wrote it down, how would I know where each word starts and stops?\"\n*Target:* \"there would be a space between each word\" or equivalent — demonstrates the rule is generalised, not memorised from one example.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Nested units**\n\"In the word 'dog', is 'dog' a letter, a word, or a sentence? What about 'd'? What about 'The dog ran.'?\"\n*Target:* correctly classifies all three: \"dog\" = word, \"d\" = letter, \"The dog ran.\" = sentence.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Adaptive Flags",
+      "content": "- **Age-appropriate framing**: this concept is most often taught to young children, but also applies to older L2 learners, adult literacy learners, and learners transferring from a non-Latin script. Never use child-register language (\"Let's play a fun game!\") with an adult or older learner — use the neutral, direct register shown in TA-2 and TA-3 above (\"calibrate exactly how English print works\").\n- **L1 script transfer (S9)**: for learners whose first script reads right-to-left (Arabic, Hebrew, Urdu) or top-to-bottom in columns (traditional vertical Chinese/Japanese), directionality is NOT a universal default — it must be explicitly taught as an English-specific convention, contrasted directly against the student's known script direction, not assumed as \"natural.\"\n- **Distinguish from alphabet recognition**: this concept is about the CONVENTIONS of print (direction, word boundaries, print-vs-picture) — it does NOT require knowing letter names or sounds yet. Do not let TA-4's \"letters vs. words\" distinction drift into a letter-naming drill; that belongs to eng.phonics.alphabet-recognition (the unlocked downstream concept).\n- **Non-clinical framing for older remedial learners**: an older student placed here due to a genuine gap should never be told this is \"for babies\" — frame it as recalibrating a foundational convention, matching the S6 adaptation above.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 174,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.phonics.print-concepts/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.print-concepts",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — hand the student a picture book, ask them to \"read\" a page\n  ↓\n[P41] PD-1 (book-handling readiness)\n  ↓ PASS\n[P06] Anchor: print vs. picture — cover-and-compare demonstration\n  ↓\nTA-1: Print carries the message, not the picture [C]\n  ↓\n[P28] Conflict: \"the picture tells the story\" → MC-PICTURE-IS-THE-STORY (if triggered)\n  ↓\nTA-2: Directionality — left-to-right, top-to-bottom, return sweep [C]\n  ↓\nTA-3: Word boundaries — spaces mark words [C→P]\n  ↓\n[P28] Conflict: word miscounting → MC-SPACES-ARE-DECORATION (if triggered)\n  ↓\nTA-4: Letters vs. words vs. sentences — nested units [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3 (escalating novelty)\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, show me the direction your finger travels on a new page before we start reading.\"\n[P68] Session close\n[P85] Regulation tail — praise noticing the spaces/direction, not \"being right\"\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 85%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no book-handling experience): dwell longer on Component 3 and TA-1/TA-2, minimal TA-3/TA-4 in the first session. S1 (has some book exposure, inconsistent directionality): compress TA-1, emphasise TA-2 return-sweep. S6 (anxious, e.g. an older struggling reader placed in this remedial concept): skip explicit \"picture vs. print\" framing that could feel babyish — reframe as \"let's calibrate exactly how English print works\" and move faster through TA-1. S9 (L1 uses right-to-left or top-to-bottom script, e.g. Arabic, Hebrew, or traditional Chinese/Japanese vertical text): TA-2 requires EXPLICIT contrast with the student's L1 directionality — do not assume left-to-right is intuitive; name the specific difference from their L1 script directly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.print-concepts.md",
+        "startLine": 138,
+        "endLine": 174
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

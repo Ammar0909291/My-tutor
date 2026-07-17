@@ -1,0 +1,390 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.blending-segmenting-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.blending-segmenting",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e29d9f17384e84ae7d8c2c1c41ab164e6262c04c3f45de4e64f071e12761cffa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md": "sha256:c5d2e144485729ab61f4efbfe9319922707c6f38324c61a0e9e528df40839e20"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.blending-segmenting",
+    "name": "Blending and Segmenting",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.phonemic-awareness",
+      "eng.phonics.rhyming"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.blending-segmenting-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.blending-segmenting (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md": "sha256:c5d2e144485729ab61f4efbfe9319922707c6f38324c61a0e9e528df40839e20"
+      },
+      "contentHash": "sha256:a16cf7b3e216658b85ee01131ecf6a7b18cab39b967d315569bdfc1e4486e9e7",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.blending-segmenting.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.blending-segmenting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.blending-segmenting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.blending-segmenting.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.blending-segmenting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.blending-segmenting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.blending-segmenting.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.blending-segmenting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.blending-segmenting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.blending-segmenting.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.blending-segmenting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.blending-segmenting\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.blending-segmenting.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md#TA-5 (addresses MC-BLENDING-IS-JUST-FAST-LETTERS, MC-SEGMENTING-STOPS-AT-SYLLABLES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.blending-segmenting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.blending-segmenting\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.blending-segmenting/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Blending and Segmenting — Conceptual Development Sequence",
+      "content": "**TA-1 — Blending from Sounds to Word [C]**\n\nPresent isolated sounds slowly, sound by sound (e.g., \"/m/... /a/... /p/\"), student blends them into the whole word (\"map\"). Use the chip-slide from Component 3 as physical support for early attempts.\n\n**TA-2 — Segmenting from Word to Sounds [C]**\n\nReverse direction: present a whole word, student breaks it into individual sounds, placing/pointing to one chip per sound. Confirm full segmentation (not just syllables) using the Component 1 check.\n\n**TA-3 — Blending Without Chips [C→P]**\n\nRepeat TA-1 without physical chips, purely auditory — sounds are presented orally with brief pauses, student blends mentally.\n\n**TA-4 — Segmenting Without Chips [P]**\n\nRepeat TA-2 without chips — student segments a spoken word into its sounds purely orally, saying each sound aloud in sequence.\n\n**TA-5 — Sound Manipulation (Add/Delete) [P]**\n\nIntroduce a light manipulation task building on blending/segmenting: \"Say 'cat'. Now say it without the /k/.\" (Target: \"at.\") Or: \"Say 'an'. Now add /m/ to the front.\" (Target: \"man.\") This bridges directly toward decoding/spelling work.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/misconception/MC-BLENDING-IS-JUST-FAST-LETTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "- **Trigger signal:** Student attempts to blend by naming letters quickly rather than producing continuous sounds (e.g., says \"buh-ah-tuh\" with hard stops between each letter-name, producing \"buh-ah-tuh\" instead of a smooth \"bat\"), and cannot merge the sounds into a recognizable word.",
+      "content": "### MC-BLENDING-IS-JUST-FAST-LETTERS\n- **Trigger signal:** Student attempts to blend by naming letters quickly rather than producing continuous sounds (e.g., says \"buh-ah-tuh\" with hard stops between each letter-name, producing \"buh-ah-tuh\" instead of a smooth \"bat\"), and cannot merge the sounds into a recognizable word.\n- **Conflict evidence [P28]:** \"Listen to me say the letter names fast: 'buh... ah... tuh'. Does that sound like a real word? Now listen to me stretch and glide the actual SOUNDS together without stopping: 'bbbaaat' → 'bat'. Which one turned into a word you know?\"\n- **Bridge text [P30]:** \"Blending means gliding sounds together smoothly, without a pause between them — not naming letters one at a time. Stopping between sounds (especially adding an extra 'uh' after stop sounds like b, t, k) breaks the word apart instead of joining it.\"\n- **Replacement text [P31]:** \"Stretch and glide each sound directly into the next one, with no pause and no added 'uh' sound, until they merge into a word.\"\n- **Discrimination pairs [P33]:**\n  - \"b-a-t\" blended smoothly → \"bat\" (correct) vs. \"buh-ah-tuh\" with stops (does not resolve to a real word).\n  - \"s-u-n\" glided → \"sun\" vs. \"suh-uh-nuh\" stopped → unrecognizable.\n- **s6_path:** \"This trips up almost every beginner because letter NAMES (like 'buh' for B) are different from letter SOUNDS (a clipped /b/) — we'll practice stretching sounds together without stopping until it clicks.\"",
+      "localKey": "MC-BLENDING-IS-JUST-FAST-LETTERS",
+      "language": "en",
+      "refs": [
+        "MC-BLENDING-IS-JUST-FAST-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/misconception/MC-SEGMENTING-STOPS-AT-SYLLABLES",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "- **Trigger signal:** Student segments a word only down to syllables, not individual phonemes (e.g., segments \"cat\" as one chunk, or segments \"rabbit\" as \"rab-bit\" and stops there, rather than continuing to /r/-/æ/-/b/-/ɪ/-/t/), treating syllable-level chunking as equivalent to full phonemic segmentation.",
+      "content": "### MC-SEGMENTING-STOPS-AT-SYLLABLES\n- **Trigger signal:** Student segments a word only down to syllables, not individual phonemes (e.g., segments \"cat\" as one chunk, or segments \"rabbit\" as \"rab-bit\" and stops there, rather than continuing to /r/-/æ/-/b/-/ɪ/-/t/), treating syllable-level chunking as equivalent to full phonemic segmentation.\n- **Conflict evidence [P28]:** \"You split 'rabbit' into 'rab' and 'bit' — good, that's the syllables. Now can you break 'rab' down even further into its separate sounds? How many sounds are inside just that one chunk?\"\n- **Bridge text [P30]:** \"Segmenting a word fully means breaking it all the way down to its smallest individual sounds (phonemes) — syllables are a bigger, in-between chunk, a useful first step but not the finish line.\"\n- **Replacement text [P31]:** \"After finding syllables, keep breaking each syllable down further into its individual sounds — check that no chunk can be split any smaller.\"\n- **Discrimination pairs [P33]:**\n  - \"cat\" segmented as one syllable/chunk (incomplete) vs. /k/-/æ/-/t/ (fully segmented, 3 phonemes).\n  - \"rabbit\" segmented as \"rab-bit\" (syllables only) vs. /r/-/æ/-/b/-/ɪ/-/t/ (fully segmented, 5 phonemes).\n- **s6_path:** \"Syllables feel like a natural stopping point because they're easier to hear as chunks — we'll always double check by asking 'can this piece be broken down even smaller?'\"\n\n---",
+      "localKey": "MC-SEGMENTING-STOPS-AT-SYLLABLES",
+      "language": "en",
+      "refs": [
+        "MC-SEGMENTING-STOPS-AT-SYLLABLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Blending from Sounds to Word",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Blending from Sounds to Word\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Segmenting from Word to Sounds",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Segmenting from Word to Sounds\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Blending Without Chips",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Blending Without Chips\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Segmenting Without Chips",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Segmenting Without Chips\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Sound Manipulation (Add/Delete)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Sound Manipulation (Add/Delete)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-BLENDING-IS-JUST-FAST-LETTERS\",\"MC-SEGMENTING-STOPS-AT-SYLLABLES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-BLENDING-IS-JUST-FAST-LETTERS",
+        "MC-SEGMENTING-STOPS-AT-SYLLABLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Blending, novel set**\n\"Blend these sounds: /b/... /i/... /g/.\"\n*Target:* \"big\" — produced with a smooth glide, not stopped letter-names.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Segmenting, novel word**\n\"Segment 'frog' into its individual sounds.\"\n*Target:* /f/-/r/-/ɒ/-/g/ (4 phonemes — checks that segmentation does not stop at a syllable/blend-cluster level for the \"fr\" blend).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Blending without chips (auditory only)**\n\"Just by listening, blend: /ʃ/... /ɛ/... /l/... /f/.\"\n*Target:* \"shelf\" — performed with no physical support.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Sound manipulation**\n\"Say 'plane'. Now say it without the /p/ sound.\"\n*Target:* \"lane.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the relationship**\n\"In your own words: how are blending and segmenting related to each other?\"\n*Target:* states or demonstrates that they are opposite/reverse processes — blending joins separate sounds into a word, segmenting breaks a word apart into its separate sounds.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Adaptive Flags",
+      "content": "- **Letter names vs. letter sounds must be explicit**: because most alphabet instruction teaches letter NAMES first, blending instruction must explicitly redirect students to use clipped SOUNDS (not \"buh,\" \"cuh,\" \"tuh\" with a trailing vowel) — this is the single most common blocking error.\n- **Full segmentation, not syllable segmentation**: always verify segmentation reaches the phoneme level, not just the syllable level, using the Component 1 discrimination check as a standing routine, not a one-time correction.\n- **Chips/manipulatives are a scaffold, not the goal**: TA-3/TA-4 explicitly remove physical supports — mastery (Component 6 probes) is defined as achievable without them; continued dependence on chips at mastery-check time signals the skill is not yet internalized.\n- **Consonant-cluster difficulty for L1-transfer learners**: for S9 learners whose L1 restricts consonant clusters, sequence CVC (single consonant) words before consonant-blend words (e.g., \"stop,\" \"desk\") to avoid conflating a phonotactic-transfer difficulty with a blending/segmenting skill deficit.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.phonics.blending-segmenting/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.blending-segmenting",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — chip-slide demonstration (blend forward, segment backward)\n  ↓\n[P41] PD-1 (phonemic isolation readiness)\n  ↓ PASS\n[P41] PD-2 (ending-sound comparison readiness)\n  ↓ PASS\n[P06] Anchor: sound-chip slide (both directions)\n  ↓\nTA-1: Blending from sounds to word [C]\n  ↓\n[P28] Conflict: letter-name stops instead of gliding → MC-BLENDING-IS-JUST-FAST-LETTERS (if triggered)\n  ↓\nTA-2: Segmenting from word to sounds [C]\n  ↓\n[P28] Conflict: stopping at syllable level → MC-SEGMENTING-STOPS-AT-SYLLABLES (if triggered)\n  ↓\nTA-3: Blending without chips [C→P]\n  ↓\nTA-4: Segmenting without chips [P]\n  ↓\nTA-5: Sound manipulation (add/delete) [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, segment your own name into its separate sounds.\"\n[P68] Session close\n[P85] Regulation tail — praise smooth gliding and full (not partial) segmentation\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior blending/segmenting exposure): keep chips physically present through TA-1/TA-2, use only 2-3-sound words (CVC) before longer words. S1 (segments syllables confidently but not phonemes): dwell on TA-2's full-segmentation check, explicitly contrasting syllable-chunking against phoneme-level segmenting. S6 (frustrated by choppy blending attempts): model gliding slowly and exaggeratedly several times before asking the student to try, and explicitly normalize the letter-name-vs-sound confusion as universal at this stage. S9 (L1 has different permissible consonant clusters, e.g. no word-initial /st-/ or /-mp/ endings): expect blending/segmenting of English consonant clusters to be harder than single-phoneme words for this learner — introduce cluster words gradually after single-phoneme CVC words are secure, not simultaneously.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.blending-segmenting.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

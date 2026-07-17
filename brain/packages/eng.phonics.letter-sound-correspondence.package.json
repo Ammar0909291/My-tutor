@@ -1,0 +1,1046 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.letter-sound-correspondence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.letter-sound-correspondence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:10073dc0bd95febcc5765e2255e193dcad13b15158b5bd3a0fc6ea47aa8e24fc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md": "sha256:3e5817b66bfda0c1ec2933491042bb81bca3083747b8ed109c537182c1a329fa"
+    },
+    "assetCount": 33,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 23,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 23
+  },
+  "concept": {
+    "conceptId": "eng.phonics.letter-sound-correspondence",
+    "name": "Letter-Sound Correspondence",
+    "difficultyRaw": "1 (foundational)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonics.alphabet-recognition",
+      "eng.phonics.blending-segmenting"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.letter-sound-correspondence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.letter-sound-correspondence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md": "sha256:3e5817b66bfda0c1ec2933491042bb81bca3083747b8ed109c537182c1a329fa"
+      },
+      "contentHash": "sha256:9b4c231843b4811af2774d16be2c8911e5142a1e0e42a29b586c9fcb87dba203",
+      "ruleCount": 23,
+      "bandCounts": {
+        "3": 23
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-A01 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-B01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-B02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-B03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-B04 (addresses MC-4, MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-C01 (addresses MC-4, MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-C02 (addresses MC-4, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-C03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-C04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-C05 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-C06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-C06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-E02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.letter-sound-correspondence.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.letter-sound-correspondence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.letter-sound-correspondence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Letter-Sound Correspondence — core idea",
+      "content": "Every English word is built from sounds (phonemes) that are represented in writing by letters or letter combinations (graphemes). Letter-sound correspondence (also called grapheme-phoneme correspondence, GPC) is the mapping between what you see on the page and what you say aloud. Reading requires this mapping in one direction (print → sound); spelling requires it in the other (sound → print). English has approximately 44 phonemes represented by 26 letters, meaning the mapping is many-to-many and must be learned explicitly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 9,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Learning Objective",
+      "content": "Given a simple English word (CVC, CCVC, or word with a common digraph):\n\n(a) the student correctly identifies each grapheme in the word (individual letters and two-letter digraph units);  \n(b) the student correctly produces the phoneme mapped to each grapheme;  \n(c) the student correctly blends the phonemes to decode the word.\n\n**Accuracy threshold:** 85% (aligned with foundational literacy standards and mastery_threshold).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 39,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "— Each Grapheme Has Exactly One Fixed Phoneme",
+      "content": "### MC-1 — Each Grapheme Has Exactly One Fixed Phoneme\n\n**Observable symptom:** Student reads 'city' as /kɪti/; reads 'cycle' as /kaɪkəl/; insists 'c always says /k/.'\n\n**Diagnostic trigger:** DB-2a; TA-A04 P41.\n\n**Root cause:** Early phonics instruction often teaches single-letter sounds in isolation with a single keyword (a for apple, c for cat) without immediately teaching context-dependent variation. Students over-generalise the initial mapping.\n\n**Repair chain:** P27 (one-grapheme-one-phoneme belief) → P06 (concrete: three 'c' words) → P17 (contrast: cat/city) → P30 (context rule: what follows 'c' determines sound) → P31 → P42 (generate examples of each)\n\n**MAMR status:** Requires MC-4 cleared first. Rationale: if student is naming letters rather than producing sounds (MC-4), they cannot perceive or compare phonemes to notice context-dependent variation. MC-4 must be resolved before the student can benefit from context-sensitivity instruction.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 5,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "— Number of Letters = Number of Sounds",
+      "content": "### MC-2 — Number of Letters = Number of Sounds\n\n**Observable symptom:** Student counts 4 sounds in 'ship' (s+h+i+p); counts 3 sounds in 'cat'; treats every written character as a separate sound unit.\n\n**Diagnostic trigger:** DB-2b; TA-A03 P41.\n\n**Root cause:** Visual scanning produces one-to-one mapping from letter to sound as a default. The grapheme concept (letter GROUP = single sound) must be explicitly taught; it is not intuitive.\n\n**Repair chain:** P27 → P07 (Elkonin boxes with digraph as single box) → P28 (say /s/ and /h/ separately — does that give 'ship'?) → P30 (count sounds, not letters; a grapheme can be 1 or 2+ letters) → P31 → P32 (5 words counting sounds correctly)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "— Silent Letters Are Irrelevant and Can Be Ignored",
+      "content": "### MC-3 — Silent Letters Are Irrelevant and Can Be Ignored\n\n**Observable symptom:** Student reads 'cake' as /kæk/ (ignoring final e); reads 'knife' as /knaɪf/ (pronouncing the 'k'); ignores 'w' in 'write.'\n\n**Diagnostic trigger:** DB-2c; TA-B02 P41.\n\n**Root cause:** 'Silent' implies no function. Students interpret the term literally — if it makes no sound, it matters for nothing. The signalling function of silent letters (controlling adjacent sounds, indicating word origin) is not intuitive.\n\n**Repair chain:** P27 (silent = ignorable) → P06 (bit vs. bite: remove the e and word changes) → P17 (contrast: with/without the e) → P30 (silent letters = signalling letters; they control the vowel before them) → P31 → P32 (3 word pairs: bit/bite, cap/cape, hop/hope)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 33,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "— Reading Means Naming Letters (Names ≠ Sounds",
+      "content": "### MC-4 — Reading Means Naming Letters (Names ≠ Sounds)\n\n**Observable symptom:** Student says \"bee-ay-tee\" when asked to read 'bat'; uses alphabet names throughout decoding; \"reads\" by reciting letter names in sequence.\n\n**Diagnostic trigger:** DB-1; TA-A01 P41.\n\n**Root cause:** Alphabet instruction heavily emphasises letter names (the alphabet song, ABC books). The distinction between name and sound is never made explicit until formal phonics begins. Students assume the name IS the reading-sound.\n\n**Repair chain:** P27 (expose: reading = naming letters) → P06 (read 'bat' with names → \"bee-ay-tee\" — unrecognisable as a word) → P28 (conflict: nobody says \"bee-ay-tee\"; the word is 'bat' — names ≠ reading sounds) → P30 (reading requires sounds: /b/-/æ/-/t/ = 'bat') → P31 → P32 (5 words decoded with sounds, not names)\n\n**MAMR status:** FOUNDATIONAL for MC-1. Must be cleared before MC-1 repair. Rationale: context-sensitive phoneme variation (MC-1) requires the student to perceive different sounds for the same grapheme. A student still confusing letter names with sounds (MC-4) cannot perceive phonemic variation — they're producing names, not sounds, and cannot compare /k/ with /s/ as letter 'c' variants.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 47,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Letter Sounds vs Letter Names: Concrete",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Letter Sounds vs Letter Names: Concrete\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P17\",\"P30\",\"P34\",\"P41\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 13,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Decoding CVC Words: Concrete Sound Buttons",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Decoding CVC Words: Concrete Sound Buttons\",\"primitives\":[\"P01\",\"P06\",\"P20\",\"P34\",\"P42\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 51,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Digraphs: Two Letters, One Sound",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Digraphs: Two Letters, One Sound\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P34\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 88,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Vowels and Context: One Grapheme, Multiple Phonemes",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Vowels and Context: One Grapheme, Multiple Phonemes\",\"primitives\":[\"P01\",\"P07\",\"P15\",\"P34\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 123,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P49\",\"P50\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 157,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Digraph Recognition",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Digraph Recognition\",\"primitives\":[\"P02\",\"P07\",\"P23\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 209,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Long Vowel Patterns",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Long Vowel Patterns\",\"primitives\":[\"P01\",\"P07\",\"P20\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 235,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Context-Dependent Sounds",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Context-Dependent Sounds\",\"primitives\":[\"P01\",\"P08\",\"P17\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 261,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [
+        "MC-4",
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 287,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Misconception Surface",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Surface\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-4",
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 299,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "MC-4 Repair: Sounds vs. Names",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-4 Repair: Sounds vs. Names\",\"primitives\":[\"P01\",\"P06\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-4\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-4",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 312,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "MC-1 Repair: One Grapheme Can Map to Multiple Phonemes",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-1 Repair: One Grapheme Can Map to Multiple Phonemes\",\"primitives\":[\"P01\",\"P06\",\"P17\",\"P27\",\"P30\",\"P31\",\"P34\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 345,
+        "endLine": 378
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "MC-2 Repair: Letters ≠ Sounds",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-2 Repair: Letters ≠ Sounds\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P31\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 378,
+        "endLine": 410
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "MC-3 Repair: Silent Letters Do Work",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"MC-3 Repair: Silent Letters Do Work\",\"primitives\":[\"P01\",\"P06\",\"P17\",\"P27\",\"P30\",\"P31\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 410,
+        "endLine": 443
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-C06",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-C06\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P28\",\"P30\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 443,
+        "endLine": 455
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Safety Frame and Individual Letter Sounds",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Safety Frame and Individual Letter Sounds\",\"primitives\":[\"P01\",\"P06\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P69\",\"P70\",\"P71\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 455,
+        "endLine": 473
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Decoding with Full Scaffold",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Decoding with Full Scaffold\",\"primitives\":[\"P01\",\"P06\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P70\",\"P81\",\"P88\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 473,
+        "endLine": 491
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Digraphs with Scaffolded Confidence Build",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Digraphs with Scaffolded Confidence Build\",\"primitives\":[\"P01\",\"P07\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P64\",\"P70\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 491,
+        "endLine": 508
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 508,
+        "endLine": 520
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Sound Inventory Awareness",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Sound Inventory Awareness\",\"primitives\":[\"P01\",\"P03\",\"P04\",\"P06\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 520,
+        "endLine": 537
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Grapheme-to-Sound Mapping with Visual Scaffold",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Grapheme-to-Sound Mapping with Visual Scaffold\",\"primitives\":[\"P01\",\"P07\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P88\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 537,
+        "endLine": 564
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Decoding with L1 Contrast Points",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Decoding with L1 Contrast Points\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P34\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 564,
+        "endLine": 591
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 591,
+        "endLine": 597
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Grapheme Identification**\n\nFor each word, identify each grapheme (circle single-letter graphemes; bracket digraphs): 'ship', 'cake', 'thin', 'bed', 'phone', 'bat'.\n\nExpected:\n- ship: [sh]-i-p\n- cake: c-a-k-e (e is the silent grapheme controller)\n- thin: [th]-i-n\n- bed: b-e-d\n- phone: [ph]-o-n-e\n- bat: b-a-t\n\nTarget: 5/6 words correctly segmented into graphemes.\n\n---\n\n**AB-2 — Sound Count**\n\nHow many sounds (phonemes) in each word: 'chat', 'bike', 'ship', 'bat', 'phone', 'splash'?\n\nExpected: 3, 3, 3, 3, 3, 5. Target: 4/6.\n\n---\n\n**AB-3 — Decoding**\n\nRead these words aloud (evaluated by teacher/engine): 'sit', 'chip', 'cake', 'thin', 'mop', 'shame'.\n\nTarget: 5/6 words decoded correctly. (Accent-neutral — phoneme-correct regardless of regional accent.)\n\n---\n\n**AB-4 — Context-Dependent Sound**\n\n\"The letter 'g' can make two sounds. Read each word: 'got', 'gem', 'gap', 'giraffe'. Which words use the 'soft g' sound (/dʒ/)?\"\n\nExpected: gem, giraffe. Target: 2/2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 794,
+        "endLine": 838
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | Knows alphabet names; does not know letter sounds; cannot distinguish grapheme from phoneme | Protocol A — full CPA, 5 TAs |\n| S1 | Knows single-letter sounds; does not recognise digraphs as single units | Protocol B — digraph and pattern extension, 4 TAs |\n| S2 | Carries identified misconception (MC-1, MC-2, MC-3, and/or MC-4) | Protocol C — MAMR repair, 3–5 TAs |\n| S6 | Correct understanding; low confidence; reading anxiety | Protocol D — scaffolded practice, 4 TAs |\n| S9 | Second-language learner; L1 phoneme inventory different from English | Protocol E — explicit contrast and anchoring, 4 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 51,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Diagnostic Battery",
+      "content": "---\n\n**DB-1 — Sound Production Check**\n\nStimulus: present letter cards 'b', 'm', 's', 'a', 'f' one at a time.\n\nQuestion: \"What sound does this letter make?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"All 5 correct sounds produced: /b/, /m/, /s/, /æ/, /f/\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"3–4 correct; may confuse letter name with sound (e.g. 'a' → names the letter 'ay' not /æ/)\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Produces letter names rather than sounds; or fewer than 3 correct\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-4\" }\n\n{ stimulus: \"No response or 'I don't know what sounds mean'\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-2 → route accordingly  \nSIGNAL:PARTIAL → S1; run DB-2 for MC screen; route to Protocol B  \nSIGNAL:INCORRECT (naming letters) → MC-4 flag → Protocol C  \nSIGNAL:NO_RESPONSE → S0 → Protocol A\n\n---\n\n**DB-2 — Misconception Screen**\n\nDB-2a (MC-1): Show 'c' in 'cat' and 'c' in 'city'. \"Does the letter 'c' always make the same sound?\"  \nDB-2b (MC-2): \"How many sounds are in the word 'ship'?\" (answer: 3 — /ʃ/, /ɪ/, /p/, not 4 for the 4 letters)  \nDB-2c (MC-3): \"What does the 'e' do in the word 'cake'?\" (the silent 'e' changes the vowel from /æ/ to /eɪ/)\n\n```\nDB-2a: { stimulus: \"Yes — 'c' always says /k/\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\nDB-2a: { stimulus: \"No — /k/ in cat, /s/ in city\", signal: \"SIGNAL:CORRECT\" }\n\nDB-2b: { stimulus: \"4 sounds — counting letters\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2\" }\nDB-2b: { stimulus: \"3 sounds — /ʃ/ /ɪ/ /p/ — 'sh' is one sound\", signal: \"SIGNAL:CORRECT\" }\n\nDB-2c: { stimulus: \"Nothing — the 'e' is silent / ignore it\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-3\" }\nDB-2c: { stimulus: \"Makes the 'a' say its name / makes the vowel long\", signal: \"SIGNAL:CORRECT\" }\n```\n\nFlag all MCs; route to Protocol C for any flagged.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-4",
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 63,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "eng.phonics.letter-sound-correspondence/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "eng.phonics.letter-sound-correspondence",
+      "title": "Prerequisite Check",
+      "content": "**PRE-1 — Alphabet Recognition** (requires eng.phonics.alphabet-recognition)\n\nStimulus: show 8 random letter cards; ask student to name each letter.\n\nExpected: names all 8 correctly.\n\nSIGNAL:INCORRECT (≥2 unknown) → prerequisite gap; schedule eng.phonics.alphabet-recognition first.\n\n---\n\n**PRE-2 — Blending** (requires eng.phonics.blending-segmenting)\n\nStimulus: \"I'm going to say three sounds slowly. Blend them into a word: /s/ — /æ/ — /t/.\"\n\nExpected: \"sat\"\n\nSIGNAL:INCORRECT → prerequisite gap; schedule eng.phonics.blending-segmenting first.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.letter-sound-correspondence.md",
+        "startLine": 116,
+        "endLine": 138
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

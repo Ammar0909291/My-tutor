@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.speech-sounds-overview-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.speech-sounds-overview",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:720a234a94ade29be6da0aa6040c5d67970ef5f6fcd57763e64ffeacd35220f6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md": "sha256:28e496983dc122b6f559d8596900c8a3d36ba2dde463f49f7c90521a1f845c15"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.speech-sounds-overview",
+    "name": "Overview of Speech Sounds",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.phonemic-awareness"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.speech-sounds-overview-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.speech-sounds-overview (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md": "sha256:28e496983dc122b6f559d8596900c8a3d36ba2dde463f49f7c90521a1f845c15"
+      },
+      "contentHash": "sha256:abfa02b79b6c3579dc36a420deed5d460b659541be07edb4c0e19d1a198b8cbf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.speech-sounds-overview.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.speech-sounds-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.speech-sounds-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.speech-sounds-overview.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.speech-sounds-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.speech-sounds-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.speech-sounds-overview.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.speech-sounds-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.speech-sounds-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.speech-sounds-overview.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.speech-sounds-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.speech-sounds-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.speech-sounds-overview.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md#TA-5 (addresses MC-SOUNDS-EQUAL-LETTERS, MC-SPEECH-SOUNDS-ARE-FIXED-UNITS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.speech-sounds-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.speech-sounds-overview\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Overview of Speech Sounds — Conceptual Development Sequence",
+      "content": "**TA-1 — Sounds vs. Letters Count-Check [C]**\n\nPresent word pairs where letter-count and sound-count diverge (e.g., \"ship\": 4 letters/3 sounds; \"box\": 3 letters/4 sounds). Student counts each separately (fingers for letters, claps for sounds) and compares.\n\n**TA-2 — Feel-Your-Mouth Sound Sorting [C]**\n\nUsing the Component 3 anchor technique, sort a set of sounds by a physical feature: voiced (buzzing throat: /z/, /v/, /m/, /b/) vs. voiceless (no buzz: /s/, /f/, /p/). No terminology needed yet — just \"buzzes\" vs. \"doesn't buzz.\"\n\n**TA-3 — Same Sound, Different Spelling [C→P]**\n\nPresent sets of words that share a sound spelled differently (e.g., the /f/ sound in \"fish,\" \"phone,\" \"laugh\"). Student identifies the shared sound by listening, independent of spelling.\n\n**TA-4 — Dialect Variation Recognition [P]**\n\nPlay or model 2-3 real dialect variants of the same word (e.g., \"butter\" flap vs. plosive /t/; \"bath\" with different vowel qualities). Student identifies that both are valid English, not \"wrong\" versions.\n\n**TA-5 — Sound Inventory Estimation [P]**\n\nGuide the student to discover, by counting distinct sounds across a set of sample words, that English has more distinct speech sounds (~44 depending on dialect/analysis) than letters (26) — establishing WHY spelling and sound cannot map one-to-one, setting up later phonetics work (organs of articulation, consonant/vowel classification).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/misconception/MC-SOUNDS-EQUAL-LETTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "- **Trigger signal:** Student equates \"sound\" with \"letter\" — says a word has \"three sounds\" by counting written letters instead of spoken phonemes (e.g., counts \"sh\" in \"ship\" as two sounds because it is two letters), or says English has \"26 sounds\" (conflating alphabet size with phoneme inventory).",
+      "content": "### MC-SOUNDS-EQUAL-LETTERS\n- **Trigger signal:** Student equates \"sound\" with \"letter\" — says a word has \"three sounds\" by counting written letters instead of spoken phonemes (e.g., counts \"sh\" in \"ship\" as two sounds because it is two letters), or says English has \"26 sounds\" (conflating alphabet size with phoneme inventory).\n- **Conflict evidence [P28]:** \"Say 'ship' slowly and listen: /ʃ/-/ɪ/-/p/ — how many sound-chunks do you hear? Now look at the letters: s-h-i-p — how many letters is that? Are the numbers the same?\"\n- **Bridge text [P30]:** \"Speech sounds are things your mouth DOES — letters are marks on paper that TRY to represent those sounds, but the match is often imperfect. One sound can be spelled with two letters ('sh'), and one letter can represent different sounds in different words ('c' in 'cat' vs. 'city').\"\n- **Replacement text [P31]:** \"Always count sounds by listening, and count letters by looking — treat them as two separate counting tasks that sometimes give different answers.\"\n- **Discrimination pairs [P33]:**\n  - \"ship\" (4 letters, 3 sounds: /ʃ/-/ɪ/-/p/) vs. \"cat\" (3 letters, 3 sounds: /k/-/æ/-/t/ — here they match, which is why the confusion feels safe until it isn't).\n  - \"box\" (3 letters, 4 sounds: /b/-/ɒ/-/k/-/s/, since \"x\" represents two sounds) vs. \"fox\" (same pattern) — letters can UNDER-count sounds too.\n- **s6_path:** \"This mismatch trips up almost everyone at first, because we learn letters before we ever think carefully about sounds — we'll always check by listening first, and treat spelling as a separate, later step.\"",
+      "localKey": "MC-SOUNDS-EQUAL-LETTERS",
+      "language": "en",
+      "refs": [
+        "MC-SOUNDS-EQUAL-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/misconception/MC-SPEECH-SOUNDS-ARE-FIXED-UNITS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "- **Trigger signal:** Student assumes every speaker produces a given sound identically and rigidly, becoming confused or dismissive when a sound is described as varying by context, dialect, or speaker (e.g., \"that's wrong, that's not how you say it\" when hearing a different but valid pronunciation).",
+      "content": "### MC-SPEECH-SOUNDS-ARE-FIXED-UNITS\n- **Trigger signal:** Student assumes every speaker produces a given sound identically and rigidly, becoming confused or dismissive when a sound is described as varying by context, dialect, or speaker (e.g., \"that's wrong, that's not how you say it\" when hearing a different but valid pronunciation).\n- **Conflict evidence [P28]:** \"Say the word 'butter' the way you normally would. Now listen to someone from a different English-speaking region say it — the middle sound might be a quick 'd'-like tap instead of a hard 't'. Is one of them speaking wrong English, or are these just two real, valid ways of making a similar sound?\"\n- **Bridge text [P30]:** \"Speech sounds are not fixed, identical stamps — they vary naturally by dialect, speaking speed, and neighboring sounds, while still being recognized as 'the same sound' by listeners of that variety. Studying speech sounds means describing this real variation, not policing a single 'correct' version.\"\n- **Replacement text [P31]:** \"Describe what a sound actually is in context, rather than assuming there is only one correct way to produce every sound.\"\n- **Discrimination pairs [P33]:**\n  - \"butter\" (US flap /ɾ/) vs. \"butter\" (UK /t/) — both valid, dialect variation, not an error.\n  - A genuinely wrong sound substitution (e.g., a learner substituting /d/ for /t/ across the board due to an unrelated speech pattern) — a real deviation, distinct from dialect variation.\n- **s6_path:** \"It feels natural to assume there's one 'correct' sound for each letter or word, but real spoken English has built-in variation — we'll get comfortable describing sounds as they actually occur, not just as a single fixed rule.\"\n\n---",
+      "localKey": "MC-SPEECH-SOUNDS-ARE-FIXED-UNITS",
+      "language": "en",
+      "refs": [
+        "MC-SPEECH-SOUNDS-ARE-FIXED-UNITS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Sounds vs. Letters Count-Check",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Sounds vs. Letters Count-Check\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Feel-Your-Mouth Sound Sorting",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Feel-Your-Mouth Sound Sorting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Same Sound, Different Spelling",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Same Sound, Different Spelling\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Dialect Variation Recognition",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Dialect Variation Recognition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Sound Inventory Estimation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Sound Inventory Estimation\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-SOUNDS-EQUAL-LETTERS\",\"MC-SPEECH-SOUNDS-ARE-FIXED-UNITS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SOUNDS-EQUAL-LETTERS",
+        "MC-SPEECH-SOUNDS-ARE-FIXED-UNITS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Sound vs. letter count, novel word**\n\"How many letters in 'thing'? How many sounds?\"\n*Target:* 5 letters (t-h-i-n-g); 3 sounds (/θ/-/ɪ/-/ŋ/).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Voiced/voiceless sort**\n\"Sort these into 'buzzes' and 'doesn't buzz': /z/, /s/, /b/, /p/, /m/.\"\n*Target:* buzzes: /z/, /b/, /m/; doesn't buzz: /s/, /p/.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Same sound, different spelling, novel set**\n\"Do 'city', 'sit', and 'cent' start with the same sound?\"\n*Target:* \"city\" and \"cent\" share the /s/ sound (despite starting with \"c\"); \"sit\" also starts with /s/ — all three actually share the sound, correctly reasoned from listening despite different letters (\"c\" vs. \"s\").",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Dialect-variation judgment**\n\"Two people say 'dance' with slightly different vowel sounds. Is one of them wrong?\"\n*Target:* correctly identifies this as normal dialect variation, not an error — reasoning explicitly stated, not just a yes/no guess.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the sound/letter mismatch**\n\"In your own words: why can't we always count sounds by counting letters?\"\n*Target:* states or demonstrates that letters and sounds are two different systems — one letter can stand for a sound-cluster or vary by word, and one sound can be spelled multiple ways.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Adaptive Flags",
+      "content": "- **Terminology sequencing**: do not introduce \"phoneme,\" \"voiced,\" \"voiceless\" as vocabulary until the underlying physical distinction is already felt and sorted correctly in TA-2 — label after the concept, not before.\n- **Dialect neutrality**: this concept must never imply that one English dialect's pronunciation is \"correct\" and others are \"wrong\" — TA-4 exists specifically to build this norm early, before later phonetics work (organs of articulation, IPA) risks over-standardizing on one accent.\n- **Letter-sound conflation is the default starting misconception**: assume every learner enters with some degree of MC-SOUNDS-EQUAL-LETTERS, since literacy instruction typically taught letters before sounds — do not treat its appearance as unusual.\n- **L1 phoneme-inventory transfer caution**: for S9 learners, differences in phoneme count/mapping between L1 and English are a fact about linguistic diversity, not a deficit — frame TA-5 and dialect discussions accordingly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SOUNDS-EQUAL-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.speech-sounds-overview/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.speech-sounds-overview",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — \"zzzz vs ssss\" throat-buzz demonstration\n  ↓\n[P41] PD-1 (phoneme-segmentation readiness)\n  ↓ PASS\n[P06] Anchor: feel-your-mouth-move (voiced/voiceless contrast)\n  ↓\nTA-1: Sounds vs. letters count-check [C]\n  ↓\n[P28] Conflict: letter-counting substituted for sound-counting → MC-SOUNDS-EQUAL-LETTERS (if triggered)\n  ↓\nTA-2: Feel-your-mouth sound sorting [C]\n  ↓\nTA-3: Same sound, different spelling [C→P]\n  ↓\nTA-4: Dialect variation recognition [P]\n  ↓\n[P28] Conflict: rigid \"one correct sound\" assumption → MC-SPEECH-SOUNDS-ARE-FIXED-UNITS (if triggered)\n  ↓\nTA-5: Sound inventory estimation [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word where the letters and sounds don't match up.\"\n[P68] Session close\n[P85] Regulation tail — praise careful listening over letter-counting habits\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior phonetics vocabulary): keep all language concrete (\"buzzes\"/\"doesn't buzz\") — do not introduce \"voiced\"/\"voiceless\" terminology until TA-2 is secure. S1 (confident reader, conflates letters/sounds from literacy habit): dwell longer on TA-1's count-check contrast, since strong letter-knowledge can make the sound/letter merge harder to break. S6 (frustrated that \"spelling should just make sense\"): validate the frustration explicitly — \"English spelling really is inconsistent, that's a fact about the language, not something you're missing\" — before TA-3. S9 (L1 has a smaller or larger phoneme inventory, or fixed grapheme-phoneme mapping, e.g. Spanish/Korean): expect TA-5's estimation exercise to surprise this learner more than most; allow extra time and avoid comparing \"English has more/fewer sounds\" as better/worse, only as different.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

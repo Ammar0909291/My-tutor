@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.articulation-organs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.articulation-organs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:153e5e7d3d5010918e1d969c6f18d053db519c9c7844cd2014757064d8505493",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md": "sha256:78e1a9d97d53ddec257992f4805e88aac0f0f147117e2257f95065023c3fb512"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.articulation-organs",
+    "name": "Organs of Articulation",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonetics.speech-sounds-overview"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.articulation-organs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.articulation-organs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md": "sha256:78e1a9d97d53ddec257992f4805e88aac0f0f147117e2257f95065023c3fb512"
+      },
+      "contentHash": "sha256:085b7c270e87850869d9de0a17bea82231da7c112278cd2df971a6bfa4488c38",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.articulation-organs.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.articulation-organs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.articulation-organs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.articulation-organs.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.articulation-organs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.articulation-organs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.articulation-organs.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md#TA-3 (addresses MC-VOICED-VOICELESS-IS-VOLUME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.articulation-organs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.articulation-organs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.articulation-organs.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.articulation-organs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.articulation-organs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.articulation-organs.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md#TA-5 (addresses MC-ONLY-TONGUE-MATTERS, MC-VOICED-VOICELESS-IS-VOLUME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.articulation-organs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.articulation-organs\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.articulation-organs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Organs of Articulation — Conceptual Development Sequence",
+      "content": "**TA-1 — Articulator Identification [C]**\n\nUsing the vocal-tract diagram, student names and locates each major articulator (lips, teeth, tongue tip/back, alveolar ridge, palate, velum, vocal folds) by touching the corresponding spot on their own face/mouth.\n\n**TA-2 — Place of Articulation Sorting [C]**\n\nPresent a set of consonant sounds (/p/, /t/, /k/, /f/, /s/, /m/) and ask the student to identify which articulator(s) are the primary \"place\" for each, using the felt-sensation method from Component 3.\n\n**TA-3 — Voiced/Voiceless Throat Test [C→P]**\n\nUsing the buzz-test method, sort a list of consonant pairs that share place/manner but differ in voicing (e.g., /p/-/b/, /t/-/d/, /k/-/g/, /f/-/v/, /s/-/z/) into voiced vs. voiceless, explicitly testing at different volumes to break MC-VOICED-VOICELESS-IS-VOLUME.\n\n**TA-4 — Manner of Articulation Introduction [P]**\n\nIntroduce the idea that sounds differ not just in WHERE they're made (place) but HOW airflow is shaped (manner) — stop (complete blockage, e.g., /p/,/t/,/k/) vs. fricative (narrow channel, friction, e.g., /f/,/s/) vs. nasal (air through the nose, e.g., /m/,/n/). Student classifies 4-5 sounds by manner.\n\n**TA-5 — Full Sound Description [P]**\n\nStudent describes a given consonant sound using all three dimensions together (place + manner + voicing) — e.g., \"/b/ is a voiced bilabial stop\" (without requiring the formal labels if not yet taught, describing in plain terms is acceptable: \"made with both lips, fully blocked then released, and it buzzes\").\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/misconception/MC-ONLY-TONGUE-MATTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "- **Trigger signal:** Student attributes all speech-sound differences to \"the tongue\" alone, ignoring lips, teeth, vocal folds, and airflow (e.g., \"you just move your tongue to make different sounds\"), and cannot explain sounds like /m/ or /f/ that involve minimal tongue movement.",
+      "content": "### MC-ONLY-TONGUE-MATTERS\n- **Trigger signal:** Student attributes all speech-sound differences to \"the tongue\" alone, ignoring lips, teeth, vocal folds, and airflow (e.g., \"you just move your tongue to make different sounds\"), and cannot explain sounds like /m/ or /f/ that involve minimal tongue movement.\n- **Conflict evidence [P28]:** \"Say 'mmmm' — where is your tongue? (Resting, not doing much.) Now say 'ffff' — is your tongue doing the work, or is it your teeth and lip?\"\n- **Bridge text [P30]:** \"Speech uses a whole system of articulators working together — lips, teeth, tongue, the roof of the mouth (palate), the throat, and the vocal folds — not just the tongue. Different sounds recruit different combinations.\"\n- **Replacement text [P31]:** \"For any sound, ask which articulators are actually involved — don't assume the tongue is always the answer.\"\n- **Discrimination pairs [P33]:**\n  - \"/m/\" (lips + nasal airflow, tongue passive) vs. \"/t/\" (tongue-tip + ridge behind teeth, lips passive).\n  - \"/f/\" (lower lip + upper teeth) vs. \"/θ/\" as in \"think\" (tongue-tip + teeth) — both involve teeth, but different primary articulators.\n- **s6_path:** \"It's an easy assumption because the tongue does a lot of work in speech — but several very common sounds barely use it at all, so we'll go through each articulator's job one at a time.\"",
+      "localKey": "MC-ONLY-TONGUE-MATTERS",
+      "language": "en",
+      "refs": [
+        "MC-ONLY-TONGUE-MATTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/misconception/MC-VOICED-VOICELESS-IS-VOLUME",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "- **Trigger signal:** Student assumes \"voiced\" means louder or more forceful, and \"voiceless\" means quieter or whispered, rather than understanding voicing as vocal-fold vibration versus non-vibration, independent of loudness.",
+      "content": "### MC-VOICED-VOICELESS-IS-VOLUME\n- **Trigger signal:** Student assumes \"voiced\" means louder or more forceful, and \"voiceless\" means quieter or whispered, rather than understanding voicing as vocal-fold vibration versus non-vibration, independent of loudness.\n- **Conflict evidence [P28]:** \"Whisper 'zzzz' as quietly as you can, but keep your hand on your throat. Do you still feel any buzzing? Now say 'ssss' loudly. Does it buzz just because it's loud?\"\n- **Bridge text [P30]:** \"Voicing is about whether your vocal folds vibrate — a physical on/off switch — not about how loud or soft you say something. You can whisper a voiced sound (weak buzz) or shout a voiceless one (no buzz, however loud).\"\n- **Replacement text [P31]:** \"Check voicing with the throat/vibration test, never by loudness.\"\n- **Discrimination pairs [P33]:**\n  - Quiet \"zzzz\" (still buzzes — voiced) vs. loud \"ssss\" (never buzzes, however loud — voiceless).\n  - \"/b/\" whispered softly (weak but present buzz) vs. \"/p/\" shouted (no buzz regardless of volume).\n- **s6_path:** \"Volume and voicing feel like they should be connected, but they're actually two completely separate things — the throat-vibration check is the only reliable test.\"\n\n---",
+      "localKey": "MC-VOICED-VOICELESS-IS-VOLUME",
+      "language": "en",
+      "refs": [
+        "MC-VOICED-VOICELESS-IS-VOLUME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Articulator Identification",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Articulator Identification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Place of Articulation Sorting",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Place of Articulation Sorting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Voiced/Voiceless Throat Test",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Voiced/Voiceless Throat Test\",\"primitives\":[],\"addresses\":[\"MC-VOICED-VOICELESS-IS-VOLUME\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-VOICED-VOICELESS-IS-VOLUME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Manner of Articulation Introduction",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Manner of Articulation Introduction\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Full Sound Description",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Sound Description\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ONLY-TONGUE-MATTERS\",\"MC-VOICED-VOICELESS-IS-VOLUME\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ONLY-TONGUE-MATTERS",
+        "MC-VOICED-VOICELESS-IS-VOLUME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Articulator identification, novel sound**\n\"Say 'th' as in 'think'. Where is your tongue?\"\n*Target:* tongue-tip touching or near the upper teeth.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Voiced/voiceless discrimination, novel pair**\n\"Is 's' in 'sip' voiced or voiceless? What about the 'z' sound in 'zip'?\"\n*Target:* \"s\" voiceless (no buzz); \"z\" voiced (buzz) — correctly tested, not guessed.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Manner classification**\n\"Is '/n/' a stop, a fricative, or a nasal? How do you know?\"\n*Target:* nasal — air flows through the nose, no full oral blockage sustained as airflow output.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Volume-independent voicing check**\n\"If I whisper the letter 'b' very quietly, is it still voiced?\"\n*Target:* correctly identifies that voicing is about vocal-fold vibration, not loudness — a whispered /b/ has a weak but real voicing quality distinct from /p/ even at low volume (or, depending on framework, recognizes true whispers can suppress voicing but that loudness alone never determines the answer).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the system**\n\"In your own words: what does 'place of articulation' mean, and why isn't the tongue the only thing that matters?\"\n*Target:* explains that place refers to WHERE in the vocal tract a sound is produced, and correctly names at least two non-tongue articulators (lips, teeth, vocal folds) as relevant to different sounds.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Adaptive Flags",
+      "content": "- **Physical, not just diagrammatic**: every articulator introduced must be paired with the student physically locating it on their own face/mouth and feeling the associated sound — a diagram alone does not anchor this concept.\n- **Volume/voicing must be explicitly decoupled**: because MC-VOICED-VOICELESS-IS-VOLUME is a near-universal first assumption, the buzz-test (not a loudness test) should be modeled and repeated at multiple volumes deliberately.\n- **Terminology can lag understanding**: plain-language description (\"both lips,\" \"the air goes through your nose\") is an acceptable and often preferable intermediate step before requiring formal terms (bilabial, nasal) — do not gate mastery on vocabulary alone if the underlying physical understanding (Component 6 MP-5) is correct.\n- **L1 sound-system contrast as an asset**: for multilingual learners, deliberately invite comparison to L1 sounds where relevant (Protocol S9) — this both validates the learner's existing linguistic knowledge and deepens the place/manner/voicing framework through contrast.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-VOICED-VOICELESS-IS-VOLUME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.articulation-organs/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.articulation-organs",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — vocal-tract diagram introduced, quick touch-and-say warm-up\n  ↓\n[P41] PD-1 (sound/letter distinction readiness)\n  ↓ PASS\n[P06] Anchor: vocal-tract tour (touch each articulator while producing its sound)\n  ↓\nTA-1: Articulator identification [C]\n  ↓\n[P28] Conflict: tongue-only assumption → MC-ONLY-TONGUE-MATTERS (if triggered)\n  ↓\nTA-2: Place of articulation sorting [C]\n  ↓\nTA-3: Voiced/voiceless throat test [C→P]\n  ↓\n[P28] Conflict: voicing-as-volume assumption → MC-VOICED-VOICELESS-IS-VOLUME (if triggered)\n  ↓\nTA-4: Manner of articulation introduction [P]\n  ↓\nTA-5: Full sound description [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, pick a sound and tell me its place, manner, and voicing.\"\n[P68] Session close\n[P85] Regulation tail — praise systematic checking (touch/buzz-test) over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior phonetics vocabulary): keep the diagram simple, focus on 4-5 high-contrast sounds (/p/,/t/,/k/,/m/,/s/) before expanding. S1 (already secure on sound/letter distinction from prior concept): move briskly through TA-1/TA-2, spend more time on TA-4/TA-5's fuller descriptions. S6 (anxious about \"getting the anatomy words wrong\"): explicitly permit plain-language description over formal terms (\"both lips\" is fine before \"bilabial\") until confidence builds. S9 (L1 has sounds not present in English, e.g. uvular/pharyngeal consonants, or lacks sounds English has, e.g. /θ/,/ð/): use this as a genuine teaching asset — ask the student to describe how an L1 sound is articulated, then contrast with the target English sound's place/manner/voicing, building the skill through comparison rather than treating the L1 sound system as irrelevant.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.articulation-organs.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

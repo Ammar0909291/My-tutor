@@ -1,0 +1,997 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.phonemic-awareness-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.phonemic-awareness",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7c5a2e7148237b2985c0ccd25a35a0b82d77432c8ad4263da55139b9eb2a4d3c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md": "sha256:327615d6750d58f479abb3f0cc3c59047461e3da814ffdd389b0a693604d972b"
+    },
+    "assetCount": 32,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 22,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 22
+  },
+  "concept": {
+    "conceptId": "eng.phonics.phonemic-awareness",
+    "name": "Phonemic Awareness",
+    "difficultyRaw": "1 (foundational)",
+    "bloom": "remember",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.phonemic-awareness-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.phonemic-awareness (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md": "sha256:327615d6750d58f479abb3f0cc3c59047461e3da814ffdd389b0a693604d972b"
+      },
+      "contentHash": "sha256:a66e0be5eff53c39ce8e20ef18c6fb03961d07ec928c704417b79e971c884b37",
+      "ruleCount": 22,
+      "bandCounts": {
+        "3": 22
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-B04 (addresses MC-1, MC-2, MC-3, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-C01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-C02 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-C03 (addresses MC-3, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-C04 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-C05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.phonemic-awareness.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.phonemic-awareness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.phonemic-awareness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.phonemic-awareness/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phonemic Awareness — core idea",
+      "content": "Phonemic awareness is the ability to hear, identify, and manipulate individual phonemes — the smallest units of sound in spoken language — without reference to print. A student with phonemic awareness can say that \"cat\" contains three phonemes (/k/ /æ/ /t/), can blend /d/ /ɒ/ /g/ into \"dog\", can delete /k/ from \"cat\" to produce \"at\", and can substitute /b/ for /k/ to produce \"bat\". No letters are involved at any point. Phonemic awareness is the auditory-oral precondition for learning letter-sound correspondence (phonics).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 9,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Learning Objective",
+      "content": "Given any spoken CVC or CCVC word:\n\n(a) the student correctly isolates the initial, medial, and final phonemes;  \n(b) the student correctly counts the phonemes (distinguishing phoneme-count from syllable-count);  \n(c) the student correctly blends three or four spoken phonemes into the target word;  \n(d) the student correctly segments a spoken word into its constituent phonemes in sequence;  \n(e) the student correctly deletes a named phoneme and produces the resulting spoken word;  \n(f) the student correctly substitutes a named phoneme and produces the resulting spoken word.\n\n**Accuracy threshold:** 85% (aligned with mastery_threshold for foundational phonics).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 40,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "— Phonemes Equal Syllables",
+      "content": "### MC-1 — Phonemes Equal Syllables\n\n**Observable symptom:** Student claps or taps once per syllable beat when asked to count phonemes; says 'butter' has 2 sounds; says 'happy' has 2 sounds; cannot count more phonemes than syllables in any word.\n\n**Diagnostic trigger:** DB-2 answer = syllable count for a word where syllable-count ≠ phoneme-count; P41 in TA-A01 returns 1 tap for a CVC word.\n\n**Root cause:** Students first learn to clap syllable beats in songs and rhymes. Rhythmic syllable chunking is robust and fires automatically when any counting task involving spoken words is presented. The phoneme concept is less perceptually salient than the syllable for most early learners.\n\n**Repair chain:** TA-C01 — P02→P26→P28→P29→P30→P31→P34→P55→P49|P50→P32\n\n**MAMR status:** Foundational for MC-2. A student who cannot distinguish phonemes from syllables is counting in wrong units entirely. MC-1 must be resolved before MC-2 repair is attempted.\n\n**Resolution signal:** Student correctly counts phonemes (not syllables) in two consecutive novel words from different syllable categories.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 5,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "— Phoneme Count Equals Letter Count",
+      "content": "### MC-2 — Phoneme Count Equals Letter Count\n\n**Observable symptom:** Student reports 4 phonemes for \"ship\" (counting s-h-i-p); 5 phonemes for \"phone\" (counting p-h-o-n-e); uses letter-counting as default for any phoneme-counting task.\n\n**Diagnostic trigger:** DB-2 answer = 4 for 'fish'; TA-A02 response taxonomy 4-box response for 'ship'.\n\n**Root cause:** Students who know the alphabet apply letter-by-letter counting as a default. The concept that two or more letters can represent one phoneme requires explicit instruction; it is not intuitive from alphabet knowledge alone.\n\n**Repair chain:** TA-C02 — P02→P26→P28→P29→P30→P31→P34→P55→P49|P50→P32 (pre-condition: MC-1 resolved)\n\n**MAMR status:** Dependent on MC-1. Cannot repair before MC-1 is resolved — a student using the wrong counting unit (syllables) cannot benefit from instruction about letters vs. phonemes.\n\n**Resolution signal:** Student correctly counts phonemes (not letters) for a digraph-containing word not used during the repair TA.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "— Only Initial Phonemes Are Salient",
+      "content": "### MC-3 — Only Initial Phonemes Are Salient\n\n**Observable symptom:** Student correctly identifies the first phoneme of any word but says \"I don't know\" or repeats the whole word when asked for the medial or final phoneme.\n\n**Diagnostic trigger:** DB-1 CORRECT; DB-4 medial follow-up incorrect; P34 for medial position in TA-B01 incorrect.\n\n**Root cause:** The onset (initial consonant) is the most perceptually prominent position in English CVC words. Instructional emphasis on \"what letter does the word START with?\" creates an asymmetry where initial position is treated as the only phonemically relevant position.\n\n**Repair chain:** TA-C03 — P02→P26→P33→P16→P34→P55→P49|P50→P34→P55→P49|P50→P32\n\n**MAMR status:** Independent of MC-1 and MC-2.\n\n**Resolution signal:** Student correctly isolates medial and final phonemes in two consecutive novel CVC words.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 37,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "— Blending and Segmenting Are the Same Cognitive Skill",
+      "content": "### MC-4 — Blending and Segmenting Are the Same Cognitive Skill\n\n**Observable symptom:** Student blends successfully (DB-3 CORRECT) but cannot segment (DB-4 INCORRECT), or vice versa — and is surprised or confused when asked to reverse direction, believing both tasks are identical.\n\n**Diagnostic trigger:** DB-3 CORRECT + DB-4 INCORRECT (phoneme-to-word direction works; word-to-phoneme fails).\n\n**Root cause:** Both tasks involve phonemes and words, masking their directional difference. Blending is practised earlier and more frequently in typical instruction; segmentation is rarer and therefore not independently proceduralised.\n\n**Repair chain:** TA-C04 — P02→P26→P17→P06→P34→P55→P49|P50→P32\n\n**MAMR status:** Independent of MC-1, MC-2, and MC-3.\n\n**Resolution signal:** Student successfully segments a word they had just blended, and blends a phoneme sequence they had just identified from a segmented word.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 53,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "What Is a Phoneme? (Concrete Tapping)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What Is a Phoneme? (Concrete Tapping)\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P34\",\"P35\",\"P41\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 12,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phoneme Segmentation with Elkonin Boxes",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Phoneme Segmentation with Elkonin Boxes\",\"primitives\":[\"P02\",\"P06\",\"P34\",\"P42\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 71,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phoneme Identification and Blending",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Phoneme Identification and Blending\",\"primitives\":[\"P02\",\"P14\",\"P16\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 153,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phoneme Manipulation: Deletion and Substitution",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Phoneme Manipulation: Deletion and Substitution\",\"primitives\":[\"P02\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\",\"P59\",\"P92\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 210,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P02\",\"P55\",\"P64\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 291,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Medial Vowel Isolation",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Medial Vowel Isolation\",\"primitives\":[\"P01\",\"P16\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 403,
+        "endLine": 460
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Final Phoneme Isolation and Full Segmentation",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Final Phoneme Isolation and Full Segmentation\",\"primitives\":[\"P02\",\"P06\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 460,
+        "endLine": 518
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phoneme Manipulation: CCVC Words",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Phoneme Manipulation: CCVC Words\",\"primitives\":[\"P02\",\"P34\",\"P45\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 518,
+        "endLine": 597
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P02\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 597,
+        "endLine": 611
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "MC-1 Repair: Phonemes ≠ Syllables",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"MC-1 Repair: Phonemes ≠ Syllables\",\"primitives\":[\"P02\",\"P26\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P41\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 611,
+        "endLine": 660
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "MC-2 Repair: Phoneme Count ≠ Letter Count",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-2 Repair: Phoneme Count ≠ Letter Count\",\"primitives\":[\"P02\",\"P26\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 660,
+        "endLine": 709
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "MC-3 Repair: Medial and Final Phonemes Are Salient",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-3 Repair: Medial and Final Phonemes Are Salient\",\"primitives\":[\"P02\",\"P16\",\"P26\",\"P32\",\"P33\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 709,
+        "endLine": 774
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "MC-4 Repair: Blending and Segmenting Are Different Skills",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-4 Repair: Blending and Segmenting Are Different Skills\",\"primitives\":[\"P02\",\"P06\",\"P17\",\"P26\",\"P32\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 774,
+        "endLine": 818
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Post-Repair Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Post-Repair Mastery Gate (P91 Terminal)\",\"primitives\":[\"P02\",\"P28\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 818,
+        "endLine": 833
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Choral Tapping (Scaffolded)",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Choral Tapping (Scaffolded)\",\"primitives\":[\"P01\",\"P06\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\",\"P70\",\"P81\",\"P82\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 833,
+        "endLine": 873
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Independent Isolation with Confidence Check",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Independent Isolation with Confidence Check\",\"primitives\":[\"P02\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 873,
+        "endLine": 931
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phoneme Manipulation with Gradual Release",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Phoneme Manipulation with Gradual Release\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\",\"P68\",\"P81\",\"P82\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 931,
+        "endLine": 993
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P02\",\"P55\",\"P70\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 993,
+        "endLine": 1010
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "L1 vs L2 Phoneme Inventory Contrast",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"L1 vs L2 Phoneme Inventory Contrast\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\",\"P95\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 1010,
+        "endLine": 1050
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Minimal Pair Discrimination",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Minimal Pair Discrimination\",\"primitives\":[\"P02\",\"P17\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 1050,
+        "endLine": 1106
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Phoneme Segmentation with L1-Interference Words",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Phoneme Segmentation with L1-Interference Words\",\"primitives\":[\"P02\",\"P06\",\"P34\",\"P49\",\"P50\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 1106,
+        "endLine": 1164
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P02\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 1164,
+        "endLine": 1174
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Phoneme Segmentation**\n\n\"Segment each word into phonemes — say each sound separately in order:  \n(a) 'frog'   (b) 'chest'   (c) 'splash'\"\n\nExpected:  \n(a) /f/ /r/ /ɒ/ /g/ — 4 phonemes  \n(b) /tʃ/ /e/ /s/ /t/ — 4 phonemes  \n(c) /s/ /p/ /l/ /æ/ /ʃ/ — 5 phonemes  \n\nTarget: 2/3 words fully correct.\n\n---\n\n**AB-2 — Phoneme Blending**\n\n\"I'll say sounds one at a time. Blend them into a word:  \n(a) /w/ /ɪ/ /ʃ/   (b) /tʃ/ /ɪ/ /p/   (c) /s/ /t/ /r/ /ʌ/ /k/\"\n\nExpected: (a) 'wish'; (b) 'chip'; (c) 'struck'  \nTarget: 2/3 words correctly blended.\n\n---\n\n**AB-3 — Phoneme Manipulation**\n\n\"(a) Say 'blend' without the /l/.  \n(b) Change /f/ in 'flat' to /s/. What word?\"\n\nExpected: (a) 'bend'; (b) 'slat'  \nTarget: 2/2 correct.\n\n---\n\n**AB-4 — Phoneme Counting**\n\n\"How many phonemes in each word: (a) 'scratch'; (b) 'throne'; (c) 'ox'?\"\n\nExpected:  \n(a) /s/ /k/ /r/ /æ/ /tʃ/ = 5  \n(b) /θ/ /r/ /əʊ/ /n/ = 4  \n(c) /ɒ/ /k/ /s/ = 3  \n\nTarget: 2/3 correct.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 1431,
+        "endLine": 1482
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | Cannot isolate initial phoneme; treats words as undivided sound units | Protocol A — full phoneme skills sequence, 5 TAs |\n| S1 | Isolates initial phoneme correctly; cannot isolate medial/final; cannot segment fully | Protocol B — position extension and manipulation, 4 TAs |\n| S2 | Carries identified misconception (MC-1, MC-2, MC-3, and/or MC-4) | Protocol C — MAMR repair, 3–5 TAs |\n| S6 | Partial phoneme awareness; low confidence; refuses attempts without reassurance | Protocol D — scaffolded practice with gradual release, 4 TAs |\n| S9 | Second-language learner; L1 phoneme inventory differs; substitutes or merges phonemes | Protocol E — explicit contrast and minimal pairs, 4 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 55,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Diagnostic Battery",
+      "content": "---\n\n**DB-1 — Phoneme Isolation (Initial)**\n\nStimulus: \"Say just the very first sound in the word 'map'. Don't say the whole word — just the first sound.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"/m/ — any clear approximation of the initial phoneme\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"/m/ produced but student adds a vowel off-glide ('muh')\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Says 'em' (letter name), repeats whole word 'map', or gives syllable 'ma-'\",\n  signal: \"SIGNAL:INCORRECT\" }\n\n{ stimulus: \"No response or 'I don't know what a sound is'\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-2  \nSIGNAL:PARTIAL → candidate for S1; run DB-2  \nSIGNAL:INCORRECT → S0 → Protocol A  \nSIGNAL:NO_RESPONSE → S0 → Protocol A\n\n---\n\n**DB-2 — Phoneme Counting**\n\nStimulus: \"I'll say a word. Count how many individual sounds you hear — no letters, just sounds with your ears: 'fish'.\"\n\nExpected: 3 (/f/ /ɪ/ /ʃ/)\n\nResponse taxonomy:\n```\n{ stimulus: \"3\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"2 — two-unit split ('fi' + 'sh')\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"1 — treats the whole word as one unit (syllable confusion)\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\n\n{ stimulus: \"4 — counting letters f-i-s-h\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2\" }\n```\n\nSIGNAL:CORRECT → run DB-3  \nSIGNAL:PARTIAL → run DB-3 for segmentation check  \nSIGNAL:INCORRECT (MC-1) → Protocol C, prioritise MC-1 repair  \nSIGNAL:INCORRECT (MC-2) → Protocol C, check MC-1 first per MAMR, then MC-2\n\n---\n\n**DB-3 — Phoneme Blending**\n\nStimulus: \"I'll say sounds slowly, one at a time. Blend them into one word: /d/ … /ɒ/ … /g/.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"'dog'\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Plausible blend with one phoneme mispronounced (e.g. 'dob')\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Repeats phonemes separately without joining; or tries to spell\",\n  signal: \"SIGNAL:INCORRECT\" }\n\n{ stimulus: \"No attempt\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-4  \nSIGNAL:INCORRECT or NO_RESPONSE → S0 → Protocol A\n\n---\n\n**DB-4 — Phoneme Segmentation**\n\nStimulus: \"Now the opposite. Say the word 'pen' stretched out — say each separate sound in order.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"/p/ /e/ /n/ — in order, with brief pause between each\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Gives correct phonemes but wrong order or misses one\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Spells 'p-e-n', gives syllables, or repeats 'pen' without segmenting\",\n  signal: \"SIGNAL:INCORRECT\" }\n\n{ stimulus: \"No attempt\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → DB-4 medial follow-up (below)  \nSIGNAL:INCORRECT + DB-3 CORRECT → MISCONCEPTION:MC-4 signal → Protocol C, MC-4 repair  \nSIGNAL:NO_RESPONSE → S0 → Protocol A\n\n**DB-4 medial follow-up (S1 candidates only):**  \nStimulus: \"What is the middle sound in 'bit'?\"  \nExpected: /ɪ/  \nCorrect → S1 confirmed → Protocol B  \nIncorrect → S1 confirmed (initial phoneme only) → Protocol B\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 67,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.phonics.phonemic-awareness/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "eng.phonics.phonemic-awareness",
+      "title": "Prerequisite Check",
+      "content": "**requires: []** — Phonemic awareness is the most foundational phonics concept in this KG. No curriculum prerequisite exists.\n\n**Attentional baseline (non-curriculum):** If a student cannot attend to spoken words for ≥5 continuous seconds during DB-1, pause and address attention before beginning. This is a clinical observation, not a curriculum gate.\n\n**Note on sequencing:** This blueprint is upstream of eng.phonics.letter-sound-correspondence. A student who begins here without prior phonics instruction is in the correct place. Letter knowledge (alphabet names) is helpful but not required — this entire blueprint is oral.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.phonemic-awareness.md",
+        "startLine": 180,
+        "endLine": 190
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

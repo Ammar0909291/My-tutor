@@ -1,0 +1,389 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.alphabet-recognition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.alphabet-recognition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cc207d373412dc926471ea697227e59dc002e59bcc9b04a70f439d88419634ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md": "sha256:fd37054cb385ed8e4e28ced9911b57912cb3b31a2871894f6d5cc50db42ea364"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.alphabet-recognition",
+    "name": "Alphabet Recognition",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.print-concepts"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.alphabet-recognition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.alphabet-recognition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md": "sha256:fd37054cb385ed8e4e28ced9911b57912cb3b31a2871894f6d5cc50db42ea364"
+      },
+      "contentHash": "sha256:e65263a2cacfd328241181537461dea9679837aadf215c5cf9a83dffe443da00",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.alphabet-recognition.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.alphabet-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.alphabet-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.alphabet-recognition.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.alphabet-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.alphabet-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.alphabet-recognition.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.alphabet-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.alphabet-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.alphabet-recognition.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.alphabet-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.alphabet-recognition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.alphabet-recognition.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md#TA-5 (addresses MC-CASE-ARE-DIFFERENT-LETTERS, MC-SHAPE-CONFUSION-MIRROR-LETTERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.alphabet-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.alphabet-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.alphabet-recognition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Alphabet Recognition — Conceptual Development Sequence",
+      "content": "**TA-1 — Uppercase Naming [C]**\n\nPresent uppercase letters one at a time in randomized (non-alphabetical) order. Student names each aloud. Randomization prevents \"reciting the alphabet song\" from substituting for genuine recognition.\n\n**TA-2 — Lowercase Naming [C]**\n\nRepeat TA-1 with lowercase letters in randomized order, isolating lowercase recognition as its own skill (since many learners recognize uppercase faster).\n\n**TA-3 — Case Matching [C→P]**\n\nPresent a shuffled mixed set of uppercase and lowercase cards. Student pairs each uppercase letter with its lowercase match, naming the pair aloud (\"Big M, little m\").\n\n**TA-4 — Mirror-Letter Discrimination [P]**\n\nPresent b/d and p/q in controlled contrast (never introduce both members of a mirror pair for the first time in the same sitting — stagger initial teaching, then contrast once each is independently secure). Use the hand-shape trick from Component 1 as a standing reference, not a one-time explanation.\n\n**TA-5 — Alphabetic Sequence Recall [P]**\n\nStudent recites the alphabet in order, then identifies \"what comes before/after\" a given letter without reciting from the start (e.g., \"What letter comes right after M?\") — testing sequence knowledge independent of full recitation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 70,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/misconception/MC-CASE-ARE-DIFFERENT-LETTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "- **Trigger signal:** Student treats \"A\" and \"a\" as unrelated symbols — can name uppercase letters in sequence but fails to match the lowercase form, or insists \"that's not the same letter\" when shown both cases side by side.",
+      "content": "### MC-CASE-ARE-DIFFERENT-LETTERS\n- **Trigger signal:** Student treats \"A\" and \"a\" as unrelated symbols — can name uppercase letters in sequence but fails to match the lowercase form, or insists \"that's not the same letter\" when shown both cases side by side.\n- **Conflict evidence [P28]:** \"Here is a big 'B' and a little 'b'. Do they make the same first sound when we say the alphabet? Watch — B... b... B... b. Same name, same sound, just written two ways — like how you can write your name in big letters or small letters and it's still your name.\"\n- **Bridge text [P30]:** \"Every letter has two 'costumes' — a big (capital) one and a small (lowercase) one — but underneath the costume it is the same letter with the same name and sound.\"\n- **Replacement text [P31]:** \"Check the letter's name/sound first, then notice which costume (case) it's wearing — don't treat case as a different letter.\"\n- **Discrimination pairs [P33]:**\n  - \"B / b\" (same letter, different case) vs. \"b / d\" (different letters, similar shape — genuinely different).\n  - \"A / a\" (same letter) vs. \"A / e\" (different letters).\n- **s6_path:** \"It's easy to think capital and lowercase are separate letters because they can look so different (like 'A'/'a' vs. 'G'/'g') — we'll match them side by side until the pairs feel automatic.\"",
+      "localKey": "MC-CASE-ARE-DIFFERENT-LETTERS",
+      "language": "en",
+      "refs": [
+        "MC-CASE-ARE-DIFFERENT-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/misconception/MC-SHAPE-CONFUSION-MIRROR-LETTERS",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "- **Trigger signal:** Student confuses visually similar/mirror-image letters — most commonly \"b/d,\" \"p/q,\" or \"m/w\" — naming one for the other, especially in isolation without word context.",
+      "content": "### MC-SHAPE-CONFUSION-MIRROR-LETTERS\n- **Trigger signal:** Student confuses visually similar/mirror-image letters — most commonly \"b/d,\" \"p/q,\" or \"m/w\" — naming one for the other, especially in isolation without word context.\n- **Conflict evidence [P28]:** \"Let's check with our hands: make a fist with your left hand and stick your thumb up — that's a 'b' shape (thumb-loop on the left). Now your right hand — that's a 'd' shape (loop on the right). Look at this letter: which hand does it match?\"\n- **Bridge text [P30]:** \"'b' and 'd' are mirror images of each other — same curve and stick, just facing opposite directions. Your eyes have to check WHICH WAY the shape faces, not just what shape it is.\"\n- **Replacement text [P31]:** \"For mirror-letters, always check which direction the loop or tail points before naming the letter.\"\n- **Discrimination pairs [P33]:**\n  - \"b / d\" (mirror pair) vs. \"b / h\" (both have an ascender but are not mirror images — genuinely different shapes).\n  - \"p / q\" (mirror pair) vs. \"p / g\" (both have descenders but different shapes).\n- **s6_path:** \"Almost every beginning reader mixes up b/d and p/q at first — it is one of the most common and expected confusions, not a sign of a problem, and it usually resolves with repeated, patient practice.\"\n\n---",
+      "localKey": "MC-SHAPE-CONFUSION-MIRROR-LETTERS",
+      "language": "en",
+      "refs": [
+        "MC-SHAPE-CONFUSION-MIRROR-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Uppercase Naming",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Uppercase Naming\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 72,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Lowercase Naming",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Lowercase Naming\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Case Matching",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Case Matching\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Mirror-Letter Discrimination",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Mirror-Letter Discrimination\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Alphabetic Sequence Recall",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Alphabetic Sequence Recall\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CASE-ARE-DIFFERENT-LETTERS\",\"MC-SHAPE-CONFUSION-MIRROR-LETTERS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CASE-ARE-DIFFERENT-LETTERS",
+        "MC-SHAPE-CONFUSION-MIRROR-LETTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 88,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Uppercase naming, novel order**\n\"Name these letters: F, K, X, R, N.\" (randomized, not alphabetical)\n*Target:* correctly names all 5 without reciting the alphabet from A.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Lowercase naming, novel order**\n\"Name these letters: q, e, s, j, v.\"\n*Target:* correctly names all 5.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Case matching**\n\"Match each capital letter to its lowercase partner: H, G, W\" (lowercase set shuffled separately: w, h, g).\n*Target:* all 3 pairs matched correctly.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Mirror-letter discrimination**\n\"Which of these is 'd' and which is 'b'? [shows both, shuffled position]\"\n*Target:* correctly identifies both without reversal, using a self-check strategy if needed.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Sequence knowledge**\n\"What letter comes right after 'M' in the alphabet? What comes right before 'S'?\"\n*Target:* \"N\" and \"R\" — answered without reciting the full alphabet aloud from the start.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Adaptive Flags",
+      "content": "- **Mirror-letter confusion is developmentally normal**: b/d and p/q reversals are expected at this stage and must never be treated as a \"wrong answer\" in a way that produces shame — frame explicitly as a normal, temporary, resolvable confusion (Component 1 s6_path).\n- **Randomize presentation order**: always test letter naming out of alphabetical sequence at least once per session — reciting the alphabet song is a different (and much easier) skill than true on-sight recognition, and the two must not be conflated when judging mastery.\n- **Own-name letters as motivational anchor**: letters from the student's own name are typically the fastest-learned and make an effective, personally meaningful starting subset for S0 learners.\n- **Non-Latin-script transfer caution**: for S9 learners whose L1 does not use the Latin alphabet, do not assume any shape/sound transfer — treat every letter as newly introduced content requiring full formation practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 178,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "eng.phonics.alphabet-recognition/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.alphabet-recognition",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — spread letter cards, brief warm-up naming 2-3 known letters\n  ↓\n[P41] PD-1 (print-concept readiness)\n  ↓ PASS\n[P06] Anchor: letter hunt (physical card selection + paired naming)\n  ↓\nTA-1: Uppercase naming [C]\n  ↓\nTA-2: Lowercase naming [C]\n  ↓\nTA-3: Case matching [C→P]\n  ↓\n[P28] Conflict: case-treated-as-different-letters → MC-CASE-ARE-DIFFERENT-LETTERS (if triggered)\n  ↓\nTA-4: Mirror-letter discrimination [P]\n  ↓\n[P28] Conflict: b/d, p/q reversal → MC-SHAPE-CONFUSION-MIRROR-LETTERS (if triggered)\n  ↓\nTA-5: Alphabetic sequence recall [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find 3 letters from your own name and tell me their names.\"\n[P68] Session close\n[P85] Regulation tail — praise careful checking, especially on mirror letters\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 90%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no letter knowledge yet): dwell heavily on TA-1/TA-2 with high-frequency letters (from the student's own name) before full-set work. S1 (knows some letters, inconsistent): compress TA-1/TA-2, focus session time on TA-3/TA-4. S6 (frustrated by repeated b/d reversals): explicitly normalize the confusion up front — \"almost every young reader mixes these up, it's not a mistake, it just needs more practice\" — before TA-4 begins, and slow the pace. S9 (L1 uses a non-Latin script or different letter-case system): treat the entire Latin alphabet as novel content, not \"the same letters transliterated\" — extra repetition on shape formation, no assumption of transfer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md",
+        "startLine": 140,
+        "endLine": 178
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

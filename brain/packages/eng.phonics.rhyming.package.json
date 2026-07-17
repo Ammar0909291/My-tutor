@@ -1,0 +1,323 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.rhyming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.rhyming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:75350d302b2230265fdb5a2971f017ef97dce7206f492354f1fe8003d63f4b54",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.rhyming.md": "sha256:ed288c2e9bba78a57a1a286aeb3f92d3316da2cf63bf5514b77ca7d94ccf0437"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "eng.phonics.rhyming",
+    "name": "Rhyming",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.phonics.phonemic-awareness"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.rhyming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.rhyming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.rhyming.md": "sha256:ed288c2e9bba78a57a1a286aeb3f92d3316da2cf63bf5514b77ca7d94ccf0437"
+      },
+      "contentHash": "sha256:df932357d529e2bcf3945e6b17966e2a57a61c57b06556676ae2783793b1834f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.rhyming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.rhyming.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.rhyming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.rhyming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.rhyming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.rhyming.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.rhyming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.rhyming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.rhyming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.rhyming.md#TA-3 (addresses MC-SPELLING-MUST-MATCH, MC-FIRST-SOUND-IS-ENOUGH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.rhyming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.rhyming\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.rhyming/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "Rhyming — Conceptual Development Sequence",
+      "content": "**TA-1 — Odd-One-Out by Ear [C]**\n\nPresent sets of three spoken words where two rhyme and one does not (e.g., \"log, dog, cup\"). Student identifies the odd one out by listening only — no print shown. Repeat with 4–5 sets, alternating which position (first, second, third) holds the odd word out, so position is never a shortcut.\n\n**TA-2 — Rhyme Pair Generation [C→P]**\n\nGive the student one word (e.g., \"bee\"). Ask them to generate as many rhyming words as they can (real words or invented nonsense words are both acceptable at this stage — \"zee,\" \"flee,\" \"gree\" all count if the ending sound matches). Confirm each by having the student say the pair aloud and check the ending.\n\n**TA-3 — Rhyme vs. Alliteration Contrast [P]**\n\nPresent pairs and ask the student to sort them into \"rhymes\" (same ending) vs. \"starts the same\" (alliteration, different ending) vs. \"neither.\" Example set: \"sun/fun\" (rhyme), \"sun/sit\" (alliteration), \"sun/dog\" (neither).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 70,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/misconception/MC-SPELLING-MUST-MATCH",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "- **Trigger signal:** Student rejects a true rhyme pair because the spellings differ (\"'bear' and 'chair' can't rhyme — they don't even have the same letters at the end\"), or accepts a false rhyme because the spellings look alike (\"'love' and 'move' rhyme because they both end in 'ove'\").",
+      "content": "### MC-SPELLING-MUST-MATCH\n- **Trigger signal:** Student rejects a true rhyme pair because the spellings differ (\"'bear' and 'chair' can't rhyme — they don't even have the same letters at the end\"), or accepts a false rhyme because the spellings look alike (\"'love' and 'move' rhyme because they both end in 'ove'\").\n- **Conflict evidence [P28]:** \"Say 'bear' out loud. Say 'chair' out loud. Do they sound the same at the end, even though 'bear' ends in 'ear' and 'chair' ends in 'air'? Now say 'love' and 'move' out loud — do those actually sound the same at the end, even though they're both spelled '-ove'?\"\n- **Bridge text [P30]:** \"Rhyming is about what you HEAR, not what you SEE written down. Two words rhyme when their ending sounds match, no matter how the letters are arranged.\"\n- **Replacement text [P31]:** \"Judge a rhyme with your ears, not your eyes — say both words aloud and listen to the last sound-chunk.\"\n- **Discrimination pairs [P33]:**\n  - \"bear / chair\" (different spelling, same ending sound — true rhyme) vs. \"love / move\" (same spelling pattern, different ending sound — false rhyme).\n  - \"night / kite\" (different spelling, rhymes) vs. \"bomb / comb\" (similar spelling, does NOT rhyme in most dialects).\n- **s6_path:** \"This is a really sneaky one because English spelling doesn't always match its sounds — even good readers get tricked by 'love/move'. Let's just always close our eyes and listen instead of picturing the letters.\"",
+      "localKey": "MC-SPELLING-MUST-MATCH",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-MUST-MATCH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/misconception/MC-FIRST-SOUND-IS-ENOUGH",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "- **Trigger signal:** Student pairs words that share a beginning sound instead of an ending sound when asked for rhymes (e.g., pairs \"sun\" with \"sit\" instead of \"sun\" with \"fun\"), confusing rhyming with alliteration.",
+      "content": "### MC-FIRST-SOUND-IS-ENOUGH\n- **Trigger signal:** Student pairs words that share a beginning sound instead of an ending sound when asked for rhymes (e.g., pairs \"sun\" with \"sit\" instead of \"sun\" with \"fun\"), confusing rhyming with alliteration.\n- **Conflict evidence [P28]:** \"You said 'sun' and 'sit' go together. Let's check the very END of each word: sun ends in '-un'. Sit ends in '-it'. Are those endings the same? Now try 'sun' and 'fun' — check the ends: '-un' and '-un'. Same or different?\"\n- **Bridge text [P30]:** \"Rhyming words match at the END, not the beginning. Words that match at the beginning (like 'sun' and 'sit') have a different name — alliteration — but that is not rhyming.\"\n- **Replacement text [P31]:** \"To check a rhyme, always compare the LAST chunk of sound in each word, ignoring how the word starts.\"\n- **Discrimination pairs [P33]:**\n  - \"sun / fun\" (end-matching, true rhyme) vs. \"sun / sit\" (start-matching only, not a rhyme).\n  - \"cat / hat\" (end-matching) vs. \"cat / cup\" (start-matching only).\n- **s6_path:** \"Lots of children mix these up at first because both feel like 'they go together somehow' — we'll practise checking the end every single time until it's automatic.\"\n\n---",
+      "localKey": "MC-FIRST-SOUND-IS-ENOUGH",
+      "language": "en",
+      "refs": [
+        "MC-FIRST-SOUND-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "Odd-One-Out by Ear",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Odd-One-Out by Ear\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 72,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "Rhyme Pair Generation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Rhyme Pair Generation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "Rhyme vs. Alliteration Contrast",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Rhyme vs. Alliteration Contrast\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-FIRST-SOUND-IS-ENOUGH\",\"MC-SPELLING-MUST-MATCH\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-MUST-MATCH",
+        "MC-FIRST-SOUND-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 80,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Odd one out, novel set**\n\"Listen: 'top, hop, run.' Which does not rhyme?\"\n*Target:* \"run\" — \"top\" and \"hop\" share /-ɒp/.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Generate multiple rhymes**\n\"Give me three different words that rhyme with 'light.'\"\n*Target:* three valid rhymes (e.g., \"night,\" \"kite,\" \"sight,\" or nonsense words ending in /-aɪt/), demonstrating the rule generalises beyond one example.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Spelling-sound conflict**\n\"Someone says 'said' and 'maid' rhyme because they're both spelled with 'ai' or similar-looking endings. Are they right? Check by saying them aloud.\"\n*Target:* correctly identifies that they do NOT rhyme (different vowel sounds despite superficially similar spelling), reasoning from sound alone.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Rhyme vs. alliteration discrimination**\n\"Do 'ball' and 'bell' rhyme, or do they just start the same?\"\n*Target:* correctly identifies this as alliteration (same start /b/), not rhyme (different endings /-ɔːl/ vs. /-ɛl/).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the rule**\n\"In your own words: how do you check if two words rhyme?\"\n*Target:* states or demonstrates \"listen to (or say) the ending sound of each word and compare them,\" without reference to spelling.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "Adaptive Flags",
+      "content": "- **Nonsense words are valid**: rhyme generation (TA-2) explicitly accepts invented words as long as the ending sound matches — this is standard practice in phonological-awareness assessment and must not be marked wrong.\n- **English spelling is not phonemically reliable**: this concept is one of the clearest places where spelling actively misleads (love/move, bear/chair) — always require the student to say words aloud before judging, never allow a visual-only judgement to stand uncorrected.\n- **Distinguish from alliteration explicitly**: TA-3 exists specifically because rhyme/alliteration confusion (MC-FIRST-SOUND-IS-ENOUGH) is extremely common and will resurface in later phonics and poetry work if not resolved here.\n- **Dialect variation**: some rhyme judgements are dialect-dependent (e.g., \"again/pen\" rhymes in some English varieties but not others). Accept the student's own dialect as authoritative for their pronunciation; do not mark a dialect-consistent rhyme judgement as wrong.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FIRST-SOUND-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 166,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.phonics.rhyming/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.rhyming",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — say three words aloud, ask which two \"sound the same\" at the end\n  ↓\n[P41] PD-1 (phonemic segmentation readiness)\n  ↓ PASS\n[P06] Anchor: odd-one-out ending-match game (spoken, then picture cards)\n  ↓\nTA-1: Odd-one-out by ear [C]\n  ↓\nTA-2: Rhyme pair generation [C→P]\n  ↓\n[P28] Conflict: spelling-based judgement → MC-SPELLING-MUST-MATCH (if triggered)\n  ↓\nTA-3: Rhyme vs. alliteration contrast [P]\n  ↓\n[P28] Conflict: start-matching confusion → MC-FIRST-SOUND-IS-ENOUGH (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3 (escalating: identify → generate → resist spelling trap)\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one rhyme for your own name (or a nonsense rhyme if it has no real one).\"\n[P68] Session close\n[P85] Regulation tail — praise listening carefully, not \"getting it right\"\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior rhyming exposure): dwell on TA-1 with concrete picture cards before moving to generation. S1 (recognises rhymes but cannot generate them): compress TA-1, emphasise TA-2. S6 (anxious, self-conscious about \"wrong\" nonsense-word answers): explicitly authorise nonsense words up front — \"made-up words count, as long as the ending sound matches\" — before TA-2 begins. S9 (L1 has different vowel inventory, e.g. no /æ/–/ɛ/ distinction): expect MP-3-style false rhymes rooted in L1 sound mergers, not just English spelling — verify by ear with extra repetitions, not just spelling contrast.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.rhyming.md",
+        "startLine": 132,
+        "endLine": 166
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
