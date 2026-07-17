@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.etymology-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.etymology",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f7c99da87df917150ec718f74970def64b1afe3317c9c629e34692ccd6f49168",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.etymology.md": "sha256:931e236602ae13492afaab3c4a7e9ed80a718ee294dacf3f63ee260e532316ea"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.etymology",
+    "name": "Etymology",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.vocab.roots-and-origins"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.etymology-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.etymology (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.etymology.md": "sha256:931e236602ae13492afaab3c4a7e9ed80a718ee294dacf3f63ee260e532316ea"
+      },
+      "contentHash": "sha256:d33a522d7aed68986581e59834f3f9aabf2228e45eea5a81d54e82c9e35e45f8",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.etymology.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.etymology.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.etymology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.etymology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.etymology.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.etymology.md#TA-2 (addresses MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.etymology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.etymology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.etymology.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.etymology.md#TA-3 (addresses MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.etymology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.etymology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.etymology.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.etymology.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.etymology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.etymology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.etymology.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.etymology.md#TA-5 (addresses MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY, MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.etymology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.etymology\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.etymology/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Etymology — Conceptual Development Sequence",
+      "content": "### TA-1: Tracing a Simple Word History\nPresent 3 words with well-documented straightforward etymologies (e.g., \"salary\" from Latin \"salarium,\" originally payment for salt) and have the student trace the word's journey from origin to current meaning using the river-journey diagram structure.\n\n### TA-2: Meaning Drift Over Time\nUsing the discrimination pairs from MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY, present word pairs showing dramatic semantic drift (\"nice\": ignorant→pleasant; \"awful\": full of awe/inspiring awe→terrible; \"silly\": blessed/happy→foolish) and have the student confirm the CURRENT meaning is what matters for communication today, while the drift itself is a historically interesting fact.\n\n### TA-3: Borrowing and Multi-Language Journeys\nUsing the discrimination pairs from MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING, present 3 words with documented multi-language borrowing paths (restaurant: Latin→French→English; algebra: Arabic→Latin→English; tea: Chinese (Min Nan \"te\")→Dutch→English) and have the student trace each full path, confirming English vocabulary is substantially built from cross-language contact.\n\n### TA-4: Using Etymology as a Meaning Clue (With Appropriate Caution)\nReinforce the productive use of etymology (as a starting-point clue for unfamiliar words, echoing `eng.vocab.roots-and-origins`) while explicitly flagging when NOT to over-rely on it (when current usage has drifted significantly, per TA-2). Student practices using etymology as a helpful-but-checked tool on 3 new words.\n\n### TA-5: Researching an Original Word History\nStudent selects one word of personal interest and researches (using provided reference material) its etymology, tracing its origin language(s), any borrowing path, and any meaning drift from origin to current usage — presenting a brief original etymology summary — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.etymology",
+      "title": ": Simple Word History Trace (Scaffolded)",
+      "content": "### WE-1: Simple Word History Trace (Scaffolded)\n**Word:** \"salary\" — from Latin \"salarium\" (payment enabling Roman soldiers to buy salt) → Old French \"salaire\" → Middle English \"salarie\" → Modern English \"salary\" (regular payment for work, no connection to salt in current meaning).\n**Walkthrough:** Trace the river path, noting the meaning has narrowed from \"salt-payment\" specifically to \"any regular pay,\" while confirming the modern meaning, not the salt-origin, is what \"salary\" actually means today.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.etymology",
+      "title": ": Meaning Drift Confirmation (Guided)",
+      "content": "### WE-2: Meaning Drift Confirmation (Guided)\n**Word:** \"awful\" — originally \"awe-full,\" meaning inspiring awe/wonder (a positive or reverent sense, as in \"an awful and majestic mountain\") → today means \"terrible, very bad.\"\n**Walkthrough:** Confirm that using \"awful\" to mean \"inspiring reverent awe\" today would be misunderstood by virtually all modern speakers — the drifted, current negative meaning is the real, functioning meaning of the word now, not a corruption of some \"truer\" original sense.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.etymology",
+      "title": ": Multi-Language Borrowing Trace (Independent)",
+      "content": "### WE-3: Multi-Language Borrowing Trace (Independent)\n**Word:** \"algebra\" — from Arabic \"al-jabr\" (meaning \"the reunion of broken parts,\" from a mathematical treatise title) → borrowed into Medieval Latin → entered English via Latin/Italian mathematical texts.\n**Walkthrough:** Student traces the full path (Arabic → Latin → English), identifying this as a genuine multi-language borrowing journey, not a single-origin word, and notes how the mathematical meaning was preserved even as the word crossed three language communities.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/misconception/MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.etymology",
+      "title": "- **Trigger signal:** Student treats a word's historical/etymological meaning as the \"real\" or authoritative meaning that should override its actual current usage — insisting, for example, that \"decimate\" must only ever mean \"to kill exactly one in ten\" (its Latin military origin) and that using it to mean \"to destroy a large part of\" is simply wrong, rather than recognizing that word meanings legitimately change over centuries and current usage is what a word actually means today.",
+      "content": "### MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY\n- **Trigger signal:** Student treats a word's historical/etymological meaning as the \"real\" or authoritative meaning that should override its actual current usage — insisting, for example, that \"decimate\" must only ever mean \"to kill exactly one in ten\" (its Latin military origin) and that using it to mean \"to destroy a large part of\" is simply wrong, rather than recognizing that word meanings legitimately change over centuries and current usage is what a word actually means today.\n- **Conflict evidence [P28]:** Present \"nice\" (from Latin \"nescius,\" meaning \"ignorant\" — its original English sense in the 1300s was closer to \"foolish\" or \"silly\") and ask the student what \"nice\" means today. Confirm no living English speaker uses \"nice\" to mean \"ignorant,\" and that insisting on the etymological meaning would make the student impossible to understand in ordinary conversation.\n- **Bridge text [P30]:** \"A word's history explains WHERE it came from and is fascinating to trace, but it doesn't get a vote on what the word means today. Language changes constantly — 'nice' has drifted enormously from 'ignorant' to its modern warm, pleasant sense, and that drifted modern meaning is the real, correct meaning now. Etymology is a history lesson, not a rulebook for current usage.\"\n- **Replacement text [P31]:** \"Enjoy etymology as the story of how a word got here — but when you need to know what a word actually means today, check current usage and dictionaries, not the historical origin. The oldest meaning is rarely the 'true' one; it's just the first stop on a long journey.\"\n- **Discrimination pairs [P33]:** (a) Etymological-meaning-as-authority (a word's original historical meaning is its true, correct meaning, and current usage that differs is an error) vs. (b) Etymology-as-history-not-authority (a word's history explains its origin and is intrinsically interesting, but current usage — however much it has drifted — is what the word actually means today).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-present the Concrete Anchor's river-journey framing before continuing to TA-2.",
+      "localKey": "MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY",
+      "language": "en",
+      "refs": [
+        "MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/misconception/MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.etymology",
+      "title": "- **Trigger signal:** Student assumes every English word traces back cleanly to one single ancestor language (usually defaulting to \"it's just Old English\" or \"it's just Latin\") and resists the idea that English has extensively borrowed and blended vocabulary from many languages throughout its history, sometimes even within a single word's journey (a Latin root arriving in English via French, for instance, rather than directly).",
+      "content": "### MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING\n- **Trigger signal:** Student assumes every English word traces back cleanly to one single ancestor language (usually defaulting to \"it's just Old English\" or \"it's just Latin\") and resists the idea that English has extensively borrowed and blended vocabulary from many languages throughout its history, sometimes even within a single word's journey (a Latin root arriving in English via French, for instance, rather than directly).\n- **Conflict evidence [P28]:** Present \"restaurant\" (borrowed directly from French, itself from a French verb meaning \"to restore,\" referring originally to a restorative broth/soup) and \"khaki\" (borrowed from Urdu/Hindi, meaning \"dust-colored,\" entering English through British colonial contact in India) side by side with \"house\" (a native Old English word with no borrowing at all). Ask the student whether all three words \"just come from English\" the same way.\n- **Bridge text [P30]:** \"English is famous for being a huge borrower — over the centuries it has taken in enormous numbers of words from French, Latin, Greek, and dozens of other languages through trade, conquest, and contact, sometimes with a word passing through two or three languages before landing in English. Not every word has a single simple origin story; many have a genuinely international journey.\"\n- **Replacement text [P31]:** \"Don't assume a word's origin is simple or single-language just because it's used in English now. Check its actual documented history — many English words were borrowed from French, Latin, Greek, or other languages, and some passed through multiple languages before arriving in English.\"\n- **Discrimination pairs [P33]:** (a) Single-origin assumption (every English word has one simple, direct ancestor language) vs. (b) Borrowing-and-contact recognition (English vocabulary is substantially built from historical borrowing across many languages, sometimes via multi-step paths through more than one intermediate language).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's world-map borrowing trail before continuing to TA-3.",
+      "localKey": "MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Tracing a Simple Word History",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Tracing a Simple Word History\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Meaning Drift Over Time",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Meaning Drift Over Time\",\"primitives\":[],\"addresses\":[\"MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Borrowing and Multi-Language Journeys",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Borrowing and Multi-Language Journeys\",\"primitives\":[],\"addresses\":[\"MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Using Etymology as a Meaning Clue (With Appropriate Caution)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using Etymology as a Meaning Clue (With Appropriate Caution)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Researching an Original Word History",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Researching an Original Word History\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY\",\"MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY",
+        "MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.etymology",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Confirm current meaning over historical origin**\nGiven a word with dramatic historical meaning drift, student states the correct current meaning and explains why the etymological origin doesn't override modern usage. *(Directly targets MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.etymology",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Trace a multi-language borrowing path**\nGiven a word with a documented multi-language origin, student correctly traces the full borrowing path across all language stages, rejecting a single-origin oversimplification. *(Directly targets MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.etymology",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Simple word history trace**\nGiven a word with a straightforward etymology, student traces its origin-to-current-meaning journey correctly.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.etymology",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Etymology as a cautious meaning clue**\nGiven an unfamiliar word, student uses its etymology as an initial clue to guess meaning, then confirms or adjusts the guess against how the word is actually used in a sentence.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.etymology",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original etymology research**\nStudent researches and presents the etymology of one self-selected word, including origin language(s), any borrowing path, and any documented meaning drift.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Adaptive Flags",
+      "content": "- If the student insists an etymological meaning is more \"correct\" than current usage, weight remediation toward MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY's bridge text and re-run TA-2's meaning-drift examples before returning to independent research.\n- If the student oversimplifies a word's origin to a single language, weight remediation toward MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING's bridge text and TA-3's multi-language borrowing-path practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.vocab.semantic-fields`, `eng.linguistics.historical-linguistics-intro`) — do not certify mastery without TA-5/MP-5's original research task, since both downstream concepts assume the student can independently investigate and present a word's history rather than only recognizing pre-taught examples.\n- Reuse the \"word river journey\" framing explicitly when introducing `eng.linguistics.historical-linguistics-intro` — that concept formalizes the same origin-tracing and language-contact concepts using proper historical-linguistic methodology and terminology.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY",
+        "MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.vocab.etymology/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.etymology",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Roots-and-Origins Readiness Check]\n        |\n        v\n[Concrete Anchor: The Word River Journey]\n        |\n        v\n[TA-1: Tracing a Simple Word History]\n        |\n        v\n[TA-2: Meaning Drift Over Time]\n        |\n        v\n[TA-3: Borrowing and Multi-Language Journeys]\n        |\n        v\n[TA-4: Etymology as a Meaning Clue, With Caution]\n        |\n        v\n[TA-5: Researching an Original Word History]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — etymology extends root identification into full historical tracing, so a student weak in root recognition will struggle to follow a word's journey across languages and time. During instruction (S1), watch for both misconception patterns: treating historical origin as authoritative over current meaning (MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY) and assuming every word has one simple single-language origin (MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING) both stem from an oversimplified view of language history — redirect both to the Word River Journey anchor's river-mouth-matters and multi-tributary framing. If the student insists on an outdated etymological meaning during TA-2 (S6), drop back to the Concrete Anchor's river-mouth demonstration before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who can trace simple straightforward histories (MP-3) but insists on etymological \"correctness\" or oversimplifies borrowing paths has not learned the core historical-linguistic judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.etymology.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

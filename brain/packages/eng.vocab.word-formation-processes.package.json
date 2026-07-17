@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.word-formation-processes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.word-formation-processes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:17f70f0f086b6ec512574423091f2056df493ebf9763eedb644f07cc5d5733c8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md": "sha256:b5c137d919c6b3a51c6352c7ec1fa3e1d39b90fef85c10f6574957e28e10b4de"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.word-formation-processes",
+    "name": "Word Formation Processes",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.vocab.roots-and-origins",
+      "eng.vocab.compound-words"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.word-formation-processes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.word-formation-processes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md": "sha256:b5c137d919c6b3a51c6352c7ec1fa3e1d39b90fef85c10f6574957e28e10b4de"
+      },
+      "contentHash": "sha256:6a38394e5da720522728b16eebd10a809957ff6acb6be7a405eeffbf082bcddf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.word-formation-processes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md#TA-1 (addresses MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.word-formation-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.word-formation-processes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.word-formation-processes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.word-formation-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.word-formation-processes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.word-formation-processes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md#TA-3 (addresses MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.word-formation-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.word-formation-processes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.word-formation-processes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.word-formation-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.word-formation-processes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.word-formation-processes.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md#TA-5 (addresses MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY, MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.word-formation-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.word-formation-processes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.word-formation-processes/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Word Formation Processes — Conceptual Development Sequence",
+      "content": "### TA-1: The Five-Process Sort\nPresent 10 words (2 per process) and have the student sort each into its correct \"factory\" (derivation, compounding, conversion, blending, clipping), explaining what specifically happened to the word's form in each case. Directly counters MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY.\n\n### TA-2: Derivation and Compounding Deep Dive\nReview and extend: derivation changes word class via affixes (act→action, happy→happiness); compounding joins two whole existing words, sometimes with a space, hyphen, or no space at all (tooth+brush, well-known, notebook). Student practices identifying the base words/affixes in each.\n\n### TA-3: Conversion — The Zero-Change Process\nUsing the discrimination pairs from MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE, present 4 conversion examples (google→to google, text→to text, up (preposition)→to up (verb, \"to up the ante\"), a good→the good) and have the student confirm zero spelling/pronunciation change while the part of speech shifts. Directly counters MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE.\n\n### TA-4: Blending and Clipping — Where Material Is Lost\nTeach blending (parts of two words fused, material dropped from both: smog=smoke+fog, brunch=breakfast+lunch) and clipping (one word shortened without adding/combining anything: gym from gymnasium, phone from telephone). Student practices identifying which original word(s) contributed to each blend/clip and what material was lost.\n\n### TA-5: Identifying the Process in Novel Words\nPresent 5 unfamiliar or recently-coined words (e.g., \"webinar\" — blend of web+seminar; \"selfie\" — clipping+derivation of self+ie; \"friend\" used as a verb, \"to friend someone\" — conversion; \"smartwatch\" — compounding; \"unfriend\" — derivation) and have the student identify the primary word-formation process for each, justifying the choice — the generative/analytical capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": ": Five-Process Identification (Scaffolded)",
+      "content": "### WE-1: Five-Process Identification (Scaffolded)\n**Words:** \"kindness\" (derivation: kind + -ness) / \"notebook\" (compounding: note + book) / \"to text\" (conversion: noun \"text\" used as verb, zero form change) / \"smog\" (blending: smoke + fog, material lost from both) / \"ad\" (clipping: shortened from \"advertisement\")\n**Walkthrough:** For each, name the process and explain what happened to the word's form — affix added, two words joined, zero change with job shift, parts fused with loss, or simple shortening.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": ": Conversion Zero-Change Verification (Guided)",
+      "content": "### WE-2: Conversion Zero-Change Verification (Guided)\n**Pair:** \"The email arrived this morning\" (noun) / \"Please email me the file\" (verb).\n**Walkthrough:** Spell and pronounce both instances of \"email\" side by side — confirm they are 100% identical in form. The only difference is grammatical role (subject/object noun vs. action verb). This confirms conversion, not some other hidden process.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": ": Novel Word Analysis (Independent)",
+      "content": "### WE-3: Novel Word Analysis (Independent)\n**Words:** \"podcast\" (blend of iPod + broadcast) / \"to google\" (conversion, brand name noun → search verb) / \"sunscreen\" (compounding: sun + screen) / \"app\" (clipping from \"application\").\n**Walkthrough:** Student identifies each process independently, explaining the specific form-change evidence (material lost for blend, zero change for conversion, two whole words joined for compound, shortening for clipping).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/misconception/MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "- **Trigger signal:** Student treats \"how new words are made\" as one single, generic process (usually defaulting to \"combining word parts,\" modeled on prefix/suffix/root work) and fails to recognize that English actually uses several structurally different processes — derivation, compounding, conversion, blending, and clipping — each producing new words in a distinct way.",
+      "content": "### MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY\n- **Trigger signal:** Student treats \"how new words are made\" as one single, generic process (usually defaulting to \"combining word parts,\" modeled on prefix/suffix/root work) and fails to recognize that English actually uses several structurally different processes — derivation, compounding, conversion, blending, and clipping — each producing new words in a distinct way.\n- **Conflict evidence [P28]:** Present four new-word examples side by side: \"happiness\" (derivation: happy + -ness, adding an affix to change word class), \"toothbrush\" (compounding: tooth + brush, combining two whole existing words), \"email\" used as a verb, \"to email someone\" (conversion: no parts added or combined at all — the same word simply shifts word class), and \"brunch\" (blending: breakfast + lunch, parts of two words fused, with material actually dropped from both). Ask the student whether all four were made \"the same way.\"\n- **Bridge text [P30]:** \"New words don't all get made the same way — English has several distinct tools for creating them. Some add a piece (derivation), some join two whole words (compounding), some don't add anything at all and just shift a word's job (conversion), and some smash pieces of two words together, losing material from both (blending). Recognizing which tool was used tells you something different about the word each time.\"\n- **Replacement text [P31]:** \"Before assuming a new word was formed by 'combining parts,' check what actually happened: was an affix added (derivation)? Were two whole words joined (compounding)? Did the same word just change job with no parts added (conversion)? Were pieces of two words fused with material lost (blending)? Was a word simply shortened (clipping)?\"\n- **Discrimination pairs [P33]:** (a) Single-process assumption (all new words are formed by the same generic \"combining\" process) vs. (b) Five-process discrimination (derivation, compounding, conversion, blending, and clipping are structurally distinct processes, each identifiable by what actually happened to the word's form).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's five-process sort before continuing.",
+      "localKey": "MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY",
+      "language": "en",
+      "refs": [
+        "MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/misconception/MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "- **Trigger signal:** Student, after learning that derivation and compounding both physically add/combine material, assumes conversion (a noun becoming a verb, or vice versa, with zero change to the word's form — e.g., \"email\" the noun becoming \"to email\" the verb) must secretly involve some invisible change too, and searches for a hidden affix or spelling difference that isn't actually there.",
+      "content": "### MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE\n- **Trigger signal:** Student, after learning that derivation and compounding both physically add/combine material, assumes conversion (a noun becoming a verb, or vice versa, with zero change to the word's form — e.g., \"email\" the noun becoming \"to email\" the verb) must secretly involve some invisible change too, and searches for a hidden affix or spelling difference that isn't actually there.\n- **Conflict evidence [P28]:** Present \"google\" (noun, the company/search engine) becoming \"to google something\" (verb, to search for something) and ask the student to spell both forms. Confirm there is genuinely zero spelling or pronunciation difference — the entire word is identical in both uses; only its grammatical job in the sentence changed.\n- **Bridge text [P30]:** \"It feels like there should be some hidden change, since derivation and compounding always show a visible change to the word's form — but conversion is specifically the one process where NOTHING changes in the word itself. The word looks and sounds completely identical; the only thing that changes is which part of speech it's acting as in a given sentence.\"\n- **Replacement text [P31]:** \"When you suspect conversion, check the spelling and pronunciation of both word forms side by side. If they're truly identical and only the grammatical role changed (noun used as a verb, or verb used as a noun, etc.), that's conversion — don't go looking for a hidden change that isn't there.\"\n- **Discrimination pairs [P33]:** (a) Hidden-change assumption (every word-formation process must leave some visible trace on the word's form) vs. (b) True zero-change recognition (conversion is defined precisely by the ABSENCE of any change to spelling or pronunciation — only the grammatical function shifts).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's conversion-mirror demonstration before continuing to TA-3.",
+      "localKey": "MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE",
+      "language": "en",
+      "refs": [
+        "MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "The Five-Process Sort",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Five-Process Sort\",\"primitives\":[],\"addresses\":[\"MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Derivation and Compounding Deep Dive",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Derivation and Compounding Deep Dive\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Conversion — The Zero-Change Process",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conversion — The Zero-Change Process\",\"primitives\":[],\"addresses\":[\"MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Blending and Clipping — Where Material Is Lost",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Blending and Clipping — Where Material Is Lost\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Identifying the Process in Novel Words",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Identifying the Process in Novel Words\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY\",\"MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY",
+        "MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Five-process discrimination**\nGiven 5 unlabeled new words (one per process), student correctly identifies each formation process and justifies the classification with specific form-change evidence. *(Directly targets MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Verify a true conversion**\nGiven a noun/verb conversion pair, student confirms zero spelling/pronunciation change and correctly identifies conversion rather than searching for a hidden affix. *(Directly targets MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Blend vs. clip vs. compound distinction**\nGiven one blend, one clip, and one compound (unlabeled), student correctly distinguishes each and identifies what material was lost (if any) versus simply joined.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Novel word process identification**\nGiven 3 unfamiliar recently-coined words, student identifies the primary formation process for each with justification.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Original word construction**\nStudent invents one original new word using an assigned process (e.g., \"invent a blend for a fruit that's part apple, part pear\") and explains which process they used and how.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Adaptive Flags",
+      "content": "- If the student defaults every new word to one generic \"combining\" process, weight remediation toward MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY's bridge text and re-run TA-1's five-process sort with clearly contrasting examples before returning to novel words.\n- If the student searches for a hidden change in conversion examples, weight remediation toward MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE's bridge text and TA-3's zero-change verification practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.vocab.academic-vocabulary`, `eng.linguistics.morphology-intro`) — do not certify mastery without TA-5/MP-4's novel-word analysis, since both downstream concepts require applying word-formation knowledge productively to unfamiliar vocabulary, not just recognizing a fixed example list.\n- Reuse the \"five word factories\" framing explicitly when introducing `eng.linguistics.morphology-intro` — that concept formalizes the same five processes using proper linguistic terminology (free/bound morphemes, zero-derivation) building directly on this concept's intuitive factory model.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY",
+        "MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.vocab.word-formation-processes/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.word-formation-processes",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Roots/Compound-Word Readiness Check]\n        |\n        v\n[Concrete Anchor: The Five Word Factories]\n        |\n        v\n[TA-1: The Five-Process Sort]\n        |\n        v\n[TA-2: Derivation and Compounding Deep Dive]\n        |\n        v\n[TA-3: Conversion — The Zero-Change Process]\n        |\n        v\n[TA-4: Blending and Clipping]\n        |\n        v\n[TA-5: Identifying the Process in Novel Words]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — this concept assumes derivation and compounding are already solid before layering conversion, blending, and clipping on top, since all five are compared and contrasted throughout instruction. During instruction (S1), watch for both misconception patterns: defaulting every new word to a single generic process (MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY) and refusing to accept conversion's genuine zero-change nature (MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE) both stem from over-generalizing the \"combine parts\" pattern from earlier vocabulary work — redirect both to the Five Word Factories anchor's explicit form-change comparison. If the student searches for a hidden change during TA-3 (S6), drop back to the Concrete Anchor's literal mirror demonstration before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who sorts familiar examples correctly (MP-3) but cannot verify a true conversion or handle a truly novel word has not yet learned the analytical skill this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.word-formation-processes.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
