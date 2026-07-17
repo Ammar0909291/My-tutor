@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.modals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.modals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:09d9ba136b35e09e0d742cc586c6dd2ec97e3679bb54c3d353a49da2c8c83028",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.modals.md": "sha256:2b7d542610622021f3a1b5d85abee15e6d691d0439fe728d6aa916ce96d8d871"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.modals",
+    "name": "Modal Verbs",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.present-tenses"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.modals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.modals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.modals.md": "sha256:2b7d542610622021f3a1b5d85abee15e6d691d0439fe728d6aa916ce96d8d871"
+      },
+      "contentHash": "sha256:704e24f584a9dba1a53000a522883b4c39ab7ce3993ed7d0127c8599aef9b460",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.modals.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.modals.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.modals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.modals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.modals.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.modals.md#TA-2 (addresses MC-MODAL-STRENGTH-IS-ALL-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.modals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.modals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.modals.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.modals.md#TA-3 (addresses MC-EACH-MODAL-HAS-ONLY-ONE-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.modals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.modals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.modals.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.modals.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.modals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.modals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.modals.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.modals.md#TA-5 (addresses MC-MODAL-STRENGTH-IS-ALL-THE-SAME, MC-EACH-MODAL-HAS-ONLY-ONE-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.modals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.modals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.modals/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.modals",
+      "title": "Modal Verbs — Conceptual Development Sequence",
+      "content": "**TA-1 — Modals of Ability and Permission (Can/Could/May) [C]**\n\nPresent sentences using can/could/may for ability and permission; student identifies the correct modal and its specific function.\n\n**TA-2 — Modals of Obligation on a Strength Spectrum (Must/Have to/Should/Ought to) [C]**\n\nPresent sentences requiring different obligation strengths; student selects the appropriate modal based on strong vs. advisory obligation, directly targeting MC-MODAL-STRENGTH-IS-ALL-THE-SAME.\n\n**TA-3 — Modals of Deduction/Certainty (Must/Might/Could/Can't) [C→P]**\n\nPresent sentences expressing logical deduction about present situations (He must be tired; She might be at work; That can't be true); student identifies the deduction function, distinct from obligation, directly targeting MC-EACH-MODAL-HAS-ONLY-ONE-MEANING by requiring recognition that \"must\" here means deduction, not obligation.\n\n**TA-4 — Modals of Possibility (May/Might/Could) [P]**\n\nPresent sentences expressing future possibility; student produces and distinguishes these from certainty-based \"will\" predictions.\n\n**TA-5 — Multi-Function Modal Disambiguation in Context [P]**\n\nPresent a mixed set of sentences using the same modal (e.g., several \"must\" sentences) in different functions (obligation vs. deduction); student identifies the correct function for each based on context alone.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/misconception/MC-EACH-MODAL-HAS-ONLY-ONE-MEANING",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.modals",
+      "title": "- **Trigger signal:** Student assumes each modal verb has a single, fixed meaning, missing that most modals are POLYSEMOUS (have multiple related meanings depending on context) — e.g., \"must\" can express strong obligation (\"You must wear a seatbelt\") OR a strong logical deduction/certainty (\"She must be tired after that trip\" — not obligation, but confident inference); \"can\" can express ability (\"I can swim\") OR permission (\"Can I leave early?\").",
+      "content": "### MC-EACH-MODAL-HAS-ONLY-ONE-MEANING\n- **Trigger signal:** Student assumes each modal verb has a single, fixed meaning, missing that most modals are POLYSEMOUS (have multiple related meanings depending on context) — e.g., \"must\" can express strong obligation (\"You must wear a seatbelt\") OR a strong logical deduction/certainty (\"She must be tired after that trip\" — not obligation, but confident inference); \"can\" can express ability (\"I can swim\") OR permission (\"Can I leave early?\").\n- **Conflict evidence [P28]:** \"You said 'must' always means 'have to.' In 'She must be tired after that long trip,' is anyone being TOLD they have to be tired? Or is the speaker making a confident GUESS/deduction about her state?\"\n- **Bridge text [P30]:** \"Most modal verbs carry MULTIPLE distinct meanings depending on context: 'must' can express obligation (You must finish this) OR confident deduction (He must be the new manager — logical inference from evidence); 'can' can express ability (I can swim) OR permission (Can I go?); 'may' can express permission (You may leave) OR possibility (It may rain). Context determines which specific meaning is intended.\"\n- **Replacement text [P31]:** \"For any modal verb, check the surrounding context to determine WHICH of its several possible meanings (obligation, deduction, ability, permission, possibility) is intended — don't assume a single fixed meaning.\"\n- **Discrimination pairs [P33]:**\n  - \"You must wear a helmet\" (obligation) vs. \"He must be exhausted\" (confident deduction, not obligation).\n  - \"I can lift 50 pounds\" (ability) vs. \"Can I borrow your pen?\" (permission request).\n- **s6_path:** \"Since a modal is a single word, it's natural to expect one fixed meaning — but most modals genuinely carry several distinct senses, and context is what reliably signals which one is intended, similar to how many regular words have multiple meanings.\"",
+      "localKey": "MC-EACH-MODAL-HAS-ONLY-ONE-MEANING",
+      "language": "en",
+      "refs": [
+        "MC-EACH-MODAL-HAS-ONLY-ONE-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/misconception/MC-MODAL-STRENGTH-IS-ALL-THE-SAME",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.modals",
+      "title": "- **Trigger signal:** Student treats modals expressing similar functions (e.g., obligation: must, have to, should, ought to) as equally strong/interchangeable, missing that they exist on a genuine STRENGTH SPECTRUM — \"must\" and \"have to\" express strong obligation (often externally imposed or non-negotiable), while \"should\" and \"ought to\" express weaker, advisory obligation (recommendation, not requirement) — using them interchangeably can misrepresent the speaker's actual intended force.",
+      "content": "### MC-MODAL-STRENGTH-IS-ALL-THE-SAME\n- **Trigger signal:** Student treats modals expressing similar functions (e.g., obligation: must, have to, should, ought to) as equally strong/interchangeable, missing that they exist on a genuine STRENGTH SPECTRUM — \"must\" and \"have to\" express strong obligation (often externally imposed or non-negotiable), while \"should\" and \"ought to\" express weaker, advisory obligation (recommendation, not requirement) — using them interchangeably can misrepresent the speaker's actual intended force.\n- **Conflict evidence [P28]:** \"You said 'you must exercise more' and 'you should exercise more' mean exactly the same thing. Which one sounds like a strict requirement, and which one sounds more like friendly advice?\"\n- **Bridge text [P30]:** \"Modals expressing similar functions exist on a STRENGTH SPECTRUM: 'must'/'have to' signal strong, often non-negotiable obligation; 'should'/'ought to' signal weaker, advisory recommendation (you'd be wise to, but it's not strictly required). Similarly, for possibility: 'might'/'could' signal weaker/more tentative possibility than 'must' (deduction) or definite predictions with 'will.' Choosing the right strength level matters for accurately conveying how strongly you mean something.\"\n- **Replacement text [P31]:** \"Check the intended STRENGTH of obligation/possibility/certainty before choosing a modal — must/have to for strong, should/ought to for advisory, might/could for weaker possibility.\"\n- **Discrimination pairs [P33]:**\n  - \"You must submit this by Friday, or you'll fail\" (strong, non-negotiable obligation) vs. \"You should submit it a bit early, just to be safe\" (advisory recommendation, not a strict requirement).\n  - \"It might rain later\" (weaker possibility) vs. \"It must be raining — everyone's coming in with wet umbrellas\" (confident deduction, stronger certainty).\n- **s6_path:** \"Modals with related functions can feel like a group of synonyms — but recognizing the strength spectrum among them (strong obligation vs. advisory, confident deduction vs. tentative possibility) adds real precision to what you're actually communicating.\"\n\n---",
+      "localKey": "MC-MODAL-STRENGTH-IS-ALL-THE-SAME",
+      "language": "en",
+      "refs": [
+        "MC-MODAL-STRENGTH-IS-ALL-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.modals",
+      "title": "Modals of Ability and Permission (Can/Could/May)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Modals of Ability and Permission (Can/Could/May)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.modals",
+      "title": "Modals of Obligation on a Strength Spectrum (Must/Have to/Should/Ought to)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modals of Obligation on a Strength Spectrum (Must/Have to/Should/Ought to)\",\"primitives\":[],\"addresses\":[\"MC-MODAL-STRENGTH-IS-ALL-THE-SAME\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-MODAL-STRENGTH-IS-ALL-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.modals",
+      "title": "Modals of Deduction/Certainty (Must/Might/Could/Can't)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Modals of Deduction/Certainty (Must/Might/Could/Can't)\",\"primitives\":[],\"addresses\":[\"MC-EACH-MODAL-HAS-ONLY-ONE-MEANING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EACH-MODAL-HAS-ONLY-ONE-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.modals",
+      "title": "Modals of Possibility (May/Might/Could)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Modals of Possibility (May/Might/Could)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.modals",
+      "title": "Multi-Function Modal Disambiguation in Context",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Multi-Function Modal Disambiguation in Context\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-EACH-MODAL-HAS-ONLY-ONE-MEANING\",\"MC-MODAL-STRENGTH-IS-ALL-THE-SAME\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MODAL-STRENGTH-IS-ALL-THE-SAME",
+        "MC-EACH-MODAL-HAS-ONLY-ONE-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.modals",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Ability/permission, novel example**\n\"In 'You may leave early today,' is 'may' expressing ability or permission?\"\n*Target:* permission.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.modals",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Obligation strength, novel example**\n\"Which is more advisory (a recommendation, not a strict rule): 'You must wear safety glasses' or 'You should wear safety glasses if it's bright out'?\"\n*Target:* \"should\" — advisory recommendation; \"must\" is the strong, likely mandatory rule.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.modals",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Deduction vs. obligation, novel example**\n\"In 'The lights are off — they must be asleep,' is 'must' expressing obligation or deduction?\"\n*Target:* deduction — a confident inference from evidence (lights off), not a requirement.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.modals",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Possibility modal, novel example**\n\"In 'It might snow tomorrow,' how certain is the speaker, compared to 'It will snow tomorrow'?\"\n*Target:* \"might\" signals a weaker, more tentative possibility, compared to the stronger certainty of \"will.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.modals",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain modal polysemy and strength**\n\"In your own words: do modal verbs have just one meaning each, and do modals expressing similar functions (like obligation) all carry the same strength?\"\n*Target:* states or demonstrates that most modals have multiple meanings determined by context (e.g., \"must\" for obligation or deduction), and that modals expressing similar functions exist on a strength spectrum (must/have to strong, should/ought to advisory).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.modals",
+      "title": "Adaptive Flags",
+      "content": "- **Modal polysemy must be explicitly taught, not assumed away**: every modal's multiple functions should be introduced deliberately (e.g., \"must\" for both obligation and deduction) rather than teaching one function per modal and hoping the others transfer.\n- **Strength-spectrum awareness adds crucial precision**: obligation modals (must/have to vs. should/ought to) and possibility modals (must vs. might/could) genuinely differ in force — teach this spectrum explicitly using the dial/slider anchor.\n- **Function-category chunking manages genuine complexity**: organize instruction by function (ability/permission, obligation, deduction, possibility) rather than by individual modal word, to reduce cognitive load across this large, overlapping system.\n- **Substantial practice needed for L1s without a modal-verb system**: for S9 learners whose L1 expresses these meanings through entirely different grammatical mechanisms, budget significant, ongoing practice, recognizing modals as one of the more distinctive and challenging features of English grammar.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.modals/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.modals",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — modal meaning cards and strength dial warm-up\n  ↓\n[P41] PD-1 (present-tenses readiness)\n  ↓ PASS\n[P06] Anchor: modal meaning cards + strength dial (multi-function match, strength slider)\n  ↓\nTA-1: Modals of ability and permission (can/could/may) [C]\n  ↓\nTA-2: Modals of obligation on a strength spectrum (must/have to/should/ought to) [C]\n  ↓\n[P28] Conflict: obligation modals treated as equally strong → MC-MODAL-STRENGTH-IS-ALL-THE-SAME (if triggered)\n  ↓\nTA-3: Modals of deduction/certainty (must/might/could/can't) [C→P]\n  ↓\n[P28] Conflict: modal assumed to have one fixed meaning → MC-EACH-MODAL-HAS-ONLY-ONE-MEANING (if triggered)\n  ↓\nTA-4: Modals of possibility (may/might/could) [P]\n  ↓\nTA-5: Multi-function modal disambiguation in context [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, use 'must' once for obligation and once for deduction.\"\n[P68] Session close\n[P85] Regulation tail — praise checking context for function and strength over assuming one fixed meaning\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on present tenses, new to modal verbs specifically): dwell on TA-1's clearer ability/permission distinction before introducing the more nuanced obligation-strength and deduction functions. S1 (already uses modals fluently in speech but conflates their functions in formal analysis/writing): focus on TA-3/TA-5's disambiguation work, since context-dependent modal meaning is subtle even for fluent speakers to consciously articulate. S6 (overwhelmed by the number of modals and their overlapping functions): use the strength-dial and multi-function-card anchor as a standing visual reference, chunking by function category (ability/permission, obligation, deduction, possibility) rather than presenting all modals as an undifferentiated list. S9 (L1 lacks a modal-verb system entirely, or expresses these functions through different grammatical means, e.g. separate lexical verbs or mood markers): expect this concept to be genuinely challenging and require substantial, dedicated practice, since English's compact, multi-functional modal system is a distinctive typological feature not shared by all languages.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.modals.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

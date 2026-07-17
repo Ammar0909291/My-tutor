@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.question-formation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.question-formation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ad23984386928d14e3fe51a4f398555208d2fd7a36193cb479825386303e93bf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.question-formation.md": "sha256:8ed535e00a20eeca0906e38105d3b6e88c968b68e648b2092b10576f504d9116"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.question-formation",
+    "name": "Question Formation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.sentence-types-by-function"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.question-formation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.question-formation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.question-formation.md": "sha256:8ed535e00a20eeca0906e38105d3b6e88c968b68e648b2092b10576f504d9116"
+      },
+      "contentHash": "sha256:c079856a916a584edaa242b2165c0ceab7c42b722ed1444ce1c819f055799a1d",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.question-formation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.question-formation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.question-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.question-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.question-formation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.question-formation.md#TA-2 (addresses MC-JUST-ADD-DO-TO-ANY-STATEMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.question-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.question-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.question-formation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.question-formation.md#TA-3 (addresses MC-WH-QUESTIONS-DONT-NEED-INVERSION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.question-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.question-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.question-formation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.question-formation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.question-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.question-formation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.question-formation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.question-formation.md#TA-5 (addresses MC-JUST-ADD-DO-TO-ANY-STATEMENT, MC-WH-QUESTIONS-DONT-NEED-INVERSION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.question-formation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.question-formation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.question-formation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Question Formation — Conceptual Development Sequence",
+      "content": "**TA-1 — Yes/No Questions with Existing Auxiliaries (Inversion) [C]**\n\nPresent statements already containing an auxiliary/be verb (is, are, has, can, will); student inverts the auxiliary and subject to form the question.\n\n**TA-2 — Yes/No Questions Requiring Do/Does/Did (No Existing Auxiliary) [C]**\n\nPresent statements with no existing auxiliary (simple present/past main verbs); student inserts do/does/did and reverts the main verb to its base form, directly targeting MC-JUST-ADD-DO-TO-ANY-STATEMENT through explicit contrast with TA-1.\n\n**TA-3 — Wh-Questions with Inversion [C→P]**\n\nPresent statements requiring a wh-question; student places the question word AND performs the correct inversion/do-insertion, directly targeting MC-WH-QUESTIONS-DONT-NEED-INVERSION.\n\n**TA-4 — Wh-Questions Asking About the Subject (No Inversion Needed) [P]**\n\nIntroduce the special case where the wh-word itself IS (or replaces) the subject (\"Who called you?\" — no inversion needed, since \"who\" is the subject); student distinguishes this from wh-questions asking about the object (which DO require inversion: \"Who did you call?\").\n\n**TA-5 — Forming Questions in Different Tenses [P]**\n\nStudent applies question-formation rules across different tenses (present, past, present perfect, modal-containing sentences), integrating all prior patterns into a comprehensive question-formation skill.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/misconception/MC-JUST-ADD-DO-TO-ANY-STATEMENT",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "- **Trigger signal:** Student attempts to form every question by simply inserting \"do/does/did\" in front of the statement, regardless of whether the sentence already contains an auxiliary/helping verb or the verb \"be\" — producing double-auxiliary errors (e.g., \"Does she is coming?\" instead of \"Is she coming?\"; \"Do you can swim?\" instead of \"Can you swim?\").",
+      "content": "### MC-JUST-ADD-DO-TO-ANY-STATEMENT\n- **Trigger signal:** Student attempts to form every question by simply inserting \"do/does/did\" in front of the statement, regardless of whether the sentence already contains an auxiliary/helping verb or the verb \"be\" — producing double-auxiliary errors (e.g., \"Does she is coming?\" instead of \"Is she coming?\"; \"Do you can swim?\" instead of \"Can you swim?\").\n- **Conflict evidence [P28]:** \"You said 'Does she is coming?' But does the sentence 'She is coming' already have a helping verb — 'is'? Do we need to ADD another helping verb, 'does,' on top of the one that's already there?\"\n- **Bridge text [P30]:** \"Do/does/did is used to form questions ONLY when the statement has NO other auxiliary/helping verb or 'be' verb already present (She likes tea → Does she like tea?). If the sentence ALREADY contains an auxiliary (is, are, was, were, has, have, can, will, etc.) or the verb 'be,' you simply INVERT that existing word with the subject instead of adding do/does/did (She is coming → Is she coming?; She can swim → Can she swim?).\"\n- **Replacement text [P31]:** \"First check whether the statement already has an auxiliary verb or 'be' — if yes, invert that word with the subject; if no, add do/does/did and use the base form of the main verb.\"\n- **Discrimination pairs [P33]:**\n  - \"She likes tea\" (no auxiliary) → \"Does she like tea?\" (add \"does,\" verb reverts to base form) vs. \"She is coming\" (already has \"is\") → \"Is she coming?\" (invert \"is,\" no \"does\" added).\n  - \"They can swim\" (already has \"can\") → \"Can they swim?\" (invert \"can\") vs. attempting \"Do they can swim?\" (incorrect double-auxiliary).\n- **s6_path:** \"The do/does/did pattern is so reliable for simple-tense questions that it's very tempting to apply it universally — but checking for an existing auxiliary or 'be' verb first, and inverting that instead, is the key discriminating step.\"",
+      "localKey": "MC-JUST-ADD-DO-TO-ANY-STATEMENT",
+      "language": "en",
+      "refs": [
+        "MC-JUST-ADD-DO-TO-ANY-STATEMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/misconception/MC-WH-QUESTIONS-DONT-NEED-INVERSION",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "- **Trigger signal:** Student forms wh-questions by simply placing the question word at the front WITHOUT also performing the necessary subject-auxiliary inversion, producing incorrect statement-like word order after the question word (e.g., \"Where you are going?\" instead of \"Where are you going?\"; \"What she wants?\" instead of \"What does she want?\").",
+      "content": "### MC-WH-QUESTIONS-DONT-NEED-INVERSION\n- **Trigger signal:** Student forms wh-questions by simply placing the question word at the front WITHOUT also performing the necessary subject-auxiliary inversion, producing incorrect statement-like word order after the question word (e.g., \"Where you are going?\" instead of \"Where are you going?\"; \"What she wants?\" instead of \"What does she want?\").\n- **Conflict evidence [P28]:** \"You said 'Where you are going?' But after the question word 'where,' does the rest still need the same subject-auxiliary INVERSION we use for yes/no questions, or can it stay in statement order?\"\n- **Bridge text [P30]:** \"Wh-questions require BOTH the question word AND the subject-auxiliary inversion (or do/does/did insertion) used in yes/no questions — the question word alone isn't enough. 'Where are you going?' (invert 'are' + subject), not 'Where you are going?' (statement order after the question word).\"\n- **Replacement text [P31]:** \"After placing the question word, still apply the same inversion (or do/does/did) rule used for yes/no questions — don't leave the rest of the sentence in plain statement order.\"\n- **Discrimination pairs [P33]:**\n  - \"Where are you going?\" (question word + inverted auxiliary \"are\" + subject) vs. \"Where you are going?\" (question word only, incorrect statement order after it).\n  - \"What does she want?\" (question word + \"does\" + base verb) vs. \"What she wants?\" (question word only, incorrect statement order).\n- **s6_path:** \"Since the question word itself clearly signals 'this is a question,' it's easy to think that's sufficient — but English requires the SAME inversion structure after the question word as it does for yes/no questions, which is an easy step to accidentally skip.\"\n\n---",
+      "localKey": "MC-WH-QUESTIONS-DONT-NEED-INVERSION",
+      "language": "en",
+      "refs": [
+        "MC-WH-QUESTIONS-DONT-NEED-INVERSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Yes/No Questions with Existing Auxiliaries (Inversion)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Yes/No Questions with Existing Auxiliaries (Inversion)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Yes/No Questions Requiring Do/Does/Did (No Existing Auxiliary)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Yes/No Questions Requiring Do/Does/Did (No Existing Auxiliary)\",\"primitives\":[],\"addresses\":[\"MC-JUST-ADD-DO-TO-ANY-STATEMENT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-JUST-ADD-DO-TO-ANY-STATEMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Wh-Questions with Inversion",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Wh-Questions with Inversion\",\"primitives\":[],\"addresses\":[\"MC-WH-QUESTIONS-DONT-NEED-INVERSION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-WH-QUESTIONS-DONT-NEED-INVERSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Wh-Questions Asking About the Subject (No Inversion Needed)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Wh-Questions Asking About the Subject (No Inversion Needed)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Forming Questions in Different Tenses",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Forming Questions in Different Tenses\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-JUST-ADD-DO-TO-ANY-STATEMENT\",\"MC-WH-QUESTIONS-DONT-NEED-INVERSION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-JUST-ADD-DO-TO-ANY-STATEMENT",
+        "MC-WH-QUESTIONS-DONT-NEED-INVERSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Inversion with existing auxiliary, novel example**\n\"Turn 'He can swim' into a question.\"\n*Target:* \"Can he swim?\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Do-insertion, novel example**\n\"Turn 'They play soccer' into a question.\"\n*Target:* \"Do they play soccer?\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Wh-question with inversion, novel example**\n\"Turn 'She bought a car' into a question asking WHAT.\"\n*Target:* \"What did she buy?\" — question word + \"did\" + base verb \"buy.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Wh-question about the subject (no inversion), novel example**\n\"Turn 'Someone broke the window' into a question asking WHO.\"\n*Target:* \"Who broke the window?\" — no inversion needed, since \"who\" replaces the subject.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain question formation**\n\"In your own words: how do you decide whether to invert an existing word or add do/does/did, and do wh-questions need the same rule?\"\n*Target:* states or demonstrates checking for an existing auxiliary/be verb (invert it) vs. its absence (add do/does/did + base verb), and that wh-questions require this same rule applied after the question word — except when the wh-word itself is the subject, which needs no inversion.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Adaptive Flags",
+      "content": "- **The invert-vs-insert-do decision is the central mechanical rule**: teach this as an explicit, checkable first step (does an auxiliary/be verb already exist?) before any question is attempted, directly countering both major misconception patterns.\n- **Wh-questions require the SAME underlying mechanism as yes/no questions, plus a question word**: never let wh-question instruction skip the inversion/do-insertion step — it's not optional, and it's the same rule already learned.\n- **Subject-questions are a genuine, teachable exception**: the no-inversion-needed case (wh-word replaces the subject) deserves explicit, separate treatment (TA-4) since it's easy to mistakenly apply inversion here too.\n- **Do-support and inversion are a distinctive, non-universal English structural feature**: for S9 learners from L1s using question particles or intonation-only marking, treat this entire mechanism as genuinely novel and provide substantial, dedicated, structured practice rather than assuming intuitive transfer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.question-formation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.question-formation",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — word-swap flip cards warm-up\n  ↓\n[P41] PD-1 (sentence-types-by-function readiness)\n  ↓ PASS\n[P06] Anchor: word-swap flip cards (invert-if-present vs. insert-do-if-absent)\n  ↓\nTA-1: Yes/no questions with existing auxiliaries (inversion) [C]\n  ↓\nTA-2: Yes/no questions requiring do/does/did (no existing auxiliary) [C]\n  ↓\n[P28] Conflict: do/does/did added regardless of existing auxiliary → MC-JUST-ADD-DO-TO-ANY-STATEMENT (if triggered)\n  ↓\nTA-3: Wh-questions with inversion [C→P]\n  ↓\n[P28] Conflict: question word alone treated as sufficient → MC-WH-QUESTIONS-DONT-NEED-INVERSION (if triggered)\n  ↓\nTA-4: Wh-questions asking about the subject (no inversion needed) [P]\n  ↓\nTA-5: Forming questions in different tenses [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, turn one statement into a yes/no question and one into a wh-question.\"\n[P68] Session close\n[P85] Regulation tail — praise checking for existing auxiliaries before applying do/does/did\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on sentence-types-by-function, new to question-formation mechanics specifically): dwell on TA-1's simpler inversion pattern before introducing do/does/did insertion. S1 (already forms questions fluently in speech but writes them with errors, or struggles with wh-question inversion specifically): focus on TA-3's wh-question inversion, since this is a common, persistent error area even for otherwise fluent speakers. S6 (overwhelmed by the branching decision between invert vs. insert-do): use the word-swap flip-card anchor as a standing decision-tree reference. S9 (L1 forms questions via a question particle or intonation alone, with no word-order change, e.g. many East Asian languages, or a different inversion convention): expect this concept's core mechanism (subject-auxiliary inversion, do-support) to be a genuinely novel, challenging structural feature requiring substantial, dedicated practice, since it has no direct parallel in many world languages.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.question-formation.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
