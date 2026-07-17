@@ -7933,6 +7933,251 @@ const COMP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.calc.antiderivatives ───────────────────────────────────────────────
+const ANTID = 'math.calc.antiderivatives'
+const ANTID_SRC = 'docs/curriculum/blueprints/math.calc.antiderivatives.md'
+
+const ANTID_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANTID,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      '\u222bx\u00b2 dx = x\u00b3/3 \u2014 or is it? Check by differentiating BACK: ' +
+      'd/dx[x\u00b3/3] = x\u00b2 \u2713. But d/dx[x\u00b3/3 + 5] = x\u00b2 too, and so does ' +
+      'd/dx[x\u00b3/3 \u2212 100]. EVERY function of the form x\u00b3/3 + C ' +
+      '(any constant C) differentiates back to x\u00b2, because the ' +
+      'derivative of any constant is zero \u2014 differentiation cannot ' +
+      '\u201csee\u201d a constant shift. So there is no single \u201cTHE ' +
+      'antiderivative\u201d \u2014 there is a whole FAMILY of them, all ' +
+      'differing by a vertical shift, and \u222bf(x)dx = F(x) + C names ' +
+      'the entire family at once. Omitting +C isn\u2019t a minor ' +
+      'formality; it silently claims there is exactly one antiderivative ' +
+      'when there are infinitely many.',
+    targetedMisconceptions: [`${ANTID}:MC-1`, `${ANTID}:MC-3`],
+    source: `${ANTID_SRC} — MC-1 CONSTANT-OMISSION + MC-3 ANTIDERIVATIVE-IS-UNIQUE (differentiate-back verification revealing the +C family)`,
+  },
+  {
+    conceptId: ANTID,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'The reverse power rule is NOT \u222bx\u207f dx = x\u207f\u207b\u00b9/n \u2014 that ' +
+      'formula subtracts from the WRONG place. Check ∫x\u00b2dx with the ' +
+      'wrong version: x\u00b9/2 = x/2. Differentiate that back: 1/2, not ' +
+      'x\u00b2 \u2014 fails immediately. The correct rule ADDS 1 to the ' +
+      'exponent and divides by the NEW exponent: \u222bx\u207f dx = ' +
+      'x\u207f\u207a\u00b9/(n+1) + C. Check: \u222bx\u00b2dx = x\u00b3/3 + C; differentiate ' +
+      'back \u2014 3\u00b7x\u00b2/3 = x\u00b2 \u2713. The reverse power rule literally ' +
+      'undoes the power rule for derivatives (which SUBTRACTS 1 from ' +
+      'the exponent and multiplies by the old exponent) \u2014 undoing ' +
+      'a subtract-and-multiply means add-and-divide, not another ' +
+      'subtract.',
+    targetedMisconceptions: [`${ANTID}:MC-2`],
+    source: `${ANTID_SRC} — MC-2 REVERSE-POWER-RULE-WRONG (n=2 differentiate-back falsification of the wrong formula)`,
+  },
+]
+
+const ANTID_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANTID,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'What is \u222bx\u00b2 dx?',
+    choices: [
+      { text: 'x\u00b3/3 + C — add 1 to the exponent, divide by the new exponent, and include the constant family', isCorrect: true },
+      { text: 'x\u00b3/3 — no constant needed, since this is the one correct antiderivative', isCorrect: false, misconceptionId: `${ANTID}:MC-1` },
+      { text: 'x/2 + C — subtract 1 from the exponent, divide by the original exponent', isCorrect: false, misconceptionId: `${ANTID}:MC-2` },
+    ],
+    correctValue: 'x\u00b3/3 + C',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ANTID}:MC-1`, `${ANTID}:MC-2`],
+    source: `${ANTID_SRC} — MC-1/MC-2 combined probe (x\u00b2), distractor-mapped`,
+  },
+  {
+    conceptId: ANTID,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Both x\u00b3/3 + 5 and x\u00b3/3 \u2212 100 differentiate back to x\u00b2. What does this tell you?',
+    choices: [
+      { text: 'There is no single \u201cTHE\u201d antiderivative — infinitely many functions differing by a constant all work, which is exactly why +C is required', isCorrect: true },
+      { text: 'One of the two must be wrong, since a function can only have one antiderivative', isCorrect: false, misconceptionId: `${ANTID}:MC-3` },
+    ],
+    correctValue: 'infinite family, both valid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANTID}:MC-3`],
+    source: `${ANTID_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.negation ────────────────────────────────────────────────────
+const NEG = 'eng.grammar.negation'
+const NEG_SRC = 'docs/curriculum/blueprints/eng.grammar.negation.md'
+
+const NEG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cShe not likes tea\u201d feels like a natural way to negate a ' +
+      'sentence \u2014 just drop in \u201cnot.\u201d But \u201cnot\u201d cannot attach ' +
+      'directly to an ordinary conjugated verb; it attaches to an ' +
+      'AUXILIARY (helping) verb or to \u201cbe.\u201d If the sentence already ' +
+      'has one (is, are, has, can, will), \u201cnot\u201d slots in right after ' +
+      'it: \u201cShe is not coming.\u201d If there is NO auxiliary \u2014 a plain ' +
+      'simple-present or simple-past main verb \u2014 you must first ' +
+      'INSERT do/does/did, and the main verb drops back to its base ' +
+      'form: \u201cShe does not like tea\u201d (not \u201clikes\u201d). Same fix as ' +
+      'question formation: check for an auxiliary first; supply ' +
+      'do/does/did if none exists, then attach \u201cnot\u201d to THAT.',
+    targetedMisconceptions: [`${NEG}:MC-JUST-ADD-NOT-ANYWHERE`],
+    source: `${NEG_SRC} — MC-JUST-ADD-NOT-ANYWHERE (P28 no-auxiliary conflict + P30 do-insertion bridge)`,
+  },
+  {
+    conceptId: NEG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cI don\u2019t have no money\u201d \u2014 doesn\u2019t that make the negative ' +
+      'STRONGER? In standard English grammar, no: a clause should ' +
+      'carry only ONE negative word. \u201cI don\u2019t have no money\u201d pairs ' +
+      'TWO negatives (\u201cdon\u2019t\u201d and \u201cno\u201d) in the same clause \u2014 ' +
+      'non-standard in formal/school English, even though it works ' +
+      'as emphatic intensification in many dialects and world ' +
+      'languages (this is a genuine grammar of those varieties, not ' +
+      'an error there). For standard/formal English, swap the ' +
+      'second negative for its neutral counterpart: no\u2192any, ' +
+      'nothing\u2192anything, never\u2192ever \u2014 giving \u201cI don\u2019t have ANY ' +
+      'money,\u201d \u201cShe didn\u2019t say ANYTHING.\u201d One negative word per ' +
+      'clause is the rule to apply in formal writing.',
+    targetedMisconceptions: [`${NEG}:MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS`],
+    source: `${NEG_SRC} — MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS (P30 one-negative-per-clause rule + dialect-honesty caveat)`,
+  },
+]
+
+const NEG_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'How do you correctly negate \u201cShe likes tea\u201d (simple present, no existing auxiliary)?',
+    choices: [
+      { text: '\u201cShe does not like tea\u201d — insert \u201cdoes,\u201d attach \u201cnot\u201d to it, and revert the verb to base form', isCorrect: true },
+      { text: '\u201cShe not likes tea\u201d — attach \u201cnot\u201d directly after the main verb', isCorrect: false, misconceptionId: `${NEG}:MC-JUST-ADD-NOT-ANYWHERE` },
+    ],
+    correctValue: 'She does not like tea',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NEG}:MC-JUST-ADD-NOT-ANYWHERE`],
+    source: `${NEG_SRC} — P28 no-auxiliary conflict as probe`,
+  },
+  {
+    conceptId: NEG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence is correct in standard/formal English?',
+    choices: [
+      { text: '\u201cI don\u2019t have any money\u201d — one negative word per clause', isCorrect: true },
+      { text: '\u201cI don\u2019t have no money\u201d — two negatives make the negation even stronger', isCorrect: false, misconceptionId: `${NEG}:MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS` },
+    ],
+    correctValue: 'I don\u2019t have any money',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NEG}:MC-DOUBLE-NEGATIVES-ARE-JUST-EXTRA-EMPHASIS`],
+    source: `${NEG_SRC} — P28 double-negative conflict as probe`,
+  },
+]
+
+// ─── eng.grammar.word-order ───────────────────────────────────────────────────
+const WORD = 'eng.grammar.word-order'
+const WORD_SRC = 'docs/curriculum/blueprints/eng.grammar.word-order.md'
+
+const WORD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WORD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cThe ball threw the boy\u201d \u2014 does this mean the boy threw the ' +
+      'ball? No: in English, it says the BALL did the throwing, ' +
+      'however silly that sounds. Some languages mark WHO-DID-WHAT ' +
+      'with word endings (case), letting word order shuffle freely; ' +
+      'English has almost none of that, so it leans entirely on ' +
+      'POSITION: Subject-Verb-Object (SVO). The noun BEFORE the verb ' +
+      'is understood as the doer; the noun AFTER is the receiver \u2014 ' +
+      'full stop, regardless of what makes logical sense in the real ' +
+      'world. \u201cThe dog bit the cat\u201d and \u201cthe cat bit the dog\u201d use ' +
+      'identical words in reverse order and mean completely different ' +
+      '(and equally grammatical) things. If your first language uses ' +
+      'endings instead of order, expect this to feel unusually rigid ' +
+      '\u2014 it is, and that rigidity is exactly what carries the ' +
+      'meaning in English.',
+    targetedMisconceptions: [`${WORD}:MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES`],
+    source: `${WORD_SRC} — MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES (P28 ball-threw-the-boy conflict + P33 dog/cat reversal pair)`,
+  },
+  {
+    conceptId: WORD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cI like very much chocolate\u201d sounds reasonable if your first ' +
+      'language allows the adverb between verb and object \u2014 English ' +
+      'does not. Two positioning rules to fix at once: adjectives sit ' +
+      'BEFORE their noun (\u201cthe red house,\u201d never \u201cthe house red\u201d); ' +
+      'manner/degree adverbs like \u201cvery much\u201d or \u201cquickly\u201d typically ' +
+      'come AFTER the full verb+object, not wedged between them \u2014 ' +
+      '\u201cI like chocolate very much,\u201d never splitting the verb from ' +
+      'its object. English tolerates almost no daylight between a ' +
+      'verb and its direct object; when in doubt, keep them ' +
+      'touching and add descriptive words before the noun or after ' +
+      'the whole verb phrase.',
+    targetedMisconceptions: [`${WORD}:MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE`],
+    source: `${WORD_SRC} — MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE (P28 very-much-chocolate conflict + P31 verb-object adjacency rule)`,
+  },
+]
+
+const WORD_PROBES: SeedProbe[] = [
+  {
+    conceptId: WORD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In English, \u201cThe ball threw the boy\u201d means:',
+    choices: [
+      { text: 'The ball did the throwing — word order (not logic) determines the subject in English', isCorrect: true },
+      { text: 'The boy threw the ball — the more logical meaning wins', isCorrect: false, misconceptionId: `${WORD}:MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES` },
+    ],
+    correctValue: 'the ball threw (as stated)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WORD}:MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES`],
+    source: `${WORD_SRC} — P28 ball-threw-the-boy conflict as probe`,
+  },
+  {
+    conceptId: WORD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence has correct English word order?',
+    choices: [
+      { text: '\u201cI like chocolate very much\u201d — the adverb follows the full verb+object', isCorrect: true },
+      { text: '\u201cI like very much chocolate\u201d — the adverb goes between the verb and object', isCorrect: false, misconceptionId: `${WORD}:MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE` },
+    ],
+    correctValue: 'I like chocolate very much',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${WORD}:MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE`],
+    source: `${WORD_SRC} — P28 very-much-chocolate conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -8028,6 +8273,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...MAXB_EXPLANATIONS,
   ...SPIN_EXPLANATIONS,
   ...COMP_EXPLANATIONS,
+  ...ANTID_EXPLANATIONS,
+  ...NEG_EXPLANATIONS,
+  ...WORD_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -8123,4 +8371,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...MAXB_PROBES,
   ...SPIN_PROBES,
   ...COMP_PROBES,
+  ...ANTID_PROBES,
+  ...NEG_PROBES,
+  ...WORD_PROBES,
 ]
