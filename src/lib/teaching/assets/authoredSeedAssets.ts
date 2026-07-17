@@ -2840,6 +2840,168 @@ const OHM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.shm ───────────────────────────────────────────────────────────
+const SHM = 'phys.wave.shm'
+const SHM_SRC = 'docs/curriculum/blueprints/phys.wave.shm.md'
+
+const SHM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SHM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Watch a pendulum honestly and you will see the defining feature ' +
+      'of simple harmonic motion: it is NEVER moving at constant speed. ' +
+      'It creeps at the top of each swing — momentarily at rest at the ' +
+      'extremes — and whips through the bottom at maximum speed. The ' +
+      'restoring force explains it: F = −kx is biggest at the extremes ' +
+      '(hardest pull back, zero speed) and zero at the centre (no pull, ' +
+      'top speed). The velocity follows v = ω√(A² − x²): at x = ±A it ' +
+      'is exactly zero; at x = 0 it peaks at Aω. So the motion is a ' +
+      'perpetual trade — speed for displacement and back — repeated ' +
+      'every cycle, sinusoidally, not uniformly.',
+    targetedMisconceptions: [`${SHM}:MC-SHM-CONSTANT-VELOCITY`],
+    source: `${SHM_SRC} — MC-SHM-CONSTANT-VELOCITY (P28 pendulum observation + P31 v = ω√(A²−x²) endpoints)`,
+  },
+  {
+    conceptId: SHM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"A bigger swing must take longer" sounds obvious — and is ' +
+      'famously false for SHM. Galileo timed a swinging chandelier ' +
+      'against his own pulse: wide swings and narrow swings took the ' +
+      'SAME time. Look at the period formulas — T = 2π√(m/k) for a ' +
+      'spring-mass, T = 2π√(L/g) for a pendulum — amplitude appears in ' +
+      'neither. The mechanism: a larger displacement means a ' +
+      'proportionally larger restoring force (F = −kx), so the mass ' +
+      'covers the longer distance proportionally faster, and the two ' +
+      'effects cancel exactly. This isochronous property is why ' +
+      'pendulum clocks keep time even as their swing slowly dies down. ' +
+      'Amplitude sets how FAR and how FAST the oscillator moves — ' +
+      'never how LONG a cycle takes.',
+    targetedMisconceptions: [`${SHM}:MC-PERIOD-DEPENDS-ON-AMPLITUDE`],
+    source: `${SHM_SRC} — MC-PERIOD-DEPENDS-ON-AMPLITUDE (P28 Galileo chandelier + P30 exact-cancellation bridge + s6 clock framing)`,
+  },
+]
+
+const SHM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SHM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A mass on a spring oscillates in SHM with amplitude A. Where is its speed greatest?',
+    choices: [
+      { text: 'At the equilibrium position x = 0, where v = Aω', isCorrect: true },
+      { text: 'At the extremes x = ±A, where the force is largest', isCorrect: false },
+      { text: 'Its speed is the same everywhere in the cycle', isCorrect: false, misconceptionId: `${SHM}:MC-SHM-CONSTANT-VELOCITY` },
+    ],
+    correctValue: 'x = 0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SHM}:MC-SHM-CONSTANT-VELOCITY`],
+    source: `${SHM_SRC} — MC-SHM-CONSTANT-VELOCITY probe, distractor-mapped`,
+  },
+  {
+    conceptId: SHM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same spring-mass system is set oscillating first with amplitude 2 cm, then with amplitude 8 cm. How do the periods compare?',
+    choices: [
+      { text: 'Identical — T = 2π√(m/k) contains no amplitude; SHM is isochronous', isCorrect: true },
+      { text: 'The 8 cm oscillation takes longer — a bigger swing takes more time', isCorrect: false, misconceptionId: `${SHM}:MC-PERIOD-DEPENDS-ON-AMPLITUDE` },
+    ],
+    correctValue: 'same period',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SHM}:MC-PERIOD-DEPENDS-ON-AMPLITUDE`],
+    source: `${SHM_SRC} — P33 discrimination pair (2 cm vs 8 cm) as probe`,
+  },
+]
+
+// ─── phys.wave.wave-properties ───────────────────────────────────────────────
+const WAV = 'phys.wave.wave-properties'
+const WAV_SRC = 'docs/curriculum/blueprints/phys.wave.wave-properties.md'
+
+const WAV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WAV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A wave is a travelling PATTERN, not travelling stuff. Watch a ' +
+      'duck when a ripple passes: it bobs up and down and stays where ' +
+      'it is — the water under it oscillates in place while the ' +
+      'disturbance moves on, handing energy from particle to particle. ' +
+      'The stadium wave is the perfect model: every person just stands ' +
+      'and sits at their own seat, yet the wave sweeps around the ' +
+      'whole stadium. That split — pattern moves at v = fλ, particles ' +
+      'only oscillate about fixed positions — is the core idea of wave ' +
+      'motion: energy is transferred, matter is not. (Even a tsunami ' +
+      'crossing the Pacific is a propagating displacement pattern, not ' +
+      'a wall of water making the trip.)',
+    targetedMisconceptions: [`${WAV}:MC-WAVE-CARRIES-MATTER`],
+    source: `${WAV_SRC} — MC-WAVE-CARRIES-MATTER (P28 duck/surfer/tsunami evidence + s6 stadium-wave anchor)`,
+  },
+  {
+    conceptId: WAV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Does a higher-pitched note travel faster? Test it: middle C ' +
+      '(262 Hz) and the C an octave up (524 Hz) both cross the room at ' +
+      'the same ~343 m/s — otherwise music heard from the back row ' +
+      'would arrive scrambled. Wave speed belongs to the MEDIUM (string ' +
+      'tension and density, air temperature, rock rigidity), not to the ' +
+      'source. Frequency belongs to the SOURCE — how often it wiggles. ' +
+      'The formula v = fλ is not "f drives v"; with v pinned by the ' +
+      'medium, it is a trade between f and λ: double the frequency and ' +
+      'the wavelength halves, speed unchanged. One sentence to keep: ' +
+      'speed is the medium\'s decision, frequency is the source\'s ' +
+      'decision, and wavelength is what balances the books.',
+    targetedMisconceptions: [`${WAV}:MC-HIGHER-FREQUENCY-FASTER`],
+    source: `${WAV_SRC} — MC-HIGHER-FREQUENCY-FASTER (P28 octave/same-speed evidence + s6 medium-vs-source split)`,
+  },
+]
+
+const WAV_PROBES: SeedProbe[] = [
+  {
+    conceptId: WAV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A wave passes a duck floating on a pond. What does the duck do?',
+    choices: [
+      { text: 'Bobs up and down in place — the wave pattern moves, the water (and duck) oscillate locally', isCorrect: true },
+      { text: 'Gets carried along with the wave toward the shore', isCorrect: false, misconceptionId: `${WAV}:MC-WAVE-CARRIES-MATTER` },
+      { text: 'Moves backward, against the wave', isCorrect: false },
+    ],
+    correctValue: 'bobs in place',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${WAV}:MC-WAVE-CARRIES-MATTER`],
+    source: `${WAV_SRC} — P28 duck scenario as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WAV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the same air, the frequency of a sound is doubled from 200 Hz to 400 Hz. What happens to its speed and wavelength?',
+    choices: [
+      { text: 'Speed stays 343 m/s (set by the medium); wavelength halves (λ = v/f)', isCorrect: true },
+      { text: 'The wave travels twice as fast — higher frequency means higher speed', isCorrect: false, misconceptionId: `${WAV}:MC-HIGHER-FREQUENCY-FASTER` },
+    ],
+    correctValue: 'same speed, half wavelength',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WAV}:MC-HIGHER-FREQUENCY-FASTER`],
+    source: `${WAV_SRC} — P33 discrimination pair (200 vs 2000 Hz) adapted, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -2873,6 +3035,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CHG_EXPLANATIONS,
   ...COUL_EXPLANATIONS,
   ...OHM_EXPLANATIONS,
+  ...SHM_EXPLANATIONS,
+  ...WAV_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -2906,4 +3070,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CHG_PROBES,
   ...COUL_PROBES,
   ...OHM_PROBES,
+  ...SHM_PROBES,
+  ...WAV_PROBES,
 ]
