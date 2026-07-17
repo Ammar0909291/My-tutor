@@ -6618,6 +6618,255 @@ const CONJ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.abst.group-theory ──────────────────────────────────────────────────
+const GRP = 'math.abst.group-theory'
+const GRP_SRC = 'docs/curriculum/blueprints/math.abst.group-theory.md'
+
+const GRP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GRP,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Is (GL_n(\u211d), \u00d7) — invertible matrices under multiplication — ' +
+      'a group, even though AB \u2260 BA in general? Yes, and this is the ' +
+      'single most load-bearing distinction in group theory: the ' +
+      'GROUP axioms (closure, associativity, identity, inverses — ' +
+      'G1\u2013G4) say nothing about commutativity. A group only becomes ' +
+      'ABELIAN if it separately satisfies G5 (ab = ba for all ' +
+      'elements). GL_n(\u211d) satisfies G1\u2013G4 perfectly \u2014 it is a ' +
+      'perfectly good, non-abelian group. Checking whether something ' +
+      'is a group means checking exactly four properties; ' +
+      'commutativity is a BONUS fifth property some groups have and ' +
+      'many don\u2019t (matrix groups, symmetry groups, permutation ' +
+      'groups are typically non-abelian, while (\u2124, +) and (\u211d\\{0}, ' +
+      '\u00d7) are abelian).',
+    targetedMisconceptions: [`${GRP}:MC-1`],
+    source: `${GRP_SRC} — MC-1 GROUP-NEEDS-COMMUTATIVITY (G1\u2013G4 vs G5 separation; GL_n(\u211d) as the canonical non-abelian counterexample)`,
+  },
+  {
+    conceptId: GRP,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Two habits to break once you leave familiar number systems. ' +
+      'First: the identity element is NOT always 0 or 1 — it is ' +
+      'whatever element e satisfies a\u00b7e = e\u00b7a = a FOR THIS group\u2019s ' +
+      'operation. In (\u2124, +) it\u2019s 0; in (\u211d\\{0}, \u00d7) it\u2019s 1; in the ' +
+      'symmetric group it\u2019s the identity permutation; in 2\u00d72 ' +
+      'invertible matrices it\u2019s the identity matrix I. Find it by ' +
+      'solving the defining equation, never by pattern-matching to a ' +
+      'familiar case. Second: the inverse is NOT always \u2212a — that ' +
+      'formula is specific to additive groups. The inverse a\u207b\u00b9 is ' +
+      'whatever satisfies a\u00b7a\u207b\u00b9 = e (G4) using THIS group\u2019s e and ' +
+      'operation: in (\u211d\\{0}, \u00d7) the inverse of a is 1/a, not \u2212a. ' +
+      'Every group question reduces to: what are e and \u00b7 here, and ' +
+      'what solves the axiom from first principles?',
+    targetedMisconceptions: [`${GRP}:MC-2`, `${GRP}:MC-3`],
+    source: `${GRP_SRC} — MC-2 IDENTITY-MUST-BE-ZERO-OR-ONE + MC-3 INVERSE-IS-NEGATIVE (G3/G4 from-first-principles derivation)`,
+  },
+]
+
+const GRP_PROBES: SeedProbe[] = [
+  {
+    conceptId: GRP,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In GL_n(\u211d) (invertible matrices under multiplication), AB \u2260 BA in general. Is GL_n(\u211d) still a group?',
+    choices: [
+      { text: 'Yes — the group axioms (closure, associativity, identity, inverses) don\u2019t require commutativity; GL_n(\u211d) is a valid non-abelian group', isCorrect: true },
+      { text: 'No — a group requires ab = ba for all elements', isCorrect: false, misconceptionId: `${GRP}:MC-1` },
+    ],
+    correctValue: 'yes — non-abelian group',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GRP}:MC-1`],
+    source: `${GRP_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: GRP,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In the group (\u211d\\{0}, \u00d7) (nonzero reals under multiplication), what is the inverse of 5?',
+    choices: [
+      { text: '1/5 — the inverse must satisfy 5 \u00d7 a\u207b\u00b9 = 1 (the identity for this operation)', isCorrect: true },
+      { text: '\u22125 — the inverse of any element is its negative', isCorrect: false, misconceptionId: `${GRP}:MC-3` },
+    ],
+    correctValue: '1/5',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRP}:MC-3`],
+    source: `${GRP_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.schrodinger-equation ────────────────────────────────────────────
+const SCHR = 'phys.qm.schrodinger-equation'
+const SCHR_SRC = 'docs/curriculum/blueprints/phys.qm.schrodinger-equation.md'
+
+const SCHR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SCHR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Solve the Schr\u00f6dinger equation and you do NOT get where the ' +
+      'particle will be — you get \u03c8(x,t), whose SQUARE |\u03c8(x,t)|\u00b2 is ' +
+      'a probability density. Position stays genuinely unknown until ' +
+      'a measurement forces a value. This is the clean parallel to ' +
+      'hold onto: Newton\u2019s F = ma evolves x(t), a definite trajectory; ' +
+      'Schr\u00f6dinger\u2019s equation evolves \u03c8(x,t), a probability ' +
+      'amplitude — deterministic evolution of a DISTRIBUTION, not a ' +
+      'point. Compute |\u03c8|\u00b2 for a two-state superposition and watch ' +
+      'it visibly oscillate between locations — unmistakably a ' +
+      'spread-out distribution changing shape, never a single ' +
+      'tracked position.',
+    targetedMisconceptions: [`${SCHR}:MC-1`],
+    source: `${SCHR_SRC} — MC-1 trajectory misconception (P28 |\u03c8|\u00b2-oscillation demo + P30 Newton/Schr\u00f6dinger parallel)`,
+  },
+  {
+    conceptId: SCHR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'A \u201cstationary\u201d state sounds like it should have zero energy — ' +
+      'it emphatically does not. \u201cStationary\u201d describes |\u03c8|\u00b2 staying ' +
+      'CONSTANT IN TIME, never the energy. For a particle in a box, ' +
+      'E\u2081 = \u03c0\u00b2\u210f\u00b2/(2mL\u00b2) — always strictly positive, and this ' +
+      'zero-point energy is not a formality: it is why liquid helium ' +
+      'refuses to freeze at atmospheric pressure even near absolute ' +
+      'zero. And a genuine trap sits one level deeper: not every ' +
+      'function satisfying the boundary conditions is a valid ' +
+      'solution. Try \u03c8 = x(L\u2212x) on [0, L]: it vanishes correctly at ' +
+      'both walls, but d\u00b2/dx\u00b2[x(L\u2212x)] = \u22122, a CONSTANT — while the ' +
+      'equation demands \u2212k\u00b2\u03c8, which is never constant unless \u03c8 = 0. ' +
+      'The function fails the actual differential equation. A valid ' +
+      'solution must satisfy the equation, the boundary conditions, ' +
+      'AND be normalizable — all three, not just the one that looks ' +
+      'checkable by eye.',
+    targetedMisconceptions: [`${SCHR}:MC-2`, `${SCHR}:MC-3`],
+    source: `${SCHR_SRC} — MC-2 stationary-means-zero-energy + MC-3 any-function-is-a-solution (E\u2081 numeric check + x(L\u2212x) counter-verification)`,
+  },
+]
+
+const SCHR_PROBES: SeedProbe[] = [
+  {
+    conceptId: SCHR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'After solving the Schr\u00f6dinger equation for \u03c8(x,t), what do you know about the particle\u2019s position?',
+    choices: [
+      { text: 'Its probability DISTRIBUTION, |\u03c8(x,t)|\u00b2 — not a definite trajectory; position is unknown until measured', isCorrect: true },
+      { text: 'Its exact position at every time, just like solving Newton\u2019s equations gives x(t)', isCorrect: false, misconceptionId: `${SCHR}:MC-1` },
+    ],
+    correctValue: 'probability distribution only',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCHR}:MC-1`],
+    source: `${SCHR_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: SCHR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The ground-state wave function of a particle in a box is \u201cstationary\u201d (|\u03c8|\u00b2 doesn\u2019t change in time). Does this mean its energy E\u2081 is zero?',
+    choices: [
+      { text: 'No — E\u2081 = \u03c0\u00b2\u210f\u00b2/(2mL\u00b2) is always positive; \u201cstationary\u201d describes the unchanging probability density, not the energy', isCorrect: true },
+      { text: 'Yes — if nothing changes in time, the energy must be zero', isCorrect: false, misconceptionId: `${SCHR}:MC-2` },
+    ],
+    correctValue: 'no — E\u2081 > 0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCHR}:MC-2`],
+    source: `${SCHR_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.active-and-passive-voice ────────────────────────────────────
+const PASV = 'eng.grammar.active-and-passive-voice'
+const PASV_SRC = 'docs/curriculum/blueprints/eng.grammar.active-and-passive-voice.md'
+
+const PASV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PASV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cAvoid passive voice\u201d is common writing advice — and taken too ' +
+      'literally, it is wrong. \u201cThe Mona Lisa was painted in the ' +
+      'early 1500s\u201d is passive, and it is the BETTER sentence: the ' +
+      'painting is the point, not some unnamed painter (we all know ' +
+      'it was Leonardo anyway; naming him would be redundant here). ' +
+      'Passive voice earns its place whenever the doer is unknown ' +
+      '(\u201cthe window was broken\u201d — no idea who), unimportant, or ' +
+      'deliberately de-emphasized, and it is the standard convention ' +
+      'in scientific writing where the PROCESS matters more than the ' +
+      'experimenter: \u201cthe solution was heated to 100\u00b0C.\u201d The real ' +
+      'advice buried inside \u201cavoid passive voice\u201d is narrower: don\u2019t ' +
+      'use it needlessly when naming the doer would be clearer — not ' +
+      'a blanket ban.',
+    targetedMisconceptions: [`${PASV}:MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING`],
+    source: `${PASV_SRC} — MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING (P28 Mona Lisa conflict + P30 doer-unknown/scientific-convention bridge)`,
+  },
+  {
+    conceptId: PASV,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cThe boy ate the cake\u201d \u2192 swap the words \u2192 \u201cThe cake ate the ' +
+      'boy\u201d? That is nonsense, not passive voice — and the tell is ' +
+      'that the cake is suddenly DOING the eating. Forming a real ' +
+      'passive needs THREE moves together, not a word-swap: (1) the ' +
+      'original OBJECT becomes the new subject (cake), (2) the verb ' +
+      'itself changes shape to \u201cbe\u201d + PAST PARTICIPLE (ate \u2192 was ' +
+      'eaten), (3) optionally tack on \u201cby + original subject\u201d if the ' +
+      'doer is worth keeping (by the boy). Result: \u201cThe cake was ' +
+      'eaten by the boy\u201d — same meaning, opposite emphasis, and a ' +
+      'genuinely restructured verb, not a word-position trick.',
+    targetedMisconceptions: [`${PASV}:MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE`],
+    source: `${PASV_SRC} — MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE (P28 cake-ate-the-boy nonsense-check + P31 three-step transformation)`,
+  },
+]
+
+const PASV_PROBES: SeedProbe[] = [
+  {
+    conceptId: PASV,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which is a genuinely good use of passive voice?',
+    choices: [
+      { text: '\u201cThe solution was heated to 100\u00b0C\u201d — standard scientific convention; the process matters, not who performed it', isCorrect: true },
+      { text: 'None — passive voice should always be eliminated from good writing', isCorrect: false, misconceptionId: `${PASV}:MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING` },
+    ],
+    correctValue: 'The solution was heated to 100\u00b0C',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PASV}:MC-PASSIVE-VOICE-IS-ALWAYS-BAD-WRITING`],
+    source: `${PASV_SRC} — P33 scientific-convention pair as probe`,
+  },
+  {
+    conceptId: PASV,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is the correct passive form of \u201cThe boy ate the cake\u201d?',
+    choices: [
+      { text: '\u201cThe cake was eaten by the boy\u201d — object becomes subject, verb becomes be + past participle', isCorrect: true },
+      { text: '\u201cThe cake ate the boy\u201d — swap the subject and object', isCorrect: false, misconceptionId: `${PASV}:MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE` },
+    ],
+    correctValue: 'The cake was eaten by the boy',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PASV}:MC-JUST-SWAP-SUBJECT-AND-OBJECT-FOR-PASSIVE`],
+    source: `${PASV_SRC} — P28 cake/boy conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -6697,6 +6946,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PFX_EXPLANATIONS,
   ...MMUL_EXPLANATIONS,
   ...CONJ_EXPLANATIONS,
+  ...GRP_EXPLANATIONS,
+  ...SCHR_EXPLANATIONS,
+  ...PASV_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -6776,4 +7028,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PFX_PROBES,
   ...MMUL_PROBES,
   ...CONJ_PROBES,
+  ...GRP_PROBES,
+  ...SCHR_PROBES,
+  ...PASV_PROBES,
 ]
