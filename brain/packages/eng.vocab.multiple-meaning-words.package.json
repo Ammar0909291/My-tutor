@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.multiple-meaning-words-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.multiple-meaning-words",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f99e2e533a39e20073cd6f7a80f27c00d30684414b4756f6e940ce343d0a659c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md": "sha256:3b3c535803f84b7bf68107240e5ea79c92c66de458dbc3d91c985443ebfb357d"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.multiple-meaning-words",
+    "name": "Multiple-Meaning Words",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.homonyms-homophones"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.multiple-meaning-words-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.multiple-meaning-words (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md": "sha256:3b3c535803f84b7bf68107240e5ea79c92c66de458dbc3d91c985443ebfb357d"
+      },
+      "contentHash": "sha256:0e04b17eafb51fd15167a99c637fe27636eff3e9af8be4098b0b1721102524b7",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.multiple-meaning-words.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.multiple-meaning-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.multiple-meaning-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.multiple-meaning-words.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md#TA-2 (addresses MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.multiple-meaning-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.multiple-meaning-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.multiple-meaning-words.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md#TA-3 (addresses MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.multiple-meaning-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.multiple-meaning-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.multiple-meaning-words.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.multiple-meaning-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.multiple-meaning-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.multiple-meaning-words.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md#TA-5 (addresses MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS, MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.multiple-meaning-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.multiple-meaning-words\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Multiple-Meaning Words — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Related (Polysemous) Multiple Meanings [C]**\n\nPresent polysemous words (head, bright, run, foot); student maps the related meanings back to a shared core concept.\n\n**TA-2 — Contrasting Polysemy with Homonymy [C]**\n\nPresent a mixed set including both polysemous words and true homonyms; student sorts them using the relatedness test, directly targeting MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS.\n\n**TA-3 — Using Context to Select the Correct Meaning [C→P]**\n\nPresent sentences using a multiple-meaning word in different contexts; student selects the contextually correct meaning, directly targeting MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER by explicitly NOT defaulting to a \"first\" or \"main\" meaning.\n\n**TA-4 — Checking Dictionary Entries Without Assuming Order = Importance [P]**\n\nGiven a dictionary entry with multiple numbered senses, student determines which sense fits a specific sentence's context, regardless of the sense's numerical position in the entry.\n\n**TA-5 — Multiple-Meaning Words in Extended Text [P]**\n\nStudent reads a passage containing several multiple-meaning words used in specific contexts and correctly identifies the intended sense of each.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/misconception/MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "- **Trigger signal:** Student treats multiple-meaning (polysemous) words as identical to homonyms, missing a subtle but real distinction: homonyms are typically UNRELATED meanings that happen to share spelling/sound by coincidence (a \"bat\" the animal vs. a \"bat\" for baseball — no meaningful connection), while POLYSEMY involves meanings that are RELATED, having evolved from a shared core sense (e.g., \"bright\" meaning \"shining with light\" and \"bright\" meaning \"intelligent\" — both connect to an underlying idea of \"clarity/illumination\"), even though the everyday distinction between the two is sometimes fuzzy and dictionaries don't always agree.",
+      "content": "### MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS\n- **Trigger signal:** Student treats multiple-meaning (polysemous) words as identical to homonyms, missing a subtle but real distinction: homonyms are typically UNRELATED meanings that happen to share spelling/sound by coincidence (a \"bat\" the animal vs. a \"bat\" for baseball — no meaningful connection), while POLYSEMY involves meanings that are RELATED, having evolved from a shared core sense (e.g., \"bright\" meaning \"shining with light\" and \"bright\" meaning \"intelligent\" — both connect to an underlying idea of \"clarity/illumination\"), even though the everyday distinction between the two is sometimes fuzzy and dictionaries don't always agree.\n- **Conflict evidence [P28]:** \"You said 'bright' (shining) and 'bright' (smart) are exactly like 'bat' (animal) and 'bat' (sports equipment) — totally unrelated meanings that just happen to share a word. Is there any conceptual connection between 'shining' and 'intelligent,' the way there's clearly NO connection between a flying mammal and sports equipment?\"\n- **Bridge text [P30]:** \"Homonyms (like 'bat'/'bat') typically have historically UNRELATED meanings that coincidentally share the same spelling/sound. POLYSEMOUS multiple-meaning words (like 'bright' meaning both 'shining' and 'intelligent') have meanings that are RELATED, connected by an underlying shared concept (both relate to a kind of 'clarity' or vividness) — even though the distinction can be fuzzy at the edges and isn't always agreed upon by dictionaries.\"\n- **Replacement text [P31]:** \"Check whether a word's multiple meanings are conceptually RELATED (polysemy) or historically UNRELATED/coincidental (homonymy) — recognizing this distinction, even though borderline cases exist.\"\n- **Discrimination pairs [P33]:**\n  - \"bright\" (shining) / \"bright\" (intelligent) — related meanings, both connected to clarity/vividness (polysemy) vs. \"bat\" (animal) / \"bat\" (sports equipment) — unrelated, coincidental (homonymy).\n  - \"head\" (body part) / \"head\" (leader, as in \"head of the company\") — related through a shared \"topmost/most important part\" concept (polysemy) vs. a genuinely coincidental homonym pair.\n- **s6_path:** \"Since both categories involve one word-form with multiple meanings, it's very reasonable to treat them the same — but noticing whether the meanings are conceptually connected or purely coincidental is a real, if sometimes subtle, distinction worth developing a feel for.\"",
+      "localKey": "MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS",
+      "language": "en",
+      "refs": [
+        "MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/misconception/MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "- **Trigger signal:** Student assumes a dictionary always lists a word's meanings in order of importance or frequency of use (with meaning #1 always being the \"main\" or most common sense), rather than recognizing that dictionaries vary in their ordering convention — some list by historical/etymological order (oldest meaning first), others by frequency — meaning the FIRST listed sense is not automatically the most relevant one for a given context, and readers must use CONTEXT, not dictionary position, to determine which sense applies.",
+      "content": "### MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER\n- **Trigger signal:** Student assumes a dictionary always lists a word's meanings in order of importance or frequency of use (with meaning #1 always being the \"main\" or most common sense), rather than recognizing that dictionaries vary in their ordering convention — some list by historical/etymological order (oldest meaning first), others by frequency — meaning the FIRST listed sense is not automatically the most relevant one for a given context, and readers must use CONTEXT, not dictionary position, to determine which sense applies.\n- **Conflict evidence [P28]:** \"You picked the first meaning listed in the dictionary for 'bank' just because it was first. Does the CONTEXT of the sentence — 'We sat on the river bank' — actually support that first-listed meaning, or does context point to a different one?\"\n- **Bridge text [P30]:** \"Dictionaries order meanings according to varying conventions (historical/etymological order in some, frequency order in others) — the FIRST listed meaning is not automatically the most common or most relevant one for your specific context. Always use the surrounding CONTEXT to determine which of a word's multiple meanings actually applies, rather than defaulting to whichever sense the dictionary happens to list first.\"\n- **Replacement text [P31]:** \"Use context, not dictionary listing order, to determine which meaning of a multiple-meaning word applies in a given sentence.\"\n- **Discrimination pairs [P33]:**\n  - \"We sat on the river bank\" (context clearly indicates the landform meaning, regardless of which sense a dictionary lists first) vs. blindly picking the dictionary's first-listed sense.\n  - A word whose dictionary's first entry is a rare/historical sense, while the sentence context calls for a more common modern sense — context should still win.\n- **s6_path:** \"It's a very reasonable assumption that a dictionary lists its 'main' meaning first, since that's how many reference lists work — but dictionary ordering conventions vary, and only context reliably tells you which meaning is actually intended in a specific sentence.\"\n\n---",
+      "localKey": "MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER",
+      "language": "en",
+      "refs": [
+        "MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Identifying Related (Polysemous) Multiple Meanings",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Related (Polysemous) Multiple Meanings\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Contrasting Polysemy with Homonymy",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Contrasting Polysemy with Homonymy\",\"primitives\":[],\"addresses\":[\"MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Using Context to Select the Correct Meaning",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Using Context to Select the Correct Meaning\",\"primitives\":[],\"addresses\":[\"MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Checking Dictionary Entries Without Assuming Order = Importance",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Checking Dictionary Entries Without Assuming Order = Importance\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Multiple-Meaning Words in Extended Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Multiple-Meaning Words in Extended Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER\",\"MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS",
+        "MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Related meanings, novel word**\n\"How are 'bright' (shining) and 'bright' (intelligent) related in meaning?\"\n*Target:* both connect to an idea of clarity/vividness — a shared conceptual link.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Polysemy vs. homonymy, novel pair**\n\"Is 'bank' (financial institution) and 'bank' (river edge) polysemy or homonymy?\"\n*Target:* debatable/borderline in some analyses, but commonly treated as homonymy (historically unrelated origins) — correctly reasoning through the relatedness test rather than assuming automatically.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Context over dictionary order, novel example**\n\"In 'The company will table this proposal,' which meaning of 'table' applies — furniture, or to postpone/set aside?\"\n*Target:* to postpone/set aside — determined by context (verb usage in a business sentence), not by whichever sense might be listed first in a dictionary.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Selecting sense from a dictionary entry**\n\"A dictionary lists five senses for 'run.' Given the sentence 'He hit a home run,' which sense applies?\"\n*Target:* correctly identifies the baseball-scoring sense, regardless of its position among the five listed senses.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain multiple-meaning words**\n\"In your own words: are multiple-meaning words the same as homonyms, and does a dictionary's first-listed meaning tell you which sense to use?\"\n*Target:* states or demonstrates that polysemous multiple-meaning words have related senses (unlike often-unrelated homonyms), and that context — not dictionary listing order — determines which sense applies in a given sentence.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Adaptive Flags",
+      "content": "- **Relatedness test distinguishes polysemy from homonymy, with acknowledged fuzzy edges**: teach the conceptual-connection test explicitly while being honest that some cases are genuinely debatable even among linguists — this builds appropriate epistemic humility alongside the skill.\n- **Context always overrides dictionary listing position**: this is a crucial, practical skill especially for dictionary-dependent learners — never let \"it's listed first\" substitute for genuine context-based sense selection.\n- **Meaning-web visualization aids polysemy recognition**: reuse this technique whenever a new polysemous word is introduced, to make the underlying conceptual connection concrete and memorable.\n- **Special priority for dictionary-reliant EL learners**: for S9 learners who frequently consult dictionaries, explicitly and repeatedly reinforce the context-over-order principle, since this population is especially likely to encounter and be misled by dictionary entry-ordering conventions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.vocab.multiple-meaning-words/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.multiple-meaning-words",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — meaning-web vs. coincidence-pair sort warm-up\n  ↓\n[P41] PD-1 (homonyms-homophones readiness)\n  ↓ PASS\n[P06] Anchor: meaning-web vs. coincidence-pair sort\n  ↓\nTA-1: Identifying related (polysemous) multiple meanings [C]\n  ↓\nTA-2: Contrasting polysemy with homonymy [C]\n  ↓\n[P28] Conflict: multiple-meaning words equated with homonyms → MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS (if triggered)\n  ↓\nTA-3: Using context to select the correct meaning [C→P]\n  ↓\n[P28] Conflict: dictionary order assumed to signal importance → MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER (if triggered)\n  ↓\nTA-4: Checking dictionary entries without assuming order = importance [P]\n  ↓\nTA-5: Multiple-meaning words in extended text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one polysemous word and map its related meanings.\"\n[P68] Session close\n[P85] Regulation tail — praise checking context and relatedness over defaulting to dictionary order or homonym assumptions\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on homonyms-homophones, new to polysemy specifically): dwell on TA-1's clear meaning-web examples before introducing the sometimes-fuzzy polysemy/homonymy contrast. S1 (already navigates multiple meanings correctly in reading but hasn't formally distinguished polysemy from homonymy): use TA-2 to build explicit vocabulary for an already-present disambiguation skill. S6 (frustrated by borderline cases where polysemy/homonymy distinction is genuinely unclear even to linguists): validate that some cases ARE genuinely debatable, and that the goal is developing a reasoned approach, not achieving perfect certainty on every edge case. S9 (English learner relying on dictionary lookups where entry-order confusion is especially likely, or whose L1 dictionary conventions differ): expect MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER to be a particularly relevant, practical issue, since dictionary-dependent learners are especially prone to defaulting to the first listed sense — prioritize TA-3/TA-4's context-first practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

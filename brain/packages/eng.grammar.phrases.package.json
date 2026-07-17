@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.phrases-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.phrases",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b55b13d468490d64b993774ef59bad252a9526ed60a8cb76cdb35f4c8b817090",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.phrases.md": "sha256:51e4676a35fd2f74773b8e8f65b022de44bfb1832817a8860f5421558f520fdc"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.phrases",
+    "name": "Phrases",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.grammar.word-order"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.phrases-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.phrases (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.phrases.md": "sha256:51e4676a35fd2f74773b8e8f65b022de44bfb1832817a8860f5421558f520fdc"
+      },
+      "contentHash": "sha256:24721e604efc5d6a355ea38bc815a65ed46f9ecb84d62dae5e1c633414caf4cf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.phrases.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.phrases.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.phrases.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.phrases.md#TA-2 (addresses MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.phrases.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.phrases.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.phrases.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.phrases.md#TA-4 (addresses MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.phrases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.phrases.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.phrases.md#TA-5 (addresses MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS, MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.phrases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.phrases\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.phrases/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Phrases — Conceptual Development Sequence",
+      "content": "**TA-1 — Noun Phrases [C]**\n\nPresent sentences with noun phrases (the tall building, my best friend); student identifies the phrase, its head noun, and its modifiers.\n\n**TA-2 — Verb Phrases [C]**\n\nPresent sentences with verb phrases (has been running, will finish soon); student identifies the phrase and its head verb, directly targeting MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS by requiring identification of the unifying function.\n\n**TA-3 — Prepositional, Adjectival, and Adverbial Phrases [C→P]**\n\nPresent sentences with prepositional phrases (in the morning), adjectival phrases (very tall), and adverbial phrases (quite quickly); student identifies each phrase type and its function.\n\n**TA-4 — Distinguishing Phrases from Clauses [P]**\n\nPresent a mixed set of phrases and clauses; student applies the subject-verb-pair test to correctly classify each, directly targeting MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING.\n\n**TA-5 — Identifying Phrases in Extended Text [P]**\n\nStudent reads a longer passage and identifies multiple phrase types (noun, verb, prepositional, adjectival, adverbial), integrating all prior categories into a realistic reading context.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/misconception/MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.phrases",
+      "title": "- **Trigger signal:** Student treats any random string of consecutive words as a \"phrase,\" without recognizing that a genuine grammatical phrase must function as a single unified UNIT (acting as one part of speech — noun, verb, adjective, adverb — within the larger sentence) built around a HEAD word, rather than being an arbitrary word grouping.",
+      "content": "### MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS\n- **Trigger signal:** Student treats any random string of consecutive words as a \"phrase,\" without recognizing that a genuine grammatical phrase must function as a single unified UNIT (acting as one part of speech — noun, verb, adjective, adverb — within the larger sentence) built around a HEAD word, rather than being an arbitrary word grouping.\n- **Conflict evidence [P28]:** \"You said 'dog the barked at' from the sentence 'The dog barked at the mailman' is a phrase. Does this group of words function as ONE unified unit doing a single job in the sentence, the way 'the dog' (a noun phrase) or 'barked at' does?\"\n- **Bridge text [P30]:** \"A grammatical phrase is a group of related words that function TOGETHER as a single unit (acting as a noun, verb, adjective, or adverb within the sentence), built around a HEAD word that the rest of the phrase modifies or complements — not just any consecutive string of words. 'The dog' is a noun phrase (head: dog); 'barked loudly' is a verb phrase (head: barked); but a random scrambled sequence isn't a phrase at all.\"\n- **Replacement text [P31]:** \"Check whether a word group functions as one unified grammatical unit built around a head word — not just whether the words happen to sit next to each other.\"\n- **Discrimination pairs [P33]:**\n  - \"the tall building\" (genuine noun phrase — head \"building,\" modified by \"the\" and \"tall,\" functions as one unit) vs. an arbitrary scrambled sequence with no unified function.\n  - \"very quickly\" (genuine adverb phrase — head \"quickly,\" modified by \"very\") vs. a random non-functional word string.\n- **s6_path:** \"Since 'phrase' in everyday language often just means 'a few words,' it's very natural to expect any word grouping to count — but the grammatical definition specifically requires functional unity around a head word.\"",
+      "localKey": "MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS",
+      "language": "en",
+      "refs": [
+        "MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/misconception/MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.phrases",
+      "title": "- **Trigger signal:** Student conflates phrases (word groups WITHOUT a subject-verb pair, functioning as a single part of speech) with clauses (word groups WITH a subject-verb pair, capable of expressing a complete or partial proposition), missing the defining structural difference — the presence or absence of a subject-verb relationship (e.g., \"in the morning\" is a phrase — no subject-verb pair; \"when the sun rises\" is a clause — contains the subject \"sun\" and verb \"rises\").",
+      "content": "### MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING\n- **Trigger signal:** Student conflates phrases (word groups WITHOUT a subject-verb pair, functioning as a single part of speech) with clauses (word groups WITH a subject-verb pair, capable of expressing a complete or partial proposition), missing the defining structural difference — the presence or absence of a subject-verb relationship (e.g., \"in the morning\" is a phrase — no subject-verb pair; \"when the sun rises\" is a clause — contains the subject \"sun\" and verb \"rises\").\n- **Conflict evidence [P28]:** \"You called 'in the morning' a clause. Does it have a subject doing an action (a subject-verb pair), the way 'when the sun rises' does? What's the key difference?\"\n- **Bridge text [P30]:** \"Phrases are word groups WITHOUT a subject-verb pair, functioning as a single grammatical unit ('in the morning' — a prepositional phrase, no subject or verb). Clauses are word groups WITH a subject-verb pair ('when the sun rises' — 'sun' is the subject, 'rises' is the verb), capable of forming at least a partial proposition. This subject-verb presence/absence is THE defining structural difference between the two categories.\"\n- **Replacement text [P31]:** \"Check for the presence of a subject-verb pair — its absence means a phrase, its presence means a clause — as the defining test.\"\n- **Discrimination pairs [P33]:**\n  - \"in the morning\" (phrase — no subject-verb pair) vs. \"when the sun rises\" (clause — \"sun\" + \"rises\" is a subject-verb pair).\n  - \"running quickly\" (phrase — no subject/verb pair, just a participial phrase) vs. \"because she was running\" (clause — \"she\" + \"was running\" is a subject-verb pair).\n- **s6_path:** \"Both phrases and clauses are 'groups of words smaller than a full sentence,' which makes them easy to conflate — but checking specifically for a subject-verb pair reliably distinguishes the two categories.\"\n\n---",
+      "localKey": "MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING",
+      "language": "en",
+      "refs": [
+        "MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Noun Phrases",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Noun Phrases\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Verb Phrases",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Verb Phrases\",\"primitives\":[],\"addresses\":[\"MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Prepositional, Adjectival, and Adverbial Phrases",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prepositional, Adjectival, and Adverbial Phrases\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Distinguishing Phrases from Clauses",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Distinguishing Phrases from Clauses\",\"primitives\":[],\"addresses\":[\"MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Identifying Phrases in Extended Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Identifying Phrases in Extended Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS\",\"MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS",
+        "MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.phrases",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Noun phrase, novel sentence**\n\"In 'My favorite book fell,' identify the noun phrase and its head.\"\n*Target:* \"My favorite book\" — head noun \"book.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.phrases",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Verb phrase, novel sentence**\n\"In 'They will have finished by noon,' identify the verb phrase and its head.\"\n*Target:* \"will have finished\" — head verb \"finished.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.phrases",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Prepositional phrase, novel sentence**\n\"In 'The cat slept under the table,' identify the prepositional phrase.\"\n*Target:* \"under the table.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.phrases",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Phrase vs. clause, novel pair**\n\"Is 'before dinner' a phrase or a clause? What about 'before we ate dinner'?\"\n*Target:* \"before dinner\" is a phrase (no subject-verb pair); \"before we ate dinner\" is a clause (\"we\" + \"ate\" is a subject-verb pair).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.phrases",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain phrases**\n\"In your own words: what makes a group of words a genuine grammatical phrase, and how is a phrase different from a clause?\"\n*Target:* states or demonstrates that a phrase is a group of words functioning as one unit around a head word (not just any word grouping), and that phrases lack a subject-verb pair while clauses have one — the defining structural distinction.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Adaptive Flags",
+      "content": "- **Head-word unity is the defining test for a genuine phrase**: always require identifying the head word and confirming the group functions as one unit, directly countering the \"any word group counts\" default.\n- **Subject-verb-pair presence/absence is the defining phrase/clause test**: teach this as an explicit, checkable rule, since phrases and clauses are easily conflated as \"smaller than a sentence\" groupings.\n- **Function-based chunking manages the five phrase types' complexity**: organize instruction by function (naming, action, relationship, description) rather than presenting all five types simultaneously.\n- **This concept is foundational for later clause/sentence-combining work**: for S9 learners, ensure genuine mastery here, since the upcoming clauses concept builds directly on the phrase/clause distinction established in this concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.phrases/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.phrases",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — phrase-unit blocks warm-up\n  ↓\n[P41] PD-1 (word-order readiness)\n  ↓ PASS\n[P06] Anchor: phrase-unit blocks (grouped units + head words, contrasted with a clause)\n  ↓\nTA-1: Noun phrases [C]\n  ↓\nTA-2: Verb phrases [C]\n  ↓\n[P28] Conflict: any word group treated as a phrase → MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS (if triggered)\n  ↓\nTA-3: Prepositional, adjectival, and adverbial phrases [C→P]\n  ↓\nTA-4: Distinguishing phrases from clauses [P]\n  ↓\n[P28] Conflict: phrases and clauses conflated → MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING (if triggered)\n  ↓\nTA-5: Identifying phrases in extended text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one noun phrase and one prepositional phrase in something you read.\"\n[P68] Session close\n[P85] Regulation tail — praise checking for head-word unity and subject-verb-pair presence over surface guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word order, new to phrase-level grammatical analysis): dwell on TA-1/TA-2's most intuitive phrase types (noun, verb) before introducing prepositional/adjectival/adverbial phrases. S1 (already uses phrases fluently in speech/writing but hasn't formally analyzed them): use this concept to build explicit, transferable structural vocabulary for an already-present intuitive skill. S6 (overwhelmed by five distinct phrase types): explicitly organize by function (naming a thing, showing action, showing relationship, describing) rather than presenting all five as an undifferentiated list. S9 (L1 doesn't use a phrase/clause distinction the same way, or has a different internal phrase-structure system): expect this concept, especially the phrase-vs-clause discrimination (TA-4), to require dedicated, explicit contrastive teaching, since this structural analysis skill is foundational to later English clause/sentence-combining work and may not transfer directly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.phrases.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
