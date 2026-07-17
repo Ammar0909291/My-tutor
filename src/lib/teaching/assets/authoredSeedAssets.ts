@@ -3987,6 +3987,169 @@ const TRI_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.projectile-motion ─────────────────────────────────────────────
+const PROJ = 'phys.mech.projectile-motion'
+const PROJ_SRC = 'docs/curriculum/blueprints/phys.mech.projectile-motion.md'
+
+const PROJ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROJ,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Does a heavier ball land sooner? Watch where the mass goes in ' +
+      'the math: gravity pulls with F = mg, and acceleration is ' +
+      'a = F/m = mg/m = g. The mass CANCELS. Every projectile — golf ' +
+      'ball or cannonball — falls with the same g = 9.8 m/s\u00b2, which ' +
+      'is exactly why the SUVAT equations for projectiles contain no ' +
+      'mass term at all: the trajectory is fixed by launch speed, ' +
+      'angle, and g alone. Two balls thrown horizontally at the same ' +
+      'speed from the same height hit the ground at the same instant, ' +
+      'the same distance out — Galileo\u2019s Leaning Tower insight. ' +
+      '(Everyday experience disagrees only because of air resistance: ' +
+      'drop a coin and a sheet of paper, then FOLD the paper small and ' +
+      'repeat — the gap nearly vanishes.)',
+    targetedMisconceptions: [`${PROJ}:MC-HEAVIER-FALLS-FASTER`],
+    source: `${PROJ_SRC} — MC-HEAVIER-FALLS-FASTER (P28 mass-cancellation + s6 folded-paper experiment)`,
+  },
+  {
+    conceptId: PROJ,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Which launch angle throws farthest? Not the steepest. Range is ' +
+      'a TRADE: a shallow launch has plenty of horizontal speed but ' +
+      'almost no flight time; a steep launch buys long flight time at ' +
+      'the cost of horizontal speed; straight up (90\u00b0) is the extreme ' +
+      'case — maximum air time, zero horizontal progress, and the ' +
+      'ball lands on your head. The formula R = v\u2080\u00b2 sin 2\u03b8/g settles ' +
+      'it: sin 2\u03b8 peaks at 2\u03b8 = 90\u00b0, so \u03b8 = 45\u00b0 is the optimal ' +
+      'balance. Bonus symmetry worth keeping: complementary angles ' +
+      'give EQUAL range — 30\u00b0 and 60\u00b0 land in the same spot, the ' +
+      '60\u00b0 shot just three times higher on the way. Height maximises ' +
+      'at 90\u00b0; RANGE maximises at 45\u00b0 — two different questions.',
+    targetedMisconceptions: [`${PROJ}:MC-MAX-RANGE-90DEG`],
+    source: `${PROJ_SRC} — MC-MAX-RANGE-90DEG (P30 trade-off bridge + P33 30\u00b0/60\u00b0 complementary pair)`,
+  },
+]
+
+const PROJ_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROJ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 kg ball and a 5 kg ball are thrown horizontally at the same speed from the same height (no air resistance). Which lands first?',
+    choices: [
+      { text: 'They land together — a = F/m = g for both; trajectories are mass-independent', isCorrect: true },
+      { text: 'The 5 kg ball — heavier objects fall faster', isCorrect: false, misconceptionId: `${PROJ}:MC-HEAVIER-FALLS-FASTER` },
+      { text: 'The 1 kg ball — lighter objects respond to gravity more quickly', isCorrect: false },
+    ],
+    correctValue: 'together',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PROJ}:MC-HEAVIER-FALLS-FASTER`],
+    source: `${PROJ_SRC} — MC-HEAVIER-FALLS-FASTER probe, distractor-mapped`,
+  },
+  {
+    conceptId: PROJ,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On level ground (no air resistance), which launch angle gives the greatest RANGE?',
+    choices: [
+      { text: '45\u00b0 — the optimal trade between horizontal speed and flight time (R = v\u2080\u00b2 sin 2\u03b8/g)', isCorrect: true },
+      { text: '90\u00b0 — launching straight up keeps the ball in the air longest, so it goes farthest', isCorrect: false, misconceptionId: `${PROJ}:MC-MAX-RANGE-90DEG` },
+    ],
+    correctValue: '45\u00b0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PROJ}:MC-MAX-RANGE-90DEG`],
+    source: `${PROJ_SRC} — MC-MAX-RANGE-90DEG probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.universal-gravitation ─────────────────────────────────────────
+const GRAV = 'phys.mech.universal-gravitation'
+const GRAV_SRC = 'docs/curriculum/blueprints/phys.mech.universal-gravitation.md'
+
+const GRAV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GRAV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '\u201cAstronauts float because there\u2019s no gravity in space\u201d — run ' +
+      'the number and it collapses. The ISS orbits just 400 km up; ' +
+      'gravity there is g = 9.8 \u00d7 (6370/6770)\u00b2 \u2248 8.7 m/s\u00b2 — 88% of ' +
+      'surface gravity, very much switched on. Astronauts feel ' +
+      'weightless because station and crew are in continuous FREE ' +
+      'FALL together, forever falling around the Earth while moving ' +
+      'sideways fast enough to keep missing it. Newton\u2019s deeper ' +
+      'point: the same F = Gm\u2081m\u2082/r\u00b2 that drops an apple holds the ' +
+      'Moon in orbit — at the Moon\u2019s distance gravity has thinned to ' +
+      '0.0027 m/s\u00b2, tiny but exactly enough. The force weakens with ' +
+      'distance but reaches zero only at infinite range: gravity ' +
+      'never switches off.',
+    targetedMisconceptions: [`${GRAV}:MC-GRAVITY-STOPS`],
+    source: `${GRAV_SRC} — MC-GRAVITY-STOPS (P28 ISS 88% computation + P30 apple-and-Moon bridge)`,
+  },
+  {
+    conceptId: GRAV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Double the distance — does gravity halve? No: it QUARTERS. The ' +
+      'law is inverse-SQUARE, F = Gm\u2081m\u2082/r\u00b2, and the geometry ' +
+      'explains why: gravity\u2019s influence spreads over the surface of ' +
+      'a sphere, and a sphere\u2019s area is 4\u03c0r\u00b2 — double the radius and ' +
+      'the same influence is spread over FOUR times the area. So the ' +
+      'scaling rule is: multiply r by k, divide F by k\u00b2. Double r \u2192 ' +
+      'F/4. Triple r \u2192 F/9. HALVE r \u2192 4F. Check yourself with ' +
+      'numbers whenever unsure: at r = 1, F\u2080; at r = 2, F\u2080/4; at ' +
+      'r = 3, F\u2080/9 — if your answers read F\u2080/2 and F\u2080/3, the ' +
+      'inverse-linear habit is driving and needs overwriting.',
+    targetedMisconceptions: [`${GRAV}:MC-INVERSE-LINEAR`],
+    source: `${GRAV_SRC} — MC-INVERSE-LINEAR (P30 sphere-area bridge + P33 k\u00b2 scaling triplet)`,
+  },
+]
+
+const GRAV_PROBES: SeedProbe[] = [
+  {
+    conceptId: GRAV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why do astronauts on the ISS (400 km altitude) feel weightless?',
+    choices: [
+      { text: 'They are in continuous free fall with the station — gravity there is still ~88% of surface gravity', isCorrect: true },
+      { text: 'There is no gravity in space — it stops beyond the atmosphere', isCorrect: false, misconceptionId: `${GRAV}:MC-GRAVITY-STOPS` },
+      { text: 'The station\u2019s speed generates an anti-gravity force that cancels weight', isCorrect: false },
+    ],
+    correctValue: 'free fall',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRAV}:MC-GRAVITY-STOPS`],
+    source: `${GRAV_SRC} — MC-GRAVITY-STOPS probe, distractor-mapped`,
+  },
+  {
+    conceptId: GRAV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two masses attract with force F. The distance between them is doubled. The new force is:',
+    choices: [
+      { text: 'F/4 — inverse-square: doubling r quadruples r\u00b2', isCorrect: true },
+      { text: 'F/2 — twice as far means half the force', isCorrect: false, misconceptionId: `${GRAV}:MC-INVERSE-LINEAR` },
+    ],
+    correctValue: 'F/4',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GRAV}:MC-INVERSE-LINEAR`],
+    source: `${GRAV_SRC} — P33 doubling pair as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -4034,6 +4197,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...TEMP_EXPLANATIONS,
   ...REFR_EXPLANATIONS,
   ...TRI_EXPLANATIONS,
+  ...PROJ_EXPLANATIONS,
+  ...GRAV_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -4081,4 +4246,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...TEMP_PROBES,
   ...REFR_PROBES,
   ...TRI_PROBES,
+  ...PROJ_PROBES,
+  ...GRAV_PROBES,
 ]
