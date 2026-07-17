@@ -6454,6 +6454,170 @@ const PFX_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.linalg.matrix-multiplication ───────────────────────────────────────
+const MMUL = 'math.linalg.matrix-multiplication'
+const MMUL_SRC = 'docs/curriculum/blueprints/math.linalg.matrix-multiplication.md'
+
+const MMUL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MMUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Matrix multiplication is NOT element-by-element like scalar ' +
+      'multiplication — it is rows-dotted-with-columns, and that ' +
+      'demands a structural handshake: A(m\u00d7n) times B(p\u00d7q) only ' +
+      'works when n = p — the inner numbers must match. Two matrices ' +
+      'each 2\u00d73 CANNOT multiply as written (3 \u2260 2); the outer ' +
+      'dimensions being equal is irrelevant. Why the rule exists: ' +
+      'entry C_ij is the dot product of A\u2019s row i with B\u2019s column j — ' +
+      'a dot product needs both vectors to have the SAME LENGTH, so ' +
+      'A\u2019s row length (n) must equal B\u2019s column length (p). Before ' +
+      'multiplying anything, write the dimensions side by side: ' +
+      '(m\u00d7n)(p\u00d7q) — inner numbers (n, p) must agree; the result ' +
+      'takes the outer numbers, m\u00d7q.',
+    targetedMisconceptions: [`${MMUL}:MC-1`],
+    source: `${MMUL_SRC} — MC-1 DIMENSION-RULE-IGNORED (TA-B01: dot-product length requirement as the structural reason)`,
+  },
+  {
+    conceptId: MMUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Two traps once the dimension rule is clear. First: entry C_ij ' +
+      'comes from ROW i of A dotted with COLUMN j of B — not column ' +
+      'i of A with row j of B. Mixing the roles up computes a ' +
+      'completely different (and usually undefined) pairing. Keep ' +
+      'the mnemonic literal: \u201crow of the first, column of the ' +
+      'second, always.\u201d Second, and more consequential: AB = BA is ' +
+      'NOT generally true, unlike ordinary numbers. The entry formula ' +
+      'itself is asymmetric between A and B (row-from-A meets ' +
+      'column-from-B), so swapping the order changes which vectors ' +
+      'get dotted with which — often changing even the RESULT\u2019S ' +
+      'dimensions, let alone its values. Always compute AB and BA ' +
+      'separately; never assume they match.',
+    targetedMisconceptions: [`${MMUL}:MC-2`, `${MMUL}:MC-3`],
+    source: `${MMUL_SRC} — MC-2 ROW-COLUMN-ORDER-REVERSED + MC-3 ASSUMES-COMMUTATIVITY (TA-B02: row-of-first/column-of-second mnemonic + asymmetric-formula argument)`,
+  },
+]
+
+const MMUL_PROBES: SeedProbe[] = [
+  {
+    conceptId: MMUL,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Matrix A is 2\u00d73 and matrix B is 2\u00d73. Can you compute AB?',
+    choices: [
+      { text: 'No — the inner dimensions (3 and 2) don\u2019t match; multiplication requires A\u2019s columns to equal B\u2019s rows', isCorrect: true },
+      { text: 'Yes — the result is 2\u00d73, since both matrices are 2\u00d73', isCorrect: false, misconceptionId: `${MMUL}:MC-1` },
+    ],
+    correctValue: 'no — dimensions incompatible',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MMUL}:MC-1`],
+    source: `${MMUL_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MMUL,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For two square matrices A and B, is AB always equal to BA?',
+    choices: [
+      { text: 'No — matrix multiplication is generally non-commutative; AB and BA must be computed separately', isCorrect: true },
+      { text: 'Yes — multiplication always commutes, just like with ordinary numbers', isCorrect: false, misconceptionId: `${MMUL}:MC-3` },
+    ],
+    correctValue: 'no, not in general',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MMUL}:MC-3`],
+    source: `${MMUL_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.conjunctions ─────────────────────────────────────────────────
+const CONJ = 'eng.grammar.conjunctions'
+const CONJ_SRC = 'docs/curriculum/blueprints/eng.grammar.conjunctions.md'
+
+const CONJ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONJ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Not all conjunctions play the same role. COORDINATING ' +
+      'conjunctions — and, but, or, so (remember FANBOYS: for, and, ' +
+      'nor, but, or, yet, so) — join two EQUAL ideas that could each ' +
+      'stand alone: \u201cI was tired, AND I went to bed.\u201d ' +
+      'SUBORDINATING conjunctions — because, although, when, if, ' +
+      'since — join a DEPENDENT clause to an independent one, ' +
+      'creating an unequal, specific relationship (cause, contrast, ' +
+      'time, condition): \u201cBECAUSE I was tired, I went to bed\u201d states ' +
+      'a CAUSE that \u201cand\u201d cannot express — swap in \u201cand\u201d and the ' +
+      'cause-and-effect link vanishes into a flat list. Test any ' +
+      'conjunction: can the piece it introduces stand alone as a ' +
+      'full sentence? Yes \u2192 coordinating. No (it needs the other ' +
+      'clause to complete its meaning) \u2192 subordinating.',
+    targetedMisconceptions: [`${CONJ}:MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY`],
+    source: `${CONJ_SRC} — MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY (P28 because-vs-and conflict + P30 FANBOYS/subordinating split)`,
+  },
+  {
+    conceptId: CONJ,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Comma placement with conjunctions follows two learnable rules, ' +
+      'not guesswork. Rule 1 (coordinating): the comma goes BEFORE ' +
+      'the conjunction when joining two full sentences — \u201cI was ' +
+      'tired, but I kept working\u201d (never \u201ctired but, I kept\u201d). ' +
+      'Rule 2 (subordinating): the comma\u2019s position depends on ORDER ' +
+      '— if the subordinate clause comes FIRST, a comma follows it: ' +
+      '\u201cAlthough I was tired, I kept working.\u201d If it comes SECOND, ' +
+      'usually no comma at all: \u201cI kept working although I was ' +
+      'tired.\u201d So the checklist is: (1) what type of conjunction? ' +
+      '(2) if subordinating, which clause comes first? Two questions, ' +
+      'not a feeling.',
+    targetedMisconceptions: [`${CONJ}:MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM`],
+    source: `${CONJ_SRC} — MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM (P30 type+order checklist + P33 pairs)`,
+  },
+]
+
+const CONJ_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONJ,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence uses \u201cbecause\u201d correctly to show a cause-and-effect relationship?',
+    choices: [
+      { text: '\u201cBecause I was tired, I went to bed\u201d — \u201cbecause\u201d is subordinating and can express cause where \u201cand\u201d cannot', isCorrect: true },
+      { text: '\u201cI was tired because I went to bed\u201d and \u201cI was tired and I went to bed\u201d mean the same thing', isCorrect: false, misconceptionId: `${CONJ}:MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY` },
+    ],
+    correctValue: 'Because I was tired, I went to bed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CONJ}:MC-ALL-CONJUNCTIONS-WORK-THE-SAME-WAY`],
+    source: `${CONJ_SRC} — P28 because-vs-and conflict as probe`,
+  },
+  {
+    conceptId: CONJ,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which comma placement is correct?',
+    choices: [
+      { text: '\u201cI was tired, but I kept working\u201d — comma BEFORE the coordinating conjunction', isCorrect: true },
+      { text: '\u201cI was tired but, I kept working\u201d — comma AFTER the conjunction', isCorrect: false, misconceptionId: `${CONJ}:MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM` },
+    ],
+    correctValue: 'I was tired, but I kept working',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CONJ}:MC-COMMA-PLACEMENT-WITH-CONJUNCTIONS-IS-RANDOM`],
+    source: `${CONJ_SRC} — P28 comma-after-but conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -6531,6 +6695,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...STW_EXPLANATIONS,
   ...TORQ_EXPLANATIONS,
   ...PFX_EXPLANATIONS,
+  ...MMUL_EXPLANATIONS,
+  ...CONJ_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -6608,4 +6774,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...STW_PROBES,
   ...TORQ_PROBES,
   ...PFX_PROBES,
+  ...MMUL_PROBES,
+  ...CONJ_PROBES,
 ]
