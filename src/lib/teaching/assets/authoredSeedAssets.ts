@@ -7279,6 +7279,253 @@ const MOD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.opt.mirrors ────────────────────────────────────────────────────────
+const MIR = 'phys.opt.mirrors'
+const MIR_SRC = 'docs/curriculum/blueprints/phys.opt.mirrors.md'
+
+const MIR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MIR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A shaving mirror is concave — and it shows a VIRTUAL image, ' +
+      'proving concave mirrors do not always form real ones. With ' +
+      'f = \u221220 cm and the object close in at u = \u221210 cm (inside the ' +
+      'focal length), the mirror formula gives 1/v = 1/(\u221220) \u2212 ' +
+      '1/(\u221210) = +0.05 \u2192 v = +20 cm: POSITIVE v means the image ' +
+      'sits behind the mirror — virtual — and m = \u2212v/u = +2 means ' +
+      'erect and magnified. That is exactly why shaving and dental ' +
+      'mirrors work: get close (inside F) and a concave mirror flips ' +
+      'from its \u201cfar\u201d personality (converging rays to a real image) ' +
+      'to its \u201cclose\u201d personality (rays diverge on reflection, but ' +
+      'their backward extensions meet behind the glass). Neither ' +
+      'mirror type is \u201calways real\u201d or \u201calways virtual\u201d — for a ' +
+      'concave mirror, OBJECT POSITION relative to F decides it.',
+    targetedMisconceptions: [`${MIR}:MC-1`],
+    source: `${MIR_SRC} — MC-1 MC-CONCAVE-MIRROR-ALWAYS-FORMS-REAL-IMAGE (P28 shaving-mirror computation + P30 two-personalities bridge)`,
+  },
+  {
+    conceptId: MIR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'm = \u22122 — does that mean the image is HALF size? No: the sign ' +
+      'and the magnitude of magnification answer two completely ' +
+      'separate questions. The SIGN tells orientation (negative = ' +
+      'inverted, positive = erect); the MAGNITUDE tells size ratio ' +
+      '(|m| > 1 = larger, |m| < 1 = smaller, |m| = 1 = same). So ' +
+      'm = \u22122 means inverted AND twice as tall — check: h\u2032 = m \u00d7 ' +
+      'h_object = \u22122 \u00d7 3 cm = \u22126 cm (the minus sign = upside-down, ' +
+      'the 6 = twice 3). m = \u22120.5 would mean inverted but HALF ' +
+      'size — negative does not mean smaller. Read every ' +
+      'magnification as two independent facts, sign then number, ' +
+      'never one number telling both stories at once.',
+    targetedMisconceptions: [`${MIR}:MC-2`],
+    source: `${MIR_SRC} — MC-2 MC-MAGNIFICATION-SIGN-GIVES-IMAGE-SIZE (P28 h\u2032 = \u22126cm computation + P30 sign/magnitude split)`,
+  },
+]
+
+const MIR_PROBES: SeedProbe[] = [
+  {
+    conceptId: MIR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A concave shaving mirror (f = \u221220 cm) has an object at u = \u221210 cm (inside the focal length). What kind of image forms?',
+    choices: [
+      { text: 'Virtual, erect, magnified — v = +20 cm (behind the mirror), m = +2', isCorrect: true },
+      { text: 'Real, inverted — concave mirrors always form real images', isCorrect: false, misconceptionId: `${MIR}:MC-1` },
+    ],
+    correctValue: 'virtual, erect, magnified',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MIR}:MC-1`],
+    source: `${MIR_SRC} — MC-1 shaving-mirror computation as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MIR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A mirror produces magnification m = \u22123. What does this tell you about the image?',
+    choices: [
+      { text: 'Inverted and 3\u00d7 LARGER than the object — sign gives orientation, magnitude gives size', isCorrect: true },
+      { text: 'Inverted and one-third the size of the object', isCorrect: false, misconceptionId: `${MIR}:MC-2` },
+    ],
+    correctValue: 'inverted, 3\u00d7 larger',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MIR}:MC-2`],
+    source: `${MIR_SRC} — P33 m=\u22123 discrimination pair as probe`,
+  },
+]
+
+// ─── math.calc.chain-rule ────────────────────────────────────────────────────
+const CHAIN = 'math.calc.chain-rule'
+const CHAIN_SRC = 'docs/curriculum/blueprints/math.calc.chain-rule.md'
+
+const CHAIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHAIN,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'The chain rule for a composite f(g(x)) has TWO factors, and ' +
+      'dropping either one gives a wrong answer that looks almost ' +
+      'right. d/dx[f(g(x))] = f\u2032(g(x)) \u00b7 g\u2032(x) — the outer derivative, ' +
+      'evaluated AT THE INNER FUNCTION (not at bare x), MULTIPLIED by ' +
+      'the inner function\u2019s own derivative. Take sin(x\u00b2): the outer ' +
+      'derivative of sin is cos, evaluated at x\u00b2 \u2192 cos(x\u00b2); the inner ' +
+      'function x\u00b2 has derivative 2x. Forgetting the 2x (the g\u2032(x) ' +
+      'factor) gives just cos(x\u00b2) — off by exactly that factor. Two ' +
+      'errors to catch: writing cos(x\u00b2) alone (inner derivative ' +
+      'missing) or writing cos(x) \u00b7 2x (outer evaluated at bare x ' +
+      'instead of at x\u00b2). Both factors, both plugged in correctly: ' +
+      '2x \u00b7 cos(x\u00b2).',
+    targetedMisconceptions: [`${CHAIN}:MC-1`, `${CHAIN}:MC-2`],
+    source: `${CHAIN_SRC} — MC-1 INNER-DERIVATIVE-MISSING + MC-2 OUTER-EVALUATED-AT-X (sin(x\u00b2) worked case isolating both failure modes)`,
+  },
+  {
+    conceptId: CHAIN,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'x\u00b7sin(x) is a PRODUCT, not a composition — the chain rule does ' +
+      'not apply here at all. The giveaway: can you name an \u201couter\u201d ' +
+      'function that TAKES sin(x) as its input and does something ' +
+      'ELSE to it? No — x and sin(x) are simply multiplied side by ' +
+      'side, two separate functions of x combined with \u00d7. That needs ' +
+      'the PRODUCT rule: (uv)\u2032 = u\u2032v + uv\u2032, giving sin(x) + x\u00b7cos(x). ' +
+      'Contrast with sin(x\u00b2): here x\u00b2 is FED INTO sin — sin acts ON ' +
+      'the output of squaring, a genuine nesting, which is exactly ' +
+      'what \u201ccomposition\u201d means and what the chain rule handles. ' +
+      'Test before choosing a rule: is one function\u2019s OUTPUT the ' +
+      'other\u2019s INPUT (composition \u2192 chain rule), or are two ' +
+      'functions just multiplied (product \u2192 product rule)?',
+    targetedMisconceptions: [`${CHAIN}:MC-3`],
+    source: `${CHAIN_SRC} — MC-3 CHAIN-RULE-FOR-PRODUCTS (composition-vs-multiplication test; x\u00b7sin(x) vs sin(x\u00b2) contrast)`,
+  },
+]
+
+const CHAIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHAIN,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'What is d/dx[sin(x\u00b2)]?',
+    choices: [
+      { text: '2x\u00b7cos(x\u00b2) — outer derivative cos evaluated at x\u00b2, times inner derivative 2x', isCorrect: true },
+      { text: 'cos(x\u00b2) — the derivative of sin', isCorrect: false, misconceptionId: `${CHAIN}:MC-1` },
+      { text: '2x\u00b7cos(x) — outer derivative evaluated at bare x', isCorrect: false, misconceptionId: `${CHAIN}:MC-2` },
+    ],
+    correctValue: '2x cos(x\u00b2)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CHAIN}:MC-1`, `${CHAIN}:MC-2`],
+    source: `${CHAIN_SRC} — MC-1/MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CHAIN,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'To differentiate x\u00b7sin(x), which rule applies?',
+    choices: [
+      { text: 'The product rule — x and sin(x) are multiplied, not nested; result: sin(x) + x\u00b7cos(x)', isCorrect: true },
+      { text: 'The chain rule — treat x as outer and sin(x) as inner: cos(x)\u00b7\u2026', isCorrect: false, misconceptionId: `${CHAIN}:MC-3` },
+    ],
+    correctValue: 'product rule',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHAIN}:MC-3`],
+    source: `${CHAIN_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.gerunds-and-infinitives ─────────────────────────────────────
+const GRD = 'eng.grammar.gerunds-and-infinitives'
+const GRD_SRC = 'docs/curriculum/blueprints/eng.grammar.gerunds-and-infinitives.md'
+
+const GRD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GRD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cSwimming is fun\u201d and \u201cI am swimming\u201d both use the identical ' +
+      'spelling, \u201cswimming\u201d — but they are doing completely ' +
+      'different jobs. In \u201cI am swimming,\u201d \u201cswimming\u201d is part of the ' +
+      'VERB phrase, showing an action in progress (present ' +
+      'continuous). In \u201cSwimming is fun,\u201d there is no other verb ' +
+      'doing the action — \u201cswimming\u201d itself IS the subject, acting ' +
+      'as a NOUN. That noun-role \u2013ing form has its own name: a ' +
+      'GERUND. Same test works for objects: \u201cI enjoy swimming\u201d — ' +
+      '\u201cswimming\u201d is the object of \u201cenjoy,\u201d a noun role, versus \u201cI am ' +
+      'reading a book\u201d where \u201creading\u201d is verb, not noun. Don\u2019t judge ' +
+      'by the spelling (always -ing); judge by the JOB: is it doing a ' +
+      'noun\u2019s work (subject/object) or a verb\u2019s work?',
+    targetedMisconceptions: [`${GRD}:MC-GERUND-IS-JUST-PRESENT-CONTINUOUS`],
+    source: `${GRD_SRC} — MC-GERUND-IS-JUST-PRESENT-CONTINUOUS (P28 swimming-is-fun conflict + P30 job-not-spelling test)`,
+  },
+  {
+    conceptId: GRD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cI enjoy to swim\u201d — wrong, and not by accident. Specific verbs ' +
+      'GOVERN whether a gerund or infinitive follows, and this must ' +
+      'be learned per verb, like a vocabulary pairing: \u201cenjoy,\u201d ' +
+      '\u201cavoid,\u201d \u201cfinish,\u201d \u201cmind\u201d demand a GERUND (\u201cI enjoy ' +
+      'swimming,\u201d never \u201cto swim\u201d); \u201cwant,\u201d \u201cdecide,\u201d \u201chope,\u201d \u201cplan\u201d ' +
+      'demand an INFINITIVE (\u201cI want to swim,\u201d never \u201cswimming\u201d); ' +
+      '\u201clike,\u201d \u201cstart,\u201d \u201cbegin\u201d accept EITHER with barely any ' +
+      'difference. The sharpest trap: a few verbs change MEANING by ' +
+      'form — \u201cI stopped smoking\u201d means I quit the habit; \u201cI stopped ' +
+      'to smoke\u201d means I paused something else IN ORDER TO smoke. ' +
+      'Same verb \u201cstop,\u201d opposite story. Memorize the governance ' +
+      'per verb; never assume the two forms are interchangeable.',
+    targetedMisconceptions: [`${GRD}:MC-GERUND-AND-INFINITIVE-ARE-ALWAYS-INTERCHANGEABLE`],
+    source: `${GRD_SRC} — MC-GERUND-AND-INFINITIVE-ARE-ALWAYS-INTERCHANGEABLE (P28 enjoy-to-swim conflict + P33 stop-smoking/stop-to-smoke meaning-change pair)`,
+  },
+]
+
+const GRD_PROBES: SeedProbe[] = [
+  {
+    conceptId: GRD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u201cSwimming is my favorite hobby,\u201d what role does \u201cswimming\u201d play?',
+    choices: [
+      { text: 'A gerund — it functions as the NOUN subject of the sentence', isCorrect: true },
+      { text: 'Present continuous verb — same as in \u201cI am swimming\u201d', isCorrect: false, misconceptionId: `${GRD}:MC-GERUND-IS-JUST-PRESENT-CONTINUOUS` },
+    ],
+    correctValue: 'gerund (subject)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRD}:MC-GERUND-IS-JUST-PRESENT-CONTINUOUS`],
+    source: `${GRD_SRC} — P28 swimming-is-fun conflict as probe`,
+  },
+  {
+    conceptId: GRD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence is grammatically correct?',
+    choices: [
+      { text: '\u201cI enjoy swimming\u201d — \u201cenjoy\u201d governs the gerund form', isCorrect: true },
+      { text: '\u201cI enjoy to swim\u201d — gerunds and infinitives are always interchangeable after any verb', isCorrect: false, misconceptionId: `${GRD}:MC-GERUND-AND-INFINITIVE-ARE-ALWAYS-INTERCHANGEABLE` },
+    ],
+    correctValue: 'I enjoy swimming',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${GRD}:MC-GERUND-AND-INFINITIVE-ARE-ALWAYS-INTERCHANGEABLE`],
+    source: `${GRD_SRC} — P28 enjoy-to-swim conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -7366,6 +7613,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...BH_EXPLANATIONS,
   ...COSM_EXPLANATIONS,
   ...MOD_EXPLANATIONS,
+  ...MIR_EXPLANATIONS,
+  ...CHAIN_EXPLANATIONS,
+  ...GRD_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -7453,4 +7703,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...BH_PROBES,
   ...COSM_PROBES,
   ...MOD_PROBES,
+  ...MIR_PROBES,
+  ...CHAIN_PROBES,
+  ...GRD_PROBES,
 ]
