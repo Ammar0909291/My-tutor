@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.negotiation-language-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.negotiation-language",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:92372246c505687d13b113f8834903d267063ce0fd665302d2ceba6cfad329a8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.negotiation-language.md": "sha256:4a6bf223bffae420baa00bd1bc08d67e559339faf12bdf0f98daadaecd8c51be"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.negotiation-language",
+    "name": "Negotiation Language",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.communication.professional-communication"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.negotiation-language-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.negotiation-language (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.negotiation-language.md": "sha256:4a6bf223bffae420baa00bd1bc08d67e559339faf12bdf0f98daadaecd8c51be"
+      },
+      "contentHash": "sha256:c1234035bfc3ca2c9cabef4d7157d81de67d846a1a6cfca9650bcd0a2b42047a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.negotiation-language.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.negotiation-language.md#TA-1 (addresses MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.negotiation-language"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.negotiation-language\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.negotiation-language.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.negotiation-language.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.negotiation-language"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.negotiation-language\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.negotiation-language.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.negotiation-language.md#TA-3 (addresses MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.negotiation-language"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.negotiation-language\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.negotiation-language.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.negotiation-language.md#TA-4 (addresses MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE, MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.negotiation-language"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.negotiation-language\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.negotiation-language/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Negotiation Language — Conceptual Development Sequence",
+      "content": "### TA-1 — Acknowledging the Other Party's Position (MC-A)\n\nUsing the parallel-parking anchor, teach opening negotiation language by acknowledging the other\nparty's constraint or concern. Student practice: given a one-sided, forceful opening, rewrite it to\nacknowledge the other party's likely concern first.\n\n### TA-2 — Proposing a Mutually Acceptable Alternative\n\nExtend TA-1: teach following an acknowledgment with a concrete alternative that moves toward mutual\nacceptability. Student practice: given an acknowledged concern, propose a specific alternative\naddressing both parties' needs.\n\n### TA-3 — Voicing Genuine Disagreement Constructively (MC-B)\n\nUsing the painted-over-crack anchor, teach using constructive language to surface a real\ndisagreement rather than staying silent. Student practice: given a scenario with an unspoken\nconcern, draft the constructive negotiation language to voice it.\n\n### TA-4 — Full Application: Navigating a Negotiation to Genuine Agreement\n\nGive the student a new negotiation scenario involving a real disagreement. They must acknowledge the\nother party's position (TA-1), propose a mutually acceptable alternative (TA-2), and voice any\nremaining genuine concern constructively rather than suppressing it (TA-3) — the full synthesis\ntask.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 142,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/misconception/MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE",
+      "kind": "misconception",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "**Trigger signal:** Student treats negotiation language as fundamentally about \"winning\" — using",
+      "content": "### MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE\n\n**Trigger signal:** Student treats negotiation language as fundamentally about \"winning\" — using\nlanguage that asserts and pushes one's own position as forcefully as possible without acknowledging\nthe other party's concerns or position at all — rather than recognizing that effective negotiation\nlanguage builds toward a mutually acceptable agreement, typically by acknowledging the other side's\nposition before proposing alternatives.\n\n**Conflict evidence [P28]:** Show the student two negotiation openings: one that immediately and\nforcefully asserts one position with no acknowledgment of the other party (\"We need this delivered by\nFriday, no exceptions.\") and one that acknowledges the other party's constraint before proposing a\npath forward (\"I understand Friday is tight given your current workload — could we look at delivering\nthe core piece by Friday and the rest by Monday?\"). Ask: \"Which opening is more likely to lead to\nactual agreement? Does forcefully pushing one position, with no acknowledgment of the other side,\ntend to build toward agreement or resistance?\"\n\n**Bridge text [P30]:** \"Treating negotiation as pushing your position as hard as possible is like\ntrying to parallel park by aggressively gunning the engine forward — you might move, but you're not\nactually getting into the space you need, and you risk damaging things along the way. Effective\nnegotiation language acknowledges the other party's actual position first, then works toward a\nspace both parties can accept — pure force tends to produce resistance and stalemate, not\nagreement.\"\n\n**Replacement text [P31]:** \"Don't use negotiation language to push your own position as hard as\npossible. Acknowledge the other party's actual concern or constraint first, then propose an\nalternative that moves toward a mutually acceptable outcome, not simply toward your original\nposition winning outright.\"\n\n**Discrimination pairs [P33]:**\n1. \"We need this delivered by Friday, no exceptions.\" (pure force, no acknowledgment, likely to\n   produce resistance) vs. \"I understand Friday is tight given your current workload — could we look\n   at delivering the core piece by Friday and the rest by Monday?\" (acknowledges the constraint,\n   proposes a mutually workable alternative).\n2. A student whose negotiation language only ever restates their own position more forcefully\n   (misconception) vs. a student who explicitly acknowledges the other party's position before\n   proposing an alternative (correct negotiation discipline).\n\n**s6_path:** If the student continues to push their position with no acknowledgment after the\nbridge, give them a one-sided, forceful negotiation opening and have them rewrite it to explicitly\nacknowledge the other party's likely concern before proposing their alternative.",
+      "localKey": "MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE",
+      "language": "en",
+      "refs": [
+        "MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/misconception/MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING",
+      "kind": "misconception",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "**Trigger signal:** Student mistakes conflict-avoidance (staying silent about a genuine disagreement,",
+      "content": "### MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING\n\n**Trigger signal:** Student mistakes conflict-avoidance (staying silent about a genuine disagreement,\nor quickly agreeing just to end discomfort) for successful negotiation or consensus-building, failing\nto recognize that real negotiation language must constructively voice and work through actual\ndisagreement, rather than suppress it — an unresolved, unspoken disagreement is not the same as a\ngenuine, worked-through agreement.\n\n**Conflict evidence [P28]:** Present two negotiation outcomes: one where a participant genuinely\ndisagreed with a proposal but stayed silent and let it pass unchallenged (surface agreement, real\ndisagreement unaddressed), and one where a participant voiced their specific concern using\nconstructive negotiation language (\"I see the appeal of this approach, but I'm concerned about X —\ncould we address that before finalizing?\") leading to a genuinely revised, mutually accepted plan.\nAsk: \"In the first case, was the disagreement actually resolved, or just left unspoken? Which\noutcome represents genuine consensus?\"\n\n**Bridge text [P30]:** \"Mistaking silence for consensus is like assuming a crack in a wall has been\nfixed just because you painted over it — the surface looks fine, but the underlying problem is still\nthere and will likely resurface later. Genuine consensus requires actually voicing and working\nthrough real disagreement using constructive language, not painting over it with silence or premature\nagreement.\"\n\n**Replacement text [P31]:** \"Don't mistake staying silent or quickly agreeing for successful\nconsensus-building. If you genuinely disagree, voice your specific concern using constructive\nnegotiation language, and work through it with the other party — real agreement requires actually\naddressing disagreement, not suppressing it.\"\n\n**Discrimination pairs [P33]:**\n1. A participant who stays silent about a genuine concern, letting a proposal pass unchallenged\n   (surface agreement, unresolved underlying disagreement) vs. a participant who voices their specific\n   concern constructively, leading to a revised and genuinely accepted plan (real consensus).\n2. A student who treats \"nobody objected out loud\" as proof of successful negotiation\n   (misconception) vs. a student who recognizes genuine consensus requires actually surfacing and\n   resolving real disagreement (correct understanding).\n\n**s6_path:** If the student continues to conflate silence with consensus after the bridge, give them\na scenario where a participant has a genuine unspoken concern, and have them draft the constructive\nnegotiation language that participant should have used to voice it, rather than staying silent.",
+      "localKey": "MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING",
+      "language": "en",
+      "refs": [
+        "MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 44,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Acknowledging the Other Party's Position (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Acknowledging the Other Party's Position (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 146,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Proposing a Mutually Acceptable Alternative",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Proposing a Mutually Acceptable Alternative\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Voicing Genuine Disagreement Constructively (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Voicing Genuine Disagreement Constructively (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Full Application: Navigating a Negotiation to Genuine Agreement",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Navigating a Negotiation to Genuine Agreement\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE\",\"MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE",
+        "MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 164,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Rewriting a One-Sided Opening to Acknowledge the Other Party**\nGiven a one-sided, forceful negotiation opening, rewrite it to acknowledge the other party's likely\nconcern first.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 188,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Proposing a Mutually Acceptable Alternative**\nGiven an acknowledged concern, propose a specific alternative addressing both parties' needs.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 188,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Voicing a Genuine Concern Constructively**\nGiven a scenario with an unspoken concern, draft the constructive negotiation language to voice it.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 188,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Surface Agreement from Genuine Consensus**\nGiven two negotiation outcomes, identify which represents surface agreement with unresolved\ndisagreement and which represents genuine, worked-through consensus.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 188,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Negotiation to Genuine Agreement**\nGiven a new negotiation scenario involving a real disagreement, acknowledge the other party's\nposition, propose a mutually acceptable alternative, and voice any remaining concern constructively.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 188,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly acknowledges the other party on provided one-sided openings (MP-1) but\n  reverts to forceful, unacknowledging language in a new original scenario (MP-5), provide a\n  mandatory \"have I acknowledged their position first?\" check before proposing any alternative.\n- If the student's acknowledgment and proposal language is strong (MP-1, MP-2) but they still leave a\n  genuine concern unspoken in a new scenario (MP-5), require an explicit \"is there something here I'm\n  not saying that I actually disagree with?\" self-check before concluding a negotiation.\n- If the student struggles to distinguish surface agreement from genuine consensus at all, provide\n  the painted-over-crack contrast explicitly before asking them to classify a new outcome.\n- Students with strong performance in `eng.composition.counterargument-and-rebuttal`'s acknowledging-\n  the-opposing-view work should transfer readily to negotiation's acknowledgment-first discipline,\n  since both require genuinely engaging with a differing position before responding — draw this\n  parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 243,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "eng.communication.negotiation-language/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.negotiation-language",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: professional communication check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.communication.professional-communication]  [Component 3: Aggressive-Parallel-Parking /\n                                                            Painted-Over-Crack Anchor]\n                                                                        |\n                                                                        v\n                                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                        |\n                                                                        v\n                                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                        |\n                                                                        v\n                                          [MP-1 through MP-5 mastery probe set]\n                                                                        |\n                                          (pass >= 0.70) -----+----- (fail)\n                                                 |                      |\n                                                 v                      v\n                            [No further unlocks —  [S6 remediation: acknowledgment-rewrite drills /\n                             terminal in current      surface-vs-genuine-consensus drills]\n                             curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (one-sided\npushing) and MC-B during TA-3 (suppressing genuine disagreement) — these are largely independent and\noften need separate, explicit correction. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2 failures indicate\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-negotiation example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.negotiation-language.md",
+        "startLine": 208,
+        "endLine": 243
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

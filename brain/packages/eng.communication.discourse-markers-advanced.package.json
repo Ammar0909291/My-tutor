@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.discourse-markers-advanced-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.discourse-markers-advanced",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8a1fe7cadd63700f77b1b7d220f445dc39c7cec2ac1549d8fe0477f4e3488c17",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md": "sha256:6a83c4d37a83850fd9343f88c7b1f5e99eababda99da9fa049b686b800e57610"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.discourse-markers-advanced",
+    "name": "Advanced Discourse Markers",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.discourse-analysis-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.discourse-markers-advanced-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.discourse-markers-advanced (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md": "sha256:6a83c4d37a83850fd9343f88c7b1f5e99eababda99da9fa049b686b800e57610"
+      },
+      "contentHash": "sha256:901e2b3ea6ca601a1c2a38118d613f3af2bbdc17ed5db3f98971951606c32f05",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.discourse-markers-advanced.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md#TA-1 (addresses MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.discourse-markers-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.discourse-markers-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.discourse-markers-advanced.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md#TA-2 (addresses MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.discourse-markers-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.discourse-markers-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.discourse-markers-advanced.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md#TA-3 (addresses MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.discourse-markers-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.discourse-markers-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.discourse-markers-advanced.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md#TA-4 (addresses MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP, MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.discourse-markers-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.discourse-markers-advanced\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Advanced Discourse Markers — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying the Actual Logical Relationship (MC-A)\n\nUsing the stop-sign-vs-yield-sign anchor, teach identifying whether two ideas are related by\ncontrast, cause, or addition before selecting a marker. Student practice: given five sentence pairs,\nidentify the actual logical relationship in each.\n\n### TA-2 — Matching the Marker to the Relationship (MC-A)\n\nExtend TA-1: teach selecting the discourse marker that accurately signals the identified\nrelationship. Student practice: given sentence pairs with a mismatched marker, identify and correct\nthe mismatch.\n\n### TA-3 — Choosing Natural Fit Over Elaborate Sound (MC-B)\n\nUsing the tuxedo-at-a-barbecue anchor, teach selecting markers for clarity and natural fit rather\nthan elaborate sound. Student practice: given an over-elaborated paragraph, revise it by replacing\neach marker with the simplest word that still accurately signals the relationship.\n\n### TA-4 — Full Application: Using Discourse Markers Across Extended Discourse\n\nGive the student a new multi-paragraph passage with several logical connections needing markers.\nThey must identify each actual relationship (TA-1), select an accurately matching marker (TA-2), and\nensure natural fit rather than forced elaboration (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 135,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/misconception/MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP",
+      "kind": "misconception",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "**Trigger signal:** Student treats discourse markers as interchangeable transition words, using",
+      "content": "### MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP\n\n**Trigger signal:** Student treats discourse markers as interchangeable transition words, using\n\"however\" where the relationship between ideas is actually additive (not contrastive), or\n\"therefore\" where there is no genuine causal link between the two ideas — picking any marker that\nsounds like a transition rather than the one that accurately signals the actual logical relationship.\n\n**Conflict evidence [P28]:** Show the student the sentence \"The report was thorough. However, it\nincluded a detailed budget breakdown.\" Ask: \"Does the second sentence actually contrast with the\nfirst, or does it add to it? Is 'however' the right word here, or does it falsely signal a contrast\nthat isn't there?\"\n\n**Bridge text [P30]:** \"Treating discourse markers as interchangeable is like using a stop sign and a\nyield sign at the same intersection depending on which one you feel like putting up — both are\ntraffic signs, but they signal genuinely different instructions, and using the wrong one gives\ndrivers false information. A discourse marker signals a SPECIFIC logical relationship (contrast,\ncause, addition); using the wrong one misleads the reader about how the ideas actually connect.\"\n\n**Replacement text [P31]:** \"Before choosing a discourse marker, identify the actual logical\nrelationship between the two ideas: is one contrasting the other, causing the other, or simply\nadding to it? Choose the marker that accurately signals that specific relationship, not just any\ntransition word.\"\n\n**Discrimination pairs [P33]:**\n1. \"The report was thorough. However, it included a detailed budget breakdown.\" (a false contrast —\n   the second idea actually adds to the first, so \"however\" is the wrong marker) vs. \"The report was\n   thorough. Furthermore, it included a detailed budget breakdown.\" (correctly signals addition).\n2. A student who uses \"therefore\" between two ideas with no genuine causal link (misconception —\n   marker doesn't match the actual relationship) vs. a student who checks whether a genuine causal\n   link exists before using \"therefore\" (correct discipline).\n\n**s6_path:** If the student continues to use markers indiscriminately after the bridge, give them\nfive sentence pairs with a discourse marker inserted, some correctly matching the actual relationship\nand some not, and have them identify and correct the mismatches.",
+      "localKey": "MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP",
+      "language": "en",
+      "refs": [
+        "MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/misconception/MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT",
+      "kind": "misconception",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "**Trigger signal:** Student assumes that more elaborate, academic-sounding discourse markers",
+      "content": "### MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT\n\n**Trigger signal:** Student assumes that more elaborate, academic-sounding discourse markers\n(\"notwithstanding,\" \"furthermore,\" \"consequently\") are inherently superior to simpler ones\nregardless of whether they fit naturally in context, leading to overstuffed, unnatural-sounding\nwriting or speech that sacrifices clarity for the mere appearance of sophistication.\n\n**Conflict evidence [P28]:** Show the student two versions of the same short paragraph: one using\nsimple, clear connectors appropriately (\"but,\" \"so,\" \"also\") and one replacing every connector with\nan elaborate alternative (\"notwithstanding,\" \"consequently,\" \"furthermore\") regardless of whether\neach fits the sentence's actual register and flow. Ask: \"Does the second version communicate more\nclearly, or does it sound forced and harder to follow? Does using a more elaborate word automatically\nmake writing better?\"\n\n**Bridge text [P30]:** \"Assuming elaborate discourse markers are always better is like assuming\nwearing a tuxedo to a casual backyard barbecue makes you more impressive — instead, it just looks out\nof place and draws attention away from what you're actually saying. A discourse marker's job is to\nmake the logical connection between ideas clear; an elaborate marker that doesn't fit the context\ndraws attention to itself instead of clarifying the relationship.\"\n\n**Replacement text [P31]:** \"Don't assume a more elaborate-sounding discourse marker is automatically\nbetter. Choose the marker — simple or sophisticated — that most naturally and clearly signals the\nactual relationship in this specific context. Clarity matters more than the appearance of\nsophistication.\"\n\n**Discrimination pairs [P33]:**\n1. A paragraph where every connector is replaced with an elaborate alternative regardless of fit\n   (forced, harder to follow) vs. the same paragraph using simple, natural connectors that clearly\n   signal each relationship (clear, appropriately fitted).\n2. A student who reflexively swaps \"but\" for \"notwithstanding\" without checking whether it fits the\n   sentence's register and flow (misconception) vs. a student who selects a marker based on clarity\n   and natural fit, whether simple or elaborate (correct discipline).\n\n**s6_path:** If the student continues to over-elaborate markers after the bridge, have them take an\nover-elaborated paragraph and revise it by replacing each marker with the simplest word that still\naccurately signals the actual relationship, then compare clarity between the two versions.",
+      "localKey": "MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT",
+      "language": "en",
+      "refs": [
+        "MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 38,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Identifying the Actual Logical Relationship (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Actual Logical Relationship (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 139,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Matching the Marker to the Relationship (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Matching the Marker to the Relationship (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 145,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Choosing Natural Fit Over Elaborate Sound (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Choosing Natural Fit Over Elaborate Sound (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 151,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Full Application: Using Discourse Markers Across Extended Discourse",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Using Discourse Markers Across Extended Discourse\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP\",\"MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP",
+        "MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 157,
+        "endLine": 278
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying the Actual Logical Relationship**\nGiven five sentence pairs, identify the actual logical relationship (contrast, cause, addition) in\neach.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 177,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Correcting a Mismatched Discourse Marker**\nGiven a sentence pair with a mismatched marker, identify and correct the mismatch.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 177,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Revising an Over-Elaborated Passage**\nGiven an over-elaborated paragraph, replace each marker with the simplest word that still accurately\nsignals the relationship.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 177,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Why an Elaborate Marker Fails**\nGiven a sentence with an elaborate marker that doesn't fit naturally, explain why it draws attention\naway from clarity.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 177,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Discourse Marker Application**\nGiven a new multi-paragraph passage, identify each logical relationship and select naturally-fitting,\naccurately-matching discourse markers throughout.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 177,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly identifies relationships on provided sentence pairs (MP-1) but selects\n  mismatched markers when writing an original multi-paragraph passage (MP-5), provide a mandatory\n  \"what is the ACTUAL relationship here?\" check before choosing any marker.\n- If the student's relationship-matching is strong (MP-1, MP-2) but they still over-elaborate markers\n  in original writing (MP-5), require an explicit \"does this sound natural here, or forced?\" read-\n  aloud check before finalizing.\n- If the student struggles to distinguish contrast, cause, and addition at all, provide a reference\n  list of common markers sorted by relationship type as a scaffolding aid.\n- Students with strong performance in `eng.linguistics.discourse-analysis-intro`'s connection-\n  recognition work should transfer readily to marker selection, since both require identifying how\n  ideas actually relate before labeling that relationship — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 233,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "eng.communication.discourse-markers-advanced/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.discourse-markers-advanced",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: discourse analysis check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.linguistics.discourse-analysis-intro]  [Component 3: Stop-Sign-vs-Yield-Sign /\n                                                       Tuxedo-at-a-Barbecue Anchor]\n                                                                    |\n                                                                    v\n                                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                    |\n                                                                    v\n                                      [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                    |\n                                                                    v\n                                      [MP-1 through MP-5 mastery probe set]\n                                                                    |\n                                      (pass >= 0.70) -----+----- (fail)\n                                             |                      |\n                                             v                      v\n                        [No further unlocks —  [S6 remediation: relationship-matching drills /\n                         terminal in current      simplification drills]\n                         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (mismatched\nmarkers) and MC-B during TA-3 (over-elaboration) — these are largely independent and often need\nseparate, explicit correction. If either fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2 failures indicate residual\nMC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-passage example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md",
+        "startLine": 198,
+        "endLine": 233
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
