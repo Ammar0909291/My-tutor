@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.literary-periods-survey-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.literary-periods-survey",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b38be5d261b0ae4026b82ba22559563e59620f30f8afeb5e6f9e9839aa1d9a6b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md": "sha256:db5a59e7ee7a0269fdf83d3291797f378ac3ae23972d574da0007eb8fcacf915"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.literary-periods-survey",
+    "name": "Survey of Literary Periods",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.literature.literary-genres-overview"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.literary-periods-survey-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.literary-periods-survey (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md": "sha256:db5a59e7ee7a0269fdf83d3291797f378ac3ae23972d574da0007eb8fcacf915"
+      },
+      "contentHash": "sha256:bab35c839d9658b4e3f8ac61b52ca3fe10e5ec63faba8362c386fe3667ddffc3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-periods-survey.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-periods-survey"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-periods-survey\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-periods-survey.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md#TA-2 (addresses MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-periods-survey"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-periods-survey\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-periods-survey.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md#TA-3 (addresses MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-periods-survey"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-periods-survey\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-periods-survey.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md#TA-4 (addresses MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER, MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-periods-survey"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-periods-survey\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.literary-periods-survey/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Survey of Literary Periods — Conceptual Development Sequence",
+      "content": "### TA-1 — Introducing Major Periods and Their Defining Characteristics\n\nIntroduce three to four major English-language literary periods/movements (e.g., Romanticism,\nRealism, Modernism) with one or two defining characteristics each. Student practice: given brief\ndescriptions of four works, match each to its most likely period based on characteristics described.\n\n### TA-2 — Periods as a Connected Historical Conversation (MC-A)\n\nUsing the fashion-generations anchor, teach students to identify how each period relates to (often\nreacts against) the one before it. Student practice: given three period transitions, write one\nsentence for each explaining what the later movement seems to be reacting against or building on.\n\n### TA-3 — Period Labels as Tendencies, Not Rigid Rules (MC-B)\n\nUsing the extended fashion anchor, teach students to treat period characteristics as dominant\ntendencies rather than universal requirements. Student practice: given a work that doesn't neatly fit\nits assigned period's typical characteristics, explain what this divergence suggests rather than\ntreating it as an error.\n\n### TA-4 — Full Application: Situating a New Work Historically\n\nGive the student a new, previously unseen short excerpt along with its approximate date of\ncomposition. They must identify likely period characteristics present (TA-1), explain how the work's\nperiod might relate to an adjacent movement (TA-2), and note any ways the work doesn't perfectly fit\nthe expected characteristics, treating this as expected nuance rather than a problem (TA-3) — the\nfull synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 144,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/misconception/MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER",
+      "kind": "misconception",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "**Trigger signal:** Student treats each literary period as a separate, disconnected box to be",
+      "content": "### MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER\n\n**Trigger signal:** Student treats each literary period as a separate, disconnected box to be\nmemorized independently, failing to recognize that movements typically develop partly IN REACTION TO\nthe movement immediately preceding them — e.g., learning \"Romanticism values emotion and nature\" and\n\"Realism values everyday, unidealized detail\" as two unrelated facts, without recognizing Realism's\nemergence partly as a reaction against Romanticism's perceived idealization and excess.\n\n**Conflict evidence [P28]:** Show the student a brief characterization of Romanticism (emphasis on\nemotion, imagination, idealized nature, the heroic individual) alongside Realism (emphasis on\nordinary life, unidealized detail, social conditions) and ask: \"Could Realism's emphasis on\n'ordinary, unidealized' subjects be a deliberate response to something Romanticism was perceived to\noverdo?\" Guide the student to see the historical sequence and reactive relationship, not just two\nindependent definitions.\n\n**Bridge text [P30]:** \"Treating literary periods as disconnected boxes is like studying each\ngeneration's fashion trends as if they appeared from nowhere, with no reference to what the previous\ngeneration wore — but a new trend is very often a deliberate reaction against what came right before\n(a backlash against excess, a return to something simpler). Literary movements work the same way:\neach new movement usually defines itself partly by what it's reacting against in the movement before\nit.\"\n\n**Replacement text [P31]:** \"When learning a new literary period, always ask: what movement came\nright before it, and what specifically might this new movement be reacting against or building on?\nPeriods form a connected historical CONVERSATION, not a set of isolated boxes.\"\n\n**Discrimination pairs [P33]:**\n1. \"Romanticism values emotion and nature. Realism values ordinary detail.\" (two disconnected facts,\n   memorized independently) vs. \"Realism's focus on unidealized, ordinary life developed partly as a\n   reaction against Romanticism's emphasis on heightened emotion and idealized nature.\" (a connected,\n   reactive relationship).\n2. A student who cannot explain any relationship between two adjacent periods (isolated-box view) vs.\n   a student who can explain at least one specific way a later movement responds to or reacts against\n   an earlier one (connected, historically-aware view).\n\n**s6_path:** If the student continues treating periods as isolated after the bridge, have them\ncreate a simple timeline showing three or four periods in sequence, and for each transition, write\none sentence explaining what the new movement seems to be reacting against or building on from the\none before it.",
+      "localKey": "MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER",
+      "language": "en",
+      "refs": [
+        "MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/misconception/MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS",
+      "kind": "misconception",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "**Trigger signal:** Student assumes period labels are rigid, universally applicable categories where",
+      "content": "### MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS\n\n**Trigger signal:** Student assumes period labels are rigid, universally applicable categories where\nevery work written during a given era must display all of that period's defining characteristics,\nfailing to recognize that individual works can blend characteristics of multiple periods, resist easy\ncategorization, or be written by an author working against the dominant trends of their own era.\n\n**Conflict evidence [P28]:** Show the student a work written during a period's timeframe that\nnonetheless doesn't fit some of that period's typical defining characteristics (or blends\ncharacteristics from two periods), alongside a work that fits the typical characteristics cleanly.\nAsk: \"Does simply being written during this time period guarantee a work displays every\ncharacteristic we associate with the period's label?\"\n\n**Bridge text [P30]:** \"Assuming every work from a period perfectly fits that period's label is like\nassuming everyone living in a particular decade must have worn that decade's most iconic fashion\ntrend — in reality, trends are dominant tendencies, not universal requirements, and plenty of\nindividuals (and works) don't fit neatly, blend influences from multiple eras, or actively push\nagainst their own time's dominant style.\"\n\n**Replacement text [P31]:** \"Use period labels as descriptions of DOMINANT TENDENCIES during a\ntimeframe, not as rigid rules every work must obey. When you encounter a work that doesn't fit neatly,\nthat's not a problem with the label — it's a reminder that real literary history is messier and more\nindividual than any single category can fully capture.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming a work written during the Romantic period MUST emphasize heightened emotion and idealized\n   nature simply because of its date (rigid, label-as-rule thinking) vs. recognizing that a\n   Romantic-era work could instead blend in some Neoclassical restraint, or push against Romantic\n   conventions entirely (flexible, tendency-based thinking).\n2. A student confused or frustrated when a work \"doesn't fit\" its assigned period label (treating the\n   mismatch as an error) vs. a student treating the mismatch as expected and interesting, prompting\n   further investigation into why that particular work diverges (correct, historically nuanced\n   understanding).\n\n**s6_path:** If the student continues treating period labels as rigid rules after the bridge, have\nthem find (or be shown) one work that is typically associated with a given period but that a scholar\nhas noted diverges from that period's typical characteristics in some specific way, and explain what\nthat divergence suggests about the limits of period labels.",
+      "localKey": "MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 43,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Introducing Major Periods and Their Defining Characteristics",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Introducing Major Periods and Their Defining Characteristics\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 148,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Periods as a Connected Historical Conversation (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Periods as a Connected Historical Conversation (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 154,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Period Labels as Tendencies, Not Rigid Rules (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Period Labels as Tendencies, Not Rigid Rules (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 160,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Full Application: Situating a New Work Historically",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Situating a New Work Historically\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER\",\"MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER",
+        "MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 167,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Matching Characteristics to Periods**\nGiven three brief work descriptions, match each to its most likely literary period based on\ncharacteristics described.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 193,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Explaining a Reactive Relationship**\nGiven two adjacent literary periods, explain at least one specific way the later movement reacts\nagainst or builds on the earlier one.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 193,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Recognizing Tendencies, Not Rigid Rules**\nGiven a work that doesn't perfectly fit its assigned period's typical characteristics, explain what\nthis divergence suggests about the nature of period labels rather than treating it as an error.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 193,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Constructing a Simple Period Timeline**\nGiven three to four periods in scrambled order, arrange them chronologically and state one\nreactive or building relationship between each adjacent pair.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 193,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Historical Situating**\nGiven a new excerpt with its approximate date, identify likely period characteristics, explain a\nplausible relationship to an adjacent movement, and note any divergence from expected characteristics\nas nuance.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 193,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Adaptive Flags",
+      "content": "- If the student can recite period characteristics accurately (MP-1) but struggles to explain\n  reactive relationships (MP-2, MP-4), this indicates memorization without genuine historical\n  understanding — provide additional timeline-building practice emphasizing the \"why did this change\n  happen\" question over rote fact recall.\n- If the student becomes overly focused on finding exceptions and divergences (over-applying MC-B's\n  correction to the point of resisting any generalization at all), recalibrate: period\n  characteristics remain useful, real, dominant tendencies — the goal is nuance, not the abandonment\n  of categorization altogether.\n- If the student's own reading experience (from other literature concepts) includes works from these\n  periods, connect this concept explicitly to those specific prior readings rather than working\n  entirely with new, unfamiliar excerpts — grounding abstract period characteristics in already-\n  known texts strengthens retention.\n- Given this concept's breadth (surveying multiple centuries of literary history in one 3-hour\n  concept), monitor for surface-level pattern-matching without genuine understanding — the mastery\n  probes' emphasis on explanation (not just labeling) is the primary check against this risk.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 252,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-periods-survey/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.literary-periods-survey",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: literary genres check] --> [PD-2: historical-sequencing check]\n   |                                                    |\n   | (gap found)                                        | (pass)\n   v                                                     v\n[Route to eng.literature.literary-genres-overview]  [Component 3: Fashion-Generations Anchor]\n                                                                |\n                                                                v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                |\n                                                                v\n                                       [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                |\n                                                                v\n                                       [MP-1 through MP-5 mastery probe set]\n                                                                |\n                                       (pass >= 0.70) -----+----- (fail)\n                                              |                      |\n                                              v                      v\n                       [Unlock: literary-criticism-intro]  [S6 remediation: timeline-building /\n                                                              find-the-divergent-work drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a genres gap routes back to that\nprerequisite, a historical-sequencing gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-1/TA-2 (isolated memorization) and MC-B during TA-3\n(rigid categorization) — these often co-occur, since a student memorizing periods as disconnected\nboxes (MC-A) also tends to treat each box's contents as fixed and universal (MC-B). If either fires,\nbranch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by\nfailure: MP-1 failure indicates basic period-characteristic knowledge (TA-1) needs review; MP-2/MP-4\nfailures indicate residual MC-A; MP-3 failure alone indicates residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap at full-analysis scale — provide one more guided\nsituating example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-periods-survey.md",
+        "startLine": 216,
+        "endLine": 252
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

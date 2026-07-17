@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.poetic-forms-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.poetic-forms",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:330f61c9e7ab4e638b1074828548a2d9d5b267bd7eeccc5eb5148fb34ea7fdf5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.poetic-forms.md": "sha256:06e7a74b9f5ef8bf21474fe39450e5cd52a8400d3d8c5ea7a118a0e8125b8d4f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.poetic-forms",
+    "name": "Poetic Forms",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.poetry-basics"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.poetic-forms-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.poetic-forms (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.poetic-forms.md": "sha256:06e7a74b9f5ef8bf21474fe39450e5cd52a8400d3d8c5ea7a118a0e8125b8d4f"
+      },
+      "contentHash": "sha256:92c9191876a6f388028307e3e6c409f7905523eb0e440d23051b1daa606a6f77",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetic-forms.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetic-forms.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetic-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetic-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetic-forms.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetic-forms.md#TA-2 (addresses MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetic-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetic-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetic-forms.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetic-forms.md#TA-3 (addresses MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetic-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetic-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.poetic-forms.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.poetic-forms.md#TA-4 (addresses MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING, MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.poetic-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.poetic-forms\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.poetic-forms/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Poetic Forms — Conceptual Development Sequence",
+      "content": "### TA-1 — Recognizing Conventional Forms by Structural Features\n\nIntroduce the defining features of the sonnet (14 lines, a structural turn), haiku (a fixed\nsyllable-count convention, typically 5-7-5, and a focus on a single compressed image), and ballad\n(narrative content, typically a specific stanza and rhyme pattern). Student practice: given four\nshort poems, identify which conventional form (if any) each follows based on its structural features.\n\n### TA-2 — Form as Functional, Not Just Classificatory (MC-A)\n\nUsing the wine-glass anchor, teach students to ask \"what does this form let the poem DO?\" after\nidentifying it. Student practice: given a sonnet and its structural turn, explain what specific effect\nthe turn creates that a shapeless version would lose.\n\n### TA-3 — Free Verse as a Deliberate, Craft-Based Form (MC-B)\n\nUsing the jazz-improvisation anchor, teach students to recognize free verse's deliberate structural\nchoices (line breaks, white space, rhythm variation) despite the absence of a fixed pattern. Student\npractice: given a free verse poem, identify at least one deliberate line-break or spacing choice and\nexplain its specific effect.\n\n### TA-4 — Full Application: Comparing How Different Forms Shape the Same Content\n\nGive the student a single piece of content (a simple observation or emotion) expressed in two\ndifferent forms (e.g., as a haiku and as a free verse poem). They must identify each form's\nstructural features (TA-1), explain what each form's specific structure allows it to do with the\ncontent (TA-2), and, for the free verse example, identify at least one deliberate structural choice\ndistinct from the fixed-form example (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 141,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/misconception/MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING",
+      "kind": "misconception",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "**Trigger signal:** Student treats identifying a poem's form (e.g., \"this is a sonnet\") as a purely",
+      "content": "### MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING\n\n**Trigger signal:** Student treats identifying a poem's form (e.g., \"this is a sonnet\") as a purely\nclassificatory, box-checking exercise with no further significance, failing to consider how the\nform's specific structural constraints (e.g., a sonnet's argumentative turn, a haiku's compression)\nactively shape the poem's meaning or effect.\n\n**Conflict evidence [P28]:** Show the student a sonnet with its structural \"turn\" (a shift in\nargument or perspective partway through, conventional to the form) and ask what the poem would lose\nif that turn were removed or the poem were simply written as an unstructured paragraph of prose\nsaying the same things. Guide the student to notice that the SPECIFIC STRUCTURE (the buildup, then\nthe turn, then the resolution within a tight, compressed space) is doing real work — creating tension,\nthen release — that a shapeless prose version would lose entirely.\n\n**Bridge text [P30]:** \"Treating form as 'just a label' is like treating the shape of a wine glass as\nirrelevant to the experience of drinking wine — but the shape actually concentrates the aroma and\ndirects the wine to specific parts of the tongue, genuinely changing the experience, not just naming\nit. A poem's form (the sonnet's turn, the haiku's compression) genuinely shapes how the poem's\nmeaning unfolds and lands, not just what to call it.\"\n\n**Replacement text [P31]:** \"When you identify a poem's form, always ask a follow-up question: what\ndoes this SPECIFIC structure allow the poem to DO that a different structure couldn't? Form isn't\njust a label — it's a set of constraints and opportunities the poet is actively using.\"\n\n**Discrimination pairs [P33]:**\n1. \"This is a sonnet.\" (labeling only, no further analysis) vs. \"This is a sonnet, and the\n   structural turn at line nine lets the poem shift from despair to a hard-won hope, a change that\n   would feel abrupt or unearned without the form's built-in space for a turn.\" (labeling plus\n   analysis of the form's functional effect).\n2. A student who identifies a haiku's syllable pattern but doesn't consider what its extreme\n   compression forces the poet to leave unsaid (surface-level labeling) vs. a student who explains\n   that the compression forces a single, sharply-focused image rather than an extended description\n   (functional understanding of form).\n\n**s6_path:** If the student continues treating form as a label only after the bridge, have them\nrewrite a short poem's content in a genuinely different form (e.g., take a haiku's content and write\nit as a much longer free-verse poem) and compare what changes about the effect — making the\nfunctional difference concrete and undeniable.",
+      "localKey": "MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING",
+      "language": "en",
+      "refs": [
+        "MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/misconception/MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED",
+      "kind": "misconception",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "**Trigger signal:** Student believes free verse, lacking a fixed meter or rhyme scheme, is",
+      "content": "### MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED\n\n**Trigger signal:** Student believes free verse, lacking a fixed meter or rhyme scheme, is\nessentially formless, unstructured, or \"not really poetry\" requiring craft — failing to recognize\nthat free verse poets make deliberate structural choices (line breaks, white space, rhythm variation)\nthat constitute a real, considered form, even without a pre-set pattern.\n\n**Conflict evidence [P28]:** Show the student a free verse poem with a deliberately placed line\nbreak that creates a specific pause or emphasis (e.g., a line break that isolates a single word for\nimpact) alongside the same content reformatted with different, more arbitrary line breaks that lose\nthat emphasis. Ask: \"Does the ORIGINAL line break placement do something specific, or would any line\nbreak placement work equally well?\" Guide the student to see that even without a fixed rule,\nspecific choices are being made deliberately.\n\n**Bridge text [P30]:** \"Assuming free verse has no form because it lacks a FIXED rule is like assuming\nan improvising jazz musician isn't really playing music because they're not following sheet music —\nbut skilled improvisation still involves deliberate, structured choices (which notes, which rhythms,\nwhen to pause) made in the moment, guided by craft, not randomness. Free verse similarly makes\ndeliberate structural choices — just not ones fixed in advance by a predetermined pattern.\"\n\n**Replacement text [P31]:** \"When reading free verse, don't assume 'no fixed rule' means 'no\nstructure at all.' Look for the deliberate choices the poet DID make: where do line breaks fall, and\nwhy there specifically? Where is there unusual white space or emphasis? These are still craft\ndecisions, just not ones following a pre-set template.\"\n\n**Discrimination pairs [P33]:**\n1. A free verse poem with a line break that isolates one word for deliberate emphasis (a specific,\n   purposeful structural choice) vs. the same content with random line breaks that don't create any\n   particular effect (demonstrating, by contrast, what a genuinely UNCRAFTED arrangement would look\n   like).\n2. A student dismissing free verse as \"not real poetry\" because it has no fixed rhyme or meter\n   (misconception) vs. a student analyzing a free verse poem's specific line-break and white-space\n   choices as deliberate structural decisions (correct, form-aware reading).\n\n**s6_path:** If the student continues to view free verse as formless after the bridge, have them take\na free verse poem and try moving one significant line break to a different position, then explain\nwhat specific effect is lost or changed — demonstrating that the original placement was a real,\nmeaningful choice, not an arbitrary one.",
+      "localKey": "MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED",
+      "language": "en",
+      "refs": [
+        "MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 42,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Recognizing Conventional Forms by Structural Features",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Recognizing Conventional Forms by Structural Features\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 145,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Form as Functional, Not Just Classificatory (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Form as Functional, Not Just Classificatory (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Free Verse as a Deliberate, Craft-Based Form (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Free Verse as a Deliberate, Craft-Based Form (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 158,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Full Application: Comparing How Different Forms Shape the Same Content",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Comparing How Different Forms Shape the Same Content\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING\",\"MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING",
+        "MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 165,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Conventional Forms**\nGiven three short poems, identify which conventional form (sonnet, haiku, ballad) each follows based\non structural features, citing the specific features observed.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 189,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Explaining a Form's Functional Effect**\nGiven a poem in a conventional form, explain what specific effect its structural features (e.g., a\nsonnet's turn, a haiku's compression) create that a different structure would not.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 189,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Deliberate Choices in Free Verse**\nGiven a free verse poem, identify at least one deliberate structural choice (a line break, spacing,\nrhythm variation) and explain its specific effect.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 189,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Deliberate Craft from Randomness**\nGiven two versions of the same free verse poem (one with the original, deliberate line breaks, one\nwith rearranged, arbitrary line breaks), identify which is the original and explain what is lost in\nthe rearranged version.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 189,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Comparative Analysis**\nGiven the same content expressed in two different forms (one conventional, one free verse), analyze\nhow each form's structure shapes the content differently, identifying specific features and effects\nin both.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 189,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Adaptive Flags",
+      "content": "- If the student can identify conventional forms accurately (MP-1) but their functional explanations\n  (MP-2) remain shallow or generic (\"it makes the poem feel more organized\"), push for specificity —\n  what EXACTLY does this structure allow that another wouldn't, tied to the actual content of this\n  specific poem.\n- If the student strongly prefers conventional forms and shows persistent skepticism toward free\n  verse even after the jazz-improvisation bridge, provide additional side-by-side comparisons using\n  poems the student already finds emotionally engaging, to ground the abstract argument in genuine\n  appreciation.\n- If the student's own attempts to identify \"deliberate\" choices in free verse (MP-3) are actually\n  post-hoc rationalizations of arbitrary features (finding meaning in genuinely accidental aspects),\n  clarify the distinction using the rearrangement test (MP-4) as the deciding evidence — genuine\n  deliberateness should be demonstrable by showing the effect changes when altered.\n- Students with a background in music or visual art may find the deliberate-choice-without-fixed-\n  rule concept (MC-B) more intuitive via those disciplines' own analogous debates (improvisation,\n  abstract art) — draw on this connection explicitly if relevant to the student's interests.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 248,
+        "endLine": 266
+      }
+    },
+    {
+      "assetId": "eng.literature.poetic-forms/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.poetic-forms",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: poetry basics check] --> [PD-2: form-name awareness check]\n   |                                                  |\n   | (gap found)                                      | (pass)\n   v                                                   v\n[Route to eng.literature.poetry-basics]      [Component 3: Wine-Glass/Jazz Anchor]\n                                                        |\n                                                        v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                        |\n                                                        v\n                              [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                              [MP-1 through MP-5 mastery probe set]\n                                                        |\n                              (pass >= 0.75) -----+----- (fail)\n                                     |                      |\n                                     v                      v\n                    [Unlock: meter-and-rhyme]  [S6 remediation: rewrite-in-different-form /\n                                                 move-the-line-break drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a poetry-basics gap routes back to\nthat prerequisite, a form-name gap gets a brief primer. During Component 4 (S1, active instruction),\nMC-A typically surfaces during TA-1/TA-2 (treating forms as labels) and MC-B during TA-3 (dismissing\nfree verse as formless) — these are largely independent and often need separate, explicit correction.\nIf either fires, branch to the relevant s6_path drill before resuming. At the mastery probe stage\n(S9), route by failure: MP-1 failure indicates basic form-identification (TA-1) needs review; MP-2\nfailure alone indicates residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with\nMP-1 through MP-4 passing indicates an integration/comparison gap — provide one more guided\ncomparative example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.poetic-forms.md",
+        "startLine": 213,
+        "endLine": 248
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
