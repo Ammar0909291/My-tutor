@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.literal-comprehension-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.literal-comprehension",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e5258dd8c10847cc5736a9c7e89e6c5caa999d106815854841ad173b2062ebba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.literal-comprehension.md": "sha256:e2648d862e359816cf655aa7fcad8e8debb1e3e30bb8e23753a735ebad4d1d5a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.literal-comprehension",
+    "name": "Literal Comprehension",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.reading-fluency"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.literal-comprehension-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.literal-comprehension (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.literal-comprehension.md": "sha256:e2648d862e359816cf655aa7fcad8e8debb1e3e30bb8e23753a735ebad4d1d5a"
+      },
+      "contentHash": "sha256:9cf4e33e9d624f9f120c9727ef928b7d22602d55b4e161686bf31aa7686b19e6",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.literal-comprehension.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md#TA-1 (addresses MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.literal-comprehension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.literal-comprehension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.literal-comprehension.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.literal-comprehension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.literal-comprehension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.literal-comprehension.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md#TA-3 (addresses MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.literal-comprehension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.literal-comprehension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.literal-comprehension.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.literal-comprehension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.literal-comprehension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.literal-comprehension.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md#TA-5 (addresses MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING, MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.literal-comprehension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.literal-comprehension\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.literal-comprehension/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Literal Comprehension — Conceptual Development Sequence",
+      "content": "**TA-1 — Extracting Explicit Facts (Who, What, When, Where) [C]**\n\nPresent short passages; student identifies and restates explicit facts in their own words, directly targeting MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING.\n\n**TA-2 — Paraphrasing Without Losing Key Details [C]**\n\nStudent practices paraphrasing sentences while deliberately checking that all key explicit facts (names, numbers, outcomes) are preserved in the paraphrase.\n\n**TA-3 — Integrating Qualifying Words (Only, Most, All, Never) [C→P]**\n\nPresent sentences with qualifying words that change the precise scope of a statement; student correctly identifies and preserves these qualifiers, directly targeting MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT.\n\n**TA-4 — Resolving Pronoun References for Literal Accuracy [P]**\n\nPresent sentences with pronouns requiring correct antecedent resolution for accurate literal understanding; student correctly identifies who/what each pronoun refers to.\n\n**TA-5 — Answering Direct \"Who/What/When/Where\" Questions from Text [P]**\n\nStudent reads a passage and answers direct factual questions, demonstrating accurate literal comprehension of explicitly stated information.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/misconception/MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING",
+      "kind": "misconception",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "- **Trigger signal:** Student believes literal comprehension requires memorizing and reproducing the EXACT wording of the text, rather than understanding the explicitly stated information well enough to restate it accurately in different words — becoming anxious about needing perfect verbatim recall, or conversely, failing a literal-comprehension check by paraphrasing so loosely that key explicit facts are lost or altered.",
+      "content": "### MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING\n- **Trigger signal:** Student believes literal comprehension requires memorizing and reproducing the EXACT wording of the text, rather than understanding the explicitly stated information well enough to restate it accurately in different words — becoming anxious about needing perfect verbatim recall, or conversely, failing a literal-comprehension check by paraphrasing so loosely that key explicit facts are lost or altered.\n- **Conflict evidence [P28]:** \"The text says 'The volcano erupted in 1883, killing thousands.' If I ask what happened, do you need to repeat those exact words, or can you say 'A volcano exploded in 1883 and many people died' and still show you understood the literal, explicitly stated facts?\"\n- **Bridge text [P30]:** \"Literal comprehension means accurately understanding information that is EXPLICITLY STATED in the text — it does NOT require memorizing or reproducing the exact original wording. You can (and should be able to) restate the same explicit facts in your own words, as long as the key stated information (what happened, when, key details) remains accurate.\"\n- **Replacement text [P31]:** \"Demonstrate literal comprehension by accurately restating the explicitly stated facts in your own words, not by memorizing or repeating the exact original wording.\"\n- **Discrimination pairs [P33]:**\n  - \"The volcano erupted in 1883, killing thousands\" restated as \"A volcano exploded in 1883 and many people died\" (accurate paraphrase, correct facts preserved) vs. requiring verbatim repetition of the original sentence.\n  - A paraphrase that loses or changes a key stated fact (e.g., changing the year or the outcome) — a genuine comprehension gap — vs. a paraphrase that preserves all explicit facts in different wording (successful literal comprehension).\n- **s6_path:** \"It's a very reasonable assumption that 'exact comprehension' should mean exact wording, especially in school contexts that sometimes reward verbatim quotes — but genuine literal comprehension is about accurately understanding and restating explicit facts, not word-for-word memorization.\"",
+      "localKey": "MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING",
+      "language": "en",
+      "refs": [
+        "MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/misconception/MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT",
+      "kind": "misconception",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "- **Trigger signal:** Student assumes that recognizing/understanding each individual word in a sentence automatically means they've comprehended what the sentence as a WHOLE explicitly states, missing that literal comprehension requires INTEGRATING the meanings of individual words into an understanding of the complete stated proposition — a student can know every word's meaning yet fail to correctly identify what the sentence, as a whole, explicitly asserts (e.g., misreading who did what to whom, or missing a key qualifying detail like \"only some\" vs. \"all\").",
+      "content": "### MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT\n- **Trigger signal:** Student assumes that recognizing/understanding each individual word in a sentence automatically means they've comprehended what the sentence as a WHOLE explicitly states, missing that literal comprehension requires INTEGRATING the meanings of individual words into an understanding of the complete stated proposition — a student can know every word's meaning yet fail to correctly identify what the sentence, as a whole, explicitly asserts (e.g., misreading who did what to whom, or missing a key qualifying detail like \"only some\" vs. \"all\").\n- **Conflict evidence [P28]:** \"You know what every single word in this sentence means. But can you tell me exactly WHO did WHAT to WHOM, according to what the sentence explicitly says? Does knowing each word guarantee you've got the whole picture right?\"\n- **Bridge text [P30]:** \"Literal comprehension requires INTEGRATING individual word meanings into an accurate understanding of what the sentence or passage explicitly states as a WHOLE — including WHO did WHAT, WHEN, and any qualifying details (only some, most, all, never). Knowing every word's meaning is necessary but not sufficient; you must also correctly combine those meanings into the actual stated proposition.\"\n- **Replacement text [P31]:** \"After confirming you know each word's meaning, deliberately check whether you've correctly combined them into what the sentence as a whole explicitly states — who, what, when, and any qualifying details.\"\n- **Discrimination pairs [P33]:**\n  - Knowing every word in \"Only some of the students passed the exam\" but misreading it as \"all students passed\" (word-level understanding without correct sentence-level integration) vs. correctly identifying that only SOME (not all) students passed.\n  - Understanding each word in \"The dog chased the cat before it hid\" but being unsure whether \"it\" refers to the dog or cat (word-level understanding without full sentence-level resolution).\n- **s6_path:** \"Knowing every word does feel like it should guarantee understanding the whole sentence — but correctly combining word meanings into the actual stated proposition (who/what/when/qualifiers) is a further, necessary step that literal comprehension specifically checks.\"\n\n---",
+      "localKey": "MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT",
+      "language": "en",
+      "refs": [
+        "MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Extracting Explicit Facts (Who, What, When, Where)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Extracting Explicit Facts (Who, What, When, Where)\",\"primitives\":[],\"addresses\":[\"MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Paraphrasing Without Losing Key Details",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Paraphrasing Without Losing Key Details\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Integrating Qualifying Words (Only, Most, All, Never)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Integrating Qualifying Words (Only, Most, All, Never)\",\"primitives\":[],\"addresses\":[\"MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Resolving Pronoun References for Literal Accuracy",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Resolving Pronoun References for Literal Accuracy\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Answering Direct \"Who/What/When/Where\" Questions from Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Answering Direct \\\"Who/What/When/Where\\\" Questions from Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT\",\"MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING",
+        "MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Fact extraction, novel passage**\n\"The text says: 'The bridge was built in 1925 by local workers.' Restate this in your own words.\"\n*Target:* any accurate paraphrase preserving when (1925) and who (local workers) built the bridge.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Preserving key details, novel example**\n\"Paraphrase: 'Two of the four team members finished early.' Keep the numbers accurate.\"\n*Target:* preserves \"two of four,\" not \"some\" or \"most\" without the specific numbers.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Qualifying word integration, novel example**\n\"The text says: 'Most, but not all, of the guests arrived on time.' Did every guest arrive on time?\"\n*Target:* no — correctly identifies that \"most but not all\" means some guests were late.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Pronoun reference resolution, novel example**\n\"'The teacher gave the student a book because she loved reading.' Who loved reading — the teacher or the student?\"\n*Target:* correctly reasons through the most likely referent based on context (or identifies genuine ambiguity if the sentence truly allows both readings).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain literal comprehension**\n\"In your own words: does literal comprehension mean memorizing the exact words of a text, and does knowing every word in a sentence guarantee you understand what it says?\"\n*Target:* states or demonstrates that literal comprehension means accurately understanding and restating explicit facts in one's own words (not verbatim memorization), and that correctly integrating word meanings into the full stated proposition (including qualifiers and pronoun references) is a necessary additional step beyond just knowing individual words.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Adaptive Flags",
+      "content": "- **Own-words restatement, not verbatim memorization, is the actual skill being assessed**: every fact-extraction task should require paraphrasing, directly countering the verbatim-memorization misconception.\n- **Word-level understanding must be explicitly checked for sentence-level integration**: never assume knowing individual words guarantees correct overall comprehension — qualifying words (only, most, all) and pronoun references are specific, checkable integration points.\n- **Qualifying words are a distinct, high-value practice category**: dedicate explicit attention to \"only/most/all/never\"-type words, since misreading these produces literal comprehension errors even when every other word is understood.\n- **Compounded difficulty for EL learners with vocabulary gaps**: for S9 learners, recognize that literal comprehension errors may stem from either missed individual words OR failed sentence-level integration — diagnose which is the actual source before assuming one particular skill gap.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.reading.literal-comprehension/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.literal-comprehension",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — fact-extraction worksheet warm-up\n  ↓\n[P41] PD-1 (reading-fluency readiness)\n  ↓ PASS\n[P06] Anchor: fact-extraction worksheet (own-words restatement + qualifier check)\n  ↓\nTA-1: Extracting explicit facts (who, what, when, where) [C]\n  ↓\n[P28] Conflict: verbatim memorization assumed required → MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING (if triggered)\n  ↓\nTA-2: Paraphrasing without losing key details [C]\n  ↓\nTA-3: Integrating qualifying words (only, most, all, never) [C→P]\n  ↓\n[P28] Conflict: word-level knowledge assumed sufficient for sentence-level understanding → MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT (if triggered)\n  ↓\nTA-4: Resolving pronoun references for literal accuracy [P]\n  ↓\nTA-5: Answering direct \"who/what/when/where\" questions from text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, read one short passage and restate its explicit facts in your own words.\"\n[P68] Session close\n[P85] Regulation tail — praise accurate paraphrasing and qualifier-preservation over verbatim recall\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on reading fluency, new to comprehension-specific analysis): dwell on TA-1's basic fact extraction before introducing the more nuanced qualifier and pronoun-resolution tasks. S1 (already comprehends texts well but hasn't practiced explicit fact-restatement in own words): use TA-1/TA-2 to build explicit paraphrasing skill for an already-present comprehension ability. S6 (anxious about needing \"exact\" understanding, prone to over-relying on verbatim quotes from prior test-taking habits): explicitly validate that own-words restatement demonstrating accurate facts is the real skill, not verbatim memorization. S9 (English learner whose vocabulary gaps may cause them to miss individual words, compounding literal-comprehension difficulty, or whose L1 sentence structure makes qualifier/pronoun resolution work differently): expect TA-3/TA-4's qualifier and pronoun-resolution work to require extra, explicit practice, since these depend on subtle word-level and structural cues that may not transfer directly from L1 reading habits.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.literal-comprehension.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
