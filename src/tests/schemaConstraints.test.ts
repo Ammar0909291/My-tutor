@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 
 const schema = readFileSync(join(process.cwd(), 'prisma/schema.prisma'), 'utf-8')
@@ -63,5 +63,27 @@ describe('Prisma schema constraint validation', () => {
 
   it('ProfileSubject has @@unique([profileId, subjectId])', () => {
     expect(schema).toMatch(/@@unique\(\[profileId, subjectId\]\)/)
+  })
+
+  // Production applies schema changes via `prisma migrate deploy`
+  // (vercel.json buildCommand), which only replays committed migration
+  // files — it never runs `prisma db push`. A model added to schema.prisma
+  // via `db push` alone (as SpineEvent originally was) validates fine
+  // locally/in CI but silently never creates its table in production.
+  // This guards every @@map'd table name against that exact drift class.
+  it('every @@map table name has a CREATE TABLE in some committed migration (prevents db-push-only schema drift reaching production)', () => {
+    const mapNames = Array.from(schema.matchAll(/@@map\("([a-zA-Z0-9_]+)"\)/g)).map((m) => m[1])
+    expect(mapNames.length).toBeGreaterThan(0)
+
+    const migrationsDir = join(process.cwd(), 'prisma/migrations')
+    const migrationFiles = readdirSync(migrationsDir, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => join(migrationsDir, e.name, 'migration.sql'))
+    const migrationsSql = migrationFiles
+      .map((f) => { try { return readFileSync(f, 'utf-8') } catch { return '' } })
+      .join('\n')
+
+    const missing = mapNames.filter((name) => !new RegExp(`CREATE TABLE "?${name}"?`, 'i').test(migrationsSql))
+    expect(missing).toEqual([])
   })
 })
