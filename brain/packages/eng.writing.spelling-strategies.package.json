@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.spelling-strategies-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.spelling-strategies",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:05e03842cccb83700f2cf91d28c8b82cb7a38bf8270fa6e8532f88e9c176d109",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.spelling-strategies.md": "sha256:a95d0b742b81981bc35c46d8b01d30c3f79614fc2352e69dcc419b395562b502"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.spelling-strategies",
+    "name": "Spelling Strategies",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonics.syllable-types",
+      "eng.writing.handwriting-and-formation"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.spelling-strategies-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.spelling-strategies (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.spelling-strategies.md": "sha256:a95d0b742b81981bc35c46d8b01d30c3f79614fc2352e69dcc419b395562b502"
+      },
+      "contentHash": "sha256:642d0055e04502355747e1d2391217f49f841d530c21f31cf18f4435ee22e236",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.spelling-strategies.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.spelling-strategies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.spelling-strategies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.spelling-strategies.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.spelling-strategies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.spelling-strategies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.spelling-strategies.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md#TA-3 (addresses MC-SPELLING-IS-PURE-MEMORIZATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.spelling-strategies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.spelling-strategies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.spelling-strategies.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md#TA-4 (addresses MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.spelling-strategies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.spelling-strategies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.spelling-strategies.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md#TA-5 (addresses MC-SPELLING-IS-PURE-MEMORIZATION, MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.spelling-strategies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.spelling-strategies\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.spelling-strategies/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Spelling Strategies — Conceptual Development Sequence",
+      "content": "**TA-1 — Sound-It-Out Strategy Application [C]**\n\nStudent spells phonetically regular words by applying syllable-type knowledge (from the prerequisite concept) directly to spelling — the same patterns used for reading, now used in reverse for writing.\n\n**TA-2 — Visual Memory Check (\"Does It Look Right?\") [C]**\n\nPresent a target word spelled two ways (one correct, one a plausible phonetic misspelling); student uses visual familiarity/memory to judge which \"looks right,\" building the visual-memory strategy explicitly.\n\n**TA-3 — Word-Part (Morphology) Strategy [C→P]**\n\nPresent words built from known prefixes, suffixes, or roots (unhappy, replay, careful, jumping); student spells by assembling recognized word-parts rather than sounding out the whole word from scratch, directly targeting MC-SPELLING-IS-PURE-MEMORIZATION.\n\n**TA-4 — Multiple-Spelling Sound Discrimination [P]**\n\nPresent a target sound with multiple possible spellings (e.g., /eɪ/: a_e, ai, ay, eigh); student practices choosing the correct spelling for specific words using visual memory/word-family knowledge on top of sounding-out, directly targeting MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING.\n\n**TA-5 — Strategy Selection for Novel Words [P]**\n\nGiven an unseen word to spell (dictated aloud), student selects and applies the most appropriate strategy (or combination) from the toolbox — sound-it-out for regular patterns, visual-memory/word-family check for ambiguous sounds, word-part assembly for words with recognizable morphology.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/misconception/MC-SPELLING-IS-PURE-MEMORIZATION",
+      "kind": "misconception",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "- **Trigger signal:** Student treats every word as an unrelated, arbitrary sequence of letters requiring rote memorization, not applying phonics patterns (syllable types) or word-part (morphology) knowledge even to regular, rule-governed words — leads to inefficient study habits (letter-by-letter drilling) and poor generalization to new words.",
+      "content": "### MC-SPELLING-IS-PURE-MEMORIZATION\n- **Trigger signal:** Student treats every word as an unrelated, arbitrary sequence of letters requiring rote memorization, not applying phonics patterns (syllable types) or word-part (morphology) knowledge even to regular, rule-governed words — leads to inefficient study habits (letter-by-letter drilling) and poor generalization to new words.\n- **Conflict evidence [P28]:** \"You spelled 'napkin' by memorizing each letter in order. But do you remember the syllable types from phonics? Can you use 'nap' (closed syllable) and 'kin' (closed syllable) to spell this instead of memorizing 10 separate letters?\"\n- **Bridge text [P30]:** \"Most English words are NOT arbitrary — they follow learnable patterns: syllable-type rules (the same ones used for reading), common word-parts (prefixes, suffixes, roots), and predictable sound-to-spelling correspondences. Applying these patterns is far more efficient and generalizes to new words, unlike pure memorization, which only helps with words already drilled.\"\n- **Replacement text [P31]:** \"Before memorizing a word letter-by-letter, check whether a known pattern (syllable type, common word-part, sound-spelling rule) already explains most or all of its spelling.\"\n- **Discrimination pairs [P33]:**\n  - \"napkin\" spelled via syllable-type pattern application (nap + kin, both closed syllables) vs. spelled via pure rote letter sequence memorization.\n  - \"unhappy\" spelled via morphology (un- + happy, a known prefix + a known base word) vs. spelled as one long unanalyzed string.\n- **s6_path:** \"Pure memorization feels like the safest approach because it doesn't require trusting a pattern — but it's actually much less efficient, and leaning on the reading patterns you already know (syllable types, word parts) will get you much further, much faster.\"",
+      "localKey": "MC-SPELLING-IS-PURE-MEMORIZATION",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-IS-PURE-MEMORIZATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/misconception/MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING",
+      "kind": "misconception",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "- **Trigger signal:** Student relies exclusively on sound-to-letter mapping even for words where sound alone is insufficient or misleading — English has multiple possible spellings for many sounds (e.g., the /eɪ/ sound can be spelled \"a_e,\" \"ai,\" \"ay,\" \"eigh\"), so sounding-out alone cannot determine which spelling is correct without additional strategies (visual memory, word-family knowledge, or morphological reasoning).",
+      "content": "### MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING\n- **Trigger signal:** Student relies exclusively on sound-to-letter mapping even for words where sound alone is insufficient or misleading — English has multiple possible spellings for many sounds (e.g., the /eɪ/ sound can be spelled \"a_e,\" \"ai,\" \"ay,\" \"eigh\"), so sounding-out alone cannot determine which spelling is correct without additional strategies (visual memory, word-family knowledge, or morphological reasoning).\n- **Conflict evidence [P28]:** \"You spelled the /eɪ/ sound in this word as 'ai' — but this particular word is actually spelled with 'eigh' ('eight'). Sounding it out got you the right SOUND, but not necessarily the right SPELLING. What else could help you choose the right spelling when there's more than one option?\"\n- **Bridge text [P30]:** \"Sounding out a word tells you what it SOUNDS like, but many English sounds have multiple possible spellings — so sounding out narrows the options but doesn't always give you the one correct spelling. You need additional strategies too: visual memory ('does this look right?'), knowing which spelling is used in which word family, or checking word-part patterns.\"\n- **Replacement text [P31]:** \"Use sounding-out as a first step to narrow down possible spellings, then apply visual memory, word-family patterns, or morphology to choose the correct one among the options.\"\n- **Discrimination pairs [P33]:**\n  - \"eight\" (correct: 'eigh' spelling) vs. an equally sound-plausible but wrong guess like \"ait\" or \"ayt.\"\n  - \"receive\" (correct: 'ei' after 'c', per the classic i-before-e rule) vs. a sound-plausible but incorrect \"recieve.\"\n- **s6_path:** \"It's very reasonable to trust sounding-out completely, since it usually gets you most of the way there — but for sounds with multiple valid spellings, an extra check (visual memory, a spelling rule, or knowing the word family) is genuinely needed on top of sounding-out, not instead of it.\"\n\n---",
+      "localKey": "MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING",
+      "language": "en",
+      "refs": [
+        "MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Sound-It-Out Strategy Application",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Sound-It-Out Strategy Application\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Visual Memory Check (\"Does It Look Right?\")",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Visual Memory Check (\\\"Does It Look Right?\\\")\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Word-Part (Morphology) Strategy",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Word-Part (Morphology) Strategy\",\"primitives\":[],\"addresses\":[\"MC-SPELLING-IS-PURE-MEMORIZATION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-IS-PURE-MEMORIZATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Multiple-Spelling Sound Discrimination",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Multiple-Spelling Sound Discrimination\",\"primitives\":[],\"addresses\":[\"MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Strategy Selection for Novel Words",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Strategy Selection for Novel Words\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING\",\"MC-SPELLING-IS-PURE-MEMORIZATION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SPELLING-IS-PURE-MEMORIZATION",
+        "MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Sound-it-out via syllable type, novel word**\n\"Spell 'picnic' using syllable-type knowledge.\"\n*Target:* \"pic-nic\" — both closed syllables, correctly spelled p-i-c-n-i-c.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Visual memory check, novel pair**\n\"Which looks right: 'recieve' or 'receive'?\"\n*Target:* \"receive\" — correctly applies visual memory (and/or the i-before-e-except-after-c pattern).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Word-part assembly, novel word**\n\"Spell 'replaying' by breaking it into its word parts.\"\n*Target:* \"re-\" + \"play\" + \"-ing\" = \"replaying,\" correctly assembled.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Multiple-spelling discrimination**\n\"The word sounds like it ends in the 'ay' sound. Is it spelled 'day' or 'dai'? How do you know?\"\n*Target:* \"day\" — correctly reasons that sounding-out alone doesn't determine the spelling, and applies visual memory/word-family knowledge (common \"-ay\" ending pattern) to choose correctly.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the spelling toolbox**\n\"In your own words: what are some different strategies you can use to spell a word, besides just sounding it out?\"\n*Target:* states or demonstrates at least two additional strategies beyond sound-it-out — visual memory (\"does it look right?\") and word-part/morphology assembly.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Adaptive Flags",
+      "content": "- **Three-strategy toolbox as the standing framework**: sound-it-out, visual memory, and word-part assembly should be explicitly named and revisited as three coordinated tools throughout spelling instruction, not taught once and abandoned.\n- **Syllable-type knowledge transfers directly from reading to spelling**: explicitly connect this concept to the reading-decoding skills already built in `eng.phonics.syllable-types` — spelling is largely the same pattern-knowledge applied in reverse, which should reduce perceived novelty and effort.\n- **Ambiguous-spelling sounds need explicit, dedicated practice**: sounds with multiple valid spellings (like /eɪ/) are a specific, bounded challenge category deserving its own practice set (TA-4), not left to incidental correction.\n- **Sound-to-spelling transparency assumption for some L1 backgrounds**: for S9 learners from highly phonetic L1 orthographies, anticipate over-reliance on sound-it-out and under-use of visual-memory/morphology strategies; deliberately reinforce the non-phonics strategies more heavily for this profile.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.writing.spelling-strategies/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.spelling-strategies",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — spelling toolbox introduction (three tools)\n  ↓\n[P41] PD-1 (syllable-type readiness)\n  ↓ PASS\n[P41] PD-2 (letter-formation readiness)\n  ↓ PASS\n[P06] Anchor: spelling toolbox (sound it out → looks right → word parts)\n  ↓\nTA-1: Sound-it-out strategy application [C]\n  ↓\nTA-2: Visual memory check (\"does it look right?\") [C]\n  ↓\nTA-3: Word-part (morphology) strategy [C→P]\n  ↓\n[P28] Conflict: pure rote memorization instead of pattern application → MC-SPELLING-IS-PURE-MEMORIZATION (if triggered)\n  ↓\nTA-4: Multiple-spelling sound discrimination [P]\n  ↓\n[P28] Conflict: sounding-out treated as always sufficient → MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING (if triggered)\n  ↓\nTA-5: Strategy selection for novel words [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, spell one word using the word-parts strategy.\"\n[P68] Session close\n[P85] Regulation tail — praise strategic tool selection over guessing or pure memorization\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on syllable types/handwriting, new to spelling-specific strategy application): dwell on TA-1's direct syllable-type-to-spelling transfer before introducing visual-memory or morphology strategies. S1 (already spells many words correctly but relies purely on memorization): explicitly introduce TA-3's word-part strategy as a more efficient alternative, using the toolbox framing to build strategic flexibility rather than replacing an already-working (if inefficient) system entirely at once. S6 (frustrated/anxious about spelling being \"unpredictable\"): validate that ambiguous-spelling sounds (TA-4) are a genuine, bounded feature of English, and that having multiple strategies (not one perfect rule) is the realistic, effective approach. S9 (L1 orthography is fully phonetic/transparent, e.g. Spanish, Finnish, Korean Hangul, where sound-to-spelling is nearly 1:1): expect this learner to rely especially heavily on sound-it-out by default and need explicit, repeated emphasis on TA-2/TA-4's additional strategies, since their L1 literacy experience may not have required them.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.spelling-strategies.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

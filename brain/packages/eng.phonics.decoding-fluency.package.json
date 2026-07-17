@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.decoding-fluency-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.decoding-fluency",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a7669db7d4da24557fc47632698ca80c4af27b4070ce401698b2c5ee7d5dad0e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md": "sha256:6578418fba2ed052319d0272b1cb69d5bd0e3ef5abd2275e9447048380be7623"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.decoding-fluency",
+    "name": "Decoding Fluency",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonics.syllable-types",
+      "eng.phonics.sight-words"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.decoding-fluency-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.decoding-fluency (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md": "sha256:6578418fba2ed052319d0272b1cb69d5bd0e3ef5abd2275e9447048380be7623"
+      },
+      "contentHash": "sha256:b9251b2794a3fc1d32feadca8b525874fd673c0b4a3c41c925dd620459fd8ebd",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.decoding-fluency.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.decoding-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.decoding-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.decoding-fluency.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.decoding-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.decoding-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.decoding-fluency.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md#TA-3 (addresses MC-ACCURATE-EQUALS-FLUENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.decoding-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.decoding-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.decoding-fluency.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md#TA-4 (addresses MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.decoding-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.decoding-fluency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.decoding-fluency.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md#TA-5 (addresses MC-ACCURATE-EQUALS-FLUENT, MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.decoding-fluency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.decoding-fluency\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.decoding-fluency/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Decoding Fluency — Conceptual Development Sequence",
+      "content": "**TA-1 — Repeated Reading for Automaticity [C]**\n\nUsing the Component 3 technique, student reads the same short decodable passage multiple times, tracking the felt increase in speed/ease each time.\n\n**TA-2 — Punctuation-Signaled Phrasing [C]**\n\nPresent sentences with varied punctuation (periods, commas, question marks, exclamation points); student practices pausing/phrasing appropriately at each mark, connecting punctuation to natural spoken rhythm.\n\n**TA-3 — Expression Matching Sentence Type [C→P]**\n\nStudent reads statements, questions, and exclamations aloud, matching intonation/expression to the sentence type (flat/falling for statements, rising for yes/no questions, energetic for exclamations), directly targeting MC-ACCURATE-EQUALS-FLUENT by requiring expression, not just correct words.\n\n**TA-4 — Speed-Accuracy Balance Check [P]**\n\nStudent reads a passage at a comfortable, natural pace; immediately after, is asked 1-2 simple comprehension questions about it. If words were skipped or mumbled to gain speed (revealed by inability to answer comprehension questions or by direct observation), student re-reads more carefully, directly targeting MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL.\n\n**TA-5 — Fluent Reading of Novel Connected Text [P]**\n\nPresent an unseen short passage (using known phonics patterns and sight words); student reads it accurately, at an appropriate pace, with expression matching sentence types and punctuation — the full integration of all three fluency components.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/misconception/MC-ACCURATE-EQUALS-FLUENT",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "- **Trigger signal:** Student decodes every word correctly but so slowly/effortfully (sounding out each word letter-by-letter even for previously-practiced words, with long pauses and no expression) that comprehension and natural rhythm are lost; treats accuracy alone as the finish line for reading, not recognizing fluency as accuracy PLUS automaticity PLUS appropriate expression.",
+      "content": "### MC-ACCURATE-EQUALS-FLUENT\n- **Trigger signal:** Student decodes every word correctly but so slowly/effortfully (sounding out each word letter-by-letter even for previously-practiced words, with long pauses and no expression) that comprehension and natural rhythm are lost; treats accuracy alone as the finish line for reading, not recognizing fluency as accuracy PLUS automaticity PLUS appropriate expression.\n- **Conflict evidence [P28]:** \"You read every word correctly in that passage — nice work! But it took you almost a minute for two sentences, and it was hard to tell if that was a question or a statement from how you read it. Do you think you could explain what the sentence MEANT, right after reading it that way?\"\n- **Bridge text [P30]:** \"Fluent reading has three parts working together: ACCURACY (reading words correctly), AUTOMATICITY (reading quickly, without effortful sounding-out for known patterns), and PROSODY/expression (reading with the natural rhythm, stress, and intonation of speech). Accuracy alone, without speed and expression, still blocks comprehension because so much mental effort goes into decoding that little is left for understanding meaning.\"\n- **Replacement text [P31]:** \"After reading, check not just whether every word was correct, but whether it was fast enough and expressive enough to sound like natural speech and to leave room for understanding meaning.\"\n- **Discrimination pairs [P33]:**\n  - Slow, flat, word-by-word reading of a sentence (accurate but not fluent) vs. the same sentence read at a natural pace with appropriate stress/intonation (fluent).\n  - A question read with flat, statement-like intonation (accurate words, wrong prosody, meaning obscured) vs. the same question read with rising intonation (fluent, meaning clear).\n- **s6_path:** \"Getting every word right feels like the whole job, especially after all the hard work of learning individual decoding rules — but fluency is genuinely a further skill on top of accuracy, built through repeated practice on texts that are already accurately decodable.\"",
+      "localKey": "MC-ACCURATE-EQUALS-FLUENT",
+      "language": "en",
+      "refs": [
+        "MC-ACCURATE-EQUALS-FLUENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/misconception/MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "- **Trigger signal:** Student rushes through text at high speed, sacrificing accuracy and/or expression to maximize speed alone (e.g., skips or mumbles unfamiliar words, ignores punctuation-signaled pauses, reads in a flat monotone rush), treating raw words-per-minute as the only goal.",
+      "content": "### MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL\n- **Trigger signal:** Student rushes through text at high speed, sacrificing accuracy and/or expression to maximize speed alone (e.g., skips or mumbles unfamiliar words, ignores punctuation-signaled pauses, reads in a flat monotone rush), treating raw words-per-minute as the only goal.\n- **Conflict evidence [P28]:** \"You read that really fast — but you skipped over 'because' and read the period at the end like it wasn't there. If I asked you what happened in that sentence, could you tell me clearly?\"\n- **Bridge text [P30]:** \"Speed is only valuable when it comes WITH accuracy and expression — rushing past unfamiliar words or ignoring punctuation actually breaks fluency, even though it feels fast. True fluency is fast enough to support understanding, not fast at any cost.\"\n- **Replacement text [P31]:** \"Read at a pace that lets you keep every word accurate and honor punctuation pauses — speed should be a natural result of practice, not a goal to chase by skipping things.\"\n- **Discrimination pairs [P33]:**\n  - Rushed reading that skips \"because\" and ignores the period (fast, but inaccurate and unclear) vs. paced reading that includes every word and pauses appropriately at punctuation (properly fluent, still efficient).\n  - A comma-signaled pause honored (clear phrasing, comprehension supported) vs. the comma ignored in a rush (run-on-sounding, comprehension harder).\n- **s6_path:** \"Speed can feel like the obvious goal once accuracy is secure — but genuinely fluent reading balances speed with accuracy and expression together, and slowing down slightly to keep all three is a sign of real skill, not a step backward.\"\n\n---",
+      "localKey": "MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Repeated Reading for Automaticity",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Repeated Reading for Automaticity\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Punctuation-Signaled Phrasing",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Punctuation-Signaled Phrasing\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Expression Matching Sentence Type",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Expression Matching Sentence Type\",\"primitives\":[],\"addresses\":[\"MC-ACCURATE-EQUALS-FLUENT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ACCURATE-EQUALS-FLUENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Speed-Accuracy Balance Check",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Speed-Accuracy Balance Check\",\"primitives\":[],\"addresses\":[\"MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Fluent Reading of Novel Connected Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Fluent Reading of Novel Connected Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ACCURATE-EQUALS-FLUENT\",\"MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ACCURATE-EQUALS-FLUENT",
+        "MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Comprehension check after fluent reading**\n\"Read this short passage naturally, then tell me in your own words what happened.\"\n*Target:* reads at an appropriate pace with reasonable accuracy and expression, THEN successfully summarizes the content — demonstrating that fluency freed up comprehension capacity.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Punctuation-signaled expression, novel sentence**\n\"Read: 'Watch out!' Then read: 'I am watching.' What's different about how you read them?\"\n*Target:* reads \"Watch out!\" with urgent/exclamatory energy; reads the statement flatly — correctly differentiating expression by sentence type/punctuation.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Speed-accuracy self-check**\n\"Read this passage at a pace where you could still answer questions about it afterward — not as fast as possible.\"\n*Target:* self-regulates pace appropriately, avoiding both over-slow word-by-word reading and over-fast word-skipping.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Novel passage fluency**\n\"Read this new passage you haven't seen before, as fluently as you can.\"\n*Target:* reads with reasonable accuracy, automaticity (no excessive sounding-out of known patterns), and appropriate expression on a genuinely unseen text.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain fluency**\n\"In your own words: what makes reading 'fluent,' beyond just getting the words right?\"\n*Target:* states or demonstrates the three-part definition — accuracy, automaticity/appropriate speed, and expression/prosody — and explains why all three matter for understanding what's read.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Adaptive Flags",
+      "content": "- **Repeated reading is the core evidence-based technique**: this concept's central instructional method (TA-1, Component 3) is repeated reading of the same accessible text — reuse this technique as the default approach whenever fluency practice is needed, rather than always introducing new texts.\n- **Three components, assessed together**: never certify fluency mastery based on accuracy alone (Component 6 MP-1 requires a comprehension check) or speed alone (MP-3 requires accuracy-preserving pacing) — always require accuracy + automaticity + expression together.\n- **Text must be decodable before fluency practice begins**: fluency practice texts should use only already-mastered phonics patterns and sight words — this concept builds automaticity and expression on top of secure decoding, not simultaneously with new decoding challenges.\n- **Prosody transfer difficulty for L2 learners**: for S9 learners, expression/intonation matching may lag behind decoding accuracy significantly, especially if L1 prosody differs substantially from English — budget dedicated modeling time for this specific sub-skill.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.phonics.decoding-fluency/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.decoding-fluency",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — repeated-reading race warm-up on a known short sentence\n  ↓\n[P41] PD-1 (syllable-type decoding readiness)\n  ↓ PASS\n[P41] PD-2 (sight-word readiness)\n  ↓ PASS\n[P06] Anchor: repeated-reading race (same text, 2-3 passes, notice improvement)\n  ↓\nTA-1: Repeated reading for automaticity [C]\n  ↓\nTA-2: Punctuation-signaled phrasing [C]\n  ↓\nTA-3: Expression matching sentence type [C→P]\n  ↓\n[P28] Conflict: accurate-but-flat/slow reading treated as sufficient → MC-ACCURATE-EQUALS-FLUENT (if triggered)\n  ↓\nTA-4: Speed-accuracy balance check [P]\n  ↓\n[P28] Conflict: rushed, word-skipping reading → MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL (if triggered)\n  ↓\nTA-5: Fluent reading of novel connected text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, read one paragraph aloud with expression and summarize it.\"\n[P68] Session close\n[P85] Regulation tail — praise the balance of accuracy, pace, and expression together\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on syllable types/sight words, new to fluency-specific practice): dwell on TA-1's repeated reading with very short, simple texts before adding punctuation/expression layers. S1 (already reads accurately but slowly and flatly): compress TA-1/TA-2, spend most time on TA-3's expression work, since MC-ACCURATE-EQUALS-FLUENT is the likely primary target. S6 (frustrated by being asked to \"slow down\" after working hard to read fast, or vice versa): explicitly validate whichever imbalance is present as a natural stage of development, framing the goal as balance rather than criticizing the existing habit. S9 (L2 learner whose L1 has very different sentence-level prosody/intonation conventions, connecting to prior sentence-stress/intonation work): expect TA-3's expression-matching to require more explicit modeling and practice than for L1-English speakers, and treat this as a legitimate, separate transfer challenge from decoding accuracy itself.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.decoding-fluency.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
