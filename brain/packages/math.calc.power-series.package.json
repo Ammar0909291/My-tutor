@@ -1,0 +1,347 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.power-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.power-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4c176ab24cf2273603eb7e7ea38eb1da5b4030308606e256c30f5d22ba9d0b48",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.power-series.md": "sha256:1632c30f81388917266697e2270bfb4fed69626a7bb563f647bdfc95bb4dc0a4"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.power-series",
+    "name": "Power Series",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.power-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.power-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.power-series.md": "sha256:1632c30f81388917266697e2270bfb4fed69626a7bb563f647bdfc95bb4dc0a4"
+      },
+      "contentHash": "sha256:4e50d821ba6fcd985a9be749c80bb79692488f34f46793b6adbb2d32602ae2ae",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.power-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.power-series.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.power-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.power-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.power-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.power-series.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.power-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.power-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.power-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.power-series.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.power-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.power-series\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.power-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.power-series.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.power-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.power-series\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.power-series/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.power-series",
+      "title": "Power Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: a series Σaₙ converges iff its partial sums converge; the ratio test (lim|aₙ₊₁/aₙ|<1 ⟹ converges, >1 ⟹ diverges, =1 ⟹ inconclusive) is the primary tool this concept reuses to find the radius of convergence\n\n### Target Knowledge State\nStudent can define a power series Σcₙ(x−a)ⁿ and its radius of convergence R (via the ratio test); correctly determine the FULL interval of convergence by separately testing BOTH endpoints x=a−R and x=a+R (since the ratio test is inconclusive exactly there); distinguish the power series's convergence domain from the domain of the FUNCTION it may equal (e.g. 1/(1−x) is defined for all x≠1, but the geometric series Σxⁿ only converges to it for |x|<1); and correctly state (without necessarily proving) that term-by-term differentiation and integration of a power series preserve the radius of convergence R, while potentially changing endpoint behavior.\n\n### Conceptual Obstacles\n1. Assuming the interval of convergence is automatically the full closed interval [a−R, a+R] once R is found — the ratio test is INCONCLUSIVE exactly at the two endpoints, which must be checked separately (by substituting the endpoint value and applying a different test, e.g. comparison or alternating series test); the true interval can be open, closed, or half-open depending on the series\n2. Confusing \"the function the series represents\" with \"the series itself\" — the geometric series formula gives $1/(1-x)$ for ALL $x\\ne1$, but the SERIES $\\sum x^n$ only converges (and hence only EQUALS that value) for $|x|<1$; outside that interval, the function value exists but the series diverges and represents nothing there\n3. Assuming term-by-term differentiation/integration always preserves convergence at both endpoints unchanged — while the radius R is provably preserved, endpoint CONVERGENCE can change: differentiating can lose convergence at an endpoint (extra factor of n hurts convergence), while integrating can gain it (extra factor of 1/(n+1) helps)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.power-series",
+      "title": "ENDPOINTS-AUTOMATICALLY-INCLUDED",
+      "content": "| MC-1 | ENDPOINTS-AUTOMATICALLY-INCLUDED | Student states the interval of convergence as [a−R,a+R] (or (a−R,a+R)) without separately testing each endpoint, assuming the ratio test's verdict extends there | Any power series whose endpoint behavior differs between the two ends, e.g. Σxⁿ/n |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.power-series",
+      "title": "SERIES-EQUALS-FUNCTION-EVERYWHERE",
+      "content": "| MC-2 | SERIES-EQUALS-FUNCTION-EVERYWHERE | Student believes a power series equals its closed-form function value everywhere the function is defined, not just within the radius of convergence | The geometric series Σxⁿ=1/(1−x) example, or any power series with an elementary closed form defined on a larger domain than \\|x−a\\|<R |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.power-series",
+      "title": "TERM-BY-TERM-PRESERVES-ENDPOINTS",
+      "content": "| MC-3 | TERM-BY-TERM-PRESERVES-ENDPOINTS | Student assumes differentiating or integrating a power series term by term leaves endpoint convergence unchanged (since \"the interval stays the same\"), missing that only the RADIUS is guaranteed preserved, not endpoint behavior | Any term-by-term differentiation/integration task at a series whose original endpoint behavior is known |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.power-series",
+      "title": "The Geometric Series as the Motivating Case",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Geometric Series as the Motivating Case\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 64,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.power-series",
+      "title": "Endpoints Differ; Series ≠ Function Outside R; Term-by-Term Changes Endpoints",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Endpoints Differ; Series ≠ Function Outside R; Term-by-Term Changes Endpoints\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 132,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.power-series",
+      "title": "Composite Problem: Radius, Endpoints, and Term-by-Term Together",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Problem: Radius, Endpoints, and Term-by-Term Together\",\"primitives\":[\"P28\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 177,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.power-series",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 216,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.power-series",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess radius computation, independent endpoint testing, series-vs-function domain awareness, and term-by-term consequence tracking under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Find the radius of convergence of $\\sum_{n=0}^\\infty \\dfrac{x^n}{n!}$.\n\n*Solution:* Ratio test: $\\dfrac{|x|^{n+1}/(n+1)!}{|x|^n/n!} = \\dfrac{|x|}{n+1}\\to0$ for every fixed $x$, so the series converges for ALL $x$: $R=\\infty$ (no endpoints to check — this is the series for $e^x$).\n\n**Problem 2:** For $\\sum_{n=1}^\\infty n\\cdot x^n$, find R and test both endpoints.\n\n*Solution:* Ratio test: $\\dfrac{(n+1)|x|^{n+1}}{n|x|^n} = |x|\\cdot\\dfrac{n+1}{n}\\to|x|$, so $R=1$. At $x=1$: $\\sum n$ diverges (terms → ∞, not 0). At $x=-1$: $\\sum n(-1)^n$ also diverges (terms don't → 0, in fact grow in magnitude). Interval: $(-1,1)$, open at both ends.\n\n**Problem 3:** True or false: \"Since $\\sum_{n=0}^\\infty x^n$ converges to $1/(1-x)$ for $|x|<1$, the equation $\\sum x^n = 1/(1-x)$ is valid for every $x\\ne1$.\" Justify.\n\n*Solution:* **False.** The series only converges (and hence only equals the right-hand side) for $|x|<1$. At, e.g., $x=2$: the right side $1/(1-2)=-1$ is a well-defined number, but the left side $\\sum2^n=1+2+4+\\cdots$ diverges — the series represents nothing there, so the \"equation\" is meaningless outside $|x|<1$ even though the function itself is defined more broadly.\n\n**Problem 4:** The series $\\sum_{n=1}^\\infty x^n/n$ has interval of convergence $[-1,1)$ (established in A02). If this series is integrated term by term from 0 to x, will the radius of the resulting series change? Could its endpoint behavior change?\n\n*Solution:* The radius stays $R=1$ (term-by-term integration always preserves the radius). Endpoint behavior CAN change — integration tends to help convergence at endpoints (an extra factor of $1/(n+1)$ appears), so it is possible (though not automatic without direct checking) that the endpoint $x=1$, which diverged for the original series, could gain convergence after integrating; each endpoint must still be re-tested directly on the new series to know for certain.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** Consider $h(x) = \\sum_{n=1}^\\infty \\dfrac{(x-2)^n}{n\\cdot4^n}$ (centered at $a=2$, not at 0).\n\n(a) Find the radius of convergence R and the resulting candidate interval before endpoint-checking.\n(b) Test both endpoints and state the full interval of convergence.\n(c) A student argues: \"Since this series is basically the same as $\\sum x^n/(n\\cdot4^n)$ but just shifted to be centered at 2 instead of 0, and shifting a graph doesn't change its shape, the endpoint behavior must be identical to whatever $\\sum x^n/(n\\cdot4^n)$ would have (just shifted by 2).\" Evaluate this reasoning, and confirm (or correct it) using your answer to (b) together with a genuinely separate computation of the unshifted series' endpoints.\n\n**Expected solution:**\n\n(a) Ratio test: $\\left|\\dfrac{(x-2)^{n+1}/((n+1)4^{n+1})}{(x-2)^n/(n4^n)}\\right| = \\dfrac{|x-2|}{4}\\cdot\\dfrac{n}{n+1}\\to\\dfrac{|x-2|}{4}$. Need $<1$: $|x-2|<4$, so $R=4$, candidate interval $(2-4, 2+4)=(-2,6)$.\n\n(b) Endpoints: $x=6$ gives $(x-2)=4$: $\\sum\\dfrac{4^n}{n4^n}=\\sum\\dfrac1n$ — harmonic, **diverges**. $x=-2$ gives $(x-2)=-4$: $\\sum\\dfrac{(-4)^n}{n4^n}=\\sum\\dfrac{(-1)^n}{n}$ — alternating harmonic, **converges**. Interval: $[-2,6)$.\n\n(c) The student's reasoning about the SHAPE being preserved under a shift is directionally sound (a shift in the center doesn't change R, and indeed here R=4 matches what $\\sum x^n/(n4^n)$ would give too, by the identical ratio-test computation with $(x-2)$ replaced by $x$) — but the specific CLAIM about endpoint labels needs to be checked, not just assumed, because \"shifted by 2\" changes WHICH x-values are the endpoints, not the underlying convergence facts at each corresponding point. Direct check of the unshifted series $\\sum x^n/(n4^n)$: at $x=4$, $\\sum1/n$ diverges; at $x=-4$, $\\sum(-1)^n/n$ converges — EXACTLY the same pattern (diverge at the positive endpoint, converge at the negative endpoint) as the shifted version, just at $x=4,-4$ instead of $x=6,-2$ (each shifted by $+2$ from the unshifted case, confirming $6=4+2$ and $-2=-4+2$). So in THIS case the student's intuition happens to check out once verified directly — but the correct habit is to verify by substitution at the ACTUAL endpoint values of the specific series given, never to skip the check merely because a shift \"looks like\" it shouldn't change anything; the shift argument correctly predicts the RADIUS is unchanged (a real, provable fact) but endpoint convergence still requires its own substitution-based check to confirm rather than assume, even when, as here, the intuition turns out to be right.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 4/5 (⌈0.75 × 5⌉ = ⌈3.75⌉ = 4)\n\n- S ≥ 4: MASTERY ACHIEVED → proceed to P74\n- S = 3: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 2: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.calc.taylor-series and math.calc.maclaurin-series; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.calc.power-series assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — ENDPOINTS-AUTOMATICALLY-INCLUDED (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming the interval of convergence is settled once R is found is ENDPOINTS-AUTOMATICALLY-INCLUDED. The ratio test is INCONCLUSIVE exactly at the two endpoints — each must be substituted in and tested by a different method.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A series has R=5 centered at 0. What is the interval of convergence?\"\n- MC-1 response: \"(-5, 5)\" or \"[-5, 5]\" stated immediately, with no endpoint computation shown.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"R only tells you the OPEN interval (-5,5) is definitely inside the region of convergence, and everything outside [-5,5] definitely diverges — the ratio test's own limit equals exactly 1 (its inconclusive case) precisely at x=5 and x=-5. You must SUBSTITUTE each specific value into the original series and apply a genuinely different test (comparison, alternating series, p-series, etc.) — there is no shortcut that reads off endpoint behavior from R alone, and the two endpoints can behave completely differently from each other (as in $\\sum x^n/n$: converges at $-1$, diverges at $1$).\"\n\nPractice: For $\\sum x^n/n^3$ (R=1 by the ratio test, same computation pattern as $1/n$ and $1/n^2$), test both endpoints and state the full interval.\n\n---\n\n### Repair Action B02 — SERIES-EQUALS-FUNCTION-EVERYWHERE (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Believing a power series equals its closed-form function everywhere the function is defined is SERIES-EQUALS-FUNCTION-EVERYWHERE. The series only equals that function value WITHIN its interval of convergence — outside it, the series diverges even if the function itself is still defined.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Since Σxⁿ = 1/(1−x), what does Σxⁿ equal at x=3?\"\n- MC-2 response: \"1/(1-3) = -1/2.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check directly: at x=3, the series is $1+3+9+27+\\cdots$, whose terms grow without bound — it DIVERGES, representing no value at all, certainly not $-1/2$. The formula $1/(1-x)$ is a property of the FUNCTION, valid for all $x\\ne1$; the equality with the SERIES only holds where the series actually converges, $|x|<1$. Once outside the interval of convergence, the series and the function are simply unrelated — the function persists, the series does not.\"\n\nPractice: State, without computing, whether $\\sum x^n=1/(1-x)$ is a valid equation at $x=0.5$, at $x=-0.9$, and at $x=1.5$ — and justify each using only the interval of convergence.\n\n---\n\n### Repair Action B03 — TERM-BY-TERM-PRESERVES-ENDPOINTS (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming differentiation/integration leaves endpoint convergence unchanged is TERM-BY-TERM-PRESERVES-ENDPOINTS. Only the RADIUS is guaranteed preserved — endpoint behavior can change (differentiation tends to hurt it, integration tends to help it) and must be re-checked on the new series.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Σxⁿ/n has interval [-1,1). After differentiating term by term, what is the new interval?\"\n- MC-3 response: \"Still [-1,1), since differentiating doesn't change the interval.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Differentiate term by term: $\\sum x^n/n \\to \\sum x^{n-1} = \\sum_{n=0}^\\infty x^n$ (the geometric series). Re-derive its interval FRESH: ratio test still gives R=1 (radius preserved, as guaranteed), but NOW check the endpoints of THIS new series — at x=-1: $\\sum(-1)^n$ diverges (terms don't → 0), whereas the ORIGINAL series converged there. The endpoint convergence was LOST by differentiating. The radius is a guaranteed invariant; endpoint behavior is not, and must be re-verified by direct substitution every time a term-by-term operation is applied.\"\n\nPractice: Starting from $\\sum x^n/n^2$ (interval [-1,1], both endpoints convergent, by comparison to $\\sum1/n^2$), differentiate term by term to get $\\sum x^{n-1}/n$ (reindex as $\\sum x^n/(n+1)$), and check whether its endpoint behavior at $x=1$ and $x=-1$ matches the original.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute the geometric series's full interval of convergence (both endpoints) from memory |\n| SR-2 | +3 days | Find R and test both endpoints for a fresh series (e.g. one with an $n^2$ or $n!$ coefficient) |\n| SR-3 | +7 days | Explain, using a concrete x-value outside the interval of convergence, why the series and its closed-form function diverge from each other there |\n| SR-4 | +14 days | Reconstruct the term-by-term differentiation endpoint-loss example (A02 Contrast 3 / B03) from scratch |\n\nRetrieval flag: if student states an interval of convergence without independently testing both endpoints (MC-1) or claims a series equals its function value outside the interval (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.seq.series-convergence | The ratio test used throughout to find R, and the underlying partial-sums definition of series convergence, are both inherited directly from that blueprint |\n| Unlocks | math.calc.taylor-series | Taylor series are power series with a specific coefficient formula; this concept's radius/interval/endpoint machinery applies unchanged |\n| Unlocks | math.calc.maclaurin-series | The a=0 special case of Taylor series, inheriting the same convergence apparatus developed here |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the full radius/endpoint/shift-reasoning skill set to a series centered at a nonzero point, a genuinely new configuration rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=10 → extended structure (3 main TAs + gate, but each TA carries denser content than the h=3-6 concepts in this corpus, reflecting the larger time allocation), matching the concept's genuinely broader scope (radius, endpoints, series-vs-function, and term-by-term consequences all fall under one KG node)\n- bloom=analyze → checkpoints and the gate require multi-step composite reasoning (radius AND both endpoints AND, in A03/A04, a downstream consequence), not single-fact recall\n- CPA_entry = C for an advanced learner: the geometric series (already familiar from prior series work) is worked completely and concretely before any general machinery is introduced, anchoring both the radius concept and the endpoint-checking discipline in one canonical, memorable example\n\n**Key teaching insight:** MC-1 (endpoint omission) is this concept's highest-leverage error because it recurs, disguised, inside MC-3 — a student who never built the habit of checking endpoints independently has no foothold when asked whether a DERIVATIVE'S endpoints match the original series's. A02's three contrasts and A03's composite problem are sequenced so the SAME endpoint-checking action (substitute the specific value, apply a fresh test) is practiced in three escalating contexts: a single series (Contrast 1), a series compared against its closed-form function (Contrast 2), and a series after a term-by-term operation (Contrast 3) — building one transferable skill rather than three separate ones.\n\n**Why h=10 justifies extra density rather than extra TAs:** Unlike some larger-h concepts elsewhere in the corpus that use additional main teaching actions, this concept's content (radius, interval, function-domain, term-by-term) is tightly interlinked (each new idea directly reuses the same endpoint-testing procedure), so three richly worked TAs plus a substantial composite problem (A03) cover the scope more coherently than splitting into more numerous, thinner actions would.\n\n**Sequencing note:** No cross-link concept exists yet for math.calc.power-series; the P76 transfer probe instead uses a series shifted to a nonzero center, deliberately pairing a plausible \"shift doesn't change anything\" intuition (which happens to be correct here) with the requirement to verify it directly rather than accept it on faith — reinforcing the check-don't-assume discipline that is this blueprint's central lesson.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.calc.power-series ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.seq.series-convergence ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=analyze → P07/multi-step recommended | Composite radius+endpoint+consequence tasks throughout A02-A04 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=4/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.75×5⌉=⌈3.75⌉=4; PASS=4/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=10 → extended-density (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Shifted-center series; shift-intuition verified rather than assumed ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 216,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.power-series",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner works the geometric series (the single most important motivating example) fully, including both endpoints, before the general radius-of-convergence machinery is stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: the geometric series Σxⁿ worked in full (ratio test, both endpoints, contrast with the function 1/(1−x)); P: a number-line picture of the interval of convergence with four possible endpoint configurations; A: formal definitions of radius/interval of convergence and the ratio-test procedure\n2. **A02 P06 CONTRAST PAIR** — a series with different behavior at each endpoint (MC-1); series-vs-function domain (MC-2, reusing the geometric series); term-by-term differentiation shrinking an endpoint's convergence (MC-3)\n3. **A03 P28 CONFLICT EVIDENCE** — a full worked example requiring radius computation, both-endpoint testing, and a term-by-term operation in one composite problem, surfacing any residual gaps before the gate\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.power-series",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute the geometric series's full interval of convergence (both endpoints) from memory |\n| SR-2 | +3 days | Find R and test both endpoints for a fresh series (e.g. one with an $n^2$ or $n!$ coefficient) |\n| SR-3 | +7 days | Explain, using a concrete x-value outside the interval of convergence, why the series and its closed-form function diverge from each other there |\n| SR-4 | +14 days | Reconstruct the term-by-term differentiation endpoint-loss example (A02 Contrast 3 / B03) from scratch |\n\nRetrieval flag: if student states an interval of convergence without independently testing both endpoints (MC-1) or claims a series equals its function value outside the interval (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 363,
+        "endLine": 378
+      }
+    },
+    {
+      "assetId": "math.calc.power-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.power-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.seq.series-convergence | The ratio test used throughout to find R, and the underlying partial-sums definition of series convergence, are both inherited directly from that blueprint |\n| Unlocks | math.calc.taylor-series | Taylor series are power series with a specific coefficient formula; this concept's radius/interval/endpoint machinery applies unchanged |\n| Unlocks | math.calc.maclaurin-series | The a=0 special case of Taylor series, inheriting the same convergence apparatus developed here |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the full radius/endpoint/shift-reasoning skill set to a series centered at a nonzero point, a genuinely new configuration rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.power-series.md",
+        "startLine": 378,
+        "endLine": 392
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.linear-system-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.linear-system",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ef41357e4e3fc71aab14af7e0401d96d91e65ff17c4dead3cf1039cfd4510f0c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.linear-system.md": "sha256:756f6aadb209d5af97dbc072182bab69e848599f967ae452f991ab4f73392dc6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.linalg.linear-system",
+    "name": "System of Linear Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.matrix",
+      "math.alg.system-linear-equations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.linear-system-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.linear-system (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.linear-system.md": "sha256:756f6aadb209d5af97dbc072182bab69e848599f967ae452f991ab4f73392dc6"
+      },
+      "contentHash": "sha256:8106cf6c99120aeb6df96ee0c9e192f06e765bbd13e930dcd698dfbb4510d4bc",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.linear-system.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.linear-system.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.linear-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.linear-system\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.linear-system.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.linear-system.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.linear-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.linear-system\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.linear-system.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.linear-system.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.linear-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.linear-system\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.linear-system/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.linear-system",
+      "title": "System of Linear Equations — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.linalg.matrix**: a rectangular array of numbers; an m×n matrix encodes a linear map ℝⁿ→ℝᵐ; matrix-vector multiplication as the operation this concept packages equations into\n- **math.alg.system-linear-equations**: a collection of linear equations in the same variables, solved by substitution/elimination; three possible outcomes (unique solution, no solution, infinitely many) — this concept restates that same content in matrix form, Ax=b, and connects the outcome to the RANK of A and [A|b]\n\n### Target Knowledge State\nStudent can translate a system of linear equations into matrix form Ax=b; correctly classify a system's outcome (unique solution, no solution, or infinitely many solutions) by comparing rank(A) to rank([A|b]) and to the number of unknowns n; correctly identify an INCONSISTENT system from a row-reduced augmented matrix (a row like [0 0 0 | c] with c≠0); correctly identify a system with infinitely many solutions (a free variable, rank(A)<n with the system otherwise consistent) and distinguish this from a unique solution (rank(A)=rank([A|b])=n); and avoid conflating \"the number of equations\" with \"the number of independent constraints,\" recognizing that redundant or contradictory equations change the effective rank without changing the equation count.\n\n### Conceptual Obstacles\n1. Assuming the number of equations always determines the outcome (e.g. \"3 equations, 3 unknowns, so there must be a unique solution\") — the actual determining factor is RANK, and equations can be redundant (dependent on others, not adding a genuine new constraint) or contradictory, so equation count alone never settles the outcome\n2. Misreading a row [0 0 0 | c] with c≠0 in a row-reduced augmented matrix as \"the system has infinitely many solutions\" (confusing an all-zero row with an all-zero-except-the-constant row) — the former (all zeros, including the constant, i.e. [0 0 0 | 0]) signals a free variable/redundancy; the latter ([0 0 0 | c], c≠0) signals a flat-out contradiction (0=c), meaning NO solution exists\n3. Confusing \"rank(A) < n\" (fewer independent equations than unknowns) with \"no solution\" — a system can be consistent (rank(A)=rank([A|b])) with rank(A)<n, which gives infinitely many solutions (free variables), not zero solutions; \"too few equations\" alone never means \"no solution,\" only \"possibly more than one solution if consistent\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.linear-system",
+      "title": "EQUATION-COUNT-DETERMINES-OUTCOME",
+      "content": "| MC-1 | EQUATION-COUNT-DETERMINES-OUTCOME | Student assumes \"n equations, n unknowns\" guarantees a unique solution, ignoring the possibility of redundant or contradictory equations that change the effective rank | Any square system (same number of equations as unknowns) that is secretly dependent or inconsistent |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.linear-system",
+      "title": "ZERO-ROW-ALWAYS-MEANS-INFINITE-SOLUTIONS",
+      "content": "| MC-2 | ZERO-ROW-ALWAYS-MEANS-INFINITE-SOLUTIONS | Student sees any all-zero-looking row in row-reduced form and concludes \"infinitely many solutions,\" without checking whether the augmented column entry in that row is also zero | Any row-reduced augmented matrix with a row [0 0 ... 0 | c]; especially when c≠0 (a contradiction, not free variables) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.linear-system",
+      "title": "RANK-LESS-THAN-N-MEANS-NO-SOLUTION",
+      "content": "| MC-3 | RANK-LESS-THAN-N-MEANS-NO-SOLUTION | Student assumes rank(A)<n (fewer independent equations than unknowns) automatically means the system is inconsistent (no solution), rather than recognizing this signals infinitely many solutions WHEN the system is otherwise consistent | Underdetermined systems (fewer independent equations than unknowns) that are, in fact, consistent |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.linear-system",
+      "title": "Three Systems, Three Outcomes, One Reading Rule",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Three Systems, Three Outcomes, One Reading Rule\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 64,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.linear-system",
+      "title": "Redundancy, the Zero-Row Trap, and Underdetermined-but-Consistent",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Redundancy, the Zero-Row Trap, and Underdetermined-but-Consistent\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 128,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.linear-system",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 173,
+        "endLine": 389
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.linear-system",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess rank-based classification fluency, correct terminal-row reading, and equation-count independence under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Row-reduce $\\begin{cases}x-y=2\\\\3x-3y=6\\end{cases}$ and classify.\n\n*Solution:* Row 2 minus 3×row 1: $0=0$. rank(A)=rank([A\\|b])=1<n=2. Infinitely many solutions: $x=2+y$, y free.\n\n**Problem 2:** Row-reduce $\\begin{cases}x-y=2\\\\3x-3y=5\\end{cases}$ and classify.\n\n*Solution:* Row 2 minus 3×row 1: $0=-1$. Contradiction. No solution.\n\n**Problem 3:** A system has 4 equations and 3 unknowns. After row reduction, exactly one row is $[0\\ 0\\ 0\\ |\\ 0]$ and all others are non-degenerate with rank(A)=3. Classify.\n\n*Solution:* rank(A)=rank([A\\|b])=3=n. **Unique solution** — the $[0\\ 0\\ 0\\|0]$ row is simply a redundant equation (adds no new constraint, but also no contradiction); with 3 genuinely independent equations matching the 3 unknowns, the solution is unique despite having started with 4 equations.\n\n**Problem 4:** True or false: \"A system with more equations than unknowns can never have a unique solution, since it's over-determined.\" Justify or correct.\n\n*Solution:* **False.** More equations than unknowns can still yield a unique solution if enough of them are independent and consistent with rank(A)=n (extra equations beyond that are then automatically redundant, not contradictory) — e.g. Problem 3 above (4 equations, 3 unknowns, unique solution). It can also yield no solution (if some equations contradict) or infinitely many (if the independent rank falls short of n) — equation count alone never determines the outcome.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.alg.system-linear-equations)*\n\n**Prompt:** Recall from math.alg.system-linear-equations that a 2×2 system solved by substitution or elimination has exactly the same three possible outcomes (unique, none, infinite) as this concept's matrix-form classification.\n\n(a) Take the system $\\begin{cases}2x+3y=7\\\\4x+6y=14\\end{cases}$. Solve it BOTH by substitution/elimination (as in math.alg.system-linear-equations) AND by row-reducing the augmented matrix (as in this concept), and confirm both methods agree on the outcome.\n(b) Explain precisely how \"the second equation is a scalar multiple of the first\" (an observation naturally made while doing elimination) corresponds to a specific rank statement about A and [A|b].\n(c) A student who has only studied elimination (not matrices) argues: \"I don't need rank — I can already tell from elimination whether a system has 0, 1, or infinitely many solutions.\" Evaluate this claim, and explain what the matrix/rank framework adds beyond what elimination alone already reveals (think about systems with many equations and many unknowns, where elimination becomes harder to track by hand).\n\n**Expected solution:**\n\n(a) *Elimination:* multiply the first equation by 2: $4x+6y=14$ — identical to the second equation. So the second equation is redundant; only one independent equation remains, $2x+3y=7$, giving infinitely many solutions ($x=(7-3y)/2$, y free). *Row reduction:* $\\begin{bmatrix}2&3&|&7\\\\4&6&|&14\\end{bmatrix} \\to$ (row 2 minus 2×row 1) $\\to \\begin{bmatrix}2&3&|&7\\\\0&0&|&0\\end{bmatrix}$ — rank(A)=rank([A\\|b])=1<n=2: infinitely many solutions. **Both methods agree.**\n\n(b) \"The second equation is a scalar multiple of the first\" means, after subtracting the appropriate multiple, the resulting row is ALL zeros including the augmented entry ($[0\\ 0\\|0]$) — precisely the condition that keeps rank([A\\|b]) from exceeding rank(A) (no new independent information, and no contradiction either). If instead the second equation were a scalar multiple of the first equation's LEFT side but NOT a matching multiple on the right side (as in Contrast 3 of A02, e.g. $2x+2y=6$ paired with something that should be $2\\times$ the first equation's right side but isn't), the same subtraction produces $[0\\ 0\\|c]$ with $c\\ne0$ — rank([A\\|b]) EXCEEDS rank(A) by exactly 1, signaling a contradiction. Elimination's informal language (\"this equation is just a multiple of that one,\" \"these two contradict\") is exactly the rank framework's formal statements about $r$ vs. $r'$, restated in row-operation terms.\n\n(c) The claim is reasonable for SMALL systems (2 or 3 equations, checked by hand, as in this blueprint's examples) — elimination genuinely does reveal the same outcome as rank analysis, since they are the same underlying mathematics viewed two ways. What the matrix/rank framework ADDS is a framework that scales: for a system with, say, 50 equations and 30 unknowns, tracking \"which equations are secretly multiples of which others\" by inspection (as elimination invites) becomes impractical, whereas ROW-REDUCING THE MATRIX systematically (a well-defined, mechanical procedure) reveals the rank directly, and the SAME three-case classification (r vs r' vs n) applies without needing to spot redundancies by eye. The matrix framework is not a DIFFERENT answer from elimination — it is the SAME answer, obtained via a method that remains tractable and precise at a scale where ad hoc equation-comparison stops being feasible.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.9 × 5⌉ = ⌈4.5⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.linalg.row-echelon and math.linalg.matrix-inverse; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.linalg.linear-system assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — EQUATION-COUNT-DETERMINES-OUTCOME (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming n equations and n unknowns guarantees a unique solution is EQUATION-COUNT-DETERMINES-OUTCOME. The RANK of A (the number of genuinely independent equations) decides the outcome — equations can be redundant or contradictory, which raw counting never detects.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A system has 3 equations and 3 unknowns. Does it have a unique solution?\"\n- MC-1 response: \"Yes, 3 equations and 3 unknowns always gives a unique solution.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Row-reduce first, always — equation count is not the test. If one equation turns out to be a scalar multiple of another (redundant) or contradicts another, the effective rank drops below 3 (or a contradiction appears), regardless of having written down 3 equations. Only checking rank(A) vs rank([A\\|b]) vs n after row-reducing settles it; 'same number of equations as unknowns' is neither necessary nor sufficient for uniqueness.\"\n\nPractice: Confirm that $\\begin{cases}x+y=2\\\\2x+2y=4\\\\3x+3y=6\\end{cases}$ (3 equations, 2 unknowns, all multiples of each other) has infinitely many solutions despite having MORE equations than unknowns.\n\n---\n\n### Repair Action B02 — ZERO-ROW-ALWAYS-MEANS-INFINITE-SOLUTIONS (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Reading any zero-coefficient row as 'infinitely many solutions' without checking the augmented entry is ZERO-ROW-ALWAYS-MEANS-INFINITE-SOLUTIONS. [0 0 0\\|0] and [0 0 0\\|c] (c≠0) look nearly identical but mean OPPOSITE things.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A row-reduced system has a row [0 0 0 \\| 7]. What does this mean?\"\n- MC-2 response: \"Infinitely many solutions, since the row is all zeros.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The COEFFICIENT side is all zeros, yes — but read the augmented entry: 7. The row says $0=7$, which is FALSE, always. This is a CONTRADICTION, meaning the entire system has NO solution — the exact opposite of 'infinitely many.' Only [0 0 0\\|0] (augmented entry also zero, i.e. $0=0$, always TRUE) signals a free variable toward infinitely many solutions. Habit: on every all-coefficient-zero row, explicitly check whether the augmented entry is zero or nonzero before concluding anything.\"\n\nPractice: Classify a system whose row reduction ends in [0 0 \\| 0] vs. one ending in [0 0 \\| −3], stating the outcome for each.\n\n---\n\n### Repair Action B03 — RANK-LESS-THAN-N-MEANS-NO-SOLUTION (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming rank(A)<n automatically means no solution is RANK-LESS-THAN-N-MEANS-NO-SOLUTION. Rank(A)<n (fewer independent equations than unknowns) signals INFINITELY MANY solutions, provided the system is otherwise consistent (rank(A)=rank([A\\|b])).\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A system has 2 independent equations and 3 unknowns. Does it have a solution?\"\n- MC-3 response: \"No, there aren't enough equations to solve for all the unknowns.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"'Not enough equations to pin down a UNIQUE answer' and 'no solution at all' are different claims. If the 2 equations are consistent (no contradiction after row reduction — check for a [0⋯0\\|c≠0] row specifically), the system has INFINITELY MANY solutions: with rank 2 and n=3, exactly $3-2=1$ variable is free, and every choice of that free variable produces a valid solution. 'Underdetermined' means 'possibly many solutions if consistent,' never 'guaranteed no solution' — only an actual contradiction (a $0=c\\ne0$ row) produces 'no solution,' and that can happen regardless of how the equation count compares to the unknown count.\"\n\nPractice: Confirm that $\\begin{cases}x+y+z=4\\\\x+y+z=4\\end{cases}$ (2 identical equations, 3 unknowns) is consistent and has infinitely many solutions (2 free variables), not \"no solution.\"\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the three-case rank classification (r<r'; r=r'=n; r=r'<n) from memory, with the outcome each implies |\n| SR-2 | +3 days | Classify a fresh square system that turns out to be secretly dependent, without assuming equation count settles it |\n| SR-3 | +7 days | Read a [0 0 0\\|c] row correctly for both c=0 and c≠0 cases, stated side by side |\n| SR-4 | +14 days | Reconstruct the elimination-vs-rank equivalence argument (A03 transfer probe) explaining what the matrix framework adds at scale |\n\nRetrieval flag: if student assumes equation count alone determines the outcome (MC-1) or misreads a contradictory zero-row as \"infinitely many\" (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.linalg.matrix | Supplies the Ax=b packaging (matrix-vector product) this concept classifies the solvability of |\n| Requires (Tier-1) | math.alg.system-linear-equations | Supplies the elimination/substitution method and the three-outcome vocabulary (unique/none/infinite) this concept restates via rank |\n| Unlocks | math.linalg.row-echelon | The systematic row-reduction procedure sketched informally here (A01-A03) is formalized fully in that blueprint |\n| Unlocks | math.linalg.matrix-inverse | A unique solution to Ax=b for every b (the r=r'=n case, with A square) is exactly the condition under which A is invertible |\n\n**GR-9:** cross_links include math.alg.system-linear-equations (Tier 1) → P76_mode = cross-link probe (probe connects elimination's informal redundancy/contradiction language directly to the formal rank statements, and asks what the matrix framework adds at scale).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (2 main TAs + gate), matching the concept's tightly bounded scope (one classification theorem, applied to worked examples) despite proficient difficulty\n- bloom=apply → checkpoints require executing row reduction and reading the result correctly, not merely stating the classification rule\n- CPA_entry = C for a proficient learner: three concrete row-reduced systems (one per outcome) anchor the classification BEFORE the general rank rule is stated, so the abstract theorem in A01's Stage A reads as a summary of what was just seen, not a new claim to take on faith\n\n**Key teaching insight:** MC-1, MC-2, and MC-3 all share a single underlying failure mode — substituting a SURFACE feature (equation count, the visual appearance of a zero row, \"fewer equations than unknowns\") for the actual determining computation (rank comparison, the augmented entry's specific value). A02's three contrasts are deliberately built so each one presents a case where the surface feature and the correct answer DISAGREE (a square system that isn't unique; a zero-looking row that's actually a contradiction; an underdetermined system that IS consistent), forcing the rank-based rule to do real work rather than merely restating an already-obvious answer.\n\n**MC-2 as the single highest-leverage repair:** Because [0 0 0\\|0] and [0 0 0\\|c≠0] are visually almost identical (differing in exactly one entry), this is the error most likely to survive into unrelated future contexts (any row-reduction task, in any subsequent linear algebra concept) if not corrected here — B02's practice item deliberately drills the two side by side one final time to cement the discrimination.\n\n**Sequencing note (cross-link):** math.alg.system-linear-equations (Tier 1, already authored) is a genuine, actionable cross-link — the P76 transfer probe explicitly reconciles that blueprint's elimination-based language (\"this equation is a multiple of that one\") with this concept's formal rank statements, and argues for what the matrix framework specifically contributes once systems grow too large to inspect by eye.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.linalg.linear-system ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.linalg.matrix ✓, math.alg.system-linear-equations ✓ | PASS |\n| V-3 | CPA entry = C for proficient difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Row-reduction execution tasks throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | math.alg.system-linear-equations is Tier 1 → P76=cross-link probe ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.9×5⌉=⌈4.5⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1, MC-2 FOUNDATIONAL, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5, tightly-scoped → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Elimination-vs-rank equivalence; scale argument for the matrix framework ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 173,
+        "endLine": 389
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.linear-system",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — proficient learner row-reduces three small concrete systems (one of each outcome type) before the general rank-based classification rule is stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: three 3×3-ish systems row-reduced to their three different outcomes; P: an augmented-matrix \"reading guide\" showing exactly what each terminal row pattern means; A: the formal rank(A) vs rank([A|b]) vs n classification theorem\n2. **A02 P06 CONTRAST PAIR** — a square system that looks unique but is secretly dependent (MC-1); [0 0 0|0] vs [0 0 0|c] read side by side (MC-2); an underdetermined-but-consistent system correctly classified as infinite, not \"no solution\" (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.linear-system",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the three-case rank classification (r<r'; r=r'=n; r=r'<n) from memory, with the outcome each implies |\n| SR-2 | +3 days | Classify a fresh square system that turns out to be secretly dependent, without assuming equation count settles it |\n| SR-3 | +7 days | Read a [0 0 0\\|c] row correctly for both c=0 and c≠0 cases, stated side by side |\n| SR-4 | +14 days | Reconstruct the elimination-vs-rank equivalence argument (A03 transfer probe) explaining what the matrix framework adds at scale |\n\nRetrieval flag: if student assumes equation count alone determines the outcome (MC-1) or misreads a contradictory zero-row as \"infinitely many\" (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 320,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-system/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.linear-system",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.linalg.matrix | Supplies the Ax=b packaging (matrix-vector product) this concept classifies the solvability of |\n| Requires (Tier-1) | math.alg.system-linear-equations | Supplies the elimination/substitution method and the three-outcome vocabulary (unique/none/infinite) this concept restates via rank |\n| Unlocks | math.linalg.row-echelon | The systematic row-reduction procedure sketched informally here (A01-A03) is formalized fully in that blueprint |\n| Unlocks | math.linalg.matrix-inverse | A unique solution to Ax=b for every b (the r=r'=n case, with A square) is exactly the condition under which A is invertible |\n\n**GR-9:** cross_links include math.alg.system-linear-equations (Tier 1) → P76_mode = cross-link probe (probe connects elimination's informal redundancy/contradiction language directly to the formal rank statements, and asks what the matrix framework adds at scale).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-system.md",
+        "startLine": 335,
+        "endLine": 350
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
