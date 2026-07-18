@@ -36428,6 +36428,366 @@ const MEQ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.qm.wave-function ──────────────────────────────────────────────────────
+const WVFN = 'phys.qm.wave-function'
+const WVFN_SRC = 'docs/curriculum/blueprints/phys.qm.wave-function.md'
+
+const WVFN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WVFN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The quantum wavefunction ψ is NOT a physical wave in real space, like water vibrating — it is a complex-valued mathematical object, ψ=Ae^(i(kx−ωt))=A(cos(kx−ωt)+i·sin(kx−ωt)). No genuine physical observable is ever complex-valued — complex numbers inherently require two independent real quantities to specify. ψ itself is therefore not directly observable at all; only |ψ|² (which is real and non-negative) corresponds to something measurable — specifically, the probability density seen in actual experiments. The wavefunction is best understood as a "probability amplitude" — a mathematical tool for computing probabilities, defined in the abstract space of possible configurations (configuration space, which for multi-particle systems is not even physical 3D space) rather than as a literal vibration of matter. For a free particle, ψ=e^(i(kx−ωt)), so |ψ|²=e^(−i(kx−ωt))×e^(i(kx−ωt))=1 everywhere — this tells you the particle is equally likely to be found anywhere, not that matter is physically vibrating; ψ=1 everywhere is a statement about our fundamental uncertainty regarding the particle\'s location, not a description of a physical oscillation. A second, separate and equally important point: P(x)=|ψ(x)|² is a probability DENSITY, not the probability itself — the probability of finding a particle at exactly one specific point x₀ (a set of measure zero in a continuous distribution) is always exactly zero, P(x=x₀)=0. The genuinely measurable quantity is P(a≤x≤b)=∫ₐᵇ|ψ|²dx — an integral over an interval. |ψ(x)|² carries units of inverse length (m⁻¹ in 1D) — the signature of a density, not a dimensionless probability. This mirrors mass density: a density of 5 kg/m³ doesn\'t mean 5 kg sits at one point, it means a 2 m³ volume contains 10 kg — similarly, |ψ(x)|²=0.5 nm⁻¹ means a 2 nm interval near x contains roughly total probability 1, and you must always integrate over an interval to extract an actual probability.',
+    targetedMisconceptions: [`${WVFN}:MC-1`, `${WVFN}:MC-2`],
+    source: `${WVFN_SRC} — MC-1 ("wavefunction is a physical wave in real space") + MC-2 ("P(x)=|ψ(x)|² is the probability of finding the particle at x")`,
+  },
+  {
+    conceptId: WVFN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "what physical quantity oscillates in a quantum wavefunction?", say "ψ is like a water wave — it\'s the electron vibrating," directly extending the analogy suggested by the term "wave function" and by de Broglie\'s wave-particle picture into a literal physical vibration of matter. Test this against the actual mathematical structure: ψ=Ae^(i(kx−ωt))=A(cos(kx−ωt)+i·sin(kx−ωt)) is genuinely COMPLEX-valued. This is a crucial red flag, because no physical observable in nature is ever complex-valued — complex numbers inherently require two independent real quantities (a real part and an imaginary part) to fully specify, and nothing directly measurable in an experiment ever comes out complex. Consequently, ψ itself is NOT directly observable — only |ψ|² (obtained by multiplying ψ by its complex conjugate, which is guaranteed to be real and non-negative) corresponds to anything measurable, specifically the probability density observed across repeated experiments. The correct interpretation: the wavefunction is a "probability amplitude" — a mathematical bookkeeping tool for computing probabilities — defined over the abstract space of possible configurations (configuration space), which for multi-particle systems is not even ordinary physical 3D space at all. It is not a vibration of matter; it is a prescription for what probabilities to assign to different measurement outcomes. Concretely, for a free particle, ψ=e^(i(kx−ωt)), so |ψ|²=e^(−i(kx−ωt))×e^(i(kx−ωt))=1 everywhere — this tells you the particle is equally likely to be found anywhere in space, not that some physical medium is oscillating; ψ=1 everywhere is fundamentally a statement about the particle having no definite classical position, our uncertainty about its location, never a literal vibration. A second, entirely separate and equally common error: interpreting P(x)=|ψ(x)|² itself as directly giving "the probability of finding the particle at x" — asked "if |ψ(0)|²=0.5 nm⁻¹, what is the probability of finding the particle exactly at x=0?", answering "the probability at x is |ψ(x)|²" as though this quantity were itself a probability. This conflates a DENSITY with the quantity it integrates to give. The probability of finding a particle at exactly one single point x₀ — a mathematical "set of measure zero" within a continuous distribution — is always exactly zero, P(x=x₀)=0, regardless of how large |ψ(x₀)|² happens to be. The genuinely measurable quantity is instead an interval probability, P(a≤x≤b)=∫ₐᵇ|ψ|²dx, obtained by integrating |ψ|² over some finite range. This is confirmed by dimensional analysis: |ψ(x)|² carries units of inverse length (m⁻¹ in one dimension) — exactly the signature of a DENSITY, not a dimensionless probability (which would have no units at all). The correct analogy is to mass density: a mass density of 5 kg/m³ at a point does not mean 5 kg of mass is concentrated at that exact point — it means that a 2 m³ volume surrounding that point contains roughly 10 kg of mass. Similarly, |ψ(x)|²=0.5 nm⁻¹ near some point x means that a 2 nm interval surrounding x contains approximately total probability 1 — you must always integrate the density over some interval or volume to extract an actual, physically meaningful probability; the density value itself at a single point is never a probability on its own.',
+    targetedMisconceptions: [`${WVFN}:MC-1`, `${WVFN}:MC-2`],
+    source: `${WVFN_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const WVFN_PROBES: SeedProbe[] = [
+  {
+    conceptId: WVFN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What physical quantity oscillates in a quantum wavefunction ψ, analogous to how displacement oscillates in a water wave?',
+    choices: [
+      { text: 'None — ψ is a complex-valued probability amplitude, a mathematical tool defined in configuration space, not a physical oscillation of matter; only |ψ|² (real, non-negative) is observable, as a probability density', isCorrect: true },
+      { text: 'The electron itself physically vibrates back and forth, just like a water wave — ψ directly represents this physical oscillation', isCorrect: false, misconceptionId: `${WVFN}:MC-1` },
+    ],
+    correctValue: 'nothing physically oscillates, psi is a probability amplitude',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WVFN}:MC-1`],
+    source: `${WVFN_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WVFN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If |ψ(0)|²=0.5 nm⁻¹, what is the probability of finding the particle at exactly x=0?',
+    choices: [
+      { text: 'Exactly 0 — the probability of finding a particle at any single point is always zero in a continuous distribution; |ψ(x)|² is a probability DENSITY (units m⁻¹), and only P(a≤x≤b)=∫|ψ|²dx over an interval gives an actual probability', isCorrect: true },
+      { text: '0.5 (50%) — the probability at x is directly given by |ψ(x)|²', isCorrect: false, misconceptionId: `${WVFN}:MC-2` },
+    ],
+    correctValue: 'zero, since it is a density not a probability itself',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WVFN}:MC-2`],
+    source: `${WVFN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.operators ──────────────────────────────────────────────────────────
+const OPER = 'phys.qm.operators'
+const OPER_SRC = 'docs/curriculum/blueprints/phys.qm.operators.md'
+
+const OPER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OPER,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A quantum operator acts on the WAVE FUNCTION, not directly on any physical system or measurement device — thinking "p̂ measures the momentum of the particle" confuses a mathematical object with a physical act of measurement. The momentum operator p̂=−iℏ∂/∂x acts mathematically on ψ(x) to produce a new function, (−iℏ)∂ψ/∂x — it doesn\'t "perform a measurement" in any physical sense; it appears specifically inside integrals like ⟨p⟩=∫ψ*p̂ψdx, where it functions as a recipe for CONSTRUCTING the expectation value, not as a measurement device itself. The Born postulate — a separate piece of the theory — governs what actually happens during a real physical measurement (selecting a specific eigenvalue); operator Â appears mathematically in the expectation value formula ⟨Â⟩=∫ψ*Âψdx, encoding the mathematical structure underlying that measurement process, not the measurement event itself. A second, separate and equally important error: treating the expectation value ⟨Â⟩ as "what we\'ll measure" in any single trial. For a particle in state ψ=(1/√2)φ₁+(1/√2)φ₂, saying "the energy is ⟨H⟩=(E₁+E₂)/2" confuses a statistical AVERAGE with the outcome of one individual measurement. Each individual energy measurement genuinely yields either E₁ (with probability 1/2) or E₂ (with probability 1/2) — never the average value (E₁+E₂)/2 itself, which typically isn\'t even an eigenvalue of the Hamiltonian at all. ⟨H⟩=(E₁+E₂)/2 is the MEAN computed over many repeated measurements, not the result of any single one — exactly as "average height of a population is 170 cm" does not mean any individual person is 170 cm tall; the average is a collective, statistical property, while each individual measurement gives an actual eigenvalue. The correct general rule: an individual measurement yields eigenvalue aₙ with probability |⟨φₙ|ψ⟩|², and ⟨Â⟩=Σ|cₙ|²aₙ is the mean computed over many repeated measurements of that same quantum state.',
+    targetedMisconceptions: [`${OPER}:MC-1`, `${OPER}:MC-2`],
+    source: `${OPER_SRC} — MC-1 ("operators act on the system, not on the wave function") + MC-2 ("expectation value is what we'll measure")`,
+  },
+  {
+    conceptId: OPER,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "what does the momentum operator p̂ do?", say "p̂ measures the momentum of the particle," directly conflating the operator — a purely mathematical object — with the physical act of performing a measurement. Test this against what p̂ actually does mathematically: p̂=−iℏ∂/∂x acts on the wave function ψ(x) to produce a new function, (−iℏ)∂ψ/∂x — a purely mathematical operation of differentiation and multiplication by a constant, with no physical apparatus involved and no "measurement event" occurring. The operator doesn\'t perform a measurement in any physical sense whatsoever; instead, it appears specifically inside integrals like the expectation-value formula ⟨p⟩=∫ψ*p̂ψdx, where its role is to serve as a mathematical recipe for CONSTRUCTING that expectation value — a statistical prediction — not to physically interact with or measure a real particle. What actually governs real physical measurements is a genuinely separate piece of quantum theory, the Born postulate, which specifies that an actual physical measurement selects one specific eigenvalue from the operator\'s spectrum. The operator itself encodes the mathematical structure underlying that measurement process — appearing in the general formula ⟨Â⟩=∫ψ*Âψdx — but the operator and the physical measurement act are genuinely two distinct things, one mathematical, one physical, connected by but not identical to each other. A second, entirely separate and equally common error: treating the expectation value ⟨Â⟩ as though it were literally "what we\'ll measure" in any single experimental trial. Asked "a particle is in ψ=(1/√2)φ₁+(1/√2)φ₂; what energy do we measure?", answering "the energy is ⟨H⟩=(E₁+E₂)/2" conflates a statistical average, computed over many repetitions, with the actual outcome of one single measurement. In reality, each individual energy measurement on this state yields EITHER E₁ (with probability 1/2) OR E₂ (with probability 1/2) — you never actually measure the averaged value (E₁+E₂)/2 in any single trial; that averaged value typically isn\'t even a legitimate eigenvalue of the Hamiltonian operator at all, and is therefore not a possible outcome of any individual measurement. ⟨H⟩=(E₁+E₂)/2 represents the MEAN taken over many, many repeated measurements performed on identically-prepared copies of this same quantum state — not the specific result of any one measurement. The clean analogy: saying "the average height of a population is 170 cm" doesn\'t mean any particular individual person is exactly 170 cm tall — the average is a purely collective, statistical property of the whole population, while each individual person (analogous to each individual measurement) has their own actual, definite height (analogous to an actual eigenvalue outcome). The general, correct rule for quantum measurement: any single measurement yields a specific eigenvalue aₙ with probability |⟨φₙ|ψ⟩|², where φₙ are the eigenstates of the operator being measured; the expectation value ⟨Â⟩=Σ|cₙ|²aₙ is then the theoretical MEAN you would obtain by averaging the results of many such individual measurements performed on identically-prepared systems, never the outcome you should expect from any single measurement in isolation.',
+    targetedMisconceptions: [`${OPER}:MC-1`, `${OPER}:MC-2`],
+    source: `${OPER_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const OPER_PROBES: SeedProbe[] = [
+  {
+    conceptId: OPER,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What does the momentum operator p̂=−iℏ∂/∂x actually do?',
+    choices: [
+      { text: 'It acts mathematically on the wave function ψ(x), producing a new function (−iℏ)∂ψ/∂x; it appears inside integrals like ⟨p⟩=∫ψ*p̂ψdx to construct the expectation value — it does not itself perform a physical measurement', isCorrect: true },
+      { text: 'It directly performs a physical measurement of the particle\'s momentum, interacting with the particle to determine its momentum value', isCorrect: false, misconceptionId: `${OPER}:MC-1` },
+    ],
+    correctValue: 'mathematical operation on the wave function, not a physical measurement',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OPER}:MC-1`],
+    source: `${OPER_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: OPER,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A particle is in state ψ=(1/√2)φ₁+(1/√2)φ₂, where φ₁,φ₂ are energy eigenstates with energies E₁,E₂. What energy value does a SINGLE energy measurement actually yield?',
+    choices: [
+      { text: 'Either E₁ (probability 1/2) or E₂ (probability 1/2) — a single measurement always yields one specific eigenvalue, never the average', isCorrect: true },
+      { text: 'The average, ⟨H⟩=(E₁+E₂)/2, since that is the expectation value for this state', isCorrect: false, misconceptionId: `${OPER}:MC-2` },
+    ],
+    correctValue: 'either E1 or E2, an eigenvalue not the average',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OPER}:MC-2`],
+    source: `${OPER_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.uncertainty-principle ──────────────────────────────────────────────
+const UNCP = 'phys.qm.uncertainty-principle'
+const UNCP_SRC = 'docs/curriculum/blueprints/phys.qm.uncertainty-principle.md'
+
+const UNCP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: UNCP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Heisenberg uncertainty principle is NOT a limitation of current measurement technology that better instruments could eventually eliminate — "it\'s just a limitation of current technology" confuses an EPISTEMIC limitation (we don\'t know) with the actual ONTOLOGICAL reality (there is genuinely nothing definite to know). A free particle in a momentum eigenstate (definite p=ℏk) has |ψ|²=constant everywhere in space — it genuinely has NO definite position at all, not merely an unmeasured one. This isn\'t ignorance on our part; it is the actual mathematical structure of that quantum state. A pure-tone sound wave provides a useful analogy: it has a definite frequency everywhere in space, but genuinely has no "location" — this isn\'t a measurement failure, the wave literally occupies all of space simultaneously. Uncertainty is intrinsic to quantum states themselves, not a limitation imposed by our measuring apparatus: states with definite momentum are infinitely spatially extended, and states with definite position have completely undefined momentum — Δx·Δp≥ℏ/2 holds for any quantum state, completely independent of the sophistication of the measuring technology used. A second, separate and equally important error: believing the uncertainty principle applies "only during measurement," as if between measurements a particle secretly possesses definite x and p values that measurement merely fails to reveal. Consider a particle in the ground state of a box, with no one measuring it: ⟨KE⟩=⟨p²⟩/2m=π²ℏ²/(2mL²)>0 — the particle genuinely has nonzero momentum spread even while completely unmeasured, a nonzero quantity that is REQUIRED to maintain proper wave-function normalization and cannot possibly go to zero. The zero-point energy of the box, ℏ²π²/2mL², means the particle possesses genuine kinetic energy even at absolute zero temperature — with no measurement occurring at all — and that energy directly reflects Δp≠0. Quantum uncertainty is a property of the quantum STATE itself, existing independent of whether or when any measurement is performed — never merely a property of the act of measuring.',
+    targetedMisconceptions: [`${UNCP}:MC-1`, `${UNCP}:MC-2`],
+    source: `${UNCP_SRC} — MC-1 ("better technology could eliminate uncertainty") + MC-2 ("uncertainty principle applies only during measurement")`,
+  },
+  {
+    conceptId: UNCP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "if we build a perfect microscope — no vibration, no photon kick — could we measure both x and p exactly?", say "it\'s just a limitation of current technology," implying that sufficiently advanced future instruments could eventually eliminate quantum uncertainty entirely. This conflates two genuinely different things: an EPISTEMIC limitation (something is definite, but we simply don\'t currently know its value) versus the actual ONTOLOGICAL reality of quantum mechanics (there is genuinely nothing definite there TO know in the first place). Test this against an actual quantum state: a free particle prepared in a momentum eigenstate, with perfectly definite momentum p=ℏk, has probability density |ψ|²=constant everywhere in space — this particle genuinely has NO definite position whatsoever, not merely an unmeasured or hidden one. This is not a gap in our knowledge that better technology could someday close; it is the actual, complete mathematical structure of that particular quantum state. A useful physical analogy: a pure-tone sound wave has a perfectly definite frequency at every point in space, yet has no meaningful "location" at all — this isn\'t a failure of measurement technique, the wave genuinely, literally occupies all of space simultaneously; asking "where is the pure tone located" is not a well-posed question about that state. Uncertainty is intrinsic to the quantum state itself, not any limitation imposed by imperfect measuring apparatus: states with perfectly definite momentum are necessarily infinitely extended in position, and states with perfectly definite position necessarily have completely undefined momentum — the relation Δx·Δp≥ℏ/2 holds for every quantum state whatsoever, entirely independent of how sophisticated or "perfect" the measuring technology used might someday become. A second, entirely separate and equally serious error: believing the uncertainty principle applies "only during measurement" — asked "a particle is in the ground state of a box with no one measuring it; does it still have Δx and Δp?", answering "if we\'re not measuring, the particle has definite x and p," as though a particle secretly possesses sharp, definite values for position and momentum whenever no one happens to be looking, with measurement itself somehow being what introduces the uncertainty. Test this directly: for a particle in the ground state of an infinite square well, ⟨KE⟩=⟨p²⟩/(2m)=π²ℏ²/(2mL²), which is strictly greater than zero — this holds true whether or not any measurement is ever performed on the particle. This nonzero momentum spread is not optional; it is REQUIRED simply to maintain proper normalization of the wave function within the confining box, and it cannot be reduced to zero regardless of measurement status. The zero-point energy of this confined particle, ℏ²π²/(2mL²), means the particle possesses genuine, real kinetic energy even at absolute zero temperature, with absolutely no measurement occurring at any point — and that persistent kinetic energy directly reflects a persistent Δp≠0, entirely independent of observation. The correct understanding: quantum uncertainty is fundamentally a property of the quantum STATE itself — a mathematical and physical fact about how that state is structured — existing completely independent of whether, when, or how any measurement happens to be performed; it is never merely an artifact or side-effect specifically tied to the physical act of measuring.',
+    targetedMisconceptions: [`${UNCP}:MC-1`, `${UNCP}:MC-2`],
+    source: `${UNCP_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const UNCP_PROBES: SeedProbe[] = [
+  {
+    conceptId: UNCP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could a sufficiently advanced future measuring instrument, with zero vibration and zero photon-kick disturbance, eventually measure both a particle\'s position and momentum exactly, eliminating quantum uncertainty?',
+    choices: [
+      { text: 'No — uncertainty is intrinsic to the quantum state itself, not a technological limitation; e.g. a momentum eigenstate genuinely has no definite position at all, regardless of measuring technology', isCorrect: true },
+      { text: 'Yes — the uncertainty principle only reflects current technological limitations; a perfect enough instrument could measure both quantities exactly', isCorrect: false, misconceptionId: `${UNCP}:MC-1` },
+    ],
+    correctValue: 'no, uncertainty is intrinsic to the quantum state, not a technology limit',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${UNCP}:MC-1`],
+    source: `${UNCP_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: UNCP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A particle sits in the ground state of a box with no one measuring it. Does it still have nonzero Δx and Δp?',
+    choices: [
+      { text: 'Yes — ⟨KE⟩=⟨p²⟩/2m>0 in the ground state even unmeasured (zero-point energy); uncertainty is a property of the quantum state, not the act of measurement', isCorrect: true },
+      { text: 'No — without measurement occurring, the particle has definite x and p; uncertainty only appears during the act of measuring', isCorrect: false, misconceptionId: `${UNCP}:MC-2` },
+    ],
+    correctValue: 'yes, uncertainty exists independent of measurement',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${UNCP}:MC-2`],
+    source: `${UNCP_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.particle-in-box ─────────────────────────────────────────────────────
+const PBOX = 'phys.qm.particle-in-box'
+const PBOX_SRC = 'docs/curriculum/blueprints/phys.qm.particle-in-box.md'
+
+const PBOX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PBOX,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The ground-state energy of a particle in an infinite square well can NEVER be zero — "at absolute zero, the particle is at rest" directly contradicts quantum mechanics. For an electron in a 1 nm box, E₁=π²ℏ²/(2m×(10⁻⁹)²)≈0.376 eV, genuinely greater than zero — this "zero-point energy" is measured directly in liquid helium, which famously does not solidify at 1 atmosphere even at absolute zero, precisely because zero-point energy prevents crystallization. The mechanism: confinement to width Δx=L forces, via the uncertainty principle, a momentum spread Δp≥ℏ/2L, which forces a minimum kinetic energy KE_min≥Δp²/2m=ℏ²/(8mL²)>0. Zero energy would require Δp=0, which by the uncertainty principle would require Δx=∞ — impossible for a genuinely confined particle. The ground state energy E₁=π²ℏ²/(2mL²) is always strictly positive; zero-point energy is a real, physically measurable phenomenon, not a theoretical curiosity. A second, separate point: the particle can NEVER be found outside an infinite square well — unlike the finite well (where tunneling genuinely occurs), no "leaking out slightly" happens here. Since V=∞ outside the well, the Schrödinger equation inside the barrier region reads −ℏ²/2m·∂²ψ/∂x²=(E−V)ψ=(E−∞)ψ; for this equation to be satisfiable at all, ψ must be EXACTLY zero outside the well. The boundary condition ψ(0)=ψ(L)=0 is exact for a genuinely infinite well — this is fundamentally different from a finite well, where tunneling occurs specifically because V is finite there; in the infinite well, the barrier is literally infinite in height, and the particle cannot penetrate it under any circumstances — this is the defining characteristic that distinguishes the infinite-well model from the finite-well model.',
+    targetedMisconceptions: [`${PBOX}:MC-1`, `${PBOX}:MC-2`],
+    source: `${PBOX_SRC} — MC-1 ("energy can be zero in the ground state") + MC-2 ("particle can be found outside the well")`,
+  },
+  {
+    conceptId: PBOX,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "can an electron in a 1 nm box have zero kinetic energy?", say "at absolute zero, the particle is at rest," applying the classical expectation that T=0 automatically means KE=0. Check this against actual quantum mechanics: for an electron confined to a 1 nm box, the ground-state energy works out to E₁=π²ℏ²/(2m×(10⁻⁹)²)≈0.376 eV — genuinely, unambiguously greater than zero, with no exceptions. This "zero-point energy" phenomenon is not merely theoretical; it is measured directly in liquid helium, which famously refuses to solidify at atmospheric pressure even at absolute zero temperature — because zero-point vibrational/kinetic energy actively prevents the atoms from settling into a crystalline lattice. The underlying mechanism traces directly to the uncertainty principle: confining a particle to a region of width Δx=L forces, via Δx·Δp≥ℏ/2, a minimum momentum spread of Δp≥ℏ/(2L), which in turn forces a minimum kinetic energy of KE_min≥Δp²/(2m)=ℏ²/(8mL²) — genuinely greater than zero for any finite confinement width L. Having zero total energy would require Δp=0 exactly, which by the same uncertainty principle would require Δx=∞ — a flat physical impossibility for a particle that is genuinely confined to a finite box. The ground state energy formula, E₁=π²ℏ²/(2mL²), is therefore always strictly positive by mathematical necessity, not merely by convention — zero-point energy is a real, physically measurable phenomenon with real experimental consequences, never something that vanishes at absolute zero as classical intuition suggests. A second, entirely separate error: asked "where can you find the particle in the infinite square well?", answering "maybe it leaks out slightly" — applying knowledge of quantum tunneling (which genuinely occurs in FINITE potential wells) inappropriately to the INFINITE well case. Check the actual mathematics directly: since the potential V=∞ strictly outside the well, the Schrödinger equation in that exterior region reads −ℏ²/(2m)·∂²ψ/∂x²=(E−V)ψ=(E−∞)ψ — and for this equation to have any physically sensible, finite solution at all, ψ must be EXACTLY zero throughout the exterior region; there is no other mathematically consistent possibility. The boundary condition ψ(0)=ψ(L)=0 is therefore exact — not approximate — for a genuinely infinite well. This differs fundamentally from a finite potential well, where tunneling genuinely does occur, specifically BECAUSE the potential barrier V outside the well is finite there, allowing the wave function to extend a small but nonzero distance beyond the classically forbidden region. In the infinite well, by sharp contrast, the potential barrier is literally infinite in height — the wave function has mathematically zero amplitude outside the well, with no tunneling possible under any circumstances; this stark impossibility of penetration is precisely the defining characteristic that distinguishes the idealized infinite-well model from the more physically realistic finite-well model, where such leakage genuinely does occur.',
+    targetedMisconceptions: [`${PBOX}:MC-1`, `${PBOX}:MC-2`],
+    source: `${PBOX_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const PBOX_PROBES: SeedProbe[] = [
+  {
+    conceptId: PBOX,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can an electron confined in an infinite square well have exactly zero kinetic energy in its ground state?',
+    choices: [
+      { text: 'No — the ground state energy E₁=π²ℏ²/(2mL²) is always strictly positive (zero-point energy); zero energy would require Δp=0, which by the uncertainty principle would need Δx=∞, impossible for a confined particle', isCorrect: true },
+      { text: 'Yes — at the lowest energy state, the particle is at rest with zero kinetic energy, just as classical intuition at T=0 suggests', isCorrect: false, misconceptionId: `${PBOX}:MC-1` },
+    ],
+    correctValue: 'no, ground state energy is always positive, zero-point energy',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PBOX}:MC-1`],
+    source: `${PBOX_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PBOX,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a particle in an infinite square well be found slightly outside the well boundaries, similar to tunneling in a finite well?',
+    choices: [
+      { text: 'No — since V=∞ outside, ψ must be exactly zero outside the well (ψ(0)=ψ(L)=0 exactly); tunneling only occurs for finite wells where V is finite outside', isCorrect: true },
+      { text: 'Yes — like in a finite well, the particle can tunnel slightly outside the infinite well boundaries', isCorrect: false, misconceptionId: `${PBOX}:MC-2` },
+    ],
+    correctValue: 'no, wave function is exactly zero outside an infinite well',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PBOX}:MC-2`],
+    source: `${PBOX_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.harmonic-oscillator-qm ──────────────────────────────────────────────
+const HOSC = 'phys.qm.harmonic-oscillator-qm'
+const HOSC_SRC = 'docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md'
+
+const HOSC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HOSC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The quantum harmonic oscillator\'s ground state does NOT have zero energy — "E₀=0 because at the lowest state there\'s no motion" applies classical intuition (a spring at rest has E=0) to a genuinely quantum system where it fails. If E₀=0 held, then ⟨p²⟩=0 and ⟨x²⟩=0 would both be required, giving Δx=Δp=0 — but this directly violates the uncertainty principle Δx·Δp≥ℏ/2, so quantum mechanics forbids E₀=0 outright. Mechanistically: confining a particle to a parabolic potential well constrains x, which by the uncertainty principle forces a nonzero momentum spread, which in turn forces nonzero kinetic energy. The actual ground-state energy is E₀=½ℏω — a real, measurable quantity: liquid helium famously fails to solidify at 0 K under atmospheric pressure precisely because zero-point vibrational energy keeps its atoms in perpetual motion. A classical spring at rest genuinely has E=0, but a quantum spring in its n=0 state has E=½ℏω>0 — both technically obey "lowest possible state," but the quantum uncertainty principle forces a nonzero energy floor that classical mechanics simply doesn\'t impose. A second, separate error: assuming energy levels are unequally spaced, "borrowing" this expectation from the infinite square well (where Eₙ∝n², giving unequal gaps). For the harmonic oscillator, Eₙ=(n+½)ℏω, so Eₙ₊₁−Eₙ=ℏω — a CONSTANT, identical for every n. Infrared absorption spectra of diatomic molecules confirm this directly: they show a single sharp absorption frequency (in the harmonic approximation) — one ℏω gap — rather than a spread of different frequencies, because every allowed transition costs exactly the same energy ℏω. The physical reason for the contrast: the infinite square well has infinitely steep walls at its boundaries, producing Eₙ∝n² (unequal spacing that grows with n); the harmonic oscillator instead has smoothly parabolic walls, producing linear n-dependence in the energy — hence equal spacing between consecutive levels, ΔE=ℏω regardless of which n you start from.',
+    targetedMisconceptions: [`${HOSC}:MC-1`, `${HOSC}:MC-2`],
+    source: `${HOSC_SRC} — MC-1 (ground state has zero energy) + MC-2 (energy levels are not equally spaced)`,
+  },
+  {
+    conceptId: HOSC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "what is the ground-state energy of the quantum harmonic oscillator?", say "E₀=0 because at the lowest state there\'s no motion," directly transplanting the classical intuition that a spring at rest (zero displacement, zero velocity) has zero energy onto the genuinely quantum-mechanical version of the same system. Check whether E₀=0 is even mathematically consistent with quantum mechanics: if E₀ genuinely equaled zero, this would require both ⟨p²⟩=0 and ⟨x²⟩=0 simultaneously — meaning both Δx=0 and Δp=0 — but this directly and unavoidably violates the uncertainty principle, Δx·Δp≥ℏ/2, which forbids any quantum state from having both position and momentum perfectly sharp (zero spread) at once. Quantum mechanics therefore strictly forbids E₀=0 for this system. The physical mechanism, worked through explicitly: confining a particle within a parabolic (harmonic) potential well inherently constrains its position x, and by the uncertainty principle, constraining x necessarily forces a nonzero spread in momentum p, which in turn forces a nonzero minimum kinetic energy — there is no way around this chain of implications. The actual, correctly computed ground-state energy is E₀=½ℏω, strictly positive, and this is not merely a mathematical curiosity — it is directly measurable: liquid helium famously fails to solidify at absolute zero temperature under normal atmospheric pressure, specifically because its zero-point vibrational energy keeps the helium atoms in continuous motion, preventing them from settling into the fixed lattice positions required for a solid crystal to form. It is true that a CLASSICAL spring at rest genuinely does have E=0 — but a QUANTUM spring in its n=0 (lowest) state has E=½ℏω, strictly greater than zero; both systems technically occupy their respective "lowest possible state," yet the quantum system\'s state is subject to the uncertainty principle in a way the classical system simply is not, forcing a nonzero energy floor that has no classical analog. A second, entirely separate and equally common error: asked "is the gap between E₂ and E₃ the same as between E₀ and E₁?", answering "higher levels should be further apart," an intuition borrowed inappropriately from the infinite square well, where energy levels genuinely do spread apart at higher n (since Eₙ∝n² there). For the quantum harmonic oscillator specifically, the energy levels are Eₙ=(n+½)ℏω, and computing the gap between any two consecutive levels gives Eₙ₊₁−Eₙ=ℏω — a value that is completely CONSTANT, identical regardless of which n you start from; there is no widening or narrowing of the gaps at higher energy. Direct experimental confirmation comes from infrared absorption spectroscopy of diatomic molecules: within the harmonic approximation, these molecules absorb light at a single sharp characteristic frequency — corresponding to exactly one ℏω energy gap — rather than showing a spread of different absorption frequencies at different energies, precisely because every allowed vibrational transition, no matter which levels it connects, costs exactly the same energy, ℏω. The underlying reason for this striking contrast with the square well: the infinite square well has infinitely steep, vertical walls at its two boundaries, and this steep-wall boundary condition is mathematically responsible for producing the Eₙ∝n² energy dependence, which gives genuinely unequal (widening) spacing between successive levels as n increases. The harmonic oscillator, by contrast, has smoothly curving PARABOLIC walls rather than sharp vertical ones, and this smooth parabolic shape is what produces a linear n-dependence in the energy formula instead — directly resulting in perfectly EQUAL spacing, ΔE=ℏω, between every pair of consecutive energy levels, regardless of which n you happen to be comparing.',
+    targetedMisconceptions: [`${HOSC}:MC-1`, `${HOSC}:MC-2`],
+    source: `${HOSC_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const HOSC_PROBES: SeedProbe[] = [
+  {
+    conceptId: HOSC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the ground-state (n=0) energy of the quantum harmonic oscillator?',
+    choices: [
+      { text: 'E₀=½ℏω, strictly positive — E₀=0 would require Δx=Δp=0, violating the uncertainty principle Δx·Δp≥ℏ/2', isCorrect: true },
+      { text: 'E₀=0 — at the lowest energy state, there is no motion, just like a classical spring at rest', isCorrect: false, misconceptionId: `${HOSC}:MC-1` },
+    ],
+    correctValue: 'E0 = hbar omega over 2, strictly positive zero-point energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HOSC}:MC-1`],
+    source: `${HOSC_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HOSC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the quantum harmonic oscillator, is the energy gap between E₂ and E₃ larger than the gap between E₀ and E₁?',
+    choices: [
+      { text: 'No — Eₙ=(n+½)ℏω gives Eₙ₊₁−Eₙ=ℏω, a constant gap regardless of n; energy levels are equally spaced, unlike the infinite square well', isCorrect: true },
+      { text: 'Yes — higher energy levels are further apart, just as in the infinite square well where Eₙ∝n²', isCorrect: false, misconceptionId: `${HOSC}:MC-2` },
+    ],
+    correctValue: 'no, gaps are all equal to hbar omega',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HOSC}:MC-2`],
+    source: `${HOSC_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.hydrogen-atom-qm ────────────────────────────────────────────────────
+const HATM = 'phys.qm.hydrogen-atom-qm'
+const HATM_SRC = 'docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md'
+
+const HATM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HATM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The electron in a hydrogen atom does NOT orbit the nucleus like a planet on a definite trajectory — "it orbits at the Bohr radius, like a planet" carries over the Bohr model\'s solar-system analogy inappropriately into full quantum mechanics. If the electron genuinely had a definite trajectory, we could simultaneously know its position and momentum precisely — directly violating Δx·Δp≥ℏ/2. Experimentally, measured hydrogen electron positions scatter across a genuine range consistent with the spread of the 1s orbital, not clustering at a single fixed radius as a planetary orbit would predict. The Bohr radius a₀ is genuinely the MOST PROBABLE radius in the full quantum model (the peak of r²|R₁₀|²), not a definite orbit that the electron continuously traces — the electron instead has a genuine probability DISTRIBUTION around the nucleus. The actual 1s wavefunction, ψ₁ₛ(r)=(1/√(πa₀³))e^(−r/a₀), describes an electron that is genuinely spread out in space; the probability of finding it at radius r within a shell of thickness dr is P(r)dr=r²|R₁₀|²dr — peaked at a₀, but genuinely spread with real probability at other radii too. Unlike the Bohr picture (electron always at exactly r=a₀), the quantum-mechanical 1s state gives P(r=0)=0, P(r=a₀)=maximum (a peak, not a certainty), and P(r→∞)→0 but never exactly zero at any finite radius. A second, separate and equally important error: assuming the orbital angular momentum quantum number l can equal the principal quantum number n. For n=3, l can only take values 0, 1, 2 — NEVER l=3 — because l=n would give a radial equation with no normalizable solution (the wavefunction diverges and fails to normalize). This constraint, l≤n−1, is a genuine mathematical necessity, not an arbitrary rule: the radial equation produces a polynomial of degree n−l−1, and for this polynomial to properly terminate (yielding a normalizable, physically sensible solution), you need n−l−1≥0, which directly gives l≤n−1. For n=3, the allowed subshells are therefore only 3s (l=0), 3p (l=1), and 3d (l=2) — never a "3f" (l=3) state, which simply does not exist.',
+    targetedMisconceptions: [`${HATM}:MC-1`, `${HATM}:MC-2`],
+    source: `${HATM_SRC} — MC-1 (electrons orbit like planets) + MC-2 (l can equal n)`,
+  },
+  {
+    conceptId: HATM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "where is the electron in the ground state of hydrogen?", say "it orbits at the Bohr radius, like a planet," directly extending the Bohr model\'s solar-system analogy — taught first historically — into the full quantum-mechanical treatment where it no longer applies. Test this against the uncertainty principle: if the electron genuinely traced out a definite orbital trajectory (a specific path with a well-defined position at each instant), then in principle we could know its position and momentum simultaneously and precisely — directly violating Δx·Δp≥ℏ/2, which forbids exactly this kind of simultaneous precision. Experimental evidence confirms this directly: actual measured positions of the electron in hydrogen scatter across a genuine range of values, consistent with the spatial spread of the quantum-mechanical 1s orbital, rather than clustering tightly at one single fixed radius as a true planetary orbit would require. The correct picture: the Bohr radius a₀ is genuinely the MOST PROBABLE radius in the full quantum treatment — specifically, the location of the peak of the radial probability distribution r²|R₁₀(r)|² — but it is emphatically not a definite orbit that the electron continuously traces around the nucleus like a planet circling the sun; instead, the electron possesses a genuine spatial probability DISTRIBUTION surrounding the nucleus. The actual ground-state wavefunction, ψ₁ₛ(r)=(1/√(πa₀³))e^(−r/a₀), describes an electron that is fundamentally spread out across space, not localized to any single orbit; the probability of finding the electron at radius r within a thin spherical shell of thickness dr is given by P(r)dr=r²|R₁₀(r)|²dr — this distribution peaks at a₀, but assigns genuinely nonzero probability to a considerable spread of other radii as well. This stands in sharp, testable contrast to the old Bohr model, which predicted the electron sits at EXACTLY r=a₀ with certainty; the actual quantum-mechanical 1s distribution instead gives P(r=0)=0 (zero probability of being found precisely at the nucleus), P(r=a₀)=a genuine maximum but not a certainty, and P(r→∞)→0 while never reaching exactly zero at any finite radius — a probability cloud, not a fixed circular path. A second, entirely separate and equally significant error: asked "what are the allowed l values for n=3?", answering "l=0,1,2,3," forgetting the fundamental quantum-mechanical constraint that l≤n−1 always. Check this against the actual mathematics: if l were allowed to equal n (here, l=n=3), the corresponding radial Schrödinger equation would have NO normalizable solution whatsoever — the resulting wavefunction would either diverge at large r or otherwise fail to be properly normalizable, making it physically meaningless. This constraint, l≤n−1, is not an arbitrary rule to be memorized without justification — it is a genuine mathematical necessity arising directly from solving the radial equation: that equation produces a polynomial solution of degree n−l−1, and for this polynomial to properly terminate at a finite degree (which is precisely what\'s required to yield a normalizable, physically sensible bound-state solution), you need n−l−1≥0, which rearranges directly to give l≤n−1 as an unavoidable mathematical consequence. For n=3 specifically, the only allowed values are therefore l=0 (giving the 3s subshell), l=1 (giving 3p), and l=2 (giving 3d) — there is no "3f" subshell (which would require l=3) at n=3; that state simply does not exist within the hydrogen atom\'s allowed quantum states. As a useful cross-check: n=1 allows only l=0 (1s); n=2 allows l=0,1 (2s, 2p); n=3 allows l=0,1,2 (3s, 3p, 3d); n=4 allows l=0,1,2,3 (4s, 4p, 4d, 4f) — the total number of angular-momentum states available at each n always sums correctly to n², confirming the l≤n−1 constraint is being applied correctly throughout.',
+    targetedMisconceptions: [`${HATM}:MC-1`, `${HATM}:MC-2`],
+    source: `${HATM_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const HATM_PROBES: SeedProbe[] = [
+  {
+    conceptId: HATM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Where is the electron in the ground state (1s) of a hydrogen atom, according to quantum mechanics?',
+    choices: [
+      { text: 'Spread out in a probability distribution around the nucleus, peaked at the Bohr radius a₀ but with real probability at other radii too — not orbiting at a fixed radius like a planet', isCorrect: true },
+      { text: 'Orbiting the nucleus at a fixed distance, exactly the Bohr radius a₀, like a planet orbiting the sun', isCorrect: false, misconceptionId: `${HATM}:MC-1` },
+    ],
+    correctValue: 'probability distribution, not a fixed orbit',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HATM}:MC-1`],
+    source: `${HATM_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HATM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What are the allowed values of the orbital angular momentum quantum number l for n=3?',
+    choices: [
+      { text: 'l=0, 1, 2 only — the constraint l≤n−1 is a mathematical necessity (the radial equation has no normalizable solution for l=n)', isCorrect: true },
+      { text: 'l=0, 1, 2, 3 — l can range up to and including n', isCorrect: false, misconceptionId: `${HATM}:MC-2` },
+    ],
+    correctValue: 'l equals 0, 1, or 2 only, since l is at most n minus 1',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HATM}:MC-2`],
+    source: `${HATM_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -36871,6 +37231,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SPTM_EXPLANATIONS,
   ...RMOM_EXPLANATIONS,
   ...MEQ_EXPLANATIONS,
+  ...WVFN_EXPLANATIONS,
+  ...OPER_EXPLANATIONS,
+  ...UNCP_EXPLANATIONS,
+  ...PBOX_EXPLANATIONS,
+  ...HOSC_EXPLANATIONS,
+  ...HATM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -37314,4 +37680,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SPTM_PROBES,
   ...RMOM_PROBES,
   ...MEQ_PROBES,
+  ...WVFN_PROBES,
+  ...OPER_PROBES,
+  ...UNCP_PROBES,
+  ...PBOX_PROBES,
+  ...HOSC_PROBES,
+  ...HATM_PROBES,
 ]
