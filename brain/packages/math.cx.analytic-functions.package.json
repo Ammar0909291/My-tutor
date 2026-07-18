@@ -1,0 +1,309 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.analytic-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.analytic-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e241abf28c136589cc58b5c555c8af435dd185c6c4cedf7487dd32a73c6bdf8e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.analytic-functions.md": "sha256:cf455e14d854982d3b543d6b206d1ddf0d46706da2ea186875b2e52aa45b078f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cx.analytic-functions",
+    "name": "Analytic (Holomorphic) Functions",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.cauchy-riemann"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.analytic-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.analytic-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.analytic-functions.md": "sha256:cf455e14d854982d3b543d6b206d1ddf0d46706da2ea186875b2e52aa45b078f"
+      },
+      "contentHash": "sha256:c3a0c148640ea1c4a2a47f1bb44607616dae5e4e8d36b1cd8dcdcbc8663c51d3",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.analytic-functions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.analytic-functions.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.analytic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.analytic-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.analytic-functions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.analytic-functions.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.analytic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.analytic-functions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.analytic-functions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.analytic-functions.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.analytic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.analytic-functions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.analytic-functions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Analytic (Holomorphic) Functions — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.cx.cauchy-riemann**: f=u+iv is complex differentiable at a point z iff the CR equations hold (∂u/∂x=∂v/∂y and ∂u/∂y=−∂v/∂x) together with u,v having continuous partial derivatives there; complex differentiability at a single point is the pointwise test this concept extends across a whole open set\n\n### Target Knowledge State\nStudent can state the definition of holomorphic (f′(z) exists at every point of an open set U) and distinguish it sharply from mere differentiability at one isolated point; state that analytic means \"locally representable by a convergent power series,\" and that in ℂ this is EQUIVALENT to holomorphic — a genuinely different, much stronger relationship than in ℝ, where infinitely differentiable does not imply real-analytic; correctly classify functions as entire (holomorphic on all of ℂ), holomorphic on a smaller domain, or nowhere/pointwise-only complex-differentiable; and explain concretely why the single-point-vs-open-set distinction matters using the standard example f(z)=|z|² (complex-differentiable at z=0 only, nowhere holomorphic).\n\n### Conceptual Obstacles\n1. Treating \"differentiable at a point\" and \"holomorphic\" as synonyms — holomorphic requires differentiability on an OPEN NEIGHBORHOOD, not just at one point; f(z)=|z|² is a sharp counterexample (differentiable at exactly one point, z=0, yet holomorphic nowhere, since no open set around 0 consists entirely of points where f is complex-differentiable)\n2. Assuming the ℝ situation transfers — in real analysis, C^∞ (infinitely differentiable) does NOT imply real-analytic (there exist smooth functions with divergent or non-matching Taylor series, e.g. the standard bump function e^(−1/x²)); students who know this ℝ fact often (wrongly) assume the same gap exists in ℂ, when in fact holomorphic ⟺ analytic is an exact equivalence in ℂ with no such gap\n3. Confusing \"entire\" with \"analytic\" — an entire function is analytic on ALL of ℂ; \"analytic\" alone only requires LOCAL power-series representability near each point of its (possibly smaller) domain, e.g. 1/z is analytic on ℂ∖{0} but not entire (it has no value, let alone a convergent power series, at z=0)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "POINTWISE-DIFFERENTIABLE-IS-HOLOMORPHIC",
+      "content": "| MC-1 | POINTWISE-DIFFERENTIABLE-IS-HOLOMORPHIC | Student treats complex differentiability at a single point as sufficient for \"holomorphic,\" missing the open-set requirement; misclassifies f(z)=\\|z\\|² as holomorphic at z=0 | Any function differentiable at isolated points via direct CR-equation checking, especially \\|z\\|²=x²+y² |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "REAL-SMOOTH-GAP-TRANSFERS-TO-COMPLEX",
+      "content": "| MC-2 | REAL-SMOOTH-GAP-TRANSFERS-TO-COMPLEX | Student assumes, by analogy with real analysis (C^∞ does not imply real-analytic), that a complex function could be \"infinitely complex-differentiable\" without having a convergent power series representation | Any question asking to justify or doubt the holomorphic⟺analytic equivalence; comparisons to real smooth non-analytic functions like e^(−1/x²) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "ENTIRE-MEANS-ANALYTIC-SAME-DOMAIN",
+      "content": "| MC-3 | ENTIRE-MEANS-ANALYTIC-SAME-DOMAIN | Student conflates \"entire\" (holomorphic/analytic on all of ℂ) with \"analytic\" in general (which only requires local power-series representability on whatever domain is specified, possibly a proper subset of ℂ); misclassifies 1/z as entire, or assumes every analytic function must be defined everywhere | Functions with poles or restricted domains, e.g. 1/z, log(z), tan(z); \"is this function entire?\" vs \"is this function analytic (on its domain)?\" |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Holomorphic, Analytic, Entire: One Family of Definitions",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Holomorphic, Analytic, Entire: One Family of Definitions\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 63,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Three Scope Distinctions That Matter",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Scope Distinctions That Matter\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 123,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 173,
+        "endLine": 385
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess the open-set/pointwise distinction, the holomorphic⟺analytic equivalence's significance, and entire-vs-subset classification under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Explain in one or two sentences why \"f is complex-differentiable at exactly one point\" and \"f is holomorphic at that point\" are different claims, citing the definition of holomorphic.\n\n*Solution:* Holomorphic is defined as a property of an OPEN SET (f′ exists at every point of some open U); a single isolated point is not an open set (no disk around it can be entirely contained in a one-point set unless the whole space is one point), so pointwise differentiability, however genuine, never by itself establishes holomorphy.\n\n**Problem 2:** Determine whether f(z) = z² + z̄ is holomorphic anywhere. Show the CR computation.\n\n*Solution:* z²=(x+iy)²=x²−y²+2ixy, and z̄=x−iy. Sum: f=(x²−y²+x)+i(2xy−y). So u=x²−y²+x, v=2xy−y. CR: ∂u/∂x=2x+1, ∂v/∂y=2x−1; these must be equal: 2x+1=2x−1 ⟹ 1=−1, never true. **Nowhere holomorphic** (the equation has no solution at all, not even one point).\n\n**Problem 3:** Is f(z) = 1/(z−3) entire? If not, precisely state the largest open set on which it is holomorphic (equivalently, analytic).\n\n*Solution:* Not entire — undefined at z=3. Holomorphic (and analytic) on ℂ∖{3}, the largest open set avoiding the single excluded point.\n\n**Problem 4:** True or false, with justification: \"A complex function that is differentiable once on an open set is automatically infinitely differentiable there, and equals its own convergent Taylor series near every point of that set.\" Contrast briefly with the real case.\n\n*Solution:* **True** — this is exactly the holomorphic⟺analytic equivalence (A01's central theorem): single complex differentiability on an open set forces both infinite differentiability and local power-series representability. This is sharply different from ℝ, where C^∞ does not imply real-analytic (e.g. e^(−1/x²), whose Taylor series at 0 is identically zero but does not equal the function away from 0).\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** Define $f(z) = \\begin{cases} z^5/\\bar z^4 & z\\neq 0 \\\\ 0 & z = 0\\end{cases}$.\n\n(a) Show that the difference quotient $\\dfrac{f(z)-f(0)}{z-0}$ has a well-defined limit as $z\\to 0$ along the real axis, and a well-defined limit along the imaginary axis, and that these two limits agree (both give a specific real number) — but that a DIFFERENT approach direction (e.g. along the line $z=t(1+i)$ for real $t\\to 0$) gives a different value, so the two-sided complex limit at $z=0$ does not actually exist. (This shows even the pointwise check can be subtle — many \"obvious\" limit computations along only the real and imaginary axes are insufficient.)\n(b) Given that $f$ fails to be complex-differentiable even at $z=0$ (once all directions are checked properly), explain what this implies about whether $f$ could be holomorphic on any open set containing $0$, and contrast this with the |z|² example from A01, which DID succeed at the single point z=0.\n\n**Expected solution:**\n\n(a) Along the real axis, $z=t$ real, $t\\to 0$: $f(z)/z = (t^5/t^4)/t = t/t = 1$ for all real $t\\neq 0$ (since $\\bar t = t$), so the limit along the real axis is $1$. Along the imaginary axis, $z=it$, $t$ real: $\\bar z = -it$, so $f(z) = (it)^5/(-it)^4 = i^5t^5/(i^4t^4) = i^5 t^5/t^4 = i^5 t = it$ (since $i^4=1, i^5=i$); then $f(z)/z = it/(it) = 1$ — the same value, $1$, along the imaginary axis too. But along $z=t(1+i)$: $\\bar z = t(1-i)$, and computing $z^5/\\bar z^4$ requires care with the ratio $z/\\bar z = (1+i)/(1-i) = i$ (multiply numerator and denominator by $(1+i)$: $(1+i)^2/((1-i)(1+i)) = 2i/2 = i$), so $z^5/\\bar z^4 = z\\cdot(z/\\bar z)^4 = z\\cdot i^4 = z\\cdot 1 = z$, giving $f(z)/z = z/z = 1$... (if this direction also gives 1, choose instead $z=t(2+i)$ or note the general fact that $z^5/\\bar z^4 \\cdot (1/z) = (z/\\bar z)^4$, which depends on the DIRECTION of approach through the ratio $z/\\bar z = e^{2i\\theta}$ for $z=re^{i\\theta}$, so $(z/\\bar z)^4 = e^{8i\\theta}$ — this is NOT constant as $\\theta$ varies, e.g. $\\theta=0$ gives $1$ but $\\theta=\\pi/8$ gives $e^{i\\pi}=-1$, a genuinely different limiting value). So the two-sided limit fails to exist once a direction with $\\theta=\\pi/8$ is checked, even though the real axis ($\\theta=0$) and imaginary axis ($\\theta=\\pi/2$, giving $e^{4\\pi i}=1$) happened to agree.\n\n(b) Since the difference quotient's limit does not exist at all (different directions give different values), $f$ is not complex-differentiable at $z=0$ — CONTRARY to the naive impression from checking only two directions. This means $f$ fails to be holomorphic on ANY open set containing 0, for an even more basic reason than |z|²: |z|² genuinely IS complex-differentiable at the single point 0 (its CR equations hold there, and a full ε-δ verification succeeds at that one point), it simply fails to extend to any surrounding open set. By contrast, this $f$ is not even complex-differentiable at the single point $z=0$ once every direction is checked — a strictly weaker function than |z|² was. Both examples end up \"nowhere holomorphic,\" but for different depths of reason, underscoring that the open-set requirement (MC-1's lesson) and the necessity of checking a limit from every direction (a refinement worth knowing even at the single-point level) are two separate discipline points a careful analyst must apply.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.9 × 5⌉ = ⌈4.5⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.cx.cauchy-theorem and math.cx.power-series-cx; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.cx.analytic-functions assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — POINTWISE-DIFFERENTIABLE-IS-HOLOMORPHIC (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Treating differentiability at a single point as holomorphy is POINTWISE-DIFFERENTIABLE-IS-HOLOMORPHIC. Holomorphic is an OPEN-SET property by definition — a single point, however genuinely differentiable, is never an open set.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"f(z)=\\|z\\|² satisfies the CR equations at z=0. Is f holomorphic at z=0?\"\n- MC-1 response: \"Yes — CR holds there, so it's holomorphic.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check ANY nearby point, not just z=0: at z=0.01 (on the real axis), u=x²+y²=0.0001, v=0; CR needs 2x=0 and 2y=0, i.e. x=0 — but x=0.01≠0, so CR FAILS at 0.01. Since 0.01 can be made arbitrarily close to 0, NO disk around 0, however small, consists entirely of differentiable points. 'Holomorphic at z₀' is shorthand for 'differentiable on some open disk around z₀' — always check a full neighborhood, never just the point itself.\"\n\nPractice: Confirm f(z)=z̄² (=x²−y²−2ixy... actually compute directly) fails CR at every point except possibly isolated ones, and identify any such points if they exist.\n\n---\n\n### Repair Action B02 — REAL-SMOOTH-GAP-TRANSFERS-TO-COMPLEX (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming the real-analysis gap (smooth but not analytic) also exists in ℂ is REAL-SMOOTH-GAP-TRANSFERS-TO-COMPLEX. In ℂ, holomorphic (differentiable once, on an open set) is EXACTLY equivalent to analytic — no such gap exists.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"In ℝ, e^(−1/x²) is C^∞ but not real-analytic at 0. Could a complex function be 'infinitely complex-differentiable' on an open set without equaling its own power series there?\"\n- MC-2 response: \"Probably, by analogy with the real case.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The analogy breaks down completely: in ℂ, holomorphic and analytic are PROVABLY equivalent (via Cauchy's integral formula, proved in a later concept) — there is no complex analogue of e^(−1/x²). The real gap exists because real differentiability is a much weaker, more local condition (checked along only two directions, +x and −x); complex differentiability requires the SAME limit from every direction in the plane simultaneously, which is a far more restrictive condition — restrictive enough to force the full power-series conclusion for free. This is precisely why complex analysis has such strong theorems compared to real analysis: the definition of 'differentiable' is quietly much stronger in ℂ.\"\n\nPractice: State (without proving) what \"differentiable from every direction in the plane\" requires compared to \"differentiable from the left and right along the real line,\" to see why the complex condition is so much stronger.\n\n---\n\n### Repair Action B03 — ENTIRE-MEANS-ANALYTIC-SAME-DOMAIN (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Conflating 'entire' with 'analytic' in general is ENTIRE-MEANS-ANALYTIC-SAME-DOMAIN. Entire specifically means holomorphic on ALL of ℂ; 'analytic' by itself only claims local power-series representability on whatever domain is under discussion, which may be a proper subset.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is f(z)=1/z entire?\"\n- MC-3 response: \"Yes, it's analytic everywhere it's defined, so it's entire.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"'Analytic everywhere it's defined' is exactly the point: 1/z is NOT defined at z=0, so 'everywhere it's defined' already excludes a point — meaning its domain is ℂ∖{0}, not ℂ. Entire specifically demands the domain BE all of ℂ, with nothing excluded. 1/z is holomorphic/analytic on the open set ℂ∖{0} (a true and useful statement) but that is a different, weaker claim than 'entire.' Analogy: a function can be perfectly smooth and well-behaved everywhere it's defined while still not being defined everywhere — those are separate facts.\"\n\nPractice: Classify tan(z) — is it entire? (No: undefined wherever cos(z)=0, so it is holomorphic on ℂ minus those isolated points, not entire.)\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Re-derive that \\|z\\|² is complex-differentiable only at z=0 from the CR equations, from memory |\n| SR-2 | +3 days | State the holomorphic⟺analytic equivalence and contrast it explicitly with the real e^(−1/x²) gap |\n| SR-3 | +7 days | Classify three fresh functions (one entire, one analytic-on-a-subset, one nowhere-holomorphic) using the CR test |\n| SR-4 | +14 days | Reconstruct why checking only the real- and imaginary-axis directions is insufficient to establish complex differentiability (the A03 transfer probe's direction-dependent limit) |\n\nRetrieval flag: if student claims \\|z\\|² is holomorphic at 0 (MC-1) or expects a real-style smooth/analytic gap in ℂ (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.cx.cauchy-riemann | The pointwise CR test from that blueprint is applied repeatedly throughout (A01, A02, A03) as the mechanical tool; this concept adds the open-set/whole-domain scope on top of it |\n| Unlocks | math.cx.cauchy-theorem | Cauchy's theorem is stated for functions holomorphic on a simply connected domain — the exact scope notion (open-set differentiability) this concept establishes |\n| Unlocks | math.cx.power-series-cx | The holomorphic⟺analytic equivalence stated here (A01) is the theorem that power series in ℂ formalizes and proves rigorously |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe tests the open-set/differentiability distinction in a genuinely new, more subtle function — z⁵/z̄⁴ — rather than against a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (2 main TAs + gate), matching other h=5, bloom=understand Tier-2/expert concepts where the content is conceptual rather than procedurally heavy\n- bloom=understand → V-4 = N/A (no P07 required; classification and justification tasks, not derivations of new formulas)\n- CPA_entry = A for an expert learner: the content is a scope/quantifier distinction best confronted directly in its formal form, with the counterexample immediately following rather than preceding the definition\n\n**Key teaching insight:** This concept's entire difficulty is quantifier scope — \"at a point\" vs. \"on an open set\" — dressed up in unfamiliar vocabulary (holomorphic, analytic, entire). The |z|² example (A01) is chosen because it is the standard minimal counterexample in every complex analysis textbook for exactly this distinction, and it is reused in A02 (Contrast 1, tabulated against z² and z̄) and B01 (repair) so a struggling student sees the same concrete function from three different angles rather than three different examples.\n\n**MC-2 as the conceptually deepest misconception:** Unlike MC-1 and MC-3 (which are definitional-scope errors), MC-2 involves a genuine, well-founded piece of prior knowledge (the real C^∞-vs-analytic gap is TRUE in ℝ) being incorrectly transferred. The repair for MC-2 must affirm that the student's real-analysis knowledge is correct, while explaining precisely why the complex definition of differentiability (uniform over all directions in the plane, not just left/right along one line) is strong enough to close the gap that exists in the weaker real setting.\n\n**Sequencing note:** No cross-link concept exists yet for math.cx.analytic-functions; the P76 transfer probe instead uses a genuinely harder direction-dependent-limit example (z⁵/z̄⁴) to stress-test the pointwise-differentiability notion itself, going one level deeper than A01's |z|² (which succeeds at one point) by presenting a function that fails even that weaker bar once every direction is checked.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.cx.analytic-functions ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.cx.cauchy-riemann ✓ | PASS |\n| V-3 | CPA entry = A for expert difficulty, conceptual content | A (Abstract) ✓ | PASS |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.9×5⌉=⌈4.5⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5, conceptual → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | z⁵/z̄⁴ direction-dependent limit; contrast with \\|z\\|² depth ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 173,
+        "endLine": 385
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — expert learner enters directly at the formal open-set definition, immediately contrasted against the single-point counterexample, appropriate for a concept whose entire content is a subtle quantifier distinction (at a point vs. on an open set) rather than a procedural skill.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — A: formal definitions (holomorphic, analytic, entire) stated together; the |z|² counterexample worked in full; P: a domain diagram showing \"differentiable only at the origin\" (a single point, no open disk) vs \"differentiable throughout an open disk\" (genuinely holomorphic)\n2. **A02 P06 CONTRAST PAIR** — pointwise vs. open-set differentiability (MC-1); the real-vs-complex analyticity gap, present in ℝ but absent in ℂ (MC-2); entire vs. analytic-on-a-proper-subset (MC-3, using 1/z)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Re-derive that \\|z\\|² is complex-differentiable only at z=0 from the CR equations, from memory |\n| SR-2 | +3 days | State the holomorphic⟺analytic equivalence and contrast it explicitly with the real e^(−1/x²) gap |\n| SR-3 | +7 days | Classify three fresh functions (one entire, one analytic-on-a-subset, one nowhere-holomorphic) using the CR test |\n| SR-4 | +14 days | Reconstruct why checking only the real- and imaginary-axis directions is insufficient to establish complex differentiability (the A03 transfer probe's direction-dependent limit) |\n\nRetrieval flag: if student claims \\|z\\|² is holomorphic at 0 (MC-1) or expects a real-style smooth/analytic gap in ℂ (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 317,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "math.cx.analytic-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.analytic-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.cx.cauchy-riemann | The pointwise CR test from that blueprint is applied repeatedly throughout (A01, A02, A03) as the mechanical tool; this concept adds the open-set/whole-domain scope on top of it |\n| Unlocks | math.cx.cauchy-theorem | Cauchy's theorem is stated for functions holomorphic on a simply connected domain — the exact scope notion (open-set differentiability) this concept establishes |\n| Unlocks | math.cx.power-series-cx | The holomorphic⟺analytic equivalence stated here (A01) is the theorem that power series in ℂ formalizes and proves rigorously |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe tests the open-set/differentiability distinction in a genuinely new, more subtle function — z⁵/z̄⁴ — rather than against a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.analytic-functions.md",
+        "startLine": 332,
+        "endLine": 346
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

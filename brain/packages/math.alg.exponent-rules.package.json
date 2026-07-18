@@ -1,0 +1,348 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.exponent-rules-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.exponent-rules",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8b2668e94231e223b18f49b96fedbf3b98b79b9b8b41f2be4fe60f1e96c0a4e4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.exponent-rules.md": "sha256:71afd4c47d8843f4e99b5a3fab198d55286df2acda891107cffa2c8779a90d23"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.exponent-rules",
+    "name": "Exponent Rules (Algebraic)",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.exponent-rules",
+      "math.alg.expression"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.exponent-rules-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.exponent-rules (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.exponent-rules.md": "sha256:71afd4c47d8843f4e99b5a3fab198d55286df2acda891107cffa2c8779a90d23"
+      },
+      "contentHash": "sha256:668772d963a173357167492a5ebcfa25cd74af15b242dd7318cffcb25d5731d7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.exponent-rules.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponent-rules.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponent-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponent-rules.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponent-rules.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponent-rules\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponent-rules.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponent-rules.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponent-rules\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponent-rules.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponent-rules.md#TA-A04 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponent-rules\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.exponent-rules/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Exponent Rules (Algebraic) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.arith.exponent-rules**: the integer laws aᵐ·aⁿ=aᵐ⁺ⁿ, (aᵐ)ⁿ=aᵐⁿ, (ab)ⁿ=aⁿbⁿ, a⁰=1, a⁻ⁿ=1/aⁿ, established for whole-number and integer exponents on numbers\n- **math.alg.expression**: variables, coefficients, and combining algebraic terms under arithmetic operations — the surface these rules now operate on (aᵐ where a is a variable or algebraic expression, not just a number)\n\n### Target Knowledge State\nStudent can apply the product, power, and quotient rules of exponents to algebraic expressions with variable bases; correctly extend the rules to zero exponents (a⁰=1 for a≠0) and negative exponents (a⁻ⁿ=1/aⁿ) as consequences of the SAME product rule rather than as separate new facts; correctly interpret and manipulate fractional (rational) exponents (a^(1/n)=ⁿ√a, a^(m/n)=ⁿ√(aᵐ)=(ⁿ√a)ᵐ) as an extension consistent with the integer rules; simplify multi-step expressions combining several rules; and avoid the classic overgeneralization errors that arise when exponent rules are pattern-matched onto addition instead of multiplication.\n\n### Conceptual Obstacles\n1. Overgeneralizing the product rule to addition — believing (a+b)ⁿ = aⁿ+bⁿ, by analogy with (ab)ⁿ=aⁿbⁿ; the rules for exponents distribute over MULTIPLICATION and DIVISION inside the base, never over addition or subtraction\n2. Treating a⁰=1 and a⁻ⁿ=1/aⁿ as arbitrary conventions to memorize rather than forced consequences of extending aᵐ⁺ⁿ=aᵐ·aⁿ consistently to m=0 and negative m — this makes the rules feel like a list of unrelated facts instead of one coherent pattern\n3. Misapplying the product/power rules to fractional exponents — e.g. computing a^(1/2)·a^(1/2) incorrectly, or confusing a^(m/n) with a^m/n (division of the exponent by n as a separate operation rather than nth root); confusing a^(1/n) (an nth root) with (1/n)·a (a fraction of a)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "EXPONENT-DISTRIBUTES-OVER-ADDITION",
+      "content": "| MC-1 | EXPONENT-DISTRIBUTES-OVER-ADDITION | Student expands (a+b)ⁿ as aⁿ+bⁿ, applying the multiplicative distribution rule (ab)ⁿ=aⁿbⁿ to a sum instead | Any expression of the form (a+b)ⁿ or (a−b)ⁿ with n≥2; most visibly n=2, confused with the correct expansion a²+2ab+b² |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "ZERO-NEGATIVE-EXPONENTS-ARBITRARY",
+      "content": "| MC-2 | ZERO-NEGATIVE-EXPONENTS-ARBITRARY | Student memorizes a⁰=1 and a⁻ⁿ=1/aⁿ as isolated facts without connecting them to the product rule, leading to shaky recall, sign errors (writing a⁻ⁿ=−aⁿ), or refusal to apply the rule when the base is an algebraic expression rather than a bare number | Any negative or zero exponent on a variable or a multi-term base; the specific error a⁻ⁿ=−aⁿ (confusing the exponent's sign with the value's sign) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "FRACTIONAL-EXPONENT-AS-DIVISION",
+      "content": "| MC-3 | FRACTIONAL-EXPONENT-AS-DIVISION | Student interprets a^(1/n) as \"a divided by n\" or a^(m/n) as \"aᵐ divided by n,\" rather than as the nth root of a (raised to the mth power); also mishandles products like a^(1/2)·a^(1/2), failing to add the exponents to get a¹=a | Any fractional/rational exponent; expressions requiring a^(1/2)·a^(1/2) or converting between radical and exponent notation |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "From Numbers to Variables: The Rules Survive",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Numbers to Variables: The Rules Survive\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 65,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Three Overgeneralizations, Three Contrasts",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Overgeneralizations, Three Contrasts\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 125,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Composite Simplification Under Multiple Rules",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Simplification Under Multiple Rules\",\"primitives\":[\"P28\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 178,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P28\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 220,
+        "endLine": 436
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent application of all exponent rules (product, power, quotient, zero, negative, fractional) under composition and transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Simplify: $x^{6}\\cdot x^{-2}\\cdot x^{3}$.\n\n*Solution:* Add all exponents (same base, product rule extends to any number of factors): $6+(-2)+3=7$, giving $x^{7}$.\n\n**Problem 2:** Simplify: $\\left(\\dfrac{2m^{4}}{n^{2}}\\right)^{3}$.\n\n*Solution:* Apply the outer power to every factor: $\\dfrac{2^{3}m^{4\\cdot3}}{n^{2\\cdot3}} = \\dfrac{8m^{12}}{n^{6}}$.\n\n**Problem 3:** Simplify: $27^{2/3}$ (as a whole number, showing the root-then-power route).\n\n*Solution:* $27^{2/3} = (27^{1/3})^{2} = 3^{2} = 9$ (cube root of 27 is 3, then square it).\n\n**Problem 4:** Simplify: $\\dfrac{x^{-3}y^{2}}{x^{2}y^{-4}}$, leaving no negative exponents.\n\n*Solution:* $x^{-3-2}y^{2-(-4)} = x^{-5}y^{6} = \\dfrac{y^{6}}{x^{5}}$.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** Radioactive decay is modeled by $N(t) = N_0 \\cdot 2^{-t/h}$, where $N_0$ is the initial quantity, $h$ is the half-life, and $t$ is elapsed time.\n\n(a) Using only exponent rules (no calculator), show that $N(h) = N_0/2$ (i.e. after one half-life, exactly half remains).\n(b) Show that $N(2h) = N_0/4$, and explain — using the product rule for exponents, not a new argument — why doubling the number of half-lives always squares the fraction remaining (from $1/2$ to $1/4$ to $1/8$, etc., i.e. $(1/2)^n$ after $n$ half-lives).\n(c) A students argues: \"Since $2^{-t/h}$ has a negative exponent, and negative numbers are 'less than zero,' the decayed quantity should eventually become negative if we wait long enough.\" Use the negative-exponent rule to explain precisely why this is wrong.\n\n**Expected solution:**\n\n(a) $N(h) = N_0\\cdot 2^{-h/h} = N_0\\cdot 2^{-1} = N_0\\cdot\\dfrac{1}{2} = \\dfrac{N_0}{2}$ — using $a^{-n}=1/a^n$ with $n=1$.\n\n(b) $N(2h) = N_0\\cdot 2^{-2h/h} = N_0\\cdot 2^{-2} = N_0\\cdot\\dfrac{1}{4} = \\dfrac{N_0}{4}$. More generally, after $n$ half-lives ($t=nh$): $N(nh) = N_0\\cdot 2^{-nh/h} = N_0\\cdot 2^{-n} = N_0\\cdot(2^{-1})^{n} = N_0\\cdot\\left(\\dfrac{1}{2}\\right)^{n}$ — this last step is exactly the power rule $a^{mn}=(a^m)^n$ applied with $a=2, m=-1$: the exponent $-n$ factors as $(-1)\\cdot n$, so $2^{-n}=(2^{-1})^n=(1/2)^n$. Each additional half-life multiplies the remaining fraction by another factor of $1/2$ — this IS the product rule in disguise, since $2^{-(n+1)} = 2^{-n}\\cdot 2^{-1} = 2^{-n}\\cdot\\frac12$.\n\n(c) The negative exponent never makes the BASE or the RESULT negative — it triggers a reciprocal, not a sign flip (exactly MC-2's contrast from A02). $2^{-t/h}$ for any real $t$ is $1/2^{t/h}$, and $2^{t/h}>0$ always (a positive base raised to any real power stays positive), so $1/2^{t/h}>0$ always too. As $t\\to\\infty$, $2^{t/h}\\to\\infty$, so $N(t)=N_0/2^{t/h}\\to 0$ — the quantity shrinks toward zero and gets arbitrarily small, but the negative exponent never produces a negative quantity of remaining material. The student's error is confusing \"the exponent has a minus sign\" with \"the value of the expression is negative\" — precisely MC-2, now surfacing in a physical-modeling context.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.alg.radicals and math.alg.exponential-function; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.alg.exponent-rules assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — EXPONENT-DISTRIBUTES-OVER-ADDITION (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Expanding (a+b)ⁿ as aⁿ+bⁿ is EXPONENT-DISTRIBUTES-OVER-ADDITION. Exponent rules distribute over MULTIPLICATION and DIVISION inside the base — never over addition or subtraction.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is (a+b)² equal to a²+b²? Test with a=2, b=3.\"\n- MC-1 response: \"Yes, the square distributes over each term.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Test it: (2+3)²=25, but 2²+3²=13. Not equal — a real gap of 12, which is exactly the missing cross term 2(2)(3). The correct expansion is (a+b)²=a²+2ab+b², and that extra middle term is unavoidable whenever you square a SUM (it comes from FOIL/distribution: (a+b)(a+b)=a²+ab+ba+b²=a²+2ab+b²). Contrast with (ab)²=a²b², which IS true, because squaring a PRODUCT lets you square each factor independently with no cross term to lose — multiplication of the base becomes multiplication of the results, but addition of the base never becomes addition of the results.\"\n\nPractice: Expand (x+1)² fully and identify the cross term; then verify (2x)³=8x³ genuinely holds (no cross term needed, since it's a product, not a sum).\n\n---\n\n### Repair Action B02 — ZERO-NEGATIVE-EXPONENTS-ARBITRARY (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Treating a⁰=1 and a⁻ⁿ=1/aⁿ as separate memorized facts (with sign errors like a⁻ⁿ=−aⁿ) is ZERO-NEGATIVE-EXPONENTS-ARBITRARY. Both rules are forced consequences of the SAME quotient rule that already produces a positive result — the exponent's sign flips to a RECIPROCAL, never to a negative value.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is 3⁻²? Is it positive or negative?\"\n- MC-2 response: \"3⁻²=−9\" or \"3⁻²=−1/9\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Derive it fresh, don't recall it: x⁰/xⁿ=x⁻ⁿ by the quotient rule, but also x⁰/xⁿ=1/xⁿ directly (since x⁰=1). So x⁻ⁿ=1/xⁿ — a RECIPROCAL of a positive quantity is still positive. Concretely: 3⁻²=1/3²=1/9, a small positive fraction, never −9 or −1/9. The negative sign lives on the EXPONENT (telling you to flip to a reciprocal); it never migrates onto the base's sign or the final value's sign.\"\n\nPractice: Compute 2⁻⁴, 10⁻¹, and (1/2)⁻³ (note the last one flips a fraction to its reciprocal: (1/2)⁻³=2³=8), confirming every result stays positive when the base is positive.\n\n---\n\n### Repair Action B03 — FRACTIONAL-EXPONENT-AS-DIVISION (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Interpreting a^(1/n) as 'a divided by n' is FRACTIONAL-EXPONENT-AS-DIVISION. a^(1/n) means the nth ROOT of a (ⁿ√a) — division of the exponent's numerator by its denominator is not what the fraction in the exponent instructs.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is 27^(1/3)? Is it 27 divided by 3?\"\n- MC-3 response: \"27/3=9\" (or approximately, treating the exponent as a literal division instruction on the base)\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Test the candidate: if 27^(1/3) were 9, then by the defining property of a cube root, 9³ should equal 27. But 9³=729, wildly off. The correct value is 3, since 3³=27 exactly — 27^(1/3) is 'the number which, cubed, returns 27,' not 'twenty-seven split into three equal pieces.' Consistency check with the product rule: 27^(1/3)·27^(1/3)·27^(1/3) = 27^(1/3+1/3+1/3) = 27^1 = 27, and indeed 3·3·3=27 — the fractional exponent rule agrees perfectly with the product rule already established for integer exponents.\"\n\nPractice: Evaluate 64^(1/2), 8^(2/3) (root-then-power: (8^(1/3))²=2²=4), and 4^(3/2) (2³=8), confirming each by checking the reverse operation (squaring/cubing back to the original).\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Re-derive x⁰=1 and x⁻ⁿ=1/xⁿ from the quotient rule from memory, without looking them up as facts |\n| SR-2 | +3 days | Numerically re-verify (a+b)²≠a²+b² and (ab)²=a²b² with fresh chosen values of a, b |\n| SR-3 | +7 days | Simplify one composite expression combining product, quotient, power-of-a-product, and negative-exponent rules in a single problem |\n| SR-4 | +14 days | Convert between radical and fractional-exponent notation in both directions; re-derive the radioactive-decay transfer argument (why doubling half-lives squares the remaining fraction) |\n\nRetrieval flag: if student expands (a+b)ⁿ as aⁿ+bⁿ (MC-1) or assigns a negative value to a negative exponent's result (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.arith.exponent-rules | The integer-exponent product/power/quotient laws established numerically are re-verified and then transferred to variable bases in A01 |\n| Requires (Tier-1) | math.alg.expression | Provides the algebraic-manipulation vocabulary (terms, coefficients, variables) that exponent rules now operate over |\n| Unlocks | math.alg.radicals | ⁿ√a notation is introduced here (A02 Contrast 3) as equivalent to a^(1/n); that blueprint develops radical simplification and rationalization built on this equivalence |\n| Unlocks | math.alg.exponential-function | f(x)=aˣ requires fluent exponent manipulation, including the fractional and negative cases used in the A04 transfer probe's decay model |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the rules to a genuinely new context — exponential decay modeling — rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=6 → standard structure (3 main TAs + gate), matching other h=6, bloom=apply Tier-2 concepts\n- bloom=apply → the checkpoints and gate emphasize procedural fluency (simplification tasks) over pure conceptual explanation, consistent with the KG's apply designation\n- CPA_entry = C for a proficient learner: numeric re-verification of the already-known integer rules opens the concept, confirming the rules survive the shift to variable bases before any new content (zero/negative/fractional exponents) is introduced\n\n**Key teaching insight:** The three misconceptions in this concept are not independent errors to patch one at a time — they share a single root cause: treating exponent notation as an arbitrary set of memorized transformation rules rather than as a coherent extension of repeated multiplication. A01's derivation of x⁰=1 and x⁻ⁿ=1/xⁿ FROM the product/quotient rule (rather than stating them as separate facts) is the single highest-leverage move in this blueprint, because a student who sees the derivation can always reconstruct the rule under exam pressure, while a student who only memorized \"a⁰=1\" has no fallback when asked to justify it or apply it to an unfamiliar base.\n\n**Composite problem design (A03):** The P28 conflict-evidence problem is deliberately built so that a shortcut on any ONE rule (coefficient handling, negative-exponent sign, or forgetting to apply the outer power to every factor) produces a visibly different final answer — this makes A03 a genuine diagnostic rather than a repetition of A01/A02's isolated-rule checks, and previews the kind of composite simplification the mastery gate (A04) requires under full transfer.\n\n**Sequencing note:** No cross-link concept exists yet for math.alg.exponent-rules; the P76 transfer probe instead applies the rules to a radioactive-decay exponential model, chosen specifically because it exercises the negative-exponent rule (MC-2's exact failure mode) inside a physically meaningful context where \"the exponent is negative\" could otherwise be mistaken for \"the physical quantity goes negative.\"\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.alg.exponent-rules ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.arith.exponent-rules ✓, math.alg.expression ✓ | PASS |\n| V-3 | CPA entry = C for proficient difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Procedural simplification tasks throughout A01-A04; V-4=satisfied by applied checkpoints | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=6 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Radioactive decay model; negative-exponent-never-negative-value argument ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 220,
+        "endLine": 436
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — proficient learner verifies the product/power rules numerically before manipulating variable expressions, confirming the rules survive the shift from numbers to algebra.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: numeric verification of aᵐ·aⁿ=aᵐ⁺ⁿ and (aᵐ)ⁿ=aᵐⁿ with actual numbers, then the same rules applied to variable bases; P: exponent \"bookkeeping\" table showing how exponents add/multiply/subtract under each operation; A: the four core rules stated for variable bases, plus the zero/negative exponent rules DERIVED from the product rule rather than stated separately\n2. **A02 P06 CONTRAST PAIR** — (a+b)ⁿ vs (ab)ⁿ (MC-1); a⁻ⁿ vs −aⁿ (MC-2); a^(1/n) vs a/n (MC-3), with the radical-notation bridge\n3. **A03 P28 CONFLICT EVIDENCE** — multi-step simplification combining product, power, quotient, zero, negative, and fractional rules in one expression, forcing correct rule selection under composition\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Re-derive x⁰=1 and x⁻ⁿ=1/xⁿ from the quotient rule from memory, without looking them up as facts |\n| SR-2 | +3 days | Numerically re-verify (a+b)²≠a²+b² and (ab)²=a²b² with fresh chosen values of a, b |\n| SR-3 | +7 days | Simplify one composite expression combining product, quotient, power-of-a-product, and negative-exponent rules in a single problem |\n| SR-4 | +14 days | Convert between radical and fractional-exponent notation in both directions; re-derive the radioactive-decay transfer argument (why doubling half-lives squares the remaining fraction) |\n\nRetrieval flag: if student expands (a+b)ⁿ as aⁿ+bⁿ (MC-1) or assigns a negative value to a negative exponent's result (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 367,
+        "endLine": 382
+      }
+    },
+    {
+      "assetId": "math.alg.exponent-rules/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.exponent-rules",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.arith.exponent-rules | The integer-exponent product/power/quotient laws established numerically are re-verified and then transferred to variable bases in A01 |\n| Requires (Tier-1) | math.alg.expression | Provides the algebraic-manipulation vocabulary (terms, coefficients, variables) that exponent rules now operate over |\n| Unlocks | math.alg.radicals | ⁿ√a notation is introduced here (A02 Contrast 3) as equivalent to a^(1/n); that blueprint develops radical simplification and rationalization built on this equivalence |\n| Unlocks | math.alg.exponential-function | f(x)=aˣ requires fluent exponent manipulation, including the fractional and negative cases used in the A04 transfer probe's decay model |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the rules to a genuinely new context — exponential decay modeling — rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponent-rules.md",
+        "startLine": 382,
+        "endLine": 397
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
