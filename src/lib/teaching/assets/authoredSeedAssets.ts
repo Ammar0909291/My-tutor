@@ -28974,6 +28974,361 @@ const RHAN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.composition.style-voice-and-tone ──────────────────────────────────────
+const SVT = 'eng.composition.style-voice-and-tone'
+const SVT_SRC = 'docs/curriculum/blueprints/eng.composition.style-voice-and-tone.md'
+
+const SVT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SVT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Style isn\'t about using the fanciest available word — it\'s about ' +
+      'making deliberate, consistent choices that create a specific ' +
+      'effect, like a chef\'s signature dish defined by consistent ' +
+      'technique, not the most exotic ingredient. Simple word choices used ' +
+      'precisely and consistently often create a stronger style than ' +
+      'needlessly complicated ones.',
+    targetedMisconceptions: [`${SVT}:MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY`],
+    source: `${SVT_SRC} — MC-A (P28 dog-sentence-simple-vs-elaborate conflict)`,
+  },
+  {
+    conceptId: SVT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A skilled writer\'s style is like a musician who plays both a gentle ' +
+      'ballad and an energetic song — the same musician, with recognizable ' +
+      'habits underneath, deliberately adjusting to fit each purpose. ' +
+      'Adjusting style for a different audience isn\'t inauthentic — core ' +
+      'habits stay recognizable while surface choices (formality, ' +
+      'complexity) flex.',
+    targetedMisconceptions: [`${SVT}:MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE`],
+    source: `${SVT_SRC} — MC-B (P28 musicians-range conflict)`,
+  },
+  {
+    conceptId: SVT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Style comes from deliberate, consistent choices creating a specific ' +
+      'effect, not from elaborate vocabulary — precise simple words used ' +
+      'consistently often create a stronger voice than complicated ones. ' +
+      'Separately, a skilled writer\'s style flexes by purpose and ' +
+      'audience while keeping a recognizable core, like a musician playing ' +
+      'different genres with the same underlying technique — adjustment ' +
+      'isn\'t betrayal of voice.',
+    targetedMisconceptions: [
+      `${SVT}:MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY`,
+      `${SVT}:MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE`,
+    ],
+    source: `${SVT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SVT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SVT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The perambulating canine traversed the verdant expanse" versus "The dog trotted across the green field, nose down, tail up." Does the first, more elaborate sentence have a stronger style than the second, simpler one?',
+    choices: [
+      { text: 'No — the simpler sentence has a clearer, more confident voice; style comes from precise, deliberate word choice, not complicated vocabulary', isCorrect: true },
+      { text: 'Yes — style is just using fancy or complicated vocabulary, so the more elaborate sentence must have the stronger style', isCorrect: false, misconceptionId: `${SVT}:MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY` },
+    ],
+    correctValue: 'no, precision beats complicated vocabulary for style',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SVT}:MC-A-STYLE-IS-JUST-USING-FANCY-OR-COMPLICATED-VOCABULARY`],
+    source: `${SVT_SRC} — dog-sentence-simple-vs-elaborate conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SVT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A writer uses short, punchy sentences and colloquial diction in a casual blog post, but longer, measured sentences and precise technical vocabulary in a formal analytical piece, while both share a preference for concrete imagery. Must a writer\'s style stay exactly the same across every piece to be authentic?',
+    choices: [
+      { text: 'No — adjusting surface choices like formality and sentence complexity for different purposes is exactly what skilled writers do, while core recognizable habits stay consistent', isCorrect: true },
+      { text: 'Yes — a writer\'s style should stay exactly the same across every piece they write, or it isn\'t their real voice', isCorrect: false, misconceptionId: `${SVT}:MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE` },
+    ],
+    correctValue: 'no, style can flex by purpose while keeping a core',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SVT}:MC-B-A-WRITERS-STYLE-SHOULD-STAY-EXACTLY-THE-SAME-ACROSS-EVERY-PIECE-THEY-WRITE`],
+    source: `${SVT_SRC} — musicians-range conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.persuasive-techniques ─────────────────────────────────────
+const PERT = 'eng.composition.persuasive-techniques'
+const PERT_SRC = 'docs/curriculum/blueprints/eng.composition.persuasive-techniques.md'
+
+const PERT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PERT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Writing separate sections for each technique is like a chef serving ' +
+      'each ingredient on its own separate plate instead of combining them ' +
+      'into one dish — all present, but not working together. ' +
+      'Sophisticated persuasion weaves appeals and evidence together to ' +
+      'reinforce the SAME specific points, rather than compartmentalizing ' +
+      'each technique.',
+    targetedMisconceptions: [`${PERT}:MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION`],
+    source: `${PERT_SRC} — MC-A (P28 combined-dish conflict)`,
+  },
+  {
+    conceptId: PERT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming a counterargument must always go at the very end is like ' +
+      'assuming a lawyer should only ever address the strongest objection ' +
+      'in closing — sometimes addressing it EARLY clears the ground for ' +
+      'the rest of the case. Placement should serve the argument\'s ' +
+      'specific strategy, not follow one fixed rule.',
+    targetedMisconceptions: [`${PERT}:MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE`],
+    source: `${PERT_SRC} — MC-B (P28 lawyers-timing conflict)`,
+  },
+  {
+    conceptId: PERT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Sophisticated persuasion weaves appeals and evidence together to ' +
+      'reinforce the same specific points, rather than compartmentalizing ' +
+      'each technique into its own section, like ingredients combined into ' +
+      'one dish rather than served separately. Separately, counterargument ' +
+      'placement should be strategic, not a fixed end-of-piece rule — a ' +
+      'lawyer sometimes addresses the strongest objection early to clear ' +
+      'the ground, not only in closing.',
+    targetedMisconceptions: [
+      `${PERT}:MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION`,
+      `${PERT}:MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE`,
+    ],
+    source: `${PERT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PERT_PROBES: SeedProbe[] = [
+  {
+    conceptId: PERT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A persuasive essay includes a separate paragraph labeled implicitly as "ethos," another as "pathos," another as "logos," and a separate counterargument paragraph, with no connection between them. Does this checklist structure count as sophisticated persuasion?',
+    choices: [
+      { text: 'No — sophisticated persuasion weaves appeals and evidence together to reinforce the same specific points, rather than presenting each technique in its own disconnected section', isCorrect: true },
+      { text: 'Yes — sophisticated persuasion means including every technique separately in its own section', isCorrect: false, misconceptionId: `${PERT}:MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION` },
+    ],
+    correctValue: 'no, techniques must be woven together, not compartmentalized',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERT}:MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION`],
+    source: `${PERT_SRC} — combined-dish conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PERT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A persuasive piece addresses its strongest counterargument early, right after stating the central claim, to preempt the most obvious objection before building the rest of the case. Must a counterargument always go at the very end regardless of the argument\'s structure?',
+    choices: [
+      { text: 'No — counterargument placement should be strategic based on the argument\'s specific needs; addressing it early can clear the ground for the rest of the case', isCorrect: true },
+      { text: 'Yes — a counterargument should always go at the very end regardless of the argument\'s structure', isCorrect: false, misconceptionId: `${PERT}:MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE` },
+    ],
+    correctValue: 'no, placement should be strategic, not fixed at the end',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERT}:MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE`],
+    source: `${PERT_SRC} — lawyers-timing conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.comparative-essay-writing ─────────────────────────────────
+const COMPE = 'eng.composition.comparative-essay-writing'
+const COMPE_SRC = 'docs/curriculum/blueprints/eng.composition.comparative-essay-writing.md'
+
+const COMPE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMPE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organizing a comparative essay in block structure (fully describing ' +
+      'Text A, then fully describing Text B) is like writing two separate ' +
+      'restaurant reviews and expecting the reader to deduce which is ' +
+      'better — the actual COMPARING work never happens on the page. ' +
+      'Organize by POINT instead: each paragraph addresses one shared ' +
+      'category, explicitly comparing both texts within it.',
+    targetedMisconceptions: [`${COMPE}:MC-A-A-COMPARATIVE-ESSAY-MEANS-FULLY-DESCRIBING-ONE-ITEM-THEN-FULLY-DESCRIBING-THE-OTHER`],
+    source: `${COMPE_SRC} — MC-A (P28 two-restaurant-reviews conflict)`,
+  },
+  {
+    conceptId: COMPE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Choosing a trivial comparison point ("both texts have chapters") is ' +
+      'like a movie review spending a paragraph comparing two films\' ' +
+      'runtimes while never discussing meaning — technically true, but ' +
+      'analytically empty. Select comparison points that reveal something ' +
+      'meaningful about the works\' themes, techniques, or effects.',
+    targetedMisconceptions: [`${COMPE}:MC-B-ANY-SUPERFICIAL-SIMILARITY-OR-DIFFERENCE-IS-A-MEANINGFUL-POINT-OF-COMPARISON-WORTH-A-PARAGRAPH`],
+    source: `${COMPE_SRC} — MC-B (P28 movie-runtime-comparison conflict)`,
+  },
+  {
+    conceptId: COMPE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A comparative essay must organize by POINT — each paragraph ' +
+      'explicitly comparing both texts on one shared category — rather ' +
+      'than by BLOCK (fully describing each text separately and leaving ' +
+      'the comparing work implicit), like two disconnected restaurant ' +
+      'reviews. Separately, comparison points must have real analytical ' +
+      'substance, not be any true but trivial similarity, like comparing ' +
+      'two films\' runtimes instead of their meaning.',
+    targetedMisconceptions: [
+      `${COMPE}:MC-A-A-COMPARATIVE-ESSAY-MEANS-FULLY-DESCRIBING-ONE-ITEM-THEN-FULLY-DESCRIBING-THE-OTHER`,
+      `${COMPE}:MC-B-ANY-SUPERFICIAL-SIMILARITY-OR-DIFFERENCE-IS-A-MEANINGFUL-POINT-OF-COMPARISON-WORTH-A-PARAGRAPH`,
+    ],
+    source: `${COMPE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const COMPE_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMPE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An essay comparing two texts has three paragraphs fully describing Text A, followed by three paragraphs fully describing Text B, with no paragraph that explicitly compares them. Does this block structure make a genuine comparative essay?',
+    choices: [
+      { text: 'No — this leaves the actual comparing work implicit or absent; a genuine comparative essay organizes by POINT, explicitly comparing both texts within each paragraph', isCorrect: true },
+      { text: 'Yes — a comparative essay means fully describing one item, then fully describing the other', isCorrect: false, misconceptionId: `${COMPE}:MC-A-A-COMPARATIVE-ESSAY-MEANS-FULLY-DESCRIBING-ONE-ITEM-THEN-FULLY-DESCRIBING-THE-OTHER` },
+    ],
+    correctValue: 'no, block structure leaves the actual comparison implicit',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COMPE}:MC-A-A-COMPARATIVE-ESSAY-MEANS-FULLY-DESCRIBING-ONE-ITEM-THEN-FULLY-DESCRIBING-THE-OTHER`],
+    source: `${COMPE_SRC} — two-restaurant-reviews conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: COMPE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student selects "both texts are divided into chapters" as a point of comparison for their essay. Is any true similarity or difference, like this one, a meaningful point of comparison worth a full paragraph?',
+    choices: [
+      { text: 'No — this is a trivial, analytically empty point; genuine comparison points must reveal something meaningful about the works\' themes, techniques, or effects', isCorrect: true },
+      { text: 'Yes — any superficial similarity or difference is a meaningful point of comparison worth a paragraph', isCorrect: false, misconceptionId: `${COMPE}:MC-B-ANY-SUPERFICIAL-SIMILARITY-OR-DIFFERENCE-IS-A-MEANINGFUL-POINT-OF-COMPARISON-WORTH-A-PARAGRAPH` },
+    ],
+    correctValue: 'no, comparison points need genuine analytical substance',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COMPE}:MC-B-ANY-SUPERFICIAL-SIMILARITY-OR-DIFFERENCE-IS-A-MEANINGFUL-POINT-OF-COMPARISON-WORTH-A-PARAGRAPH`],
+    source: `${COMPE_SRC} — movie-runtime-comparison conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.research-paper-writing ────────────────────────────────────
+const RESPW = 'eng.composition.research-paper-writing'
+const RESPW_SRC = 'docs/curriculum/blueprints/eng.composition.research-paper-writing.md'
+
+const RESPW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RESPW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organizing a paper source-by-source is like giving each trial ' +
+      'witness a standalone monologue instead of building a case — a ' +
+      'lawyer organizes by ARGUMENT, pulling relevant testimony from ' +
+      'whichever witnesses support each point. Outline your paper by SUB-' +
+      'ARGUMENT or idea, not by source, pulling in whichever sources ' +
+      'support each specific point.',
+    targetedMisconceptions: [`${RESPW}:MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES`],
+    source: `${RESPW_SRC} — MC-A (P28 trial-lawyer conflict)`,
+  },
+  {
+    conceptId: RESPW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Citing only sources that agree with you is like a doctor only ' +
+      'reading test results that confirm their initial guess — it feels ' +
+      'safer, but produces a less accurate diagnosis. Deliberately seek ' +
+      'out and address sources that complicate or partially disagree with ' +
+      'your thesis; engaging genuine complexity strengthens credibility, ' +
+      'it doesn\'t weaken the argument.',
+    targetedMisconceptions: [`${RESPW}:MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE`],
+    source: `${RESPW_SRC} — MC-B (P28 doctors-test-results conflict)`,
+  },
+  {
+    conceptId: RESPW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A research paper must be organized by IDEA or sub-argument, ' +
+      'pulling in whichever sources support each specific point, like a ' +
+      'lawyer organizing a case by claim rather than giving each witness a ' +
+      'standalone monologue — not a sequence of source-by-source ' +
+      'summaries. Separately, genuine synthesis requires engaging sources ' +
+      'that complicate or partially disagree with the thesis, not citing ' +
+      'only agreeing ones, like a doctor who reads all test results, not ' +
+      'just the confirming ones.',
+    targetedMisconceptions: [
+      `${RESPW}:MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES`,
+      `${RESPW}:MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE`,
+    ],
+    source: `${RESPW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RESPW_PROBES: SeedProbe[] = [
+  {
+    conceptId: RESPW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A research paper has one paragraph fully summarizing Source A, then a paragraph fully summarizing Source B, then one fully summarizing Source C, with no paragraph combining them around one point. Is this a strong way to organize a research paper?',
+    choices: [
+      { text: 'No — this organizes by source rather than by idea; a strong paper organizes by sub-argument, pulling in whichever sources support each specific point', isCorrect: true },
+      { text: 'Yes — a research paper is a sequence of source summaries, one after another', isCorrect: false, misconceptionId: `${RESPW}:MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES` },
+    ],
+    correctValue: 'no, papers should organize by idea, not by source',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RESPW}:MC-A-A-RESEARCH-PAPER-IS-A-SEQUENCE-OF-SOURCE-SUMMARIES`],
+    source: `${RESPW_SRC} — trial-lawyer conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RESPW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student researching a thesis finds a source that partially complicates it, and decides not to cite that source at all, citing only sources that agree. Does synthesizing sources mean only using ones that agree with the thesis?',
+    choices: [
+      { text: 'No — a strong paper deliberately engages sources that complicate or partially disagree, explaining how the argument accounts for them, which strengthens rather than weakens credibility', isCorrect: true },
+      { text: 'Yes — synthesizing sources means only using sources that agree with the thesis', isCorrect: false, misconceptionId: `${RESPW}:MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE` },
+    ],
+    correctValue: 'no, genuine synthesis engages complicating sources too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RESPW}:MC-B-SYNTHESIZING-SOURCES-MEANS-ONLY-USING-SOURCES-THAT-AGREE`],
+    source: `${RESPW_SRC} — doctors-test-results conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -29300,6 +29655,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FALL_EXPLANATIONS,
   ...FIGL_EXPLANATIONS,
   ...RHAN_EXPLANATIONS,
+  ...SVT_EXPLANATIONS,
+  ...PERT_EXPLANATIONS,
+  ...COMPE_EXPLANATIONS,
+  ...RESPW_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -29626,4 +29985,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FALL_PROBES,
   ...FIGL_PROBES,
   ...RHAN_PROBES,
+  ...SVT_PROBES,
+  ...PERT_PROBES,
+  ...COMPE_PROBES,
+  ...RESPW_PROBES,
 ]
