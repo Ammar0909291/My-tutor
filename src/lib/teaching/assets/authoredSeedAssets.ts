@@ -10794,6 +10794,390 @@ const CONS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.phonics.consonant-blends ────────────────────────────────────────────
+const CBL = 'eng.phonics.consonant-blends'
+const CBL_SRC = 'docs/curriculum/blueprints/eng.phonics.consonant-blends.md'
+
+const CBL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CBL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A consonant blend is two or three separate consonant sounds said ' +
+      'right next to each other, with each one still fully pronounced. Say ' +
+      '"stop" very slowly, stretching the beginning: /s/... /t/... /ɒ/... ' +
+      '/p/ — that is TWO separate consonant sounds at the start, not one. ' +
+      'For any blend, say each consonant sound separately and slowly ' +
+      'first, then speed them up without dropping any one of them — ' +
+      'dropping the /s/ from "stop" leaves you with the completely ' +
+      'different word "top".',
+    targetedMisconceptions: [`${CBL}:MC-BLEND-IS-ONE-FUSED-SOUND`],
+    source: `${CBL_SRC} — MC-BLEND-IS-ONE-FUSED-SOUND (P28 stop/top conflict evidence)`,
+  },
+  {
+    conceptId: CBL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Blends and digraphs look similar on the page — both are two ' +
+      'consonant letters written together — but they behave completely ' +
+      'differently when spoken. Say "st" in "stop" slowly: you hear TWO ' +
+      'different sounds, /s/ then /t/ — that is a blend, and it keeps both ' +
+      'sounds. Now say "sh" in "ship" slowly: you hear only ONE sound the ' +
+      'whole time, not /s/ followed by /h/ — that is a digraph, a brand-new ' +
+      'merged sound. Test any two-consonant combination by saying it ' +
+      'slowly: two separate sounds means blend; one new sound means ' +
+      'digraph.',
+    targetedMisconceptions: [`${CBL}:MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING`],
+    source: `${CBL_SRC} — MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING (P28 st/sh conflict evidence)`,
+  },
+  {
+    conceptId: CBL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A consonant blend is two or three consonant sounds said in quick ' +
+      'sequence, each one fully preserved — "stop" keeps both /s/ and /t/, ' +
+      'and dropping either one changes the word entirely ("top", "sop"). ' +
+      'This is the opposite of a digraph, where two letters merge into one ' +
+      'brand-new sound: "sh" is not /s/ followed by /h/, it is the single ' +
+      'sound /ʃ/. Since both patterns look identical on the page — two ' +
+      'consonant letters together — the reliable test is always to say the ' +
+      'combination slowly: two audible sounds means blend, one merged ' +
+      'sound means digraph.',
+    targetedMisconceptions: [
+      `${CBL}:MC-BLEND-IS-ONE-FUSED-SOUND`,
+      `${CBL}:MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING`,
+    ],
+    source: `${CBL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CBL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CBL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Say "stop" slowly. How many separate consonant sounds do you hear at the start?',
+    choices: [
+      { text: 'Two — /s/ then /t/, both fully pronounced', isCorrect: true },
+      { text: 'One fused sound', isCorrect: false, misconceptionId: `${CBL}:MC-BLEND-IS-ONE-FUSED-SOUND` },
+    ],
+    correctValue: 'two',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CBL}:MC-BLEND-IS-ONE-FUSED-SOUND`],
+    source: `${CBL_SRC} — P28 stop conflict as probe`,
+  },
+  {
+    conceptId: CBL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Is "sh" in "ship" a blend (two sounds) or a digraph (one sound)?',
+    choices: [
+      { text: 'A digraph — it is one single sound, /ʃ/, not /s/ followed by /h/', isCorrect: true },
+      { text: 'A blend — you can hear /s/ then /h/ separately', isCorrect: false, misconceptionId: `${CBL}:MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING` },
+    ],
+    correctValue: 'digraph',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CBL}:MC-BLENDS-AND-DIGRAPHS-ARE-THE-SAME-THING`],
+    source: `${CBL_SRC} — P28 st/sh conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.short-vowels ─────────────────────────────────────────────────
+const SVOW = 'eng.phonics.short-vowels'
+const SVOW_SRC = 'docs/curriculum/blueprints/eng.phonics.short-vowels.md'
+
+const SVOW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SVOW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Every vowel letter has a NAME (what you say reciting the alphabet — ' +
+      '"a" says "ay") and a different SOUND it makes inside real words. Say ' +
+      'the letter "a" as its name — "ay" — then say the word "cat" out ' +
+      'loud the way you normally talk. The middle sound in "cat" is not ' +
+      '"ay" — it is shorter, /æ/. In a short, closed one-syllable word ' +
+      '(ending in a consonant, no silent e), use the vowel\'s SHORT sound, ' +
+      'not its alphabet name.',
+    targetedMisconceptions: [`${SVOW}:MC-VOWEL-LETTER-NAME-IS-THE-SOUND`],
+    source: `${SVOW_SRC} — MC-VOWEL-LETTER-NAME-IS-THE-SOUND (P28 letter-name-vs-cat conflict evidence)`,
+  },
+  {
+    conceptId: SVOW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'It is not just about how many syllables a word has — it is about ' +
+      'whether the syllable is CLOSED (ends in a consonant, no final e) or ' +
+      'has a silent "e" at the end that changes the vowel to its long ' +
+      'sound. "Cap" and "cape" are both one syllable — say them both ' +
+      'slowly: "cap" has the short /æ/ sound, "cape" has the long /eɪ/ ' +
+      'sound, because of that one extra silent letter. Before assuming a ' +
+      'one-syllable word has a short vowel, check whether it ends in a ' +
+      'silent "e" — if it does, expect the long vowel sound instead.',
+    targetedMisconceptions: [`${SVOW}:MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL`],
+    source: `${SVOW_SRC} — MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL (P28 cap/cape conflict evidence)`,
+  },
+  {
+    conceptId: SVOW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Each vowel letter has an alphabet NAME ("a" says "ay") that is ' +
+      'distinct from the SOUND it represents inside a real word. In a ' +
+      'closed syllable — one that ends in a consonant with no silent e — ' +
+      'the vowel takes its short sound instead: "cat" uses /æ/, not the ' +
+      'letter name "ay". The distinguishing factor for one-syllable words ' +
+      'is not syllable count but syllable structure: "cap" (closed, no ' +
+      'silent e) keeps the short /æ/, while "cape" (silent e present) ' +
+      'shifts to the long /eɪ/. Always check for a trailing silent e before ' +
+      'assuming a short vowel.',
+    targetedMisconceptions: [
+      `${SVOW}:MC-VOWEL-LETTER-NAME-IS-THE-SOUND`,
+      `${SVOW}:MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL`,
+    ],
+    source: `${SVOW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SVOW_PROBES: SeedProbe[] = [
+  {
+    conceptId: SVOW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What vowel sound is in the middle of "cat"?',
+    choices: [
+      { text: 'The short /æ/ sound', isCorrect: true },
+      { text: 'The letter name, "ay"', isCorrect: false, misconceptionId: `${SVOW}:MC-VOWEL-LETTER-NAME-IS-THE-SOUND` },
+    ],
+    correctValue: '/æ/',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SVOW}:MC-VOWEL-LETTER-NAME-IS-THE-SOUND`],
+    source: `${SVOW_SRC} — P28 letter-name-vs-cat conflict as probe`,
+  },
+  {
+    conceptId: SVOW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Do "cap" and "cape" have the same vowel sound, since both are one syllable?',
+    choices: [
+      { text: 'No — "cap" has a short /æ/, "cape" has a long /eɪ/ because of the silent e', isCorrect: true },
+      { text: 'Yes — both are one-syllable words, so both use the short vowel', isCorrect: false, misconceptionId: `${SVOW}:MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SVOW}:MC-ONE-SYLLABLE-WORDS-ALWAYS-SHORT-VOWEL`],
+    source: `${SVOW_SRC} — P28 cap/cape conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.digraphs ─────────────────────────────────────────────────────
+const DGR = 'eng.phonics.digraphs'
+const DGR_SRC = 'docs/curriculum/blueprints/eng.phonics.digraphs.md'
+
+const DGR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DGR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Digraphs are the opposite of blends: TWO letters that together make ' +
+      'just ONE brand-new sound, not two sounds said in sequence. Try to ' +
+      'say "s" then "h" separately for "sh" — now say the word "ship" the ' +
+      'way you normally talk. There is no full /s/ sound followed by a ' +
+      'full /h/ sound — it is one single sound, /ʃ/, the whole time. For a ' +
+      'digraph, treat the two letters as ONE unit representing ONE sound — ' +
+      'never try to sound out each letter separately.',
+    targetedMisconceptions: [`${DGR}:MC-DIGRAPH-IS-A-BLEND`],
+    source: `${DGR_SRC} — MC-DIGRAPH-IS-A-BLEND (P28 s+h vs. ship conflict evidence)`,
+  },
+  {
+    conceptId: DGR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A vowel digraph is two vowel letters working together to make ONE ' +
+      'vowel sound — often following the pattern "when two vowels go ' +
+      'walking, the first one does the talking" (its long sound), like in ' +
+      '"rain" or "boat." But read "said" — does "ai" make the same sound ' +
+      'there as in "rain"? It does not; "said" is an exception. For a vowel ' +
+      'digraph, try the long-first-vowel-sound pattern first, but stay ' +
+      'ready to adjust for known exception words — vowel teams are less ' +
+      'perfectly reliable than consonant digraphs.',
+    targetedMisconceptions: [`${DGR}:MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES`],
+    source: `${DGR_SRC} — MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES (P28 rain/said conflict evidence)`,
+  },
+  {
+    conceptId: DGR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A digraph is two letters that merge into one new sound, unlike a ' +
+      'blend, which keeps two sounds distinct. "Sh" in "ship" is not /s/ ' +
+      'followed by /h/ — it is the single sound /ʃ/; treat any digraph as ' +
+      'one indivisible unit rather than sounding out each letter. Vowel ' +
+      'digraphs follow a looser version of this idea: two vowels together ' +
+      'often produce the first vowel\'s long sound ("rain", "boat"), but ' +
+      'this pattern has real exceptions ("said", "bread") that must be ' +
+      'learned individually — vowel teams are simply less reliable than ' +
+      'consonant digraphs, which almost never break their pattern.',
+    targetedMisconceptions: [
+      `${DGR}:MC-DIGRAPH-IS-A-BLEND`,
+      `${DGR}:MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES`,
+    ],
+    source: `${DGR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DGR_PROBES: SeedProbe[] = [
+  {
+    conceptId: DGR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Say "ship" naturally. Do you hear a full /s/ sound followed by a full /h/ sound, or one single sound?',
+    choices: [
+      { text: 'One single sound, /ʃ/, the whole time', isCorrect: true },
+      { text: 'Two separate sounds, /s/ then /h/', isCorrect: false, misconceptionId: `${DGR}:MC-DIGRAPH-IS-A-BLEND` },
+    ],
+    correctValue: 'one sound, /ʃ/',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${DGR}:MC-DIGRAPH-IS-A-BLEND`],
+    source: `${DGR_SRC} — P28 s+h vs. ship conflict as probe`,
+  },
+  {
+    conceptId: DGR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Does "ai" make the same sound in "said" as it does in "rain"?',
+    choices: [
+      { text: 'No — "said" is an exception to the usual long-vowel-team pattern', isCorrect: true },
+      { text: 'Yes — vowel teams always make the same sound in every word', isCorrect: false, misconceptionId: `${DGR}:MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DGR}:MC-VOWEL-DIGRAPHS-FOLLOW-SHORT-VOWEL-RULES`],
+    source: `${DGR_SRC} — P28 rain/said conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.long-vowels-silent-e ─────────────────────────────────────────
+const LVSE = 'eng.phonics.long-vowels-silent-e'
+const LVSE_SRC = 'docs/curriculum/blueprints/eng.phonics.long-vowels-silent-e.md'
+
+const LVSE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LVSE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Read "cap." Now read "cape." Do they have the same vowel sound? The ' +
+      'only spelling difference is that final "e" — and it changes ' +
+      'everything. The final "e" itself is not pronounced, that part is ' +
+      'true, but it has an important JOB: it signals that the vowel ' +
+      'earlier in the word should say its long sound (its alphabet name) ' +
+      'instead of its short sound. It is silent, but not meaningless. ' +
+      'Whenever you see a word ending in a single consonant + silent e, ' +
+      'expect the earlier vowel to say its long sound.',
+    targetedMisconceptions: [`${LVSE}:MC-SILENT-E-DOES-NOTHING`],
+    source: `${LVSE_SRC} — MC-SILENT-E-DOES-NOTHING (P28 cap/cape conflict evidence)`,
+  },
+  {
+    conceptId: LVSE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'The silent-e-makes-the-vowel-long pattern is the MOST common reason ' +
+      'a word ends in silent e, but it is not the only one. The rule says ' +
+      'the earlier vowel should be long — so read "have": does the "a" ' +
+      'actually say its long sound ("hay-v"), or does it stay short? It ' +
+      'stays short. A small set of common words (have, give, live, love, ' +
+      'come, some, done) keep a short vowel despite the final e. Apply the ' +
+      'silent-e-long-vowel rule as the default expectation, but check known ' +
+      'high-frequency exception words separately.',
+    targetedMisconceptions: [`${LVSE}:MC-ANY-E-AT-THE-END-MEANS-LONG-VOWEL`],
+    source: `${LVSE_SRC} — MC-ANY-E-AT-THE-END-MEANS-LONG-VOWEL (P28 have exception conflict evidence)`,
+  },
+  {
+    conceptId: LVSE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A final silent "e" is unpronounced but functional: it signals that ' +
+      'the earlier vowel in the word should take its long (alphabet-name) ' +
+      'sound rather than its short sound — "cap" (short /æ/) versus "cape" ' +
+      '(long /eɪ/), with the silent e as the only spelling difference. This ' +
+      'is the most common reason a word ends in e, but not the only one: a ' +
+      'short list of common words — have, give, live, love, come, some, ' +
+      'done — keep a short vowel despite the final e, largely because ' +
+      'English spelling avoids ending words in certain letters (v, u) even ' +
+      'when the sound does not call for an e. Apply the rule as the ' +
+      'default, and hold the exception list separately.',
+    targetedMisconceptions: [
+      `${LVSE}:MC-SILENT-E-DOES-NOTHING`,
+      `${LVSE}:MC-ANY-E-AT-THE-END-MEANS-LONG-VOWEL`,
+    ],
+    source: `${LVSE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LVSE_PROBES: SeedProbe[] = [
+  {
+    conceptId: LVSE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is the only spelling difference between "cap" and "cape", and what does it do?',
+    choices: [
+      { text: 'The final "e" — it is silent itself but makes the earlier vowel say its long sound', isCorrect: true },
+      { text: 'The final "e" — it does nothing at all', isCorrect: false, misconceptionId: `${LVSE}:MC-SILENT-E-DOES-NOTHING` },
+    ],
+    correctValue: 'the silent e signals a long vowel',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LVSE}:MC-SILENT-E-DOES-NOTHING`],
+    source: `${LVSE_SRC} — P28 cap/cape conflict as probe`,
+  },
+  {
+    conceptId: LVSE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Does the "a" in "have" say its long sound, the way the silent-e rule would predict?',
+    choices: [
+      { text: 'No — "have" is a common exception; the vowel stays short despite the final e', isCorrect: true },
+      { text: 'Yes — any word ending in e must have a long vowel', isCorrect: false, misconceptionId: `${LVSE}:MC-ANY-E-AT-THE-END-MEANS-LONG-VOWEL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LVSE}:MC-ANY-E-AT-THE-END-MEANS-LONG-VOWEL`],
+    source: `${LVSE_SRC} — P28 have exception conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -10921,6 +11305,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...RHYME_EXPLANATIONS,
   ...BLEND_EXPLANATIONS,
   ...CONS_EXPLANATIONS,
+  ...CBL_EXPLANATIONS,
+  ...SVOW_EXPLANATIONS,
+  ...DGR_EXPLANATIONS,
+  ...LVSE_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -11048,4 +11436,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...RHYME_PROBES,
   ...BLEND_PROBES,
   ...CONS_PROBES,
+  ...CBL_PROBES,
+  ...SVOW_PROBES,
+  ...DGR_PROBES,
+  ...LVSE_PROBES,
 ]
