@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.local-extrema-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.local-extrema",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1bd1ba392e590fba05ac858655bc82089cf92b3cd6f25ee81f3d7944ecdc313a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.local-extrema.md": "sha256:a9be12b8be56c549902d4821e8d049796f506488c06d289b2cda2db4594c5fe9"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.local-extrema",
+    "name": "Local Extrema",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.critical-points",
+      "math.calc.increasing-decreasing"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.local-extrema-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.local-extrema (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.local-extrema.md": "sha256:a9be12b8be56c549902d4821e8d049796f506488c06d289b2cda2db4594c5fe9"
+      },
+      "contentHash": "sha256:ae77ee17e4465e19d310166a4efd242ee531f563db2ccf41c2c76cdb8633ceaa",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.local-extrema.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.local-extrema.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.local-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.local-extrema\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.local-extrema.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.local-extrema.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.local-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.local-extrema\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.local-extrema.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.local-extrema.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.local-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.local-extrema\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.local-extrema/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.local-extrema",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the **First Derivative Test**: at a critical point $c$, if $f'$ changes from positive to negative, $c$ is a **local maximum**; if $f'$ changes from negative to positive, $c$ is a **local minimum**; if $f'$ does **not** change sign, $c$ is **neither**.\n- LO2: Apply the **Second Derivative Test**: at a critical point $c$ where $f'(c)=0$, if $f''(c)>0$, $c$ is a local minimum; if $f''(c)<0$, $c$ is a local maximum — and recognize the test's **inconclusive case** ($f''(c)=0$), where the First Derivative Test must be used instead.\n- LO3: Choose strategically between the two tests for a given problem, recognizing when the Second Derivative Test is more efficient (when $f''$ is easy to compute and nonzero at $c$) versus when the First Derivative Test is required (when $f'(c)$ doesn't exist, so the Second Derivative Test doesn't even apply, or when $f''(c)=0$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.local-extrema",
+      "title": "EVERY-CRITICAL-POINT-RESOLVES-TO-EXTREMUM",
+      "content": "| MC-1 | EVERY-CRITICAL-POINT-RESOLVES-TO-EXTREMUM | Assuming the First Derivative Test must classify every critical point as either a max or a min, not recognizing \"neither\" (no sign change) as a valid outcome | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.local-extrema",
+      "title": "SECOND-DERIVATIVE-ZERO-MISINTERPRETED",
+      "content": "| MC-2 | SECOND-DERIVATIVE-ZERO-MISINTERPRETED | Treating $f''(c)=0$ as meaning something specific (e.g. \"weak extremum\" or \"saddle point\" by default) rather than recognizing it as a genuinely inconclusive result requiring the First Derivative Test | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.local-extrema",
+      "title": "SECOND-DERIVATIVE-TEST-APPLIED-AT-UNDEFINED-DERIVATIVE-POINTS",
+      "content": "| MC-3 | SECOND-DERIVATIVE-TEST-APPLIED-AT-UNDEFINED-DERIVATIVE-POINTS | Attempting to apply the Second Derivative Test at a critical point where $f'$ itself is undefined (not just where $f'=0$), where the test is simply inapplicable | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.local-extrema",
+      "title": "The First Derivative Test (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The First Derivative Test (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.local-extrema",
+      "title": "The Second Derivative Test, Its Inconclusive Case, and Test Selection (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Second Derivative Test, Its Inconclusive Case, and Test Selection (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.local-extrema",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.local-extrema",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. $f(x)=x^3-6x^2+9x$. Find all critical points and classify each using the First Derivative Test.\n  2. Using the Second Derivative Test, classify the critical points of $g(x)=x^4-8x^2$ (find where $g''=0$ first, if anywhere, before applying the test).\n  3. $h(x)=x^5$ has a critical point at $x=0$ where $h''(0)=0$ (inconclusive). Use the First Derivative Test to determine whether $x=0$ is a local max, local min, or neither.\n  4. Explain why the Second Derivative Test cannot be used at all for $k(x)=|x|$ at $x=0$, and use the First Derivative Test instead to classify that point.\n- **P76 (Transfer Probe, mode = independence)**: \"A company's profit function is $P(x) = -x^3+9x^2-15x$ (where $x$ is thousands of units produced). (a) Find all critical points. (b) Use the Second Derivative Test to classify each as a local max or min, where possible. (c) A financial analyst wants to double-check the classification of one critical point using the First Derivative Test as well, purely as a cross-verification method — perform this check for that same critical point and confirm both tests agree, explaining why agreement is expected whenever both tests give a definite (non-inconclusive) answer.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.local-extrema",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.critical-points` (finding critical points, and the critical-point-is-only-a-candidate caveat this concept now resolves) and `math.calc.increasing-decreasing` (the sign-of-$f'$ test for increasing/decreasing, and the sign-analysis procedure via critical-point partitioning).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.local-extrema/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.local-extrema",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.critical-points` (the candidates this concept classifies, and the exact \"is it actually a max/min?\" ambiguity this concept resolves), `math.calc.increasing-decreasing` (the sign-of-$f'$/sign-analysis machinery the First Derivative Test directly reuses).\n- **Unlocks**: `math.calc.optimization` (real-world optimization problems require classifying critical points exactly as taught here, as the final step after finding candidates).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.local-extrema.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

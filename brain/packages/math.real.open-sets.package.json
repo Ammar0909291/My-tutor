@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.open-sets-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.open-sets",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a493661a00590db20aa4350e22f6f58d300718f93d7fffe9796733ea9c646238",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.open-sets.md": "sha256:6cc60de21a14a691cbc4359978f49e27323ecded55cde035a3970529b6e157d6"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.real.open-sets",
+    "name": "Open and Closed Sets",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.real.metric-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.open-sets-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.open-sets (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.open-sets.md": "sha256:6cc60de21a14a691cbc4359978f49e27323ecded55cde035a3970529b6e157d6"
+      },
+      "contentHash": "sha256:16e5a2c914d3db3d4125e842c098b5ccfec433f3f33215dff3d164713bebb473",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.open-sets.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.open-sets.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.open-sets\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.open-sets.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.open-sets.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.open-sets\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.open-sets.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.open-sets.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.open-sets\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.open-sets/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.open-sets",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **open ball** $B(x,r)=\\{y\\in X: d(x,y)<r\\}$ in a metric space $(X,d)$, and define a set $U$ as **open** if every point of $U$ is an **interior point** — i.e., for every $x\\in U$, some open ball $B(x,r)\\subseteq U$ (possibly with a different $r$ for each $x$).\n- LO2: Define a set $C$ as **closed** if its complement $X\\setminus C$ is open, and prove the equivalent characterization — $C$ is closed iff $C$ contains all its **limit points** (points arbitrarily close to $C$, in the sense that every open ball around them intersects $C$).\n- LO3: Recognize that open and closed are **not opposites** in the naive sense — a set can be neither open nor closed, or (in special cases) both — and define the **closure** of a set $S$ as the smallest closed set containing $S$, correctly computing it for simple examples.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.open-sets",
+      "title": "OPEN-CLOSED-ASSUMED-EXHAUSTIVE-DICHOTOMY",
+      "content": "| MC-1 | OPEN-CLOSED-ASSUMED-EXHAUSTIVE-DICHOTOMY | Believing every set must be classifiable as exactly one of open or closed, not recognizing \"neither\" (and, separately, \"both\") as genuinely possible | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.open-sets",
+      "title": "CLOSURE-CONFUSED-WITH-ANY-CLOSED-SUPERSET",
+      "content": "| MC-2 | CLOSURE-CONFUSED-WITH-ANY-CLOSED-SUPERSET | Believing any closed set containing $S$ qualifies as \"the closure\" of $S$, rather than specifically the smallest such closed set | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.open-sets",
+      "title": "LIMIT-POINT-REQUIRES-SET-MEMBERSHIP",
+      "content": "| MC-3 | LIMIT-POINT-REQUIRES-SET-MEMBERSHIP | Believing a point must already belong to $C$ to be considered a \"limit point\" of $C$, rather than recognizing limit points can be points outside $C$ that $C$ approaches arbitrarily closely | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.open-sets",
+      "title": "Open Sets via the Interior-Point/Ball Definition (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Open Sets via the Interior-Point/Ball Definition (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.open-sets",
+      "title": "Closed Sets, Limit Points, and the Closure (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Closed Sets, Limit Points, and the Closure (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.open-sets",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.open-sets",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify directly, using the interior-point definition, that $(1,4)$ is open in $\\mathbb{R}$.\n  2. Verify, either via the complement-is-open check or via limit points, that $\\{2\\}$ (a single point) is closed in $\\mathbb{R}$.\n  3. Is $[3,5)$ open, closed, both, or neither? Justify by checking both definitions explicitly.\n  4. Find the closure of $S=\\{1/n : n=1,2,3,\\ldots\\}$ in $\\mathbb{R}$ (hint: identify the limit point(s) this set approaches but never reaches).\n- **P76 (Transfer Probe, mode = independence)**: \"In a metric space modeling a city's delivery zone, distance $d(x,y)$ is measured in kilometers. A company defines its 'guaranteed same-day zone' as $Z=\\{y : d(\\text{warehouse}, y) < 10\\}$ km (strictly less than 10km). (a) Using this lesson's definitions, argue that $Z$ is an open set. (b) A rival company instead defines its zone as $Z'=\\{y : d(\\text{warehouse}, y) \\leq 10\\}$ km (10km or less) — is $Z'$ open, closed, or neither, and how does the boundary distance of exactly 10km determine this? (c) Explain, using the concept of closure, why $Z'$ is exactly the closure of $Z$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.open-sets",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.metric-space` (the metric $d(x,y)$, its three axioms, and standard examples like $\\mathbb{R}^n$ with the Euclidean metric).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.open-sets/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.open-sets",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.metric-space` (the metric $d$ and the space $(X,d)$ this entire concept's balls, interior points, and limit points are defined relative to).\n- **Unlocks**: `math.real.compactness` (compactness is defined in terms of open covers, building directly on this concept's open-set definition), `math.real.connectedness` (connectedness is defined via the impossibility of splitting a space into two disjoint nonempty open sets).\n- **Cross-link**: KG lists `math.top.open-sets` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.top.open-sets.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's metric-ball-based open-set definition directly to the more general topological-space axiomatic definition of open sets (where \"open\" is taken as a primitive notion satisfying axioms, rather than derived from a metric) — this metric-space treatment is exactly the motivating special case for that later abstraction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.open-sets.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

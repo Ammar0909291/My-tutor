@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.category-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.category",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b632925599b8948712e000b4c0a0429b93a8d0858071eae8b28e5ca0e0ee31f5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.category.md": "sha256:0d2935ed8c24e58b8c28dd47b9c4deafbe6eb036bb99eb50f03f285ee8aa178f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cat.category",
+    "name": "Category",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.function-set-theoretic",
+      "math.abst.algebraic-structure"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.category-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.category (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.category.md": "sha256:0d2935ed8c24e58b8c28dd47b9c4deafbe6eb036bb99eb50f03f285ee8aa178f"
+      },
+      "contentHash": "sha256:19c2ab1cbf26a5c04efca844a605a66f41d6db40f38f43832b1b8e9a53e8e520",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.category.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.category.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.category\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.category.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.category.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.category\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.category.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.category.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.category\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.category/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.category",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the definition of a **category** $\\mathcal{C}$: a class of **objects** $\\mathrm{Ob}(\\mathcal{C})$, for each pair of objects $(A,B)$ a set $\\mathrm{Hom}(A,B)$ of **morphisms** (arrows) from $A$ to $B$, a **composition** operation $\\circ$ combining compatible morphisms, and an **identity morphism** $1_A$ for each object.\n- LO2: Verify the two category axioms — **associativity** of composition ($h\\circ(g\\circ f) = (h\\circ g)\\circ f$ whenever the compositions are defined) and the **identity law** ($1_B\\circ f = f = f\\circ 1_A$ for $f:A\\to B$) — for a specific concrete category.\n- LO3: Recognize the four named example categories ($\\mathbf{Set}$: sets and functions; $\\mathbf{Grp}$: groups and homomorphisms; $\\mathbf{Top}$: topological spaces and continuous maps; $\\mathbf{Vect}_k$: vector spaces and linear maps) as instances of the single abstract category definition, correctly identifying what serves as \"objects\" and \"morphisms\" in each.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.category/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.category",
+      "title": "ANY-FUNCTION-ASSUMED-VALID-MORPHISM",
+      "content": "| MC-1 | ANY-FUNCTION-ASSUMED-VALID-MORPHISM | Assuming any function between the underlying sets of two objects automatically qualifies as a morphism in every category, ignoring category-specific structure-preservation requirements (e.g. treating a non-homomorphism as a valid Grp morphism) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.cat.category/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.category",
+      "title": "COMPOSITION-ASSUMED-COMMUTATIVE",
+      "content": "| MC-2 | COMPOSITION-ASSUMED-COMMUTATIVE | Confusing associativity (which composition order of grouping gives the same result) with commutativity (whether $f\\circ g = g\\circ f$), incorrectly assuming morphism composition can generally be reordered | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.cat.category/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.category",
+      "title": "IDENTITY-MORPHISM-ASSUMED-UNIQUE-ACROSS-OBJECTS",
+      "content": "| MC-3 | IDENTITY-MORPHISM-ASSUMED-UNIQUE-ACROSS-OBJECTS | Believing a single identity morphism serves all objects in a category (like a universal \"do nothing\" arrow), rather than each object having its OWN distinct identity morphism | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.cat.category/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.category",
+      "title": "The Four Ingredients, Grounded Directly in Set (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Four Ingredients, Grounded Directly in Set (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cat.category/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.category",
+      "title": "Verifying the Axioms, and Morphisms as Structure-Preserving (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verifying the Axioms, and Morphisms as Structure-Preserving (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.cat.category/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.category",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cat.category/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.category",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. In the category $\\mathbf{Set}$, let $A=\\{1,2,3\\}$, $B=\\{x,y\\}$. How many morphisms are in $\\mathrm{Hom}(A,B)$? (Count all functions $A\\to B$.)\n  2. Give an example of a function $\\mathbb{R}\\to\\mathbb{R}$ that IS a valid morphism in $\\mathbf{Set}$ but is NOT a valid morphism in $\\mathbf{Vect}_{\\mathbb{R}}$ (i.e., not linear), when both $\\mathbb{R}$'s are viewed as the same 1-dimensional vector space.\n  3. For three morphisms $f:A\\to B$, $g:B\\to C$, $h:C\\to D$ in any category, write out both groupings of their triple composition and state which axiom guarantees they're equal.\n  4. Explain why $1_B \\circ f = f$ (the identity law) for $f:A\\to B$, using the concrete case of $f$ being a function between sets and $1_B$ the identity function on $B$.\n- **P76 (Transfer Probe, mode = independence)**: \"A software system models user-interface 'screens' as objects and 'valid navigation transitions' between screens as morphisms — a transition is only valid if it preserves certain required application state (e.g., a logged-in-only screen can only transition to another logged-in-accessible screen). (a) Identify what plays the role of objects and morphisms in this system. (b) Explain, using this lesson's structure-preservation contrast (Set vs. Grp), why NOT every possible function between screens (in the loose 'any UI event could jump anywhere' sense) should count as a valid morphism in this category — what is the 'preserved structure' analogous to a group homomorphism's operation-preservation? (c) If transition A→B and B→C are both valid, explain using the category axioms why the composite transition A→C being valid (and unambiguous regardless of how you think about the chaining) is guaranteed by this lesson's associativity axiom.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cat.category/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.category",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.function-set-theoretic` (functions as a specific kind of relation — the model for \"morphism\" in the category $\\mathbf{Set}$) and `math.abst.algebraic-structure` (sets with operations satisfying axioms — the model for the various algebraic-structure categories like $\\mathbf{Grp}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.category/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.category",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.function-set-theoretic` (functions as the model for $\\mathbf{Set}$'s morphisms, and the general notion of composable maps), `math.abst.algebraic-structure` (sets-with-operations as the model for $\\mathbf{Grp}$ and the other algebraic-structure categories).\n- **Unlocks**: `math.cat.functor` (a functor is a structure-preserving map BETWEEN categories — this concept's definition of a category is the essential prerequisite object that functors act on).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.category.md",
+        "startLine": 102,
+        "endLine": 108
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
