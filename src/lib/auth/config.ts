@@ -58,12 +58,13 @@ export const authConfig: NextAuthConfig = {
     // HIGH-1: deny authentication for soft-deleted users across ALL providers
     // (Credentials already returns null above; this covers Google OAuth and any
     //  future providers before NextAuth issues a session token).
-    async signIn({ user }) {
+    async signIn({ user, account }) {
       if (!user?.email) return false
       try {
+        const email = canonicalEmail(user.email)
         const dbUser = await prisma.user.findUnique({
-          where: { email: canonicalEmail(user.email) },
-          select: { isDeleted: true },
+          where: { email },
+          select: { id: true, isDeleted: true },
         })
         // If the user row doesn't exist yet (first OAuth sign-in), allow through —
         // the jwt callback creates the DB row. If it exists and is deleted, block.
