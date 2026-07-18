@@ -1,0 +1,350 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.decimals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.decimals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:491bed0d1c355a0fdd687958eb931cbc2aa0da7c8901b964d9a7bf60dfb9b546",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.decimals.md": "sha256:eb161a216239cc5efb95f2dc3d12d632e28998a1ed2d572681965534de2e290d"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.decimals",
+    "name": "Decimals",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.arith.fractions",
+      "math.arith.place-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.decimals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.decimals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.decimals.md": "sha256:eb161a216239cc5efb95f2dc3d12d632e28998a1ed2d572681965534de2e290d"
+      },
+      "contentHash": "sha256:bd583646ed3c02cff9b9b8cdd72f6af4a71d98786bdb802358a882b53ff18b06",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.decimals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimals.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.decimals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimals.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.decimals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimals.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.decimals.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimals.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimals\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.decimals/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.decimals",
+      "title": "Decimals — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.arith.fractions**: a fraction p/q represents a part-whole relationship; decimals are simply fractions with denominators restricted to powers of 10\n- **math.arith.place-value**: each digit's value depends on its position; decimals EXTEND this system to positions right of the decimal point (tenths, hundredths, thousandths — powers of 1/10), the exact same positional logic already learned for whole numbers\n\n### Target Knowledge State\nStudent can read, write, and compare decimals correctly using place value (not digit count); correctly ADD and SUBTRACT decimals with proper place-value alignment (not treating whole and decimal parts as separate independent numbers); and correctly predict whether multiplying or dividing by a decimal will increase or decrease a quantity, recognizing that the \"multiplication makes bigger / division makes smaller\" rule from whole-number arithmetic FAILS once factors between 0 and 1 are involved.\n\n### Conceptual Obstacles\n1. Comparing decimals by DIGIT COUNT or digit VALUE as if they were whole numbers (e.g. believing 0.36 > 0.4 because \"36 > 4\") — decimal comparison must align place values (tenths vs. tenths, hundredths vs. hundredths), and a longer decimal string is not automatically a larger number\n2. Treating the whole-number part and the decimal part as two SEPARATE whole numbers to be combined independently (e.g. computing 1.9 + 2.9 as \"1+2=3\" and \"9+9=18\" glued together as \"3.18\" instead of carrying correctly to get 4.8) — decimal arithmetic must track a SINGLE continuous place-value system across the decimal point, with carrying/borrowing flowing across it exactly as between ones and tens\n3. Overgeneralizing \"multiplying makes bigger, dividing makes smaller\" from whole-number experience — this fails whenever a factor is a decimal STRICTLY BETWEEN 0 and 1: multiplying by such a factor makes the result SMALLER (e.g. 5×0.5=2.5<5), and dividing by such a factor makes the result LARGER (e.g. 5÷0.5=10>5)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.decimals",
+      "title": "LONGER-DECIMAL-IS-LARGER",
+      "content": "| MC-1 | LONGER-DECIMAL-IS-LARGER | Student compares decimals by treating the digits after the point as if they formed a whole number (more digits/bigger digit string = bigger value), e.g. concluding 0.36>0.4 | Any comparison between decimals with a different number of digits, especially where the \"longer\" one has a smaller leading (tenths) digit |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.decimals",
+      "title": "WHOLE-AND-DECIMAL-PARTS-SEPARATE",
+      "content": "| MC-2 | WHOLE-AND-DECIMAL-PARTS-SEPARATE | Student adds/subtracts decimals by combining the whole-number parts and decimal parts as two independent computations, without carrying across the decimal point when the decimal-part sum exceeds 1 | Any addition/subtraction where the decimal parts sum to 1 or more, e.g. 1.9+2.9, 3.6+2.7 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.decimals",
+      "title": "MULTIPLY-BIGGER-DIVIDE-SMALLER-ALWAYS",
+      "content": "| MC-3 | MULTIPLY-BIGGER-DIVIDE-SMALLER-ALWAYS | Student assumes multiplication always increases and division always decreases a positive number, failing for factors/divisors strictly between 0 and 1 | Any multiplication or division involving a decimal factor less than 1, e.g. 8×0.25, 8÷0.25 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimals",
+      "title": "The Place-Value Grid Extends Rightward",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Place-Value Grid Extends Rightward\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 65,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimals",
+      "title": "Three Overgeneralizations from Whole-Number Habits",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Overgeneralizations from Whole-Number Habits\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 136,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimals",
+      "title": "Composite: Compare, Add, and Predict Together",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite: Compare, Add, and Predict Together\",\"primitives\":[\"P28\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 183,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimals",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 219,
+        "endLine": 435
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.decimals",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess place-value comparison, carrying discipline, and multiply/divide-by-decimal direction prediction under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Which is larger: $0.099$ or $0.1$?\n\n*Solution:* Align: $0.099$ vs $0.100$. Tenths: 0 vs 1 — $0.100>0.099$, so $0.1>0.099$.\n\n**Problem 2:** Compute $5.7+4.6$, showing carrying explicitly.\n\n*Solution:* Tenths: $7+6=13$ tenths $=1$ one $+3$ tenths, carry 1. Ones: $5+4+1=10$. Result: $10.3$.\n\n**Problem 3:** Without fully computing, state whether $12\\times0.75$ is bigger or smaller than 12, and whether $12\\div0.75$ is bigger or smaller than 12.\n\n*Solution:* $12\\times0.75$ is smaller than 12 (factor $<1$: taking three-quarters of 12). $12\\div0.75$ is bigger than 12 (dividing by a number less than 1: asking how many 0.75-sized pieces fit in 12, more than 12 fit since each piece is under 1).\n\n**Problem 4:** A student claims $0.5$ km is longer than $0.45$ km \"because 5 is more digits away from being a whole number, so it must represent more.\" Identify the error and give the correct comparison.\n\n*Solution:* The reasoning is confused/invalid, but the conclusion happens to be numerically correct by coincidence: align $0.50$ vs $0.45$ — tenths: $5$ vs $4$, so $0.50>0.45$, i.e. $0.5>0.45$ is TRUE, but for the correct reason (a larger tenths digit), not the stated reasoning (which doesn't track any real place-value logic at all and would fail on other examples, e.g. it gives no correct method for comparing 0.5 to 0.6).\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A store sells fabric at \\$$12.50$ per meter. A customer wants to know the cost of $0.8$ meters, and separately, how many $0.8$-meter pieces can be cut from a $12.50$ meter roll.\n\n(a) Compute the cost of $0.8$ meters (i.e. $12.50\\times0.8$), and state, BEFORE computing, whether you expect this to be more or less than \\$12.50, with a one-sentence reason.\n(b) Compute how many $0.8$-meter pieces fit in the $12.50$-meter roll (i.e. $12.50\\div0.8$), and state, BEFORE computing, whether you expect this count to be more or less than $12.5$, with a one-sentence reason.\n(c) A student argues: \"Both of these involve the number 0.8, and since 0.8 is less than 1, BOTH results should come out smaller than the original 12.50.\" Evaluate this claim carefully — is it true for both (a) and (b), or does it only correctly predict one of them? Explain precisely why, connecting to the multiply-vs-divide distinction from Contrast 3.\n\n**Expected solution:**\n\n(a) Since $0.8<1$, multiplying \\$12.50 by 0.8 gives a SMALLER value (taking 0.8, i.e. 80%, of the original price) — expect LESS than \\$12.50. Computing: $12.50\\times0.8=10.00$. Confirms: \\$10.00 < \\$12.50.\n\n(b) Since $0.8<1$, dividing 12.50 by 0.8 asks \"how many 0.8-sized pieces fit into 12.50\" — since each piece is SMALLER than one whole unit, MORE than 12.5 pieces fit — expect MORE than $12.5$. Computing: $12.50\\div0.8=15.625$. Confirms: $15.625 > 12.5$.\n\n(c) The claim is **wrong for (b)** — it correctly predicts (a) (multiplying by 0.8<1 does shrink the result) but incorrectly predicts (b) (dividing by 0.8<1 GROWS the result, the opposite direction). The student's error is applying a single \"0.8 is small, so it shrinks things\" intuition to BOTH operations, without recognizing that multiplication and division respond to a divisor/factor less than 1 in OPPOSITE ways: multiplying BY a number less than 1 takes a fraction of the original (smaller), while dividing BY a number less than 1 counts how many small pieces fit (more pieces, bigger count) — exactly the asymmetry established in Contrast 3 (where $8\\times0.25<8$ but $8\\div0.25>8$, using the identical 0.25). The presence of a decimal less than 1 in a problem never determines the direction of change on its own; the OPERATION (multiply vs. divide) determines which direction that decimal pushes the result.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.arith.percentages and math.arith.rounding; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.arith.decimals assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — LONGER-DECIMAL-IS-LARGER (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Comparing decimals by digit count or reading the decimal part as a whole number is LONGER-DECIMAL-IS-LARGER. Decimals must be compared by PLACE VALUE, column by column from the left — a longer string of digits after the point is never automatically bigger.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Which is larger, 0.36 or 0.4?\"\n- MC-1 response: \"0.36, since 36 is bigger than 4.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Align first: 0.36 vs 0.40 (pad 0.4 with a trailing zero so the columns match). Compare from the LEFT, highest place value first: ones tie (0=0), then tenths: 3 vs 4 — 4 is bigger, so 0.40 (=0.4) wins, decided entirely at the tenths column. The '36' in 0.36 is really '3 tenths + 6 hundredths,' not the whole number thirty-six — treating it as thirty-six ignores what each digit's POSITION is worth.\"\n\nPractice: Order 0.5, 0.45, and 0.499 from smallest to largest using aligned columns.\n\n---\n\n### Repair Action B02 — WHOLE-AND-DECIMAL-PARTS-SEPARATE (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Adding/subtracting the whole-number and decimal parts as two separate computations is WHOLE-AND-DECIMAL-PARTS-SEPARATE. The decimal point sits inside ONE continuous place-value system — carrying (or borrowing) must flow across it exactly as between the ones and tens columns.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Compute 1.9 + 2.9.\"\n- MC-2 response: \"1+2=3 and 9+9=18, so the answer is 3.18.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check the tenths column specifically: $9+9=18$ TENTHS. Eighteen tenths is more than one whole (10 tenths = 1 one), so this MUST carry: 18 tenths = 1 one + 8 tenths. Add that carried 1 into the ones-column sum: $1+2+1=4$. Correct answer: $4.8$, not $3.18$ (which isn't even a sensible tenths digit — 'putting 18 in the tenths place' the way '3.18' does is exactly like writing '13' as a single ones-digit in whole-number addition instead of carrying).\"\n\nPractice: Compute $4.6+3.7$ by first identifying the tenths-column sum, checking whether it exceeds 9, and carrying if so.\n\n---\n\n### Repair Action B03 — MULTIPLY-BIGGER-DIVIDE-SMALLER-ALWAYS (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming multiplication always increases and division always decreases a number is MULTIPLY-BIGGER-DIVIDE-SMALLER-ALWAYS. This only holds when the OTHER factor/divisor is greater than 1 — for factors/divisors strictly between 0 and 1, BOTH operations reverse direction.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is 10×0.2 bigger or smaller than 10?\"\n- MC-3 response: \"Bigger, since multiplying always makes things bigger.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check what 0.2 actually IS: less than 1. Multiplying by a number less than 1 means taking a FRACTION of the original — $10\\times0.2=2$, which is one-fifth of 10, smaller than 10. The 'multiplying makes bigger' rule silently assumes you're multiplying by something bigger than 1 (like 3, or 10); once the multiplier drops below 1, you're taking a PART of the original instead of repeating it, which shrinks it. Symmetrically, dividing by a number less than 1 (like 0.2) asks 'how many 0.2-sized pieces fit in 10' — since each piece is small, MANY fit (50 of them), so $10\\div0.2=50$, bigger than 10.\"\n\nPractice: Predict (without computing) whether $20\\times0.1$ is bigger or smaller than 20, and whether $20\\div0.1$ is bigger or smaller than 20 — then verify by computing both.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Order three fresh decimals of different digit lengths using aligned place-value columns |\n| SR-2 | +3 days | Add two decimals requiring a carry across the decimal point, showing the carry explicitly |\n| SR-3 | +7 days | Predict (without computing) the direction of change for a multiplication and a division by a decimal less than 1, then verify |\n| SR-4 | +14 days | Reconstruct the fabric-store transfer probe's multiply-vs-divide asymmetry argument for a fresh pair of numbers |\n\nRetrieval flag: if student compares decimals by digit count (MC-1) or fails to carry across the decimal point (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.arith.fractions | Decimals are fractions restricted to power-of-10 denominators; the part-whole intuition from fractions grounds why \"0.4\" means \"4 tenths,\" not \"the whole number 4\" |\n| Requires (Tier-1) | math.arith.place-value | Supplies the entire positional-notation framework this concept extends rightward past the decimal point |\n| Unlocks | math.arith.percentages | Percentages are decimals scaled by 100; this concept's place-value and multiply/divide-by-decimal skills transfer directly |\n| Unlocks | math.arith.rounding | Rounding decimals requires exactly the column-by-column place-value reading established here |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the multiply-vs-divide-by-a-decimal-less-than-1 asymmetry to a fresh real-world pricing/cutting scenario rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=10 → extended structure (3 main TAs + gate), reflecting the concept's broader scope (comparison, addition/subtraction with carrying, and multiply/divide direction — three genuinely separate skill clusters under one KG node)\n- bloom=apply → every checkpoint and the gate require executing a procedure (comparing, adding with carrying, predicting/computing) rather than stating a definition\n- CPA_entry = C for a developing learner: a physical place-value grid, used for both comparison and addition, anchors the \"one continuous system, not two separate parts\" insight before any symbolic rule is stated\n\n**Key teaching insight:** MC-1 is this concept's highest-leverage misconception because it is a genuine prerequisite skill for self-checking the other two: a student who cannot reliably compare decimal magnitudes has no way to sanity-check whether an addition result (MC-2) or a multiplication/division result (MC-3) is even plausible in size. A01 and A02 are sequenced so aligned-column comparison is established FIRST and reused as an implicit checking tool throughout A02's carrying contrast and A03's composite problem.\n\n**MC-3 as a genuinely separate, later-appearing error:** Unlike MC-1/MC-2 (which are errors of PROCEDURE — misreading or misaligning digits), MC-3 is an error of PREDICTION/INTUITION carried over from whole-number arithmetic; it is deliberately taught via a side-by-side table (Contrast 3) contrasting a factor greater than 1 (confirming the old intuition) against a factor less than 1 (breaking it), rather than simply asserting \"the rule doesn't always work,\" so the student sees exactly WHERE the whole-number intuition's hidden assumption (factor/divisor > 1) breaks down.\n\n**Sequencing note:** No cross-link concept exists yet for math.arith.decimals; the P76 transfer probe instead uses a fabric-pricing/cutting scenario that deliberately applies the SAME decimal (0.8) to both a multiplication and a division, so the student must recognize that a single decimal value's effect depends entirely on which operation it appears in — directly testing whether the multiply/divide asymmetry (Contrast 3, B03) has been internalized as a general principle rather than memorized for one specific example.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.arith.decimals ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.arith.fractions ✓, math.arith.place-value ✓ | PASS |\n| V-3 | CPA entry = C for developing difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Procedural comparison/carrying/prediction tasks throughout A01-A04 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=10, three skill clusters → extended (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Fabric pricing/cutting; multiply-vs-divide asymmetry with the same decimal ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 219,
+        "endLine": 435
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.decimals",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — developing learner compares and computes with decimals using a place-value grid (physically aligning digits by column) before any general rule is stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: a place-value grid used to compare and add decimals correctly, column by column; P: the grid pictured directly, tenths/hundredths/thousandths columns explicit; A: formal decimal notation as an extension of place value, and the alignment rule for addition/subtraction\n2. **A02 P06 CONTRAST PAIR** — 0.36 vs 0.4 read via aligned place-value columns (MC-1); 1.9+2.9 done correctly with carrying vs. the separated-parts error (MC-2); 8×0.25 and 8÷0.25 contrasted against the whole-number \"bigger/smaller\" intuition (MC-3)\n3. **A03 P28 CONFLICT EVIDENCE** — a composite problem requiring correct comparison, aligned addition, and multiply/divide-by-decimal prediction together\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.decimals",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Order three fresh decimals of different digit lengths using aligned place-value columns |\n| SR-2 | +3 days | Add two decimals requiring a carry across the decimal point, showing the carry explicitly |\n| SR-3 | +7 days | Predict (without computing) the direction of change for a multiplication and a division by a decimal less than 1, then verify |\n| SR-4 | +14 days | Reconstruct the fabric-store transfer probe's multiply-vs-divide asymmetry argument for a fresh pair of numbers |\n\nRetrieval flag: if student compares decimals by digit count (MC-1) or fails to carry across the decimal point (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 366,
+        "endLine": 381
+      }
+    },
+    {
+      "assetId": "math.arith.decimals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.decimals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.arith.fractions | Decimals are fractions restricted to power-of-10 denominators; the part-whole intuition from fractions grounds why \"0.4\" means \"4 tenths,\" not \"the whole number 4\" |\n| Requires (Tier-1) | math.arith.place-value | Supplies the entire positional-notation framework this concept extends rightward past the decimal point |\n| Unlocks | math.arith.percentages | Percentages are decimals scaled by 100; this concept's place-value and multiply/divide-by-decimal skills transfer directly |\n| Unlocks | math.arith.rounding | Rounding decimals requires exactly the column-by-column place-value reading established here |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the multiply-vs-divide-by-a-decimal-less-than-1 asymmetry to a fresh real-world pricing/cutting scenario rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimals.md",
+        "startLine": 381,
+        "endLine": 396
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

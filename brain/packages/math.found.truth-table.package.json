@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.truth-table-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.truth-table",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:49b278b5b21f9ad218a2618e9f3a3739454cc4a8b22edeee743304211d7333dd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.truth-table.md": "sha256:aab5f95c28eaa7520b216ff76a2a3f20501367a824b9be124f198a21ce4a57a0"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.truth-table",
+    "name": "Truth Table",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.logical-connectives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.truth-table-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.truth-table (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.truth-table.md": "sha256:aab5f95c28eaa7520b216ff76a2a3f20501367a824b9be124f198a21ce4a57a0"
+      },
+      "contentHash": "sha256:877cababc390232439e7f1735a3dec806964953f2b6156bd2305641fef2b1e61",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.truth-table.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.truth-table.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.truth-table"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.truth-table\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.truth-table.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.truth-table.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.truth-table"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.truth-table\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.truth-table.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.truth-table.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.truth-table"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.truth-table\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.truth-table/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.truth-table",
+      "title": "Truth Table — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.found.logical-connectives**: the operators ¬, ∧, ∨, →, ↔ combine propositions with precise truth-functional meanings — this concept tabulates those meanings exhaustively for every input combination\n\n### Target Knowledge State\nStudent can construct a complete truth table for a compound proposition, listing every combination of truth values for its component propositions (2ⁿ rows for n propositions); correctly apply the INCLUSIVE meaning of ∨ (true when either or both inputs are true, false only when both are false); correctly apply the material conditional P→Q (FALSE only when P is true and Q is false; TRUE — \"vacuously\" — whenever P is false, regardless of Q); and correctly negate a conjunction or disjunction using De Morgan's laws (¬(P∧Q)≡¬P∨¬Q; ¬(P∨Q)≡¬P∧¬Q — the connective FLIPS under negation).\n\n### Conceptual Obstacles\n1. Reading ∨ (OR) as exclusive — assuming \"P∨Q\" is false when BOTH P and Q are true, by analogy with everyday English \"or\" (e.g. \"coffee or tea,\" usually meaning pick one); the logical/mathematical ∨ is INCLUSIVE, true whenever at least one of P, Q holds, including when both do\n2. Believing \"if P then Q\" (P→Q) is automatically false whenever P is false — this is the single most famous truth-table surprise: P→Q is defined to be TRUE whenever the antecedent P is false, regardless of Q's truth value (\"vacuous truth\"), which conflicts sharply with everyday intuitions about implication\n3. Negating ¬(P∧Q) as ¬P∧¬Q (or ¬(P∨Q) as ¬P∨¬Q) — forgetting that De Morgan's laws FLIP the connective under negation (¬(P∧Q)≡¬P∨¬Q, not ¬P∧¬Q), a very common algebraic-style overgeneralization treating negation as if it distributed unchanged\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.truth-table",
+      "title": "OR-IS-EXCLUSIVE",
+      "content": "| MC-1 | OR-IS-EXCLUSIVE | Student marks P∨Q as false when both P and Q are true, reading ∨ as \"one or the other, not both,\" matching colloquial English \"or\" | Any truth table row with both inputs true, for a disjunction |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.truth-table",
+      "title": "FALSE-ANTECEDENT-MEANS-FALSE-IMPLICATION",
+      "content": "| MC-2 | FALSE-ANTECEDENT-MEANS-FALSE-IMPLICATION | Student marks P→Q as false whenever P is false, regardless of Q, rather than recognizing P→Q is vacuously TRUE in that case | Any truth table row with a false antecedent, for a conditional |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.truth-table",
+      "title": "NEGATION-DISTRIBUTES-WITHOUT-FLIPPING",
+      "content": "| MC-3 | NEGATION-DISTRIBUTES-WITHOUT-FLIPPING | Student computes ¬(P∧Q) as ¬P∧¬Q (or ¬(P∨Q) as ¬P∨¬Q), failing to flip the connective as De Morgan's laws require | Any task negating a conjunction or disjunction |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.truth-table",
+      "title": "Building a Truth Table Row by Row",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Building a Truth Table Row by Row\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 63,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.truth-table",
+      "title": "Inclusive vs. Exclusive OR; Vacuous Truth; De Morgan's Flip",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Inclusive vs. Exclusive OR; Vacuous Truth; De Morgan's Flip\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 131,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.truth-table",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 187,
+        "endLine": 402
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.truth-table",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess inclusive-OR fluency, vacuous-truth application, and correct De Morgan negation under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Construct the full truth table for P∧Q, marking all four rows.\n\n*Solution:* (T,T)→T; (T,F)→F; (F,T)→F; (F,F)→F — true only when both are true.\n\n**Problem 2:** Evaluate \"If 5 is even, then 5 is prime\" as a material conditional. Is it true or false?\n\n*Solution:* True — the antecedent (\"5 is even\") is false, so the conditional is vacuously true regardless of the consequent's actual truth value (which happens to be true here too, but that's not why the conditional is true).\n\n**Problem 3:** Is P∨Q true when P is true and Q is true? Is P⊕Q (exclusive or) true in that same case?\n\n*Solution:* P∨Q: true (inclusive OR counts \"both\" as satisfying \"at least one\"). P⊕Q: false (exclusive OR requires exactly one, not both).\n\n**Problem 4:** Using De Morgan's law, rewrite ¬(P∨Q) without a negation applied to the whole parenthesized expression (i.e. push the negation inside).\n\n*Solution:* ¬(P∨Q) ≡ ¬P∧¬Q (negating a disjunction flips it to a conjunction of the negated parts).\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A university's policy states: \"A student may graduate if they have completed all core courses OR received a special exemption from the dean.\"\n\n(a) Using the INCLUSIVE reading of \"or\" (the logical default), determine whether a student who has BOTH completed all core courses AND received a dean's exemption may graduate.\n(b) A separate policy states: \"If a student has an unresolved disciplinary case, they may not register for the following semester.\" A particular student has NO disciplinary case at all. Using the material conditional's truth table, determine whether this second policy statement is satisfied (true) or violated (false) for this student, and justify using the vacuous-truth row.\n(c) A student complains: \"These two policies use logic in an unfair way — the OR policy lets in people who satisfy BOTH conditions, which seems too generous, while the IF policy seems to just not apply to people without a disciplinary case, which seems to let them off too easily.\" Evaluate this complaint by identifying, precisely, which truth-table row is doing the work in each case, and explain why \"the rule doesn't apply\" and \"the rule is satisfied (true)\" turn out to be the same outcome for the IF policy specifically.\n\n**Expected solution:**\n\n(a) Under inclusive OR, satisfying BOTH conditions certainly satisfies \"at least one\" — the student MAY graduate. (This matches Row 1 of the ∨ truth table: P=T, Q=T → T.)\n\n(b) The policy \"if disciplinary case, then may not register\" is P→Q with P=false (no disciplinary case) for this student. By the material conditional's truth table, P→Q is TRUE whenever P is false, regardless of Q — so the policy statement is TRUE (satisfied, not violated) for this student, precisely because the antecedent condition that would trigger scrutiny (having a disciplinary case) never arose. This is Row 3 or 4 of the → truth table (P=F, either Q value), both giving T.\n\n(c) The complaint conflates two different truth-table rows with two different intuitions, but formally there is no unfairness or inconsistency — each policy's truth value is determined mechanically by its own definition. For the OR policy, the \"generous\" both-satisfied case is Row 1 (P=T,Q=T→T), a deliberate feature of inclusive OR (rewarding either sufficient condition, or both, equally). For the IF policy, \"the rule doesn't apply\" (no disciplinary case, so no violation can occur) and \"the rule is satisfied/true\" are indeed the SAME formal outcome, precisely because of vacuous truth: a conditional with a false antecedent is DEFINED as true, capturing exactly the intuition that a promise/rule cannot be broken if the triggering condition never occurred. The complaint's discomfort is a genuine, common reaction to how formal logic's ∨ and → are DEFINED (not bugs or inconsistencies) — both definitions are chosen specifically so that truth tables give unambiguous, mechanically computable answers in every one of the four input combinations, at the cost of sometimes disagreeing with looser, context-dependent everyday intuitions about \"or\" and \"if.\"\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.found.logical-equivalence and math.disc.boolean-circuits; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.found.truth-table assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — OR-IS-EXCLUSIVE (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Reading ∨ as exclusive (true only when exactly one input is true) is OR-IS-EXCLUSIVE. Mathematical/logical OR is INCLUSIVE by default — true whenever AT LEAST ONE input is true, including when both are.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is P∨Q true when both P and Q are true?\"\n- MC-1 response: \"No — 'or' means one or the other, not both.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check the actual definition: ∨ is true whenever AT LEAST ONE input is true. When both are true, 'at least one' is certainly satisfied (in fact, satisfied twice over) — so P∨Q=T there. Everyday English 'or' often carries an exclusive flavor ('coffee or tea'), but logic's default symbol ∨ is always inclusive; a separate symbol (⊕, XOR) exists specifically for the exclusive meaning when that's what's intended.\"\n\nPractice: State whether \"I'll bring a book or a laptop to read\" (interpreted inclusively) is satisfied if someone brings both.\n\n---\n\n### Repair Action B02 — FALSE-ANTECEDENT-MEANS-FALSE-IMPLICATION (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming P→Q is automatically false when P is false is FALSE-ANTECEDENT-MEANS-FALSE-IMPLICATION. P→Q is defined to be TRUE whenever the antecedent is false — a 'vacuous truth,' since there's no way to violate a promise whose triggering condition never occurred.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is 'if pigs can fly, then 2+2=5' true or false?\"\n- MC-2 response: \"False, since pigs obviously can't fly and 2+2 isn't 5.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"P→Q's truth table is false in EXACTLY one row: P true, Q false (a broken promise). Here P ('pigs can fly') is false, so we're automatically in one of the three TRUE rows, regardless of Q's own truth value — the conditional is TRUE, however absurd both parts individually are. Anchor: a promise 'if it rains, I'll bring an umbrella' is not BROKEN on a sunny day, no matter what you do about umbrellas — the conditional survives (is true) whenever its trigger never fires.\"\n\nPractice: Evaluate \"If the moon is made of cheese, then 7 is a prime number\" as a material conditional, and justify using the vacuous-truth row.\n\n---\n\n### Repair Action B03 — NEGATION-DISTRIBUTES-WITHOUT-FLIPPING (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Computing ¬(P∧Q) as ¬P∧¬Q (or ¬(P∨Q) as ¬P∨¬Q) is NEGATION-DISTRIBUTES-WITHOUT-FLIPPING. De Morgan's laws require the connective to FLIP under negation — AND becomes OR, and OR becomes AND.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is ¬(P∧Q) equivalent to?\"\n- MC-3 response: \"¬P∧¬Q.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check row by row: at P=T,Q=F, P∧Q=F, so ¬(P∧Q)=T. Does ¬P∧¬Q match? ¬P=F,¬Q=T, so F∧T=F — does NOT match (T≠F). Try ¬P∨¬Q instead: F∨T=T — MATCHES. De Morgan's law is ¬(P∧Q)≡¬P∨¬Q (AND flips to OR under negation). Mnemonic: negation 'breaks apart' the connective into its opposite — 'not (both)' means 'at least one fails,' which is exactly an OR of the negated parts, not an AND.\"\n\nPractice: Verify ¬(P∨Q)≡¬P∧¬Q by checking all four rows directly against the definitions.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Reconstruct the full five-connective truth table (¬,∧,∨,→,↔) from memory |\n| SR-2 | +3 days | Evaluate a fresh material conditional with a false antecedent, justifying vacuous truth explicitly |\n| SR-3 | +7 days | Apply De Morgan's law to negate a fresh conjunction and a fresh disjunction, verifying at least one row against the definition |\n| SR-4 | +14 days | Reconstruct the university-policy transfer probe's argument for why \"rule doesn't apply\" and \"rule is true\" coincide for a conditional |\n\nRetrieval flag: if student marks the both-true row of OR as false (MC-1) or a false-antecedent conditional as false (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.found.logical-connectives | Supplies the five connectives (¬,∧,∨,→,↔) this concept tabulates exhaustively for every input combination |\n| Unlocks | math.found.logical-equivalence | Two propositions are logically equivalent iff their truth tables match on every row — the exact column-comparison technique used in A02 Contrast 3 |\n| Unlocks | math.disc.boolean-circuits | Truth tables are the direct specification for logic gates (AND, OR, NOT gates implement ∧, ∨, ¬ exactly) |\n\n**GR-9:** cross_links: math.disc.boolean-circuits is listed in the KG but has **no authored blueprint yet** — P76_mode is therefore set to independence for now; once math.disc.boolean-circuits is authored, a future revision may add a genuine cross-link probe connecting truth tables directly to logic-gate behavior.\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=3 → compact structure (2 main TAs + gate), matching other h=3, foundational/apply concepts\n- bloom=apply → every checkpoint and the gate require constructing/evaluating truth tables mechanically, not merely stating definitions\n- CPA_entry = C for a foundational learner: a single truth table (P∨Q) built row by row anchors the \"check the definition against each specific combination\" discipline before all five connectives are presented together\n\n**Key teaching insight:** MC-2 (vacuous truth) is this concept's highest-leverage misconception precisely because it conflicts most sharply with natural-language intuition — everyday \"if...then\" statements feel meaningless or inapplicable when the premise is false, never \"true.\" A02's Contrast 2 uses a concrete promise (\"if it rains, I'll bring an umbrella\") specifically because promise-keeping is a domain where \"the promise isn't broken\" and \"the promise is true/kept\" are intuitively the same outcome, bridging the gap between everyday reasoning and the formal convention.\n\n**MC-1 and MC-3 as complementary connective-behavior errors:** MC-1 involves reading a connective (∨) too NARROWLY (as if it were exclusive); MC-3 involves negating a connective too NAIVELY (without flipping it). Both are addressed with the same technique — building the FULL truth table and comparing column by column — reinforcing that every claim about connective behavior in this concept is settled by direct row-by-row verification, never by pattern-matching from a superficially similar rule.\n\n**Sequencing note (cross-link):** math.disc.boolean-circuits (logic gates implementing ∧, ∨, ¬ in hardware) is not yet authored in the corpus; this blueprint's truth-table machinery is exactly what that future concept will need to invoke (a truth table IS a gate's specification), and Component 7 records the pending cross-link for a future authoring pass.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.found.truth-table ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.found.logical-connectives ✓ | PASS |\n| V-3 | CPA entry = C for foundational difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Truth-table construction/evaluation tasks throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented; not-yet-authored cross-link noted ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_link target not yet authored → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1, MC-2 FOUNDATIONAL, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=3 → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | University graduation/disciplinary policy scenario; OR/IF rows named explicitly ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 187,
+        "endLine": 402
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.truth-table",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — foundational learner builds a truth table row by row for one compound proposition, checking each row's INCLUSIVE-or value directly, before any general rule is stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: a full truth table for P∨Q built row by row, explicitly marking the both-true row; P: a 2×2 grid picture of all four input combinations; A: formal truth tables for all five connectives (¬,∧,∨,→,↔), stated together\n2. **A02 P06 CONTRAST PAIR** — inclusive OR vs. exclusive OR side by side (MC-1); the conditional's vacuous-truth row explicitly justified against intuition (MC-2); ¬(P∧Q) computed correctly via De Morgan vs. the naive non-flipping error (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.truth-table",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Reconstruct the full five-connective truth table (¬,∧,∨,→,↔) from memory |\n| SR-2 | +3 days | Evaluate a fresh material conditional with a false antecedent, justifying vacuous truth explicitly |\n| SR-3 | +7 days | Apply De Morgan's law to negate a fresh conjunction and a fresh disjunction, verifying at least one row against the definition |\n| SR-4 | +14 days | Reconstruct the university-policy transfer probe's argument for why \"rule doesn't apply\" and \"rule is true\" coincide for a conditional |\n\nRetrieval flag: if student marks the both-true row of OR as false (MC-1) or a false-antecedent conditional as false (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 334,
+        "endLine": 349
+      }
+    },
+    {
+      "assetId": "math.found.truth-table/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.truth-table",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.found.logical-connectives | Supplies the five connectives (¬,∧,∨,→,↔) this concept tabulates exhaustively for every input combination |\n| Unlocks | math.found.logical-equivalence | Two propositions are logically equivalent iff their truth tables match on every row — the exact column-comparison technique used in A02 Contrast 3 |\n| Unlocks | math.disc.boolean-circuits | Truth tables are the direct specification for logic gates (AND, OR, NOT gates implement ∧, ∨, ¬ exactly) |\n\n**GR-9:** cross_links: math.disc.boolean-circuits is listed in the KG but has **no authored blueprint yet** — P76_mode is therefore set to independence for now; once math.disc.boolean-circuits is authored, a future revision may add a genuine cross-link probe connecting truth tables directly to logic-gate behavior.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.truth-table.md",
+        "startLine": 349,
+        "endLine": 363
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
