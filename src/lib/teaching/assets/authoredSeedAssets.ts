@@ -32048,6 +32048,366 @@ const VADD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.meas.dimensions ────────────────────────────────────────────────────
+const DIMN = 'phys.meas.dimensions'
+const DIMN_SRC = 'docs/curriculum/blueprints/phys.meas.dimensions.md'
+
+const DIMN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIMN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A dimension is the fundamental KIND of a physical quantity — length [L], mass [M], time [T] — completely distinct from the UNIT, which is just the SCALE used to measure that kind (metres or feet for length, seconds or hours for time). A desk edge measured as 1.5 metres and also as about 5 feet is exactly the SAME edge, the SAME kind of quantity (length), just expressed on two different scales — changing units NEVER changes the dimension. Every physical quantity\'s dimensional formula builds up from [M], [L], [T] according to its definition: speed = length/time → [L][T]⁻¹; acceleration = speed/time → [L][T]⁻²; force = mass × acceleration → [M][L][T]⁻²; area = length × length → [L]²; density = mass/volume → [M][L]⁻³ — derived from the definition, never memorized from a list. The principle of homogeneity is what makes dimensional analysis practically powerful: every additive term in a valid physical equation, and both sides of the equation, must reduce to the IDENTICAL [M][L][T] combination — a genuine, purely mechanical way to catch errors in a derived formula without knowing any physics content, simply by checking that dimensions match term by term (pure numbers like ½ or 2π carry no dimension and never affect the check).',
+    targetedMisconceptions: [`${DIMN}:MC-UNITS-ARE-DIMENSIONS`, `${DIMN}:MC-ADD-ACROSS-DIMENSIONS`],
+    source: `${DIMN_SRC} — TA-2 (dimension vs. unit) + TA-3 (dimensional formula notation) + homogeneity principle`,
+  },
+  {
+    conceptId: DIMN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing that measuring the same physical quantity in different units means it has different DIMENSIONS. Test it directly: a desk edge measured as 1.5 metres is ALSO about 5 feet — it\'s the exact same physical edge, and if metres and feet represented different KINDS of quantity, that one edge would somehow have to be two different kinds of thing simultaneously, which is absurd. The KIND of quantity — length — is the dimension, written [L]; the metre or the foot is merely the SCALE, the unit, used to express that same underlying kind numerically. Converting freely between units (metres to feet, seconds to hours, kilograms to pounds) never changes the dimension at all — it stays [L], or [T], or [M], regardless of which unit you happen to be using. Second, more consequential trap: adding or equating quantities of genuinely DIFFERENT dimensions just because the raw numbers seem to "work out" arithmetically. Ask directly: what would "3 metres + 5 seconds" even physically MEAN — is the answer supposed to be a length? A time? Neither makes sense, because you can only meaningfully add or set equal quantities that share the exact SAME dimension — length only adds to length, time only adds to time. This is precisely what the principle of homogeneity checks: every additive term in a valid equation, and both sides of it, must reduce to the identical [M][L][T] combination; pure numbers (like the ½ in s = ut + ½at²) carry no dimension at all and never disturb this check — they\'re dimensionless multipliers, not quantities with their own kind.',
+    targetedMisconceptions: [`${DIMN}:MC-UNITS-ARE-DIMENSIONS`, `${DIMN}:MC-ADD-ACROSS-DIMENSIONS`],
+    source: `${DIMN_SRC} — MC-UNITS-ARE-DIMENSIONS + MC-ADD-ACROSS-DIMENSIONS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DIMN_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIMN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A desk edge measures 1.5 metres, and the exact same edge measures about 5 feet. Do metres and feet represent different dimensions?',
+    choices: [
+      { text: 'No — both are simply different UNITS (scales) for measuring the same dimension, length [L]; the underlying kind of quantity never changes when you switch units', isCorrect: true },
+      { text: 'Yes — different units mean different dimensions, since the numbers 1.5 and 5 are completely different', isCorrect: false, misconceptionId: `${DIMN}:MC-UNITS-ARE-DIMENSIONS` },
+    ],
+    correctValue: 'no, same dimension different units',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIMN}:MC-UNITS-ARE-DIMENSIONS`],
+    source: `${DIMN_SRC} — MC-UNITS-ARE-DIMENSIONS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DIMN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes an equation that includes the term "3 metres + 5 seconds." Is this a physically meaningful expression?',
+    choices: [
+      { text: 'No — only quantities of the SAME dimension can be added; length and time are different dimensions, and there is no physical quantity that "3 metres + 5 seconds" could represent', isCorrect: true },
+      { text: 'Yes — as long as the numbers work out arithmetically, the terms can be added regardless of what they represent', isCorrect: false, misconceptionId: `${DIMN}:MC-ADD-ACROSS-DIMENSIONS` },
+    ],
+    correctValue: 'no, cannot add different dimensions',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIMN}:MC-ADD-ACROSS-DIMENSIONS`],
+    source: `${DIMN_SRC} — MC-ADD-ACROSS-DIMENSIONS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.meas.errors ─────────────────────────────────────────────────────────
+const ERRS = 'phys.meas.errors'
+const ERRS_SRC = 'docs/curriculum/blueprints/phys.meas.errors.md'
+
+const ERRS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ERRS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Precision and accuracy measure two genuinely different things about a set of measurements. PRECISION is how tightly repeated readings cluster together (how consistent/repeatable they are); ACCURACY is how close those readings are to the TRUE value. These are independent: three rulers all worn down the same way could give a beautifully consistent reading of 12.41 cm every single time — highly precise — while all three start 2 mm past the true zero mark, meaning every single reading is systematically wrong by the same amount — precise AND inaccurate simultaneously. This distinction maps directly onto the two categories of measurement error: RANDOM error scatters readings unpredictably in both directions around the true value, and genuinely gets reduced by taking more readings and averaging (positive and negative random fluctuations partially cancel out); SYSTEMATIC error pushes every single reading the SAME direction by roughly the same amount (a miscalibrated zero, a consistently offset instrument), and averaging does absolutely NOTHING to fix it — a thermometer reading 2°C high on every measurement still averages to 2°C high no matter how many readings you take, since there\'s no opposite-direction error to cancel against. Random error is fixed by repeating and averaging; systematic error requires calibrating or correcting the instrument itself.',
+    targetedMisconceptions: [`${ERRS}:MC-PRECISION-IS-ACCURACY`, `${ERRS}:MC-AVERAGING-FIXES-ALL`],
+    source: `${ERRS_SRC} — precision vs. accuracy distinction + random vs. systematic error (averaging only fixes random)`,
+  },
+  {
+    conceptId: ERRS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing that consistent, repeatable readings must necessarily be the TRUE value — since agreement between measurements feels like it should mean correctness. Test this directly with three rulers, all worn down in exactly the same way, all reading 12.41 cm on the same object every single time — beautifully consistent (PRECISE), but if all three rulers start 2 mm past their true zero mark, every single reading is consistently WRONG by that same 2 mm offset (INACCURATE). Consistency among readings tells you nothing about whether they agree with each other because they\'re both correctly measuring the truth, or whether they\'re all sharing the same systematic flaw — precision (how tightly readings cluster) and accuracy (how close they are to the true value) are genuinely independent properties, and you must check for calibration offsets SEPARATELY from checking scatter between repeated readings. Second, related trap: assuming that simply taking more readings and averaging them removes ANY kind of error, without distinguishing what TYPE of error is present. It doesn\'t work universally: a thermometer that reads 2°C high on every single measurement, averaged over 100 readings, still gives an average that\'s 2°C high — because every reading is offset in the SAME direction, there\'s no opposite-direction scatter for the averaging process to cancel against. Averaging genuinely helps ONLY with RANDOM error (scatter that goes both ways unpredictably around the true value, which partially cancels when you average many readings); it does absolutely nothing for SYSTEMATIC error (a consistent offset in one direction), which can only be removed by calibrating or correcting the instrument itself — repeating the measurement more times is simply the wrong tool for that particular problem.',
+    targetedMisconceptions: [`${ERRS}:MC-PRECISION-IS-ACCURACY`, `${ERRS}:MC-AVERAGING-FIXES-ALL`],
+    source: `${ERRS_SRC} — MC-PRECISION-IS-ACCURACY + MC-AVERAGING-FIXES-ALL, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ERRS_PROBES: SeedProbe[] = [
+  {
+    conceptId: ERRS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Three worn rulers all consistently read 12.41 cm on the same object every time, but all three start 2 mm past the true zero mark. Are these readings precise, accurate, both, or neither?',
+    choices: [
+      { text: 'Precise but NOT accurate — the readings cluster tightly together (precision), but they are all systematically offset from the true value (inaccurate)', isCorrect: true },
+      { text: 'Both precise and accurate — since all three rulers agree with each other, the consistent reading must be correct', isCorrect: false, misconceptionId: `${ERRS}:MC-PRECISION-IS-ACCURACY` },
+    ],
+    correctValue: 'precise but not accurate',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ERRS}:MC-PRECISION-IS-ACCURACY`],
+    source: `${ERRS_SRC} — MC-PRECISION-IS-ACCURACY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ERRS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A thermometer reads exactly 2°C high on every single measurement (a systematic error). Will averaging 100 readings from this thermometer remove the error?',
+    choices: [
+      { text: 'No — systematic error pushes every reading the same direction, so it survives averaging untouched; only calibrating or correcting the instrument removes it', isCorrect: true },
+      { text: 'Yes — taking more readings and averaging always removes measurement error, regardless of its type', isCorrect: false, misconceptionId: `${ERRS}:MC-AVERAGING-FIXES-ALL` },
+    ],
+    correctValue: 'no, averaging does not fix systematic error',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ERRS}:MC-AVERAGING-FIXES-ALL`],
+    source: `${ERRS_SRC} — MC-AVERAGING-FIXES-ALL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.meas.significant-figures ───────────────────────────────────────────
+const SGFG = 'phys.meas.significant-figures'
+const SGFG_SRC = 'docs/curriculum/blueprints/phys.meas.significant-figures.md'
+
+const SGFG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SGFG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Significant figures report how PRECISELY a quantity was actually measured — never how many digits your calculator happens to display. If a ruler measures to the nearest millimetre and you compute an area, a calculator might output 7.853975 cm², but the ruler never actually measured anything past the millimetre — those trailing digits (.853975) are pure arithmetic noise, not real measured precision, and reporting them falsely CLAIMS a precision your instrument never had. The governing rule for combining measurements: a calculated result can NEVER be more precise than its least precise input — when multiplying or dividing, the result keeps the FEWEST significant figures among the inputs; when adding or subtracting, the result keeps the FEWEST decimal places among the inputs. If both sides of a rectangle are measured to only 2 significant figures, their product (the area) is trustworthy to only 2 significant figures as well, regardless of how many digits the raw multiplication produces — precision cannot be manufactured by arithmetic, only inherited (and generally degraded) from the original measurements. Best practice: carry extra digits through intermediate calculation steps to avoid accumulating rounding error, then round ONLY ONCE, at the very end, to match the precision the original measurements actually support.',
+    targetedMisconceptions: [`${SGFG}:MC-MORE-DIGITS-BETTER`, `${SGFG}:MC-RESULT-EXCEEDS-INPUTS`],
+    source: `${SGFG_SRC} — sig figs report actual measured precision + multiply/divide and add/subtract rules (result never exceeds input precision)`,
+  },
+  {
+    conceptId: SGFG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong belief: assuming that reporting MORE digits automatically means a MORE accurate answer, since more decimal places feel like more precision. Consider a ruler that measures only to the nearest millimetre, feeding into a calculator that outputs an area of 7.853975 cm². Which of those digits did the ruler actually MEASURE? It can\'t see past the millimetre mark — so where did ".853975" even come from? Those trailing digits are pure arithmetic noise generated by the calculator\'s multiplication, not information the ruler ever actually gathered; writing them down FALSELY CLAIMS a level of precision the original measurement never had. Significant figures exist specifically to report only the digits your actual measurement supports — nothing beyond what the instrument genuinely resolved. Second, closely related trap: believing that a CALCULATED result can somehow end up MORE precise than the raw data that went into it — as if combining two imprecise numbers through arithmetic could magically manufacture extra trustworthy digits. If both sides of a rectangle were each measured to only 2 significant figures, neither measurement is trustworthy past its second digit — so how could their PRODUCT suddenly become trustworthy to five figures? It can\'t: precision is never CREATED by arithmetic operations, only inherited (and typically degraded) from the inputs. Multiplying or dividing keeps the FEWEST significant figures among all the inputs; adding or subtracting keeps the FEWEST decimal places among the inputs; and a well-designed calculation rounds only ONCE, at the very end, rather than rounding at every intermediate step (which would compound rounding errors unnecessarily).',
+    targetedMisconceptions: [`${SGFG}:MC-MORE-DIGITS-BETTER`, `${SGFG}:MC-RESULT-EXCEEDS-INPUTS`],
+    source: `${SGFG_SRC} — MC-MORE-DIGITS-BETTER + MC-RESULT-EXCEEDS-INPUTS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SGFG_PROBES: SeedProbe[] = [
+  {
+    conceptId: SGFG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ruler measures only to the nearest millimetre. A calculator, using that measurement, outputs an area of 7.853975 cm². How many of these digits are actually trustworthy?',
+    choices: [
+      { text: 'Only as many as the original millimetre-precision measurement supports — the trailing digits (.853975) are arithmetic noise the ruler never measured', isCorrect: true },
+      { text: 'All of them — the calculator computed them precisely, so all the displayed digits are trustworthy and should be reported', isCorrect: false, misconceptionId: `${SGFG}:MC-MORE-DIGITS-BETTER` },
+    ],
+    correctValue: 'only digits the measurement supports',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SGFG}:MC-MORE-DIGITS-BETTER`],
+    source: `${SGFG_SRC} — MC-MORE-DIGITS-BETTER trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SGFG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Both sides of a rectangle are measured to 2 significant figures each. To how many significant figures should the calculated area (their product) be reported?',
+    choices: [
+      { text: '2 significant figures — a calculated result can never be more precise than its least precise input; multiplication/division keeps the fewest sig figs among the inputs', isCorrect: true },
+      { text: 'As many significant figures as the calculator displays for the product, since the calculation itself is exact', isCorrect: false, misconceptionId: `${SGFG}:MC-RESULT-EXCEEDS-INPUTS` },
+    ],
+    correctValue: '2 significant figures',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SGFG}:MC-RESULT-EXCEEDS-INPUTS`],
+    source: `${SGFG_SRC} — MC-RESULT-EXCEEDS-INPUTS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.meas.unit-conversion ───────────────────────────────────────────────
+const UCNV = 'phys.meas.unit-conversion'
+const UCNV_SRC = 'docs/curriculum/blueprints/phys.meas.unit-conversion.md'
+
+const UCNV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: UCNV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 1-metre stick, laid against a ruler marked in centimetres, spans exactly 100 centimetre-marks — the SAME physical stick reads as "1" in metres but "100" in centimetres. The stick obviously didn\'t change length; only the SIZE of the measuring unit changed. This is the core logic of unit conversion: a centimetre is a much SMALLER "scoop" than a metre, so you need MORE of them to cover the same physical length — smaller unit → bigger number; bigger unit → smaller number, always in that inverse relationship. Metric prefixes each represent a specific power of ten that tells you exactly how big or small the unit is relative to the base unit: milli = 10⁻³, centi = 10⁻², kilo = 10³, mega = 10⁶, micro = 10⁻⁶ — memorizing these as their actual powers of ten (not as a vague "add some zeros" rule) is essential, since different prefixes shift the decimal point by genuinely different amounts. The reliable conversion procedure: identify the two powers of ten involved, determine whether the new unit is smaller or bigger than the old one, and then multiply (if the new unit is smaller, since you need more of them) or divide (if the new unit is bigger, since you need fewer of them) by the appropriate power of ten.',
+    targetedMisconceptions: [`${UCNV}:MC-INVERSE-DIRECTION`, `${UCNV}:MC-PREFIX-BLIND`],
+    source: `${UCNV_SRC} — the metre-stick/centimetre demonstration (inverse unit-size relationship) + prefix powers of ten`,
+  },
+  {
+    conceptId: UCNV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but backwards intuition: assuming that converting to a BIGGER unit should give a BIGGER number, since "bigger" seems like it should go with "bigger." Test it directly with a real object: a 1-metre stick, measured against centimetre marks, spans exactly 100 of them — the exact SAME physical stick reads as "1" when measured in metres but "100" when measured in centimetres. Did the stick somehow get longer when the number jumped from 1 to 100? Obviously not — only the SIZE of the measuring unit changed, and a centimetre is a much SMALLER scoop than a metre, meaning you need MORE of these smaller scoops to cover the identical physical length. The relationship is genuinely inverse: converting TO a smaller unit makes the number go UP (you multiply); converting TO a bigger unit makes the number go DOWN (you divide) — exactly the opposite of the "bigger unit, bigger number" instinct. Second trap: treating metric prefixes as vague, arbitrary "decimal shifts" memorized by rote — like saying "kilo just means add three zeros" — without understanding the actual POWER OF TEN each prefix represents, and without checking whether that rule generalizes. Try converting 4 megametres to metres using "add three zeros": that gives 4000, but the correct answer is 4,000,000, because mega represents 10⁶ (six zeros), not three — "add three zeros" happened to work for kilo (10³) purely by coincidence, and silently fails for every other prefix. Each metric prefix is a specific, fixed power of ten — milli = 10⁻³, centi = 10⁻², kilo = 10³, mega = 10⁶, micro = 10⁻⁶ — and reading the prefix as its actual power of ten, then applying the smaller-unit-bigger-number direction rule, is what makes conversion reliable for every prefix, not just the ones you happen to have memorized a shortcut for.',
+    targetedMisconceptions: [`${UCNV}:MC-INVERSE-DIRECTION`, `${UCNV}:MC-PREFIX-BLIND`],
+    source: `${UCNV_SRC} — MC-INVERSE-DIRECTION + MC-PREFIX-BLIND, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const UCNV_PROBES: SeedProbe[] = [
+  {
+    conceptId: UCNV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1-metre stick is measured against centimetre marks and spans exactly 100 of them. Does converting from metres (1) to centimetres (100) mean the stick got longer?',
+    choices: [
+      { text: 'No — the stick\'s physical length never changed; only the SIZE of the unit changed, and since a centimetre is a smaller unit, more of them are needed for the same length', isCorrect: true },
+      { text: 'The number 100 is bigger than 1, so converting to a bigger unit should always give a bigger number, confirming the stick is effectively "more" in centimetres', isCorrect: false, misconceptionId: `${UCNV}:MC-INVERSE-DIRECTION` },
+    ],
+    correctValue: 'no, only the unit size changed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${UCNV}:MC-INVERSE-DIRECTION`],
+    source: `${UCNV_SRC} — MC-INVERSE-DIRECTION trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: UCNV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You are converting 4 megametres to metres, using the rule "kilo means add three zeros" applied to mega instead. What goes wrong?',
+    choices: [
+      { text: 'Mega represents 10⁶ (six zeros), not 10³ (three zeros) like kilo — "add three zeros" only worked for kilo by coincidence and gives the wrong answer (4,000 instead of the correct 4,000,000) for mega', isCorrect: true },
+      { text: 'Nothing goes wrong — "add three zeros" is a universal rule that works for any metric prefix', isCorrect: false, misconceptionId: `${UCNV}:MC-PREFIX-BLIND` },
+    ],
+    correctValue: 'mega is 10^6 not 10^3, rule fails',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${UCNV}:MC-PREFIX-BLIND`],
+    source: `${UCNV_SRC} — MC-PREFIX-BLIND trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.astro.dark-matter ───────────────────────────────────────────────────
+const DMTR = 'phys.astro.dark-matter'
+const DMTR_SRC = 'docs/curriculum/blueprints/phys.astro.dark-matter.md'
+
+const DMTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DMTR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Dark matter is a hypothesized non-baryonic particle species that has mass and gravitates but doesn\'t interact electromagnetically (doesn\'t emit, absorb, or reflect light), inferred from the extra gravity needed to explain flat galaxy rotation curves, gravitational lensing, and large-scale cosmic structure formation. A natural first guess — that dark matter is simply ordinary matter we haven\'t detected yet (cold gas clouds, dim dead stars, primordial black holes) — is ruled out by Big Bang Nucleosynthesis: the observed ratios of hydrogen, deuterium, helium-3, helium-4, and lithium-7 produced in the first few minutes after the Big Bang are exquisitely sensitive to the total amount of ordinary (baryonic) matter present, and they pin baryonic density at Ω_b ≈ 0.049 — independently confirmed by the cosmic microwave background — leaving no room for large amounts of hidden ordinary matter; dark matter (Ω_DM ≈ 0.27) must be a fundamentally different, non-baryonic kind of particle. An alternative explanation — Modified Newtonian Dynamics (MOND), which tweaks the law of gravity at very low accelerations instead of adding invisible mass — fits individual spiral galaxy rotation curves reasonably well but fails catastrophically on multiple other fronts simultaneously: the Bullet Cluster shows the gravitational mass (mapped by lensing) is spatially offset by roughly 200 kpc from the visible gas (mapped by X-rays), something MOND cannot produce without dark matter; and MOND has no consistent extension that reproduces the observed cosmic microwave background power spectrum or the growth of large-scale cosmic structure, both of which dark matter plus general relativity explain successfully within one unified framework.',
+    targetedMisconceptions: [`${DMTR}:MC-1`, `${DMTR}:MC-3`],
+    source: `${DMTR_SRC} — MC-1 (BBN rules out baryonic dark matter) + MC-3 (MOND fails Bullet Cluster, CMB, large-scale structure)`,
+  },
+  {
+    conceptId: DMTR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A reasonable-sounding but ruled-out guess: assuming the "missing mass" implied by galaxy rotation curves and gravitational lensing must just be ordinary matter that\'s too faint or too small to have been detected yet — cold gas clouds, dead stars, primordial black holes. Big Bang Nucleosynthesis rules this out decisively: the precise observed ratios of hydrogen, deuterium, and helium isotopes produced in the first few minutes after the Big Bang are exquisitely sensitive to exactly how much ordinary (baryonic) matter existed at that time — if dark matter were baryonic, there would have to be far more protons and neutrons around, which would have produced measurably different, and NOT observed, light-element ratios. This calculation independently pins baryonic matter at Ω_b ≈ 0.049 — matching the cosmic microwave background measurement exactly — leaving essentially no room for large quantities of hidden ordinary matter; whatever dark matter is, it cannot be made of protons and neutrons. Second trap: reasoning that since Modified Newtonian Dynamics (MOND) — tweaking gravity itself at very low accelerations, rather than adding invisible particles — fits many individual spiral galaxy rotation curves well with a single adjustable parameter, this must mean dark matter is an unnecessary complication (a seemingly simpler explanation via Occam\'s razor). It isn\'t simpler once you look beyond rotation curves: the Bullet Cluster (two colliding galaxy clusters) shows the gravitational mass, mapped by lensing, is spatially offset by roughly 200 kiloparsecs from the visible hot gas, mapped by X-rays — MOND predicts mass should follow the baryons and simply cannot produce this offset without invoking dark matter anyway. MOND also has no consistent way to reproduce the detailed cosmic microwave background power spectrum, nor the observed growth of galaxy clusters and cosmic filaments from tiny early-universe density fluctuations — dark matter combined with general relativity is the only framework that explains rotation curves, the Bullet Cluster, the CMB, AND large-scale structure simultaneously, within one unified physical picture.',
+    targetedMisconceptions: [`${DMTR}:MC-1`, `${DMTR}:MC-3`],
+    source: `${DMTR_SRC} — MC-1 + MC-3, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DMTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: DMTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could dark matter simply be ordinary (baryonic) matter that\'s too faint to detect — cold gas, dead stars, or primordial black holes?',
+    choices: [
+      { text: 'No — Big Bang Nucleosynthesis pins baryonic matter density at Ω_b ≈ 0.049 (confirmed by the CMB), leaving no room for the much larger amount of dark matter (Ω_DM ≈ 0.27) to be baryonic', isCorrect: true },
+      { text: 'Yes — dark matter is most likely just ordinary matter in a form too dim or too small for telescopes to image', isCorrect: false, misconceptionId: `${DMTR}:MC-1` },
+    ],
+    correctValue: 'no, dark matter must be non-baryonic',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DMTR}:MC-1`],
+    source: `${DMTR_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DMTR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'MOND (Modified Newtonian Dynamics) fits many individual galaxy rotation curves well by modifying gravity instead of adding dark matter. Does this mean dark matter is unnecessary?',
+    choices: [
+      { text: 'No — MOND fails catastrophically for the Bullet Cluster (mass-gas offset), the CMB power spectrum, and large-scale structure formation, all of which dark matter + general relativity explain together', isCorrect: true },
+      { text: 'Yes — since MOND explains rotation curves with a simpler modification to known physics, Occam\'s razor favors it over inventing a new particle', isCorrect: false, misconceptionId: `${DMTR}:MC-3` },
+    ],
+    correctValue: 'no, MOND fails other tests',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DMTR}:MC-3`],
+    source: `${DMTR_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.astro.stellar-structure ────────────────────────────────────────────
+const STLS = 'phys.astro.stellar-structure'
+const STLS_SRC = 'docs/curriculum/blueprints/phys.astro.stellar-structure.md'
+
+const STLS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STLS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Stars shine through NUCLEAR fusion, not chemical burning — a distinction the numbers make undeniable. Chemical combustion of hydrogen releases roughly 2.5 eV per reaction; at the Sun\'s actual power output (3.85×10²⁶ W), the Sun\'s total chemical fuel would be exhausted in about 6,000 years — but geological and astronomical evidence puts the Sun at 4.5 billion years old and counting, a discrepancy of roughly 750,000×. Nuclear fusion (the proton-proton chain: 4 protons fusing into 1 helium-4 nucleus, releasing 26.7 MeV per reaction) delivers roughly 10 million times more energy per reaction than chemical burning, correctly predicting a stellar lifetime near 10 billion years. How long a star lives is governed by a counterintuitive relationship: luminosity scales as L ∝ M^3.5 (more massive stars are drastically MORE luminous, not just proportionally), so lifetime τ ∝ M/L ∝ M^(−2.5) — a 10-solar-mass star, despite having 10× the fuel, burns through it so much faster (roughly 316× faster) that its total lifetime is only about 30 million years, some 300 times SHORTER than the Sun\'s, not longer. A star\'s position on the Hertzsprung-Russell diagram\'s main sequence is set almost entirely by its MASS at formation, not by its age — the Sun has brightened only about 30% over its entire 4.5-billion-year lifetime and stays near the same main-sequence position throughout core hydrogen burning, only moving substantially (up and to the right, toward the red giant branch) once core hydrogen is finally exhausted.',
+    targetedMisconceptions: [`${STLS}:MC-1`, `${STLS}:MC-2`],
+    source: `${STLS_SRC} — MC-1 (nuclear vs. chemical energy source) + MC-2 (mass-luminosity-lifetime scaling, L∝M^3.5, τ∝M^-2.5)`,
+  },
+  {
+    conceptId: STLS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wildly wrong picture, drawn from everyday experience with fire: imagining stars as giant balls of "burning" hydrogen, like a huge chemical combustion reaction. Run the numbers directly: chemical energy released by burning hydrogen is about 2.5 eV per reaction; given the Sun\'s total mass and its actual power output (3.85×10²⁶ W), a purely chemical Sun would exhaust its entire fuel supply in roughly 6,000 years — but the Sun is independently known (from geology, from stellar evolution models, from radiometric dating of meteorites) to be about 4.5 BILLION years old, a discrepancy of roughly 750,000-fold. Nuclear fusion — specifically the proton-proton chain, where 4 hydrogen nuclei fuse into 1 helium-4 nucleus, releasing 26.7 MeV per reaction — delivers roughly 10 million times more energy per reaction than chemical burning, correctly accounting for a 10-billion-year stellar lifetime instead of 6,000 years. Second, equally natural but backwards trap: assuming a MORE massive star, having MORE hydrogen "fuel" available, must live LONGER — simple proportional "more fuel, more time" reasoning. It\'s the opposite: luminosity scales as L ∝ M^3.5, an extremely steep relationship, so a 10-solar-mass star isn\'t just 10× brighter — it\'s roughly 3,162× brighter (10^3.5). Since lifetime scales as τ ∝ M/L ∝ M^(−2.5), that same 10-solar-mass star, despite carrying 10× the fuel, burns through it so much faster that its total lifetime comes out to roughly τ_sun/316 ≈ 30 million years — about 300 TIMES SHORTER than the Sun\'s lifetime, not longer. Massive stars are dramatically brighter but catastrophically short-lived; small, dim red dwarf stars (like one at 0.1 solar masses) can burn for roughly a TRILLION years — about 100 times the current age of the universe.',
+    targetedMisconceptions: [`${STLS}:MC-1`, `${STLS}:MC-2`],
+    source: `${STLS_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const STLS_PROBES: SeedProbe[] = [
+  {
+    conceptId: STLS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If the Sun shone by chemical combustion of hydrogen (like ordinary fire) rather than nuclear fusion, roughly how long could it sustain its current power output?',
+    choices: [
+      { text: 'About 6,000 years — chemical energy per reaction (≈2.5 eV) is far too small compared to nuclear fusion (≈6.7 MeV per proton), a discrepancy of roughly 750,000× against the Sun\'s actual 4.5-billion-year age', isCorrect: true },
+      { text: 'Close to its actual observed lifetime of 4.5 billion years, since chemical burning of a mass as large as the Sun\'s provides plenty of energy', isCorrect: false, misconceptionId: `${STLS}:MC-1` },
+    ],
+    correctValue: 'about 6000 years, far too short',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STLS}:MC-1`],
+    source: `${STLS_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: STLS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A star has 10 times the Sun\'s mass, so it has 10 times as much hydrogen fuel. Does it live roughly 10 times as long as the Sun?',
+    choices: [
+      { text: 'No — it lives roughly 300 times SHORTER, not longer; luminosity scales as L∝M^3.5, so the more massive star burns its fuel so much faster (τ∝M^-2.5) that having more fuel does not translate into a longer life', isCorrect: true },
+      { text: 'Yes — more mass means more fuel, so proportionally it should live about 10 times as long', isCorrect: false, misconceptionId: `${STLS}:MC-2` },
+    ],
+    correctValue: 'no, it lives far shorter',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STLS}:MC-2`],
+    source: `${STLS_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -32418,6 +32778,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...WHTB_EXPLANATIONS,
   ...POTM_EXPLANATIONS,
   ...VADD_EXPLANATIONS,
+  ...DIMN_EXPLANATIONS,
+  ...ERRS_EXPLANATIONS,
+  ...SGFG_EXPLANATIONS,
+  ...UCNV_EXPLANATIONS,
+  ...DMTR_EXPLANATIONS,
+  ...STLS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -32788,4 +33154,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...WHTB_PROBES,
   ...POTM_PROBES,
   ...VADD_PROBES,
+  ...DIMN_PROBES,
+  ...ERRS_PROBES,
+  ...SGFG_PROBES,
+  ...UCNV_PROBES,
+  ...DMTR_PROBES,
+  ...STLS_PROBES,
 ]
