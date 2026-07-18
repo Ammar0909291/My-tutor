@@ -14439,6 +14439,506 @@ const DSND_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.rolling-motion ───────────────────────────────────────────────
+const ROLL = 'phys.mech.rolling-motion'
+const ROLL_SRC = 'docs/curriculum/blueprints/phys.mech.rolling-motion.md'
+
+const ROLL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ROLL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A tiny 1 kg sphere with radius 0.1 m and a massive 100 kg sphere ' +
+      'with radius 2 m are released from the same 3 m height and roll ' +
+      'down identical ramps without slipping — and they arrive at the ' +
+      'bottom at EXACTLY the same speed, v = √(2gh/(1+β)) ≈ 6.55 m/s. ' +
+      'Both mass and radius completely cancel out of the formula, leaving ' +
+      'only β = I/(mR²), the shape factor that captures how the object’s ' +
+      'mass is distributed relative to its rotation axis, and h, the ' +
+      'drop height. A solid sphere (β = 2/5) always beats a solid ' +
+      'cylinder (β = 1/2), which always beats a hollow sphere (β ≈ 2/3), ' +
+      'which always beats a hollow cylinder (β = 1) down the SAME ramp — ' +
+      'regardless of how big or heavy any of them are, because more mass ' +
+      'concentrated far from the axis means more energy diverted into ' +
+      'spinning instead of forward motion.',
+    targetedMisconceptions: [`${ROLL}:MC-SAME-RACE`],
+    source: `${ROLL_SRC} — Component 3 MC-SAME-RACE conflict_evidence [P28] (1 kg vs. 100 kg sphere, identical v_cm)`,
+  },
+  {
+    conceptId: ROLL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A solid sphere rolling at v = 4 m/s might look like a simple ' +
+      'translating object, tempting a KE calculation of just ' +
+      '½mv² = ½×2×16 = 16 J — but that silently throws away real energy. ' +
+      'The sphere is simultaneously SPINNING as it rolls, and that ' +
+      'rotation carries its own genuine kinetic energy, ' +
+      '½Iω² = ½×0.2×64 = 6.4 J for this example, bringing the TRUE total ' +
+      'to 22.4 J, not 16 J. Rolling is never "the same as sliding" — every ' +
+      'point of mass in a rolling object participates in the spin as well ' +
+      'as the forward glide, so the complete energy budget is always ' +
+      'KE_total = ½mv²_cm + ½Iω², with the rolling constraint v_cm = Rω ' +
+      'connecting the two. Dropping the rotational term systematically ' +
+      'under-predicts the true energy and produces the wrong final speed ' +
+      'on any incline problem.',
+    targetedMisconceptions: [`${ROLL}:MC-ROLLING-SAME-AS-SLIDING`],
+    source: `${ROLL_SRC} — Component 3 MC-ROLLING-SAME-AS-SLIDING conflict_evidence [P28] (16 J vs. 22.4 J worked numbers)`,
+  },
+]
+
+const ROLL_PROBES: SeedProbe[] = [
+  {
+    conceptId: ROLL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A solid sphere and a hollow cylinder of DIFFERENT mass and DIFFERENT radius are released from the same height on the same ramp, rolling without slipping. Which one reaches the bottom first?',
+    choices: [
+      { text: 'The solid sphere — always, regardless of mass or radius, because its smaller shape factor β = 2/5 beats the hollow cylinder’s β = 1', isCorrect: true },
+      { text: 'Whichever one is heavier or has the larger radius', isCorrect: false, misconceptionId: `${ROLL}:MC-SAME-RACE` },
+    ],
+    correctValue: 'the solid sphere',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ROLL}:MC-SAME-RACE`],
+    source: `${ROLL_SRC} — MC-SAME-RACE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ROLL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ball of mass m and radius R rolls without slipping at speed v. Is its total kinetic energy exactly ½mv²?',
+    choices: [
+      { text: 'No — the total is ½mv² + ½Iω², since the ball is spinning as well as translating', isCorrect: true },
+      { text: 'Yes — ½mv² already accounts for all of the ball’s motion', isCorrect: false, misconceptionId: `${ROLL}:MC-ROLLING-SAME-AS-SLIDING` },
+    ],
+    correctValue: 'no, add rotational KE',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ROLL}:MC-ROLLING-SAME-AS-SLIDING`],
+    source: `${ROLL_SRC} — MC-ROLLING-SAME-AS-SLIDING trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.conservative-forces ──────────────────────────────────────────
+const CONSV = 'phys.mech.conservative-forces'
+const CONSV_SRC = 'docs/curriculum/blueprints/phys.mech.conservative-forces.md'
+
+const CONSV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONSV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 1 kg block moves from a height of 2 m down to ground level by two ' +
+      'completely different routes: a straight 2 m vertical drop, or a ' +
+      '4 m frictionless ramp at 30°. Compute the work gravity does on ' +
+      'each: the vertical drop gives W = mgh = 1×9.8×2 = 19.6 J; the ramp ' +
+      'gives W = mg sinθ × d = 9.8×0.5×4 = 19.6 J — EXACTLY the same, ' +
+      'despite the ramp path being twice as long. That is what makes ' +
+      'gravity a CONSERVATIVE force: the work it does depends only on the ' +
+      'start and end positions, never on the path length or shape taken ' +
+      'between them. Gravity genuinely doesn’t care HOW you got to the ' +
+      'ground, only where you started and ended — spring force and ' +
+      'electric force share this property, while friction very much does ' +
+      'not: a longer sliding path always means more friction work.',
+    targetedMisconceptions: [`${CONSV}:MC-PATH-INDEPENDENCE-HARD`],
+    source: `${CONSV_SRC} — Component 1 MC-PATH-INDEPENDENCE-HARD conflict_evidence [P28] (vertical drop vs. ramp, equal work)`,
+  },
+  {
+    conceptId: CONSV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Potential energy behaves like a rechargeable battery: push against ' +
+      'gravity or a spring and you store energy that comes fully back out ' +
+      'later as kinetic energy. It is tempting to imagine a "friction ' +
+      'potential energy" working the same way — but try sliding a block ' +
+      'along a rough floor and the floor merely warms up slightly; there ' +
+      'is no way to "cool the floor" and recover that lost energy as ' +
+      'motion again, which would violate the second law of ' +
+      'thermodynamics. Potential energy only exists for CONSERVATIVE ' +
+      'forces — ones with a genuine PE function satisfying F = −dU/dx, ' +
+      'like gravity (U = mgh) or a spring (U = ½kx²). Friction has no ' +
+      'such function; it is a one-way valve that converts mechanical ' +
+      'energy irreversibly into heat, never storing it for later return.',
+    targetedMisconceptions: [`${CONSV}:MC-FRICTION-HAS-PE`],
+    source: `${CONSV_SRC} — Component 1 MC-FRICTION-HAS-PE conflict_evidence [P28] (floor-warming irreversibility, 2nd law)`,
+  },
+]
+
+const CONSV_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONSV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block moves from height 2 m to ground level via a vertical drop, then separately via a longer frictionless ramp. Does gravity do the same work in both cases?',
+    choices: [
+      { text: 'Yes — gravity is a conservative force, so its work depends only on the start and end heights, not the path', isCorrect: true },
+      { text: 'No — the longer ramp path means gravity does more work', isCorrect: false, misconceptionId: `${CONSV}:MC-PATH-INDEPENDENCE-HARD` },
+    ],
+    correctValue: 'yes, same work',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONSV}:MC-PATH-INDEPENDENCE-HARD`],
+    source: `${CONSV_SRC} — MC-PATH-INDEPENDENCE-HARD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CONSV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block slides to a stop on a rough floor due to friction. Can the energy lost to friction be recovered later as kinetic energy, the way spring PE can?',
+    choices: [
+      { text: 'No — friction has no potential-energy function; it dissipates mechanical energy irreversibly as heat', isCorrect: true },
+      { text: 'Yes — the energy is stored as "friction potential energy" and can be released again', isCorrect: false, misconceptionId: `${CONSV}:MC-FRICTION-HAS-PE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONSV}:MC-FRICTION-HAS-PE`],
+    source: `${CONSV_SRC} — MC-FRICTION-HAS-PE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.gravitational-field ──────────────────────────────────────────
+const GFLD = 'phys.mech.gravitational-field'
+const GFLD_SRC = 'docs/curriculum/blueprints/phys.mech.gravitational-field.md'
+
+const GFLD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GFLD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'If the gravitational field simply WERE the force, then the field ' +
+      'near Earth would be 500 N for a 50 kg person standing there and a ' +
+      'completely different 1000 N for a 100 kg person standing at the ' +
+      'exact same spot — two different "fields" at one location, which is ' +
+      'nonsensical for something meant to describe the space itself. What ' +
+      'we actually measure at Earth’s surface is g = 9.8 m/s² for ' +
+      'EVERYONE, regardless of their mass. The field is defined as force ' +
+      'PER UNIT MASS, g = F/m (N/kg), precisely so the mass of whatever ' +
+      'test object you place there cancels out, leaving a quantity that ' +
+      'genuinely describes the space at that point rather than the probe ' +
+      'sitting in it — g = GM/r², the same value no matter what you put ' +
+      'there.',
+    targetedMisconceptions: [`${GFLD}:MC-FIELD-IS-FORCE`],
+    source: `${GFLD_SRC} — Component 1 MC-FIELD-IS-FORCE conflict_evidence [P28] (50 kg vs. 100 kg person, same g)`,
+  },
+  {
+    conceptId: GFLD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Textbook diagrams often draw gravitational field lines stopping ' +
+      'right at Earth’s surface, which makes it easy to assume the field ' +
+      '"only exists at ground level" — but that’s purely a drawing ' +
+      'limitation, not physics. At the International Space Station’s ' +
+      'altitude of 400 km, r ≈ 6770 km from Earth’s centre, and ' +
+      'g = GM/r² ≈ 8.67 m/s² — still a hefty 88% of the surface value, ' +
+      'which is exactly why astronauts in orbit are weightless from ' +
+      'FALLING, not from escaping gravity entirely. The inverse-square ' +
+      'law g = GM/r² applies at every r outside Earth without any cutoff ' +
+      '— the field extends through all of space, simply growing weaker ' +
+      'and weaker (never vanishing) as r increases, all the way to ' +
+      'infinity.',
+    targetedMisconceptions: [`${GFLD}:MC-FIELD-STOPS-AT-SURFACE`],
+    source: `${GFLD_SRC} — Component 1 MC-FIELD-STOPS-AT-SURFACE conflict_evidence [P28] (ISS altitude, g still 88% of surface value)`,
+  },
+]
+
+const GFLD_PROBES: SeedProbe[] = [
+  {
+    conceptId: GFLD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 50 kg person and a 100 kg person both stand at Earth’s surface. Is the gravitational field strength g the same for both of them?',
+    choices: [
+      { text: 'Yes — g = F/m is a property of the location (space), the same 9.8 m/s² for any mass placed there', isCorrect: true },
+      { text: 'No — the heavier person experiences a stronger field, since more mass means more force', isCorrect: false, misconceptionId: `${GFLD}:MC-FIELD-IS-FORCE` },
+    ],
+    correctValue: 'yes, same g',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GFLD}:MC-FIELD-IS-FORCE`],
+    source: `${GFLD_SRC} — MC-FIELD-IS-FORCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: GFLD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The International Space Station orbits at about 400 km altitude. Is Earth’s gravitational field essentially zero there?',
+    choices: [
+      { text: 'No — g at that altitude is still about 88% of its surface value; the field extends through all space, weakening as 1/r² but never stopping', isCorrect: true },
+      { text: 'Yes — the gravitational field only exists near Earth’s surface', isCorrect: false, misconceptionId: `${GFLD}:MC-FIELD-STOPS-AT-SURFACE` },
+    ],
+    correctValue: 'no, still substantial',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GFLD}:MC-FIELD-STOPS-AT-SURFACE`],
+    source: `${GFLD_SRC} — MC-FIELD-STOPS-AT-SURFACE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.gravitational-potential ──────────────────────────────────────
+const GPOT = 'phys.mech.gravitational-potential'
+const GPOT_SRC = 'docs/curriculum/blueprints/phys.mech.gravitational-potential.md'
+
+const GPOT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GPOT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'U = mgh works beautifully for a book lifted 1.5 m off a table, but ' +
+      'try applying it to a satellite at r = 3R_Earth and it gives a ' +
+      'wildly wrong answer — around 1.25×10⁸m joules, not even the right ' +
+      'SIGN compared to the correct U = −GMm/r ≈ −3.1×10⁷m joules. The ' +
+      'reason: U = mgh secretly assumes gravity’s strength g stays ' +
+      'perfectly constant, which is only true very close to Earth’s ' +
+      'surface (h ≪ R_Earth ≈ 6370 km) — at r = 2R_Earth, g has already ' +
+      'dropped to a quarter of its surface value, so treating it as ' +
+      'constant breaks down completely. The universal formula ' +
+      'U = −GMm/r, with its reference point at infinity, is valid ' +
+      'EVERYWHERE and simplifies back down to the familiar U ≈ mgh (plus ' +
+      'a constant) only in the special near-surface case — never the ' +
+      'other way around.',
+    targetedMisconceptions: [`${GPOT}:MC-MGHZERO`],
+    source: `${GPOT_SRC} — Component 1 MC-MGHZERO conflict_evidence [P28] (mgh vs. −GMm/r at r=3R_Earth, wrong sign)`,
+  },
+  {
+    conceptId: GPOT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Seeing U = −GMm/r come out NEGATIVE feels wrong at first — how can ' +
+      'energy be less than zero? The key is where the reference point ' +
+      'sits: U = 0 is defined at r = infinity, not at Earth’s surface. ' +
+      'Picture Earth’s gravity as digging a deep well below that zero ' +
+      'line: as an object falls closer to Earth (r decreases), gravity ' +
+      'does positive work on it, so the SYSTEM must lose potential ' +
+      'energy — dropping further and further below zero, all the way to ' +
+      'roughly −62.5 MJ per kilogram at the surface. An object with total ' +
+      'energy below zero is gravitationally trapped in that well; only an ' +
+      'object with total energy at or above zero has enough to climb all ' +
+      'the way back out to U = 0 at infinity and genuinely escape.',
+    targetedMisconceptions: [`${GPOT}:MC-POSITIVE-POTENTIAL`],
+    source: `${GPOT_SRC} — Component 1 MC-POSITIVE-POTENTIAL conflict_evidence [P28] (potential-well framing, reference at infinity)`,
+  },
+]
+
+const GPOT_PROBES: SeedProbe[] = [
+  {
+    conceptId: GPOT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A satellite orbits at r = 3R_Earth from Earth’s centre. Should you use U = mgh or U = −GMm/r to find its gravitational potential energy?',
+    choices: [
+      { text: 'U = −GMm/r — the exact formula, valid everywhere; U = mgh only works when h is small compared to Earth’s radius', isCorrect: true },
+      { text: 'U = mgh — it works for any height above Earth’s surface', isCorrect: false, misconceptionId: `${GPOT}:MC-MGHZERO` },
+    ],
+    correctValue: 'U = -GMm/r',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GPOT}:MC-MGHZERO`],
+    source: `${GPOT_SRC} — MC-MGHZERO trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: GPOT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is gravitational potential energy U = −GMm/r always negative (for r > 0)?',
+    choices: [
+      { text: 'Because the reference point U = 0 is defined at r = infinity, and any finite r is "below" that reference — deeper in the gravitational well', isCorrect: true },
+      { text: 'It is a mistake in the formula — potential energy should always be positive', isCorrect: false, misconceptionId: `${GPOT}:MC-POSITIVE-POTENTIAL` },
+    ],
+    correctValue: 'reference at infinity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GPOT}:MC-POSITIVE-POTENTIAL`],
+    source: `${GPOT_SRC} — MC-POSITIVE-POTENTIAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.escape-velocity ──────────────────────────────────────────────
+const ESCV = 'phys.mech.escape-velocity'
+const ESCV_SRC = 'docs/curriculum/blueprints/phys.mech.escape-velocity.md'
+
+const ESCV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ESCV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Escape velocity is often pictured as something only a powered ' +
+      'rocket with its engines running can achieve — but it is really a ' +
+      'purely ENERGETIC condition, nothing to do with continuous thrust. ' +
+      'A baseball thrown at exactly 11.2 km/s from Earth’s surface would ' +
+      'escape Earth’s gravity completely with its "engines" (a hand) off ' +
+      'the instant it leaves your fingers, coasting all the way to ' +
+      'infinity on kinetic energy alone (ignoring air resistance). The ' +
+      'condition is simply: does the launch kinetic energy meet or exceed ' +
+      'the depth of the gravitational potential well, KE ≥ |U|? If so, ' +
+      'total energy E ≥ 0 and the object is free forever, no further ' +
+      'propulsion required — v_e = √(2GM/r) is precisely the speed at ' +
+      'which that energy threshold is exactly met.',
+    targetedMisconceptions: [`${ESCV}:MC-ESCAPE-REQUIRES-THRUST`],
+    source: `${ESCV_SRC} — Component 1 MC-ESCAPE-REQUIRES-THRUST conflict_evidence [P28] (baseball at 11.2 km/s, energy condition)`,
+  },
+  {
+    conceptId: ESCV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems reasonable that a heavier object should need a higher ' +
+      'speed to escape a planet’s gravity — but write out the energy ' +
+      'balance and the object’s own mass cancels completely: ' +
+      '½mv_e² = GMm/r gives v_e² = 2GM/r, with no m left anywhere. A 1 kg ' +
+      'ball and a 1000 kg rocket launched from the exact same point in ' +
+      'the exact same gravitational field share the IDENTICAL escape ' +
+      'speed, roughly 11.2 km/s from Earth’s surface for both — though ' +
+      'the rocket obviously needs a thousand times more total ENERGY to ' +
+      'reach that same speed, since E = ½mv_e² still scales with mass ' +
+      'even though v_e itself does not. This mirrors Galileo’s famous ' +
+      'free-fall result that all objects accelerate at the same g ' +
+      'regardless of mass — escape velocity is essentially free-fall from ' +
+      'infinity run in reverse, and mass cancels there for exactly the ' +
+      'same underlying reason.',
+    targetedMisconceptions: [`${ESCV}:MC-ESCAPE-DEPENDS-ON-MASS`],
+    source: `${ESCV_SRC} — Component 1 MC-ESCAPE-DEPENDS-ON-MASS conflict_evidence [P28] (mass cancellation, Galileo free-fall analogy)`,
+  },
+]
+
+const ESCV_PROBES: SeedProbe[] = [
+  {
+    conceptId: ESCV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A baseball is thrown from Earth’s surface at exactly escape velocity, then the thrower lets go. Does the baseball need continued propulsion to escape Earth’s gravity?',
+    choices: [
+      { text: 'No — escape velocity is defined as the speed needed to escape with no further propulsion; the ball coasts to infinity on its initial kinetic energy alone', isCorrect: true },
+      { text: 'Yes — only a rocket with continuously firing engines can actually escape Earth’s gravity', isCorrect: false, misconceptionId: `${ESCV}:MC-ESCAPE-REQUIRES-THRUST` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ESCV}:MC-ESCAPE-REQUIRES-THRUST`],
+    source: `${ESCV_SRC} — MC-ESCAPE-REQUIRES-THRUST trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ESCV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 kg probe and a 10 000 kg spacecraft are both launched from Earth’s surface. Do they need the same escape velocity?',
+    choices: [
+      { text: 'Yes — v_e = √(2GM/r) does not depend on the escaping object’s mass, though the spacecraft needs far more total energy to reach that speed', isCorrect: true },
+      { text: 'No — the much heavier spacecraft needs a higher escape velocity', isCorrect: false, misconceptionId: `${ESCV}:MC-ESCAPE-DEPENDS-ON-MASS` },
+    ],
+    correctValue: 'yes, same v_e',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ESCV}:MC-ESCAPE-DEPENDS-ON-MASS`],
+    source: `${ESCV_SRC} — MC-ESCAPE-DEPENDS-ON-MASS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.keplers-laws ──────────────────────────────────────────────────
+const KEPL = 'phys.mech.keplers-laws'
+const KEPL_SRC = 'docs/curriculum/blueprints/phys.mech.keplers-laws.md'
+
+const KEPL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KEPL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Textbook diagrams almost always draw planetary orbits as neat ' +
+      'circles with the Sun sitting at the centre — but Kepler’s First ' +
+      'Law says every orbit is actually an ELLIPSE with the Sun at one ' +
+      'FOCUS, never the centre. Earth’s orbit has eccentricity e ≈ 0.017, ' +
+      'nearly circular but measurably not; Mars’s is more elongated at ' +
+      'e ≈ 0.093; Pluto’s reaches e ≈ 0.248, a clearly stretched ellipse. ' +
+      'A circle is simply the special case where eccentricity e = 0 and ' +
+      'the two foci happen to collapse onto the same central point — the ' +
+      'circular orbits taught earlier are a convenient approximation, ' +
+      'while Kepler’s actual law (derived from Tycho Brahe’s real ' +
+      'observational data, before Newton ever wrote F = GMm/r²) covers ' +
+      'the full range from perfect circles to highly stretched ellipses, ' +
+      'always with the Sun at one focus and the second focus sitting ' +
+      'empty.',
+    targetedMisconceptions: [`${KEPL}:MC-KEPLER-CIRCULAR`],
+    source: `${KEPL_SRC} — Component 1 MC-KEPLER-CIRCULAR conflict_evidence [P28] (Earth/Mars/Pluto eccentricities)`,
+  },
+  {
+    conceptId: KEPL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Equal areas in equal times" sounds like it should mean a planet ' +
+      'covers equal DISTANCES in equal times — but it means something ' +
+      'quite different, and the two are easy to conflate. Near perihelion ' +
+      '(closest approach to the Sun), a planet moves fast and sweeps out ' +
+      'a wide but SHORT sector; near aphelion (farthest point), it moves ' +
+      'slowly and sweeps a narrow but LONG sector — both sectors having ' +
+      'the identical AREA, but very different arc lengths. That directly ' +
+      'implies the planet’s SPEED varies around its orbit: for Earth, ' +
+      'roughly 30.3 km/s at perihelion versus 29.3 km/s at aphelion — a ' +
+      'small but measurable and real difference. The underlying cause is ' +
+      'conservation of angular momentum, r×v_⊥ = constant: as the ' +
+      'distance r from the Sun shrinks near perihelion, the tangential ' +
+      'speed v_⊥ must grow to compensate, and equal-areas-in-equal-times ' +
+      'is exactly the geometric fingerprint of that conservation law.',
+    targetedMisconceptions: [`${KEPL}:MC-SPEED-CONSTANT-ELLIPSE`],
+    source: `${KEPL_SRC} — Component 1 MC-SPEED-CONSTANT-ELLIPSE conflict_evidence [P28] (Earth perihelion/aphelion speed, angular momentum)`,
+  },
+]
+
+const KEPL_PROBES: SeedProbe[] = [
+  {
+    conceptId: KEPL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'According to Kepler’s First Law, where is the Sun located relative to a planet’s elliptical orbit?',
+    choices: [
+      { text: 'At one focus of the ellipse (the other focus is empty) — never at the centre, except in the special circular case', isCorrect: true },
+      { text: 'At the exact centre of the ellipse, for every planet', isCorrect: false, misconceptionId: `${KEPL}:MC-KEPLER-CIRCULAR` },
+    ],
+    correctValue: 'at one focus',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${KEPL}:MC-KEPLER-CIRCULAR`],
+    source: `${KEPL_SRC} — MC-KEPLER-CIRCULAR trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: KEPL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Kepler’s Second Law says a planet sweeps out equal areas in equal times. Does this mean the planet moves at constant speed throughout its elliptical orbit?',
+    choices: [
+      { text: 'No — the planet moves fastest at perihelion (closest to the Sun) and slowest at aphelion (farthest); only equal AREAS, not equal distances, are swept in equal times', isCorrect: true },
+      { text: 'Yes — equal areas in equal times means the planet travels at constant speed', isCorrect: false, misconceptionId: `${KEPL}:MC-SPEED-CONSTANT-ELLIPSE` },
+    ],
+    correctValue: 'no, speed varies',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${KEPL}:MC-SPEED-CONSTANT-ELLIPSE`],
+    source: `${KEPL_SRC} — MC-SPEED-CONSTANT-ELLIPSE trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -14607,6 +15107,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FINS_EXPLANATIONS,
   ...NOTE_EXPLANATIONS,
   ...DSND_EXPLANATIONS,
+  ...ROLL_EXPLANATIONS,
+  ...CONSV_EXPLANATIONS,
+  ...GFLD_EXPLANATIONS,
+  ...GPOT_EXPLANATIONS,
+  ...ESCV_EXPLANATIONS,
+  ...KEPL_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -14775,4 +15281,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FINS_PROBES,
   ...NOTE_PROBES,
   ...DSND_PROBES,
+  ...ROLL_PROBES,
+  ...CONSV_PROBES,
+  ...GFLD_PROBES,
+  ...GPOT_PROBES,
+  ...ESCV_PROBES,
+  ...KEPL_PROBES,
 ]
