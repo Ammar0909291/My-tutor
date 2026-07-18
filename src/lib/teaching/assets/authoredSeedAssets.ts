@@ -37388,6 +37388,366 @@ const DMAT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.stat.probability-basics ──────────────────────────────────────────────
+const PROB = 'phys.stat.probability-basics'
+const PROB_SRC = 'docs/curriculum/blueprints/phys.stat.probability-basics.md'
+
+const PROB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The second law of thermodynamics does NOT forbid all the air molecules in a room from spontaneously rushing into one corner — "that\'s impossible — the second law forbids it" treats the second law as a fundamental mechanical constraint, when it is actually a statistical statement. There is no microscopic mechanism preventing spontaneous ordering: each molecule follows Newton\'s laws, which are perfectly time-reversible — a video of gas molecules colliding, played in reverse, still shows entirely valid collisions. The second law is instead a PROBABILITY statement: the ratio Ω(ordered)/Ω(disordered)≈10^(−10²³) for a macroscopic gas — fantastically small, but not literally zero. It is not impossible — it is fantastically IMPROBABLE. If every atom in the universe reshuffled the gas molecules once per second since the Big Bang, you would still not have any substantial probability of observing spontaneous ordering occur. "Fantastically improbable" and "impossible" are genuinely different concepts: the second law holds not because microscopic reversal is somehow forbidden, but because the number of low-entropy microstates is an exponentially tiny fraction of the total number of possible microstates. A second, separate error: assuming high entropy always means "disordered" in the visual, everyday sense. Ice (crystalline, visually ordered) does have lower entropy than liquid water (visually disordered) — but this pattern is not universal. Crystals CAN have HIGHER entropy than liquids in certain systems (e.g., hard-sphere colloids, some liquid-crystal transitions) — "disorder" as a concept has no rigorous mathematical definition in thermodynamics at all. The formula S=k_B ln Ω always correctly gives the entropy; the informal "disorder" heuristic sometimes gives the wrong prediction entirely. If ordered arrangements happen to have MORE accessible microstates (as occurs in some colloidal systems), the "ordered" macrostate genuinely has higher entropy — use the formula S=k_B ln Ω (counting microstates), never the vague visual metaphor of "messiness."',
+    targetedMisconceptions: [`${PROB}:MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE`, `${PROB}:MC-ENTROPY-MEANS-DISORDER`],
+    source: `${PROB_SRC} — MC-1/MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE (statistical statement, improbable not impossible) + MC-2/MC-ENTROPY-MEANS-DISORDER (S=k_B ln Ω, not a visual disorder metaphor)`,
+  },
+  {
+    conceptId: PROB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "is it theoretically possible — even if fantastically unlikely — for all the air molecules in this room to spontaneously rush into one corner, leaving you in a vacuum?", say "that\'s impossible — the second law forbids it," treating the second law of thermodynamics as a hard, fundamental mechanical constraint that flatly prohibits certain configurations from ever occurring. Check whether there is any actual microscopic mechanism preventing this: each individual molecule obeys Newton\'s laws exactly, and Newton\'s laws are perfectly time-reversible — if you filmed gas molecules colliding and then played that video in reverse, you would still see entirely valid, physically legitimate collisions, obeying the same laws of motion. There is genuinely no microscopic rule forbidding spontaneous ordering. What the second law actually is: a PROBABILITY statement, not an absolute mechanical prohibition. The ratio Ω(ordered)/Ω(disordered), for a macroscopic quantity of gas, works out to approximately 10^(−10²³) — an almost incomprehensibly small number, but genuinely NOT zero. It is not impossible for the gas to spontaneously order itself — it is merely fantastically, almost incomprehensibly IMPROBABLE. To make this concrete: if every single atom in the entire universe reshuffled the room\'s gas molecules once every second, continuously, since the Big Bang, you would still not accumulate any meaningful probability of actually observing this ordering occur. "Fantastically improbable" and "impossible" are genuinely distinct concepts, not synonyms — the second law holds not because microscopic time-reversal is somehow forbidden by the laws of physics, but simply because the number of low-entropy (ordered) microstates represents an exponentially tiny fraction of the astronomically large total number of possible microstates. A second, entirely separate and equally common error: assuming that high entropy always corresponds to visual "disorder" or "messiness," and correspondingly that low entropy always means visual "order." Asked "ice (crystalline, ordered) has lower entropy than liquid water (disordered) — does this prove that high entropy always means disordered structures?", answering "high entropy = messy, low entropy = organised" as a universal rule. This pedagogical shortcut, common in introductory courses, does not hold universally. Crystals CAN genuinely have HIGHER entropy than liquids in certain physical systems — concrete examples include hard-sphere colloidal systems and certain liquid-crystal phase transitions. The deeper issue: "disorder" as an intuitive, everyday concept has no rigorous mathematical definition anywhere within thermodynamics itself. The formula S=k_B ln Ω (Boltzmann\'s entropy formula, counting the number of accessible microstates Ω) always gives the objectively correct entropy value for any system; the informal "disorder" heuristic, by contrast, sometimes gives a systematically WRONG prediction. The disorder heuristic persists in intuition because it happens to work correctly for most everyday, familiar systems — but "disorder" remains a vague human concept, not a precise physical quantity. If ordered-looking arrangements happen to correspond to MORE accessible microstates in some particular system (as genuinely occurs in certain colloidal systems), then that visually "ordered" macrostate actually has HIGHER entropy than a visually disordered alternative — the reliable approach is always to use the precise formula S=k_B ln Ω, counting actual microstates directly, rather than relying on the vague, sometimes-misleading visual metaphor of "messiness" or "organization."',
+    targetedMisconceptions: [`${PROB}:MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE`, `${PROB}:MC-ENTROPY-MEANS-DISORDER`],
+    source: `${PROB_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const PROB_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is it theoretically possible for all the air molecules in a room to spontaneously rush into one corner, or does the second law of thermodynamics make this strictly impossible?',
+    choices: [
+      { text: 'It is theoretically possible but fantastically improbable (Ω(ordered)/Ω(disordered)≈10^(−10²³)) — the second law is a statistical statement, not a mechanical prohibition', isCorrect: true },
+      { text: 'It is strictly impossible — the second law of thermodynamics forbids this outcome from ever occurring, as a fundamental mechanical law', isCorrect: false, misconceptionId: `${PROB}:MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE` },
+    ],
+    correctValue: 'possible but astronomically improbable, not literally impossible',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROB}:MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE`],
+    source: `${PROB_SRC} — MC-1/MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PROB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does high entropy always correspond to visually "disordered" or "messy" structures?',
+    choices: [
+      { text: 'No — S=k_B ln Ω is the rigorous definition; certain systems (e.g. hard-sphere colloids) can have crystalline (visually ordered) phases with HIGHER entropy than the disordered phase', isCorrect: true },
+      { text: 'Yes — high entropy always means disordered/messy, and low entropy always means organized structures, as a universal rule', isCorrect: false, misconceptionId: `${PROB}:MC-ENTROPY-MEANS-DISORDER` },
+    ],
+    correctValue: 'no, disorder is not a rigorous definition, S=k_B ln Omega is',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROB}:MC-ENTROPY-MEANS-DISORDER`],
+    source: `${PROB_SRC} — MC-2/MC-ENTROPY-MEANS-DISORDER trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.boltzmann-factor ────────────────────────────────────────────────
+const BOLT = 'phys.stat.boltzmann-factor'
+const BOLT_SRC = 'docs/curriculum/blueprints/phys.stat.boltzmann-factor.md'
+
+const BOLT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BOLT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Boltzmann factor e^(−E/k_BT) is NOT itself a probability — it must be divided by the partition function Z to become one. For a system with energy levels 0 and 0.1 eV at T=300K (k_BT≈0.026 eV), simply writing "P=e^(−0.1/0.026)=0.021" and stopping there is wrong: without normalizing by Z, P₀=e⁰=1 (also unnormalized), so P₀+P_ε=1.021≠1 — probabilities must sum to exactly 1. The correct computation: Z=1+0.021=1.021, giving P_ε=0.021/1.021=0.0206 and P₀=1/1.021=0.979, which correctly sum to 1. The Boltzmann factor e^(−E/k_BT) gives only the RELATIVE weight of a state, not its probability directly — to get an actual probability, you must divide by the sum of all weights, Z=Σe^(−E_i/k_BT), the partition function acting as the normalization constant. A second, separate and counterintuitive-seeming error: assuming that as temperature increases, the probability of occupying a high-energy state DECREASES, because the exponent −E/k_BT becomes "less negative" (closer to zero). This gets the direction backwards. At higher T, the exponent −E/k_BT genuinely does become less negative, and e^(less negative) is CLOSER TO 1 — meaning LARGER, not smaller. So the Boltzmann weight of the high-energy state actually INCREASES relative to the low-energy state as T rises: P_high/P_low=e^(−ΔE/k_BT) genuinely increases as T increases, since the exponent becomes less negative. Higher T means more thermal energy is available, more states become accessible, and high-energy states become relatively more populated, not less.',
+    targetedMisconceptions: [`${BOLT}:MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z`, `${BOLT}:MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E`],
+    source: `${BOLT_SRC} — MC-1/MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z (must normalize by Z) + MC-2/MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E (higher T increases high-energy state probability, not decreases)`,
+  },
+  {
+    conceptId: BOLT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "a system has two energy levels, 0 and 0.1 eV; at T=300K (k_BT≈0.026 eV), what is the probability of being in the upper level?", say "P=e^(−0.1/0.026)=0.021," omitting the crucial partition-function normalization. Check this answer: without normalizing by Z, the "probability" of the ground state comes out to P₀=e⁰=1 (also unnormalized) — but then P₀+P_ε=1.021, which is NOT 1, and probabilities are required to sum to exactly 1 for a properly normalized distribution. The correct calculation properly includes Z: compute Z=1+0.021=1.021 (summing the raw, unnormalized Boltzmann factors for both states), then P_ε=0.021/1.021≈0.0206 and P₀=1/1.021≈0.979 — checking, 0.0206+0.979≈1, correctly normalized. The key conceptual point: the Boltzmann factor e^(−E/k_BT) gives only the RELATIVE weight of a given energy state — it is not, by itself, a probability. To convert these relative weights into genuine probabilities, you must divide each one by the sum of ALL the weights across every accessible state: Z=Σᵢe^(−Eᵢ/k_BT), the partition function, which functions precisely as the necessary normalization constant. The correct general formula is P(Eᵢ)=e^(−Eᵢ/k_BT)/Z. A second, entirely separate and genuinely counterintuitive-feeling error: asked "does increasing temperature increase or decrease the probability of being in a high-energy state? What does the formula predict?", reasoning "higher T means the exponent is smaller (less negative), so probability decreases" — correctly observing that −E/k_BT becomes less negative as T increases, but then drawing the wrong conclusion about what this means for probability. Check the actual mathematics: at temperature T₁, the ratio P_high/P_low=e^(−ΔE/k_BT₁). At a higher temperature T₂>T₁, the exponent −ΔE/k_BT₂ is LESS negative than at T₁ — and since e^(less negative number) is CLOSER to 1, meaning it is genuinely LARGER (not smaller), the ratio P_high/P_low is actually LARGER at the higher temperature — high-energy states become RELATIVELY MORE probable at higher T, the opposite of the student\'s conclusion. The partition function Z does also increase with T, but the specific RATIO P_high/P_low unambiguously increases as well — this is a genuinely robust result, not dependent on any subtlety in how Z itself changes. The correct physical picture: as T increases, the exponent −E/k_BT becomes less negative, meaning the Boltzmann weight of the high-energy state increases relative to the low-energy state\'s weight; more thermal energy becomes available, more states become genuinely accessible, and high-energy states become MORE populated (not less) as temperature rises.',
+    targetedMisconceptions: [`${BOLT}:MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z`, `${BOLT}:MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E`],
+    source: `${BOLT_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const BOLT_PROBES: SeedProbe[] = [
+  {
+    conceptId: BOLT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A two-level system has energies 0 and 0.1 eV. At T=300K (k_BT≈0.026 eV), what is the actual probability of the upper level, using the Boltzmann factor e^(−0.1/0.026)≈0.021?',
+    choices: [
+      { text: 'P_ε=0.021/Z=0.021/1.021≈0.0206 — the raw Boltzmann factor must be divided by the partition function Z=Σe^(−Eᵢ/k_BT) to get a normalized probability', isCorrect: true },
+      { text: 'P_ε=0.021 directly — the Boltzmann factor itself already is the probability', isCorrect: false, misconceptionId: `${BOLT}:MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z` },
+    ],
+    correctValue: 'must normalize by Z, giving approximately 0.0206',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOLT}:MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z`],
+    source: `${BOLT_SRC} — MC-1/MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BOLT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'As temperature T increases, does the relative probability of a high-energy state (compared to a low-energy state) increase or decrease?',
+    choices: [
+      { text: 'It increases — the exponent −E/k_BT becomes less negative at higher T, making e^(less negative) larger; high-energy states become relatively more populated at higher T', isCorrect: true },
+      { text: 'It decreases — since the exponent becomes less negative (smaller in magnitude) at higher T, the probability shrinks', isCorrect: false, misconceptionId: `${BOLT}:MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E` },
+    ],
+    correctValue: 'increases, high energy states become more populated at higher T',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOLT}:MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E`],
+    source: `${BOLT_SRC} — MC-2/MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.partition-function ──────────────────────────────────────────────
+const PTFN = 'phys.stat.partition-function'
+const PTFN_SRC = 'docs/curriculum/blueprints/phys.stat.partition-function.md'
+
+const PTFN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PTFN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The partition function Z is NOT "just a normalization factor with no physical content" — "Z is just the denominator so probabilities add to 1" drastically undersells its role. In fact, ⟨E⟩=−∂(ln Z)/∂β and F=−k_BT ln Z — both of these central thermodynamic formulas require Z explicitly, not merely as a normalization constant, but as the PRIMARY object from which all of thermodynamics is derived. Z is the most important object in equilibrium statistical mechanics: every thermodynamic quantity — energy, entropy, free energy, pressure, heat capacity — is obtainable as a derivative of ln Z. The probabilities do use Z for normalization, yes, but ln Z itself is the fundamental thermodynamic potential in the (T,V,N) ensemble — the Helmholtz free energy is literally F=−k_BT ln Z. A second, separate and equally important error: assuming "the sum in Z is over energy levels, not microstates" — writing, for a system with three energy levels E₀ (2-fold degenerate), E₁ (3-fold degenerate), E₂ (non-degenerate), "Z=e^(−βE₀)+e^(−βE₁)+e^(−βE₂)," treating each energy LEVEL as contributing exactly one term. This is wrong: Z=Σᵢe^(−βEᵢ) sums over MICROSTATES i, not energy levels. If E₀ is 2-fold degenerate, it genuinely contributes 2×e^(−βE₀) to Z — two distinct microstates sharing the same energy, each contributing its own term. Omitting degeneracy gives wrong probabilities and wrong thermodynamics. The correct formula: Z=Σᵢ(microstates)e^(−βEᵢ)=Σ_E g(E)e^(−βE), where g(E) is the degeneracy (the number of distinct microstates sharing energy E). For the example given: Z=2e^(−βE₀)+3e^(−βE₁)+e^(−βE₂) — properly weighting each energy level by its degeneracy.',
+    targetedMisconceptions: [`${PTFN}:MC-1`, `${PTFN}:MC-2`],
+    source: `${PTFN_SRC} — MC-1 (Z is not just a normalization factor, it generates all thermodynamics) + MC-2 (sum in Z is over microstates, weighted by degeneracy, not over energy levels)`,
+  },
+  {
+    conceptId: PTFN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked to compute the average energy and free energy after already computing a partition function Z, say "Z is just the denominator so probabilities add to 1," treating Z as a disposable bookkeeping device — a habit carried over from ordinary probability theory, where normalization constants are frequently discarded once probabilities have been normalized. Test this against what Z is actually used for beyond normalization: the average energy formula is ⟨E⟩=−∂(ln Z)/∂β, and the Helmholtz free energy is F=−k_BT ln Z — both of these fundamental thermodynamic quantities require Z EXPLICITLY, not merely as a discardable normalization constant, but as the PRIMARY mathematical object from which the entire thermodynamic description of the system is derived. Z is genuinely the single most important object in equilibrium statistical mechanics: essentially every thermodynamic quantity of interest — energy, entropy, free energy, pressure, heat capacity — can be obtained as some derivative of ln Z with respect to appropriate variables. The probabilities pᵢ=e^(−βEᵢ)/Z do genuinely use Z as a normalization constant, but Z\'s LOGARITHM serves as the fundamental thermodynamic potential in the canonical (T,V,N) ensemble — this is a genuinely different, far more central role than simply "the denominator." Consider a concrete check: in an ordinary probability distribution, the normalization constant 1/Z indeed cancels out when computing ratios between probabilities — but ⟨E⟩=−∂(ln Z)/∂β requires the FULL Z itself (not merely a ratio), differentiated explicitly with respect to β — this calculation genuinely cannot be done while treating Z as a disposable afterthought. A second, entirely separate and equally common error: asked to write Z for a system with three energy levels — E₀ (2-fold degenerate), E₁ (3-fold degenerate), E₂ (non-degenerate) — answering "Z=e^(−βE₀)+e^(−βE₁)+e^(−βE₂)," treating each distinct energy LEVEL as contributing exactly one term to the sum, regardless of degeneracy. Check this against the actual definition: Z=Σᵢe^(−βEᵢ) sums over individual MICROSTATES i, not over distinct energy levels. If E₀ happens to be 2-fold degenerate — meaning there are two genuinely distinct microstates that both happen to share energy E₀ — then E₀ contributes 2×e^(−βE₀) to the total sum, not just a single e^(−βE₀) term, because each of those two distinct microstates is a separate term in the sum defining Z. Omitting this degeneracy factor produces systematically wrong probabilities and wrong thermodynamic predictions throughout. The correct, general formula: Z=Σᵢ(microstates)e^(−βEᵢ)=Σ_E g(E)e^(−βE), where g(E) denotes the DEGENERACY — the number of distinct microstates that share the same energy value E. Applied to the specific example given: Z=2e^(−βE₀)+3e^(−βE₁)+e^(−βE₂), correctly weighting each energy level\'s contribution by exactly how many distinct microstates share that energy — a fair six-sided die illustrates the same principle: it has 6 distinct microstates (faces), and even if several faces happen to correspond to the same "energy" category, the partition function must still contain 6 separate terms (one per physical microstate), never merely 2 terms (one per energy category), regardless of how the energies happen to group together.',
+    targetedMisconceptions: [`${PTFN}:MC-1`, `${PTFN}:MC-2`],
+    source: `${PTFN_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const PTFN_PROBES: SeedProbe[] = [
+  {
+    conceptId: PTFN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the partition function Z merely a normalization constant with no independent physical significance beyond making probabilities sum to 1?',
+    choices: [
+      { text: 'No — Z is the generating function for all thermodynamics; ⟨E⟩=−∂(ln Z)/∂β and F=−k_BT ln Z both require Z explicitly as the primary object, not just a normalization denominator', isCorrect: true },
+      { text: 'Yes — Z is just the denominator that normalizes the Boltzmann probabilities so they sum to 1, with no further physical content', isCorrect: false, misconceptionId: `${PTFN}:MC-1` },
+    ],
+    correctValue: 'Z is the fundamental thermodynamic generating function, not just a normalizer',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PTFN}:MC-1`],
+    source: `${PTFN_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PTFN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A system has energy level E₀ that is 2-fold degenerate. How does E₀ contribute to the partition function Z=Σᵢe^(−βEᵢ)?',
+    choices: [
+      { text: 'It contributes 2×e^(−βE₀) — the sum in Z runs over microstates, and E₀\'s two distinct degenerate microstates each contribute their own term', isCorrect: true },
+      { text: 'It contributes a single term, e^(−βE₀) — the sum in Z runs over distinct energy levels, not individual microstates', isCorrect: false, misconceptionId: `${PTFN}:MC-2` },
+    ],
+    correctValue: 'contributes 2 times e to the minus beta E0, weighted by degeneracy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PTFN}:MC-2`],
+    source: `${PTFN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.chemical-potential ──────────────────────────────────────────────
+const CHEM = 'phys.stat.chemical-potential'
+const CHEM_SRC = 'docs/curriculum/blueprints/phys.stat.chemical-potential.md'
+
+const CHEM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHEM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A higher chemical potential μ does NOT mean a phase is more stable — "the phase with higher μ wins" gets the direction exactly backwards. Particles genuinely flow from HIGH μ to LOW μ, precisely analogous to how heat flows from high T to low T — the phase with the LOWER μ, at a given temperature and pressure, is the thermodynamically STABLE phase. At an actual phase transition, the two phases\' chemical potentials are exactly equal, μ₁=μ₂; above or below the transition temperature or pressure, whichever phase has the lower μ at that condition is the one that becomes favored (stable). A second, separate and equally important error: assuming chemical potential "only matters for chemical reactions" — "this is just for chemists." μ actually controls ALL particle-number-changing processes throughout physics, not merely chemistry: phase transitions, quantum statistics (the Fermi-Dirac and Bose-Einstein occupation numbers both depend explicitly on μ), Bose-Einstein condensation (where μ→0 from below as the critical temperature is approached), semiconductor doping (governed by quasi-Fermi levels, which are chemical potentials for electrons and holes), electrochemistry, and osmosis. In condensed matter physics and quantum mechanics broadly, μ is every bit as fundamental a state variable as temperature T — far more general than a narrowly "chemistry-only" concept.',
+    targetedMisconceptions: [`${CHEM}:MC-CP-HIGHER-MU-MORE-STABLE`, `${CHEM}:MC-CP-MU-ONLY-CHEMISTRY`],
+    source: `${CHEM_SRC} — MC-CP-HIGHER-MU-MORE-STABLE (lower mu is the stable phase, particles flow high to low mu) + MC-CP-MU-ONLY-CHEMISTRY (mu governs phase transitions, quantum statistics, semiconductors, not just chemistry)`,
+  },
+  {
+    conceptId: CHEM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "higher chemical potential means the phase is more stable," reasoning "the phase with higher μ wins" — assuming, by rough analogy to other physical quantities where "higher" often means "more favored," that a higher chemical potential value indicates the more thermodynamically stable phase. This gets the actual direction backwards. Particles genuinely flow from regions or phases of HIGH chemical potential toward regions or phases of LOW chemical potential — this is closely analogous to how heat flows from a region of high temperature toward a region of low temperature, never the reverse, under normal spontaneous conditions. Correspondingly, the phase with the LOWER chemical potential μ, at a given temperature T and pressure P, is the one that is genuinely thermodynamically STABLE — not the phase with higher μ. At an actual phase transition (like the boiling or freezing point), the chemical potentials of the two coexisting phases are exactly equal, μ₁=μ₂, at that specific transition temperature or pressure; move slightly above or below that transition condition, and whichever phase now has the LOWER μ at that new condition becomes the favored, stable phase — the system will spontaneously convert toward that lower-μ phase, driven by the same "flow toward lower μ" principle. A second, entirely separate and equally common error: assuming "chemical potential only matters for chemical reactions," dismissing it with "this is just for chemists" — a natural assumption given the word "chemical" right in its name. This significantly understates how broadly applicable μ actually is throughout physics. Chemical potential genuinely controls ALL particle-number-changing processes across many areas of physics, not merely chemical reactions specifically: phase transitions (as just discussed); quantum statistics broadly, since both the Fermi-Dirac and Bose-Einstein occupation-number formulas depend explicitly on μ; Bose-Einstein condensation, where μ approaches zero from below as the system cools toward the critical BEC transition temperature; semiconductor physics, where the concept of quasi-Fermi levels used to describe non-equilibrium electron and hole populations is directly a chemical-potential concept; electrochemistry; and osmosis. Within condensed matter physics and quantum mechanics broadly, μ functions as every bit as fundamental a state variable as temperature T itself — the name "chemical potential" is something of a historical accident, reflecting where the concept was first introduced, rather than a genuine limitation on where it actually applies throughout physics.',
+    targetedMisconceptions: [`${CHEM}:MC-CP-HIGHER-MU-MORE-STABLE`, `${CHEM}:MC-CP-MU-ONLY-CHEMISTRY`],
+    source: `${CHEM_SRC} — MC-CP-HIGHER-MU-MORE-STABLE + MC-CP-MU-ONLY-CHEMISTRY, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const CHEM_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHEM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two coexisting phases have chemical potentials μ₁ and μ₂ with μ₁>μ₂. Which phase is thermodynamically stable, and which way do particles flow?',
+    choices: [
+      { text: 'The phase with LOWER μ (phase 2) is stable; particles flow from high μ to low μ, analogous to heat flowing from high T to low T', isCorrect: true },
+      { text: 'The phase with HIGHER μ (phase 1) is stable, since higher chemical potential indicates the more favored, dominant phase', isCorrect: false, misconceptionId: `${CHEM}:MC-CP-HIGHER-MU-MORE-STABLE` },
+    ],
+    correctValue: 'lower mu is stable, particles flow high to low mu',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHEM}:MC-CP-HIGHER-MU-MORE-STABLE`],
+    source: `${CHEM_SRC} — MC-CP-HIGHER-MU-MORE-STABLE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CHEM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does chemical potential μ only matter for chemical reactions, or does it appear in other areas of physics?',
+    choices: [
+      { text: 'It controls all particle-number-changing processes broadly: phase transitions, Fermi-Dirac/Bose-Einstein occupation numbers, Bose-Einstein condensation, semiconductor quasi-Fermi levels — as fundamental as temperature T', isCorrect: true },
+      { text: 'It only matters for chemistry — chemical reactions specifically — and is not a fundamental quantity elsewhere in physics', isCorrect: false, misconceptionId: `${CHEM}:MC-CP-MU-ONLY-CHEMISTRY` },
+    ],
+    correctValue: 'mu is fundamental across many areas of physics, not just chemistry',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHEM}:MC-CP-MU-ONLY-CHEMISTRY`],
+    source: `${CHEM_SRC} — MC-CP-MU-ONLY-CHEMISTRY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.entropy-statistical ─────────────────────────────────────────────
+const ENTS = 'phys.stat.entropy-statistical'
+const ENTS_SRC = 'docs/curriculum/blueprints/phys.stat.entropy-statistical.md'
+
+const ENTS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENTS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The multiplicity Ω is NOT itself the probability of a macrostate — "Ω is the probability, so P(A)=10" for a macrostate with Ω_A=10 conflates a COUNT with a probability. Ω is a count: the number of distinct microstates that produce a given macrostate. If macrostate A has Ω_A=10 and macrostate B has Ω_B=100, the actual probability is P(A)=Ω_A/Ω_total=10/(10+100)=10/110≈0.09 — a genuine ratio, computed by dividing by the TOTAL number of microstates across all macrostates. Ω=100 does not directly mean "probability=100" (a nonsensical statement, since probabilities cannot exceed 1) — it means probability=100/110≈0.91. Ω counts the number of ways to realize a given macrostate; the probability of that macrostate is Ω divided by the sum of Ω over ALL possible macrostates. High Ω genuinely does correlate with high probability, but Ω itself is a count, never a probability directly. A second, separate and equally important error: assuming the canonical-ensemble entropy formula, S=k_B ln Z+⟨E⟩/T, must be a genuinely DIFFERENT quantity from the microcanonical formula, S=k_B ln Ω, simply because the two formulas LOOK structurally different. They are not different quantities — both formulas give exactly the same numerical result for any given system, evaluated within their appropriate ensemble. They are two different mathematical EXPRESSIONS for the same underlying physical quantity. The microcanonical (Boltzmann) formula uses Ω at fixed total energy; the canonical (partition-function) formula uses Z at fixed temperature. These two different ensembles give the same thermodynamics in the thermodynamic limit (large system size). More precisely: S=k_B ln Ω (microcanonical)=−k_B Σpᵢ ln pᵢ (the general Gibbs entropy formula)=k_B ln Z+⟨E⟩/T (canonical) — all three expressions describe the SAME entropy, and they agree exactly in the thermodynamic limit; in the microcanonical ensemble specifically, all Ω microstates are equally probable, causing the general Gibbs formula to reduce algebraically to the simpler k_B ln Ω.',
+    targetedMisconceptions: [`${ENTS}:MC-3`, `${ENTS}:MC-4`],
+    source: `${ENTS_SRC} — MC-3 (Ω is a probability, not a count — actually a count that must be normalized) + MC-4 (canonical entropy formula and microcanonical entropy formula are the same quantity, not different)`,
+  },
+  {
+    conceptId: ENTS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, given a system with two macrostates where macrostate A has Ω_A=10 and macrostate B has Ω_B=100, asked "what is the probability of macrostate A?", answer "Ω is the probability, so P(A)=10" — directly conflating the multiplicity Ω with the probability itself. This is a category error: Ω is fundamentally a COUNT, specifically the number of distinct microstates that produce a given macrostate — it is not, by itself, a probability at all, and indeed a "probability of 10" is nonsensical, since probabilities must lie between 0 and 1. Ω_A=10 genuinely means there are exactly 10 distinct microstates that all produce macrostate A. The actual probability is instead computed as a ratio: P(A)=Ω_A/Ω_total=10/(10+100)=10/110≈0.09 — dividing the count for macrostate A by the TOTAL count of microstates summed across ALL possible macrostates. Similarly, Ω_B=100 does not directly mean "probability=100" — it means P(B)=100/110≈0.91. The correct relationship: Ω counts the number of distinct ways to realize a given macrostate; the PROBABILITY of that macrostate is Ω divided by the sum of Ω over every possible macrostate. It remains true that a higher Ω genuinely correlates with a higher probability — but Ω itself, taken alone, is never itself a probability; it is a count that must be normalized by dividing by a total before it becomes a legitimate probability. A useful analogy: the number of ways to roll a total of 7 with two standard dice is Ω=6 (out of 36 total possible dice-roll outcomes); the probability is P(7)=6/36=1/6 — clearly Ω=6 is not the same number as P=1/6, illustrating the same count-versus-probability distinction. A second, entirely separate and equally common error: asked "is the entropy computed from the partition function the same as Boltzmann\'s entropy?", answering "the thermodynamic formula uses Z; the statistical formula uses Ω — they must be different entropies," reasoning purely from the fact that the two formulas LOOK structurally different on the page. Test this directly: both S=k_B ln Ω (the microcanonical, "Boltzmann" formula) and S=k_B ln Z+⟨E⟩/T (the canonical, "partition-function" formula) give EXACTLY the same numerical result for any given physical system, when each is correctly evaluated within its own appropriate statistical ensemble. They are simply two different mathematical EXPRESSIONS describing the identical underlying physical quantity: entropy. The microcanonical ensemble uses Ω, counted at FIXED total energy; the canonical ensemble instead uses Z, evaluated at FIXED temperature — genuinely different ensembles, mathematically, describing genuinely the same physics, and giving identical thermodynamic predictions in the thermodynamic limit (i.e., for sufficiently large systems). More precisely, the full chain of equivalence is: S=k_B ln Ω (microcanonical)=−k_B Σᵢpᵢ ln pᵢ (the fully general Gibbs entropy formula, valid in any ensemble)=k_B ln Z+⟨E⟩/T (canonical) — all three expressions genuinely describe the identical entropy, converging to the same numerical answer in the thermodynamic limit. The specific mechanism connecting them: the canonical entropy S=k_B ln Z+⟨E⟩/T is precisely the thermal average of the general Gibbs entropy S=−k_B Σpᵢ ln pᵢ, evaluated using the canonical probabilities pᵢ=e^(−βEᵢ)/Z; in the microcanonical ensemble specifically, all Ω accessible microstates are exactly equally probable by definition, which causes the general Gibbs formula to algebraically simplify down to the much simpler expression k_B ln Ω — confirming these are genuinely the same quantity, viewed through two different but ultimately equivalent ensemble formalisms.',
+    targetedMisconceptions: [`${ENTS}:MC-3`, `${ENTS}:MC-4`],
+    source: `${ENTS_SRC} — MC-3 + MC-4, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const ENTS_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENTS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A system has two macrostates: A with Ω_A=10 microstates, B with Ω_B=100 microstates. What is the probability of macrostate A?',
+    choices: [
+      { text: 'P(A)=Ω_A/Ω_total=10/(10+100)=10/110≈0.09 — Ω is a count of microstates, and probability requires dividing by the total count across all macrostates', isCorrect: true },
+      { text: 'P(A)=10, since Ω directly equals the probability of that macrostate', isCorrect: false, misconceptionId: `${ENTS}:MC-3` },
+    ],
+    correctValue: 'approximately 0.09, Omega must be normalized by the total',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTS}:MC-3`],
+    source: `${ENTS_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ENTS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the entropy computed from the partition function (S=k_B ln Z+⟨E⟩/T, canonical ensemble) a genuinely different quantity from Boltzmann\'s entropy (S=k_B ln Ω, microcanonical ensemble)?',
+    choices: [
+      { text: 'No — both formulas give the same numerical entropy in the thermodynamic limit; they are two different expressions of the same quantity, connected via the general Gibbs entropy formula', isCorrect: true },
+      { text: 'Yes — since the formulas use different mathematical objects (Z vs. Ω), they must represent genuinely different entropies', isCorrect: false, misconceptionId: `${ENTS}:MC-4` },
+    ],
+    correctValue: 'same quantity, two equivalent expressions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTS}:MC-4`],
+    source: `${ENTS_SRC} — MC-4 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.free-energy ─────────────────────────────────────────────────────
+const FREN = 'phys.stat.free-energy'
+const FREN_SRC = 'docs/curriculum/blueprints/phys.stat.free-energy.md'
+
+const FREN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FREN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Systems do NOT always evolve to minimize total energy — "systems go to lower energy — so the liquid should be favored" applies purely mechanical intuition to a thermodynamic system where entropy also matters. At 100°C, water evaporates spontaneously even though water vapor has HIGHER energy than liquid water (ΔH_vap>0, meaning evaporation requires energy input). At exactly 100°C and 1 atm, ΔG_vap=ΔH_vap−TΔS_vap=0 — exactly at equilibrium. Above 100°C, TΔS_vap>ΔH_vap, giving ΔG_vap<0, meaning evaporation becomes spontaneous — entropy DRIVES the transition despite its energy cost. Two competing effects are always in play: energy (which "wants" to be low, U minimized) and entropy (which "wants" to be high, i.e., high disorder/many accessible microstates). Free energy F=U−TS captures this trade-off directly. At sufficiently high T, entropy wins the competition. The correct principle: equilibrium corresponds to MINIMUM FREE ENERGY (F or G), never simply minimum internal energy U — entropy can genuinely drive endothermic (energy-costing) processes to become spontaneous at sufficiently high temperature. A second, separate error: assuming Helmholtz free energy F is simply "the total energy that\'s free for use" — "free energy is the energy available to do work," as the everyday-sounding name might suggest. At constant T and V: ΔF=ΔU−TΔS=−W_max, where W_max is the maximum work done BY the system (not including ordinary PdV boundary/expansion work) — so F genuinely represents the maximum NON-expansion work available from the system, not its total internal energy. "Free" specifically means "available to do useful work, above and beyond the minimum heat that must be exchanged with the environment" — the environment necessarily takes its own TΔS_env share of the energy, and only the remainder is genuinely "free" for useful work. F=maximum total work available at constant T,V; the related quantity G (Gibbs free energy) similarly gives the maximum NON-PdV work at constant T,P. Both are specifically the extractable USEFUL work, never the system\'s total internal energy.',
+    targetedMisconceptions: [`${FREN}:MC-1`, `${FREN}:MC-2`],
+    source: `${FREN_SRC} — MC-1 (systems minimize free energy, not just energy; entropy can drive endothermic transitions) + MC-2 (F is maximum extractable work, not total available energy)`,
+  },
+  {
+    conceptId: FREN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "at 100°C, water evaporates spontaneously, yet water vapor has higher energy than liquid water (ΔH_vap>0) — how is this possible?", say "systems go to lower energy — so the liquid should be favored," applying an intuition drawn from Newtonian mechanics — where systems settle toward lower potential energy configurations — directly onto a thermodynamic system, where it is only part of the full picture. Test this against the actual numbers: at exactly 100°C and 1 atmosphere pressure, ΔG_vap=ΔH_vap−TΔS_vap=0 exactly — the system sits precisely AT equilibrium, with liquid and vapor phases equally favored. Move slightly ABOVE 100°C, and the term TΔS_vap becomes LARGER than ΔH_vap, giving ΔG_vap<0 — and evaporation becomes genuinely spontaneous, despite requiring positive energy input (ΔH_vap>0). Entropy is DRIVING this transition, actively overcoming the energy cost. The full picture requires recognizing two genuinely competing effects operating simultaneously: energy (which "wants" the system to settle into low-U configurations) and entropy (which "wants" the system to access high-S, i.e., high-disorder, configurations, since these correspond to vastly more accessible microstates). Free energy, F=U−TS, is precisely the mathematical object that captures this energy-versus-entropy trade-off in one combined quantity. At sufficiently high temperature, the TS term dominates and entropy effectively "wins" this competition against the raw energy cost. The genuinely correct governing principle: equilibrium corresponds to MINIMUM FREE ENERGY (either F, at constant T and V, or G, at constant T and P) — never simply minimum internal energy U by itself. This is precisely why entropy CAN, and routinely does, drive endothermic (energy-absorbing) processes to become spontaneous, provided the temperature is high enough for the entropic contribution to outweigh the energetic cost. A second, entirely separate and equally common error: asked "what does \'free energy\' mean — is it the total energy that\'s free for use?", answering "free energy is the energy available to do work," essentially taking the everyday, colloquial-sounding name "free energy" at face value, as though it meant something like "energy that is simply free for the taking." Test this against the actual thermodynamic definition: at constant temperature T and volume V specifically, ΔF=ΔU−TΔS=−W_max, where W_max here denotes the maximum WORK done BY the system — critically, NOT including ordinary PdV boundary/expansion work, which is treated separately. So F genuinely represents specifically the maximum NON-expansion work extractable from the system, not simply "the total internal energy that happens to be available." The precise meaning of "free" in this context: it means "available to perform useful work, over and above the minimum amount of heat that must necessarily be exchanged with the surrounding environment" — the environment inevitably claims its own TΔS_env share of the total energy involved in any real process, and only whatever energy remains after that mandatory environmental exchange is genuinely "free" to be extracted as useful work. To summarize precisely: F represents the maximum TOTAL work extractable at constant T and V; the related Gibbs free energy G similarly represents the maximum NON-PdV work extractable at constant T and P. Both F and G are specifically measures of extractable, USEFUL work — never simply "the total available internal energy" of the system, as the colloquial name might naively suggest.',
+    targetedMisconceptions: [`${FREN}:MC-1`, `${FREN}:MC-2`],
+    source: `${FREN_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const FREN_PROBES: SeedProbe[] = [
+  {
+    conceptId: FREN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water evaporates spontaneously at 100°C, even though water vapor has higher energy than liquid water (ΔH_vap>0). How is this consistent with thermodynamics?',
+    choices: [
+      { text: 'Systems minimize FREE energy (F or G), not just internal energy; above 100°C, TΔS_vap>ΔH_vap, giving ΔG_vap<0 — entropy drives the transition despite the energy cost', isCorrect: true },
+      { text: 'This is a contradiction — systems always evolve to minimize energy, so liquid water (lower energy) should always be favored', isCorrect: false, misconceptionId: `${FREN}:MC-1` },
+    ],
+    correctValue: 'systems minimize free energy, entropy can drive endothermic processes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FREN}:MC-1`],
+    source: `${FREN_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FREN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does "free energy" F mean the total internal energy of a system that is freely available for use?',
+    choices: [
+      { text: 'No — at constant T,V, F represents the maximum NON-expansion work extractable, ΔF=−W_max; "free" means available for useful work beyond the mandatory heat exchanged with the environment', isCorrect: true },
+      { text: 'Yes — free energy is literally the total energy that is free and available for the system to use for work', isCorrect: false, misconceptionId: `${FREN}:MC-2` },
+    ],
+    correctValue: 'F is maximum extractable work, not total internal energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FREN}:MC-2`],
+    source: `${FREN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -37847,6 +38207,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SMTX_EXPLANATIONS,
   ...SELR_EXPLANATIONS,
   ...DMAT_EXPLANATIONS,
+  ...PROB_EXPLANATIONS,
+  ...BOLT_EXPLANATIONS,
+  ...PTFN_EXPLANATIONS,
+  ...CHEM_EXPLANATIONS,
+  ...ENTS_EXPLANATIONS,
+  ...FREN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -38306,4 +38672,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SMTX_PROBES,
   ...SELR_PROBES,
   ...DMAT_PROBES,
+  ...PROB_PROBES,
+  ...BOLT_PROBES,
+  ...PTFN_PROBES,
+  ...CHEM_PROBES,
+  ...ENTS_PROBES,
+  ...FREN_PROBES,
 ]
