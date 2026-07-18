@@ -30042,6 +30042,272 @@ const EFS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.communication.research-methodology-writing ────────────────────────────
+const RMW = 'eng.communication.research-methodology-writing'
+const RMW_SRC = 'docs/curriculum/blueprints/eng.communication.research-methodology-writing.md'
+
+const RMW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RMW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A bare list of method steps with no justification is like a recipe ' +
+      'that lists ingredients but never explains why a technique was ' +
+      'chosen — a reader can follow the steps but can\'t judge whether the ' +
+      'technique suits the goal. For every methodological choice, add a ' +
+      'brief "...because..." explaining why it suits this specific ' +
+      'research question.',
+    targetedMisconceptions: [`${RMW}:MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION`],
+    source: `${RMW_SRC} — MC-A (P28 recipe-technique conflict)`,
+  },
+  {
+    conceptId: RMW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Presenting a method as flawless is like a mechanic claiming a ' +
+      'repair has zero possible failure points — a careful reader trusts ' +
+      'you MORE, not less, when you honestly note a specific limitation ' +
+      'while still defending the method\'s overall soundness. ' +
+      'Acknowledging a real, specific limitation signals rigor, not ' +
+      'weakness.',
+    targetedMisconceptions: [`${RMW}:MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS`],
+    source: `${RMW_SRC} — MC-B (P28 honest-mechanic conflict)`,
+  },
+  {
+    conceptId: RMW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A methodology description must justify each methodological choice ' +
+      'relative to the specific research question, not just list ' +
+      'procedural steps, like a recipe explaining why a technique was ' +
+      'chosen, not just listing ingredients. Separately, acknowledging a ' +
+      'real, specific limitation while still defending the method\'s ' +
+      'overall soundness signals genuine rigor, like an honest mechanic ' +
+      'noting one real limitation rather than claiming a repair is ' +
+      'flawless.',
+    targetedMisconceptions: [
+      `${RMW}:MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION`,
+      `${RMW}:MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS`,
+    ],
+    source: `${RMW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RMW_PROBES: SeedProbe[] = [
+  {
+    conceptId: RMW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A methods section reads: "We surveyed 50 students. We analyzed the results using a chi-square test." with no explanation of why these choices suit the research question. Is this a complete method description?',
+    choices: [
+      { text: 'No — describing a method means explaining WHY specific choices (sample size, test type) suit the research question, not just listing the steps taken', isCorrect: true },
+      { text: 'Yes — describing a method means just listing the steps taken, with no justification needed', isCorrect: false, misconceptionId: `${RMW}:MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION` },
+    ],
+    correctValue: 'no, method choices must be justified, not just listed',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RMW}:MC-A-DESCRIBING-A-METHOD-MEANS-JUST-LISTING-THE-STEPS-TAKEN-WITH-NO-JUSTIFICATION`],
+    source: `${RMW_SRC} — recipe-technique conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RMW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A methodology section presents its chosen method with no acknowledged limitations at all, as if it were flawless. Does presenting a method this way make the research seem more credible?',
+    choices: [
+      { text: 'No — transparently acknowledging a real, specific limitation while still defending the method\'s appropriateness signals genuine rigor and is more credible, not less', isCorrect: true },
+      { text: 'Yes — a good methodology section should present the method as flawless with no acknowledged limitations', isCorrect: false, misconceptionId: `${RMW}:MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS` },
+    ],
+    correctValue: 'no, acknowledging real limitations signals rigor',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RMW}:MC-B-A-GOOD-METHODOLOGY-SECTION-SHOULD-PRESENT-THE-METHOD-AS-FLAWLESS-WITH-NO-ACKNOWLEDGED-LIMITATIONS`],
+    source: `${RMW_SRC} — honest-mechanic conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.technical-writing ───────────────────────────────────────
+const TECHW = 'eng.communication.technical-writing'
+const TECHW_SRC = 'docs/curriculum/blueprints/eng.communication.technical-writing.md'
+
+const TECHW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TECHW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Varying vocabulary in technical instructions is like a map that ' +
+      'calls the same intersection three different names on three ' +
+      'different signs — a reader has no way of knowing they all refer to ' +
+      'the same place. Once you name something, use that EXACT SAME term ' +
+      'every time; technical writing needs rigid consistency, not literary ' +
+      'variety.',
+    targetedMisconceptions: [`${TECHW}:MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING`],
+    source: `${TECHW_SRC} — MC-A (P28 three-named-intersection conflict)`,
+  },
+  {
+    conceptId: TECHW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Instructions that only describe the successful sequence are like a ' +
+      'hiking guide that never mentions the fork where most hikers ' +
+      'accidentally go the wrong way — it fails exactly the readers who ' +
+      'need help most. Anticipate the specific points where readers are ' +
+      'likely to go wrong and address them directly, not just the ideal ' +
+      'path.',
+    targetedMisconceptions: [`${TECHW}:MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT`],
+    source: `${TECHW_SRC} — MC-B (P28 hiking-trail-fork conflict)`,
+  },
+  {
+    conceptId: TECHW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Technical writing requires rigid terminological consistency, not ' +
+      'literary vocabulary variety — like a map naming the same ' +
+      'intersection consistently rather than with three different signs. ' +
+      'Separately, instructions must anticipate likely reader confusion or ' +
+      'error points, not just describe the ideal "happy path," like a ' +
+      'hiking guide that flags the fork where most hikers go wrong.',
+    targetedMisconceptions: [
+      `${TECHW}:MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING`,
+      `${TECHW}:MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT`,
+    ],
+    source: `${TECHW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TECHW_PROBES: SeedProbe[] = [
+  {
+    conceptId: TECHW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A set of instructions calls the same physical component "the switch," then later "the toggle," then later "the control" in different steps, to avoid repetitive vocabulary. Is varying vocabulary like this good technical writing?',
+    choices: [
+      { text: 'No — a reader unfamiliar with the device would reasonably think these are three different parts; technical writing requires rigid, unwavering terminology consistency instead', isCorrect: true },
+      { text: 'Yes — technical writing should use varied vocabulary to avoid repetition, like other writing', isCorrect: false, misconceptionId: `${TECHW}:MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING` },
+    ],
+    correctValue: 'no, technical writing needs consistent terminology',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TECHW}:MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING`],
+    source: `${TECHW_SRC} — three-named-intersection conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TECHW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Assembly instructions only describe the successful sequence ("insert part A into slot B") with no guidance for common mistakes, like inserting part A upside down. Is this sufficient for good technical writing?',
+    choices: [
+      { text: 'No — technical writing must anticipate and address at least one likely point of reader confusion or error, not just describe what happens when everything goes right', isCorrect: true },
+      { text: 'Yes — technical writing only needs to describe what to do when everything goes right', isCorrect: false, misconceptionId: `${TECHW}:MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT` },
+    ],
+    correctValue: 'no, instructions must anticipate likely error points',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TECHW}:MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT`],
+    source: `${TECHW_SRC} — hiking-trail-fork conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.business-writing ────────────────────────────────────────
+const BUSW = 'eng.communication.business-writing'
+const BUSW_SRC = 'docs/curriculum/blueprints/eng.communication.business-writing.md'
+
+const BUSW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BUSW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Building up to your point like an academic essay is like a road ' +
+      'sign with the critical information buried in small print at the ' +
+      'bottom — a driver glancing past at speed will miss it. In business ' +
+      'writing, state your main point or request in the FIRST sentence or ' +
+      'two; supporting context comes after, not before.',
+    targetedMisconceptions: [`${BUSW}:MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY`],
+    source: `${BUSW_SRC} — MC-A (P28 road-sign-at-speed conflict)`,
+  },
+  {
+    conceptId: BUSW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Believing formatting doesn\'t matter as long as content is accurate ' +
+      'is like believing a grocery list scribbled as one run-on sentence ' +
+      'works as well as a list with one item per line — both are ' +
+      'accurate, but only one can be scanned in seconds. Use short ' +
+      'paragraphs, bullet points, and clear subject lines to make ' +
+      'documents scannable.',
+    targetedMisconceptions: [`${BUSW}:MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER`],
+    source: `${BUSW_SRC} — MC-B (P28 grocery-list conflict)`,
+  },
+  {
+    conceptId: BUSW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Business writing must front-load the main point in the first ' +
+      'sentence or two, not build up to it like an academic essay, like a ' +
+      'road sign with critical information at the top rather than buried ' +
+      'in small print. Separately, visual formatting (short paragraphs, ' +
+      'bullets, clear subject lines) is what makes a document scannable ' +
+      'for busy readers, not a cosmetic afterthought — like a grocery list ' +
+      'written one item per line instead of a run-on sentence.',
+    targetedMisconceptions: [
+      `${BUSW}:MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY`,
+      `${BUSW}:MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER`,
+    ],
+    source: `${BUSW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const BUSW_PROBES: SeedProbe[] = [
+  {
+    conceptId: BUSW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An email to a manager opens with several sentences of context and background before finally stating the actual request in the final paragraph. Is building up to the point this way, like an academic essay, effective business writing?',
+    choices: [
+      { text: 'No — a busy business reader needs the main point or request stated in the first sentence or two, with supporting context following, not buried at the end', isCorrect: true },
+      { text: 'Yes — business writing should build up to the main point like an academic essay', isCorrect: false, misconceptionId: `${BUSW}:MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY` },
+    ],
+    correctValue: 'no, business writing must front-load the main point',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BUSW}:MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY`],
+    source: `${BUSW_SRC} — road-sign-at-speed conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BUSW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A memo lists three action items woven together in one dense paragraph, with all the correct information technically present. Does formatting matter as long as the content is accurate?',
+    choices: [
+      { text: 'No — visual formatting (short paragraphs, bullet points) determines whether a busy reader can actually scan and extract the information; dense prose requires careful reading even when accurate', isCorrect: true },
+      { text: 'Yes — a business document just needs to contain the right information; formatting doesn\'t matter', isCorrect: false, misconceptionId: `${BUSW}:MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER` },
+    ],
+    correctValue: 'no, formatting determines scannability and usability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BUSW}:MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER`],
+    source: `${BUSW_SRC} — grocery-list conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -30382,6 +30648,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...AWA_EXPLANATIONS,
   ...PCE_EXPLANATIONS,
   ...EFS_EXPLANATIONS,
+  ...RMW_EXPLANATIONS,
+  ...TECHW_EXPLANATIONS,
+  ...BUSW_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -30722,4 +30991,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...AWA_PROBES,
   ...PCE_PROBES,
   ...EFS_PROBES,
+  ...RMW_PROBES,
+  ...TECHW_PROBES,
+  ...BUSW_PROBES,
 ]
