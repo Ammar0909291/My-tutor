@@ -27315,6 +27315,541 @@ const THST_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.composition.claim-evidence-reasoning ──────────────────────────────────
+const CER = 'eng.composition.claim-evidence-reasoning'
+const CER_SRC = 'docs/curriculum/blueprints/eng.composition.claim-evidence-reasoning.md'
+
+const CER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CER,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Evidence sitting next to a claim with no explanation is like two ' +
+      'ends of a broken bridge facing each other across a gap — the reader ' +
+      'can see both sides, but nothing carries them across. Reasoning is ' +
+      'the middle section: a sentence starting "This shows that..." that ' +
+      'explicitly explains WHY this specific evidence leads to this ' +
+      'specific claim, so the reader doesn\'t have to guess.',
+    targetedMisconceptions: [`${CER}:MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH`],
+    source: `${CER_SRC} — MC-A (P28 broken-bridge conflict)`,
+  },
+  {
+    conceptId: CER,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A reasoning sentence that just restates the claim ("This shows ' +
+      'lunch should be longer") is like an echo — it sounds like an ' +
+      'answer but adds nothing new. Test it: cover up the claim — if a ' +
+      'reader could still guess the claim from the reasoning sentence ' +
+      'alone, it\'s genuine reasoning explaining a mechanism; if not, it\'s ' +
+      'circular.',
+    targetedMisconceptions: [`${CER}:MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN`],
+    source: `${CER_SRC} — MC-B (P28 echo/circular-reasoning conflict)`,
+  },
+  {
+    conceptId: CER,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Evidence placed next to a claim with no explicit connecting ' +
+      'sentence leaves a gap the reader must cross alone, like a broken ' +
+      'bridge; a reasoning sentence ("This shows that... because...") must ' +
+      'explicitly bridge evidence to claim. Separately, a reasoning ' +
+      'sentence that merely restates the claim (an echo) adds no new ' +
+      'content — cover up the claim and check whether the reasoning ' +
+      'sentence still explains a real mechanism on its own.',
+    targetedMisconceptions: [
+      `${CER}:MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH`,
+      `${CER}:MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN`,
+    ],
+    source: `${CER_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CER_PROBES: SeedProbe[] = [
+  {
+    conceptId: CER,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Students should have longer lunch periods. A survey found 60% of students said they feel rushed at lunch." Is evidence placed directly next to a claim like this enough to make a complete argument?',
+    choices: [
+      { text: 'No — without an explicit reasoning sentence explaining why this evidence leads to this claim, several different conclusions could be drawn from the same evidence', isCorrect: true },
+      { text: 'Yes — evidence next to a claim is enough; the reader will supply the connection themselves', isCorrect: false, misconceptionId: `${CER}:MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH` },
+    ],
+    correctValue: 'no, an explicit reasoning sentence is needed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CER}:MC-A-EVIDENCE-NEXT-TO-A-CLAIM-IS-ENOUGH`],
+    source: `${CER_SRC} — broken-bridge conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CER,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes: Claim — "Lunch should be longer." Evidence — "60% of students feel rushed." Reasoning — "This shows that lunch should be longer." Is this reasoning sentence genuine reasoning?',
+    choices: [
+      { text: 'No — it just restates the claim in different words (an echo) and adds no new explanatory content about WHY the evidence supports the claim', isCorrect: true },
+      { text: 'Yes — reasoning just means restating the claim again after the evidence to reinforce it', isCorrect: false, misconceptionId: `${CER}:MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN` },
+    ],
+    correctValue: 'no, this is circular restatement, not reasoning',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CER}:MC-B-REASONING-MEANS-JUST-RESTATING-THE-CLAIM-AGAIN`],
+    source: `${CER_SRC} — echo/circular-reasoning conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.rhetorical-appeals ────────────────────────────────────────
+const RHET = 'eng.composition.rhetorical-appeals'
+const RHET_SRC = 'docs/curriculum/blueprints/eng.composition.rhetorical-appeals.md'
+
+const RHET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RHET,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Pathos isn\'t just adding emotional or dramatic language — it\'s ' +
+      'connecting a real feeling to the SPECIFIC claim being made, like a ' +
+      'lawyer making a jury feel the weight of a specific piece of ' +
+      'evidence rather than crying about "how sad the whole situation is" ' +
+      'in general. If a reader could feel the emotion and still not know ' +
+      'what you want them to believe or do, it\'s decoration, not pathos.',
+    targetedMisconceptions: [`${RHET}:MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC`],
+    source: `${RHET_SRC} — MC-A (P28 connected-vs-disconnected-emotion conflict)`,
+  },
+  {
+    conceptId: RHET,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Logos isn\'t just including a statistic — it\'s building a chain of ' +
+      'reasoning where evidence logically connects to a conclusion, like a ' +
+      'bridge\'s support beams actually touching both sides. A number ' +
+      'floating near a claim with no explained "because" connection is a ' +
+      'support beam propped up in mid-air — it looks like structure but ' +
+      'isn\'t holding anything up.',
+    targetedMisconceptions: [`${RHET}:MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS`],
+    source: `${RHET_SRC} — MC-B (P28 floating-statistic conflict)`,
+  },
+  {
+    conceptId: RHET,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Pathos requires connecting a real feeling to the specific claim ' +
+      'being argued, not just inserting emotional language generally — a ' +
+      'lawyer targeting the jury\'s feeling about specific evidence, not ' +
+      'generic sadness. Separately, logos requires an explicit reasoning ' +
+      'chain connecting evidence to conclusion ("because..."), not merely ' +
+      'the presence of a number — like a support beam that must actually ' +
+      'touch both sides of a bridge to hold weight.',
+    targetedMisconceptions: [
+      `${RHET}:MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC`,
+      `${RHET}:MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS`,
+    ],
+    source: `${RHET_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RHET_PROBES: SeedProbe[] = [
+  {
+    conceptId: RHET,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An essay about recycling policy inserts a vague, generic sentence — "It\'s just so sad how things have changed" — unrelated to the specific policy argument. Does this count as effective pathos?',
+    choices: [
+      { text: 'No — pathos must connect a real feeling to the SPECIFIC claim being made; generic emotional language disconnected from the argument is decoration, not persuasion', isCorrect: true },
+      { text: 'Yes — pathos just means using emotional or dramatic language anywhere in a persuasive piece', isCorrect: false, misconceptionId: `${RHET}:MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC` },
+    ],
+    correctValue: 'no, pathos must connect to the specific claim',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RHET}:MC-A-PATHOS-MEANS-JUST-BEING-EMOTIONAL-OR-DRAMATIC`],
+    source: `${RHET_SRC} — connected-vs-disconnected-emotion conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RHET,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A persuasive essay cites "Studies show 73% of people like parks" with no source and no explanation of why this national figure supports building a specific local park. Does including this statistic make the argument logical (logos)?',
+    choices: [
+      { text: 'No — a number with no explained connection to the specific claim is a floating statistic, not logos; logos requires an explicit reasoning chain linking evidence to conclusion', isCorrect: true },
+      { text: 'Yes — logos just means using numbers or statistics anywhere in the argument', isCorrect: false, misconceptionId: `${RHET}:MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS` },
+    ],
+    correctValue: 'no, logos requires an explicit reasoning connection',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RHET}:MC-B-LOGOS-MEANS-JUST-USING-NUMBERS-OR-STATISTICS`],
+    source: `${RHET_SRC} — floating-statistic conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.bilingualism-and-multilingualism ──────────────────────────
+const BILM = 'eng.linguistics.bilingualism-and-multilingualism'
+const BILM_SRC = 'docs/curriculum/blueprints/eng.linguistics.bilingualism-and-multilingualism.md'
+
+const BILM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BILM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Expecting a bilingual speaker to have identical, equal fluency in ' +
+      'every domain across both languages is like expecting someone to be ' +
+      'equally skilled with every tool in two entirely different ' +
+      'toolsets — skill naturally develops around actual use. Evaluate ' +
+      'bilingual competence holistically across both languages together; ' +
+      'different strengths in different domains is the normal pattern, ' +
+      'not a deficiency.',
+    targetedMisconceptions: [`${BILM}:MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY`],
+    source: `${BILM_SRC} — MC-A (P28 domain-specific-competence conflict)`,
+  },
+  {
+    conceptId: BILM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A bilingual child mixing elements of both languages in one sentence ' +
+      'is like a child learning to ride two different bicycles with ' +
+      'different brake systems, temporarily mixing up which brake to use ' +
+      'on which bike — a normal, temporary developmental stage, not ' +
+      'confusion or delay. Code-mixing typically resolves as the child\'s ' +
+      'ability to separate the two systems develops.',
+    targetedMisconceptions: [`${BILM}:MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED`],
+    source: `${BILM_SRC} — MC-B (P28 two-bicycles code-mixing conflict)`,
+  },
+  {
+    conceptId: BILM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Bilingual competence should be evaluated holistically across both ' +
+      'languages, not by requiring identical, domain-matched fluency in ' +
+      'each separately — like expecting equal mastery of two entirely ' +
+      'different toolsets. Separately, a bilingual child mixing elements ' +
+      'of both languages within a sentence reflects a normal, well-' +
+      'documented developmental pattern (like temporarily confusing two ' +
+      'bicycles\' brake systems), not confusion or delay.',
+    targetedMisconceptions: [
+      `${BILM}:MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY`,
+      `${BILM}:MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED`,
+    ],
+    source: `${BILM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const BILM_PROBES: SeedProbe[] = [
+  {
+    conceptId: BILM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bilingual speaker discusses family topics fluently in their heritage language but discusses academic topics more comfortably in their schooling language. Does this different strength in each domain mean they\'re not truly bilingual?',
+    choices: [
+      { text: 'No — this domain-specific competence pattern, shaped by which language is used in which contexts, is the normal way bilingual competence develops, not a deficiency', isCorrect: true },
+      { text: 'Yes — a true bilingual must have equal, native-like fluency in both languages separately across every domain', isCorrect: false, misconceptionId: `${BILM}:MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY` },
+    ],
+    correctValue: 'no, domain-specific competence is normal, not a deficiency',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BILM}:MC-A-A-TRUE-BILINGUAL-MUST-HAVE-EQUAL-NATIVE-LIKE-FLUENCY-IN-BOTH-LANGUAGES-SEPARATELY`],
+    source: `${BILM_SRC} — domain-specific-competence conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BILM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A young bilingual child mixes words from both languages within a single sentence. Does this pattern indicate the child is confused or experiencing a developmental delay?',
+    choices: [
+      { text: 'No — code-mixing during bilingual acquisition is a normal, well-documented developmental pattern that typically resolves as the child\'s ability to separate the two systems develops', isCorrect: true },
+      { text: 'Yes — a bilingual child mixing two languages in one sentence is confused or delayed and should be restricted to one language', isCorrect: false, misconceptionId: `${BILM}:MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED` },
+    ],
+    correctValue: 'no, code-mixing is normal bilingual development',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BILM}:MC-B-A-BILINGUAL-CHILD-MIXING-TWO-LANGUAGES-IN-ONE-SENTENCE-IS-CONFUSED-OR-DELAYED`],
+    source: `${BILM_SRC} — two-bicycles code-mixing conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.computational-linguistics-intro ───────────────────────────
+const COMPL = 'eng.linguistics.computational-linguistics-intro'
+const COMPL_SRC = 'docs/curriculum/blueprints/eng.linguistics.computational-linguistics-intro.md'
+
+const COMPL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMPL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming fluent, grammatically correct output means a system ' +
+      '"understands" content is like assuming a skilled tribute-band ' +
+      'musician who perfectly mimics a song must have personally composed ' +
+      'and deeply understood its meaning. Fluency is a measure of ' +
+      'statistical pattern-matching skill — a separate question from ' +
+      'genuine comprehension or factual accuracy.',
+    targetedMisconceptions: [`${COMPL}:MC-A-A-COMPUTER-PRODUCING-FLUENT-GRAMMATICALLY-CORRECT-LANGUAGE-MUST-UNDERSTAND-THE-MEANING-THE-WAY-A-HUMAN-DOES`],
+    source: `${COMPL_SRC} — MC-A (P28 tribute-band-musician conflict)`,
+  },
+  {
+    conceptId: COMPL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming computational systems handle every language task equally ' +
+      'well is like assuming a cook who has memorized thousands of recipes ' +
+      'can automatically diagnose why a never-before-seen dish tastes ' +
+      'off. Certain ambiguities (like "the trophy didn\'t fit in the ' +
+      'suitcase because it was too big") genuinely require real-world ' +
+      'knowledge that pure pattern-matching struggles to capture reliably.',
+    targetedMisconceptions: [`${COMPL}:MC-B-COMPUTATIONAL-LANGUAGE-SYSTEMS-CAN-HANDLE-EVERY-ASPECT-OF-LANGUAGE-EQUALLY-WELL-WITH-NO-GENUINE-LIMITATIONS`],
+    source: `${COMPL_SRC} — MC-B (P28 trophy-suitcase-ambiguity conflict)`,
+  },
+  {
+    conceptId: COMPL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Fluent, grammatically correct output from a language system doesn\'t ' +
+      'guarantee genuine understanding — it can be produced through ' +
+      'statistical pattern-matching, like a tribute-band musician mimicking ' +
+      'a song without composing it; fluency and accuracy are separate ' +
+      'questions. Separately, computational systems have genuine ' +
+      'limitations for tasks requiring real-world or common-sense ' +
+      'knowledge beyond linguistic pattern, like a well-practiced cook ' +
+      'facing a genuinely novel dish.',
+    targetedMisconceptions: [
+      `${COMPL}:MC-A-A-COMPUTER-PRODUCING-FLUENT-GRAMMATICALLY-CORRECT-LANGUAGE-MUST-UNDERSTAND-THE-MEANING-THE-WAY-A-HUMAN-DOES`,
+      `${COMPL}:MC-B-COMPUTATIONAL-LANGUAGE-SYSTEMS-CAN-HANDLE-EVERY-ASPECT-OF-LANGUAGE-EQUALLY-WELL-WITH-NO-GENUINE-LIMITATIONS`,
+    ],
+    source: `${COMPL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const COMPL_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMPL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A computational language system produces a grammatically flawless sentence that contains a subtle factual error. Does producing fluent, correct-sounding language guarantee the system genuinely understands the content the way a human would?',
+    choices: [
+      { text: 'No — fluent output can be generated through statistical pattern-matching, a genuinely different process from human comprehension, even when it looks indistinguishable', isCorrect: true },
+      { text: 'Yes — a computer producing fluent, grammatically correct language must understand the meaning the way a human does', isCorrect: false, misconceptionId: `${COMPL}:MC-A-A-COMPUTER-PRODUCING-FLUENT-GRAMMATICALLY-CORRECT-LANGUAGE-MUST-UNDERSTAND-THE-MEANING-THE-WAY-A-HUMAN-DOES` },
+    ],
+    correctValue: 'no, fluency does not guarantee genuine understanding',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COMPL}:MC-A-A-COMPUTER-PRODUCING-FLUENT-GRAMMATICALLY-CORRECT-LANGUAGE-MUST-UNDERSTAND-THE-MEANING-THE-WAY-A-HUMAN-DOES`],
+    source: `${COMPL_SRC} — tribute-band-musician conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: COMPL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The trophy didn\'t fit in the suitcase because it was too big." Resolving whether "it" refers to the trophy or the suitcase requires knowing which one typically needs to fit inside the other. Can grammatical pattern alone resolve this ambiguity?',
+    choices: [
+      { text: 'No — this genuinely requires real-world, common-sense knowledge beyond linguistic pattern, a task that remains difficult for computational systems', isCorrect: true },
+      { text: 'Yes — computational language systems can handle every aspect of language equally well with no genuine limitations', isCorrect: false, misconceptionId: `${COMPL}:MC-B-COMPUTATIONAL-LANGUAGE-SYSTEMS-CAN-HANDLE-EVERY-ASPECT-OF-LANGUAGE-EQUALLY-WELL-WITH-NO-GENUINE-LIMITATIONS` },
+    ],
+    correctValue: 'no, this requires real-world knowledge beyond pattern',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COMPL}:MC-B-COMPUTATIONAL-LANGUAGE-SYSTEMS-CAN-HANDLE-EVERY-ASPECT-OF-LANGUAGE-EQUALLY-WELL-WITH-NO-GENUINE-LIMITATIONS`],
+    source: `${COMPL_SRC} — trophy-suitcase-ambiguity conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.debate-skills ─────────────────────────────────────────────────
+const DBAT = 'eng.speaking.debate-skills'
+const DBAT_SRC = 'docs/curriculum/blueprints/eng.speaking.debate-skills.md'
+
+const DBAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DBAT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Delivering a fixed, pre-planned script regardless of what the ' +
+      'opponent actually argues is like a tennis player swinging at the ' +
+      'exact same spot every time regardless of where the ball lands. A ' +
+      'rebuttal must directly engage with the opponent\'s SPECIFIC ' +
+      'argument, requiring active, in-the-moment listening, not a script ' +
+      'executed regardless of their actual case.',
+    targetedMisconceptions: [`${DBAT}:MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS`],
+    source: `${DBAT_SRC} — MC-A (P28 tennis-fixed-spot conflict)`,
+  },
+  {
+    conceptId: DBAT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Confusing forceful argumentation with personal hostility is like ' +
+      'confusing a boxer\'s powerful, direct punches within the rules with ' +
+      'an unsportsmanlike attack outside the ring. Be as forceful and ' +
+      'direct as needed challenging the opponent\'s ARGUMENT and ' +
+      'REASONING, while always keeping language targeted at the argument, ' +
+      'not the person.',
+    targetedMisconceptions: [`${DBAT}:MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE`],
+    source: `${DBAT_SRC} — MC-B (P28 boxing-ring conflict)`,
+  },
+  {
+    conceptId: DBAT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A debate rebuttal must directly respond to the opponent\'s specific, ' +
+      'actual argument through active in-the-moment listening — not a ' +
+      'pre-planned script delivered regardless of what was said, like a ' +
+      'tennis player swinging at a fixed spot regardless of the ball. ' +
+      'Separately, forceful, direct disagreement with an opponent\'s ' +
+      'reasoning and personal respect are fully compatible — like a ' +
+      'boxer\'s within-the-rules punches versus an attack outside the ring.',
+    targetedMisconceptions: [
+      `${DBAT}:MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS`,
+      `${DBAT}:MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE`,
+    ],
+    source: `${DBAT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DBAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: DBAT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a debate transcript, one speaker\'s "rebuttal" clearly ignores the specific points the opponent just made, instead delivering pre-planned remarks. Does this count as winning the exchange?',
+    choices: [
+      { text: 'No — a rebuttal must directly engage with what the opponent actually said, requiring active listening, not a fixed script delivered regardless of their actual case', isCorrect: true },
+      { text: 'Yes — winning a debate means delivering your prepared arguments regardless of what the opponent actually says', isCorrect: false, misconceptionId: `${DBAT}:MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS` },
+    ],
+    correctValue: 'no, rebuttals must directly engage the opponent\'s actual case',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DBAT}:MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS`],
+    source: `${DBAT_SRC} — tennis-fixed-spot conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DBAT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The evidence my opponent cites doesn\'t actually support their conclusion, because..." — this rebuttal firmly and directly refutes the opponent\'s reasoning. Does being this forceful and direct mean the speaker is being disrespectful or hostile?',
+    choices: [
+      { text: 'No — forceful, direct engagement with an opponent\'s reasoning and personal respect are fully compatible; this rebuttal targets the argument, not the person', isCorrect: true },
+      { text: 'Yes — being forceful or directly challenging an opponent\'s argument means being disrespectful or hostile', isCorrect: false, misconceptionId: `${DBAT}:MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE` },
+    ],
+    correctValue: 'no, forcefulness and respect are compatible',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DBAT}:MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE`],
+    source: `${DBAT_SRC} — boxing-ring conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.citations-and-referencing ─────────────────────────────────────
+const CITE = 'eng.writing.citations-and-referencing'
+const CITE_SRC = 'docs/curriculum/blueprints/eng.writing.citations-and-referencing.md'
+
+const CITE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CITE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Citation isn\'t about whether you used someone\'s exact WORDS — it\'s ' +
+      'about whether you used their IDEAS, FACTS, or DATA. Like borrowing ' +
+      'a friend\'s car: whether you drive it exactly as-is or repaint it a ' +
+      'different color first, it\'s still their car. Paraphrasing a fact ' +
+      'into your own words doesn\'t remove the need to cite where it came ' +
+      'from.',
+    targetedMisconceptions: [`${CITE}:MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION`],
+    source: `${CITE_SRC} — MC-A (P28 borrowed-car-repainted conflict)`,
+  },
+  {
+    conceptId: CITE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A citation is like an address on an envelope — it tells you exactly ' +
+      'where information came from, but not whether what\'s inside is true ' +
+      'or trustworthy. Citing a source correctly answers "where did this ' +
+      'come from?" — it is a separate question from "is this reliable?", ' +
+      'which needs its own credibility check.',
+    targetedMisconceptions: [`${CITE}:MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE`],
+    source: `${CITE_SRC} — MC-B (P28 address-on-envelope conflict)`,
+  },
+  {
+    conceptId: CITE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Citation depends on whether an idea, fact, or data came from a ' +
+      'source, not on whether the exact wording was kept — like a ' +
+      'borrowed car that\'s still borrowed even repainted a different ' +
+      'color; paraphrasing doesn\'t remove the need to cite. Separately, a ' +
+      'citation only answers "where did this come from?" (like an address ' +
+      'on an envelope) — it says nothing about whether the source is ' +
+      'reliable, which requires a separate credibility check.',
+    targetedMisconceptions: [
+      `${CITE}:MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION`,
+      `${CITE}:MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE`,
+    ],
+    source: `${CITE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CITE_PROBES: SeedProbe[] = [
+  {
+    conceptId: CITE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student reads "Renewable energy costs have fallen 70% in the last decade, according to the IEA" and writes, in their own words, "Solar and wind power have become much cheaper over the past ten years" with no citation. Does paraphrasing remove the need to cite the source?',
+    choices: [
+      { text: 'No — the fact itself came from the source regardless of wording; only the words changed, not the ownership of the underlying information, so a citation is still needed', isCorrect: true },
+      { text: 'Yes — only direct quotes need citation; rewording a fact into your own words means no citation is required', isCorrect: false, misconceptionId: `${CITE}:MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION` },
+    ],
+    correctValue: 'no, paraphrased facts still require citation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CITE}:MC-A-ONLY-DIRECT-QUOTES-NEED-CITATION`],
+    source: `${CITE_SRC} — borrowed-car-repainted conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CITE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two sources are both properly, correctly cited for the same claim — one a peer-reviewed nutrition study, one a promotional blog funded by a competing company. Does correct citation formatting tell us the cited claim is reliable?',
+    choices: [
+      { text: 'No — a citation only shows where information came from; source credibility is a separate question requiring its own evaluation (expertise, bias, corroboration)', isCorrect: true },
+      { text: 'Yes — citing a source means the information is automatically true or good evidence', isCorrect: false, misconceptionId: `${CITE}:MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE` },
+    ],
+    correctValue: 'no, citation and credibility are separate questions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CITE}:MC-B-CITING-A-SOURCE-MEANS-THE-INFORMATION-IS-AUTOMATICALLY-TRUE-OR-GOOD-EVIDENCE`],
+    source: `${CITE_SRC} — address-on-envelope conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -27622,6 +28157,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CORPL_EXPLANATIONS,
   ...PRSK_EXPLANATIONS,
   ...THST_EXPLANATIONS,
+  ...CER_EXPLANATIONS,
+  ...RHET_EXPLANATIONS,
+  ...BILM_EXPLANATIONS,
+  ...COMPL_EXPLANATIONS,
+  ...DBAT_EXPLANATIONS,
+  ...CITE_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -27929,4 +28470,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CORPL_PROBES,
   ...PRSK_PROBES,
   ...THST_PROBES,
+  ...CER_PROBES,
+  ...RHET_PROBES,
+  ...BILM_PROBES,
+  ...COMPL_PROBES,
+  ...DBAT_PROBES,
+  ...CITE_PROBES,
 ]
