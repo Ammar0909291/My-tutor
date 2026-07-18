@@ -34568,6 +34568,186 @@ const HENG_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.carnot-cycle ───────────────────────────────────────────────────
+const CARN = 'phys.therm.carnot-cycle'
+const CARN_SRC = 'docs/curriculum/blueprints/phys.therm.carnot-cycle.md'
+
+const CARN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CARN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Carnot cycle is an idealized reversible heat-engine cycle — it defines the theoretical MAXIMUM possible efficiency for any heat engine operating between two temperatures T_H and T_C, but it is a benchmark, not a machine you can buy or build. No real engine can BE a Carnot engine, because a Carnot cycle requires every step to happen quasi-statically (infinitely slowly, staying in equilibrium at every instant) — a real Carnot engine delivering zero power per cycle (since each cycle takes infinite time) would be practically useless. Real engines (Rankine, Otto, Diesel) trade some efficiency for finite, useful power output, and engineers optimize them to approach the Carnot limit while still delivering power in finite time. A second, separate error: substituting Celsius temperatures directly into η = 1 − T_C/T_H. Try it: T_H=127°C=400K, T_C=27°C=300K. The Celsius substitution gives η=1−27/127=78.7% (wrong); the Kelvin substitution gives η=1−300/400=25% (correct). The Carnot derivation requires absolute temperature because it comes from Q_H/T_H = Q_C/T_C (from entropy conservation, dS=δQ_rev/T), where T is always absolute thermodynamic temperature. Temperature DIFFERENCES are the same size in Celsius and Kelvin, which is why ΔT problems work in either scale — but ratios T_C/T_H are NOT equal across scales (300/400 ≠ 27/127), so since the Carnot formula involves a ratio, Kelvin is mandatory: always convert T(K)=T(°C)+273.15 before using η=1−T_C/T_H.',
+    targetedMisconceptions: [`${CARN}:MC-CARNOT-IS-REAL-ENGINE`, `${CARN}:MC-CARNOT-EFFICIENCY-USES-CELSIUS`],
+    source: `${CARN_SRC} — MC-CARNOT-IS-REAL-ENGINE (idealized benchmark, not a buildable engine) + MC-CARNOT-EFFICIENCY-USES-CELSIUS (must use Kelvin, ratio not difference)`,
+  },
+  {
+    conceptId: CARN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students ask "where can I buy a Carnot engine?" or assume the Carnot engine is simply the best real engine ever built. It is neither — it is a purely theoretical, idealized reversible cycle. No heat engine operating between the same two temperatures can exceed Carnot efficiency, but achieving Carnot efficiency requires every step of the cycle to be quasi-static, meaning infinitely slow. A real engine built to run as a genuine Carnot cycle would deliver zero power per cycle, because each cycle would take infinite time — a mathematically perfect but practically useless machine. This is why real engines (Rankine in power plants, Otto in gasoline cars, Diesel in trucks) deliberately trade away some theoretical efficiency in exchange for finite, usable power output; engineers optimize these real cycles to approach the Carnot ceiling as closely as practical, never to reach it. The Carnot cycle is best understood as a thermodynamic LAW setting the maximum possible efficiency, not an engineering target to literally be built. A second, independent error concerns units: writing η=1−T_C/T_H with Celsius temperatures plugged in directly. Worked comparison: for T_H=127°C=400K and T_C=27°C=300K, the (wrong) Celsius calculation gives η=1−(27/127)=78.7%, while the (correct) Kelvin calculation gives η=1−(300/400)=25% — a huge discrepancy. The reason Kelvin is mandatory: the Carnot formula is derived from Q_H/T_H=Q_C/T_C, which itself comes from entropy conservation (dS=δQ_rev/T), and T here is always absolute thermodynamic temperature. It is true that a TEMPERATURE DIFFERENCE (ΔT) is numerically identical in Celsius and Kelvin — which is why many other thermal formulas work fine in either scale — but a RATIO like T_C/T_H is emphatically not scale-invariant (300/400 ≠ 27/127). Since the Carnot formula is a ratio, always convert to Kelvin first: T(K)=T(°C)+273.15.',
+    targetedMisconceptions: [`${CARN}:MC-CARNOT-IS-REAL-ENGINE`, `${CARN}:MC-CARNOT-EFFICIENCY-USES-CELSIUS`],
+    source: `${CARN_SRC} — MC-CARNOT-IS-REAL-ENGINE + MC-CARNOT-EFFICIENCY-USES-CELSIUS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CARN_PROBES: SeedProbe[] = [
+  {
+    conceptId: CARN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student asks "where can I buy a Carnot engine, since it\'s the most efficient one?" What is the correct response?',
+    choices: [
+      { text: 'The Carnot cycle is a theoretical ideal setting the maximum possible efficiency — no real Carnot engine can be built because it requires infinitely slow (quasi-static) steps, delivering zero power', isCorrect: true },
+      { text: 'Carnot engines are sold commercially as the most efficient real heat engines available', isCorrect: false, misconceptionId: `${CARN}:MC-CARNOT-IS-REAL-ENGINE` },
+    ],
+    correctValue: 'theoretical ideal, not a buildable real engine',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CARN}:MC-CARNOT-IS-REAL-ENGINE`],
+    source: `${CARN_SRC} — MC-CARNOT-IS-REAL-ENGINE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CARN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A Carnot engine operates between T_H=127°C and T_C=27°C. What is its efficiency?',
+    choices: [
+      { text: 'Convert to Kelvin first: T_H=400K, T_C=300K, so η=1−300/400=0.25 (25%)', isCorrect: true },
+      { text: 'Use Celsius values directly: η=1−27/127=0.787 (78.7%)', isCorrect: false, misconceptionId: `${CARN}:MC-CARNOT-EFFICIENCY-USES-CELSIUS` },
+    ],
+    correctValue: '25%, using Kelvin ratio',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARN}:MC-CARNOT-EFFICIENCY-USES-CELSIUS`],
+    source: `${CARN_SRC} — MC-CARNOT-EFFICIENCY-USES-CELSIUS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.refrigerators ──────────────────────────────────────────────────
+const RFRG = 'phys.therm.refrigerators'
+const RFRG_SRC = 'docs/curriculum/blueprints/phys.therm.refrigerators.md'
+
+const RFRG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RFRG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Refrigerators move heat — they do not create cold. The interior of a fridge at 5°C contains the same molecules as room air at 25°C; they were never replaced with some special "cold substance." What changed is energy: the refrigerator moved thermal energy OUT of the interior (Q_C) and rejected it, plus the work input, to the hot kitchen (Q_H=Q_C+W). The interior gets colder because it has LESS thermal energy, not because "cold" was added — cold is simply a relative term for low thermal energy, never a substance that flows in. A second, separate point concerns Coefficient of Performance (COP), which can legitimately exceed 1 — this is NOT a violation of thermodynamics, because COP is not the same thing as heat-engine efficiency. Efficiency η=W_out/Q_H is bounded by 1 because you cannot get more work out than heat in — it is a conversion ratio. COP_R=Q_C/W measures something fundamentally different: how much heat you MOVE per unit of work spent. You move Q_C of heat and also bring along the work energy, so Q_H=Q_C+W>W, meaning COP=Q_C/W can be, and typically is, much greater than 1 (real fridges run COP≈3–5) — you are transporting heat, not converting it, so there is no ceiling of 1. The second law does still bound COP, but at a different ceiling: COP_R ≤ COP_Carnot = T_C/(T_H−T_C), which for small temperature differences can itself be quite large.',
+    targetedMisconceptions: [`${RFRG}:MC-REFRIGERATOR-CREATES-COLD`, `${RFRG}:MC-COP-CANNOT-EXCEED-ONE`],
+    source: `${RFRG_SRC} — MC-REFRIGERATOR-CREATES-COLD (heat moves, cold is not a substance) + MC-COP-CANNOT-EXCEED-ONE (COP is not efficiency, can exceed 1 legitimately)`,
+  },
+  {
+    conceptId: RFRG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "the refrigerator makes cold air" or think the fridge produces something called "cold" that gets pumped inside. This gets the physics backwards. The interior air molecules at 5°C are the identical molecules that were there before — they have not been swapped for "cold molecules." What the refrigerator actually does is move thermal energy: it extracts heat Q_C from the cold interior and rejects Q_H=Q_C+W (the extracted heat plus the work input) to the warmer room, via the refrigeration cycle. The interior cools specifically because it LOST thermal energy — cold is not a substance that enters from anywhere, it is simply the relative absence of thermal energy compared to the surroundings. In measurement terms: if Q_C=150J is removed from the interior, the interior\'s temperature drops precisely because of that energy loss, full stop — there is no separate "coldness" being delivered. A second, independent confusion: some students see Coefficient of Performance values like COP=3–5 and think this must violate thermodynamics, reasoning "efficiency can\'t exceed 100%." But COP is not efficiency in the heat-engine sense at all. Heat-engine efficiency η=W_out/Q_H is capped at 1 because you cannot extract more work than the heat you put in — it is a strict conversion process. A refrigerator\'s COP_R=Q_C/W instead measures how much heat gets MOVED per unit of work spent moving it — and since the heat rejected equals Q_H=Q_C+W, you are transporting Q_C of heat while spending only W of work, so COP=Q_C/W readily exceeds 1 without breaking any law; it is not a conversion, it is a transport process. The second law does impose a real ceiling, just a different one: COP_R ≤ COP_Carnot=T_C/(T_H−T_C), which for small temperature differences between hot and cold reservoirs can be quite large — routinely well above 1.',
+    targetedMisconceptions: [`${RFRG}:MC-REFRIGERATOR-CREATES-COLD`, `${RFRG}:MC-COP-CANNOT-EXCEED-ONE`],
+    source: `${RFRG_SRC} — MC-REFRIGERATOR-CREATES-COLD + MC-COP-CANNOT-EXCEED-ONE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RFRG_PROBES: SeedProbe[] = [
+  {
+    conceptId: RFRG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A refrigerator\'s interior drops from 25°C to 5°C. What actually happened?',
+    choices: [
+      { text: 'The refrigerator removed thermal energy (Q_C) from the interior and rejected it, plus work input, to the room — the interior did not gain any "cold substance"', isCorrect: true },
+      { text: 'The refrigerator produced cold and pumped it into the interior, replacing the warm air', isCorrect: false, misconceptionId: `${RFRG}:MC-REFRIGERATOR-CREATES-COLD` },
+    ],
+    correctValue: 'heat was removed, not cold added',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RFRG}:MC-REFRIGERATOR-CREATES-COLD`],
+    source: `${RFRG_SRC} — MC-REFRIGERATOR-CREATES-COLD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RFRG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A refrigerator has COP=4. Does this violate thermodynamics, since "efficiency can\'t exceed 100%"?',
+    choices: [
+      { text: 'No — COP is not efficiency; it measures heat moved per unit work (COP=Q_C/W), which can exceed 1 because Q_H=Q_C+W, and the real ceiling is COP≤COP_Carnot=T_C/(T_H−T_C)', isCorrect: true },
+      { text: 'Yes — any performance ratio greater than 1 violates the second law of thermodynamics', isCorrect: false, misconceptionId: `${RFRG}:MC-COP-CANNOT-EXCEED-ONE` },
+    ],
+    correctValue: 'no violation, COP is a transport ratio not efficiency',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RFRG}:MC-COP-CANNOT-EXCEED-ONE`],
+    source: `${RFRG_SRC} — MC-COP-CANNOT-EXCEED-ONE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.third-law ──────────────────────────────────────────────────────
+const TLAW = 'phys.therm.third-law'
+const TLAW_SRC = 'docs/curriculum/blueprints/phys.therm.third-law.md'
+
+const TLAW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TLAW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Third Law forbids reaching absolute zero in any finite number of steps — it is a genuine thermodynamic law, not merely a practical engineering limit that better technology could eventually overcome. The logic: cooling a system from T to T−δT requires removing entropy ΔS from it, but near 0K, ΔS→0 for every possible isothermal process (this is the Nernst theorem). Since only a vanishingly small amount of entropy can be removed per step, and the total remaining entropy also vanishes as T→0, you face an infinite series of ever-smaller steps that never terminates. Laboratory nuclear demagnetization has reached temperatures around 100 picokelvin — astonishingly close to 0K — but never exactly 0K, and never will, no matter how advanced the technology becomes; each cooling technique hits its own floor, and while a new technique can pick up from there, none delivers the final step. A second, separate point: the Third Law\'s statement that entropy is exactly zero at 0K applies specifically to a PERFECT crystalline substance — every atom in its unique, single equilibrium position, with no isotope mixing or nuclear spin disorder. This is an idealization, not a universal fact about all matter. Real substances with structural disorder frozen in at 0K can have nonzero "residual entropy": for example, CO crystals have molecules randomly frozen in either CO or OC orientation, contributing residual entropy S₀=R·ln(2)≈5.76 J/(mol·K) even at 0K — confirmed by comparing calorimetric entropy measurements against spectroscopic predictions, which differ by exactly this residual amount. Glasses, being amorphous even at 0K, likewise have S₀≫0. The "perfect crystal" qualifier in the Third Law is essential, not optional.',
+    targetedMisconceptions: [`${TLAW}:MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE`, `${TLAW}:MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES`],
+    source: `${TLAW_SRC} — MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE (unattainability, Nernst theorem equivalence) + MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES (perfect-crystal qualifier, residual entropy)`,
+  },
+  {
+    conceptId: TLAW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students reason "if we just do enough cooling steps, we\'ll eventually reach 0K," treating the Third Law as merely stating that entropy equals zero at 0K without also forbidding actually getting there. But the two are logically equivalent — the Nernst formulation of the Third Law and the unattainability of absolute zero are the same statement viewed two ways. Here is why: cooling any system from temperature T down to T−δT requires removing some amount of entropy ΔS from it. But as T approaches 0K, the Nernst theorem tells us ΔS→0 for every possible isothermal process — meaning each cooling step near absolute zero can only remove a vanishingly tiny sliver of entropy. Since the total entropy still remaining in the system also shrinks toward zero as T→0, you are chasing a target that recedes exactly as fast as you approach it — an infinite sequence of ever-smaller steps that mathematically never terminates in a finite number of operations. This is not a statement about current technological limits — it is a hard thermodynamic law. Real laboratory records reflect this precisely: nuclear demagnetization techniques have reached temperatures near 100 picokelvin (a hundred-trillionth of a kelvin above 0K) — extraordinarily close — but never 0K itself, and the Third Law guarantees this will remain true forever, regardless of future technology; each new cooling technique hits its own floor, and while another technique can continue from there, none can ever deliver that final, infinitely-receding step. A second, separate error: assuming EVERY substance has exactly S=0 at 0K, including glasses, mixtures, and disordered solids. The Third Law\'s zero-entropy statement (from Planck\'s formulation) applies specifically to a PERFECT crystalline substance — meaning every atom occupies its unique, well-defined equilibrium position, with no isotopic mixing and no frozen-in nuclear spin disorder. This is a deliberate idealization, and it does not describe every real substance. Concrete counter-example: CO crystals have molecules that freeze into random CO or OC orientations as the crystal forms, and this orientational disorder survives all the way down to 0K, contributing a measurable residual entropy of S₀=R·ln(2)≈5.76 J/(mol·K) — this is confirmed experimentally, because calorimetric entropy measurements taken by integrating heat capacity from 0K upward come out exactly 5.76 J/(mol·K) lower than spectroscopic entropy predictions, and that gap IS the residual entropy. Amorphous glasses, having no ordered crystal structure at all even at 0K, likewise carry S₀≫0. The Third Law\'s "perfect crystal" qualifier is not a minor technicality — it is essential to the law\'s truth.',
+    targetedMisconceptions: [`${TLAW}:MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE`, `${TLAW}:MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES`],
+    source: `${TLAW_SRC} — MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE + MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TLAW_PROBES: SeedProbe[] = [
+  {
+    conceptId: TLAW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could enough successive cooling steps eventually reach exactly 0K?',
+    choices: [
+      { text: 'No — the Third Law (Nernst theorem) forbids reaching 0K in any finite number of steps; entropy removable per step shrinks to zero just as fast as the target is approached', isCorrect: true },
+      { text: 'Yes — with sufficiently advanced technology and enough cooling stages, 0K could eventually be reached', isCorrect: false, misconceptionId: `${TLAW}:MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE` },
+    ],
+    correctValue: 'no, absolute zero is unattainable in finite steps',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TLAW}:MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE`],
+    source: `${TLAW_SRC} — MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TLAW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does every substance have exactly zero entropy at 0K?',
+    choices: [
+      { text: 'No — only a perfect crystalline substance has S=0 at 0K; real substances like CO crystals or glasses can have nonzero residual entropy from frozen-in disorder', isCorrect: true },
+      { text: 'Yes — the Third Law guarantees S=0 at 0K for all substances, including glasses and disordered mixtures', isCorrect: false, misconceptionId: `${TLAW}:MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES` },
+    ],
+    correctValue: 'no, only perfect crystals; real substances can have residual entropy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TLAW}:MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES`],
+    source: `${TLAW_SRC} — MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -34980,6 +35160,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...TPRC_EXPLANATIONS,
   ...PTRN_EXPLANATIONS,
   ...HENG_EXPLANATIONS,
+  ...CARN_EXPLANATIONS,
+  ...RFRG_EXPLANATIONS,
+  ...TLAW_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -35392,4 +35575,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...TPRC_PROBES,
   ...PTRN_PROBES,
   ...HENG_PROBES,
+  ...CARN_PROBES,
+  ...RFRG_PROBES,
+  ...TLAW_PROBES,
 ]
