@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.square-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.square-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:96245517094e7cd99a0101e81b3f852c84ea340ee389fd7bca7d3a5dd5219c3e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.square-numbers.md": "sha256:3112ccc18161e4e242c7aed0c1bbd8819c179621f70507fb8407906f1965bf0e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.square-numbers",
+    "name": "Perfect Squares",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.arith.exponentiation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.square-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.square-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.square-numbers.md": "sha256:3112ccc18161e4e242c7aed0c1bbd8819c179621f70507fb8407906f1965bf0e"
+      },
+      "contentHash": "sha256:7273d3fe2befd4f52bac8c569d6ba53f2bb0a7696c6fc82dfc058555d12e79b8",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.square-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.square-numbers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.square-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.square-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.square-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.square-numbers.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.square-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.square-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.square-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.square-numbers.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.square-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.square-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.square-numbers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Perfect Squares — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.arith.exponentiation**: $n^2=n\\times n$ (repeated multiplication) — this concept studies the specific integers PRODUCED by squaring, not the operation itself, already known\n\n### Target Knowledge State\nStudent can list and recognize perfect squares ($1,4,9,16,25,36,49,64,81,100,\\ldots$) and correctly compute $n^2$ as $n\\times n$ (never $2n$); correctly recognize that squaring a NEGATIVE integer produces a POSITIVE perfect square ($(-n)^2=n^2$, not a negative value); and correctly verify whether a number IS a perfect square by actually checking for a whole-number square root, rather than guessing from surface features like its last digit.\n\n### Conceptual Obstacles\n1. Confusing \"squaring\" with \"doubling\" — computing $n^2$ as $2n$ (adding $n$ to itself) rather than $n\\times n$ (multiplying $n$ by itself); the two operations coincide only at $n=2$ ($2^2=4=2\\times2$), which can reinforce the confusion if that's the first example seen\n2. Believing that squaring a negative integer produces a negative result — $(-5)^2$ might be computed as $-25$ rather than the correct $25$; squaring ALWAYS produces a non-negative result, regardless of the original number's sign\n3. Judging whether a number is a perfect square from surface features (like its last digit) rather than actually checking for an integer square root — perfect squares' last digits ARE restricted (only 0,1,4,5,6,9 ever appear), but having one of those last digits is NECESSARY, not SUFFICIENT, for being a perfect square (e.g. 15 ends in 5 but is not a perfect square)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.square-numbers",
+      "title": "SQUARING-MEANS-DOUBLING",
+      "content": "| MC-1 | SQUARING-MEANS-DOUBLING | Student computes $n^2$ as $2n$ (doubling) rather than $n\\times n$ (multiplying by itself) | Any squaring computation for $n\\ne2$, where doubling and squaring give different answers |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.square-numbers",
+      "title": "NEGATIVE-SQUARED-IS-NEGATIVE",
+      "content": "| MC-2 | NEGATIVE-SQUARED-IS-NEGATIVE | Student computes $(-n)^2$ as a negative number, rather than recognizing squaring a negative always yields a positive result | Any squaring of a negative integer |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.square-numbers",
+      "title": "LAST-DIGIT-DECIDES-PERFECT-SQUARE",
+      "content": "| MC-3 | LAST-DIGIT-DECIDES-PERFECT-SQUARE | Student judges a number to be a perfect square based solely on its last digit matching a common perfect-square ending (0,1,4,5,6,9), without verifying an actual integer square root exists | Any non-square number whose last digit happens to match a perfect square's typical ending, e.g. 15, 26, 40 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Building the List by Direct Multiplication",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Building the List by Direct Multiplication\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 63,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Positive Result from Negatives; Verify, Don't Guess from Digits",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Positive Result from Negatives; Verify, Don't Guess from Digits\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 116,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 152,
+        "endLine": 366
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess correct squaring computation, sign handling, and verification-based perfect-square recognition under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Compute $8^2$ (not $2\\times8$).\n\n*Solution:* $8\\times8=64$.\n\n**Problem 2:** Compute $(-6)^2$.\n\n*Solution:* $(-6)\\times(-6)=36$ (positive).\n\n**Problem 3:** Is $50$ a perfect square? Justify using consecutive integer squares.\n\n*Solution:* $7^2=49$, $8^2=64$ — 50 falls strictly between them, not equal to either. NOT a perfect square.\n\n**Problem 4:** True or false: \"Since 121 ends in 1, and many perfect squares end in 1, 121 must be a perfect square.\" Evaluate the REASONING (not just the conclusion).\n\n*Solution:* The conclusion happens to be true ($121=11^2$), but the REASONING is invalid as stated — ending in 1 is necessary for some perfect squares but not sufficient (e.g. 31 also ends in 1 but is not a perfect square). The correct justification requires checking directly: $11^2=121$ exactly, confirming it, independent of the last-digit observation.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.geom.area)*\n\n**Prompt:** A gardener wants to build a square vegetable patch. Recall from math.geom.area that the area of a square with side length $s$ is $s^2$.\n\n(a) The gardener wants the patch's area to be exactly 144 square feet. Using the perfect-square list, determine the exact side length $s$ (a whole number of feet), and verify by computing $s^2$ directly.\n(b) A second gardener wants a patch with area exactly 150 square feet. Using the \"falls between consecutive squares\" technique, explain why NO whole-number side length gives exactly 150 square feet, and state the two whole-number side lengths that come closest (just under and just over).\n(c) A student argues: \"For part (b), since 150 is close to 144=12², we could just say the side length is approximately 12 feet and call it a perfect square for practical gardening purposes.\" Evaluate this claim, distinguishing between a PRACTICAL/approximate answer (which might be reasonable for gardening) and the MATHEMATICAL fact about whether 150 is a genuine perfect square.\n\n**Expected solution:**\n\n(a) From the perfect-square list, $144=12^2$ (locate it: $12\\times12=144$). Verify directly: $12\\times12=144$ ✓. Side length: **12 feet**.\n\n(b) Check consecutive squares: $12^2=144$, $13^2=169$. Since $144<150<169$, and 150 doesn't exactly equal either, NO whole-number side length produces exactly 150 square feet — the closest whole-number side lengths are 12 feet (area 144, just under) and 13 feet (area 169, just over).\n\n(c) The claim conflates two genuinely different things. MATHEMATICALLY, 150 is definitively NOT a perfect square — this is a precise, verifiable fact (no integer squares to exactly 150), and no amount of \"closeness\" to 144 changes that. PRACTICALLY, for an actual gardening project, using a side length of \"approximately 12 feet\" (accepting an area close to but not exactly 150) might be a perfectly reasonable real-world simplification — but this is a PRACTICAL COMPROMISE, not a mathematical reclassification of 150 as a perfect square. The two questions (\"is 150 a perfect square?\" and \"is 12 feet a good-enough approximate side length for a 150-square-foot patch?\") have different, independent answers, and conflating them (treating \"close enough for gardening\" as making 150 \"basically\" a perfect square) is exactly the kind of last-digit/approximation-based reasoning this concept warns against — verification (checking against exact consecutive squares) is the only way to settle the mathematical question, regardless of what practical accommodations are separately reasonable.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.9 × 5⌉ = ⌈4.5⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.arith.square-roots; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.arith.square-numbers assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — SQUARING-MEANS-DOUBLING (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Computing n² as 2n is SQUARING-MEANS-DOUBLING. Squaring means multiplying a number BY ITSELF (n×n), not adding it to itself (2n) — these only coincidentally agree at n=2.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is 5²?\"\n- MC-1 response: \"10\" (doubling 5).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"$5^2$ means $5\\times5$, not $2\\times5$. Compute directly: $5\\times5=25$, not 10. Check at $n=2$ why the confusion might arise: $2^2=2\\times2=4$ AND $2\\times2=4$ (doubling) also give 4 — purely because $2+2=2\\times2$ happens to be true only for the number 2. For every other number (like 5), squaring and doubling give clearly different results (25 vs. 10).\"\n\nPractice: Compute both 4² and 2×4, confirming they give different values (16 vs. 8).\n\n---\n\n### Repair Action B02 — NEGATIVE-SQUARED-IS-NEGATIVE (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Computing (-n)² as negative is NEGATIVE-SQUARED-IS-NEGATIVE. A negative number times a negative number is always POSITIVE — squaring a negative integer gives the same positive perfect square as its positive counterpart.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is (-8)²?\"\n- MC-2 response: \"-64.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"$(-8)^2=(-8)\\times(-8)$. Recall the sign rule: negative times negative equals positive. So $(-8)\\times(-8)=64$, the SAME positive perfect square as $8^2=64$ — never $-64$. Squaring ALWAYS produces a non-negative result, for any real number, positive or negative.\"\n\nPractice: Compute (-3)² and 3² side by side, confirming they give the identical positive value.\n\n---\n\n### Repair Action B03 — LAST-DIGIT-DECIDES-PERFECT-SQUARE (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Judging a number is a perfect square from its last digit alone is LAST-DIGIT-DECIDES-PERFECT-SQUARE. A matching last digit is necessary for SOME perfect squares but never sufficient on its own — only checking against actual consecutive integer squares reliably verifies it.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"26 ends in 6, like 16=4² and 36=6². Is 26 a perfect square?\"\n- MC-3 response: \"Yes, since it ends in a digit common to perfect squares.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check directly against consecutive squares: $5^2=25$, $6^2=36$ — 26 falls strictly between them, matching neither exactly. NOT a perfect square, despite the matching last digit. The last-digit pattern only narrows down CANDIDATES (rules out numbers ending in 2,3,7,8, which can never be perfect squares) — it never confirms one; direct verification against the actual list of squares is the only reliable test.\"\n\nPractice: Check whether 65 (ending in 5, like 25 and 225) is a perfect square, using consecutive squares (8²=64, 9²=81) to verify.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute a fresh squaring problem, explicitly contrasting it against doubling the same number |\n| SR-2 | +3 days | Compute a fresh negative integer's square, confirming a positive result |\n| SR-3 | +7 days | Verify whether a fresh number is a perfect square using the consecutive-squares bracket method |\n| SR-4 | +14 days | Reconstruct the gardening transfer probe's practical-vs-mathematical distinction for a fresh non-square target area |\n\nRetrieval flag: if student doubles instead of squaring (MC-1) or reports a negative result for a squared negative (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.arith.exponentiation | Supplies the $n^2$ notation and repeated-multiplication meaning this concept studies the integer outputs of |\n| Unlocks | math.arith.square-roots | The inverse operation (finding $n$ given $n^2$) builds directly on the perfect-square list established here |\n\n**GR-9:** cross_links include math.geom.area (Tier 1) → P76_mode = cross-link probe (probe applies the perfect-square list and verification method to a concrete square-garden area problem, distinguishing mathematical exactness from practical approximation).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=3 → compact structure (2 main TAs + gate), matching the concept's small time allocation and recall-focused (bloom=remember) scope\n- bloom=remember → checkpoints emphasize direct recall/computation of the perfect-square list and squaring procedure, not derivations\n- CPA_entry = C for a developing learner: direct repeated multiplication (with an explicit doubling-vs-squaring check at a non-coincidental value) anchors squaring as genuine self-multiplication before any shortcut or pattern-based recognition is introduced\n\n**Key teaching insight:** MC-1 is this concept's highest-leverage misconception specifically because of the $n=2$ coincidence ($2\\times2=2+2$) — if a student's very first exposure to squaring happens to use $n=2$ as the example, doubling and squaring are indistinguishable, and the misconception can persist silently until a different number exposes it. A01 is deliberately built around $n=3$ (not $n=2$) as the illustrative contrast specifically to break this coincidence immediately.\n\n**MC-3 and the necessary-vs-sufficient distinction:** MC-3 is a genuine logical error (mistaking a necessary condition — matching last digit — for a sufficient one) rather than a computational slip, and B03's repair explicitly names this distinction (\"necessary for SOME, never sufficient\") so the lesson generalizes beyond just perfect squares to the broader habit of not confusing \"consistent with\" and \"proves.\"\n\n**Sequencing note (cross-link):** math.geom.area (Tier 1, already authored) is a genuine, actionable cross-link — the P76 transfer probe grounds the perfect-square verification method in a concrete square-garden scenario, and its part (c) explicitly separates the mathematical fact (is a number a perfect square) from a practical approximation question (is a close side-length good enough for gardening), reinforcing that verification-based reasoning applies to the mathematical question specifically.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.arith.square-numbers ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.arith.exponentiation ✓ | PASS |\n| V-3 | CPA entry = C for developing difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=remember → recall/computation tasks | Direct squaring and list-recall tasks throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | math.geom.area is Tier 1 → P76=cross-link probe ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.9×5⌉=⌈4.5⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=3 → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Square garden area scenario; mathematical-vs-practical distinction ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 152,
+        "endLine": 366
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — developing learner builds the list of perfect squares by direct repeated multiplication, deliberately checking $n=2$ against a DIFFERENT value to break the doubling/squaring coincidence, before any shortcut is introduced.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: building $1^2,2^2,3^2,\\ldots$ by direct multiplication, explicitly contrasting $3^2$ against $2\\times3$; P: a growing square-grid picture (geometric area) for perfect squares; A: the formal definition and negative-integer squaring rule\n2. **A02 P06 CONTRAST PAIR** — squaring vs. doubling on a value where they clearly differ (MC-1); a negative integer squared, shown positive (MC-2); a last-digit-matching non-square vs. a genuine perfect square (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.square-numbers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute a fresh squaring problem, explicitly contrasting it against doubling the same number |\n| SR-2 | +3 days | Compute a fresh negative integer's square, confirming a positive result |\n| SR-3 | +7 days | Verify whether a fresh number is a perfect square using the consecutive-squares bracket method |\n| SR-4 | +14 days | Reconstruct the gardening transfer probe's practical-vs-mathematical distinction for a fresh non-square target area |\n\nRetrieval flag: if student doubles instead of squaring (MC-1) or reports a negative result for a squared negative (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 299,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "math.arith.square-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.square-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.arith.exponentiation | Supplies the $n^2$ notation and repeated-multiplication meaning this concept studies the integer outputs of |\n| Unlocks | math.arith.square-roots | The inverse operation (finding $n$ given $n^2$) builds directly on the perfect-square list established here |\n\n**GR-9:** cross_links include math.geom.area (Tier 1) → P76_mode = cross-link probe (probe applies the perfect-square list and verification method to a concrete square-garden area problem, distinguishing mathematical exactness from practical approximation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.square-numbers.md",
+        "startLine": 314,
+        "endLine": 327
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.rules-of-inference-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.rules-of-inference",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b776ffa84944be0fcbdbf59be302993f3658d003140045ae7dcfb434140ca432",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.rules-of-inference.md": "sha256:046146edefad240d21e96e85341a9cbeeb40c895e6ba9b34d0d6630815b2323e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.rules-of-inference",
+    "name": "Rules of Inference",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.logical-equivalence",
+      "math.found.logical-connectives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.rules-of-inference-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.rules-of-inference (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.rules-of-inference.md": "sha256:046146edefad240d21e96e85341a9cbeeb40c895e6ba9b34d0d6630815b2323e"
+      },
+      "contentHash": "sha256:c40ca286f018c1111379ab4e598b55591a298cf8c1686e306f1c787a0ec729a9",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.rules-of-inference.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rules-of-inference.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rules-of-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rules-of-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rules-of-inference.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rules-of-inference.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rules-of-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rules-of-inference\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rules-of-inference.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rules-of-inference.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rules-of-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rules-of-inference\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.rules-of-inference/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Rules of Inference — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.found.logical-equivalence**: two propositions are equivalent iff they match on every truth-table row — the tool that VERIFIES a proposed inference rule is genuinely valid (a valid rule's premises-imply-conclusion form is a tautology)\n- **math.found.logical-connectives**: ¬,∧,∨,→,↔ — the vocabulary inference rules are built from\n\n### Target Knowledge State\nStudent can apply modus ponens (P, P→Q ⊢ Q) and modus tollens (¬Q, P→Q ⊢ ¬P) correctly to draw valid conclusions; correctly identify and REJECT the two classic invalid argument forms that superficially resemble them — affirming the consequent (Q, P→Q ⊢ P, INVALID) and denying the antecedent (¬P, P→Q ⊢ ¬Q, INVALID); and correctly recognize that a valid inference rule's DIRECTION cannot be reversed — from {P, P→Q} validly concluding Q does NOT license concluding P→Q from {P,Q}.\n\n### Conceptual Obstacles\n1. Affirming the consequent — treating \"P→Q is true, and Q is true, therefore P is true\" as a valid inference, when in fact Q being true says nothing about P (many other things besides P could have caused Q); this is a genuinely invalid argument form, not a weaker version of modus ponens\n2. Denying the antecedent — treating \"P→Q is true, and P is false, therefore Q is false\" as valid, when P being false says nothing about Q's truth value (Q could still be true for some other reason); this is a genuinely invalid argument form, not a weaker version of modus tollens\n3. Assuming a valid inference's direction can be reversed — believing that because {P, P→Q} validly yields Q (modus ponens), the reverse process (starting from P and Q, concluding P→Q) is equally valid; a conditional cannot in general be inferred merely from its antecedent and consequent both happening to be true\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "AFFIRMING-THE-CONSEQUENT",
+      "content": "| MC-1 | AFFIRMING-THE-CONSEQUENT | Student treats \"P→Q; Q; therefore P\" as valid, confusing it with modus ponens | Any argument where the consequent Q is asserted true and the antecedent P is (invalidly) concluded |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "DENYING-THE-ANTECEDENT",
+      "content": "| MC-2 | DENYING-THE-ANTECEDENT | Student treats \"P→Q; ¬P; therefore ¬Q\" as valid, confusing it with modus tollens | Any argument where the antecedent P is asserted false and the consequent Q's negation is (invalidly) concluded |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "INFERENCE-DIRECTION-REVERSIBLE",
+      "content": "| MC-3 | INFERENCE-DIRECTION-REVERSIBLE | Student assumes a valid rule's direction can be reversed — e.g. from P and Q both being true, concluding P→Q must also be established | Any task asking whether a conditional can be inferred merely from its antecedent and consequent independently holding |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Two Valid Rules, Verified by Truth Table",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Valid Rules, Verified by Truth Table\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 64,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Two Fallacies, Exposed by Truth Table; Direction Cannot Reverse",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Two Fallacies, Exposed by Truth Table; Direction Cannot Reverse\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 129,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 187,
+        "endLine": 402
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess correct application of modus ponens/tollens, rejection of the two classic fallacies, and direction-reversal awareness under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** \"If x=3, then x²=9\" (P→Q) and \"x=3\" (P). What follows by modus ponens?\n\n*Solution:* $x^2=9$ (Q).\n\n**Problem 2:** \"If x=3, then x²=9\" (P→Q) and \"x²≠9\" (¬Q). What follows by modus tollens?\n\n*Solution:* $x\\ne3$ (¬P).\n\n**Problem 3:** \"If x=3, then x²=9\" and \"x²=9\". Can you validly conclude x=3? Name the fallacy if not, and give a counterexample.\n\n*Solution:* No — affirming the consequent. Counterexample: $x=-3$ gives $x^2=9$ too, but $x\\ne3$.\n\n**Problem 4:** \"If x=3, then x²=9\" and \"x≠3\". Can you validly conclude x²≠9? Name the fallacy if not, and give a counterexample.\n\n*Solution:* No — denying the antecedent. Counterexample: $x=-3\\ne3$, yet $x^2=9$ (not ≠9).\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A medical test has the property: \"If a patient has disease D, the test result is positive\" (P→Q, where P=\"has D\", Q=\"test positive\").\n\n(a) A patient tests positive (Q). A doctor concludes \"the patient has D\" (P). Is this valid? Name the fallacy if not, and explain in real medical terms (not just abstract symbols) why the conclusion doesn't necessarily follow.\n(b) A different patient tests negative (¬Q). Using modus tollens correctly, what can be validly concluded?\n(c) A researcher observes that, in a specific patient, both \"has D\" and \"tests positive\" happen to be true, and concludes: \"This confirms our rule 'if a patient has D, the test is positive' is a genuinely reliable causal rule.\" Evaluate this reasoning, distinguishing between confirming ONE INSTANCE is consistent with the rule versus establishing the rule ITSELF (as a general implication) from that one instance alone.\n\n**Expected solution:**\n\n(a) **Invalid** — this is affirming the consequent. In real terms: many medical tests have FALSE POSITIVES — a patient could test positive due to a different condition, a lab error, or other causes entirely unrelated to disease D, without actually having D. Testing positive (Q) does not, by itself, guarantee the specific cause was D (P); the rule only guarantees the OTHER direction (having D guarantees a positive test, not the reverse).\n\n(b) Modus tollens: from $\\neg Q$ (tests negative) and $P\\to Q$, validly conclude $\\neg P$ — the patient does NOT have disease D (assuming the test has zero false negatives, i.e. the rule $P\\to Q$ genuinely holds without exception; real tests may have this stated as an idealization).\n\n(c) The researcher's reasoning overreaches. Observing ONE patient where both P (has D) and Q (tests positive) are true is fully CONSISTENT with the rule $P\\to Q$ holding — it doesn't contradict it — but a single consistent instance does not ESTABLISH the general rule as reliable or causal; that would require broader evidence (e.g. checking many patients WITH the disease to confirm they consistently test positive, and understanding the biological/testing mechanism). This is precisely the direction-reversal fallacy from Contrast 3 in a scientific-reasoning guise: observing P and Q both true in a single case never PROVES $P\\to Q$ as a law — at most it fails to disprove it. Confirming a rule's reliability requires evidence structured very differently from simply noting one instance where the antecedent and consequent happened to coincide.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 4/5 (⌈0.8 × 5⌉ = ⌈4⌉ = 4)\n\n- S ≥ 4: MASTERY ACHIEVED → proceed to P74\n- S = 3: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 2: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.found.proof; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.found.rules-of-inference assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — AFFIRMING-THE-CONSEQUENT (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Concluding P from P→Q and Q is AFFIRMING-THE-CONSEQUENT. This is invalid — Q being true doesn't rule out other causes of Q besides P.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"If it's raining, the ground is wet. The ground is wet. Is it raining?\"\n- MC-1 response: \"Yes, it must be raining.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check for other causes of a wet ground: a sprinkler, a spilled bucket, melted snow — the ground being wet is CONSISTENT with rain but doesn't RULE OUT these other explanations. Verify via truth table: $[(P\\to Q)\\wedge Q]\\to P$ fails at row (F,T) — P false, Q true, P→Q true, yet the conclusion P would be false. NOT a tautology, confirming this inference pattern is invalid in general.\"\n\nPractice: For \"if a shape is a square, it has 4 sides\" and \"a shape has 4 sides,\" explain why you cannot conclude it's a square, naming a specific counterexample shape.\n\n---\n\n### Repair Action B02 — DENYING-THE-ANTECEDENT (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Concluding ¬Q from P→Q and ¬P is DENYING-THE-ANTECEDENT. This is invalid — P being false doesn't rule out Q being true for some other reason.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"If it's raining, the ground is wet. It's not raining. Is the ground dry?\"\n- MC-2 response: \"Yes, the ground must be dry.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The ground could still be wet from a sprinkler even though it's not raining — 'not raining' rules out rain as the CAUSE, but says nothing about OTHER causes making the ground wet anyway. Verify via truth table: $[(P\\to Q)\\wedge\\neg P]\\to\\neg Q$ fails at row (F,T) — P false, Q true (so ¬Q false), yet ¬P is true; the conclusion ¬Q is false there. NOT a tautology.\"\n\nPractice: For \"if a number is a multiple of 4, it's even\" and \"a number is not a multiple of 4,\" explain why you cannot conclude it's odd, naming a specific counterexample number.\n\n---\n\n### Repair Action B03 — INFERENCE-DIRECTION-REVERSIBLE (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming a valid rule's direction can be reversed is INFERENCE-DIRECTION-REVERSIBLE. Concluding Q from P and P→Q (modus ponens) does NOT license the reverse: concluding P→Q merely from P and Q both being independently true.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Today is Tuesday, and the store is open. Does this prove 'if it's Tuesday, the store is open'?\"\n- MC-3 response: \"Yes, since both are true today.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Both being true TODAY says nothing about whether the connection holds as a GENERAL RULE. The store might be open every single day, with Tuesday being completely irrelevant to its hours — one day's coincidence proves nothing about a general implication. Establishing $P\\to Q$ as a genuine rule requires checking many cases (or understanding an underlying mechanism), not observing one instance where both happen to hold.\"\n\nPractice: Explain why observing that \"today is sunny\" and \"the ice cream shop has a long line\" doesn't prove \"if it's sunny, the ice cream shop has a long line\" as a universal rule.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Reconstruct modus ponens and modus tollens from memory, applying each to a fresh premise pair |\n| SR-2 | +3 days | Verify affirming-the-consequent and denying-the-antecedent are invalid via fresh truth tables |\n| SR-3 | +7 days | Find a fresh counterexample number/object disproving an affirming-the-consequent or denying-the-antecedent argument |\n| SR-4 | +14 days | Reconstruct the medical-test transfer probe's distinction between one consistent instance and establishing a general rule |\n\nRetrieval flag: if student accepts affirming the consequent (MC-1) or denying the antecedent (MC-2) as valid, re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.found.logical-equivalence | Supplies the truth-table-as-tautology validity criterion used throughout to verify (or refute) every argument form in this concept |\n| Requires (Tier-1) | math.found.logical-connectives | Supplies the → connective these inference rules are built around |\n| Unlocks | math.found.proof | Formal mathematical proofs are built by chaining valid inference rules (modus ponens, modus tollens, and others) — this concept supplies the basic building blocks |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the fallacy-detection and direction-reversal lessons to a medical-testing/scientific-reasoning scenario rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (2 main TAs + gate), matching the concept's tightly focused scope (two valid rules, two paired fallacies, one direction-reversal caution) despite developing difficulty\n- bloom=apply → every checkpoint and the gate require applying a rule or constructing a counterexample, not merely stating a definition\n- CPA_entry = C for a developing learner: a concrete rain/wet-ground scenario, verified by truth table (already a familiar technique), anchors both valid rules before their invalid look-alikes are introduced\n\n**Key teaching insight:** MC-1 and MC-2 are best taught as a matched PAIR, not two separate lessons, because they share the identical underlying error (mistaking \"consistent with the rule\" for \"the only way the rule could be satisfied\") applied to the two valid rules' mirror images. A02's Contrasts 1 and 2 deliberately reuse the IDENTICAL rain/wet-ground scenario from A01, changing only which premise is asserted, so the parallel structure between the valid and invalid forms — and between the two fallacies themselves — is as visible as possible.\n\n**MC-3 as the conceptually deepest error:** Unlike MC-1/MC-2 (which involve a specific WRONG conclusion), MC-3 involves a more subtle logical error — mistaking evidence CONSISTENT with a rule for evidence that ESTABLISHES the rule. This connects directly to scientific reasoning generally (confirmation bias, the difference between consistent-with and proves), which is why the A03 transfer probe extends it into an explicitly scientific/medical framing.\n\n**Sequencing note:** No cross-link concept exists yet for math.found.rules-of-inference; the P76 transfer probe instead uses a medical-testing scenario, chosen because false positives/negatives make the affirming-the-consequent and denying-the-antecedent fallacies concretely consequential (misdiagnosis) rather than abstract, and because the direction-reversal fallacy maps naturally onto a common scientific-reasoning error (over-generalizing from one confirming instance).\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.found.rules-of-inference ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.found.logical-equivalence ✓ (this session), math.found.logical-connectives ✓ | PASS |\n| V-3 | CPA entry = C for developing difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Rule-application and counterexample-construction tasks throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=4/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.8×5⌉=⌈4⌉=4; PASS=4/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5, tightly-scoped → standard (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Medical testing false-positive scenario; consistent-with-vs-establishes distinction ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 187,
+        "endLine": 402
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — developing learner works a concrete modus ponens and modus tollens example fully, verified by truth table, before the invalid look-alike forms are introduced.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: modus ponens and modus tollens worked on a concrete premise pair, each verified as a tautology via truth table; P: an argument-form template picture; A: the formal rule statements and validity-via-tautology criterion\n2. **A02 P06 CONTRAST PAIR** — modus ponens vs. affirming the consequent, truth-table-verified (MC-1); modus tollens vs. denying the antecedent, truth-table-verified (MC-2); the direction-reversal fallacy exposed via a counterexample (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Reconstruct modus ponens and modus tollens from memory, applying each to a fresh premise pair |\n| SR-2 | +3 days | Verify affirming-the-consequent and denying-the-antecedent are invalid via fresh truth tables |\n| SR-3 | +7 days | Find a fresh counterexample number/object disproving an affirming-the-consequent or denying-the-antecedent argument |\n| SR-4 | +14 days | Reconstruct the medical-test transfer probe's distinction between one consistent instance and establishing a general rule |\n\nRetrieval flag: if student accepts affirming the consequent (MC-1) or denying the antecedent (MC-2) as valid, re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 334,
+        "endLine": 349
+      }
+    },
+    {
+      "assetId": "math.found.rules-of-inference/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.rules-of-inference",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.found.logical-equivalence | Supplies the truth-table-as-tautology validity criterion used throughout to verify (or refute) every argument form in this concept |\n| Requires (Tier-1) | math.found.logical-connectives | Supplies the → connective these inference rules are built around |\n| Unlocks | math.found.proof | Formal mathematical proofs are built by chaining valid inference rules (modus ponens, modus tollens, and others) — this concept supplies the basic building blocks |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the fallacy-detection and direction-reversal lessons to a medical-testing/scientific-reasoning scenario rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rules-of-inference.md",
+        "startLine": 349,
+        "endLine": 363
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

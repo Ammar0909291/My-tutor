@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.algebraic-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.algebraic-structure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:747a76c26bd04ad588a22efd6206680832951a6ec0a9dd1ff9af94b8d7adcc55",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.algebraic-structure.md": "sha256:c877c8a1ccd3408031b24bacb9984419b1a0b1a6c60563da13c9333993ddafe6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.abst.algebraic-structure",
+    "name": "Algebraic Structure",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.axiom",
+      "math.found.set-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.algebraic-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.algebraic-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.algebraic-structure.md": "sha256:c877c8a1ccd3408031b24bacb9984419b1a0b1a6c60563da13c9333993ddafe6"
+      },
+      "contentHash": "sha256:09797235a127d561c61eb8f0a726b48a472665715128bed7c932e3b8218676f8",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.algebraic-structure.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.algebraic-structure.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.algebraic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.algebraic-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.algebraic-structure.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.algebraic-structure.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.algebraic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.algebraic-structure\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.algebraic-structure.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.algebraic-structure.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.algebraic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.algebraic-structure\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.algebraic-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "Algebraic Structure — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.found.axiom**: a statement accepted as a starting rule, not proved from anything more basic — algebraic structures are DEFINED by which axioms their operation(s) satisfy\n- **math.found.set-theory**: sets and their elements — an algebraic structure is a set PLUS operation(s), never the set alone\n\n### Target Knowledge State\nStudent can recognize that an algebraic structure is a SET together with one or more OPERATIONS satisfying specified axioms — not the set alone; correctly recognize that the SAME underlying set can carry MULTIPLE different algebraic structures depending on which operation is paired with it (e.g. $(\\mathbb Z,+)$ and $(\\mathbb Z,\\times)$ are different structures on the identical set $\\mathbb Z$); and correctly verify structural axioms using only the OPERATION's behavior (abstractly), without needing to know any concrete details about what the elements \"are.\"\n\n### Conceptual Obstacles\n1. Treating the algebraic structure as fully determined by the underlying set alone, ignoring that the CHOICE of operation is an equally essential, independent part of the structure — \"the integers\" is not one algebraic structure but the basis for MANY, depending on which operation accompanies them\n2. Assuming a given set can only carry ONE \"natural\" algebraic structure — missing that the SAME set (e.g. $\\mathbb Z$) simultaneously supports entirely different structures ($(\\mathbb Z,+)$, $(\\mathbb Z,\\times)$, and others), each with its own distinct properties (e.g. $(\\mathbb Z,+)$ has inverses for every element; $(\\mathbb Z,\\times)$ does not)\n3. Believing you must know the concrete \"nature\" of the elements (numbers, matrices, functions, symbols) to verify an axiom — algebraic axioms are stated purely in terms of how the OPERATION behaves (closure, associativity, identity, inverses), and can be checked without any reference to what the elements intrinsically \"are\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "STRUCTURE-IS-JUST-THE-SET",
+      "content": "| MC-1 | STRUCTURE-IS-JUST-THE-SET | Student treats \"the algebraic structure\" as fully determined by the underlying set, ignoring the operation's essential role | Any comparison between two different structures sharing the identical underlying set |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "ONE-STRUCTURE-PER-SET",
+      "content": "| MC-2 | ONE-STRUCTURE-PER-SET | Student assumes a given set has only one natural algebraic structure, missing that multiple operations yield multiple, genuinely different structures on the same set | Any set (e.g. ℤ) paired with two different operations, each satisfying different axiom sets |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "AXIOMS-REQUIRE-KNOWING-ELEMENT-NATURE",
+      "content": "| MC-3 | AXIOMS-REQUIRE-KNOWING-ELEMENT-NATURE | Student believes verifying a structural axiom requires understanding the concrete \"nature\" of the elements, rather than recognizing axioms are stated purely in terms of operation behavior | Any structure whose elements are abstract or unfamiliar (symbols, matrices, functions) rather than ordinary numbers |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "One Set, Two Structures",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"One Set, Two Structures\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 64,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "Multiple Structures, One Set; Axioms Without Knowing \"What Elements Are\"",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiple Structures, One Set; Axioms Without Knowing \\\"What Elements Are\\\"\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 114,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 150,
+        "endLine": 366
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess recognition of set-plus-operation as the structure, multiple-structures-per-set awareness, and abstract axiom verification under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Is $(\\mathbb Q, +)$ (rational numbers under addition) the \"same structure\" as $(\\mathbb Q,\\times)$? Justify using the inverse axiom.\n\n*Solution:* No — under +, every rational has an additive inverse (its negation, always rational). Under ×, EVERY rational EXCEPT 0 has a multiplicative inverse (its reciprocal), but 0 has none (no rational $m$ satisfies $0\\times m=1$) — a genuinely different inverse-failure pattern, confirming different structures on the same set.\n\n**Problem 2:** For the set of $2\\times2$ matrices under matrix addition, find the identity element.\n\n*Solution:* The zero matrix $\\begin{pmatrix}0&0\\\\0&0\\end{pmatrix}$ (adding it to any matrix leaves that matrix unchanged).\n\n**Problem 3:** True or false: \"Since ℤ is a specific, fixed set, it can only be given one natural algebraic structure.\" Correct if false.\n\n*Solution:* False — ℤ supports many distinct structures depending on the chosen operation (e.g. $(\\mathbb Z,+)$, $(\\mathbb Z,\\times)$, and countless custom operations like $a*b=a+b+1$), each with different axiom-satisfaction patterns.\n\n**Problem 4:** On the set of all subsets of $\\{1,2,3\\}$ (the power set), define $A\\cup B$ (union) as the operation. Is $\\emptyset$ (empty set) the identity? Justify without needing to think deeply about \"what a set really is,\" just how union behaves.\n\n*Solution:* Yes — $A\\cup\\emptyset=A$ for any subset $A$ (unioning with nothing adds nothing), confirmed purely from the behavior of union, with no deeper reflection on set \"nature\" required.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** Consider the set of all $2\\times2$ real matrices, $M_2(\\mathbb R)$, under TWO different operations: (i) matrix addition, and (ii) matrix multiplication.\n\n(a) Find the identity element for matrix addition, and separately for matrix multiplication (they will be different matrices).\n(b) Check whether every element has an inverse under addition. Then check whether every element has an inverse under multiplication (hint: consider the zero matrix, or any matrix with determinant 0, e.g. $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$).\n(c) A student argues: \"Since we're always talking about '2×2 real matrices,' there's really only ONE algebraic structure being discussed here — 'the matrices' — regardless of which operation we happen to be using in a given problem.\" Evaluate this claim precisely, using your findings from (a) and (b) as direct evidence.\n\n**Expected solution:**\n\n(a) Additive identity: the zero matrix $\\begin{pmatrix}0&0\\\\0&0\\end{pmatrix}$ (adding it changes nothing). Multiplicative identity: $\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ (the identity matrix — multiplying by it changes nothing). These are DIFFERENT matrices serving as identity for the two different operations.\n\n(b) Under addition: every matrix $A$ has an additive inverse $-A$ (negate every entry), and $A+(-A)=$ zero matrix — inverses always exist. Under multiplication: NOT every matrix has an inverse — e.g. $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ has determinant $1(1)-1(1)=0$, and a matrix with determinant 0 has NO multiplicative inverse (a standard linear-algebra fact); indeed, this matrix would need some $B$ with $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}B=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$, which is impossible since the given matrix maps every vector into a 1-dimensional subspace, never able to reach every possible output needed to recover the full identity matrix. So under multiplication, the inverse axiom FAILS for this (and every determinant-0) matrix.\n\n(c) The student's claim is **wrong**, and (a)/(b) supply direct, concrete evidence: the two operations give DIFFERENT identity elements (zero matrix vs. identity matrix) and DIFFERENT inverse behavior (always exists under addition; fails for determinant-0 matrices under multiplication) — these are two demonstrably DIFFERENT algebraic structures sharing only their underlying SET ($M_2(\\mathbb R)$), exactly the lesson of Contrast 1 (multiple structures per set) applied to a genuinely new, more complex example. \"The matrices\" names a set, not a structure; \"the matrices under addition\" and \"the matrices under multiplication\" are two separate, independently-axiom-checked structures, and treating them as interchangeable (as the student's claim implicitly does) would make it impossible to correctly state which properties (like universal invertibility) hold for which one.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.abst.group-theory and math.abst.ring-theory; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.abst.algebraic-structure assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — STRUCTURE-IS-JUST-THE-SET (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Treating the algebraic structure as fully determined by the set alone is STRUCTURE-IS-JUST-THE-SET. The structure is the SET together with an OPERATION — the operation choice is just as essential as the set itself.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Describe the algebraic structure of ℤ.\"\n- MC-1 response: describes properties of the integers themselves (ordering, size, etc.) without mentioning any specific operation.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"'ℤ' alone names only a SET — asking about ITS algebraic structure is incomplete until an operation is specified. $(\\mathbb Z,+)$ has universal inverses; $(\\mathbb Z,\\times)$ does not (check: 2 has no integer multiplicative inverse). These are genuinely different structures despite sharing the identical set — always specify (and think about) BOTH the set AND the operation together when discussing 'the structure.'\"\n\nPractice: State the identity element and check inverse-existence for (ℤ,+) versus a new operation a*b=a-b (subtraction) on ℤ, confirming they give different results.\n\n---\n\n### Repair Action B02 — ONE-STRUCTURE-PER-SET (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming a set has only one natural algebraic structure is ONE-STRUCTURE-PER-SET. A single set can support unlimited different structures, one for every distinct choice of qualifying operation.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Besides + and ×, could ℤ have any OTHER algebraic structures?\"\n- MC-2 response: \"No, + and × are the only natural operations on integers.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Define a genuinely new operation directly: $a*b=a+b+1$. Check it satisfies closure (sum of integers plus 1 is still an integer), has an identity ($e=-1$, since $a+(-1)+1=a$), and has inverses (for each $a$, $m=-2-a$ works). This is a THIRD, entirely valid algebraic structure on ℤ, distinct from both $(\\mathbb Z,+)$ and $(\\mathbb Z,\\times)$ — there is no upper limit on how many different structures a single set can support, as long as each new operation is well-defined and satisfies whichever axioms are being checked.\"\n\nPractice: Define $a\\star b = a\\times b + 1$ on ℤ and check whether an identity element exists for this new operation.\n\n---\n\n### Repair Action B03 — AXIOMS-REQUIRE-KNOWING-ELEMENT-NATURE (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Believing you need to understand what elements concretely 'are' to verify axioms is AXIOMS-REQUIRE-KNOWING-ELEMENT-NATURE. Axioms are checked purely from the OPERATION's behavior — abstract elements (strings, matrices, symbols) work exactly the same way as familiar numbers, axiom-checking-wise.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Can you check the identity axiom for string concatenation without knowing 'what a string really is' philosophically?\"\n- MC-3 response: \"No, you'd need to understand strings deeply first.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"You only need to know how the OPERATION behaves, not any deeper 'nature' of the elements: does some element $e$ satisfy $x*e=e*x=x$ for every $x$? For concatenation, the empty string $\\epsilon$ satisfies exactly this (joining nothing changes nothing) — verified purely by checking the operation's defining behavior, with zero need for any philosophical understanding of what a 'string' fundamentally is. The exact same style of check works for numbers, matrices, functions, or any other kind of element.\"\n\nPractice: Without reflecting on 'what a function really is,' check whether the identity function (f(x)=x) acts as an identity element for FUNCTION COMPOSITION, purely by testing (f∘g)(x) and (g∘f)(x) for an arbitrary g.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the definition (set + operation, not set alone) and re-derive the (ℤ,+) vs (ℤ,×) inverse-axiom contrast from memory |\n| SR-2 | +3 days | Define a fresh new operation on a familiar set and check whether it satisfies the identity/inverse axioms |\n| SR-3 | +7 days | Verify axioms for a fresh abstract structure (not numbers) purely from the operation's stated behavior |\n| SR-4 | +14 days | Reconstruct the matrix addition-vs-multiplication transfer probe's argument for why \"the matrices\" names a set, not a structure |\n\nRetrieval flag: if student describes a structure using only set properties (MC-1) or assumes a set has one fixed structure (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.found.axiom | Algebraic structures are defined precisely by WHICH axioms their operation(s) satisfy |\n| Requires (Tier-1) | math.found.set-theory | An algebraic structure is a set (plus operation) — this concept's very first component |\n| Unlocks | math.abst.group-theory | A group is the specific named structure type satisfying closure, associativity, identity, and inverses — the next-level specialization of this concept's general framework |\n| Unlocks | math.abst.ring-theory | A ring adds a second operation with its own axioms and compatibility conditions — another specialization built on this concept's set-plus-operation(s) foundation |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the multiple-structures-per-set lesson to matrix addition vs. multiplication, a genuinely new, more complex example rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=2 → compact structure (2 main TAs + gate), matching the concept's small time allocation and tightly focused conceptual scope\n- bloom=understand → V-4 = N/A (no P07 required; structural-recognition and axiom-verification tasks, not derivations)\n- CPA_entry = C for an advanced learner: directly comparing $(\\mathbb Z,+)$ against $(\\mathbb Z,\\times)$ on the SAME familiar set anchors \"operation matters, not just the set\" before the fully general and more abstract definition is introduced\n\n**Key teaching insight:** MC-1 is this concept's root misconception because the KG's own defining description (\"the SAME set with different operations yields different structures\") is a direct denial of it — every subsequent lesson in abstract algebra (groups, rings, fields) depends on students correctly treating \"structure\" as inseparable from its operation(s). A01's inverse-axiom check (holding for + but not for × on the identical set ℤ) is chosen as the anchoring example specifically because it demonstrates a STRUCTURAL PROPERTY differing between two structures on one set — not merely a superficial notational difference — making the \"operation matters\" lesson concrete and falsifiable rather than assumed.\n\n**MC-2 as a natural consequence, not a separate topic:** Once MC-1 is corrected (recognizing operation-dependence), MC-2 (multiple structures existing) follows almost automatically — A02's Contrast 1 exhibits a THIRD, genuinely novel operation ($a*b=a+b+1$) specifically to prevent the lesson from being limited to \"there happen to be exactly two structures on ℤ\" (+ and ×), instead establishing that the space of possible structures on any set is effectively unlimited.\n\n**Sequencing note:** No cross-link concept exists yet for math.abst.algebraic-structure; the P76 transfer probe instead uses matrix addition vs. multiplication, a genuinely richer example (non-commutative multiplication, determinant-based invertibility) that stress-tests whether the \"set vs. structure\" distinction generalizes beyond the simpler ℤ examples used throughout the main teaching sequence.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.abst.algebraic-structure ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.found.axiom ✓, math.found.set-theory ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=2 → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Matrix addition vs. multiplication; set-vs-structure argument at a richer scale ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 150,
+        "endLine": 366
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner directly compares two different operations on the SAME set (ℤ with + vs. ℤ with ×), checking a specific axiom (inverses) that holds for one but not the other, before the general definition is stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: $(\\mathbb Z,+)$ vs. $(\\mathbb Z,\\times)$, checking the inverse axiom explicitly for both; P: a picture of one set supporting multiple structures; A: the formal definition of an algebraic structure\n2. **A02 P06 CONTRAST PAIR** — the same set with two different operations, genuinely different structures (MC-1/MC-2); an abstract structure (e.g. symbol-string concatenation) with axioms verified purely from operation behavior (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the definition (set + operation, not set alone) and re-derive the (ℤ,+) vs (ℤ,×) inverse-axiom contrast from memory |\n| SR-2 | +3 days | Define a fresh new operation on a familiar set and check whether it satisfies the identity/inverse axioms |\n| SR-3 | +7 days | Verify axioms for a fresh abstract structure (not numbers) purely from the operation's stated behavior |\n| SR-4 | +14 days | Reconstruct the matrix addition-vs-multiplication transfer probe's argument for why \"the matrices\" names a set, not a structure |\n\nRetrieval flag: if student describes a structure using only set properties (MC-1) or assumes a set has one fixed structure (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 297,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "math.abst.algebraic-structure/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.algebraic-structure",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.found.axiom | Algebraic structures are defined precisely by WHICH axioms their operation(s) satisfy |\n| Requires (Tier-1) | math.found.set-theory | An algebraic structure is a set (plus operation) — this concept's very first component |\n| Unlocks | math.abst.group-theory | A group is the specific named structure type satisfying closure, associativity, identity, and inverses — the next-level specialization of this concept's general framework |\n| Unlocks | math.abst.ring-theory | A ring adds a second operation with its own axioms and compatibility conditions — another specialization built on this concept's set-plus-operation(s) foundation |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the multiple-structures-per-set lesson to matrix addition vs. multiplication, a genuinely new, more complex example rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.algebraic-structure.md",
+        "startLine": 312,
+        "endLine": 327
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
