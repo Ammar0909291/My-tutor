@@ -1,0 +1,348 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.gcd-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.gcd",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:844bfcc2581c328ea094d618d98de15959e214aefca43c7ce330531331f0d87a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.gcd.md": "sha256:cd1ac7bb1e830fb94bb62259775fe5394be24a9465ed2bd85ad1446327418c40"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.gcd",
+    "name": "Greatest Common Divisor",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.divisibility",
+      "math.nt.prime-factorization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.gcd-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.gcd (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.gcd.md": "sha256:cd1ac7bb1e830fb94bb62259775fe5394be24a9465ed2bd85ad1446327418c40"
+      },
+      "contentHash": "sha256:305a0c0dbbb81f05e060abaaa9990b7e0419d2f8b099fc501bf73ca70be86353",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.gcd.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.gcd.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.gcd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.gcd\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.gcd.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.gcd.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.gcd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.gcd\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.gcd.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.gcd.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.gcd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.gcd\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.gcd.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.gcd.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.gcd"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.gcd\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.gcd/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.nt.gcd",
+      "title": "Greatest Common Divisor — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.nt.divisibility**: $a\\mid b$ iff $b=ak$ for some integer $k$ — the relation whose common instances (shared divisors) this concept seeks the LARGEST of\n- **math.nt.prime-factorization**: every integer >1 has a unique prime factorization — the tool behind the prime-factorization method for GCD (take the MINIMUM shared exponent of each common prime)\n\n### Target Knowledge State\nStudent can compute GCD(a,b) via prime factorization (taking the MINIMUM exponent of each prime appearing in BOTH factorizations) and via the Euclidean algorithm (repeated division-with-remainder until the remainder is 0); correctly distinguish coprime (GCD=1) from \"at least one number is prime,\" recognizing two COMPOSITE numbers can still be coprime (share no common prime factors at all); and correctly apply the Euclidean algorithm step by step, continuing until a remainder of EXACTLY ZERO is reached (the GCD is the last NONZERO remainder, not the first small remainder encountered).\n\n### Conceptual Obstacles\n1. Confusing the GCD rule (minimum shared exponent) with the LCM rule (maximum shared exponent) when using prime factorization — a genuinely common mix-up, since both procedures compare the same two factorizations and differ only in which extreme (min vs. max) is taken\n2. Believing coprimality (GCD=1) requires at least one of the two numbers to be PRIME — missing that two COMPOSITE numbers (e.g. 8 and 9, or 14 and 15) can be coprime, sharing no common prime factor at all, despite neither being prime itself\n3. Misapplying the Euclidean algorithm — stopping at the first small or \"nice-looking\" remainder rather than continuing until the remainder reaches EXACTLY ZERO, and then reporting the WRONG number as the GCD (the correct GCD is the last NONZERO remainder, i.e. the divisor in the final step where the remainder becomes 0)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.gcd",
+      "title": "GCD-LCM-EXPONENT-CONFUSION",
+      "content": "| MC-1 | GCD-LCM-EXPONENT-CONFUSION | Student takes the MAXIMUM shared prime exponent when computing GCD (the rule that actually belongs to LCM), or vice versa | Any prime-factorization-based GCD computation where the two numbers' shared primes have different exponents |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.gcd",
+      "title": "COPRIME-REQUIRES-A-PRIME-NUMBER",
+      "content": "| MC-2 | COPRIME-REQUIRES-A-PRIME-NUMBER | Student believes GCD(a,b)=1 (coprime) requires at least one of a,b to be prime, rejecting or doubting coprimality between two composite numbers | Any coprime pair where BOTH numbers are composite, e.g. 8 and 9 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.gcd",
+      "title": "EUCLIDEAN-ALGORITHM-WRONG-STOPPING-POINT",
+      "content": "| MC-3 | EUCLIDEAN-ALGORITHM-WRONG-STOPPING-POINT | Student stops the Euclidean algorithm at the first small remainder encountered, or reports the WRONG value as the GCD, rather than continuing until the remainder is exactly 0 and taking the last nonzero remainder | Any Euclidean algorithm computation requiring more than 2 steps |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.gcd",
+      "title": "Three Methods, One Answer",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Three Methods, One Answer\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 65,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.gcd",
+      "title": "Min ≠ Max; Coprime Composites; Finish the Algorithm",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Min ≠ Max; Coprime Composites; Finish the Algorithm\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 116,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.gcd",
+      "title": "Composite: All Three Methods Must Agree",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite: All Three Methods Must Agree\",\"primitives\":[\"P28\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 170,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.gcd",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 208,
+        "endLine": 424
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.gcd",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess correct method selection and execution, coprime recognition, and Euclidean-algorithm completion discipline under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Compute GCD(16, 24) via prime factorization.\n\n*Solution:* $16=2^4$, $24=2^3\\times3$. Shared: 2, min(4,3)=3. GCD$=2^3=8$.\n\n**Problem 2:** Are 21 and 22 coprime? Justify.\n\n*Solution:* $21=3\\times7$, $22=2\\times11$ — no shared prime factors. Coprime, GCD=1 (note: consecutive integers are always coprime, a useful general fact, though not required to answer this specific question).\n\n**Problem 3:** Complete the Euclidean algorithm for GCD(150, 40), showing every step.\n\n*Solution:* $150=3\\times40+30$ → (40,30); $40=1\\times30+10$ → (30,10); $30=3\\times10+0$ → GCD=10.\n\n**Problem 4:** A student computes GCD(2^3·3^2·5, 2^2·3^3·7) by taking the maximum exponent of each shared prime. What error is this, and what is the CORRECT GCD?\n\n*Solution:* This is the GCD-LCM-EXPONENT-CONFUSION error — GCD requires the MINIMUM shared exponent, not the maximum. Shared primes: 2 (min(3,2)=2), 3 (min(2,3)=2); 5 and 7 are not shared. Correct GCD$=2^2\\times3^2=4\\times9=36$.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A baker has 180 chocolate chip cookies and 252 oatmeal cookies, and wants to package them into identical gift boxes, each box containing the SAME number of chocolate chip cookies and the SAME number of oatmeal cookies, using the LARGEST possible box size (i.e. as few boxes as possible) with no cookies left over.\n\n(a) Explain, in one sentence, why this problem is asking for GCD(180,252), not LCM(180,252).\n(b) Compute GCD(180,252) using the Euclidean algorithm, showing every step.\n(c) A colleague argues: \"Since 180 and 252 are both even and both divisible by common factors, and neither is prime, this situation is actually impossible to solve cleanly — you'd need them to be coprime or one of them prime for a clean box size to exist.\" Evaluate this claim using your answer to (b), and explain what it gets wrong about the relationship between GCD and primality/coprimality.\n\n**Expected solution:**\n\n(a) The LARGEST possible box size using ALL cookies with none left over corresponds to the LARGEST number that divides BOTH 180 and 252 evenly — exactly the definition of GCD (not LCM, which would instead answer \"what is the smallest number of cookies that both counts divide into,\" a different, unrelated question here).\n\n(b) $252=1\\times180+72$ → (180,72); $180=2\\times72+36$ → (72,36); $72=2\\times36+0$ → **GCD=36**.\n\n(c) The colleague's claim is **incorrect** — GCD(180,252)=36 exists perfectly well and gives a clean answer (36 boxes... more precisely, $180/36=5$ chocolate chip cookies and $252/36=7$ oatmeal cookies per box, with 36 total boxes), despite neither 180 nor 252 being prime, and despite them NOT being coprime (36≠1). The colleague has the relationship backwards: a LARGE GCD (like 36 here) means the numbers share SUBSTANTIAL common structure and CAN be divided cleanly into few, large boxes; primality of the original numbers is irrelevant to whether a GCD exists or is useful — every pair of positive integers has a well-defined GCD (computable via the Euclidean algorithm, as shown in (b)), regardless of whether either number is prime or whether the pair happens to be coprime. In fact, the LARGER the GCD, the MORE cleanly the packaging problem resolves (bigger, fewer boxes) — the opposite of the colleague's implied worry.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.arith.fraction-simplification and math.nt.bezout-identity; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.nt.gcd assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — GCD-LCM-EXPONENT-CONFUSION (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Taking the maximum shared exponent for GCD (or minimum for LCM) is GCD-LCM-EXPONENT-CONFUSION. GCD uses the MINIMUM shared exponent (the largest factor common to BOTH); LCM uses the MAXIMUM (the smallest multiple of BOTH).\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"For 2³×3 and 2²×3², compute GCD using the exponents you'd naturally combine.\"\n- MC-1 response: takes max(3,2)=3 for prime 2 and max(1,2)=2 for prime 3, giving 2³×3²=72 (this is actually the LCM).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Ask which is SMALLER, hence common to both: for a number to divide BOTH originals, it can use AT MOST the SMALLER count of each prime available in either one — that's the MINIMUM, not maximum. Here: min(3,2)=2 for prime 2, min(1,2)=1 for prime 3, giving GCD$=2^2\\times3=12$. The maximum-exponent version (72) is actually the correct LCM computation — a real, useful number, just not the one asked for here.\"\n\nPractice: For $2^4\\times5$ and $2^2\\times5^3$, compute both GCD (min exponents) and LCM (max exponents), keeping the two answers clearly labeled and distinct.\n\n---\n\n### Repair Action B02 — COPRIME-REQUIRES-A-PRIME-NUMBER (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Believing coprimality requires one number to be prime is COPRIME-REQUIRES-A-PRIME-NUMBER. Coprimality only requires ZERO shared prime factors — two composite numbers built from entirely different primes are automatically coprime.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Are 14 and 15 coprime? Neither is prime.\"\n- MC-2 response: \"No, coprime numbers need at least one to be prime.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Factorize both: $14=2\\times7$, $15=3\\times5$ — completely different primes, no overlap at all. GCD(14,15)=1 — coprime, confirmed directly, with neither number being prime. The test for coprimality is entirely about SHARED prime factors (zero of them), never about whether either number is itself prime — two 'complicated' composite numbers can still have nothing in common, prime-factor-wise.\"\n\nPractice: Determine whether 33 and 35 are coprime by factoring each (33=3×11, 35=5×7) and checking for shared primes.\n\n---\n\n### Repair Action B03 — EUCLIDEAN-ALGORITHM-WRONG-STOPPING-POINT (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Stopping the Euclidean algorithm before the remainder reaches exactly 0 is EUCLIDEAN-ALGORITHM-WRONG-STOPPING-POINT. The correct GCD is the LAST NONZERO remainder — the divisor in the specific step where the remainder finally becomes 0, not any earlier intermediate value.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"GCD(90,36): 90=2×36+18. What's the GCD?\"\n- MC-3 response: \"18\" (stopping after one step, without continuing).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"One step isn't necessarily enough — continue: is 18 the FINAL nonzero remainder, or does the algorithm keep going? Next step: $36=2\\times18+0$ — remainder IS 0 here, so the algorithm correctly terminates, and 18 (the divisor in THIS final step) is indeed the GCD. In this particular case the first guess happened to be right, but only because the SECOND step's remainder was exactly 0 — always verify by taking one more step and checking for a zero remainder before finalizing; had the second step produced a NONZERO remainder, the algorithm would need to continue further, and 18 would NOT have been the final answer.\"\n\nPractice: Compute GCD(112, 42) via the Euclidean algorithm, explicitly stating which step produces the first zero remainder and confirming the GCD is read from THAT step, not an earlier one.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute a fresh GCD via prime factorization, explicitly stating \"minimum exponent\" before computing |\n| SR-2 | +3 days | Determine coprimality for a fresh pair of composite numbers by factoring and checking for shared primes |\n| SR-3 | +7 days | Complete a fresh Euclidean algorithm computation, explicitly identifying the step that produces remainder 0 |\n| SR-4 | +14 days | Reconstruct the cookie-packaging transfer probe's argument for why a large GCD signals MORE cleanly-resolvable packaging, not less |\n\nRetrieval flag: if student confuses GCD's min-exponent rule with LCM's max-exponent rule (MC-1) or stops the Euclidean algorithm before reaching a zero remainder (MC-3), re-execute B01/B03 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.nt.divisibility | Supplies the \"a divides b\" relation this concept seeks the largest COMMON instance of |\n| Requires (Tier-1, this session) | math.nt.prime-factorization | Supplies the unique factorization that the prime-factorization method for GCD directly operates on |\n| Unlocks | math.arith.fraction-simplification | Simplifying a fraction to lowest terms is exactly dividing numerator and denominator by their GCD |\n| Unlocks | math.nt.bezout-identity | Bézout's identity (GCD as an integer linear combination) is proved constructively using the Euclidean algorithm's steps, developed in this blueprint |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies GCD to a cookie-packaging scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (3 main TAs + gate), reflecting the concept's three genuinely separate computational methods (listing, prime factorization, Euclidean algorithm) each warranting dedicated treatment\n- bloom=apply → every checkpoint and the gate require executing a computational procedure, not merely stating a definition\n- CPA_entry = C for a developing learner: exhaustive divisor listing (A01) grounds \"GCD\" in a directly verifiable, brute-force procedure before either faster method (which both require trusting an unfamiliar rule) is introduced\n\n**Key teaching insight:** MC-1 (GCD/LCM exponent confusion) is this concept's highest-leverage misconception because the two rules are MIRROR IMAGES of each other applied to the identical input (the same two factorizations) — no external signal (like a wildly implausible magnitude) reliably catches the swap, unlike some other arithmetic errors. A02's Contrast 1 is deliberately built as a SINGLE example computing both GCD and LCM side by side specifically so the mirror-image structure itself becomes the memory aid (\"smaller for GCD, bigger for LCM\"), rather than presenting the two rules in separate, disconnected lessons.\n\n**MC-3's completion discipline as a transferable habit:** The Euclidean algorithm's \"stop only at remainder 0\" rule is emphasized not just for this concept but as a template for iterative algorithms generally (a pattern recurring in later concepts like the extended Euclidean algorithm for Bézout's identity) — B03's repair deliberately frames the check as \"take one more step and verify\" rather than \"memorize how many steps this specific problem needs,\" building a habit that generalizes to problems of any length.\n\n**Sequencing note:** No cross-link concept exists yet for math.nt.gcd; the P76 transfer probe instead uses a cookie-packaging scenario specifically because \"neither number is prime, and they're not coprime\" is exactly the surface feature a residual MC-2/GCD-conflation might flag as suspicious — the probe's part (c) directly confronts and corrects this by showing a large, useful GCD emerging from two ordinary composite numbers.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.nt.gcd ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.nt.divisibility ✓, math.nt.prime-factorization ✓ | PASS |\n| V-3 | CPA entry = C for developing difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Computational method-execution tasks throughout A01-A04 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5, three methods → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Cookie-packaging scenario; large-GCD-means-cleaner-not-messier argument ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 208,
+        "endLine": 424
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.gcd",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — developing learner computes GCD via listing all divisors of two small numbers directly, before the prime-factorization and Euclidean-algorithm shortcuts are introduced.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: GCD by exhaustive divisor listing for two small numbers; P: a Venn-diagram-style picture of shared prime factors; A: the formal prime-factorization (minimum exponent) method and the Euclidean algorithm procedure\n2. **A02 P06 CONTRAST PAIR** — GCD's minimum-exponent rule vs. LCM's maximum-exponent rule, computed side by side on the same pair (MC-1); a coprime composite-composite pair vs. a non-coprime pair (MC-2); a correctly-completed Euclidean algorithm vs. one stopped too early (MC-3)\n3. **A03 P28 CONFLICT EVIDENCE** — a composite problem requiring all three methods (listing check, prime factorization, Euclidean algorithm) to agree\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.gcd",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute a fresh GCD via prime factorization, explicitly stating \"minimum exponent\" before computing |\n| SR-2 | +3 days | Determine coprimality for a fresh pair of composite numbers by factoring and checking for shared primes |\n| SR-3 | +7 days | Complete a fresh Euclidean algorithm computation, explicitly identifying the step that produces remainder 0 |\n| SR-4 | +14 days | Reconstruct the cookie-packaging transfer probe's argument for why a large GCD signals MORE cleanly-resolvable packaging, not less |\n\nRetrieval flag: if student confuses GCD's min-exponent rule with LCM's max-exponent rule (MC-1) or stops the Euclidean algorithm before reaching a zero remainder (MC-3), re-execute B01/B03 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 355,
+        "endLine": 370
+      }
+    },
+    {
+      "assetId": "math.nt.gcd/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.gcd",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.nt.divisibility | Supplies the \"a divides b\" relation this concept seeks the largest COMMON instance of |\n| Requires (Tier-1, this session) | math.nt.prime-factorization | Supplies the unique factorization that the prime-factorization method for GCD directly operates on |\n| Unlocks | math.arith.fraction-simplification | Simplifying a fraction to lowest terms is exactly dividing numerator and denominator by their GCD |\n| Unlocks | math.nt.bezout-identity | Bézout's identity (GCD as an integer linear combination) is proved constructively using the Euclidean algorithm's steps, developed in this blueprint |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies GCD to a cookie-packaging scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.gcd.md",
+        "startLine": 370,
+        "endLine": 385
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
