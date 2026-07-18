@@ -22687,6 +22687,460 @@ const SUPD_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.literature.literary-periods-survey ──────────────────────────────────
+const LPS = 'eng.literature.literary-periods-survey'
+const LPS_SRC = 'docs/curriculum/blueprints/eng.literature.literary-periods-survey.md'
+
+const LPS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LPS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Realism\'s focus on ordinary, unidealized life developed partly as ' +
+      'a reaction against Romanticism\'s emphasis on heightened emotion ' +
+      'and idealized nature — like each generation\'s fashion trend often ' +
+      'reacts against the one right before it. When learning a new ' +
+      'literary period, always ask what movement came before it and what ' +
+      'this new movement might be reacting against: periods form a ' +
+      'connected historical conversation, not isolated boxes.',
+    targetedMisconceptions: [`${LPS}:MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER`],
+    source: `${LPS_SRC} — MC-A (P28 fashion-generations conflict)`,
+  },
+  {
+    conceptId: LPS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not every work written during the Romantic period displays every ' +
+      'Romantic characteristic — some blend in restraint from other ' +
+      'movements or push against their own era\'s dominant style, just as ' +
+      'not everyone in a decade wore that decade\'s iconic fashion trend. ' +
+      'Use period labels as descriptions of DOMINANT TENDENCIES, not ' +
+      'rigid rules every work must obey.',
+    targetedMisconceptions: [`${LPS}:MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS`],
+    source: `${LPS_SRC} — MC-B (P28 fashion-trend-nonuniversal conflict)`,
+  },
+  {
+    conceptId: LPS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Literary periods form a connected historical conversation rather ' +
+      'than isolated categories — a movement typically develops partly in ' +
+      'reaction to the movement immediately preceding it (Realism reacting ' +
+      'against Romanticism\'s idealization, for instance). Separately, ' +
+      'period characteristics describe dominant tendencies during a ' +
+      'timeframe, not universal rules every work must obey; individual ' +
+      'works can blend influences from multiple periods or diverge from ' +
+      'their own era\'s dominant style.',
+    targetedMisconceptions: [
+      `${LPS}:MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER`,
+      `${LPS}:MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS`,
+    ],
+    source: `${LPS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LPS_PROBES: SeedProbe[] = [
+  {
+    conceptId: LPS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Realism emphasizes ordinary, unidealized detail. Should you learn this as an isolated fact with no connection to the Romanticism that preceded it?',
+    choices: [
+      { text: 'No — Realism\'s focus on the ordinary developed partly as a reaction against Romanticism\'s idealization; periods form a connected historical conversation', isCorrect: true },
+      { text: 'Yes — literary periods are isolated categories with no connection to each other', isCorrect: false, misconceptionId: `${LPS}:MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER` },
+    ],
+    correctValue: 'no, periods are connected',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LPS}:MC-A-LITERARY-PERIODS-ARE-ISOLATED-CATEGORIES-WITH-NO-CONNECTION-TO-EACH-OTHER`],
+    source: `${LPS_SRC} — fashion-generations conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LPS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A work written during the Romantic period doesn\'t display heightened emotion or idealized nature. Does this mean the period label is wrong?',
+    choices: [
+      { text: 'No — period characteristics describe dominant tendencies, not universal rules; individual works can blend influences or diverge from their era\'s dominant style', isCorrect: true },
+      { text: 'Yes — every work from a given period perfectly fits that period\'s defining characteristics', isCorrect: false, misconceptionId: `${LPS}:MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS` },
+    ],
+    correctValue: 'no, tendencies not universal rules',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LPS}:MC-B-EVERY-WORK-FROM-A-GIVEN-PERIOD-PERFECTLY-FITS-THAT-PERIODS-DEFINING-CHARACTERISTICS`],
+    source: `${LPS_SRC} — fashion-trend-nonuniversal conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.meter-and-rhyme ───────────────────────────────────────────
+const MRHY = 'eng.literature.meter-and-rhyme'
+const MRHY_SRC = 'docs/curriculum/blueprints/eng.literature.meter-and-rhyme.md'
+
+const MRHY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MRHY,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A poem with a consistent AABB rhyme scheme can still have wildly ' +
+      'irregular meter — like a song with a consistent chorus melody that ' +
+      'doesn\'t require a steady, unchanging beat throughout. Rhyme (end- ' +
+      'sound repetition) and meter (stress pattern within lines) are ' +
+      'independent dimensions: always analyze them as two separate ' +
+      'questions, never assume finding one settles the other.',
+    targetedMisconceptions: [`${MRHY}:MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER`],
+    source: `${MRHY_SRC} — MC-A (P28 song-chorus-vs-steady-beat conflict)`,
+  },
+  {
+    conceptId: MRHY,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'One line with a deliberate stress-reversal doesn\'t mean a poem ' +
+      '"has no meter" — like a song still counted as 4/4 time despite one ' +
+      'measure containing a brief syncopated variation. Meter describes ' +
+      'the DOMINANT, overall pattern across most lines, not an unbroken, ' +
+      'rigid rule with zero exceptions; occasional substitutions are a ' +
+      'normal, often deliberate variation.',
+    targetedMisconceptions: [`${MRHY}:MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER`],
+    source: `${MRHY_SRC} — MC-B (P28 syncopated-measure conflict)`,
+  },
+  {
+    conceptId: MRHY,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Rhyme scheme and meter are independent poetic dimensions that vary ' +
+      'separately — identifying a poem\'s rhyme scheme does not determine ' +
+      'its metrical regularity, and each must be assessed as a distinct ' +
+      'question. Separately, meter describes a dominant overall pattern ' +
+      'across most lines, not an unbroken rule with zero exceptions: a ' +
+      'single line deviating via an accepted metrical substitution does ' +
+      'not mean the poem lacks meter.',
+    targetedMisconceptions: [
+      `${MRHY}:MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER`,
+      `${MRHY}:MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER`,
+    ],
+    source: `${MRHY_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const MRHY_PROBES: SeedProbe[] = [
+  {
+    conceptId: MRHY,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A poem has a clear, consistent AABB rhyme scheme. Must it also have a regular, consistent meter?',
+    choices: [
+      { text: 'No — rhyme and meter are independent dimensions that vary separately; a poem can have consistent rhyme with irregular meter, or vice versa', isCorrect: true },
+      { text: 'Yes — a poem that rhymes must also have a regular, consistent meter', isCorrect: false, misconceptionId: `${MRHY}:MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER` },
+    ],
+    correctValue: 'no, independent dimensions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MRHY}:MC-A-A-POEM-THAT-RHYMES-MUST-ALSO-HAVE-A-REGULAR-CONSISTENT-METER`],
+    source: `${MRHY_SRC} — song-chorus-vs-steady-beat conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MRHY,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A poem is mostly written in a consistent stress pattern, but one line has a deliberate stress-reversal for emphasis. Does this one deviation mean the poem has no meter?',
+    choices: [
+      { text: 'No — meter describes the dominant overall pattern; an occasional deliberate substitution within an otherwise consistent pattern doesn\'t erase it', isCorrect: true },
+      { text: 'Yes — any deviation from the dominant stress pattern means the poem has no meter', isCorrect: false, misconceptionId: `${MRHY}:MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER` },
+    ],
+    correctValue: 'no, substitutions are normal',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MRHY}:MC-B-ANY-DEVIATION-FROM-THE-DOMINANT-STRESS-PATTERN-MEANS-THE-POEM-HAS-NO-METER`],
+    source: `${MRHY_SRC} — syncopated-measure conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.short-story-study ─────────────────────────────────────────
+const SSS = 'eng.literature.short-story-study'
+const SSS_SRC = 'docs/curriculum/blueprints/eng.literature.short-story-study.md'
+
+const SSS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SSS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A short story that ends on an unresolved, ambiguous moment isn\'t ' +
+      'an incomplete novel — its power often comes FROM refusing to over- ' +
+      'explain, like a photograph that can\'t (and isn\'t trying to) show ' +
+      'you what happened five minutes before or after. Ask "what does the ' +
+      'story\'s compression DO for it?" instead of "what is the story ' +
+      'missing?"',
+    targetedMisconceptions: [`${SSS}:MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL`],
+    source: `${SSS_SRC} — MC-A (P28 photograph-vs-documentary conflict)`,
+  },
+  {
+    conceptId: SSS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A single, unrepeated mention that a character "wore a green scarf" ' +
+      'has zero supporting evidence for symbolism — unlike a tree image ' +
+      'appearing in both the opening and final paragraph, tied each time ' +
+      'to the protagonist\'s sense of home. Before claiming a detail is ' +
+      'symbolic, find the EVIDENCE: repetition, explicit connection to ' +
+      'theme, or structural emphasis. A detail mentioned once with no ' +
+      'callback is usually just a detail.',
+    targetedMisconceptions: [`${SSS}:MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL`],
+    source: `${SSS_SRC} — MC-B (P28 toolbox-handle-color conflict)`,
+  },
+  {
+    conceptId: SSS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A short story is a deliberately compressed form built for a ' +
+      'specific kind of impact, not an incomplete or abbreviated novel — ' +
+      'its often-unresolved endings are a craft choice, and extending them ' +
+      'into full novel-style resolution would typically weaken rather than ' +
+      'complete the effect. Separately, the form\'s compression means some ' +
+      'details do double duty, but not every detail is symbolic: genuine ' +
+      'symbolic weight requires evidence such as repetition, explicit ' +
+      'thematic connection, or structural emphasis.',
+    targetedMisconceptions: [
+      `${SSS}:MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL`,
+      `${SSS}:MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL`,
+    ],
+    source: `${SSS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SSS_PROBES: SeedProbe[] = [
+  {
+    conceptId: SSS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A short story ends abruptly on an ambiguous, unresolved moment. Does this mean the story is incomplete, like a short novel that ran out of pages?',
+    choices: [
+      { text: 'No — a short story is a deliberately compressed form, and an unresolved ending is often a craft choice whose power comes from refusing to over-explain', isCorrect: true },
+      { text: 'Yes — a short story is just a short novel', isCorrect: false, misconceptionId: `${SSS}:MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL` },
+    ],
+    correctValue: 'no, compression is deliberate',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SSS}:MC-A-SHORT-STORY-IS-JUST-A-SHORT-NOVEL`],
+    source: `${SSS_SRC} — photograph-vs-documentary conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SSS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A character\'s shirt color is mentioned once in a short story, with no repetition or thematic connection. Should you treat this as a deep symbol just because the story is compressed?',
+    choices: [
+      { text: 'No — genuine symbolic weight requires evidence (repetition, thematic connection, structural emphasis); a detail mentioned once with no callback is usually just a detail', isCorrect: true },
+      { text: 'Yes — every detail in a short story must be a deep symbol', isCorrect: false, misconceptionId: `${SSS}:MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL` },
+    ],
+    correctValue: 'no, needs evidence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SSS}:MC-B-EVERY-DETAIL-MUST-BE-A-DEEP-SYMBOL`],
+    source: `${SSS_SRC} — toolbox-handle-color conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.intonation-patterns ────────────────────────────────────────
+const INTP = 'eng.phonetics.intonation-patterns'
+const INTP_SRC = 'docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md'
+
+const INTP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INTP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Are you coming?" rises at the end, but "Where are you going?" ' +
+      'falls — not all questions use rising intonation. Yes/no questions ' +
+      'typically RISE, but wh-questions (who, what, where, when, why, ' +
+      'how) typically FALL, just like statements, in neutral speech. ' +
+      'Before choosing intonation for a question, check whether it\'s ' +
+      'yes/no (rise) or wh (fall, in the neutral case).',
+    targetedMisconceptions: [`${INTP}:MC-ALL-QUESTIONS-RISE`],
+    source: `${INTP_SRC} — MC-1 (P28 wh-question-falls conflict)`,
+  },
+  {
+    conceptId: INTP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"You\'re leaving." said with falling pitch is a statement; the ' +
+      'exact same words with rising pitch become a surprised question or ' +
+      'confirmation-check — zero change in words, completely different ' +
+      'meaning. Intonation isn\'t decoration: it can be the ONLY signal ' +
+      'distinguishing a statement from a question, or expressing surprise, ' +
+      'sarcasm, or doubt.',
+    targetedMisconceptions: [`${INTP}:MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL`],
+    source: `${INTP_SRC} — MC-2 (P28 youre-leaving-meaning-shift conflict)`,
+  },
+  {
+    conceptId: INTP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Not all questions rise: yes/no questions typically use rising ' +
+      'intonation while wh-questions typically fall, just like statements, ' +
+      'in neutral unmarked speech — a genuinely different, equally common ' +
+      'default pattern. Separately, intonation is meaning-bearing rather ' +
+      'than stylistic: identical word sequences can convey different ' +
+      'meanings or functions purely through pitch change, with zero ' +
+      'alteration to the words themselves.',
+    targetedMisconceptions: [
+      `${INTP}:MC-ALL-QUESTIONS-RISE`,
+      `${INTP}:MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL`,
+    ],
+    source: `${INTP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const INTP_PROBES: SeedProbe[] = [
+  {
+    conceptId: INTP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Should "Where are you going?" (a wh-question) end with rising intonation, the same as "Are you coming?" (a yes/no question)?',
+    choices: [
+      { text: 'No — wh-questions typically fall in neutral speech, just like statements; only yes/no questions typically rise', isCorrect: true },
+      { text: 'Yes — all questions rise', isCorrect: false, misconceptionId: `${INTP}:MC-ALL-QUESTIONS-RISE` },
+    ],
+    correctValue: 'no, wh-questions fall',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTP}:MC-ALL-QUESTIONS-RISE`],
+    source: `${INTP_SRC} — wh-question-falls conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: INTP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"You\'re leaving." said with falling pitch versus the identical words said with rising pitch. Is intonation just decorative styling here, with no real change in meaning?',
+    choices: [
+      { text: 'No — falling pitch signals a plain statement while rising pitch signals a surprised question; intonation alone carries the meaning difference here', isCorrect: true },
+      { text: 'Yes — intonation is decorative, not meaningful', isCorrect: false, misconceptionId: `${INTP}:MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL` },
+    ],
+    correctValue: 'no, intonation carries meaning',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTP}:MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL`],
+    source: `${INTP_SRC} — youre-leaving-meaning-shift conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.transitions-and-cohesion ─────────────────────────────────────
+const TCOH = 'eng.writing.transitions-and-cohesion'
+const TCOH_SRC = 'docs/curriculum/blueprints/eng.writing.transitions-and-cohesion.md'
+
+const TCOH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TCOH,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"The team practiced for months. However, they won the ' +
+      'championship." misuses "however" — winning after practicing is a ' +
+      'consequence, not a contrast, so "as a result" fits instead. ' +
+      'Transition words aren\'t flow-improving decorations you sprinkle ' +
+      'anywhere — each signals a SPECIFIC logical relationship. Identify ' +
+      'the actual relationship (contrast, cause-effect, addition, ' +
+      'sequence) before choosing a transition word.',
+    targetedMisconceptions: [`${TCOH}:MC-ANY-TRANSITION-WORD-CAN-BE-INSERTED-ANYWHERE-TO-IMPROVE-FLOW`],
+    source: `${TCOH_SRC} — MC-1 (P28 however-vs-as-a-result conflict)`,
+  },
+  {
+    conceptId: TCOH,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"The volcano erupted violently. It sent ash miles into the sky." ' +
+      'flows well with almost no transition words at all — cohesion also ' +
+      'comes from pronoun reference ("it"), repeated key terms, and ' +
+      'synonym substitution. Transition words at sentence starts are only ' +
+      'ONE tool for cohesion, not the only one.',
+    targetedMisconceptions: [`${TCOH}:MC-COHESION-ONLY-HAPPENS-AT-THE-BEGINNING-OF-SENTENCES-WITH-TRANSITION-WORDS`],
+    source: `${TCOH_SRC} — MC-2 (P28 volcano-pronoun-cohesion conflict)`,
+  },
+  {
+    conceptId: TCOH,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Each transition word signals a specific logical relationship ' +
+      '(contrast, cause-effect, addition, sequence, example); inserting ' +
+      'one that doesn\'t match the actual relationship between ideas ' +
+      'misrepresents that relationship rather than merely sounding off. ' +
+      'Separately, cohesion is achieved through multiple devices — ' +
+      'pronoun reference, repeated key terms, synonym substitution — not ' +
+      'sentence-starting transition words alone.',
+    targetedMisconceptions: [
+      `${TCOH}:MC-ANY-TRANSITION-WORD-CAN-BE-INSERTED-ANYWHERE-TO-IMPROVE-FLOW`,
+      `${TCOH}:MC-COHESION-ONLY-HAPPENS-AT-THE-BEGINNING-OF-SENTENCES-WITH-TRANSITION-WORDS`,
+    ],
+    source: `${TCOH_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TCOH_PROBES: SeedProbe[] = [
+  {
+    conceptId: TCOH,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"The team practiced for months. However, they won the championship." Does "however" correctly signal the relationship between these two sentences?',
+    choices: [
+      { text: 'No — winning after practicing is a consequence, not a contrast; "as a result" would correctly signal the actual cause-effect relationship', isCorrect: true },
+      { text: 'Yes — any transition word can be inserted anywhere to improve flow', isCorrect: false, misconceptionId: `${TCOH}:MC-ANY-TRANSITION-WORD-CAN-BE-INSERTED-ANYWHERE-TO-IMPROVE-FLOW` },
+    ],
+    correctValue: 'no, must match actual relationship',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TCOH}:MC-ANY-TRANSITION-WORD-CAN-BE-INSERTED-ANYWHERE-TO-IMPROVE-FLOW`],
+    source: `${TCOH_SRC} — however-vs-as-a-result conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TCOH,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"The volcano erupted violently. It sent ash miles into the sky." has almost no transition words. Does this mean the paragraph lacks cohesion?',
+    choices: [
+      { text: 'No — cohesion also comes from pronoun reference ("it"), repeated terms, and synonyms; transition words are only one of several cohesive devices', isCorrect: true },
+      { text: 'Yes — cohesion only happens at the beginning of sentences with transition words', isCorrect: false, misconceptionId: `${TCOH}:MC-COHESION-ONLY-HAPPENS-AT-THE-BEGINNING-OF-SENTENCES-WITH-TRANSITION-WORDS` },
+    ],
+    correctValue: 'no, other devices create cohesion too',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TCOH}:MC-COHESION-ONLY-HAPPENS-AT-THE-BEGINNING-OF-SENTENCES-WITH-TRANSITION-WORDS`],
+    source: `${TCOH_SRC} — volcano-pronoun-cohesion conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -22943,6 +23397,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ACVOC_EXPLANATIONS,
   ...SEMF_EXPLANATIONS,
   ...SUPD_EXPLANATIONS,
+  ...LPS_EXPLANATIONS,
+  ...MRHY_EXPLANATIONS,
+  ...SSS_EXPLANATIONS,
+  ...INTP_EXPLANATIONS,
+  ...TCOH_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -23199,4 +23658,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ACVOC_PROBES,
   ...SEMF_PROBES,
   ...SUPD_PROBES,
+  ...LPS_PROBES,
+  ...MRHY_PROBES,
+  ...SSS_PROBES,
+  ...INTP_PROBES,
+  ...TCOH_PROBES,
 ]
