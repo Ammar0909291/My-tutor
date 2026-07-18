@@ -19941,6 +19941,747 @@ const VOWL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.vocab.roots-and-origins ─────────────────────────────────────────────
+const ROOT = 'eng.vocab.roots-and-origins'
+const ROOT_SRC = 'docs/curriculum/blueprints/eng.vocab.roots-and-origins.md'
+
+const ROOT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ROOT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A root gives you a strong starting clue, not a locked-in exact ' +
+      'definition. "Manufacture" (root "manu" = hand) used to mean ' +
+      'exactly "made by hand," but now just means "made/produced," even ' +
+      'by machines — word meanings drift over centuries of use. Use the ' +
+      'root to make an educated FIRST guess at a word’s meaning, then ' +
+      'check that guess against how the word is actually used in its ' +
+      'sentence.',
+    targetedMisconceptions: [`${ROOT}:MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD`],
+    source: `${ROOT_SRC} — MC-A (P28 manufacture-vs-manuscript conflict)`,
+  },
+  {
+    conceptId: ROOT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Spotting familiar letters is a good first step, but letters can ' +
+      'overlap by pure coincidence. "Capital" (from Latin "caput," head) ' +
+      'genuinely relates to "head," but "caterpillar" only superficially ' +
+      'resembles "cat" with no etymological relationship at all. Before ' +
+      'trusting a root match, check whether the root’s actual MEANING ' +
+      'helps explain the word’s real meaning — if it doesn’t fit, the ' +
+      'letters were probably just a coincidence.',
+    targetedMisconceptions: [`${ROOT}:MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT`],
+    source: `${ROOT_SRC} — MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT (P28 capital-vs-caterpillar conflict)`,
+  },
+  {
+    conceptId: ROOT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A Greek or Latin root provides a strong starting hypothesis about ' +
+      'a word’s meaning, not a fixed, unchangeable definition — word ' +
+      'meanings drift over centuries, so the root’s literal sense may or ' +
+      'may not match a word’s current usage; check the hypothesis against ' +
+      'context. Separately, a visual letter match is not sufficient ' +
+      'evidence of a shared root — "caterpillar" superficially resembles ' +
+      '"cat" but shares no etymological relationship; verify that the ' +
+      'root’s meaning actually explains the word’s meaning before trusting ' +
+      'the match.',
+    targetedMisconceptions: [
+      `${ROOT}:MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD`,
+      `${ROOT}:MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT`,
+    ],
+    source: `${ROOT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ROOT_PROBES: SeedProbe[] = [
+  {
+    conceptId: ROOT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The root "manu" means "hand." Does "manufacture" still mean literally "made by hand" today?',
+    choices: [
+      { text: 'No — its meaning has drifted to just "made/produced," even by machines; the root is a starting clue, not a fixed rule', isCorrect: true },
+      { text: 'Yes — a root always keeps the exact same meaning in every word it appears in', isCorrect: false, misconceptionId: `${ROOT}:MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD` },
+    ],
+    correctValue: 'no, meaning has drifted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ROOT}:MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD`],
+    source: `${ROOT_SRC} — manufacture-vs-manuscript conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ROOT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does "caterpillar" share a real root connection with "cat," since it starts with those letters?',
+    choices: [
+      { text: 'No — this is a coincidental letter overlap; "caterpillar" has no etymological relationship to "cat" at all', isCorrect: true },
+      { text: 'Yes — if a word looks like it has a root, it must be that root', isCorrect: false, misconceptionId: `${ROOT}:MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT` },
+    ],
+    correctValue: 'no, coincidental',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ROOT}:MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT`],
+    source: `${ROOT_SRC} — capital-vs-caterpillar conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.multiple-meaning-words ───────────────────────────────────────
+const MULM = 'eng.vocab.multiple-meaning-words'
+const MULM_SRC = 'docs/curriculum/blueprints/eng.vocab.multiple-meaning-words.md'
+
+const MULM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MULM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Homonyms (like "bat"/"bat") typically have historically UNRELATED ' +
+      'meanings that coincidentally share spelling/sound. POLYSEMOUS ' +
+      'multiple-meaning words (like "bright" meaning both "shining" and ' +
+      '"intelligent") have meanings that are RELATED, connected by an ' +
+      'underlying shared concept (both relate to a kind of "clarity"). ' +
+      'Check whether a word’s multiple meanings are conceptually RELATED ' +
+      '(polysemy) or historically UNRELATED (homonymy).',
+    targetedMisconceptions: [`${MULM}:MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS`],
+    source: `${MULM_SRC} — MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS (P28 bright-vs-bat conflict)`,
+  },
+  {
+    conceptId: MULM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Dictionaries order meanings according to varying conventions ' +
+      '(historical order in some, frequency order in others) — the FIRST ' +
+      'listed meaning is not automatically the most relevant one for your ' +
+      'specific context. "We sat on the river bank" clearly indicates the ' +
+      'landform meaning regardless of which sense a dictionary lists ' +
+      'first. Always use the surrounding CONTEXT to determine which of a ' +
+      'word’s multiple meanings applies.',
+    targetedMisconceptions: [`${MULM}:MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER`],
+    source: `${MULM_SRC} — MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER (P28 river-bank-dictionary-order conflict)`,
+  },
+  {
+    conceptId: MULM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Polysemous multiple-meaning words have conceptually related senses ' +
+      '("bright" meaning shining and intelligent, both tied to clarity), ' +
+      'distinct from homonyms, whose meanings are typically historically ' +
+      'unrelated and only coincidentally share form. Separately, a ' +
+      'dictionary’s listing order does not indicate importance or ' +
+      'frequency in a consistent way across dictionaries — context, not ' +
+      'entry position, determines which sense applies in a given ' +
+      'sentence.',
+    targetedMisconceptions: [
+      `${MULM}:MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS`,
+      `${MULM}:MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER`,
+    ],
+    source: `${MULM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const MULM_PROBES: SeedProbe[] = [
+  {
+    conceptId: MULM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "bright" (shining) and "bright" (intelligent) the same kind of multiple-meaning relationship as "bat" (animal) and "bat" (sports equipment)?',
+    choices: [
+      { text: 'No — "bright" is polysemy (the two meanings are conceptually related through "clarity"), while "bat" is homonymy (unrelated, coincidental meanings)', isCorrect: true },
+      { text: 'Yes — multiple-meaning words are just another name for homonyms', isCorrect: false, misconceptionId: `${MULM}:MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS` },
+    ],
+    correctValue: 'no, polysemy vs. homonymy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MULM}:MC-MULTIPLE-MEANING-WORDS-ARE-JUST-HOMONYMS`],
+    source: `${MULM_SRC} — bright-vs-bat conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MULM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Should you pick whichever meaning of "bank" a dictionary lists first, or use the sentence context to decide?',
+    choices: [
+      { text: 'Use context — dictionary listing order does not indicate which sense applies in a specific sentence', isCorrect: true },
+      { text: 'Always pick the first-listed meaning, since dictionaries list meanings in order of importance', isCorrect: false, misconceptionId: `${MULM}:MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER` },
+    ],
+    correctValue: 'use context',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MULM}:MC-DICTIONARY-LISTS-MEANINGS-IN-IMPORTANCE-ORDER`],
+    source: `${MULM_SRC} — river-bank-dictionary-order conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.collocations ───────────────────────────────────────────────────
+const COLL = 'eng.vocab.collocations'
+const COLL_SRC = 'docs/curriculum/blueprints/eng.vocab.collocations.md'
+
+const COLL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COLL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Synonyms match at the level of dictionary meaning, but ' +
+      'collocations are about which specific words HABITUALLY pair ' +
+      'together in real usage. "Make" and "do" can both loosely mean "to ' +
+      'perform," but English speakers only pair "make" with "decision," ' +
+      'not "do" — "do a decision" is wrong even though "do" is a fine ' +
+      'verb elsewhere ("do a favor"). Collocations must be learned as ' +
+      'fixed pairings, not derived logically from synonym lists.',
+    targetedMisconceptions: [`${COLL}:MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE`],
+    source: `${COLL_SRC} — MC (P28 make-a-decision-vs-do-a-decision conflict)`,
+  },
+  {
+    conceptId: COLL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A collocation’s meaning is fully transparent — "heavy rain" means ' +
+      'exactly what it says, just that English happens to pair "heavy" ' +
+      'with "rain." An idiom’s meaning is hidden — "it’s raining cats and ' +
+      'dogs" cannot be figured out from the individual words at all. Ask: ' +
+      'can I understand this phrase just by understanding each word ' +
+      'normally? If yes, it’s a collocation; if the meaning is a total ' +
+      'surprise, it’s an idiom.',
+    targetedMisconceptions: [`${COLL}:MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS`],
+    source: `${COLL_SRC} — MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS (P28 heavy-rain-vs-cats-and-dogs conflict)`,
+  },
+  {
+    conceptId: COLL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Collocations are governed by habitual usage convention, not ' +
+      'synonym logic — "make a decision" is correct and "do a decision" ' +
+      'is not, even though "make" and "do" overlap in meaning elsewhere; ' +
+      'these fixed pairings must be learned through exposure. Separately, ' +
+      'collocations are transparent, literal habitual pairings ("heavy ' +
+      'rain"), while idioms are non-literal expressions whose meaning ' +
+      'cannot be derived from their individual words ("raining cats and ' +
+      'dogs") — a meaningfully different linguistic category, not the same ' +
+      'thing under a fancier name.',
+    targetedMisconceptions: [
+      `${COLL}:MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE`,
+      `${COLL}:MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS`,
+    ],
+    source: `${COLL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const COLL_PROBES: SeedProbe[] = [
+  {
+    conceptId: COLL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Since "do" and "make" are near-synonyms, is "do a decision" just as correct as "make a decision"?',
+    choices: [
+      { text: 'No — English speakers only pair "make" with "decision"; a synonym fitting the dictionary definition doesn\'t mean it fits the fixed phrase', isCorrect: true },
+      { text: 'Yes — if a synonym fits the definition, it fits the phrase', isCorrect: false, misconceptionId: `${COLL}:MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE` },
+    ],
+    correctValue: 'no, fixed pairing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COLL}:MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE`],
+    source: `${COLL_SRC} — make-a-decision-vs-do-a-decision conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: COLL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "heavy rain" the same kind of phrase as "it\'s raining cats and dogs"?',
+    choices: [
+      { text: 'No — "heavy rain" is a transparent collocation (means exactly what it says); "raining cats and dogs" is an idiom (non-literal, can\'t be derived from the words)', isCorrect: true },
+      { text: 'Yes — collocations are just a fancier name for idioms', isCorrect: false, misconceptionId: `${COLL}:MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS` },
+    ],
+    correctValue: 'no, different categories',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COLL}:MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS`],
+    source: `${COLL_SRC} — heavy-rain-vs-cats-and-dogs conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.register-and-formality ───────────────────────────────────────
+const REGF = 'eng.vocab.register-and-formality'
+const REGF_SRC = 'docs/curriculum/blueprints/eng.vocab.register-and-formality.md'
+
+const REGF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REGF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Formal English isn’t "better" English — it’s a different tool for ' +
+      'a different job. Texting a close friend "I would be delighted to ' +
+      'accompany you" instead of "sure, I’m in" doesn’t sound more ' +
+      'correct, it sounds strange, the same way a tuxedo at a beach party ' +
+      'isn’t "more correct" than swim trunks. Ask: who is this for, and ' +
+      'what’s the relationship? Register should match the audience, not ' +
+      'maximize formality.',
+    targetedMisconceptions: [`${REGF}:MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT`],
+    source: `${REGF_SRC} — MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT (P28 tuxedo-text-to-friend conflict)`,
+  },
+  {
+    conceptId: REGF,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Informal writing follows its own real rules — it isn’t "grammar ' +
+      'gone wrong," it’s a different, equally legitimate set of ' +
+      'conventions suited to speed and closeness. "omw, running like 5 ' +
+      'min late, save me a seat!" is a perfectly correct informal message; ' +
+      'rewriting it as a formal legal-sounding letter would actually fail ' +
+      'at the message’s real job. Contractions, fragments, and casual word ' +
+      'choices are correct informal-register choices, not mistakes.',
+    targetedMisconceptions: [`${REGF}:MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING`],
+    source: `${REGF_SRC} — MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING (P28 omw-text-message conflict)`,
+  },
+  {
+    conceptId: REGF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Formality is a fit-to-context scale, not a correctness scale — a ' +
+      'hyper-formal register with a close friend sounds strange, not more ' +
+      'correct, just as an under-formal register with an authority figure ' +
+      'is genuinely mismatched. Separately, informal register conventions ' +
+      '(contractions, fragments, colloquial vocabulary) are legitimate, ' +
+      'rule-governed choices suited to casual contexts, not grammar ' +
+      'errors — the actual error is only a register mismatched to its ' +
+      'audience and purpose, in either direction.',
+    targetedMisconceptions: [
+      `${REGF}:MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT`,
+      `${REGF}:MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING`,
+    ],
+    source: `${REGF_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const REGF_PROBES: SeedProbe[] = [
+  {
+    conceptId: REGF,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is texting a close friend "I would be delighted to accompany you" more correct than "sure, I\'m in"?',
+    choices: [
+      { text: 'No — it sounds strange or even sarcastic in that context; formal isn\'t automatically more correct, it has to fit the audience', isCorrect: true },
+      { text: 'Yes — more formal language is always better, more correct English', isCorrect: false, misconceptionId: `${REGF}:MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT` },
+    ],
+    correctValue: 'no, mismatched register',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REGF}:MC-FORMAL-ALWAYS-MEANS-BETTER-OR-MORE-CORRECT`],
+    source: `${REGF_SRC} — tuxedo-text-to-friend conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: REGF,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "omw, running like 5 min late, save me a seat!" a grammar error that needs fixing?',
+    choices: [
+      { text: 'No — it correctly fits its informal, fast-paced context; contractions and casual choices are legitimate register conventions, not mistakes', isCorrect: true },
+      { text: 'Yes — informal register always means bad grammar or sloppy writing', isCorrect: false, misconceptionId: `${REGF}:MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING` },
+    ],
+    correctValue: 'no, legitimate informal register',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REGF}:MC-INFORMAL-REGISTER-MEANS-BAD-GRAMMAR-OR-SLOPPY-WRITING`],
+    source: `${REGF_SRC} — omw-text-message conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.paragraph-structure ────────────────────────────────────────
+const PARG = 'eng.writing.paragraph-structure'
+const PARG_SRC = 'docs/curriculum/blueprints/eng.writing.paragraph-structure.md'
+
+const PARG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PARG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Being "about the same general topic" isn’t enough — a real ' +
+      'paragraph needs ONE controlling idea that every single sentence ' +
+      'supports. A "paragraph" about dogs mixing breeds, dog food, a ' +
+      'specific pet, and training has no unifying thread even though all ' +
+      'sentences are "about dogs." Before writing, decide on ONE ' +
+      'controlling idea, then check every sentence: does it directly ' +
+      'support that one idea?',
+    targetedMisconceptions: [`${PARG}:MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC`],
+    source: `${PARG_SRC} — MC-A (P28 dog-breeds-food-training-mixed conflict)`,
+  },
+  {
+    conceptId: PARG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A controlling idea usually appears first, since that helps the ' +
+      'reader know what to expect — but it doesn’t have to. It can work ' +
+      'as a concluding statement tying evidence together at the end, or ' +
+      'stay unstated but clearly implied. Check whether the paragraph has ' +
+      'one controlling idea that all the sentences support — regardless ' +
+      'of WHERE that idea appears.',
+    targetedMisconceptions: [`${PARG}:MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE`],
+    source: `${PARG_SRC} — MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE (P28 garden-conclusion-sentence conflict)`,
+  },
+  {
+    conceptId: PARG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A paragraph requires one controlling idea that every sentence ' +
+      'supports — sentences merely sharing a broad topic without a ' +
+      'unifying claim do not yet form a genuine paragraph. Separately, the ' +
+      'controlling idea’s position is flexible: it can open the ' +
+      'paragraph, close it as a summarizing statement, or remain implied ' +
+      'rather than directly stated — what matters is that one idea ' +
+      'genuinely organizes every sentence, not its placement.',
+    targetedMisconceptions: [
+      `${PARG}:MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC`,
+      `${PARG}:MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE`,
+    ],
+    source: `${PARG_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PARG_PROBES: SeedProbe[] = [
+  {
+    conceptId: PARG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A "paragraph" has sentences about dog breeds, dog food, a specific pet, and dog training. Is this a well-formed paragraph, since all sentences are about dogs?',
+    choices: [
+      { text: 'No — same general topic isn\'t enough; a paragraph needs ONE controlling idea that every sentence supports', isCorrect: true },
+      { text: 'Yes — a paragraph is just a group of sentences about the same general topic', isCorrect: false, misconceptionId: `${PARG}:MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC` },
+    ],
+    correctValue: 'no, lacks one controlling idea',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PARG}:MC-A-PARAGRAPH-IS-JUST-A-GROUP-OF-SENTENCES-ABOUT-THE-SAME-GENERAL-TOPIC`],
+    source: `${PARG_SRC} — dog-breeds-food-training-mixed conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PARG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A paragraph describes three garden features, then ends with "This garden truly is a peaceful retreat." Is this well-organized, even though the controlling idea comes last?',
+    choices: [
+      { text: 'Yes — the controlling idea can appear first, last, or stay implied, as long as it genuinely organizes every sentence', isCorrect: true },
+      { text: 'No — a topic sentence must always be the first sentence of a paragraph', isCorrect: false, misconceptionId: `${PARG}:MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE` },
+    ],
+    correctValue: 'yes, valid structure',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PARG}:MC-A-TOPIC-SENTENCE-MUST-ALWAYS-BE-THE-FIRST-SENTENCE`],
+    source: `${PARG_SRC} — garden-conclusion-sentence conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.literary-devices-overview ───────────────────────────────
+const LDEV = 'eng.literature.literary-devices-overview'
+const LDEV_SRC = 'docs/curriculum/blueprints/eng.literature.literary-devices-overview.md'
+
+const LDEV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LDEV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Naming a device correctly is just the first step, like correctly ' +
+      'naming a tool before using it. "Her anger was a wildfire" is more ' +
+      'than just "that’s a metaphor" — real analysis explains what ' +
+      'specific effect the device creates (emphasizing how the anger ' +
+      'spreads uncontrollably) and why the author likely chose it. After ' +
+      'identifying a device, always push further: what effect does it ' +
+      'create, and why here instead of stating the idea directly?',
+    targetedMisconceptions: [`${LDEV}:MC-IDENTIFYING-A-DEVICE-BY-NAME-IS-THE-GOAL-OF-LITERARY-ANALYSIS`],
+    source: `${LDEV_SRC} — MC (P28 wildfire-metaphor-naming-vs-explaining conflict)`,
+  },
+  {
+    conceptId: LDEV,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Literary devices aren’t decoration sitting on top of the "real" ' +
+      'meaning — they’re often HOW the meaning gets built in the first ' +
+      'place. Removing the irony from a character celebrating a "victory" ' +
+      'that’s actually a devastating loss removes the reader’s awareness ' +
+      'of that gap entirely, not just decorative flair. Test a device by ' +
+      'imagining the passage without it: if meaning is genuinely lost, the ' +
+      'device was doing real interpretive work.',
+    targetedMisconceptions: [`${LDEV}:MC-LITERARY-DEVICES-ARE-DECORATIVE-EXTRAS-SEPARATE-FROM-MEANING`],
+    source: `${LDEV_SRC} — MC-LITERARY-DEVICES-ARE-DECORATIVE-EXTRAS-SEPARATE-FROM-MEANING (P28 irony-removal-test conflict)`,
+  },
+  {
+    conceptId: LDEV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Correctly naming a literary device is only the first step of ' +
+      'analysis — the actual interpretive work is explaining the specific ' +
+      'effect the device creates and why the author likely chose it over ' +
+      'a plainer alternative. Separately, devices are frequently integral ' +
+      'to constructing meaning rather than decorative — the removal test ' +
+      '(imagining the passage without the device) reveals whether genuine ' +
+      'meaning would be lost, which is true of most devices worth ' +
+      'analyzing.',
+    targetedMisconceptions: [
+      `${LDEV}:MC-IDENTIFYING-A-DEVICE-BY-NAME-IS-THE-GOAL-OF-LITERARY-ANALYSIS`,
+      `${LDEV}:MC-LITERARY-DEVICES-ARE-DECORATIVE-EXTRAS-SEPARATE-FROM-MEANING`,
+    ],
+    source: `${LDEV_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LDEV_PROBES: SeedProbe[] = [
+  {
+    conceptId: LDEV,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is correctly saying "that\'s a metaphor" about "Her anger was a wildfire" a complete piece of literary analysis?',
+    choices: [
+      { text: 'No — naming the device is only the first step; analysis requires explaining its specific effect and why the author chose it', isCorrect: true },
+      { text: 'Yes — identifying and naming a device by name is the goal of literary analysis', isCorrect: false, misconceptionId: `${LDEV}:MC-IDENTIFYING-A-DEVICE-BY-NAME-IS-THE-GOAL-OF-LITERARY-ANALYSIS` },
+    ],
+    correctValue: 'no, naming is just the first step',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LDEV}:MC-IDENTIFYING-A-DEVICE-BY-NAME-IS-THE-GOAL-OF-LITERARY-ANALYSIS`],
+    source: `${LDEV_SRC} — wildfire-metaphor-naming-vs-explaining conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LDEV,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A passage uses irony (a character celebrating what the reader knows is actually a devastating loss). If the ironic framing were removed and events stated plainly, would the passage lose only "prettiness," or something more?',
+    choices: [
+      { text: 'Something more — the passage would lose actual meaning (the reader\'s awareness of the gap between perception and reality), showing the device was doing real interpretive work', isCorrect: true },
+      { text: 'Only prettiness — literary devices are decorative extras separate from a passage\'s real meaning', isCorrect: false, misconceptionId: `${LDEV}:MC-LITERARY-DEVICES-ARE-DECORATIVE-EXTRAS-SEPARATE-FROM-MEANING` },
+    ],
+    correctValue: 'real meaning is lost',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LDEV}:MC-LITERARY-DEVICES-ARE-DECORATIVE-EXTRAS-SEPARATE-FROM-MEANING`],
+    source: `${LDEV_SRC} — irony-removal-test conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.prose-nonfiction ─────────────────────────────────────────
+const PRNF = 'eng.literature.prose-nonfiction'
+const PRNF_SRC = 'docs/curriculum/blueprints/eng.literature.prose-nonfiction.md'
+
+const PRNF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRNF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming nonfiction has no author voice is like assuming a ' +
+      'photograph involves no choices — but the photographer chose the ' +
+      'angle, the framing, what to include and exclude. A memoir is ' +
+      '"true" in that it deals with real events, but the author still ' +
+      'makes deliberate choices about what to include, how to frame it, ' +
+      'and what it means — genuine voice and interpretation, not neutral ' +
+      'transcription.',
+    targetedMisconceptions: [`${PRNF}:MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION`],
+    source: `${PRNF_SRC} — MC-A (P28 memoir-photographer-choices conflict)`,
+  },
+  {
+    conceptId: PRNF,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating all nonfiction subgenres as the same is like treating a ' +
+      'diary, a biography, a news article, and a persuasive op-ed as ' +
+      'identical just because they’re all "about real things." Memoir is ' +
+      'personal first-person reflection on one’s own life; biography is a ' +
+      'researched account of someone else’s life; journalism is timely ' +
+      'reporting; the essay explores or argues an idea — each has its own ' +
+      'purpose and conventions.',
+    targetedMisconceptions: [`${PRNF}:MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING`],
+    source: `${PRNF_SRC} — MC-B (P28 diary-biography-news-op-ed conflict)`,
+  },
+  {
+    conceptId: PRNF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Nonfiction’s factual basis does not mean voiceless, neutral ' +
+      'reporting — forms like memoir and the personal essay carry genuine ' +
+      'authorial voice, selective emphasis, and interpretation of real ' +
+      'events. Separately, nonfiction subgenres are not interchangeable: ' +
+      'memoir, biography, journalism, and the essay each serve a distinct ' +
+      'purpose with distinct conventions, and misapplying one form’s ' +
+      'conventions to another is a genuine analytical error.',
+    targetedMisconceptions: [
+      `${PRNF}:MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION`,
+      `${PRNF}:MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING`,
+    ],
+    source: `${PRNF_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRNF_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRNF,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A memoir passage is shaped by personal reflection and selective emphasis on certain details. Does being nonfiction mean it should be voiceless and neutral instead?',
+    choices: [
+      { text: 'No — nonfiction describes the subject matter\'s factual basis, not the absence of authorial voice; memoirs genuinely carry personal perspective and interpretation', isCorrect: true },
+      { text: 'Yes — nonfiction means purely objective, neutral fact-reporting with no author voice or interpretation', isCorrect: false, misconceptionId: `${PRNF}:MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION` },
+    ],
+    correctValue: 'no, genuine voice exists',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRNF}:MC-A-NONFICTION-MEANS-PURELY-OBJECTIVE-NEUTRAL-FACT-REPORTING-WITH-NO-AUTHOR-VOICE-OR-INTERPRETATION`],
+    source: `${PRNF_SRC} — memoir-photographer-choices conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRNF,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are memoir, biography, journalism, and the essay basically the same thing, since all four are nonfiction?',
+    choices: [
+      { text: 'No — each serves a distinct purpose (own life, someone else\'s researched life, timely reporting, exploring/arguing an idea) with distinct conventions', isCorrect: true },
+      { text: 'Yes — all nonfiction subgenres are basically the same thing', isCorrect: false, misconceptionId: `${PRNF}:MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING` },
+    ],
+    correctValue: 'no, distinct subgenres',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRNF}:MC-B-ALL-NONFICTION-SUBGENRES-ESSAY-MEMOIR-BIOGRAPHY-JOURNALISM-ARE-BASICALLY-THE-SAME-THING`],
+    source: `${PRNF_SRC} — diary-biography-news-op-ed conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.ipa-basics ────────────────────────────────────────────────
+const IPAB = 'eng.phonetics.ipa-basics'
+const IPAB_SRC = 'docs/curriculum/blueprints/eng.phonetics.ipa-basics.md'
+
+const IPAB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IPAB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Every IPA symbol stands for exactly ONE phoneme you’ve already ' +
+      'learned to produce and classify — it’s a one-symbol-one-sound ' +
+      'NOTATION SYSTEM, unlike English spelling. Reading /ʃ/ as "s" then ' +
+      '"h" is wrong — it’s the single "sh" sound you already know from ' +
+      '"ship." For any IPA symbol, ask which specific sound it represents ' +
+      '— never try to sound it out using English letter-reading habits.',
+    targetedMisconceptions: [`${IPAB}:MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS`],
+    source: `${IPAB_SRC} — MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS (P28 sh-as-s-h conflict)`,
+  },
+  {
+    conceptId: IPAB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'IPA transcribes only the sounds you actually pronounce — it ' +
+      'completely ignores spelling and silent letters. "Knife" has 5 ' +
+      'letters but transcribes as /naɪf/, just 4 symbols, since the ' +
+      'silent "k" disappears entirely. When transcribing a word into IPA, ' +
+      'say the word aloud first and transcribe only what you actually ' +
+      'hear — never letter-by-letter from the spelling.',
+    targetedMisconceptions: [`${IPAB}:MC-IPA-MATCHES-ENGLISH-SPELLING`],
+    source: `${IPAB_SRC} — MC-IPA-MATCHES-ENGLISH-SPELLING (P28 knife-transcription conflict)`,
+  },
+  {
+    conceptId: IPAB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'IPA symbols are a one-symbol-one-sound notation for phonemes ' +
+      'already known through place/manner/voicing (or height/backness/' +
+      'rounding) classification — they should never be read using English ' +
+      'letter-sound habits. Separately, IPA transcribes sound only, ' +
+      'completely independent of spelling — silent letters disappear and ' +
+      'the symbol count frequently differs from the letter count in ' +
+      'either direction, since transcription reflects only what is ' +
+      'actually pronounced.',
+    targetedMisconceptions: [
+      `${IPAB}:MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS`,
+      `${IPAB}:MC-IPA-MATCHES-ENGLISH-SPELLING`,
+    ],
+    source: `${IPAB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const IPAB_PROBES: SeedProbe[] = [
+  {
+    conceptId: IPAB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Should you read the IPA symbol /ʃ/ as "s" followed by "h"?',
+    choices: [
+      { text: 'No — /ʃ/ is one single symbol for one single sound (the "sh" sound), already known from consonant classification', isCorrect: true },
+      { text: 'Yes — IPA symbols are just fancy letters, read using normal English letter-sound rules', isCorrect: false, misconceptionId: `${IPAB}:MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS` },
+    ],
+    correctValue: 'no, one symbol one sound',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IPAB}:MC-IPA-SYMBOLS-ARE-JUST-FANCY-LETTERS`],
+    source: `${IPAB_SRC} — sh-as-s-h conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IPAB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The word "knife" has 5 letters. Should its IPA transcription also have 5 symbols?',
+    choices: [
+      { text: 'No — IPA transcribes only actual sounds; "knife" transcribes as /naɪf/, just 4 symbols, since the silent "k" is dropped entirely', isCorrect: true },
+      { text: 'Yes — IPA transcription matches English spelling letter for letter', isCorrect: false, misconceptionId: `${IPAB}:MC-IPA-MATCHES-ENGLISH-SPELLING` },
+    ],
+    correctValue: 'no, 4 symbols',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IPAB}:MC-IPA-MATCHES-ENGLISH-SPELLING`],
+    source: `${IPAB_SRC} — knife-transcription conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -20167,6 +20908,14 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PRFC_EXPLANATIONS,
   ...CNSD_EXPLANATIONS,
   ...VOWL_EXPLANATIONS,
+  ...ROOT_EXPLANATIONS,
+  ...MULM_EXPLANATIONS,
+  ...COLL_EXPLANATIONS,
+  ...REGF_EXPLANATIONS,
+  ...PARG_EXPLANATIONS,
+  ...LDEV_EXPLANATIONS,
+  ...PRNF_EXPLANATIONS,
+  ...IPAB_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -20393,4 +21142,12 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PRFC_PROBES,
   ...CNSD_PROBES,
   ...VOWL_PROBES,
+  ...ROOT_PROBES,
+  ...MULM_PROBES,
+  ...COLL_PROBES,
+  ...REGF_PROBES,
+  ...PARG_PROBES,
+  ...LDEV_PROBES,
+  ...PRNF_PROBES,
+  ...IPAB_PROBES,
 ]
