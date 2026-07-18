@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.integer-arithmetic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.integer-arithmetic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4056dd69e0532570bfebe6fa9d9324c53babe8240a42888d5ddd19907f7da760",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.integer-arithmetic.md": "sha256:1769d8b4c044a3fcecffc0ae3dc38a62b80f9037e300bcd286c591d23011a45f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.integer-arithmetic",
+    "name": "Integer Arithmetic",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.arith.negative-numbers",
+      "math.arith.multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.integer-arithmetic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.integer-arithmetic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.integer-arithmetic.md": "sha256:1769d8b4c044a3fcecffc0ae3dc38a62b80f9037e300bcd286c591d23011a45f"
+      },
+      "contentHash": "sha256:d33590752eaa223e447fa376453bd1450cd1254415a5e629a8b10a3a4d8a239a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.integer-arithmetic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.integer-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.integer-arithmetic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.integer-arithmetic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.integer-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.integer-arithmetic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.integer-arithmetic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.integer-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.integer-arithmetic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.integer-arithmetic.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.integer-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.integer-arithmetic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.integer-arithmetic/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Learning Objectives",
+      "content": "- LO1: Fluently compute all four operations (+, −, ×, ÷) on signed integers, correctly applying the sign rules for multiplication/division (same signs → positive, different signs → negative) and the addition/subtraction rules from `math.arith.negative-numbers`.\n- LO2: Evaluate multi-operation integer expressions correctly applying order of operations together with sign rules (e.g. distinguishing $-3^2$ from $(-3)^2$, and evaluating chained sign changes in a single expression).\n- LO3: Determine, without full computation, the sign of a product or quotient of several signed integers by counting negative factors (even count → positive, odd count → negative).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "NEGATIVE-BASE-EXPONENT-ORDER-ERROR",
+      "content": "| MC-1 | NEGATIVE-BASE-EXPONENT-ORDER-ERROR | Evaluating $-a^2$ as $(-a)^2$ (applying the minus to the base before exponentiation, instead of after) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "SIGN-COUNTING-OVERGENERALIZED-CANCELLATION",
+      "content": "| MC-2 | SIGN-COUNTING-OVERGENERALIZED-CANCELLATION | Misapplying \"negatives cancel in pairs\" reasoning (e.g. assuming any count of negative factors beyond 2 is automatically positive) instead of correctly counting odd/even | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "ZERO-DIVISION-SIGN-CONFUSION",
+      "content": "| MC-3 | ZERO-DIVISION-SIGN-CONFUSION | Believing division by 0 has some determinable sign (e.g. \"negative divided by 0 is negative infinity, so it's still negative\") instead of recognizing it as undefined | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Multiplication/Division Sign Rule Fluency (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Multiplication/Division Sign Rule Fluency (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Order of Operations with Signs, and the Negative-Factor-Counting Shortcut (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Order of Operations with Signs, and the Negative-Factor-Counting Shortcut (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 16,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Composite Multi-Step Expression (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Multi-Step Expression (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 28,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $(-14) + (-9) - (-20)$.\n  2. Compute $(-6)\\times(-3)\\times 2$.\n  3. Evaluate $-5^2 + (-2)\\times(-3)$.\n  4. Without full computation, state the sign of $(-1)\\times(-1)\\times(-1)\\times(-1)\\times(-1)\\times 6$.\n- **P76 (Transfer Probe, mode = independence)**: \"A chemistry log records temperature *changes* per hour as signed integers: −3, −3, −3, −3 (four consecutive hours of the same drop). If the starting temperature was 10°C, use integer multiplication to find the total change over the four hours, then the final temperature. Separately: an error-tracking system multiplies together five signed correction factors, three of which are negative — is the overall correction positive or negative, and why can you tell before multiplying it out?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 28,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.negative-numbers` (sign rules for addition/subtraction, double-negative, negative×negative=positive) and `math.arith.multiplication` (multiplication as repeated addition, fluency with basic products). This concept is the *consolidation* and *fluency* layer: it does not introduce new sign-rule reasoning so much as demand fast, reliable, integrated four-operation computation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.integer-arithmetic/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.integer-arithmetic",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.negative-numbers` (addition/subtraction sign rules, double-negative), `math.arith.multiplication` (repeated-addition grounding, basic product fluency).\n- **Unlocks**: `math.nt.divisibility` (divisibility of integers builds directly on integer division/multiplication fluency here), `math.arith.fractions` (fraction arithmetic requires fluent signed-integer numerator/denominator operations).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.integer-arithmetic.md",
+        "startLine": 113,
+        "endLine": 119
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
