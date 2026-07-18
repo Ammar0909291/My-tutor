@@ -26234,6 +26234,370 @@ const EDPR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.linguistics.discourse-analysis-intro ────────────────────────────────
+const DISA = 'eng.linguistics.discourse-analysis-intro'
+const DISA_SRC = 'docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md'
+
+const DISA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DISA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A passage packed with pronouns and conjunctions ("therefore," ' +
+      '"however") can still fail to make logical sense if the pronoun ' +
+      'referents are unclear or the logical connections don\'t actually ' +
+      'hold — like a bridge covered in visible bolts that doesn\'t ' +
+      'connect to anything solid. Cohesion (linking devices) and ' +
+      'coherence (actual logical sense) are separate properties; check ' +
+      'both independently.',
+    targetedMisconceptions: [`${DISA}:MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT`],
+    source: `${DISA_SRC} — MC-A (P28 bolted-bridge conflict)`,
+  },
+  {
+    conceptId: DISA,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A speaker\'s falling intonation or a closing phrase like "so yeah" ' +
+      'reliably prompts the next speaker to begin — like traffic flowing ' +
+      'through a busy intersection via real conventions, not a single ' +
+      'director. Conversational turn-taking follows real, identifiable ' +
+      'completion signals and patterns, not random social chaos.',
+    targetedMisconceptions: [`${DISA}:MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE`],
+    source: `${DISA_SRC} — MC-B (P28 busy-intersection conflict)`,
+  },
+  {
+    conceptId: DISA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Cohesion (surface-level linking devices — pronouns, conjunctions) ' +
+      'and coherence (actual logical sense) are separate properties; a ' +
+      'text dense with linking devices can still fail to cohere if ' +
+      'referents are unclear or logical connections don\'t hold. ' +
+      'Separately, conversational turn-taking follows real, identifiable ' +
+      'patterns (completion signals, appropriate pause points), not ' +
+      'random, unstructured social chaos.',
+    targetedMisconceptions: [
+      `${DISA}:MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT`,
+      `${DISA}:MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE`,
+    ],
+    source: `${DISA_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DISA_PROBES: SeedProbe[] = [
+  {
+    conceptId: DISA,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A passage is dense with pronouns and conjunctions like "therefore" and "however," but the pronoun referents are unclear and the logical connections don\'t actually hold. Does having lots of these cohesive devices automatically make the passage coherent?',
+    choices: [
+      { text: 'No — cohesion (linking devices) and coherence (actual logical sense) are separate properties; a text can have many devices and still fail to cohere logically', isCorrect: true },
+      { text: 'Yes — a text with lots of cohesive devices like pronouns and conjunctions is automatically coherent', isCorrect: false, misconceptionId: `${DISA}:MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT` },
+    ],
+    correctValue: 'no, cohesion and coherence differ',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DISA}:MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT`],
+    source: `${DISA_SRC} — bolted-bridge conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DISA,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a transcribed conversation, a speaker\'s falling intonation and a closing phrase reliably prompt the next speaker to begin. Does conversational turn-taking happen randomly with no underlying structure?',
+    choices: [
+      { text: 'No — turn-taking follows real, identifiable completion signals (intonation, closing phrases, grammatical completion points), a genuine systematic structure', isCorrect: true },
+      { text: 'Yes — conversational turn-taking just happens randomly with no underlying structure', isCorrect: false, misconceptionId: `${DISA}:MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE` },
+    ],
+    correctValue: 'no, turn-taking is systematic',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DISA}:MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE`],
+    source: `${DISA_SRC} — busy-intersection conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.sociolinguistics-intro ───────────────────────────────────
+const SOCL = 'eng.linguistics.sociolinguistics-intro'
+const SOCL_SRC = 'docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md'
+
+const SOCL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SOCL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Speakers from different social classes within the SAME city ' +
+      'systematically use certain grammatical features at different ' +
+      'rates — like neighbors in one city having systematically different ' +
+      'home-decoration styles correlated with age cohort, not geography. ' +
+      'Sociolinguistics studies how social factors (class, gender, age, ' +
+      'identity) — not just region — systematically shape language ' +
+      'variation.',
+    targetedMisconceptions: [`${SOCL}:MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS`],
+    source: `${SOCL_SRC} — MC-A (P28 home-decoration-age-cohort conflict)`,
+  },
+  {
+    conceptId: SOCL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A bilingual speaker fluidly switching between two languages ' +
+      'depending on topic or audience demonstrates MORE linguistic skill ' +
+      'than a monolingual speaker stuck in one register — like a ' +
+      'bilingual musician who can play both jazz and classical depending ' +
+      'on the venue. Code-switching requires full competence in BOTH ' +
+      'varieties plus the social skill of choosing the right one for the ' +
+      'context, not confusion.',
+    targetedMisconceptions: [`${SOCL}:MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY`],
+    source: `${SOCL_SRC} — MC-B (P28 bilingual-musician conflict)`,
+  },
+  {
+    conceptId: SOCL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Language variation correlates systematically with social factors ' +
+      '(class, gender, age, identity), not just regional geography — ' +
+      'documented patterns exist even among speakers from the same city. ' +
+      'Separately, code-switching and register-shifting demonstrate full ' +
+      'competence in multiple varieties plus the social judgment to ' +
+      'select the appropriate one for context, a skilled competency, not ' +
+      'evidence of incomplete mastery.',
+    targetedMisconceptions: [
+      `${SOCL}:MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS`,
+      `${SOCL}:MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY`,
+    ],
+    source: `${SOCL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SOCL_PROBES: SeedProbe[] = [
+  {
+    conceptId: SOCL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Speakers from different social classes within the same city use certain grammatical features at systematically different rates. Does this mean language variation is only about geographic region?',
+    choices: [
+      { text: 'No — social factors like class, age, gender, and identity also systematically shape language variation, independent of geography', isCorrect: true },
+      { text: 'Yes — language variation is only about geographic region, not social factors', isCorrect: false, misconceptionId: `${SOCL}:MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS` },
+    ],
+    correctValue: 'no, social factors matter too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SOCL}:MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS`],
+    source: `${SOCL_SRC} — home-decoration-age-cohort conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SOCL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bilingual speaker fluidly switches between two languages depending on topic and audience. Does this mean the speaker doesn\'t fully know either language properly?',
+    choices: [
+      { text: 'No — skilled code-switching requires full competence in both languages plus the added social skill of choosing the right one for context; it demonstrates more skill, not less', isCorrect: true },
+      { text: 'Yes — code-switching and register-shifting mean a speaker doesn\'t fully know either variety', isCorrect: false, misconceptionId: `${SOCL}:MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY` },
+    ],
+    correctValue: 'no, code-switching is skilled competence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SOCL}:MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY`],
+    source: `${SOCL_SRC} — bilingual-musician conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.public-speaking-basics ───────────────────────────────────────
+const PUBS = 'eng.speaking.public-speaking-basics'
+const PUBS_SRC = 'docs/curriculum/blueprints/eng.speaking.public-speaking-basics.md'
+
+const PUBS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PUBS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Experienced, skilled speakers regularly feel racing hearts and ' +
+      'nausea before giving excellent, well-received talks. Nervousness ' +
+      'is a nearly universal physiological response that coexists with ' +
+      'good performance — it doesn\'t reliably predict how well you\'ll ' +
+      'actually do. Treating nervousness as a doom signal just adds a ' +
+      'second layer of anxiety about the anxiety itself.',
+    targetedMisconceptions: [`${PUBS}:MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY`],
+    source: `${PUBS_SRC} — MC-1 (P28 weather-gauge-captain conflict)`,
+  },
+  {
+    conceptId: PUBS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Word-for-word memorization often produces a flat, disconnected ' +
+      'delivery — if you forget one word, the whole recitation can fall ' +
+      'apart. Like a road map showing key destinations rather than rigid ' +
+      'turn-by-turn instructions, skilled speakers prepare key points and ' +
+      'speak naturally from that structure, which connects better with ' +
+      'an audience and adapts if something is forgotten.',
+    targetedMisconceptions: [`${PUBS}:MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY`],
+    source: `${PUBS_SRC} — MC-2 (P28 road-map-not-script conflict)`,
+  },
+  {
+    conceptId: PUBS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Nervousness before speaking is a nearly universal physiological ' +
+      'response, even among skilled speakers, and does not reliably ' +
+      'predict actual performance quality. Separately, effective public ' +
+      'speaking typically works from key points or an outline rather than ' +
+      'verbatim memorization, since a rigid script produces a flatter, ' +
+      'less resilient delivery than natural, conversational speech from a ' +
+      'flexible structure.',
+    targetedMisconceptions: [
+      `${PUBS}:MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY`,
+      `${PUBS}:MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY`,
+    ],
+    source: `${PUBS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PUBS_PROBES: SeedProbe[] = [
+  {
+    conceptId: PUBS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Your heart is racing right before a class presentation. Does this reliably mean you\'re going to do badly?',
+    choices: [
+      { text: 'No — nervousness is a nearly universal physiological response that coexists with good performance; it doesn\'t reliably predict how well you\'ll do', isCorrect: true },
+      { text: 'Yes — nervousness before speaking means you will do badly', isCorrect: false, misconceptionId: `${PUBS}:MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY` },
+    ],
+    correctValue: 'no, nervousness isn\'t predictive',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PUBS}:MC-NERVOUSNESS-BEFORE-SPEAKING-MEANS-YOU-WILL-DO-BADLY`],
+    source: `${PUBS_SRC} — weather-gauge-captain conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PUBS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does effective public speaking require memorizing your speech word-for-word and reciting it exactly?',
+    choices: [
+      { text: 'No — skilled speakers typically prepare key points or an outline, allowing natural, flexible, conversational delivery rather than rigid verbatim recitation', isCorrect: true },
+      { text: 'Yes — a good speaker memorizes every word and recites it exactly', isCorrect: false, misconceptionId: `${PUBS}:MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY` },
+    ],
+    correctValue: 'no, use key points not verbatim script',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PUBS}:MC-A-GOOD-SPEAKER-MEMORIZES-EVERY-WORD-AND-RECITES-IT-EXACTLY`],
+    source: `${PUBS_SRC} — road-map-not-script conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.essay-structure ────────────────────────────────────────────────
+const ESSY = 'eng.writing.essay-structure'
+const ESSY_SRC = 'docs/curriculum/blueprints/eng.writing.essay-structure.md'
+
+const ESSY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ESSY,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"This essay will discuss climate change" only announces a topic — ' +
+      'it gives no specific claim. "Local governments, not just national ' +
+      'policy, hold the most practical power to reduce climate change\'s ' +
+      'immediate impact" is a specific, arguable thesis the essay can ' +
+      'develop. An introduction needs a genuine thesis, not just a topic ' +
+      'announcement — the same error as a weak topic sentence, scaled up ' +
+      'to essay level.',
+    targetedMisconceptions: [`${ESSY}:MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES`],
+    source: `${ESSY_SRC} — MC-1 (P28 departure-sign-specificity conflict)`,
+  },
+  {
+    conceptId: ESSY,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A conclusion that just restates the thesis in nearly identical ' +
+      'wording suggests the essay\'s body never actually developed ' +
+      'anything — like a "round trip" ending exactly where it started. A ' +
+      'genuine conclusion synthesizes what the body specifically showed ' +
+      'and explains the argument\'s broader significance — an arrival, ' +
+      'not a rewind.',
+    targetedMisconceptions: [`${ESSY}:MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD`],
+    source: `${ESSY_SRC} — MC-2 (P28 round-trip-vs-one-way-journey conflict)`,
+  },
+  {
+    conceptId: ESSY,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'An essay\'s introduction must establish a specific, arguable ' +
+      'thesis the entire essay develops and defends, not merely announce ' +
+      'a general subject — the same claim-versus-announcement distinction ' +
+      'that applies to paragraph-level topic sentences, scaled to the ' +
+      'whole essay. Separately, an effective conclusion synthesizes the ' +
+      'body\'s specific evidence and reasoning and explains the ' +
+      'argument\'s broader significance, rather than restating the ' +
+      'introduction\'s thesis in near-identical wording.',
+    targetedMisconceptions: [
+      `${ESSY}:MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES`,
+      `${ESSY}:MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD`,
+    ],
+    source: `${ESSY_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ESSY_PROBES: SeedProbe[] = [
+  {
+    conceptId: ESSY,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"This essay will discuss climate change." Does this introduction give the reader a specific claim the essay will argue?',
+    choices: [
+      { text: 'No — it only announces the general subject; an essay introduction needs a specific, arguable thesis, just like a paragraph needs a genuine topic sentence claim', isCorrect: true },
+      { text: 'Yes — the introduction just announces the topic the way a paragraph\'s topic sentence does', isCorrect: false, misconceptionId: `${ESSY}:MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES` },
+    ],
+    correctValue: 'no, needs a specific thesis',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ESSY}:MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES`],
+    source: `${ESSY_SRC} — departure-sign-specificity conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ESSY,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An essay\'s conclusion restates its introduction\'s thesis in nearly identical wording. Does this demonstrate the essay\'s body actually developed the argument?',
+    choices: [
+      { text: 'No — a conclusion that just repeats the introduction suggests the body never developed anything; a genuine conclusion synthesizes the specific evidence shown', isCorrect: true },
+      { text: 'Yes — the conclusion just repeats the introduction word-for-word', isCorrect: false, misconceptionId: `${ESSY}:MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD` },
+    ],
+    correctValue: 'no, must synthesize not repeat',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ESSY}:MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD`],
+    source: `${ESSY_SRC} — round-trip-vs-one-way-journey conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -26529,6 +26893,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PSYL_EXPLANATIONS,
   ...DISC_EXPLANATIONS,
   ...EDPR_EXPLANATIONS,
+  ...DISA_EXPLANATIONS,
+  ...SOCL_EXPLANATIONS,
+  ...PUBS_EXPLANATIONS,
+  ...ESSY_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -26824,4 +27192,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PSYL_PROBES,
   ...DISC_PROBES,
   ...EDPR_PROBES,
+  ...DISA_PROBES,
+  ...SOCL_PROBES,
+  ...PUBS_PROBES,
+  ...ESSY_PROBES,
 ]
