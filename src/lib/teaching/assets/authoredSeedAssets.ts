@@ -34208,6 +34208,366 @@ const TEXP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.calorimetry ───────────────────────────────────────────────────
+const CALO = 'phys.therm.calorimetry'
+const CALO_SRC = 'docs/curriculum/blueprints/phys.therm.calorimetry.md'
+
+const CALO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CALO,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A calorimetry energy balance must account for EVERY object that changes temperature — including the calorimeter vessel itself, not just the two substances you\'re actually studying. The complete balance is Q_hot = Q_water + Q_calorimeter, never just Q_hot = Q_water: the calorimeter is a real physical object with its own heat capacity (often expressed as a "water equivalent" mass W_cal, in grams, or directly as C_cal in kJ/°C), and it genuinely absorbs some of the heat released by the hot object too. Skipping this term systematically UNDERESTIMATES the heat actually released by the hot substance, making calculated specific heats come out artificially LOW — a well-calibrated bomb calorimeter has its C_cal measured experimentally beforehand, via a standard combustion of known energy, precisely so this correction can be applied accurately. The final equilibrium temperature of a mixture is NOT simply the arithmetic average of the two starting temperatures, (T_hot+T_cold)/2 — that shortcut is only valid in the special case where both substances have EQUAL thermal mass (m×c). In general, energy conservation gives Q_lost = Q_gained, i.e. m₁c₁(T₁−T_f) = m₂c₂(T_f−T₂), which rearranges to the properly WEIGHTED average T_f = (m₁c₁T₁ + m₂c₂T₂)/(m₁c₁ + m₂c₂) — the final temperature is pulled disproportionately toward whichever substance has the LARGER thermal mass (m×c); a small hot object added to a large, cool bath barely moves the bath\'s temperature at all, precisely because the bath\'s thermal mass dominates the weighted average.',
+    targetedMisconceptions: [`${CALO}:MC-CALORIMETRY-IGNORES-CALORIMETER`, `${CALO}:MC-FINAL-TEMPERATURE-IS-AVERAGE`],
+    source: `${CALO_SRC} — MC-CALORIMETRY-IGNORES-CALORIMETER (must include calorimeter heat capacity) + MC-FINAL-TEMPERATURE-IS-AVERAGE (weighted average by thermal mass, not simple average)`,
+  },
+  {
+    conceptId: CALO,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but incomplete assumption: setting up the calorimetry energy balance as Q_hot = Q_water only, forgetting that the calorimeter VESSEL itself is a real physical object that also changes temperature during the experiment and therefore also absorbs some heat. Run the calculation without including the calorimeter\'s heat capacity (W_cal) and compare the resulting specific heat to the correct value that DOES include it — the version omitting W_cal produces a calculated specific heat that comes out artificially LOW, because it wrongly attributes ALL the heat released by the hot object to warming the water alone, when in reality some of that heat also went into warming the calorimeter vessel. The complete, correct energy balance is Q_hot = Q_water + Q_calorimeter — this is precisely why a properly calibrated calorimeter has its own heat capacity C_cal measured experimentally beforehand (via a standard combustion of known, precisely-known energy release), so this correction term can be applied accurately in later measurements. Second, a very tempting but generally wrong shortcut: guessing the final equilibrium temperature of a hot-cold mixture is simply the arithmetic average, T_f = (T_hot+T_cold)/2, without considering the masses or specific heats of the two substances involved. Test it against a case with genuinely different thermal masses: 10 g of water at 80°C mixed with 200 g of water at 20°C — the simple average predicts 50°C, but conservation of energy gives a very different, much lower answer, since the much larger 200 g mass dominates. The formula T_f=(T₁+T₂)/2 is only valid in the special case where the two substances have EQUAL thermal mass (m₁c₁=m₂c₂); in general, the correct approach is energy conservation, Q_lost=Q_gained → m₁c₁(T₁−T_f)=m₂c₂(T_f−T₂), which rearranges to the properly weighted average T_f=(m₁c₁T₁+m₂c₂T₂)/(m₁c₁+m₂c₂) — the final temperature is pulled disproportionately toward whichever substance has the larger thermal mass, exactly why a small hot object dropped into a large cool bath barely moves the bath\'s temperature at all.',
+    targetedMisconceptions: [`${CALO}:MC-CALORIMETRY-IGNORES-CALORIMETER`, `${CALO}:MC-FINAL-TEMPERATURE-IS-AVERAGE`],
+    source: `${CALO_SRC} — MC-CALORIMETRY-IGNORES-CALORIMETER + MC-FINAL-TEMPERATURE-IS-AVERAGE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CALO_PROBES: SeedProbe[] = [
+  {
+    conceptId: CALO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a calorimetry experiment, should the calorimeter vessel\'s own heat capacity be included in the energy balance, or only the two substances being studied?',
+    choices: [
+      { text: 'It must be included — the complete balance is Q_hot = Q_water + Q_calorimeter; omitting the calorimeter\'s heat capacity underestimates released heat and gives an artificially low calculated specific heat', isCorrect: true },
+      { text: 'Only the two substances matter — the calorimeter vessel is just a container and doesn\'t need to be included in the energy balance', isCorrect: false, misconceptionId: `${CALO}:MC-CALORIMETRY-IGNORES-CALORIMETER` },
+    ],
+    correctValue: 'must include calorimeter heat capacity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CALO}:MC-CALORIMETRY-IGNORES-CALORIMETER`],
+    source: `${CALO_SRC} — MC-CALORIMETRY-IGNORES-CALORIMETER trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CALO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '10 g of water at 80°C is mixed with 200 g of water at 20°C. Is the final temperature the simple average, 50°C?',
+    choices: [
+      { text: 'No — the final temperature is a THERMAL-MASS-WEIGHTED average, pulled toward the much larger 200g mass; the simple average only works when both masses (and specific heats) are equal', isCorrect: true },
+      { text: 'Yes — mixing two temperatures always gives the simple arithmetic average, regardless of the masses involved', isCorrect: false, misconceptionId: `${CALO}:MC-FINAL-TEMPERATURE-IS-AVERAGE` },
+    ],
+    correctValue: 'no, weighted average not simple average',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CALO}:MC-FINAL-TEMPERATURE-IS-AVERAGE`],
+    source: `${CALO_SRC} — MC-FINAL-TEMPERATURE-IS-AVERAGE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.entropy ───────────────────────────────────────────────────────
+const ENTR = 'phys.therm.entropy'
+const ENTR_SRC = 'docs/curriculum/blueprints/phys.therm.entropy.md'
+
+const ENTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENTR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Entropy is a precisely defined physical quantity, S = k_B ln Ω, where Ω is the number of equivalent microscopic arrangements (microstates) consistent with a system\'s macroscopic state — it is NOT the same as everyday "messiness" or visual disorder, despite that being a common loose analogy. A perfectly tidy NaCl crystal (every atom locked in a rigid lattice) genuinely has LESS entropy than liquid NaCl at the same temperature, which in turn has less entropy than gaseous NaCl at even higher temperature — and crucially, a visually "tidy" room can actually have HIGH entropy if its air molecules are at high temperature (providing many possible energy microstates), while a visually "messy" room could have LOW entropy if everything inside is cold and nearly motionless. Entropy fundamentally measures SPREAD: spread of energy across available degrees of freedom, and spread of particles across accessible positions — higher temperature means more possible kinetic-energy configurations (higher Ω, higher S), and larger volume means molecules have more possible positions to occupy (higher Ω, higher S). The Second Law specifically constrains the ENTIRE universe (system PLUS surroundings combined), never any single isolated system by itself: ΔS_universe ≥ 0 always, but ΔS for any individual subsystem can be positive, negative, or zero — a cup of coffee cooling down has its OWN entropy decrease (ΔS_coffee < 0), which is completely fine, precisely because the surrounding room\'s entropy increases by AT LEAST as much (ΔS_room ≥ |ΔS_coffee|), keeping the total ΔS_universe non-negative.',
+    targetedMisconceptions: [`${ENTR}:MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE`, `${ENTR}:MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM`],
+    source: `${ENTR_SRC} — MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE (S=k_B ln Ω, not "messiness") + MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM (only ΔS_universe≥0, individual systems can decrease)`,
+  },
+  {
+    conceptId: ENTR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but imprecise assumption: equating "entropy" directly with everyday "messiness" or visual disorder — reasoning "entropy is just clutter" or "my room\'s entropy increases when I don\'t tidy it up." This everyday analogy genuinely breaks down under scrutiny: a perfectly tidy, rigidly-ordered crystal of NaCl has LESS entropy than liquid NaCl at the same temperature, and gaseous NaCl at higher temperature has even more — but more strikingly, a visually "tidy" room can actually have HIGH entropy (if its air molecules are at high temperature, providing enormous numbers of possible kinetic-energy microstates), while a visually "messy" but cold, motionless room could have genuinely LOW entropy. Entropy is precisely defined as S = k_B ln Ω, where Ω counts the number of equivalent microscopic arrangements (microstates) consistent with the observed macroscopic state — it measures SPREAD (of energy across degrees of freedom, or of particles across available positions), not visual tidiness; the "disorder" analogy is a useful rough intuition, never a precise definition. Second, a very tempting but wrong overgeneralization: taking "entropy always increases" to mean it must increase for EVERY individual system in isolation — leading to genuinely wrong conclusions like "my coffee can\'t cool down, since that would decrease its entropy." The Second Law specifically governs ΔS_universe (the system PLUS its surroundings TOGETHER), never any single system considered alone: a coffee cup cooling from 90°C to 20°C genuinely has DECREASING coffee-entropy (ΔS_coffee < 0) — completely consistent with the second law, because the surrounding room\'s entropy INCREASES by at least as much as the coffee\'s decreases (ΔS_room ≥ |ΔS_coffee|), keeping the total ΔS_universe non-negative. A refrigerator is the clearest everyday example: it makes food genuinely colder (ΔS_food < 0), while generating heat that increases the kitchen\'s entropy by MORE than the food\'s entropy decreased (ΔS_room > |ΔS_food|), so ΔS_universe > 0 overall — local entropy decreases are entirely permitted, as long as the total, universe-wide sum never decreases.',
+    targetedMisconceptions: [`${ENTR}:MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE`, `${ENTR}:MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM`],
+    source: `${ENTR_SRC} — MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE + MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ENTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A perfectly tidy, rigidly-ordered NaCl crystal is compared to liquid NaCl at the same temperature. Which has higher entropy?',
+    choices: [
+      { text: 'The liquid NaCl — entropy is precisely S=k_B ln Ω (a count of possible microstates), and molecules in a liquid have vastly more possible arrangements than a rigid crystal lattice, regardless of "tidiness"', isCorrect: true },
+      { text: 'Neither, or it can\'t be determined — entropy is essentially the same thing as visual "messiness," and the crystal is more tidy so should have lower entropy, but liquid isn\'t necessarily "messier" in the everyday sense', isCorrect: false, misconceptionId: `${ENTR}:MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE` },
+    ],
+    correctValue: 'liquid NaCl has higher entropy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTR}:MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE`],
+    source: `${ENTR_SRC} — MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ENTR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cup of coffee cools from 90°C to 20°C, so the coffee\'s own entropy DECREASES. Does this violate the second law of thermodynamics?',
+    choices: [
+      { text: 'No — the second law only requires ΔS_universe (system + surroundings) ≥ 0; the coffee\'s entropy can decrease as long as the surrounding room\'s entropy increases by at least as much', isCorrect: true },
+      { text: 'Yes — since entropy always increases for every system, a decrease in the coffee\'s entropy is forbidden by the second law', isCorrect: false, misconceptionId: `${ENTR}:MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM` },
+    ],
+    correctValue: 'no, only total entropy must not decrease',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTR}:MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM`],
+    source: `${ENTR_SRC} — MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.second-law ────────────────────────────────────────────────────
+const SLAW = 'phys.therm.second-law'
+const SLAW_SRC = 'docs/curriculum/blueprints/phys.therm.second-law.md'
+
+const SLAW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SLAW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Second Law of Thermodynamics is NOT merely a restatement of the First Law (energy conservation) — it adds a genuinely new, independent constraint that the First Law says nothing about: DIRECTION. Consider heat spontaneously flowing from a cold metal block (300 K) to a hotter one (600 K), with no work exchanged at all — this process would perfectly conserve energy (satisfying the First Law completely), yet it never actually happens spontaneously in nature, because the Second Law forbids it. The First Law answers "how much" energy moves (conservation); the Second Law answers "which way" energy naturally flows (direction, governed by entropy) — together they form the complete thermodynamic framework, with the Second Law ruling out an entire category of energy-conserving-but-physically-impossible processes that the First Law alone would permit. The Second Law also applies FAR more broadly than just heat engines — its full, general statement is that the total entropy of an isolated system (or the universe as a whole) never decreases, ΔS_universe ≥ 0, and this constrains EVERYTHING: heat engines, chemical reactions, phase transitions, biological systems, even cosmology. A biological cell assembling ordered proteins from disordered amino acids does NOT violate the second law, despite creating local order — the cell achieves this reduction in its own local entropy only at the cost of releasing metabolic heat that increases the surrounding environment\'s entropy by MORE than enough to compensate, exactly the same mechanism by which a refrigerator can make food colder (locally decreasing entropy) while generating heat that increases the kitchen\'s entropy by an even larger amount.',
+    targetedMisconceptions: [`${SLAW}:MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT`, `${SLAW}:MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT`],
+    source: `${SLAW_SRC} — MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT (adds direction/entropy, First Law alone doesn't forbid spontaneous cold-to-hot flow) + MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT (applies to all systems, universe-wide entropy)`,
+  },
+  {
+    conceptId: SLAW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing the Second Law is essentially just the First Law restated in different words — "you can\'t get more work out than heat you put in, which is just energy conservation." Test this by imagining a process that PERFECTLY conserves energy but should intuitively strike you as impossible: heat spontaneously flowing from a COLD metal block (300 K) to a HOTTER one (600 K), with zero work exchanged anywhere. Does the First Law (energy conservation) prohibit this? It doesn\'t — energy is perfectly conserved throughout, since heat simply moves from one object to another with no net change in total energy; the First Law is completely silent about which DIRECTION a process must run. Yet this spontaneous cold-to-hot heat flow genuinely never happens in nature — and it\'s specifically the Second Law that forbids it, by adding an entirely independent constraint the First Law never addressed: DIRECTION. The First Law tells you "how much" energy moves (conservation); the Second Law tells you "which way" it\'s allowed to flow naturally (governed by entropy) — together, not separately, they form the complete framework, and the Second Law genuinely rules out an entire category of processes that perfectly conserve energy yet are still physically forbidden. Second, related trap: assuming the Second Law is narrowly specific to heat engines, and therefore doesn\'t apply to chemical reactions, biological processes, or anything outside classical thermodynamics. Consider a biological cell assembling highly ordered proteins from disordered amino acids — does this creation of local order violate the second law? It doesn\'t, because the Second Law\'s FULL, general statement is that the total entropy of an isolated system (or the entire universe) never decreases, ΔS_universe ≥ 0 — and this applies to absolutely everything: heat engines, chemical reactions, phase transitions, biological systems, even cosmology. The cell achieves its local decrease in entropy (building order) only by releasing metabolic heat that increases the surrounding environment\'s entropy by MORE than enough to compensate — precisely the same mechanism that lets a refrigerator make food colder (locally decreasing entropy) while generating heat that raises the kitchen\'s entropy by an even larger amount, and the same mechanism that lets a crystal form from a solution (locally ordering) by releasing latent heat into its surroundings.',
+    targetedMisconceptions: [`${SLAW}:MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT`, `${SLAW}:MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT`],
+    source: `${SLAW_SRC} — MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT + MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SLAW_PROBES: SeedProbe[] = [
+  {
+    conceptId: SLAW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Heat spontaneously flows from a cold metal block (300 K) to a hotter block (600 K), with no work exchanged. This perfectly conserves energy. Does the First Law forbid this process?',
+    choices: [
+      { text: 'No — the First Law only concerns energy conservation and says nothing about direction; it is the SECOND Law (via entropy) that forbids this spontaneous cold-to-hot heat flow', isCorrect: true },
+      { text: 'Yes — since this violates energy conservation, the First Law rules it out, making the Second Law essentially redundant', isCorrect: false, misconceptionId: `${SLAW}:MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT` },
+    ],
+    correctValue: 'no, First Law does not forbid it; Second Law does',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SLAW}:MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT`],
+    source: `${SLAW_SRC} — MC-SECOND-LAW-IS-JUST-FIRST-LAW-RESTATEMENT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SLAW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A living cell assembles ordered proteins from disordered amino acids, creating local order. Does this violate the second law of thermodynamics?',
+    choices: [
+      { text: 'No — the second law applies to the TOTAL entropy of the universe; the cell\'s local entropy decrease is compensated by metabolic heat released, increasing the surrounding environment\'s entropy by at least as much', isCorrect: true },
+      { text: 'Yes, unless we consider this an exception — the second law is fundamentally about heat engines and doesn\'t really apply to biological or chemical processes', isCorrect: false, misconceptionId: `${SLAW}:MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT` },
+    ],
+    correctValue: 'no, universe-wide entropy still increases',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SLAW}:MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT`],
+    source: `${SLAW_SRC} — MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.thermodynamic-processes ──────────────────────────────────────
+const TPRC = 'phys.therm.thermodynamic-processes'
+const TPRC_SRC = 'docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md'
+
+const TPRC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TPRC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'On a P-V diagram, the adiabatic curve is ALWAYS steeper than the isothermal curve at any point where they cross — never flatter or equal — because an adiabatic process has no heat input to maintain temperature as the gas expands, so the gas genuinely COOLS as it expands, causing pressure to drop FASTER than it would along a constant-temperature isotherm. Numerically, for the same starting point and same volume expansion, the adiabatic curve (following PV^γ = constant, with γ>1) always ends up BELOW the isothermal curve (following PV = constant) — same final volume, but lower final pressure AND lower final temperature; the adiabatic slope on a P-V diagram is −γP/V compared to the isothermal slope of just −P/V, steeper by exactly the factor γ. A separate and commonly confused case: gas expanding FREELY into a vacuum (with nothing to push against) behaves completely differently from gas expanding against a piston. Apply the First Law directly to free expansion: there\'s no external pressure to do work against, so W_by = 0 exactly; the process is also insulated, so Q = 0 — giving ΔU = Q + W = 0 exactly, meaning temperature stays UNCHANGED for an ideal gas. This is the opposite of the common assumption that "expansion always cools a gas" — that rule applies specifically to expansion AGAINST an external pressure (like pushing a piston, doing positive work, which genuinely does cool the gas adiabatically), never to free expansion into an empty vacuum, where there\'s simply nothing for the gas to push against and therefore no work is done at all.',
+    targetedMisconceptions: [`${TPRC}:MC-ADIABATIC-STEEPER-OR-SHALLOWER`, `${TPRC}:MC-FREE-EXPANSION-COOLS-GAS`],
+    source: `${TPRC_SRC} — MC-ADIABATIC-STEEPER-OR-SHALLOWER (adiabatic always steeper than isothermal on P-V diagram) + MC-FREE-EXPANSION-COOLS-GAS (free expansion into vacuum: ΔU=0, T unchanged)`,
+  },
+  {
+    conceptId: TPRC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption when first sketching P-V diagrams: drawing the adiabatic curve as FLATTER than (or equal to) the isothermal curve, since both curves are "expansion curves" and might intuitively seem similar. Compare them numerically for the same gas starting at V₁=2L, both expanding to V₂=6L: the isothermal pressure follows P=P₁/3 (from PV=const), while the adiabatic pressure follows P=P₁×(2/6)^(5/3)=P₁×(1/3)^1.667 — a noticeably SMALLER fraction of the original pressure than the isothermal case, meaning the adiabatic curve drops MORE steeply, ending up BELOW the isothermal curve at the same final volume. The physical reason: adiabatic expansion has NO heat input to maintain temperature, so the gas genuinely cools as it expands (unlike the isothermal case, which by definition stays at constant temperature via continuous heat exchange), and that additional cooling makes pressure fall faster — the adiabatic slope on a P-V diagram is −γP/V, exactly γ times steeper than the isothermal slope of −P/V (since γ>1 for any real gas). Second, a distinct and commonly confused trap: assuming ALL gas expansion cools the gas, including "free expansion" into an empty vacuum with nothing to push against. Apply the First Law directly to this specific case: since there\'s no external pressure at all, the gas does zero work (W_by=0); since the process is insulated, no heat is exchanged (Q=0) — giving ΔU=Q+W=0 exactly, meaning the temperature of an ideal gas stays completely UNCHANGED during free expansion into vacuum, genuinely different from adiabatic expansion against a piston (which DOES cool the gas, since the gas does real positive work pushing the piston, and that work comes out of the gas\'s own internal energy, lowering its temperature). The distinguishing rule: expansion AGAINST resistance (a piston, external pressure) → gas does positive work → temperature falls; expansion into a genuine VACUUM with nothing to push against → zero work done → temperature stays exactly the same (for an ideal gas).',
+    targetedMisconceptions: [`${TPRC}:MC-ADIABATIC-STEEPER-OR-SHALLOWER`, `${TPRC}:MC-FREE-EXPANSION-COOLS-GAS`],
+    source: `${TPRC_SRC} — MC-ADIABATIC-STEEPER-OR-SHALLOWER + MC-FREE-EXPANSION-COOLS-GAS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TPRC_PROBES: SeedProbe[] = [
+  {
+    conceptId: TPRC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the same gas expanding from the same starting point to the same final volume, is the adiabatic curve on a P-V diagram steeper or shallower than the isothermal curve?',
+    choices: [
+      { text: 'Steeper — the adiabatic curve drops faster (P falls more) because the gas cools during adiabatic expansion (no heat input), unlike the isothermal case which stays at constant T', isCorrect: true },
+      { text: 'Shallower or equal — both curves represent expansion, so they should have similar or identical slopes', isCorrect: false, misconceptionId: `${TPRC}:MC-ADIABATIC-STEEPER-OR-SHALLOWER` },
+    ],
+    correctValue: 'adiabatic is steeper',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TPRC}:MC-ADIABATIC-STEEPER-OR-SHALLOWER`],
+    source: `${TPRC_SRC} — MC-ADIABATIC-STEEPER-OR-SHALLOWER trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TPRC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An ideal gas expands freely into a vacuum (nothing to push against, insulated so no heat exchange). What happens to its temperature?',
+    choices: [
+      { text: 'Temperature stays UNCHANGED — with no external pressure (W=0) and no heat exchange (Q=0), the First Law gives ΔU=0, so T is unchanged for an ideal gas', isCorrect: true },
+      { text: 'Temperature drops — gas expansion always cools the gas, regardless of what it is expanding against', isCorrect: false, misconceptionId: `${TPRC}:MC-FREE-EXPANSION-COOLS-GAS` },
+    ],
+    correctValue: 'temperature unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TPRC}:MC-FREE-EXPANSION-COOLS-GAS`],
+    source: `${TPRC_SRC} — MC-FREE-EXPANSION-COOLS-GAS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.phase-transitions ────────────────────────────────────────────
+const PTRN = 'phys.therm.phase-transitions'
+const PTRN_SRC = 'docs/curriculum/blueprints/phys.therm.phase-transitions.md'
+
+const PTRN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PTRN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'While a substance is undergoing a phase change (melting, boiling), its temperature stays EXACTLY FIXED at the transition temperature — it does NOT continue rising during the transition, and this isn\'t instantaneous either, but rather has real, measurable WIDTH in time. Put a thermometer in a mixture of ice and water at 1 atm, stir gently, and add heat steadily: the temperature reading stays locked at exactly 0°C for as long as ANY ice remains, only beginning to rise again once every last bit of ice has melted — all the heat energy added during this flat segment goes entirely into BREAKING intermolecular bonds (the phase change itself), never into raising the kinetic energy (temperature) of the molecules. This flat segment has genuine width proportional to mass times latent heat (m×L): melting 0.5 kg of ice requires 167,000 J total, so at a steady 100 W heating rate, that\'s a full 28 minutes of completely flat temperature — a real, extended, measurable phase, not an instant. Different phase transitions require dramatically different amounts of latent heat, and using the wrong one produces large errors: for water, melting requires L_f = 334 kJ/kg, but vaporizing requires L_v = 2260 kJ/kg — nearly 7 times MORE energy — because melting only partially disrupts intermolecular forces (molecules gain the freedom to flow but stay close and still interacting), while vaporization completely eliminates those forces (molecules separate to distances where the forces become negligible), which is intrinsically a far more energy-demanding transformation.',
+    targetedMisconceptions: [`${PTRN}:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE`, `${PTRN}:MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS`],
+    source: `${PTRN_SRC} — MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE (temperature stays fixed during phase change, real width in time) + MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS (L_v ~6-10x larger than L_f, different physical mechanisms)`,
+  },
+  {
+    conceptId: PTRN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing that when you heat ice, its temperature keeps rising continuously throughout — right up through and including the melting process itself, treating the melting as either instantaneous or non-isothermal. Test it directly: put a thermometer in a mixture of ice and water at 1 atm, add heat steadily from a water bath, and record the reading every 30 seconds over several minutes — the temperature stays PERFECTLY FLAT at exactly 0°C for as long as ANY ice remains in the mixture, refusing to rise even one degree, and only begins climbing again once the very last trace of ice has fully melted. As long as two phases genuinely coexist (solid+liquid, or liquid+gas), the temperature is locked at the transition temperature; all the heat energy added during this flat stretch goes entirely into breaking intermolecular bonds (the phase change itself), never into raising molecular kinetic energy (which is what temperature actually measures). This flat segment isn\'t some idealized instant — it has real, substantial WIDTH proportional to m×L: melting just 0.5 kg of ice requires a genuine 167,000 J, meaning at a modest 100 W heating rate, that\'s a full 28 minutes of completely flat temperature — a real, extended, measurable phenomenon, and a fundamental signature of phase transitions in thermodynamics. Second, related trap: assuming the latent heat needed for one type of phase transition (like melting) is roughly the same magnitude as for another type (like vaporization), or mixing up which L value applies to which transition. Compare directly for water: melting 1 kg of ice requires L_f=334 kJ, while vaporizing 1 kg of water requires L_v=2260 kJ — nearly SEVEN times more energy for vaporization than melting. The physical reason: melting only PARTIALLY disrupts intermolecular forces — molecules in the resulting liquid gain freedom to flow past each other but remain close together and still interacting significantly; vaporization, by contrast, COMPLETELY eliminates intermolecular forces, separating molecules to distances where those forces become negligible — a far more thorough, energy-intensive transformation. Always identify which specific transition you\'re dealing with (fusion L_f, vaporization L_v, or sublimation L_s≈L_f+L_v) and use the matching latent heat value — for water specifically: L_f=334, L_v=2260, L_s≈2594 kJ/kg.',
+    targetedMisconceptions: [`${PTRN}:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE`, `${PTRN}:MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS`],
+    source: `${PTRN_SRC} — MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE + MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const PTRN_PROBES: SeedProbe[] = [
+  {
+    conceptId: PTRN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You add heat steadily to a mixture of ice and water at 1 atm, while some ice still remains unmelted. What happens to the temperature reading?',
+    choices: [
+      { text: 'It stays EXACTLY FIXED at 0°C for as long as any ice remains — all the added heat goes into breaking intermolecular bonds (melting), not into raising temperature, until all the ice is gone', isCorrect: true },
+      { text: 'It continues rising steadily throughout, since heat is continuously being added to the mixture', isCorrect: false, misconceptionId: `${PTRN}:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE` },
+    ],
+    correctValue: 'stays fixed at 0C until all ice melts',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PTRN}:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE`],
+    source: `${PTRN_SRC} — MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PTRN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For water, is the latent heat of fusion (melting, L_f=334 kJ/kg) roughly the same magnitude as the latent heat of vaporization (boiling, L_v=2260 kJ/kg)?',
+    choices: [
+      { text: 'No — L_v is nearly 7 times LARGER than L_f, because vaporization completely eliminates intermolecular forces while melting only partially disrupts them', isCorrect: true },
+      { text: 'Yes — latent heats for different phase transitions of the same substance are generally similar in magnitude', isCorrect: false, misconceptionId: `${PTRN}:MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS` },
+    ],
+    correctValue: 'no, vaporization requires far more energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PTRN}:MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS`],
+    source: `${PTRN_SRC} — MC-LATENT-HEAT-SAME-FOR-ALL-TRANSITIONS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.heat-engines ──────────────────────────────────────────────────
+const HENG = 'phys.therm.heat-engines'
+const HENG_SRC = 'docs/curriculum/blueprints/phys.therm.heat-engines.md'
+
+const HENG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HENG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A heat engine\'s efficiency has two mathematically equivalent formulas — η = W_out/Q_H = 1 − Q_C/Q_H — but a very common calculation error mixes them up: writing η = 1 − Q_C directly (forgetting to divide Q_C by Q_H first). This is a genuine error, not just sloppy notation — efficiency η is dimensionless (a pure ratio, always between 0 and 1), while Q_C alone is measured in joules; the correct formula requires dividing Q_C BY Q_H specifically, since η = W_out/Q_H = (Q_H−Q_C)/Q_H = 1−Q_C/Q_H follows directly from energy conservation (W_out = Q_H − Q_C) — both quantities in that fraction must be normalized by Q_H. A perfectly frictionless engine could NOT achieve 100% efficiency, even in principle — this is not a limitation of friction or mechanical imperfection, but a fundamental thermodynamic ceiling imposed by the Second Law itself (specifically, the Kelvin-Planck statement: "no engine operating in a cycle can convert heat entirely into work"). Achieving η=100% would require Q_C=0 exactly — but the engine must discharge SOME heat to a cold reservoir to complete its cycle and return the working fluid to its starting state; without that discharge, the cycle simply cannot close. Even the theoretically best possible (reversible, frictionless) engine is bounded by the Carnot efficiency η_Carnot = 1 − T_C/T_H < 1 — genuinely less than 100% always, since reaching η=100% would require either T_C→0 K (absolute zero, physically unachievable) or T_H→∞ (also physically unachievable); real engines, with genuine friction and irreversibility, fall even further below this already-unreachable Carnot ceiling.',
+    targetedMisconceptions: [`${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE`, `${HENG}:MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE`],
+    source: `${HENG_SRC} — MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE (η=1-Qc/Qh, must divide by Qh not just subtract) + MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE (Carnot ceiling, Kelvin-Planck statement, even frictionless engines are bounded)`,
+  },
+  {
+    conceptId: HENG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A common calculation error: writing engine efficiency as η = 1 − Q_C, simply subtracting the rejected heat directly without first dividing it by the input heat Q_H. Check the units to see why this fails: efficiency η is meant to be dimensionless (a pure ratio, always between 0 and 1), but Q_C alone carries units of joules — subtracting a quantity measured in joules from the pure number 1 doesn\'t even make dimensional sense. The correct relationship follows directly from energy conservation: since W_out = Q_H − Q_C, dividing both sides by Q_H gives η = W_out/Q_H = (Q_H−Q_C)/Q_H = 1 − Q_C/Q_H — BOTH terms in that final expression, the 1 and the Q_C/Q_H ratio, are properly dimensionless, because Q_C has genuinely been divided by Q_H, not merely subtracted. For example, an engine absorbing Q_H=2000J and rejecting Q_C=1200J has efficiency η=1−(1200/2000)=1−0.6=0.4 (40%) — computed correctly two equivalent ways, W_out/Q_H=(2000−1200)/2000=0.4 and 1−Q_C/Q_H=0.4, and they must always agree. Second, a genuinely tempting but wrong assumption: believing a perfectly frictionless engine, with zero mechanical losses, could theoretically achieve 100% efficiency, converting all input heat directly into work. It fundamentally cannot, and this has nothing to do with friction at all — it\'s a hard thermodynamic ceiling imposed by the Second Law itself (specifically the Kelvin-Planck statement: no engine operating in a cycle can convert heat entirely into work). Reaching η=100% would require Q_C=0 exactly, meaning the engine rejects zero heat to any cold reservoir — but a cyclic engine genuinely MUST discharge some heat to complete its cycle and return the working fluid to its original starting state; without that discharge, the cycle simply cannot close and repeat. Even the theoretically ideal, perfectly reversible engine (the Carnot engine) is fundamentally bounded by η_Carnot=1−T_C/T_H, strictly LESS than 100% under all physically achievable conditions — reaching exactly 100% would require either T_C→0K (absolute zero, physically unreachable) or T_H→∞ (also physically unreachable); real engines, burdened with genuine friction and other irreversibilities, fall even further below this already-unreachable Carnot ceiling.',
+    targetedMisconceptions: [`${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE`, `${HENG}:MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE`],
+    source: `${HENG_SRC} — MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE + MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const HENG_PROBES: SeedProbe[] = [
+  {
+    conceptId: HENG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An engine absorbs Q_H=2000J and rejects Q_C=1200J. Is the efficiency η = 1 − Q_C = 1 − 1200 (a nonsensical negative number), or something else?',
+    choices: [
+      { text: 'η = 1 − Q_C/Q_H = 1 − (1200/2000) = 0.4 (40%) — Q_C must be divided by Q_H first, since efficiency is a dimensionless ratio, not a simple subtraction', isCorrect: true },
+      { text: 'η = 1 − Q_C, treating efficiency as simply 1 minus the rejected heat directly', isCorrect: false, misconceptionId: `${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE` },
+    ],
+    correctValue: 'must divide Qc by Qh, giving 0.4',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE`],
+    source: `${HENG_SRC} — MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HENG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could a perfectly frictionless heat engine, with zero mechanical losses, achieve 100% efficiency?',
+    choices: [
+      { text: 'No — even a perfectly frictionless engine is bounded by the Carnot efficiency η=1−T_C/T_H<1; the Second Law (Kelvin-Planck statement) fundamentally forbids converting all input heat into work in a cyclic engine', isCorrect: true },
+      { text: 'Yes — if all friction and mechanical losses were eliminated, the engine could in principle convert all input heat entirely into work', isCorrect: false, misconceptionId: `${HENG}:MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE` },
+    ],
+    correctValue: 'no, thermodynamic ceiling below 100 percent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HENG}:MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE`],
+    source: `${HENG_SRC} — MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -34614,6 +34974,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...KTHY_EXPLANATIONS,
   ...SPHT_EXPLANATIONS,
   ...TEXP_EXPLANATIONS,
+  ...CALO_EXPLANATIONS,
+  ...ENTR_EXPLANATIONS,
+  ...SLAW_EXPLANATIONS,
+  ...TPRC_EXPLANATIONS,
+  ...PTRN_EXPLANATIONS,
+  ...HENG_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -35020,4 +35386,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...KTHY_PROBES,
   ...SPHT_PROBES,
   ...TEXP_PROBES,
+  ...CALO_PROBES,
+  ...ENTR_PROBES,
+  ...SLAW_PROBES,
+  ...TPRC_PROBES,
+  ...PTRN_PROBES,
+  ...HENG_PROBES,
 ]
