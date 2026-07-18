@@ -33848,6 +33848,366 @@ const RADT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.zeroth-law ────────────────────────────────────────────────────
+const ZLAW = 'phys.therm.zeroth-law'
+const ZLAW_SRC = 'docs/curriculum/blueprints/phys.therm.zeroth-law.md'
+
+const ZLAW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ZLAW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Zeroth Law of Thermodynamics states: if object A is in thermal equilibrium with object C, and object B is also in thermal equilibrium with C, then A and B are in thermal equilibrium with each other. This seems like "obvious math" (A=C and B=C implies A=B), but it is genuinely an empirical PHYSICAL claim, not a logical necessity — plenty of physical relationships are NOT transitive this way (paint sample A matching the color of C, and C matching B, doesn\'t guarantee A and B look identical to each other; three wires with equal resistance to a fourth aren\'t automatically at equal resistance to each other in every configuration). The Zeroth Law could in principle have been FALSE — imagine a hypothetical material where A and C reach no-heat-flow contact, B and C also reach no-heat-flow contact, yet A and B mysteriously exchange heat when brought together; this has NEVER been observed in millions of tests, and that consistent non-violation is precisely what earns thermal equilibrium the status of a genuine physical law rather than a trivial tautology. This law is also what makes THERMOMETRY logically possible in the first place: thermal equilibrium (the observable, no-heat-flow-on-contact state) is the PRIMITIVE concept, and temperature is the DERIVED concept — defined as the property shared by all objects in mutual thermal equilibrium; the logical order runs heat-flow observation → equilibrium definition → temperature concept, never the reverse (you cannot define "same temperature" using the concept of temperature itself without circularity — you need the Zeroth Law\'s transitivity to make the concept well-defined at all).',
+    targetedMisconceptions: [`${ZLAW}:MC-ZEROTH-LAW-TRIVIAL`, `${ZLAW}:MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY`],
+    source: `${ZLAW_SRC} — MC-ZEROTH-LAW-TRIVIAL (empirical, falsifiable, not mathematical necessity) + MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY (equilibrium is primitive, temperature is derived)`,
+  },
+  {
+    conceptId: ZLAW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: dismissing the Zeroth Law as "just math," reasoning "of course if A=B and A=C then B=C — that\'s trivial, not real physics." It genuinely isn\'t trivial — many physical properties DON\'T obey this kind of transitivity. Paint sample A might visually match color sample C, and C might match color sample B, without A and B necessarily matching each other under careful comparison (subtle color-matching relationships aren\'t always transitive). The Zeroth Law makes a real, FALSIFIABLE claim: it could, in principle, have turned out false — imagine a hypothetical material where object A reaches no-heat-flow equilibrium with C, and separately object B also reaches no-heat-flow equilibrium with C, yet A and B mysteriously exchange heat when brought into contact with each other directly. This has been tested millions of times via ordinary thermometry and has NEVER once been violated — and it\'s precisely that consistent, repeatedly-tested non-violation that earns the Zeroth Law genuine status as a physical law, not a mathematical tautology. Second, related trap: dismissing "thermal equilibrium" as circularly defined, reasoning "it just means same temperature, so defining equilibrium via temperature and temperature via equilibrium is circular and useless." The actual logical order avoids this trap entirely: thermal equilibrium is defined FIRST and PURELY OPERATIONALLY — as the observable state where no NET heat flows when two objects are brought into contact — with zero reference to temperature at all; only AFTER establishing this primitive, directly-observable concept does the Zeroth Law\'s transitivity let you DEFINE temperature as the shared property of all objects mutually in equilibrium. The chain runs: observe heat flow (or its absence) → define equilibrium operationally from that observation → invoke the Zeroth Law\'s transitivity → derive the concept of temperature as the equivalence-class label. Temperature isn\'t assumed at the start; it\'s the END PRODUCT of this reasoning chain, built entirely from directly observable heat-flow behavior.',
+    targetedMisconceptions: [`${ZLAW}:MC-ZEROTH-LAW-TRIVIAL`, `${ZLAW}:MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY`],
+    source: `${ZLAW_SRC} — MC-ZEROTH-LAW-TRIVIAL + MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ZLAW_PROBES: SeedProbe[] = [
+  {
+    conceptId: ZLAW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the Zeroth Law of Thermodynamics ("if A equilibrates with C, and B equilibrates with C, then A equilibrates with B") just a trivial mathematical fact, or a genuine empirical physical claim?',
+    choices: [
+      { text: 'A genuine, falsifiable empirical claim — many physical properties are NOT transitive this way; the Zeroth Law could in principle have been false, and its consistent non-violation over millions of tests is what makes it a real physical law', isCorrect: true },
+      { text: 'Just trivial math — if A=C and B=C, then obviously A=B, this requires no physical testing at all', isCorrect: false, misconceptionId: `${ZLAW}:MC-ZEROTH-LAW-TRIVIAL` },
+    ],
+    correctValue: 'genuine empirical falsifiable claim',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ZLAW}:MC-ZEROTH-LAW-TRIVIAL`],
+    source: `${ZLAW_SRC} — MC-ZEROTH-LAW-TRIVIAL trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ZLAW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which concept is logically PRIMITIVE (defined first, directly from observation) — thermal equilibrium, or temperature?',
+    choices: [
+      { text: 'Thermal equilibrium — defined purely operationally as "no net heat flow on contact," with zero reference to temperature; temperature is then DERIVED as the shared property of objects in mutual equilibrium', isCorrect: true },
+      { text: 'Temperature — thermal equilibrium is simply defined as "same temperature," so temperature must come first', isCorrect: false, misconceptionId: `${ZLAW}:MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY` },
+    ],
+    correctValue: 'thermal equilibrium is primitive, temperature is derived',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ZLAW}:MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY`],
+    source: `${ZLAW_SRC} — MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.internal-energy ──────────────────────────────────────────────
+const IENG = 'phys.therm.internal-energy'
+const IENG_SRC = 'docs/curriculum/blueprints/phys.therm.internal-energy.md'
+
+const IENG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IENG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Internal energy U is a STATE FUNCTION — for an ideal gas, U = (f/2)nRT depends ONLY on temperature (and the amount of gas, n), never on the specific PATH taken to reach that state. Two processes starting at the same initial temperature and ending at the same final temperature have EXACTLY the same ΔU, whether you got there by heating at constant volume, constant pressure, or any other path — what genuinely DOES differ between paths is how the total energy change splits between heat (Q) and work (W): at constant volume, no work is done, so Q = ΔU entirely; at constant pressure, some of the added heat goes into doing expansion work (Q = ΔU + PΔV), so MORE heat is required to reach the same ΔT, but ΔU itself is identical either way. A related, extremely common error is treating internal energy U and heat Q as the same thing, using them interchangeably ("the internal energy I added was 500 J" when meaning "500 J of heat"). They are fundamentally different kinds of quantities: U is what a system HAS — its stored microscopic energy, an "account balance" — while Q and W are what a system RECEIVES or GIVES, "deposits and withdrawals" via two completely different routes (heat transfer vs. mechanical work). Joule\'s classic paddle-wheel experiment makes this vivid: doing 4000 J of mechanical WORK on water (W = 4000 J, Q = 0, no heat added at all) still raises the water\'s internal energy by exactly 4000 J — proving conclusively that U can change via work alone, with zero heat transfer, so U and Q can never be treated as synonyms.',
+    targetedMisconceptions: [`${IENG}:MC-U-DEPENDS-ON-PATH`, `${IENG}:MC-INTERNAL-ENERGY-EQUALS-HEAT`],
+    source: `${IENG_SRC} — MC-U-DEPENDS-ON-PATH (U is a state function, ΔU is path-independent) + MC-INTERNAL-ENERGY-EQUALS-HEAT (Joule paddle-wheel: U changes via work alone)`,
+  },
+  {
+    conceptId: IENG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing internal energy change ΔU depends on the specific PROCESS or PATH used to get from an initial to a final state — reasoning "heating at constant pressure should give a different ΔU than heating at constant volume, since the processes are physically different." For an ideal gas, U = (f/2)nRT depends ONLY on temperature — so any two processes starting at the same initial T and ending at the same final T have IDENTICAL ΔU, full stop, regardless of whether the path was constant volume, constant pressure, or anything else. What genuinely differs between the two paths isn\'t ΔU itself, but how Q and W SPLIT to produce that same ΔU: at constant volume, the gas does no work (W=0), so all the added heat goes directly into ΔU (Q = ΔU); at constant pressure, the expanding gas does positive work on its surroundings (PΔV), so MORE total heat must be supplied to achieve the exact same ΔU (Q = ΔU + PΔV) — the extra heat compensates for the energy "leaking out" as mechanical work, but the underlying ΔU, being purely a function of the temperature change, stays identical either way. Second, a very common terminology slip: using "internal energy" and "heat" interchangeably, as in "I added 500 J of internal energy" when genuinely meaning "I added 500 J of heat." These are fundamentally different kinds of quantities — U is what a system currently HAS, a stored energy quantity, an account BALANCE; Q (heat) and W (work) are what a system RECEIVES or GIVES, transfers INTO or OUT OF that balance, via two entirely different physical mechanisms. Joule\'s famous paddle-wheel experiment proves this decisively: doing 4000 J of pure mechanical WORK on water, with ZERO heat added (W=4000J, Q=0), still raises the water\'s internal energy by exactly 4000 J — internal energy genuinely changed with no heat transfer whatsoever, conclusively showing U and Q can never be treated as the same thing; the first law, ΔU = Q + W, makes this precise: the SAME ΔU=500J can arise from Q=500J & W=0, or Q=0 & W=500J, or Q=800J & W=−300J — many different (Q,W) combinations, all producing the identical ΔU.',
+    targetedMisconceptions: [`${IENG}:MC-U-DEPENDS-ON-PATH`, `${IENG}:MC-INTERNAL-ENERGY-EQUALS-HEAT`],
+    source: `${IENG_SRC} — MC-U-DEPENDS-ON-PATH + MC-INTERNAL-ENERGY-EQUALS-HEAT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const IENG_PROBES: SeedProbe[] = [
+  {
+    conceptId: IENG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An ideal gas is heated from 300 K to 500 K, once at constant volume and once at constant pressure (same initial/final temperature both times). Is ΔU the same for both processes, or different?',
+    choices: [
+      { text: 'The SAME — for an ideal gas, U depends only on temperature (U=(f/2)nRT), so ΔU is identical for any process with the same initial and final temperature; only how Q and W split between them differs', isCorrect: true },
+      { text: 'Different — constant pressure heating should give a different ΔU than constant volume heating, since they are physically different processes', isCorrect: false, misconceptionId: `${IENG}:MC-U-DEPENDS-ON-PATH` },
+    ],
+    correctValue: 'same delta-U for both',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IENG}:MC-U-DEPENDS-ON-PATH`],
+    source: `${IENG_SRC} — MC-U-DEPENDS-ON-PATH trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IENG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Joule\'s paddle-wheel experiment does 4000 J of mechanical work on water, with ZERO heat added (Q=0). Does the water\'s internal energy change?',
+    choices: [
+      { text: 'Yes — it increases by exactly 4000 J; internal energy can change entirely via work, with no heat transfer at all, proving U and Q are not the same thing', isCorrect: true },
+      { text: 'No — since no heat (Q) was added, and "internal energy" essentially means heat content, the internal energy stays unchanged', isCorrect: false, misconceptionId: `${IENG}:MC-INTERNAL-ENERGY-EQUALS-HEAT` },
+    ],
+    correctValue: 'yes, increases by 4000 J via work alone',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IENG}:MC-INTERNAL-ENERGY-EQUALS-HEAT`],
+    source: `${IENG_SRC} — MC-INTERNAL-ENERGY-EQUALS-HEAT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.ideal-gas-law ─────────────────────────────────────────────────
+const IGL = 'phys.therm.ideal-gas-law'
+const IGL_SRC = 'docs/curriculum/blueprints/phys.therm.ideal-gas-law.md'
+
+const IGL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IGL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The ideal gas law PV = nRT (and its ratio forms like P₁/T₁ = P₂/T₂) requires TWO absolute, not relative, quantities: temperature must be in KELVIN, never Celsius, and pressure must be ABSOLUTE, never gauge. For temperature: Charles\'s Law states V/T = constant, which is only physically meaningful if T=0 corresponds to genuinely ZERO volume — that happens at absolute zero (0 K = −273.15°C), NOT at 0°C, which is just the arbitrary freezing point of water; try "doubling" a Celsius temperature from 0°C and you get the nonsensical result of 0°C again (0×2=0), while doubling 273 K correctly gives 546 K, a real, physically meaningful temperature change. The conversion rule: always convert T[°C] to T[K] = T[°C] + 273 before using it in ANY gas law formula involving T multiplicatively. For pressure: a "flat" tire reading zero on a gauge is NOT actually at vacuum — it\'s at ordinary atmospheric pressure (about 1 atm absolute), since gauge pressure specifically measures pressure ABOVE atmospheric, P_gauge = P_absolute − P_atm; plugging P_gauge = 0 directly into PV=nRT would incorrectly predict zero moles of gas in a tire that\'s clearly full of air at 1 atm. The correct conversion: P_absolute = P_gauge + P_atm (with P_atm ≈ 101,325 Pa ≈ 1 bar ≈ 1 atm in SI units), always use P_absolute in the gas law, and convert back to gauge pressure at the end only if that\'s specifically what the answer requires.',
+    targetedMisconceptions: [`${IGL}:MC-CELSIUS-IN-GAS-LAW`, `${IGL}:MC-GAUGE-PRESSURE-IN-GAS-LAW`],
+    source: `${IGL_SRC} — MC-CELSIUS-IN-GAS-LAW (must use Kelvin, absolute zero = 0 volume) + MC-GAUGE-PRESSURE-IN-GAS-LAW (must use absolute pressure, not gauge)`,
+  },
+  {
+    conceptId: IGL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but consequential trap: plugging Celsius temperature directly into PV = nRT or any ratio form like P₁/T₁ = P₂/T₂, since Celsius is the everyday temperature scale. It produces genuinely broken results — try applying Charles\'s Law (V/T = constant) starting at 0°C and "doubling" the temperature: 0°C doubled is still 0°C (0×2=0), a completely meaningless statement about temperature change. This is because Charles\'s Law\'s underlying physics only makes sense if T=0 corresponds to genuinely ZERO volume, which happens at absolute zero (0 K = −273.15°C), not at 0°C — Celsius\'s zero point is just the arbitrary freezing point of water, with no special physical significance for gas behavior. The fix is simple but mandatory: ALWAYS convert Celsius to Kelvin (T[K] = T[°C] + 273) before using temperature multiplicatively in any gas law; failing to do this produces errors ranging from mildly wrong (at high temperatures, where the ±273 offset matters proportionally less) to catastrophically wrong (near 0°C, where it matters enormously). Second, equally natural but consequential trap: plugging GAUGE pressure directly into PV = nRT, since gauge pressure is what everyday instruments (tire gauges, blood pressure cuffs) actually display. A tire reading "zero gauge pressure" is described as "flat" — but it\'s emphatically NOT at vacuum, it still contains air at ordinary atmospheric pressure (≈1 atm absolute); if you plug P_gauge = 0 directly into PV = nRT, you get the absurd prediction of ZERO moles of gas inside a tire that\'s obviously full of air. Gauge pressure specifically measures pressure ABOVE atmospheric (P_gauge = P_absolute − P_atm), while the gas law requires ABSOLUTE pressure — the genuine total force per unit area the gas exerts. The fix: always convert P_absolute = P_gauge + P_atm (with P_atm ≈ 101,325 Pa ≈ 1 atm in SI units) before using pressure in the gas law, and convert back to gauge pressure only at the very end if that\'s specifically what\'s being asked for.',
+    targetedMisconceptions: [`${IGL}:MC-CELSIUS-IN-GAS-LAW`, `${IGL}:MC-GAUGE-PRESSURE-IN-GAS-LAW`],
+    source: `${IGL_SRC} — MC-CELSIUS-IN-GAS-LAW + MC-GAUGE-PRESSURE-IN-GAS-LAW, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const IGL_PROBES: SeedProbe[] = [
+  {
+    conceptId: IGL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gas is at 0°C and its temperature is "doubled" to 0°C (using the raw Celsius value, 0×2=0). What is wrong with this calculation?',
+    choices: [
+      { text: 'Gas law temperature ratios only work correctly in KELVIN, since T=0 must correspond to genuinely zero volume (absolute zero, −273.15°C), never at the arbitrary 0°C; convert to Kelvin first (T[K]=T[°C]+273)', isCorrect: true },
+      { text: 'Nothing is wrong — Celsius can be used directly in gas law formulas, just like Kelvin', isCorrect: false, misconceptionId: `${IGL}:MC-CELSIUS-IN-GAS-LAW` },
+    ],
+    correctValue: 'must convert to Kelvin first',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IGL}:MC-CELSIUS-IN-GAS-LAW`],
+    source: `${IGL_SRC} — MC-CELSIUS-IN-GAS-LAW trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IGL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A tire gauge reads "0" (a "flat" tire). Using P_gauge=0 directly in PV=nRT predicts n=0 moles of gas. Is this correct?',
+    choices: [
+      { text: 'No — a "flat" tire still contains air at atmospheric pressure (≈1 atm absolute), not vacuum; the gas law requires ABSOLUTE pressure (P_abs = P_gauge + P_atm), never raw gauge pressure', isCorrect: true },
+      { text: 'Yes — gauge pressure can be plugged directly into PV=nRT, since it is the pressure reading that matters', isCorrect: false, misconceptionId: `${IGL}:MC-GAUGE-PRESSURE-IN-GAS-LAW` },
+    ],
+    correctValue: 'no, must use absolute pressure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IGL}:MC-GAUGE-PRESSURE-IN-GAS-LAW`],
+    source: `${IGL_SRC} — MC-GAUGE-PRESSURE-IN-GAS-LAW trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.kinetic-theory ────────────────────────────────────────────────
+const KTHY = 'phys.therm.kinetic-theory'
+const KTHY_SRC = 'docs/curriculum/blueprints/phys.therm.kinetic-theory.md'
+
+const KTHY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KTHY,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Temperature measures the AVERAGE kinetic energy PER MOLECULE, never the TOTAL energy of a system — KE_avg = (3/2)k_BT is strictly per-molecule, while total internal energy U = N×(3/2)k_BT = (3/2)nRT depends on BOTH temperature AND the amount of gas (n). This means two systems can have identical temperature but wildly different total energy (a small hot spark vs. a vast, cooler ocean — the ocean, despite being cooler, holds far more TOTAL thermal energy simply because it has vastly more molecules), or identical total energy at different temperatures (fewer molecules at higher T vs. many more molecules at lower T). Furthermore, NOT every molecule in a gas moves at the same speed — the Maxwell-Boltzmann distribution shows molecular speeds genuinely range continuously from near 0 up to arbitrarily high values, even at a single fixed temperature; the "root-mean-square" speed v_rms (the square root of the AVERAGE of v²) is a useful statistical summary but is NOT the actual speed of any particular molecule — v_mp (most probable) < v_avg (mean) < v_rms, in the ratio roughly 1 : 1.128 : 1.225. This spread of speeds, especially the high-speed "tail" of the distribution, is physically essential: it\'s precisely why liquid water molecules can evaporate even well below the boiling point (some individual molecules in the fast tail have enough energy to escape the surface), why chemical reaction rates follow the Arrhenius equation, and even why stellar nucleosynthesis proceeds at all (protons need to be in the extreme fast tail to have any realistic chance of tunneling through the Coulomb barrier).',
+    targetedMisconceptions: [`${KTHY}:MC-TEMPERATURE-IS-TOTAL-ENERGY`, `${KTHY}:MC-ALL-MOLECULES-SAME-SPEED`],
+    source: `${KTHY_SRC} — MC-TEMPERATURE-IS-TOTAL-ENERGY (T is per-molecule average, U scales with both T and n) + MC-ALL-MOLECULES-SAME-SPEED (Maxwell-Boltzmann distribution, v_rms is not everyone's speed)`,
+  },
+  {
+    conceptId: KTHY,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing "hotter gas has more total energy" as if this were essentially the DEFINITION of temperature, conflating average energy per molecule with total system energy. Compare directly: 1 mole of monatomic gas at 400 K versus 2 moles of the SAME gas at 200 K — the 400 K sample has the HIGHER temperature, but calculate total internal energy U=(3/2)nRT for each: the 200 K sample, despite being COOLER, has 2 moles versus 1, and the math works out so total energy depends on BOTH n and T together, not on temperature alone. Temperature genuinely measures the AVERAGE kinetic energy PER MOLECULE (KE_avg = (3/2)k_BT), while TOTAL internal energy U = N×(3/2)k_BT = (3/2)nRT scales with BOTH the temperature AND the number of molecules present — this is exactly why a vast, relatively cool ocean holds far more total thermal energy than a tiny, intensely hot spark: the ocean has astronomically more molecules, even though each individual molecule\'s average kinetic energy is lower. Second, equally natural trap: treating v_rms (root-mean-square speed) as if it were the actual speed of every single molecule in the gas, ignoring that speeds are genuinely distributed across a range. If every molecule in a 300 K gas sample truly moved at exactly v_rms = 517 m/s with zero variation, gas behavior (evaporation, chemical reaction rates, diffusion) would look completely different from what\'s actually observed. The Maxwell-Boltzmann distribution shows molecular speeds spread continuously from near zero up to arbitrarily high values, even at one fixed temperature — the three characteristic speeds (most probable v_mp, average v_avg, and root-mean-square v_rms) are all genuinely DIFFERENT values (roughly in ratio 1 : 1.128 : 1.225), with v_rms being merely a statistical summary (the square root of the average of v²), never any individual molecule\'s actual speed. This spread — especially the high-speed "tail" — is physically essential: it explains why liquid water evaporates even well below its boiling point (some individual fast-tail molecules have enough energy to escape the surface), why chemical reactions proceed at measurable rates at ordinary temperatures (Arrhenius kinetics), and even how stars manage nuclear fusion at all (only the extreme fast-tail protons have any real chance of quantum-tunneling through the Coulomb barrier).',
+    targetedMisconceptions: [`${KTHY}:MC-TEMPERATURE-IS-TOTAL-ENERGY`, `${KTHY}:MC-ALL-MOLECULES-SAME-SPEED`],
+    source: `${KTHY_SRC} — MC-TEMPERATURE-IS-TOTAL-ENERGY + MC-ALL-MOLECULES-SAME-SPEED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const KTHY_PROBES: SeedProbe[] = [
+  {
+    conceptId: KTHY,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '1 mole of gas at 400 K versus 2 moles of the same gas at 200 K. Which sample has more TOTAL internal energy?',
+    choices: [
+      { text: 'It depends — total internal energy U=(3/2)nRT scales with BOTH n and T; with the numbers given, the cooler 2-mole sample can actually have MORE total energy than the hotter 1-mole sample, since temperature alone doesn\'t determine total energy', isCorrect: true },
+      { text: 'The 400 K sample always has more total energy, since higher temperature directly means more total energy', isCorrect: false, misconceptionId: `${KTHY}:MC-TEMPERATURE-IS-TOTAL-ENERGY` },
+    ],
+    correctValue: 'depends on both n and T, not T alone',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KTHY}:MC-TEMPERATURE-IS-TOTAL-ENERGY`],
+    source: `${KTHY_SRC} — MC-TEMPERATURE-IS-TOTAL-ENERGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: KTHY,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gas at 300 K has v_rms = 517 m/s. Does this mean every single molecule in the gas is moving at exactly 517 m/s?',
+    choices: [
+      { text: 'No — molecular speeds follow the Maxwell-Boltzmann distribution, ranging continuously from near zero to very high values; v_rms is a statistical summary (square root of the average of v²), not any individual molecule\'s actual speed', isCorrect: true },
+      { text: 'Yes — v_rms represents the uniform speed shared by all molecules in the gas at that temperature', isCorrect: false, misconceptionId: `${KTHY}:MC-ALL-MOLECULES-SAME-SPEED` },
+    ],
+    correctValue: 'no, speeds are distributed, not uniform',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KTHY}:MC-ALL-MOLECULES-SAME-SPEED`],
+    source: `${KTHY_SRC} — MC-ALL-MOLECULES-SAME-SPEED trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.specific-heat ─────────────────────────────────────────────────
+const SPHT = 'phys.therm.specific-heat'
+const SPHT_SRC = 'docs/curriculum/blueprints/phys.therm.specific-heat.md'
+
+const SPHT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SPHT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Temperature change ΔT depends on THREE quantities together, not on heat added (Q) alone: ΔT = Q/(mc), where m is mass and c is specific heat capacity — the material-specific "transfer function" connecting how much heat goes in to how much temperature rise comes out. Add the exact same 50 kJ of heat to 1 kg of water versus 1 kg of iron, and their temperature rises are dramatically DIFFERENT: water, with its high specific heat capacity, shows a small ΔT, while iron, with its much lower specific heat capacity, shows a large ΔT — the SAME heat input produces very different temperature outcomes purely because of the material\'s intrinsic capacity to "absorb" heat without much temperature change. Doubling Q doubles ΔT (for fixed m and c); doubling c HALVES ΔT (for fixed Q and m); doubling m also HALVES ΔT (for fixed Q and c) — all three variables genuinely matter, not just the heat added. A closely related distinction: temperature and heat CONTENT (internal energy) are fundamentally different quantities that must never be confused. Temperature measures thermal INTENSITY (which direction heat will flow on contact), while internal energy measures the TOTAL thermal energy actually stored; a material at HIGH temperature doesn\'t automatically mean it holds HIGH total energy — it might simply have low specific heat capacity or small mass. A spark, for instance, reaches an extremely high temperature but carries negligible total heat content, because its mass is tiny — internal energy roughly scales as U ≈ mcT, so at the SAME temperature, a larger mass or higher-c material genuinely stores more total energy, while at the SAME energy input, a lower-c material rises to a HIGHER final temperature.',
+    targetedMisconceptions: [`${SPHT}:MC-MORE-HEAT-MEANS-MORE-TEMPERATURE`, `${SPHT}:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT`],
+    source: `${SPHT_SRC} — MC-MORE-HEAT-MEANS-MORE-TEMPERATURE (ΔT=Q/mc depends on m and c too) + MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT (temperature vs. internal energy, spark example)`,
+  },
+  {
+    conceptId: SPHT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing heat added and temperature rise are simply directly proportional, regardless of what material or how much of it is involved — "I added more heat, so the temperature must have risen more, period." Test it directly: give exactly 50 kJ of heat to 1 kg of water, and separately give the identical 50 kJ to 1 kg of iron — if heat and ΔT were simply proportional with no other factors, both should show the SAME temperature rise. They don\'t, dramatically: water\'s temperature barely rises, while iron\'s temperature rises much more, for the exact same heat input and mass. The actual relationship, ΔT = Q/(mc), shows temperature change depends on THREE things together — heat added (Q), mass (m), and specific heat capacity (c), a material-specific property — never on Q in isolation: water\'s high specific heat capacity means it can "absorb" a lot of heat while barely warming up, while iron\'s much lower specific heat capacity means the same heat input produces a much larger temperature swing. Second, closely related trap: assuming a material at higher TEMPERATURE necessarily has more HEAT CONTENT (total internal energy) stored inside it — reasoning "the iron at 131°C has more heat in it than the water at 32°C, simply because it\'s hotter." Consider: if both objects started at the identical 20°C and each absorbed the identical 50 kJ, which one has "more heat" stored? Temperature measures thermal INTENSITY — essentially, which direction heat will spontaneously flow on contact — while heat content (internal energy) measures the TOTAL thermal energy actually stored inside the object; these are genuinely different physical quantities. A spark reaches an extremely high temperature yet carries negligible total heat content, precisely because its mass is tiny — high temperature specifically indicates the material has relatively LITTLE remaining capacity to absorb more energy without heating further (low c) or simply has little mass, not that it holds a large total energy reservoir. Roughly, U ≈ mcT: at the SAME temperature, a larger mass or higher specific heat material genuinely stores more total internal energy; at the SAME heat input, a LOWER specific-heat material rises to a HIGHER final temperature — high temperature and high heat content, while both related to U, arise through entirely different combinations of factors.',
+    targetedMisconceptions: [`${SPHT}:MC-MORE-HEAT-MEANS-MORE-TEMPERATURE`, `${SPHT}:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT`],
+    source: `${SPHT_SRC} — MC-MORE-HEAT-MEANS-MORE-TEMPERATURE + MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SPHT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SPHT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Exactly 50 kJ of heat is added to 1 kg of water, and separately, the identical 50 kJ is added to 1 kg of iron. Do both show the same temperature rise?',
+    choices: [
+      { text: 'No — ΔT = Q/(mc), and water\'s much higher specific heat capacity c means it shows a SMALLER temperature rise than iron for the same heat and mass', isCorrect: true },
+      { text: 'Yes — the same heat input to the same mass should always produce the same temperature rise, regardless of the material', isCorrect: false, misconceptionId: `${SPHT}:MC-MORE-HEAT-MEANS-MORE-TEMPERATURE` },
+    ],
+    correctValue: 'no, water rises less due to higher c',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPHT}:MC-MORE-HEAT-MEANS-MORE-TEMPERATURE`],
+    source: `${SPHT_SRC} — MC-MORE-HEAT-MEANS-MORE-TEMPERATURE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SPHT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A tiny spark reaches an extremely high temperature. Does this mean the spark carries a large amount of total heat content (internal energy)?',
+    choices: [
+      { text: 'No — high temperature does not mean high total heat content; the spark\'s tiny mass means its total internal energy is negligible, despite the high temperature', isCorrect: true },
+      { text: 'Yes — a high-temperature object always has more heat content stored inside it than a lower-temperature object', isCorrect: false, misconceptionId: `${SPHT}:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT` },
+    ],
+    correctValue: 'no, high temperature does not imply high heat content',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPHT}:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT`],
+    source: `${SPHT_SRC} — MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.therm.thermal-expansion ────────────────────────────────────────────
+const TEXP = 'phys.therm.thermal-expansion'
+const TEXP_SRC = 'docs/curriculum/blueprints/phys.therm.thermal-expansion.md'
+
+const TEXP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TEXP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Thermal expansion is ISOTROPIC for homogeneous materials — heating scales EVERY linear dimension by the same factor (1 + αΔT), including holes and gaps within the object, not just the outermost length. Think of a metal ring printed on a sheet of stretchy rubber: uniformly stretching that rubber sheet in every direction enlarges EVERY feature drawn on it, including any holes — a heated metal ring genuinely gets a BIGGER inner hole, not a smaller one, exactly the same way its outer diameter grows; the hole expands as if it were made of the same material, even though there\'s no actual material there. The formula ΔL = αL₀ΔT applies independently to any linear dimension — length, width, diameter, or hole radius — and this scales up predictably to area (ΔA = 2αA₀ΔT, factor of 2α because TWO dimensions each scale) and volume (ΔV = 3αV₀ΔT, factor of 3α because all THREE dimensions scale). Water is a striking and important EXCEPTION to ordinary thermal expansion behavior: between 0°C and 4°C, water actually CONTRACTS as it warms (density increases, volume decreases) — its expansion coefficient γ is genuinely NEGATIVE in this narrow range, because ice-like hexagonal hydrogen-bond clusters (the same structure as solid ice, which is why ice floats) are breaking down and allowing molecules to pack more tightly; only ABOVE 4°C does water switch to normal thermal expansion (γ becomes positive), with γ=0 exactly at 4°C, water\'s point of MAXIMUM density. This anomaly has enormous ecological consequences: it\'s precisely why lakes freeze from the TOP down rather than the bottom up — the densest water (at 4°C) sinks to the bottom, protecting aquatic life beneath a surface ice layer even in deep winter.',
+    targetedMisconceptions: [`${TEXP}:MC-ONLY-LENGTH-EXPANDS`, `${TEXP}:MC-WATER-ALWAYS-EXPANDS-WITH-HEAT`],
+    source: `${TEXP_SRC} — MC-ONLY-LENGTH-EXPANDS (isotropic expansion, holes also expand) + MC-WATER-ALWAYS-EXPANDS-WITH-HEAT (water's anomalous 0-4°C contraction)`,
+  },
+  {
+    conceptId: TEXP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing that when a rod is heated, only its LENGTH increases while its THICKNESS (diameter) stays the same, as if expansion were somehow a one-dimensional effect. It isn\'t — thermal expansion is genuinely ISOTROPIC for homogeneous materials, scaling EVERY linear dimension by the identical factor (1+αΔT) simultaneously. Even more counterintuitively: consider a metal RING with a hole in the middle — does heating make the hole SHRINK (as if the ring material is expanding "inward" to fill the gap) or does the hole also get BIGGER? Measure it directly, and the hole genuinely gets bigger, expanding right alongside the outer diameter. The right mental model: imagine the ring is printed on a sheet of stretchy rubber — uniformly stretching that entire rubber sheet in all directions enlarges every feature drawn on it, including any holes, exactly as if the "absence of material" were expanding along with everything else. The formula ΔL=αL₀ΔT applies independently to length, width, diameter, AND hole radius; area scales as ΔA=2αA₀ΔT (two dimensions), and volume as ΔV=3αV₀ΔT (three dimensions) — a heated sphere gets uniformly larger in every single direction, no exceptions. Second, a genuinely important trap: assuming water ALWAYS expands when heated, the way virtually every other common material does, and applying the standard positive-expansion formula uncritically across the temperature range. Check actual density data between 0°C and 4°C, and water\'s density INCREASES as temperature rises in this narrow range (meaning volume DECREASES — water is genuinely CONTRACTING while being heated). This happens because water near 0°C still contains significant ice-like hexagonal hydrogen-bond clusters (the very structure responsible for why solid ice floats) — as temperature rises from 0°C toward 4°C, these open, less-dense ice-like clusters progressively break down, letting water molecules pack MORE tightly together, so density rises and volume falls; only above 4°C does the ordinary thermal-expansion mechanism (increasing molecular vibration amplitude) finally dominate and water begins to expand normally, with the expansion coefficient γ exactly zero at 4°C (water\'s point of maximum density) and negative below it. This single anomaly has enormous ecological consequences: it\'s precisely why lakes freeze top-down rather than bottom-up, with the densest 4°C water sinking to the bottom and protecting aquatic ecosystems even in deep winter.',
+    targetedMisconceptions: [`${TEXP}:MC-ONLY-LENGTH-EXPANDS`, `${TEXP}:MC-WATER-ALWAYS-EXPANDS-WITH-HEAT`],
+    source: `${TEXP_SRC} — MC-ONLY-LENGTH-EXPANDS + MC-WATER-ALWAYS-EXPANDS-WITH-HEAT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TEXP_PROBES: SeedProbe[] = [
+  {
+    conceptId: TEXP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A metal ring (with a hole in the middle) is heated. Does the hole SHRINK (as the ring material expands "inward" to fill it), or does the hole also get BIGGER?',
+    choices: [
+      { text: 'The hole gets BIGGER — thermal expansion is isotropic, scaling every linear dimension (including the hole) by the same factor, like uniformly stretching a rubber sheet the ring is printed on', isCorrect: true },
+      { text: 'The hole shrinks — only the outer length/diameter of the material expands, while the inner hole stays the same size or gets smaller', isCorrect: false, misconceptionId: `${TEXP}:MC-ONLY-LENGTH-EXPANDS` },
+    ],
+    correctValue: 'the hole also gets bigger',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TEXP}:MC-ONLY-LENGTH-EXPANDS`],
+    source: `${TEXP_SRC} — MC-ONLY-LENGTH-EXPANDS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TEXP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water is heated from 1°C to 3°C (staying below 4°C). Does its volume increase or decrease over this range?',
+    choices: [
+      { text: 'Volume DECREASES (density increases) — this is water\'s anomalous behavior below 4°C, where ice-like hydrogen-bond clusters break down, allowing tighter molecular packing, until reaching maximum density exactly at 4°C', isCorrect: true },
+      { text: 'Volume increases, following the standard thermal expansion formula that applies to virtually all materials when heated', isCorrect: false, misconceptionId: `${TEXP}:MC-WATER-ALWAYS-EXPANDS-WITH-HEAT` },
+    ],
+    correctValue: 'volume decreases, anomalous below 4C',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TEXP}:MC-WATER-ALWAYS-EXPANDS-WITH-HEAT`],
+    source: `${TEXP_SRC} — MC-WATER-ALWAYS-EXPANDS-WITH-HEAT trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -34248,6 +34608,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...NRXN_EXPLANATIONS,
   ...RDEC_EXPLANATIONS,
   ...RADT_EXPLANATIONS,
+  ...ZLAW_EXPLANATIONS,
+  ...IENG_EXPLANATIONS,
+  ...IGL_EXPLANATIONS,
+  ...KTHY_EXPLANATIONS,
+  ...SPHT_EXPLANATIONS,
+  ...TEXP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -34648,4 +35014,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...NRXN_PROBES,
   ...RDEC_PROBES,
   ...RADT_PROBES,
+  ...ZLAW_PROBES,
+  ...IENG_PROBES,
+  ...IGL_PROBES,
+  ...KTHY_PROBES,
+  ...SPHT_PROBES,
+  ...TEXP_PROBES,
 ]
