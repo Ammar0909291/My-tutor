@@ -15035,6 +15035,105 @@ const LCST_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.listening.critical-listening ──────────────────────────────────────
+const CRLIS = 'eng.listening.critical-listening'
+const CRLIS_SRC = 'docs/curriculum/blueprints/eng.listening.critical-listening.md'
+
+const CRLIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CRLIS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Judging an argument by how confidently it is delivered is like ' +
+      'judging a bridge’s safety by how shiny its paint job is — the ' +
+      'paint tells you nothing about whether the structure underneath can ' +
+      'hold weight. A confident, fluent delivery can wrap around a weak, ' +
+      'unsupported argument, and a hesitant delivery can carry a ' +
+      'well-supported one. Evaluate the structure (the evidence and ' +
+      'reasoning), not the paint (the delivery): ask what evidence is ' +
+      'actually being offered and whether the reasoning connects that ' +
+      'evidence to the conclusion.',
+    targetedMisconceptions: [`${CRLIS}:MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT`],
+    source: `${CRLIS_SRC} — MC-A (shiny-paint-bridge anchor)`,
+  },
+  {
+    conceptId: CRLIS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Treating any mentioned evidence as equally strong is like treating ' +
+      'a single handwritten note and an official notarized document as ' +
+      'equally valid proof of the same claim — both are technically ' +
+      '"evidence," but they carry very different weight. A single ' +
+      'anecdote from one person is far weaker evidence than a documented, ' +
+      'credible, relevant source. When a speaker cites evidence, do not ' +
+      'just note that evidence was mentioned — ask how credible the ' +
+      'source is and whether it is actually relevant to the specific ' +
+      'claim being made.',
+    targetedMisconceptions: [`${CRLIS}:MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL`],
+    source: `${CRLIS_SRC} — MC-B (notarized-document-vs-handwritten-note anchor)`,
+  },
+  {
+    conceptId: CRLIS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A speaker’s confidence and fluency say nothing about whether ' +
+      'their argument is actually well-supported — a polished delivery ' +
+      'can carry a weak, unsupported claim, and a hesitant delivery can ' +
+      'carry a rigorously supported one. Evaluate the underlying evidence ' +
+      'and reasoning, not the presentation. Separately, not all cited ' +
+      '"evidence" carries equal weight: a single personal anecdote is far ' +
+      'weaker support than a documented, credible, relevant source. When ' +
+      'assessing a spoken argument, check the source’s credibility and ' +
+      'its relevance to the specific claim being made, rather than simply ' +
+      'noting that something was cited.',
+    targetedMisconceptions: [
+      `${CRLIS}:MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT`,
+      `${CRLIS}:MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL`,
+    ],
+    source: `${CRLIS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CRLIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CRLIS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Speaker A delivers an argument confidently and fluently but rests it on a single unsupported personal anecdote. Speaker B delivers a similar argument hesitantly but cites a specific named study. Whose argument is actually better supported?',
+    choices: [
+      { text: 'Speaker B — evaluate the evidence and reasoning, not how confidently it was delivered', isCorrect: true },
+      { text: 'Speaker A — the confident, fluent delivery makes the stronger argument', isCorrect: false, misconceptionId: `${CRLIS}:MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT` },
+    ],
+    correctValue: 'Speaker B',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CRLIS}:MC-A-A-CONFIDENT-FLUENT-SPEAKER-IS-MAKING-A-STRONGER-ARGUMENT`],
+    source: `${CRLIS_SRC} — shiny-paint-bridge conflict as probe`,
+  },
+  {
+    conceptId: CRLIS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A speaker says "my neighbor told me this happened to them" to support a broad claim. Another speaker cites a peer-reviewed study of 500 participants to support a similar claim. Are these two pieces of evidence equally strong?',
+    choices: [
+      { text: 'No — a single anecdote is far weaker evidence than a documented, credible study; evaluate the source’s credibility, not just whether something was cited', isCorrect: true },
+      { text: 'Yes — both speakers cited evidence, so both claims are equally supported', isCorrect: false, misconceptionId: `${CRLIS}:MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CRLIS}:MC-B-ANY-EVIDENCE-A-SPEAKER-MENTIONS-PROVES-THEIR-POINT-EQUALLY-WELL`],
+    source: `${CRLIS_SRC} — notarized-document-vs-handwritten-note conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -15210,6 +15309,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ESCV_EXPLANATIONS,
   ...KEPL_EXPLANATIONS,
   ...LCST_EXPLANATIONS,
+  ...CRLIS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -15385,4 +15485,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ESCV_PROBES,
   ...KEPL_PROBES,
   ...LCST_PROBES,
+  ...CRLIS_PROBES,
 ]
