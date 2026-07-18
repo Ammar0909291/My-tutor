@@ -138,7 +138,7 @@ export function buildLibrarySkillPath(
   return nodes
 }
 
-export async function getDashboardV2Data(userId: string, _modeOverride?: 'library' | 'school'): Promise<DashboardV2Data> {
+export async function getDashboardV2Data(userId: string): Promise<DashboardV2Data> {
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 

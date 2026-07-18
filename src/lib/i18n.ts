@@ -980,7 +980,6 @@ export const translations = {
     dashx_remove_subject_title: 'Убрать предмет',
     dashx_lesson_n: 'Урок {n}',
     dashx_add_subject: '＋ Добавить предмет',
-    nav_modes: 'Режимы',
 
     /* ── Dashboard: Achievements panel ── */
     dashx_achievements_title: '🏆 Достижения',
@@ -2057,7 +2056,6 @@ export const translations = {
     dashx_remove_subject_title: 'Remove subject',
     dashx_lesson_n: 'Lesson {n}',
     dashx_add_subject: '＋ Add a subject',
-    nav_modes: 'Modes',
 
     /* ── Dashboard: Achievements panel ── */
     dashx_achievements_title: '🏆 Achievements',
@@ -3135,7 +3133,6 @@ export const translations = {
     dashx_remove_subject_title: 'विषय हटाएं',
     dashx_lesson_n: 'पाठ {n}',
     dashx_add_subject: '＋ विषय जोड़ें',
-    nav_modes: 'मोड्स',
 
     /* ── Dashboard: Achievements panel ── */
     dashx_achievements_title: '🏆 Achievements',
