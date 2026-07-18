@@ -11470,6 +11470,316 @@ const DFLU_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.center-of-mass ───────────────────────────────────────────────
+const CMASS = 'phys.mech.center-of-mass'
+const CMASS_SRC = 'docs/curriculum/blueprints/phys.mech.center-of-mass.md'
+
+const CMASS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CMASS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A dumbbell has a 1 kg mass at x = 0 and a 9 kg mass at x = 1 m. The ' +
+      'geometric centre — the midpoint of the rod — sits at 0.5 m, but ' +
+      'the centre of mass is nowhere near there: x_CM = ' +
+      '(1×0 + 9×1)/(1+9) = 0.9 m, pulled almost all the way to the heavy ' +
+      'end. Centre of mass is a MASS-WEIGHTED average position, not a ' +
+      'geometric one — think of it as the exact point you could balance ' +
+      'the object on a single finger; heavier parts pull that balance ' +
+      'point toward themselves. Only for a uniform, evenly-distributed ' +
+      'object does the centre of mass happen to land exactly on the ' +
+      'geometric centre; for a ring or hollow sphere, the centre of mass ' +
+      'sits in the empty space at the middle, not in the material at ' +
+      'all.',
+    targetedMisconceptions: [`${CMASS}:MC-CMASS-IS-GEOMETRIC-CENTRE`],
+    source: `${CMASS_SRC} — Component 1 MC-CMASS-IS-GEOMETRIC-CENTRE conflict_evidence [P28] (dumbbell worked numbers)`,
+  },
+  {
+    conceptId: CMASS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 1 kg part moving at 10 m/s and a 4 kg part moving at 2 m/s ' +
+      'belong to the same system — averaging the two speeds directly ' +
+      'gives (10+2)/2 = 6 m/s, but that is not the centre-of-mass ' +
+      'velocity. The correct calculation weights each velocity by its ' +
+      'own mass: v_CM = (1×10 + 4×2)/(1+4) = 18/5 = 3.6 m/s — noticeably ' +
+      'different from the plain average, because the heavier 4 kg part ' +
+      'should count for more. In fact v_CM = p_total/M, the system’s ' +
+      'total momentum divided by its total mass — which is exactly why ' +
+      'the centre of mass of an ISOLATED system moves at constant ' +
+      'velocity no matter how wildly the individual parts collide or ' +
+      'interact inside it, since internal forces can never change the ' +
+      'system’s total momentum.',
+    targetedMisconceptions: [`${CMASS}:MC-CMASS-VELOCITY-SUM`],
+    source: `${CMASS_SRC} — Component 1 MC-CMASS-VELOCITY-SUM conflict_evidence [P28] (mass-weighted velocity vs. simple average)`,
+  },
+]
+
+const CMASS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CMASS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 kg mass sits at x = 0 m and a 9 kg mass sits at x = 1 m on a light rod. Where is the centre of mass?',
+    choices: [
+      { text: 'x = 0.9 m — the mass-weighted average, pulled toward the heavier 9 kg mass', isCorrect: true },
+      { text: 'x = 0.5 m — the geometric midpoint of the rod', isCorrect: false, misconceptionId: `${CMASS}:MC-CMASS-IS-GEOMETRIC-CENTRE` },
+    ],
+    correctValue: '0.9 m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMASS}:MC-CMASS-IS-GEOMETRIC-CENTRE`],
+    source: `${CMASS_SRC} — MC-CMASS-IS-GEOMETRIC-CENTRE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CMASS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 kg part of a system moves at 10 m/s and a 4 kg part moves at 2 m/s. What is the centre-of-mass velocity?',
+    choices: [
+      { text: '3.6 m/s — the mass-weighted average, (1×10 + 4×2)/(1+4)', isCorrect: true },
+      { text: '6 m/s — the simple average of the two speeds', isCorrect: false, misconceptionId: `${CMASS}:MC-CMASS-VELOCITY-SUM` },
+    ],
+    correctValue: '3.6 m/s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMASS}:MC-CMASS-VELOCITY-SUM`],
+    source: `${CMASS_SRC} — MC-CMASS-VELOCITY-SUM trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.angular-kinematics ───────────────────────────────────────────
+const AKIN = 'phys.mech.angular-kinematics'
+const AKIN_SRC = 'docs/curriculum/blueprints/phys.mech.angular-kinematics.md'
+
+const AKIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AKIN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Spin a bicycle wheel and watch a single spoke: the tip near the ' +
+      'rim visibly sweeps through space far faster than a point close to ' +
+      'the hub, even though the whole wheel is rotating together as one ' +
+      'rigid piece. That is the key split in rotational motion: every ' +
+      'point on a rigid rotating body shares the exact same angular ' +
+      'velocity ω (they all sweep through the same angle in the same ' +
+      'time), but their TANGENTIAL speed v = rω depends on r, the ' +
+      'distance from the axis — a point right at the axis (r = 0) has ' +
+      'zero tangential speed no matter how fast the object spins, while a ' +
+      'point at the rim moves fastest. This is exactly why the outer edge ' +
+      'of an old vinyl record wears down faster than the label near the ' +
+      'centre: same ω for the whole disc, but a much larger v at the ' +
+      'larger radius.',
+    targetedMisconceptions: [`${AKIN}:MC-SAME-TANGENTIAL`],
+    source: `${AKIN_SRC} — Component 3 MC-SAME-TANGENTIAL conflict_evidence [P28] (disc radius/speed numbers, record-wear example)`,
+  },
+]
+
+const AKIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: AKIN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A rigid disc rotates at ω = 4 rad/s. Point A is at r = 0.2 m from the axis; point B is at r = 0.5 m. How do their tangential speeds compare?',
+    choices: [
+      { text: 'They differ (v_A = 0.8 m/s, v_B = 2 m/s) — same ω, but v = rω depends on r', isCorrect: true },
+      { text: 'They are the same, since both points are on the same rotating disc', isCorrect: false, misconceptionId: `${AKIN}:MC-SAME-TANGENTIAL` },
+    ],
+    correctValue: 'different (v = r*omega)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AKIN}:MC-SAME-TANGENTIAL`],
+    source: `${AKIN_SRC} — MC-SAME-TANGENTIAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.moment-of-inertia ────────────────────────────────────────────
+const MOI = 'phys.mech.moment-of-inertia'
+const MOI_SRC = 'docs/curriculum/blueprints/phys.mech.moment-of-inertia.md'
+
+const MOI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MOI,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A solid cylinder and a hollow cylinder can have exactly the same ' +
+      'mass (4 kg) and the same radius (0.3 m) and still resist changes ' +
+      'in spin completely differently: I_solid = ½MR² = 0.18 kg·m², but ' +
+      'I_hollow = MR² = 0.36 kg·m² — exactly double, despite identical ' +
+      'mass and identical radius. The reason is that moment of inertia is ' +
+      'I = Σmr², weighting every bit of mass by the SQUARE of its ' +
+      'distance from the axis — in the hollow cylinder every gram of ' +
+      'mass sits out at the maximum radius, while in the solid cylinder ' +
+      'much of the mass is packed in close to the axis where it barely ' +
+      'contributes to I. Moment of inertia is never just "how much mass" ' +
+      '— it depends just as heavily on HOW that mass is distributed ' +
+      'relative to the spin axis.',
+    targetedMisconceptions: [`${MOI}:MC-I-IS-MASS`],
+    source: `${MOI_SRC} — Component 3 MC-I-IS-MASS conflict_evidence [P28] (solid vs. hollow cylinder, equal mass/radius)`,
+  },
+]
+
+const MOI_PROBES: SeedProbe[] = [
+  {
+    conceptId: MOI,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A solid cylinder and a hollow cylinder have the SAME mass and the SAME radius, rotating about the same central axis. Do they have the same moment of inertia?',
+    choices: [
+      { text: 'No — the hollow cylinder has twice the moment of inertia, because all its mass sits at the maximum radius', isCorrect: true },
+      { text: 'Yes — moment of inertia depends only on total mass, and their masses are equal', isCorrect: false, misconceptionId: `${MOI}:MC-I-IS-MASS` },
+    ],
+    correctValue: 'no, hollow has 2x I',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MOI}:MC-I-IS-MASS`],
+    source: `${MOI_SRC} — MC-I-IS-MASS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.rotational-dynamics ──────────────────────────────────────────
+const RDYN = 'phys.mech.rotational-dynamics'
+const RDYN_SRC = 'docs/curriculum/blueprints/phys.mech.rotational-dynamics.md'
+
+const RDYN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RDYN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Apply the exact same torque, τ = 4 N·m, to two different discs — ' +
+      'Disc A with a large moment of inertia I = 2 kg·m², and Disc B with ' +
+      'a small I = 0.5 kg·m². If torque alone decided angular ' +
+      'acceleration, both would spin up identically. They don’t: ' +
+      'α_A = τ/I = 4/2 = 2 rad/s², while α_B = 4/0.5 = 8 rad/s² — Disc B ' +
+      'accelerates four times faster on the exact same torque. The ' +
+      'rotational analogue of Newton’s Second Law makes this explicit: ' +
+      'τ = Iα, rearranged as α = τ/I. Torque is the rotational "push"; I ' +
+      'is the rotational "resistance to being pushed" — exactly the way F ' +
+      'and m combine in a = F/m. This is precisely why a heavy flywheel ' +
+      'resists spinning up even under a large torque, and why flywheels ' +
+      'are used to store rotational energy stably.',
+    targetedMisconceptions: [`${RDYN}:MC-ALPHA-EQUALS-TORQUE`],
+    source: `${RDYN_SRC} — Component 3 MC-ALPHA-EQUALS-TORQUE conflict_evidence [P28] (two-disc τ=Iα comparison)`,
+  },
+]
+
+const RDYN_PROBES: SeedProbe[] = [
+  {
+    conceptId: RDYN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same net torque τ = 4 N·m is applied to Disc A (I = 2 kg·m²) and Disc B (I = 0.5 kg·m²). Do they get the same angular acceleration?',
+    choices: [
+      { text: 'No — α = τ/I, so Disc B (smaller I) accelerates four times faster than Disc A', isCorrect: true },
+      { text: 'Yes — same torque always produces the same angular acceleration', isCorrect: false, misconceptionId: `${RDYN}:MC-ALPHA-EQUALS-TORQUE` },
+    ],
+    correctValue: 'no, B accelerates 4x faster',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RDYN}:MC-ALPHA-EQUALS-TORQUE`],
+    source: `${RDYN_SRC} — MC-ALPHA-EQUALS-TORQUE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.angular-momentum ─────────────────────────────────────────────
+const AMOM = 'phys.mech.angular-momentum'
+const AMOM_SRC = 'docs/curriculum/blueprints/phys.mech.angular-momentum.md'
+
+const AMOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMOM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A small top spinning at ω = 20 rad/s with I = 0.1 kg·m² has ' +
+      'angular momentum L = 0.1×20 = 2 kg·m²/s. A massive flywheel ' +
+      'spinning twenty times SLOWER, at just ω = 1 rad/s but with a much ' +
+      'larger I = 5 kg·m², has L = 5×1 = 5 kg·m²/s — more than double the ' +
+      'top’s angular momentum despite spinning far more slowly. Angular ' +
+      'momentum is L = Iω, so BOTH the rotational inertia and the ' +
+      'rotation rate matter, exactly the way ordinary momentum p = mv ' +
+      'means a slow-moving truck can carry more momentum than a ' +
+      'fast-moving bicycle. Never judge angular momentum from ω alone — ' +
+      'two objects spinning at the same ω can have wildly different L if ' +
+      'their moments of inertia differ.',
+    targetedMisconceptions: [`${AMOM}:MC-L-IS-OMEGA`],
+    source: `${AMOM_SRC} — Component 3 MC-L-IS-OMEGA conflict_evidence [P28] (top vs. flywheel, p=mv analogy)`,
+  },
+]
+
+const AMOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMOM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Object A: I = 0.1 kg·m², ω = 20 rad/s. Object B: I = 5 kg·m², ω = 1 rad/s. Which has more angular momentum?',
+    choices: [
+      { text: 'Object B — L = Iω gives B a larger L (5 kg·m²/s) than A (2 kg·m²/s), despite spinning much slower', isCorrect: true },
+      { text: 'Object A — it spins much faster, so it must have more angular momentum', isCorrect: false, misconceptionId: `${AMOM}:MC-L-IS-OMEGA` },
+    ],
+    correctValue: 'Object B',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AMOM}:MC-L-IS-OMEGA`],
+    source: `${AMOM_SRC} — MC-L-IS-OMEGA trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.conservation-of-angular-momentum ─────────────────────────────
+const CAMOM = 'phys.mech.conservation-of-angular-momentum'
+const CAMOM_SRC = 'docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md'
+
+const CAMOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CAMOM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A figure skater spinning on (nearly frictionless) ice pulls her ' +
+      'arms in and speeds up dramatically — with no push from the ice, no ' +
+      'external torque acting on her at all. Where does the extra spin ' +
+      'come from? Angular momentum L = Iω stays exactly constant when no ' +
+      'external torque acts, so pulling her arms in reduces her moment of ' +
+      'inertia I (mass moves closer to the spin axis) — and since ' +
+      'L = Iω must stay fixed, a smaller I forces a larger ω. No external ' +
+      'agent is needed at all: she redistributed her OWN mass, and ' +
+      'internal forces are perfectly capable of changing I (and hence ω) ' +
+      'even though they can never change the total L itself.',
+    targetedMisconceptions: [`${CAMOM}:MC-ANGULAR-SPEED-FREE`],
+    source: `${CAMOM_SRC} — Component 3 MC-ANGULAR-SPEED-FREE conflict_evidence [P28] (skater arms-in example)`,
+  },
+]
+
+const CAMOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: CAMOM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A figure skater spinning on frictionless ice pulls her arms inward and spins faster. What external torque caused this speed-up?',
+    choices: [
+      { text: 'None — angular momentum is conserved; pulling her arms in reduced her moment of inertia I, and since L = Iω is constant, ω increased', isCorrect: true },
+      { text: 'The ice must be exerting an external torque to make her spin faster', isCorrect: false, misconceptionId: `${CAMOM}:MC-ANGULAR-SPEED-FREE` },
+    ],
+    correctValue: 'no external torque needed',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CAMOM}:MC-ANGULAR-SPEED-FREE`],
+    source: `${CAMOM_SRC} — MC-ANGULAR-SPEED-FREE trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -11604,6 +11914,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SIGHT_EXPLANATIONS,
   ...SYLT_EXPLANATIONS,
   ...DFLU_EXPLANATIONS,
+  ...CMASS_EXPLANATIONS,
+  ...AKIN_EXPLANATIONS,
+  ...MOI_EXPLANATIONS,
+  ...RDYN_EXPLANATIONS,
+  ...AMOM_EXPLANATIONS,
+  ...CAMOM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -11738,4 +12054,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SIGHT_PROBES,
   ...SYLT_PROBES,
   ...DFLU_PROBES,
+  ...CMASS_PROBES,
+  ...AKIN_PROBES,
+  ...MOI_PROBES,
+  ...RDYN_PROBES,
+  ...AMOM_PROBES,
+  ...CAMOM_PROBES,
 ]
