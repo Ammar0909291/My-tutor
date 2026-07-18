@@ -14151,6 +14151,294 @@ const LDET_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.listening.following-instructions ──────────────────────────────────────
+const FINS = 'eng.listening.following-instructions'
+const FINS_SRC = 'docs/curriculum/blueprints/eng.listening.following-instructions.md'
+
+const FINS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FINS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Acting on the first instruction before hearing the rest is like ' +
+      'starting to dial a phone number after hearing only the first two ' +
+      'digits — you are acting on incomplete information. A three-step ' +
+      'instruction like "Open the drawer, take out the blue folder, and ' +
+      'put it on the desk" needs to be heard in full before you begin any ' +
+      'part of it. Listen to the entire instruction before beginning any ' +
+      'action — hold all the steps in mind first, then execute them in the ' +
+      'correct order.',
+    targetedMisconceptions: [`${FINS}:MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH`],
+    source: `${FINS_SRC} — MC-A (incomplete-phone-number anchor)`,
+  },
+  {
+    conceptId: FINS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Assuming mention order always equals execution order is like ' +
+      'assuming movie credits at the end tell you what happened first in ' +
+      'the story. "Before you close the window, turn off the light" ' +
+      'requires turning off the light FIRST, despite "close the window" ' +
+      'being mentioned first — the word "before" reorders the steps. Listen ' +
+      'for sequence markers like "before," "after," and "once you have" — ' +
+      'these words tell you the TRUE order of execution, which can differ ' +
+      'from the order the steps were spoken in.',
+    targetedMisconceptions: [`${FINS}:MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED`],
+    source: `${FINS_SRC} — MC-B (movie-credits-order anchor)`,
+  },
+  {
+    conceptId: FINS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A complete multi-step instruction must be held in mind before any ' +
+      'part of it is executed — acting on the first step heard risks ' +
+      'missing subsequent steps entirely, the equivalent of dialing on ' +
+      'incomplete information. Separately, execution order is not always ' +
+      'identical to mention order: sequence markers such as "before," ' +
+      '"after," and "once you have" can reorder steps relative to how they ' +
+      'were spoken — "before you close the window, turn off the light" ' +
+      'requires the second-mentioned action to occur first. Track these ' +
+      'markers explicitly rather than defaulting to mention order.',
+    targetedMisconceptions: [
+      `${FINS}:MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH`,
+      `${FINS}:MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED`,
+    ],
+    source: `${FINS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const FINS_PROBES: SeedProbe[] = [
+  {
+    conceptId: FINS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Should you start acting the instant you hear the first step of a multi-step instruction?',
+    choices: [
+      { text: 'No — listen to the whole instruction first, then act, so you don\'t miss later steps', isCorrect: true },
+      { text: 'Yes — acting immediately on the first instruction heard is the right approach', isCorrect: false, misconceptionId: `${FINS}:MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FINS}:MC-A-ACTING-IMMEDIATELY-ON-THE-FIRST-INSTRUCTION-HEARD-IS-THE-RIGHT-APPROACH`],
+    source: `${FINS_SRC} — incomplete-phone-number conflict as probe`,
+  },
+  {
+    conceptId: FINS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: '"Before you close the window, turn off the light." Which action should happen first?',
+    choices: [
+      { text: 'Turn off the light — "before" reorders the steps despite mention order', isCorrect: true },
+      { text: 'Close the window — it was mentioned first, so it happens first', isCorrect: false, misconceptionId: `${FINS}:MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED` },
+    ],
+    correctValue: 'turn off the light',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FINS}:MC-B-INSTRUCTIONS-ARE-ALWAYS-EXECUTED-IN-THE-SAME-ORDER-THEY-ARE-MENTIONED`],
+    source: `${FINS_SRC} — movie-credits-order conflict as probe`,
+  },
+]
+
+// ─── eng.listening.note-taking-while-listening ─────────────────────────────────
+const NOTE = 'eng.listening.note-taking-while-listening'
+const NOTE_SRC = 'docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md'
+
+const NOTE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NOTE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Trying to write every word down while listening is like trying to ' +
+      'catch every single drop from a fast-flowing faucet with your bare ' +
+      'hands — you will miss others while your hands are still full. A ' +
+      'student writing "the economy grew by three percent last year due to ' +
+      'increased consumer spending" in full falls behind, while one writing ' +
+      '"econ ↑3% ← consumer spend" captures the same key information fast ' +
+      'enough to catch the next point. Use short phrases, abbreviations, ' +
+      'and symbols instead of full sentences.',
+    targetedMisconceptions: [`${NOTE}:MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD`],
+    source: `${NOTE_SRC} — MC-A (faucet-and-cup anchor)`,
+  },
+  {
+    conceptId: NOTE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Writing down individual facts as they come up, with no attention to ' +
+      'the speaker\'s own structural signal words ("first," "however," "the ' +
+      'most important point is"), produces a flat, unordered list that is ' +
+      'hard to use afterward because it does not reflect how the ideas ' +
+      'actually related to each other. Capture those structural signal ' +
+      'words as you take notes — they organize your notes to match how the ' +
+      'speaker actually structured their ideas, not just a random sequence ' +
+      'of facts.',
+    targetedMisconceptions: [`${NOTE}:MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE`],
+    source: `${NOTE_SRC} — MC-B (structural-signal-words conflict evidence)`,
+  },
+  {
+    conceptId: NOTE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Effective note-taking uses abbreviated forms — symbols, shortened ' +
+      'phrases — rather than verbatim transcription, since attempting to ' +
+      'capture every word causes a listener to fall behind and miss ' +
+      'subsequent content while still writing the previous point. ' +
+      'Separately, notes should reflect the speaker\'s own structural ' +
+      'signal words (sequence markers, contrast markers, emphasis cues) ' +
+      'rather than recording facts as an unordered list — capturing these ' +
+      'signals as you write preserves the actual logical relationships ' +
+      'between ideas, making the notes far more usable afterward.',
+    targetedMisconceptions: [
+      `${NOTE}:MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD`,
+      `${NOTE}:MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE`,
+    ],
+    source: `${NOTE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const NOTE_PROBES: SeedProbe[] = [
+  {
+    conceptId: NOTE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'While listening, should you write "the economy grew by three percent last year due to increased consumer spending" in full, or "econ ↑3% ← consumer spend"?',
+    choices: [
+      { text: '"econ ↑3% ← consumer spend" — brief abbreviated notes keep you ready for the next point', isCorrect: true },
+      { text: 'The full sentence — good notes mean writing down as much as possible word-for-word', isCorrect: false, misconceptionId: `${NOTE}:MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD` },
+    ],
+    correctValue: 'the abbreviated version',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NOTE}:MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD`],
+    source: `${NOTE_SRC} — faucet-and-cup conflict as probe`,
+  },
+  {
+    conceptId: NOTE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A speaker says "First... however... but the most important factor is...". Should your notes ignore these words and just list the facts, or capture them to show structure?',
+    choices: [
+      { text: 'Capture the structural signal words — they show how the ideas actually relate to each other', isCorrect: true },
+      { text: 'Ignore them — note-taking is just writing down facts as they come up, with no structure needed', isCorrect: false, misconceptionId: `${NOTE}:MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE` },
+    ],
+    correctValue: 'capture the structural signal words',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NOTE}:MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE`],
+    source: `${NOTE_SRC} — structural-signal-words conflict as probe`,
+  },
+]
+
+// ─── eng.listening.distinguishing-sounds-in-speech ─────────────────────────────
+const DSND = 'eng.listening.distinguishing-sounds-in-speech'
+const DSND_SRC = 'docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md'
+
+const DSND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DSND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Relying entirely on context to distinguish similar sounds is like ' +
+      'navigating only by asking other people for directions instead of ' +
+      'ever learning to read a map — it works until you are in unfamiliar ' +
+      'territory with no one to ask. "I saw the ship/sheep in the distance" ' +
+      'said in a foggy harbor scene gives no context clue to tell the words ' +
+      'apart. Train your ear to actually hear the specific phonetic ' +
+      'contrast — a vowel length, a consonant sound — so you can ' +
+      'distinguish the words even when context does not settle it.',
+    targetedMisconceptions: [`${DSND}:MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT`],
+    source: `${DSND_SRC} — MC-A (map-reading-vs-asking-for-directions anchor)`,
+  },
+  {
+    conceptId: DSND,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Assuming isolated-word skill transfers automatically to connected ' +
+      'speech is like assuming that identifying a single musical note ' +
+      'played slowly means you can automatically pick out that same note ' +
+      'within a fast, complex piece of music. "Ship" and "sheep" spoken ' +
+      'carefully and separately sound clearly distinguishable, but the same ' +
+      'words embedded in fast, natural speech can blur noticeably. Practice ' +
+      'listening for the same contrast specifically within connected ' +
+      'speech, not just in careful, isolated pronunciation.',
+    targetedMisconceptions: [`${DSND}:MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH`],
+    source: `${DSND_SRC} — MC-B (isolated-note-vs-fast-music anchor)`,
+  },
+  {
+    conceptId: DSND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Distinguishing similar-sounding words by phonetic contrast alone — ' +
+      'not context — is essential, since context is often genuinely ' +
+      'ambiguous and provides no reliable fallback when it fails; the ear ' +
+      'must be trained on the actual sound difference. Separately, ' +
+      'contrasts clearly audible in careful, isolated pronunciation can ' +
+      'blur or reduce substantially in fast, connected natural speech — ' +
+      'isolated-word discrimination skill does not automatically transfer, ' +
+      'and dedicated practice with connected-speech material is required ' +
+      'to close that gap.',
+    targetedMisconceptions: [
+      `${DSND}:MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT`,
+      `${DSND}:MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH`,
+    ],
+    source: `${DSND_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DSND_PROBES: SeedProbe[] = [
+  {
+    conceptId: DSND,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"I saw the ship/sheep in the distance," said in a foggy harbor scene where either word could fit. Can context alone tell you which word was said?',
+    choices: [
+      { text: 'No — context is ambiguous here; you need to actually hear the phonetic contrast', isCorrect: true },
+      { text: 'Yes — sentence context always lets you tell similar-sounding words apart', isCorrect: false, misconceptionId: `${DSND}:MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DSND}:MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT`],
+    source: `${DSND_SRC} — map-reading-vs-asking-for-directions conflict as probe`,
+  },
+  {
+    conceptId: DSND,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You can clearly distinguish "ship" and "sheep" when each is said slowly and separately. Will you automatically distinguish them in fast, connected natural speech?',
+    choices: [
+      { text: 'No — connected speech can blur the contrast; this needs separate, dedicated practice', isCorrect: true },
+      { text: 'Yes — if you can hear the difference in isolation, you can hear it in connected speech too', isCorrect: false, misconceptionId: `${DSND}:MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DSND}:MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH`],
+    source: `${DSND_SRC} — isolated-note-vs-fast-music conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -14316,6 +14604,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ACTL_EXPLANATIONS,
   ...GIST_EXPLANATIONS,
   ...LDET_EXPLANATIONS,
+  ...FINS_EXPLANATIONS,
+  ...NOTE_EXPLANATIONS,
+  ...DSND_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -14481,4 +14772,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ACTL_PROBES,
   ...GIST_PROBES,
   ...LDET_PROBES,
+  ...FINS_PROBES,
+  ...NOTE_PROBES,
+  ...DSND_PROBES,
 ]
