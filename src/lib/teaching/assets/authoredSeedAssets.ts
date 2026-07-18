@@ -35528,6 +35528,366 @@ const YOUN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.generalized-coordinates ─────────────────────────────────────────
+const GENC = 'phys.mech.generalized-coordinates'
+const GENC_SRC = 'docs/curriculum/blueprints/phys.mech.generalized-coordinates.md'
+
+const GENC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GENC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A generalized coordinate is any quantity that uniquely specifies a system\'s configuration — there is no requirement that it be a Cartesian x, y, z measured in metres. Consider a pendulum: insisting on x and y forces the constraint x²+y²=L² to hold at all times — two numbers tied together by one constraint equation, even though the pendulum genuinely has only ONE independent motion (it swings back and forth along a single degree of freedom). The angle θ specifies the bob\'s position completely and is a perfectly valid coordinate: given θ, you can always uniquely recover x=L·sinθ and y=−L·cosθ. Generalized coordinates can be angles (in radians), arc lengths along a curve, ratios, or any measurable parameter — the only genuine requirement is that the quantity uniquely parameterizes the allowed configurations. The correct procedure: first count the degrees of freedom, DOF=3N−k (N particles, k independent constraints), then choose any f=DOF quantities that parameterize the allowed configurations, writing x=x(q₁,...,q_f,t) to connect back to Cartesian coordinates when needed. A second, separate point: constraints genuinely REDUCE degrees of freedom, they do not merely add a force while leaving all 3N Cartesian dimensions "still available." A bead threaded on a wire can only move along the wire — it has exactly 1 degree of freedom, regardless of how many force components (like the wire\'s normal force) act on it. The normal force is always perpendicular to the bead\'s motion, does zero work, and the bead genuinely cannot leave the wire — so although the bead exists in 3D space, it has only 1D freedom of movement. A holonomic constraint f(r,t)=0 reduces the count of independent motions by exactly 1, because it makes one coordinate derivable from the others — it is a genuine geometrical restriction on where the particle can be, not just an additional force acting on an otherwise-unconstrained particle. DOF=3N−k precisely counts the remaining independent dimensions of motion, and the constraint forces (normal forces, tensions) are reaction forces that enforce this geometry implicitly — in Lagrangian mechanics you never need to compute them explicitly.',
+    targetedMisconceptions: [`${GENC}:MC-COORD-MUST-BE-CARTESIAN`, `${GENC}:MC-CONSTRAINT-REDUCES-FREEDOM`],
+    source: `${GENC_SRC} — MC-COORD-MUST-BE-CARTESIAN (any parameterizing quantity is a valid coordinate) + MC-CONSTRAINT-REDUCES-FREEDOM (holonomic constraints genuinely reduce DOF=3N-k)`,
+  },
+  {
+    conceptId: GENC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students insist on writing coordinates strictly as x, y, z even for constrained systems, saying "coordinates have to be in metres," and struggle to accept θ as a coordinate because "it\'s not a position." Consider a swinging pendulum directly: if you insist on using Cartesian x and y, you are forced to maintain the constraint x²+y²=L² at every instant — that is two numbers linked by one constraint equation. But the pendulum genuinely has only ONE independent motion — it simply swings back and forth — so one coordinate really should be enough to describe it completely. The angle θ does exactly this: it specifies exactly where the bob is at every moment, completely and unambiguously. The correct general test for whether something counts as a valid coordinate is not "is it measured in metres" but rather "does it uniquely specify the configuration" — and given θ, you can always recover x=L·sinθ and y=−L·cosθ uniquely, satisfying that test perfectly. Generalized coordinates can be angles, arc lengths measured along a curve, ratios, or genuinely any measurable parameter that uniquely pins down the system\'s state — there is no restriction to distance units at all. The systematic procedure: first count degrees of freedom via DOF=3N−k (N particles, k independent holonomic constraints), then choose any f=DOF quantities that parameterize the allowed configurations — angles, arc lengths, or ratios are all equally valid choices — writing x=x(q₁,...,q_f,t) whenever you need to connect back to ordinary Cartesian coordinates. A second, separate and equally common error: counting degrees of freedom as always 3N regardless of constraints, conflating the constraint FORCES (like normal force or tension) with the constraint EQUATIONS themselves, and reasoning "even with the constraint, the particle can still move in 3D" since it still occupies 3D space. Consider a bead threaded on a wire directly: it can genuinely only move ALONG the wire, meaning it has exactly 1 degree of freedom — this is true regardless of how many force components act on it. The wire does exert a normal force on the bead, yes, but that force is always perpendicular to the bead\'s direction of motion, so it does zero work and the bead simply cannot leave the wire\'s path. So although the bead technically exists within 3D space, it possesses only 1D freedom of actual movement — the other 2 dimensions of freedom have genuinely been removed by the constraint, not merely "forced" while remaining available. The precise mechanism: a holonomic constraint f(r,t)=0 reduces the count of independent motions by exactly 1, because it makes one coordinate mathematically derivable from the others — this is a genuine GEOMETRICAL restriction on where the particle is allowed to be, fundamentally different from simply being "a force that acts on the particle." The formula DOF=3N−k precisely counts what remains: for each holonomic constraint, subtract exactly 1 from 3N, and the resulting number f tells you exactly how many independent parameters — the generalized coordinates — you genuinely need. The constraint forces (normal forces, tensions, joint forces) are reaction forces that enforce this geometry implicitly; in Lagrangian mechanics, you never need to compute them explicitly at all, since the choice of generalized coordinates has already built the constraint into the description from the start.',
+    targetedMisconceptions: [`${GENC}:MC-COORD-MUST-BE-CARTESIAN`, `${GENC}:MC-CONSTRAINT-REDUCES-FREEDOM`],
+    source: `${GENC_SRC} — MC-COORD-MUST-BE-CARTESIAN + MC-CONSTRAINT-REDUCES-FREEDOM, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const GENC_PROBES: SeedProbe[] = [
+  {
+    conceptId: GENC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a simple pendulum, is the angle θ a valid coordinate for describing the bob\'s motion, or must you use Cartesian x and y?',
+    choices: [
+      { text: 'θ is a perfectly valid coordinate — it uniquely specifies the bob\'s position (x=L·sinθ, y=−L·cosθ), and since the pendulum has only 1 DOF, θ alone suffices, avoiding the redundant x,y-plus-constraint approach', isCorrect: true },
+      { text: 'Only x and y are valid coordinates, since coordinates must be measured in metres, not radians', isCorrect: false, misconceptionId: `${GENC}:MC-COORD-MUST-BE-CARTESIAN` },
+    ],
+    correctValue: 'theta is valid, any quantity uniquely specifying configuration works',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GENC}:MC-COORD-MUST-BE-CARTESIAN`],
+    source: `${GENC_SRC} — MC-COORD-MUST-BE-CARTESIAN trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: GENC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bead is threaded on a rigid wire and can only slide along it. How many degrees of freedom does the bead have?',
+    choices: [
+      { text: '1 — the wire constraint removes 2 of the original 3 dimensions of freedom, since the normal force does no work and the bead cannot leave the wire\'s path', isCorrect: true },
+      { text: '3 — the bead still exists in 3D space, so it retains all 3 degrees of freedom regardless of the wire constraint', isCorrect: false, misconceptionId: `${GENC}:MC-CONSTRAINT-REDUCES-FREEDOM` },
+    ],
+    correctValue: '1 degree of freedom, constraint genuinely reduces DOF',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GENC}:MC-CONSTRAINT-REDUCES-FREEDOM`],
+    source: `${GENC_SRC} — MC-CONSTRAINT-REDUCES-FREEDOM trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.euler-lagrange-equation ─────────────────────────────────────────
+const EULR = 'phys.mech.euler-lagrange-equation'
+const EULR_SRC = 'docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md'
+
+const EULR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EULR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Lagrangian L=T−V is NOT the total energy of the system — the minus sign is essential, not a typo, and this is a genuinely different mathematical object from mechanical energy E=T+V. For a spring at maximum stretch (all potential energy): T=0, V=½kA²>0, so total mechanical energy E=½kA²>0, but the Lagrangian L=0−½kA²=−½kA²<0. If L genuinely were "the energy," it could never come out negative — yet it clearly does here. L is best understood not as an energy at all, but as a mathematical object (a function of coordinates q and velocities q̇) whose TIME-INTEGRAL gives the action; the Euler-Lagrange equation is derived by requiring this action to be stationary, and the minus sign in T−V is essential to that derivation, producing the correct equations of motion. Total energy E=T+V is conserved (when ∂L/∂t=0); the Lagrangian L=T−V plays a completely different role as the integrand of the action — write "L=T−V" explicitly every time to avoid confusing the two. A second, separate and equally important point: you do NOT need to separately find constraint forces (like tension or normal force) to use the Euler-Lagrange equation. In a pendulum derivation, the Lagrangian works out to L=½mL²θ̇²+mgL·cosθ — containing only kinetic energy (from θ̇) and gravitational potential energy (from θ); the string tension never appears anywhere in L. This is because tension does zero work (it acts perpendicular to the bob\'s motion), and choosing θ as the generalized coordinate already automatically enforces the fixed-length constraint x²+y²=L² — the constraint force simply drops out of the variational principle entirely. Constraint forces — normal forces, tensions, joint forces — do not appear in L at all, as long as the constraints are holonomic. The procedure is simply: write T and V in terms of the generalized coordinates, then apply d/dt(∂L/∂q̇ᵢ)=∂L/∂qᵢ directly — the correct equations of motion emerge automatically, with constraint forces never needing to be computed separately.',
+    targetedMisconceptions: [`${EULR}:MC-LAGRANGIAN-IS-ENERGY`, `${EULR}:MC-EL-NEEDS-FORCES`],
+    source: `${EULR_SRC} — MC-LAGRANGIAN-IS-ENERGY (L=T-V is not energy, minus sign essential) + MC-EL-NEEDS-FORCES (constraint forces do not appear in L, drop out automatically)`,
+  },
+  {
+    conceptId: EULR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students call the Lagrangian "the energy" or "total mechanical energy," sometimes even writing L=T+V (with a plus sign) instead of the correct L=T−V, and become confused when L comes out negative, since they expect an "energy" to be positive. Test this directly against a concrete case: total mechanical energy is genuinely E=T+V, but the Lagrangian is defined as L=T−V — and that minus sign is absolutely not a typo or a simplification, it is essential to the entire framework. Consider a spring at its point of maximum stretch, where all the energy is potential: kinetic energy T=0, and potential energy V=½kA²>0. Total mechanical energy comes out to E=T+V=0+½kA²=½kA²>0, as expected for an "energy." But the Lagrangian comes out to L=T−V=0−½kA²=−½kA²<0 — genuinely negative. If L really were simply "the energy" under a different name, it could never be negative — energies (at least in this classical sense) shouldn\'t go below zero for a system at rest with only potential energy stored. So what actually is L, if not an energy? L is best understood as a purely mathematical construction — a function of the coordinates q and velocities q̇ — whose TIME-INTEGRAL (accumulated over a trajectory) gives what is called the "action." The Euler-Lagrange equation itself is derived by requiring this action to be stationary (extremized) with respect to small variations in the path — and the specific minus sign in T−V is mathematically essential to that derivation, producing correctly signed equations of motion; if you used T+V instead, the resulting equations of motion would come out wrong. The clean way to keep these straight: total energy E=T+V is a genuinely conserved quantity (specifically when ∂L/∂t=0); the Lagrangian L=T−V instead plays the entirely different role of being the integrand of the action integral — write "L=T−V" explicitly at the top of every problem to prevent this confusion from creeping in. A second, entirely separate and equally common error: believing you still need to separately solve for constraint forces — like the tension in a pendulum\'s string, or a normal force — before you can apply the Euler-Lagrange equation, reasoning "but I need the tension to find θ̈ for the pendulum." Check this directly against an actual pendulum derivation: the resulting Lagrangian works out to L=½mL²θ̇²+mgL·cosθ — containing only a kinetic-energy term (built from θ̇) and a gravitational-potential-energy term (built from θ) — the string tension T never appears anywhere in this expression, not even implicitly. Why? Tension acts perpendicular to the bob\'s actual direction of motion at every instant, so it does zero work on the bob; and by choosing θ as the generalized coordinate in the first place, the fixed-length constraint x²+y²=L² has already been automatically built into the description — the constraint force itself simply cancels out of the underlying variational principle entirely, never needing to be computed. More generally: constraint forces of every kind — normal forces, string tensions, joint forces in a linked mechanism — do not appear anywhere in L, as long as the underlying constraints are holonomic (expressible as an equation relating coordinates, without inequalities or non-integrable velocity dependencies). The correct, complete procedure is simply: write T and V purely in terms of your chosen generalized coordinates, then apply the Euler-Lagrange equation d/dt(∂L/∂q̇ᵢ)=∂L/∂qᵢ directly to each coordinate — the correct equations of motion emerge completely automatically, with constraint forces never needing to be separately identified, computed, or substituted in at any stage.',
+    targetedMisconceptions: [`${EULR}:MC-LAGRANGIAN-IS-ENERGY`, `${EULR}:MC-EL-NEEDS-FORCES`],
+    source: `${EULR_SRC} — MC-LAGRANGIAN-IS-ENERGY + MC-EL-NEEDS-FORCES, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const EULR_PROBES: SeedProbe[] = [
+  {
+    conceptId: EULR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A spring at maximum stretch (x=A) has T=0 and V=½kA². What is the Lagrangian L at this instant?',
+    choices: [
+      { text: 'L=T−V=−½kA² (negative) — L is not the total energy; the minus sign is essential to the action-based derivation of the equations of motion', isCorrect: true },
+      { text: 'L=T+V=½kA² (positive), since the Lagrangian equals the total mechanical energy of the system', isCorrect: false, misconceptionId: `${EULR}:MC-LAGRANGIAN-IS-ENERGY` },
+    ],
+    correctValue: 'L = T - V, can be negative, not the same as energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EULR}:MC-LAGRANGIAN-IS-ENERGY`],
+    source: `${EULR_SRC} — MC-LAGRANGIAN-IS-ENERGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EULR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'To find the equation of motion for a pendulum using the Euler-Lagrange equation with θ as the coordinate, do you need to separately compute the string tension?',
+    choices: [
+      { text: 'No — the tension does no work (perpendicular to motion) and never appears in L=½mL²θ̇²+mgL·cosθ; choosing θ already enforces the length constraint automatically', isCorrect: true },
+      { text: 'Yes — the tension must be added into the Euler-Lagrange equation to correctly find θ̈', isCorrect: false, misconceptionId: `${EULR}:MC-EL-NEEDS-FORCES` },
+    ],
+    correctValue: 'no, constraint forces drop out automatically for holonomic constraints',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EULR}:MC-EL-NEEDS-FORCES`],
+    source: `${EULR_SRC} — MC-EL-NEEDS-FORCES trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.hamiltonian ──────────────────────────────────────────────────────
+const HAML = 'phys.mech.hamiltonian'
+const HAML_SRC = 'docs/curriculum/blueprints/phys.mech.hamiltonian.md'
+
+const HAML_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HAML,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Hamiltonian H is NOT the same object as the Lagrangian L with different notation — they are genuinely different mathematical functions with different signs and different independent variables. L=T−V while H=T+V (under standard conditions) — for a spring, L=½mẋ²−½kx² while H=p²/(2m)+½kx². At maximum stretch (x=A, ẋ=0, p=0): L=0−½kA²=−½kA²<0, while H=0+½kA²=½kA²>0 — same magnitude, opposite sign, definitely not "the same thing." Crucially, they also use different INDEPENDENT VARIABLES: L takes (q,q̇,t) as its inputs (position and VELOCITY), while H takes (q,p,t) as its inputs (position and MOMENTUM). The Legendre transform is the specific mathematical operation that switches from velocity to momentum as the independent variable, connecting the two: (1) compute pᵢ=∂L/∂q̇ᵢ; (2) solve for q̇ᵢ(q,p); (3) H=Σpᵢq̇ᵢ−L, substituting everything in terms of q and p. They encode the same underlying physics but are genuinely different mathematical objects. A second, separate and important point: H does NOT always equal the total mechanical energy T+V — this equality requires two specific conditions to both hold: (1) the kinetic energy T must be a homogeneous quadratic function of the velocities q̇ᵢ (no linear terms in q̇), AND (2) the constraints must be time-independent. When either condition fails — for instance, with time-dependent constraints, like a bead on a wire being pulled outward at constant speed — H may not equal the mechanical energy, though H remains a well-defined conserved quantity whenever ∂L/∂t=0 (evaluated in the appropriate frame). For all standard, typical problems at this level — where T is quadratic in velocities and constraints are fixed in time — H does equal E=T+V, and this condition should be checked and stated explicitly rather than assumed automatically.',
+    targetedMisconceptions: [`${HAML}:MC-H-IS-L`, `${HAML}:MC-H-ALWAYS-ENERGY`],
+    source: `${HAML_SRC} — MC-H-IS-L (H and L are different functions, different signs/variables, Legendre transform) + MC-H-ALWAYS-ENERGY (H=T+V requires quadratic T and time-independent constraints)`,
+  },
+  {
+    conceptId: HAML,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students treat the Hamiltonian H as simply "the Lagrangian L with different notation" — the same underlying object, just relabeled — sometimes even writing H=T−V (copying the Lagrangian\'s formula directly) and being unable to state that L takes (q,q̇,t) as its inputs while H takes (q,p,t) as its inputs. Test this directly with a spring example: L=T−V=½mẋ²−½kx², while H=T+V=p²/(2m)+½kx² — notice these already have opposite signs on the potential term structurally. At maximum stretch, where x=A, ẋ=0, and correspondingly p=0: L=0−½kA²=−½kA² (negative), while H=0+½kA²=½kA² (positive) — same numerical magnitude, but genuinely opposite sign. If H and L were truly "the same thing," this sign flip could not happen. The deeper reason they differ: L=T−V while H=T+V — different formulas built from the same T and V — and they additionally use fundamentally different independent variables. L is a function of (q,q̇,t) — position and VELOCITY — while H is a function of (q,p,t) — position and MOMENTUM. The Legendre transform is the specific, well-defined mathematical procedure that converts from one description to the other, switching velocity for momentum as the independent variable: first compute the canonical momentum pᵢ=∂L/∂q̇ᵢ; then algebraically solve this relation for q̇ᵢ in terms of q and p; finally substitute into H=Σpᵢq̇ᵢ−L, expressing everything purely in terms of q and p. L and H encode the identical underlying physics, but they are genuinely distinct mathematical objects — different signs, different domains, related by this specific transform, never simply "the same function under a different name." A second, separate and equally important error: assuming H always equals the total mechanical energy T+V, without ever checking whether the underlying assumptions actually hold — applying "H=E" blindly even to systems with explicitly time-dependent constraints, and not knowing under what conditions this equality can actually fail. Consider a bead threaded on a wire that is itself being pulled outward at constant speed v₀, so the wire\'s geometry changes with time (r=r₀+v₀t) — a genuinely time-dependent constraint. In this case, H=Σpᵢq̇ᵢ−L still holds by definition, but the kinetic energy T now contains extra cross-terms arising from the moving constraint itself, so H no longer equals T+V. H can still be a conserved quantity, specifically if ∂L/∂t=0 in the appropriately chosen (possibly moving) reference frame — but it does NOT equal the mechanical energy as measured in the original lab frame. The precise conditions required for H=T+V to hold are twofold: (1) the kinetic energy T must be a homogeneous quadratic function of the generalized velocities q̇ᵢ, with no linear terms present, AND (2) the constraints defining the system must be time-independent. When either of these two conditions fails to hold — whether from time-dependent constraints or from a non-standard form of T — H may genuinely diverge from the mechanical energy, even though H itself remains a perfectly well-defined conserved quantity whenever ∂L/∂t=0. For essentially all standard, textbook-level problems encountered at this stage — where T is quadratic in the velocities and the constraints are fixed and unchanging in time — H does equal E=T+V exactly, but this equality is a CONSEQUENCE of those two conditions holding, not an automatic, universal law that applies unconditionally to every Hamiltonian system.',
+    targetedMisconceptions: [`${HAML}:MC-H-IS-L`, `${HAML}:MC-H-ALWAYS-ENERGY`],
+    source: `${HAML_SRC} — MC-H-IS-L + MC-H-ALWAYS-ENERGY, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const HAML_PROBES: SeedProbe[] = [
+  {
+    conceptId: HAML,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a spring system, L=T−V=−½kA² at maximum stretch, and H=T+V=½kA² at the same instant. Are H and L the same object?',
+    choices: [
+      { text: 'No — they are different mathematical functions with opposite signs here (L negative, H positive) and different independent variables: L(q,q̇,t) versus H(q,p,t), related by a Legendre transform', isCorrect: true },
+      { text: 'Yes — H and L represent the same underlying quantity, just written with different notation', isCorrect: false, misconceptionId: `${HAML}:MC-H-IS-L` },
+    ],
+    correctValue: 'different objects, related by Legendre transform',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HAML}:MC-H-IS-L`],
+    source: `${HAML_SRC} — MC-H-IS-L trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HAML,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bead is on a wire that is itself being pulled outward at constant speed (a time-dependent constraint). Does H equal the mechanical energy T+V in this case?',
+    choices: [
+      { text: 'Not necessarily — H=T+V requires T to be quadratic in velocities AND the constraints to be time-independent; with a time-dependent constraint, H may not equal the lab-frame mechanical energy, even though H can still be conserved', isCorrect: true },
+      { text: 'Yes — H always equals T+V for any mechanical system, regardless of whether constraints depend on time', isCorrect: false, misconceptionId: `${HAML}:MC-H-ALWAYS-ENERGY` },
+    ],
+    correctValue: 'not necessarily, requires time-independent constraints and quadratic T',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HAML}:MC-H-ALWAYS-ENERGY`],
+    source: `${HAML_SRC} — MC-H-ALWAYS-ENERGY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.hamiltons-equations ─────────────────────────────────────────────
+const HAMQ = 'phys.mech.hamiltons-equations'
+const HAMQ_SRC = 'docs/curriculum/blueprints/phys.mech.hamiltons-equations.md'
+
+const HAMQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HAMQ,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Hamilton\'s equations are genuinely asymmetric in sign: q̇ᵢ=+∂H/∂pᵢ (plus sign) but ṗᵢ=−∂H/∂qᵢ (minus sign) — writing both with plus signs gives the wrong physics. Check this with a spring: H=p²/(2m)+½kx². If you incorrectly wrote ṗ=+∂H/∂x=+kx, then dp/dt=+kx, meaning the force is in the +x direction when the spring is stretched to +x — but a stretched spring genuinely exerts a RESTORING force, F=−kx, pulling back toward equilibrium, not pushing further away. The plus sign gives fundamentally wrong physics. The correct minus sign traces back to the Legendre transform connecting Hamiltonian and Lagrangian mechanics: from the Euler-Lagrange equation, ṗᵢ=d/dt(∂L/∂q̇ᵢ)=∂L/∂qᵢ. Since H=Σpq̇−L, differentiating gives ∂H/∂qᵢ=−∂L/∂qᵢ (the qᵢ-dependence of H comes entirely through the −L term at fixed p). Combining these: ṗᵢ=∂L/∂qᵢ=−∂H/∂qᵢ — the minus sign is forced by the mathematics of the transform, not a matter of convention. Memorize the pair as genuinely asymmetric: q̇ᵢ=+∂H/∂pᵢ (plus for position) and ṗᵢ=−∂H/∂qᵢ (minus for momentum). A second, separate point: the two Hamilton\'s equations are NOT redundant restatements of the same physics — both are genuinely required together to determine the full dynamics. Using only ṗ=−kx for the spring leaves one equation with two unknowns (x and p) — insufficient to solve the system. The second equation, ẋ=p/m, is not "trivially obvious" — it specifies how x itself evolves in time (its own genuine equation of motion), just as ṗ=−kx specifies how p evolves. In phase space, x and p are treated as independent variables, each with its own first-order equation of motion; together, both equations combine to fully determine the trajectory (x(t),p(t)) — for instance, differentiating and substituting gives the familiar ẍ=−(k/m)x, but only by using BOTH equations together. In Hamiltonian mechanics there is no direct ẍ equation — only the pair of coupled first-order equations ẋ and ṗ, which together reproduce the equivalent second-order dynamics.',
+    targetedMisconceptions: [`${HAMQ}:MC-SIGN-BOTH-POSITIVE`, `${HAMQ}:MC-TWO-EQUATIONS-REDUNDANT`],
+    source: `${HAMQ_SRC} — MC-SIGN-BOTH-POSITIVE (asymmetric signs, minus forced by Legendre transform) + MC-TWO-EQUATIONS-REDUNDANT (both equations independently needed for full dynamics)`,
+  },
+  {
+    conceptId: HAMQ,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students write Hamilton\'s equations with both signs positive — ṗᵢ=+∂H/∂qᵢ, missing the required minus sign — and sometimes explicitly question "the minus sign looks wrong — shouldn\'t force be in the direction of increasing q?" Test this against a spring system directly: H=p²/(2m)+½kx². If you (incorrectly) write ṗ=+∂H/∂x=+kx, this gives dp/dt=+kx, implying the force points in the +x direction whenever the spring is stretched to positive x — pushing the mass further away from equilibrium. But physically, a stretched or compressed spring exerts a RESTORING force, F=−kx, always pulling the mass back toward equilibrium — the exact opposite direction from what the incorrect plus-sign equation predicts. The plus-sign version genuinely gives the wrong physics, not just an unconventional sign choice. Where does the correct minus sign actually come from? Trace it through the Legendre transform connecting Hamiltonian and Lagrangian mechanics: from the Euler-Lagrange equation, ṗᵢ=d/dt(∂L/∂q̇ᵢ)=∂L/∂qᵢ — this holds in Lagrangian mechanics generally. Meanwhile, since H is defined via H=Σpq̇−L, and this Legendre transform means that at fixed p, the qᵢ-dependence of H comes entirely through the −L term, giving ∂H/∂qᵢ=−∂L/∂qᵢ. Combining the two: ṗᵢ=∂L/∂qᵢ=−∂H/∂qᵢ — the minus sign is genuinely forced by the mathematical structure of the Legendre transform itself, not an arbitrary convention that could equally well be chosen the other way. The safest practice: memorize the pair as an intentionally asymmetric duo — q̇ᵢ=+∂H/∂pᵢ (a plus sign for how position evolves) and ṗᵢ=−∂H/∂qᵢ (a minus sign for how momentum evolves) — and write both explicitly at the top of every problem before proceeding. A second, entirely separate error: treating Hamilton\'s two equations as merely two different ways of writing the same underlying physics — deriving only one of the pair and stopping there, or claiming that ẋ=p/m is "trivially obvious" (just restating the definition of momentum) and therefore not worth deriving or using explicitly. Test this against the same spring example: if you use ONLY ṗ=−kx, you have one single equation relating two unknowns, x and p — genuinely insufficient information to solve for the system\'s motion. You need a second, independent equation to pin down both variables. That second equation, ẋ=p/m, tells you something the first equation does not: specifically how x itself evolves dynamically in relation to p. Together, the two equations give you everything: differentiating ẋ=p/m and substituting ṗ=−kx yields the familiar ẍ=−(k/m)x — but this combined second-order result only emerges by genuinely using BOTH first-order equations together, not from either one alone. The deeper reason both are essential: in phase space, position x and momentum p are treated as two independent dynamical variables, each requiring its own first-order equation of motion to fully specify how it changes in time — ẋ=∂H/∂p is the genuine equation of motion for x (not a trivial restatement of momentum\'s definition), just as ṗ=−∂H/∂q is the genuine equation of motion for p. Together, this pair of coupled first-order equations fully determines the complete trajectory (x(t),p(t)) through phase space; Hamiltonian mechanics deliberately works with this pair of first-order equations rather than a single second-order equation like ẍ, precisely because both members of the pair carry genuinely independent dynamical information.',
+    targetedMisconceptions: [`${HAMQ}:MC-SIGN-BOTH-POSITIVE`, `${HAMQ}:MC-TWO-EQUATIONS-REDUNDANT`],
+    source: `${HAMQ_SRC} — MC-SIGN-BOTH-POSITIVE + MC-TWO-EQUATIONS-REDUNDANT, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const HAMQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: HAMQ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a spring with H=p²/(2m)+½kx², what is ṗ according to Hamilton\'s equations, and does it give a restoring force?',
+    choices: [
+      { text: 'ṗ=−∂H/∂x=−kx — this correctly gives a restoring force, pulling the mass back toward equilibrium when stretched', isCorrect: true },
+      { text: 'ṗ=+∂H/∂x=+kx — both of Hamilton\'s equations use a plus sign, giving a force pushing further from equilibrium', isCorrect: false, misconceptionId: `${HAMQ}:MC-SIGN-BOTH-POSITIVE` },
+    ],
+    correctValue: 'p-dot equals minus dH/dx, gives correct restoring force',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HAMQ}:MC-SIGN-BOTH-POSITIVE`],
+    source: `${HAMQ_SRC} — MC-SIGN-BOTH-POSITIVE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HAMQ,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a spring, is the equation ẋ=p/m "trivially obvious" and therefore not really needed alongside ṗ=−kx to solve the motion?',
+    choices: [
+      { text: 'No — both equations are genuinely needed; ṗ=−kx alone leaves two unknowns (x,p) with one equation, and ẋ=p/m is x\'s own independent equation of motion, required to fully determine (x(t),p(t))', isCorrect: true },
+      { text: 'Yes — ẋ=p/m just restates the definition of momentum, so ṗ=−kx alone is sufficient to determine the full motion', isCorrect: false, misconceptionId: `${HAMQ}:MC-TWO-EQUATIONS-REDUNDANT` },
+    ],
+    correctValue: 'both equations independently required, not redundant',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HAMQ}:MC-TWO-EQUATIONS-REDUNDANT`],
+    source: `${HAMQ_SRC} — MC-TWO-EQUATIONS-REDUNDANT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.cyclic-coordinates-conservation-laws ────────────────────────────
+const CYCC = 'phys.mech.cyclic-coordinates-conservation-laws'
+const CYCC_SRC = 'docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md'
+
+const CYCC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CYCC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A "cyclic coordinate" does NOT mean that coordinate is zero or held constant — it means something quite different: the coordinate is simply ABSENT from the Lagrangian (∂L/∂qᵢ=0). For a central-force problem, φ (the angular position) is cyclic — but this does not mean the particle stops moving angularly. A planet genuinely orbits the sun, with φ changing continuously; Kepler\'s second law even tells us the orbit sweeps out equal areas in equal times, which requires φ to keep changing. What is actually "cyclic" is not the coordinate φ itself, but its ABSENCE from L. Something else entirely is what stays constant. The precise mechanism: "cyclic coordinate" means the Lagrangian is independent of the VALUE of qᵢ (∂L/∂qᵢ=0) — the coordinate itself can change freely over time. The Euler-Lagrange equation then gives d/dt(pᵢ)=∂L/∂qᵢ=0, meaning pᵢ (the CONJUGATE MOMENTUM to that coordinate) is what stays constant. The coordinate changes; its conjugate momentum is conserved. Checking ∂L/∂qᵢ is the diagnostic test — if zero, qᵢ is cyclic and pᵢ=∂L/∂q̇ᵢ is conserved. A second, separate and related error: identifying symmetry purely from the visual, geometric SHAPE of a system (spherical, cylindrical, etc.), rather than from whether the Lagrangian itself changes under a coordinate shift. A free particle moving in 1D has literally no shape at all — it\'s just a point — yet L=½mẋ² is completely independent of x, meaning translational symmetry holds and p_x is conserved. Conversely, a bead threaded on a ring that LOOKS symmetric can nonetheless have an L that genuinely depends on φ if there is a bump or irregularity on the ring — the geometric shape appears symmetric, but the actual physics captured in L is not. What genuinely matters for Noether\'s theorem is this: does L change when you shift the coordinate qᵢ→qᵢ+ε (for an infinitesimally small ε)? If L(q+ε)=L(q) for all such ε, that constitutes a genuine continuous symmetry of the Lagrangian, and Noether\'s theorem then guarantees a corresponding conserved quantity exists. Shape is at best a suggestive hint — it is never the actual definition of the relevant symmetry; the correct test is always to check ∂L/∂qᵢ directly, examining L itself rather than relying on pictures.',
+    targetedMisconceptions: [`${CYCC}:MC-CYCLIC-MEANS-ZERO`, `${CYCC}:MC-SYMMETRY-IS-SHAPE`],
+    source: `${CYCC_SRC} — MC-CYCLIC-MEANS-ZERO (cyclic means absent from L, momentum is conserved not the coordinate) + MC-SYMMETRY-IS-SHAPE (symmetry is about L's dependence on the coordinate, not visual shape)`,
+  },
+  {
+    conceptId: CYCC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "φ is cyclic so φ=0" or "φ=const," confusing a coordinate being CYCLIC with that coordinate being FIXED or motionless, and reason "if φ doesn\'t appear in L, then nothing in φ is happening." Test this directly against a central-force orbital problem, where φ genuinely is a cyclic coordinate. Does this mean the orbiting particle doesn\'t move angularly at all? Obviously not — a planet visibly orbits its sun continuously, with φ changing at every moment. Kepler\'s second law states that the orbit sweeps out equal areas in equal times, and this law is entirely ABOUT φ continuously changing over the orbit. So what is genuinely "cyclic" here is not the coordinate φ itself — φ clearly is NOT constant, NOT fixed, and NOT zero — what is cyclic is φ\'s ABSENCE from the Lagrangian L. Something else entirely turns out to be the conserved quantity. The precise, correct meaning of "cyclic coordinate": it means ∂L/∂qᵢ=0 — that is, the Lagrangian does not depend on the VALUE of that particular coordinate qᵢ, even though qᵢ itself is completely free to change over time. Applying the Euler-Lagrange equation to this situation, d/dt(pᵢ)=∂L/∂qᵢ=0, directly gives that pᵢ — the momentum CONJUGATE to that coordinate — is what stays constant, not the coordinate itself. To summarize the correct procedure: first check whether ∂L/∂qᵢ=0; if so, call qᵢ cyclic; then note that pᵢ=∂L/∂q̇ᵢ is what is conserved — the coordinate itself remains free to change continuously, while its conjugate momentum is the one quantity that stays fixed. A second, entirely separate and related error: trying to identify a system\'s symmetry purely from its visual, geometric SHAPE — assuming "symmetric" must mean the system LOOKS the same (spherically or cylindrically symmetric in appearance), and consequently missing genuine symmetries that have no visible geometric signature, or wrongly assuming symmetries exist purely because a picture happens to look tidy. Consider a free particle moving in one dimension: it has literally no shape whatsoever — it is simply a mathematical point with no visible structure at all. Yet its Lagrangian, L=½mẋ², is completely independent of the coordinate x — a genuine translational symmetry — which by Noether\'s theorem guarantees that p_x is conserved, despite there being no shape to point to as "the symmetry." Meanwhile, consider a bead threaded on a ring that visually LOOKS perfectly symmetric (a smooth circle) — yet if there happens to be a small bump or irregularity somewhere on that ring, L can genuinely depend on the angular coordinate φ, meaning the actual underlying physics is NOT symmetric, despite the ring\'s geometric appearance suggesting otherwise. The lesson: the genuinely relevant question for Noether\'s theorem is never "does the system\'s SHAPE look symmetric" but rather "does L actually change when you shift the coordinate qᵢ→qᵢ+ε, for an infinitesimally small shift ε?" If L(q+ε)=L(q) holds for all such infinitesimal shifts, that constitutes a genuine continuous symmetry of the Lagrangian itself, and Noether\'s theorem then guarantees a corresponding conserved quantity must exist as a consequence. Visual shape can at best serve as a rough, suggestive hint about where to look for symmetry — it is never the actual mathematical definition of the symmetry itself; the reliable, correct test is always to directly check whether ∂L/∂qᵢ=0 by examining the Lagrangian\'s explicit dependence on the coordinate, rather than relying on how the system happens to look in a diagram.',
+    targetedMisconceptions: [`${CYCC}:MC-CYCLIC-MEANS-ZERO`, `${CYCC}:MC-SYMMETRY-IS-SHAPE`],
+    source: `${CYCC_SRC} — MC-CYCLIC-MEANS-ZERO + MC-SYMMETRY-IS-SHAPE, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const CYCC_PROBES: SeedProbe[] = [
+  {
+    conceptId: CYCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a central-force orbit problem, the angle φ is a cyclic coordinate. Does this mean φ stays constant (the particle doesn\'t move angularly)?',
+    choices: [
+      { text: 'No — φ changes continuously as the particle orbits (Kepler\'s second law); "cyclic" means φ is absent from L (∂L/∂φ=0), so its conjugate momentum p_φ is conserved, not φ itself', isCorrect: true },
+      { text: 'Yes — a cyclic coordinate means that coordinate is zero or held constant throughout the motion', isCorrect: false, misconceptionId: `${CYCC}:MC-CYCLIC-MEANS-ZERO` },
+    ],
+    correctValue: 'phi changes freely, its conjugate momentum is conserved',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CYCC}:MC-CYCLIC-MEANS-ZERO`],
+    source: `${CYCC_SRC} — MC-CYCLIC-MEANS-ZERO trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CYCC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A free particle moving in 1D has L=½mẋ². It has no visible geometric "shape" at all. Does it have a Noether symmetry leading to a conserved quantity?',
+    choices: [
+      { text: 'Yes — L is independent of x (∂L/∂x=0), a genuine translational symmetry, so p_x is conserved by Noether\'s theorem, regardless of the absence of visible shape', isCorrect: true },
+      { text: 'No — Noether symmetries require the system to look geometrically symmetric (spherical or cylindrical), and a point particle has no such shape', isCorrect: false, misconceptionId: `${CYCC}:MC-SYMMETRY-IS-SHAPE` },
+    ],
+    correctValue: 'yes, symmetry is about dependence in L, not visual shape',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CYCC}:MC-SYMMETRY-IS-SHAPE`],
+    source: `${CYCC_SRC} — MC-SYMMETRY-IS-SHAPE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.canonical-transformations ───────────────────────────────────────
+const CANT = 'phys.mech.canonical-transformations'
+const CANT_SRC = 'docs/curriculum/blueprints/phys.mech.canonical-transformations.md'
+
+const CANT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CANT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not every coordinate change (q,p)→(Q,P) is canonical — only transformations satisfying the Poisson bracket conditions {Qᵢ,Pⱼ}=δᵢⱼ, {Qᵢ,Qⱼ}=0, {Pᵢ,Pⱼ}=0 qualify. Point transformations Q=Q(q,t) are always canonical, but arbitrary mixing of (q,p)→(Q,P) generally is not. Concrete check: is Q=q², P=p/(2q) canonical? Compute {Q,P}={q²,p/(2q)}=q·(1/2q)·1+(−1/2q²)(2q)=1/2−1=−1/2≠1 — this transformation FAILS the canonical test, since the bracket does not equal 1. By contrast, the identity transformation via generating function F₂(q,p,P)=qP gives Q=∂F₂/∂P=q and P=∂F₂/∂q=p, so Q=q, P=p — trivially canonical, confirmed by {Q,P}={q,p}=1. The lesson: "I can transform to any variables I want" is false; canonicality is a specific, checkable mathematical condition (preserving the Poisson bracket structure, equivalently preserving the form of Hamilton\'s equations), not a free choice. A second, separate point: the generating function F is NOT analogous to a potential energy — it is a fundamentally different kind of object. F is a bridge function relating the OLD and NEW variables via partial derivatives (there are four standard types, F₁ through F₄, suited to different boundary conditions depending on which variables are held fixed at the endpoints), and F genuinely carries units of action (joule-seconds, J·s) — NOT units of energy (joules). Thinking of F as "just generates the new coordinates" undersells its actual mathematical role: F is the mediating function through which the transformation itself is defined and through which the new Hamiltonian K relates to the old H (typically via K=H+∂F/∂t).',
+    targetedMisconceptions: [`${CANT}:MC-CT-ANY-COORD-CHANGE`, `${CANT}:MC-CT-GENERATING-IS-POTENTIAL`],
+    source: `${CANT_SRC} — MC-CT-ANY-COORD-CHANGE (canonicality requires Poisson bracket conditions, checkable) + MC-CT-GENERATING-IS-POTENTIAL (F is a bridge function with units of action, not a potential energy)`,
+  },
+  {
+    conceptId: CANT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students believe "any coordinate change is canonical," reasoning "I can transform to any variables I want" as if canonicality were simply a matter of free choice rather than a specific mathematical property that a transformation either has or lacks. Test this directly with a concrete example: is the transformation Q=q², P=p/(2q) canonical? The rigorous test is to compute the Poisson bracket {Q,P} and check whether it equals exactly 1. Working it out: {Q,P}={q²,p/(2q)}=q·(1/2q)·1+(−1/2q²)(2q)=1/2−1=−1/2. Since −1/2≠1, this transformation FAILS the canonical test — it is NOT a canonical transformation, despite looking like a perfectly reasonable, smooth change of variables. This demonstrates that arbitrary mixing of old coordinates and momenta into new ones, however smooth or well-defined the formulas look, is generally NOT canonical. Only transformations satisfying the full set of Poisson bracket conditions — {Qᵢ,Pⱼ}=δᵢⱼ (Kronecker delta), {Qᵢ,Qⱼ}=0, and {Pᵢ,Pⱼ}=0 — genuinely qualify as canonical. Point transformations of the simple form Q=Q(q,t) (where the new position depends only on the old position and time, with the new momentum determined consistently) are always canonical — but once you start mixing q and p together in more general ways, canonicality becomes a nontrivial condition that must be checked explicitly, not assumed. As a contrasting example that does pass: the identity transformation, generated by F₂(q,p,P)=qP, gives Q=∂F₂/∂P=q and P=∂F₂/∂q=p — so Q=q and P=p exactly, and indeed {Q,P}={q,p}=1 confirms this trivial case is canonical, as it must be. A second, entirely separate error: treating the generating function F as if it were analogous to a potential energy — something like "F just generates the new coordinates," implicitly imagining F plays a role similar to how a potential V generates a force via a gradient. This significantly undersells and mischaracterizes what F actually is. F is properly understood as a BRIDGE function — a mathematical object relating the OLD phase-space variables to the NEW phase-space variables through specific partial-derivative relationships. There are four standard types of generating functions, conventionally labeled F₁ through F₄, each suited to a different choice of which variables (old position/momentum, new position/momentum) are held fixed at the boundary of the relevant variational problem. Critically, F carries units of ACTION (joule-seconds, J·s) — the same units as the Lagrangian\'s time-integral — NOT units of energy (joules) as a potential energy would have. F is the mediating function through which the entire transformation (q,p)→(Q,P) is actually defined, and through which the new Hamiltonian K relates back to the original Hamiltonian H, typically via the relation K=H+∂F/∂t — a role considerably richer and more structural than merely "generating new coordinates" in some vague sense.',
+    targetedMisconceptions: [`${CANT}:MC-CT-ANY-COORD-CHANGE`, `${CANT}:MC-CT-GENERATING-IS-POTENTIAL`],
+    source: `${CANT_SRC} — MC-CT-ANY-COORD-CHANGE + MC-CT-GENERATING-IS-POTENTIAL, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const CANT_PROBES: SeedProbe[] = [
+  {
+    conceptId: CANT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the transformation Q=q², P=p/(2q) canonical?',
+    choices: [
+      { text: 'No — computing the Poisson bracket gives {Q,P}=1/2−1=−1/2≠1, so it fails the canonical test, despite being a smooth, well-defined coordinate change', isCorrect: true },
+      { text: 'Yes — any smooth, invertible coordinate transformation qualifies as canonical, since you can transform to whatever variables you want', isCorrect: false, misconceptionId: `${CANT}:MC-CT-ANY-COORD-CHANGE` },
+    ],
+    correctValue: 'not canonical, Poisson bracket does not equal 1',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CANT}:MC-CT-ANY-COORD-CHANGE`],
+    source: `${CANT_SRC} — MC-CT-ANY-COORD-CHANGE diagnostic probe TA-4/P08 as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CANT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What are the units of a generating function F in canonical transformation theory?',
+    choices: [
+      { text: 'Units of action (joule-seconds, J·s) — F is a bridge function relating old and new variables via partial derivatives, not a potential energy', isCorrect: true },
+      { text: 'Units of energy (joules) — F behaves like a potential energy that generates the new coordinates', isCorrect: false, misconceptionId: `${CANT}:MC-CT-GENERATING-IS-POTENTIAL` },
+    ],
+    correctValue: 'units of action, not energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CANT}:MC-CT-GENERATING-IS-POTENTIAL`],
+    source: `${CANT_SRC} — MC-CT-GENERATING-IS-POTENTIAL trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -35956,6 +36316,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...WSPD_EXPLANATIONS,
   ...WOPT_EXPLANATIONS,
   ...YOUN_EXPLANATIONS,
+  ...GENC_EXPLANATIONS,
+  ...EULR_EXPLANATIONS,
+  ...HAML_EXPLANATIONS,
+  ...HAMQ_EXPLANATIONS,
+  ...CYCC_EXPLANATIONS,
+  ...CANT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -36384,4 +36750,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...WSPD_PROBES,
   ...WOPT_PROBES,
   ...YOUN_PROBES,
+  ...GENC_PROBES,
+  ...EULR_PROBES,
+  ...HAML_PROBES,
+  ...HAMQ_PROBES,
+  ...CYCC_PROBES,
+  ...CANT_PROBES,
 ]
