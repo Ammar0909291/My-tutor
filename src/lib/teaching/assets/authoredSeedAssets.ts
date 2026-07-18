@@ -13768,6 +13768,102 @@ const STEN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.reading-across-genres ─────────────────────────────────────────
+const RAG = 'eng.reading.reading-across-genres'
+const RAG_SRC = 'docs/curriculum/blueprints/eng.reading.reading-across-genres.md'
+
+const RAG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Summarizing each text separately and calling it synthesis is like ' +
+      'laying three separate photographs side by side and calling it a ' +
+      'single portrait — the photographs are all present, but nothing has ' +
+      'actually been combined into one unified image. Genuine synthesis ' +
+      'integrates insights from multiple texts into one connected ' +
+      'understanding: after understanding each text individually, ask what ' +
+      'these texts, taken together, tell you that no single one tells you ' +
+      'alone, and write statements that draw on multiple sources at once.',
+    targetedMisconceptions: [`${RAG}:MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK`],
+    source: `${RAG_SRC} — MC-A (three-photographs-vs-single-portrait anchor)`,
+  },
+  {
+    conceptId: RAG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming different genres cannot be synthesized is like assuming a ' +
+      'photograph and a written description of the same event have ' +
+      'nothing to do with each other because one is a picture and one is ' +
+      'words — different forms of the same underlying subject can ' +
+      'absolutely inform each other. A poem about the emotional experience ' +
+      'of drought and a scientific report on drought\'s measurable effects ' +
+      'share a genuine underlying topic despite their very different ' +
+      'forms; look for how each genre\'s distinct approach illuminates a ' +
+      'different facet of the same shared subject.',
+    targetedMisconceptions: [`${RAG}:MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED`],
+    source: `${RAG_SRC} — MC-B (photograph-vs-written-description anchor)`,
+  },
+  {
+    conceptId: RAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuine synthesis across multiple texts requires integrating their ' +
+      'insights into one unified understanding — separate summaries placed ' +
+      'sequentially, however thorough individually, do not constitute ' +
+      'synthesis, since the actual integrating work never happens on the ' +
+      'page. Separately, texts in markedly different genres — a poem and a ' +
+      'scientific report, for instance — can share a genuine underlying ' +
+      'topic and inform a single unified understanding despite their ' +
+      'different forms and conventions; genre difference describes the ' +
+      'form a text takes, not a barrier around its content.',
+    targetedMisconceptions: [
+      `${RAG}:MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK`,
+      `${RAG}:MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED`,
+    ],
+    source: `${RAG_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RAG_PROBES: SeedProbe[] = [
+  {
+    conceptId: RAG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes three separate paragraph summaries, one per source, with no sentence connecting them. Is this genuine synthesis?',
+    choices: [
+      { text: 'No — genuine synthesis integrates insights across sources into one unified understanding', isCorrect: true },
+      { text: 'Yes — summarizing each source separately, one after another, is what synthesis means', isCorrect: false, misconceptionId: `${RAG}:MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RAG}:MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK`],
+    source: `${RAG_SRC} — three-photographs-vs-single-portrait conflict as probe`,
+  },
+  {
+    conceptId: RAG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A poem about the emotional experience of drought and a scientific report on drought\'s measurable effects are in completely different genres. Can they still be synthesized into one understanding?',
+    choices: [
+      { text: 'Yes — they share a genuine underlying topic despite their different forms', isCorrect: true },
+      { text: 'No — texts in different genres cannot be meaningfully connected', isCorrect: false, misconceptionId: `${RAG}:MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RAG}:MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED`],
+    source: `${RAG_SRC} — photograph-vs-written-description conflict as probe`,
+  },
+]
 
 // ─── Batch export ────────────────────────────────────────────────────────────
 
@@ -13930,6 +14026,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...BERN_EXPLANATIONS,
   ...VISC_EXPLANATIONS,
   ...STEN_EXPLANATIONS,
+  ...RAG_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -14091,4 +14188,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...BERN_PROBES,
   ...VISC_PROBES,
   ...STEN_PROBES,
+  ...RAG_PROBES,
 ]
