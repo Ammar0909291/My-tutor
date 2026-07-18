@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.trig-identities-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.trig-identities",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:06481166e6c6ed22419d3729cc88ff6a0afdc343cf870dfacca8e4d1487885cd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.trig-identities.md": "sha256:3b0375196bd561271c73b1345a80dff73099f4cba1f38696f8fe369ccc94fcb2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.trig-identities",
+    "name": "Trigonometric Identities",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.trig.trig-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.trig-identities-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.trig-identities (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.trig-identities.md": "sha256:3b0375196bd561271c73b1345a80dff73099f4cba1f38696f8fe369ccc94fcb2"
+      },
+      "contentHash": "sha256:df3725f838a3afe86f455743f7edcf0368705b15f891f7c19821fde03552062e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-identities.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-identities.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-identities\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-identities.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-identities.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-identities\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-identities.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-identities.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-identities\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-identities.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-identities.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-identities\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.trig-identities/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the **Pythagorean identity** $\\sin^2\\theta+\\cos^2\\theta=1$ (and its two derived forms, $1+\\tan^2\\theta=\\sec^2\\theta$ and $1+\\cot^2\\theta=\\csc^2\\theta$) to simplify expressions and to find one trig value given another.\n- LO2: State and apply the **angle-sum and angle-difference formulas** ($\\sin(A\\pm B)$, $\\cos(A\\pm B)$) to compute exact trig values for angles not on the standard unit-circle list, by decomposing them into sums/differences of known angles.\n- LO3: Apply the **double-angle formulas** (derived directly from the angle-sum formulas with $A=B$) and correctly select an identity strategically to simplify a given expression, recognizing that a single expression can often be simplified via more than one valid identity path.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-identities",
+      "title": "SINGLE-IDENTITY-PATH-ASSUMED",
+      "content": "| MC-1 | SINGLE-IDENTITY-PATH-ASSUMED | Believing each simplification problem has exactly one valid \"correct\" identity to apply first, rather than recognizing multiple equally-valid strategies commonly exist | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-identities",
+      "title": "SIGN-DROPPED-WHEN-TAKING-SQUARE-ROOT",
+      "content": "| MC-2 | SIGN-DROPPED-WHEN-TAKING-SQUARE-ROOT | When solving $\\cos^2\\theta$ (or similar) via the Pythagorean identity, taking only the positive square root without checking the correct sign from the angle's quadrant | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-identities",
+      "title": "ANGLE-SUM-FORMULA-DISTRIBUTED-LIKE-LINEAR-FUNCTION",
+      "content": "| MC-3 | ANGLE-SUM-FORMULA-DISTRIBUTED-LIKE-LINEAR-FUNCTION | Incorrectly believing $\\sin(A+B)=\\sin A+\\sin B$ (treating sin as if it distributed over addition like a linear function), rather than using the correct angle-sum formula | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-identities",
+      "title": "The Pythagorean Identity and Angle-Sum Formulas, via the Unit Circle (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Pythagorean Identity and Angle-Sum Formulas, via the Unit Circle (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Double-Angle Formulas and Strategic Path Selection (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Double-Angle Formulas and Strategic Path Selection (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Composite Multi-Identity Simplification (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Multi-Identity Simplification (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 17,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Given $\\cos\\theta=-\\frac{5}{13}$ with $\\theta$ in Quadrant III, find $\\sin\\theta$ and $\\tan\\theta$.\n  2. Find the exact value of $\\sin(15°)$ using $15°=45°-30°$.\n  3. Simplify $\\cos(2x)+2\\sin^2x$ using a double-angle identity.\n  4. Simplify $\\frac{\\sin x + \\sin x\\cos(2x)}{\\cos x}$ (hint: multiple valid identity paths exist — try more than one if your first attempt gets messy).\n- **P76 (Transfer Probe, mode = independence)**: \"An AC electrical circuit's instantaneous power is modeled by $P(t) = V_0I_0\\sin(\\omega t)\\sin(\\omega t+\\phi)$ for a phase difference $\\phi$ between voltage and current. (a) Using the angle-sum formula, expand $\\sin(\\omega t+\\phi)$ in terms of $\\sin(\\omega t)$ and $\\cos(\\omega t)$. (b) Substitute this back into $P(t)$ and use a Pythagorean or double-angle identity to simplify the resulting expression into a form separating a constant (time-averaged) term from an oscillating term — this is exactly how real AC power analysis separates 'real power' from 'oscillating power.' (c) Note that your simplification path is not unique — briefly describe an alternative identity substitution that could have been used at one step, connecting to this lesson's point about multiple valid simplification routes.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.trig.trig-functions` (sin, cos, tan defined via the unit circle, periodicity, standard angle values).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.trig.trig-identities/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.trig-identities",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.trig.trig-functions` (sin/cos/tan definitions and standard angle values, the base vocabulary every identity here operates on).\n- **Unlocks**: `math.trig.trig-equations` (solving trigonometric equations routinely requires simplifying via these identities first).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-identities.md",
+        "startLine": 101,
+        "endLine": 107
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
