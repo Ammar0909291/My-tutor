@@ -18911,6 +18911,1036 @@ const ARTO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.vocab.compound-words ────────────────────────────────────────────────
+const CMPW = 'eng.vocab.compound-words'
+const CMPW_SRC = 'docs/curriculum/blueprints/eng.vocab.compound-words.md'
+
+const CMPW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CMPW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Some compound words are TRANSPARENT — their meaning is predictable ' +
+      'from their parts (doghouse = house for a dog; sunflower = a flower ' +
+      'associated with the sun). Others are OPAQUE — their meaning has ' +
+      'drifted away from a literal combination and must be learned as its ' +
+      'own distinct word: "butterfly" is not about butter or literal ' +
+      'flying-like-a-bird, it names an insect with its own meaning. Check ' +
+      'whether a compound’s meaning genuinely follows from its parts ' +
+      'before assuming it always does.',
+    targetedMisconceptions: [`${CMPW}:MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM`],
+    source: `${CMPW_SRC} — MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM (P28 butterfly-vs-doghouse conflict)`,
+  },
+  {
+    conceptId: CMPW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Compound words appear in THREE written forms: CLOSED (one unbroken ' +
+      'word: notebook, sunflower), HYPHENATED (well-known, mother-in-law), ' +
+      'and OPEN (written as separate words but functioning as one unified ' +
+      'concept: ice cream, high school). All three are genuine compounds — ' +
+      'the specific spelling convention is often just established custom, ' +
+      'and can even change over time (e-mail became email). Recognize a ' +
+      'compound by whether two words express ONE unified concept, ' +
+      'regardless of spacing.',
+    targetedMisconceptions: [`${CMPW}:MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD`],
+    source: `${CMPW_SRC} — MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD (P28 ice-cream conflict)`,
+  },
+  {
+    conceptId: CMPW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A compound word’s meaning may be transparent (predictable from its ' +
+      'parts, like "doghouse") or opaque (drifted from a literal ' +
+      'combination, like "butterfly" or "understand") — assuming every ' +
+      'compound is literally the sum of its parts produces genuine ' +
+      'comprehension errors. Separately, compounds are written in three ' +
+      'forms — closed, hyphenated, and open — and a compound written as ' +
+      'two separate words ("ice cream," "high school") is still a genuine ' +
+      'compound as long as it expresses one unified concept.',
+    targetedMisconceptions: [
+      `${CMPW}:MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM`,
+      `${CMPW}:MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD`,
+    ],
+    source: `${CMPW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CMPW_PROBES: SeedProbe[] = [
+  {
+    conceptId: CMPW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "butterfly" mean something related to butter and flying, the same way "doghouse" means a house for a dog?',
+    choices: [
+      { text: 'No — "butterfly" is opaque; it names an insect, unrelated to butter or literal flying, unlike the transparent "doghouse"', isCorrect: true },
+      { text: 'Yes — every compound word\'s meaning is always the literal sum of its two parts', isCorrect: false, misconceptionId: `${CMPW}:MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM` },
+    ],
+    correctValue: 'no, opaque compound',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CMPW}:MC-COMPOUND-MEANING-IS-ALWAYS-LITERAL-SUM`],
+    source: `${CMPW_SRC} — butterfly-vs-doghouse conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CMPW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "ice cream" a real compound word, even though it\'s written as two separate words?',
+    choices: [
+      { text: 'Yes — it names one unified concept, making it an open compound; compounds can be closed, hyphenated, or open', isCorrect: true },
+      { text: 'No — compound words are always written as one unbroken word', isCorrect: false, misconceptionId: `${CMPW}:MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD` },
+    ],
+    correctValue: 'yes, open compound',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CMPW}:MC-COMPOUND-WORDS-ARE-ALWAYS-WRITTEN-AS-ONE-WORD`],
+    source: `${CMPW_SRC} — ice-cream conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.suffixes ───────────────────────────────────────────────────────
+const SUFX = 'eng.vocab.suffixes'
+const SUFX_SRC = 'docs/curriculum/blueprints/eng.vocab.suffixes.md'
+
+const SUFX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUFX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Many suffixes have a primarily GRAMMATICAL function — they change ' +
+      'the word’s CLASS (part of speech): "-tion/-ment/-ness" typically ' +
+      'create nouns, "-ive/-ous/-ful" typically create adjectives, "-ly" ' +
+      'typically creates adverbs. "Create" (verb) + "-tion" → "creation" ' +
+      '(noun) — the suffix changed more than just meaning, it changed the ' +
+      'word’s grammatical job. Check whether a suffix changes the word’s ' +
+      'CLASS, not just its shade of meaning.',
+    targetedMisconceptions: [`${SUFX}:MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS`],
+    source: `${SUFX_SRC} — MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS (P28 create-vs-creation conflict)`,
+  },
+  {
+    conceptId: SUFX,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Spelling changes when adding suffixes follow genuine, learnable ' +
+      'rules, not randomness: drop a silent final "e" before a vowel-' +
+      'starting suffix ("hope" + "-ing" = "hoping"), change a final "y" ' +
+      'to "i" before most suffixes when preceded by a consonant ("happy" ' +
+      '+ "-ness" = "happiness"), and double a final consonant in short, ' +
+      'stressed, single-vowel words ("run" + "-ing" = "running"). Check ' +
+      'the base word’s ending against the specific spelling rule before ' +
+      'adding a suffix.',
+    targetedMisconceptions: [`${SUFX}:MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM`],
+    source: `${SUFX_SRC} — MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM (P28 hopeing-vs-hoping conflict)`,
+  },
+  {
+    conceptId: SUFX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Suffixes often serve a primarily grammatical function — converting ' +
+      'a word’s class (verb to noun, noun to adjective, adjective to ' +
+      'adverb) — which is frequently more predictable and important than ' +
+      'any subtle meaning shift the suffix adds. Separately, spelling ' +
+      'adjustments triggered by adding a suffix (dropping a silent "e," ' +
+      'changing "y" to "i," doubling a final consonant) follow specific, ' +
+      'checkable rules tied to the base word’s ending, not arbitrary ' +
+      'exceptions.',
+    targetedMisconceptions: [
+      `${SUFX}:MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS`,
+      `${SUFX}:MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM`,
+    ],
+    source: `${SUFX_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SUFX_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUFX,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'When "-tion" is added to "create" (a verb) to make "creation," does the suffix only add meaning, or does it also change the word\'s class?',
+    choices: [
+      { text: 'It changes the word class too — "creation" is a noun, not a verb; suffixes often primarily do this grammatical job', isCorrect: true },
+      { text: 'Suffixes only add meaning and never change a word\'s class', isCorrect: false, misconceptionId: `${SUFX}:MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS` },
+    ],
+    correctValue: 'changes word class too',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUFX}:MC-SUFFIXES-ONLY-CHANGE-MEANING-NOT-WORD-CLASS`],
+    source: `${SUFX_SRC} — create-vs-creation conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SUFX,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is the spelling change from "hope" to "hoping" (dropping the silent "e") just a random exception to memorize?',
+    choices: [
+      { text: 'No — it follows a systematic rule: drop a silent final "e" before a vowel-starting suffix', isCorrect: true },
+      { text: 'Yes — suffix spelling changes are random and must be memorized case by case', isCorrect: false, misconceptionId: `${SUFX}:MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM` },
+    ],
+    correctValue: 'no, systematic rule',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUFX}:MC-SUFFIX-SPELLING-CHANGES-ARE-RANDOM`],
+    source: `${SUFX_SRC} — hopeing-vs-hoping conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.homonyms-homophones ──────────────────────────────────────────
+const HOMO = 'eng.vocab.homonyms-homophones'
+const HOMO_SRC = 'docs/curriculum/blueprints/eng.vocab.homonyms-homophones.md'
+
+const HOMO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HOMO,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Homonyms are words spelled IDENTICALLY with different meanings — ' +
+      '"bat" (animal) and "bat" (sports equipment) are true homonyms, ' +
+      'spelled and often pronounced the same. Homophones are words that ' +
+      'SOUND identical but are spelled DIFFERENTLY — "their," "there," ' +
+      'and "they’re" all sound the same but look completely different. ' +
+      'Check spelling first: identical spelling means homonym; identical ' +
+      'sound but different spelling means homophone.',
+    targetedMisconceptions: [`${HOMO}:MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING`],
+    source: `${HOMO_SRC} — MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING (P28 bat-vs-their-there conflict)`,
+  },
+  {
+    conceptId: HOMO,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'When a word has multiple homonym meanings or homophone spellings, ' +
+      'CONTEXT is exactly what tells you which one is intended — in "the ' +
+      'river bank" the surrounding words signal the landform meaning, not ' +
+      'the financial institution. When you recognize a homonym or ' +
+      'homophone, use the surrounding context to determine which specific ' +
+      'meaning or spelling is correct, rather than defaulting to one ' +
+      'option.',
+    targetedMisconceptions: [`${HOMO}:MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS`],
+    source: `${HOMO_SRC} — MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS (P28 river-bank-vs-financial-bank conflict)`,
+  },
+  {
+    conceptId: HOMO,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Homonyms share identical spelling with different meanings ("bat" ' +
+      'the animal vs. "bat" the sports equipment); homophones share ' +
+      'identical sound but differ in spelling ("their"/"there"/"they’re") ' +
+      '— checking spelling first is the reliable discriminator between the ' +
+      'two categories. Separately, context — the same skill used for ' +
+      'context clues generally — is what resolves which specific meaning ' +
+      'or spelling applies in a given sentence; defaulting to one meaning ' +
+      'regardless of context produces genuine comprehension and writing ' +
+      'errors.',
+    targetedMisconceptions: [
+      `${HOMO}:MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING`,
+      `${HOMO}:MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS`,
+    ],
+    source: `${HOMO_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const HOMO_PROBES: SeedProbe[] = [
+  {
+    conceptId: HOMO,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Are "their," "there," and "they\'re" homonyms, since they all sound the same?',
+    choices: [
+      { text: 'No — they are homophones; they sound identical but are spelled differently, unlike homonyms which are spelled the same', isCorrect: true },
+      { text: 'Yes — homonym and homophone mean the same thing', isCorrect: false, misconceptionId: `${HOMO}:MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING` },
+    ],
+    correctValue: 'no, homophones',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HOMO}:MC-HOMONYM-AND-HOMOPHONE-ARE-THE-SAME-THING`],
+    source: `${HOMO_SRC} — bat-vs-their-there conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HOMO,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "We sat on the river bank," does "bank" mean a financial institution, the same as it usually does?',
+    choices: [
+      { text: 'No — the surrounding context ("river") signals the landform meaning here, not the financial institution meaning', isCorrect: true },
+      { text: 'Yes — "bank" always means the financial institution regardless of context', isCorrect: false, misconceptionId: `${HOMO}:MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS` },
+    ],
+    correctValue: 'no, landform meaning',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HOMO}:MC-CONTEXT-DOESNT-MATTER-FOR-THESE-WORDS`],
+    source: `${HOMO_SRC} — river-bank-vs-financial-bank conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.connotation-denotation ────────────────────────────────────────
+const CNDN = 'eng.vocab.connotation-denotation'
+const CNDN_SRC = 'docs/curriculum/blueprints/eng.vocab.connotation-denotation.md'
+
+const CNDN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CNDN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two words can share the same DENOTATION (literal meaning: both ' +
+      '"cheap" and "frugal" denote spending little money) while carrying ' +
+      'very different CONNOTATIONS (emotional associations: "cheap" often ' +
+      'connotes stinginess, while "frugal" often connotes wise, admirable ' +
+      'restraint). Choosing the wrong word for the intended tone — even ' +
+      'with an accurate literal meaning — can completely misrepresent your ' +
+      'intended message. Check both denotation AND connotation before ' +
+      'choosing between near-synonyms.',
+    targetedMisconceptions: [`${CNDN}:MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE`],
+    source: `${CNDN_SRC} — MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE (P28 cheap-vs-frugal conflict)`,
+  },
+  {
+    conceptId: CNDN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Connotations are largely SHARED, culturally established ' +
+      'associations recognized by most speakers of a language community — ' +
+      'this shared, predictable nature is exactly what makes connotation ' +
+      'analyzable and teachable, not simply random personal opinion. Most ' +
+      'English speakers would agree "nosy" sounds more critical than ' +
+      '"curious," even though both denote interest in others’ affairs. ' +
+      'Treat connotation as a shared, culturally-recognized pattern, not ' +
+      'purely individual, unpredictable opinion.',
+    targetedMisconceptions: [`${CNDN}:MC-CONNOTATION-IS-JUST-PERSONAL-OPINION`],
+    source: `${CNDN_SRC} — MC-CONNOTATION-IS-JUST-PERSONAL-OPINION (P28 nosy-vs-curious conflict)`,
+  },
+  {
+    conceptId: CNDN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Shared denotation does not guarantee interchangeability — words ' +
+      'like "cheap" and "frugal" denote the same core meaning but carry ' +
+      'different connotations, and using the wrong one can misrepresent ' +
+      'intended tone even when the literal meaning is accurate. Separately, ' +
+      'connotation is not purely individual, idiosyncratic opinion — it is ' +
+      'a largely shared, community-recognized pattern (most speakers would ' +
+      'agree "nosy" reads more critically than "curious"), which is what ' +
+      'makes it analyzable and teachable rather than random.',
+    targetedMisconceptions: [
+      `${CNDN}:MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE`,
+      `${CNDN}:MC-CONNOTATION-IS-JUST-PERSONAL-OPINION`,
+    ],
+    source: `${CNDN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CNDN_PROBES: SeedProbe[] = [
+  {
+    conceptId: CNDN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you want to COMPLIMENT someone on careful spending habits, would calling them "cheap" work just as well as "frugal," since both mean the same literal thing?',
+    choices: [
+      { text: 'No — "cheap" carries a critical connotation while "frugal" carries an admiring one, even though both denote the same literal meaning', isCorrect: true },
+      { text: 'Yes — if two words share the same denotation, they are fully interchangeable in any context', isCorrect: false, misconceptionId: `${CNDN}:MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE` },
+    ],
+    correctValue: 'no, different connotations',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CNDN}:MC-SAME-DENOTATION-MEANS-INTERCHANGEABLE`],
+    source: `${CNDN_SRC} — cheap-vs-frugal conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CNDN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If ten different English speakers were asked whether "nosy" sounds more critical than "curious," would their answers be totally random and different for each person?',
+    choices: [
+      { text: 'No — most speakers would agree "nosy" sounds more critical; connotation is a shared, culturally-recognized pattern, not random personal opinion', isCorrect: true },
+      { text: 'Yes — connotation is just each individual person\'s private, unpredictable feeling about a word', isCorrect: false, misconceptionId: `${CNDN}:MC-CONNOTATION-IS-JUST-PERSONAL-OPINION` },
+    ],
+    correctValue: 'no, shared pattern',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CNDN}:MC-CONNOTATION-IS-JUST-PERSONAL-OPINION`],
+    source: `${CNDN_SRC} — nosy-vs-curious conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.sentence-writing ────────────────────────────────────────────
+const SWRT = 'eng.writing.sentence-writing'
+const SWRT_SRC = 'docs/curriculum/blueprints/eng.writing.sentence-writing.md'
+
+const SWRT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SWRT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Capital letters and periods are just the packaging — they don’t ' +
+      'make something a complete sentence any more than gift wrap makes ' +
+      'an empty box a real present. "Running through the park." is ' +
+      'capitalized and period-ended, but has no subject-verb pair — it’s a ' +
+      'fragment wearing sentence clothing. Before trusting the formatting, ' +
+      'check inside: is there an actual subject and verb pair expressing a ' +
+      'complete thought?',
+    targetedMisconceptions: [`${SWRT}:MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD`],
+    source: `${SWRT_SRC} — MC-A (P28 running-through-the-park conflict)`,
+  },
+  {
+    conceptId: SWRT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A longer sentence isn’t automatically better writing — it’s often ' +
+      'just less disciplined writing. "The thing that happened was that ' +
+      'the dog, which was a very big and also quite furry dog, ran ' +
+      'extremely fast..." says far less clearly than "The big, furry dog ' +
+      'raced toward the ball the boy had thrown." Skilled writers choose ' +
+      'the sentence length that best fits the idea — write what most ' +
+      'clearly expresses your idea, not what’s longest.',
+    targetedMisconceptions: [`${SWRT}:MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING`],
+    source: `${SWRT_SRC} — MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING (P28 padded-dog-sentence conflict)`,
+  },
+  {
+    conceptId: SWRT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Capitalization and end punctuation are formatting, not proof of ' +
+      'completeness — a properly formatted fragment ("Running through the ' +
+      'park.") still lacks the genuine subject-verb pair a complete ' +
+      'sentence requires. Separately, sentence length is not itself a ' +
+      'measure of quality — a padded, wordy sentence communicates less ' +
+      'clearly than a precise one saying the same thing; write the length ' +
+      'that most clearly and precisely serves the idea, not the longest ' +
+      'one possible.',
+    targetedMisconceptions: [
+      `${SWRT}:MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD`,
+      `${SWRT}:MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING`,
+    ],
+    source: `${SWRT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SWRT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SWRT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Running through the park." a complete sentence, since it starts with a capital letter and ends with a period?',
+    choices: [
+      { text: 'No — it has no subject-verb pair; capitalization and punctuation are just formatting, not proof of completeness', isCorrect: true },
+      { text: 'Yes — a capital letter and a period are all that\'s needed to make a sentence complete', isCorrect: false, misconceptionId: `${SWRT}:MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD` },
+    ],
+    correctValue: 'no, fragment',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SWRT}:MC-A-SENTENCE-IS-COMPLETE-AS-LONG-AS-IT-HAS-A-CAPITAL-LETTER-AND-A-PERIOD`],
+    source: `${SWRT_SRC} — running-through-the-park conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SWRT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is a long, padded sentence always better writing than a short, clear one saying the same thing?',
+    choices: [
+      { text: 'No — clarity and precision matter more than length; padding usually makes writing worse, not more impressive', isCorrect: true },
+      { text: 'Yes — longer sentences always signal more sophisticated, better writing', isCorrect: false, misconceptionId: `${SWRT}:MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING` },
+    ],
+    correctValue: 'no, clarity matters more',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SWRT}:MC-LONGER-SENTENCES-ARE-ALWAYS-BETTER-WRITING`],
+    source: `${SWRT_SRC} — padded-dog-sentence conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.theme-and-message ───────────────────────────────────────
+const THEM = 'eng.literature.theme-and-message'
+const THEM_SRC = 'docs/curriculum/blueprints/eng.literature.theme-and-message.md'
+
+const THEM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THEM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A topic ("family," "war," "friendship") just names what the story ' +
+      'is about — it could apply to almost any story on that subject. A ' +
+      'theme is a specific INSIGHT or CLAIM the particular story makes ' +
+      'about that topic, developed through its plot and characters: not ' +
+      '"the theme is family" but "family bonds can survive even severe ' +
+      'conflict if built on genuine respect." Don’t stop at naming the ' +
+      'topic — ask what specific insight THIS story makes about it.',
+    targetedMisconceptions: [`${THEM}:MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY`],
+    source: `${THEM_SRC} — MC (P28 family-topic-vs-family-bonds-insight conflict)`,
+  },
+  {
+    conceptId: THEM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Complex stories often support more than one valid thematic reading ' +
+      '— different readers can reasonably emphasize different evidence and ' +
+      'arrive at different, equally legitimate theme statements, such as ' +
+      '"perseverance leads to success" and "success sometimes requires ' +
+      'accepting help from others" both drawn from the same story. What ' +
+      'makes a theme statement valid isn’t matching one "correct" answer — ' +
+      'it’s being genuinely supported by specific textual evidence.',
+    targetedMisconceptions: [`${THEM}:MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME`],
+    source: `${THEM_SRC} — MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME (P28 perseverance-vs-accepting-help conflict)`,
+  },
+  {
+    conceptId: THEM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Theme is the specific insight or claim a story develops about its ' +
+      'topic through plot and character, not the topic itself — "family" ' +
+      'names a subject, while "family bonds can survive severe conflict ' +
+      'if built on genuine respect" states a theme. Separately, complex ' +
+      'stories often legitimately support multiple valid theme statements, ' +
+      'each grounded in specific textual evidence — validity depends on ' +
+      'evidentiary support, not matching a single predetermined answer.',
+    targetedMisconceptions: [
+      `${THEM}:MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY`,
+      `${THEM}:MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME`,
+    ],
+    source: `${THEM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const THEM_PROBES: SeedProbe[] = [
+  {
+    conceptId: THEM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "the theme is family" a complete, specific theme statement?',
+    choices: [
+      { text: 'No — "family" is just the topic; a theme must be a specific insight or claim the story makes about that topic', isCorrect: true },
+      { text: 'Yes — naming the general subject area is itself the theme', isCorrect: false, misconceptionId: `${THEM}:MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY` },
+    ],
+    correctValue: 'no, just a topic',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${THEM}:MC-THEME-IS-THE-SAME-AS-THE-TOPIC-OR-SUBJECT-OF-THE-STORY`],
+    source: `${THEM_SRC} — family-topic-vs-family-bonds-insight conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: THEM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A story could support both "perseverance leads to success" and "success sometimes requires accepting help," each backed by different evidence in the story. Can only one of these be "the" theme?',
+    choices: [
+      { text: 'No — both can be legitimate theme statements, since complex stories often support multiple valid interpretations, each grounded in specific evidence', isCorrect: true },
+      { text: 'Yes — every story has exactly one single correct theme to find', isCorrect: false, misconceptionId: `${THEM}:MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME` },
+    ],
+    correctValue: 'no, both can be valid',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${THEM}:MC-A-STORY-CAN-ONLY-HAVE-ONE-CORRECT-THEME`],
+    source: `${THEM_SRC} — perseverance-vs-accepting-help conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.foreshadowing-and-suspense ──────────────────────────────
+const FORS = 'eng.literature.foreshadowing-and-suspense'
+const FORS_SRC = 'docs/curriculum/blueprints/eng.literature.foreshadowing-and-suspense.md'
+
+const FORS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FORS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Calling any early mention of a later event "foreshadowing" is like ' +
+      'calling any road sign a "coded message" — a road sign saying ' +
+      '"Bridge Ahead" directly tells you what’s coming; a coded message ' +
+      'only reveals its meaning once you have the key. "Little did she ' +
+      'know, this would be the last time..." is an explicit flash-forward, ' +
+      'not foreshadowing; a character pausing oddly at a doorway with no ' +
+      'explanation, whose significance emerges only later, IS genuine ' +
+      'foreshadowing — subtle and retrospective.',
+    targetedMisconceptions: [`${FORS}:MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING`],
+    source: `${FORS_SRC} — MC-A (P28 explicit-flash-forward-vs-doorway-pause conflict)`,
+  },
+  {
+    conceptId: FORS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating suspense and dramatic irony as the same technique is like ' +
+      'confusing the tension of watching a live game whose outcome you ' +
+      'don’t know with watching a recording where you already know the ' +
+      'villain is about to jump out, but the character doesn’t. Suspense ' +
+      'withholds information from the reader (shared uncertainty with the ' +
+      'character); dramatic irony gives the reader information the ' +
+      'character lacks — the information structure is opposite in each ' +
+      'case.',
+    targetedMisconceptions: [`${FORS}:MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING`],
+    source: `${FORS_SRC} — MC-B (P28 rescue-uncertainty-vs-villain-in-closet conflict)`,
+  },
+  {
+    conceptId: FORS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuine foreshadowing is a subtle detail whose significance emerges ' +
+      'only in retrospect, distinct from an explicit flash-forward or ' +
+      'spoiler that states a future event directly — an early direct ' +
+      'statement of what will happen is not foreshadowing, however early ' +
+      'it appears. Separately, suspense and dramatic irony operate through ' +
+      'opposite information structures: suspense withholds information ' +
+      'from the reader (shared uncertainty with the character), while ' +
+      'dramatic irony gives the reader knowledge the character lacks.',
+    targetedMisconceptions: [
+      `${FORS}:MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING`,
+      `${FORS}:MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING`,
+    ],
+    source: `${FORS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const FORS_PROBES: SeedProbe[] = [
+  {
+    conceptId: FORS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "Little did she know, this would be the last time she saw her hometown" an example of foreshadowing?',
+    choices: [
+      { text: 'No — this is an explicit flash-forward, stating the future directly; genuine foreshadowing is subtle and only makes sense in retrospect', isCorrect: true },
+      { text: 'Yes — any early mention of a later event counts as foreshadowing', isCorrect: false, misconceptionId: `${FORS}:MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING` },
+    ],
+    correctValue: 'no, explicit flash-forward',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FORS}:MC-A-ANY-EARLY-MENTION-OF-A-LATER-EVENT-COUNTS-AS-FORESHADOWING`],
+    source: `${FORS_SRC} — explicit-flash-forward-vs-doorway-pause conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FORS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The reader has already seen a villain hiding in a closet, but the character walking toward it has no idea. Is this suspense or dramatic irony?',
+    choices: [
+      { text: 'Dramatic irony — the reader knows something the character doesn\'t, the opposite information structure from suspense', isCorrect: true },
+      { text: 'Suspense and dramatic irony are the same technique, since both create tension', isCorrect: false, misconceptionId: `${FORS}:MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING` },
+    ],
+    correctValue: 'dramatic irony',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FORS}:MC-B-SUSPENSE-AND-DRAMATIC-IRONY-ARE-THE-SAME-TECHNIQUE-BOTH-CREATE-TENSION-BY-TELLING-THE-READER-SOMETHING`],
+    source: `${FORS_SRC} — rescue-uncertainty-vs-villain-in-closet conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.dramatic-structure ──────────────────────────────────────
+const DSTR = 'eng.literature.dramatic-structure'
+const DSTR_SRC = 'docs/curriculum/blueprints/eng.literature.dramatic-structure.md'
+
+const DSTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DSTR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming act breaks are just like chapter breaks is like assuming ' +
+      'a live concert’s intermission serves the same function as pausing ' +
+      'your own playlist — but the intermission is a SHARED, SIMULTANEOUS ' +
+      'pause experienced by the whole audience at once, timed ' +
+      'deliberately by the performers, while a playlist pause is an ' +
+      'individual, self-timed choice. A play’s act break similarly ' +
+      'creates a real, shared collective pause a novel’s individually-paced ' +
+      'chapter break doesn’t replicate.',
+    targetedMisconceptions: [`${DSTR}:MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION`],
+    source: `${DSTR_SRC} — MC-A (P28 intermission-vs-playlist-pause conflict)`,
+  },
+  {
+    conceptId: DSTR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming every scene builds tension identically is like assuming ' +
+      'every song on a concert’s setlist should be equally loud and ' +
+      'intense — but a well-structured setlist deliberately varies: some ' +
+      'songs establish mood, some build energy, some provide a breather, ' +
+      'one is the climactic finale. A play’s scenes similarly serve ' +
+      'different, deliberately varied structural functions — establishing ' +
+      'context, escalating conflict, releasing tension, or delivering ' +
+      'climax — not one uniform job.',
+    targetedMisconceptions: [`${DSTR}:MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION`],
+    source: `${DSTR_SRC} — MC-B (P28 concert-setlist-variation conflict)`,
+  },
+  {
+    conceptId: DSTR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A play’s act breaks are not arbitrary divisions equivalent to a ' +
+      'novel’s chapters — they exploit the live, shared, simultaneous ' +
+      'nature of a theatrical audience’s collective pause (an ' +
+      'intermission), often placed at moments of heightened tension for ' +
+      'exactly that reason. Separately, individual scenes within a play ' +
+      'serve differentiated structural functions — establishing context, ' +
+      'escalating conflict, releasing tension, delivering climax — rather ' +
+      'than uniformly "building tension" in an undifferentiated way.',
+    targetedMisconceptions: [
+      `${DSTR}:MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION`,
+      `${DSTR}:MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION`,
+    ],
+    source: `${DSTR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DSTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: DSTR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a play\'s act break serve the same function as a novel\'s chapter break?',
+    choices: [
+      { text: 'No — an act break exploits the live, shared, simultaneous pause of an actual audience intermission, unlike an individually-paced chapter break', isCorrect: true },
+      { text: 'Yes — acts and scenes are just arbitrary divisions like chapters, with no special function', isCorrect: false, misconceptionId: `${DSTR}:MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION` },
+    ],
+    correctValue: 'no, different function',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DSTR}:MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION`],
+    source: `${DSTR_SRC} — intermission-vs-playlist-pause conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DSTR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does every scene in a play build tension in exactly the same generic way?',
+    choices: [
+      { text: 'No — different scenes serve different structural functions (establishing context, escalating, releasing tension, climax), like varied songs on a concert setlist', isCorrect: true },
+      { text: 'Yes — every scene builds tension identically, with no variation in function', isCorrect: false, misconceptionId: `${DSTR}:MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION` },
+    ],
+    correctValue: 'no, varied functions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DSTR}:MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION`],
+    source: `${DSTR_SRC} — concert-setlist-variation conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.prose-fiction ────────────────────────────────────────────
+const PRFC = 'eng.literature.prose-fiction'
+const PRFC_SRC = 'docs/curriculum/blueprints/eng.literature.prose-fiction.md'
+
+const PRFC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRFC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A short story isn’t a novel with content cut out — it’s built ' +
+      'around a different principle entirely: a single unified effect or ' +
+      'insight, often centered on one conflict and a small cast, achieved ' +
+      'within a limited scope. Expecting novel-scale complexity from a ' +
+      'short story means missing what the form is actually designed to do ' +
+      'well: intense focus, not broad scope, is the short story’s actual ' +
+      'strength.',
+    targetedMisconceptions: [`${PRFC}:MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL`],
+    source: `${PRFC_SRC} — MC-A (P28 novel-scope-vs-short-story-scope conflict)`,
+  },
+  {
+    conceptId: PRFC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Prose fiction doesn’t need to be realistic to explore genuine human ' +
+      'truths — fantastical, surreal, or symbolic elements can illuminate ' +
+      'emotional or thematic truths just as powerfully as strict realism. ' +
+      'A story representing grief as a literal shrinking house explores ' +
+      'the same human truth as a realistic story about grief, through a ' +
+      'different, non-realistic method. Realism is one legitimate mode ' +
+      'among several, not the standard all "serious" fiction must meet.',
+    targetedMisconceptions: [`${PRFC}:MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD`],
+    source: `${PRFC_SRC} — MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD (P28 shrinking-house-grief conflict)`,
+  },
+  {
+    conceptId: PRFC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The short story is a genuinely distinct form from the novel, built ' +
+      'around a single unified effect and a tightly-focused conflict and ' +
+      'cast, rather than a scaled-down version of a novel’s expansive ' +
+      'scope — its compression is a deliberate structural strength, not a ' +
+      'deficiency. Separately, prose fiction’s value does not depend on ' +
+      'realism — fantastical, surreal, and symbolic modes can explore ' +
+      'genuine human truths as effectively as strict realism; realism and ' +
+      'non-realism are different tools, not a hierarchy of seriousness.',
+    targetedMisconceptions: [
+      `${PRFC}:MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL`,
+      `${PRFC}:MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD`,
+    ],
+    source: `${PRFC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRFC_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRFC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a short story\'s tight focus on one conflict and a small cast a sign it\'s "missing" content a real (novel-length) story would have?',
+    choices: [
+      { text: 'No — the short story is a genuinely distinct form built around a single unified effect, not a novel with content removed', isCorrect: true },
+      { text: 'Yes — a short story is just a shorter version of a novel, missing the scope a complete story should have', isCorrect: false, misconceptionId: `${PRFC}:MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL` },
+    ],
+    correctValue: 'no, distinct form',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRFC}:MC-A-SHORT-STORY-IS-JUST-A-SHORTER-VERSION-OF-A-NOVEL`],
+    source: `${PRFC_SRC} — novel-scope-vs-short-story-scope conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRFC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A story represents a character\'s grief through their house literally shrinking. Is this fantastical story "less serious" or "less true" about human experience than a realistic grief story?',
+    choices: [
+      { text: 'No — it explores the same genuine human truth (grief) through a different, non-realistic method; realism is one legitimate mode among several', isCorrect: true },
+      { text: 'Yes — prose fiction must always be completely realistic to count as good, serious literature', isCorrect: false, misconceptionId: `${PRFC}:MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD` },
+    ],
+    correctValue: 'no, equally valid',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRFC}:MC-PROSE-FICTION-MUST-ALWAYS-BE-COMPLETELY-REALISTIC-TO-BE-GOOD`],
+    source: `${PRFC_SRC} — shrinking-house-grief conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.consonant-sounds ──────────────────────────────────────────
+const CNSD = 'eng.phonetics.consonant-sounds'
+const CNSD_SRC = 'docs/curriculum/blueprints/eng.phonetics.consonant-sounds.md'
+
+const CNSD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CNSD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Place, manner, and voicing are not a fixed list to memorize per ' +
+      'sound — they are three physical TESTS (where’s the closure? how is ' +
+      'airflow shaped? does the throat buzz?) you can apply to ANY ' +
+      'consonant, including ones you’ve never classified before. For any ' +
+      'new consonant, run all three tests yourself — locate the place, ' +
+      'observe the manner, check voicing — rather than searching memory ' +
+      'for a pre-learned label.',
+    targetedMisconceptions: [`${CNSD}:MC-CLASSIFICATION-IS-JUST-LABELING`],
+    source: `${CNSD_SRC} — MC-CLASSIFICATION-IS-JUST-LABELING (P28 novel-sound-test conflict)`,
+  },
+  {
+    conceptId: CNSD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Place, manner, and voicing are three SEPARATE dimensions that must ' +
+      'be combined together — like height, width, and depth for a box — ' +
+      'no single dimension (or even two) fully identifies a consonant. ' +
+      '"Voiceless bilabial" alone is still ambiguous; adding "stop" fully ' +
+      'specifies /p/. Always state all three dimensions together as a ' +
+      'complete description.',
+    targetedMisconceptions: [`${CNSD}:MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT`],
+    source: `${CNSD_SRC} — MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT (P28 voiceless-bilabial-ambiguity conflict)`,
+  },
+  {
+    conceptId: CNSD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Consonant classification by place, manner, and voicing is a ' +
+      'repeatable diagnostic method applicable to any sound, including ' +
+      'unfamiliar ones — not a fixed list of labels to recall from memory ' +
+      'for previously drilled sounds. Separately, the three dimensions ' +
+      'must be combined together to uniquely identify a consonant; any one ' +
+      'or two dimensions alone leave the sound ambiguous, so a complete ' +
+      'description always states all three together.',
+    targetedMisconceptions: [
+      `${CNSD}:MC-CLASSIFICATION-IS-JUST-LABELING`,
+      `${CNSD}:MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT`,
+    ],
+    source: `${CNSD_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CNSD_PROBES: SeedProbe[] = [
+  {
+    conceptId: CNSD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You are given a sound you have never classified before. Can you figure out its place, manner, and voicing by applying the three tests, or do you need to have already memorized a label for it?',
+    choices: [
+      { text: 'You can apply the three tests (locate place, observe manner, check voicing) live to any sound, including unfamiliar ones', isCorrect: true },
+      { text: 'Classification is just recalling a memorized label, so you can only classify sounds you\'ve already drilled', isCorrect: false, misconceptionId: `${CNSD}:MC-CLASSIFICATION-IS-JUST-LABELING` },
+    ],
+    correctValue: 'apply the three tests live',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNSD}:MC-CLASSIFICATION-IS-JUST-LABELING`],
+    source: `${CNSD_SRC} — novel-sound-test conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CNSD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If a sound is described as "voiceless bilabial," is that enough information to uniquely identify exactly which sound it is?',
+    choices: [
+      { text: 'No — manner is also needed (e.g., "stop") to fully specify the sound; all three dimensions must be combined together', isCorrect: true },
+      { text: 'Yes — place, manner, and voicing are independent facts, and any one or two is enough on its own', isCorrect: false, misconceptionId: `${CNSD}:MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT` },
+    ],
+    correctValue: 'no, need all three',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNSD}:MC-PLACE-MANNER-VOICING-ARE-INDEPENDENT`],
+    source: `${CNSD_SRC} — voiceless-bilabial-ambiguity conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.vowel-sounds ──────────────────────────────────────────────
+const VOWL = 'eng.phonetics.vowel-sounds'
+const VOWL_SRC = 'docs/curriculum/blueprints/eng.phonetics.vowel-sounds.md'
+
+const VOWL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VOWL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Vowels DO have a precise articulatory description, just like ' +
+      'consonants — instead of place/manner/voicing, vowels are described ' +
+      'by tongue HEIGHT (how high/low), tongue BACKNESS (how front/back), ' +
+      'and lip ROUNDING. Say "ee" then "ah" — the tongue really is higher ' +
+      'and further forward for one, lower and further back for the other. ' +
+      'There’s no closure (that’s what makes them vowels), but there is ' +
+      'still a specific, describable tongue position.',
+    targetedMisconceptions: [`${VOWL}:MC-VOWELS-HAVE-NO-ARTICULATION-PLACE`],
+    source: `${VOWL_SRC} — MC-VOWELS-HAVE-NO-ARTICULATION-PLACE (P28 ee-vs-ah conflict)`,
+  },
+  {
+    conceptId: VOWL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Most vowels (monophthongs) hold one steady tongue position for ' +
+      'their whole duration, like /iː/ in "see." But some vowels ' +
+      '(diphthongs) are actually a GLIDE — the tongue starts at one ' +
+      'position and moves toward another within the same syllable, like ' +
+      '/aɪ/ in "time" (starts low-central, glides toward high-front). ' +
+      'Stretch out any vowel sound slowly and check whether the tongue ' +
+      'position stays still (monophthong) or moves (diphthong).',
+    targetedMisconceptions: [`${VOWL}:MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME`],
+    source: `${VOWL_SRC} — MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME (P28 time-slow-stretch conflict)`,
+  },
+  {
+    conceptId: VOWL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Vowels have a precise, describable articulation — tongue height, ' +
+      'tongue backness, and lip rounding — despite involving no closure or ' +
+      'blockage the way consonants do; "no closure" does not mean "no ' +
+      'describable position." Separately, most vowels (monophthongs) hold ' +
+      'a single steady tongue position, while diphthongs involve the ' +
+      'tongue gliding from one position toward another within a single ' +
+      'vowel sound — stretching a vowel out slowly reveals whether it is ' +
+      'static or gliding.',
+    targetedMisconceptions: [
+      `${VOWL}:MC-VOWELS-HAVE-NO-ARTICULATION-PLACE`,
+      `${VOWL}:MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME`,
+    ],
+    source: `${VOWL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const VOWL_PROBES: SeedProbe[] = [
+  {
+    conceptId: VOWL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Do vowels have a specific, locatable tongue position, or are they just "open mouth noises" with nothing describable happening?',
+    choices: [
+      { text: 'Vowels have a specific, describable tongue position — height, backness, and lip rounding — even though there\'s no closure like with consonants', isCorrect: true },
+      { text: 'Vowels have no articulation place at all, unlike consonants', isCorrect: false, misconceptionId: `${VOWL}:MC-VOWELS-HAVE-NO-ARTICULATION-PLACE` },
+    ],
+    correctValue: 'yes, describable position',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VOWL}:MC-VOWELS-HAVE-NO-ARTICULATION-PLACE`],
+    source: `${VOWL_SRC} — ee-vs-ah conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VOWL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you stretch out the vowel in "time" slowly, does your tongue position stay exactly the same the whole time?',
+    choices: [
+      { text: 'No — it glides from one position toward another; "time" contains a diphthong, not a static monophthong', isCorrect: true },
+      { text: 'Yes — monophthongs and diphthongs are the same thing, both just one steady vowel sound', isCorrect: false, misconceptionId: `${VOWL}:MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME` },
+    ],
+    correctValue: 'no, it glides',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VOWL}:MC-MONOPHTHONGS-AND-DIPHTHONGS-ARE-THE-SAME`],
+    source: `${VOWL_SRC} — time-slow-stretch conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -19126,6 +20156,17 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...WFAM_EXPLANATIONS,
   ...SPEL_EXPLANATIONS,
   ...ARTO_EXPLANATIONS,
+  ...CMPW_EXPLANATIONS,
+  ...SUFX_EXPLANATIONS,
+  ...HOMO_EXPLANATIONS,
+  ...CNDN_EXPLANATIONS,
+  ...SWRT_EXPLANATIONS,
+  ...THEM_EXPLANATIONS,
+  ...FORS_EXPLANATIONS,
+  ...DSTR_EXPLANATIONS,
+  ...PRFC_EXPLANATIONS,
+  ...CNSD_EXPLANATIONS,
+  ...VOWL_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -19341,4 +20382,15 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...WFAM_PROBES,
   ...SPEL_PROBES,
   ...ARTO_PROBES,
+  ...CMPW_PROBES,
+  ...SUFX_PROBES,
+  ...HOMO_PROBES,
+  ...CNDN_PROBES,
+  ...SWRT_PROBES,
+  ...THEM_PROBES,
+  ...FORS_PROBES,
+  ...DSTR_PROBES,
+  ...PRFC_PROBES,
+  ...CNSD_PROBES,
+  ...VOWL_PROBES,
 ]
