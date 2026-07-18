@@ -28117,7 +28117,6 @@ const TRAN_PROBES: SeedProbe[] = [
   },
 ]
 
-
 // ─── phys.mech.orbital-mechanics ────────────────────────────────────────────
 const ORB = 'phys.mech.orbital-mechanics'
 const ORB_SRC = 'docs/curriculum/blueprints/phys.mech.orbital-mechanics.md'
@@ -28620,6 +28619,361 @@ const CAPC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.composition.counterargument-and-rebuttal ──────────────────────────────
+const CREB = 'eng.composition.counterargument-and-rebuttal'
+const CREB_SRC = 'docs/curriculum/blueprints/eng.composition.counterargument-and-rebuttal.md'
+
+const CREB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CREB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Picking a weak version of the opposition to easily defeat is like ' +
+      'challenging a boxer to fight your little brother instead of the ' +
+      'actual champion — you might "win," but it proves nothing. A genuine ' +
+      'counterargument must be the STRONGEST reasonable version of the ' +
+      'opposing view, one a real opponent would recognize as fair, or ' +
+      'defeating it means nothing.',
+    targetedMisconceptions: [`${CREB}:MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT`],
+    source: `${CREB_SRC} — MC-A (P28 strawman-vs-strongest-objection conflict)`,
+  },
+  {
+    conceptId: CREB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Restating your original point louder in response to a specific ' +
+      'objection is like answering "but this bridge might not hold the ' +
+      'weight" with "I still think we should cross!" — it doesn\'t address ' +
+      'the actual concern. A real rebuttal must specifically name and ' +
+      'respond to what was just said: refute it, counter it with ' +
+      'evidence, or concede the point partially.',
+    targetedMisconceptions: [`${CREB}:MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY`],
+    source: `${CREB_SRC} — MC-B (P28 restating-louder conflict)`,
+  },
+  {
+    conceptId: CREB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A genuine counterargument must engage the strongest, most reasonable ' +
+      'version of the opposing view — one a real opponent would recognize ' +
+      'as fair — not a weak strawman easy to defeat, like challenging a ' +
+      'boxer\'s little brother instead of the champion. Separately, a ' +
+      'rebuttal must specifically engage the substance of that objection, ' +
+      'not restate the original claim louder, like answering a specific ' +
+      'safety concern about a bridge with "I still think we should cross."',
+    targetedMisconceptions: [
+      `${CREB}:MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT`,
+      `${CREB}:MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY`,
+    ],
+    source: `${CREB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CREB_PROBES: SeedProbe[] = [
+  {
+    conceptId: CREB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An essay about school uniforms summarizes the opposing view as "some people think uniforms are literally like a prison uniform" — an extreme, easily-dismissed version — rather than the more common, moderate objection about cost burden and self-expression. Is this a genuine counterargument?',
+    choices: [
+      { text: 'No — a real opponent wouldn\'t recognize this as their actual position; a genuine counterargument must engage the strongest, most reasonable version of the opposing view', isCorrect: true },
+      { text: 'Yes — counterargument means picking the weakest opposing view so it\'s easy to defeat', isCorrect: false, misconceptionId: `${CREB}:MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT` },
+    ],
+    correctValue: 'no, counterarguments must engage the strongest opposing view',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CREB}:MC-A-COUNTERARGUMENT-MEANS-PICKING-THE-WEAKEST-OPPOSING-VIEW-TO-EASILY-DEFEAT`],
+    source: `${CREB_SRC} — strawman-vs-strongest-objection conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CREB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'After fairly summarizing an opponent\'s specific concern about the cost burden of school uniforms on low-income families, a student writes: "But uniforms are still a good idea because they promote unity." Does this count as a genuine rebuttal?',
+    choices: [
+      { text: 'No — it restates the original position without addressing the specific cost concern raised at all; a real rebuttal must specifically engage the substance of the objection', isCorrect: true },
+      { text: 'Yes — rebuttal means restating your original position more forcefully after the opposing view is presented', isCorrect: false, misconceptionId: `${CREB}:MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY` },
+    ],
+    correctValue: 'no, rebuttals must specifically engage the objection raised',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CREB}:MC-B-REBUTTAL-MEANS-JUST-RESTATING-YOUR-ORIGINAL-POSITION-MORE-FORCEFULLY`],
+    source: `${CREB_SRC} — restating-louder conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.logical-fallacies ─────────────────────────────────────────
+const FALL = 'eng.composition.logical-fallacies'
+const FALL_SRC = 'docs/curriculum/blueprints/eng.composition.logical-fallacies.md'
+
+const FALL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FALL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming a true conclusion means the argument for it must be sound ' +
+      'is like assuming a winning lottery ticket must have been a smart ' +
+      'financial decision — the outcome being good doesn\'t mean the ' +
+      'reasoning was valid. Evaluate an argument\'s REASONING as a separate ' +
+      'question from whether you agree with or believe the conclusion.',
+    targetedMisconceptions: [`${FALL}:MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS`],
+    source: `${FALL_SRC} — MC-A (P28 lottery-ticket conflict)`,
+  },
+  {
+    conceptId: FALL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not every mention of a person\'s characteristics is ad hominem — ' +
+      'it\'s the difference between dismissing a witness for "ugly shoes" ' +
+      '(irrelevant) versus noting they have a financial stake in the case ' +
+      '(a legitimate, relevant reason for caution). A true ad hominem ' +
+      'attacks something irrelevant to the argument\'s merit; a relevant ' +
+      'credibility concern is not a fallacy.',
+    targetedMisconceptions: [`${FALL}:MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY`],
+    source: `${FALL_SRC} — MC-B (P28 relevant-witness conflict)`,
+  },
+  {
+    conceptId: FALL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A fallacy is about broken reasoning, not a false result — a true or ' +
+      'agreeable conclusion doesn\'t validate the argument offered for it, ' +
+      'like a winning lottery ticket that doesn\'t retroactively make ' +
+      'buying it wise. Separately, not every personal criticism is ad ' +
+      'hominem — a genuinely relevant concern about bias or expertise ' +
+      '(like a witness\'s financial stake) is a legitimate credibility ' +
+      'challenge, distinct from an irrelevant personal attack.',
+    targetedMisconceptions: [
+      `${FALL}:MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS`,
+      `${FALL}:MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY`,
+    ],
+    source: `${FALL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const FALL_PROBES: SeedProbe[] = [
+  {
+    conceptId: FALL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Exercise is good for you because that person who disagrees is out of shape." The conclusion (exercise is good) is true. Does this true conclusion mean the reasoning used (attacking the person\'s fitness) is not fallacious?',
+    choices: [
+      { text: 'No — the reasoning is still a fallacious ad hominem attack even though the conclusion happens to be true; fallacy is about broken reasoning, separate from whether the conclusion is true', isCorrect: true },
+      { text: 'Yes — if an argument\'s conclusion is true or agreeable, the argument can\'t be fallacious', isCorrect: false, misconceptionId: `${FALL}:MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS` },
+    ],
+    correctValue: 'no, a true conclusion does not excuse fallacious reasoning',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FALL}:MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS`],
+    source: `${FALL_SRC} — lottery-ticket conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FALL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Someone criticizes a claim about a medical treatment by noting: "This person receives funding directly from the company selling the treatment, which is a relevant conflict of interest." Is this criticism an ad hominem fallacy?',
+    choices: [
+      { text: 'No — this raises a genuinely relevant concern about bias affecting this specific claim; it is a legitimate credibility challenge, not an irrelevant personal attack', isCorrect: true },
+      { text: 'Yes — every strong criticism of a person making a claim is an ad hominem fallacy', isCorrect: false, misconceptionId: `${FALL}:MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY` },
+    ],
+    correctValue: 'no, relevant credibility concerns are not ad hominem',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FALL}:MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY`],
+    source: `${FALL_SRC} — relevant-witness conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.figurative-language-in-composition ───────────────────────
+const FIGL = 'eng.composition.figurative-language-in-composition'
+const FIGL_SRC = 'docs/curriculum/blueprints/eng.composition.figurative-language-in-composition.md'
+
+const FIGL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FIGL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Figurative language isn\'t a costume that only belongs at a fiction ' +
+      'party — it\'s a legitimate tool used across serious expository and ' +
+      'persuasive writing (economics columns, scientific explainers) ' +
+      'because abstract ideas are hard to grasp in purely literal terms. A ' +
+      'well-chosen metaphor makes a hard idea easier to hold onto, without ' +
+      'making the writing less serious.',
+    targetedMisconceptions: [`${FIGL}:MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY`],
+    source: `${FIGL_SRC} — MC-A (P28 inflation-leaking-tire conflict)`,
+  },
+  {
+    conceptId: FIGL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Piling up multiple unrelated metaphors for one idea is like giving ' +
+      'someone three different sets of directions to the same house, each ' +
+      'using a different landmark — instead of helping, it leaves them ' +
+      'lost. One well-chosen, consistently developed comparison usually ' +
+      'clarifies far more than several competing ones crammed together.',
+    targetedMisconceptions: [`${FIGL}:MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING`],
+    source: `${FIGL_SRC} — MC-B (P28 mixed-metaphors conflict)`,
+  },
+  {
+    conceptId: FIGL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Figurative language is a legitimate expository and persuasive tool, ' +
+      'not exclusively a fiction device — used across serious writing ' +
+      'because abstract ideas are hard to grasp purely literally. ' +
+      'Separately, adding figurative language isn\'t automatically good: ' +
+      'one well-mapped, consistently developed comparison clarifies far ' +
+      'more than several competing metaphors crammed together, like giving ' +
+      'someone one clear set of directions instead of three conflicting ' +
+      'ones.',
+    targetedMisconceptions: [
+      `${FIGL}:MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY`,
+      `${FIGL}:MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING`,
+    ],
+    source: `${FIGL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const FIGL_PROBES: SeedProbe[] = [
+  {
+    conceptId: FIGL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An expository passage explains inflation using a controlled metaphor: "Inflation is like a slow leak in a tire: the car still runs, but every mile requires the engine to work slightly harder." Does using this metaphor make the passage seem like fiction rather than serious expository writing?',
+    choices: [
+      { text: 'No — figurative language is a legitimate expository and persuasive tool used across serious, respected non-fiction writing to make abstract ideas easier to grasp', isCorrect: true },
+      { text: 'Yes — figurative language only belongs in fiction or poetry and has no place in expository writing', isCorrect: false, misconceptionId: `${FIGL}:MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY` },
+    ],
+    correctValue: 'no, figurative language is legitimate in expository writing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FIGL}:MC-A-FIGURATIVE-LANGUAGE-ONLY-BELONGS-IN-FICTION-OR-POETRY`],
+    source: `${FIGL_SRC} — inflation-leaking-tire conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FIGL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A paragraph explaining inflation crams in three unrelated metaphors: "a leaking tire, and also a runaway train, and also a hungry beast." Does adding more figurative language like this automatically make the writing better?',
+    choices: [
+      { text: 'No — switching between multiple competing comparisons for the same idea makes it harder to follow; one well-developed, consistent comparison usually clarifies far more', isCorrect: true },
+      { text: 'Yes — any figurative language added is automatically good writing, so more metaphors make an explanation clearer', isCorrect: false, misconceptionId: `${FIGL}:MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING` },
+    ],
+    correctValue: 'no, mixed metaphors confuse rather than clarify',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FIGL}:MC-B-ANY-FIGURATIVE-LANGUAGE-ADDED-IS-AUTOMATICALLY-GOOD-WRITING`],
+    source: `${FIGL_SRC} — mixed-metaphors conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.rhetorical-analysis ───────────────────────────────────────
+const RHAN = 'eng.composition.rhetorical-analysis'
+const RHAN_SRC = 'docs/curriculum/blueprints/eng.composition.rhetorical-analysis.md'
+
+const RHAN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RHAN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A list of devices found in a text is like listing every ingredient ' +
+      'in a meal without describing how they combine into a dish — "this ' +
+      'has salt, this has garlic" tells you what\'s present, not what it ' +
+      'tastes like together. Rhetorical analysis needs a synthesis step: ' +
+      'how do these choices work TOGETHER to build one cumulative effect?',
+    targetedMisconceptions: [`${RHAN}:MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND`],
+    source: `${RHAN_SRC} — MC-A (P28 ingredient-list-vs-recipe conflict)`,
+  },
+  {
+    conceptId: RHAN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Evaluating rhetorical effectiveness is like judging a chess move\'s ' +
+      'quality regardless of which side you\'re rooting for — a brilliant ' +
+      'move is brilliant either way. "Is this strategy well-suited to its ' +
+      'intended audience?" is a completely separate question from "do I ' +
+      'personally agree with the conclusion?" — never let personal ' +
+      'agreement silently substitute for genuine evaluation.',
+    targetedMisconceptions: [`${RHAN}:MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT`],
+    source: `${RHAN_SRC} — MC-B (P28 chess-judge conflict)`,
+  },
+  {
+    conceptId: RHAN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Rhetorical analysis requires a synthesis step explaining how ' +
+      'catalogued devices work TOGETHER toward a cumulative effect, not ' +
+      'just an inventory — like a recipe explaining how ingredients ' +
+      'combine, not just listing them. Separately, evaluating a text\'s ' +
+      'rhetorical effectiveness for its intended audience is a question ' +
+      'entirely separate from personal agreement with its conclusion, like ' +
+      'judging a chess move\'s quality independent of which side you\'re ' +
+      'rooting for.',
+    targetedMisconceptions: [
+      `${RHAN}:MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND`,
+      `${RHAN}:MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT`,
+    ],
+    source: `${RHAN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RHAN_PROBES: SeedProbe[] = [
+  {
+    conceptId: RHAN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student\'s analysis of a speech says: "This uses ethos, then pathos, then a metaphor, then repetition, then logos," with no discussion of how these choices work together. Is this a complete rhetorical analysis?',
+    choices: [
+      { text: 'No — this is just an inventory of devices found; a complete analysis must synthesize how the choices work together to build a cumulative effect', isCorrect: true },
+      { text: 'Yes — rhetorical analysis means listing every device found in a text', isCorrect: false, misconceptionId: `${RHAN}:MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND` },
+    ],
+    correctValue: 'no, a device inventory alone is not a complete analysis',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RHAN}:MC-A-RHETORICAL-ANALYSIS-MEANS-LISTING-EVERY-DEVICE-FOUND`],
+    source: `${RHAN_SRC} — ingredient-list-vs-recipe conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RHAN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes: "This argument fails because I disagree with school uniforms," about a text whose rhetorical strategy is actually well-matched to its stated skeptical audience. Does evaluating rhetorical effectiveness mean stating whether you personally agree with the argument?',
+    choices: [
+      { text: 'No — rhetorical effectiveness asks whether the strategy is well-suited to persuading its intended audience, a separate question from whether the analyst personally agrees with the conclusion', isCorrect: true },
+      { text: 'Yes — evaluating a text\'s rhetorical effectiveness means stating whether you personally agree with its argument', isCorrect: false, misconceptionId: `${RHAN}:MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT` },
+    ],
+    correctValue: 'no, effectiveness and personal agreement are separate questions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RHAN}:MC-B-EVALUATING-EFFECTIVENESS-MEANS-STATING-WHETHER-YOU-AGREE-WITH-THE-ARGUMENT`],
+    source: `${RHAN_SRC} — chess-judge conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -28942,6 +29296,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...EFLD_EXPLANATIONS,
   ...EPOT_EXPLANATIONS,
   ...CAPC_EXPLANATIONS,
+  ...CREB_EXPLANATIONS,
+  ...FALL_EXPLANATIONS,
+  ...FIGL_EXPLANATIONS,
+  ...RHAN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -29264,4 +29622,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...EFLD_PROBES,
   ...EPOT_PROBES,
   ...CAPC_PROBES,
+  ...CREB_PROBES,
+  ...FALL_PROBES,
+  ...FIGL_PROBES,
+  ...RHAN_PROBES,
 ]
