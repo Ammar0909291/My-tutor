@@ -1,0 +1,282 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.subset-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.subset",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3b1381cea39cb710ba24075089bb958455e6a4c260001faee6a8e782b3353448",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.subset.md": "sha256:7d273438cde9f8faed4316d4f5cc07dfeb6f2e60bd90fad3d612a51aaf561ec7"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.subset",
+    "name": "Subset",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.set-membership"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.subset-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.subset (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.subset.md": "sha256:7d273438cde9f8faed4316d4f5cc07dfeb6f2e60bd90fad3d612a51aaf561ec7"
+      },
+      "contentHash": "sha256:714edd16e022d8df4fdf23da790cc6b8aceb6a162296dee0d91d89fea5a94a22",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.subset.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.subset.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.subset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.subset\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.subset.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.subset.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.subset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.subset\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.subset.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.subset.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.subset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.subset\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.subset/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.subset",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $A\\subseteq B$ (\"A is a subset of B\") as: **every element of A is also an element of B**, and determine, given two explicit sets, whether one is a subset of the other.\n- LO2: Correctly distinguish $A\\subseteq B$ (subset — a relation between two sets) from $x\\in A$ (membership — a relation between an object and a set), directly building on the distinction already established in `math.found.set-membership`.\n- LO3: Recognize two special cases: (i) **every set is a subset of itself** ($A\\subseteq A$ always holds), and (ii) **the empty set is a subset of every set** ($\\emptyset\\subseteq B$ for any $B$, vacuously true since there are no elements of $\\emptyset$ to fail the condition).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.subset/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.subset",
+      "title": "MEMBERSHIP-SUBSET-STILL-CONFLATED",
+      "content": "| MC-1 | MEMBERSHIP-SUBSET-STILL-CONFLATED | Continuing to treat $x\\in A$ and $\\{x\\}\\subseteq A$ as the identical statement even after the formal ⊆ definition is introduced (a persistence of the prerequisite concept's own MC-1) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.subset/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.subset",
+      "title": "SELF-SUBSET-DISBELIEVED",
+      "content": "| MC-2 | SELF-SUBSET-DISBELIEVED | Believing a set cannot be a subset of itself, or treating $A\\subseteq A$ as a special/exceptional case rather than a direct consequence of the definition | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.subset/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.subset",
+      "title": "EMPTY-SET-SUBSET-DISBELIEVED",
+      "content": "| MC-3 | EMPTY-SET-SUBSET-DISBELIEVED | Believing $\\emptyset\\subseteq B$ is false, or uncertain/undefined, rather than recognizing it as vacuously true by the definition | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.subset/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.subset",
+      "title": "Checking Subset Element-by-Element (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Checking Subset Element-by-Element (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.found.subset/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.subset",
+      "title": "The Two Special Cases (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Two Special Cases (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.subset/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.subset",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.subset/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.subset",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Let $A=\\{3,6,9\\}$, $B=\\{1,3,5,6,7,9\\}$. Is $A\\subseteq B$? Justify by checking each element.\n  2. Let $C=\\{2,4,6\\}$, $D=\\{2,4,8\\}$. Is $C\\subseteq D$? If not, identify which element fails.\n  3. Is $\\{5\\}\\subseteq\\{5,10,15\\}$ true? Separately, is $5\\in\\{5,10,15\\}$ true? Explain why both can be true statements despite using different relations.\n  4. Explain, using the definition of ⊆ directly (not just as a memorized fact), why $\\emptyset\\subseteq A$ for every set A, no matter what A contains.\n- **P76 (Transfer Probe, mode = independence)**: \"A school's 'Honor Roll' list is a subset of the full 'Enrolled Students' list — every honor roll student must also be an enrolled student (though not every enrolled student is on the honor roll). (a) If the Honor Roll list is $H=\\{\\text{Ana, Ben, Cid}\\}$ and the Enrolled Students list is $E=\\{\\text{Ana, Ben, Cid, Dee, Eli}\\}$, verify directly (element by element) that $H\\subseteq E$. (b) A new student club opens with literally zero members yet (an empty set). Using this lesson's vacuous-truth reasoning, explain why this empty club's membership set is automatically a subset of the Enrolled Students list, even before anyone joins.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.subset/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.subset",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set-membership` (the ∈ relation and, critically, the already-taught distinction between an object being \"in\" a set versus a set being \"contained in\" another set — MC-1 from that blueprint, \"ELEMENT-SUBSET-CONFUSION,\" is the exact misconception this concept now formally resolves by giving ⊆ its own precise definition).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.subset/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.subset",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set-membership` (the ∈ relation this concept's ⊆ definition is built directly on top of, and whose own MC-1 — element/subset conflation — this concept is specifically designed to finally resolve with a precise ⊆ definition).\n- **Unlocks**: `math.found.set-operations` (union, intersection, and complement are defined and reasoned about using subset relationships), `math.found.power-set` (the power set of A is literally the set of all subsets of A — this concept's definition is the power set's entire content).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.subset.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

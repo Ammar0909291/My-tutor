@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.increasing-decreasing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.increasing-decreasing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f6e3877a46f294263bea768cccb357b270ee8a957d90414e20cc404b9b119471",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.increasing-decreasing.md": "sha256:b1377d037e1a232ca725b3475401cae6f2aacd08db132d2f6bda83e33896b072"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.increasing-decreasing",
+    "name": "Increasing and Decreasing Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.mean-value-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.increasing-decreasing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.increasing-decreasing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.increasing-decreasing.md": "sha256:b1377d037e1a232ca725b3475401cae6f2aacd08db132d2f6bda83e33896b072"
+      },
+      "contentHash": "sha256:0d6deb343fd422b65b693dfac4bde66a57f0a0233ebf96d3aab1a17a053a75b4",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.increasing-decreasing.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.increasing-decreasing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.increasing-decreasing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.increasing-decreasing.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.increasing-decreasing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.increasing-decreasing\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.increasing-decreasing.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.increasing-decreasing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.increasing-decreasing\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.increasing-decreasing/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the increasing/decreasing test: if $f'(x)>0$ for all $x$ in an interval, $f$ is **increasing** on that interval; if $f'(x)<0$ throughout, $f$ is **decreasing** — and apply this test by finding where $f'(x)$ is positive/negative (typically via sign analysis around critical points).\n- LO2: Prove the increasing/decreasing test **using the Mean Value Theorem** — for any two points $x_1<x_2$ in the interval, MVT guarantees some $c$ between them with $f'(c) = \\frac{f(x_2)-f(x_1)}{x_2-x_1}$, and since $f'(c)$'s sign matches the whole interval's, this directly forces $f(x_2)-f(x_1)$ to have that same sign.\n- LO3: Use sign analysis of $f'$ across critical points to partition a function's domain into intervals of increase/decrease, and correctly handle the boundary/endpoint behavior (the test applies to $f'$ evaluated strictly *inside* an interval, with continuity carrying the conclusion through to closed endpoints).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "CRITICAL-POINT-ASSUMED-TO-BREAK-MONOTONICITY",
+      "content": "| MC-1 | CRITICAL-POINT-ASSUMED-TO-BREAK-MONOTONICITY | Believing any critical point inside an interval necessarily interrupts increasing/decreasing behavior, rather than checking whether the derivative's sign actually changes there | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "SIGN-ANALYSIS-REQUIRES-EXHAUSTIVE-TESTING",
+      "content": "| MC-2 | SIGN-ANALYSIS-REQUIRES-EXHAUSTIVE-TESTING | Believing sign analysis requires testing many points throughout each interval rather than relying on the IVT-based guarantee that one sample point per critical-point-bounded interval suffices | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "TEST-CITED-WITHOUT-MVT-JUSTIFICATION",
+      "content": "| MC-3 | TEST-CITED-WITHOUT-MVT-JUSTIFICATION | Treating \"f' > 0 implies increasing\" as a standalone fact to memorize rather than a theorem following directly from the Mean Value Theorem | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "The Test and Its MVT-Based Proof (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Test and Its MVT-Based Proof (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "Sign Analysis via Critical-Point Partitioning (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sign Analysis via Critical-Point Partitioning (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find all intervals of increase and decrease for $f(x)=x^3-6x^2+9x$.\n  2. Find all intervals of increase and decrease for $g(x)=x^4-8x^2$.\n  3. Using the MVT-based proof structure from this lesson, explain in your own words why $f'(x)>0$ throughout an interval forces $f$ to be increasing there — don't just cite the rule, walk through the argument.\n  4. $h(x)=(x-2)^3+1$ has a critical point at $x=2$ (where $h'(2)=0$), yet $h$ is increasing on all of $\\mathbb{R}$. Explain why this critical point does not interrupt the increasing behavior, using the sign-analysis reasoning from this lesson.\n- **P76 (Transfer Probe, mode = independence)**: \"A company's inventory level over time is modeled by $I(t) = t^3-12t^2+36t$ (for $t\\geq0$, in days). (a) Find $I'(t)$ and determine all critical points. (b) Using sign analysis, determine the intervals of time where inventory is increasing versus decreasing. (c) A colleague claims that since $I'(6)=0$ is a critical point, inventory must switch from increasing to decreasing exactly at $t=6$ — verify or refute this claim by checking the actual sign of $I'$ immediately before and after $t=6$, connecting your answer to this lesson's distinction between a critical point existing and the derivative's sign actually changing there.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.mean-value-theorem` (the theorem's precise statement and hypotheses, and the existence-not-uniqueness distinction).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.increasing-decreasing/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.increasing-decreasing",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.mean-value-theorem` (the theorem this concept's entire justification rests on).\n- **Unlocks**: `math.calc.critical-points` (identifying critical points is the essential first step of the sign-analysis procedure taught here — note the KG's dependency direction: this concept's own sign-analysis technique motivates and is completed by formally defining critical points in the next concept, even though critical points were informally used here already via Example 1's computation).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.increasing-decreasing.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
