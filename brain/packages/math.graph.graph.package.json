@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.graph-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.graph",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3653dfd29799010d72d7821f237eb4f04e6f40c872a962b3ef10a3d02b6e82c3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.graph.md": "sha256:013c4ab8ae7ca5c159e66147b3ac2747c2c406713105ec4fa9cbea8f28df0d09"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.graph.graph",
+    "name": "Graph",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.set-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.graph-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.graph (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.graph.md": "sha256:013c4ab8ae7ca5c159e66147b3ac2747c2c406713105ec4fa9cbea8f28df0d09"
+      },
+      "contentHash": "sha256:4993faddf350819430d933986c1569cbf908bcf443b449dc3fbcebdfe585b1ae",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.graph.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.graph.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.graph.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.graph/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.graph",
+      "title": "Learning Objectives",
+      "content": "- LO1: State a graph's **order** ($n=|V|$, the number of vertices) and **size** ($m=|E|$, the number of edges) for a given graph, correctly distinguishing these two related-but-different counts.\n- LO2: Restate the Handshaking Lemma in order/size notation ($\\sum_v \\deg(v) = 2m$) and apply it using $m$ explicitly, building on the vertex/edge/degree vocabulary already established in `math.disc.graph`.\n- LO3: Distinguish four graph families by their edge structure — simple undirected, directed, **weighted** (edges carry a numeric value, e.g. distance or cost), and **multigraph** (multiple edges permitted between the same pair of vertices) — and correctly classify a given real-world network as the appropriate family.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.graph/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.graph",
+      "title": "ORDER-SIZE-ASSUMED-EQUAL",
+      "content": "| MC-1 | ORDER-SIZE-ASSUMED-EQUAL | Believing a graph's order (vertex count) and size (edge count) must be equal or otherwise directly linked, rather than independent counts | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.graph.graph/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.graph",
+      "title": "WEIGHTED-GRAPH-DIFFERENT-OBJECT",
+      "content": "| MC-2 | WEIGHTED-GRAPH-DIFFERENT-OBJECT | Believing a weighted graph is a fundamentally different kind of mathematical structure rather than the same underlying graph with numeric labels added to its edges | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.graph.graph/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.graph",
+      "title": "MULTIGRAPH-DEGREE-BY-NEIGHBOR-COUNT",
+      "content": "| MC-3 | MULTIGRAPH-DEGREE-BY-NEIGHBOR-COUNT | In a multigraph, counting a vertex's degree by its number of distinct neighboring vertices rather than by its number of incident edges | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.graph.graph/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph",
+      "title": "Order, Size, and the Handshaking Lemma Restated (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Order, Size, and the Handshaking Lemma Restated (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.graph.graph/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph",
+      "title": "Weighted and Multigraph Extensions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Weighted and Multigraph Extensions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.graph.graph/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.graph.graph/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A graph has V={P,Q,R,S} and E={{P,Q},{Q,R},{R,S},{S,P},{P,R}}. State its order and size.\n  2. Using the graph in problem 1, verify the Handshaking Lemma using the order/size notation ($\\sum\\deg=2m$).\n  3. A delivery network has warehouses as vertices, with edges labeled by delivery cost between each warehouse pair, and sometimes two different delivery contractors both serving the same warehouse pair (two separate edges). Classify this network among simple/directed/weighted/multigraph, and justify each part of the classification.\n  4. In a multigraph, vertex X has three edges to vertex Y and one edge to vertex Z (no other edges). What is deg(X)?\n- **P76 (Transfer Probe, mode = cross-link probe against `math.disc.graph`)**: \"Recall from your earlier lesson on graphs (`math.disc.graph`) that a graph G=(V,E) with 5 edges and four known vertex degrees 2, 3, 1, 3 has a fifth vertex of degree 1, found via $\\sum\\deg=2|E|=10$. Restate that exact same graph and calculation now using this lesson's order/size notation: what is $m$ for that graph, and what does $\\sum\\deg(v)=2m$ give you? Then extend it: if this same road network additionally had one road pair served by two separate bike-path *and* car-road edges between the same two towns (turning it into a multigraph), how would the size $m$ and the degree sum change, and would the Handshaking Lemma still hold exactly?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.graph.graph/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.graph",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set-theory` (V and E as sets, E⊆V×V). This concept also assumes and directly builds on the vertex/edge/undirected-vs-directed/degree/Handshaking-Lemma content already taught in the sibling concept `math.disc.graph` — see Component 7 for the precise division of labor between the two.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.graph/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.graph",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set-theory` (V and E as sets, E⊆V×V).\n- **Unlocks**: `math.graph.connectivity` (paths and connectedness build on the order/size/degree vocabulary formalized here), `math.graph.tree` (trees are connected acyclic graphs with the specific order/size relation $m=n-1$, a direct extension of this concept's order/size framing).\n- **Cross-link**: KG lists `math.disc.graph` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.disc.graph.md` **is already authored**. This is the first blueprint in the corpus whose named cross-link target is confirmed present, enabling a genuine **cross-link probe** (P76 above) that directly reuses that concept's own worked example (the 5-edge, degree-2/3/1/3-known graph) and asks the learner to re-derive the identical result in this concept's order/size vocabulary, then extend it to a multigraph — testing that the learner recognizes these two concepts as complementary vocabularies for one underlying idea, not two separate topics. Division of labor: `math.disc.graph` owns the foundational vertex/edge/directed-vs-undirected/self-loop/degree/Handshaking-Lemma content; this concept owns order/size terminology and the weighted/multigraph extensions, deliberately not re-teaching the foundational material to avoid duplicating that blueprint's Teaching Actions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

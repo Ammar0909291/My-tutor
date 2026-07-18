@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.pythagorean-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.pythagorean-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f30deb8b2309ab87921cc7580886dd957f3a406aea00a20626493c272f17c9ed",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md": "sha256:13bcc444640072997845a9e4e73e6eb997b95aa4c65788068db4d524b0824b72"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.pythagorean-theorem",
+    "name": "Pythagorean Theorem",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.geom.right-triangle",
+      "math.arith.square-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.pythagorean-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.pythagorean-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md": "sha256:13bcc444640072997845a9e4e73e6eb997b95aa4c65788068db4d524b0824b72"
+      },
+      "contentHash": "sha256:b3b8b861ab4b3c164e569613622013c33d7bd1d21b2e62f5c53313799553ea2d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.pythagorean-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.pythagorean-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.pythagorean-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.pythagorean-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.pythagorean-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.pythagorean-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.pythagorean-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.pythagorean-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.pythagorean-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.pythagorean-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.pythagorean-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.pythagorean-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.pythagorean-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Pythagorean Theorem ($a^2+b^2=c^2$) correctly identifying which side is the hypotenuse (opposite the right angle, always the longest side) versus the two legs.\n- LO2: Apply the theorem to find an unknown side length — either the hypotenuse (given both legs) or a leg (given the hypotenuse and one leg) — including recognizing that solving for a leg requires *subtracting* squares, not adding.\n- LO3: Apply the theorem to determine whether a given set of three side lengths could form a right triangle at all (i.e., verify $a^2+b^2=c^2$ holds for the proposed longest side), as a bridge toward the converse and toward recognizing common Pythagorean triples.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "ALWAYS-ADD-SQUARES",
+      "content": "| MC-1 | ALWAYS-ADD-SQUARES | Defaulting to adding the two known squares regardless of whether the unknown side is the hypotenuse or a leg, instead of subtracting when solving for a leg | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "ANY-TRIPLE-IS-RIGHT-TRIANGLE",
+      "content": "| MC-2 | ANY-TRIPLE-IS-RIGHT-TRIANGLE | Believing any three positive side lengths automatically satisfy the Pythagorean relation, without checking the equation actually holds against the correctly identified longest side | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "WRONG-SIDE-TREATED-AS-HYPOTENUSE",
+      "content": "| MC-3 | WRONG-SIDE-TREATED-AS-HYPOTENUSE | Checking the Pythagorean relation using a leg (not the longest side) as if it were $c$, producing a false negative for a genuinely valid right triangle | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "The Theorem via Area Dissection (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Theorem via Area Dissection (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Solving for a Leg vs. the Hypotenuse, and the Right-Triangle Test (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Solving for a Leg vs. the Hypotenuse, and the Right-Triangle Test (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Composite Application (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Application (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 17,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A right triangle has legs 5 and 12. Find the hypotenuse.\n  2. A right triangle has hypotenuse 25 and one leg 7. Find the other leg.\n  3. Do side lengths 8, 15, 17 form a right triangle? Show the check.\n  4. A ladder problem: a ladder 13m long leans against a wall, its base 5m from the wall. How high up the wall does it reach?\n- **P76 (Transfer Probe, mode = independence)**: \"A baseball diamond is a square with each side 90 feet. A shortstop needs to throw the ball in a straight line from a point at second base directly to first base — using the Pythagorean theorem (treating the diamond's diagonal as a right-triangle hypotenuse with two 90-foot legs), find that throw distance. Separately: an engineer claims a triangular brace with sides 20cm, 21cm, and 29cm is a right-triangle brace — verify or refute this claim using the theorem.\" *Component 7 note: these two scenarios were chosen independently rather than cross-linking to `math.nt.pythagorean-triples` or `math.geom.distance-formula`, since neither has an authored blueprint yet.*\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.right-triangle` (a triangle with one 90° angle; the hypotenuse is opposite the right angle and is the longest side) and `math.arith.square-numbers` (fluent squaring and perfect-square recognition, needed for both computing $a^2+b^2$ and for taking the resulting square root).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.pythagorean-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.pythagorean-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.right-triangle` (defines the hypotenuse/leg vocabulary this theorem depends on), `math.arith.square-numbers` (fluent squaring, needed for both directions of the formula and for extracting square roots of the results).\n- **Unlocks**: `math.geom.distance-formula` (the coordinate-plane distance formula is a direct restatement of this theorem with $\\Delta x,\\Delta y$ as legs), `math.trig.right-triangle-trig` (trigonometric ratios are defined on the same right-triangle side structure this theorem governs), `math.geom.pythagorean-converse` (the logical converse of this theorem, using the same equation as a *sufficient* condition for right-angledness).\n- **Cross-link**: KG lists `math.nt.pythagorean-triples` and `math.geom.distance-formula` as cross-links. Verified via directory listing that neither blueprint yet exists. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once either target is authored, may add a genuine cross-link probe — e.g. connecting this theorem's arithmetic directly to the classification/generation of Pythagorean triples, or to deriving the coordinate distance formula.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.pythagorean-theorem.md",
+        "startLine": 99,
+        "endLine": 105
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
