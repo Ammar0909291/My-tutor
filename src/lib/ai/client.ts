@@ -231,7 +231,8 @@ LEARNING RULES:
 2. If the student seems confused, choose a DIFFERENT approach: analogy, real example, mini-code, smaller steps
 3. NEVER move to next topic without genuine confirmation of understanding from the conversation
 4. When a TURN DIRECTIVE is present, its next-move and length budget govern this response exactly. Otherwise: max 3-4 sentences + code, then at most one follow-up question if the QUESTION STAGE POLICY allows
-5. Short student replies = fatigue → make it more engaging${notationBlock}`
+5. Short student replies = fatigue → make it more engaging
+NAVIGATION RULE: You are a teaching agent only — you do not control lesson navigation. If the student types "next lesson", "previous lesson", "go to lesson N", "skip", "go back", "lesson 5", "continue", "restart lesson", "review lesson", or any similar phrase that requests switching to a different lesson: respond with exactly one sentence — "Use the lesson navigation panel at the top to switch lessons." — then return to teaching. Never change the active lesson, never teach a different lesson, never discuss the lesson order. Lesson selection is owned by the UI.${notationBlock}`
   }
 
   if (teachingLanguage === 'hi') {
@@ -251,7 +252,8 @@ TEACHING LAWS:
 HINGLISH SUPPORT:
 - छात्र Hinglish में लिख सकते हैं — यह बिल्कुल ठीक है
 - Technical terms English में रखें: variable, function, loop, array, pointer
-- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo${notationBlock}`
+- Casual Hindi use करें: yaar, bhai, dekho, samjho, easy hai, try karo
+NAVIGATION RULE: Aap sirf teaching agent hain — lesson navigation aapke haath mein nahi hai. Agar student "next lesson", "previous lesson", "lesson N pe jao", "skip", "wapas jao", "lesson restart karo", "review karo", ya koi bhi aise phrase likhe jo doosre lesson pe jaane ki request ho — ek hi sentence mein jawab dein: "Lesson switch karne ke liye upar wali navigation panel use karein." — phir teaching continue karein. Kabhi bhi active lesson na badlein, doosra lesson mat padhayein, lesson order ke baare mein discuss na karein. Lesson selection UI ka kaam hai.${notationBlock}`
   }
 
   // Russian
@@ -270,7 +272,8 @@ HINGLISH SUPPORT:
 2. ЛЕСТНИЦА ВОПРОСОВ — каждый вопрос стоит на ступени: 1 Наблюдение ("что ты замечаешь?") → 2 Узнавание → 3 Определение → 4 Простое рассуждение → 5 Применение → 6 Вычисление → 7 Перенос. Не перескакивай больше чем на одну ступень; если студент не отвечает — спустись на ступень ниже, а не повторяй тот же вопрос; НИКОГДА не задавай вычислительный вопрос, пока ступени 1–5 не закреплены; максимум ДВА вопроса подряд — потом ДАЙ что-то (объяснение, демонстрацию, аналогию, разобранный пример). Вопрос — инструмент обучения, а не экзамен.${beginnerTuning}
 3. Оценивай понимание по тому, что студент сам пишет в ответ — не требуй жёсткого формата "да / нет / частично"
 4. Если студент выглядит растерянным — выбери ДРУГОЙ подход
-5. Максимум 3-4 предложения + код, потом — если лестница вопросов позволяет — естественный вопрос или задание${notationBlock}`
+5. Максимум 3-4 предложения + код, потом — если лестница вопросов позволяет — естественный вопрос или задание
+ПРАВИЛО НАВИГАЦИИ: Ты — обучающий агент, ты не управляешь навигацией по урокам. Если студент пишет «следующий урок», «предыдущий урок», «перейди к уроку N», «пропусти», «назад», «урок 5», «продолжим», «начать заново», «повторить урок» или любую фразу с просьбой переключить урок — ответь ровно одним предложением: «Используй панель навигации вверху, чтобы переключить урок.» — и продолжи обучение. Никогда не меняй активный урок, не преподавай другой урок, не обсуждай порядок уроков. Выбор урока — задача интерфейса.${notationBlock}`
 }
 
 export function buildCurriculumPrompt(subject: string, selfDescription: string, treeBlock?: string | null) {

@@ -16,6 +16,7 @@ interface LessonNavigationPanelProps {
   teachingLanguage?: string
   disabled?: boolean
   onPrevious: () => void
+  onCurrent?: () => void
   onNext: () => void
 }
 
@@ -40,16 +41,14 @@ function statusBadge(lesson: CurriculumLesson | null, ctx: {
 
 /**
  * Lesson Navigation Panel — Previous / Current / Next, inside the Tutor Max
- * chat panel. Purely presentational: every field it renders is data
- * LessonScreen.tsx already fetched (CurriculumLesson[], CurriculumProgress,
- * topicProgressMap, availableTopicSlugs). Lock/mastery/completion state is
- * computed by the same computeLessonLockState() the Curriculum Roadmap
- * tree uses, so the two views can never disagree.
+ * chat panel. All three cards are interactive buttons that route through
+ * LessonScreen's requestLessonSwitch() controller — no lesson switch ever
+ * bypasses the confirmation dialog or lock validation.
  */
 export function LessonNavigationPanel({
   previousLesson, currentLesson, nextLesson, totalLessons,
   progress, topicProgressMap, availableTopicSlugs, teachingLanguage,
-  disabled, onPrevious, onNext,
+  disabled, onPrevious, onCurrent, onNext,
 }: LessonNavigationPanelProps) {
   if (!currentLesson) return null
   const isRu = teachingLanguage === 'ru'
@@ -71,6 +70,7 @@ export function LessonNavigationPanel({
     border: `1px solid ${accent ? `${accent}44` : 'var(--border-subtle)'}`,
     background: accent ? `${accent}0c` : 'transparent',
     display: 'flex', flexDirection: 'column', gap: 3,
+    textAlign: 'left',
   })
 
   const labelStyle: React.CSSProperties = {
@@ -100,10 +100,10 @@ export function LessonNavigationPanel({
         onClick={onPrevious}
         disabled={disabled || !previousLesson}
         title={previousLesson ? previousLesson.lessonTitle : undefined}
-        aria-label={isRu ? 'Предыдущий урок' : 'Previous lesson'}
+        aria-label={isRu ? 'Предыдущий урок' : isHi ? 'Pichla lesson' : 'Previous lesson'}
         style={{
           ...slotStyle(),
-          textAlign: 'left', cursor: previousLesson && !disabled ? 'pointer' : 'default',
+          cursor: previousLesson && !disabled ? 'pointer' : 'default',
           opacity: previousLesson ? 1 : 0.45,
         }}
       >
@@ -124,8 +124,18 @@ export function LessonNavigationPanel({
         )}
       </button>
 
-      {/* Current Lesson */}
-      <div style={slotStyle(INDIGO)}>
+      {/* Current Lesson — clickable: opens restart dialog */}
+      <button
+        onClick={onCurrent}
+        disabled={disabled || !onCurrent}
+        title={isRu ? 'Начать урок заново' : isHi ? 'Lesson restart karo' : 'Restart this lesson'}
+        aria-label={isRu ? 'Текущий урок — нажмите, чтобы начать заново' : isHi ? 'Current lesson — tap to restart' : 'Current lesson — click to restart'}
+        aria-current="true"
+        style={{
+          ...slotStyle(INDIGO),
+          cursor: onCurrent && !disabled ? 'pointer' : 'default',
+        }}
+      >
         <span style={{ ...labelStyle, color: INDIGO }}>
           {isRu ? 'Текущий' : isHi ? 'Current' : 'Current'}
           {totalLessons > 0 && (
@@ -139,18 +149,18 @@ export function LessonNavigationPanel({
         {currentBadge && (
           <span style={{ fontSize: 10, color: currentBadge.color }}>{currentBadge.icon} {currentBadge.label}</span>
         )}
-      </div>
+      </button>
 
       {/* Next Lesson / Continue to Next Lesson */}
       <button
         onClick={onNext}
         disabled={!nextEnabled}
         title={nextLockedReason ?? (nextLesson ? nextLesson.lessonTitle : undefined)}
-        aria-label={isRu ? 'Следующий урок' : 'Next lesson'}
+        aria-label={isRu ? 'Следующий урок' : isHi ? 'Agla lesson' : 'Next lesson'}
         aria-disabled={!nextEnabled}
         style={{
           ...slotStyle(isCurrentCompleted && nextEnabled ? GREEN : undefined),
-          textAlign: 'left', cursor: nextEnabled ? 'pointer' : 'default',
+          cursor: nextEnabled ? 'pointer' : 'default',
           opacity: nextLesson ? (nextEnabled ? 1 : 0.55) : 0.45,
         }}
       >

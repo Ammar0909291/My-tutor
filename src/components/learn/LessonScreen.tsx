@@ -21,9 +21,11 @@ import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { LessonNavigationPanel } from '@/components/learn/LessonNavigationPanel'
 import {
-  computeLessonLockState, findPreviousLesson, findNextLesson,
+  computeLessonLockState, canAdvanceToNextLesson, findPreviousLesson, findNextLesson,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
 } from '@/lib/curriculum/lessonNavigation'
+import { detectNavigationIntent } from '@/lib/learn/navigationIntent'
+import { logNavEvent } from '@/lib/learn/navEvents'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
@@ -892,6 +894,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [revisionTopic, setRevisionTopic] = useState<RevisionTopic>(null)
   const [skipWarning, setSkipWarning] = useState<SkipWarning>(null)
 
+  // Lesson switch dialog — opened by requestLessonSwitch(); never bypassed.
+  const [lessonSwitchDialog, setLessonSwitchDialog] = useState<{
+    target: CurriculumLesson
+    trigger: 'roadmap' | 'previous_card' | 'current_card' | 'next_card' | 'intent_detector'
+    isReview: boolean
+    isRestart: boolean
+    isFuture: boolean
+  } | null>(null)
+
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [terminalOutput, setTerminalOutput] = useState('')
@@ -1610,8 +1621,70 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       : teachingLanguage === 'hi'
       ? `Lesson ${lessonOrder} repeat karte hain: ${lesson.lessonTitle}`
       : `Let's review lesson ${lessonOrder}: ${lesson.lessonTitle}`
-    await sendMessage(sessionId, reviewMsg, true)
+    await sendMessage(sessionId, reviewMsg, false)
   }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, teachingLanguage, sendMessage, startRevision])
+
+  // Single navigation controller — ALL lesson switches (nav panel, roadmap,
+  // intent detector) go through this. Never bypasses lock check or dialog.
+  const requestLessonSwitch = useCallback((
+    target: CurriculumLesson,
+    trigger: 'roadmap' | 'previous_card' | 'current_card' | 'next_card' | 'intent_detector',
+  ) => {
+    const ctx = { progress: curriculumProgress, topicProgressMap, availableTopicSlugs }
+    const state = computeLessonLockState(target, ctx)
+    if (state.isLocked) return
+    const isRestart = target.order === curriculumProgress.currentLesson
+    const isFuture = !isRestart && !state.isCompleted && !state.isMastered
+    const isReview = !isRestart && (state.isCompleted || state.isMastered)
+    logNavEvent({
+      kind: 'lesson_switch_requested',
+      fromLessonId: curriculumProgress.currentLesson,
+      toLessonId: target.order,
+      completed: state.isCompleted,
+      mastered: state.isMastered,
+      trigger,
+    })
+    setLessonSwitchDialog({ target, trigger, isReview, isRestart, isFuture })
+  }, [curriculumProgress, topicProgressMap, availableTopicSlugs])
+
+  const confirmLessonSwitch = useCallback(async () => {
+    if (!lessonSwitchDialog || !sessionId) return
+    const { target, trigger, isRestart, isReview } = lessonSwitchDialog
+    setLessonSwitchDialog(null)
+
+    const kind = isRestart ? 'lesson_restart' : isReview ? 'lesson_review' : 'lesson_resume'
+    logNavEvent({
+      kind,
+      fromLessonId: curriculumProgress.currentLesson,
+      toLessonId: target.order,
+      trigger,
+    })
+
+    if (isRestart) {
+      const msg = teachingLanguage === 'ru'
+        ? `Давай начнём урок «${target.lessonTitle}» заново. Пожалуйста, начни сначала.`
+        : teachingLanguage === 'hi'
+        ? `"${target.lessonTitle}" dobara shuru karte hain. Bilkul shuruaat se shuru karo.`
+        : `Let's restart lesson "${target.lessonTitle}" from the beginning.`
+      await sendMessage(sessionId, msg, false)
+      setActiveTab('chat')
+      return
+    }
+
+    if (isReview || target.order < curriculumProgress.currentLesson) {
+      await startRevision(target)
+      return
+    }
+
+    // Future unlocked lesson — navigate forward
+    const msg = teachingLanguage === 'ru'
+      ? `Продолжим с урока ${target.order}: ${target.lessonTitle}`
+      : teachingLanguage === 'hi'
+      ? `Lesson ${target.order} shuru karte hain: ${target.lessonTitle}`
+      : `Let's start lesson ${target.order}: ${target.lessonTitle}`
+    await sendMessage(sessionId, msg, false)
+    setActiveTab('chat')
+  }, [lessonSwitchDialog, sessionId, teachingLanguage, curriculumProgress, sendMessage, startRevision])
 
   // Open the next lesson. Only ever called when canAdvanceToNextLesson()
   // is true (current lesson completed + next lesson unlocked per
@@ -1631,7 +1704,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       : teachingLanguage === 'hi'
       ? `Chalo agla lesson ${next.order} shuru karte hain: ${next.lessonTitle}`
       : `Let's continue with the next lesson: ${next.lessonTitle}`
-    await sendMessage(sessionId, startMsg, true)
+    // showInUI=false — internal trigger; no visible fake message in chat history
+    await sendMessage(sessionId, startMsg, false)
   }, [curriculumLessons, curriculumProgress, sessionId, teachingLanguage, sendMessage])
 
   // Initiate a skip: check risk then confirm or warn
@@ -1900,13 +1974,44 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }
 
-  // Send handler
+  // Send handler — intercepts navigation intents before they reach the LLM
   function handleSend() {
     if (isStreaming || !sessionId) return
     if (micState === 'recording') stopRecording()
     if (selectedImage) { sendImageMessage(sessionId); return }
     const text = input.trim()
     if (!text && !attachedFile) return
+
+    // Navigation intent check: if the whole message is a navigation command,
+    // route it to the lesson switch dialog instead of the LLM.
+    if (text && !attachedFile && currentLessonData) {
+      const intent = detectNavigationIntent(text)
+      if (intent) {
+        setInput('')
+        clearDraft(`lesson_${subjectSlug}`)
+        if (textareaRef.current) textareaRef.current.style.height = 'auto'
+        const ctx = { progress: curriculumProgress, topicProgressMap, availableTopicSlugs }
+
+        if (intent.kind === 'next') {
+          const next = findNextLesson(curriculumLessons, curriculumProgress)
+          if (next && canAdvanceToNextLesson(currentLessonData, next, ctx)) {
+            requestLessonSwitch(next, 'intent_detector')
+          }
+        } else if (intent.kind === 'previous') {
+          const prev = findPreviousLesson(curriculumLessons, curriculumProgress)
+          if (prev) requestLessonSwitch(prev, 'intent_detector')
+        } else if (intent.kind === 'restart') {
+          requestLessonSwitch(currentLessonData, 'intent_detector')
+        } else if (intent.kind === 'review' || intent.kind === 'resume') {
+          requestLessonSwitch(currentLessonData, 'intent_detector')
+        } else if (intent.kind === 'lesson_n' && intent.lessonNum != null) {
+          const target = curriculumLessons.find((l) => l.order === intent.lessonNum)
+          if (target) requestLessonSwitch(target, 'intent_detector')
+        }
+        return
+      }
+    }
+
     let msg = text
     if (attachedFile) {
       msg += (text ? '\n' : '') + `\`\`\`${attachedFile.language}\n${attachedFile.content}\n\`\`\``
@@ -2298,6 +2403,128 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         </div>
       )}
 
+      {/* ── Lesson Switch Confirmation Dialog ──────────────────────────── */}
+      {lessonSwitchDialog && (() => {
+        const { target, isReview, isRestart, isFuture } = lessonSwitchDialog
+        const isRu = teachingLanguage === 'ru'
+        const isHi = teachingLanguage === 'hi'
+
+        const title = isRestart
+          ? (isRu ? 'Начать урок заново?' : isHi ? 'Lesson restart karein?' : 'Restart this lesson?')
+          : isReview
+          ? (isRu ? 'Повторить урок?' : isHi ? 'Lesson review karein?' : 'Review this lesson?')
+          : (isRu ? 'Перейти к другому уроку?' : isHi ? 'Dusre lesson pe jayein?' : 'Leave current lesson?')
+
+        const body = isRestart
+          ? (isRu
+            ? 'Прогресс сохранён. Текущий урок начнётся сначала.'
+            : isHi
+            ? 'Progress save hai. Yeh lesson ek baar phir se shuru hoga.'
+            : 'Your progress is saved. This lesson will start again from the beginning.')
+          : isReview
+          ? (isRu
+            ? 'Вы уже завершили этот урок. Хотите повторить его снова?'
+            : isHi
+            ? 'Aapne yeh lesson complete kar liya hai. Kya aap ise review karna chahte hain?'
+            : 'You have already completed this lesson. Would you like to review it again?')
+          : null
+
+        const bullets = (!isRestart && !isReview) ? (isRu
+          ? ['Прогресс по текущему уроку сохранён', 'Мастерство и оценки зафиксированы', 'Вы можете вернуться к этому уроку в любое время']
+          : isHi
+          ? ['Current lesson ka progress save hai', 'Mastery aur scores record ho gaye hain', 'Aap kabhi bhi is lesson pe wapas aa sakte hain']
+          : ['Your progress on the current lesson is saved', 'Mastery and scores are recorded', 'You can return to this lesson any time'])
+          : null
+
+        const fromTitle = currentLessonData?.lessonTitle ?? ''
+        const toTitle = target.lessonTitle
+
+        return (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 1000,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)',
+              padding: 16,
+            }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                logNavEvent({ kind: 'lesson_switch_cancelled', fromLessonId: curriculumProgress.currentLesson, toLessonId: target.order, trigger: lessonSwitchDialog.trigger })
+                setLessonSwitchDialog(null)
+              }
+            }}
+          >
+            <div
+              style={{
+                background: 'var(--bg-surface)', borderRadius: 16, padding: '24px 24px 20px',
+                maxWidth: 400, width: '100%', boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+                border: '1px solid var(--border-subtle)',
+                display: 'flex', flexDirection: 'column', gap: 16,
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>{title}</h2>
+
+              {/* From → To */}
+              {!isRestart && (
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 600, padding: '3px 8px', background: 'var(--bg-elevated)', borderRadius: 8, maxWidth: 160, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {fromTitle}
+                  </span>
+                  <span style={{ fontSize: 12, color: 'var(--text-dim)' }}>→</span>
+                  <span style={{ fontSize: 12, color: 'var(--text-primary)', fontWeight: 700, padding: '3px 8px', background: `${UI.indigo}14`, border: `1px solid ${UI.indigo}33`, borderRadius: 8, maxWidth: 160, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {toTitle}
+                  </span>
+                </div>
+              )}
+
+              {body && <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>{body}</p>}
+
+              {bullets && (
+                <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  {bullets.map((b) => (
+                    <li key={b} style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.4 }}>{b}</li>
+                  ))}
+                </ul>
+              )}
+
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 4 }}>
+                <button
+                  onClick={() => {
+                    logNavEvent({ kind: 'lesson_switch_cancelled', fromLessonId: curriculumProgress.currentLesson, toLessonId: target.order, trigger: lessonSwitchDialog.trigger })
+                    setLessonSwitchDialog(null)
+                  }}
+                  style={{
+                    padding: '9px 16px', borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                    background: 'transparent', color: 'var(--text-secondary)',
+                    border: '1px solid var(--border-subtle)',
+                  }}>
+                  {isRu ? 'Отмена' : isHi ? 'Cancel' : 'Cancel'}
+                </button>
+                <button
+                  onClick={confirmLessonSwitch}
+                  autoFocus
+                  style={{
+                    padding: '9px 18px', borderRadius: 10, fontSize: 13, fontWeight: 700, cursor: 'pointer',
+                    background: UI.indigo, color: '#fff', border: 'none',
+                  }}>
+                  {isRestart
+                    ? (isRu ? 'Начать заново' : isHi ? 'Restart' : 'Restart Lesson')
+                    : isReview
+                    ? (isRu ? 'Повторить' : isHi ? 'Review' : 'Review Lesson')
+                    : isFuture
+                    ? (isRu ? 'Перейти' : isHi ? 'Switch' : 'Switch Lesson')
+                    : (isRu ? 'Продолжить' : isHi ? 'Continue' : 'Continue')}
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
+
       {/* Final Assessment modal (Sprint N — TASK 5/6) */}
       {finalAssessmentOpen && (
         <FinalAssessmentModal
@@ -2657,8 +2884,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 teachingLanguage={teachingLanguage}
                 onGapClick={(topicSlug) => {
                   const lesson = curriculumLessons.find((l) => l.topicSlug === topicSlug)
-                  if (lesson && lesson.order < curriculumProgress.currentLesson && sessionId) {
-                    navigateToLesson(lesson.order)
+                  if (lesson && sessionId) {
+                    requestLessonSwitch(lesson, 'roadmap')
                   }
                 }}
               />
@@ -2832,7 +3059,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         const isLockExpanded = expandedLockedTopic === lesson.topicSlug
                         const isSkipWarningShown = skipWarning?.topicSlug === lesson.topicSlug
 
-                        const canNavigate = (isCompleted || isPrevious || isMastered || isRevision) && !isCurrent
+                        const canNavigate = !isCurrent && !isLocked
                         const canReview = (isCompleted || isMastered) && !isCurrent && lesson.topicSlug !== undefined
                         const canSkip = !isLocked && !isCompleted && !isMastered && !isRevision && !isSkipped && !isCurrent && lesson.topicSlug !== undefined
 
@@ -2850,20 +3077,36 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           : isCurrent ? UI.indigo
                           : 'var(--text-dim)'
 
+                        const roadmapLabel = isMastered
+                          ? (teachingLanguage === 'ru' ? `Урок ${lesson.order}: ${lesson.lessonTitle} — освоен` : `Lesson ${lesson.order}: ${lesson.lessonTitle} — mastered`)
+                          : isCompleted
+                          ? (teachingLanguage === 'ru' ? `Урок ${lesson.order}: ${lesson.lessonTitle} — завершён` : `Lesson ${lesson.order}: ${lesson.lessonTitle} — completed`)
+                          : isCurrent
+                          ? (teachingLanguage === 'ru' ? `Урок ${lesson.order}: ${lesson.lessonTitle} — текущий` : `Lesson ${lesson.order}: ${lesson.lessonTitle} — current`)
+                          : isLocked
+                          ? (teachingLanguage === 'ru' ? `Урок ${lesson.order}: ${lesson.lessonTitle} — заблокирован` : `Lesson ${lesson.order}: ${lesson.lessonTitle} — locked`)
+                          : `Lesson ${lesson.order}: ${lesson.lessonTitle}`
+
                         return (
                           <div key={lesson.order} style={{ marginBottom: 2 }}>
-                            <div
+                            <button
                               onClick={() => {
                                 if (isLocked && lesson.topicSlug) {
                                   setExpandedLockedTopic((prev) => prev === lesson.topicSlug ? null : lesson.topicSlug!)
+                                } else if (isCurrent) {
+                                  requestLessonSwitch(lesson, 'roadmap')
                                 } else if (canNavigate) {
-                                  navigateToLesson(lesson.order)
+                                  requestLessonSwitch(lesson, 'roadmap')
                                 }
                               }}
+                              aria-label={roadmapLabel}
+                              aria-current={isCurrent ? 'true' : undefined}
+                              aria-disabled={isLocked ? 'true' : undefined}
                               style={{
+                                width: '100%', textAlign: 'left',
                                 display: 'flex', alignItems: 'flex-start', gap: 6,
                                 padding: '5px 8px', borderRadius: 6,
-                                cursor: (canNavigate || isLocked) ? 'pointer' : 'default',
+                                cursor: (canNavigate || isLocked || isCurrent) ? 'pointer' : 'default',
                                 background: isCurrent ? `${UI.indigo}14`
                                   : isRevision ? 'rgba(121,192,255,0.07)'
                                   : isSkipWarningShown ? 'rgba(245,158,11,0.07)'
@@ -2876,6 +3119,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                   : '1px solid transparent',
                                 transition: 'all 150ms',
                                 opacity: isLocked ? 0.6 : 1,
+                                outline: 'none',
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault()
+                                  if (isLocked && lesson.topicSlug) {
+                                    setExpandedLockedTopic((prev) => prev === lesson.topicSlug ? null : lesson.topicSlug!)
+                                  } else if (!isLocked) {
+                                    requestLessonSwitch(lesson, 'roadmap')
+                                  }
+                                }
                               }}
                             >
                               <span style={{ fontSize: 11, marginTop: 1, flexShrink: 0, color: iconColor }}>
@@ -2980,7 +3234,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                   )}
                                 </div>
                               </div>
-                            </div>
+                            </button>
 
                             {/* Skip warning — shown inline when user clicks Skip on a topic with dependents */}
                             {isSkipWarningShown && skipWarning && (
@@ -3416,8 +3670,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 availableTopicSlugs={availableTopicSlugs}
                 teachingLanguage={teachingLanguage}
                 disabled={isStreaming || !sessionId}
-                onPrevious={() => previousLessonData && navigateToLesson(previousLessonData.order)}
-                onNext={() => advanceToNextLesson()}
+                onPrevious={() => previousLessonData && requestLessonSwitch(previousLessonData, 'previous_card')}
+                onCurrent={() => currentLessonData && requestLessonSwitch(currentLessonData, 'current_card')}
+                onNext={() => nextLessonData && requestLessonSwitch(nextLessonData, 'next_card')}
               />
             )}
 
@@ -3892,6 +4147,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 767px) {
           .lesson-grid { grid-template-columns: 1fr !important; }
+        }
+        /* Keyboard focus ring for roadmap buttons and nav panel cards */
+        button:focus-visible {
+          outline: 2px solid #6C5CE7;
+          outline-offset: 2px;
+        }
+        /* Touch feedback for mobile roadmap buttons */
+        @media (hover: none) {
+          button:active { opacity: 0.75 !important; }
         }
       `}</style>
       </div>{/* end right column (nav rail sibling) */}
