@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.natural-transformation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.natural-transformation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e646e36dadce05adbc7d991447146553933ef43e74acb013661b9b03970bfd40",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.natural-transformation.md": "sha256:04715c1e6ce642d1fa2461d254e680b6cd24b7b4f50983a511858f16021e32f3"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cat.natural-transformation",
+    "name": "Natural Transformation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cat.functor"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.natural-transformation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.natural-transformation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.natural-transformation.md": "sha256:04715c1e6ce642d1fa2461d254e680b6cd24b7b4f50983a511858f16021e32f3"
+      },
+      "contentHash": "sha256:9f3c008b726e667c45b3a5abada9dd8cf1ac1493e933ce54db8dd0a544c50a2b",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.natural-transformation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.natural-transformation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.natural-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.natural-transformation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.natural-transformation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.natural-transformation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.natural-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.natural-transformation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.natural-transformation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.natural-transformation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.natural-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.natural-transformation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.natural-transformation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **natural transformation** $\\eta: F\\Rightarrow G$ between two functors $F,G:\\mathcal{C}\\to\\mathcal{D}$ as an assignment, to each object $X\\in\\mathcal{C}$, of a morphism $\\eta_X: F(X)\\to G(X)$ in $\\mathcal{D}$ (called the **component** at $X$).\n- LO2: State and verify the **naturality condition** — for every morphism $f:X\\to Y$ in $\\mathcal{C}$, the \"naturality square\" commutes: $\\eta_Y\\circ F(f) = G(f)\\circ\\eta_X$ — by checking both paths around the square agree for a specific example.\n- LO3: Explain why natural transformations are called the **\"right notion of morphism\" between functors** — an arbitrary family of component morphisms $\\eta_X$ (one per object, with no further constraint) is NOT automatically a natural transformation; only families satisfying the naturality condition for EVERY morphism $f$ qualify.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "ANY-COMPONENT-FAMILY-ASSUMED-NATURAL",
+      "content": "| MC-1 | ANY-COMPONENT-FAMILY-ASSUMED-NATURAL | Believing any family of per-object morphisms $\\eta_X:F(X)\\to G(X)$ automatically qualifies as a natural transformation, without checking the naturality square | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "NATURALITY-CHECKED-FOR-SOME-MORPHISMS-ONLY",
+      "content": "| MC-2 | NATURALITY-CHECKED-FOR-SOME-MORPHISMS-ONLY | Believing verifying the naturality square for a few sample morphisms is sufficient to conclude the whole family is natural, rather than requiring it to hold for EVERY morphism in the source category | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "NATURALITY-SQUARE-DIRECTION-CONFUSED",
+      "content": "| MC-3 | NATURALITY-SQUARE-DIRECTION-CONFUSED | Confusing the two paths around the naturality square (e.g. writing $F(f)\\circ\\eta_Y$ instead of $\\eta_Y\\circ F(f)$, mismatching which functor's morphism-image composes with which component) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Components and the Naturality Square (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Components and the Naturality Square (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Natural vs. Non-Natural Families (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Natural vs. Non-Natural Families (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the naturality condition precisely for a transformation $\\eta:F\\Rightarrow G$ between functors $F,G:\\mathcal{C}\\to\\mathcal{D}$, for a morphism $f:X\\to Y$ in $\\mathcal{C}$.\n  2. For the identity-to-double-dual natural transformation (Example 1), explain in your own words why the formula $\\eta_V(v)(\\phi)=\\phi(v)$ requires no arbitrary choice, unlike Example 2's basis-dependent family.\n  3. Draw (describe in words) the naturality square for a transformation $\\eta:F\\Rightarrow G$ and a morphism $f:X\\to Y$, labeling all four objects/morphisms involved.\n  4. Given a family of component morphisms that you're told satisfies naturality for SOME specific morphisms but you haven't checked all of them, explain why you cannot yet conclude it's a genuine natural transformation.\n- **P76 (Transfer Probe, mode = independence)**: \"A data-processing pipeline has two functors $F,G:\\mathbf{Set}\\to\\mathbf{Set}$: $F$ sends each set $X$ to $X\\times X$ (all ordered pairs), and $G$ sends each set $X$ to the set of unordered pairs (2-element subsets) of $X$, roughly $\\{X, \\text{choose 2}\\}$. Define a candidate transformation $\\eta_X: X\\times X \\to G(X)$ by $\\eta_X(a,b) = \\{a,b\\}$ (forgetting order) whenever $a\\neq b$, with some convention for $a=b$. (a) Explain what the naturality condition would require of this family for a function $f:X\\to Y$ between sets. (b) Argue informally why this particular $\\eta$ — defined by a single uniform rule with no arbitrary per-set choices — is a strong CANDIDATE to actually be natural, contrasting it with this lesson's basis-dependent non-example.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cat.functor` (functors as structure-preserving maps between categories, preserving composition and identity).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.natural-transformation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.natural-transformation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cat.functor` (the two functors $F,G$ this concept's transformation relates, and their morphism-preservation structure that the naturality condition must cohere with).\n- **Unlocks**: `math.cat.adjunction` (adjunctions are defined via natural transformations, specifically the unit and counit), `math.cat.limits` (limits are defined via universal cones, themselves formalized using natural transformations between diagram-indexing functors).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.natural-transformation.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

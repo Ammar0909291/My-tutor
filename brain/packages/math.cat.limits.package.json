@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.limits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.limits",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e77b13df0b10e76ffedae3a257460f7a07cb4cb2ebdde3a51ba86e31b02a615d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.limits.md": "sha256:2a1662f5d4677ae2bdb365c5ddb37b693b4ffb040417115b5bc7bdc1d6ea8dfb"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cat.limits",
+    "name": "Limits and Colimits",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.cat.natural-transformation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.limits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.limits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.limits.md": "sha256:2a1662f5d4677ae2bdb365c5ddb37b693b4ffb040417115b5bc7bdc1d6ea8dfb"
+      },
+      "contentHash": "sha256:a0335827dbac4706dbb352db980b309e6fb576b725e616c5224bb1285c1bcdd6",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.limits.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.limits.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.limits\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.limits.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.limits.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.limits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.limits.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.limits.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.limits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.limits/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.limits",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **cone** over a diagram $D:J\\to\\mathcal{C}$ (indexed by a small category $J$) as an object $C\\in\\mathcal{C}$ together with morphisms $\\pi_j:C\\to D(j)$ for each $j\\in J$, compatible with $D$'s morphisms, and define the **limit** of $D$ as the **universal** such cone (the \"best possible\" one, through which every other cone factors uniquely).\n- LO2: Recognize **products** and **coproducts** as the limit/colimit of a **discrete diagram** (a diagram with no morphisms between its objects other than identities), and recognize **equalizers**, **pullbacks**, and **pushouts** as specific named limits/colimits of small, non-discrete diagram shapes.\n- LO3: State what it means for a functor to **preserve limits** (\"continuous,\" in this technical category-theoretic sense — unrelated to topological continuity by name only) and explain why this is a genuinely useful/restrictive property, not automatic for arbitrary functors.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.limits/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.limits",
+      "title": "LIMIT-PRESERVATION-ASSUMED-AUTOMATIC",
+      "content": "| MC-1 | LIMIT-PRESERVATION-ASSUMED-AUTOMATIC | Believing any functor between categories automatically preserves limits, rather than recognizing this as a genuine property requiring its own verification | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cat.limits/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.limits",
+      "title": "UNIQUENESS-OF-FACTORING-MAP-OVERLOOKED",
+      "content": "| MC-2 | UNIQUENESS-OF-FACTORING-MAP-OVERLOOKED | Verifying that SOME factoring map exists from an arbitrary cone to the candidate limit, without checking it is UNIQUE, and thereby missing that a non-universal cone could satisfy existence without uniqueness | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.cat.limits/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.limits",
+      "title": "DISCRETE-DIAGRAM-ASSUMED-ONLY-DIAGRAM-SHAPE",
+      "content": "| MC-3 | DISCRETE-DIAGRAM-ASSUMED-ONLY-DIAGRAM-SHAPE | Believing all limits are products (i.e., assuming every diagram is discrete), not recognizing that non-discrete diagram shapes (giving equalizers, pullbacks, etc.) are equally valid instances of the same general limit concept | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.cat.limits/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.limits",
+      "title": "Cones and the Universal Property, via the Product (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cones and the Universal Property, via the Product (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cat.limits/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.limits",
+      "title": "Equalizers as a Different Diagram Shape, and Limit-Preservation as a Non-Automatic Property (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Equalizers as a Different Diagram Shape, and Limit-Preservation as a Non-Automatic Property (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.cat.limits/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.limits",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cat.limits/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.limits",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. In $\\mathbf{Set}$, verify that the coproduct (disjoint union) $A\\sqcup B$ satisfies the universal property of a colimit for the discrete diagram sending two indices to $A,B$ (describe the inclusion maps and the universal factoring property).\n  2. Find the equalizer of $f(x)=x^3$ and $g(x)=x$ as functions $\\mathbb{R}\\to\\mathbb{R}$.\n  3. Describe, in your own words, what diagram shape a pullback is the limit of, and give one concrete example (e.g. fiber product of two functions into a common target).\n  4. Explain why \"F is a functor\" alone does not imply \"F preserves limits,\" using this lesson's forgetful-functor-vs-$\\pi_0$ contrast as your example.\n- **P76 (Transfer Probe, mode = independence)**: \"A relational database models two tables sharing a common 'customer ID' column as a JOIN operation — mathematically, this is a pullback: given functions $f:\\text{Orders}\\to\\text{CustomerIDs}$ and $g:\\text{Accounts}\\to\\text{CustomerIDs}$ (each row mapping to its customer ID), the pullback is the set of matched (order, account) pairs sharing the same customer ID. (a) Using this lesson's definition of a limit as a universal cone, explain informally why the JOIN result, together with its two projection maps back to Orders and Accounts, deserves to be called 'universal' among all ways of pairing up matching rows. (b) A database engineer claims that 'any function between two database schemas automatically preserves joins.' Using this lesson's forgetful-functor-vs-connected-components contrast, explain why this claim needs independent justification and is not automatic.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cat.limits/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.limits",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cat.natural-transformation` (natural transformations, used to formalize the notion of \"cone\" and the universal property's uniqueness-of-factoring-map requirement).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.limits/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.limits",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cat.natural-transformation` (used to formalize cone compatibility and the universal factoring map's uniqueness in the fully general categorical language).\n- **Unlocks**: `math.cat.equalizer` (a detailed, dedicated treatment of the equalizer construction introduced here as one example), `math.cat.pullback` (likewise for pullbacks).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.limits.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
