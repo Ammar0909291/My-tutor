@@ -30577,6 +30577,96 @@ const EFP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.communication.negotiation-language ────────────────────────────────────
+const NEGL = 'eng.communication.negotiation-language'
+const NEGL_SRC = 'docs/curriculum/blueprints/eng.communication.negotiation-language.md'
+
+const NEGL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NEGL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating negotiation as pushing your position as hard as possible ' +
+      'is like trying to parallel park by aggressively gunning the engine ' +
+      'forward — you might move, but you\'re not getting into the space ' +
+      'you need. Acknowledge the other party\'s actual position first, ' +
+      'then propose an alternative that moves toward mutual agreement, ' +
+      'not one-sided winning.',
+    targetedMisconceptions: [`${NEGL}:MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE`],
+    source: `${NEGL_SRC} — MC-A (P28 aggressive-parallel-parking conflict)`,
+  },
+  {
+    conceptId: NEGL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Mistaking silence for consensus is like assuming a crack in a wall ' +
+      'has been fixed just because you painted over it — the underlying ' +
+      'problem is still there. Genuine consensus requires actually voicing ' +
+      'and working through real disagreement using constructive language, ' +
+      'not suppressing it with silence or premature agreement.',
+    targetedMisconceptions: [`${NEGL}:MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING`],
+    source: `${NEGL_SRC} — MC-B (P28 painted-over-crack conflict)`,
+  },
+  {
+    conceptId: NEGL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Effective negotiation language acknowledges the other party\'s ' +
+      'position before proposing alternatives, aiming at mutually ' +
+      'acceptable agreement rather than pushing one\'s own position as ' +
+      'hard as possible, like carefully maneuvering into a parking space ' +
+      'rather than aggressively gunning forward. Separately, staying ' +
+      'silent about or quickly agreeing past a genuine disagreement is not ' +
+      'the same as successful consensus-building — like painting over a ' +
+      'crack rather than repairing it; real agreement requires actually ' +
+      'voicing and working through the disagreement.',
+    targetedMisconceptions: [
+      `${NEGL}:MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE`,
+      `${NEGL}:MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING`,
+    ],
+    source: `${NEGL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const NEGL_PROBES: SeedProbe[] = [
+  {
+    conceptId: NEGL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"We need this delivered by Friday, no exceptions." This opening asserts one position forcefully with no acknowledgment of the other party. Does effective negotiation language mean pushing your own position as hard as possible?',
+    choices: [
+      { text: 'No — effective negotiation language acknowledges the other party\'s actual position before proposing alternatives, aiming at mutually acceptable agreement rather than one-sided winning', isCorrect: true },
+      { text: 'Yes — effective negotiation language means pushing your own position as hard as possible', isCorrect: false, misconceptionId: `${NEGL}:MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE` },
+    ],
+    correctValue: 'no, negotiation requires acknowledging the other party first',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NEGL}:MC-A-EFFECTIVE-NEGOTIATION-LANGUAGE-MEANS-PUSHING-YOUR-OWN-POSITION-AS-HARD-AS-POSSIBLE`],
+    source: `${NEGL_SRC} — aggressive-parallel-parking conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NEGL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A participant genuinely disagrees with a proposal but stays silent and lets it pass unchallenged. Is staying silent about a genuine disagreement the same as successful consensus-building?',
+    choices: [
+      { text: 'No — an unresolved, unspoken disagreement is not the same as a genuine, worked-through agreement; real consensus requires actually voicing and addressing the concern constructively', isCorrect: true },
+      { text: 'Yes — avoiding disagreement altogether by staying silent or quickly agreeing is the same as successful consensus-building', isCorrect: false, misconceptionId: `${NEGL}:MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING` },
+    ],
+    correctValue: 'no, silence is not the same as genuine consensus',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NEGL}:MC-B-AVOIDING-DISAGREEMENT-ALTOGETHER-BY-STAYING-SILENT-OR-QUICKLY-AGREEING-IS-THE-SAME-AS-SUCCESSFUL-CONSENSUS-BUILDING`],
+    source: `${NEGL_SRC} — painted-over-crack conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -30923,6 +31013,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PROFC_EXPLANATIONS,
   ...PDES_EXPLANATIONS,
   ...EFP_EXPLANATIONS,
+  ...NEGL_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -31269,4 +31360,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PROFC_PROBES,
   ...PDES_PROBES,
   ...EFP_PROBES,
+  ...NEGL_PROBES,
 ]
