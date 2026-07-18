@@ -13266,6 +13266,509 @@ const EVSR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.stress-strain ────────────────────────────────────────────────
+const SSTR = 'phys.mech.stress-strain'
+const SSTR_SRC = 'docs/curriculum/blueprints/phys.mech.stress-strain.md'
+
+const SSTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SSTR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 1000 N force applied to a steel bar with a 0.01 m² cross-section ' +
+      'produces stress σ = 1000/0.01 = 100 000 Pa. Apply that exact same ' +
+      '1000 N to a much thinner bar, cross-section only 0.001 m², and the ' +
+      'stress jumps to 1 000 000 Pa — ten times higher, purely because ' +
+      'the force is now concentrated over ten times less area, even ' +
+      'though the force itself never changed. Stress is FORCE PER UNIT ' +
+      'AREA, σ = F/A, never force alone — exactly why a pin held with the ' +
+      'same push as a fingertip hurts far more: the same force squeezed ' +
+      'through the pin’s tiny area produces enormous stress, while spread ' +
+      'across your palm it produces almost none. A material fails when ' +
+      'its stress exceeds its ultimate tensile strength, a property ' +
+      'measured in pascals, never in newtons alone.',
+    targetedMisconceptions: [`${SSTR}:MC-STRESS-IS-FORCE`],
+    source: `${SSTR_SRC} — Component 1 MC-STRESS-IS-FORCE conflict_evidence [P28] (thick vs. thin bar, same force)`,
+  },
+  {
+    conceptId: SSTR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Young’s modulus E and spring constant k are easy to blur together, ' +
+      'but they answer genuinely different questions. E = σ/ε is a pure ' +
+      'MATERIAL property — steel is always E ≈ 200 GPa whether you test a ' +
+      'short thick rod or a long thin wire, the same way "steel" always ' +
+      'means the same substance no matter how it’s shaped. Spring ' +
+      'constant k = EA/L, by contrast, mixes that material property ' +
+      'together with the OBJECT’s own geometry (its area A and length L) ' +
+      '— so a short, thick steel rod and a long, thin steel wire share ' +
+      'the identical E but have wildly different k values (the rod is far ' +
+      'stiffer to physically deform). Confusing the two leads to treating ' +
+      'a geometry change as if it changed the material itself, when only ' +
+      'k has moved.',
+    targetedMisconceptions: [`${SSTR}:MC-YOUNG-MODULUS-IS-STIFFNESS`],
+    source: `${SSTR_SRC} — Component 1 MC-YOUNG-MODULUS-IS-STIFFNESS conflict_evidence [P28] (E vs. k, geometry-independence)`,
+  },
+]
+
+const SSTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: SSTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same 1000 N force is applied to two bars of different cross-sectional area: Bar A (0.01 m²) and Bar B (0.001 m², ten times smaller). Do they experience the same stress?',
+    choices: [
+      { text: 'No — Bar B experiences ten times more stress, since σ = F/A and its area is ten times smaller', isCorrect: true },
+      { text: 'Yes — the applied force is identical, so the stress must be the same', isCorrect: false, misconceptionId: `${SSTR}:MC-STRESS-IS-FORCE` },
+    ],
+    correctValue: 'no, B has 10x more stress',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SSTR}:MC-STRESS-IS-FORCE`],
+    source: `${SSTR_SRC} — MC-STRESS-IS-FORCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SSTR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A short, thick steel rod and a long, thin steel wire have very different spring constants k. Do they also have different Young’s moduli E?',
+    choices: [
+      { text: 'No — E is a material property (same for both, since both are steel); only k, which depends on geometry, differs', isCorrect: true },
+      { text: 'Yes — the rod is stiffer, so it must have a larger E', isCorrect: false, misconceptionId: `${SSTR}:MC-YOUNG-MODULUS-IS-STIFFNESS` },
+    ],
+    correctValue: 'no, same E',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SSTR}:MC-YOUNG-MODULUS-IS-STIFFNESS`],
+    source: `${SSTR_SRC} — MC-YOUNG-MODULUS-IS-STIFFNESS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.pressure-fluids ──────────────────────────────────────────────
+const PFLU = 'phys.mech.pressure-fluids'
+const PFLU_SRC = 'docs/curriculum/blueprints/phys.mech.pressure-fluids.md'
+
+const PFLU_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PFLU,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Submerge a hollow ball with a small hole drilled in its side, and ' +
+      'water rushes in from whichever direction the hole faces — top, ' +
+      'bottom, or either side — proving fluid pressure is NOT a purely ' +
+      'downward push. At any single point in a fluid, the pressure acts ' +
+      'equally in every direction at once (this is exactly the sensation ' +
+      'a diver feels: their wetsuit is squeezed evenly from all sides, ' +
+      'not just from above). What "downward pressure" usually describes ' +
+      'is really the FORCE on one particular surface, force = P × A, ' +
+      'acting perpendicular to whatever surface you are looking at — ' +
+      'downward on a horizontal surface facing up, sideways on a vertical ' +
+      'wall, and so on. The pressure itself, P = P₀ + ρgd, is a scalar ' +
+      'with no direction of its own; only the resulting FORCE on a ' +
+      'specific surface has one.',
+    targetedMisconceptions: [`${PFLU}:MC-PRESSURE-DIRECTION`],
+    source: `${PFLU_SRC} — Component 1 MC-PRESSURE-DIRECTION conflict_evidence [P28] (hollow-ball-with-hole, diver analogy)`,
+  },
+  {
+    conceptId: PFLU,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A wide barrel and a thin test tube, both filled with water to ' +
+      'exactly the same height (1 m), might seem like they should have ' +
+      'very different pressure at the bottom — the barrel holds a ' +
+      'hundred times more water, after all. But P = ρgh = ' +
+      '1000×9.8×1 = 9800 Pa in BOTH containers, identical — pressure ' +
+      'depends only on depth h, the fluid’s density ρ, and gravity g, ' +
+      'never on the total volume of fluid or the shape of the container. ' +
+      'This is the classical "hydraulic paradox," and it’s exactly why a ' +
+      'water tower’s pressure at your tap depends only on how HIGH the ' +
+      'tower stands, never on how wide or large its tank is — a tall, ' +
+      'narrow tower delivers more pressure than a short, enormous one.',
+    targetedMisconceptions: [`${PFLU}:MC-PRESSURE-DEPENDS-ON-VOLUME`],
+    source: `${PFLU_SRC} — Component 1 MC-PRESSURE-DEPENDS-ON-VOLUME conflict_evidence [P28] (barrel vs. tube, water-tower analogy)`,
+  },
+]
+
+const PFLU_PROBES: SeedProbe[] = [
+  {
+    conceptId: PFLU,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A submerged hollow ball has a small hole drilled in its side. From which direction does water enter?',
+    choices: [
+      { text: 'From whichever direction the hole faces — fluid pressure acts in all directions at a given point', isCorrect: true },
+      { text: 'Only from directly above, since fluid pressure acts downward', isCorrect: false, misconceptionId: `${PFLU}:MC-PRESSURE-DIRECTION` },
+    ],
+    correctValue: 'from whichever direction the hole faces',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PFLU}:MC-PRESSURE-DIRECTION`],
+    source: `${PFLU_SRC} — MC-PRESSURE-DIRECTION trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PFLU,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A wide barrel and a narrow test tube are both filled with water to the same height h = 1 m. Compare the water pressure at the bottom of each.',
+    choices: [
+      { text: 'Equal — pressure at depth h depends only on h, density, and g, never on the container’s volume or shape', isCorrect: true },
+      { text: 'The barrel has much higher pressure, since it holds far more water', isCorrect: false, misconceptionId: `${PFLU}:MC-PRESSURE-DEPENDS-ON-VOLUME` },
+    ],
+    correctValue: 'equal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PFLU}:MC-PRESSURE-DEPENDS-ON-VOLUME`],
+    source: `${PFLU_SRC} — MC-PRESSURE-DEPENDS-ON-VOLUME trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.buoyancy ─────────────────────────────────────────────────────
+const BUOY = 'phys.mech.buoyancy'
+const BUOY_SRC = 'docs/curriculum/blueprints/phys.mech.buoyancy.md'
+
+const BUOY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BUOY,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 1 kg steel ball sinks; a 1000 kg steel ship floats — a thousand ' +
+      'times heavier, yet it floats while the tiny ball sinks. Weight ' +
+      'alone clearly cannot be what decides floating or sinking. The real ' +
+      'factor is average DENSITY: the ship is mostly hollow, so its total ' +
+      'mass spread over its total volume (steel hull plus all that empty, ' +
+      'air-filled interior) works out to less than water’s density, while ' +
+      'a solid steel ball’s density is far above water’s. An object ' +
+      'floats when its average density is less than the fluid’s density ' +
+      'and sinks when it’s greater — never a matter of comparing raw ' +
+      'weights. Archimedes’ principle makes this precise: the buoyant ' +
+      'force equals the weight of the fluid displaced, ' +
+      'F_buoy = ρ_fluid × V_displaced × g, which depends on the fluid’s ' +
+      'density and the displaced volume, not the object’s own weight at ' +
+      'all.',
+    targetedMisconceptions: [`${BUOY}:MC-BUOYANCY-WEIGHT`],
+    source: `${BUOY_SRC} — Component 1 MC-BUOYANCY-WEIGHT conflict_evidence [P28] (1 kg ball vs. 1000 kg ship)`,
+  },
+  {
+    conceptId: BUOY,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems reasonable that an object sinking deeper should feel MORE ' +
+      'buoyancy, the way water pressure itself keeps increasing with ' +
+      'depth — but for a rigid, fully submerged object, buoyancy stays ' +
+      'exactly constant no matter how deep it goes. The reason: buoyancy ' +
+      'comes from the DIFFERENCE between the pressure pushing up on the ' +
+      'object’s bottom face and the pressure pushing down on its top ' +
+      'face. Both of those pressures individually increase with depth, ' +
+      'but since the object’s own height (the gap between top and bottom ' +
+      'face) never changes, that pressure DIFFERENCE — and therefore the ' +
+      'net buoyant force, F_buoy = ρ_fluid × V_object × g — stays fixed. ' +
+      'Depth only starts to matter for buoyancy when the object itself ' +
+      'compresses and changes volume, like a balloon or a fish’s swim ' +
+      'bladder, which a rigid steel cube never does.',
+    targetedMisconceptions: [`${BUOY}:MC-BUOYANCY-PROPORTIONAL-TO-DEPTH`],
+    source: `${BUOY_SRC} — Component 1 MC-BUOYANCY-PROPORTIONAL-TO-DEPTH conflict_evidence [P28] (constant V_submerged for rigid objects)`,
+  },
+]
+
+const BUOY_PROBES: SeedProbe[] = [
+  {
+    conceptId: BUOY,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 kg steel ball sinks in water; a 1000 kg steel ship floats. What determines whether an object floats or sinks?',
+    choices: [
+      { text: 'Average density compared to the fluid’s density — not weight', isCorrect: true },
+      { text: 'Weight — heavier objects sink, lighter objects float', isCorrect: false, misconceptionId: `${BUOY}:MC-BUOYANCY-WEIGHT` },
+    ],
+    correctValue: 'average density',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BUOY}:MC-BUOYANCY-WEIGHT`],
+    source: `${BUOY_SRC} — MC-BUOYANCY-WEIGHT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BUOY,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A rigid steel cube is fully submerged at 1 m depth, then pushed down to 10 m depth. How does the buoyant force on it change?',
+    choices: [
+      { text: 'It stays the same — F_buoy = ρ_fluid × V_object × g, and V_object never changes for a rigid object', isCorrect: true },
+      { text: 'It increases, since the cube sinks deeper and experiences more buoyancy at greater depth', isCorrect: false, misconceptionId: `${BUOY}:MC-BUOYANCY-PROPORTIONAL-TO-DEPTH` },
+    ],
+    correctValue: 'unchanged',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BUOY}:MC-BUOYANCY-PROPORTIONAL-TO-DEPTH`],
+    source: `${BUOY_SRC} — MC-BUOYANCY-PROPORTIONAL-TO-DEPTH trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.bernoulli ────────────────────────────────────────────────────
+const BERN = 'phys.mech.bernoulli'
+const BERN_SRC = 'docs/curriculum/blueprints/phys.mech.bernoulli.md'
+
+const BERN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BERN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Fast-moving fluid has low pressure" can sound like some mysterious ' +
+      'suction rule, but Bernoulli’s equation is really nothing more than ' +
+      'energy conservation written for a moving fluid: for a steady, ' +
+      'incompressible, non-viscous flow, P + ½ρv² + ρgh stays constant ' +
+      'along a streamline — pressure energy, kinetic energy density, and ' +
+      'gravitational energy density, all adding up to the same total ' +
+      'everywhere. If the fluid speeds up, its kinetic-energy term ½ρv² ' +
+      'necessarily grows, and since the total must stay fixed, the ' +
+      'pressure term P must shrink to compensate — the low pressure is a ' +
+      'CONSEQUENCE of the speed increase, not a cause that "sucks" ' +
+      'anything. Exactly the same total-energy-conservation logic you ' +
+      'already use for a swinging pendulum (KE trades off against PE) — ' +
+      'Bernoulli is that same idea wearing a fluid-dynamics costume.',
+    targetedMisconceptions: [`${BERN}:MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY`],
+    source: `${BERN_SRC} — Component 1 MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY conflict_evidence [P28] (energy-conservation derivation)`,
+  },
+  {
+    conceptId: BERN,
+    subjectSlug: 'physics',
+    familyKind: 'common_misconception_note',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The popular "equal transit time" explanation for aerofoil lift — ' +
+      'that air splitting at the leading edge must travel over the top ' +
+      'and under the bottom and arrive together at the trailing edge, so ' +
+      'the top air goes faster to cover more distance — is experimentally ' +
+      'FALSE. Wind-tunnel smoke visualisation shows the air travelling ' +
+      'over the top actually arrives at the trailing edge BEFORE the air ' +
+      'that went underneath; there is no rendezvous requirement at all. ' +
+      'Bernoulli’s equation is still correct once you know the real speed ' +
+      'difference between the surfaces — it correctly converts that speed ' +
+      'difference into a pressure difference and hence lift — but the ' +
+      'REASON the top surface is faster is the aerofoil’s curvature, ' +
+      'angle of attack, and the resulting downward deflection of air ' +
+      '(Newton’s Third Law), not equal transit time.',
+    targetedMisconceptions: [`${BERN}:MC-BERNOULLI-LIFT-EQUAL-TRANSIT`],
+    source: `${BERN_SRC} — Component 1 MC-BERNOULLI-LIFT-EQUAL-TRANSIT conflict_evidence [P28] (wind-tunnel smoke visualisation)`,
+  },
+]
+
+const BERN_PROBES: SeedProbe[] = [
+  {
+    conceptId: BERN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'According to Bernoulli’s equation, why does pressure drop where fluid speed increases in a horizontal pipe?',
+    choices: [
+      { text: 'Because P + ½ρv² is constant — the extra kinetic-energy density must be balanced by a drop in pressure', isCorrect: true },
+      { text: 'Because fast-moving fluid actively "sucks" the pressure away', isCorrect: false, misconceptionId: `${BERN}:MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY` },
+    ],
+    correctValue: 'energy conservation, not suction',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BERN}:MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY`],
+    source: `${BERN_SRC} — MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BERN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does air flowing over the top and bottom of an aerofoil arrive at the trailing edge at the same time (equal transit time)?',
+    choices: [
+      { text: 'No — wind-tunnel evidence shows the top-surface air arrives first; there is no equal-transit requirement', isCorrect: true },
+      { text: 'Yes — the air must meet up again at the trailing edge, which is why the top air moves faster', isCorrect: false, misconceptionId: `${BERN}:MC-BERNOULLI-LIFT-EQUAL-TRANSIT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BERN}:MC-BERNOULLI-LIFT-EQUAL-TRANSIT`],
+    source: `${BERN_SRC} — MC-BERNOULLI-LIFT-EQUAL-TRANSIT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.viscosity ────────────────────────────────────────────────────
+const VISC = 'phys.mech.viscosity'
+const VISC_SRC = 'docs/curriculum/blueprints/phys.mech.viscosity.md'
+
+const VISC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VISC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Mercury is roughly 13 times DENSER than water, yet it pours and ' +
+      'flows almost as easily as water — its viscosity is only slightly ' +
+      'higher. Honey, meanwhile, is barely 1.4 times denser than water ' +
+      'but is thousands of times more VISCOUS, oozing rather than ' +
+      'pouring. Density (ρ, mass per unit volume) and viscosity (η, ' +
+      'resistance to flow, or how hard you must push one fluid layer past ' +
+      'another) are completely independent properties with different ' +
+      'physical origins — density comes from how much mass is packed into ' +
+      'a given volume, while viscosity comes from how strongly ' +
+      'neighbouring molecules grip each other as they try to slide past ' +
+      'one another. A fluid can be dense and freely-flowing (mercury), or ' +
+      'light and highly viscous (many polymer solutions) — knowing one ' +
+      'property tells you essentially nothing about the other.',
+    targetedMisconceptions: [`${VISC}:MC-VISCOSITY-IS-DENSITY`],
+    source: `${VISC_SRC} — Component 1 MC-VISCOSITY-IS-DENSITY conflict_evidence [P28] (mercury vs. honey density/viscosity contrast)`,
+  },
+  {
+    conceptId: VISC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Viscosity is often treated as one fixed number for a given fluid, ' +
+      'but it is one of the MOST temperature-sensitive properties in all ' +
+      'of physics. Water’s viscosity drops from 1.79×10⁻³ Pa·s at 0°C to ' +
+      'just 0.28×10⁻³ Pa·s at 100°C — over six times thinner when hot. ' +
+      'Cold honey barely moves (η ≈ 100 Pa·s), while warm honey pours ' +
+      'freely (η ≈ 0.1 Pa·s) — a thousand-fold difference from ' +
+      'temperature alone. In LIQUIDS, viscosity drops sharply as ' +
+      'temperature rises, because heat agitates molecules enough to break ' +
+      'the intermolecular grip that resists flow. In GASES the effect ' +
+      'reverses — viscosity rises weakly with temperature, since hotter ' +
+      'gas molecules collide more often and transfer more momentum ' +
+      'between layers. Any viscosity value quoted without a temperature ' +
+      'attached is genuinely incomplete — exactly why mechanics drain an ' +
+      'engine while the oil is still warm and thin, not cold and thick.',
+    targetedMisconceptions: [`${VISC}:MC-VISCOSITY-CONSTANT-TEMPERATURE`],
+    source: `${VISC_SRC} — Component 1 MC-VISCOSITY-CONSTANT-TEMPERATURE conflict_evidence [P28] (water/honey/air temperature dependence)`,
+  },
+]
+
+const VISC_PROBES: SeedProbe[] = [
+  {
+    conceptId: VISC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Mercury is about 13 times denser than water but flows almost as easily. Honey is only 1.4 times denser than water but flows far more slowly. What does this show?',
+    choices: [
+      { text: 'Viscosity and density are independent properties — a dense fluid can have low viscosity, and vice versa', isCorrect: true },
+      { text: 'A fluid’s viscosity is directly determined by its density', isCorrect: false, misconceptionId: `${VISC}:MC-VISCOSITY-IS-DENSITY` },
+    ],
+    correctValue: 'independent properties',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VISC}:MC-VISCOSITY-IS-DENSITY`],
+    source: `${VISC_SRC} — MC-VISCOSITY-IS-DENSITY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VISC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the viscosity of water stay the same as its temperature changes from 0°C to 100°C?',
+    choices: [
+      { text: 'No — water’s viscosity drops more than sixfold as it heats from 0°C to 100°C', isCorrect: true },
+      { text: 'Yes — viscosity is a fixed material property that does not change with temperature', isCorrect: false, misconceptionId: `${VISC}:MC-VISCOSITY-CONSTANT-TEMPERATURE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VISC}:MC-VISCOSITY-CONSTANT-TEMPERATURE`],
+    source: `${VISC_SRC} — MC-VISCOSITY-CONSTANT-TEMPERATURE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.surface-tension ──────────────────────────────────────────────
+const STEN = 'phys.mech.surface-tension'
+const STEN_SRC = 'docs/curriculum/blueprints/phys.mech.surface-tension.md'
+
+const STEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STEN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Surface tension γ and pressure look related but are dimensionally ' +
+      'different quantities: γ is force per unit LENGTH (N/m), while ' +
+      'pressure is force per unit AREA (N/m²) — they cannot simply be ' +
+      'equated. What surface tension actually DOES is generate an excess ' +
+      'pressure inside a curved liquid surface: a spherical water drop of ' +
+      'radius r has ΔP = 2γ/r, while a soap bubble — which has TWO ' +
+      'surfaces, inner and outer — has double that, ΔP = 4γ/r. For a ' +
+      'water drop of radius 1 mm with γ = 0.072 N/m, that works out to ' +
+      'ΔP = 2×0.072/0.001 = 144 Pa, a genuine pressure in pascals, ' +
+      'produced BY the surface tension but never identical to it. The two ' +
+      'quantities are linked through the Young–Laplace equation, not ' +
+      'interchangeable.',
+    targetedMisconceptions: [`${STEN}:MC-SURFACE-TENSION-IS-PRESSURE`],
+    source: `${STEN_SRC} — Component 1 MC-SURFACE-TENSION-IS-PRESSURE conflict_evidence [P28] (drop vs. bubble ΔP formulas, worked numbers)`,
+  },
+  {
+    conceptId: STEN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A needle resting on water seems to prove surface tension pulls ' +
+      '"outward," stretching the surface like a trampoline holding the ' +
+      'needle up from below — but surface tension actually acts ' +
+      'TANGENTIALLY, along the surface, never straight outward or ' +
+      'straight inward through the liquid. What happens under the needle ' +
+      'is that the water surface dips slightly, and the tangential pull ' +
+      'along that now-curved surface develops an upward-pointing ' +
+      'COMPONENT exactly like the tension in a tilted rope has a vertical ' +
+      'component — the surface itself never stretches outward, it simply ' +
+      'pulls along itself, and curvature converts part of that tangential ' +
+      'pull into a net supporting force. On a perfectly flat surface, ' +
+      'this tangential tension produces no net force on the bulk liquid ' +
+      'at all — only curvature creates the perpendicular effect that ' +
+      'shows up as excess pressure or, here, as a floating needle.',
+    targetedMisconceptions: [`${STEN}:MC-SURFACE-TENSION-ACTS-OUTWARD`],
+    source: `${STEN_SRC} — Component 1 MC-SURFACE-TENSION-ACTS-OUTWARD conflict_evidence [P28] (needle-on-water, tangential-vs-normal force)`,
+  },
+]
+
+const STEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: STEN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A water drop of radius r has surface tension γ. What is the excess pressure inside the drop?',
+    choices: [
+      { text: 'ΔP = 2γ/r — related to surface tension through curvature, not equal to γ itself', isCorrect: true },
+      { text: 'ΔP = γ — the pressure equals the surface tension directly', isCorrect: false, misconceptionId: `${STEN}:MC-SURFACE-TENSION-IS-PRESSURE` },
+    ],
+    correctValue: '2*gamma/r',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${STEN}:MC-SURFACE-TENSION-IS-PRESSURE`],
+    source: `${STEN_SRC} — MC-SURFACE-TENSION-IS-PRESSURE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: STEN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In which direction does surface tension act on a liquid surface?',
+    choices: [
+      { text: 'Tangentially, along the surface — curvature then converts part of that tangential pull into a normal (perpendicular) force', isCorrect: true },
+      { text: 'Outward, stretching the liquid surface away from the bulk liquid', isCorrect: false, misconceptionId: `${STEN}:MC-SURFACE-TENSION-ACTS-OUTWARD` },
+    ],
+    correctValue: 'tangentially',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STEN}:MC-SURFACE-TENSION-ACTS-OUTWARD`],
+    source: `${STEN_SRC} — MC-SURFACE-TENSION-ACTS-OUTWARD trigger case as probe, distractor-mapped`,
+  },
+]
+
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -13421,6 +13924,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CCTX_EXPLANATIONS,
   ...CRIT_EXPLANATIONS,
   ...EVSR_EXPLANATIONS,
+  ...SSTR_EXPLANATIONS,
+  ...PFLU_EXPLANATIONS,
+  ...BUOY_EXPLANATIONS,
+  ...BERN_EXPLANATIONS,
+  ...VISC_EXPLANATIONS,
+  ...STEN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -13576,4 +14085,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CCTX_PROBES,
   ...CRIT_PROBES,
   ...EVSR_PROBES,
+  ...SSTR_PROBES,
+  ...PFLU_PROBES,
+  ...BUOY_PROBES,
+  ...BERN_PROBES,
+  ...VISC_PROBES,
+  ...STEN_PROBES,
 ]
