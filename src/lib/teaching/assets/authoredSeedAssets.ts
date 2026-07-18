@@ -12479,6 +12479,397 @@ const TSTR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.genre-recognition ─────────────────────────────────────────────
+const GNRC = 'eng.reading.genre-recognition'
+const GNRC_SRC = 'docs/curriculum/blueprints/eng.reading.genre-recognition.md'
+
+const GNRC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GNRC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Identifying genre from one surface feature is like assuming any ' +
+      'building with a pointed roof must be a church — plenty of houses ' +
+      'have pointed roofs too. A nonfiction informational text about ocean ' +
+      'animals written with poetic line breaks does not become a poem just ' +
+      'because it has line breaks. Genre is really determined by the ' +
+      'text\'s overall PURPOSE — to inform with verified facts, to tell an ' +
+      'invented story, to persuade — and its full set of structural ' +
+      'conventions, not any one visible trait like line breaks or ' +
+      'dialogue.',
+    targetedMisconceptions: [`${GNRC}:MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE`],
+    source: `${GNRC_SRC} — MC-A (P28 ocean-animals-poem conflict evidence)`,
+  },
+  {
+    conceptId: GNRC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Assuming every text fits exactly one genre box is like assuming ' +
+      'every dish must be purely "sweet" or purely "savory" — but plenty ' +
+      'of dishes are deliberately both. A memoir uses story structure ' +
+      '(usually fiction\'s territory) to tell true events — that is ' +
+      'narrative nonfiction, a genuine hybrid. Do not force every text ' +
+      'into one fixed genre; if it combines conventions from more than one ' +
+      'genre, name it as a hybrid rather than picking just one category ' +
+      'that does not fully fit.',
+    targetedMisconceptions: [`${GNRC}:MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP`],
+    source: `${GNRC_SRC} — MC-B (P30 sweet-and-savory hybrid-genre bridge)`,
+  },
+  {
+    conceptId: GNRC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genre is determined by a text\'s overall purpose and full set of ' +
+      'structural conventions, not by any single surface feature — line ' +
+      'breaks do not make a text a poem, and a serious tone does not make ' +
+      'a text nonfiction; a nonfiction piece can be formatted with line ' +
+      'breaks, and a fictionalized biography can read with complete ' +
+      'gravity. Separately, genres are not always mutually exclusive: many ' +
+      'texts deliberately blend conventions from more than one genre — ' +
+      'narrative nonfiction (a memoir using story structure to convey ' +
+      'true events) is a recognized hybrid, not an error of ' +
+      'classification. Identify genre by checking purpose and multiple ' +
+      'conventions together, and name a genuine hybrid as such rather than ' +
+      'forcing a single ill-fitting label.',
+    targetedMisconceptions: [
+      `${GNRC}:MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE`,
+      `${GNRC}:MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP`,
+    ],
+    source: `${GNRC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const GNRC_PROBES: SeedProbe[] = [
+  {
+    conceptId: GNRC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A nonfiction informational text about ocean animals is written with poetic line breaks. Is it a poem?',
+    choices: [
+      { text: 'No — its purpose and content are informational nonfiction; line breaks alone do not make it a poem', isCorrect: true },
+      { text: 'Yes — any text with line breaks is a poem', isCorrect: false, misconceptionId: `${GNRC}:MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GNRC}:MC-A-A-TEXTS-GENRE-CAN-BE-IDENTIFIED-FROM-ONE-SURFACE-FEATURE-ALONE`],
+    source: `${GNRC_SRC} — P28 ocean-animals-poem conflict as probe`,
+  },
+  {
+    conceptId: GNRC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A memoir uses story structure (rising action, climax, resolution) to tell true events from the author\'s life. Must this be classified as purely fiction or purely nonfiction?',
+    choices: [
+      { text: 'No — it can be named as narrative nonfiction, a genuine hybrid combining both genres\' conventions', isCorrect: true },
+      { text: 'Yes — every text must fit into exactly one fixed genre with no overlap', isCorrect: false, misconceptionId: `${GNRC}:MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP` },
+    ],
+    correctValue: 'no, it is a hybrid (narrative nonfiction)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GNRC}:MC-B-EVERY-TEXT-BELONGS-TO-EXACTLY-ONE-FIXED-GENRE-WITH-NO-OVERLAP`],
+    source: `${GNRC_SRC} — P30 sweet-and-savory hybrid-genre conflict as probe`,
+  },
+]
+
+// ─── eng.reading.authors-purpose-and-tone ──────────────────────────────────────
+const APT = 'eng.reading.authors-purpose-and-tone'
+const APT_SRC = 'docs/curriculum/blueprints/eng.reading.authors-purpose-and-tone.md'
+
+const APT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: APT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Purposes are not always neatly separate — a text can entertain ' +
+      'while also persuading, or inform while also entertaining through an ' +
+      'engaging style. A humorous personal essay can use funny anecdotes ' +
+      'AND argue for a specific viewpoint about how to live a happier life ' +
+      'at the same time. Instead of forcing one label, ask which purpose ' +
+      'is PRIMARY, then check whether a secondary purpose is also clearly ' +
+      'present, and name both if so, rather than picking just one and ' +
+      'ignoring the rest.',
+    targetedMisconceptions: [`${APT}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-PURPOSE-INFORM-OR-PERSUADE-OR-ENTERTAIN`],
+    source: `${APT_SRC} — MC-A-TEXT-CAN-ONLY-HAVE-ONE-PURPOSE-INFORM-OR-PERSUADE-OR-ENTERTAIN (P28 humorous-persuasive-essay conflict evidence)`,
+  },
+  {
+    conceptId: APT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Tone is about the AUTHOR\'s attitude, shown through specific word ' +
+      'choices and style — not about how you personally happen to feel ' +
+      'reading it. "The battle resulted in significant casualties on both ' +
+      'sides" uses clinical, detached, factual language — that is the ' +
+      'author\'s tone. Different readers might feel sad, feel nothing, or ' +
+      'feel angry reading the same passage, but that varying reaction is ' +
+      'not the tone. To identify tone, point to specific words or phrases ' +
+      'as evidence — do not just report your own emotional reaction.',
+    targetedMisconceptions: [`${APT}:MC-TONE-IS-JUST-WHATEVER-EMOTION-THE-READER-HAPPENS-TO-FEEL`],
+    source: `${APT_SRC} — MC-TONE-IS-JUST-WHATEVER-EMOTION-THE-READER-HAPPENS-TO-FEEL (P28 clinical-battle-description conflict evidence)`,
+  },
+  {
+    conceptId: APT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A text\'s purpose need not be a single, exclusive category: a piece ' +
+      'can entertain while simultaneously persuading, or inform while ' +
+      'entertaining through style — identify the primary purpose, then ' +
+      'check separately for a genuine secondary purpose rather than ' +
+      'forcing one label. Tone, distinct from purpose, is the attitude the ' +
+      'author conveys through specific word choice and style — a property ' +
+      'of the text itself, evidenced by concrete word choices — not the ' +
+      'reader\'s personal emotional reaction, which varies between readers ' +
+      'and is not what "tone" analysis measures.',
+    targetedMisconceptions: [
+      `${APT}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-PURPOSE-INFORM-OR-PERSUADE-OR-ENTERTAIN`,
+      `${APT}:MC-TONE-IS-JUST-WHATEVER-EMOTION-THE-READER-HAPPENS-TO-FEEL`,
+    ],
+    source: `${APT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const APT_PROBES: SeedProbe[] = [
+  {
+    conceptId: APT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A humorous personal essay uses funny anecdotes and also argues for a specific viewpoint about happiness. Does this text have only one purpose?',
+    choices: [
+      { text: 'No — it can have a primary purpose and a genuine secondary purpose at the same time', isCorrect: true },
+      { text: 'Yes — every text must be classified under exactly one purpose', isCorrect: false, misconceptionId: `${APT}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-PURPOSE-INFORM-OR-PERSUADE-OR-ENTERTAIN` },
+    ],
+    correctValue: 'no, it can have both',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${APT}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-PURPOSE-INFORM-OR-PERSUADE-OR-ENTERTAIN`],
+    source: `${APT_SRC} — P28 humorous-persuasive-essay conflict as probe`,
+  },
+  {
+    conceptId: APT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: '"The battle resulted in significant casualties on both sides" is written in clinical, detached language. If one reader feels sad and another feels nothing, has the author\'s tone changed?',
+    choices: [
+      { text: 'No — the author\'s tone (clinical, detached) is fixed in the word choices; reader reactions can vary without changing it', isCorrect: true },
+      { text: 'Yes — tone is whatever emotion each individual reader happens to feel', isCorrect: false, misconceptionId: `${APT}:MC-TONE-IS-JUST-WHATEVER-EMOTION-THE-READER-HAPPENS-TO-FEEL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${APT}:MC-TONE-IS-JUST-WHATEVER-EMOTION-THE-READER-HAPPENS-TO-FEEL`],
+    source: `${APT_SRC} — P28 clinical-battle-description conflict as probe`,
+  },
+]
+
+// ─── eng.reading.predicting-and-confirming ─────────────────────────────────────
+const PRED = 'eng.reading.predicting-and-confirming'
+const PRED_SRC = 'docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md'
+
+const PRED_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRED,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Making an ungrounded guess and calling it a "prediction" is like a ' +
+      'weather forecaster predicting rain by picking a card at random, ' +
+      'instead of looking at the clouds and pressure already visible. A ' +
+      'text titled "The Drought That Changed the Village" opens with ' +
+      'cracked, dry farmland — "the story is about a dragon" is an ' +
+      'ungrounded guess, while "the story is probably about how the ' +
+      'village deals with water shortage" uses the actual clues in front ' +
+      'of you. Before predicting, look for the title, headings, and ' +
+      'opening details — be ready to explain which clue led you there.',
+    targetedMisconceptions: [`${PRED}:MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES`],
+    source: `${PRED_SRC} — MC-A (P28 drought-village conflict evidence)`,
+  },
+  {
+    conceptId: PRED,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Defending an original prediction against contradicting evidence is ' +
+      'like a detective who, having named one suspect early on, ignores ' +
+      'every new clue that points elsewhere just to avoid admitting the ' +
+      'first guess was wrong. Predicting "this character will succeed ' +
+      'easily" after paragraph one, then reading a later paragraph showing ' +
+      'repeated failure, means the new information contradicts the ' +
+      'prediction. A prediction is a working hypothesis, not a commitment ' +
+      '— when new text clearly contradicts it, revise the prediction ' +
+      'rather than defending it.',
+    targetedMisconceptions: [`${PRED}:MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED`],
+    source: `${PRED_SRC} — MC-B (P28 easy-success-then-failure conflict evidence)`,
+  },
+  {
+    conceptId: PRED,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A genuine prediction is grounded in specific available clues — ' +
+      'title, headings, opening details — reasoned toward a likely ' +
+      'continuation, not an ungrounded guess that happens to sound ' +
+      'plausible. Separately, a prediction functions as a working ' +
+      'hypothesis rather than a fixed commitment: when subsequent text ' +
+      'clearly contradicts an earlier prediction, the correct response is ' +
+      'to revise the prediction based on the new evidence, not to defend ' +
+      'or selectively reinterpret the original guess to preserve it — the ' +
+      'same evidence-updating discipline that distinguishes careful ' +
+      'reasoning from confirmation bias.',
+    targetedMisconceptions: [
+      `${PRED}:MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES`,
+      `${PRED}:MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED`,
+    ],
+    source: `${PRED_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRED_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRED,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A text titled "The Drought That Changed the Village" opens describing cracked, dry farmland. Which is the better prediction: "the story is about a dragon" or "the story is about a water shortage"?',
+    choices: [
+      { text: '"The story is about a water shortage" — grounded in the title and opening clues', isCorrect: true },
+      { text: '"The story is about a dragon" — any guess counts as a prediction', isCorrect: false, misconceptionId: `${PRED}:MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES` },
+    ],
+    correctValue: 'water shortage prediction',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRED}:MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES`],
+    source: `${PRED_SRC} — P28 drought-village conflict as probe`,
+  },
+  {
+    conceptId: PRED,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A reader predicted "this character will succeed easily," then read a paragraph showing the character failing repeatedly. What should the reader do?',
+    choices: [
+      { text: 'Revise the prediction based on the new evidence', isCorrect: true },
+      { text: 'Keep defending the original prediction despite the contradicting evidence', isCorrect: false, misconceptionId: `${PRED}:MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED` },
+    ],
+    correctValue: 'revise the prediction',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRED}:MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED`],
+    source: `${PRED_SRC} — P28 easy-success-then-failure conflict as probe`,
+  },
+]
+
+// ─── eng.reading.skimming-and-scanning ──────────────────────────────────────────
+const SKIM = 'eng.reading.skimming-and-scanning'
+const SKIM_SRC = 'docs/curriculum/blueprints/eng.reading.skimming-and-scanning.md'
+
+const SKIM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SKIM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Treating skimming and scanning as the same technique is like using ' +
+      'a telescope and a magnifying glass interchangeably — a telescope ' +
+      'helps you see the big picture from far away (skimming for general ' +
+      'idea), while a magnifying glass helps you zoom in on one tiny ' +
+      'specific detail (scanning for a specific fact). Before rapidly ' +
+      'reading a text, identify your actual purpose: do you need the ' +
+      'general idea (skim — headings, topic sentences), or one specific ' +
+      'piece of information (scan — search only for that word or number)?',
+    targetedMisconceptions: [`${SKIM}:MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES`],
+    source: `${SKIM_SRC} — MC-A (telescope-vs-magnifying-glass anchor)`,
+  },
+  {
+    conceptId: SKIM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Assuming a skim or scan gives the same understanding as careful ' +
+      'reading is like assuming glancing at a building\'s outline from ' +
+      'across the street tells you everything about its interior layout — ' +
+      'you get a rough shape, not the actual detail. If a task requires ' +
+      'explaining the three reasons an author gives and how they connect, ' +
+      'skimming the headings alone will not be enough. Before deciding to ' +
+      'skim or scan, ask: does this task need genuine understanding of ' +
+      'nuance or connections? If so, switch to full, careful reading.',
+    targetedMisconceptions: [`${SKIM}:MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING`],
+    source: `${SKIM_SRC} — MC-B (building-outline-from-across-the-street anchor)`,
+  },
+  {
+    conceptId: SKIM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Skimming and scanning are distinct techniques suited to distinct ' +
+      'purposes: skimming samples a text\'s structure (headings, topic ' +
+      'sentences) for its general idea, while scanning searches for one ' +
+      'specific target while ignoring surrounding text — selecting the ' +
+      'wrong one wastes time and yields the wrong kind of result. Neither ' +
+      'technique substitutes for full, careful reading when a task ' +
+      'genuinely requires understanding nuance, connections, or complex ' +
+      'reasoning — both are appropriate only for previewing or locating, ' +
+      'not for deep comprehension.',
+    targetedMisconceptions: [
+      `${SKIM}:MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES`,
+      `${SKIM}:MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING`,
+    ],
+    source: `${SKIM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SKIM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SKIM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'You need to find one specific date in a long article. Should you skim or scan?',
+    choices: [
+      { text: 'Scan — search only for the specific date, ignoring surrounding text', isCorrect: true },
+      { text: 'Skim — skimming and scanning are the same technique either way', isCorrect: false, misconceptionId: `${SKIM}:MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES` },
+    ],
+    correctValue: 'scan',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SKIM}:MC-A-SKIMMING-AND-SCANNING-ARE-THE-SAME-TECHNIQUE-WITH-DIFFERENT-NAMES`],
+    source: `${SKIM_SRC} — telescope-vs-magnifying-glass technique-match as probe`,
+  },
+  {
+    conceptId: SKIM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A task asks you to explain how an author\'s three reasons connect to each other. Is skimming the headings enough for this task?',
+    choices: [
+      { text: 'No — this requires full careful reading to understand the connections between reasons', isCorrect: true },
+      { text: 'Yes — skimming gives the same depth of understanding as careful reading', isCorrect: false, misconceptionId: `${SKIM}:MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SKIM}:MC-B-SKIMMING-OR-SCANNING-GIVES-THE-SAME-DEPTH-OF-UNDERSTANDING-AS-CAREFUL-READING`],
+    source: `${SKIM_SRC} — building-outline-from-across-the-street conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -12626,6 +13017,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...INFR_EXPLANATIONS,
   ...SUMM_EXPLANATIONS,
   ...TSTR_EXPLANATIONS,
+  ...GNRC_EXPLANATIONS,
+  ...APT_EXPLANATIONS,
+  ...PRED_EXPLANATIONS,
+  ...SKIM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -12773,4 +13168,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...INFR_PROBES,
   ...SUMM_PROBES,
   ...TSTR_PROBES,
+  ...GNRC_PROBES,
+  ...APT_PROBES,
+  ...PRED_PROBES,
+  ...SKIM_PROBES,
 ]
