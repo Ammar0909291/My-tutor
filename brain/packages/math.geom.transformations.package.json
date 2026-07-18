@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.transformations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.transformations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e0c64b98b6136fe31238a5f148b6083796b87ad8c54080383ee109864e3406f9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.transformations.md": "sha256:c29b4212d7ac7c5c87430943f379d5289f77d9b704c0c88f2fc4fd5b9730633d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.transformations",
+    "name": "Geometric Transformations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.geom.coordinate-plane"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.transformations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.transformations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.transformations.md": "sha256:c29b4212d7ac7c5c87430943f379d5289f77d9b704c0c88f2fc4fd5b9730633d"
+      },
+      "contentHash": "sha256:b8d698268b514c90f61a28a1d06b99f8737aa48e84216f5d1af6d75256c73bfd",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.transformations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.transformations.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.transformations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.transformations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.transformations.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.transformations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.transformations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.transformations.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.transformations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.transformations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.transformations.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.transformations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.transformations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.transformations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **geometric transformation** as a function mapping the plane to itself, and identify the four basic types — **translation** (slide), **rotation** (turn about a point), **reflection** (flip across a line), and **dilation** (scale from a center point) — applying each via coordinate rules to a given point or shape.\n- LO2: Classify translations, rotations, and reflections as **isometries** (distance-preserving transformations — the image is congruent to the original) and distinguish these from dilations (which preserve *shape* but not distance/size unless the scale factor is exactly 1 or −1), correctly predicting which properties survive each transformation type.\n- LO3: Apply a **composition** of two or more transformations in the specified order, and recognize that transformation composition is generally **not commutative** — performing the same two transformations in reversed order can produce a different final image.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.transformations",
+      "title": "ALL-TRANSFORMATIONS-PRESERVE-CONGRUENCE",
+      "content": "| MC-1 | ALL-TRANSFORMATIONS-PRESERVE-CONGRUENCE | Believing every geometric transformation (including dilation) preserves congruence/distance, not distinguishing isometries from scaling transformations | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.transformations",
+      "title": "COMPOSITION-ASSUMED-COMMUTATIVE",
+      "content": "| MC-2 | COMPOSITION-ASSUMED-COMMUTATIVE | Assuming that applying two transformations in either order produces the same final result | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.transformations",
+      "title": "ROTATION-CENTER-ASSUMED-ORIGIN",
+      "content": "| MC-3 | ROTATION-CENTER-ASSUMED-ORIGIN | Applying the standard rotation-about-the-origin formula to a rotation centered at some other, non-origin point without adjusting for the different center | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.transformations",
+      "title": "The Four Transformation Types via Physical Motion (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Four Transformation Types via Physical Motion (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.transformations",
+      "title": "Isometries vs. Dilations, and Composition Order (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Isometries vs. Dilations, and Composition Order (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.transformations",
+      "title": "Composite Multi-Transformation Problem (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Multi-Transformation Problem (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 17,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.transformations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.transformations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Point $Q=(-2,5)$. Find its image under: (a) translation by $(3,-1)$, (b) reflection across the $y$-axis, (c) dilation by factor 3 centered at the origin.\n  2. Given $A=(1,1)$, $B=(4,5)$ (distance 5), find the images of both under a $180°$ rotation about the origin, and verify the distance is preserved.\n  3. Apply reflection across the $x$-axis, THEN a $90°$ CCW rotation, to point $(2,3)$. Then, separately, apply the $90°$ CCW rotation FIRST, then the reflection, to the same starting point. Show the two final results differ.\n  4. A shape is dilated by factor $-1$ (a negative scale factor, centered at the origin). Explain, using the definition, why this specific dilation IS actually an isometry (hint: compute the distance-preservation check directly), despite dilations in general not being isometries.\n- **P76 (Transfer Probe, mode = independence)**: \"A video game's sprite-rendering engine applies transformations to a character sprite in this exact order every frame: first a reflection (to flip the character when it turns around), then a rotation (to tilt it on slopes), then a translation (to move it across the screen). A game-engine bug accidentally swaps the ORDER to translation-then-rotation-then-reflection. Using a specific example point on the sprite (e.g. its 'nose' at local coordinates $(1,0)$ relative to the character's pivot), demonstrate concretely that the buggy order produces a different final screen position than the intended order — connecting this directly to the non-commutativity of transformation composition from this lesson.\" *Component 7 note: this scenario was chosen independently rather than cross-linking to `math.linalg.linear-map` or `math.abst.group-action`, since neither blueprint yet exists.*\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.transformations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.coordinate-plane` (points as ordered pairs $(x,y)$, the two perpendicular axes) — this concept's coordinate rules for each transformation type are built directly on that representation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.transformations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.transformations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.coordinate-plane` (points as ordered pairs — the representation every transformation rule here is built on).\n- **Unlocks**: `math.linalg.linear-map` (rotations, reflections, and dilations centered at the origin are exactly the linear maps of the plane — this concept's coordinate rules are the concrete precursor to that concept's abstract linear-map framework).\n- **Cross-link**: KG lists `math.linalg.linear-map` and `math.abst.group-action` as cross-links. Verified via directory listing that neither blueprint yet exists. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once either target is authored, may add a genuine cross-link probe — e.g. connecting this concept's rotation/reflection/dilation coordinate rules directly to `math.linalg.linear-map`'s matrix representations (each of the four transformation types corresponds to a specific $2\\times2$ matrix), or to `math.abst.group-action`'s framing of the isometries as forming a group acting on the plane.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.transformations.md",
+        "startLine": 101,
+        "endLine": 107
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.critical-points-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.critical-points",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2c2ecba20b881ee2cdc2fc29e108e32e13fb11c8d025d38263a09edc92373a36",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.critical-points.md": "sha256:554d9ab9ae061fc41bdb0eac620dbfda8c12022121bff86fcc24202716afb22f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.critical-points",
+    "name": "Critical Points",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.derivative-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.critical-points-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.critical-points (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.critical-points.md": "sha256:554d9ab9ae061fc41bdb0eac620dbfda8c12022121bff86fcc24202716afb22f"
+      },
+      "contentHash": "sha256:fb675d9f94bea97a57c475cf417329ca77af163a9c16755b9b3388e480b457aa",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.critical-points.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.critical-points.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.critical-points"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.critical-points\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.critical-points.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.critical-points.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.critical-points"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.critical-points\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.critical-points.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.critical-points.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.critical-points"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.critical-points\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.critical-points/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.critical-points",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **critical point** of $f$ as a value $c$ in the domain of $f$ where **either** $f'(c)=0$ **or** $f'(c)$ is undefined, and correctly find all critical points of a given function by solving $f'(x)=0$ and separately checking for points where $f'$ fails to exist.\n- LO2: Recognize that critical points are only **candidates** for local extrema (or inflection points) — not every critical point is actually a local max/min — and correctly identify examples where a critical point is neither.\n- LO3: Correctly distinguish a critical point that arises from $f'(c)=0$ (a \"smooth\" flat point, e.g. the vertex of a parabola) from one arising because $f'(c)$ is **undefined** (e.g. a sharp corner or a vertical tangent), since these require different graphical/analytical handling.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.critical-points",
+      "title": "CRITICAL-POINT-ASSUMED-EXTREMUM",
+      "content": "| MC-1 | CRITICAL-POINT-ASSUMED-EXTREMUM | Believing every critical point must be a local maximum or minimum, without checking further | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.critical-points",
+      "title": "UNDEFINED-DERIVATIVE-CATEGORY-MISSED",
+      "content": "| MC-2 | UNDEFINED-DERIVATIVE-CATEGORY-MISSED | Searching only for points where $f'(x)=0$ and failing to separately check for points where $f'(x)$ is undefined | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.critical-points",
+      "title": "OUTSIDE-DOMAIN-POINT-TREATED-AS-CRITICAL",
+      "content": "| MC-3 | OUTSIDE-DOMAIN-POINT-TREATED-AS-CRITICAL | Treating a point outside $f$'s domain (where a derivative-like expression is undefined, but $f$ itself isn't even defined there) as a critical point | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.critical-points",
+      "title": "Two Sources of Critical Points (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Sources of Critical Points (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.critical-points",
+      "title": "Critical Point ≠ Extremum (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Critical Point ≠ Extremum (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.critical-points",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.critical-points",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find all critical points of $f(x)=x^3-6x^2+9x$.\n  2. Find all critical points of $g(x)=x^{2/3}$ (hint: check where the power-rule-derived derivative formula is undefined, in addition to solving for zeros).\n  3. $h(x)=x^4$ has a critical point at $x=0$. Determine, by checking nearby function values, whether it is a local max, local min, or neither.\n  4. A student solves $f'(x)=0$ for a piecewise function and finds two solutions, then states \"these are all the critical points.\" What check did the student skip, and how would you verify whether anything was missed?\n- **P76 (Transfer Probe, mode = independence)**: \"A company's hourly profit function $P(t) = -t^3+9t^2$ (for $t$ in a realistic working-hours domain) is being analyzed by an analyst who wants to find all 'candidate' times where profit might peak or bottom out. (a) Find all critical points of $P(t)$ algebraically. (b) The analyst's software separately flags a suspicious kink in a DIFFERENT process's profit graph (not this same $P(t)$) at a specific hour, where the profit rate visibly jumps rather than smoothly leveling off — explain why that kink, even without ever computing $P'=0$ there, still counts as a critical point, and what category of critical point it represents.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.critical-points",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.derivative-rules` (power rule, sum/difference rule, constant multiple rule — enough to differentiate polynomials and locate where the derivative equals zero).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.critical-points/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.critical-points",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.derivative-rules` (power/sum/constant-multiple rules — the computational tool for solving $f'(x)=0$ on polynomials).\n- **Unlocks**: `math.calc.local-extrema` (the first/second derivative tests that resolve exactly the \"is this critical point actually a max/min?\" ambiguity this concept deliberately leaves open), `math.calc.optimization` (real-world max/min problems are solved by first finding critical points, exactly as taught here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.critical-points.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

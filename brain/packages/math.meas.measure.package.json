@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.measure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.measure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5dde817ab07c8ae9b9a01b340fd2669c26d5849eb18dabe0aa698485365f959d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.measure.md": "sha256:95dd83c1149dff11115c0ca6a432db11105d41a029538085f4b05b46f7cf91c0"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.meas.measure",
+    "name": "Measure",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.meas.sigma-algebra"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.measure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.measure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.measure.md": "sha256:95dd83c1149dff11115c0ca6a432db11105d41a029538085f4b05b46f7cf91c0"
+      },
+      "contentHash": "sha256:f12d5b22ae4ad9035096f81ec7eafebd7f3a4e837b623c69b0b057c07505ed90",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.measure.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measure.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measure.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.measure/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.measure",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **measure** $\\mu$ on a measurable space $(X,\\mathcal{F})$ as a function $\\mu:\\mathcal{F}\\to[0,\\infty]$ satisfying $\\mu(\\emptyset)=0$ and **countable additivity**: for pairwise disjoint sets $E_1,E_2,\\ldots\\in\\mathcal{F}$, $\\mu\\left(\\bigcup_n E_n\\right) = \\sum_n \\mu(E_n)$.\n- LO2: Recognize that countable additivity **requires pairwise disjointness** — applying it to overlapping sets produces an incorrect (over-counted) total — and correctly compute $\\mu(A\\cup B)$ for *non-disjoint* $A,B$ using inclusion-exclusion instead ($\\mu(A\\cup B) = \\mu(A)+\\mu(B)-\\mu(A\\cap B)$).\n- LO3: Identify a **probability measure** as the special case of a measure with the additional normalization $\\mu(X)=1$, and connect the triple $(X,\\mathcal{F},\\mu)$ (a **measure space**) to the probability triple $(\\Omega,\\mathcal{F},P)$ (a **probability space**) as the identical structure under a normalization constraint.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.measure/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.measure",
+      "title": "ADDITIVITY-APPLIED-TO-OVERLAPPING-SETS",
+      "content": "| MC-1 | ADDITIVITY-APPLIED-TO-OVERLAPPING-SETS | Applying countable additivity ($\\mu(A\\cup B)=\\mu(A)+\\mu(B)$) to sets that are not pairwise disjoint, over-counting the overlap | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.meas.measure/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.measure",
+      "title": "MEASURE-ASSUMED-NORMALIZED",
+      "content": "| MC-2 | MEASURE-ASSUMED-NORMALIZED | Believing every measure automatically satisfies $\\mu(X)=1$, conflating the general measure concept with the special probability-measure case | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.measure/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.measure",
+      "title": "INFINITE-MEASURE-TREATED-AS-ERROR",
+      "content": "| MC-3 | INFINITE-MEASURE-TREATED-AS-ERROR | Believing a measure returning $\\infty$ for some set indicates a mistake, rather than recognizing $[0,\\infty]$ (including infinity) as the legitimate codomain of a general measure | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.meas.measure/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure",
+      "title": "The Measure Axioms and Countable Additivity (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Measure Axioms and Countable Additivity (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.meas.measure/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure",
+      "title": "Disjoint vs. Overlapping, and the Measure/Probability-Measure Relationship (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Disjoint vs. Overlapping, and the Measure/Probability-Measure Relationship (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.meas.measure/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.meas.measure/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.measure",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Using the counting measure on $\\mathcal{F}=$ power set of $\\{1,\\ldots,10\\}$, compute $\\mu(\\{1,2,3\\}\\cup\\{4,5,6,7\\})$ using countable additivity (are these sets disjoint?).\n  2. Using the same counting measure, compute $\\mu(\\{1,2,3,4,5\\}\\cup\\{4,5,6,7\\})$ correctly, given that these sets overlap.\n  3. Explain, using the definition of countable additivity, why $\\mu(\\emptyset)=0$ is actually forced to be consistent with (not just separately assumed alongside) the additivity axiom — hint: consider the disjoint union $E\\cup\\emptyset=E$.\n  4. A measure $\\mu$ on $(X,\\mathcal{F})$ satisfies $\\mu(X)=7$. Is $\\mu$ a probability measure? If not, describe how to construct a genuine probability measure from it (hint: consider $\\mu(E)/\\mu(X)$).\n- **P76 (Transfer Probe, mode = cross-link probe against `math.prob.probability-measure`)**: \"Recall from your `math.prob.probability-measure` lesson the three Kolmogorov axioms: (i) $P(A)\\geq 0$, (ii) $P(\\Omega)=1$, (iii) $P(A\\cup B)=P(A)+P(B)$ for mutually exclusive $A,B$ — and that lesson's own derived rule $P(A^c)=1-P(A)$. Using THIS lesson's general measure framework: (a) show that Kolmogorov axiom (iii) is exactly countable (here, finite) additivity for pairwise disjoint sets, restated in probability notation. (b) Show that axiom (ii), $P(\\Omega)=1$, is exactly this lesson's extra probability-measure normalization condition $\\mu(X)=1$, with $X=\\Omega$. (c) Using this lesson's inclusion-exclusion formula, re-derive that other blueprint's complement rule $P(A^c)=1-P(A)$ as the special case $B=A^c$ (noting $A\\cap A^c=\\emptyset$ and $A\\cup A^c=\\Omega$).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.meas.measure/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.measure",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.sigma-algebra` (the measurable space $(X,\\mathcal{F})$ — the domain on which a measure is defined — including the closure axioms that guarantee countable unions of measurable sets remain measurable, which is exactly what's needed for countable additivity to even make sense as a well-formed statement).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.measure/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.measure",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.sigma-algebra` (the measurable space $(X,\\mathcal{F})$ that a measure is defined on; the closure axioms there are exactly what make countable additivity's union well-defined as a measurable set).\n- **Unlocks**: `math.meas.lebesgue-measure` (the canonical concrete measure on $\\mathbb{R}$/$\\mathbb{R}^n$, generalizing length/area/volume, built as a specific instance of this general framework), `math.meas.measurable-function` (functions compatible with a measure space's structure, needed before integration theory).\n- **Cross-link**: KG lists `math.prob.probability-measure` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.prob.probability-measure.md` **is already authored** — read directly (via grep) to confirm its exact Kolmogorov axiom statements and derived complement rule. The P76 transfer probe above requires the learner to explicitly re-derive that blueprint's own three axioms and its complement-rule corollary from this concept's more general measure framework — the reverse direction of the general-to-specific relationship Component 3 establishes, closing the loop that blueprint's own note (\"math.meas.measure is NOT a Tier 1 concept; treat cross_links as empty\") left open at its authoring time.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure.md",
+        "startLine": 95,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
