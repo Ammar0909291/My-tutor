@@ -12078,6 +12078,407 @@ const LCOM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.main-idea-and-details ─────────────────────────────────────────
+const MIDT = 'eng.reading.main-idea-and-details'
+const MIDT_SRC = 'docs/curriculum/blueprints/eng.reading.main-idea-and-details.md'
+
+const MIDT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MIDT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'The first sentence often grabs your attention, but the main idea has ' +
+      'to be the one thing that EVERY sentence in the paragraph is helping ' +
+      'to explain. A paragraph opens with "The lion\'s roar shook the ' +
+      'grass" — a vivid detail — but sentences 2 through 5 are really about ' +
+      'lion pride hierarchy. To find the main idea, do not just read ' +
+      'sentence one. Read the whole paragraph and ask: "What is the one ' +
+      'idea that ALL of these sentences are supporting?" A detail only ' +
+      'covers itself; the main idea has to be big enough to cover ' +
+      'everything.',
+    targetedMisconceptions: [`${MIDT}:MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA`],
+    source: `${MIDT_SRC} — MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA (P28 lion-roar conflict evidence)`,
+  },
+  {
+    conceptId: MIDT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Sometimes a writer states the main idea in one sentence — that is a ' +
+      'stated main idea. But often the writer just shows you three or four ' +
+      'pieces of evidence and expects YOU to notice the pattern and put it ' +
+      'into your own words — that is an implied main idea. Three sentences ' +
+      'each describe a different way people in a town helped after a ' +
+      'flood, with no sentence saying "the town came together." Ask ' +
+      'yourself: is there one sentence that already says the big idea, or ' +
+      'do I need to notice the pattern and say it myself? Both are valid — ' +
+      'an implied main idea in your own words counts just as much as a ' +
+      'quoted one.',
+    targetedMisconceptions: [`${MIDT}:MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE`],
+    source: `${MIDT_SRC} — MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE (P28 flood-town implied-idea conflict evidence)`,
+  },
+  {
+    conceptId: MIDT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The main idea of a paragraph is the single idea every sentence in it ' +
+      'is working to support — not necessarily the content of the opening ' +
+      'sentence, which often serves as a hook or a narrow illustrative ' +
+      'detail rather than the controlling idea itself. Confirm a candidate ' +
+      'main idea by checking whether it covers every sentence in the ' +
+      'paragraph, not just the first. Separately, a main idea need not be ' +
+      'stated verbatim anywhere in the text: a stated main idea appears in ' +
+      'one explicit sentence, while an implied main idea must be ' +
+      'synthesized by the reader from a pattern across several supporting ' +
+      'details — both are equally legitimate, and forcing a search for an ' +
+      'exact quotable sentence will fail on implied-main-idea passages.',
+    targetedMisconceptions: [
+      `${MIDT}:MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA`,
+      `${MIDT}:MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE`,
+    ],
+    source: `${MIDT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const MIDT_PROBES: SeedProbe[] = [
+  {
+    conceptId: MIDT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A paragraph opens with "The lion\'s roar shook the grass," but sentences 2-5 are about lion pride hierarchy. Is the first sentence the main idea?',
+    choices: [
+      { text: 'No — check whether it covers every sentence; here it is just an opening detail', isCorrect: true },
+      { text: 'Yes — the first sentence is always the main idea', isCorrect: false, misconceptionId: `${MIDT}:MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MIDT}:MC-A-FIRST-SENTENCE-IS-ALWAYS-THE-MAIN-IDEA`],
+    source: `${MIDT_SRC} — P28 lion-roar conflict as probe`,
+  },
+  {
+    conceptId: MIDT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Three sentences each describe a different way townspeople helped after a flood, but no sentence says "the town came together." Can this paragraph still have a main idea?',
+    choices: [
+      { text: 'Yes — an implied main idea, put in your own words, is just as valid as a stated one', isCorrect: true },
+      { text: 'No — if no sentence states it directly, there is no main idea', isCorrect: false, misconceptionId: `${MIDT}:MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MIDT}:MC-MAIN-IDEA-MUST-BE-STATED-WORD-FOR-WORD-SOMEWHERE`],
+    source: `${MIDT_SRC} — P28 flood-town implied-idea conflict as probe`,
+  },
+]
+
+// ─── eng.reading.inference-in-reading ──────────────────────────────────────────
+const INFR = 'eng.reading.inference-in-reading'
+const INFR_SRC = 'docs/curriculum/blueprints/eng.reading.inference-in-reading.md'
+
+const INFR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INFR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A good inference is not just a plausible guess about life in general ' +
+      '— it is a conclusion you can defend by pointing to specific clues IN ' +
+      'THE TEXT plus something you already know. A character "grabbed her ' +
+      'coat, checked the sky, and slammed the door" — no weather is ' +
+      'mentioned. "She was late for work" is plausible but untethered; "it ' +
+      'might rain" is grounded in the actual clues (checking the sky, ' +
+      'grabbing a coat). Every inference should be traceable back to: "The ' +
+      'text said ___, and I know ___, so I can conclude ___."',
+    targetedMisconceptions: [`${INFR}:MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE`],
+    source: `${INFR_SRC} — MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE (P28 coat-and-sky conflict evidence)`,
+  },
+  {
+    conceptId: INFR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'You do not need the text to state something in exact words to ' +
+      'reasonably conclude it. "Tom\'s hands shook as he opened the ' +
+      'envelope. He read the letter twice before setting it down without a ' +
+      'word." The text never says "Tom felt nervous" — and that is exactly ' +
+      'what makes this an inference rather than a literal fact. Shaking ' +
+      'hands, reading something twice, and silence are physical signs of ' +
+      'strong emotion; connecting them to a feeling is a real, legitimate ' +
+      'reading skill, not "making things up," as long as the conclusion is ' +
+      'well-supported by the details actually given.',
+    targetedMisconceptions: [`${INFR}:MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT`],
+    source: `${INFR_SRC} — MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT (P28 Tom-shaking-hands conflict evidence)`,
+  },
+  {
+    conceptId: INFR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A valid inference must be traceable to specific textual clues ' +
+      'combined with background knowledge — not any real-world-plausible ' +
+      'idea that happens to come to mind independent of what the text ' +
+      'actually says. The reliable check: "the text said ___, and I know ' +
+      '___, so I can conclude ___." The opposite failure is equally real: ' +
+      'refusing to draw any conclusion beyond what is printed verbatim. ' +
+      'Authors routinely convey internal states (fear, nervousness, joy) ' +
+      'entirely through observable behavior, and connecting specific ' +
+      'described details to a reasonable conclusion is a legitimate, ' +
+      'expected reading skill — not speculation — provided the details ' +
+      'genuinely support it.',
+    targetedMisconceptions: [
+      `${INFR}:MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE`,
+      `${INFR}:MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT`,
+    ],
+    source: `${INFR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const INFR_PROBES: SeedProbe[] = [
+  {
+    conceptId: INFR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A character "grabbed her coat, checked the sky, and slammed the door." A student infers "she was late for work." Is this a well-grounded inference?',
+    choices: [
+      { text: 'No — nothing in the text supports lateness; "it might rain" is the inference the clues actually support', isCorrect: true },
+      { text: 'Yes — any plausible real-world explanation counts as an inference', isCorrect: false, misconceptionId: `${INFR}:MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INFR}:MC-INFERENCE-MEANS-ANY-GUESS-THAT-FEELS-PLAUSIBLE`],
+    source: `${INFR_SRC} — P28 coat-and-sky conflict as probe`,
+  },
+  {
+    conceptId: INFR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: '"Tom\'s hands shook as he opened the envelope." The text never says Tom felt nervous. Can a reader still reasonably conclude he was nervous?',
+    choices: [
+      { text: 'Yes — physical signs of emotion, described in the text, support that conclusion even though the word is never used', isCorrect: true },
+      { text: 'No — if the text never states a feeling directly, you cannot know it', isCorrect: false, misconceptionId: `${INFR}:MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INFR}:MC-IF-ITS-NOT-STATED-EXPLICITLY-YOU-CANT-KNOW-IT`],
+    source: `${INFR_SRC} — P28 Tom-shaking-hands conflict as probe`,
+  },
+]
+
+// ─── eng.reading.summarizing ────────────────────────────────────────────────────
+const SUMM = 'eng.reading.summarizing'
+const SUMM_SRC = 'docs/curriculum/blueprints/eng.reading.summarizing.md'
+
+const SUMM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUMM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Copying sentences, even the "important" ones, only proves you can ' +
+      'find text — it does not prove you understood it. A real summary ' +
+      'requires you to process the meaning and rebuild it in your own ' +
+      'words. After identifying the main idea and key details, close or ' +
+      'cover the original text and restate what you remember in your own ' +
+      'words and sentence structure. If you find yourself needing to peek ' +
+      'back at exact phrasing, that is a signal to re-read for ' +
+      'understanding rather than for exact words to copy.',
+    targetedMisconceptions: [`${SUMM}:MC-A-SUMMARY-MEANS-COPYING-THE-IMPORTANT-SENTENCES`],
+    source: `${SUMM_SRC} — MC-A-SUMMARY-MEANS-COPYING-THE-IMPORTANT-SENTENCES (P28 copy-vs-restate conflict evidence)`,
+  },
+  {
+    conceptId: SUMM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A summary\'s whole purpose is compression — capturing the essential ' +
+      'content in much less space. If your summary is nearly as long as ' +
+      'the original, it has not done its job. A passage might have 3 ' +
+      'essential supporting details and 2 minor illustrative ones (a color ' +
+      'mentioned once, an incidental aside) — before including a detail in ' +
+      'your summary, ask: does the main idea actually depend on this ' +
+      'detail, or is it just interesting extra flavor? Keep only the ' +
+      'load-bearing details — the ones that would change the reader\'s ' +
+      'understanding if removed.',
+    targetedMisconceptions: [`${SUMM}:MC-A-GOOD-SUMMARY-INCLUDES-EVERY-DETAIL-FROM-THE-ORIGINAL`],
+    source: `${SUMM_SRC} — MC-A-GOOD-SUMMARY-INCLUDES-EVERY-DETAIL-FROM-THE-ORIGINAL (P28 essential-vs-minor-detail conflict evidence)`,
+  },
+  {
+    conceptId: SUMM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A genuine summary requires processing the source content and ' +
+      'rebuilding it in your own words and sentence structure — stringing ' +
+      'together verbatim quotations, even of the most important-looking ' +
+      'sentences, demonstrates that you located content, not that you ' +
+      'understood it. Test yourself by covering the original and restating ' +
+      'what you retain; needing to check exact phrasing signals incomplete ' +
+      'understanding, not a summarizing shortcut. Separately, a summary\'s ' +
+      'defining purpose is compression: it must retain only the main idea ' +
+      'and genuinely load-bearing details, deliberately dropping minor or ' +
+      'illustrative details — a summary approaching the original\'s length ' +
+      'has failed at its core function regardless of accuracy.',
+    targetedMisconceptions: [
+      `${SUMM}:MC-A-SUMMARY-MEANS-COPYING-THE-IMPORTANT-SENTENCES`,
+      `${SUMM}:MC-A-GOOD-SUMMARY-INCLUDES-EVERY-DETAIL-FROM-THE-ORIGINAL`,
+    ],
+    source: `${SUMM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SUMM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUMM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student writes a "summary" by copying three sentences word-for-word from the original passage. Does this demonstrate understanding?',
+    choices: [
+      { text: 'No — copying only proves the reader can locate text, not that they understood it', isCorrect: true },
+      { text: 'Yes — selecting the important sentences and reproducing them is a valid summary', isCorrect: false, misconceptionId: `${SUMM}:MC-A-SUMMARY-MEANS-COPYING-THE-IMPORTANT-SENTENCES` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SUMM}:MC-A-SUMMARY-MEANS-COPYING-THE-IMPORTANT-SENTENCES`],
+    source: `${SUMM_SRC} — P28 copy-vs-restate conflict as probe`,
+  },
+  {
+    conceptId: SUMM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student\'s summary is nearly as long as the original passage because it includes every detail. Is this a good summary?',
+    choices: [
+      { text: 'No — a summary must compress by dropping minor details and keeping only load-bearing ones', isCorrect: true },
+      { text: 'Yes — including every detail from the original makes a summary more complete', isCorrect: false, misconceptionId: `${SUMM}:MC-A-GOOD-SUMMARY-INCLUDES-EVERY-DETAIL-FROM-THE-ORIGINAL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SUMM}:MC-A-GOOD-SUMMARY-INCLUDES-EVERY-DETAIL-FROM-THE-ORIGINAL`],
+    source: `${SUMM_SRC} — P28 essential-vs-minor-detail conflict as probe`,
+  },
+]
+
+// ─── eng.reading.text-structure ─────────────────────────────────────────────────
+const TSTR = 'eng.reading.text-structure'
+const TSTR_SRC = 'docs/curriculum/blueprints/eng.reading.text-structure.md'
+
+const TSTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TSTR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Paragraph breaks are about formatting on the page; text structure is ' +
+      'about how the IDEAS are connected underneath. "Heavy rain fell for ' +
+      'three days, so the river rose above its banks, which flooded the ' +
+      'nearby farms" is a single, unbroken sentence — but it clearly shows ' +
+      'one thing leading to another, a cause-effect pattern. Ignore where ' +
+      'the paragraph breaks are for a moment. Ask instead: what is the ' +
+      'logical relationship between the ideas — time order (sequence), one ' +
+      'thing causing the next (cause-effect), two things compared ' +
+      '(compare-contrast), a difficulty and a fix (problem-solution), or ' +
+      'just describing features (description)?',
+    targetedMisconceptions: [`${TSTR}:MC-TEXT-STRUCTURE-IS-JUST-ABOUT-PARAGRAPH-BREAKS`],
+    source: `${TSTR_SRC} — MC-TEXT-STRUCTURE-IS-JUST-ABOUT-PARAGRAPH-BREAKS (P28 flood cause-effect conflict evidence)`,
+  },
+  {
+    conceptId: TSTR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Short, simple passages often use just one pattern all the way ' +
+      'through — but longer or more complex texts frequently combine ' +
+      'patterns, with different sections doing different organizational ' +
+      'jobs. Paragraph 1 explains why a lake became polluted (cause-effect: ' +
+      'factory runoff caused fish die-offs); paragraph 2 describes three ' +
+      'different cleanup solutions being tried (problem-solution). Before ' +
+      'locking in one structure label for an entire passage, check each ' +
+      'section separately — it is completely normal and correct to say ' +
+      '"this passage uses cause-effect first, then problem-solution" rather ' +
+      'than forcing one label onto the whole thing.',
+    targetedMisconceptions: [`${TSTR}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-STRUCTURE-PATTERN`],
+    source: `${TSTR_SRC} — MC-A-TEXT-CAN-ONLY-HAVE-ONE-STRUCTURE-PATTERN (P28 polluted-lake two-pattern conflict evidence)`,
+  },
+  {
+    conceptId: TSTR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Text structure refers to the logical relationship connecting a ' +
+      'passage\'s ideas — sequence, cause-effect, compare-contrast, ' +
+      'problem-solution, or description — not the physical placement of ' +
+      'paragraph breaks. A single unbroken sentence can display a clear ' +
+      'cause-effect chain, while a multi-paragraph essay can remain purely ' +
+      'descriptive throughout; formatting and structure are independent ' +
+      'variables. Separately, longer or more complex texts commonly shift ' +
+      'structural patterns across sections rather than committing to one ' +
+      'pattern throughout — accurately describing such a text requires ' +
+      'naming each section\'s pattern individually rather than forcing a ' +
+      'single overall label that fits no section well.',
+    targetedMisconceptions: [
+      `${TSTR}:MC-TEXT-STRUCTURE-IS-JUST-ABOUT-PARAGRAPH-BREAKS`,
+      `${TSTR}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-STRUCTURE-PATTERN`,
+    ],
+    source: `${TSTR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TSTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: TSTR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: '"Heavy rain fell for three days, so the river rose, which flooded the farms" is one unbroken sentence. Does it have a text structure?',
+    choices: [
+      { text: 'Yes — it shows a clear cause-effect pattern, independent of paragraph breaks', isCorrect: true },
+      { text: 'No — it is only one paragraph, so there is no real structure to identify', isCorrect: false, misconceptionId: `${TSTR}:MC-TEXT-STRUCTURE-IS-JUST-ABOUT-PARAGRAPH-BREAKS` },
+    ],
+    correctValue: 'yes, cause-effect',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TSTR}:MC-TEXT-STRUCTURE-IS-JUST-ABOUT-PARAGRAPH-BREAKS`],
+    source: `${TSTR_SRC} — P28 flood cause-effect conflict as probe`,
+  },
+  {
+    conceptId: TSTR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Paragraph 1 explains why a lake became polluted (cause-effect); paragraph 2 describes cleanup solutions (problem-solution). What is "the" structure of this passage?',
+    choices: [
+      { text: 'It uses two patterns — cause-effect in the first part, problem-solution in the second', isCorrect: true },
+      { text: 'It must be classified under one single structure label overall', isCorrect: false, misconceptionId: `${TSTR}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-STRUCTURE-PATTERN` },
+    ],
+    correctValue: 'two patterns, one per section',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TSTR}:MC-A-TEXT-CAN-ONLY-HAVE-ONE-STRUCTURE-PATTERN`],
+    source: `${TSTR_SRC} — P28 polluted-lake two-pattern conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -12221,6 +12622,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PTM_EXPLANATIONS,
   ...RFLU_EXPLANATIONS,
   ...LCOM_EXPLANATIONS,
+  ...MIDT_EXPLANATIONS,
+  ...INFR_EXPLANATIONS,
+  ...SUMM_EXPLANATIONS,
+  ...TSTR_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -12364,4 +12769,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PTM_PROBES,
   ...RFLU_PROBES,
   ...LCOM_PROBES,
+  ...MIDT_PROBES,
+  ...INFR_PROBES,
+  ...SUMM_PROBES,
+  ...TSTR_PROBES,
 ]
