@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.polynomial-roots-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.polynomial-roots",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5be12fa345621b0ac69b6df97662b6b629a94528b608429710144c4e330168b0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.polynomial-roots.md": "sha256:8daf5d30d580cda257cd1e0feff41dbf888b886694c9795aca9a8ff4a8839dcd"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.polynomial-roots",
+    "name": "Polynomial Roots (Real and Complex)",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.factor-theorem",
+      "math.alg.quadratic-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.polynomial-roots-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.polynomial-roots (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.polynomial-roots.md": "sha256:8daf5d30d580cda257cd1e0feff41dbf888b886694c9795aca9a8ff4a8839dcd"
+      },
+      "contentHash": "sha256:9ce00b472a275f3cc483f9b9271ef4104e919897be9b6879a85e0b1e417dd95f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-roots.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-roots.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-roots\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-roots.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-roots.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-roots\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-roots.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-roots.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-roots\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-roots.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-roots.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-roots\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.polynomial-roots/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **root** of a polynomial $p(x)$ as a value $x=a$ with $p(a)=0$, and connect this to the Factor Theorem: $a$ is a root iff $(x-a)$ is a factor of $p(x)$.\n- LO2: State that a degree-$n$ polynomial has **exactly $n$ roots counting multiplicity** over $\\mathbb{C}$ (the informal statement of the Fundamental Theorem of Algebra), and correctly account for **multiplicity** — a repeated factor $(x-a)^k$ contributes $k$ roots at the same value $a$, not just one.\n- LO3: Apply the **Conjugate Root Theorem** — for a polynomial with *real* coefficients, complex (non-real) roots always occur in conjugate pairs $a+bi$ and $a-bi$ — to find a missing root or to determine the full root set from a partial one.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "DISTINCT-ROOTS-NOT-MULTIPLICITY",
+      "content": "| MC-1 | DISTINCT-ROOTS-NOT-MULTIPLICITY | Counting only distinct root values rather than roots weighted by multiplicity, leading to a root count that doesn't match the polynomial's degree | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "CONJUGATE-PAIRING-NOT-APPLIED",
+      "content": "| MC-2 | CONJUGATE-PAIRING-NOT-APPLIED | Failing to recognize that a real-coefficient polynomial's non-real roots must occur in conjugate pairs, missing a root that the theorem would otherwise supply for free | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "CONJUGATE-THEOREM-APPLIED-WITHOUT-REAL-COEFFICIENTS-CHECK",
+      "content": "| MC-3 | CONJUGATE-THEOREM-APPLIED-WITHOUT-REAL-COEFFICIENTS-CHECK | Applying the Conjugate Root Theorem's conclusion to a polynomial without first verifying its coefficients are all real | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Roots, Multiplicity, and the Root-Count Theorem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Roots, Multiplicity, and the Root-Count Theorem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "The Conjugate Root Theorem, With and Without Real Coefficients (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Conjugate Root Theorem, With and Without Real Coefficients (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Composite Application (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Application (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 17,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. $p(x)=(x+4)^3(x-5)$. List all roots with multiplicities, and verify the total matches the degree.\n  2. A real-coefficient degree-4 polynomial has known roots $1$ and $3-i$. Find all remaining roots.\n  3. Explain why $r(x) = x^2+1$ having roots $i$ and $-i$ is consistent with (in fact required by) the Conjugate Root Theorem, given its coefficients are real.\n  4. $s(x) = (x-2i)(x-1)$ has a root at $2i$. Does the Conjugate Root Theorem force $-2i$ to also be a root of $s(x)$? Justify using $s(x)$'s coefficients.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.cx.complex-numbers-analysis`)**: \"Recall from your complex-numbers-analysis lesson that for $z=x+iy$, the conjugate is $z̄=x-iy$ and $|z|^2 = z\\bar z$. A real-coefficient quadratic $p(x)=x^2-6x+13$ has roots that are a conjugate pair (by the Conjugate Root Theorem, since its discriminant is negative). Use the quadratic formula to find both roots explicitly in $a+bi$ form, confirm they are indeed conjugates $z$ and $\\bar z$ in exactly the sense from that lesson, then compute $|z|$ two ways: (a) directly via $\\sqrt{x^2+y^2}$ from the root's real/imaginary parts, and (b) via $\\sqrt{z\\bar z}$ using both roots together. Confirm both methods agree.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.factor-theorem` ($(x-a)$ is a factor of $p(x)$ iff $p(a)=0$) and `math.alg.quadratic-equation` (solving $ax^2+bx+c=0$, including via the quadratic formula, which can produce genuinely complex roots when the discriminant is negative).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-roots/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.polynomial-roots",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.factor-theorem` (the root/factor equivalence this whole concept is built on), `math.alg.quadratic-equation` (the quadratic formula, the first place students meet genuinely complex roots via a negative discriminant).\n- **Unlocks**: `math.alg.fundamental-theorem-algebra` (the rigorous statement and proof-sketch of the root-counting theorem informally used throughout this concept).\n- **Cross-link**: KG lists `math.cx.complex-numbers-analysis` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md` **is already authored** (confirmed by reading its content: it covers modulus $|z|=\\sqrt{x^2+y^2}$, argument, polar form, and conjugation $\\bar z = x-iy$ with $|z|^2=z\\bar z$). The P76 transfer probe above directly reuses that concept's conjugation and modulus machinery, applying it to a conjugate root pair produced by this concept's own Conjugate Root Theorem — genuinely connecting the two concepts rather than restating either in isolation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-roots.md",
+        "startLine": 98,
+        "endLine": 104
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

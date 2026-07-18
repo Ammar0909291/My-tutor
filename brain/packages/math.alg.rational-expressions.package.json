@@ -1,0 +1,281 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.rational-expressions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.rational-expressions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:afac7473a4a209ff96642ae9a7f5e99c882928ad0f0642c9344bea93fc3715a0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.rational-expressions.md": "sha256:eed1feff80585d28db89f120523a47c284f8551d756e89b26c227e293ea5ee6d"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.rational-expressions",
+    "name": "Rational Expressions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.alg.polynomial",
+      "math.alg.factoring"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.rational-expressions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.rational-expressions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.rational-expressions.md": "sha256:eed1feff80585d28db89f120523a47c284f8551d756e89b26c227e293ea5ee6d"
+      },
+      "contentHash": "sha256:36b1664abbc2abaa76b0f1aba7b953da3234791c6a5e9014d0cd33dfca4f81bb",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.rational-expressions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rational-expressions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rational-expressions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rational-expressions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.rational-expressions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rational-expressions.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rational-expressions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rational-expressions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.rational-expressions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rational-expressions.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rational-expressions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rational-expressions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.rational-expressions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a rational expression as $\\frac{p(x)}{q(x)}$ with $p,q$ polynomials and $q(x)\\neq 0$, and determine its **domain restrictions** (the values of $x$ that make the denominator zero and must therefore be excluded).\n- LO2: Simplify a rational expression by fully **factoring** numerator and denominator and **canceling common factors**, while correctly tracking that canceling a factor does *not* remove the domain restriction it created — the simplified expression is only equivalent to the original *away from* the excluded values.\n- LO3: Perform the four arithmetic operations (+, −, ×, ÷) on rational expressions, applying the same procedures as numeric fraction arithmetic (common denominators for +/−, multiply-straight-across then simplify for ×, multiply-by-reciprocal for ÷) but with polynomial factoring replacing simple integer factoring.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "DOMAIN-FROM-SIMPLIFIED-FORM-ONLY",
+      "content": "| MC-1 | DOMAIN-FROM-SIMPLIFIED-FORM-ONLY | Determining the domain restriction from the simplified expression's denominator rather than the original, pre-cancellation denominator, missing values canceled away | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "CANCELING-ADDED-TERMS",
+      "content": "| MC-2 | CANCELING-ADDED-TERMS | Attempting to cancel a term that is added (not multiplied) within the numerator or denominator, treating it as if it were a shared multiplicative factor | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "ADD-NUMERATORS-AND-DENOMINATORS-SEPARATELY",
+      "content": "| MC-3 | ADD-NUMERATORS-AND-DENOMINATORS-SEPARATELY | Adding/subtracting rational expressions by combining numerators and denominators independently ($\\frac{a}{b}+\\frac{c}{d}\\to\\frac{a+c}{b+d}$) instead of finding a genuine common denominator | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "Rational Expressions as Generalized Numeric Fractions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Rational Expressions as Generalized Numeric Fractions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "The Four Operations, Contrasted with Numeric Fraction Rules (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Four Operations, Contrasted with Numeric Fraction Rules (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Simplify $\\frac{x^2-16}{x^2+3x-4}$ and state the full domain restriction.\n  2. Compute $\\frac{x-3}{x+5}\\times\\frac{x^2+2x-15}{x^2-9}$, simplifying fully.\n  3. Compute $\\frac{2}{x+3} - \\frac{4}{x-1}$, expressing the result as a single simplified rational expression.\n  4. A student simplifies $\\frac{x^2-1}{x-1}$ to $x+1$ and claims the domain is \"all real numbers\" since $x+1$ has no denominator. Identify and correct the error.\n- **P76 (Transfer Probe, mode = independence)**: \"A pharmacology model expresses a drug's blood concentration ratio as $\\frac{2d}{d^2+5d+6}$ where $d$ is the dose in mg, and a separate elimination-rate ratio as $\\frac{d+2}{d+3}$. (a) Simplify the concentration ratio expression fully by factoring, and state its domain restriction in terms of physically meaningful dose values. (b) Multiply the two ratios together (concentration ratio × elimination-rate ratio) and simplify the product. (c) Explain, using this lesson's domain-restriction rule, why the ORIGINAL concentration expression's excluded dose value(s) must still be excluded from the final simplified product, even if that value no longer appears as a zero of the simplified denominator.\" *Component 7 note: this scenario was chosen independently rather than cross-linking to `math.func.rational-function`, since that blueprint does not yet exist.*\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.polynomial` (polynomial expressions, degree) and `math.alg.factoring` (factoring polynomials into products of lower-degree polynomials).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.rational-expressions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.rational-expressions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.polynomial` (the numerator/denominator building blocks), `math.alg.factoring` (the essential tool for both simplification and LCD-building).\n- **Unlocks**: `math.alg.rational-equations` (solving equations involving rational expressions builds directly on domain-restriction awareness and simplification here), `math.func.rational-function` (the function-theoretic treatment — asymptotes, holes, end behavior — of rational expressions as functions).\n- **Cross-link**: KG lists `math.func.rational-function` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.func.rational-function.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's domain-restriction analysis directly to that concept's vertical-asymptote-vs-removable-hole distinction (the exact same \"canceled factor vs. surviving factor\" logic reappears there as the hole/asymptote distinction).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rational-expressions.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
