@@ -24876,6 +24876,371 @@ const OUTP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.linguistics.historical-linguistics-intro ────────────────────────────
+const HLIN = 'eng.linguistics.historical-linguistics-intro'
+const HLIN_SRC = 'docs/curriculum/blueprints/eng.linguistics.historical-linguistics-intro.md'
+
+const HLIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HLIN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Modern English isn\'t a "corrupted" version of Old English — Old ' +
+      'English was itself already changed from an even earlier ancestor. ' +
+      'Like a river\'s current path isn\'t a corruption of where it used ' +
+      'to flow (rivers always change course through the same natural ' +
+      'process), every stage of a language is a complete, fully ' +
+      'functional system, not decline from a "purer" earlier form.',
+    targetedMisconceptions: [`${HLIN}:MC-A-LANGUAGE-CHANGE-IS-RANDOM-DECAY-OR-CORRUPTION-OF-A-PURER-EARLIER-FORM`],
+    source: `${HLIN_SRC} — MC-A (P28 river-erosion conflict)`,
+  },
+  {
+    conceptId: HLIN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Great Vowel Shift changed English long vowels in a regular, ' +
+      'predictable pattern across many words, not randomly word-by-word ' +
+      '— like a city\'s traffic light system that looks chaotic at one ' +
+      'intersection but reveals a systematic, engineered pattern once ' +
+      'multiple intersections are compared. Ask whether the same kind of ' +
+      'change appears in OTHER words sharing a similar sound, not whether ' +
+      'this looks like an isolated event.',
+    targetedMisconceptions: [`${HLIN}:MC-B-LANGUAGE-CHANGE-HAPPENS-RANDOMLY-WORD-BY-WORD-WITH-NO-SYSTEMATIC-PATTERN`],
+    source: `${HLIN_SRC} — MC-B (P28 traffic-pattern conflict)`,
+  },
+  {
+    conceptId: HLIN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Every historical stage of a language is a complete, fully ' +
+      'functional system that has already changed from its own ancestor ' +
+      '— there is no privileged "pure" starting point, so language change ' +
+      'should never be framed as decay or corruption. Separately, ' +
+      'historical sound, grammatical, and meaning changes follow ' +
+      'systematic, predictable rules across many words sharing a feature, ' +
+      'not random word-by-word variation — this systematicity is exactly ' +
+      'what allows linguists to reconstruct language history.',
+    targetedMisconceptions: [
+      `${HLIN}:MC-A-LANGUAGE-CHANGE-IS-RANDOM-DECAY-OR-CORRUPTION-OF-A-PURER-EARLIER-FORM`,
+      `${HLIN}:MC-B-LANGUAGE-CHANGE-HAPPENS-RANDOMLY-WORD-BY-WORD-WITH-NO-SYSTEMATIC-PATTERN`,
+    ],
+    source: `${HLIN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const HLIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: HLIN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is Modern English a "corrupted" or "decayed" version of Old English?',
+    choices: [
+      { text: 'No — Old English was itself already changed from an earlier ancestor language; every stage of a language is a complete system, not a corruption of a "purer" earlier one', isCorrect: true },
+      { text: 'Yes — language change is random decay or corruption of a purer earlier form', isCorrect: false, misconceptionId: `${HLIN}:MC-A-LANGUAGE-CHANGE-IS-RANDOM-DECAY-OR-CORRUPTION-OF-A-PURER-EARLIER-FORM` },
+    ],
+    correctValue: 'no, change is continuous and normal',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HLIN}:MC-A-LANGUAGE-CHANGE-IS-RANDOM-DECAY-OR-CORRUPTION-OF-A-PURER-EARLIER-FORM`],
+    source: `${HLIN_SRC} — river-erosion conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HLIN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Great Vowel Shift changed the pronunciation of many English words with a shared original sound. Did this happen randomly, word by word, with no underlying pattern?',
+    choices: [
+      { text: 'No — historical sound changes follow systematic rules across many words sharing a feature; this systematicity is what lets linguists reconstruct language history', isCorrect: true },
+      { text: 'Yes — language change happens randomly, word by word, with no systematic pattern', isCorrect: false, misconceptionId: `${HLIN}:MC-B-LANGUAGE-CHANGE-HAPPENS-RANDOMLY-WORD-BY-WORD-WITH-NO-SYSTEMATIC-PATTERN` },
+    ],
+    correctValue: 'no, change follows systematic rules',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HLIN}:MC-B-LANGUAGE-CHANGE-HAPPENS-RANDOMLY-WORD-BY-WORD-WITH-NO-SYSTEMATIC-PATTERN`],
+    source: `${HLIN_SRC} — traffic-pattern conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.syntax-theory-intro ──────────────────────────────────────
+const SYNT = 'eng.linguistics.syntax-theory-intro'
+const SYNT_SRC = 'docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md'
+
+const SYNT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SYNT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A young child says "the big red ball," essentially never "the ' +
+      'ball big red," despite never being explicitly taught adjective ' +
+      'order. Linguistic syntax studies this deep, unconscious structural ' +
+      'knowledge every fluent speaker has — like automatic walking ' +
+      'balance nobody explicitly taught — not explicit, debatable school- ' +
+      'grammar conventions like "don\'t split an infinitive."',
+    targetedMisconceptions: [`${SYNT}:MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY`],
+    source: `${SYNT_SRC} — MC-A (P28 child-adjective-order conflict)`,
+  },
+  {
+    conceptId: SYNT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Colorless green ideas sleep furiously" follows correct English ' +
+      'word order and agreement (grammatically well-formed) yet is ' +
+      'utterly nonsensical (semantically empty) — like a beautifully ' +
+      'engineered bridge that leads to an empty field. Ask two SEPARATE ' +
+      'questions: does it follow structural rules (syntax)? Does it make ' +
+      'logical sense (semantics)? A sentence can pass the first and fail ' +
+      'the second.',
+    targetedMisconceptions: [`${SYNT}:MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING`],
+    source: `${SYNT_SRC} — MC-B (P28 colorless-green-ideas conflict)`,
+  },
+  {
+    conceptId: SYNT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Linguistic syntax studies a speaker\'s deep, internalized, largely ' +
+      'unconscious structural knowledge — present even without formal ' +
+      'education — distinct from explicit, taught prescriptive writing ' +
+      'conventions. Separately, syntactic well-formedness (following ' +
+      'structural rules) and semantic meaningfulness are related but ' +
+      'genuinely distinct levels of analysis: a sentence can be perfectly ' +
+      'grammatical while being semantically nonsensical.',
+    targetedMisconceptions: [
+      `${SYNT}:MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY`,
+      `${SYNT}:MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING`,
+    ],
+    source: `${SYNT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SYNT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SYNT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A young child never taught any explicit rule about adjective order still never says "the ball big red." Is this the same kind of knowledge as an explicit school-grammar rule like "don\'t split an infinitive"?',
+    choices: [
+      { text: 'No — this is deep, automatic structural knowledge every fluent speaker has, unlike explicit, taught conventions; linguistic syntax studies the former', isCorrect: true },
+      { text: 'Yes — syntax is just school grammar rules for writing correctly', isCorrect: false, misconceptionId: `${SYNT}:MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY` },
+    ],
+    correctValue: 'no, syntax is deep unconscious knowledge',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SYNT}:MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY`],
+    source: `${SYNT_SRC} — child-adjective-order conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SYNT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Colorless green ideas sleep furiously" follows correct English word order and agreement. Must it also make logical sense, since it\'s grammatically correct?',
+    choices: [
+      { text: 'No — syntax (structural well-formedness) and semantics (meaning) are separate questions; this sentence is grammatical but nonsensical', isCorrect: true },
+      { text: 'Yes — a grammatically correct sentence must also make sense; syntax and meaning are the same thing', isCorrect: false, misconceptionId: `${SYNT}:MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING` },
+    ],
+    correctValue: 'no, syntax and semantics differ',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SYNT}:MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING`],
+    source: `${SYNT_SRC} — colorless-green-ideas conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.conversation-skills ──────────────────────────────────────────
+const CVSK = 'eng.speaking.conversation-skills'
+const CVSK_SRC = 'docs/curriculum/blueprints/eng.speaking.conversation-skills.md'
+
+const CVSK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CVSK,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A conversation is a turn-taking activity, like a game of catch — ' +
+      'if one person holds the ball the whole time, it stops being a ' +
+      'game. Good conversationalists don\'t talk the most; they create ' +
+      'space for both people to contribute roughly equally and build on ' +
+      'what the other person says. Measure success by fair turns, not ' +
+      'word count.',
+    targetedMisconceptions: [`${CVSK}:MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT`],
+    source: `${CVSK_SRC} — MC-1 (P28 tennis-rally-monopoly conflict)`,
+  },
+  {
+    conceptId: CVSK,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A short, comfortable pause while someone thinks about what to say ' +
+      'next isn\'t a sign anything went wrong — it\'s normal, even ' +
+      'between people who know each other well. Only silence that comes ' +
+      'with visible discomfort and avoided eye contact signals a real ' +
+      'problem worth addressing. Before rushing to fill a silence, check ' +
+      'which kind it is.',
+    targetedMisconceptions: [`${CVSK}:MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG`],
+    source: `${CVSK_SRC} — MC-2 (P28 thinking-pause-vs-stalled conflict)`,
+  },
+  {
+    conceptId: CVSK,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Conversational skill is measured by balanced, responsive turn- ' +
+      'taking, not by volume or duration of speech — monopolizing a ' +
+      'conversation undermines it regardless of content quality. ' +
+      'Separately, a brief thinking pause or comfortable silence is a ' +
+      'normal, healthy part of conversation, distinct from a genuinely ' +
+      'stalled silence marked by visible discomfort; only the latter ' +
+      'warrants an active rescue.',
+    targetedMisconceptions: [
+      `${CVSK}:MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT`,
+      `${CVSK}:MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG`,
+    ],
+    source: `${CVSK_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CVSK_PROBES: SeedProbe[] = [
+  {
+    conceptId: CVSK,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'One speaker talks continuously for two minutes about their weekend without pausing for the other person to respond. Does talking this much signal good conversational skill?',
+    choices: [
+      { text: 'No — conversation is a turn-taking activity; good conversationalists create roughly equal space for both people, not maximize their own talking time', isCorrect: true },
+      { text: 'Yes — good conversation means talking a lot', isCorrect: false, misconceptionId: `${CVSK}:MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT` },
+    ],
+    correctValue: 'no, balance matters not volume',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CVSK}:MC-GOOD-CONVERSATION-MEANS-TALKING-A-LOT`],
+    source: `${CVSK_SRC} — tennis-rally-monopoly conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CVSK,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Two friends finish reminiscing and there\'s a comfortable 3-second pause before one responds thoughtfully. Did something go wrong in that pause?',
+    choices: [
+      { text: 'No — a short thinking pause or comfortable quiet moment is completely normal; only silence with visible discomfort signals a real problem', isCorrect: true },
+      { text: 'Yes — silence in a conversation means something went wrong', isCorrect: false, misconceptionId: `${CVSK}:MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG` },
+    ],
+    correctValue: 'no, brief pauses are normal',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CVSK}:MC-SILENCE-IN-A-CONVERSATION-MEANS-SOMETHING-WENT-WRONG`],
+    source: `${CVSK_SRC} — thinking-pause-vs-stalled conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.drafting ───────────────────────────────────────────────────────
+const DRFT = 'eng.writing.drafting'
+const DRFT_SRC = 'docs/curriculum/blueprints/eng.writing.drafting.md'
+
+const DRFT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DRFT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Stopping every few words to fix minor spelling or word-choice ' +
+      'issues disrupts your flow of thought and often means losing track ' +
+      'of the larger idea. Drafting\'s job is capturing content, not ' +
+      'achieving polished correctness — mark uncertain spots (underline, ' +
+      'bracket a note) and keep writing; error-correction is editing\'s ' +
+      'job, which comes later.',
+    targetedMisconceptions: [`${DRFT}:MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING`],
+    source: `${DRFT_SRC} — MC-1 (P28 dashboard-light-pit-stop conflict)`,
+  },
+  {
+    conceptId: DRFT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Getting stuck on one difficult transition doesn\'t mean you need ' +
+      'to stop drafting entirely — like a driver who follows a DETOUR ' +
+      'sign and keeps going instead of stopping the car until construction ' +
+      'clears. Write a placeholder note ("[TRANSITION NEEDED HERE]"), ' +
+      'skip ahead to an easier section, or write a rough approximate ' +
+      'version to refine later — keep the overall drafting process ' +
+      'moving.',
+    targetedMisconceptions: [`${DRFT}:MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE`],
+    source: `${DRFT_SRC} — MC-2 (P28 road-detour conflict)`,
+  },
+  {
+    conceptId: DRFT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Drafting\'s primary job is capturing content and ideas, not ' +
+      'achieving polished correctness — error-correction properly ' +
+      'belongs to the later editing stage, so uncertain spots should be ' +
+      'marked and left for later rather than stopping the flow of ideas. ' +
+      'Separately, getting stuck on one section doesn\'t warrant halting ' +
+      'the entire drafting process; push-through strategies (placeholder ' +
+      'notes, skipping ahead, a rough approximation) preserve overall ' +
+      'momentum.',
+    targetedMisconceptions: [
+      `${DRFT}:MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING`,
+      `${DRFT}:MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE`,
+    ],
+    source: `${DRFT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DRFT_PROBES: SeedProbe[] = [
+  {
+    conceptId: DRFT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'While drafting, you notice a small spelling error. Should you stop immediately and fix it before continuing?',
+    choices: [
+      { text: 'No — mark it and keep writing; drafting\'s job is capturing content, and error-correction is editing\'s job, deferred to later', isCorrect: true },
+      { text: 'Yes — you must stop and fix every error during drafting', isCorrect: false, misconceptionId: `${DRFT}:MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING` },
+    ],
+    correctValue: 'no, mark it and keep going',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DRFT}:MC-YOU-MUST-STOP-AND-FIX-EVERY-ERROR-DURING-DRAFTING`],
+    source: `${DRFT_SRC} — dashboard-light-pit-stop conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DRFT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You get stuck figuring out how to phrase a difficult transition while drafting. Should you stop drafting entirely until you know exactly what to write?',
+    choices: [
+      { text: 'No — use a placeholder note, skip ahead to an easier section, or write a rough approximate version, keeping the overall drafting process moving', isCorrect: true },
+      { text: 'Yes — if you get stuck, you should stop drafting until you know exactly what to write', isCorrect: false, misconceptionId: `${DRFT}:MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE` },
+    ],
+    correctValue: 'no, push through with a strategy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DRFT}:MC-IF-YOU-GET-STUCK-YOU-SHOULD-STOP-DRAFTING-UNTIL-YOU-KNOW-EXACTLY-WHAT-TO-WRITE`],
+    source: `${DRFT_SRC} — road-detour conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -25156,6 +25521,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ACCD_EXPLANATIONS,
   ...PRCV_EXPLANATIONS,
   ...OUTP_EXPLANATIONS,
+  ...HLIN_EXPLANATIONS,
+  ...SYNT_EXPLANATIONS,
+  ...CVSK_EXPLANATIONS,
+  ...DRFT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -25436,4 +25805,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ACCD_PROBES,
   ...PRCV_PROBES,
   ...OUTP_PROBES,
+  ...HLIN_PROBES,
+  ...SYNT_PROBES,
+  ...CVSK_PROBES,
+  ...DRFT_PROBES,
 ]
