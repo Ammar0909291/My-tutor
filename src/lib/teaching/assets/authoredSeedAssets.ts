@@ -33488,6 +33488,366 @@ const ASPC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.nuclear-fission ─────────────────────────────────────────────────
+const NFIS = 'phys.mod.nuclear-fission'
+const NFIS_SRC = 'docs/curriculum/blueprints/phys.mod.nuclear-fission.md'
+
+const NFIS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NFIS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A nuclear reactor cannot explode like an atomic bomb, even under a runaway power excursion — the two are fundamentally different regimes, not points on a single continuous danger scale. A nuclear weapon requires uranium or plutonium enriched to ≥90%, rapidly assembled into a compact prompt-supercritical configuration within microseconds; reactor fuel, by contrast, is enriched to only about 3%, and even under a loss-of-control accident (like Chernobyl), the geometry, low enrichment, and slow chain-reaction timescale make a nuclear detonation physically impossible — the actual failure mode is a runaway power excursion leading to a steam explosion, structural failure, and radioactive material release, a serious accident but categorically different from a nuclear blast. Fission energy comes overwhelmingly from converting the KINETIC ENERGY of fragments and radiation, never from converting the bulk of the uranium\'s mass to energy: a single U-235 fission event releases about 200 MeV, corresponding to a mass defect Δm = 200 MeV/931.5 MeV/u ≈ 0.215 u — but the mass of U-235 itself is 235 u, so the fraction of mass actually converted is only about 0.215/235 ≈ 0.09%, meaning fully 99.91% of the original mass-energy remains locked in the fission products themselves, never released as usable energy.',
+    targetedMisconceptions: [`${NFIS}:MC-1`, `${NFIS}:MC-4`],
+    source: `${NFIS_SRC} — MC-1 (reactor cannot detonate like a weapon, different enrichment/timescale regime) + MC-4 (only 0.09% of mass converts to energy, not the whole mass)`,
+  },
+  {
+    conceptId: NFIS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption, fueled by cultural association between "nuclear reactor" and "atomic bomb": believing a fission reactor can explode with a nuclear detonation the way a weapon does, if something goes badly enough wrong. It genuinely cannot — a nuclear explosion requires rapid assembly of HIGHLY enriched fissile material (≥90% enrichment) into a compact prompt-supercritical configuration within microseconds, while reactor fuel is enriched to only about 3%, and the reactor\'s geometry and materials, combined with the much slower millisecond-scale chain reaction (relying on delayed neutrons), make the super-prompt-critical condition needed for a nuclear detonation physically impossible to reach. The Chernobyl accident is the clearest real-world demonstration: even with a genuine runaway power excursion, the result was a steam explosion and fire, releasing radioactive material — a serious and genuinely catastrophic accident, but categorically NOT a nuclear detonation. Second, related trap: assuming fission energy comes from converting essentially ALL of the fissioning uranium\'s mass into energy, given how dramatically more energy fission releases compared to chemical reactions. Compute the actual fraction converted: a single fission event releases about 200 MeV, corresponding (via E=mc²) to a mass defect Δm ≈ 0.215 atomic mass units — but the U-235 nucleus itself has a mass of 235 u, so the fraction of mass genuinely converted to energy is only about 0.215/235 ≈ 0.09%. The overwhelming majority of the original mass-energy, 99.91%, remains locked inside the fission products themselves (their own rest mass) — E = mc² applies specifically to the small MASS DIFFERENCE between the reactants and products, never to the reactants\' total mass.',
+    targetedMisconceptions: [`${NFIS}:MC-1`, `${NFIS}:MC-4`],
+    source: `${NFIS_SRC} — MC-1 + MC-4, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NFIS_PROBES: SeedProbe[] = [
+  {
+    conceptId: NFIS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A nuclear reactor experiences a severe loss-of-control accident, with a runaway power excursion. Can it explode with a nuclear detonation like an atomic bomb?',
+    choices: [
+      { text: 'No — reactor fuel (≈3% enriched) and slow chain-reaction timescales cannot reach the prompt-supercritical conditions a weapon requires (≥90% enrichment, microsecond assembly); the failure mode is a steam explosion/fire, not a nuclear blast', isCorrect: true },
+      { text: 'Yes — given a severe enough accident, a reactor can detonate just like a nuclear weapon, since both rely on the same fission chain reaction', isCorrect: false, misconceptionId: `${NFIS}:MC-1` },
+    ],
+    correctValue: 'no, reactor cannot nuclear-detonate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NFIS}:MC-1`],
+    source: `${NFIS_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NFIS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A single U-235 fission event releases about 200 MeV of energy. Roughly what fraction of the uranium nucleus\'s total mass gets converted into that energy?',
+    choices: [
+      { text: 'About 0.09% — the mass defect Δm≈0.215u is tiny compared to U-235\'s total mass of 235u; the vast majority of the mass-energy remains in the fission products', isCorrect: true },
+      { text: 'Nearly 100% — fission converts essentially the entire mass of the uranium nucleus into energy', isCorrect: false, misconceptionId: `${NFIS}:MC-4` },
+    ],
+    correctValue: 'about 0.09 percent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NFIS}:MC-4`],
+    source: `${NFIS_SRC} — MC-4 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.nuclear-fusion ──────────────────────────────────────────────────
+const NFUS = 'phys.mod.nuclear-fusion'
+const NFUS_SRC = 'docs/curriculum/blueprints/phys.mod.nuclear-fusion.md'
+
+const NFUS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NFUS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Fusion genuinely releases energy overall, but that doesn\'t mean it happens easily — deuterium-tritium fusion requires temperatures around 100 million Kelvin to achieve meaningful reaction rates, because the positively-charged nuclei must overcome (or quantum-mechanically tunnel through) the strong Coulomb repulsion between them before the short-range nuclear force can bind them together; achieving and sustaining these extreme conditions requires magnetic or inertial confinement, representing one of the most difficult engineering challenges in physics. Like a rock that CAN roll downhill and release energy, but still needs to be pushed uphill first, fusion is thermodynamically favorable overall while still demanding enormous energy input just to initiate the reaction. The Sun doesn\'t shine by any kind of chemical "burning" (combustion) — if it did, its total available chemical energy (a few eV per atom) would be exhausted in roughly 10,000 years, wildly inconsistent with its actual age of 4.6 billion years; instead, the Sun undergoes genuine nuclear fusion (4 protons → helium-4 + 26.7 MeV), releasing roughly a million times more energy per atom than any chemical reaction could, correctly accounting for a lifetime around 10 billion years — no oxygen, no combustion, purely nuclear energy at the MeV scale rather than the eV scale of ordinary chemistry.',
+    targetedMisconceptions: [`${NFUS}:MC-1`, `${NFUS}:MC-2`],
+    source: `${NFUS_SRC} — MC-1 (fusion needs 100 million K, Coulomb barrier) + MC-2 (Sun undergoes nuclear fusion, not chemical burning)`,
+  },
+  {
+    conceptId: NFUS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing fusion should be "easy" to achieve on Earth simply because the overall reaction releases energy — after all, if it\'s thermodynamically favorable, why would it be hard? Releasing energy overall says nothing about how hard it is to GET STARTED: deuterium-tritium fusion requires temperatures around 100 million Kelvin just to achieve meaningful reaction rates, because the two positively-charged nuclei must first overcome (or tunnel through) the powerful Coulomb repulsion between them before the short-range nuclear force can take over and bind them; achieving and sustaining these extreme conditions requires sophisticated magnetic or inertial confinement technology, one of the hardest engineering problems in physics. Like a rock perched at the top of a hill — releasing energy as it rolls down is easy once it starts, but pushing it up there in the first place takes real work — fusion is genuinely energy-releasing overall while still requiring enormous energy investment just to initiate. Second, equally natural trap: describing the Sun as "burning" the way an ordinary fire burns, implying an ongoing chemical combustion process. Test the numbers directly: if the Sun\'s energy really came from chemical burning, its total available chemical energy (roughly a few eV per atom) would be completely exhausted in about 10,000 years — but the Sun is independently known to be 4.6 BILLION years old and still shining steadily. Nuclear fusion, by contrast, releases roughly 7 MeV per proton fused (4 protons → helium-4 + 26.7 MeV total) — about a MILLION times more energy per atom than any chemical process, correctly accounting for a lifetime on the order of 10 billion years. The Sun\'s energy is fundamentally NUCLEAR (MeV scale, involving the strong force and mass-energy conversion), never chemical (eV scale, involving electron bonds) — no oxygen is involved, and there is no combustion happening at all.',
+    targetedMisconceptions: [`${NFUS}:MC-1`, `${NFUS}:MC-2`],
+    source: `${NFUS_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NFUS_PROBES: SeedProbe[] = [
+  {
+    conceptId: NFUS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Fusion reactions release net energy overall. Does this mean fusion is easy to achieve and sustain on Earth?',
+    choices: [
+      { text: 'No — despite being energy-releasing overall, fusion requires overcoming the Coulomb repulsion between nuclei, needing temperatures around 100 million K and sophisticated confinement, one of the hardest engineering challenges in physics', isCorrect: true },
+      { text: 'Yes — since the reaction releases energy overall, it should occur readily under normal conditions without much difficulty', isCorrect: false, misconceptionId: `${NFUS}:MC-1` },
+    ],
+    correctValue: 'no, requires extreme conditions to initiate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NFUS}:MC-1`],
+    source: `${NFUS_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NFUS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Sun is often casually described as "burning." Does it shine via chemical combustion, or something else?',
+    choices: [
+      { text: 'Nuclear fusion — chemical burning could only sustain the Sun for about 10,000 years, but the Sun is 4.6 billion years old; fusion releases roughly a million times more energy per atom than chemistry', isCorrect: true },
+      { text: 'Chemical combustion, just like an ordinary fire, sustained by oxygen reacting with the Sun\'s hydrogen fuel', isCorrect: false, misconceptionId: `${NFUS}:MC-2` },
+    ],
+    correctValue: 'nuclear fusion, not chemical burning',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NFUS}:MC-2`],
+    source: `${NFUS_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.nuclear-models ──────────────────────────────────────────────────
+const NMOD = 'phys.mod.nuclear-models'
+const NMOD_SRC = 'docs/curriculum/blueprints/phys.mod.nuclear-models.md'
+
+const NMOD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NMOD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The nuclear shell model borrows the ORGANIZING IDEA of atomic electron shells (nucleons filling discrete energy levels) but produces genuinely DIFFERENT magic numbers, because the underlying physics differs substantially: nuclei use a Woods-Saxon-type potential rather than the Coulomb potential governing atomic electrons, and — crucially — nuclear spin-orbit coupling is roughly 20-50 times STRONGER than in atoms and even has the OPPOSITE effective ordering, splitting levels differently (for example, the 1f shell splits into 1f₇/₂, filling first with 8 states, then 1f₅/₂ with 6 states, producing magic number 28 — not the value atomic-style shell-filling alone would predict). Test the atomic-shell prediction directly against real data: it would predict magic numbers at 2, 10, 18 by analogy — but ¹⁸O is not especially stable, while ⁴He, ¹⁶O, and ⁴⁰Ca (all "doubly magic," with both proton number and neutron number at nuclear magic numbers: 2, 8, 20...) genuinely ARE anomalously stable with high binding energy per nucleon — protons and neutrons fill their OWN separate shell sequences independently (as different particle species under the Pauli exclusion principle), never one combined sequence. "Magic" specifically means exceptionally high binding energy and stability — NOT "most common" or "most abundant" in nature: lead-208 is doubly magic and highly stable, yet lead has only 4 stable isotopes total, while tin (magic at Z=50) has 10 stable isotopes, and iron-56 (not magic for either protons or neutrons) is actually the most cosmically ABUNDANT nucleus in the universe, since abundance depends on stellar nucleosynthesis pathways, not simply on nuclear stability.',
+    targetedMisconceptions: [`${NMOD}:MC-1`, `${NMOD}:MC-4`],
+    source: `${NMOD_SRC} — MC-1 (nuclear levels differ from atomic levels due to spin-orbit strength) + MC-4 (magic numbers mean stability, not commonness/abundance)`,
+  },
+  {
+    conceptId: NMOD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: assuming nuclear energy levels behave the SAME way atomic electron shells do, since the shell-model idea was borrowed by analogy — predicting nuclear "magic numbers" at 2, 10, 18, mirroring atomic magic numbers. The prediction fails against real data: ⁴He (Z=2, N=2), ¹⁶O (Z=8, N=8), and ⁴⁰Ca (Z=20, N=20) are all "doubly magic" and genuinely, anomalously stable with high binding energy per nucleon — but ¹⁸O is not especially stable, directly contradicting what the naive atomic-analogy prediction would give. The physics genuinely differs: nuclei experience a different governing potential (Woods-Saxon, versus the Coulomb potential shaping atomic electron orbitals) AND nuclear spin-orbit coupling is roughly 20-50 times STRONGER than the atomic version, splitting energy levels differently — the real nuclear magic numbers (2, 8, 20, 28, 50, 82, 126) emerge from this genuinely different level structure, not from simply copying the atomic sequence. Second, related trap: interpreting "magic number" as meaning "most commonly occurring" or "most abundant" isotope/nucleus in nature, since "magic" sounds like it should correlate with prevalence. It means something more specific: exceptionally HIGH nuclear stability (high binding energy, high energy required to remove a nucleon, low first-excited-state energy) — NOT abundance. Lead-208 is doubly magic and genuinely very stable, yet lead as an element has only 4 stable isotopes total; tin (magic at Z=50) has 10 stable isotopes; and iron-56 — which is NOT magic for either its proton count OR its neutron count — happens to be the most COSMICALLY ABUNDANT nucleus in the entire universe, because cosmic abundance is determined by the specific pathways of stellar nucleosynthesis (how stars actually build up elements), not simply by which nuclei are the most inherently stable.',
+    targetedMisconceptions: [`${NMOD}:MC-1`, `${NMOD}:MC-4`],
+    source: `${NMOD_SRC} — MC-1 + MC-4, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NMOD_PROBES: SeedProbe[] = [
+  {
+    conceptId: NMOD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'By direct analogy with atomic electron shells (magic numbers at 2, 10, 18), a student predicts ¹⁸O should be especially stable. Is this prediction correct?',
+    choices: [
+      { text: 'No — nuclear levels have a genuinely different structure (different potential, much stronger spin-orbit coupling), giving different magic numbers (2, 8, 20, 28...); ¹⁸O is not especially stable', isCorrect: true },
+      { text: 'Yes — nuclear shells follow the same magic numbers as atomic shells, since both use the same shell-filling idea', isCorrect: false, misconceptionId: `${NMOD}:MC-1` },
+    ],
+    correctValue: 'no, nuclear magic numbers differ from atomic ones',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NMOD}:MC-1`],
+    source: `${NMOD_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NMOD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Iron-56 is the most cosmically abundant nucleus in the universe, yet it is not "magic" for either its proton or neutron count. What does this tell you about what "magic number" actually means?',
+    choices: [
+      { text: '"Magic" means exceptionally high nuclear stability/binding energy — it does NOT mean "most abundant"; cosmic abundance depends on stellar nucleosynthesis pathways, a separate factor from nuclear stability', isCorrect: true },
+      { text: 'This is a contradiction — magic numbers should correspond to the most commonly occurring nuclei in nature', isCorrect: false, misconceptionId: `${NMOD}:MC-4` },
+    ],
+    correctValue: 'magic means stability, not abundance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NMOD}:MC-4`],
+    source: `${NMOD_SRC} — MC-4 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.nuclear-reactions ──────────────────────────────────────────────
+const NRXN = 'phys.mod.nuclear-reactions'
+const NRXN_SRC = 'docs/curriculum/blueprints/phys.mod.nuclear-reactions.md'
+
+const NRXN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NRXN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Q-value of a nuclear reaction (the total kinetic energy released) is NOT the kinetic energy any single product particle receives — momentum conservation forces the total Q to be SHARED between the products in a fixed proportion determined by their mass ratio. For DT fusion, the alpha particle and neutron don\'t split the 17.6 MeV total energy equally; momentum conservation dictates each gets a definite, unequal share (roughly KE_α ≈ 3.5 MeV, KE_n ≈ 14.1 MeV — the LIGHTER particle, the neutron, carries away the LARGER share of kinetic energy, exactly like a compressed spring connecting two unequal masses gives the lighter mass more velocity, hence more kinetic energy). Calculating Q correctly requires genuinely precise atomic masses — NOT the integer mass NUMBER (which is just a nucleon COUNT) — because using integer mass numbers gives Δm = 0 for any balanced reaction, incorrectly predicting Q = 0 (no energy release) for every reaction; the actual mass values differ from integers by tiny fractions (a few milliunits) due to nuclear binding energy, and that tiny mass difference, multiplied by 931.5 MeV per atomic mass unit, is EXACTLY what produces the MeV-scale energy release — always use tabulated atomic masses to 4-6 decimal places, never the mass number, for any Q-value calculation.',
+    targetedMisconceptions: [`${NRXN}:MC-1`, `${NRXN}:MC-3`],
+    source: `${NRXN_SRC} — MC-1 (Q shared by momentum conservation, not full Q to one product) + MC-3 (must use precise atomic mass, not integer mass number)`,
+  },
+  {
+    conceptId: NRXN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing the Q-value (total kinetic energy released) of a nuclear reaction is simply the kinetic energy that ONE of the product particles ends up with — as if Q were assigned wholesale to a single fragment. It isn\'t: momentum conservation forces the total Q to be SHARED between the products in a fixed, unequal proportion determined by their relative masses — for DT fusion (releasing Q = 17.6 MeV total), the alpha particle and the neutron don\'t split this evenly; the LIGHTER particle (the neutron) ends up carrying away substantially MORE kinetic energy (≈14.1 MeV) than the heavier alpha particle (≈3.5 MeV), exactly the way a compressed spring connecting two unequal masses gives the lighter mass more velocity (and hence, since KE=½mv², a disproportionately larger share of the total kinetic energy) when released. Second, a genuinely subtle and consequential trap: using the integer MASS NUMBER (a simple count of nucleons) instead of the precise ATOMIC MASS (measured to many decimal places) when calculating Q from Δm × c². Using integers, any properly balanced nuclear equation trivially gives Δm = 0, incorrectly predicting Q = 0 — no energy release at all — for every single reaction, which is obviously wrong (nuclear reactions genuinely release MeV-scale energy). The mass number is just a NUCLEON COUNT, an integer; the actual atomic mass differs from that integer by a tiny fraction (a few "milliunits," reflecting the real binding energy of the nucleus), and it\'s precisely that tiny fractional mass difference, multiplied by the conversion factor 931.5 MeV per atomic mass unit, that correctly produces the observed MeV-scale energy release — Q-value calculations always require tabulated atomic masses to 4-6 decimal places, never the integer mass number.',
+    targetedMisconceptions: [`${NRXN}:MC-1`, `${NRXN}:MC-3`],
+    source: `${NRXN_SRC} — MC-1 + MC-3, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NRXN_PROBES: SeedProbe[] = [
+  {
+    conceptId: NRXN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'DT fusion releases Q = 17.6 MeV total, shared between an alpha particle and a neutron. Do both particles receive equal shares of this energy?',
+    choices: [
+      { text: 'No — momentum conservation forces an unequal split determined by mass ratio; the lighter neutron gets substantially more kinetic energy (≈14.1 MeV) than the heavier alpha particle (≈3.5 MeV)', isCorrect: true },
+      { text: 'Yes — the total Q-value is simply split evenly (8.8 MeV each) between the two product particles', isCorrect: false, misconceptionId: `${NRXN}:MC-1` },
+    ],
+    correctValue: 'unequal split, lighter particle gets more',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NRXN}:MC-1`],
+    source: `${NRXN_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NRXN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You calculate the Q-value of a nuclear reaction using integer MASS NUMBERS (nucleon counts) instead of precise atomic masses. What happens?',
+    choices: [
+      { text: 'You get Δm = 0 for any balanced reaction, incorrectly predicting Q = 0 (no energy release); precise atomic masses (to 4-6 decimal places) are required to reveal the tiny mass difference that produces the actual MeV-scale energy', isCorrect: true },
+      { text: 'You get the same correct Q-value, since mass number is essentially equivalent to atomic mass for this purpose', isCorrect: false, misconceptionId: `${NRXN}:MC-3` },
+    ],
+    correctValue: 'incorrectly predicts zero energy release',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NRXN}:MC-3`],
+    source: `${NRXN_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.radioactive-decay ──────────────────────────────────────────────
+const RDEC = 'phys.mod.radioactive-decay'
+const RDEC_SRC = 'docs/curriculum/blueprints/phys.mod.radioactive-decay.md'
+
+const RDEC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RDEC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Radioactive decay is exponential — N = N₀ × (1/2)^n after n half-lives — meaning the sample NEVER reaches exactly zero, no matter how many half-lives pass: each half-life halves whatever amount is CURRENTLY present, not some fixed original quantity, so after 2 half-lives, 1000 atoms become 500, then 250 — never zero. It\'s compounding, not subtraction: after 10 half-lives, N = N₀/1024 ≈ 0.1% remains; after 20 half-lives, N ≈ 0.0001% remains — approaching zero asymptotically but never actually arriving there. The correct decay equation is N = N₀e^(−λt), where λ = ln(2)/t₁/₂ is the decay constant — and critically, the exponent λt must be DIMENSIONLESS: λ has units of inverse time (s⁻¹), t has units of time (s), so their product λt is a pure dimensionless number, exactly as an exponent must be; a formula like N = N₀e^(−t₁/₂×t), by contrast, would have units of time-squared in the exponent — a dimensional impossibility that produces catastrophically wrong numbers. The half-life is fundamentally a STATISTICAL property of a large ensemble, never a prediction for any single nucleus: an individual atom might decay in the next second or survive for thousands of years — its actual decay time follows a probability distribution, with the probability it has decayed BEFORE time t given by P = 1 − e^(−λt), which equals exactly 1/2 at t = t₁/₂; for one lone atom, this is genuinely a coin flip stretched across time, not a countdown timer.',
+    targetedMisconceptions: [`${RDEC}:MC-1`, `${RDEC}:MC-2`],
+    source: `${RDEC_SRC} — MC-1 (never reaches exactly zero, N=N₀(1/2)^n) + MC-2 (correct formula N=N₀e^(-λt), dimensionless exponent)`,
+  },
+  {
+    conceptId: RDEC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing that after exactly TWO half-lives, the entire sample has decayed away to nothing, reasoning "one half-life removes half, so two half-lives should remove the other half, leaving zero." It doesn\'t work that way — each half-life halves whatever amount is CURRENTLY present, not some fixed portion of the ORIGINAL amount: starting with 1000 atoms, after 1 half-life you have 500 (half of the original 1000); after the SECOND half-life, you take half of the CURRENT 500, giving 250 — not zero. The formula N = N₀ × (1/2)^n makes this compounding relationship explicit: it\'s multiplicative, never subtractive, and mathematically can never reach exactly zero, no matter how many half-lives elapse — after 10 half-lives roughly 0.1% remains, after 20 half-lives roughly 0.0001% remains, approaching zero asymptotically but never truly arriving. Second, a genuine and consequential formula error: writing the decay equation as N = N₀e^(−t₁/₂×t), multiplying the half-life directly by the elapsed time inside the exponent. Check the units: an exponent must always be a pure, dimensionless number; λ (the decay constant) has units of inverse time (s⁻¹), so λt (time × inverse-time) is correctly dimensionless — but t₁/₂ has units of TIME (seconds), so t₁/₂ × t would have units of TIME-SQUARED, a genuine dimensional impossibility that produces catastrophically wrong numerical results (plugging in carbon-14\'s half-life of 5730 years into that broken formula gives essentially zero remaining atoms almost instantly, obviously absurd). The correct formula is N = N₀e^(−λt), with λ = ln(2)/t₁/₂ — equivalently, N = N₀ × (1/2)^(t/t₁/₂), which correctly reduces to exactly N₀/2 when t equals one half-life.',
+    targetedMisconceptions: [`${RDEC}:MC-1`, `${RDEC}:MC-2`],
+    source: `${RDEC_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RDEC_PROBES: SeedProbe[] = [
+  {
+    conceptId: RDEC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sample starts with 1000 radioactive atoms. After exactly TWO half-lives have passed, how many atoms remain?',
+    choices: [
+      { text: '250 — each half-life halves whatever is CURRENTLY present (1000→500→250), not a fixed portion of the original amount; the sample never reaches exactly zero', isCorrect: true },
+      { text: '0 — after two half-lives, the entire original sample has decayed away completely', isCorrect: false, misconceptionId: `${RDEC}:MC-1` },
+    ],
+    correctValue: '250 atoms remain',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RDEC}:MC-1`],
+    source: `${RDEC_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RDEC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which is the correct radioactive decay formula: N = N₀e^(−λt), or N = N₀e^(−t₁/₂×t)?',
+    choices: [
+      { text: 'N = N₀e^(−λt), where λ=ln2/t₁/₂ — the exponent λt is dimensionless (s⁻¹ × s), as any exponent must be', isCorrect: true },
+      { text: 'N = N₀e^(−t₁/₂×t) — multiplying the half-life directly by elapsed time', isCorrect: false, misconceptionId: `${RDEC}:MC-2` },
+    ],
+    correctValue: 'N = N0 e^(-lambda t)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RDEC}:MC-2`],
+    source: `${RDEC_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.radioactivity ───────────────────────────────────────────────────
+const RADT = 'phys.mod.radioactivity'
+const RADT_SRC = 'docs/curriculum/blueprints/phys.mod.radioactivity.md'
+
+const RADT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RADT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Radioactivity is fundamentally a NUCLEAR process, never something originating from the atom\'s electrons — an alpha particle is literally ⁴₂He, two protons and two neutrons, genuine NUCLEAR particles, not electrons at all; radium-226\'s nucleus contains 88 protons and 138 neutrons, and after alpha decay, the daughter nucleus has 86 protons and 136 neutrons — the electron shells only rearrange AFTERWARD, they are never the source of the decay itself. This is reflected in the vastly different energy scales involved: atomic spectra (electron shell transitions) operate at roughly 1-10 eV, while radioactive decay (nuclear rearrangements) operates at roughly 1 MeV — a full million times larger, confirming the nucleus, not the electron cloud, is genuinely the seat of radioactivity. Ionizing radiation danger depends critically on BOTH the radiation type AND the exposure route — never on energy or ionizing power alone. Alpha particles are highly ionizing (dense, localized energy deposition) but have essentially zero penetration power, stopped completely by dead skin or a sheet of paper — making them nearly harmless EXTERNALLY, but extremely dangerous if ingested or inhaled, since inside the body that same dense ionization causes concentrated, severe tissue damage (relative biological effectiveness ≈20, compared to ≈1 for gamma). Gamma rays are the opposite: low ionizing power per interaction but high penetration (requiring centimeters of lead to stop), making them the MORE dangerous radiation type for EXTERNAL exposure specifically, since they can reach and damage internal organs that alpha particles could never touch from outside the body.',
+    targetedMisconceptions: [`${RADT}:MC-1`, `${RADT}:MC-3`],
+    source: `${RADT_SRC} — MC-1 (radioactivity is nuclear, not from electrons) + MC-3 (alpha vs. gamma danger depends on exposure route)`,
+  },
+  {
+    conceptId: RADT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption, perhaps from associating "radiation" loosely with any kind of atomic energy release: believing radioactivity originates from the atom\'s ELECTRONS, the same source responsible for atomic spectra (electron transitions between shells). It doesn\'t — an alpha particle is literally ⁴₂He, made of two protons and two neutrons, genuine NUCLEAR particles that have nothing to do with electrons; radium-226\'s nucleus specifically contains 88 protons and 138 neutrons, and after emitting an alpha particle, the resulting daughter nucleus has 86 protons and 136 neutrons — electron shells only rearrange AFTERWARD in response to the changed nuclear charge, never as the SOURCE of the decay. The energy scales confirm this decisively: atomic spectra (genuine electron transitions) operate at roughly 1-10 eV, while radioactive decay (nuclear rearrangement) operates at roughly 1 MeV, a full MILLION times larger energy scale — the nucleus is unambiguously the seat of radioactivity, not the electron cloud. Second, subtler but genuinely consequential trap: assuming alpha particles must be "more dangerous" than gamma rays simply because alpha particles carry more localized energy per interaction (higher ionizing power). Danger critically depends on the EXPOSURE ROUTE, not ionizing power alone: for EXTERNAL exposure, an alpha particle is stopped completely by a few centimeters of air or even dead skin cells, making it essentially harmless from outside the body — while gamma rays penetrate deeply, reaching internal organs, making gamma the MORE dangerous radiation type externally. But flip to INTERNAL exposure (the alpha-emitting material is ingested or inhaled): now that same dense, highly localized ionization becomes extremely damaging, since it deposits enormous energy density directly into a tiny volume of living tissue right where it originates — alpha\'s relative biological effectiveness (RBE) is roughly 20× that of gamma for equal absorbed dose. Alpha = high ionizing power, but essentially zero external penetration; gamma = low ionizing power, but high penetration — "more dangerous" genuinely depends on whether the exposure is external or internal, never on ionizing power in isolation.',
+    targetedMisconceptions: [`${RADT}:MC-1`, `${RADT}:MC-3`],
+    source: `${RADT_SRC} — MC-1 + MC-3, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RADT_PROBES: SeedProbe[] = [
+  {
+    conceptId: RADT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What part of the atom is actually responsible for radioactivity — the electron shells or the nucleus?',
+    choices: [
+      { text: 'The nucleus — alpha particles (⁴₂He), beta particles, and gamma photons all originate from nuclear rearrangements at the MeV scale, roughly a million times the eV scale of electron transitions', isCorrect: true },
+      { text: 'The electron shells — radioactivity comes from the same electron transitions responsible for atomic spectra', isCorrect: false, misconceptionId: `${RADT}:MC-1` },
+    ],
+    correctValue: 'the nucleus',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RADT}:MC-1`],
+    source: `${RADT_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RADT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is an alpha-emitting source more dangerous than a gamma-emitting source of the same activity?',
+    choices: [
+      { text: 'It depends on the exposure route — externally, gamma is more dangerous (alpha is stopped by skin); if ingested/inhaled, alpha becomes far more dangerous due to dense localized ionization inside the body', isCorrect: true },
+      { text: 'Yes, always — alpha is unconditionally more dangerous than gamma, since it has higher ionizing power', isCorrect: false, misconceptionId: `${RADT}:MC-3` },
+    ],
+    correctValue: 'depends on exposure route',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RADT}:MC-3`],
+    source: `${RADT_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -33882,6 +34242,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...XRAY_EXPLANATIONS,
   ...BEEN_EXPLANATIONS,
   ...ASPC_EXPLANATIONS,
+  ...NFIS_EXPLANATIONS,
+  ...NFUS_EXPLANATIONS,
+  ...NMOD_EXPLANATIONS,
+  ...NRXN_EXPLANATIONS,
+  ...RDEC_EXPLANATIONS,
+  ...RADT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -34276,4 +34642,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...XRAY_PROBES,
   ...BEEN_PROBES,
   ...ASPC_PROBES,
+  ...NFIS_PROBES,
+  ...NFUS_PROBES,
+  ...NMOD_PROBES,
+  ...NRXN_PROBES,
+  ...RDEC_PROBES,
+  ...RADT_PROBES,
 ]
