@@ -25872,6 +25872,368 @@ const REVC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.linguistics.pragmatics-intro ─────────────────────────────────────────
+const PRAG = 'eng.linguistics.pragmatics-intro'
+const PRAG_SRC = 'docs/curriculum/blueprints/eng.linguistics.pragmatics-intro.md'
+
+const PRAG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Can you pass the salt?" is literally a question about ability, ' +
+      'but a bare "Yes, I can" with no action wouldn\'t satisfy the ' +
+      'speaker — like a knock on a door being understood as "let me in," ' +
+      'not just a physical sound. Ask whether a speaker\'s literal ' +
+      'semantic form is actually what they intend, or a conventional ' +
+      'indirect way of accomplishing something else (a request).',
+    targetedMisconceptions: [`${PRAG}:MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN`],
+    source: `${PRAG_SRC} — MC-A (P28 door-knock-salt-request conflict)`,
+  },
+  {
+    conceptId: PRAG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Are you coming to the party?" "I have to work that night." ' +
+      'reliably implies "no" — nearly any listener draws the same ' +
+      'confident inference, like a chess player\'s deliberate strategic ' +
+      'move, not a confused mistake. Implicature is a PRECISE, reliable ' +
+      'inference competent listeners confidently draw, not vague or ' +
+      'unclear communication.',
+    targetedMisconceptions: [`${PRAG}:MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR`],
+    source: `${PRAG_SRC} — MC-B (P28 chess-move-implicature conflict)`,
+  },
+  {
+    conceptId: PRAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A speaker\'s literal, semantic sentence meaning can systematically ' +
+      'differ from their actual communicative intent via indirect speech ' +
+      'acts (e.g., "Can you pass the salt?" functioning as a request, not ' +
+      'a literal ability question). Separately, implicature is meaning ' +
+      'reliably conveyed but not literally stated, inferred based on ' +
+      'shared conversational expectations — a precise, predictable ' +
+      'inference, not vagueness or ambiguity.',
+    targetedMisconceptions: [
+      `${PRAG}:MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN`,
+      `${PRAG}:MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR`,
+    ],
+    source: `${PRAG_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRAG_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRAG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At a dinner table, someone asks "Can you pass the salt?" If you answered just "Yes, I can" and did nothing else, would that satisfy what the speaker wanted?',
+    choices: [
+      { text: 'No — the literal question about ability is a conventional indirect way of making a request; what a speaker literally says isn\'t always exactly what they mean', isCorrect: true },
+      { text: 'Yes — what a speaker literally says is always exactly what they mean', isCorrect: false, misconceptionId: `${PRAG}:MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN` },
+    ],
+    correctValue: 'no, it\'s an indirect request',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRAG}:MC-A-WHAT-A-SPEAKER-LITERALLY-SAYS-IS-ALWAYS-EXACTLY-WHAT-THEY-MEAN`],
+    source: `${PRAG_SRC} — door-knock-salt-request conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRAG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Are you coming to the party?" "I have to work that night." Nearly every listener confidently infers "no." Is this reliable inference the same thing as the response being vague or unclear?',
+    choices: [
+      { text: 'No — this is a genuine, reliable implicature that virtually any competent listener draws consistently; implicature is precise, not vague', isCorrect: true },
+      { text: 'Yes — implicature means the same as literal vagueness or just being unclear', isCorrect: false, misconceptionId: `${PRAG}:MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR` },
+    ],
+    correctValue: 'no, implicature is reliable not vague',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRAG}:MC-B-IMPLICATURE-MEANS-THE-SAME-AS-LITERAL-VAGUENESS-OR-JUST-BEING-UNCLEAR`],
+    source: `${PRAG_SRC} — chess-move-implicature conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.psycholinguistics-intro ──────────────────────────────────
+const PSYL = 'eng.linguistics.psycholinguistics-intro'
+const PSYL_SRC = 'docs/curriculum/blueprints/eng.linguistics.psycholinguistics-intro.md'
+
+const PSYL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PSYL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Reading comprehension FEELS instantaneous, yet reaction-time ' +
+      'experiments reveal it actually happens incrementally, word by ' +
+      'word — like relying on subjective heart-rate sense instead of an ' +
+      'actual monitor. Psycholinguists use controlled experimental ' +
+      'evidence (reaction times, error patterns) specifically because ' +
+      'introspection is often an unreliable guide to what\'s actually ' +
+      'happening beneath conscious awareness.',
+    targetedMisconceptions: [`${PSYL}:MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES`],
+    source: `${PSYL_SRC} — MC-A (P28 heart-rate-monitor conflict)`,
+  },
+  {
+    conceptId: PSYL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Speech errors like "tips of the slung" for "slips of the tongue" ' +
+      'consistently swap consonants with consonants, never randomly with ' +
+      'vowels — like a printing press\'s misprints following a consistent ' +
+      'mechanical pattern rather than pure randomness. Speech errors ' +
+      'reveal systematic information about how language is planned in ' +
+      'structured stages, not meaningless noise.',
+    targetedMisconceptions: [`${PSYL}:MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN`],
+    source: `${PSYL_SRC} — MC-B (P28 printing-press-misprint conflict)`,
+  },
+  {
+    conceptId: PSYL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Psycholinguists rely on controlled experimental evidence (reaction ' +
+      'times, speech-error analysis) rather than introspection alone, ' +
+      'since subjective impressions are often unreliable guides to mental ' +
+      'processes happening beneath conscious awareness. Separately, ' +
+      'speech errors follow systematic patterns (e.g., consonants ' +
+      'swapping only with consonants) revealing that speech is planned in ' +
+      'structured stages, rather than constituting random noise.',
+    targetedMisconceptions: [
+      `${PSYL}:MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES`,
+      `${PSYL}:MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN`,
+    ],
+    source: `${PSYL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PSYL_PROBES: SeedProbe[] = [
+  {
+    conceptId: PSYL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Reading comprehension subjectively feels instant, arriving all at once. Is simply introspecting about this feeling a reliable way to study what\'s actually happening in the mind?',
+    choices: [
+      { text: 'No — controlled reaction-time experiments reveal comprehension actually happens incrementally, word by word, contradicting the subjective feeling; introspection alone is unreliable here', isCorrect: true },
+      { text: 'Yes — introspection, simply thinking about how language feels to use, is a reliable way to study mental language processes', isCorrect: false, misconceptionId: `${PSYL}:MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES` },
+    ],
+    correctValue: 'no, need experimental evidence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PSYL}:MC-A-INTROSPECTION-SIMPLY-THINKING-ABOUT-HOW-LANGUAGE-FEELS-TO-USE-IS-A-RELIABLE-WAY-TO-STUDY-MENTAL-LANGUAGE-PROCESSES`],
+    source: `${PSYL_SRC} — heart-rate-monitor conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PSYL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A speaker says "tips of the slung" instead of "slips of the tongue," swapping consonants with consonants, never with vowels. Is this just random noise or carelessness?',
+    choices: [
+      { text: 'No — this systematic pattern (consonants only swap with consonants) reveals real information about how speech is planned in structured stages', isCorrect: true },
+      { text: 'Yes — speech errors are just random noise with no systematic pattern', isCorrect: false, misconceptionId: `${PSYL}:MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN` },
+    ],
+    correctValue: 'no, errors reveal systematic patterns',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PSYL}:MC-B-SPEECH-ERRORS-SLIPS-OF-THE-TONGUE-ARE-JUST-RANDOM-NOISE-WITH-NO-SYSTEMATIC-PATTERN`],
+    source: `${PSYL_SRC} — printing-press-misprint conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.discussion-skills ─────────────────────────────────────────────
+const DISC = 'eng.speaking.discussion-skills'
+const DISC_SRC = 'docs/curriculum/blueprints/eng.speaking.discussion-skills.md'
+
+const DISC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DISC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Silently going along with a flawed idea avoids "rudeness" but lets ' +
+      'a weak idea stand unchallenged. Respectful disagreement — ' +
+      '"I see why you\'d think that, but I think the data points the ' +
+      'other way, because..." — is one of the most valuable ' +
+      'contributions you can make. Acknowledge the other person\'s point ' +
+      'first, then explain your reasoning; disagreement isn\'t rudeness.',
+    targetedMisconceptions: [`${DISC}:MC-DISAGREEING-MEANS-BEING-RUDE-OR-CONFRONTATIONAL`],
+    source: `${DISC_SRC} — MC-1 (P28 respectful-challenge-block conflict)`,
+  },
+  {
+    conceptId: DISC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Introducing a completely unrelated new topic technically counts ' +
+      'as "new" but abandons the discussion without engaging it. Building ' +
+      'on a prior point ("Building on what you said...") or connecting ' +
+      'two earlier points is just as valuable a contribution as ' +
+      'introducing something brand-new — a great discussion contributor ' +
+      'often deepens what\'s already been said.',
+    targetedMisconceptions: [`${DISC}:MC-A-GOOD-DISCUSSION-CONTRIBUTION-MEANS-INTRODUCING-A-NEW-IDEA`],
+    source: `${DISC_SRC} — MC-2 (P28 building-blocks-tower conflict)`,
+  },
+  {
+    conceptId: DISC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Respectfully voiced disagreement — acknowledging the other ' +
+      'person\'s point, then explaining a different view with reasoning — ' +
+      'is a valuable and expected discussion contribution, not an ' +
+      'inherently rude or confrontational act. Separately, building on, ' +
+      'extending, or connecting prior points are equally valuable ' +
+      'discussion moves alongside introducing genuinely new ideas, not a ' +
+      'lesser form of contribution.',
+    targetedMisconceptions: [
+      `${DISC}:MC-DISAGREEING-MEANS-BEING-RUDE-OR-CONFRONTATIONAL`,
+      `${DISC}:MC-A-GOOD-DISCUSSION-CONTRIBUTION-MEANS-INTRODUCING-A-NEW-IDEA`,
+    ],
+    source: `${DISC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DISC_PROBES: SeedProbe[] = [
+  {
+    conceptId: DISC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student silently goes along with a group member\'s idea they actually think is flawed, to avoid seeming rude. Does avoiding disagreement like this actually serve the group\'s goal?',
+    choices: [
+      { text: 'No — respectful, substantive disagreement is one of the most valuable contributions to a discussion; silence lets weak ideas stand unchallenged', isCorrect: true },
+      { text: 'Yes — disagreeing means being rude or confrontational', isCorrect: false, misconceptionId: `${DISC}:MC-DISAGREEING-MEANS-BEING-RUDE-OR-CONFRONTATIONAL` },
+    ],
+    correctValue: 'no, respectful disagreement helps',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DISC}:MC-DISAGREEING-MEANS-BEING-RUDE-OR-CONFRONTATIONAL`],
+    source: `${DISC_SRC} — respectful-challenge-block conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DISC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In a discussion, Speaker B introduces a completely unrelated new topic instead of building on Speaker A\'s point. Is introducing a new idea always the most valuable way to contribute?',
+    choices: [
+      { text: 'No — building on, extending, or connecting prior points are equally valuable contributions; a new but disconnected topic can abandon the discussion\'s progress', isCorrect: true },
+      { text: 'Yes — a good discussion contribution means introducing a new idea', isCorrect: false, misconceptionId: `${DISC}:MC-A-GOOD-DISCUSSION-CONTRIBUTION-MEANS-INTRODUCING-A-NEW-IDEA` },
+    ],
+    correctValue: 'no, building on is equally valuable',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DISC}:MC-A-GOOD-DISCUSSION-CONTRIBUTION-MEANS-INTRODUCING-A-NEW-IDEA`],
+    source: `${DISC_SRC} — building-blocks-tower conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.editing-and-proofreading ───────────────────────────────────────
+const EDPR = 'eng.writing.editing-and-proofreading'
+const EDPR_SRC = 'docs/curriculum/blueprints/eng.writing.editing-and-proofreading.md'
+
+const EDPR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EDPR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A single silent read at normal speed often misses errors because ' +
+      'your brain automatically "auto-corrects" familiar text — like a ' +
+      'car\'s rearview mirror simply not showing the blind spot no matter ' +
+      'how carefully you look. Use multiple techniques (reading aloud ' +
+      'slowly, reading backward sentence-by-sentence, single-error-type ' +
+      'passes) to actually catch what a normal silent read misses.',
+    targetedMisconceptions: [`${EDPR}:MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS`],
+    source: `${EDPR_SRC} — MC-1 (P28 multi-pass-flashlight conflict)`,
+  },
+  {
+    conceptId: EDPR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Their going to the store" — a spell-checker would NOT flag ' +
+      '"Their" as misspelled, since it\'s a correctly-spelled word, just ' +
+      'the wrong one for context. Spell-check has genuine blind spots ' +
+      '(homophones, context-dependent word choices) — use it as a ' +
+      'helpful first pass, not the final word; human proofreading is ' +
+      'still necessary afterward.',
+    targetedMisconceptions: [`${EDPR}:MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR`],
+    source: `${EDPR_SRC} — MC-2 (P28 blind-spot-mirror conflict)`,
+  },
+  {
+    conceptId: EDPR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A single normal-speed silent read-through reliably misses errors, ' +
+      'since the brain automatically auto-corrects familiar text — ' +
+      'reliable proofreading requires multiple techniques (reading aloud, ' +
+      'disrupted-order reading, single-error-type passes). Separately, ' +
+      'spell-check and grammar-check tools have genuine blind spots — ' +
+      'correctly-spelled wrong words (homophones) and context-dependent ' +
+      'errors — so human proofreading remains necessary even after ' +
+      'running these tools.',
+    targetedMisconceptions: [
+      `${EDPR}:MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS`,
+      `${EDPR}:MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR`,
+    ],
+    source: `${EDPR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const EDPR_PROBES: SeedProbe[] = [
+  {
+    conceptId: EDPR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You proofread your essay by reading it silently once at normal speed. Does this reliably catch all remaining errors?',
+    choices: [
+      { text: 'No — the brain automatically auto-corrects familiar text while reading silently and quickly; multiple techniques (reading aloud, backward reading) catch errors a single silent read misses', isCorrect: true },
+      { text: 'Yes — proofreading by reading silently once catches all errors', isCorrect: false, misconceptionId: `${EDPR}:MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS` },
+    ],
+    correctValue: 'no, use multiple techniques',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EDPR}:MC-PROOFREADING-BY-READING-SILENTLY-ONCE-CATCHES-ALL-ERRORS`],
+    source: `${EDPR_SRC} — multi-pass-flashlight conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EDPR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"Their going to the store." Would a spell-checker flag "Their" as an error here?',
+    choices: [
+      { text: 'No — "Their" is correctly spelled, just the wrong word for context; spell-check tools miss homophone errors like this, so human proofreading is still needed', isCorrect: true },
+      { text: 'Yes — spell-check and grammar-check tools catch every error', isCorrect: false, misconceptionId: `${EDPR}:MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR` },
+    ],
+    correctValue: 'no, spell-check has blind spots',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EDPR}:MC-SPELL-CHECK-AND-GRAMMAR-CHECK-TOOLS-CATCH-EVERY-ERROR`],
+    source: `${EDPR_SRC} — blind-spot-mirror conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -26163,6 +26525,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...NVCM_EXPLANATIONS,
   ...STOR_EXPLANATIONS,
   ...REVC_EXPLANATIONS,
+  ...PRAG_EXPLANATIONS,
+  ...PSYL_EXPLANATIONS,
+  ...DISC_EXPLANATIONS,
+  ...EDPR_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -26454,4 +26820,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...NVCM_PROBES,
   ...STOR_PROBES,
   ...REVC_PROBES,
+  ...PRAG_PROBES,
+  ...PSYL_PROBES,
+  ...DISC_PROBES,
+  ...EDPR_PROBES,
 ]
