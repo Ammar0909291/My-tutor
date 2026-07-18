@@ -11178,6 +11178,298 @@ const LVSE_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.phonics.sight-words ──────────────────────────────────────────────────
+const SIGHT = 'eng.phonics.sight-words'
+const SIGHT_SRC = 'docs/curriculum/blueprints/eng.phonics.sight-words.md'
+
+const SIGHT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SIGHT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      '"Sight word" means a word taught for instant, automatic recognition ' +
+      'because of how common it is — NOT necessarily because it is ' +
+      'unreadable by sounding out. Try "and": sound it out, /æ/-/n/-/d/ — ' +
+      'that works perfectly. Many sight words (and, big, can, get) are ' +
+      'fully phonetically regular; only some (said, was, of, the) have ' +
+      'genuinely irregular spelling-sound patterns that truly require ' +
+      'memorization. For any sight word, first try sounding it out — only ' +
+      'fall back to pure memorization for the genuinely irregular ones.',
+    targetedMisconceptions: [`${SIGHT}:MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL`],
+    source: `${SIGHT_SRC} — MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL (P28 and/was conflict evidence)`,
+  },
+  {
+    conceptId: SIGHT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Sight-word recognition needs to be fast, but it still has to ' +
+      'process every letter, in order — glancing at just the shape, ' +
+      'length, or first letter is not enough. You read this as "was" — ' +
+      'look letter by letter: w-a-s. Now look at "saw": s-a-w — same three ' +
+      'letters, different order, a completely different word. Even when ' +
+      'reading a sight word quickly, make sure your eyes move across every ' +
+      'letter in order — do not rely on shape or length alone, especially ' +
+      'for words with a common "twin" like "there"/"three".',
+    targetedMisconceptions: [`${SIGHT}:MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH`],
+    source: `${SIGHT_SRC} — MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH (P28 was/saw conflict evidence)`,
+  },
+  {
+    conceptId: SIGHT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      '"Sight word" describes a word taught for instant, automatic ' +
+      'recognition due to its frequency — not necessarily because it is ' +
+      'phonetically irregular. Most high-frequency words (and, big, can, ' +
+      'get) decode perfectly normally; only a genuinely irregular subset ' +
+      '(said, was, of, the) resists standard sounding-out and needs direct ' +
+      'memorization. Separately, fast recognition still requires processing ' +
+      'every letter in sequence, not just overall shape or length — "was" ' +
+      'and "saw" share identical letters in reversed order and are ' +
+      'frequently confused by readers relying on a quick glance rather than ' +
+      'a full letter-by-letter check.',
+    targetedMisconceptions: [
+      `${SIGHT}:MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL`,
+      `${SIGHT}:MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH`,
+    ],
+    source: `${SIGHT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SIGHT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SIGHT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Can the sight word "and" be sounded out phonetically?',
+    choices: [
+      { text: 'Yes — /æ/-/n/-/d/ works perfectly; not all sight words are irregular', isCorrect: true },
+      { text: 'No — sight words can never be sounded out, they must be memorized', isCorrect: false, misconceptionId: `${SIGHT}:MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SIGHT}:MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL`],
+    source: `${SIGHT_SRC} — P28 and/was conflict as probe`,
+  },
+  {
+    conceptId: SIGHT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Is "was" the same word as "saw"?',
+    choices: [
+      { text: 'No — same three letters, but in reversed order, so they are different words', isCorrect: true },
+      { text: 'Yes — they look similar enough at a glance', isCorrect: false, misconceptionId: `${SIGHT}:MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SIGHT}:MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH`],
+    source: `${SIGHT_SRC} — P28 was/saw conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.syllable-types ───────────────────────────────────────────────
+const SYLT = 'eng.phonics.syllable-types'
+const SYLT_SRC = 'docs/curriculum/blueprints/eng.phonics.syllable-types.md'
+
+const SYLT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SYLT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A long word is not a mystery to guess at — it is just a sequence of ' +
+      'syllables, and every syllable follows one of six reliable patterns ' +
+      'you already partly know from single-syllable words. Take ' +
+      '"reptile": split it into syllables instead of guessing from the ' +
+      'whole shape — rep-tile. "Rep" is a closed syllable (short vowel), ' +
+      '"tile" is a silent-e syllable (long vowel) — both patterns you ' +
+      'already know. For any multisyllabic word, divide it into syllables ' +
+      'first, then decode syllable-by-syllable.',
+    targetedMisconceptions: [`${SYLT}:MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE`],
+    source: `${SYLT_SRC} — MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE (P28 reptile/repeat conflict evidence)`,
+  },
+  {
+    conceptId: SYLT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'There are six different syllable TYPES, and each one signals a ' +
+      'different vowel sound. You read "ba" in "baby" with a short vowel, ' +
+      'like "bat" — but does "ba-by" have a consonant closing off that ' +
+      'first syllable, the way "bat" does? It does not. Closed syllables ' +
+      '(ending in a consonant) get the short vowel, but OPEN syllables ' +
+      '(ending in the vowel itself) get the LONG vowel instead, like "ba" ' +
+      'in "baby" or "go" in "going". Before applying a vowel-sound rule to ' +
+      'any syllable, first identify which of the six types it actually is.',
+    targetedMisconceptions: [`${SYLT}:MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN`],
+    source: `${SYLT_SRC} — MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN (P28 baby/bat conflict evidence)`,
+  },
+  {
+    conceptId: SYLT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A multisyllabic word is decodable, not a shape to guess at wholesale ' +
+      '— split it into syllables and apply the same single-syllable rules ' +
+      'you already know to each chunk. "Reptile" splits into "rep" (closed ' +
+      'syllable, short vowel) and "tile" (silent-e syllable, long vowel), ' +
+      'both fully regular. The key skill is not memorizing one dominant ' +
+      'pattern but correctly identifying which of six syllable types ' +
+      '(closed, open, silent-e, vowel-team, r-controlled, consonant-le) ' +
+      'each syllable actually is before applying its vowel rule — "ba" in ' +
+      '"baby" is open (long vowel), not closed like "bat" (short vowel), ' +
+      'despite superficial similarity.',
+    targetedMisconceptions: [
+      `${SYLT}:MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE`,
+      `${SYLT}:MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN`,
+    ],
+    source: `${SYLT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SYLT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SYLT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'How should you approach reading the long word "reptile"?',
+    choices: [
+      { text: 'Split it into syllables (rep-tile) and decode each one using known patterns', isCorrect: true },
+      { text: 'Guess the whole word from its general shape', isCorrect: false, misconceptionId: `${SYLT}:MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE` },
+    ],
+    correctValue: 'split into syllables and decode each',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SYLT}:MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE`],
+    source: `${SYLT_SRC} — P28 reptile/repeat conflict as probe`,
+  },
+  {
+    conceptId: SYLT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Does the first syllable of "baby" ("ba") use a short vowel, like "bat" does?',
+    choices: [
+      { text: 'No — "ba" is an open syllable (no closing consonant), so it uses the long vowel sound', isCorrect: true },
+      { text: 'Yes — every syllable follows the same short-vowel pattern', isCorrect: false, misconceptionId: `${SYLT}:MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SYLT}:MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN`],
+    source: `${SYLT_SRC} — P28 baby/bat conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.decoding-fluency ──────────────────────────────────────────────
+const DFLU = 'eng.phonics.decoding-fluency'
+const DFLU_SRC = 'docs/curriculum/blueprints/eng.phonics.decoding-fluency.md'
+
+const DFLU_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DFLU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Fluent reading has three parts working together: ACCURACY (reading ' +
+      'words correctly), AUTOMATICITY (reading quickly, without effortful ' +
+      'sounding-out for known patterns), and PROSODY (reading with the ' +
+      'natural rhythm and intonation of speech). Reading every word ' +
+      'correctly but so slowly that it takes a full minute for two ' +
+      'sentences, with no sense of whether it was a question or a ' +
+      'statement, is not yet fluent — accuracy alone, without speed and ' +
+      'expression, still blocks comprehension, because so much effort goes ' +
+      'into decoding that little is left for understanding meaning.',
+    targetedMisconceptions: [`${DFLU}:MC-ACCURATE-EQUALS-FLUENT`],
+    source: `${DFLU_SRC} — MC-ACCURATE-EQUALS-FLUENT (P28 slow-but-accurate conflict evidence)`,
+  },
+  {
+    conceptId: DFLU,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Speed is only valuable when it comes WITH accuracy and expression. ' +
+      'Reading very fast but skipping the word "because" and reading the ' +
+      'final period as if it were not there means the sentence cannot be ' +
+      'explained clearly afterward — rushing past unfamiliar words or ' +
+      'ignoring punctuation actually breaks fluency, even though it feels ' +
+      'fast. Read at a pace that lets you keep every word accurate and ' +
+      'honor punctuation pauses — true fluency is fast enough to support ' +
+      'understanding, not fast at any cost.',
+    targetedMisconceptions: [`${DFLU}:MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL`],
+    source: `${DFLU_SRC} — MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL (P28 rushed-reading conflict evidence)`,
+  },
+  {
+    conceptId: DFLU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Fluency is accuracy, automaticity, and prosody together, not any one ' +
+      'of them alone. Reading every word correctly but at a halting, ' +
+      'effortful pace with no clear sentence-level intonation still blocks ' +
+      'comprehension, since decoding consumes the mental effort that ' +
+      'understanding meaning requires. The opposite failure is just as ' +
+      'real: maximizing raw speed by skipping unfamiliar words or ignoring ' +
+      'punctuation produces fast but inaccurate, unclear reading. Genuine ' +
+      'fluency is a pace that preserves full accuracy and honors ' +
+      'punctuation-signaled phrasing — speed that emerges from practice, ' +
+      'not speed pursued at the expense of the other two components.',
+    targetedMisconceptions: [
+      `${DFLU}:MC-ACCURATE-EQUALS-FLUENT`,
+      `${DFLU}:MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL`,
+    ],
+    source: `${DFLU_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DFLU_PROBES: SeedProbe[] = [
+  {
+    conceptId: DFLU,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student reads every word in a passage correctly, but it takes almost a minute for two sentences with no clear expression. Is this reading fluent?',
+    choices: [
+      { text: 'No — fluency needs accuracy, automaticity, AND expression together, not accuracy alone', isCorrect: true },
+      { text: 'Yes — getting every word right is the whole goal of fluent reading', isCorrect: false, misconceptionId: `${DFLU}:MC-ACCURATE-EQUALS-FLUENT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DFLU}:MC-ACCURATE-EQUALS-FLUENT`],
+    source: `${DFLU_SRC} — P28 slow-but-accurate conflict as probe`,
+  },
+  {
+    conceptId: DFLU,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student reads very fast but skips the word "because" and ignores the ending period. Is this fluent reading?',
+    choices: [
+      { text: 'No — speed without accuracy and without honoring punctuation is not real fluency', isCorrect: true },
+      { text: 'Yes — reading fast is the main sign of fluency', isCorrect: false, misconceptionId: `${DFLU}:MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DFLU}:MC-FLUENCY-MEANS-READING-FAST-ABOVE-ALL`],
+    source: `${DFLU_SRC} — P28 rushed-reading conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -11309,6 +11601,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SVOW_EXPLANATIONS,
   ...DGR_EXPLANATIONS,
   ...LVSE_EXPLANATIONS,
+  ...SIGHT_EXPLANATIONS,
+  ...SYLT_EXPLANATIONS,
+  ...DFLU_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -11440,4 +11735,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SVOW_PROBES,
   ...DGR_PROBES,
   ...LVSE_PROBES,
+  ...SIGHT_PROBES,
+  ...SYLT_PROBES,
+  ...DFLU_PROBES,
 ]
