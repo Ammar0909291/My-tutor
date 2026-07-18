@@ -1,0 +1,281 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.differentiability-rigorous-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.differentiability-rigorous",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fb665967bbd919ba2a78318e2987f10dfda8bc522097f6a8a45e3a6a69698ff3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.differentiability-rigorous.md": "sha256:52459275b1b6d96ea0b4d3067e711071c68653454df11fc524fb97831739f447"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.real.differentiability-rigorous",
+    "name": "Differentiability (Rigorous)",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.real.continuity-rigorous",
+      "math.calc.derivative-definition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.differentiability-rigorous-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.differentiability-rigorous (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.differentiability-rigorous.md": "sha256:52459275b1b6d96ea0b4d3067e711071c68653454df11fc524fb97831739f447"
+      },
+      "contentHash": "sha256:8bd383a9b60d8ea490487b092b5fe051758b23b86f52f7088a039126ad0bc556",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.differentiability-rigorous.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.differentiability-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.differentiability-rigorous\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.differentiability-rigorous.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.differentiability-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.differentiability-rigorous\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.differentiability-rigorous.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.differentiability-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.differentiability-rigorous\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.differentiability-rigorous/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the rigorous ε-δ-style meaning of $f'(a) = \\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$ existing — that this limit itself satisfies the formal ε-δ limit definition (from `math.real.continuity-rigorous`'s machinery) — and use this to rigorously prove differentiability fails at a specific point (e.g. $|x|$ at $x=0$) by showing the one-sided difference quotients disagree.\n- LO2: Prove that **differentiability implies continuity** (a genuine theorem, not just an observation) using the algebraic identity $f(a+h)-f(a) = \\frac{f(a+h)-f(a)}{h}\\cdot h$ and limit laws, and state precisely why the **converse fails** — differentiability is a strictly stronger condition than continuity.\n- LO3: State the multivariable generalization — the **total derivative** $Df(a)$ as a linear map (rather than a single number) — and recognize that the existence of all partial derivatives is **necessary but not sufficient** for (total) differentiability in $\\mathbb{R}^n$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "NON-DIFFERENTIABILITY-IMPLIES-DISCONTINUITY",
+      "content": "| MC-1 | NON-DIFFERENTIABILITY-IMPLIES-DISCONTINUITY | Believing that if $f$ is not differentiable at a point, it must also be discontinuous there — incorrectly treating the converse of \"differentiable ⟹ continuous\" as also true | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "PARTIALS-EXIST-IMPLIES-TOTAL-DIFFERENTIABILITY",
+      "content": "| MC-2 | PARTIALS-EXIST-IMPLIES-TOTAL-DIFFERENTIABILITY | Believing that if all partial derivatives of a multivariable function exist at a point, the function must be (totally) differentiable there | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "IMPLICATION-CITED-WITHOUT-PROOF",
+      "content": "| MC-3 | IMPLICATION-CITED-WITHOUT-PROOF | Treating \"differentiable ⟹ continuous\" as a fact to be recalled/cited rather than a genuine theorem requiring its own limit-law-based proof | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "Rigorous Non-Differentiability via One-Sided Difference Quotients (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Rigorous Non-Differentiability via One-Sided Difference Quotients (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "The Implication and Its Failed Converse (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Implication and Its Failed Converse (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Prove rigorously, using one-sided difference quotients, that $f(x)=|x-2|$ is not differentiable at $x=2$.\n  2. Using the algebraic identity $f(a+h)-f(a)=\\frac{f(a+h)-f(a)}{h}\\cdot h$, prove that if $f'(5)$ exists then $f$ is continuous at 5 — do not just cite the theorem, walk through the limit-law argument.\n  3. Give an example (can reuse or adapt Example 3's function) illustrating that a function can have both partial derivatives exist at a point without being continuous there.\n  4. A student claims: \"since $f$ is continuous everywhere, it must be differentiable everywhere too.\" Identify the specific logical error and supply a concrete counterexample.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.calc.derivative-definition`)**: \"Recall from your `math.calc.derivative-definition` lesson that $f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$ was introduced via the secant-line-rotating-to-tangent-line picture, and that lesson already flagged corners, cusps, and vertical tangents as visually identifiable non-differentiability points, including that lesson's own note that 'differentiability implies continuity, but continuity does not imply differentiability.' Using THIS lesson's rigorous machinery: (a) take that lesson's informal claim about $|x|$'s corner at $x=0$ and supply the missing rigorous proof — the explicit one-sided difference-quotient computation that lesson deferred. (b) That lesson's own implication statement was asserted without proof — supply the missing algebraic proof here, using the identity from this lesson's Component 3. (c) Explain what NEW content this lesson adds beyond that one — specifically the $\\mathbb{R}^n$ generalization to the total derivative as a linear map, and why 'all partials exist' is a strictly weaker condition than that lesson's single-variable differentiability.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.continuity-rigorous` (the ε-δ definition of continuity, and the equivalent sequential characterization) and `math.calc.derivative-definition` (the calculus-level derivative definition, informal understanding that differentiability implies continuity, and identification of non-differentiability points like corners/cusps — see Component 7 for the precise division of labor between the two blueprints).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.differentiability-rigorous/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.differentiability-rigorous",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.continuity-rigorous` (the ε-δ limit machinery this concept's difference-quotient limit relies on), `math.calc.derivative-definition` (the calculus-level derivative definition and informal awareness of non-differentiability points, rigorously completed here).\n- **Unlocks**: `math.real.mvt` (the rigorous Mean Value Theorem proof requires this concept's precise differentiability definition), `math.real.taylor-rigorous` (rigorous Taylor series require rigorous higher-order differentiability).\n- **Cross-link**: KG lists `math.calc.derivative-definition` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.calc.derivative-definition.md` **is already authored** — read directly (via grep) to confirm its exact content: it already introduces $f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$ via the secant/tangent picture, already flags \"differentiability implies continuity, not conversely,\" and already identifies non-differentiability points (corners, cusps, vertical tangents) informally. Division of labor: that blueprint owns the calculus-level intuition and informal statement; this blueprint owns the rigorous proofs and the $\\mathbb{R}^n$ generalization, deliberately not re-teaching the informal content. The P76 cross-link probe directly asks the learner to supply the rigorous proofs that blueprint's own content left informal — the fourth instance in this corpus (after `math.graph.graph`, `math.meas.sigma-algebra`, `math.meas.measure`) of a genuine, content-verified cross-link probe that completes an earlier blueprint's deliberately-deferred content.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.differentiability-rigorous.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.linear-map-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.linear-map",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cc57e4ee853faf5e2056737ead150961abbf3733c1763ae72e8dd35432f476c8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.linear-map.md": "sha256:d58c688559acec217360591662710c98454b41bb29189d4921d39775924db360"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.linalg.linear-map",
+    "name": "Linear Map",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.vector-space",
+      "math.linalg.matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.linear-map-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.linear-map (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.linear-map.md": "sha256:d58c688559acec217360591662710c98454b41bb29189d4921d39775924db360"
+      },
+      "contentHash": "sha256:10a386d2387015242b061c7513af825b3b167f67461e412b14004c2dab907c7f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.linear-map.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.linear-map.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.linear-map"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.linear-map\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.linear-map.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.linear-map.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.linear-map"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.linear-map\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.linear-map.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.linear-map.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.linear-map"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.linear-map\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.linear-map/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.linear-map",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **linear map** $T:V\\to W$ between vector spaces as a function satisfying **additivity** ($T(u+v)=T(u)+T(v)$) and **homogeneity** ($T(cv)=cT(v)$ for scalars $c$), and verify whether a given map is linear by checking both properties directly.\n- LO2: Explain and apply the key structural fact that a linear map is **completely determined by its action on a basis** — knowing $T(e_1),\\ldots,T(e_n)$ for a basis $e_1,\\ldots,e_n$ of $V$ lets you compute $T(v)$ for *any* $v\\in V$ by writing $v$ in terms of the basis and applying linearity.\n- LO3: Connect linear maps between finite-dimensional spaces to **matrices** — every such linear map is represented by some matrix once bases are chosen — and recognize the geometric transformations (rotation, reflection, dilation centered at the origin) already studied as concrete instances of linear maps.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.linear-map",
+      "title": "ALL-TRANSFORMATIONS-ASSUMED-LINEAR",
+      "content": "| MC-1 | ALL-TRANSFORMATIONS-ASSUMED-LINEAR | Assuming any previously-studied geometric transformation (including translation) is automatically a linear map, without checking the two defining properties (or the necessary $T(0)=0$ consequence) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.linear-map",
+      "title": "BASIS-DETERMINATION-NOT-ENFORCED",
+      "content": "| MC-2 | BASIS-DETERMINATION-NOT-ENFORCED | Believing a linear map's values away from a chosen basis can be independently/arbitrarily specified, rather than recognizing they are fully forced once the basis images are fixed | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.linear-map",
+      "title": "HOMOGENEITY-CHECKED-WITH-UNIT-SCALAR-ONLY",
+      "content": "| MC-3 | HOMOGENEITY-CHECKED-WITH-UNIT-SCALAR-ONLY | Verifying $T(cv)=cT(v)$ only for $c=1$ (or other trivial scalars) and concluding homogeneity holds generally, without testing a genuinely distinguishing scalar | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.linear-map",
+      "title": "The Two Linearity Properties, Grounded in Geometric Transformations (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Two Linearity Properties, Grounded in Geometric Transformations (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.linear-map",
+      "title": "Determined by Basis Action, and the Matrix Connection (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Determined by Basis Action, and the Matrix Connection (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.linear-map",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.linear-map",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify whether $T(x,y,z) = (x+y, 2z)$ is a linear map from $\\mathbb{R}^3\\to\\mathbb{R}^2$.\n  2. Verify whether $S(x,y) = (xy, x)$ is a linear map (hint: check homogeneity carefully with a specific non-unit scalar).\n  3. A linear map $T:\\mathbb{R}^2\\to\\mathbb{R}^2$ has $T(1,0)=(2,0)$ and $T(0,1)=(0,3)$. Find $T(4,-1)$ and write the corresponding matrix.\n  4. Explain why $T(0,0)$ must equal $(0,0)$ for any linear map, and use this to quickly rule out one of the four geometric transformation types as never being linear.\n- **P76 (Transfer Probe, mode = independence)**: \"An image-processing filter applies a fixed $2\\times2$ pixel-coordinate transformation matrix $A=\\begin{pmatrix}1&0.5\\\\0&1\\end{pmatrix}$ (a 'shear' effect) to every pixel's $(x,y)$ position. (a) Confirm this transformation is a linear map by checking it satisfies both linearity properties directly (not just by assuming any matrix-based rule automatically qualifies). (b) The filter's basis images are $T(1,0)=(1,0)$ and $T(0,1)=(0.5,1)$ — use ONLY these two facts and linearity to compute where the pixel at $(4,2)$ moves, without directly multiplying the full matrix by the vector, then confirm it matches direct matrix multiplication.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.linear-map",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.vector-space` (the 8 vector space axioms, vector addition, scalar multiplication) and `math.linalg.matrix` (matrices as rectangular arrays encoding linear transformations).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.linear-map/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.linear-map",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.vector-space` (the vector addition/scalar multiplication structure a linear map must respect), `math.linalg.matrix` (the matrix representation this concept connects linear maps to).\n- **Unlocks**: `math.linalg.kernel-image` (the kernel and image of a linear map are defined directly in terms of this concept's structure), `math.linalg.matrix-representation` (the general basis-dependent matrix-representation theory, building on this concept's basis-determination fact).\n- **Cross-link**: KG lists `math.abst.group-homomorphism` and `math.fnal.bounded-operator` as cross-links. Verified via directory listing that neither blueprint yet exists. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once either target is authored, may add a genuine cross-link probe — e.g. connecting this concept's additivity/homogeneity axioms directly to `math.abst.group-homomorphism`'s more general structure-preserving-map framework (a linear map is precisely a group homomorphism of the additive group that also respects scalar multiplication), or to `math.fnal.bounded-operator`'s infinite-dimensional generalization.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.linear-map.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
