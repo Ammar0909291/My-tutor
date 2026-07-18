@@ -18168,6 +18168,287 @@ const RUNC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.adverbs ─────────────────────────────────────────────────────
+const ADVB = 'eng.grammar.adverbs'
+const ADVB_SRC = 'docs/curriculum/blueprints/eng.grammar.adverbs.md'
+
+const ADVB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ADVB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Many adverbs don’t end in "-ly" at all (fast, hard, well, soon, ' +
+      'often, never, very) — the "-ly" pattern is common but not ' +
+      'universal. "She ran fast" — "fast" is still an adverb, describing ' +
+      'HOW she ran, despite no "-ly." And some "-ly" words are actually ' +
+      'adjectives (friendly, lovely, lonely, silly) describing NOUNS, not ' +
+      'verbs — "a friendly dog" describes "dog," not an action. Check ' +
+      'what a word MODIFIES, not the ending alone.',
+    targetedMisconceptions: [`${ADVB}:MC-ALL-ADVERBS-END-IN-LY`],
+    source: `${ADVB_SRC} — MC-ALL-ADVERBS-END-IN-LY (P28 fast-vs-friendly conflict)`,
+  },
+  {
+    conceptId: ADVB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Adverbs modify THREE things: verbs (she runs quickly), adjectives ' +
+      '("very tall," "extremely difficult"), and other adverbs ("quite ' +
+      'quickly," "too slowly"). In "She is VERY tall," "very" isn’t ' +
+      'describing an action — it’s describing the adjective "tall," ' +
+      'telling us HOW tall. When an adverb modifies an adjective or ' +
+      'another adverb, it usually shows DEGREE or INTENSITY rather than ' +
+      'manner.',
+    targetedMisconceptions: [`${ADVB}:MC-ADVERBS-ONLY-MODIFY-VERBS`],
+    source: `${ADVB_SRC} — MC-ADVERBS-ONLY-MODIFY-VERBS (P28 she-is-very-tall conflict)`,
+  },
+  {
+    conceptId: ADVB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The "-ly" ending is a useful but unreliable clue for identifying ' +
+      'adverbs — many adverbs lack it (fast, hard, well, often) and some ' +
+      '"-ly" words are adjectives (friendly, lovely, lonely). Check what a ' +
+      'word modifies rather than relying on its ending. Separately, ' +
+      'adverbs modify not only verbs but also adjectives and other ' +
+      'adverbs, most often expressing degree or intensity ("very tall," ' +
+      '"quite quickly") rather than manner — the modification pattern is ' +
+      'a three-way system, not verb-only.',
+    targetedMisconceptions: [
+      `${ADVB}:MC-ALL-ADVERBS-END-IN-LY`,
+      `${ADVB}:MC-ADVERBS-ONLY-MODIFY-VERBS`,
+    ],
+    source: `${ADVB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ADVB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ADVB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "She ran fast," is "fast" an adverb even though it doesn\'t end in "-ly"?',
+    choices: [
+      { text: 'Yes — "fast" modifies the verb "ran," which makes it an adverb; the "-ly" ending is common but not required', isCorrect: true },
+      { text: 'No — a word must end in "-ly" to be an adverb', isCorrect: false, misconceptionId: `${ADVB}:MC-ALL-ADVERBS-END-IN-LY` },
+    ],
+    correctValue: 'yes, adverb',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ADVB}:MC-ALL-ADVERBS-END-IN-LY`],
+    source: `${ADVB_SRC} — fast-vs-friendly conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ADVB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "She is very tall," what does "very" modify?',
+    choices: [
+      { text: 'The adjective "tall" — adverbs can modify adjectives, not just verbs', isCorrect: true },
+      { text: 'Nothing — adverbs can only modify verbs, so "very" must be something else here', isCorrect: false, misconceptionId: `${ADVB}:MC-ADVERBS-ONLY-MODIFY-VERBS` },
+    ],
+    correctValue: 'tall (the adjective)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ADVB}:MC-ADVERBS-ONLY-MODIFY-VERBS`],
+    source: `${ADVB_SRC} — she-is-very-tall conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.subject-and-predicate ──────────────────────────────────────
+const SUBP = 'eng.grammar.subject-and-predicate'
+const SUBP_SRC = 'docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md'
+
+const SUBP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUBP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The subject is WHO or WHAT the sentence is about — usually the ' +
+      'doer of the action — not simply whatever word or phrase happens to ' +
+      'appear first. In "In the morning, the birds sing," "In the ' +
+      'morning" is an introductory phrase answering WHEN, not the ' +
+      'subject; "the birds" is the true subject, since that’s who is ' +
+      'doing the singing. Ask "who or what is this sentence about?" to ' +
+      'find the subject, rather than assuming it’s the first word.',
+    targetedMisconceptions: [`${SUBP}:MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD`],
+    source: `${SUBP_SRC} — MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD (P28 in-the-morning-the-birds-sing conflict)`,
+  },
+  {
+    conceptId: SUBP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The predicate is EVERYTHING in the sentence except the subject — ' +
+      'it includes the main verb PLUS any objects, complements, and ' +
+      'modifiers that complete the statement. In "The dog chased the ball ' +
+      'across the yard," the full predicate is "chased the ball across ' +
+      'the yard," not just "chased." Identify the predicate as everything ' +
+      'except the subject, not just the single verb word.',
+    targetedMisconceptions: [`${SUBP}:MC-PREDICATE-IS-JUST-THE-VERB`],
+    source: `${SUBP_SRC} — MC-PREDICATE-IS-JUST-THE-VERB (P28 chased-the-ball-across-the-yard conflict)`,
+  },
+  {
+    conceptId: SUBP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The subject is identified by asking who or what the sentence is ' +
+      'about, not by assuming it is whatever word appears first — ' +
+      'sentences beginning with an introductory phrase ("In the morning") ' +
+      'place the true subject after that phrase. Separately, the ' +
+      'predicate consists of everything in the sentence except the ' +
+      'subject — the main verb together with its objects, complements, ' +
+      'and modifiers — not merely the single verb word.',
+    targetedMisconceptions: [
+      `${SUBP}:MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD`,
+      `${SUBP}:MC-PREDICATE-IS-JUST-THE-VERB`,
+    ],
+    source: `${SUBP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SUBP_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUBP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "In the morning, the birds sing," is "In the morning" the subject, since it comes first?',
+    choices: [
+      { text: 'No — "the birds" is the subject, since that\'s who is doing the singing; "In the morning" just tells us when', isCorrect: true },
+      { text: 'Yes — the subject is always whatever word or phrase comes first in the sentence', isCorrect: false, misconceptionId: `${SUBP}:MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD` },
+    ],
+    correctValue: 'no, "the birds" is the subject',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUBP}:MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD`],
+    source: `${SUBP_SRC} — in-the-morning-the-birds-sing conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SUBP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "The dog chased the ball across the yard," is the predicate just "chased"?',
+    choices: [
+      { text: 'No — the full predicate is "chased the ball across the yard," everything in the sentence except the subject "the dog"', isCorrect: true },
+      { text: 'Yes — the predicate is just the single verb word', isCorrect: false, misconceptionId: `${SUBP}:MC-PREDICATE-IS-JUST-THE-VERB` },
+    ],
+    correctValue: 'no, the full phrase',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUBP}:MC-PREDICATE-IS-JUST-THE-VERB`],
+    source: `${SUBP_SRC} — chased-the-ball-across-the-yard conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.sentence-combining ──────────────────────────────────────────
+const SCMB = 'eng.grammar.sentence-combining'
+const SCMB_SRC = 'docs/curriculum/blueprints/eng.grammar.sentence-combining.md'
+
+const SCMB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SCMB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Using "and" for everything is like using a single connector cable ' +
+      'for every kind of device, regardless of whether it needs power, ' +
+      'data, or audio — it might physically connect the two things, but ' +
+      'it doesn’t carry the right KIND of connection. "It started raining ' +
+      'and we went inside" hides the cause-effect relationship; "Because ' +
+      'it started raining, we went inside" makes it explicit. Before ' +
+      'combining with "and," ask whether a cause-effect, time, contrast, ' +
+      'or conditional relationship is being hidden.',
+    targetedMisconceptions: [`${SCMB}:MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM`],
+    source: `${SCMB_SRC} — MC-A (P28 it-started-raining-and-vs-because conflict)`,
+  },
+  {
+    conceptId: SCMB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Combining every sentence is like adding seasoning to every single ' +
+      'bite of a meal regardless of whether that bite already tastes ' +
+      'exactly right. "She opened the door. Nothing. The room was empty." ' +
+      'uses deliberate short sentences to build tension — merging them ' +
+      'into "When she opened the door, there was nothing, and the room ' +
+      'was empty" destroys that effect. Before combining a short ' +
+      'sentence, ask whether its shortness is serving a deliberate ' +
+      'purpose (emphasis, pacing, tension).',
+    targetedMisconceptions: [`${SCMB}:MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES`],
+    source: `${SCMB_SRC} — MC-B (P28 she-opened-the-door-nothing conflict)`,
+  },
+  {
+    conceptId: SCMB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Combining sentences with "and" by default fails to convey ' +
+      'cause-effect, temporal, contrastive, or conditional relationships ' +
+      'that a subordinating conjunction would make explicit — identify ' +
+      'the actual relationship between two ideas before selecting a ' +
+      'connector, rather than defaulting to "and." Separately, combining ' +
+      'is not universally an improvement: a short sentence can serve a ' +
+      'deliberate rhythmic or emphatic function, and merging it into a ' +
+      'longer sentence can weaken rather than strengthen the writing — ' +
+      'sentence variety, not uniform length, is usually the stronger ' +
+      'goal.',
+    targetedMisconceptions: [
+      `${SCMB}:MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM`,
+      `${SCMB}:MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES`,
+    ],
+    source: `${SCMB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SCMB_PROBES: SeedProbe[] = [
+  {
+    conceptId: SCMB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does "It started raining and we went inside" show WHY we went inside, the same way "Because it started raining, we went inside" does?',
+    choices: [
+      { text: 'No — "and" just lists two events; "because" makes the actual cause-effect relationship explicit', isCorrect: true },
+      { text: 'Yes — "and" works fine for combining any two sentences regardless of their relationship', isCorrect: false, misconceptionId: `${SCMB}:MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM` },
+    ],
+    correctValue: 'no, and hides the relationship',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SCMB}:MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM`],
+    source: `${SCMB_SRC} — it-started-raining-and-vs-because conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SCMB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"She opened the door. Nothing. The room was empty." uses short sentences for dramatic tension. Would combining them into one longer sentence always improve this passage?',
+    choices: [
+      { text: 'No — the short sentences are deliberately building tension; combining them would weaken that effect', isCorrect: true },
+      { text: 'Yes — a longer, combined sentence is always better than several short ones', isCorrect: false, misconceptionId: `${SCMB}:MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES` },
+    ],
+    correctValue: 'no, would weaken the effect',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SCMB}:MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES`],
+    source: `${SCMB_SRC} — she-opened-the-door-nothing conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -18375,6 +18656,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PARA_EXPLANATIONS,
   ...CSDS_EXPLANATIONS,
   ...RUNC_EXPLANATIONS,
+  ...ADVB_EXPLANATIONS,
+  ...SUBP_EXPLANATIONS,
+  ...SCMB_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -18582,4 +18866,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PARA_PROBES,
   ...CSDS_PROBES,
   ...RUNC_PROBES,
+  ...ADVB_PROBES,
+  ...SUBP_PROBES,
+  ...SCMB_PROBES,
 ]
