@@ -15535,6 +15535,501 @@ const TCON_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.clauses ─────────────────────────────────────────────────────
+const CLAU = 'eng.grammar.clauses'
+const CLAU_SRC = 'docs/curriculum/blueprints/eng.grammar.clauses.md'
+
+const CLAU_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CLAU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A dependent clause STILL genuinely contains a subject-verb pair — ' +
+      'that is what makes it a clause at all, just like an independent ' +
+      'clause. The word "dependent" refers specifically to its INABILITY ' +
+      'TO STAND ALONE as a complete sentence (because of a subordinating ' +
+      'word like "because" or "when"), not to any lack of clause ' +
+      'structure. "Because she was tired" is absolutely a clause (subject ' +
+      '"she" + verb "was"), just a dependent one. Check for a ' +
+      'subject-verb pair to confirm clause status first — then separately ' +
+      'determine whether it can stand alone (independent) or not ' +
+      '(dependent).',
+    targetedMisconceptions: [`${CLAU}:MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE`],
+    source: `${CLAU_SRC} — MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE (P28 because-she-was-tired conflict)`,
+  },
+  {
+    conceptId: CLAU,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Independent clause" describes a STRUCTURAL UNIT (a subject-verb ' +
+      'group that COULD stand alone), not a whole-sentence category. A ' +
+      'single sentence can contain multiple independent clauses (a ' +
+      'compound sentence: "I was tired, so I went to bed" — TWO ' +
+      'independent clauses joined by "so"), or an independent clause plus ' +
+      'a dependent clause (a complex sentence: "I went to bed because I ' +
+      'was tired"). "Simple sentence" specifically refers to a sentence ' +
+      'with ONLY ONE independent clause and no dependent clauses — a ' +
+      'narrower, more specific category.',
+    targetedMisconceptions: [`${CLAU}:MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY`],
+    source: `${CLAU_SRC} — MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY (P28 I-was-tired-so-I-went-to-bed conflict)`,
+  },
+  {
+    conceptId: CLAU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A dependent clause still contains a genuine subject-verb pair — ' +
+      'the subordinating word ("because," "when," "although") only ' +
+      'affects whether the clause can stand alone as a complete sentence, ' +
+      'not whether it counts as a clause at all. Separately, "independent ' +
+      'clause" is a structural building block, not a synonym for "whole ' +
+      'sentence" — a compound sentence contains two or more independent ' +
+      'clauses joined together, and a complex sentence combines an ' +
+      'independent clause with one or more dependent clauses. Confirm ' +
+      'clause status by checking for a subject-verb pair, then separately ' +
+      'assess how that clause combines with others in the larger ' +
+      'sentence.',
+    targetedMisconceptions: [
+      `${CLAU}:MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE`,
+      `${CLAU}:MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY`,
+    ],
+    source: `${CLAU_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CLAU_PROBES: SeedProbe[] = [
+  {
+    conceptId: CLAU,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "because she was tired" a genuine clause, even though it cannot stand alone as a sentence?',
+    choices: [
+      { text: 'Yes — it contains a subject ("she") and a verb ("was"), which makes it a genuine clause; "because" only means it cannot stand alone', isCorrect: true },
+      { text: 'No — adding "because" removes its clause status entirely', isCorrect: false, misconceptionId: `${CLAU}:MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE` },
+    ],
+    correctValue: 'yes, a dependent clause',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CLAU}:MC-A-CLAUSE-WITH-A-SUBORDINATING-WORD-ISNT-A-CLAUSE`],
+    source: `${CLAU_SRC} — because-she-was-tired conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CLAU,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "I was tired, so I went to bed," how many independent clauses are there?',
+    choices: [
+      { text: 'Two — "I was tired" and "I went to bed," joined by "so"', isCorrect: true },
+      { text: 'One — this is just a single simple sentence, and "independent clause" is another name for that', isCorrect: false, misconceptionId: `${CLAU}:MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY` },
+    ],
+    correctValue: 'two',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CLAU}:MC-INDEPENDENT-CLAUSE-MEANS-SIMPLE-SENTENCE-ONLY`],
+    source: `${CLAU_SRC} — I-was-tired-so-I-went-to-bed conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.conditionals ────────────────────────────────────────────────
+const COND = 'eng.grammar.conditionals'
+const COND_SRC = 'docs/curriculum/blueprints/eng.grammar.conditionals.md'
+
+const COND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The second conditional uses PAST TENSE FORM (if + simple past) to ' +
+      'express a HYPOTHETICAL or UNREAL condition about the PRESENT or ' +
+      'FUTURE, not actual past time. "If I had more money, I would ' +
+      'travel" means: right now, I don’t have more money, but IF I ' +
+      'imagined having it, I would travel — the past-tense verb form is a ' +
+      'grammatical convention signaling unreality/distance from fact, not ' +
+      'literal past time. Treat the past-tense verb form here as a ' +
+      'signal of hypothetical/unreal PRESENT possibility, not as a ' +
+      'reference to something that actually happened.',
+    targetedMisconceptions: [`${COND}:MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME`],
+    source: `${COND_SRC} — MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME (P28 if-I-had-more-money conflict)`,
+  },
+  {
+    conceptId: COND,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The four conditional types express genuinely different degrees of ' +
+      'reality: ZERO (if + present, present — general truths: "If you ' +
+      'heat water, it boils"), FIRST (if + present, will + base — real ' +
+      'future possibility: "If it rains, I will stay home"), SECOND (if ' +
+      '+ past, would + base — hypothetical present/future: "If I had ' +
+      'more time, I would help"), THIRD (if + past perfect, would have + ' +
+      'past participle — counterfactual PAST, something that did NOT ' +
+      'happen: "If I had studied, I would have passed"). Before forming a ' +
+      'conditional sentence, identify which reality-type applies and use ' +
+      'that type’s specific tense pairing.',
+    targetedMisconceptions: [`${COND}:MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE`],
+    source: `${COND_SRC} — MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE (P28 rains-vs-had-studied conflict)`,
+  },
+  {
+    conceptId: COND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The second conditional’s past-tense form ("If I had more time, I ' +
+      'would help") signals hypothetical unreality about the present or ' +
+      'future, not actual past time — a distancing grammatical ' +
+      'convention, not a literal time reference. Separately, English’s ' +
+      'four conditional types (zero, first, second, third) each express a ' +
+      'genuinely different degree of reality — general truth, real future ' +
+      'possibility, hypothetical present/future, or counterfactual past — ' +
+      'and each requires its own specific tense pairing rather than one ' +
+      'interchangeable "if" pattern.',
+    targetedMisconceptions: [
+      `${COND}:MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME`,
+      `${COND}:MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE`,
+    ],
+    source: `${COND_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const COND_PROBES: SeedProbe[] = [
+  {
+    conceptId: COND,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "If I had more money, I would travel more," does "had" mean I HAD money in the past and don’t anymore?',
+    choices: [
+      { text: 'No — this describes an imagined, unreal situation right now; I currently don’t have more money', isCorrect: true },
+      { text: 'Yes — the past-tense verb form always means past time', isCorrect: false, misconceptionId: `${COND}:MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME` },
+    ],
+    correctValue: 'no, hypothetical present',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COND}:MC-SECOND-CONDITIONAL-PAST-TENSE-MEANS-PAST-TIME`],
+    source: `${COND_SRC} — if-I-had-more-money conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: COND,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Should "If it rains, I will stay home" and "If I had studied, I would have passed" use the same conditional structure?',
+    choices: [
+      { text: 'No — the first is a real future possibility (first conditional), the second is a counterfactual past that already didn’t happen (third conditional); each needs its own tense pairing', isCorrect: true },
+      { text: 'Yes — all "if" sentences follow one interchangeable structure', isCorrect: false, misconceptionId: `${COND}:MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE` },
+    ],
+    correctValue: 'no, different conditional types',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COND}:MC-ALL-CONDITIONALS-ARE-THE-SAME-STRUCTURE`],
+    source: `${COND_SRC} — rains-vs-had-studied conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.participles-and-participial-phrases ────────────────────────
+const PART = 'eng.grammar.participles-and-participial-phrases'
+const PART_SRC = 'docs/curriculum/blueprints/eng.grammar.participles-and-participial-phrases.md'
+
+const PART_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PART,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A present participle (-ing form) can function as an ADJECTIVE, ' +
+      'modifying a noun ("the sleeping baby" — "sleeping" describes ' +
+      '"baby," just like "the tired baby" would). This is grammatically ' +
+      'distinct from a GERUND (-ing form functioning as a NOUN: "Sleeping ' +
+      'is healthy" — "sleeping" IS the subject). Same spelling, different ' +
+      'grammatical roles — check whether the -ing word is describing a ' +
+      'noun (participle/adjective) or acting AS a noun itself (gerund).',
+    targetedMisconceptions: [`${PART}:MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN`],
+    source: `${PART_SRC} — MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN (P28 sleeping-baby-vs-sleeping-is-healthy conflict)`,
+  },
+  {
+    conceptId: PART,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A participial phrase must logically modify (describe an action ' +
+      'performed by) the SUBJECT of the main clause that immediately ' +
+      'follows it — if the subject doesn’t match who/what is actually ' +
+      'doing the participial action, the sentence is a "dangling ' +
+      'participle," a genuine logical error, even if the writer’s ' +
+      'INTENDED meaning feels clear to them. "Walking down the street, ' +
+      'the trees were beautiful" illogically attaches the walking action ' +
+      'to "the trees" (the actual subject). Correct: "Walking down the ' +
+      'street, I noticed the trees were beautiful."',
+    targetedMisconceptions: [`${PART}:MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR`],
+    source: `${PART_SRC} — MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR (P28 walking-down-the-street conflict)`,
+  },
+  {
+    conceptId: PART,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'An -ing word functions as an adjective (present participle) when ' +
+      'it modifies a noun ("the sleeping baby"), and as a noun (gerund) ' +
+      'when it acts as the subject or object of a sentence ("Sleeping is ' +
+      'healthy") — identical spelling, different grammatical roles, ' +
+      'distinguished by function rather than form. Separately, a ' +
+      'participial phrase must logically attach to the subject of the ' +
+      'main clause that follows it; when it does not ("Walking down the ' +
+      'street, the trees were beautiful" — the trees cannot walk), the ' +
+      'sentence contains a dangling participle, a genuine logical error ' +
+      'regardless of how clear the intended meaning felt to the writer.',
+    targetedMisconceptions: [
+      `${PART}:MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN`,
+      `${PART}:MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR`,
+    ],
+    source: `${PART_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PART_PROBES: SeedProbe[] = [
+  {
+    conceptId: PART,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "the sleeping baby," what job is "sleeping" doing?',
+    choices: [
+      { text: 'It is a present participle functioning as an adjective, describing "baby"', isCorrect: true },
+      { text: 'It is a gerund, since any -ing word functioning this way must be a gerund', isCorrect: false, misconceptionId: `${PART}:MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN` },
+    ],
+    correctValue: 'participle (adjective)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PART}:MC-PRESENT-PARTICIPLE-IS-JUST-A-GERUND-AGAIN`],
+    source: `${PART_SRC} — sleeping-baby-vs-sleeping-is-healthy conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PART,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is there a problem with "Walking down the street, the trees were beautiful"?',
+    choices: [
+      { text: 'Yes — it is a dangling participle; "the trees" (the subject) cannot walk, so the sentence needs a human subject added', isCorrect: true },
+      { text: 'No — the sentence is fine since the intended meaning is clear enough', isCorrect: false, misconceptionId: `${PART}:MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR` },
+    ],
+    correctValue: 'yes, dangling participle',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PART}:MC-DANGLING-PARTICIPLES-ARE-FINE-IF-MEANING-IS-CLEAR`],
+    source: `${PART_SRC} — walking-down-the-street conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.pronoun-antecedent-agreement ───────────────────────────────
+const PAAG = 'eng.grammar.pronoun-antecedent-agreement'
+const PAAG_SRC = 'docs/curriculum/blueprints/eng.grammar.pronoun-antecedent-agreement.md'
+
+const PAAG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PAAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Indefinite pronouns like "everyone," "someone," "each," ' +
+      '"everybody," "anybody" are grammatically SINGULAR, even though ' +
+      'they refer to a group of people conceptually — this is confirmed ' +
+      'by their singular verb agreement ("Everyone IS here," not ' +
+      '"ARE"). Traditionally, formal grammar pairs these with "his or ' +
+      'her"; modern standard usage increasingly accepts singular ' +
+      '"they/their" as a gender-neutral option, but recognizing these ' +
+      'words’ singular grammatical STATUS is the key point. Check an ' +
+      'indefinite pronoun’s verb agreement (is/are) to confirm it’s ' +
+      'singular before choosing an agreeing pronoun.',
+    targetedMisconceptions: [`${PAAG}:MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL`],
+    source: `${PAAG_SRC} — MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL (P28 everyone-is-vs-are conflict)`,
+  },
+  {
+    conceptId: PAAG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A pronoun must have a clear, single, unambiguous antecedent — when ' +
+      'a sentence has two or more possible antecedents (like "Sarah" and ' +
+      '"Maria," both female singular nouns the pronoun "she" could refer ' +
+      'to), the reader genuinely cannot determine the intended meaning ' +
+      'without additional information. This is a real communication ' +
+      'failure, not something "context makes obvious," since the ' +
+      'writer’s inside knowledge isn’t available to the reader. Check ' +
+      'whether a pronoun has exactly ONE possible antecedent — if ' +
+      'multiple candidates exist, rewrite the sentence to eliminate the ' +
+      'ambiguity.',
+    targetedMisconceptions: [`${PAAG}:MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR`],
+    source: `${PAAG_SRC} — MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR (P28 Sarah-told-Maria conflict)`,
+  },
+  {
+    conceptId: PAAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Indefinite pronouns ("everyone," "someone," "each") are ' +
+      'grammatically singular, confirmed by their singular verb agreement ' +
+      '("Everyone is here") — modern usage increasingly accepts singular ' +
+      '"their" as a gender-neutral pairing, but the pronoun itself remains ' +
+      'grammatically singular regardless of which option is chosen. ' +
+      'Separately, a pronoun needs exactly one identifiable antecedent; ' +
+      '"Sarah told Maria that she had won the award" is genuinely ' +
+      'ambiguous ("she" could be either), and assuming the intended ' +
+      'meaning is "obvious from context" overlooks that the reader lacks ' +
+      'the writer’s inside knowledge.',
+    targetedMisconceptions: [
+      `${PAAG}:MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL`,
+      `${PAAG}:MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR`,
+    ],
+    source: `${PAAG_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PAAG_PROBES: SeedProbe[] = [
+  {
+    conceptId: PAAG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "everyone" pair with "is" or "are" — and what does that tell you about choosing a pronoun to refer back to it?',
+    choices: [
+      { text: '"Is" — "everyone" is grammatically singular, so it needs a singular-agreeing pronoun choice', isCorrect: true },
+      { text: '"Are" — "everyone" refers to many people, so it should be treated as plural', isCorrect: false, misconceptionId: `${PAAG}:MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL` },
+    ],
+    correctValue: 'is, singular',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PAAG}:MC-INDEFINITE-PRONOUNS-ARE-ALWAYS-PLURAL`],
+    source: `${PAAG_SRC} — everyone-is-vs-are conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PAAG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "Sarah told Maria that she had won the award," can you tell for certain who won, just from this sentence?',
+    choices: [
+      { text: 'No — "she" could refer to either Sarah or Maria; the sentence needs to be rewritten to remove the ambiguity', isCorrect: true },
+      { text: 'Yes — the context makes it obvious enough who "she" refers to', isCorrect: false, misconceptionId: `${PAAG}:MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR` },
+    ],
+    correctValue: 'no, ambiguous',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PAAG}:MC-AMBIGUOUS-PRONOUN-REFERENCE-IS-FINE-IF-CONTEXT-SEEMS-CLEAR`],
+    source: `${PAAG_SRC} — Sarah-told-Maria conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.end-punctuation ─────────────────────────────────────────────
+const ENDP = 'eng.grammar.end-punctuation'
+const ENDP_SRC = 'docs/curriculum/blueprints/eng.grammar.end-punctuation.md'
+
+const ENDP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENDP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'An exclamation point signals STRONG EMOTION or emphasis ' +
+      '(excitement, surprise, urgency, fear, strong command) — not ' +
+      'specifically loudness or volume. A quietly whispered "I can’t ' +
+      'believe it!" can still carry genuine strong emotion deserving an ' +
+      'exclamation point, while a loudly spoken but emotionally flat ' +
+      'statement typically doesn’t need one. Use the exclamation point ' +
+      'to signal genuine strong emotion or emphasis, regardless of ' +
+      'whether the statement would be spoken loudly or quietly.',
+    targetedMisconceptions: [`${ENDP}:MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL`],
+    source: `${ENDP_SRC} — MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL (P28 whispered-shock conflict)`,
+  },
+  {
+    conceptId: ENDP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The presence of a wh-word doesn’t automatically make a sentence a ' +
+      'question requiring a question mark — check the sentence’s actual ' +
+      'FUNCTION: is it genuinely asking something that needs an answer ' +
+      '(interrogative, question mark), or is it expressing strong feeling ' +
+      '(exclamatory, exclamation point) or reporting a thought/statement ' +
+      '(declarative, period), even though it contains a wh-word? "What a ' +
+      'beautiful day!" is exclamatory, not a question, despite starting ' +
+      'with "What."',
+    targetedMisconceptions: [`${ENDP}:MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK`],
+    source: `${ENDP_SRC} — MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK (P28 what-a-beautiful-day conflict)`,
+  },
+  {
+    conceptId: ENDP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'An exclamation point marks strong emotion or emphasis, not ' +
+      'loudness — a quietly delivered but genuinely emotional statement ' +
+      'deserves one just as much as a loud one, and a loud but ' +
+      'emotionally flat statement typically does not. Separately, a ' +
+      'sentence beginning with a wh-word ("what," "how," "why") is not ' +
+      'automatically interrogative — check its genuine function: "What a ' +
+      'beautiful day!" expresses strong feeling (exclamatory), while "What ' +
+      'day is it?" genuinely asks something (interrogative). Choose end ' +
+      'punctuation based on communicative function, not surface cues like ' +
+      'volume or the presence of a wh-word.',
+    targetedMisconceptions: [
+      `${ENDP}:MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL`,
+      `${ENDP}:MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK`,
+    ],
+    source: `${ENDP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ENDP_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENDP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Could a quietly whispered "I can’t believe it!" still deserve an exclamation point?',
+    choices: [
+      { text: 'Yes — exclamation points signal strong emotion, not loudness; genuine shock or excitement can be whispered', isCorrect: true },
+      { text: 'No — exclamation points are only for statements said loudly', isCorrect: false, misconceptionId: `${ENDP}:MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ENDP}:MC-EXCLAMATION-POINT-MEANS-LOUD-NOT-EMOTIONAL`],
+    source: `${ENDP_SRC} — whispered-shock conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ENDP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "What a beautiful day" need a question mark, since it starts with the wh-word "What"?',
+    choices: [
+      { text: 'No — it expresses strong feeling, not a genuine question, so it needs an exclamation point: "What a beautiful day!"', isCorrect: true },
+      { text: 'Yes — any sentence starting with a wh-word needs a question mark', isCorrect: false, misconceptionId: `${ENDP}:MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK` },
+    ],
+    correctValue: 'no, exclamation point',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ENDP}:MC-ANY-SENTENCE-STARTING-WITH-A-WH-WORD-IS-A-QUESTION-MARK`],
+    source: `${ENDP_SRC} — what-a-beautiful-day conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -15715,6 +16210,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...STYP_EXPLANATIONS,
   ...PHR_EXPLANATIONS,
   ...TCON_EXPLANATIONS,
+  ...CLAU_EXPLANATIONS,
+  ...COND_EXPLANATIONS,
+  ...PART_EXPLANATIONS,
+  ...PAAG_EXPLANATIONS,
+  ...ENDP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -15895,4 +16395,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...STYP_PROBES,
   ...PHR_PROBES,
   ...TCON_PROBES,
+  ...CLAU_PROBES,
+  ...COND_PROBES,
+  ...PART_PROBES,
+  ...PAAG_PROBES,
+  ...ENDP_PROBES,
 ]
