@@ -24415,6 +24415,467 @@ const TWP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.linguistics.morphology-intro ─────────────────────────────────────────
+const MORP = 'eng.linguistics.morphology-intro'
+const MORP_SRC = 'docs/curriculum/blueprints/eng.linguistics.morphology-intro.md'
+
+const MORP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MORP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Banana" has three syllables but is ONE morpheme (no smaller piece ' +
+      'carries independent meaning); "cats" has one syllable but TWO ' +
+      'morphemes ("cat" + plural "-s"). A syllable is a unit of ' +
+      'PRONUNCIATION; a morpheme is a unit of MEANING — like measuring a ' +
+      'cake by "bites" versus "distinct ingredients." Never assume ' +
+      'syllable count tells you morpheme count.',
+    targetedMisconceptions: [`${MORP}:MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE`],
+    source: `${MORP_SRC} — MC-A (P28 banana-cats-count-mismatch conflict)`,
+  },
+  {
+    conceptId: MORP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"-ness" turns the adjective "happy" into the noun "happiness" — a ' +
+      'derivational morpheme, changing the word\'s category, like ' +
+      'renovating a house to add a new room. "-ed" in "walked" only marks ' +
+      'past tense; "walked" is still a verb — an inflectional morpheme, ' +
+      'like updating a house number without changing the house. These are ' +
+      'genuinely different kinds of morphemes, not the same job.',
+    targetedMisconceptions: [`${MORP}:MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME`],
+    source: `${MORP_SRC} — MC-B (P28 house-renovation-vs-house-number conflict)`,
+  },
+  {
+    conceptId: MORP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A morpheme is defined by carrying meaning or grammatical function, ' +
+      'not by being a syllable — morpheme boundaries and syllable ' +
+      'boundaries frequently do not align ("banana": 3 syllables, 1 ' +
+      'morpheme; "cats": 1 syllable, 2 morphemes). Separately, ' +
+      'derivational morphemes (which can change a word\'s part of speech ' +
+      'or core meaning, e.g. "-ness") are functionally distinct from ' +
+      'inflectional morphemes (which mark grammatical information like ' +
+      'tense or number without changing the word\'s core category, e.g. ' +
+      '"-ed").',
+    targetedMisconceptions: [
+      `${MORP}:MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE`,
+      `${MORP}:MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME`,
+    ],
+    source: `${MORP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const MORP_PROBES: SeedProbe[] = [
+  {
+    conceptId: MORP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Banana" has three syllables. Does that mean it has three morphemes?',
+    choices: [
+      { text: 'No — "banana" is one single morpheme despite three syllables, since no smaller piece of it carries independent meaning; syllable count and morpheme count often don\'t match', isCorrect: true },
+      { text: 'Yes — a morpheme is the same thing as a syllable', isCorrect: false, misconceptionId: `${MORP}:MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE` },
+    ],
+    correctValue: 'no, one morpheme despite three syllables',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MORP}:MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE`],
+    source: `${MORP_SRC} — banana-cats-count-mismatch conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MORP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"-ness" in "happiness" (adjective→noun) and "-ed" in "walked" (verb stays verb) are both suffixes. Do they do the same kind of job?',
+    choices: [
+      { text: 'No — "-ness" is derivational (changes the word\'s part of speech), while "-ed" is inflectional (marks tense without changing the category); these are functionally different', isCorrect: true },
+      { text: 'Yes — adding any ending to a word has the same kind of effect; derivational and inflectional are the same', isCorrect: false, misconceptionId: `${MORP}:MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME` },
+    ],
+    correctValue: 'no, derivational and inflectional differ',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MORP}:MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME`],
+    source: `${MORP_SRC} — house-renovation-vs-house-number conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.phonology-intro ──────────────────────────────────────────
+const PHON = 'eng.linguistics.phonology-intro'
+const PHON_SRC = 'docs/curriculum/blueprints/eng.linguistics.phonology-intro.md'
+
+const PHON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"How is air released differently producing the two p-sounds in ' +
+      '\'pin\' vs. \'spin\'?" is a phonetic question (physical production). ' +
+      '"Do English speakers treat these as the same sound or different ' +
+      'sounds — does swapping change meaning?" is a phonological question ' +
+      '(the abstract system). Phonetics measures the physical sound; ' +
+      'phonology asks which sound differences the speakers\' mental ' +
+      'system treats as meaningfully different.',
+    targetedMisconceptions: [`${PHON}:MC-A-PHONOLOGY-AND-PHONETICS-ARE-THE-SAME-THING`],
+    source: `${PHON_SRC} — MC-A (P28 aspirated-p-two-questions conflict)`,
+  },
+  {
+    conceptId: PHON,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Aspirated vs. unaspirated "p" is physically different in ALL ' +
+      'languages, but in English swapping them never changes a word\'s ' +
+      'meaning (allophonic), while in Thai this exact distinction DOES ' +
+      'change meaning (phonemic). Whether a physical difference counts as ' +
+      'a meaningful one is decided by each language\'s own system, not by ' +
+      'physics alone — never assume a physical difference is phonemic ' +
+      'everywhere.',
+    targetedMisconceptions: [`${PHON}:MC-B-IF-TWO-SOUNDS-ARE-PHYSICALLY-DIFFERENT-THEY-MUST-BE-DIFFERENT-PHONEMES-IN-EVERY-LANGUAGE`],
+    source: `${PHON_SRC} — MC-B (P28 aspirated-p-cross-linguistic conflict)`,
+  },
+  {
+    conceptId: PHON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Phonetics studies the physical, measurable properties of speech ' +
+      'sounds, while phonology studies which sound distinctions are ' +
+      'functionally meaningful within a specific language\'s abstract ' +
+      'system — these are related but genuinely distinct questions. ' +
+      'Separately, a physical sound distinction\'s phonemic status is ' +
+      'language-specific: the same physical difference (e.g. aspirated vs. ' +
+      'unaspirated "p") can be phonemic in one language (Thai) and merely ' +
+      'allophonic in another (English), verifiable via the minimal pair ' +
+      'test.',
+    targetedMisconceptions: [
+      `${PHON}:MC-A-PHONOLOGY-AND-PHONETICS-ARE-THE-SAME-THING`,
+      `${PHON}:MC-B-IF-TWO-SOUNDS-ARE-PHYSICALLY-DIFFERENT-THEY-MUST-BE-DIFFERENT-PHONEMES-IN-EVERY-LANGUAGE`,
+    ],
+    source: `${PHON_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PHON_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHON,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"How is air released differently when producing two p-sounds?" and "Do English speakers treat these two p-sounds as different, meaning-changing sounds?" Are these the same kind of question?',
+    choices: [
+      { text: 'No — the first is a phonetic question (physical production); the second is a phonological question (abstract, meaning-based system)', isCorrect: true },
+      { text: 'Yes — phonology and phonetics are the same thing', isCorrect: false, misconceptionId: `${PHON}:MC-A-PHONOLOGY-AND-PHONETICS-ARE-THE-SAME-THING` },
+    ],
+    correctValue: 'no, phonetic vs. phonological differ',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHON}:MC-A-PHONOLOGY-AND-PHONETICS-ARE-THE-SAME-THING`],
+    source: `${PHON_SRC} — aspirated-p-two-questions conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PHON,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Aspirated and unaspirated "p" are physically different sounds in both English and Thai. Must this physical difference be a meaningful, word-changing distinction (a phoneme) in every language?',
+    choices: [
+      { text: 'No — it\'s phonemic in Thai (changes word meaning) but merely allophonic in English (doesn\'t); phonemic status is decided by each language\'s own system, not physics alone', isCorrect: true },
+      { text: 'Yes — if two sounds are physically different, they must be different phonemes in every language', isCorrect: false, misconceptionId: `${PHON}:MC-B-IF-TWO-SOUNDS-ARE-PHYSICALLY-DIFFERENT-THEY-MUST-BE-DIFFERENT-PHONEMES-IN-EVERY-LANGUAGE` },
+    ],
+    correctValue: 'no, phonemic status is language-specific',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHON}:MC-B-IF-TWO-SOUNDS-ARE-PHYSICALLY-DIFFERENT-THEY-MUST-BE-DIFFERENT-PHONEMES-IN-EVERY-LANGUAGE`],
+    source: `${PHON_SRC} — aspirated-p-cross-linguistic conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.accents-and-dialects ───────────────────────────────────────
+const ACCD = 'eng.phonetics.accents-and-dialects'
+const ACCD_SRC = 'docs/curriculum/blueprints/eng.phonetics.accents-and-dialects.md'
+
+const ACCD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACCD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A non-rhotic speaker who doesn\'t pronounce the "r" in "car" isn\'t ' +
+      'making a mistake — they follow this same rule consistently across ' +
+      'every word with that sound pattern, like how driving on the left ' +
+      'vs. right side of the road are both internally consistent systems, ' +
+      'neither objectively "more correct." An accent applies its own ' +
+      'consistent sound rules; ask "what rule explains this pattern?" not ' +
+      '"is this wrong?"',
+    targetedMisconceptions: [`${ACCD}:MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH`],
+    source: `${ACCD_SRC} — MC-A (P28 rhotic-non-rhotic-driving-side conflict)`,
+  },
+  {
+    conceptId: ACCD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Calling a "standard" broadcast accent more "correct" is like ' +
+      'saying one country\'s currency is "more real money" just because ' +
+      'it\'s more widely used internationally — the wider use reflects ' +
+      'historical and economic power, not linguistic superiority. A ' +
+      '"standard" accent became standard through social and historical ' +
+      'processes (who had power, whose speech got broadcast), not because ' +
+      'it\'s linguistically superior.',
+    targetedMisconceptions: [`${ACCD}:MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT`],
+    source: `${ACCD_SRC} — MC-B (P28 currency-prestige conflict)`,
+  },
+  {
+    conceptId: ACCD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'An accent is a systematic, rule-governed sound system applied ' +
+      'consistently across every word in that variety, not a random or ' +
+      'careless deviation from a "correct" pronunciation. Separately, a ' +
+      '"standard" or prestige accent\'s higher social status is a matter ' +
+      'of social and historical power (education, media, government ' +
+      'association), not linguistic merit — no accent is inherently more ' +
+      'correct than another.',
+    targetedMisconceptions: [
+      `${ACCD}:MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH`,
+      `${ACCD}:MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT`,
+    ],
+    source: `${ACCD_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ACCD_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACCD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A non-rhotic speaker consistently drops the "r" sound in "car," "far," and every similar word. Is this careless mispronunciation?',
+    choices: [
+      { text: 'No — it\'s a predictable, rule-governed pattern applied consistently across words, like an internally consistent system, not an error', isCorrect: true },
+      { text: 'Yes — accents are mispronunciations or careless speech', isCorrect: false, misconceptionId: `${ACCD}:MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH` },
+    ],
+    correctValue: 'no, it\'s systematic',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACCD}:MC-A-ACCENTS-ARE-MISPRONUNCIATIONS-OR-CARELESS-SPEECH`],
+    source: `${ACCD_SRC} — rhotic-non-rhotic-driving-side conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ACCD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A "standard" broadcast accent and a stigmatized regional accent are both grammatically correct and equally consistent. Is the standard accent linguistically more correct?',
+    choices: [
+      { text: 'No — its higher prestige reflects social and historical power, not linguistic superiority; neither accent contains an actual linguistic error', isCorrect: true },
+      { text: 'Yes — a standard or prestige accent is linguistically more correct', isCorrect: false, misconceptionId: `${ACCD}:MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT` },
+    ],
+    correctValue: 'no, prestige is social not linguistic',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACCD}:MC-B-A-STANDARD-OR-PRESTIGE-ACCENT-IS-LINGUISTICALLY-MORE-CORRECT`],
+    source: `${ACCD_SRC} — currency-prestige conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.pronunciation-in-conversation ────────────────────────────────
+const PRCV = 'eng.speaking.pronunciation-in-conversation'
+const PRCV_SRC = 'docs/curriculum/blueprints/eng.speaking.pronunciation-in-conversation.md'
+
+const PRCV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRCV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"COMputer" with a slightly imprecise vowel is still generally ' +
+      'understandable, but "comPUter" with wrong stress can genuinely ' +
+      'confuse a listener even with perfect individual sounds. Word ' +
+      'stress and intonation errors often disrupt comprehension MORE than ' +
+      'individual sound imperfections — prioritize stress/intonation ' +
+      'accuracy alongside individual sound precision, not instead of it.',
+    targetedMisconceptions: [`${PRCV}:MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION`],
+    source: `${PRCV_SRC} — MC-1 (P28 computer-stress-vs-segment conflict)`,
+  },
+  {
+    conceptId: PRCV,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A speaker can have a noticeable accent while still being ' +
+      'completely, clearly understood — the realistic pronunciation goal ' +
+      'is INTELLIGIBILITY (being clearly understood), not eliminating all ' +
+      'traces of accent to sound "native-like." Accent itself isn\'t a ' +
+      'communication problem; specific features that genuinely impede ' +
+      'understanding (like wrong word stress) are worth targeted practice.',
+    targetedMisconceptions: [`${PRCV}:MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL`],
+    source: `${PRCV_SRC} — MC-2 (P28 intelligibility-not-native-likeness conflict)`,
+  },
+  {
+    conceptId: PRCV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Word stress and intonation errors often disrupt listener ' +
+      'comprehension more severely than individual sound (segmental) ' +
+      'imperfections, so conversational pronunciation practice should ' +
+      'prioritize stress/intonation accuracy alongside segmental ' +
+      'precision, not treat segmental perfection as sufficient alone. ' +
+      'Separately, intelligibility — being clearly understood — is the ' +
+      'realistic pronunciation goal, not eliminating all traces of ' +
+      'accent; a noticeable accent is fully compatible with high ' +
+      'intelligibility.',
+    targetedMisconceptions: [
+      `${PRCV}:MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION`,
+      `${PRCV}:MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL`,
+    ],
+    source: `${PRCV_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRCV_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRCV,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Someone says "comPUter" (wrong stress) with perfectly accurate individual sounds. Is this easily understood, since every individual sound is correct?',
+    choices: [
+      { text: 'No — wrong stress placement can genuinely confuse a listener even with perfect individual sounds; stress/intonation often matter more than segmental precision', isCorrect: true },
+      { text: 'Yes — perfect individual sounds are more important than stress and intonation', isCorrect: false, misconceptionId: `${PRCV}:MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION` },
+    ],
+    correctValue: 'no, stress matters more',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRCV}:MC-PERFECT-INDIVIDUAL-SOUNDS-MORE-IMPORTANT-THAN-STRESS-AND-INTONATION`],
+    source: `${PRCV_SRC} — computer-stress-vs-segment conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRCV,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Should your pronunciation goal be to eliminate your accent completely and sound exactly like a native speaker?',
+    choices: [
+      { text: 'No — intelligibility (being clearly understood) is the realistic goal; a speaker can have a noticeable accent while still being perfectly intelligible', isCorrect: true },
+      { text: 'Yes — a native-like accent is the goal', isCorrect: false, misconceptionId: `${PRCV}:MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL` },
+    ],
+    correctValue: 'no, aim for intelligibility',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRCV}:MC-NATIVE-LIKE-ACCENT-IS-THE-GOAL`],
+    source: `${PRCV_SRC} — intelligibility-not-native-likeness conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.outlining-and-planning ────────────────────────────────────────
+const OUTP = 'eng.writing.outlining-and-planning'
+const OUTP_SRC = 'docs/curriculum/blueprints/eng.writing.outlining-and-planning.md'
+
+const OUTP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OUTP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A formal Roman-numeral outline and a simple bullet-point list ' +
+      'capturing the same main points and sub-points in the same logical ' +
+      'order both accomplish outlining\'s real purpose. The formal format ' +
+      'is just one possible tool, not a requirement — use whatever format ' +
+      'actually helps you organize your thinking, as long as genuine ' +
+      'logical organization is there.',
+    targetedMisconceptions: [`${OUTP}:MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST`],
+    source: `${OUTP_SRC} — MC-1 (P28 multi-format-equivalence conflict)`,
+  },
+  {
+    conceptId: OUTP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'If drafting reveals evidence B actually needs to come before ' +
+      'evidence A, forcing the draft to match the original outline order ' +
+      'wastes the new insight. An outline is a planning tool, not an ' +
+      'unbreakable contract — like a GPS that reroutes rather than ' +
+      'forcing you down a closed road. Revising your outline once ' +
+      'drafting reveals a better structure is normal, even a sign of good ' +
+      'thinking.',
+    targetedMisconceptions: [`${OUTP}:MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING`],
+    source: `${OUTP_SRC} — MC-2 (P28 gps-reroute conflict)`,
+  },
+  {
+    conceptId: OUTP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Outlining\'s real purpose is organizing ideas logically before ' +
+      'drafting; any format that achieves this — a bullet list, a cluster ' +
+      'diagram, a formal Roman-numeral outline — satisfies that purpose, ' +
+      'so no single format is required. Separately, an outline is a ' +
+      'flexible planning tool that should be revised as drafting reveals ' +
+      'a better structure, a logical gap, or a new idea, rather than a ' +
+      'fixed contract the draft must match exactly.',
+    targetedMisconceptions: [
+      `${OUTP}:MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST`,
+      `${OUTP}:MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING`,
+    ],
+    source: `${OUTP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const OUTP_PROBES: SeedProbe[] = [
+  {
+    conceptId: OUTP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student organizes their main points and sub-points in a simple bullet list instead of a formal Roman-numeral outline. Does only the Roman-numeral version "count" as real planning?',
+    choices: [
+      { text: 'No — any format that genuinely organizes ideas logically before drafting satisfies outlining\'s real purpose; the formal format is just one tool among several', isCorrect: true },
+      { text: 'Yes — an outline must be a rigid, formal Roman-numeral list', isCorrect: false, misconceptionId: `${OUTP}:MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST` },
+    ],
+    correctValue: 'no, function matters not format',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OUTP}:MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST`],
+    source: `${OUTP_SRC} — multi-format-equivalence conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: OUTP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'While drafting, a writer realizes evidence B actually needs to come before evidence A, though the outline placed A first. Should the writer force the draft to match the original outline order?',
+    choices: [
+      { text: 'No — an outline is a flexible planning tool, not an unbreakable contract; it\'s normal and even a sign of good thinking to revise it once drafting reveals a better structure', isCorrect: true },
+      { text: 'Yes — once an outline is made, it can\'t be changed during drafting', isCorrect: false, misconceptionId: `${OUTP}:MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING` },
+    ],
+    correctValue: 'no, revise the outline',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OUTP}:MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING`],
+    source: `${OUTP_SRC} — gps-reroute conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -24690,6 +25151,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ORFL_EXPLANATIONS,
   ...CWF_EXPLANATIONS,
   ...TWP_EXPLANATIONS,
+  ...MORP_EXPLANATIONS,
+  ...PHON_EXPLANATIONS,
+  ...ACCD_EXPLANATIONS,
+  ...PRCV_EXPLANATIONS,
+  ...OUTP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -24965,4 +25431,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ORFL_PROBES,
   ...CWF_PROBES,
   ...TWP_PROBES,
+  ...MORP_PROBES,
+  ...PHON_PROBES,
+  ...ACCD_PROBES,
+  ...PRCV_PROBES,
+  ...OUTP_PROBES,
 ]
