@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.prime-distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.prime-distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:633e95a193073e95fe831c139323c80ef8fdd7cd905d635d0ea0feb0fcf6c9b9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.prime-distribution.md": "sha256:2c78f859f9304266ae24a94e95e506384f86787c9fe1acdea8a7d24b111dee1c"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.nt.prime-distribution",
+    "name": "Distribution of Primes",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.nt.prime-number",
+      "math.calc.limits"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.prime-distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.prime-distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.prime-distribution.md": "sha256:2c78f859f9304266ae24a94e95e506384f86787c9fe1acdea8a7d24b111dee1c"
+      },
+      "contentHash": "sha256:8a1e8033a2a607657c30ecec09109dcb3f540907f09b56e0571b348dd75ead76",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-distribution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-distribution.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-distribution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-distribution.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-distribution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-distribution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-distribution.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-distribution\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.prime-distribution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **prime-counting function** $\\pi(x)$ as the number of primes less than or equal to $x$, compute it directly for small values, and state the **Prime Number Theorem**: $\\pi(x)\\sim\\frac{x}{\\ln x}$ as $x\\to\\infty$.\n- LO2: Correctly interpret the **asymptotic equivalence** symbol $\\sim$ — $\\pi(x)\\sim\\frac{x}{\\ln x}$ means $\\lim_{x\\to\\infty}\\frac{\\pi(x)}{x/\\ln x}=1$, i.e. the RATIO tends to 1 — and explicitly distinguish this from the (false) claim that $\\pi(x)-\\frac{x}{\\ln x}\\to0$ (the absolute difference does NOT vanish; it actually grows without bound, even as the ratio approaches 1).\n- LO3: Analyze the practical implication of the Prime Number Theorem — that primes become **increasingly sparse** as numbers grow larger (the \"density\" of primes near $x$ behaves roughly like $\\frac{1}{\\ln x}$), and use this to reason qualitatively about how prime-counting behaves at different orders of magnitude.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "ASYMPTOTIC-RATIO-CONFLATED-WITH-VANISHING-DIFFERENCE",
+      "content": "| MC-1 | ASYMPTOTIC-RATIO-CONFLATED-WITH-VANISHING-DIFFERENCE | Believing $f(x)\\sim g(x)$ (ratio tends to 1) implies $f(x)-g(x)\\to0$ (difference vanishes), when in fact the difference can grow without bound while the ratio still converges to 1 | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "PNT-TREATED-AS-EXACT-FORMULA",
+      "content": "| MC-2 | PNT-TREATED-AS-EXACT-FORMULA | Treating $\\pi(x)\\approx x/\\ln x$ as an exact or near-exact computational formula usable at any specific finite $x$, rather than recognizing it as a large-$x$ asymptotic statement with potentially significant relative error at smaller/moderate $x$ | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "PRIME-SPARSITY-MISTAKEN-FOR-PRIME-FINITENESS",
+      "content": "| MC-3 | PRIME-SPARSITY-MISTAKEN-FOR-PRIME-FINITENESS | Believing that primes becoming increasingly sparse (rarer in relative density) as numbers grow implies primes eventually stop appearing altogether, confusing decreasing density with a finite total count | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "The Prime-Counting Function and the PNT Statement (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Prime-Counting Function and the PNT Statement (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "Ratio vs. Difference, and Prime Sparsity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Ratio vs. Difference, and Prime Sparsity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\pi(30)$ directly by listing all primes up to 30, then compute the PNT estimate $30/\\ln30$ and compare.\n  2. Explain, in your own words, the precise meaning of $\\pi(x)\\sim x/\\ln x$, being explicit about what this does and does not claim about the difference $\\pi(x)-x/\\ln x$.\n  3. Given that $\\pi(x)/(x/\\ln x)$ is closer to 1 at $x=10^9$ than at $x=10^6$, is it still possible for $\\pi(x)-x/\\ln x$ to be a LARGER absolute number at $x=10^9$ than at $x=10^6$? Explain why or why not, using this lesson's ratio/difference distinction.\n  4. Using the $1/\\ln x$ local-density heuristic, roughly estimate what fraction of numbers near $x=10^{10}$ would be expected to be prime (you do not need to compute $\\pi$ exactly — just apply the density heuristic).\n- **P76 (Transfer Probe, mode = independence)**: \"A cryptography course explains that generating a large random prime number (say, around 300 digits long) for use in an encryption key requires testing many random candidates before finding one that's actually prime, because primes become increasingly rare among large numbers. (a) Using the Prime Number Theorem's density heuristic ($\\approx 1/\\ln x$), roughly estimate what fraction of 300-digit numbers are prime (you can express $\\ln x$ in terms of the number of digits, using $x\\approx10^{300}$, so $\\ln x \\approx 300\\ln10\\approx691$). (b) Using this density estimate, explain roughly how many random 300-digit candidates you'd expect to need to test, on average, before finding a prime. (c) A student argues 'since we need to test hundreds of candidates, primes must be extremely rare and might eventually stop appearing altogether at very large sizes' — using a fact you know is TRUE about primes (distinct from the Prime Number Theorem itself), explain why this specific conclusion is incorrect even though the premise (many candidates needed) is correct.\" *Component 7 note: this scenario was chosen independently rather than cross-linking to `math.cx.riemann-zeta`, since that blueprint does not yet exist.*\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.nt.prime-number` (the definition of a prime, and comfort finding/counting primes directly) and `math.calc.limits` (the formal meaning of a limit as $x\\to\\infty$, needed to correctly parse the asymptotic-equivalence statement).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.prime-distribution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.prime-distribution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.prime-number` (the definition of primality this entire concept counts and analyzes), `math.calc.limits` (the formal limit machinery underlying the precise meaning of asymptotic equivalence).\n- **Unlocks**: `math.nt.analytic-number-theory` (the broader field this concept's central result, the Prime Number Theorem, is the flagship achievement of).\n- **Cross-link**: KG lists `math.cx.riemann-zeta` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.cx.riemann-zeta.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's ratio-vs-difference distinction directly to the Riemann zeta function's role in controlling the PRECISE error term in the Prime Number Theorem (the connection between the zeta function's zeros and how tightly $\\pi(x)$ tracks $x/\\ln x$ is exactly the substance of the Riemann Hypothesis).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-distribution.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

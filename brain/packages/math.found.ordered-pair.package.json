@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.ordered-pair-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.ordered-pair",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0b9e745166f8c81a3452856e5474393510cd43cc56e1666096b6588b891448e0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.ordered-pair.md": "sha256:149fa5641e346792957a615283e69eb2cbab8c7d5c7ff0f0d5052c3d2f85d8a1"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.ordered-pair",
+    "name": "Ordered Pair",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.set"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.ordered-pair-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.ordered-pair (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.ordered-pair.md": "sha256:149fa5641e346792957a615283e69eb2cbab8c7d5c7ff0f0d5052c3d2f85d8a1"
+      },
+      "contentHash": "sha256:3c94ad2d7b13c5447de03952e56afae2e85d87d9182b7e44e2a6c1effec26d34",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.ordered-pair.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.ordered-pair.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.ordered-pair"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.ordered-pair\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.ordered-pair.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.ordered-pair.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.ordered-pair"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.ordered-pair\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.ordered-pair.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.ordered-pair.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.ordered-pair"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.ordered-pair\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.ordered-pair/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **ordered pair** $(a,b)$ as a pair of elements where **order matters**, and state the precise equality rule: $(a,b)=(c,d)$ **iff** $a=c$ **and** $b=d$ (both coordinates must match, in the corresponding position).\n- LO2: Contrast an ordered pair $(a,b)$ with the **unordered** set $\\{a,b\\}$ (already known from `math.found.set`), correctly identifying that $(a,b)\\neq(b,a)$ in general (when $a\\neq b$), while $\\{a,b\\}=\\{b,a\\}$ always.\n- LO3: Determine whether two given ordered pairs are equal by checking BOTH coordinate positions, and correctly conclude non-equality if even one coordinate position fails to match.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.ordered-pair",
+      "title": "ORDERED-PAIR-TREATED-AS-SET",
+      "content": "| MC-1 | ORDERED-PAIR-TREATED-AS-SET | Believing $(a,b)=(b,a)$ always, treating ordered pairs like unordered sets rather than recognizing order matters for ordered-pair equality | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.ordered-pair",
+      "title": "PARTIAL-COORDINATE-MATCH-ASSUMED-SUFFICIENT",
+      "content": "| MC-2 | PARTIAL-COORDINATE-MATCH-ASSUMED-SUFFICIENT | Believing a match in ONE coordinate position (while the other differs) is enough to conclude two ordered pairs are equal | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.ordered-pair",
+      "title": "EQUALITY-CONDITION-TREATED-AS-OR-RATHER-THAN-AND",
+      "content": "| MC-3 | EQUALITY-CONDITION-TREATED-AS-OR-RATHER-THAN-AND | Misreading the equality rule as \"$a=c$ OR $b=d$\" rather than the correct \"$a=c$ AND $b=d$\" (both conditions required simultaneously) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Order Matters, via Labeled Positions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Order Matters, via Labeled Positions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Ordered Pair vs. Set, and Both Coordinates Must Match (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Ordered Pair vs. Set, and Both Coordinates Must Match (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Is $(6,2)=(6,2)$? Is $(6,2)=(2,6)$? Justify each using the equality rule.\n  2. Is $\\{5,11\\}=\\{11,5\\}$? Separately, is $(5,11)=(11,5)$? Explain why these two questions can have different answers.\n  3. Is $(7,3)=(7,9)$? Identify specifically which coordinate(s) match and which don't.\n  4. Give an example of two DIFFERENT numbers $a\\neq b$ such that $(a,b)=(b,a)$ is actually possible, or explain why no such example exists.\n- **P76 (Transfer Probe, mode = independence)**: \"A game board's grid position is recorded as an ordered pair (column, row) — e.g. $(3,5)$ means column 3, row 5. (a) Using this lesson's equality rule, explain why the position $(3,5)$ and the position $(5,3)$ represent two DIFFERENT squares on the board, even though both involve the same two numbers, 3 and 5. (b) A separate game feature records which two players are currently 'linked' as a plain SET of player IDs, like $\\{P_3,P_5\\}$, where link direction doesn't matter. Explain, using this lesson's contrast between ordered pairs and sets, why representing grid positions as ordered pairs but player links as sets is the mathematically correct choice for each purpose.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set` (the definition of a set, and specifically its unordered, no-duplicates nature — the property this concept's ordered pair is deliberately built to NOT have).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.ordered-pair/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.ordered-pair",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set` (the general notion of a collection of elements, which this concept deliberately modifies by adding an order requirement).\n- **Unlocks**: `math.found.cartesian-product` (the Cartesian product $A\\times B$ is defined as the set of ALL ordered pairs $(a,b)$ with $a\\in A, b\\in B$ — this concept's definition is the Cartesian product's entire building block).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.ordered-pair.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

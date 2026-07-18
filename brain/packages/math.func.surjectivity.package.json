@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.surjectivity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.surjectivity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:35a35652917c7782da4334763a04a40edf6d0db9cb2fe8a186b8f8d7fea1f49f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.surjectivity.md": "sha256:ecaf984b30974e841f7ef2ece772275fdcab2c95e380810eeadfa22f3e3832e2"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.func.surjectivity",
+    "name": "Surjective (Onto) Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.surjectivity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.surjectivity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.surjectivity.md": "sha256:ecaf984b30974e841f7ef2ece772275fdcab2c95e380810eeadfa22f3e3832e2"
+      },
+      "contentHash": "sha256:d587a1dcb0a7c12479dfb743a4389bcca8b2dbb9d8e99e6aa06634748cb072de",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.surjectivity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.surjectivity.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.surjectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.surjectivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.surjectivity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.surjectivity.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.surjectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.surjectivity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.surjectivity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.surjectivity.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.surjectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.surjectivity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.surjectivity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.surjectivity",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $f:A\\to B$ as **surjective** (or **onto**) if **every** $b\\in B$ has **at least one** $a\\in A$ with $f(a)=b$ — formally, $\\forall b\\in B, \\exists a\\in A: f(a)=b$ — and determine whether a given function is surjective by checking this condition.\n- LO2: Connect surjectivity to the equivalent statement \"the **range** (actual set of outputs) equals the **codomain** (the stated target set),\" and use this equivalence to quickly disqualify a function as non-surjective by finding a single codomain element with no preimage.\n- LO3: Correctly distinguish surjectivity (about every codomain element being HIT) from injectivity (about no two domain elements mapping to the SAME output) — recognizing these are independent properties, and a function can be surjective without being injective, or vice versa.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.surjectivity",
+      "title": "SURJECTIVE-CONFLATED-WITH-INJECTIVE",
+      "content": "| MC-1 | SURJECTIVE-CONFLATED-WITH-INJECTIVE | Believing surjectivity implies (or is the same as) injectivity, rather than recognizing these as independent properties | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.surjectivity",
+      "title": "ALL-DOMAIN-ELEMENTS-MAPPED-ASSUMED-SUFFICIENT",
+      "content": "| MC-2 | ALL-DOMAIN-ELEMENTS-MAPPED-ASSUMED-SUFFICIENT | Believing that since every domain element maps to SOME codomain element (a property every function trivially has), the function must automatically be surjective | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.surjectivity",
+      "title": "SINGLE-COUNTEREXAMPLE-NOT-RECOGNIZED-AS-SUFFICIENT",
+      "content": "| MC-3 | SINGLE-COUNTEREXAMPLE-NOT-RECOGNIZED-AS-SUFFICIENT | Believing that disqualifying surjectivity requires checking many or all codomain elements exhaustively, rather than recognizing a single unreached codomain element as sufficient to disprove it | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.surjectivity",
+      "title": "Checking Every Codomain Element via an Arrow Diagram (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Checking Every Codomain Element via an Arrow Diagram (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.surjectivity",
+      "title": "Range vs. Codomain, and Independence from Injectivity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Range vs. Codomain, and Independence from Injectivity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.surjectivity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.surjectivity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. $f:\\{1,2,3,4\\}\\to\\{p,q\\}$ with $f(1)=p,f(2)=p,f(3)=q,f(4)=q$. Is $f$ surjective? Justify by checking each codomain element.\n  2. $g:\\mathbb{Z}\\to\\mathbb{Z}$ defined by $g(n)=2n$. Is $g$ surjective? (Hint: is every integer, including odd ones, actually reached?)\n  3. $h:\\mathbb{R}\\to\\mathbb{R}$ defined by $h(x)=x^3$. Determine whether $h$ is surjective, and separately whether it is injective, treating these as two independent checks.\n  4. A student claims \"since every element of the domain maps somewhere in the codomain, the function must be surjective.\" Explain what is wrong with this reasoning, using Example 2 as a counterexample.\n- **P76 (Transfer Probe, mode = independence)**: \"A company assigns every one of its 50 employees (the domain) to exactly one of 5 project teams (the codomain), and every one of the 5 teams currently has at least one employee assigned. (a) Using this lesson's definition, explain why this assignment function is surjective. (b) A new team (team 6) is added but has zero employees assigned to it yet — explain, using the range-equals-codomain characterization, why the assignment function is now NOT surjective, purely because of this one empty team, even though every existing employee is still validly assigned somewhere. (c) Separately, is it possible for this assignment to be surjective while still having two employees on the exact same team? Explain why this does not contradict surjectivity.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.surjectivity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.func.function-concept` (the domain/codomain/rule structure of a function).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.surjectivity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.surjectivity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.func.function-concept` (the domain/codomain structure surjectivity is defined relative to).\n- **Unlocks**: `math.func.bijection` (a bijection is defined as a function that is both surjective and injective — this concept supplies exactly half of that definition).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.surjectivity.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
