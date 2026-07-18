@@ -13068,6 +13068,106 @@ const CCTX_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.critical-reading ───────────────────────────────────────────────
+const CRIT = 'eng.reading.critical-reading'
+const CRIT_SRC = 'docs/curriculum/blueprints/eng.reading.critical-reading.md'
+
+const CRIT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CRIT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Critical" in critical reading does not mean "negative" or ' +
+      '"fault-finding" — it means evaluative: carefully examining ' +
+      'evidence, assumptions, and credibility rather than accepting claims ' +
+      'at face value. A well-researched, carefully-argued article with ' +
+      'strong evidence and no significant flaws can still receive a ' +
+      'genuine critical reading that concludes "this argument is ' +
+      'well-supported because the evidence comes from credible sources." ' +
+      'Do not force disagreement to prove you are "being critical" — your ' +
+      'conclusion should follow from genuine evaluation, not be decided in ' +
+      'advance.',
+    targetedMisconceptions: [`${CRIT}:MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT`],
+    source: `${CRIT_SRC} — MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT (P28 well-argued-article conflict evidence)`,
+  },
+  {
+    conceptId: CRIT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Citing something is not the same as citing something credible. A ' +
+      'passage citing "a study" with no name, sample size, or date is far ' +
+      'weaker evidence than a passage citing a specific, recent, ' +
+      'peer-reviewed study — even though both LOOK like they are backing ' +
+      'up a claim with evidence. When you see a citation or statistic, ask: ' +
+      'is the source specific and identifiable? Is it recent and relevant? ' +
+      'You have to evaluate the quality of the citation itself, not just ' +
+      'its presence.',
+    targetedMisconceptions: [`${CRIT}:MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE`],
+    source: `${CRIT_SRC} — MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE (P28 vague-study-vs-named-study conflict evidence)`,
+  },
+  {
+    conceptId: CRIT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      '"Critical" reading means evaluative analysis of evidence, ' +
+      'assumptions, and credibility — not manufactured fault-finding. A ' +
+      'genuinely rigorous evaluation can validly conclude that a ' +
+      'well-argued, well-sourced text is credible; the process, not a ' +
+      'predetermined negative verdict, is what makes reading "critical." ' +
+      'Separately, the mere presence of a citation or statistic does not ' +
+      'establish credibility — a vague, unattributed reference to "a ' +
+      'study" carries far less evidentiary weight than a specific, ' +
+      'current, relevant, peer-reviewed source. Genuine critical reading ' +
+      'evaluates a citation\'s specificity, currency, and relevance rather ' +
+      'than treating its mere existence as proof.',
+    targetedMisconceptions: [
+      `${CRIT}:MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT`,
+      `${CRIT}:MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE`,
+    ],
+    source: `${CRIT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CRIT_PROBES: SeedProbe[] = [
+  {
+    conceptId: CRIT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student critically reads a well-researched, well-argued article and concludes it is credible and well-supported. Did the student fail at critical reading by not finding fault with it?',
+    choices: [
+      { text: 'No — critical reading means evaluating evidence, which can validly conclude a text is credible', isCorrect: true },
+      { text: 'Yes — critical reading requires finding something wrong with or disagreeing with the text', isCorrect: false, misconceptionId: `${CRIT}:MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CRIT}:MC-CRITICAL-READING-MEANS-FINDING-FAULT-OR-DISAGREEING-WITH-THE-TEXT`],
+    source: `${CRIT_SRC} — P28 well-argued-article conflict as probe`,
+  },
+  {
+    conceptId: CRIT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A passage cites "a study" with no name, sample size, or date to support its claim. Does citing a study automatically make the claim credible?',
+    choices: [
+      { text: 'No — the citation\'s specificity, currency, and relevance must be evaluated; a vague citation is weak evidence', isCorrect: true },
+      { text: 'Yes — if a text cites sources or statistics, its claims are automatically credible', isCorrect: false, misconceptionId: `${CRIT}:MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CRIT}:MC-IF-A-TEXT-CITES-SOURCES-OR-STATISTICS-ITS-CLAIMS-ARE-AUTOMATICALLY-CREDIBLE`],
+    source: `${CRIT_SRC} — P28 vague-study-vs-named-study conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -13221,6 +13321,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SKIM_EXPLANATIONS,
   ...CLRD_EXPLANATIONS,
   ...CCTX_EXPLANATIONS,
+  ...CRIT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -13374,4 +13475,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SKIM_PROBES,
   ...CLRD_PROBES,
   ...CCTX_PROBES,
+  ...CRIT_PROBES,
 ]
