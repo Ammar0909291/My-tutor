@@ -37748,6 +37748,186 @@ const FREN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.stat.fermi-dirac ──────────────────────────────────────────────────────
+const FDIR = 'phys.stat.fermi-dirac'
+const FDIR_SRC = 'docs/curriculum/blueprints/phys.stat.fermi-dirac.md'
+
+const FDIR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FDIR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Fermi-Dirac distribution CANNOT be approximated by Maxwell-Boltzmann for electrons in metals at room temperature — "room temperature is low, so Maxwell-Boltzmann is fine" over-generalizes from ideal gases. For copper, E_F≈7 eV, while k_BT at 300K≈0.026 eV, giving k_BT/E_F≈0.4%. The Maxwell-Boltzmann prediction, f(E)≈e^(−E/k_BT), gives f(7 eV)≈e^(−7/0.026)≈e^(−269)≈10^(−117) — but the true Fermi-Dirac distribution gives f(E_F)=1/2 exactly. These differ by 117 orders of magnitude at the Fermi energy — the electron gas in copper is deeply DEGENERATE (quantum), not classical. Maxwell-Boltzmann is valid only when average occupation≪1 (many more states than particles); electron states in metals are instead densely packed, with a Fermi temperature T_F=E_F/k_B≈80,000K for copper. Since T=300K≪T_F, the quantum effect (Pauli exclusion) dominates — Maxwell-Boltzmann applies only when T≫T_F (at which point the metal would already be vaporized). A second, separate error: assuming f(E_F)=1 at T=0, reasoning that E_F is "the highest occupied energy level." At T=0: f(E)=1 for E<E_F and f(E)=0 for E>E_F — f(E_F) itself is undefined at exactly T=0 (a discontinuity in the step function). At any FINITE T: f(E_F)=1/(e⁰+1)=1/2, always exactly one-half at E=μ, regardless of temperature. As T→0, the distribution sharpens into a genuine step function, with f=1 below μ and f=0 above μ — but at the boundary point E=μ itself, f(μ)=1/2 holds for all T>0, a clean symmetry point that persists even as the step sharpens.',
+    targetedMisconceptions: [`${FDIR}:MC-1`, `${FDIR}:MC-2`],
+    source: `${FDIR_SRC} — MC-1 (Fermi-Dirac cannot be approximated by Maxwell-Boltzmann for metals, T_F>>T) + MC-2 (f(E_F)=1/2 always at finite T, not 1)`,
+  },
+  {
+    conceptId: FDIR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "at what energy does the Fermi-Dirac distribution differ significantly from Maxwell-Boltzmann for electrons in copper (E_F≈7 eV) at T=300K?", say "room temperature is low, so Maxwell-Boltzmann is fine" — over-generalizing from the fact that classical statistics work well for ordinary ideal gases at room temperature, without checking whether this reasoning applies to electrons in a metal. Check the numbers directly: k_BT at 300K is approximately 0.026 eV, while E_F for copper is approximately 7 eV, giving the ratio k_BT/E_F≈0.4% — an extremely small fraction. The Maxwell-Boltzmann prediction for occupation at the Fermi energy is f(E)≈e^(−E/k_BT)→f(7 eV)≈e^(−7/0.026)≈e^(−269)≈10^(−117) — an absurdly small number. But the actual Fermi-Dirac distribution gives f(E_F)=1/2 exactly, at ANY temperature. These two predictions differ by a staggering 117 orders of magnitude at the Fermi energy — proving conclusively that the electron gas in copper is deeply DEGENERATE (a genuinely quantum-mechanical system), not remotely classical, despite room temperature intuitively "feeling" low-energy. The correct validity criterion for Maxwell-Boltzmann statistics is that average occupation per state must be much less than 1 — meaning there must be far more available states than particles. For electrons in metals, however, states are densely packed together in energy, characterized by a Fermi temperature T_F=E_F/k_B, which works out to roughly 80,000K for copper — an enormous temperature. Since actual room temperature T=300K is vastly smaller than T_F≈80,000K, the quantum effect of Pauli exclusion dominates completely; Maxwell-Boltzmann statistics only become valid when T≫T_F — a regime so hot that the metal itself would already have vaporized. A second, entirely separate and equally common error: asked "what is f(E) for E slightly above E_F at T=0? For E slightly below E_F?", answering "f(E_F)=1 because E_F is the highest occupied state" — a natural-sounding conclusion from the common description of E_F as "the highest occupied energy level." Check this carefully at T=0: f(E)=1 for every E<E_F (fully occupied below the Fermi level), and f(E)=0 for every E>E_F (completely empty above it) — but AT exactly E=E_F, f(E_F) is genuinely UNDEFINED at T=0 precisely, since the distribution has a mathematical discontinuity right at that point (the step function jumps abruptly from 1 to 0 there). At ANY finite temperature T>0, however, the Fermi-Dirac formula gives f(E_F)=1/(e⁰+1)=1/2 — always exactly one-half at E=μ (the chemical potential), completely independent of the specific temperature value, as long as it is nonzero. The general, precise statement: f(μ)=1/2 holds for all T>0; only exactly at T=0 does this smooth crossover collapse into a sharp step-function discontinuity, with f jumping abruptly between 1 (below μ) and 0 (above μ) at that single point — but even as T→0 and the transition sharpens increasingly, f(E_F)=1/2 remains true at every nonzero temperature along the way, right up to the T=0 limit itself.',
+    targetedMisconceptions: [`${FDIR}:MC-1`, `${FDIR}:MC-2`],
+    source: `${FDIR_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const FDIR_PROBES: SeedProbe[] = [
+  {
+    conceptId: FDIR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is it valid to approximate the Fermi-Dirac distribution with Maxwell-Boltzmann statistics for electrons in copper (E_F≈7 eV) at room temperature (T=300K)?',
+    choices: [
+      { text: 'No — T_F≈80,000K for copper, so T=300K≪T_F; Maxwell-Boltzmann and Fermi-Dirac differ by ~117 orders of magnitude at E_F; the electron gas is deeply degenerate', isCorrect: true },
+      { text: 'Yes — room temperature is low enough that classical Maxwell-Boltzmann statistics apply accurately to electrons in metals, just as they do for ordinary ideal gases', isCorrect: false, misconceptionId: `${FDIR}:MC-1` },
+    ],
+    correctValue: 'no, deeply quantum degenerate, MB approximation invalid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FDIR}:MC-1`],
+    source: `${FDIR_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FDIR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At a finite temperature T>0, what is the Fermi-Dirac occupation f(E_F) at exactly the Fermi energy?',
+    choices: [
+      { text: 'f(E_F)=1/2 exactly — this holds for any nonzero temperature; only at T=0 does the distribution become an undefined discontinuity at E_F', isCorrect: true },
+      { text: 'f(E_F)=1 — since E_F is defined as the highest occupied energy level, it must always be fully occupied', isCorrect: false, misconceptionId: `${FDIR}:MC-2` },
+    ],
+    correctValue: 'one half, at any finite temperature',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FDIR}:MC-2`],
+    source: `${FDIR_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.bose-einstein ────────────────────────────────────────────────────
+const BOSE = 'phys.stat.bose-einstein'
+const BOSE_SRC = 'docs/curriculum/blueprints/phys.stat.bose-einstein.md'
+
+const BOSE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BOSE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Bose-Einstein distribution requires a MINUS sign in the denominator, not a plus sign — writing "n̄(E)=1/(e^(β(E−μ))+1) for bosons" mistakenly uses the Fermi-Dirac formula\'s +1 instead of the correct −1. Check the physical consequence directly: with +1 (the Fermi-Dirac form), n̄(E_min)→1/2 as μ→E_min — capping occupation at a maximum of 1/2 per state. But with −1 (the correct Bose-Einstein form), n̄(E_min)→∞ as μ→E_min — this divergence is precisely the signature of macroscopic occupation, i.e., Bose-Einstein condensation (BEC). The bosonic formula MUST have −1 to allow n̄ to exceed 1, since bosons (unlike fermions) can pile arbitrarily many particles into the same single-particle state. The sign difference traces back to the grand partition function itself: for fermions, occupation number n can only be 0 or 1 (two terms in the sum), giving Z_fermion=1+e^(−βΔ), whose corresponding occupation denominator is e^(βΔ)+1 — the +1. For bosons, n can be 0,1,2,3,... without limit (an infinite geometric series), giving Z_boson=1/(1−e^(−βΔ)), whose corresponding occupation denominator is e^(βΔ)−1 — the −1. The correct formulas: Bose-Einstein n̄(E)=1/(e^(β(E−μ))−1) with −1; Fermi-Dirac f(E)=1/(e^(β(E−μ))+1) with +1 — bosons are "generous" (−1 allows unlimited occupation), fermions are "exclusive" (+1 caps occupation at 1). A second, separate error: assuming the chemical potential μ for bosons works the same as for fermions. For bosons, μ must ALWAYS remain strictly below the minimum energy state, μ<E_min — never at or above it. If μ≥E_min, the occupation of the ground state n̄(E_min) genuinely diverges to infinity, which is unphysical for a finite system with a fixed, finite number of particles N. For fermions, by contrast, μ (the Fermi energy at T=0) can sit anywhere within the occupied energy band, with f(E) always safely bounded between 0 and 1 regardless of where μ falls. This constraint on bosonic μ is exactly what causes BEC: as temperature decreases toward the critical temperature T_c, μ approaches E_min from below; below T_c, the normal excited states can only hold a limited number of bosons N_excited(T), forcing the excess N−N_excited to pile macroscopically into the single ground state.',
+    targetedMisconceptions: [`${BOSE}:MC-1`, `${BOSE}:MC-2`],
+    source: `${BOSE_SRC} — MC-1 (Bose-Einstein needs -1 not +1, allows unlimited occupation, BEC signature) + MC-2 (bosonic mu must stay below E_min, unlike fermionic mu)`,
+  },
+  {
+    conceptId: BOSE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked to "write the mean occupation n̄(E) for a bosonic state at energy E," answer "n̄(E)=1/(e^(β(E−μ))+1) for bosons," using a +1 in the denominator — mistakenly borrowing the Fermi-Dirac formula\'s sign convention, having memorized "the formula has a ±1" without correctly recalling which sign corresponds to which particle statistics. Check what each sign choice implies physically: with +1 (the actual Fermi-Dirac form), as μ approaches E_min, n̄(E_min) approaches only 1/2 — the occupation is capped, never exceeding 1 per state, consistent with Fermi statistics (Pauli exclusion). But with −1 (the correct Bose-Einstein form), as μ approaches E_min, n̄(E_min) genuinely diverges toward infinity — and this divergence is precisely the mathematical signature of macroscopic ground-state occupation, i.e., Bose-Einstein condensation (BEC). The bosonic formula MUST use −1 specifically to allow n̄ to exceed 1 at all, since bosons — unlike fermions — face no restriction preventing many particles from occupying the identical single-particle quantum state simultaneously. The origin of this sign difference traces directly to the grand partition function for each type of particle: for fermions, the occupation number n of a given state can only take the values 0 or 1 (Pauli exclusion forbids more), giving just two terms in the sum, Z_fermion=1+e^(−βΔ) — the corresponding mean-occupation denominator works out to e^(βΔ)+1, explaining the +1. For bosons, by contrast, n can take any value 0,1,2,3,... without any upper limit, giving an infinite geometric series, Z_boson=1/(1−e^(−βΔ)) — and the corresponding mean-occupation denominator works out instead to e^(βΔ)−1, explaining the −1. The correct, distinguishing formulas: Bose-Einstein statistics use n̄(E)=1/(e^(β(E−μ))−1), with a MINUS sign; Fermi-Dirac statistics use f(E)=1/(e^(β(E−μ))+1), with a PLUS sign. A useful memory aid: bosons are "generous" (the −1 in the denominator permits occupation numbers greater than 1, even arbitrarily large ones), while fermions are "exclusive" (the +1 strictly prevents occupation from ever exceeding 1). A second, entirely separate and equally common error: asked "can μ be greater than E_min for bosons? What happens if it is?", answering "μ is just like the Fermi energy for electrons," assuming — by direct analogy with fermions, where μ equals the Fermi energy E_F at T=0 and can sit comfortably in the middle of the occupied energy band — that μ for bosons is similarly unconstrained in where it can sit relative to the energy spectrum. Check this against the bosonic occupation formula directly: n̄(E)=1/(e^(β(E−μ))−1) requires e^(β(E−μ))>1 for every physically sensible state, meaning E>μ must hold for ALL states in the system. If μ were to reach or exceed E_min (the lowest available energy state), the mean occupation of that ground state, n̄(E_min), would genuinely diverge to infinity — a mathematically unphysical result for any real, finite system with a fixed total number of particles N. Therefore μ<E_min must ALWAYS hold strictly for bosons — a fundamentally different, more restrictive situation than fermions face. As temperature decreases, μ approaches E_min from below (but never quite reaches or crosses it, except in the idealized BEC transition itself); the ground-state occupation grows correspondingly larger as this approach continues, but must always remain mathematically finite for any genuinely finite system. This specific constraint — that bosonic μ must remain strictly below the minimum energy level — is exactly the mechanism that leads directly to Bose-Einstein condensation: as the critical temperature T_c is approached and then crossed from above, the available excited states can only accommodate a limited, calculable number of bosons N_excited(T) at that given temperature, and any additional particles beyond this excited-state capacity, N−N_excited(T), are forced to macroscopically pile into the single ground state itself — the defining physical signature of BEC.',
+    targetedMisconceptions: [`${BOSE}:MC-1`, `${BOSE}:MC-2`],
+    source: `${BOSE_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const BOSE_PROBES: SeedProbe[] = [
+  {
+    conceptId: BOSE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the correct denominator sign in the Bose-Einstein mean occupation formula, n̄(E)=1/(e^(β(E−μ))±1)?',
+    choices: [
+      { text: 'Minus (−1) — this allows n̄ to diverge as μ→E_min, the mathematical signature of Bose-Einstein condensation; bosons face no limit on occupation per state', isCorrect: true },
+      { text: 'Plus (+1) — the same sign as the Fermi-Dirac formula, since both are quantum statistics formulas with similar structure', isCorrect: false, misconceptionId: `${BOSE}:MC-1` },
+    ],
+    correctValue: 'minus sign, allows unlimited occupation and BEC divergence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOSE}:MC-1`],
+    source: `${BOSE_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BOSE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can the chemical potential μ for a bosonic system equal or exceed the minimum single-particle energy E_min, the way the Fermi energy can sit within the occupied band for fermions?',
+    choices: [
+      { text: 'No — μ<E_min must hold strictly for bosons at all times; if μ≥E_min, the ground-state occupation n̄(E_min) diverges, which is unphysical for a finite system', isCorrect: true },
+      { text: 'Yes — μ for bosons behaves just like the Fermi energy for fermions, and can sit anywhere in the energy spectrum without constraint', isCorrect: false, misconceptionId: `${BOSE}:MC-2` },
+    ],
+    correctValue: 'no, mu must stay strictly below E_min for bosons',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOSE}:MC-2`],
+    source: `${BOSE_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.grand-canonical-ensemble ────────────────────────────────────────
+const GCEN = 'phys.stat.grand-canonical-ensemble'
+const GCEN_SRC = 'docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md'
+
+const GCEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GCEN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The chemical potential μ is NOT "just another energy" — "μ is the energy per particle" misses its defining, directional function. μ genuinely IS the energy cost of adding one particle at fixed T, V, S — but crucially, what matters most is that it controls particle NUMBER at equilibrium. Two systems in contact reach equilibrium by exchanging particles until their chemical potentials are equal, μ₁=μ₂ — exactly analogous to how two systems in thermal contact exchange heat until their temperatures equalize. Importantly, μ CAN be negative (this occurs for bosons at high temperature, and for a dilute classical gas generally) — simply calling it "an energy" without recognizing this directional, equilibrating function misses what μ actually does physically: it is not merely a magnitude, but a quantity whose EQUALIZATION between systems governs particle flow. A second, separate and equally important error: assuming fugacity z=e^(βμ) directly represents "the probability of finding a particle" — "high fugacity means more likely to be occupied." Fugacity z actually controls the thermodynamic WEIGHT of states with different particle number N in the grand partition function, not an occupation probability directly. For bosons specifically, occupation ⟨n⟩=z/(e^(βε)−z) — and z must satisfy the constraint z<e^(βε_min) (equivalently z<1 for gapless/zero-energy-minimum bosons) simply to keep the grand partition function Ξ mathematically convergent — this convergence constraint is a mathematical requirement on z, not evidence that z itself is a probability in any direct sense.',
+    targetedMisconceptions: [`${GCEN}:MC-GCE-MU-IS-ENERGY`, `${GCEN}:MC-GCE-FUGACITY-IS-PROB`],
+    source: `${GCEN_SRC} — MC-GCE-MU-IS-ENERGY (mu controls particle number equalization, not just a raw energy value) + MC-GCE-FUGACITY-IS-PROB (fugacity controls thermodynamic weight, not occupation probability directly)`,
+  },
+  {
+    conceptId: GCEN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "chemical potential μ is just another energy," reasoning "μ is the energy per particle" — treating μ as though it were simply an ordinary energy quantity, on the same conceptual footing as, say, average kinetic energy per particle. This significantly undersells μ\'s actual, distinctive role. μ genuinely IS, in a precise technical sense, the energy cost of adding a single additional particle to a system held at fixed temperature T, volume V, and entropy S — so in that narrow sense, the "energy" characterization is not entirely wrong. But the crucial, distinguishing feature of μ is what it actually CONTROLS: particle NUMBER at thermodynamic equilibrium. When two systems are brought into contact and allowed to freely exchange particles, they will continue exchanging particles until their chemical potentials become exactly equal, μ₁=μ₂ — this is precisely analogous to how two systems in thermal contact exchange heat energy back and forth until their temperatures equalize, T₁=T₂. Importantly, μ genuinely CAN be negative under many realistic physical conditions — this occurs, for instance, for bosons at sufficiently high temperature, or quite generally for any dilute classical gas — and simply labeling μ as "an energy" without appreciating this crucial equalizing, directional function (particles flow from high μ toward low μ, precisely as heat flows from high T toward low T) misses what μ genuinely does physically: it is fundamentally not just a magnitude to be reported, but a quantity whose EQUALIZATION between two systems in contact is what actually governs and drives particle exchange between them. A second, entirely separate and equally common error: interpreting fugacity, z=e^(βμ), as though it directly represented "the probability of finding a particle," reasoning "high fugacity means more likely to be occupied" — treating z as though it were itself some kind of occupation probability. This is a category error. Fugacity z actually controls the thermodynamic WEIGHT assigned to states carrying different total particle numbers N within the grand partition function — it is a weighting factor in a sum over many possible particle-number configurations, not an occupation probability for any single state directly. For bosons specifically, the mean occupation formula is ⟨n⟩=z/(e^(βε)−z) — notice that z itself appears embedded within this larger formula, rather than being the occupation probability by itself. Furthermore, z must satisfy a specific mathematical CONSTRAINT, z<e^(βε_min) (which simplifies to z<1 specifically for bosons with a gapless, zero-energy-minimum spectrum), purely in order to keep the grand partition function Ξ mathematically CONVERGENT as an infinite sum — this convergence requirement is fundamentally a mathematical constraint ensuring the theory\'s internal consistency, not evidence that z itself functions as, or is bounded like, a probability in any direct physical sense.',
+    targetedMisconceptions: [`${GCEN}:MC-GCE-MU-IS-ENERGY`, `${GCEN}:MC-GCE-FUGACITY-IS-PROB`],
+    source: `${GCEN_SRC} — MC-GCE-MU-IS-ENERGY + MC-GCE-FUGACITY-IS-PROB, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const GCEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: GCEN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two systems come into contact and can freely exchange particles. What condition must hold at equilibrium?',
+    choices: [
+      { text: 'μ₁=μ₂ — chemical potentials must equalize, exactly analogous to how temperatures equalize for systems exchanging heat', isCorrect: true },
+      { text: 'No particular condition — since μ is just an energy per particle, particle exchange stops whenever convenient, with no equalization requirement', isCorrect: false, misconceptionId: `${GCEN}:MC-GCE-MU-IS-ENERGY` },
+    ],
+    correctValue: 'chemical potentials must be equal at equilibrium',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GCEN}:MC-GCE-MU-IS-ENERGY`],
+    source: `${GCEN_SRC} — MC-GCE-MU-IS-ENERGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: GCEN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the fugacity z=e^(βμ) directly represent the probability of finding a particle in a given state?',
+    choices: [
+      { text: 'No — z controls the thermodynamic weight of different particle-number configurations in the grand partition function; e.g. for bosons ⟨n⟩=z/(e^(βε)−z), and z is constrained (z<1 for gapless bosons) for convergence, not as a probability bound', isCorrect: true },
+      { text: 'Yes — higher fugacity directly means a higher probability that a given state is occupied', isCorrect: false, misconceptionId: `${GCEN}:MC-GCE-FUGACITY-IS-PROB` },
+    ],
+    correctValue: 'no, fugacity is a weighting factor, not an occupation probability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GCEN}:MC-GCE-FUGACITY-IS-PROB`],
+    source: `${GCEN_SRC} — MC-GCE-FUGACITY-IS-PROB trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -38213,6 +38393,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CHEM_EXPLANATIONS,
   ...ENTS_EXPLANATIONS,
   ...FREN_EXPLANATIONS,
+  ...FDIR_EXPLANATIONS,
+  ...BOSE_EXPLANATIONS,
+  ...GCEN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -38678,4 +38861,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CHEM_PROBES,
   ...ENTS_PROBES,
   ...FREN_PROBES,
+  ...FDIR_PROBES,
+  ...BOSE_PROBES,
+  ...GCEN_PROBES,
 ]
