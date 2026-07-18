@@ -37928,6 +37928,366 @@ const GCEN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.stat.fluctuations-correlations ────────────────────────────────────────
+const FLUC = 'phys.stat.fluctuations-correlations'
+const FLUC_SRC = 'docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md'
+
+const FLUC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FLUC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'For large N, fluctuations are NOT simply negligible in the sense that "statistical mechanics only predicts averages" — "standard deviation is O(1/√N) so we can ignore it" misses that response functions themselves ARE the fluctuations. It is true that RELATIVE fluctuations δA/⟨A⟩~1/√N→0 as N grows, but ABSOLUTE fluctuations actually GROW with system size, and crucially, key thermodynamic response functions are DEFINED in terms of these fluctuations: heat capacity C_V=(1/kT²)(⟨E²⟩−⟨E⟩²) and compressibility κ_T∝⟨(δN)²⟩. Fluctuations are genuinely, directly physically MEASURABLE — through light scattering, and dramatically through critical opalescence — and they actually DIVERGE at phase transitions, becoming enormous rather than negligible right at criticality. Far from being an ignorable footnote, fluctuations are the direct physical content behind measurable macroscopic response properties. A second, separate error: assuming "correlation function" in statistical mechanics means the same thing as ordinary Pearson correlation from statistics, "high correlation means the variables are linearly related." The pair correlation function G(r)=⟨s(r)s(0)⟩−⟨s⟩² actually measures how fluctuations at position 0 predict (correlate with) fluctuations at a different position r — a genuinely spatial, physical quantity, not merely an abstract statistical linear-relationship measure. Away from criticality, G(r) decays exponentially, as e^(−r/ξ), characterized by a correlation length ξ; but AT a critical point, ξ diverges (ξ→∞) and G(r) instead follows a POWER LAW, G(r)~r^(−(d−2+η)) — a fundamentally different functional form (power-law, not exponential) than the correlation function shows away from criticality, reflecting the genuinely scale-free physics that emerges precisely at a critical point.',
+    targetedMisconceptions: [`${FLUC}:MC-FL-FLUCTUATIONS-NEGLIGIBLE`, `${FLUC}:MC-FL-CORRELATION-IS-SAME-AS-CORRELATION`],
+    source: `${FLUC_SRC} — MC-FL-FLUCTUATIONS-NEGLIGIBLE (response functions ARE fluctuations, measurable, diverge at transitions) + MC-FL-CORRELATION-IS-SAME-AS-CORRELATION (pair correlation function is spatial, decays as power law at criticality)`,
+  },
+  {
+    conceptId: FLUC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "for large N, fluctuations are negligible — statistical mechanics only predicts averages," reasoning "standard deviation is O(1/√N) so we can ignore it" — correctly recalling that RELATIVE fluctuations shrink with system size, but drawing the wrong conclusion that fluctuations are therefore simply unimportant or ignorable. It is genuinely true that relative fluctuations δA/⟨A⟩~1/√N shrink toward zero as N grows large — this part of the reasoning is correct. But ABSOLUTE fluctuations, ⟨(δA)²⟩ itself (without dividing by ⟨A⟩), actually GROW as system size increases — and crucially, some of the most important, directly measurable thermodynamic quantities are DEFINED precisely in terms of these fluctuations, not despite them. The heat capacity is C_V=(1/kT²)(⟨E²⟩−⟨E⟩²) — a genuine energy-FLUCTUATION quantity, not a separate independent measurement; similarly, the isothermal compressibility κ_T is proportional to ⟨(δN)²⟩, the particle-number fluctuation. These "response functions" — quantities describing how a system responds to small external changes — literally ARE fluctuation quantities in disguise; you cannot dismiss fluctuations as negligible while simultaneously wanting to correctly predict heat capacity or compressibility, since these ARE the fluctuations. Fluctuations are also directly, physically MEASURABLE in real experiments — through light-scattering experiments, and especially dramatically through the phenomenon of critical opalescence (a fluid becoming visibly cloudy near its critical point, due to enormous density fluctuations scattering light). Far from vanishing, fluctuations actually DIVERGE at phase transitions — becoming physically enormous precisely at criticality, rather than negligible. A second, entirely separate and equally common error: assuming "correlation function" in statistical mechanics is simply the familiar Pearson correlation coefficient from introductory statistics, reasoning "high correlation means the variables are linearly related," as though the term carried over its statistics-textbook meaning unchanged. The pair correlation function in statistical mechanics, G(r)=⟨s(r)s(0)⟩−⟨s⟩², actually measures something genuinely SPATIAL: how a fluctuation at one specific position (position 0) predicts or correlates with a fluctuation at a different position, a distance r away — a physically meaningful quantity describing spatial structure in the fluctuations of a many-body system, not an abstract linear-relationship coefficient between two arbitrary statistical variables. Away from any critical point, this spatial correlation function G(r) decays EXPONENTIALLY with distance, following e^(−r/ξ), where ξ is called the correlation length — a characteristic distance beyond which fluctuations become essentially uncorrelated. But precisely AT a critical point, something dramatic happens: the correlation length ξ diverges (ξ→∞), and correspondingly G(r) no longer decays exponentially at all — instead it follows a POWER LAW, G(r)~r^(−(d−2+η)), where d is the spatial dimension and η is a critical exponent. This fundamental change in functional form — from exponential decay away from criticality to power-law decay exactly at the critical point — reflects the genuinely scale-free physics that emerges specifically at a critical point, where correlations extend across all length scales simultaneously, with no single characteristic correlation length remaining to set a decay scale.',
+    targetedMisconceptions: [`${FLUC}:MC-FL-FLUCTUATIONS-NEGLIGIBLE`, `${FLUC}:MC-FL-CORRELATION-IS-SAME-AS-CORRELATION`],
+    source: `${FLUC_SRC} — MC-FL-FLUCTUATIONS-NEGLIGIBLE + MC-FL-CORRELATION-IS-SAME-AS-CORRELATION, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const FLUC_PROBES: SeedProbe[] = [
+  {
+    conceptId: FLUC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a large system (large N), since relative fluctuations δA/⟨A⟩~1/√N shrink toward zero, are fluctuations negligible and safely ignorable?',
+    choices: [
+      { text: 'No — response functions like heat capacity C_V=(1/kT²)(⟨E²⟩−⟨E⟩²) and compressibility κ_T ARE fluctuation quantities, physically measurable and diverging at phase transitions', isCorrect: true },
+      { text: 'Yes — since relative fluctuations vanish as N grows, statistical mechanics only needs to predict averages, and fluctuations can be safely ignored', isCorrect: false, misconceptionId: `${FLUC}:MC-FL-FLUCTUATIONS-NEGLIGIBLE` },
+    ],
+    correctValue: 'no, response functions are fluctuations, not negligible',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FLUC}:MC-FL-FLUCTUATIONS-NEGLIGIBLE`],
+    source: `${FLUC_SRC} — MC-FL-FLUCTUATIONS-NEGLIGIBLE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FLUC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How does the pair correlation function G(r) behave exactly at a critical point, compared to away from it?',
+    choices: [
+      { text: 'Away from criticality, G(r) decays exponentially (e^(−r/ξ)); AT the critical point, ξ→∞ and G(r) instead follows a power law, r^(−(d−2+η)) — a fundamentally different, scale-free behavior', isCorrect: true },
+      { text: 'G(r) is the same as the Pearson correlation coefficient from statistics, and behaves identically at and away from criticality', isCorrect: false, misconceptionId: `${FLUC}:MC-FL-CORRELATION-IS-SAME-AS-CORRELATION` },
+    ],
+    correctValue: 'power law at criticality, exponential decay away from it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FLUC}:MC-FL-CORRELATION-IS-SAME-AS-CORRELATION`],
+    source: `${FLUC_SRC} — MC-FL-CORRELATION-IS-SAME-AS-CORRELATION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.phase-transitions ───────────────────────────────────────────────
+const PHTR = 'phys.stat.phase-transitions'
+const PHTR_SRC = 'docs/curriculum/blueprints/phys.stat.phase-transitions.md'
+
+const PHTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHTR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Second-order" in the Ehrenfest classification does NOT mean "the phase transition happens twice" — this is a genuine terminology confusion. The Ehrenfest classification actually refers to which DERIVATIVE of the Gibbs free energy G is discontinuous: a first-order transition has a discontinuous FIRST derivative of G (manifesting physically as latent heat and a density jump); a second-order (continuous) transition has continuous first derivatives, but its SECOND derivatives (heat capacity C_P, compressibility κ_T, susceptibility χ) diverge instead. "Second order" refers to WHICH mathematical derivative of G is discontinuous, never to how many times the transition physically occurs — the transition happens exactly once in both cases; only the mathematical character of the discontinuity differs. A second, separate error: assuming mean-field theory gives the EXACT critical exponents in general — "β=1/2 is the exact critical exponent for magnetization" as a universal statement. Mean-field exponents (β=1/2, γ=1, ν=1/2, η=0) are actually exact ONLY above the upper critical dimension d_c (d_c=4 specifically for the Ising model). Below d_c, fluctuations — which mean-field theory deliberately ignores — genuinely change the exponents: the Ising model in 2 dimensions, for instance, has β=1/8, dramatically different from the mean-field value of 1/2. Mean-field theory\'s predictions are a useful, simplifying approximation, valid in high enough dimensions where fluctuations become unimportant, but genuinely wrong (not merely imprecise) for lower-dimensional systems where fluctuations dominate.',
+    targetedMisconceptions: [`${PHTR}:MC-PT-FIRST-SECOND-TERMINOLOGY`, `${PHTR}:MC-PT-MF-EXACT`],
+    source: `${PHTR_SRC} — MC-PT-FIRST-SECOND-TERMINOLOGY ("second order" refers to which G-derivative is discontinuous, not transition count) + MC-PT-MF-EXACT (mean-field exponents exact only above upper critical dimension d_c)`,
+  },
+  {
+    conceptId: PHTR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "why is it \'second order\'?", assume "second-order transition means the phase transition happens twice," a natural-sounding but incorrect reading of the ordinal terminology. The actual Ehrenfest classification scheme refers to something more precise and mathematical: WHICH derivative of the Gibbs free energy G is discontinuous at the transition, never to how many times the physical transition happens. In a FIRST-order transition, the FIRST derivative of G with respect to a relevant thermodynamic variable is discontinuous — this physically manifests as latent heat being absorbed or released, and a discontinuous jump in density (the classic example being liquid-to-gas boiling). In a SECOND-order (also called "continuous") transition, by contrast, the first derivatives of G remain continuous throughout — no latent heat, no density jump — but the SECOND derivatives, quantities like heat capacity C_P, compressibility κ_T, and magnetic susceptibility χ, diverge instead at the transition point. So "second order" specifically identifies which derivative — the second one, rather than the first — is the discontinuous (or in this case, divergent) quantity; the transition itself still happens exactly once physically in both cases, at one specific temperature or pressure — the "order" number refers purely to the mathematical structure of which derivative misbehaves, never to a count of physical occurrences. A second, entirely separate and equally common error: assuming "mean-field theory gives the exact critical exponents," treating a specific number like "β=1/2 is the exact critical exponent for magnetization" as a universally true statement, applicable to any system near any phase transition. Test this against known exact results: mean-field exponents — specifically β=1/2 (order parameter), γ=1 (susceptibility), ν=1/2 (correlation length), η=0 (correlation function decay) — are actually exact ONLY when the spatial dimension d exceeds a specific "upper critical dimension" d_c, which for the Ising model specifically equals d_c=4. Below this upper critical dimension, fluctuations — precisely the physical effect that mean-field theory deliberately neglects, by construction, in exchange for mathematical tractability — genuinely change the actual critical exponents from their mean-field values. The clearest concrete counter-example: the 2D Ising model (d=2, well below d_c=4) has an exactly known critical exponent β=1/8 — dramatically different from the mean-field prediction of β=1/2, not merely a small correction but a qualitatively different exponent entirely. Mean-field theory remains a genuinely useful, simplifying first approximation, mathematically exact specifically in sufficiently high dimensions (d≥d_c) where fluctuations become comparatively unimportant — but it gives genuinely WRONG (not merely imprecise) predictions for the critical exponents in lower-dimensional systems, where fluctuations, systematically ignored by the mean-field approximation, dominate the actual physics near the critical point.',
+    targetedMisconceptions: [`${PHTR}:MC-PT-FIRST-SECOND-TERMINOLOGY`, `${PHTR}:MC-PT-MF-EXACT`],
+    source: `${PHTR_SRC} — MC-PT-FIRST-SECOND-TERMINOLOGY + MC-PT-MF-EXACT, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const PHTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the Ehrenfest classification, what does "second-order" phase transition actually refer to?',
+    choices: [
+      { text: 'The SECOND derivative of the Gibbs free energy G (e.g., heat capacity, compressibility) is the one that is discontinuous/diverges, while first derivatives remain continuous', isCorrect: true },
+      { text: 'The phase transition physically occurs twice, as opposed to a first-order transition which occurs once', isCorrect: false, misconceptionId: `${PHTR}:MC-PT-FIRST-SECOND-TERMINOLOGY` },
+    ],
+    correctValue: 'second derivative of G is discontinuous, not a count of occurrences',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHTR}:MC-PT-FIRST-SECOND-TERMINOLOGY`],
+    source: `${PHTR_SRC} — MC-PT-FIRST-SECOND-TERMINOLOGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PHTR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does mean-field theory give the exact critical exponent β=1/2 for the 2D Ising model?',
+    choices: [
+      { text: 'No — mean-field exponents are exact only above the upper critical dimension d_c=4 for Ising; the exact 2D Ising exponent is β=1/8, since fluctuations (ignored by mean field) matter below d_c', isCorrect: true },
+      { text: 'Yes — mean-field theory gives the exact critical exponent β=1/2 for any system, in any spatial dimension', isCorrect: false, misconceptionId: `${PHTR}:MC-PT-MF-EXACT` },
+    ],
+    correctValue: 'no, exact 2D value is 1/8, mean-field is only exact above d_c=4',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHTR}:MC-PT-MF-EXACT`],
+    source: `${PHTR_SRC} — MC-PT-MF-EXACT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.phase-transitions-critical-phenomena ────────────────────────────
+const PHCR = 'phys.stat.phase-transitions-critical-phenomena'
+const PHCR_SRC = 'docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md'
+
+const PHCR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHCR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Universality does NOT mean "all phase transitions are the same" — "magnets and fluids must behave identically since they\'re in the same universality class" overstates what universality actually claims. Universality means ONLY the critical exponents (β, γ, ν, η, ...) and scaling functions are identical for systems in the same universality class (systems sharing the same symmetry and spatial dimension) — the microscopic interactions, the actual transition temperature T_c, and various amplitude factors genuinely DIFFER between different systems, even within the same universality class. Only the POWER-LAW approach to the critical point — the precise mathematical exponents governing HOW quantities diverge or vanish near T_c — is identical; magnets and fluids in the same universality class share these exponents, while everything else about their physical behavior (their actual T_c, their specific microscopic physics) remains genuinely different. A second, separate and equally important error: assuming the renormalization group (RG) "is just a calculational technique" — "RG is a method for computing exponents," treating it as merely one computational tool among others for extracting numbers. RG is actually a genuine CONCEPTUAL framework — describing a flow in coupling-constant space — that explains WHY universality exists in the first place: irrelevant operators flow to zero under repeated RG transformations, causing many different microscopic starting points to flow toward the same universal fixed point in coupling-constant space. RG provides genuine non-perturbative physical insight, and crucially, it continues to work even in regimes where ordinary perturbation theory completely fails. The actual numerical CALCULATION of critical exponents is a CONSEQUENCE of the RG concept, not the defining point of RG itself — RG\'s primary contribution is conceptual understanding of universality\'s origin, with numerical exponent extraction being a secondary, downstream benefit.',
+    targetedMisconceptions: [`${PHCR}:MC-CP-UNIV-MEANS-SAME`, `${PHCR}:MC-CP-RG-IS-TECHNIQUE`],
+    source: `${PHCR_SRC} — MC-CP-UNIV-MEANS-SAME (only critical exponents/scaling functions are universal, not all behavior) + MC-CP-RG-IS-TECHNIQUE (RG is a conceptual framework explaining universality, not just a calculation tool)`,
+  },
+  {
+    conceptId: PHCR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "universality means all phase transitions are the same," reasoning "magnets and fluids must behave identically since they\'re in the same universality class" — overextending the genuine physical concept of universality into a claim that is far too broad. Universality actually asserts something much more specific and precise: ONLY the critical EXPONENTS (β, γ, ν, η, and others) and the associated scaling FUNCTIONS are identical for systems belonging to the same universality class — a class defined specifically by sharing the same symmetry properties and the same spatial dimension. Everything else about a given system genuinely DIFFERS between systems, even within the same universality class: the specific microscopic interactions (magnetic exchange coupling versus intermolecular forces, for instance), the actual numerical transition temperature T_c (a magnet\'s Curie temperature and a fluid\'s critical point temperature are completely different physical numbers), and various amplitude prefactors that appear alongside the universal power laws. What genuinely IS shared, universally, across systems in the same class: the precise mathematical FORM of the power-law approach to the critical point — how physical quantities diverge or vanish as you approach T_c, characterized by those specific critical exponents — this mathematical pattern is identical for magnets and fluids sharing a universality class, while essentially everything else about their actual physical behavior (specific transition temperature, microscopic mechanism) remains genuinely, completely different between the two systems. A second, entirely separate and equally common error: assuming "renormalization group is just a calculational technique," reasoning "RG is a method for computing exponents" — treating RG merely as one computational tool among several available for extracting numerical values, on par with, say, a particular series-expansion method. This substantially undersells what RG actually is and does. Renormalization group theory is genuinely a CONCEPTUAL framework at its core — describing how the effective coupling constants describing a system\'s interactions FLOW as you progressively examine the system at larger and larger length scales (equivalently, as you coarse-grain the system, integrating out short-wavelength fluctuations). This RG-flow picture is precisely what EXPLAINS why universality exists as a genuine physical phenomenon in the first place: many different microscopic "irrelevant" details (specific interaction forms that don\'t affect long-distance behavior) mathematically flow toward zero under repeated RG transformations, causing vastly different microscopic starting points — different specific magnets, different specific fluids — to all flow toward, and converge on, the exact same universal FIXED POINT in the abstract space of coupling constants. This is precisely why systems with very different microscopic physics can nonetheless share identical critical exponents: their RG flows converge to the identical fixed point, despite starting from very different microscopic initial conditions. RG provides genuine, deep non-perturbative physical insight into critical phenomena, and crucially, it continues to work and provide understanding even in situations where ordinary perturbation theory (an expansion in some small parameter) completely fails to converge or give sensible results. The actual numerical CALCULATION of specific critical-exponent values is properly understood as a downstream CONSEQUENCE that flows from the RG concept — a secondary, practical benefit — rather than being the fundamental point or defining purpose of renormalization group theory itself, which is primarily a conceptual explanation for why and how universality arises physically.',
+    targetedMisconceptions: [`${PHCR}:MC-CP-UNIV-MEANS-SAME`, `${PHCR}:MC-CP-RG-IS-TECHNIQUE`],
+    source: `${PHCR_SRC} — MC-CP-UNIV-MEANS-SAME + MC-CP-RG-IS-TECHNIQUE, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const PHCR_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHCR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A magnet and a fluid are in the same universality class. Does this mean they behave identically in every respect?',
+    choices: [
+      { text: 'No — only their critical exponents and scaling functions are identical; their microscopic interactions, actual transition temperature T_c, and amplitude factors genuinely differ', isCorrect: true },
+      { text: 'Yes — being in the same universality class means all their physical behavior, including transition temperature and microscopic physics, must be identical', isCorrect: false, misconceptionId: `${PHCR}:MC-CP-UNIV-MEANS-SAME` },
+    ],
+    correctValue: 'only exponents/scaling functions are shared, not everything',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHCR}:MC-CP-UNIV-MEANS-SAME`],
+    source: `${PHCR_SRC} — MC-CP-UNIV-MEANS-SAME trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PHCR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the renormalization group (RG) fundamentally just a calculational technique for computing critical exponents?',
+    choices: [
+      { text: 'No — RG is a conceptual framework (flow in coupling-constant space) explaining WHY universality exists (irrelevant operators flow to a fixed point); numerical exponent calculation is a consequence, not the point', isCorrect: true },
+      { text: 'Yes — RG is simply one computational method among others for calculating exponents, comparable to any other numerical technique', isCorrect: false, misconceptionId: `${PHCR}:MC-CP-RG-IS-TECHNIQUE` },
+    ],
+    correctValue: 'RG is a conceptual framework explaining universality, not just a technique',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHCR}:MC-CP-RG-IS-TECHNIQUE`],
+    source: `${PHCR_SRC} — MC-CP-RG-IS-TECHNIQUE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.ising-model ──────────────────────────────────────────────────────
+const ISNG = 'phys.stat.ising-model'
+const ISNG_SRC = 'docs/curriculum/blueprints/phys.stat.ising-model.md'
+
+const ISNG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ISNG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The 1D Ising model does NOT have a ferromagnetic phase transition at any finite temperature — "in 1D there must be an ordered phase" is false, contradicted by the Peierls argument. The Peierls argument shows that domain walls in 1D cost only a FINITE energy (2J per wall), while flipping a domain gains entropy k T ln(N) — since entropy gain grows with system size N while energy cost stays fixed, ANY temperature T>0 makes it thermodynamically favorable to introduce domain walls, destroying long-range order at any nonzero temperature. Only in 2D and higher dimensions does the energy COST of a domain wall itself GROW with system size (the wall becomes a longer boundary as the system grows), which can then outcompete the entropy gain at sufficiently low temperature, allowing a genuinely ordered phase to survive up to some finite critical temperature T_c. A second, separate and equally important error: assuming mean-field theory gives the correct critical temperature T_c even when its exponents are known to be wrong — "T_c(MF) is approximately right even in 2D." Check the actual numbers for 2D Ising: mean-field theory predicts T_c(MF)=2zJ/k (with coordination number z=4 for a square lattice)=8J/k, but the EXACT result (Onsager\'s famous solution) gives T_c=2J/(k ln(1+√2))≈2.27J/k — mean-field theory OVERESTIMATES T_c by a substantial 77%, not a small correction. The fluctuations that lower the true T_c (fluctuations that destabilize order at lower temperatures than mean-field predicts) are exactly the physical effect systematically ignored by mean-field theory — this error is SYSTEMATIC, arising from a genuine conceptual omission, not merely a small quantitative imprecision that could be dismissed as "close enough."',
+    targetedMisconceptions: [`${ISNG}:MC-IS-1D-ORDERS`, `${ISNG}:MC-IS-MF-ACCURATE-ANY-D`],
+    source: `${ISNG_SRC} — MC-IS-1D-ORDERS (1D Ising has no finite-T phase transition, Peierls argument) + MC-IS-MF-ACCURATE-ANY-D (mean-field T_c overestimates by 77% in 2D, systematic error)`,
+  },
+  {
+    conceptId: ISNG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "the 1D Ising model has a ferromagnetic phase transition at finite T," reasoning "in 1D there must be an ordered phase," perhaps assuming that since higher-dimensional Ising models genuinely do have ordered phases below some critical temperature, the 1D case should behave analogously. This is false, and the physical mechanism explaining why is the Peierls argument. In one dimension, a "domain wall" separating a region of up-spins from a region of down-spins costs only a FINITE amount of energy — specifically 2J per wall, where J is the coupling constant — regardless of how large the overall system is. Meanwhile, INTRODUCING such a domain wall gains ENTROPY: since the wall could be located at any one of roughly N possible positions along the 1D chain, this contributes an entropy gain of approximately k T ln(N) at temperature T. As the system size N grows larger, the entropy GAIN from having a domain wall grows without bound (logarithmically in N), while the energy COST of the wall stays fixed at 2J — meaning that at ANY nonzero temperature T>0, no matter how small, introducing domain walls eventually becomes thermodynamically favorable for a sufficiently large system, since the entropy term ultimately overwhelms the fixed energy cost. This destroys long-range magnetic order at any T>0 in one dimension — the 1D Ising model genuinely has NO finite-temperature phase transition at all; only exactly at T=0 does perfect order survive. The crucial dimensional difference: only in 2D and higher does the energy COST of a domain wall itself GROW with system size (a domain wall in 2D is a boundary LINE whose length scales with the system\'s linear size, rather than a single point as in 1D) — this growing energy cost can then successfully compete against, and at sufficiently low temperature actually outweigh, the entropy gain, allowing a genuinely ordered phase to survive up to some finite critical temperature T_c in 2D and higher dimensions. A second, entirely separate and equally common error: assuming "mean-field theory gives the correct critical temperature T_c even if exponents are wrong," reasoning "T_c(MF) is approximately right even in 2D" — a natural-sounding hedge, conceding that mean-field theory\'s critical EXPONENTS are known to be wrong in low dimensions, while assuming the predicted transition TEMPERATURE itself remains reasonably accurate. Check this directly against the exactly-solvable 2D Ising model: mean-field theory predicts T_c(MF)=2zJ/k, where z is the coordination number (z=4 for a square lattice), giving T_c(MF)=8J/k. But the exact result — Onsager\'s celebrated 1944 exact solution of the 2D Ising model — gives T_c=2J/(k ln(1+√2))≈2.27J/k. Comparing these: mean-field theory OVERESTIMATES the true critical temperature by a substantial 77% — a large, systematic discrepancy, not a small rounding error or minor imprecision that could reasonably be dismissed as "approximately right." The underlying reason for this large, systematic error: the very fluctuations that act to LOWER the true critical temperature (thermal fluctuations that destabilize magnetic order more readily than a naive mean-field average would suggest) are EXACTLY the physical effect that mean-field theory deliberately ignores by construction, in exchange for mathematical simplicity. This is a genuine, systematic conceptual omission built into the mean-field approximation itself, producing a substantial and predictable error — not merely a small, forgivable quantitative imprecision that happens to be "close enough" for practical purposes.',
+    targetedMisconceptions: [`${ISNG}:MC-IS-1D-ORDERS`, `${ISNG}:MC-IS-MF-ACCURATE-ANY-D`],
+    source: `${ISNG_SRC} — MC-IS-1D-ORDERS + MC-IS-MF-ACCURATE-ANY-D, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const ISNG_PROBES: SeedProbe[] = [
+  {
+    conceptId: ISNG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the 1D Ising model have a ferromagnetic phase transition at some finite temperature T>0?',
+    choices: [
+      { text: 'No — the Peierls argument shows domain walls cost only finite energy (2J) while gaining entropy kT ln(N), so any T>0 destroys long-range order; only 2D+ has a true finite-T ordered phase', isCorrect: true },
+      { text: 'Yes — like higher-dimensional Ising models, the 1D case must also have an ordered ferromagnetic phase at low enough finite temperature', isCorrect: false, misconceptionId: `${ISNG}:MC-IS-1D-ORDERS` },
+    ],
+    correctValue: 'no finite-T transition in 1D, order only survives at T=0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISNG}:MC-IS-1D-ORDERS`],
+    source: `${ISNG_SRC} — MC-IS-1D-ORDERS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ISNG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the 2D Ising model, does mean-field theory give an approximately correct critical temperature T_c, even though its critical exponents are known to be wrong?',
+    choices: [
+      { text: 'No — mean-field predicts T_c(MF)=8J/k, but the exact (Onsager) value is ≈2.27J/k, a 77% overestimate; the fluctuations ignored by mean field cause a large systematic error, not a small one', isCorrect: true },
+      { text: 'Yes — mean-field theory\'s predicted T_c is approximately right in 2D, even though its critical exponents are known to be inaccurate', isCorrect: false, misconceptionId: `${ISNG}:MC-IS-MF-ACCURATE-ANY-D` },
+    ],
+    correctValue: 'mean-field overestimates T_c by 77 percent, a large systematic error',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISNG}:MC-IS-MF-ACCURATE-ANY-D`],
+    source: `${ISNG_SRC} — MC-IS-MF-ACCURATE-ANY-D trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.stat.monte-carlo-basics ──────────────────────────────────────────────
+const MCAR = 'phys.stat.monte-carlo-basics'
+const MCAR_SRC = 'docs/curriculum/blueprints/phys.stat.monte-carlo-basics.md'
+
+const MCAR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MCAR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Monte Carlo simulation being "random" does NOT mean it "must sample all configurations equally" — "it\'s random, so it\'s unbiased" fundamentally misunderstands the whole point of importance sampling. Metropolis importance sampling is DELIBERATELY BIASED toward LOW-energy configurations, weighted by the Boltzmann factor e^(−βE). Simple, unbiased random sampling (sampling every possible configuration with genuinely equal probability) would be catastrophically INEFFICIENT for a large physical system — most configurations for a large system have near-zero Boltzmann weight, meaning uniform random sampling would waste almost all computational effort exploring physically irrelevant, negligible-probability states. Importance sampling instead deliberately generates configurations with probability proportional to e^(−βE)/Z — genuinely NOT uniformly across all configurations — precisely so that computational effort concentrates on the physically important, high-probability configurations that actually dominate the true thermal ensemble average. A second, separate and equally important error: assuming detailed balance is merely "a technical condition" that can be dispensed with as long as "the simulation runs long enough" — "as long as the simulation runs long enough, any acceptance rule works." Detailed balance, W_ij P_j=W_ji P_i (at equilibrium), is actually NECESSARY for convergence to the CORRECT equilibrium distribution P_i∝e^(−βE_i). Without satisfying detailed balance, the underlying Markov chain may genuinely converge — but to the WRONG stationary distribution, one that does not correspond to the true physical Boltzmann distribution, regardless of how long the simulation is run. The Metropolis acceptance rule, min(1,e^(−βΔE)), is one SPECIFIC choice of transition rule that is mathematically verified to satisfy detailed balance — but detailed balance itself is a genuine mathematical necessity for correctness, never an optional technicality that "eventually sorts itself out" given enough simulation time.',
+    targetedMisconceptions: [`${MCAR}:MC-MC-RANDOM-MEANS-CORRECT`, `${MCAR}:MC-MC-DETAILED-BALANCE-OPTIONAL`],
+    source: `${MCAR_SRC} — MC-MC-RANDOM-MEANS-CORRECT (importance sampling is deliberately biased toward low-energy states, not uniform) + MC-MC-DETAILED-BALANCE-OPTIONAL (detailed balance is necessary for correct convergence, not optional)`,
+  },
+  {
+    conceptId: MCAR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "Monte Carlo is random so it must sample all configurations equally," reasoning "it\'s random, so it\'s unbiased" — assuming that because the word "random" appears in "Monte Carlo," the method must involve genuinely uniform, unbiased random sampling across all possible configurations of the system. This fundamentally misreads what Metropolis importance sampling actually does. It is deliberately, intentionally BIASED — specifically toward LOW-energy configurations, weighted precisely according to the Boltzmann factor e^(−βE). Consider why genuine uniform random sampling would be a disaster for a large physical system: most possible configurations of a large system have near-ZERO Boltzmann weight (they are astronomically improbable in the true thermal equilibrium ensemble) — so sampling configurations with genuinely equal probability across the board would waste nearly all of the computational effort exploring physically irrelevant, negligible-probability states that contribute almost nothing to any meaningful thermal average. This would be catastrophically inefficient, potentially requiring computationally infeasible amounts of sampling to obtain any statistically meaningful result. Importance sampling instead deliberately generates configurations with probability proportional specifically to e^(−βE)/Z — genuinely NOT with uniform probability across all configurations — precisely so that the limited computational sampling effort concentrates on the physically important, high-Boltzmann-weight configurations that actually dominate the true thermal average, making the simulation dramatically more efficient than naive uniform sampling ever could be. A second, entirely separate and equally common error: assuming "detailed balance is a technical condition — you just need to reach equilibrium eventually," reasoning "as long as the simulation runs long enough, any acceptance rule works" — treating detailed balance as some optional mathematical nicety that could be safely disregarded, provided you simply run the simulation for a sufficiently long time. This significantly understates detailed balance\'s actual necessity. Detailed balance, expressed as W_ij P_j=W_ji P_i evaluated at equilibrium (where W_ij is the transition rate from state j to state i, and P_i is the equilibrium probability of state i), is genuinely NECESSARY for the Markov chain underlying the Monte Carlo simulation to converge to the CORRECT equilibrium distribution, P_i∝e^(−βE_i) — the actual physical Boltzmann distribution you are trying to sample from. Without a transition rule satisfying detailed balance, the Markov chain may still genuinely converge to SOME stationary distribution after running long enough — but that stationary distribution may be entirely WRONG, failing to correspond to the true physical Boltzmann distribution at all, no matter how long you continue running the simulation. Running longer does not fix a fundamentally incorrect transition rule; it merely converges more precisely to the wrong answer. The Metropolis acceptance rule specifically, min(1,e^(−βΔE)), represents one SPECIFIC, carefully constructed choice of transition rule that has been mathematically verified to satisfy detailed balance rigorously — but detailed balance itself remains a genuine mathematical NECESSITY for the simulation\'s correctness, never merely an optional technical nicety that "sorts itself out eventually" given sufficient simulation runtime; an acceptance rule that violates detailed balance produces a simulation that converges reliably, but to a physically incorrect answer.',
+    targetedMisconceptions: [`${MCAR}:MC-MC-RANDOM-MEANS-CORRECT`, `${MCAR}:MC-MC-DETAILED-BALANCE-OPTIONAL`],
+    source: `${MCAR_SRC} — MC-MC-RANDOM-MEANS-CORRECT + MC-MC-DETAILED-BALANCE-OPTIONAL, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const MCAR_PROBES: SeedProbe[] = [
+  {
+    conceptId: MCAR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does Metropolis Monte Carlo importance sampling generate configurations with equal probability across all possible configurations, since it is "random"?',
+    choices: [
+      { text: 'No — it deliberately generates configurations with probability proportional to e^(−βE)/Z, biased toward low-energy states; uniform sampling would be catastrophically inefficient for a large system', isCorrect: true },
+      { text: 'Yes — since Monte Carlo is a random method, it samples all configurations with genuinely equal probability, making it unbiased', isCorrect: false, misconceptionId: `${MCAR}:MC-MC-RANDOM-MEANS-CORRECT` },
+    ],
+    correctValue: 'deliberately biased sampling toward low-energy configurations, not uniform',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MCAR}:MC-MC-RANDOM-MEANS-CORRECT`],
+    source: `${MCAR_SRC} — MC-MC-RANDOM-MEANS-CORRECT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MCAR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If a Monte Carlo transition rule does NOT satisfy detailed balance, will running the simulation long enough still guarantee convergence to the correct Boltzmann distribution?',
+    choices: [
+      { text: 'No — detailed balance is NECESSARY for convergence to the correct equilibrium distribution P_i∝e^(−βE_i); without it, the chain may converge to a wrong stationary distribution regardless of runtime', isCorrect: true },
+      { text: 'Yes — detailed balance is just a technical nicety; as long as the simulation runs long enough, any acceptance rule eventually converges to the correct equilibrium distribution', isCorrect: false, misconceptionId: `${MCAR}:MC-MC-DETAILED-BALANCE-OPTIONAL` },
+    ],
+    correctValue: 'no, detailed balance is necessary, not merely optional',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MCAR}:MC-MC-DETAILED-BALANCE-OPTIONAL`],
+    source: `${MCAR_SRC} — MC-MC-DETAILED-BALANCE-OPTIONAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.quantum-tunneling ───────────────────────────────────────────────────
+const QTUN = 'phys.qm.quantum-tunneling'
+const QTUN_SRC = 'docs/curriculum/blueprints/phys.qm.quantum-tunneling.md'
+
+const QTUN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QTUN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A tunneling particle does NOT temporarily "borrow" extra energy to go over the barrier — "the uncertainty principle lets it borrow energy ΔE for time Δt" is a pop-science misapplication of the energy-time uncertainty relation. The transmitted particle has EXACTLY the same energy as the incident particle — energy is conserved throughout the entire process; the transmitted particle\'s energy equals E_incident, never V₀ (the barrier height). Inside the barrier, the wave function is EVANESCENT (smoothly decaying), not oscillatory — the particle is never at some classical turning point possessing extra "borrowed" energy. Think of it like an evanescent electromagnetic wave: it decays smoothly inside the barrier region, with no energy spike required anywhere — the amplitude simply leaks through, closely analogous to light leaking through a sufficiently thin metal film (the optical phenomenon known as frustrated total internal reflection). Tunneling occurs because ψ≠0 inside the classically forbidden barrier region — the wave function genuinely has a nonzero tail there. The particle never literally "goes over" the top of the barrier; it simply appears on the far side, carrying the same energy it had before, with no violation of energy conservation anywhere. A second, closely related error: assuming tunneling genuinely violates energy conservation — asked "if a particle with E=1 eV tunnels through a barrier of V₀=5 eV, where does it get the energy to be inside the barrier?", reasoning "energy conservation says this shouldn\'t happen" from the classical observation that inside the barrier, KE=E−V₀<0 (an apparently impossible negative kinetic energy). Quantum mechanically, you genuinely CANNOT ask "what is the particle\'s KE at position x inside the barrier," because position and energy cannot be simultaneously well-defined in this way — the particle does not "have" a definite kinetic energy at a specific position inside the barrier; only probabilities are actually defined there. Energy IS conserved, in the precise sense that total energy E is exactly the same before, during, and after the entire tunneling process. The question "what is the particle\'s energy at position x inside the barrier" is simply ILL-POSED within quantum mechanics — the energy eigenstate genuinely has energy E everywhere throughout space, and the "classically forbidden region" is forbidden only for CLASSICAL trajectories specifically; quantum mechanics itself has no trajectories at all, so this classical notion of forbiddenness simply does not carry over.',
+    targetedMisconceptions: [`${QTUN}:MC-1`, `${QTUN}:MC-2`],
+    source: `${QTUN_SRC} — MC-1 (no energy is borrowed, wave function is evanescent) + MC-2 (energy is conserved, KE-at-a-point question is ill-posed in QM)`,
+  },
+  {
+    conceptId: QTUN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "how does a particle tunnel? Does it temporarily have enough energy to reach the top?", say "the uncertainty principle lets it borrow energy ΔE for time Δt," drawing on popular-science descriptions of tunneling that loosely invoke the energy-time uncertainty relation to suggest the particle temporarily "borrows" extra energy to surmount the barrier, then "pays it back" afterward. Check this against the actual physics: the transmitted particle genuinely has EXACTLY the same energy as the incident particle — energy is conserved throughout the entire tunneling process, with the transmitted particle\'s energy equal to E_incident, never equal to V₀ (the barrier height) at any point. The wave function INSIDE the barrier region is evanescent — meaning it decays smoothly, exponentially, as a function of position — rather than being oscillatory (as it would be in a classically allowed region); the particle is genuinely never located at some classical turning point where it might briefly possess extra "borrowed" energy. A useful physical analogy: an evanescent electromagnetic wave decays smoothly inside a barrier region with no energy spike anywhere required — the wave\'s amplitude simply leaks through the barrier, closely analogous to how light can leak through a sufficiently thin metal film via the phenomenon known as frustrated total internal reflection (an optical tunneling effect). Tunneling occurs specifically because the wave function ψ is genuinely nonzero inside the classically forbidden barrier region — it has a real, nonzero mathematical tail there. The particle never literally "goes over" the barrier\'s top at any point; instead it simply appears on the far side of the barrier, carrying precisely the same energy it originally had, with no violation of energy conservation occurring anywhere in the process. A second, closely related and equally common error: assuming that tunneling genuinely violates energy conservation, asked "if a particle with E=1 eV tunnels through a barrier of V₀=5 eV, where does it get the energy to be inside the barrier?", reasoning "energy conservation says this shouldn\'t happen" — drawing directly from the classical observation that, treated classically, the kinetic energy inside the barrier would be KE=E−V₀=1−5=−4 eV, an apparently impossible negative value. The resolution requires recognizing that quantum mechanics genuinely does not permit you to ask "what is the particle\'s kinetic energy at a specific position x inside the barrier" in the first place — position and (kinetic) energy cannot simultaneously be well-defined quantities in this classical, trajectory-based sense; the particle simply does not "possess" a definite kinetic energy value at any specific position inside the barrier — only probability amplitudes (and their squared magnitudes, probabilities) are actually well-defined there. Energy conservation IS genuinely satisfied, in the precise sense that the particle\'s TOTAL energy E remains exactly the same before, during, and after the entire tunneling process — nothing is ever added or removed. The very question "what is the particle\'s energy at position x, specifically inside the barrier?" is fundamentally ILL-POSED within quantum mechanics — the relevant energy eigenstate genuinely has the same well-defined total energy E everywhere throughout all of space, including inside the barrier region; the notion of a "classically forbidden region" applies only to classical PARTICLE TRAJECTORIES specifically, a concept quantum mechanics does not actually possess in the first place, since quantum mechanics has no literal trajectories at all — only evolving probability amplitudes.',
+    targetedMisconceptions: [`${QTUN}:MC-1`, `${QTUN}:MC-2`],
+    source: `${QTUN_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const QTUN_PROBES: SeedProbe[] = [
+  {
+    conceptId: QTUN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When a particle tunnels through a potential barrier, does it temporarily "borrow" extra energy (via the uncertainty principle) to get over the top?',
+    choices: [
+      { text: 'No — the transmitted particle has exactly the same energy as the incident particle; the wave function inside the barrier is evanescent (decaying), never at an energy-spiked classical turning point', isCorrect: true },
+      { text: 'Yes — the uncertainty principle lets the particle borrow energy ΔE for a short time Δt, temporarily giving it enough energy to surmount the barrier', isCorrect: false, misconceptionId: `${QTUN}:MC-1` },
+    ],
+    correctValue: 'no borrowed energy, energy is conserved throughout',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QTUN}:MC-1`],
+    source: `${QTUN_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: QTUN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A particle with E=1 eV tunnels through a barrier of V₀=5 eV. Classically, KE=E−V₀=−4 eV inside the barrier is impossible. Does this mean tunneling violates energy conservation?',
+    choices: [
+      { text: 'No — quantum mechanically, "kinetic energy at a specific position inside the barrier" is an ill-posed question; total energy E is conserved throughout, before, during, and after tunneling', isCorrect: true },
+      { text: 'Yes — since the classical kinetic energy inside the barrier is negative, tunneling genuinely violates energy conservation', isCorrect: false, misconceptionId: `${QTUN}:MC-2` },
+    ],
+    correctValue: 'no violation, the classical KE-at-a-point question does not apply in QM',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QTUN}:MC-2`],
+    source: `${QTUN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -38396,6 +38756,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FDIR_EXPLANATIONS,
   ...BOSE_EXPLANATIONS,
   ...GCEN_EXPLANATIONS,
+  ...FLUC_EXPLANATIONS,
+  ...PHTR_EXPLANATIONS,
+  ...PHCR_EXPLANATIONS,
+  ...ISNG_EXPLANATIONS,
+  ...MCAR_EXPLANATIONS,
+  ...QTUN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -38864,4 +39230,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FDIR_PROBES,
   ...BOSE_PROBES,
   ...GCEN_PROBES,
+  ...FLUC_PROBES,
+  ...PHTR_PROBES,
+  ...PHCR_PROBES,
+  ...ISNG_PROBES,
+  ...MCAR_PROBES,
+  ...QTUN_PROBES,
 ]
