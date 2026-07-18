@@ -13,6 +13,8 @@ import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
 import type { VoiceTimingSignal } from '@/lib/voice/voiceSignal'
+import { fetchWithTimeout } from '@/lib/net/timeout'
+import { isFallbackResponse, pickRecoveryMessage } from '@/lib/learn/tutorRecovery'
 import { useDraftMessage, clearDraft } from '@/lib/hooks/useDraftMessage'
 import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
@@ -903,6 +905,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const messagesAreaRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const initializedRef = useRef(false)
+  // Stability P0: how many chat turns in a row have failed. Drives the
+  // escalation from the warm "got cut off" line to a real "connection problem
+  // on our side" message so the student never sees the same sentence loop.
+  const consecutiveTurnFailuresRef = useRef(0)
+  // Stability P0: guards against an infinite "Connecting to tutor…" — set true
+  // when the connect watchdog fires (init never produced a first message).
+  const [connectStalled, setConnectStalled] = useState(false)
   const autoOpenedPracticeRef = useRef(false)
   const speakingIdRef = useRef<string|null>(null)
   const serverAudioRef = useRef<HTMLAudioElement|null>(null)
@@ -946,8 +955,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           schoolChapterId: schoolChapterId ?? undefined,
         })
         const [histRes, sessionRes] = await Promise.all([
-          fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`),
-          fetch('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: sessionBody }),
+          fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000),
+          fetchWithTimeout('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: sessionBody }, 15000),
         ])
         if (cancelled) return
 
@@ -1326,10 +1335,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     let res: Response | undefined
     let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } } = {}
     try {
-      // Retry up to 2 times on network failures ("Load failed", ECONNRESET, etc.)
+      // Retry up to 2 times on failure. Retryable = a dropped/hung connection
+      // (fetchWithTimeout aborts a stalled request instead of hanging forever
+      // — the mobile-Safari infinite-spinner root cause), OR a transient server
+      // failure (5xx/429), OR a soft AI fallback (provider:'fallback', the
+      // model timed out server-side). Every retry re-sends the SAME sid+text,
+      // so conversation context is preserved and the model gets another try
+      // before the student sees anything.
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
-          res = await fetch('/api/learn/chat', {
+          res = await fetchWithTimeout('/api/learn/chat', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               sessionId: sid, message: text, userId: userId ?? 'anonymous',
@@ -1342,16 +1357,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // must never be assumed read. undefined = nothing collapsed.
               lastExplanationRead: lastExplanationReadRef.current,
             }),
-          })
+          }, 30000)
           data = await res.json().catch(() => ({}))
+          if (attempt < 2 && (!res.ok || isFallbackResponse(data))) {
+            await new Promise((r) => setTimeout(r, (attempt + 1) * 1200))
+            continue
+          }
           break
         } catch (fetchErr) {
           if (attempt === 2) throw fetchErr
           await new Promise((r) => setTimeout(r, (attempt + 1) * 1500))
         }
       }
+      // A surviving soft fallback is not a real teaching turn — surface it
+      // through the same recovery path as a hard error (logged, escalated),
+      // never rendered raw as if the tutor had answered.
+      if (isFallbackResponse(data)) throw new Error('AI temporarily unavailable (provider fallback)')
       const errMsg = typeof data.error === 'string' ? data.error : data.error?.message ?? `HTTP ${res?.status ?? 0}`
       if (!res?.ok || !data.success || !data.text) throw new Error(errMsg)
+      // Real answer arrived — reset the consecutive-failure escalation counter.
+      consecutiveTurnFailuresRef.current = 0
       let full = data.text
       const provider = data.provider
       const responseVisual = data.visual
@@ -1532,12 +1557,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // student unfiltered. console.error keeps the real message for
       // debugging; the bubble gets a warm, teacherly recovery line instead.
       const msg = err instanceof Error ? err.message : String(err)
-      console.error('[learn/chat] turn failed:', msg)
-      const recoveryText = teachingLanguage === 'ru'
-        ? 'Ой, связь прервалась на секунду. Можешь повторить или просто отправь сообщение ещё раз — я на месте.'
-        : teachingLanguage === 'hi'
-        ? 'Oops, connection ek second ke liye ruk gaya. Dobara try karo — main yahin hoon.'
-        : "Sorry, I got cut off there for a second. Go ahead and try again — I'm still here."
+      // Count consecutive failures so the copy escalates on repeat instead of
+      // looping the same warm line — the real error is logged server-visibly.
+      consecutiveTurnFailuresRef.current += 1
+      console.error(`[learn/chat] turn failed (consecutive ${consecutiveTurnFailuresRef.current}):`, msg)
+      const recoveryText = pickRecoveryMessage(consecutiveTurnFailuresRef.current, teachingLanguage)
       setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m))
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug])
@@ -1773,13 +1797,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (initializedRef.current) return
     initializedRef.current = true
     setLessonStarted(true)
+    setConnectStalled(false)
     try {
-      const res = await fetch('/api/sessions', {
+      // P0 (mobile Safari infinite "Connecting to tutor…"): the session POST
+      // is the one call that runs BEFORE any message bubble exists, so a
+      // stalled request here leaves the connect screen up forever. Bound it
+      // with a timeout and auto-retry once — a cold-start cookie/network race
+      // on Safari usually clears on the second attempt.
+      const postSession = () => fetchWithTimeout('/api/sessions', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ subjectSlug, memoryContext: memoryContext ?? undefined, userId: userId ?? undefined, schoolChapterId: schoolChapterId ?? undefined }),
-      })
-      const data = await res.json()
-      if (!data.success) { setInitError(data.error ?? 'Error'); return }
+      }, 15000)
+      let res: Response
+      try {
+        res = await postSession()
+      } catch {
+        res = await postSession()
+      }
+      const data = await res.json().catch(() => ({ success: false }))
+      if (!res.ok || !data.success) { setInitError(data.error ?? 'connect_failed'); return }
       const sid = data.data.id; setSessionId(sid)
 
       // WhatsApp-style full history: restore the COMPLETE conversation for
@@ -1789,7 +1825,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // inside /api/learn/chat and is untouched by this restore.
       let restoredAny = false
       try {
-        const histRes = await fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`)
+        const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000)
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
@@ -1829,7 +1865,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // A resumed (still-active) session keeps its flow — no new opening
       // prompt. A NEW session with restored history still gets the opening
       // prompt so Tutor Max greets and continues, appended below the history.
-      if (data.resumed) return
+      // P0: only short-circuit when messages were actually restored. A resumed
+      // session whose history came back empty (e.g. a prior attempt died before
+      // the tutor replied) must still fall through to the opening prompt —
+      // otherwise messages stays [] and the connect screen never resolves.
+      if (data.resumed && restoredAny) return
 
       const lessonRef = resumeLessonTitle
         ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
@@ -1910,8 +1950,29 @@ Greet them warmly. In 1–2 sentences recap what was covered last time, then con
 Student level: "${levelDescription}". Write at a level appropriate for them.`)
       await sendMessage(sid, opening, false)
       if (initialPrompt) await sendMessage(sid, initialPrompt, true)
-    } catch { setInitError('Connection failed. Please refresh the page.') }
+    } catch (err) { console.error('[startLesson] init failed:', err); setInitError('connect_failed') }
   }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId, initialPrompt, curriculumLessons, curriculumProgress])
+
+  // P0 recovery: re-run initialization from a clean slate (used by the Retry
+  // buttons on both the init-error screen and the connect-stalled screen).
+  const retryInit = useCallback(() => {
+    setInitError('')
+    setConnectStalled(false)
+    initializedRef.current = false
+    startLesson()
+  }, [startLesson])
+
+  // P0 watchdog — the guarantee that "Connecting to tutor…" can NEVER be
+  // terminal. Once the lesson has started but no first message has appeared,
+  // give initialization a bounded window; if it still hasn't produced a
+  // message, flip to the recoverable connect-stalled screen instead of
+  // spinning forever. Any unforeseen hang (not just the ones timed out above)
+  // is caught here.
+  useEffect(() => {
+    if (!lessonStarted || messages.length > 0 || initError || connectStalled) return
+    const id = setTimeout(() => setConnectStalled(true), 25000)
+    return () => clearTimeout(id)
+  }, [lessonStarted, messages.length, initError, connectStalled])
 
   // Vision send
   async function sendImageMessage(sid: string) {
@@ -2251,12 +2312,23 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
     : 0
 
   if (initError) {
+    // 'connect_failed' is our sentinel for a bounded/hung init failure — show
+    // the warm, translated recovery copy. Any other value is a server-provided
+    // message, shown as-is.
+    const initErrorText = initError === 'connect_failed' ? t('lesson_connect_failed') : initError
     return (
       <div className={`${styles.learnCandy} min-h-screen flex items-center justify-center p-6`} style={{ background: 'var(--bg-void)' }}>
         <div className="text-center">
           <div className="text-4xl mb-4 text-red-400">⚠</div>
-          <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>{initError}</p>
-          <Link href="/dashboard" className="text-sm" style={{ color: 'var(--coral)' }}>{t('lesson_back_base')}</Link>
+          <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>{initErrorText}</p>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
+            <button
+              onClick={retryInit}
+              style={{ padding: '9px 20px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
+              {t('lesson_connect_retry')}
+            </button>
+            <Link href="/dashboard" className="text-sm" style={{ color: 'var(--coral)' }}>{t('lesson_back_base')}</Link>
+          </div>
         </div>
       </div>
     )
@@ -3615,13 +3687,27 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               )}
 
               {/* Welcome / loading state — EagleMascot replaces the generic initials avatar */}
-              {lessonStarted && messages.length === 0 && (
+              {lessonStarted && messages.length === 0 && !connectStalled && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
                   <EagleMascot variant="hero" size={56} />
                   <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
                   <div style={{ display: 'flex', gap: 6 }}>
                     <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
                   </div>
+                </div>
+              )}
+
+              {/* P0: connect watchdog fired — never leave the spinner up
+                  forever. Offer a real recovery instead. */}
+              {lessonStarted && messages.length === 0 && connectStalled && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 14, paddingTop: 40, textAlign: 'center' }}>
+                  <div style={{ fontSize: 32 }}>⚠</div>
+                  <p style={{ fontSize: 13.5, color: 'var(--text-secondary)', maxWidth: 320 }}>{t('lesson_connect_failed')}</p>
+                  <button
+                    onClick={retryInit}
+                    style={{ padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
+                    {t('lesson_connect_retry')}
+                  </button>
                 </div>
               )}
 

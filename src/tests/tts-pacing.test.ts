@@ -57,3 +57,18 @@ describe('rateForSegment', () => {
     expect(rateForSegment(1, 'Good.')).toBe(1)
   })
 })
+
+describe('splitIntoSpeechSegments — clause breathing (Stability sprint P1)', () => {
+  it('breaks on semicolons so list-like clauses breathe', () => {
+    expect(splitIntoSpeechSegments('Steps are these; do this; then that.')).toEqual([
+      'Steps are these;',
+      'do this;',
+      'then that.',
+    ])
+  })
+
+  it('never splits a colon inside a time or ratio', () => {
+    expect(splitIntoSpeechSegments('Meet at 3:45 today.')).toEqual(['Meet at 3:45 today.'])
+    expect(splitIntoSpeechSegments('The ratio is 2:1 here.')).toEqual(['The ratio is 2:1 here.'])
+  })
+})

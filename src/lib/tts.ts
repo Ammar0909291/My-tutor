@@ -50,7 +50,12 @@ export function canUseSpeechRecognition(lang: TeachingLang): boolean {
 // read-through. Pure/testable on purpose — kept separate from the
 // window.speechSynthesis orchestration below.
 export function splitIntoSpeechSegments(text: string): string[] {
-  const parts = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g)
+  // Break at sentence enders (.!?) and at semicolons — a semicolon is always a
+  // clause boundary a human teacher breathes on, and (unlike a colon) never
+  // appears inside a time "3:45" or ratio "2:1", so it's safe to split on
+  // unconditionally. The delimiter stays attached so the spoken cadence cue
+  // isn't lost.
+  const parts = text.match(/[^.!?;]+[.!?;]+|[^.!?;]+$/g)
   if (!parts) return [text]
   return parts.map((p) => p.trim()).filter(Boolean)
 }

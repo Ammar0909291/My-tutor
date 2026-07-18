@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
+import { withTimeout } from '@/lib/net/timeout'
 import { DashboardV2 } from '@/components/dashboard/v2/DashboardV2'
 import { getDashboardV2Data } from '@/lib/dashboard/getDashboardV2Data'
 
@@ -14,13 +15,18 @@ export default async function DashboardPage() {
   const userId = session.user.id
 
   console.log('[D3] user fetch start')
-  const user = await withRetry(() => prisma.user.findUnique({
+  // P0 (infinite "Loading your dashboard…"): bound the DB-bound work. A prisma
+  // query can hang without throwing (pool exhaustion, a stalled connection),
+  // and this is a server component — a never-resolving await keeps loading.tsx
+  // on screen forever. On timeout we throw, which surfaces the app-wide
+  // error.tsx boundary (with its Retry) — a recoverable state, never infinite.
+  const user = await withTimeout(withRetry(() => prisma.user.findUnique({
     where: { id: userId },
     select: {
       onboardingCompleted: true,
       profile: { select: { userType: true } },
     },
-  }))
+  })), 12000, 'dashboard-user')
   console.log('[D4] user fetch complete', { found: !!user, profile: !!user?.profile })
 
   if (!user?.profile) redirect('/onboarding')
@@ -29,7 +35,7 @@ export default async function DashboardPage() {
   }
 
   console.log('[D5] dashboard data start')
-  const data = await getDashboardV2Data(userId)
+  const data = await withTimeout(getDashboardV2Data(userId), 18000, 'dashboard-data')
   console.log('[D6] dashboard data complete')
 
   console.log('[D7] render start')

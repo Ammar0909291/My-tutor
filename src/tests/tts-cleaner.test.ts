@@ -101,3 +101,28 @@ describe('pre-existing behavior is preserved', () => {
     expect(cleanTextForTTS('**important** and *emphasis*')).toBe('important and emphasis')
   })
 })
+
+describe('keycap emoji sequences (Stability sprint P1)', () => {
+  it('never leaves the enclosing-keycap codepoint that voices read as "keycap"', () => {
+    const out = cleanTextForTTS('Choose 1️⃣ or 2️⃣ or 3️⃣')
+    expect(out).not.toMatch(/[️⃣]/)
+    expect(out.toLowerCase()).not.toContain('keycap')
+  })
+
+  it('reads keycap-numbered options as their plain numbers', () => {
+    expect(cleanTextForTTS('Choose 1️⃣ or 2️⃣')).toBe('Choose 1 or 2')
+  })
+
+  it('handles keycap markers used as a list', () => {
+    const out = cleanTextForTTS('1️⃣ The\n2️⃣ Cat\n3️⃣ Sat')
+    expect(out).not.toMatch(/[️⃣]/)
+    expect(out).toContain('1 The')
+    expect(out).toContain('2 Cat')
+  })
+
+  it('drops rare #/* keycaps without leaving artifacts', () => {
+    const out = cleanTextForTTS('Press #️⃣ then *️⃣')
+    expect(out).not.toMatch(/[️⃣]/)
+    expect(out.toLowerCase()).not.toContain('keycap')
+  })
+})

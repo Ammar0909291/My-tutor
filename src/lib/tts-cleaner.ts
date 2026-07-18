@@ -82,6 +82,19 @@ export function cleanTextForTTS(text: string): string {
   t = t.replace(/```[\s\S]*?```/g, '')
   // Remove inline code
   t = t.replace(/`([^`]+)`/g, '$1')
+  // Keycap emoji sequences ("1️⃣", "#️⃣", "*️⃣") are a base character + an
+  // optional variation selector (U+FE0F) + the combining enclosing keycap
+  // (U+20E3). Neither combining codepoint falls in the emoji ranges stripped
+  // below, so without this the base survives and several TTS voices announce
+  // the enclosing-keycap codepoint literally as "keycap" ("keycap 1…"). Map a
+  // digit keycap to its bare digit (reads naturally as "one", "two", and a
+  // line-leading one still flows into the numbered-list ordinal pass below);
+  // drop the rare #/* keycaps entirely. (️ = variation selector,
+  // ⃣ = combining enclosing keycap.)
+  t = t.replace(/([0-9])️?⃣/g, '$1 ')
+  t = t.replace(/[#*]️?⃣/g, ' ')
+  // Any orphaned variation selector / stray combining keycap left behind.
+  t = t.replace(/[️⃣]/g, '')
   // Remove emojis
   t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F000}-\u{1F02F}\u{1F900}-\u{1F9FF}]/gu, '')
   // Remove special icons and other decorative/UI symbols never meant to be
