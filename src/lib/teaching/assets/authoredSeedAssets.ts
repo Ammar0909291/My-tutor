@@ -25241,6 +25241,637 @@ const DRFT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.linguistics.language-acquisition-intro ──────────────────────────────
+const LACQ = 'eng.linguistics.language-acquisition-intro'
+const LACQ_SRC = 'docs/curriculum/blueprints/eng.linguistics.language-acquisition-intro.md'
+
+const LACQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LACQ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A child saying "I goed to the park" has never heard an adult say ' +
+      '"goed" — this error proves the child is actively applying a ' +
+      'regular rule (add "-ed" for past tense), not copying adult speech. ' +
+      'Like a child building a novel Lego structure using a pattern ' +
+      'extracted from simpler ones they\'ve seen, children construct ' +
+      'rules; they don\'t just imitate.',
+    targetedMisconceptions: [`${LACQ}:MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY`],
+    source: `${LACQ_SRC} — MC-A (P28 goed-lego-pattern conflict)`,
+  },
+  {
+    conceptId: LACQ,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Young children typically acquire native-like pronunciation more ' +
+      'easily, while adults often acquire new grammar rules and ' +
+      'vocabulary faster using explicit reasoning — like a trained adult ' +
+      'painter isn\'t simply a "worse painter" than an uninhibited child, ' +
+      'just a different one with different strengths. Older learners ' +
+      'aren\'t a weaker version of child acquisition; they use a genuinely ' +
+      'different process with its own strengths and challenges.',
+    targetedMisconceptions: [`${LACQ}:MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION`],
+    source: `${LACQ_SRC} — MC-B (P28 painters-different-toolkit conflict)`,
+  },
+  {
+    conceptId: LACQ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Children\'s systematic acquisition errors (overregularization, ' +
+      'e.g. "goed") reveal active rule-construction rather than imitation ' +
+      'failure, since these forms are essentially never produced by ' +
+      'adults. Separately, acquiring an additional language later in life ' +
+      'draws on genuinely different cognitive resources (explicit ' +
+      'reasoning, existing language knowledge) that produce different ' +
+      'area-specific strengths and challenges relative to childhood ' +
+      'acquisition, not a uniformly weaker version of the same process.',
+    targetedMisconceptions: [
+      `${LACQ}:MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY`,
+      `${LACQ}:MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION`,
+    ],
+    source: `${LACQ_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LACQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: LACQ,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A child says "I goed to the park," a form no adult around them has ever produced. Does this prove children learn language purely by imitating adult speech?',
+    choices: [
+      { text: 'No — since no adult produces "goed," this error reveals the child actively applying a regular rule, evidence of rule-construction, not imitation', isCorrect: true },
+      { text: 'Yes — children learn language purely by imitating what they hear adults say', isCorrect: false, misconceptionId: `${LACQ}:MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY` },
+    ],
+    correctValue: 'no, it proves rule-construction',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LACQ}:MC-A-CHILDREN-LEARN-LANGUAGE-PURELY-BY-IMITATING-WHAT-THEY-HEAR-ADULTS-SAY`],
+    source: `${LACQ_SRC} — goed-lego-pattern conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LACQ,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Adults often learn new grammar rules faster than young children, using explicit reasoning. Does this mean adult language learning is just a weaker, less effective version of childhood acquisition?',
+    choices: [
+      { text: 'No — older learners draw on genuinely different cognitive resources with different strengths and challenges (e.g. faster grammar learning, slower pronunciation), not a uniformly weaker process', isCorrect: true },
+      { text: 'Yes — learning a language later in life is just a weaker or worse version of childhood acquisition', isCorrect: false, misconceptionId: `${LACQ}:MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION` },
+    ],
+    correctValue: 'no, different strengths not weaker',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LACQ}:MC-B-LEARNING-A-LANGUAGE-LATER-IN-LIFE-IS-JUST-A-WEAKER-OR-WORSE-VERSION-OF-CHILDHOOD-ACQUISITION`],
+    source: `${LACQ_SRC} — painters-different-toolkit conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.language-families ────────────────────────────────────────
+const LFAM = 'eng.linguistics.language-families'
+const LFAM_SRC = 'docs/curriculum/blueprints/eng.linguistics.language-families.md'
+
+const LFAM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LFAM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two unrelated languages sharing one similar-sounding word for a ' +
+      'concept doesn\'t prove they\'re related — like two unrelated people ' +
+      'sharing a rare surname purely by coincidence. Genuine family ' +
+      'relationship requires SYSTEMATIC, regular sound correspondences ' +
+      'across MANY words (the comparative method), not a single similar- ' +
+      'sounding match, which could be borrowing or coincidence.',
+    targetedMisconceptions: [`${LFAM}:MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED`],
+    source: `${LFAM_SRC} — MC-A (P28 coincidental-surname conflict)`,
+  },
+  {
+    conceptId: LFAM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two genuinely unrelated languages can share a writing system ' +
+      'through cultural contact, while two genuinely related languages ' +
+      'can use entirely different scripts — like two countries sharing a ' +
+      'currency without being part of the same political federation. ' +
+      'Never infer a genealogical language family relationship from a ' +
+      'shared writing system or geographic proximity alone.',
+    targetedMisconceptions: [`${LFAM}:MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY`],
+    source: `${LFAM_SRC} — MC-B (P28 shared-currency-not-federation conflict)`,
+  },
+  {
+    conceptId: LFAM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuine genealogical language family relationships are ' +
+      'established through systematic, regular sound correspondences ' +
+      'across many words (the comparative method), not a single similar- ' +
+      'sounding word pair, which could reflect coincidence or borrowing ' +
+      'rather than shared ancestry. Separately, a shared writing system or ' +
+      'geographic proximity is a historically contingent fact entirely ' +
+      'separate from genealogical descent — neither indicates family ' +
+      'relationship on its own.',
+    targetedMisconceptions: [
+      `${LFAM}:MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED`,
+      `${LFAM}:MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY`,
+    ],
+    source: `${LFAM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LFAM_PROBES: SeedProbe[] = [
+  {
+    conceptId: LFAM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two unrelated languages happen to share one similar-sounding word for the same concept. Does this prove they belong to the same language family?',
+    choices: [
+      { text: 'No — genuine family relationship requires systematic, regular sound correspondences across many words; a single similar word could be coincidence or borrowing', isCorrect: true },
+      { text: 'Yes — any two languages with similar-sounding words must be related', isCorrect: false, misconceptionId: `${LFAM}:MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED` },
+    ],
+    correctValue: 'no, need systematic correspondence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LFAM}:MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED`],
+    source: `${LFAM_SRC} — coincidental-surname conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LFAM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two languages use the same writing system and are spoken in neighboring regions. Does this automatically mean they\'re in the same genealogical language family?',
+    choices: [
+      { text: 'No — shared writing system and geographic proximity are separate, historically contingent facts; neither indicates genealogical relationship on its own', isCorrect: true },
+      { text: 'Yes — languages sharing a writing system or region are automatically in the same language family', isCorrect: false, misconceptionId: `${LFAM}:MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY` },
+    ],
+    correctValue: 'no, script/geography are separate facts',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LFAM}:MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY`],
+    source: `${LFAM_SRC} — shared-currency-not-federation conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.semantics-intro ───────────────────────────────────────────
+const SEMI = 'eng.linguistics.semantics-intro'
+const SEMI_SRC = 'docs/curriculum/blueprints/eng.linguistics.semantics-intro.md'
+
+const SEMI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SEMI,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Robin" and "bird" aren\'t just two unrelated labels — "a robin is ' +
+      'always a bird, but a bird is not always a robin" reveals a ' +
+      'systematic, testable hyponymy relationship, like a library\'s books ' +
+      'organized into categories rather than scattered randomly. Ask ' +
+      'whether a word has a broader category, a near-synonym, or an ' +
+      'opposite — these are systematic relationships, not isolated facts.',
+    targetedMisconceptions: [`${SEMI}:MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS`],
+    source: `${SEMI_SRC} — MC-A (P28 robin-bird-hyponymy conflict)`,
+  },
+  {
+    conceptId: SEMI,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"I saw the man with the telescope" has two meanings from the exact ' +
+      'same words grouped differently — did I use the telescope, or did ' +
+      'he have it? Like the same ingredients combined differently ' +
+      'producing genuinely different dishes, sentence meaning is ' +
+      'compositional: built from word meanings AND how they structurally ' +
+      'combine, not just which words are used.',
+    targetedMisconceptions: [`${SEMI}:MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER`],
+    source: `${SEMI_SRC} — MC-B (P28 telescope-ambiguity conflict)`,
+  },
+  {
+    conceptId: SEMI,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Word meanings carry systematic, testable relationships to each ' +
+      'other — hyponymy (category membership, "an X is always a Y but not ' +
+      'vice versa"), synonymy, antonymy — rather than functioning as ' +
+      'isolated, unstructured labels. Separately, sentence meaning is ' +
+      'compositional, built from word meanings AND their specific ' +
+      'structural combination: identical words grouped differently ("I ' +
+      'saw the man with the telescope") can produce genuinely distinct ' +
+      'meanings.',
+    targetedMisconceptions: [
+      `${SEMI}:MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS`,
+      `${SEMI}:MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER`,
+    ],
+    source: `${SEMI_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SEMI_PROBES: SeedProbe[] = [
+  {
+    conceptId: SEMI,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"A robin is always a bird, but a bird is not always a robin." Is this just a random, isolated fact about these two specific words?',
+    choices: [
+      { text: 'No — this is a systematic, testable hyponymy relationship that applies to many word pairs (rose/flower, oak/tree), not an isolated fact', isCorrect: true },
+      { text: 'Yes — word meaning is a simple one-to-one label with no internal structure or relationships', isCorrect: false, misconceptionId: `${SEMI}:MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS` },
+    ],
+    correctValue: 'no, it\'s a systematic pattern',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SEMI}:MC-A-WORD-MEANING-IS-A-SIMPLE-ONE-TO-ONE-LABEL-WITH-NO-INTERNAL-STRUCTURE-OR-RELATIONSHIPS`],
+    source: `${SEMI_SRC} — robin-bird-hyponymy conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SEMI,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"I saw the man with the telescope" has two different meanings, using the exact same words. Does this mean sentence meaning is just the sum of word meanings regardless of how they\'re grouped?',
+    choices: [
+      { text: 'No — the two meanings come from the same words being structurally grouped differently; sentence meaning is compositional, built from words AND their structural combination', isCorrect: true },
+      { text: 'Yes — sentence meaning is just the sum of individual word meanings in any order', isCorrect: false, misconceptionId: `${SEMI}:MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER` },
+    ],
+    correctValue: 'no, structure matters too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SEMI}:MC-B-SENTENCE-MEANING-IS-JUST-THE-SUM-OF-INDIVIDUAL-WORD-MEANINGS-IN-ANY-ORDER`],
+    source: `${SEMI_SRC} — telescope-ambiguity conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.asking-and-answering-questions ─────────────────────────────
+const AAQ = 'eng.speaking.asking-and-answering-questions'
+const AAQ_SRC = 'docs/curriculum/blueprints/eng.speaking.asking-and-answering-questions.md'
+
+const AAQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AAQ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Why were you late?" can\'t be answered with just "Yes." — that ' +
+      'question requires an explanation. But "Did you finish your ' +
+      'homework?" genuinely can be answered with a short "Yes." Check ' +
+      'what TYPE of question was asked: yes/no questions (did/is/can) can ' +
+      'take short answers, but wh-questions (why/how/what) need actual ' +
+      'explanation.',
+    targetedMisconceptions: [`${AAQ}:MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER`],
+    source: `${AAQ_SRC} — MC-A (P28 why-were-you-late conflict)`,
+  },
+  {
+    conceptId: AAQ,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"What time does the movie start?" isn\'t answered by "The movie ' +
+      'theater is really nice and has great popcorn" — that\'s topic- ' +
+      'related but doesn\'t hit the bullseye. A genuine answer directly ' +
+      'addresses the specific information requested, not just anything ' +
+      'connected to the general subject.',
+    targetedMisconceptions: [`${AAQ}:MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC`],
+    source: `${AAQ_SRC} — MC-B (P28 dartboard-movie-time conflict)`,
+  },
+  {
+    conceptId: AAQ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A one-word answer is complete only for yes/no questions ("did," ' +
+      '"is," "can"); wh-questions ("why," "how," "what") genuinely require ' +
+      'explanation, so the appropriate answer type must match the ' +
+      'question type. Separately, a response must directly address the ' +
+      'specific information requested, not merely share the question\'s ' +
+      'general topic — topic-adjacent responses do not count as genuine ' +
+      'answers.',
+    targetedMisconceptions: [
+      `${AAQ}:MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER`,
+      `${AAQ}:MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC`,
+    ],
+    source: `${AAQ_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const AAQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: AAQ,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Someone asks "Why were you late today?" Can this be fully answered with just "Yes"?',
+    choices: [
+      { text: 'No — this is a wh-question requiring explanation; "yes" doesn\'t even make sense as an answer here', isCorrect: true },
+      { text: 'Yes — a yes-or-no answer is always a complete answer', isCorrect: false, misconceptionId: `${AAQ}:MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER` },
+    ],
+    correctValue: 'no, match answer to question type',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AAQ}:MC-A-YES-OR-NO-ANSWER-IS-ALWAYS-A-COMPLETE-ANSWER`],
+    source: `${AAQ_SRC} — why-were-you-late conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: AAQ,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Someone asks "What time does the movie start?" and you respond, "The theater is really nice and has great popcorn." Does this count as a genuine answer, since it\'s related to the topic?',
+    choices: [
+      { text: 'No — a genuine answer must directly address the specific information requested, not just share the question\'s general topic', isCorrect: true },
+      { text: 'Yes — a good question can be answered with anything related to the topic', isCorrect: false, misconceptionId: `${AAQ}:MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC` },
+    ],
+    correctValue: 'no, must hit the specific ask',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AAQ}:MC-A-GOOD-QUESTION-CAN-BE-ANSWERED-WITH-ANYTHING-RELATED-TO-THE-TOPIC`],
+    source: `${AAQ_SRC} — dartboard-movie-time conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.non-verbal-communication ────────────────────────────────────
+const NVCM = 'eng.speaking.non-verbal-communication'
+const NVCM_SRC = 'docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md'
+
+const NVCM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NVCM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Direct eye contact with an elder signals respect in one culture ' +
+      'but disrespect or confrontation in another — like a thumbs-up ' +
+      'meaning "good job" in some countries but registering as offensive ' +
+      'in others. Non-verbal cues are like words: their meaning is set by ' +
+      'cultural convention, not a universal, built-in signal.',
+    targetedMisconceptions: [`${NVCM}:MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE`],
+    source: `${NVCM_SRC} — MC-A (P28 thumbs-up-not-universal conflict)`,
+  },
+  {
+    conceptId: NVCM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"I\'m really excited to be here" said in a flat monotone with eyes ' +
+      'on the floor and arms crossed — listeners trust the body language ' +
+      'over the words, just like everyone recognizes a flat "fine." in a ' +
+      'text doesn\'t actually mean fine. Non-verbal communication isn\'t a ' +
+      'minor decoration; it can carry the real message, even overriding ' +
+      'contradictory words.',
+    targetedMisconceptions: [`${NVCM}:MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS`],
+    source: `${NVCM_SRC} — MC-B (P28 flat-fine-text-message conflict)`,
+  },
+  {
+    conceptId: NVCM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Non-verbal cues (eye contact, gesture, personal space) carry ' +
+      'culturally variable meaning rather than one universal signal — the ' +
+      'same cue can signal respect in one culture and disrespect in ' +
+      'another. Separately, non-verbal communication carries real, ' +
+      'sometimes decisive communicative weight: when spoken words and body ' +
+      'language contradict, listeners often trust the non-verbal signal ' +
+      'over the literal words.',
+    targetedMisconceptions: [
+      `${NVCM}:MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE`,
+      `${NVCM}:MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS`,
+    ],
+    source: `${NVCM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const NVCM_PROBES: SeedProbe[] = [
+  {
+    conceptId: NVCM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Direct eye contact with an elder signals respect in one cultural context but disrespect in another. Does a specific non-verbal cue like eye contact mean the same thing in every culture?',
+    choices: [
+      { text: 'No — non-verbal cues are culturally variable; the same cue can carry opposite meanings depending on cultural context', isCorrect: true },
+      { text: 'Yes — non-verbal cues like eye contact and gesture mean the same thing in every culture', isCorrect: false, misconceptionId: `${NVCM}:MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE` },
+    ],
+    correctValue: 'no, meaning varies by culture',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NVCM}:MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE`],
+    source: `${NVCM_SRC} — thumbs-up-not-universal conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NVCM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A speaker says "I\'m really excited to be here" in a flat monotone with arms crossed, avoiding eye contact. Is the non-verbal signal just a minor addition to the real message, which is the spoken words?',
+    choices: [
+      { text: 'No — when words and body language contradict, listeners often trust the non-verbal signal over the words; non-verbal communication can carry the real message', isCorrect: true },
+      { text: 'Yes — non-verbal communication is just a minor addition to the real message, which is the spoken words', isCorrect: false, misconceptionId: `${NVCM}:MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS` },
+    ],
+    correctValue: 'no, non-verbal carries real weight',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NVCM}:MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS`],
+    source: `${NVCM_SRC} — flat-fine-text-message conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.storytelling-orally ──────────────────────────────────────────
+const STOR = 'eng.speaking.storytelling-orally'
+const STOR_SRC = 'docs/curriculum/blueprints/eng.speaking.storytelling-orally.md'
+
+const STOR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STOR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Listing every detail in exact order (what time you woke up, every ' +
+      'street you walked down) is like a tour guide reading every line of ' +
+      'a blueprint instead of pointing out what\'s interesting — nobody ' +
+      'stays engaged. A good oral story selects and emphasizes the events ' +
+      'that matter (a turning point, a moment of tension), compressing or ' +
+      'cutting the rest.',
+    targetedMisconceptions: [`${STOR}:MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER`],
+    source: `${STOR_SRC} — MC-A (P28 blueprint-tour-guide conflict)`,
+  },
+  {
+    conceptId: STOR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'An exciting chase scene told in a flat monotone contains the same ' +
+      'events but doesn\'t feel exciting — like a song\'s melody mattering ' +
+      'as much as its lyrics. How you say something (pacing, tone, ' +
+      'emphasis) is part of what you\'re actually communicating, not an ' +
+      'optional decoration separate from the story\'s real content.',
+    targetedMisconceptions: [`${STOR}:MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY`],
+    source: `${STOR_SRC} — MC-B (P28 flat-song-lyrics conflict)`,
+  },
+  {
+    conceptId: STOR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A good oral story selects and emphasizes the events that matter ' +
+      'for audience engagement rather than reciting every detail with ' +
+      'equal weight in strict chronological order. Separately, vocal ' +
+      'expression (tone, pacing, emphasis) is integral to how a story is ' +
+      'actually received, not a decorative extra separate from the ' +
+      'story\'s content — a flat delivery of exciting events fails to ' +
+      'convey the excitement despite identical content.',
+    targetedMisconceptions: [
+      `${STOR}:MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER`,
+      `${STOR}:MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY`,
+    ],
+    source: `${STOR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const STOR_PROBES: SeedProbe[] = [
+  {
+    conceptId: STOR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A retelling of getting lost includes every detail in exact chronological order — what time you woke up, every street walked. Does including every detail make a story better?',
+    choices: [
+      { text: 'No — a good oral story selects and emphasizes the events that matter, compressing or cutting minor details that don\'t add to the impact', isCorrect: true },
+      { text: 'Yes — a good oral story includes every detail in exact order', isCorrect: false, misconceptionId: `${STOR}:MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER` },
+    ],
+    correctValue: 'no, select and emphasize key moments',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STOR}:MC-A-A-GOOD-ORAL-STORY-INCLUDES-EVERY-DETAIL-IN-EXACT-ORDER`],
+    source: `${STOR_SRC} — blueprint-tour-guide conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: STOR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'An exciting chase scene is told in a flat, unvarying monotone with all the same events and words. Does the flat delivery still feel exciting to the listener?',
+    choices: [
+      { text: 'No — vocal expression is integral to how a story lands; a flat delivery of exciting content doesn\'t convey excitement despite identical events', isCorrect: true },
+      { text: 'Yes — vocal expression is an optional extra separate from the real content of the story', isCorrect: false, misconceptionId: `${STOR}:MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY` },
+    ],
+    correctValue: 'no, delivery is integral to content',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STOR}:MC-B-VOCAL-EXPRESSION-IS-AN-OPTIONAL-EXTRA-SEPARATE-FROM-THE-REAL-CONTENT-OF-THE-STORY`],
+    source: `${STOR_SRC} — flat-song-lyrics conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.revising-for-content ───────────────────────────────────────────
+const REVC = 'eng.writing.revising-for-content'
+const REVC_SRC = 'docs/curriculum/blueprints/eng.writing.revising-for-content.md'
+
+const REVC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REVC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A draft with perfect spelling but a confusing, poorly-organized ' +
+      'argument is a bigger problem than a well-organized draft with a ' +
+      'few typos. Revising for content means reconsidering big-picture ' +
+      'questions — is the argument clear, is the organization logical, ' +
+      'is evidence sufficient — not correcting spelling or grammar, which ' +
+      'is editing\'s job.',
+    targetedMisconceptions: [`${REVC}:MC-REVISING-MEANS-FIXING-SURFACE-ERRORS-LIKE-SPELLING-AND-GRAMMAR`],
+    source: `${REVC_SRC} — MC-1 (P28 surface-polish-vs-recipe-redesign conflict)`,
+  },
+  {
+    conceptId: REVC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A long draft that repeats the same point multiple times with ' +
+      'minimal new evidence still needs content revision — like a ' +
+      'visually large plate full of empty-calorie filler that looks ' +
+      'complete but doesn\'t actually nourish. Judge content adequacy by ' +
+      'evaluating the argument, evidence, and organization directly, not ' +
+      'by word count or paragraph count.',
+    targetedMisconceptions: [`${REVC}:MC-A-DRAFT-WITH-ENOUGH-WORDS-OR-PARAGRAPHS-DOESNT-NEED-CONTENT-REVISION`],
+    source: `${REVC_SRC} — MC-2 (P28 empty-calories conflict)`,
+  },
+  {
+    conceptId: REVC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Revising for content means reconsidering big-picture questions — ' +
+      'argument clarity, organizational logic, evidence sufficiency — not ' +
+      'correcting surface-level spelling, grammar, or punctuation, which ' +
+      'belongs to the later editing stage. Separately, a draft\'s length ' +
+      'or paragraph count does not indicate content adequacy; a long draft ' +
+      'can still have genuine content gaps or repetition requiring ' +
+      'revision regardless of its size.',
+    targetedMisconceptions: [
+      `${REVC}:MC-REVISING-MEANS-FIXING-SURFACE-ERRORS-LIKE-SPELLING-AND-GRAMMAR`,
+      `${REVC}:MC-A-DRAFT-WITH-ENOUGH-WORDS-OR-PARAGRAPHS-DOESNT-NEED-CONTENT-REVISION`,
+    ],
+    source: `${REVC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const REVC_PROBES: SeedProbe[] = [
+  {
+    conceptId: REVC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A draft has perfect spelling and grammar but a confusing, poorly-organized argument that jumps between unrelated points. Does revising this draft mean checking its spelling and grammar?',
+    choices: [
+      { text: 'No — revising for content means reconsidering the argument\'s clarity and organization; spelling and grammar belong to the later editing stage', isCorrect: true },
+      { text: 'Yes — revising means fixing surface errors like spelling and grammar', isCorrect: false, misconceptionId: `${REVC}:MC-REVISING-MEANS-FIXING-SURFACE-ERRORS-LIKE-SPELLING-AND-GRAMMAR` },
+    ],
+    correctValue: 'no, revision addresses content first',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REVC}:MC-REVISING-MEANS-FIXING-SURFACE-ERRORS-LIKE-SPELLING-AND-GRAMMAR`],
+    source: `${REVC_SRC} — surface-polish-vs-recipe-redesign conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: REVC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A long draft with many paragraphs repeats the same point three times with minimal new evidence. Does its length mean it doesn\'t need content revision?',
+    choices: [
+      { text: 'No — length and paragraph count don\'t measure content quality; this draft has genuine content gaps (repetition, insufficient development) needing revision regardless of size', isCorrect: true },
+      { text: 'Yes — a draft with enough words or paragraphs doesn\'t need content revision', isCorrect: false, misconceptionId: `${REVC}:MC-A-DRAFT-WITH-ENOUGH-WORDS-OR-PARAGRAPHS-DOESNT-NEED-CONTENT-REVISION` },
+    ],
+    correctValue: 'no, evaluate content directly',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REVC}:MC-A-DRAFT-WITH-ENOUGH-WORDS-OR-PARAGRAPHS-DOESNT-NEED-CONTENT-REVISION`],
+    source: `${REVC_SRC} — empty-calories conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -25525,6 +26156,13 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SYNT_EXPLANATIONS,
   ...CVSK_EXPLANATIONS,
   ...DRFT_EXPLANATIONS,
+  ...LACQ_EXPLANATIONS,
+  ...LFAM_EXPLANATIONS,
+  ...SEMI_EXPLANATIONS,
+  ...AAQ_EXPLANATIONS,
+  ...NVCM_EXPLANATIONS,
+  ...STOR_EXPLANATIONS,
+  ...REVC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -25809,4 +26447,11 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SYNT_PROBES,
   ...CVSK_PROBES,
   ...DRFT_PROBES,
+  ...LACQ_PROBES,
+  ...LFAM_PROBES,
+  ...SEMI_PROBES,
+  ...AAQ_PROBES,
+  ...NVCM_PROBES,
+  ...STOR_PROBES,
+  ...REVC_PROBES,
 ]
