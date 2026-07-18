@@ -17685,6 +17685,489 @@ const DRAM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.verbs ───────────────────────────────────────────────────────
+const VERB = 'eng.grammar.verbs'
+const VERB_SRC = 'docs/curriculum/blueprints/eng.grammar.verbs.md'
+
+const VERB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VERB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Verbs express action OR state of being — "is," "am," "are," ' +
+      '"seem," "feel," "become" are all verbs even though they don’t show ' +
+      'physical movement; in "She IS happy," nothing physically moves, ' +
+      'but "is" still does a verb’s job, connecting the subject to a ' +
+      'description. Mental/emotional verbs (think, want, believe, love) ' +
+      'work the same way. Check whether a word expresses action OR a ' +
+      'state/condition/mental process — not just visible physical ' +
+      'movement.',
+    targetedMisconceptions: [`${VERB}:MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS`],
+    source: `${VERB_SRC} — MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS (P28 she-is-happy conflict)`,
+  },
+  {
+    conceptId: VERB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Helping (auxiliary) verbs — is, am, are, was, were, has, have, ' +
+      'had, will, would, can, could, must, do, does, did — combine with a ' +
+      'main verb to form the complete VERB PHRASE, carrying essential ' +
+      'information about tense, ongoing action, ability, or question ' +
+      'formation. In "She is running," just "She running" alone isn’t a ' +
+      'complete, correct sentence — "is" is doing real grammatical work. ' +
+      'Always check for helping verbs alongside the main verb, and treat ' +
+      'the full verb phrase as the complete verb.',
+    targetedMisconceptions: [`${VERB}:MC-HELPING-VERBS-ARE-NOT-REAL-VERBS`],
+    source: `${VERB_SRC} — MC-HELPING-VERBS-ARE-NOT-REAL-VERBS (P28 she-is-running-vs-she-running conflict)`,
+  },
+  {
+    conceptId: VERB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Verbs express action or state of being/mental process — linking ' +
+      'verbs ("is," "seems," "becomes") and mental-process verbs (think, ' +
+      'believe, want) are genuine verbs despite showing no physical ' +
+      'movement. Separately, helping (auxiliary) verbs combine with a ' +
+      'main verb to form the complete verb phrase, carrying essential ' +
+      'tense, aspect, and modal information ("has been waiting," "will ' +
+      'have finished") — the full phrase, not just the main verb alone, ' +
+      'is the grammatically complete unit.',
+    targetedMisconceptions: [
+      `${VERB}:MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS`,
+      `${VERB}:MC-HELPING-VERBS-ARE-NOT-REAL-VERBS`,
+    ],
+    source: `${VERB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const VERB_PROBES: SeedProbe[] = [
+  {
+    conceptId: VERB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "She IS happy," is anything physically moving? Is "is" still a verb?',
+    choices: [
+      { text: 'Nothing is physically moving, but "is" is still a verb — it connects the subject to a state or description', isCorrect: true },
+      { text: '"Is" cannot be a verb since nothing is physically moving', isCorrect: false, misconceptionId: `${VERB}:MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS` },
+    ],
+    correctValue: 'yes, is is a verb',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${VERB}:MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS`],
+    source: `${VERB_SRC} — she-is-happy conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VERB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "She is running," is "running" the only verb, or is "is" also part of the verb?',
+    choices: [
+      { text: '"Is running" together is the complete verb phrase — "is" is a genuine helping verb, not just an optional extra word', isCorrect: true },
+      { text: 'Only "running" is the verb — helping verbs like "is" don\'t really count as verbs', isCorrect: false, misconceptionId: `${VERB}:MC-HELPING-VERBS-ARE-NOT-REAL-VERBS` },
+    ],
+    correctValue: 'is running, together',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${VERB}:MC-HELPING-VERBS-ARE-NOT-REAL-VERBS`],
+    source: `${VERB_SRC} — she-is-running-vs-she-running conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.complex-sentences ───────────────────────────────────────────
+const CPLX = 'eng.grammar.complex-sentences'
+const CPLX_SRC = 'docs/curriculum/blueprints/eng.grammar.complex-sentences.md'
+
+const CPLX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CPLX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Not every joining word creates a compound sentence. Coordinating ' +
+      'conjunctions (and, but, or, so, yet, for, nor) join two clauses ' +
+      'that could EACH stand alone — that’s compound. Subordinating ' +
+      'conjunctions (because, although, when, if, since, while) create a ' +
+      'clause that CANNOT stand alone by itself — "Because the game was ' +
+      'cancelled" is not a complete sentence on its own. A sentence built ' +
+      'from an independent clause plus a dependent clause is complex, not ' +
+      'compound. Test each clause separately: is it complete on its own?',
+    targetedMisconceptions: [`${CPLX}:MC-A-SENTENCE-WITH-A-SUBORDINATING-WORD-IS-COMPOUND`],
+    source: `${CPLX_SRC} — MC-A (P28 and-vs-because conflict)`,
+  },
+  {
+    conceptId: CPLX,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A dependent clause can come before OR after the independent clause ' +
+      '— the sentence is complex either way, and the meaning stays the ' +
+      'same. "Because it was raining, we stayed inside" and "We stayed ' +
+      'inside because it was raining" are both complex sentences with ' +
+      'identical meaning. What changes is just the comma: when the ' +
+      'dependent clause comes first, it’s followed by a comma; when the ' +
+      'independent clause comes first, you usually don’t need a comma ' +
+      'before the dependent clause that follows.',
+    targetedMisconceptions: [`${CPLX}:MC-THE-DEPENDENT-CLAUSE-MUST-ALWAYS-COME-FIRST`],
+    source: `${CPLX_SRC} — MC-THE-DEPENDENT-CLAUSE-MUST-ALWAYS-COME-FIRST (P28 because-it-was-raining-both-orders conflict)`,
+  },
+  {
+    conceptId: CPLX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A subordinating conjunction (because, although, when, if) does not ' +
+      'create a compound sentence — it introduces a dependent clause that ' +
+      'cannot stand alone, making the resulting sentence complex, not ' +
+      'compound; test each clause individually for standalone ' +
+      'completeness to distinguish the two. Separately, the dependent ' +
+      'clause may precede or follow the independent clause with identical ' +
+      'meaning and classification — only the comma convention changes ' +
+      '(comma follows an introductory dependent clause; typically no ' +
+      'comma when it follows the independent clause).',
+    targetedMisconceptions: [
+      `${CPLX}:MC-A-SENTENCE-WITH-A-SUBORDINATING-WORD-IS-COMPOUND`,
+      `${CPLX}:MC-THE-DEPENDENT-CLAUSE-MUST-ALWAYS-COME-FIRST`,
+    ],
+    source: `${CPLX_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CPLX_PROBES: SeedProbe[] = [
+  {
+    conceptId: CPLX,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Because the game was cancelled, the fans went home disappointed" a compound sentence, since it has a joining word?',
+    choices: [
+      { text: 'No — it is complex; "because the game was cancelled" cannot stand alone as a complete sentence, so it is a dependent clause, not a second independent clause', isCorrect: true },
+      { text: 'Yes — any sentence with a joining word between two clauses is compound', isCorrect: false, misconceptionId: `${CPLX}:MC-A-SENTENCE-WITH-A-SUBORDINATING-WORD-IS-COMPOUND` },
+    ],
+    correctValue: 'no, complex sentence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CPLX}:MC-A-SENTENCE-WITH-A-SUBORDINATING-WORD-IS-COMPOUND`],
+    source: `${CPLX_SRC} — and-vs-because conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CPLX,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Are "Because it was raining, we stayed inside" and "We stayed inside because it was raining" both valid complex sentences with the same meaning?',
+    choices: [
+      { text: 'Yes — a dependent clause can come before or after the independent clause; only the comma placement changes, not whether it\'s complex', isCorrect: true },
+      { text: 'No — the dependent clause must always come first in a complex sentence', isCorrect: false, misconceptionId: `${CPLX}:MC-THE-DEPENDENT-CLAUSE-MUST-ALWAYS-COME-FIRST` },
+    ],
+    correctValue: 'yes, both valid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CPLX}:MC-THE-DEPENDENT-CLAUSE-MUST-ALWAYS-COME-FIRST`],
+    source: `${CPLX_SRC} — because-it-was-raining-both-orders conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.parallel-structure ──────────────────────────────────────────
+const PARA = 'eng.grammar.parallel-structure'
+const PARA_SRC = 'docs/curriculum/blueprints/eng.grammar.parallel-structure.md'
+
+const PARA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PARA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Parallel structure isn’t just a rule for simple word lists — it’s ' +
+      'a general principle that applies any time you join items in a ' +
+      'series or comparison, whether those items are single words, ' +
+      'phrases, or entire clauses. "She likes swimming, to run, and ' +
+      'biking" mismatches a gerund, an infinitive, and another gerund; ' +
+      '"She likes swimming, running, and biking" matches all three as ' +
+      'gerunds. When checking for parallel structure, check ANY series, ' +
+      'including ones made of phrases, not just single-word lists.',
+    targetedMisconceptions: [`${PARA}:MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS`],
+    source: `${PARA_SRC} — MC-A (P28 swimming-to-run-biking conflict)`,
+  },
+  {
+    conceptId: PARA,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Fixing parallel structure by just making items "sound similar" ' +
+      'without checking the actual grammatical form is like tuning three ' +
+      'instruments to roughly the same volume without checking they’re ' +
+      'actually in the same musical key. "...to practice harder, to focus ' +
+      'more, and to try improving their communication" still mismatches ' +
+      '(mixing infinitive-plus-gerund with plain infinitives); ' +
+      '"...to practice harder, to focus more, and to improve their ' +
+      'communication" genuinely matches all three as simple infinitives. ' +
+      'Identify the EXACT grammatical form and match precisely, not just ' +
+      'adjust wording until it sounds better.',
+    targetedMisconceptions: [`${PARA}:MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR`],
+    source: `${PARA_SRC} — MC-B (P28 to-try-improving-incomplete-fix conflict)`,
+  },
+  {
+    conceptId: PARA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Parallel structure applies to any series or comparison — single ' +
+      'words, phrases (gerund, infinitive), or full clauses — not just ' +
+      'simple word lists; a mismatch at the phrase level ("swimming, to ' +
+      'run, and biking") is exactly as real a violation as a word-level ' +
+      'one. Separately, a genuine fix requires matching the EXACT ' +
+      'grammatical form of the matching items, not merely adjusting ' +
+      'wording until the series sounds more similar — a superficial ' +
+      'adjustment that still mixes forms has not actually resolved the ' +
+      'violation.',
+    targetedMisconceptions: [
+      `${PARA}:MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS`,
+      `${PARA}:MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR`,
+    ],
+    source: `${PARA_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PARA_PROBES: SeedProbe[] = [
+  {
+    conceptId: PARA,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does "She likes swimming, to run, and biking" violate parallel structure, even though the items are phrases, not single words?',
+    choices: [
+      { text: 'Yes — parallel structure applies to phrases too; "to run" (infinitive) mismatches the two gerunds ("swimming," "biking")', isCorrect: true },
+      { text: 'No — parallel structure only applies to simple lists of single words, not phrases', isCorrect: false, misconceptionId: `${PARA}:MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS` },
+    ],
+    correctValue: 'yes, it violates parallel structure',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PARA}:MC-A-PARALLEL-STRUCTURE-ONLY-APPLIES-TO-SIMPLE-LISTS-OF-SINGLE-WORDS`],
+    source: `${PARA_SRC} — swimming-to-run-biking conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PARA,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does changing "...to practice harder, to focus more, and improving their communication" to "...to practice harder, to focus more, and to try improving their communication" actually fix the parallel structure violation?',
+    choices: [
+      { text: 'No — it still mixes an infinitive-plus-gerund construction with two plain infinitives; the exact grammatical form still doesn\'t match', isCorrect: true },
+      { text: 'Yes — the items now sound more similar, so the structure is fixed', isCorrect: false, misconceptionId: `${PARA}:MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR` },
+    ],
+    correctValue: 'no, still mismatched',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PARA}:MC-B-FIXING-A-PARALLEL-STRUCTURE-ERROR-JUST-MEANS-MAKING-THE-ITEMS-SOUND-SIMILAR`],
+    source: `${PARA_SRC} — to-try-improving-incomplete-fix conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.colons-semicolons-dashes ────────────────────────────────────
+const CSDS = 'eng.grammar.colons-semicolons-dashes'
+const CSDS_SRC = 'docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md'
+
+const CSDS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CSDS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Using a colon after any introductory-feeling phrase, regardless of ' +
+      'whether it’s a complete sentence, is like opening a formal ' +
+      'announcement with a half-finished sentence. "My favorite foods ' +
+      'are: pizza, tacos, and sushi" is wrong — "my favorite foods are" ' +
+      'isn’t a complete clause on its own; "I have three favorite foods: ' +
+      'pizza, tacos, and sushi" is correct, since "I have three favorite ' +
+      'foods" stands alone. Before placing a colon, check: does ' +
+      'everything BEFORE it form a complete, independent sentence?',
+    targetedMisconceptions: [`${CSDS}:MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE`],
+    source: `${CSDS_SRC} — MC-A (P28 my-favorite-foods-are-vs-I-have-three-favorite-foods conflict)`,
+  },
+  {
+    conceptId: CSDS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating semicolons and commas as interchangeable is like treating ' +
+      'a heavy-duty industrial staple and a piece of tape as ' +
+      'interchangeable — both can "attach" things, but the semicolon is ' +
+      'specifically built for joining two genuinely independent, complete ' +
+      'clauses without a conjunction. "After the movie; we got ice ' +
+      'cream" misuses the semicolon (the first part isn’t independent); ' +
+      '"We got ice cream; then we went home" correctly joins two ' +
+      'independent clauses. Reserve the semicolon for this specific job; ' +
+      'use a comma for everything else.',
+    targetedMisconceptions: [`${CSDS}:MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY`],
+    source: `${CSDS_SRC} — MC-B (P28 after-the-movie-semicolon-misuse conflict)`,
+  },
+  {
+    conceptId: CSDS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A colon requires a complete, grammatically independent clause ' +
+      'immediately before it — placing one after an incomplete ' +
+      'introductory phrase ("My favorite foods are:") is incorrect, ' +
+      'regardless of how naturally it seems to introduce a list. ' +
+      'Separately, the semicolon and comma are not interchangeable: the ' +
+      'semicolon specifically joins two genuinely independent clauses ' +
+      'without a conjunction (or separates complex list items already ' +
+      'containing commas), while the comma serves broader, distinct ' +
+      'functions.',
+    targetedMisconceptions: [
+      `${CSDS}:MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE`,
+      `${CSDS}:MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY`,
+    ],
+    source: `${CSDS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CSDS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CSDS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "My favorite foods are: pizza, tacos, and sushi" correctly punctuated?',
+    choices: [
+      { text: 'No — "my favorite foods are" is not a complete independent clause on its own, so the colon is misplaced', isCorrect: true },
+      { text: 'Yes — a colon can be used after any phrase that seems to introduce a list', isCorrect: false, misconceptionId: `${CSDS}:MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE` },
+    ],
+    correctValue: 'no, colon misplaced',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CSDS}:MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE`],
+    source: `${CSDS_SRC} — my-favorite-foods-are-vs-I-have-three-favorite-foods conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CSDS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "After the movie; we got ice cream" correctly using the semicolon?',
+    choices: [
+      { text: 'No — "after the movie" is not an independent clause on its own; a semicolon requires a complete independent clause on both sides', isCorrect: true },
+      { text: 'Yes — semicolons and commas do the same job and can be used interchangeably', isCorrect: false, misconceptionId: `${CSDS}:MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY` },
+    ],
+    correctValue: 'no, misused semicolon',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CSDS}:MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY`],
+    source: `${CSDS_SRC} — after-the-movie-semicolon-misuse conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.run-on-sentences-and-comma-splices ─────────────────────────
+const RUNC = 'eng.grammar.run-on-sentences-and-comma-splices'
+const RUNC_SRC = 'docs/curriculum/blueprints/eng.grammar.run-on-sentences-and-comma-splices.md'
+
+const RUNC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RUNC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Assuming a comma alone can correctly join two independent clauses ' +
+      'is like assuming a single link of chain, with no connecting ' +
+      'clasp, can hold two heavy objects together — the comma is doing ' +
+      'some of the connecting work, but on its own it isn’t secure. "The ' +
+      'rain stopped, we went outside" is a comma splice (comma alone, an ' +
+      'error); "The rain stopped, and we went outside" is correct (comma ' +
+      'PLUS the conjunction "and"). Never join two independent clauses ' +
+      'with a comma alone.',
+    targetedMisconceptions: [`${RUNC}:MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA`],
+    source: `${RUNC_SRC} — MC-A (P28 rain-stopped-comma-alone-vs-and conflict)`,
+  },
+  {
+    conceptId: RUNC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Assuming splitting into two sentences is the only fix for a run-on ' +
+      'or comma splice is like assuming there’s only one way to repair a ' +
+      'torn seam in fabric — sewing, fabric glue, or a patch might all ' +
+      'genuinely fix the tear. "The rain stopped we went outside" (a true ' +
+      'run-on) can be fixed by splitting ("The rain stopped. We went ' +
+      'outside."), by adding comma-plus-conjunction ("The rain stopped, ' +
+      'and we went outside."), or with a semicolon ("The rain stopped; we ' +
+      'went outside.") — all valid, with the best choice depending on the ' +
+      'rhythm and relationship you want.',
+    targetedMisconceptions: [`${RUNC}:MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES`],
+    source: `${RUNC_SRC} — MC-B (P28 three-valid-fixes conflict)`,
+  },
+  {
+    conceptId: RUNC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A comma alone is never sufficient to join two independent clauses ' +
+      '— that produces a comma splice, a genuine error, not a valid ' +
+      'alternative to a properly formed compound sentence (which requires ' +
+      'the comma plus a coordinating conjunction). Separately, correcting ' +
+      'a run-on sentence or comma splice has three equally valid ' +
+      'strategies — splitting into two sentences, adding comma-plus-' +
+      'conjunction, or using a semicolon — and the best choice depends on ' +
+      'the intended rhythm and relationship between the two ideas, not a ' +
+      'single default fix.',
+    targetedMisconceptions: [
+      `${RUNC}:MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA`,
+      `${RUNC}:MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES`,
+    ],
+    source: `${RUNC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RUNC_PROBES: SeedProbe[] = [
+  {
+    conceptId: RUNC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "The rain stopped, we went outside" correctly punctuated?',
+    choices: [
+      { text: 'No — this is a comma splice; a comma alone cannot join two independent clauses, it needs a conjunction added or a different fix', isCorrect: true },
+      { text: 'Yes — a comma is just as correct as a comma-plus-conjunction for joining two independent clauses', isCorrect: false, misconceptionId: `${RUNC}:MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA` },
+    ],
+    correctValue: 'no, comma splice',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RUNC}:MC-A-A-COMMA-SPLICE-IS-JUST-AS-CORRECT-AS-A-COMPOUND-SENTENCE-SINCE-BOTH-USE-A-COMMA`],
+    source: `${RUNC_SRC} — rain-stopped-comma-alone-vs-and conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RUNC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'For the run-on "The rain stopped we went outside," is splitting it into two sentences the ONLY valid fix?',
+    choices: [
+      { text: 'No — adding a comma plus conjunction, or using a semicolon, are also valid fixes, each with a slightly different rhythm', isCorrect: true },
+      { text: 'Yes — splitting into two separate sentences is the only way to fix a run-on or comma splice', isCorrect: false, misconceptionId: `${RUNC}:MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES` },
+    ],
+    correctValue: 'no, multiple valid fixes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RUNC}:MC-B-THE-ONLY-WAY-TO-FIX-A-RUN-ON-OR-COMMA-SPLICE-IS-TO-SPLIT-IT-INTO-TWO-SEPARATE-SENTENCES`],
+    source: `${RUNC_SRC} — three-valid-fixes conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -17887,6 +18370,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SATM_EXPLANATIONS,
   ...POV_EXPLANATIONS,
   ...DRAM_EXPLANATIONS,
+  ...VERB_EXPLANATIONS,
+  ...CPLX_EXPLANATIONS,
+  ...PARA_EXPLANATIONS,
+  ...CSDS_EXPLANATIONS,
+  ...RUNC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -18089,4 +18577,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SATM_PROBES,
   ...POV_PROBES,
   ...DRAM_PROBES,
+  ...VERB_PROBES,
+  ...CPLX_PROBES,
+  ...PARA_PROBES,
+  ...CSDS_PROBES,
+  ...RUNC_PROBES,
 ]
