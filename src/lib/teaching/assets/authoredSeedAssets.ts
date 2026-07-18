@@ -14939,6 +14939,102 @@ const KEPL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.listening.listening-comprehension-strategies ──────────────────────────
+const LCST = 'eng.listening.listening-comprehension-strategies'
+const LCST_SRC = 'docs/curriculum/blueprints/eng.listening.listening-comprehension-strategies.md'
+
+const LCST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LCST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Expecting to understand every single word perfectly the first time ' +
+      'is like expecting to see every star clearly on a slightly hazy ' +
+      'night — a skilled stargazer keeps observing, and the picture often ' +
+      'becomes clearer as more comes into view. A listener who freezes on ' +
+      'one unfamiliar word misses the next several sentences, while one who ' +
+      'makes a quick contextual guess and keeps listening usually ' +
+      'understands more of the passage overall. When you hit an unfamiliar ' +
+      'word, do not stop and panic — make a quick, reasonable guess and ' +
+      'KEEP LISTENING.',
+    targetedMisconceptions: [`${LCST}:MC-A-GOOD-LISTENERS-UNDERSTAND-EVERY-WORD-PERFECTLY-THE-FIRST-TIME`],
+    source: `${LCST_SRC} — MC-A (hazy-night-stargazer anchor)`,
+  },
+  {
+    conceptId: LCST,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Predicting what a speaker will say next is not wild guessing, and ' +
+      'it is also not something to skip entirely by treating each moment as ' +
+      'unconnected to what came before. A genuine prediction is a flexible, ' +
+      'revisable hypothesis grounded in the clues already given — when the ' +
+      'actual content differs from your prediction, that is a normal signal ' +
+      'to update your expectation, not a sign you failed. Treat predictions ' +
+      'as working guesses to revise, not fixed assumptions to defend.',
+    targetedMisconceptions: [`${LCST}:MC-B-PREDICTING-WHAT-COMES-NEXT-MEANS-GUESSING-RANDOMLY-OR-JUST-ASSUMING-YOURE-RIGHT`],
+    source: `${LCST_SRC} — MC-B (revisable-hypothesis conflict evidence)`,
+  },
+  {
+    conceptId: LCST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Skilled listening tolerates momentary gaps: freezing on one ' +
+      'unfamiliar word and losing track of subsequent content produces ' +
+      'worse overall comprehension than making a quick contextual guess and ' +
+      'continuing — later content frequently resolves the initial ' +
+      'ambiguity. Separately, predicting upcoming content is a legitimate ' +
+      'comprehension strategy grounded in available clues, functioning as a ' +
+      'revisable hypothesis rather than either a random guess or a fixed ' +
+      'commitment — when actual content diverges from a prediction, revise ' +
+      'the prediction rather than treating the divergence as failure.',
+    targetedMisconceptions: [
+      `${LCST}:MC-A-GOOD-LISTENERS-UNDERSTAND-EVERY-WORD-PERFECTLY-THE-FIRST-TIME`,
+      `${LCST}:MC-B-PREDICTING-WHAT-COMES-NEXT-MEANS-GUESSING-RANDOMLY-OR-JUST-ASSUMING-YOURE-RIGHT`,
+    ],
+    source: `${LCST_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LCST_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCST,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A listener hears an unfamiliar word and freezes, missing the next three sentences while stuck on it. Was this the better strategy compared to guessing from context and continuing?',
+    choices: [
+      { text: 'No — making a quick contextual guess and continuing to listen usually leads to better overall understanding', isCorrect: true },
+      { text: 'Yes — good listeners must understand every word perfectly the first time', isCorrect: false, misconceptionId: `${LCST}:MC-A-GOOD-LISTENERS-UNDERSTAND-EVERY-WORD-PERFECTLY-THE-FIRST-TIME` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCST}:MC-A-GOOD-LISTENERS-UNDERSTAND-EVERY-WORD-PERFECTLY-THE-FIRST-TIME`],
+    source: `${LCST_SRC} — hazy-night-stargazer conflict as probe`,
+  },
+  {
+    conceptId: LCST,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A listener predicted what a speaker would say next, but the actual content turned out differently. Does this mean the listener failed?',
+    choices: [
+      { text: 'No — a prediction is a revisable hypothesis; update it when new information contradicts it', isCorrect: true },
+      { text: 'Yes — predicting what comes next means you must guess randomly or assume you\'re always right', isCorrect: false, misconceptionId: `${LCST}:MC-B-PREDICTING-WHAT-COMES-NEXT-MEANS-GUESSING-RANDOMLY-OR-JUST-ASSUMING-YOURE-RIGHT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCST}:MC-B-PREDICTING-WHAT-COMES-NEXT-MEANS-GUESSING-RANDOMLY-OR-JUST-ASSUMING-YOURE-RIGHT`],
+    source: `${LCST_SRC} — revisable-hypothesis conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -15113,6 +15209,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...GPOT_EXPLANATIONS,
   ...ESCV_EXPLANATIONS,
   ...KEPL_EXPLANATIONS,
+  ...LCST_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -15287,4 +15384,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...GPOT_PROBES,
   ...ESCV_PROBES,
   ...KEPL_PROBES,
+  ...LCST_PROBES,
 ]
