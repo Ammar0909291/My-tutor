@@ -1,0 +1,351 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.sampling-distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.sampling-distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2be6242d76723df0074171e884e290e0b049953be91b622ff24724638d45c83f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.sampling-distribution.md": "sha256:d25aa02c841b84f063b59226c0f59ea74b3a1c543cf22b99bf32c29efc4ca1d5"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.sampling-distribution",
+    "name": "Sampling Distribution",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.stats.sampling",
+      "math.prob.random-variable"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.sampling-distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.sampling-distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.sampling-distribution.md": "sha256:d25aa02c841b84f063b59226c0f59ea74b3a1c543cf22b99bf32c29efc4ca1d5"
+      },
+      "contentHash": "sha256:d5a1c9c57fa5970777b04dbbdd696499d0fb6515b9d3cb3aca9d09c800cbe92a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling-distribution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling-distribution.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling-distribution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling-distribution.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling-distribution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling-distribution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling-distribution.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling-distribution\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling-distribution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling-distribution.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling-distribution\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.sampling-distribution/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Sampling Distribution — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.stats.sampling**: SRS, stratified, cluster methods — the mechanism by which repeated samples are drawn, which this concept studies the OUTCOME (the statistic's distribution) of\n- **math.prob.random-variable**: a random variable assigns numbers to outcomes; a sample statistic (like $\\bar X$) is itself a random variable, since its value differs from sample to sample\n- **math.prob.clt**: the sampling distribution of $\\bar X_n$ is approximately normal for large n — this concept develops the FULL sampling-distribution framework (mean, standard error, shape) that CLT's shape claim is one part of\n\n### Target Knowledge State\nStudent can define a sampling distribution as the probability distribution of a STATISTIC (e.g. $\\bar X$) computed across ALL possible samples of a given size — a distinct object from both the population and any single sample's raw data; correctly state $E[\\bar X]=\\mu$ and $SD(\\bar X)=\\sigma/\\sqrt n$ (the standard error), applying the SQUARE-ROOT scaling correctly (not a linear $1/n$ scaling); and correctly reason about how sample size affects the standard error's magnitude, recognizing that QUADRUPLING (not doubling) the sample size is needed to HALVE the standard error, due to the square-root relationship.\n\n### Conceptual Obstacles\n1. Confusing the sampling distribution (of a STATISTIC, across MANY hypothetical samples) with the distribution of raw DATA within one single sample, or with the population distribution itself — three genuinely different objects that are easy to conflate given how similar their descriptions can sound\n2. Misapplying the standard-error formula $\\sigma/\\sqrt n$ as $\\sigma/n$ (a straightforward, but incorrect, linear scaling) — the square root is not optional or a rounding nuance, it fundamentally changes how much n must grow to shrink SE by a given factor\n3. Assuming that DOUBLING the sample size HALVES the standard error (a linear-scaling intuition) — because SE scales as $1/\\sqrt n$, halving SE actually requires QUADRUPLING n, not doubling it; this is a frequently tested, easy-to-miss numerical consequence of the square-root relationship\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 29,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "SAMPLING-DISTRIBUTION-IS-THE-DATA",
+      "content": "| MC-1 | SAMPLING-DISTRIBUTION-IS-THE-DATA | Student conflates the sampling distribution (of a statistic across many samples) with the distribution of individual data points within one sample, or with the population distribution | Any question distinguishing \"spread of the data in one sample\" from \"spread of the statistic across many samples\" |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "STANDARD-ERROR-IS-SIGMA-OVER-N",
+      "content": "| MC-2 | STANDARD-ERROR-IS-SIGMA-OVER-N | Student computes the standard error as $\\sigma/n$ instead of $\\sigma/\\sqrt n$, applying a linear rather than square-root scaling | Any numeric standard-error computation |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "DOUBLE-N-HALVES-SE",
+      "content": "| MC-3 | DOUBLE-N-HALVES-SE | Student assumes doubling the sample size halves the standard error, missing that SE scales as $1/\\sqrt n$, so QUADRUPLING n is required to halve SE | Any question asking how much n must change to achieve a target reduction in standard error |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "The Distribution of a Statistic, Built by Hand",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Distribution of a Statistic, Built by Hand\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 66,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Three Distinct Objects; √n, Not n; Quadruple, Not Double",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Distinct Objects; √n, Not n; Quadruple, Not Double\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 134,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Composite: All Three Distinctions Together",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite: All Three Distinctions Together\",\"primitives\":[\"P28\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 185,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 222,
+        "endLine": 438
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess the three-object distinction, correct SE computation, and correct scaling reasoning under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** A population has $\\mu=50, \\sigma=10$. For samples of size $n=4$, state $E[\\bar X]$ and $SD(\\bar X)$.\n\n*Solution:* $E[\\bar X]=\\mu=50$. $SD(\\bar X)=\\sigma/\\sqrt n=10/\\sqrt4=10/2=5$.\n\n**Problem 2:** True or false: \"The standard error is the same thing as the population standard deviation.\" Justify.\n\n*Solution:* **False.** SE = $\\sigma/\\sqrt n$ is the standard deviation of the SAMPLING DISTRIBUTION of the mean (always ≤ σ for n≥1, strictly smaller for n>1); σ itself is the population's own standard deviation, a fixed, larger quantity that averaging does not change.\n\n**Problem 3:** For $\\sigma=40$, find the sample size needed so that $SE=5$.\n\n*Solution:* $5=40/\\sqrt n \\Rightarrow \\sqrt n=8 \\Rightarrow n=64$.\n\n**Problem 4:** A sample size increases from $n=10$ to $n=20$ (doubled). Does the standard error get cut exactly in half? Justify with a computation (assume $\\sigma=10$ for concreteness).\n\n*Solution:* No. At $n=10$: $SE=10/\\sqrt{10}\\approx3.16$. At $n=20$: $SE=10/\\sqrt{20}\\approx2.24$. Ratio: $2.24/3.16\\approx0.707=1/\\sqrt2$, not $0.5$ — doubling n reduces SE by a factor of $1/\\sqrt2$, not $1/2$; halving SE requires quadrupling n.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A polling organization surveys voters and reports the sample mean approval rating, with a population standard deviation (voter-to-voter variability in approval scores) of $\\sigma=25$ points.\n\n(a) For a poll of $n=100$ voters, compute the standard error, and explain in one sentence what this number represents (as opposed to what a single voter's own approval-score variability represents).\n(b) The organization wants to reduce its margin of error (proportional to the SE) to one-FIFTH of its current size for a follow-up poll. What new sample size is required, and how many TIMES more voters must be surveyed compared to the original 100?\n(c) A journalist writes: \"The organization surveyed 4 times as many people this year (400 instead of 100), so their results should now be 4 times more precise.\" Evaluate this claim precisely, computing the actual change in standard error and identifying exactly what \"4 times more precise\" would have to mean for the claim to be numerically correct (if it is at all).\n\n**Expected solution:**\n\n(a) $SE=25/\\sqrt{100}=25/10=2.5$. This represents the standard deviation of the SAMPLING DISTRIBUTION of the sample mean approval rating — i.e., how much the average approval rating would be expected to vary from one poll of 100 voters to another poll of 100 (different) voters — NOT the variability of individual voters' own approval scores (which remains the full population $\\sigma=25$, unchanged by any polling).\n\n(b) To reduce SE to $1/5$ of its current value, $\\sqrt n$ must become 5 times as large, so $n$ must become $5^2=25$ times as large: new $n=25\\times100=2500$ — **25 times** as many voters as the original 100 (not 5 times).\n\n(c) The journalist's claim is **incorrect** as a direct precision multiplier. Computing directly: at $n=100$, $SE=2.5$; at $n=400$ (4 times as many voters), $SE=25/\\sqrt{400}=25/20=1.25$ — exactly HALF of the original, not a quarter. The actual relationship: $SE\\propto1/\\sqrt n$, so multiplying $n$ by a factor of 4 multiplies $\\sqrt n$ by a factor of $\\sqrt4=2$, which divides SE by 2 (not 4). For \"4 times more precise\" (SE reduced to 1/4) to be numerically correct, $n$ would need to increase by a factor of $4^2=16$ (i.e. to $n=1600$), not merely 4. The journalist's error is applying a direct, linear \"4x sample size → 4x precision\" intuition, when the actual relationship is governed by the square root, exactly the DOUBLE-N-HALVES-SE misconception generalized to a different multiplier.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.stats.standard-error; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.stats.sampling-distribution assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — SAMPLING-DISTRIBUTION-IS-THE-DATA (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Conflating the sampling distribution with one sample's raw data (or the population) is SAMPLING-DISTRIBUTION-IS-THE-DATA. The sampling distribution describes a STATISTIC's behavior across MANY hypothetical samples — a different object from any single sample's own data or the population itself.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is the 'sampling distribution' of a sample of 10 test scores?\"\n- MC-1 response: describes the spread of the 10 scores THEMSELVES, as if that were the sampling distribution.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The spread of the 10 scores in ONE sample is just that sample's own data — not a sampling distribution at all. The sampling distribution requires imagining (or actually computing) the STATISTIC (like the mean of those 10 scores) across MANY different possible samples of 10 — it describes how THAT statistic varies from sample to sample, a fundamentally different, 'one level up' object from the raw data in any single sample.\"\n\nPractice: For a population {1,2,3,4,5,6}, list all samples of size 2, compute each sample's mean, and confirm the resulting list of means (the sampling distribution) is different from any single sample's own two data points.\n\n---\n\n### Repair Action B02 — STANDARD-ERROR-IS-SIGMA-OVER-N (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Computing SE as σ/n instead of σ/√n is STANDARD-ERROR-IS-SIGMA-OVER-N. The square root is essential — omitting it drastically understates the sampling distribution's true spread.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"σ=20, n=16. Compute the standard error.\"\n- MC-2 response: \"20/16=1.25.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Take the square root of n FIRST: $\\sqrt{16}=4$, then divide: $20/4=5$. The correct SE is 5, not 1.25 — a substantial difference. Skipping the square root treats the sampling distribution as far more concentrated than it really is; always compute $\\sqrt n$ as an explicit intermediate step before dividing.\"\n\nPractice: Compute the standard error for σ=36, n=9, showing the √n step explicitly before dividing.\n\n---\n\n### Repair Action B03 — DOUBLE-N-HALVES-SE (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming doubling n halves the standard error is DOUBLE-N-HALVES-SE. Because SE∝1/√n, halving SE actually requires QUADRUPLING n — doubling n only reduces SE by a factor of 1/√2≈0.707, not 1/2.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"SE is currently 8, from n=25. What new n gives SE=4 (half)?\"\n- MC-3 response: \"n=50 (double it).\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Test n=50 directly: if $\\sigma$ is such that $\\sigma/\\sqrt{25}=8$, then $\\sigma=40$. At $n=50$: $SE=40/\\sqrt{50}\\approx40/7.07\\approx5.66$ — NOT 4. To actually reach SE=4: $4=40/\\sqrt n \\Rightarrow \\sqrt n=10 \\Rightarrow n=100$ — QUADRUPLE the original 25, not double. The rule: halving SE always requires multiplying n by $2^2=4$, because $\\sqrt{4n}=2\\sqrt n$ (doubling the square root, which is what actually halves the fraction).\"\n\nPractice: Starting from n=9 with some SE value, determine the exact new n required to cut SE to one-third of its original value (without being told the specific σ — reason purely from the scaling relationship).\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the three-object distinction (population / one sample's data / sampling distribution) using a fresh tiny enumerated population |\n| SR-2 | +3 days | Compute a fresh standard error using σ/√n, showing the square-root step explicitly |\n| SR-3 | +7 days | Determine the sample-size multiplier needed to achieve a fresh target SE reduction (e.g. to one-quarter), generalizing beyond just \"halving\" |\n| SR-4 | +14 days | Reconstruct the polling transfer probe's argument for why quadrupling the sample size only halves (not quarters) the standard error |\n\nRetrieval flag: if student conflates the sampling distribution with raw sample data (MC-1) or applies a linear rather than square-root SE scaling (MC-2/MC-3), re-execute B01/B02/B03 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.stats.sampling | Supplies the repeated-sampling mechanism (SRS) whose statistic's distribution this concept studies |\n| Requires (Tier-1) | math.prob.random-variable | A sample statistic (like $\\bar X$) is itself a random variable, exactly the framework this concept applies |\n| Requires (Tier-1, via this session's authoring) | math.prob.clt | Supplies the approximately-normal SHAPE claim for the sampling distribution of $\\bar X$ at large n, which this concept's mean/SE formulas complement |\n| Unlocks | math.stats.standard-error | The standard error formula developed here (σ/√n) becomes the dedicated subject of deeper treatment in that blueprint |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the three-object distinction and √n scaling to a polling-precision scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (3 main TAs + gate), matching the concept's three genuinely separate skill clusters (object distinction, SE formula, scaling reasoning) despite proficient difficulty\n- bloom=understand → V-4 = N/A (no P07 required; conceptual distinction-drawing and numeric-verification tasks, not derivations beyond the direct formula applications)\n- CPA_entry = C for a proficient learner: an enumerated tiny population (all 6 samples of size 2 from a 4-element set) makes the sampling distribution a genuinely COMPUTABLE, checkable object before the abstract σ/√n formula is stated\n\n**Key teaching insight:** MC-1 is this concept's root misconception because the very NAME \"sampling distribution\" invites confusion with \"the distribution of the sample\" (i.e. the sample's own data) — A01's three-panel picture (population / one sample's data / sampling distribution) is deliberately the FIRST thing shown, before any formula, specifically to establish that three different nouns describe three different objects, so that MC-2 and MC-3 (both precise numeric claims ABOUT the sampling distribution specifically) have a well-defined target to be precise about.\n\n**MC-2 and MC-3 as one family of scaling errors:** Both misconceptions stem from expecting LINEAR behavior (÷n directly, or \"double input → double output\") where the true relationship is governed by a SQUARE ROOT. A02's Contrasts 2 and 3 are deliberately sequenced back to back (compute SE correctly, then explore how SE changes with n) so the square-root's TWO consequences — the formula itself, and its scaling behavior — are seen as one coherent mathematical fact, not two unrelated rules to memorize.\n\n**Sequencing note:** No cross-link concept exists yet for math.stats.sampling-distribution; the P76 transfer probe instead uses a political-polling scenario, chosen because \"surveyed more people\" arguments about precision are common in real reporting and directly test whether the √n scaling (not a linear one) has been internalized as a general principle, not just recalled for the specific \"double→halve\" case already seen in A02.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.stats.sampling-distribution ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.stats.sampling ✓, math.prob.random-variable ✓ (math.prob.clt also authored this session) | PASS |\n| V-3 | CPA entry = C for proficient difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5, three skill clusters → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Political polling precision scenario; 4x sample size → 2x (not 4x) precision, generalized scaling ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 222,
+        "endLine": 438
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — proficient learner computes $\\bar X$ for several small hypothetical samples from a tiny population, tabulating the RESULTING distribution of those means, before the formal mean/SE formulas are stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: sample means computed from a small enumerated population, their own distribution tabulated; P: three side-by-side pictures (population, one sample's data, sampling distribution of the mean); A: formal definition, $E[\\bar X]=\\mu$, $SD(\\bar X)=\\sigma/\\sqrt n$\n2. **A02 P06 CONTRAST PAIR** — the three distributions (population/one-sample-data/sampling-distribution) directly contrasted (MC-1); $\\sigma/\\sqrt n$ computed correctly vs. the $\\sigma/n$ error (MC-2); doubling vs. quadrupling n to halve SE, computed explicitly (MC-3)\n3. **A03 P28 CONFLICT EVIDENCE** — a composite numeric problem requiring all three distinctions together\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 58,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the three-object distinction (population / one sample's data / sampling distribution) using a fresh tiny enumerated population |\n| SR-2 | +3 days | Compute a fresh standard error using σ/√n, showing the square-root step explicitly |\n| SR-3 | +7 days | Determine the sample-size multiplier needed to achieve a fresh target SE reduction (e.g. to one-quarter), generalizing beyond just \"halving\" |\n| SR-4 | +14 days | Reconstruct the polling transfer probe's argument for why quadrupling the sample size only halves (not quarters) the standard error |\n\nRetrieval flag: if student conflates the sampling distribution with raw sample data (MC-1) or applies a linear rather than square-root SE scaling (MC-2/MC-3), re-execute B01/B02/B03 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 369,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "math.stats.sampling-distribution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.sampling-distribution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.stats.sampling | Supplies the repeated-sampling mechanism (SRS) whose statistic's distribution this concept studies |\n| Requires (Tier-1) | math.prob.random-variable | A sample statistic (like $\\bar X$) is itself a random variable, exactly the framework this concept applies |\n| Requires (Tier-1, via this session's authoring) | math.prob.clt | Supplies the approximately-normal SHAPE claim for the sampling distribution of $\\bar X$ at large n, which this concept's mean/SE formulas complement |\n| Unlocks | math.stats.standard-error | The standard error formula developed here (σ/√n) becomes the dedicated subject of deeper treatment in that blueprint |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the three-object distinction and √n scaling to a polling-precision scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling-distribution.md",
+        "startLine": 384,
+        "endLine": 399
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
