@@ -23141,6 +23141,731 @@ const TCOH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.literature.literary-criticism-intro ─────────────────────────────────
+const LCI = 'eng.literature.literary-criticism-intro'
+const LCI_SRC = 'docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md'
+
+const LCI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LCI,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A historical reading and a formalist reading of the same poem ' +
+      'aren\'t competing for the "one correct answer" — like a doctor, a ' +
+      'nutritionist, and a trainer each asking a different legitimate ' +
+      'question about the same person\'s health. Instead of asking "which ' +
+      'critical approach is right?", ask "what KIND OF QUESTION is each ' +
+      'approach asking, and what does each reveal that the others don\'t?"',
+    targetedMisconceptions: [`${LCI}:MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS`],
+    source: `${LCI_SRC} — MC-A (P28 doctor-nutritionist-trainer conflict)`,
+  },
+  {
+    conceptId: LCI,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"I didn\'t like this story, it was boring" isn\'t reader-response ' +
+      'criticism — it\'s just an unsupported opinion, like a sommelier ' +
+      'who just says "I don\'t like it" instead of describing what ' +
+      'specific acidity or tannins created the tasting experience. Reader- ' +
+      'response criticism requires connecting your reaction back to a ' +
+      'SPECIFIC textual feature, not just stating a raw personal reaction.',
+    targetedMisconceptions: [`${LCI}:MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION`],
+    source: `${LCI_SRC} — MC-B (P28 sommelier-grounded-reaction conflict)`,
+  },
+  {
+    conceptId: LCI,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Different critical approaches (historical/biographical, formalist, ' +
+      'reader-response) ask genuinely different questions about the same ' +
+      'text and can produce legitimately different, complementary — not ' +
+      'competing — insights; there is no single correct interpretation ' +
+      'criticism is racing to uncover. Separately, reader-response ' +
+      'criticism requires grounding a personal reaction in a specific ' +
+      'textual feature; an unsupported reaction with no textual connection ' +
+      'is raw material, not yet an interpretation.',
+    targetedMisconceptions: [
+      `${LCI}:MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS`,
+      `${LCI}:MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION`,
+    ],
+    source: `${LCI_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LCI_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCI,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A historical reading and a formalist reading of the same poem reach different conclusions. Must one of them be the single correct interpretation and the other wrong?',
+    choices: [
+      { text: 'No — each critical approach asks a genuinely different question about the text; different, complementary readings can both be legitimately valid', isCorrect: true },
+      { text: 'Yes — there is one single correct interpretation of a text that criticism uncovers', isCorrect: false, misconceptionId: `${LCI}:MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS` },
+    ],
+    correctValue: 'no, different questions not competing answers',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LCI}:MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS`],
+    source: `${LCI_SRC} — doctor-nutritionist-trainer conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LCI,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes "I didn\'t like this story, it was boring" with no reference to any specific textual feature. Does this count as a valid reader-response interpretation?',
+    choices: [
+      { text: 'No — reader-response criticism requires connecting the reaction to a specific textual feature; an ungrounded reaction is just an unsupported opinion', isCorrect: true },
+      { text: 'Yes — any personal reaction to a text counts as a valid reader-response interpretation', isCorrect: false, misconceptionId: `${LCI}:MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION` },
+    ],
+    correctValue: 'no, needs textual grounding',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LCI}:MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION`],
+    source: `${LCI_SRC} — sommelier-grounded-reaction conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.novel-study ───────────────────────────────────────────────
+const NOVS = 'eng.literature.novel-study'
+const NOVS_SRC = 'docs/curriculum/blueprints/eng.literature.novel-study.md'
+
+const NOVS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NOVS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A subplot that doesn\'t directly advance the main conflict isn\'t ' +
+      '"padding" — a novel\'s greater length allows subplots and fully ' +
+      'developed secondary characters, just as a feature film\'s length ' +
+      'allows an ensemble cast a short film can\'t support. Ask what a ' +
+      'novel\'s greater length allows it to do that a short story ' +
+      'couldn\'t, rather than assuming a novel is just a short story ' +
+      'stretched out.',
+    targetedMisconceptions: [`${NOVS}:MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS`],
+    source: `${NOVS_SRC} — MC-A (P28 feature-film-vs-short-film conflict)`,
+  },
+  {
+    conceptId: NOVS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An early chapter suggesting "hard work always leads to success" ' +
+      'isn\'t the novel\'s final word — like a research study\'s full ' +
+      'conclusion only emerging from tracking the pattern across all the ' +
+      'data, not the first data point. Don\'t finalize a novel\'s theme ' +
+      'from one passage; track how it\'s reinforced, complicated, or even ' +
+      'reversed as the novel progresses.',
+    targetedMisconceptions: [`${NOVS}:MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER`],
+    source: `${NOVS_SRC} — MC-B (P28 long-running-study-data-point conflict)`,
+  },
+  {
+    conceptId: NOVS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A novel\'s greater length enables genuinely different structural ' +
+      'possibilities — subplots, fully developed secondary characters, ' +
+      'slower pacing — that are not simply "more of the same" compression ' +
+      'a short story requires; treating them as padding misapplies the ' +
+      'short story\'s economy standard. Separately, a novel\'s theme ' +
+      'typically develops and deepens across its extended length, so a ' +
+      'theme statement drawn from any single passage should be revised as ' +
+      'later chapters complicate or qualify it.',
+    targetedMisconceptions: [
+      `${NOVS}:MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS`,
+      `${NOVS}:MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER`,
+    ],
+    source: `${NOVS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const NOVS_PROBES: SeedProbe[] = [
+  {
+    conceptId: NOVS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A novel includes a fully developed secondary character whose storyline doesn\'t directly advance the main conflict. Is this "padding," the way it would be criticized in a compressed short story?',
+    choices: [
+      { text: 'No — a novel\'s greater length legitimately allows subplots and fully developed secondary characters; a novel isn\'t just a short story stretched out', isCorrect: true },
+      { text: 'Yes — a novel is just a short story stretched out with more words', isCorrect: false, misconceptionId: `${NOVS}:MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS` },
+    ],
+    correctValue: 'no, novels have different structural possibilities',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NOVS}:MC-A-A-NOVEL-IS-JUST-A-SHORT-STORY-STRETCHED-OUT-WITH-MORE-WORDS`],
+    source: `${NOVS_SRC} — feature-film-vs-short-film conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NOVS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An early chapter of a novel suggests "hard work always leads to success." Can you finalize this as the novel\'s full theme from this one passage?',
+    choices: [
+      { text: 'No — a novel\'s theme typically develops and deepens across its extended length; the full picture only emerges by tracking the theme across the whole book', isCorrect: true },
+      { text: 'Yes — a novel\'s theme can be fully understood from any single passage or chapter', isCorrect: false, misconceptionId: `${NOVS}:MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER` },
+    ],
+    correctValue: 'no, theme develops across the novel',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NOVS}:MC-B-A-NOVELS-THEME-CAN-BE-FULLY-UNDERSTOOD-FROM-ANY-SINGLE-PASSAGE-OR-CHAPTER`],
+    source: `${NOVS_SRC} — long-running-study-data-point conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.connected-speech ───────────────────────────────────────────
+const CSPE = 'eng.phonetics.connected-speech'
+const CSPE_SRC = 'docs/curriculum/blueprints/eng.phonetics.connected-speech.md'
+
+const CSPE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CSPE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Want to" becoming "wanna" in casual speech isn\'t sloppy or ' +
+      'incorrect — elision, assimilation, and linking are regular, rule- ' +
+      'governed features of natural, fluent spoken English used by ' +
+      'careful and casual speakers alike. Treat connected-speech features ' +
+      'as a normal, describable part of natural speech, not an error to ' +
+      'eliminate, while recognizing formal contexts may call for fuller ' +
+      'forms.',
+    targetedMisconceptions: [`${CSPE}:MC-CONNECTED-SPEECH-CHANGES-ARE-SLOPPY-SPEECH`],
+    source: `${CSPE_SRC} — MC-1 (P28 want-to-wanna-register conflict)`,
+  },
+  {
+    conceptId: CSPE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Going to" → "gonna" and "want to" → "wanna" aren\'t two random, ' +
+      'unrelated one-off quirks — both follow the same general elision/ ' +
+      'reduction pattern. Connected-speech changes fall into a small ' +
+      'number of systematic pattern TYPES (elision, assimilation, ' +
+      'linking) that generalize across many word combinations, not ' +
+      'isolated memorized exceptions.',
+    targetedMisconceptions: [`${CSPE}:MC-CONNECTED-SPEECH-IS-RANDOM`],
+    source: `${CSPE_SRC} — MC-2 (P28 gonna-gimme-pattern conflict)`,
+  },
+  {
+    conceptId: CSPE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Connected-speech changes (elision, assimilation, linking) are ' +
+      'regular, rule-governed features of natural fluent English, not ' +
+      'careless mistakes — appropriate register determines whether the ' +
+      'reduced or fuller form is called for, not correctness. Separately, ' +
+      'these changes follow a small number of systematic pattern types ' +
+      'that generalize across many word combinations, rather than being ' +
+      'unpredictable, isolated exceptions to memorize one by one.',
+    targetedMisconceptions: [
+      `${CSPE}:MC-CONNECTED-SPEECH-CHANGES-ARE-SLOPPY-SPEECH`,
+      `${CSPE}:MC-CONNECTED-SPEECH-IS-RANDOM`,
+    ],
+    source: `${CSPE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CSPE_PROBES: SeedProbe[] = [
+  {
+    conceptId: CSPE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A fluent speaker naturally says "wanna" instead of "want to" in casual conversation. Is this sloppy, incorrect pronunciation to be avoided?',
+    choices: [
+      { text: 'No — elision, assimilation, and linking are regular, rule-governed features of natural fluent speech, not careless mistakes', isCorrect: true },
+      { text: 'Yes — connected-speech changes are sloppy speech', isCorrect: false, misconceptionId: `${CSPE}:MC-CONNECTED-SPEECH-CHANGES-ARE-SLOPPY-SPEECH` },
+    ],
+    correctValue: 'no, it\'s systematic and normal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CSPE}:MC-CONNECTED-SPEECH-CHANGES-ARE-SLOPPY-SPEECH`],
+    source: `${CSPE_SRC} — want-to-wanna-register conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CSPE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Going to" becomes "gonna" and "want to" becomes "wanna." Are these two unrelated, randomly memorized quirks?',
+    choices: [
+      { text: 'No — both follow the same general elision/reduction pattern; connected speech follows a small number of systematic pattern types, not random exceptions', isCorrect: true },
+      { text: 'Yes — connected speech is random', isCorrect: false, misconceptionId: `${CSPE}:MC-CONNECTED-SPEECH-IS-RANDOM` },
+    ],
+    correctValue: 'no, same systematic pattern',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CSPE}:MC-CONNECTED-SPEECH-IS-RANDOM`],
+    source: `${CSPE_SRC} — gonna-gimme-pattern conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.prosody ─────────────────────────────────────────────────────
+const PROS = 'eng.phonetics.prosody'
+const PROS_SRC = 'docs/curriculum/blueprints/eng.phonetics.prosody.md'
+
+const PROS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Describing only a sentence\'s rising/falling pitch leaves out how ' +
+      'the words are TIMED and which ones are STRESSED. Prosody is the ' +
+      'combined, integrated system of THREE elements working together: ' +
+      'stress, rhythm, and intonation — analyzing prosody means ' +
+      'considering all three together, since they interact to create an ' +
+      'utterance\'s full effect, not intonation alone.',
+    targetedMisconceptions: [`${PROS}:MC-PROSODY-IS-JUST-INTONATION`],
+    source: `${PROS_SRC} — MC-1 (P28 three-components-together conflict)`,
+  },
+  {
+    conceptId: PROS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A statement can be grammatically correct as a "statement" via ' +
+      'falling intonation, yet still sound bored, sarcastic, or genuinely ' +
+      'interested through stress and rhythm layered on top. Prosody does ' +
+      'double duty: it signals grammatical/structural information AND it ' +
+      'independently conveys ATTITUDE and EMOTION — don\'t stop analysis ' +
+      'at grammar alone.',
+    targetedMisconceptions: [`${PROS}:MC-PROSODY-ONLY-CONVEYS-GRAMMAR`],
+    source: `${PROS_SRC} — MC-2 (P28 sarcasm-attitude-layer conflict)`,
+  },
+  {
+    conceptId: PROS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Prosody is the integrated combination of stress, rhythm, and ' +
+      'intonation together, not a synonym for intonation alone — full ' +
+      'prosodic analysis requires naming all three components. ' +
+      'Separately, prosody carries both grammatical/structural ' +
+      'information and an independent attitudinal/emotional layer (e.g. ' +
+      'sarcasm, boredom, genuine interest), so analysis limited to ' +
+      'grammatical function alone is incomplete.',
+    targetedMisconceptions: [
+      `${PROS}:MC-PROSODY-IS-JUST-INTONATION`,
+      `${PROS}:MC-PROSODY-ONLY-CONVEYS-GRAMMAR`,
+    ],
+    source: `${PROS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PROS_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You described a sentence\'s prosody by only naming its rising/falling pitch pattern. Is that a complete prosodic analysis?',
+    choices: [
+      { text: 'No — prosody is the combined system of stress, rhythm, AND intonation together; intonation is only one of three components', isCorrect: true },
+      { text: 'Yes — prosody is just intonation', isCorrect: false, misconceptionId: `${PROS}:MC-PROSODY-IS-JUST-INTONATION` },
+    ],
+    correctValue: 'no, must include stress and rhythm too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROS}:MC-PROSODY-IS-JUST-INTONATION`],
+    source: `${PROS_SRC} — three-components-together conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PROS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You identified that a sentence is grammatically a statement based on its falling intonation. Have you fully analyzed its prosody?',
+    choices: [
+      { text: 'No — prosody also independently conveys attitude and emotion (sarcasm, boredom, interest); grammatical function is only one of prosody\'s two roles', isCorrect: true },
+      { text: 'Yes — prosody only conveys grammar', isCorrect: false, misconceptionId: `${PROS}:MC-PROSODY-ONLY-CONVEYS-GRAMMAR` },
+    ],
+    correctValue: 'no, must check attitude/emotion too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROS}:MC-PROSODY-ONLY-CONVEYS-GRAMMAR`],
+    source: `${PROS_SRC} — sarcasm-attitude-layer conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.descriptive-writing ──────────────────────────────────────────
+const DESW = 'eng.writing.descriptive-writing'
+const DESW_SRC = 'docs/curriculum/blueprints/eng.writing.descriptive-writing.md'
+
+const DESW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DESW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"The big, tall, huge, enormous, gigantic tree" piles on redundant ' +
+      'adjectives that all say roughly the same thing. "The oak\'s ' +
+      'gnarled branches cast long shadows across the frost-covered yard" ' +
+      'uses fewer words but creates a sharper picture. Choose ONE precise, ' +
+      'specific detail instead of stacking adjectives — quality and ' +
+      'specificity beat quantity every time.',
+    targetedMisconceptions: [`${DESW}:MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID`],
+    source: `${DESW_SRC} — MC-1 (P28 precision-filter conflict)`,
+  },
+  {
+    conceptId: DESW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"The bakery had golden-brown bread and colorful pastries" is ' +
+      'purely visual. Adding "crackled faintly as they cooled" (sound) ' +
+      'and "the warm scent of yeast and butter" (smell) pulls the reader ' +
+      'into the scene far more completely. Before finishing a descriptive ' +
+      'passage, check which senses you\'ve used — sight alone leaves out ' +
+      'most of what makes an experience feel real.',
+    targetedMisconceptions: [`${DESW}:MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS`],
+    source: `${DESW_SRC} — MC-2 (P28 five-sense-dial conflict)`,
+  },
+  {
+    conceptId: DESW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A few precise, specific sensory details create genuine vividness; ' +
+      'redundant or vague adjective-piling dilutes rather than enhances a ' +
+      'description. Separately, genuinely immersive description draws on ' +
+      'multiple senses — sound, smell, touch, taste — not sight alone, ' +
+      'which leaves out most of what makes a scene feel real.',
+    targetedMisconceptions: [
+      `${DESW}:MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID`,
+      `${DESW}:MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS`,
+    ],
+    source: `${DESW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DESW_PROBES: SeedProbe[] = [
+  {
+    conceptId: DESW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"The big, tall, huge, enormous, gigantic tree stood in the yard" piles on five size-adjectives. Does stacking more adjectives like this make description more vivid?',
+    choices: [
+      { text: 'No — redundant adjectives dilute vividness; a few precise, specific sensory details create a sharper image than a pile of near-synonyms', isCorrect: true },
+      { text: 'Yes — more adjectives always makes description more vivid', isCorrect: false, misconceptionId: `${DESW}:MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID` },
+    ],
+    correctValue: 'no, precision beats quantity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DESW}:MC-MORE-ADJECTIVES-ALWAYS-MAKES-DESCRIPTION-MORE-VIVID`],
+    source: `${DESW_SRC} — precision-filter conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DESW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A description of a bakery only mentions its golden-brown bread and colorful pastries (sight details). Is a sight-only description enough for vivid, immersive writing?',
+    choices: [
+      { text: 'No — sound, smell, touch, and taste often carry as much sensory power as sight; genuinely immersive description draws on multiple senses', isCorrect: true },
+      { text: 'Yes — descriptive writing only uses visual sight details', isCorrect: false, misconceptionId: `${DESW}:MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS` },
+    ],
+    correctValue: 'no, use multiple senses',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DESW}:MC-DESCRIPTIVE-WRITING-ONLY-USES-VISUAL-SIGHT-DETAILS`],
+    source: `${DESW_SRC} — five-sense-dial conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.expository-writing ────────────────────────────────────────────
+const EXPW = 'eng.writing.expository-writing'
+const EXPW_SRC = 'docs/curriculum/blueprints/eng.writing.expository-writing.md'
+
+const EXPW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EXPW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"I think photosynthesis is amazing and everyone should appreciate ' +
+      'it" is opinion/persuasive framing, not expository writing. ' +
+      '"Photosynthesis is the process by which plants convert sunlight, ' +
+      'water, and carbon dioxide into glucose and oxygen" explains the ' +
+      'topic objectively. Expository writing\'s job is to explain, ' +
+      'inform, or clarify — not to argue a position; save opinions for ' +
+      'persuasive writing.',
+    targetedMisconceptions: [`${EXPW}:MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC`],
+    source: `${EXPW_SRC} — MC-1 (P28 photosynthesis-opinion-vs-explanation conflict)`,
+  },
+  {
+    conceptId: EXPW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Osmosis is the movement of water across a semi-permeable ' +
+      'membrane" is technically correct but unclear to someone new to the ' +
+      'concept. Following it with "when you soak a wilted celery stalk in ' +
+      'water, water moves into the celery\'s cells through osmosis, ' +
+      'making it firm again" makes it click. A bare definition often ' +
+      'isn\'t enough — add a concrete example, analogy, or elaboration.',
+    targetedMisconceptions: [`${EXPW}:MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC`],
+    source: `${EXPW_SRC} — MC-2 (P28 osmosis-celery-example conflict)`,
+  },
+  {
+    conceptId: EXPW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Expository writing\'s function is to explain, inform, or clarify a ' +
+      'topic through objective facts, definitions, and examples — ' +
+      'personal opinion and value-judgment framing belong to persuasive ' +
+      'writing, not expository. Separately, a bare, technically-correct ' +
+      'definition is often insufficient for a complex topic; genuine ' +
+      'clarification for an unfamiliar reader typically requires a ' +
+      'concrete example, analogy, or further elaboration.',
+    targetedMisconceptions: [
+      `${EXPW}:MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC`,
+      `${EXPW}:MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC`,
+    ],
+    source: `${EXPW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const EXPW_PROBES: SeedProbe[] = [
+  {
+    conceptId: EXPW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"I think photosynthesis is amazing and everyone should appreciate it more." Is this an appropriate sentence for expository writing?',
+    choices: [
+      { text: 'No — expository writing explains or clarifies objectively; this inserts personal opinion, which belongs in persuasive writing instead', isCorrect: true },
+      { text: 'Yes — expository writing means stating your opinion about the topic', isCorrect: false, misconceptionId: `${EXPW}:MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC` },
+    ],
+    correctValue: 'no, keep it objective',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXPW}:MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC`],
+    source: `${EXPW_SRC} — photosynthesis-opinion-vs-explanation conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EXPW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"Osmosis is the movement of water across a semi-permeable membrane." Is this bare, technically-correct definition alone enough to explain osmosis to someone unfamiliar with it?',
+    choices: [
+      { text: 'No — a bare definition often isn\'t enough; adding a concrete example (like wilted celery firming up in water) helps the reader actually understand it', isCorrect: true },
+      { text: 'Yes — a definition or fact alone is enough to explain a complex topic', isCorrect: false, misconceptionId: `${EXPW}:MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC` },
+    ],
+    correctValue: 'no, add an example',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXPW}:MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC`],
+    source: `${EXPW_SRC} — osmosis-celery-example conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.narrative-writing ─────────────────────────────────────────────
+const NARW = 'eng.writing.narrative-writing'
+const NARW_SRC = 'docs/curriculum/blueprints/eng.writing.narrative-writing.md'
+
+const NARW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NARW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"I woke up. I ate breakfast. I walked to school." lists events ' +
+      'flatly with equal weight — that\'s a report, not a narrative. Good ' +
+      'narrative writing SLOWS DOWN on the moments that matter most, ' +
+      'developing them with sensory detail, while compressing or skipping ' +
+      'less important time. Not every moment deserves equal narrative ' +
+      'real estate.',
+    targetedMisconceptions: [`${NARW}:MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER`],
+    source: `${NARW_SRC} — MC-A (P28 camera-zoom-lens conflict)`,
+  },
+  {
+    conceptId: NARW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"I told my sister I was scared, and she reassured me" tells the ' +
+      'reader THAT a conversation happened but shows nothing of HOW. ' +
+      'Rendering the actual exchange — "\'I don\'t think I can do this,\' ' +
+      'I whispered..." — lets the reader experience the specific words ' +
+      'and emotional texture. For key moments, actual dialogue is far ' +
+      'more powerful than summary.',
+    targetedMisconceptions: [`${NARW}:MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD`],
+    source: `${NARW_SRC} — MC-B (P28 zoom-lens-microphone conflict)`,
+  },
+  {
+    conceptId: NARW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Narrative writing selectively develops the moments that matter ' +
+      'most with sensory detail and pacing, while compressing or skipping ' +
+      'less important stretches of time — a uniform chronological list of ' +
+      'events produces a report, not an experience the reader lives ' +
+      'through. Separately, rendering key conversations as actual ' +
+      'dialogue reveals character voice and creates immediacy that ' +
+      'summarized narration cannot replicate.',
+    targetedMisconceptions: [
+      `${NARW}:MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER`,
+      `${NARW}:MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD`,
+    ],
+    source: `${NARW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const NARW_PROBES: SeedProbe[] = [
+  {
+    conceptId: NARW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"I woke up. I ate breakfast. I walked to school. I saw my friend." Is listing every event equally, in order, what makes a good narrative?',
+    choices: [
+      { text: 'No — good narrative writing slows down on the moments that matter most and compresses or skips less important time; uniform listing produces a report, not a narrative', isCorrect: true },
+      { text: 'Yes — a good narrative just lists everything that happened in order', isCorrect: false, misconceptionId: `${NARW}:MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER` },
+    ],
+    correctValue: 'no, slow down on key moments',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NARW}:MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER`],
+    source: `${NARW_SRC} — camera-zoom-lens conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NARW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"I told my sister I was scared, and she reassured me" summarizes a key conversation. Is summarizing dialogue like this just as effective as rendering the actual exchange?',
+    choices: [
+      { text: 'No — actual dialogue reveals character voice and creates immediacy that summary flattens out; for key moments, rendered dialogue is more powerful', isCorrect: true },
+      { text: 'Yes — dialogue is just decoration and can be summarized instead', isCorrect: false, misconceptionId: `${NARW}:MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD` },
+    ],
+    correctValue: 'no, render key dialogue',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NARW}:MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD`],
+    source: `${NARW_SRC} — zoom-lens-microphone conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.persuasive-writing-basics ─────────────────────────────────────
+const PERW = 'eng.writing.persuasive-writing-basics'
+const PERW_SRC = 'docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md'
+
+const PERW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PERW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"School uniforms are terrible! Everyone hates them!!!" is forceful ' +
+      'but gives zero actual reasons — like trying to win a courtroom ' +
+      'case by shouting "Guilty!" with no evidence. "School uniforms ' +
+      'limit self-expression, and research shows they don\'t improve ' +
+      'academic outcomes" states the position calmly with real reasons. ' +
+      'Persuasion comes from the strength of reasons, not the volume of ' +
+      'wording.',
+    targetedMisconceptions: [`${PERW}:MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE`],
+    source: `${PERW_SRC} — MC-A (P28 shouting-courtroom conflict)`,
+  },
+  {
+    conceptId: PERW,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"School uniforms are bad because I don\'t like wearing them" just ' +
+      'restates personal preference — like a lawyer\'s whole argument ' +
+      'being "because my client says so." "School uniforms limit ' +
+      'students\' ability to express identity, which research links to ' +
+      'lower engagement" gives a neutral reader something real to weigh. ' +
+      'Ask: would this convince someone who doesn\'t already share my ' +
+      'opinion?',
+    targetedMisconceptions: [`${PERW}:MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON`],
+    source: `${PERW_SRC} — MC-B (P28 because-my-client-says-so conflict)`,
+  },
+  {
+    conceptId: PERW,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Persuasive strength comes from the strength of reasons, not the ' +
+      'intensity of wording — forceful language, intensifiers, or ' +
+      'repetition without actual reasons does not constitute a supported ' +
+      'argument. Separately, a genuine reason must be independently ' +
+      'weighable by a neutral reader who doesn\'t already share the ' +
+      'writer\'s preference; restating personal preference as if it were ' +
+      'a reason is circular, not persuasive.',
+    targetedMisconceptions: [
+      `${PERW}:MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE`,
+      `${PERW}:MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON`,
+    ],
+    source: `${PERW_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PERW_PROBES: SeedProbe[] = [
+  {
+    conceptId: PERW,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"School uniforms are terrible! Everyone hates them! They are just awful and wrong!!!" Does stating this forcefully, with exclamation points, make it persuasive?',
+    choices: [
+      { text: 'No — persuasive strength comes from actual reasons a reader can weigh, not the volume or intensity of the wording', isCorrect: true },
+      { text: 'Yes — stating an opinion forcefully or with strong language makes it persuasive', isCorrect: false, misconceptionId: `${PERW}:MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE` },
+    ],
+    correctValue: 'no, needs actual reasons',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERW}:MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE`],
+    source: `${PERW_SRC} — shouting-courtroom conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PERW,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"School uniforms are bad because I don\'t like wearing them." Does this count as a genuine supporting reason?',
+    choices: [
+      { text: 'No — this just restates personal preference; a genuine reason must be something a neutral reader who doesn\'t share the preference could find compelling', isCorrect: true },
+      { text: 'Yes — restating a personal preference counts as a reason', isCorrect: false, misconceptionId: `${PERW}:MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON` },
+    ],
+    correctValue: 'no, needs independent weighability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERW}:MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON`],
+    source: `${PERW_SRC} — because-my-client-says-so conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -23402,6 +24127,14 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SSS_EXPLANATIONS,
   ...INTP_EXPLANATIONS,
   ...TCOH_EXPLANATIONS,
+  ...LCI_EXPLANATIONS,
+  ...NOVS_EXPLANATIONS,
+  ...CSPE_EXPLANATIONS,
+  ...PROS_EXPLANATIONS,
+  ...DESW_EXPLANATIONS,
+  ...EXPW_EXPLANATIONS,
+  ...NARW_EXPLANATIONS,
+  ...PERW_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -23663,4 +24396,12 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SSS_PROBES,
   ...INTP_PROBES,
   ...TCOH_PROBES,
+  ...LCI_PROBES,
+  ...NOVS_PROBES,
+  ...CSPE_PROBES,
+  ...PROS_PROBES,
+  ...DESW_PROBES,
+  ...EXPW_PROBES,
+  ...NARW_PROBES,
+  ...PERW_PROBES,
 ]
