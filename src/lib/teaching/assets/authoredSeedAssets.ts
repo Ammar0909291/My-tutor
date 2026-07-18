@@ -18449,6 +18449,468 @@ const SCMB_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.vocab.context-clues ─────────────────────────────────────────────────
+const CCLU = 'eng.vocab.context-clues'
+const CCLU_SRC = 'docs/curriculum/blueprints/eng.vocab.context-clues.md'
+
+const CCLU_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CCLU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Context clues come from the FULL surrounding sentence or passage, ' +
+      'not just one nearby word. In "The gregarious puppy bounded up to ' +
+      'every visitor," guessing "gregarious" means "big" from "bounded" ' +
+      'alone misses the fuller clue — approaching EVERY visitor suggests ' +
+      'sociability, not size. Before settling on a guessed meaning, scan ' +
+      'the entire sentence for every relevant clue, not just the first ' +
+      'word that stands out.',
+    targetedMisconceptions: [`${CCLU}:MC-GUESS-FROM-ONE-WORD-NEARBY`],
+    source: `${CCLU_SRC} — MC-GUESS-FROM-ONE-WORD-NEARBY (P28 gregarious-puppy conflict)`,
+  },
+  {
+    conceptId: CCLU,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Context clues give you a reasonable, often approximate, WORKING ' +
+      'HYPOTHESIS about a word’s meaning — not a guaranteed, precise, ' +
+      'dictionary-perfect definition. If you guessed "morose" means ' +
+      '"tired" from one sentence, but the next says "even after a full ' +
+      'night’s sleep, he stayed morose," that contradicts "tired" and ' +
+      'should prompt revision. Good readers stay open to revising their ' +
+      'guess as more context appears, rather than locking in the first ' +
+      'answer.',
+    targetedMisconceptions: [`${CCLU}:MC-CONTEXT-CLUES-ALWAYS-GIVE-CERTAINTY`],
+    source: `${CCLU_SRC} — MC-CONTEXT-CLUES-ALWAYS-GIVE-CERTAINTY (P28 morose-tired-vs-sleep conflict)`,
+  },
+  {
+    conceptId: CCLU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A reliable context-clue inference weighs the whole surrounding ' +
+      'sentence or passage, not just a single salient nearby word, which ' +
+      'can mislead if considered in isolation. Separately, a context-based ' +
+      'meaning guess is a working hypothesis, not a guaranteed precise ' +
+      'definition — later context may confirm, refine, or contradict an ' +
+      'initial guess, and a careful reader remains ready to revise rather ' +
+      'than treating the first inference as final.',
+    targetedMisconceptions: [
+      `${CCLU}:MC-GUESS-FROM-ONE-WORD-NEARBY`,
+      `${CCLU}:MC-CONTEXT-CLUES-ALWAYS-GIVE-CERTAINTY`,
+    ],
+    source: `${CCLU_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CCLU_PROBES: SeedProbe[] = [
+  {
+    conceptId: CCLU,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "The gregarious puppy bounded up to every visitor," is it reliable to guess "gregarious" means "big" based only on the word "bounded"?',
+    choices: [
+      { text: 'No — the fuller clue "every visitor" suggests sociability, not size; the whole sentence should be weighed, not just one word', isCorrect: true },
+      { text: 'Yes — the closest nearby word is usually enough to determine a word\'s meaning', isCorrect: false, misconceptionId: `${CCLU}:MC-GUESS-FROM-ONE-WORD-NEARBY` },
+    ],
+    correctValue: 'no, weigh the whole sentence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CCLU}:MC-GUESS-FROM-ONE-WORD-NEARBY`],
+    source: `${CCLU_SRC} — gregarious-puppy conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CCLU,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You guessed "morose" means "tired" from one sentence. The next sentence says "even after a full night\'s sleep, he stayed morose." Should you keep your original guess?',
+    choices: [
+      { text: 'No — this new context contradicts "tired," so the guess should be revised; a context-clue guess is a working hypothesis, not a locked-in answer', isCorrect: true },
+      { text: 'Yes — once you make a context-clue guess, it is certain and should not be revised', isCorrect: false, misconceptionId: `${CCLU}:MC-CONTEXT-CLUES-ALWAYS-GIVE-CERTAINTY` },
+    ],
+    correctValue: 'no, revise the guess',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CCLU}:MC-CONTEXT-CLUES-ALWAYS-GIVE-CERTAINTY`],
+    source: `${CCLU_SRC} — morose-tired-vs-sleep conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.synonyms-antonyms ─────────────────────────────────────────────
+const SYAN = 'eng.vocab.synonyms-antonyms'
+const SYAN_SRC = 'docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md'
+
+const SYAN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SYAN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Synonyms have SIMILAR meanings, not usually IDENTICAL ones — most ' +
+      'synonym pairs differ in shade of meaning, formality, or emotional ' +
+      'connotation, even when they refer to roughly the same core idea. ' +
+      '"Skinny" often carries a slightly negative connotation, while ' +
+      '"slender" often sounds more neutral or complimentary, even though ' +
+      'both describe a similar body type. Always check for differences in ' +
+      'connotation or formality before assuming full interchangeability.',
+    targetedMisconceptions: [`${SYAN}:MC-SYNONYMS-ARE-EXACTLY-IDENTICAL`],
+    source: `${SYAN_SRC} — MC-SYNONYMS-ARE-EXACTLY-IDENTICAL (P28 skinny-vs-slender conflict)`,
+  },
+  {
+    conceptId: SYAN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Not every word has a clean antonym — antonyms typically apply to ' +
+      'words describing qualities, states, or gradable concepts (hot/' +
+      'cold, happy/sad, fast/slow) where there’s a meaningful "opposite" ' +
+      'on some scale. Many concrete nouns (book, table, cloud) simply ' +
+      'don’t have a true antonym, since they’re not part of an ' +
+      'opposite-pair system at all. Before searching for an antonym, check ' +
+      'whether the word describes a gradable quality or a concrete thing.',
+    targetedMisconceptions: [`${SYAN}:MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE`],
+    source: `${SYAN_SRC} — MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE (P28 book-has-no-antonym conflict)`,
+  },
+  {
+    conceptId: SYAN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Synonyms are similar in meaning, not interchangeable in every ' +
+      'register or connotation — pairs like "skinny"/"slender" or ' +
+      '"cheap"/"inexpensive" share a core meaning but differ in emotional ' +
+      'coloring or formality. Separately, antonyms exist reliably only for ' +
+      'gradable qualities or states (hot/cold, generous/stingy); concrete ' +
+      'nouns naming things or categories typically have no meaningful ' +
+      'antonym at all — checking gradability before searching for an ' +
+      'opposite avoids forcing an inaccurate pairing.',
+    targetedMisconceptions: [
+      `${SYAN}:MC-SYNONYMS-ARE-EXACTLY-IDENTICAL`,
+      `${SYAN}:MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE`,
+    ],
+    source: `${SYAN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SYAN_PROBES: SeedProbe[] = [
+  {
+    conceptId: SYAN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Are "skinny" and "slender" exactly identical, with zero difference in how they feel to a listener?',
+    choices: [
+      { text: 'No — both describe a similar body type, but "skinny" often sounds more negative while "slender" often sounds more neutral or complimentary', isCorrect: true },
+      { text: 'Yes — synonyms are always fully interchangeable with no difference at all', isCorrect: false, misconceptionId: `${SYAN}:MC-SYNONYMS-ARE-EXACTLY-IDENTICAL` },
+    ],
+    correctValue: 'no, different connotation',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SYAN}:MC-SYNONYMS-ARE-EXACTLY-IDENTICAL`],
+    source: `${SYAN_SRC} — skinny-vs-slender conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SYAN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does the word "book" have a meaningful antonym, the same way "hot" has "cold"?',
+    choices: [
+      { text: 'No — "book" is a concrete noun/category, not a gradable quality, so it has no true antonym', isCorrect: true },
+      { text: 'Yes — every word has a simple, clear-cut opposite', isCorrect: false, misconceptionId: `${SYAN}:MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE` },
+    ],
+    correctValue: 'no, no true antonym',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SYAN}:MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE`],
+    source: `${SYAN_SRC} — book-has-no-antonym conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.word-families ─────────────────────────────────────────────────
+const WFAM = 'eng.vocab.word-families'
+const WFAM_SRC = 'docs/curriculum/blueprints/eng.vocab.word-families.md'
+
+const WFAM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WFAM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A true word family shares a common BASE WORD or ROOT with a ' +
+      'related MEANING, not just similar-looking letters at the start. ' +
+      '"Act, action, active, reaction" all relate to the idea of "doing" ' +
+      '— that’s a genuine word family. "Car," "care," and "card" just ' +
+      'happen to share letters by coincidence, with no meaning connection ' +
+      'at all. Check for a genuine shared MEANING connection through a ' +
+      'common root, not just similar spelling.',
+    targetedMisconceptions: [`${WFAM}:MC-SIMILAR-SPELLING-MEANS-SAME-FAMILY`],
+    source: `${WFAM_SRC} — MC-SIMILAR-SPELLING-MEANS-SAME-FAMILY (P28 car-care-card conflict)`,
+  },
+  {
+    conceptId: WFAM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Word families typically include words from DIFFERENT word classes, ' +
+      'all built from the same root — "act" (verb), "action" (noun), ' +
+      '"active" (adjective), "actively" (adverb) are all members of the ' +
+      'same family despite belonging to different grammatical categories. ' +
+      'Expect word-family members to span different word classes built ' +
+      'from the same root — don’t assume they must all match the first ' +
+      'member’s word class.',
+    targetedMisconceptions: [`${WFAM}:MC-WORD-FAMILY-MEMBERS-ARE-ALWAYS-SAME-WORD-CLASS`],
+    source: `${WFAM_SRC} — MC-WORD-FAMILY-MEMBERS-ARE-ALWAYS-SAME-WORD-CLASS (P28 act-verb-vs-action-noun conflict)`,
+  },
+  {
+    conceptId: WFAM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A genuine word family is defined by a shared root MEANING, not by ' +
+      'shared letters — "act, action, active, reaction" form a real ' +
+      'family, while "car, care, card" merely share a spelling coincidence ' +
+      'with no meaning connection. Separately, family members commonly ' +
+      'span multiple word classes built from the same root (verb, noun, ' +
+      'adjective, adverb forms) — expecting all members to share one word ' +
+      'class overlooks this normal, productive pattern.',
+    targetedMisconceptions: [
+      `${WFAM}:MC-SIMILAR-SPELLING-MEANS-SAME-FAMILY`,
+      `${WFAM}:MC-WORD-FAMILY-MEMBERS-ARE-ALWAYS-SAME-WORD-CLASS`,
+    ],
+    source: `${WFAM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const WFAM_PROBES: SeedProbe[] = [
+  {
+    conceptId: WFAM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Do "car," "care," and "card" belong to the same word family, since they all start with "car"?',
+    choices: [
+      { text: 'No — they share no actual meaning connection; a true word family requires a shared root meaning, not just similar spelling', isCorrect: true },
+      { text: 'Yes — sharing the same starting letters is enough to be a word family', isCorrect: false, misconceptionId: `${WFAM}:MC-SIMILAR-SPELLING-MEANS-SAME-FAMILY` },
+    ],
+    correctValue: 'no, no shared meaning',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WFAM}:MC-SIMILAR-SPELLING-MEANS-SAME-FAMILY`],
+    source: `${WFAM_SRC} — car-care-card conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WFAM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'If "act" is a verb, must "action" (from the same word family) also be a verb?',
+    choices: [
+      { text: 'No — "action" is a noun; word families typically span different word classes (verb, noun, adjective, adverb) built from the same root', isCorrect: true },
+      { text: 'Yes — all members of a word family must share the same word class', isCorrect: false, misconceptionId: `${WFAM}:MC-WORD-FAMILY-MEMBERS-ARE-ALWAYS-SAME-WORD-CLASS` },
+    ],
+    correctValue: 'no, different word classes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WFAM}:MC-WORD-FAMILY-MEMBERS-ARE-ALWAYS-SAME-WORD-CLASS`],
+    source: `${WFAM_SRC} — act-verb-vs-action-noun conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.spelling-strategies ─────────────────────────────────────────
+const SPEL = 'eng.writing.spelling-strategies'
+const SPEL_SRC = 'docs/curriculum/blueprints/eng.writing.spelling-strategies.md'
+
+const SPEL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SPEL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Most English words are NOT arbitrary — they follow learnable ' +
+      'patterns: syllable-type rules (the same ones used for reading), ' +
+      'common word-parts (prefixes, suffixes, roots), and predictable ' +
+      'sound-to-spelling correspondences. "Napkin" can be spelled via "nap" ' +
+      '+ "kin" (both closed syllables) rather than memorized letter by ' +
+      'letter. Before memorizing a word, check whether a known pattern ' +
+      'already explains most or all of its spelling.',
+    targetedMisconceptions: [`${SPEL}:MC-SPELLING-IS-PURE-MEMORIZATION`],
+    source: `${SPEL_SRC} — MC-SPELLING-IS-PURE-MEMORIZATION (P28 napkin-syllable-types conflict)`,
+  },
+  {
+    conceptId: SPEL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Sounding out a word tells you what it SOUNDS like, but many English ' +
+      'sounds have multiple possible spellings — the /eɪ/ sound can be ' +
+      'spelled "a_e," "ai," "ay," or "eigh." Sounding out "eight" might ' +
+      'plausibly suggest "ait," but the correct spelling requires ' +
+      'additional strategies (visual memory, word-family knowledge). Use ' +
+      'sounding-out to narrow down possible spellings, then apply visual ' +
+      'memory or word-part patterns to choose the correct one.',
+    targetedMisconceptions: [`${SPEL}:MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING`],
+    source: `${SPEL_SRC} — MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING (P28 eight-vs-ait conflict)`,
+  },
+  {
+    conceptId: SPEL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Spelling is not pure rote memorization — most words follow ' +
+      'learnable patterns (syllable-type rules, morphological word-parts, ' +
+      'sound-spelling correspondences) that generalize efficiently to new ' +
+      'words, unlike letter-by-letter drilling. Separately, sounding out a ' +
+      'word narrows down but does not always determine its spelling, since ' +
+      'many sounds have multiple valid spellings — visual memory and ' +
+      'word-family knowledge are additional, necessary strategies for ' +
+      'these ambiguous cases.',
+    targetedMisconceptions: [
+      `${SPEL}:MC-SPELLING-IS-PURE-MEMORIZATION`,
+      `${SPEL}:MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING`,
+    ],
+    source: `${SPEL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SPEL_PROBES: SeedProbe[] = [
+  {
+    conceptId: SPEL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is the best way to spell "napkin" to memorize each of its 6 letters as an unrelated sequence?',
+    choices: [
+      { text: 'No — "nap" and "kin" are both closed syllables you already know how to spell from phonics; applying that pattern is far more efficient than pure memorization', isCorrect: true },
+      { text: 'Yes — every word must be memorized letter by letter, since spelling is arbitrary', isCorrect: false, misconceptionId: `${SPEL}:MC-SPELLING-IS-PURE-MEMORIZATION` },
+    ],
+    correctValue: 'no, use syllable patterns',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SPEL}:MC-SPELLING-IS-PURE-MEMORIZATION`],
+    source: `${SPEL_SRC} — napkin-syllable-types conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SPEL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'If you sound out the /eɪ/ sound in "eight" and it could plausibly be spelled "ait," "ayt," or "eigh," does sounding-out alone tell you which one is correct?',
+    choices: [
+      { text: 'No — sounding out narrows the options, but you need visual memory or word-family knowledge to pick the actual correct spelling', isCorrect: true },
+      { text: 'Yes — sounding out a word always gives you the one correct spelling', isCorrect: false, misconceptionId: `${SPEL}:MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING` },
+    ],
+    correctValue: 'no, need additional strategies',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SPEL}:MC-SOUNDING-OUT-ALWAYS-GIVES-CORRECT-SPELLING`],
+    source: `${SPEL_SRC} — eight-vs-ait conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.articulation-organs ──────────────────────────────────────
+const ARTO = 'eng.phonetics.articulation-organs'
+const ARTO_SRC = 'docs/curriculum/blueprints/eng.phonetics.articulation-organs.md'
+
+const ARTO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARTO,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Speech uses a whole system of articulators working together — ' +
+      'lips, teeth, tongue, the roof of the mouth, the throat, and the ' +
+      'vocal folds — not just the tongue. Say "mmmm" and the tongue rests ' +
+      'passively while the lips do the work; say "ffff" and it’s the ' +
+      'lower lip and upper teeth, not the tongue. For any sound, ask which ' +
+      'articulators are actually involved — don’t assume the tongue is ' +
+      'always the answer.',
+    targetedMisconceptions: [`${ARTO}:MC-ONLY-TONGUE-MATTERS`],
+    source: `${ARTO_SRC} — MC-ONLY-TONGUE-MATTERS (P28 mmmm-vs-ffff conflict)`,
+  },
+  {
+    conceptId: ARTO,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Voicing is about whether your vocal folds vibrate — a physical on/ ' +
+      'off switch — not about how loud or soft you say something. ' +
+      'Whisper "zzzz" as quietly as possible and you still feel a buzz; ' +
+      'say "ssss" as loudly as you can and it never buzzes. Check voicing ' +
+      'with the throat/vibration test, never by loudness.',
+    targetedMisconceptions: [`${ARTO}:MC-VOICED-VOICELESS-IS-VOLUME`],
+    source: `${ARTO_SRC} — MC-VOICED-VOICELESS-IS-VOLUME (P28 quiet-zzzz-vs-loud-ssss conflict)`,
+  },
+  {
+    conceptId: ARTO,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Speech production involves a full system of articulators (lips, ' +
+      'teeth, tongue, palate, throat, vocal folds), not the tongue alone ' +
+      '— sounds like /m/ or /f/ involve minimal or no tongue movement, ' +
+      'relying instead on the lips and teeth. Separately, voicing refers ' +
+      'specifically to vocal-fold vibration, independent of loudness — a ' +
+      'whispered voiced sound still carries a weak vibration, and a ' +
+      'shouted voiceless sound never does; the throat-vibration test, not ' +
+      'volume, is the reliable check.',
+    targetedMisconceptions: [
+      `${ARTO}:MC-ONLY-TONGUE-MATTERS`,
+      `${ARTO}:MC-VOICED-VOICELESS-IS-VOLUME`,
+    ],
+    source: `${ARTO_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ARTO_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARTO,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'When you say "ffff," is the tongue doing the main work, or is it something else?',
+    choices: [
+      { text: 'Something else — the lower lip and upper teeth do the main work for /f/; the tongue is barely involved', isCorrect: true },
+      { text: 'The tongue — all speech sounds are made mainly by the tongue', isCorrect: false, misconceptionId: `${ARTO}:MC-ONLY-TONGUE-MATTERS` },
+    ],
+    correctValue: 'lips and teeth, not tongue',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ARTO}:MC-ONLY-TONGUE-MATTERS`],
+    source: `${ARTO_SRC} — mmmm-vs-ffff conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ARTO,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'If you whisper "zzzz" as quietly as possible, is it still a voiced sound?',
+    choices: [
+      { text: 'Yes — voicing is about vocal-fold vibration, not loudness; a quiet "zzzz" still buzzes, while a loud "ssss" never does', isCorrect: true },
+      { text: 'No — a sound is only voiced if it is said loudly', isCorrect: false, misconceptionId: `${ARTO}:MC-VOICED-VOICELESS-IS-VOLUME` },
+    ],
+    correctValue: 'yes, still voiced',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ARTO}:MC-VOICED-VOICELESS-IS-VOLUME`],
+    source: `${ARTO_SRC} — quiet-zzzz-vs-loud-ssss conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -18659,6 +19121,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ADVB_EXPLANATIONS,
   ...SUBP_EXPLANATIONS,
   ...SCMB_EXPLANATIONS,
+  ...CCLU_EXPLANATIONS,
+  ...SYAN_EXPLANATIONS,
+  ...WFAM_EXPLANATIONS,
+  ...SPEL_EXPLANATIONS,
+  ...ARTO_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -18869,4 +19336,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ADVB_PROBES,
   ...SUBP_PROBES,
   ...SCMB_PROBES,
+  ...CCLU_PROBES,
+  ...SYAN_PROBES,
+  ...WFAM_PROBES,
+  ...SPEL_PROBES,
+  ...ARTO_PROBES,
 ]
