@@ -15134,6 +15134,407 @@ const CRLIS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.pronouns ───────────────────────────────────────────────────
+const PRON = 'eng.grammar.pronouns'
+const PRON_SRC = 'docs/curriculum/blueprints/eng.grammar.pronouns.md'
+
+const PRON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Pronouns substitute for ANY noun — people (he, she, they), things ' +
+      '(it), places, ideas, or groups (they, these, those) — not just ' +
+      'people. In "I bought a book. IT was expensive," "it" replaces ' +
+      '"book," not a person. "It" is one of the most frequently used ' +
+      'pronouns and almost always refers to non-human things, places, or ' +
+      'ideas. Check what noun a pronoun is replacing — it could be a ' +
+      'person, but just as often a thing, place, or idea.',
+    targetedMisconceptions: [`${PRON}:MC-PRONOUNS-ONLY-REPLACE-PEOPLE`],
+    source: `${PRON_SRC} — MC-PRONOUNS-ONLY-REPLACE-PEOPLE (P28 book/it conflict + P33 discrimination pairs)`,
+  },
+  {
+    conceptId: PRON,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Reflexive pronouns (myself, yourself, himself, herself, itself, ' +
+      'ourselves, themselves) are correct specifically when the subject ' +
+      'performing the action and the object receiving the action are the ' +
+      'SAME entity ("I hurt myself") or for emphasis directly after the ' +
+      'noun/pronoun they intensify ("I myself saw it"). They are NOT ' +
+      'simply more formal or emphatic substitutes for regular object ' +
+      'pronouns (me, you, him, her) in general — "Give the book to me" is ' +
+      'correct; "Give the book to myself" is not, unless "myself" is the ' +
+      'one giving it to themselves. Use a reflexive pronoun only when the ' +
+      'subject and object refer to the same entity, or for direct ' +
+      'emphasis — otherwise use the regular object pronoun.',
+    targetedMisconceptions: [`${PRON}:MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS`],
+    source: `${PRON_SRC} — MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS (P28 giving-to-myself conflict + P30 same-entity bridge)`,
+  },
+  {
+    conceptId: PRON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Pronouns substitute for any noun, not just people — things, ' +
+      'places, ideas, and groups all take pronouns ("it," "they," ' +
+      '"these") just as readily as personal pronouns do. Separately, ' +
+      'reflexive pronouns (myself, yourself, himself...) are grammatically ' +
+      'correct only when the subject and object of the action are the ' +
+      'same entity ("I hurt myself"), or for direct emphasis ("I myself ' +
+      'saw it") — they are not a more formal or polite substitute for a ' +
+      'regular object pronoun. "Please send the report to myself" is ' +
+      'incorrect; it should be "to me," since the sender and the intended ' +
+      'recipient are different entities.',
+    targetedMisconceptions: [
+      `${PRON}:MC-PRONOUNS-ONLY-REPLACE-PEOPLE`,
+      `${PRON}:MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS`,
+    ],
+    source: `${PRON_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRON_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRON,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "I bought a book. IT was expensive," what does "it" replace?',
+    choices: [
+      { text: '"Book" — a thing, not a person', isCorrect: true },
+      { text: 'Nothing — "it" only replaces people, and "book" is not a person, so this must be a different kind of word', isCorrect: false, misconceptionId: `${PRON}:MC-PRONOUNS-ONLY-REPLACE-PEOPLE` },
+    ],
+    correctValue: 'book',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PRON}:MC-PRONOUNS-ONLY-REPLACE-PEOPLE`],
+    source: `${PRON_SRC} — book/it conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRON,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Please give the form to myself" correct?',
+    choices: [
+      { text: 'No — the giver and receiver are different people here, so it should be "to me"; reflexive pronouns require the subject and object to be the same entity', isCorrect: true },
+      { text: 'Yes — "myself" is just a more formal, polite way of saying "me"', isCorrect: false, misconceptionId: `${PRON}:MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS` },
+    ],
+    correctValue: 'no, should be "to me"',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRON}:MC-REFLEXIVE-PRONOUNS-ARE-JUST-EMPHASIS`],
+    source: `${PRON_SRC} — give-the-book-to-myself conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.sentence-types-by-function ─────────────────────────────────
+const STYP = 'eng.grammar.sentence-types-by-function'
+const STYP_SRC = 'docs/curriculum/blueprints/eng.grammar.sentence-types-by-function.md'
+
+const STYP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STYP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Sentence type is defined by grammatical FUNCTION — declarative ' +
+      '(states a fact), interrogative (asks a question), imperative ' +
+      '(gives a command, often with an implied "you" subject), and ' +
+      'exclamatory (expresses strong emotion) — not simply by which ' +
+      'punctuation mark appears at the end. "Stop!" is a command ' +
+      '(imperative) because of what it DOES, not because of the ' +
+      'exclamation point; "Stop." is still a command, just punctuated ' +
+      'less emphatically — same function, different punctuation. ' +
+      'Determine sentence type by structure and purpose first, then ' +
+      'treat punctuation as a supporting signal, not the sole test.',
+    targetedMisconceptions: [`${STYP}:MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE`],
+    source: `${STYP_SRC} — MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE (P28 Stop!/Stop. conflict)`,
+  },
+  {
+    conceptId: STYP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Interrogative sentences (questions) can be formed in TWO main ways: ' +
+      'with a wh-word at the start ("What is your name?") OR by inverting ' +
+      'the subject and auxiliary/helping verb with no question word at ' +
+      'all ("Are you ready?" "Did she call?" "Can he swim?") — both are ' +
+      'genuine, equally common question structures. Recognize a sentence ' +
+      'as interrogative if it either starts with a wh-word OR inverts the ' +
+      'subject and auxiliary verb, not just the wh-word pattern alone.',
+    targetedMisconceptions: [`${STYP}:MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD`],
+    source: `${STYP_SRC} — MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD (P28 Are-you-coming conflict)`,
+  },
+  {
+    conceptId: STYP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Sentence type (declarative, interrogative, imperative, ' +
+      'exclamatory) is defined by grammatical function and communicative ' +
+      'purpose, not by the ending punctuation mark — "Stop." and "Stop!" ' +
+      'are both imperative (commands); only the emphasis differs. ' +
+      'Separately, interrogative sentences take two structurally distinct ' +
+      'forms: wh-word questions ("What is your name?") and subject-' +
+      'auxiliary inversion questions with no question word at all ("Are ' +
+      'you ready?" "Did she call?") — both are equally legitimate ' +
+      'question structures, and inversion-only questions should not be ' +
+      'overlooked just because they lack an obvious wh-word signal.',
+    targetedMisconceptions: [
+      `${STYP}:MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE`,
+      `${STYP}:MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD`,
+    ],
+    source: `${STYP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const STYP_PROBES: SeedProbe[] = [
+  {
+    conceptId: STYP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Please sit down." a command, even though it ends in a period rather than an exclamation point?',
+    choices: [
+      { text: 'Yes — it is imperative (a command/request), regardless of the period ending', isCorrect: true },
+      { text: 'No — without an exclamation point, it cannot be a command', isCorrect: false, misconceptionId: `${STYP}:MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE` },
+    ],
+    correctValue: 'yes, imperative',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STYP}:MC-PUNCTUATION-MARK-ALONE-DEFINES-SENTENCE-TYPE`],
+    source: `${STYP_SRC} — please-sit-down conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: STYP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Have you finished?" interrogative, even though it does not start with a wh-word like "who" or "what"?',
+    choices: [
+      { text: 'Yes — it is interrogative via subject-auxiliary inversion, a valid question structure with no question word needed', isCorrect: true },
+      { text: 'No — questions must start with a question word to count as interrogative', isCorrect: false, misconceptionId: `${STYP}:MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD` },
+    ],
+    correctValue: 'yes, interrogative',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STYP}:MC-QUESTIONS-ALWAYS-START-WITH-A-QUESTION-WORD`],
+    source: `${STYP_SRC} — have-you-finished conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.phrases ─────────────────────────────────────────────────────
+const PHR = 'eng.grammar.phrases'
+const PHR_SRC = 'docs/curriculum/blueprints/eng.grammar.phrases.md'
+
+const PHR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A grammatical phrase is a group of related words that function ' +
+      'TOGETHER as a single unit (acting as a noun, verb, adjective, or ' +
+      'adverb within the sentence), built around a HEAD word that the ' +
+      'rest of the phrase modifies or complements — not just any ' +
+      'consecutive string of words. "The dog" is a noun phrase (head: ' +
+      'dog); "barked loudly" is a verb phrase (head: barked); but a ' +
+      'random scrambled sequence like "dog the barked at" is not a ' +
+      'phrase at all, since it does not function as one unified unit. ' +
+      'Check whether a word group functions as one unified grammatical ' +
+      'unit built around a head word — not just whether the words happen ' +
+      'to sit next to each other.',
+    targetedMisconceptions: [`${PHR}:MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS`],
+    source: `${PHR_SRC} — MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS (P28 scrambled-sequence conflict)`,
+  },
+  {
+    conceptId: PHR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Phrases are word groups WITHOUT a subject-verb pair, functioning ' +
+      'as a single grammatical unit ("in the morning" — a prepositional ' +
+      'phrase, no subject or verb). Clauses are word groups WITH a ' +
+      'subject-verb pair ("when the sun rises" — "sun" is the subject, ' +
+      '"rises" is the verb), capable of forming at least a partial ' +
+      'proposition. This subject-verb presence/absence is THE defining ' +
+      'structural difference between the two categories — check for the ' +
+      'presence of a subject-verb pair as the defining test.',
+    targetedMisconceptions: [`${PHR}:MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING`],
+    source: `${PHR_SRC} — MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING (P28 in-the-morning-vs-when-the-sun-rises conflict)`,
+  },
+  {
+    conceptId: PHR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A grammatical phrase is a word group that functions as a single ' +
+      'unit built around a head word ("the tall building" — head: ' +
+      'building) — not simply any consecutive string of words; an ' +
+      'arbitrary scrambled sequence with no unifying head and function is ' +
+      'not a phrase. Separately, phrases and clauses are distinguished by ' +
+      'one defining structural test: the presence or absence of a ' +
+      'subject-verb pair. "In the morning" is a phrase (no subject-verb ' +
+      'pair); "when the sun rises" is a clause ("sun" + "rises" is a ' +
+      'subject-verb pair). Apply this test explicitly rather than treating ' +
+      'phrases and clauses as interchangeable "smaller than a sentence" ' +
+      'groupings.',
+    targetedMisconceptions: [
+      `${PHR}:MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS`,
+      `${PHR}:MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING`,
+    ],
+    source: `${PHR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PHR_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "dog the barked at" (a scrambled string from "The dog barked at the mailman") a genuine grammatical phrase?',
+    choices: [
+      { text: 'No — it does not function as one unified unit around a head word, unlike "the dog" or "barked at"', isCorrect: true },
+      { text: 'Yes — any group of consecutive words from a sentence counts as a phrase', isCorrect: false, misconceptionId: `${PHR}:MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PHR}:MC-A-PHRASE-IS-JUST-ANY-GROUP-OF-WORDS`],
+    source: `${PHR_SRC} — scrambled-sequence conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PHR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "in the morning" a phrase or a clause?',
+    choices: [
+      { text: 'A phrase — it has no subject-verb pair', isCorrect: true },
+      { text: 'A clause — phrases and clauses are really the same thing', isCorrect: false, misconceptionId: `${PHR}:MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING` },
+    ],
+    correctValue: 'phrase',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PHR}:MC-PHRASES-AND-CLAUSES-ARE-THE-SAME-THING`],
+    source: `${PHR_SRC} — in-the-morning-vs-when-the-sun-rises conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.tense-consistency ──────────────────────────────────────────
+const TCON = 'eng.grammar.tense-consistency'
+const TCON_SRC = 'docs/curriculum/blueprints/eng.grammar.tense-consistency.md'
+
+const TCON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TCON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Tense consistency doesn’t mean using ONE tense throughout — it ' +
+      'means using tenses that logically and CONSISTENTLY reflect the ' +
+      'actual TIME relationships of what’s being described. A MOTIVATED ' +
+      'shift (genuinely describing a different time) is correct: "She ' +
+      'walked to the store yesterday; tomorrow she will visit the gym." ' +
+      'An UNMOTIVATED shift (switching tense without any real change in ' +
+      'time reference) is the actual error: "She walked to the store ' +
+      'because she needs milk" — both actions happen in the same past ' +
+      'time-frame, so both should be past tense ("needed"). Check whether ' +
+      'a tense shift reflects an actual change in the TIME being ' +
+      'described (motivated, correct) or is an arbitrary switch within ' +
+      'the same time-frame (unmotivated, an error).',
+    targetedMisconceptions: [`${TCON}:MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY`],
+    source: `${TCON_SRC} — MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY (P28 walked-yesterday/will-visit-tomorrow conflict)`,
+  },
+  {
+    conceptId: TCON,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'While past tense is the most common narrative choice, present ' +
+      'tense ("historical present") is a legitimate, deliberate stylistic ' +
+      'option for narrating past or fictional events vividly, as if ' +
+      'unfolding in real time — used in storytelling, sports commentary ' +
+      '("He shoots, he scores!"), and some literary fiction. The key ' +
+      'requirement is CONSISTENCY: if you choose present-tense narration, ' +
+      'sustain it throughout the relevant passage rather than randomly ' +
+      'mixing it with past tense. Recognize present-tense narration as a ' +
+      'valid stylistic choice, not an automatic error.',
+    targetedMisconceptions: [`${TCON}:MC-NARRATIVE-TENSE-CANT-BE-PRESENT`],
+    source: `${TCON_SRC} — MC-NARRATIVE-TENSE-CANT-BE-PRESENT (P28 so-I-walk-into-the-room conflict)`,
+  },
+  {
+    conceptId: TCON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Tense consistency does not require a single tense throughout a ' +
+      'passage — it requires that tense shifts reflect genuine changes in ' +
+      'the time being described. A MOTIVATED shift ("She graduated last ' +
+      'year; next year she will start medical school") is correct; an ' +
+      'UNMOTIVATED shift within the same time-frame ("She walked to the ' +
+      'store because she needs milk," which should be "needed") is the ' +
+      'actual error. Separately, present-tense ("historical present") ' +
+      'narration is a legitimate stylistic choice for vividly narrating ' +
+      'past or fictional events — not an automatic error — provided it is ' +
+      'sustained consistently rather than mixed arbitrarily with past ' +
+      'tense mid-passage.',
+    targetedMisconceptions: [
+      `${TCON}:MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY`,
+      `${TCON}:MC-NARRATIVE-TENSE-CANT-BE-PRESENT`,
+    ],
+    source: `${TCON_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TCON_PROBES: SeedProbe[] = [
+  {
+    conceptId: TCON,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is there a tense error in "She graduated last year; next year she will start medical school"?',
+    choices: [
+      { text: 'No — the tense shift is motivated by a genuine change in the time being described (past graduation, future start of school)', isCorrect: true },
+      { text: 'Yes — every verb in a passage must be in the exact same tense', isCorrect: false, misconceptionId: `${TCON}:MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY` },
+    ],
+    correctValue: 'no error',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TCON}:MC-ALL-VERBS-IN-A-PASSAGE-MUST-MATCH-EXACTLY`],
+    source: `${TCON_SRC} — graduated-last-year/will-start conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TCON,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "The ball flies through the air, and the crowd goes wild" grammatically wrong because it is not in past tense?',
+    choices: [
+      { text: 'No — this is valid historical-present narration (e.g., sports commentary style), a legitimate stylistic choice, not an error', isCorrect: true },
+      { text: 'Yes — stories and accounts of events must always be told in past tense', isCorrect: false, misconceptionId: `${TCON}:MC-NARRATIVE-TENSE-CANT-BE-PRESENT` },
+    ],
+    correctValue: 'no, valid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TCON}:MC-NARRATIVE-TENSE-CANT-BE-PRESENT`],
+    source: `${TCON_SRC} — ball-flies-through-the-air conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -15310,6 +15711,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...KEPL_EXPLANATIONS,
   ...LCST_EXPLANATIONS,
   ...CRLIS_EXPLANATIONS,
+  ...PRON_EXPLANATIONS,
+  ...STYP_EXPLANATIONS,
+  ...PHR_EXPLANATIONS,
+  ...TCON_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -15486,4 +15891,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...KEPL_PROBES,
   ...LCST_PROBES,
   ...CRLIS_PROBES,
+  ...PRON_PROBES,
+  ...STYP_PROBES,
+  ...PHR_PROBES,
+  ...TCON_PROBES,
 ]
