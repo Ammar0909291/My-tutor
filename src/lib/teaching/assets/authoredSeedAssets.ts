@@ -36968,6 +36968,426 @@ const PAUL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.qm.perturbation-theory ─────────────────────────────────────────────────
+const PRTB = 'phys.qm.perturbation-theory'
+const PRTB_SRC = 'docs/curriculum/blueprints/phys.qm.perturbation-theory.md'
+
+const PRTB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRTB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Perturbation theory does NOT always work, regardless of how many additional terms you add — "you can always use perturbation theory — just add more terms" is over-confident and false. Consider a perturbation H\' comparable in size to the level spacing (E_n⁰−E_m⁰): the state-correction denominator ⟨m|H\'|n⟩/(E_n⁰−E_m⁰) becomes large when the denominator is small, and the second-order energy correction |⟨m|H\'|n⟩|²/(E_n⁰−E_m⁰) can actually EXCEED the first-order correction — the series diverges rather than converging. Perturbation theory is fundamentally a power series expansion in a small parameter λ, and it converges only if each successive term is genuinely smaller than the previous one — requiring the off-diagonal matrix elements to be much smaller than the level spacings: |⟨m|Ĥ\'|n⟩|≪|E_n⁰−E_m⁰|. For near-degenerate levels, where this condition fails, you must instead use degenerate perturbation theory, or fall back on variational methods or exact diagonalization. A second, separate error: confusing the first-order ENERGY correction formula with the first-order STATE correction formula, writing "E_n¹=Σ_{m≠n}⟨m|H\'|n⟩" for the energy correction. The first-order energy correction is actually just the single DIAGONAL matrix element, E_n¹=⟨n⁰|H\'|n⁰⟩ — no sum at all. Deriving this from the Schrödinger equation: projecting (Ĥ⁰+λH\')(|n⁰⟩+λ|n¹⟩)=(E_n⁰+λE_n¹)(|n⁰⟩+λ|n¹⟩) onto ⟨n⁰| causes the Ĥ⁰ terms to cancel, leaving exactly E_n¹=⟨n⁰|H\'|n⁰⟩. The sum-over-m≠n formula, |φₙ¹⟩=Σ_{m≠n}[⟨φₘ⁰|Ĥ\'|φₙ⁰⟩/(Eₙ⁰−Eₘ⁰)]|φₘ⁰⟩, is instead the formula for the first-order STATE correction — a genuinely different quantity, involving off-diagonal matrix elements summed over all m≠n, unlike the single diagonal term used for the energy correction.',
+    targetedMisconceptions: [`${PRTB}:MC-1`, `${PRTB}:MC-2`],
+    source: `${PRTB_SRC} — MC-1 (perturbation theory always works, false — requires small matrix elements relative to level spacing) + MC-2 (first-order energy correction is diagonal only, not a sum)`,
+  },
+  {
+    conceptId: PRTB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "when does perturbation theory fail?", say "you can always use perturbation theory — just add more terms," an over-confident assumption often reinforced by textbooks that mostly present clean, well-behaved examples where the method works smoothly. Test this against a genuinely problematic case: consider a perturbation H\' whose magnitude is comparable to the level spacing (E_n⁰−E_m⁰) between two unperturbed energy levels. The state-correction denominator, appearing in the term ⟨m|H\'|n⟩/(E_n⁰−E_m⁰), becomes large precisely when this energy denominator is small — and the resulting second-order energy correction, |⟨m|H\'|n⟩|²/(E_n⁰−E_m⁰), can genuinely EXCEED the size of the first-order correction, meaning the series is diverging rather than converging toward the true answer, contradicting the assumption that "adding more terms" always improves accuracy. Perturbation theory is, at its mathematical core, a power series expansion in some small parameter λ — and like any power series, it only converges if each successive term is genuinely smaller in magnitude than the one before it. This requires the off-diagonal matrix elements of the perturbation to be much smaller than the relevant level spacings: |⟨m|Ĥ\'|n⟩|≪|E_n⁰−E_m⁰|. When energy levels are nearly degenerate — meaning this energy-denominator condition fails — ordinary (non-degenerate) perturbation theory breaks down entirely, and you must instead switch to degenerate perturbation theory, or use alternative approaches like variational methods or exact diagonalization of the full Hamiltonian. A second, entirely separate and equally common error: asked to "write the formula for the first-order energy correction E_n¹," answering "E_n¹=Σ_{m≠n}⟨m|H\'|n⟩" — this confuses the first-order ENERGY correction with the completely different first-order STATE correction formula. The first-order energy correction is actually much simpler: it is just the single DIAGONAL matrix element, E_n¹=⟨n⁰|H\'|n⁰⟩, with no sum over other states at all. Deriving this carefully from the time-independent Schrödinger equation: expand (Ĥ⁰+λH\')(|n⁰⟩+λ|n¹⟩)=(E_n⁰+λE_n¹)(|n⁰⟩+λ|n¹⟩) to first order in λ, then project the result onto the bra ⟨n⁰| — the Ĥ⁰ terms on both sides cancel exactly (since ⟨n⁰|Ĥ⁰=E_n⁰⟨n⁰|), leaving precisely E_n¹=⟨n⁰|H\'|n⁰⟩, confirming this is a single diagonal term, not a sum. The sum-over-m≠n formula that the student incorrectly applied to the energy, |φₙ¹⟩=Σ_{m≠n}[⟨φₘ⁰|Ĥ\'|φₙ⁰⟩/(Eₙ⁰−Eₘ⁰)]|φₘ⁰⟩, is actually the completely separate formula for the first-order STATE correction |φₙ¹⟩ — a genuinely different physical quantity from the energy correction, involving OFF-diagonal matrix elements (⟨φₘ⁰|Ĥ\'|φₙ⁰⟩ for m≠n) summed together with energy-denominator weighting, in sharp contrast to the single diagonal term used for computing the energy shift itself.',
+    targetedMisconceptions: [`${PRTB}:MC-1`, `${PRTB}:MC-2`],
+    source: `${PRTB_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const PRTB_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRTB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does perturbation theory always converge to the correct answer if you simply add more terms to the series?',
+    choices: [
+      { text: 'No — it converges only if |⟨m|Ĥ\'|n⟩|≪|E_n⁰−E_m⁰| (matrix elements much smaller than level spacing); for near-degenerate levels the series can diverge, requiring degenerate perturbation theory instead', isCorrect: true },
+      { text: 'Yes — perturbation theory always works for any perturbation strength, as long as you include enough higher-order terms', isCorrect: false, misconceptionId: `${PRTB}:MC-1` },
+    ],
+    correctValue: 'no, requires small matrix elements relative to level spacing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PRTB}:MC-1`],
+    source: `${PRTB_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRTB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the correct formula for the first-order energy correction E_n¹ in perturbation theory?',
+    choices: [
+      { text: 'E_n¹=⟨n⁰|H\'|n⁰⟩ — a single diagonal matrix element, no sum over other states', isCorrect: true },
+      { text: 'E_n¹=Σ_{m≠n}⟨m|H\'|n⟩ — a sum over all states m≠n', isCorrect: false, misconceptionId: `${PRTB}:MC-2` },
+    ],
+    correctValue: 'diagonal matrix element only, not a sum',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PRTB}:MC-2`],
+    source: `${PRTB_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.variational-method ──────────────────────────────────────────────────
+const VARM = 'phys.qm.variational-method'
+const VARM_SRC = 'docs/curriculum/blueprints/phys.qm.variational-method.md'
+
+const VARM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VARM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A visually good-looking trial wavefunction does NOT guarantee an accurate energy estimate — "if my trial function is close to the real ground state, E_trial is close to the exact energy" overstates what the variational principle actually guarantees. The variational principle guarantees only E_trial≥E₀ (a genuine upper bound on the true ground-state energy), but the GAP between E_trial and the exact E₀ can be arbitrarily large even for wavefunctions that look visually quite similar to the true ground state, if the trial function has the wrong symmetry or the wrong number/placement of nodes — accuracy of the wavefunction ψ and accuracy of the resulting energy E are genuinely SEPARATE questions, not automatically linked. A second, separate and equally important error: assuming the variational method can be applied to find EXCITED states in exactly the same simple way used for the ground state — "I can use the variational method to find excited states the same way I find the ground state," by simply "minimizing with a different trial function to get E₁." This fails without additional structure: excited-state variational methods require explicit ORTHOGONALITY constraints against all lower-energy states; without imposing these constraints, straightforward minimization always collapses back down to the ground state, since the ground state is the true global minimum of the energy functional. The simple Rayleigh-Ritz bound, E_trial≥E₀, applies unconditionally only to the ground state itself — extending the method to excited states requires the extra orthogonality machinery, not just picking a "different-looking" trial function.',
+    targetedMisconceptions: [`${VARM}:MC-VAR-EXACT`, `${VARM}:MC-VAR-ANY-STATE`],
+    source: `${VARM_SRC} — MC-VAR-EXACT (good-looking trial function does not guarantee accurate energy) + MC-VAR-ANY-STATE (excited states require orthogonality constraints, not just a different trial function)`,
+  },
+  {
+    conceptId: VARM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "if my trial function is close to the real ground state, E_trial is close to the exact energy," or more casually "I got a good wavefunction so my energy is accurate" — assuming that visual or qualitative closeness between a trial wavefunction and the true ground state automatically translates into a correspondingly accurate energy estimate. This overstates what the variational principle actually promises. The variational principle rigorously guarantees only one thing: E_trial≥E₀ — the trial energy is always an upper bound on the true ground-state energy, never below it. But the SIZE of the gap between E_trial and the true E₀ can be arbitrarily large, even for a trial wavefunction that LOOKS visually quite similar to the actual ground state — specifically if that trial function has the wrong symmetry properties, or the wrong number or placement of nodes, compared to the true wavefunction. The lesson: how "close" a trial wavefunction ψ_trial looks to the true wavefunction and how close the resulting energy E_trial comes to the true energy E₀ are genuinely SEPARATE, independent questions — visual similarity in the wavefunction does not automatically guarantee numerical accuracy in the energy, and a seemingly minor structural flaw (wrong symmetry, misplaced nodes) can produce a substantial energy error despite an otherwise plausible-looking trial function. A second, entirely separate and equally common error: assuming "I can use the variational method to find excited states the same way I find the ground state," suggesting you can simply "minimize with a different trial function to get E₁" — treating the excited-state calculation as a straightforward extension of the ground-state procedure, just swapping in a different starting guess. This fails without additional mathematical structure. Excited-state variational calculations genuinely require explicit ORTHOGONALITY constraints — the trial function for an excited state must be constrained to be orthogonal to all lower-energy states\' wavefunctions. Without imposing these orthogonality constraints explicitly, straightforward energy minimization will always collapse back down toward the ground state itself, regardless of what trial function you start with, precisely because the ground state IS the global minimum of the energy functional across all possible trial wavefunctions — nothing in an unconstrained minimization procedure prevents it from finding that global minimum rather than a genuinely excited state. The simple Rayleigh-Ritz variational bound, E_trial≥E₀, applies unconditionally ONLY to the ground state calculation; correctly extending the variational method to excited states requires this additional orthogonality machinery to be built in explicitly — it is never as simple as merely choosing a "different-looking" trial function and minimizing as before.',
+    targetedMisconceptions: [`${VARM}:MC-VAR-EXACT`, `${VARM}:MC-VAR-ANY-STATE`],
+    source: `${VARM_SRC} — MC-VAR-EXACT + MC-VAR-ANY-STATE, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const VARM_PROBES: SeedProbe[] = [
+  {
+    conceptId: VARM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A trial wavefunction looks visually very similar to the true ground state. Does this guarantee E_trial is close to the exact ground-state energy E₀?',
+    choices: [
+      { text: 'No — the variational principle only guarantees E_trial≥E₀; the gap can be large if the trial function has wrong symmetry or nodes, even if it looks visually similar', isCorrect: true },
+      { text: 'Yes — a visually close trial wavefunction always produces a correspondingly accurate energy estimate', isCorrect: false, misconceptionId: `${VARM}:MC-VAR-EXACT` },
+    ],
+    correctValue: 'no guarantee, wavefunction and energy accuracy are separate questions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VARM}:MC-VAR-EXACT`],
+    source: `${VARM_SRC} — MC-VAR-EXACT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VARM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can you find the first excited state E₁ using the variational method simply by minimizing energy with a different trial function, the same way you find the ground state?',
+    choices: [
+      { text: 'No — without an explicit orthogonality constraint to all lower states, unconstrained minimization always collapses back to the ground state, since it is the global minimum', isCorrect: true },
+      { text: 'Yes — minimizing with any different trial function automatically yields the first excited state', isCorrect: false, misconceptionId: `${VARM}:MC-VAR-ANY-STATE` },
+    ],
+    correctValue: 'no, requires orthogonality constraints to lower states',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VARM}:MC-VAR-ANY-STATE`],
+    source: `${VARM_SRC} — MC-VAR-ANY-STATE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.wkb-approximation ───────────────────────────────────────────────────
+const WKBA = 'phys.qm.wkb-approximation'
+const WKBA_SRC = 'docs/curriculum/blueprints/phys.qm.wkb-approximation.md'
+
+const WKBA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WKBA,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The WKB approximation is NOT exact everywhere just because ℏ is small — "since ℏ is small, WKB is exact for any problem" ignores a genuine mathematical breakdown at classical turning points. WKB fails specifically at classical turning points, where the classical momentum p(x)=0 and the local de Broglie wavelength λ→∞ — connection formulas are required specifically to patch the solution across these turning points, because the approximation itself requires |dλ/dx|≪1 (the wavelength must vary slowly compared to itself), a condition that mathematically breaks down at turning points REGARDLESS of how small ℏ is. Small ℏ alone does not fix this failure — the approximation\'s validity condition depends on the LOCAL rate of change of the wavelength, not simply on the overall size of ℏ. A second, separate and equally important error: assuming the tunneling probability always takes the simple form e^(−κa) with a a single barrier width and κ a single constant — "just use the simple exponential decay." This formula is only correct for a CONSTANT-height barrier. For a spatially VARYING barrier V(x), the correct WKB tunneling factor is T∝exp(−2∫|p(x)|dx/ℏ), where the integral runs across the entire classically forbidden region — using a naive "barrier width times a single κ" calculation completely misses the actual shape of V(x) across the barrier, and gives a systematically wrong tunneling probability whenever the barrier isn\'t uniformly flat.',
+    targetedMisconceptions: [`${WKBA}:MC-WKB-EXACT-CLASSICALLY`, `${WKBA}:MC-WKB-TUNNELING-FORMULA`],
+    source: `${WKBA_SRC} — MC-WKB-EXACT-CLASSICALLY (WKB fails at turning points regardless of ℏ) + MC-WKB-TUNNELING-FORMULA (tunneling factor requires integrating over the full barrier shape, not a single κ×width)`,
+  },
+  {
+    conceptId: WKBA,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "WKB gives the exact answer in the classical limit ℏ→0," reasoning "since ℏ is small, WKB is exact for any problem" — assuming that a small enough value of ℏ automatically guarantees the WKB approximation is exact, everywhere, for any potential shape. This overlooks a genuine, unavoidable mathematical breakdown at specific locations: classical turning points, where the classical momentum p(x) equals zero. At exactly these points, the local de Broglie wavelength λ diverges, λ→∞, and the WKB approximation genuinely fails there — this is precisely why special "connection formulas" are required to properly patch the WKB solution together across a turning point, joining the classically allowed region\'s oscillatory solution to the classically forbidden region\'s exponential solution. The underlying reason: the WKB approximation formally requires the condition |dλ/dx|≪1 — meaning the wavelength must vary slowly compared to its own size — and this condition breaks down mathematically at turning points REGARDLESS of how small ℏ happens to be; making ℏ smaller does not fix this specific local breakdown, since the failure is tied to the LOCAL rate of change of the wavelength near p(x)=0, not to the overall magnitude of ℏ. A second, entirely separate and equally common error: assuming the tunneling probability through any potential barrier is always given by the simple form e^(−κa), where a is a single barrier width and κ is a single decay constant — "just use the simple exponential decay." This particular simple formula is genuinely correct ONLY for the special case of a CONSTANT-height (flat, rectangular) barrier. For a more general, spatially VARYING barrier V(x) — the realistic case in most physical problems — the correct WKB tunneling transmission factor is instead T∝exp(−2∫|p(x)|dx/ℏ), where the integral is taken across the ENTIRE classically forbidden region (wherever E<V(x)), properly accounting for how the local momentum p(x) — and hence the local decay rate — changes shape as you move through the barrier. Using the naive shortcut of "barrier width times a single constant κ" completely misses the actual detailed shape of V(x) across the barrier, and produces a systematically incorrect tunneling probability whenever the barrier is not uniformly flat — the correct approach genuinely requires integrating the local momentum p(x) over the full extent of the classically forbidden region, not simply multiplying a single decay rate by a single width.',
+    targetedMisconceptions: [`${WKBA}:MC-WKB-EXACT-CLASSICALLY`, `${WKBA}:MC-WKB-TUNNELING-FORMULA`],
+    source: `${WKBA_SRC} — MC-WKB-EXACT-CLASSICALLY + MC-WKB-TUNNELING-FORMULA, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const WKBA_PROBES: SeedProbe[] = [
+  {
+    conceptId: WKBA,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Since ℏ is small in most physical systems, is the WKB approximation exact everywhere, including at classical turning points where p(x)=0?',
+    choices: [
+      { text: 'No — WKB fails at classical turning points (where λ→∞), regardless of how small ℏ is; connection formulas are needed to patch the solution across these points', isCorrect: true },
+      { text: 'Yes — since ℏ is small, WKB gives the exact answer everywhere, including at turning points', isCorrect: false, misconceptionId: `${WKBA}:MC-WKB-EXACT-CLASSICALLY` },
+    ],
+    correctValue: 'no, WKB genuinely fails at turning points regardless of hbar',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WKBA}:MC-WKB-EXACT-CLASSICALLY`],
+    source: `${WKBA_SRC} — MC-WKB-EXACT-CLASSICALLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WKBA,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a spatially varying potential barrier V(x) (not constant-height), what is the correct WKB tunneling probability formula?',
+    choices: [
+      { text: 'T∝exp(−2∫|p(x)|dx/ℏ), integrating the local momentum p(x) across the full classically forbidden region', isCorrect: true },
+      { text: 'T=e^(−κa), using a single decay constant κ and the barrier width a — the same simple formula as for a constant-height barrier', isCorrect: false, misconceptionId: `${WKBA}:MC-WKB-TUNNELING-FORMULA` },
+    ],
+    correctValue: 'must integrate p(x) over the barrier shape, not a single kappa times width',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WKBA}:MC-WKB-TUNNELING-FORMULA`],
+    source: `${WKBA_SRC} — MC-WKB-TUNNELING-FORMULA trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.scattering-theory-born-approximation ────────────────────────────────
+const SCAT = 'phys.qm.scattering-theory-born-approximation'
+const SCAT_SRC = 'docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md'
+
+const SCAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SCAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The scattering cross-section is NOT simply the geometric area of the target — "σ=πR² for a sphere" applies naive classical geometry where quantum scattering behaves differently. Cross-section is properly defined as an EFFECTIVE area — the ratio of scattered flux to incident flux per unit target density — and for quantum scatterers, σ genuinely depends on the potential strength and the incident energy, not just on geometric size. A hard sphere of radius R actually has σ=4πR² at LOW energy (not the naively expected πR²), specifically due to wave diffraction effects around the sphere\'s edge — a purely quantum-mechanical (wave) correction that classical geometric reasoning completely misses. A second, separate and equally important error: assuming the Born approximation works "whenever the potential is weak" — "V is small so Born is fine" — treating potential weakness as the only condition needed. The Born approximation actually requires BOTH |V̄|/E≪1 AND that the scattering does not significantly deplete the incident wave — TWO conditions, not one. At low energy specifically (where kR≪1), the Born approximation can fail even for a potential that looks "weak" by naive standards, particularly for potentials capable of supporting bound states. The full validity condition is genuinely energy-dependent: ka≫1 AND V₀/(ℏ²k²/2m)≪1 — both conditions must hold together; potential weakness alone, without checking the energy-dependent condition, is not sufficient to guarantee the Born approximation is valid.',
+    targetedMisconceptions: [`${SCAT}:MC-SCAT-CROSS-SECTION-AREA`, `${SCAT}:MC-BORN-ALWAYS-VALID`],
+    source: `${SCAT_SRC} — MC-SCAT-CROSS-SECTION-AREA (cross-section is effective area, not geometric area, hard sphere gives 4πR² not πR²) + MC-BORN-ALWAYS-VALID (Born approximation needs energy-dependent conditions, not just weak V)`,
+  },
+  {
+    conceptId: SCAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "cross-section is the geometric area of the target," writing "σ=πR² for a sphere" — applying straightforward classical geometric reasoning, treating the scattering cross-section as though it were simply the target\'s physical silhouette area, the way you might compute the shadow cast by a solid sphere. This is not correct for quantum scattering. Cross-section is properly defined as an EFFECTIVE area — specifically, the ratio of scattered flux to incident flux per unit target density — a quantity computed from the actual scattering physics, not read directly off the target\'s geometric size. For quantum scatterers, σ genuinely depends on the strength of the scattering potential and on the incident particle\'s energy, not merely on geometric dimensions. A striking concrete counter-example: a hard sphere of radius R, at LOW incident energy, actually has scattering cross-section σ=4πR² — a factor of 4 larger than the naively expected geometric value πR² — and this factor-of-4 enhancement arises specifically from wave DIFFRACTION effects occurring around the edge of the sphere, a purely quantum-mechanical (wave-like) phenomenon that simple classical geometric reasoning completely fails to predict or account for. A second, entirely separate and equally common error: assuming "the Born approximation works whenever the potential is weak," reasoning simply "V is small so Born is fine" — treating potential weakness alone as the sole, sufficient condition for the Born approximation\'s validity. In reality, the Born approximation genuinely requires TWO separate conditions to both hold simultaneously: first, |V̄|/E≪1 (the potential must indeed be weak relative to the incident energy), AND second, that the scattering process does not significantly deplete the incident wave (a separate physical requirement about the overall scattering strength). Critically, at LOW incident energy specifically — the regime where kR≪1 — the Born approximation can genuinely fail even for a potential that looks "weak" by naive standards, particularly for potentials capable of supporting bound states, where low-energy scattering physics becomes qualitatively different from the weak-potential expectation. The full, correct validity condition for the Born approximation is genuinely energy-DEPENDENT, requiring both ka≫1 AND V₀/(ℏ²k²/2m)≪1 to hold together — checking potential weakness alone, without separately verifying this energy-dependent condition, is never sufficient on its own to guarantee that the Born approximation will actually give an accurate result.',
+    targetedMisconceptions: [`${SCAT}:MC-SCAT-CROSS-SECTION-AREA`, `${SCAT}:MC-BORN-ALWAYS-VALID`],
+    source: `${SCAT_SRC} — MC-SCAT-CROSS-SECTION-AREA + MC-BORN-ALWAYS-VALID, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const SCAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SCAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the low-energy scattering cross-section of a hard sphere of radius R — is it simply the geometric cross-sectional area πR²?',
+    choices: [
+      { text: 'No — at low energy it is σ=4πR², four times the naive geometric area, due to wave diffraction around the sphere; cross-section is an effective scattering area, not simple geometric area', isCorrect: true },
+      { text: 'Yes — σ=πR², matching the geometric silhouette area of the sphere', isCorrect: false, misconceptionId: `${SCAT}:MC-SCAT-CROSS-SECTION-AREA` },
+    ],
+    correctValue: 'sigma equals 4 pi R squared at low energy, due to diffraction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCAT}:MC-SCAT-CROSS-SECTION-AREA`],
+    source: `${SCAT_SRC} — MC-SCAT-CROSS-SECTION-AREA trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SCAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a "weak" potential (small |V̄|/E) alone guarantee the Born approximation is valid?',
+    choices: [
+      { text: 'No — validity also requires ka≫1 (an energy-dependent condition); at low energy (kR≪1), Born can fail even for a weak potential, especially one supporting bound states', isCorrect: true },
+      { text: 'Yes — as long as the potential is weak, the Born approximation is always valid regardless of energy', isCorrect: false, misconceptionId: `${SCAT}:MC-BORN-ALWAYS-VALID` },
+    ],
+    correctValue: 'no, requires both weak potential AND an energy-dependent condition',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCAT}:MC-BORN-ALWAYS-VALID`],
+    source: `${SCAT_SRC} — MC-BORN-ALWAYS-VALID trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.s-matrix-basics ──────────────────────────────────────────────────────
+const SMTX = 'phys.qm.s-matrix-basics'
+const SMTX_SRC = 'docs/curriculum/blueprints/phys.qm.s-matrix-basics.md'
+
+const SMTX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SMTX,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The S-matrix and T-matrix are NOT the same thing, even though they are closely related — "S-matrix and T-matrix are the same thing, so I can use them interchangeably" is a genuine error. In appropriate conventions, S=1+iT: the identity part of S corresponds specifically to NO scattering occurring at all, while T (the transition matrix) carries the genuine scattering dynamics and amplitude. S itself is UNITARY (satisfying SS†=1), reflecting overall probability conservation, while T carries the dynamical content of the scattering process — these are genuinely different mathematical objects playing different roles. Confusing S with T leads directly to wrong applications of the optical theorem and incorrect pole-structure analysis, since the two matrices have different mathematical properties and different physical interpretations. A second, separate and equally important error: treating unitarity as merely "a nice property" that approximate, non-unitary S-matrices can safely dispense with — "my approximate S doesn\'t need to be unitary" or "non-unitary approximations still give useful cross-sections." Unitarity, S†S=1, IS physically equivalent to probability conservation itself — it is not a decorative mathematical nicety but a core physical requirement. Violating unitarity leads directly to non-physical predictions: negative probabilities, cross-sections that violate the optical theorem\'s bounds, or spurious probability creation/destruction that has no physical meaning. Any approximation scheme that breaks unitarity must therefore be used cautiously, strictly within its known, carefully-checked range of validity — never treated as an acceptable general-purpose shortcut.',
+    targetedMisconceptions: [`${SMTX}:MC-SMAT-S-IS-JUST-T`, `${SMTX}:MC-SMAT-UNITARITY-OPTIONAL`],
+    source: `${SMTX_SRC} — MC-SMAT-S-IS-JUST-T (S and T are related but distinct, S=1+iT) + MC-SMAT-UNITARITY-OPTIONAL (unitarity IS probability conservation, not optional)`,
+  },
+  {
+    conceptId: SMTX,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "S-matrix and T-matrix are the same thing," reasoning "S=T, so I can use them interchangeably" — treating these two closely related quantities in scattering theory as fully identical, exchangeable objects. They are genuinely different, though related. In appropriate conventions, the relationship is S=1+iT: the "1" (identity) part of S corresponds specifically to the case of NO scattering happening at all — the particle simply passes through unaffected — while T, the transition matrix, carries the actual scattering amplitude and represents the genuine dynamical content of what happens WHEN scattering does occur. S itself has a crucial mathematical property that T does not directly share in the same way: S is UNITARY, satisfying SS†=1, a property that encodes overall probability conservation across all possible outcomes; T instead carries the specific dynamics of the interaction, without being unitary itself in the same sense. Confusing the two — treating S and T as simply interchangeable — leads directly to concrete errors: applying the optical theorem incorrectly (since the optical theorem specifically relates forward scattering amplitude, built from T, to the total cross section, via the unitarity of S), and misidentifying the pole structure of scattering amplitudes (since S-matrix poles and T-matrix expressions carry different mathematical significance for identifying resonances and bound states). A second, entirely separate and equally serious error: treating unitarity as merely "a nice property" that a non-unitary approximate S-matrix could reasonably do without — reasoning "unitarity is just a nice property — non-unitary approximations still give useful cross-sections," or more directly, "my approximate S doesn\'t need to be unitary." This significantly understates the physical importance of unitarity. Unitarity, expressed mathematically as S†S=1, IS the mathematical statement of probability conservation itself — it is not a decorative or optional mathematical nicety, but a direct encoding of a fundamental physical law: probability must be conserved across all possible scattering outcomes. Violating unitarity in an approximation scheme leads directly to physically nonsensical predictions: negative probabilities (which are meaningless), total cross-sections that violate the bounds imposed by the optical theorem, or effective "creation" or "destruction" of probability that corresponds to no genuine physical process. This does not mean non-unitary approximations are always useless — but it does mean any approximation scheme that breaks strict unitarity must be applied cautiously and only within its specifically known, carefully checked range of validity — it should never be casually treated as an acceptable general-purpose substitute for a properly unitary treatment.',
+    targetedMisconceptions: [`${SMTX}:MC-SMAT-S-IS-JUST-T`, `${SMTX}:MC-SMAT-UNITARITY-OPTIONAL`],
+    source: `${SMTX_SRC} — MC-SMAT-S-IS-JUST-T + MC-SMAT-UNITARITY-OPTIONAL, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const SMTX_PROBES: SeedProbe[] = [
+  {
+    conceptId: SMTX,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are the S-matrix and T-matrix in scattering theory the same mathematical object, usable interchangeably?',
+    choices: [
+      { text: 'No — S=1+iT; the identity part of S represents no scattering, while T carries the genuine scattering amplitude; S is unitary (SS†=1), a property T does not share the same way', isCorrect: true },
+      { text: 'Yes — S and T are the same object, just written with different notation, and can be used interchangeably', isCorrect: false, misconceptionId: `${SMTX}:MC-SMAT-S-IS-JUST-T` },
+    ],
+    correctValue: 'different objects, related by S=1+iT',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMTX}:MC-SMAT-S-IS-JUST-T`],
+    source: `${SMTX_SRC} — MC-SMAT-S-IS-JUST-T trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SMTX,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is unitarity (S†S=1) just a nice-to-have mathematical property, or can approximate non-unitary S-matrices be safely used without it?',
+    choices: [
+      { text: 'Unitarity IS probability conservation; violating it produces non-physical results (negative probabilities, optical-theorem violations); non-unitary approximations must be restricted to their known valid range', isCorrect: true },
+      { text: 'Unitarity is just a nice mathematical property; non-unitary approximate S-matrices still give useful, physically valid cross-sections in general', isCorrect: false, misconceptionId: `${SMTX}:MC-SMAT-UNITARITY-OPTIONAL` },
+    ],
+    correctValue: 'unitarity is essential, not optional, it encodes probability conservation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMTX}:MC-SMAT-UNITARITY-OPTIONAL`],
+    source: `${SMTX_SRC} — MC-SMAT-UNITARITY-OPTIONAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.selection-rules ───────────────────────────────────────────────────────
+const SELR = 'phys.qm.selection-rules'
+const SELR_SRC = 'docs/curriculum/blueprints/phys.qm.selection-rules.md'
+
+const SELR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SELR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A "forbidden" transition is NOT impossible — "no, it\'s forbidden" (as if that meant the transition literally cannot happen) misreads what the word "forbidden" actually means in this context. The 2s state of hydrogen genuinely DOES decay to 1s, via two-photon emission (2s→1s+γ+γ), with a measured lifetime τ≈0.12 s — this metastable 2s state is actually observed spectroscopically in interstellar nebulae. If the transition were truly impossible, the state would be permanent, but direct measurements confirm it does decay, just via a different mechanism than usual. "Forbidden" specifically means the E1 (electric dipole) matrix element ⟨1s|r⃗|2s⟩=0 (a consequence of matching parity between the two states) — decay can still occur via higher-order processes: M1 (magnetic dipole), E2 (electric quadrupole), or two-photon emission — all of these are genuinely much SLOWER than an ordinary E1 transition, but not impossible. "Forbidden" = suppressed (typically by factors of (ka)² or (v/c)² per additional multipolarity step beyond E1), never impossible; a forbidden transition is simply slow — sometimes by a factor of 10⁷ or more compared to an allowed transition. A second, separate and equally important error: assuming Δn=±1 is a genuine selection rule, analogous to Δl=±1. Test this against a famous, heavily observed spectral line: the Balmer Hβ line (n=4→n=2) is one of the most-observed hydrogen spectral lines in astronomy, and it proceeds via, e.g., 4d→2p (Δl=−1) — a transition with Δn=2, which is perfectly allowed for E1 transitions. The underlying reason: the Coulomb potential has no dependence on angular momentum, so photon absorption or emission genuinely doesn\'t "care" about the radial quantum number n at all — only l and m are actually constrained, by angular-momentum and parity conservation. Δn is entirely UNRESTRICTED — any n\'→n transition is allowed, provided it separately satisfies Δl=±1 and Δm=0,±1; selection rules genuinely apply only to l, m, and spin, never to n.',
+    targetedMisconceptions: [`${SELR}:MC-1`, `${SELR}:MC-2`],
+    source: `${SELR_SRC} — MC-1 (forbidden transitions are impossible, false) + MC-2 (Δn=±1 is a selection rule, false — only Δl and Δm are constrained)`,
+  },
+  {
+    conceptId: SELR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "can the 2s state of hydrogen decay to 1s by photon emission?", say "no — it\'s forbidden," taking the word "forbidden" at face value to mean the transition literally cannot happen under any circumstances. Test this directly: the 2s state of hydrogen genuinely DOES decay to 1s — via a two-photon emission process, 2s→1s+γ+γ, with a measured lifetime of τ≈0.12 seconds. This is not merely theoretical: this metastable 2s state is actually observed spectroscopically in real astronomical settings, specifically in interstellar nebulae, where its characteristic decay signature has been directly measured. If the 2s→1s transition were genuinely, totally impossible as the word "forbidden" superficially suggests, the state would need to be permanently stable, never decaying at all — but direct experimental measurements confirm it does eventually decay, just through a different physical mechanism than the usual, faster route. What "forbidden" actually, technically means: specifically that the E1 (electric dipole) matrix element vanishes, ⟨1s|r⃗|2s⟩=0 — a direct consequence of both states sharing the same parity (s states have even parity, and the electric dipole operator r⃗ has odd parity, forcing this particular matrix element to vanish by symmetry). But decay can still genuinely proceed through higher-order physical processes: M1 (magnetic dipole) transitions, E2 (electric quadrupole) transitions, or two-photon emission — all of these mechanisms are dramatically SLOWER than an ordinary, allowed E1 transition, but none of them is actually impossible. The correct interpretation: "forbidden" means suppressed — typically by factors of roughly (ka)² or (v/c)² for each additional step in multipolarity beyond simple E1 — never impossible; a genuinely "forbidden" transition is simply a slow one, sometimes by a factor of 10⁷ or considerably more compared to an allowed transition, but it can and does still occur given enough time. A second, entirely separate and equally common error: asked "is the transition from n=4 to n=2 with Δl=−1 allowed?", answering "no — Δn must be ±1," incorrectly extending the genuine Δl=±1 selection rule by analogy to also apply to Δn, perhaps influenced by older Bohr-model intuitions about oscillations between adjacent orbits. Test this directly against a famous, extensively studied astronomical spectral line: the Balmer Hβ line, corresponding to the n=4→n=2 transition, is one of the MOST observed hydrogen spectral lines in all of astronomy — and it proceeds via specific transitions like 4d(l=2)→2p(l=1), where Δl=−1 (satisfying the genuine selection rule) while Δn=2 (definitely not ±1) — and this transition is perfectly allowed as an E1 process, contradicting the "Δn=±1" assumption directly. The underlying physical reason: the Coulomb potential governing the hydrogen atom has no dependence whatsoever on angular momentum quantum numbers — photon absorption and emission processes genuinely do not "care" about the radial quantum number n at all; only l and m are actually subject to physical constraints, arising specifically from angular-momentum conservation and parity conservation during the emission or absorption of a photon (which itself carries one unit of angular momentum). The correct, complete rule: Δn is entirely UNRESTRICTED — any transition n\'→n whatsoever is allowed, PROVIDED it separately satisfies Δl=±1 and Δm=0,±1 — selection rules genuinely apply only to the angular quantum numbers l and m (and separately to spin, for spin-changing transitions), never to the principal quantum number n itself.',
+    targetedMisconceptions: [`${SELR}:MC-1`, `${SELR}:MC-2`],
+    source: `${SELR_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const SELR_PROBES: SeedProbe[] = [
+  {
+    conceptId: SELR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The 2s→1s transition in hydrogen is "E1 forbidden" (Δl=0). Does this mean the 2s state can never decay to 1s?',
+    choices: [
+      { text: 'No — it decays via two-photon emission (2s→1s+γ+γ) with lifetime ~0.12s; "forbidden" means suppressed/slow (via higher-order processes), not impossible', isCorrect: true },
+      { text: 'Yes — "forbidden" means the transition is completely impossible, so the 2s state is permanently stable', isCorrect: false, misconceptionId: `${SELR}:MC-1` },
+    ],
+    correctValue: 'forbidden means slow, not impossible; it does decay',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SELR}:MC-1`],
+    source: `${SELR_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SELR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the hydrogen transition 4d(n=4,l=2)→2p(n=2,l=1) — with Δn=2, Δl=−1 — an allowed E1 transition?',
+    choices: [
+      { text: 'Yes — Δn is unrestricted for E1 transitions; only Δl=±1 and Δm=0,±1 are constrained, and this transition satisfies Δl=−1', isCorrect: true },
+      { text: 'No — since Δn=2, not ±1, this transition violates the selection rule and is forbidden', isCorrect: false, misconceptionId: `${SELR}:MC-2` },
+    ],
+    correctValue: 'yes, allowed, delta n is unrestricted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SELR}:MC-2`],
+    source: `${SELR_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.density-matrix ────────────────────────────────────────────────────────
+const DMAT = 'phys.qm.density-matrix'
+const DMAT_SRC = 'docs/curriculum/blueprints/phys.qm.density-matrix.md'
+
+const DMAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DMAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A mixed state is NOT simply a superposition of states — "a mixed state is a superposition of states — like |ψ⟩=Σcₙ|n⟩" confuses two genuinely distinct concepts. A superposition is a PURE state, characterized by definite relative PHASES between its component terms — this is a fundamentally different object from a mixed state, which represents a CLASSICAL ensemble described by PROBABILITIES with no coherent phase relationships between terms. Mathematically: ρ=Σpₙ|n⟩⟨n| (a mixed state, a classical probability-weighted mixture) is NOT equal to |ψ⟩⟨ψ| for |ψ⟩=Σcₙ|n⟩ (a pure superposition state) — these produce genuinely different density matrices, even when the pₙ and |cₙ|² happen to match numerically. The key diagnostic test: ρ²=ρ holds specifically for a pure state, while Tr(ρ²)<1 holds specifically for a genuinely mixed state — this trace-based test cleanly distinguishes the two cases mathematically. A second, separate and equally important error: assuming that after tracing out an environment (a "partial trace"), you\'ve lost ALL quantum information about the remaining subsystem — "partial trace destroys entanglement — the state is now classical." The partial trace actually gives the REDUCED density matrix ρ_A=Tr_B(ρ_AB), and this reduced density matrix RETAINS ALL locally-accessible quantum information about subsystem A specifically — ρ_A can genuinely still be a mixed QUANTUM state (definitely not automatically classical), and quantum coherences WITHIN subsystem A are fully preserved by the partial trace operation. Only the CORRELATIONS specifically WITH subsystem B (the traced-out environment) are lost — never all of A\'s own internal quantum information, which remains intact.',
+    targetedMisconceptions: [`${DMAT}:MC-DM-MIXED-IS-SUPERPOSITION`, `${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO`],
+    source: `${DMAT_SRC} — MC-DM-MIXED-IS-SUPERPOSITION (mixed state is a classical ensemble, not a coherent superposition) + MC-DM-PARTIAL-TRACE-LOSES-INFO (partial trace preserves local quantum information within A)`,
+  },
+  {
+    conceptId: DMAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "a mixed state is a superposition of states — like |ψ⟩=Σcₙ|n⟩," or more casually "the density matrix is just a more complicated wavefunction," treating mixed states as though they were simply another way of writing an ordinary quantum superposition, just packaged in matrix form. These are genuinely different physical concepts, not merely different notations for the same thing. A superposition is specifically a PURE state — it carries definite, coherent relative PHASES between its component basis states, meaning interference effects between the terms are physically real and observable. A mixed state, by sharp contrast, represents a fundamentally different physical situation: a CLASSICAL ensemble, described purely by PROBABILITIES pₙ of the system actually being in each state |n⟩, with genuinely no coherent phase relationships whatsoever existing between the different terms — it is more like "the system is definitely in state |1⟩ with probability p₁, OR definitely in state |2⟩ with probability p₂" (a classical either/or uncertainty), rather than "the system is coherently in a quantum blend of both simultaneously" (the genuinely different situation a true superposition describes). Mathematically, these produce different objects: the mixed-state density matrix ρ=Σpₙ|n⟩⟨n| is NOT the same as |ψ⟩⟨ψ| computed from the pure superposition |ψ⟩=Σcₙ|n⟩ — even in cases where the classical probabilities pₙ numerically happen to match |cₙ|², the resulting density matrices differ, because the pure-state version additionally contains cross-terms (coherences) between different n values that are completely absent from the classical mixed-state version. The clean diagnostic test to distinguish the two: computing ρ² and checking whether ρ²=ρ holds — this equality holds specifically and only for a genuinely PURE state; for a genuinely MIXED state, instead Tr(ρ²)<1 strictly, providing a clean, computable mathematical test to tell the two cases apart in any specific case. A second, entirely separate and equally common error: assuming that after performing a "partial trace" — tracing out some environment or subsystem B that a system of interest, A, has become entangled with — you have thereby lost ALL quantum information about the remaining subsystem A, reasoning "after tracing out the environment, I\'ve lost all the quantum information," or "partial trace destroys entanglement — the state is now classical." This significantly overstates what the partial trace operation actually does. The partial trace correctly gives you the REDUCED density matrix of subsystem A, computed as ρ_A=Tr_B(ρ_AB) — and this reduced density matrix genuinely RETAINS ALL of the locally-accessible quantum information about subsystem A specifically. ρ_A can absolutely still represent a genuinely mixed QUANTUM state (this is emphatically not automatically the same thing as becoming "classical" — a mixed quantum state remains a fully quantum-mechanical object, subject to quantum statistics, even though it lacks the coherent global phase information connecting it to B); crucially, quantum coherences that exist WITHIN subsystem A itself are fully preserved by the partial-trace operation and are not destroyed at all. The ONLY thing genuinely lost by the partial trace is information about CORRELATIONS specifically between subsystem A and the traced-out subsystem B (the entanglement connecting A to B, in other words) — never the entirety of A\'s own internal quantum information, which remains completely intact and accessible within the reduced density matrix ρ_A.',
+    targetedMisconceptions: [`${DMAT}:MC-DM-MIXED-IS-SUPERPOSITION`, `${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO`],
+    source: `${DMAT_SRC} — MC-DM-MIXED-IS-SUPERPOSITION + MC-DM-PARTIAL-TRACE-LOSES-INFO, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const DMAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: DMAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a mixed state ρ=Σpₙ|n⟩⟨n| the same object as a pure superposition |ψ⟩⟨ψ| for |ψ⟩=Σcₙ|n⟩ (with pₙ=|cₙ|²)?',
+    choices: [
+      { text: 'No — a superposition (pure state) has coherent phase relationships (cross-terms) that a mixed state (classical probability ensemble) lacks; the diagnostic test is ρ²=ρ for pure, Tr(ρ²)<1 for mixed', isCorrect: true },
+      { text: 'Yes — a mixed state is just a superposition, and the density matrix is simply a more complicated way of writing the same wavefunction', isCorrect: false, misconceptionId: `${DMAT}:MC-DM-MIXED-IS-SUPERPOSITION` },
+    ],
+    correctValue: 'different objects, mixed lacks coherent phase cross-terms',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DMAT}:MC-DM-MIXED-IS-SUPERPOSITION`],
+    source: `${DMAT_SRC} — MC-DM-MIXED-IS-SUPERPOSITION trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DMAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'After tracing out an entangled environment B, computing the reduced density matrix ρ_A=Tr_B(ρ_AB), have you lost all quantum information about subsystem A?',
+    choices: [
+      { text: 'No — ρ_A retains all locally-accessible quantum information about A, including internal coherences; only correlations WITH B (the entanglement) are lost', isCorrect: true },
+      { text: 'Yes — the partial trace destroys all quantum information, leaving A in a purely classical state', isCorrect: false, misconceptionId: `${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO` },
+    ],
+    correctValue: 'no, local quantum information in A is preserved, only A-B correlations lost',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO`],
+    source: `${DMAT_SRC} — MC-DM-PARTIAL-TRACE-LOSES-INFO trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -37420,6 +37840,13 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...AMAD_EXPLANATIONS,
   ...IDPT_EXPLANATIONS,
   ...PAUL_EXPLANATIONS,
+  ...PRTB_EXPLANATIONS,
+  ...VARM_EXPLANATIONS,
+  ...WKBA_EXPLANATIONS,
+  ...SCAT_EXPLANATIONS,
+  ...SMTX_EXPLANATIONS,
+  ...SELR_EXPLANATIONS,
+  ...DMAT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -37872,4 +38299,11 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...AMAD_PROBES,
   ...IDPT_PROBES,
   ...PAUL_PROBES,
+  ...PRTB_PROBES,
+  ...VARM_PROBES,
+  ...WKBA_PROBES,
+  ...SCAT_PROBES,
+  ...SMTX_PROBES,
+  ...SELR_PROBES,
+  ...DMAT_PROBES,
 ]
