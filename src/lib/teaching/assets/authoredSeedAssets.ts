@@ -29776,7 +29776,271 @@ const EMFC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.communication.academic-writing-advanced ───────────────────────────────
+const AWA = 'eng.communication.academic-writing-advanced'
+const AWA_SRC = 'docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md'
 
+const AWA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AWA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Writing as if no one has considered your question before is like ' +
+      'walking into an ongoing group discussion and starting your own ' +
+      'separate conversation as if alone in the room. Before stating your ' +
+      'claim, briefly situate it: "While X has argued A, this paper ' +
+      'contends B" shows you\'re contributing to a conversation, not ' +
+      'starting one from nothing.',
+    targetedMisconceptions: [`${AWA}:MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID`],
+    source: `${AWA_SRC} — MC-A (P28 group-conversation conflict)`,
+  },
+  {
+    conceptId: AWA,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Padding a piece to seem sophisticated is like adding empty ' +
+      'packaging around a small gift to make the box look bigger — it ' +
+      'looks impressive, but there\'s no more content inside. Before adding ' +
+      'a sentence, ask: does this add a genuinely NEW idea, or is it ' +
+      'restating something already said in more complicated words?',
+    targetedMisconceptions: [`${AWA}:MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED`],
+    source: `${AWA_SRC} — MC-B (P28 empty-gift-box conflict)`,
+  },
+  {
+    conceptId: AWA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Advanced academic writing must situate an argument within existing ' +
+      'scholarly conversation, not write as if in a vacuum — like joining ' +
+      'an ongoing discussion rather than starting an unrelated monologue. ' +
+      'Separately, length and complex phrasing don\'t equal sophistication ' +
+      '— genuine depth comes from new content (an angle, a nuance, ' +
+      'additional evidence), not from inflated packaging around the same ' +
+      'small idea.',
+    targetedMisconceptions: [
+      `${AWA}:MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID`,
+      `${AWA}:MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED`,
+    ],
+    source: `${AWA_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const AWA_PROBES: SeedProbe[] = [
+  {
+    conceptId: AWA,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A paper opens with "This paper argues that X is the primary cause of Y" with no acknowledgment of any existing scholarly perspective on the question. Does advanced academic writing mean ignoring what others have already said on the topic?',
+    choices: [
+      { text: 'No — advanced academic writing briefly situates the claim relative to existing scholarly positions (building on, complicating, or synthesizing them), not writing as if the conversation started with you', isCorrect: true },
+      { text: 'Yes — advanced academic writing means ignoring what others have already said and presenting your analysis as the first consideration of the question', isCorrect: false, misconceptionId: `${AWA}:MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID` },
+    ],
+    correctValue: 'no, arguments must be situated in scholarly conversation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AWA}:MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID`],
+    source: `${AWA_SRC} — group-conversation conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: AWA,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A paragraph restates the same analytical point three times using increasingly complex sentence structures, with no new information added at any point. Does this longer, more complex-sounding paragraph count as more sophisticated writing?',
+    choices: [
+      { text: 'No — this is padding; genuine sophistication comes from adding real analytical depth (a new angle, evidence, or nuance), not from inflating existing content with complicated phrasing', isCorrect: true },
+      { text: 'Yes — a longer, more complex-sounding piece is automatically more sophisticated regardless of whether it adds new content', isCorrect: false, misconceptionId: `${AWA}:MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED` },
+    ],
+    correctValue: 'no, padding is not the same as genuine sophistication',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AWA}:MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED`],
+    source: `${AWA_SRC} — empty-gift-box conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.plagiarism-and-citation-ethics ────────────────────────────
+const PCE = 'eng.composition.plagiarism-and-citation-ethics'
+const PCE_SRC = 'docs/curriculum/blueprints/eng.composition.plagiarism-and-citation-ethics.md'
+
+const PCE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PCE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating plagiarism as just a formatting technicality is like ' +
+      'treating signing someone else\'s name on a check as just a ' +
+      'paperwork issue — it\'s really about falsely claiming ownership of ' +
+      'something that isn\'t yours. Plagiarism is a genuine ethical ' +
+      'violation (misrepresenting someone else\'s work as your own), the ' +
+      'same underlying issue as taking credit for a colleague\'s idea.',
+    targetedMisconceptions: [`${PCE}:MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE`],
+    source: `${PCE_SRC} — MC-A (P28 signed-check conflict)`,
+  },
+  {
+    conceptId: PCE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating every citation mistake as equally serious as deliberate ' +
+      'plagiarism is like treating a minor parking-permit paperwork error ' +
+      'the same as stealing a car — both are "car-related," but intent and ' +
+      'harm differ completely. An honest, minor formatting slip within a ' +
+      'genuine attribution attempt is fundamentally different from ' +
+      'deliberately presenting someone\'s work as your own.',
+    targetedMisconceptions: [`${PCE}:MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM`],
+    source: `${PCE_SRC} — MC-B (P28 parking-permit-vs-stolen-car conflict)`,
+  },
+  {
+    conceptId: PCE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Plagiarism is a genuine ethical violation — falsely claiming ' +
+      'ownership of someone else\'s work — not an arbitrary formatting ' +
+      'rule, like signing someone else\'s name on a check. Separately, an ' +
+      'honest, minor citation formatting slip within a genuine attribution ' +
+      'attempt is fundamentally different in kind from deliberate, ' +
+      'uncredited copying, like a parking-permit paperwork error versus an ' +
+      'actual stolen car — not merely a difference of degree.',
+    targetedMisconceptions: [
+      `${PCE}:MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE`,
+      `${PCE}:MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM`,
+    ],
+    source: `${PCE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PCE_PROBES: SeedProbe[] = [
+  {
+    conceptId: PCE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student submits an essay entirely copied from an online source with no attribution, presenting it as their own original analysis. Is this just a technical formatting rule violation, not a real ethical issue?',
+    choices: [
+      { text: 'No — this is a genuine ethical violation, misrepresenting someone else\'s work as one\'s own, which has real consequences for the original author and the shared intellectual record', isCorrect: true },
+      { text: 'Yes — plagiarism is just a technical formatting rule, not a real ethical issue', isCorrect: false, misconceptionId: `${PCE}:MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE` },
+    ],
+    correctValue: 'no, plagiarism is a genuine ethical violation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PCE}:MC-A-PLAGIARISM-IS-JUST-A-TECHNICAL-FORMATTING-RULE-NOT-A-REAL-ETHICAL-ISSUE`],
+    source: `${PCE_SRC} — signed-check conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PCE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student correctly paraphrases a source\'s idea and genuinely attempts to cite it, but makes a minor formatting mistake (a missing page number). Is this equally as serious as a student who copies an entire paragraph with no citation at all, presented as original writing?',
+    choices: [
+      { text: 'No — the minor formatting slip is an honest attempt at attribution, fundamentally different in kind from deliberate, uncredited copying, which is a genuine misrepresentation of authorship', isCorrect: true },
+      { text: 'Yes — any citation mistake, even a minor formatting error, is equally serious as deliberate plagiarism', isCorrect: false, misconceptionId: `${PCE}:MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM` },
+    ],
+    correctValue: 'no, honest slips and deliberate copying differ in kind',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PCE}:MC-B-ANY-CITATION-MISTAKE-EVEN-A-MINOR-FORMATTING-ERROR-IS-EQUALLY-SERIOUS-AS-DELIBERATE-PLAGIARISM`],
+    source: `${PCE_SRC} — parking-permit-vs-stolen-car conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.editing-for-style ─────────────────────────────────────────
+const EFS = 'eng.composition.editing-for-style'
+const EFS_SRC = 'docs/curriculum/blueprints/eng.composition.editing-for-style.md'
+
+const EFS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EFS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating grammatical correctness as the finish line is like a chef ' +
+      'declaring a dish finished the moment none of the ingredients are ' +
+      'spoiled — correctness is the minimum floor, not the ceiling. A ' +
+      'technically correct sentence can still be bloated or vague; editing ' +
+      'for style is a separate pass asking "is this the clearest, most ' +
+      'economical way to say this?"',
+    targetedMisconceptions: [`${EFS}:MC-A-IF-A-SENTENCE-IS-GRAMMATICALLY-CORRECT-THERE-IS-NOTHING-LEFT-TO-EDIT`],
+    source: `${EFS_SRC} — MC-A (P28 chefs-finish-line conflict)`,
+  },
+  {
+    conceptId: EFS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Cutting words indiscriminately is like a butcher trimming meat by ' +
+      'removing whatever is fastest to cut regardless of fat or muscle — ' +
+      'you end up with less, but not necessarily better. Real editing ' +
+      'removes padding (words that add nothing) while protecting ' +
+      'precision (words carrying real, needed meaning) — the goal is ' +
+      'economy, not mere shortness.',
+    targetedMisconceptions: [`${EFS}:MC-B-CUTTING-WORDS-ALWAYS-IMPROVES-A-SENTENCE-REGARDLESS-OF-WHAT-IS-CUT`],
+    source: `${EFS_SRC} — MC-B (P28 butchers-trim conflict)`,
+  },
+  {
+    conceptId: EFS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Grammatical correctness is the floor, not the ceiling — a ' +
+      'technically correct sentence can still be wordy or vague, like a ' +
+      'chef declaring a dish finished the moment nothing is spoiled; ' +
+      'editing for style is a genuinely separate pass. Separately, cutting ' +
+      'words must target padding specifically, not any words ' +
+      'indiscriminately, like a butcher trimming only fat, not muscle — ' +
+      'the goal is economy, not mere shortness.',
+    targetedMisconceptions: [
+      `${EFS}:MC-A-IF-A-SENTENCE-IS-GRAMMATICALLY-CORRECT-THERE-IS-NOTHING-LEFT-TO-EDIT`,
+      `${EFS}:MC-B-CUTTING-WORDS-ALWAYS-IMPROVES-A-SENTENCE-REGARDLESS-OF-WHAT-IS-CUT`,
+    ],
+    source: `${EFS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const EFS_PROBES: SeedProbe[] = [
+  {
+    conceptId: EFS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Due to the fact that the weather conditions were of an unfavorable nature, the event was ultimately cancelled." This sentence is grammatically flawless. Is there nothing left to edit here?',
+    choices: [
+      { text: 'No — correctness and stylistic quality are independent; this sentence is grammatically correct but wordy and could be tightened to "Bad weather cancelled the event"', isCorrect: true },
+      { text: 'Yes — if a sentence is grammatically correct, there is nothing left to edit', isCorrect: false, misconceptionId: `${EFS}:MC-A-IF-A-SENTENCE-IS-GRAMMATICALLY-CORRECT-THERE-IS-NOTHING-LEFT-TO-EDIT` },
+    ],
+    correctValue: 'no, correctness and style are separate questions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EFS}:MC-A-IF-A-SENTENCE-IS-GRAMMATICALLY-CORRECT-THERE-IS-NOTHING-LEFT-TO-EDIT`],
+    source: `${EFS_SRC} — chefs-finish-line conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EFS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The committee, after reviewing all twelve submitted proposals over three separate meetings, selected the one from the engineering team." is cut to "The committee chose one." Did cutting all these words automatically improve the sentence?',
+    choices: [
+      { text: 'No — this over-cut destroyed real information the reader needed (how many proposals, how thoroughly reviewed, which team was chosen); cutting words always improving a sentence regardless of what is cut is false', isCorrect: true },
+      { text: 'Yes — cutting words always improves a sentence regardless of what is cut', isCorrect: false, misconceptionId: `${EFS}:MC-B-CUTTING-WORDS-ALWAYS-IMPROVES-A-SENTENCE-REGARDLESS-OF-WHAT-IS-CUT` },
+    ],
+    correctValue: 'no, cutting must target padding, not real content',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EFS}:MC-B-CUTTING-WORDS-ALWAYS-IMPROVES-A-SENTENCE-REGARDLESS-OF-WHAT-IS-CUT`],
+    source: `${EFS_SRC} — butchers-trim conflict as probe, distractor-mapped`,
+  },
+]
 
 // ─── Batch export ────────────────────────────────────────────────────────────
 
@@ -30115,6 +30379,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...DIEL_EXPLANATIONS,
   ...KVL2_EXPLANATIONS,
   ...EMFC_EXPLANATIONS,
+  ...AWA_EXPLANATIONS,
+  ...PCE_EXPLANATIONS,
+  ...EFS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -30452,4 +30719,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...DIEL_PROBES,
   ...KVL2_PROBES,
   ...EMFC_PROBES,
+  ...AWA_PROBES,
+  ...PCE_PROBES,
+  ...EFS_PROBES,
 ]
