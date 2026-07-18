@@ -32768,6 +32768,366 @@ const POLR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.opt.brewsters-law ───────────────────────────────────────────────────
+const BREW = 'phys.opt.brewsters-law'
+const BREW_SRC = 'docs/curriculum/blueprints/phys.opt.brewsters-law.md'
+
+const BREW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BREW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Brewster\'s law identifies the specific angle of incidence (θ_B, where tan θ_B = n₂/n₁) at which the REFLECTED ray becomes exactly 100% s-polarized (perpendicular to the plane of incidence) — the p-component (parallel to the plane of incidence) has zero reflectance at this exact angle, so nothing but s-polarized light reflects. This is a precisely different claim from saying the REFRACTED (transmitted) ray also becomes completely polarized — it doesn\'t. At Brewster\'s angle, all the p-polarized light that isn\'t reflected goes entirely into the refracted beam, but the refracted beam ALSO carries most of the s-polarized light (since only a small fraction of s-light reflects even at θ_B) — so the transmitted beam ends up richer in p-polarization but genuinely only PARTIALLY polarized (typically around 38% degree of polarization for glass), not pure p. Producing a completely polarized transmitted beam requires stacking many refracting surfaces (a "pile of plates" polarizer), since each additional surface removes a bit more of the residual s-polarized light. This has a practical consequence for polarized sunglasses: they\'re specifically optimized to block horizontal reflections (from water, roads) viewed near Brewster\'s angle, where the glare truly is nearly 100% s-polarized and gets almost completely blocked — but reflections at other angles, or off non-horizontal surfaces, are only PARTIALLY polarized, so sunglasses reduce that glare only partially, not completely.',
+    targetedMisconceptions: [`${BREW}:MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY`, `${BREW}:MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS`],
+    source: `${BREW_SRC} — MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY (reflected ray 100% polarized, refracted only partial) + MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS`,
+  },
+  {
+    conceptId: BREW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing that at Brewster\'s angle, BOTH the reflected AND the refracted (transmitted) rays become completely polarized. Only the reflected ray does — at θ_B, the reflectance for p-polarized light drops to exactly zero, meaning the reflected beam is 100% s-polarized, purely perpendicular to the plane of incidence. But the refracted beam is a different story: it receives ALL the p-polarized light (since none of it reflected) PLUS most of the s-polarized light too (only a small fraction of s-light reflects, even at θ_B) — the actual measured degree of polarization for the refracted beam through glass at Brewster\'s angle is only around 38%, far from complete. The refracted beam is genuinely richer in p-polarization than before, but never purely p; achieving a fully polarized transmitted beam requires stacking many refracting surfaces together (a "pile of plates" polarizer), since each additional surface strips away more of the lingering s-component. Second, related trap: assuming polarized sunglasses eliminate ALL glare and reflections from every surface, since they clearly work so well against water and road glare. They\'re specifically effective for horizontal reflective surfaces (water, wet roads) viewed at angles near Brewster\'s angle, where the reflected glare really is nearly 100% s-polarized (horizontal) — and sunglasses block that horizontal polarization component almost entirely, essentially eliminating the glare. But reflections at very different angles (like near-normal incidence) are only partially polarized to begin with, so sunglasses block only about half of that light rather than all of it; and reflections from vertical surfaces (like a window reflecting a building) can carry significant vertically-polarized components that pass right through horizontally-oriented sunglass lenses largely unaffected.',
+    targetedMisconceptions: [`${BREW}:MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY`, `${BREW}:MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS`],
+    source: `${BREW_SRC} — MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY + MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const BREW_PROBES: SeedProbe[] = [
+  {
+    conceptId: BREW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Light strikes a glass surface at exactly Brewster\'s angle. Is the TRANSMITTED (refracted) beam completely polarized, or is it the reflected beam that is completely polarized?',
+    choices: [
+      { text: 'The REFLECTED beam is completely (100%) s-polarized; the refracted/transmitted beam is only PARTIALLY polarized, since it carries all the p-light plus most of the s-light too', isCorrect: true },
+      { text: 'Both the reflected and refracted beams become completely polarized at Brewster\'s angle', isCorrect: false, misconceptionId: `${BREW}:MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY` },
+    ],
+    correctValue: 'only the reflected beam is fully polarized',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BREW}:MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY`],
+    source: `${BREW_SRC} — MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BREW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Do polarized sunglasses eliminate ALL glare and reflections, from any surface at any angle?',
+    choices: [
+      { text: 'No — they are specifically effective against horizontal-surface glare (water, roads) viewed near Brewster\'s angle, where reflections are nearly 100% s-polarized; other angles and non-horizontal surfaces are only partially reduced', isCorrect: true },
+      { text: 'Yes — polarized sunglasses block essentially all reflected glare from any surface, since reflections are always completely polarized', isCorrect: false, misconceptionId: `${BREW}:MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS` },
+    ],
+    correctValue: 'no, only effective for specific geometries',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BREW}:MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS`],
+    source: `${BREW_SRC} — MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.total-internal-reflection ──────────────────────────────────────
+const TIR = 'phys.opt.total-internal-reflection'
+const TIR_SRC = 'docs/curriculum/blueprints/phys.opt.total-internal-reflection.md'
+
+const TIR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TIR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Total internal reflection (TIR) requires TWO conditions simultaneously, neither sufficient alone: (1) light must travel from a DENSER medium into a LESS DENSE one (n₁ > n₂ — never the reverse), and (2) the angle of incidence must exceed the critical angle θ_c, defined by sin θ_c = n₂/n₁. Applying Snell\'s law directly shows why the direction matters: going from less dense to denser (n₁ < n₂), the refracted angle is ALWAYS smaller than the incident angle (the ray bends toward the normal), so the refracted angle can never reach 90° — there is simply no critical angle and TIR is physically impossible in that direction, no matter how large the incident angle gets. Once both conditions are met, TIR isn\'t merely "very strong" partial reflection — it is EXACTLY 100% reflection, a genuine threshold phenomenon: reflectance rises continuously as the angle approaches θ_c from below, reaches 100% exactly AT θ_c (where the refracted ray would run along the surface itself, at 90°), and stays at EXACTLY 100% for every angle beyond θ_c, with zero energy transmitted into the second medium. This makes TIR strictly better than even the best metallic mirrors (which typically absorb 5-15% of incident light) for applications demanding minimal loss — optical fibers rely entirely on this zero-loss property, letting light signals travel thousands of kilometers with amplification needed only roughly every 80 km.',
+    targetedMisconceptions: [`${TIR}:MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER`, `${TIR}:MC-TIR-IS-PARTIAL-REFLECTION`],
+    source: `${TIR_SRC} — MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER (n1>n2 required) + MC-TIR-IS-PARTIAL-REFLECTION (exactly 100%, threshold not gradual)`,
+  },
+  {
+    conceptId: TIR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but impossible scenario: trying to find a critical angle for light traveling from air INTO glass (from less dense to more dense), or believing TIR can happen "at any sufficiently large angle" regardless of which direction the light travels. Apply Snell\'s law directly to see why this fails: n₁ sin θ₁ = n₂ sin θ₂, so for air-to-glass, 1.0 × sin θ₁ = 1.5 × sin θ₂, giving sin θ₂ = sin θ₁/1.5 — a value ALWAYS smaller than sin θ₁, meaning the refracted angle is always smaller than the incident angle (the ray bends TOWARD the normal, never away from it). For TIR to occur, the refracted angle would need to reach 90°, which would require sin θ₁ = 1.5 × sin 90° = 1.5 — a mathematically impossible value, since sine can never exceed 1. There is simply no critical angle when going from a less dense to a denser medium; TIR strictly requires light traveling FROM denser TO less dense (n₁ > n₂), with no exceptions. Second, equally natural trap: treating TIR as just an especially strong version of ordinary partial reflection, wondering "how much light gets through" even beyond the critical angle. Measure reflectance as a function of angle experimentally and you find a genuine THRESHOLD, not a smooth continuation: below θ_c, reflectance rises gradually as angle increases (ordinary partial reflection, with real transmitted light); at exactly θ_c, the refracted ray runs along the surface itself (90°), transmitting essentially zero energy; and for EVERY angle beyond θ_c, reflectance jumps to and stays at EXACTLY 100.0% — not "almost all," not "99%," but precisely all of it, with zero energy transmitted into the second medium. The word "TOTAL" in "total internal reflection" is a precise mathematical statement, not a vague description of strength.',
+    targetedMisconceptions: [`${TIR}:MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER`, `${TIR}:MC-TIR-IS-PARTIAL-REFLECTION`],
+    source: `${TIR_SRC} — MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER + MC-TIR-IS-PARTIAL-REFLECTION, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TIR_PROBES: SeedProbe[] = [
+  {
+    conceptId: TIR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Light travels from air (n=1.0) into glass (n=1.5). Can total internal reflection occur at any angle of incidence for this direction of travel?',
+    choices: [
+      { text: 'No — TIR requires going from a DENSER medium to a LESS dense one (n₁ > n₂); going from air into glass, the refracted angle is always smaller than the incident angle, so it can never reach 90° for any incident angle', isCorrect: true },
+      { text: 'Yes — TIR occurs at any sufficiently large angle of incidence, regardless of which direction the light travels between the two media', isCorrect: false, misconceptionId: `${TIR}:MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER` },
+    ],
+    correctValue: 'no, TIR impossible in this direction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TIR}:MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER`],
+    source: `${TIR_SRC} — MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TIR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Light strikes a glass-air boundary at an angle well beyond the critical angle. What fraction of the light energy is reflected?',
+    choices: [
+      { text: 'Exactly 100% — total internal reflection is a genuine threshold phenomenon, not gradually increasing partial reflection; above the critical angle, reflectance is precisely 1.00 with zero energy transmitted', isCorrect: true },
+      { text: 'A very large fraction, but some light still escapes into the second medium, since TIR is essentially just very strong partial reflection', isCorrect: false, misconceptionId: `${TIR}:MC-TIR-IS-PARTIAL-REFLECTION` },
+    ],
+    correctValue: 'exactly 100 percent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TIR}:MC-TIR-IS-PARTIAL-REFLECTION`],
+    source: `${TIR_SRC} — MC-TIR-IS-PARTIAL-REFLECTION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.diffraction ─────────────────────────────────────────────────────
+const DIFR = 'phys.opt.diffraction'
+const DIFR_SRC = 'docs/curriculum/blueprints/phys.opt.diffraction.md'
+
+const DIFR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIFR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Diffraction is fundamentally the superposition of countless Huygens secondary wavelets radiating from every point across a distributed aperture — NOT simply "light bending around an edge," which is only a visible CONSEQUENCE of this superposition, never the underlying mechanism itself. If diffraction really were just bending, a single slit would produce one bright fringe on each side; instead, it produces the full alternating dark-bright pattern that only makes sense as the overlapping and interference of many wavelets radiating from every point across the slit opening, including some light appearing inside what would be the purely geometric shadow. The angular half-width of the central diffraction maximum is θ₁ = λ/a (equivalently, y₁ = λD/a for the linear position on a screen at distance D) — inversely proportional to the slit width a, meaning a NARROWER slit produces a WIDER diffraction pattern, exactly the opposite of naive geometric-shadow intuition (which would predict a narrower slit gives a narrower, more tightly-confined beam, the way a smaller hole lets through a narrower stream of balls). This inverse relationship reflects a genuine wave principle: a very wide slit barely constrains the wave at all (approaching a flat, undiffracted wavefront), while a very narrow slit constrains it severely, forcing the wave to spread out much more to satisfy its own wave physics.',
+    targetedMisconceptions: [`${DIFR}:MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS`, `${DIFR}:MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN`],
+    source: `${DIFR_SRC} — MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS (Huygens superposition, not simple bending) + MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN (θ₁=λ/a inverse relationship)`,
+  },
+  {
+    conceptId: DIFR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but incomplete picture, drawn from everyday language: describing diffraction as simply "light bending around the edge of an obstacle," the way water flows around a rock. This mistakes a visible CONSEQUENCE for the actual CAUSE. If diffraction really were mere bending, a single narrow slit should produce just one bright fringe deflected to each side — but real single-slit diffraction produces a full pattern of alternating bright and dark fringes, which only makes physical sense as the overlapping superposition of countless Huygens secondary wavelets, each radiating outward from a different point across the slit\'s opening; those overlapping waves interfere constructively in some directions (bright fringes) and destructively in others (dark fringes), with the apparent "spreading" of the beam being a SIDE EFFECT of this superposition process, never a separate bending mechanism operating on its own. Second, equally natural but backwards trap: predicting that halving a slit\'s width should also halve the width of the resulting diffraction pattern — treating the slit like a hole a ball physically passes through, where a smaller hole naturally gives a narrower stream. It\'s the exact opposite for waves: the diffraction angular half-width formula θ₁ = λ/a shows the pattern width is INVERSELY proportional to the slit width, so halving a DOUBLES the central maximum\'s width, not halves it. Physically: a very wide slit barely constrains the wave at all, letting it pass through almost like an undiffracted flat wavefront with a narrow geometric image; a very narrow slit severely constrains the wave, forcing it to spread out dramatically to satisfy its own underlying wave physics — narrower slit genuinely means MORE spreading, not less.',
+    targetedMisconceptions: [`${DIFR}:MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS`, `${DIFR}:MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN`],
+    source: `${DIFR_SRC} — MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS + MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DIFR_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIFR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "diffraction just means light bends around the edge of an obstacle, like water bends around a rock." What is missing from this description?',
+    choices: [
+      { text: 'It misses the actual mechanism — diffraction is the superposition of many Huygens secondary wavelets from across the aperture, producing an alternating bright-dark fringe pattern, not just one bent beam', isCorrect: true },
+      { text: 'Nothing is missing — "bending around the edge" is a complete and accurate description of diffraction', isCorrect: false, misconceptionId: `${DIFR}:MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS` },
+    ],
+    correctValue: 'missing the superposition mechanism',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIFR}:MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS`],
+    source: `${DIFR_SRC} — MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DIFR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you halve the width of a single slit, what happens to the width of the central diffraction maximum?',
+    choices: [
+      { text: 'It DOUBLES — the angular half-width θ₁ = λ/a is inversely proportional to slit width a, so a narrower slit produces a WIDER diffraction pattern', isCorrect: true },
+      { text: 'It also halves — a narrower slit, like a smaller hole, should produce a narrower beam', isCorrect: false, misconceptionId: `${DIFR}:MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN` },
+    ],
+    correctValue: 'doubles',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIFR}:MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN`],
+    source: `${DIFR_SRC} — MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.lens-power ──────────────────────────────────────────────────────
+const LPWR = 'phys.opt.lens-power'
+const LPWR_SRC = 'docs/curriculum/blueprints/phys.opt.lens-power.md'
+
+const LPWR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LPWR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Lens power P = 1/f (measured in diopters, D, when f is in meters) tells you how strongly a lens bends light — but combining two lenses correctly requires knowing whether they\'re actually in contact. The simple addition rule P_total = P₁ + P₂ is EXACT only when two thin lenses touch (separation d = 0); the moment they\'re separated by any real distance d, the correct formula becomes 1/f_eff = 1/f₁ + 1/f₂ − d/(f₁f₂), with the extra −d/(f₁f₂) correction term accounting for the fact that a ray refracted by the first lens travels to a DIFFERENT height before hitting the second lens, changing the effective combined power. For two f = 10 cm lenses separated by 5 cm, naive addition predicts f_eff = 5 cm, while the correct formula gives f_eff = 6.67 cm — a genuine 33% error from ignoring the separation. Power\'s SIGN and MAGNITUDE carry independent information that must both be considered when comparing lenses: the sign tells you the TYPE of lens (positive = converging, negative = diverging), while the magnitude |P| tells you the DEGREE of bending — a −5 D lens and a +5 D lens bend light by the identical magnitude but in opposite directions, so calling one lens simply "stronger" than another requires specifying whether you mean magnitude of bending or the direction/type of correction (in eyeglass prescriptions, a −5 D lens genuinely corrects more severe nearsightedness than a −2 D lens, since both are the same TYPE of correction differing only in magnitude).',
+    targetedMisconceptions: [`${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES`, `${LPWR}:MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS`],
+    source: `${LPWR_SRC} — MC-POWER-ADDS-FOR-SEPARATED-LENSES (d=0 required for P_total=P1+P2) + MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS (sign vs. magnitude)`,
+  },
+  {
+    conceptId: LPWR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong shortcut: applying the simple formula P_total = P₁ + P₂ to two lenses that have a real gap between them, without checking whether the formula\'s hidden assumption (zero separation) actually applies. Test it directly: two f = 10 cm lenses (P = 10 D each) separated by d = 5 cm — naive addition gives P_total = 20 D, meaning f_eff = 5 cm, but the correct formula, 1/f_eff = 1/f₁ + 1/f₂ − d/(f₁f₂), gives f_eff = 6.67 cm instead — a substantial 33% error from ignoring the separation. The physical reason: the P₁+P₂ formula is derived by tracing where a ray refracted by lens 1 hits lens 2, and it implicitly ASSUMES the ray hits lens 2 at exactly the same height it left lens 1 — true only when the lenses touch (d = 0); once separated, the ray travels to a genuinely different height before reaching lens 2, changing the effective combined power, which is exactly what the −d/(f₁f₂) correction term accounts for. Always check whether a problem specifies lenses "in contact" before defaulting to simple addition. Second, related trap: assuming a lens with a LARGER power magnitude is unconditionally "stronger" without considering whether the comparison even makes sense given the sign. A −5 D lens (diverging, f = −20 cm) and a +2 D lens (converging, f = +50 cm) bend light in genuinely OPPOSITE ways; if "stronger" means "bends light more" in raw magnitude, then |−5| > |2|, so the −5 D lens does bend more — but a −5 D lens and a +5 D lens have IDENTICAL bending magnitude despite opposite signs, meaning "stronger" without specifying sign vs. magnitude is genuinely ambiguous. In prescription eyewear specifically, comparing lenses of the SAME sign (both negative, correcting myopia) is meaningful — a −5 D prescription corrects more severe nearsightedness than a −2 D prescription — but comparing across signs (−5 D vs. +2 D) requires being explicit about which property, direction or magnitude, you actually mean by "stronger."',
+    targetedMisconceptions: [`${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES`, `${LPWR}:MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS`],
+    source: `${LPWR_SRC} — MC-POWER-ADDS-FOR-SEPARATED-LENSES + MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LPWR_PROBES: SeedProbe[] = [
+  {
+    conceptId: LPWR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two thin lenses (f = 10 cm each) are separated by a 5 cm gap. Can you find their combined focal length using the simple formula P_total = P₁ + P₂?',
+    choices: [
+      { text: 'No — that formula assumes the lenses are in CONTACT (d=0); for separated lenses, you need 1/f_eff = 1/f₁ + 1/f₂ − d/(f₁f₂), which gives a meaningfully different answer (6.67 cm vs. the naive 5 cm)', isCorrect: true },
+      { text: 'Yes — P_total = P₁ + P₂ works for any two lenses regardless of the separation between them', isCorrect: false, misconceptionId: `${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES` },
+    ],
+    correctValue: 'no, separation must be accounted for',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES`],
+    source: `${LPWR_SRC} — MC-POWER-ADDS-FOR-SEPARATED-LENSES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LPWR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Compare a −5 D lens and a +2 D lens. Is the −5 D lens unconditionally "stronger"?',
+    choices: [
+      { text: 'It depends what "stronger" means — in raw bending magnitude, |−5| > |2| so it bends more, but the two lenses are opposite TYPES (diverging vs. converging), so the comparison must specify sign vs. magnitude', isCorrect: true },
+      { text: 'Yes — a −5 D lens is always stronger than a +2 D lens, full stop, since 5 is a bigger number than 2', isCorrect: false, misconceptionId: `${LPWR}:MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS` },
+    ],
+    correctValue: 'depends on sign vs magnitude distinction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LPWR}:MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS`],
+    source: `${LPWR_SRC} — MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.optical-instruments ────────────────────────────────────────────
+const OPTI = 'phys.opt.optical-instruments'
+const OPTI_SRC = 'docs/curriculum/blueprints/phys.opt.optical-instruments.md'
+
+const OPTI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OPTI,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A telescope\'s objective lens does NOT magnify distant objects — it collects light and forms a small, focused REAL image at its focal plane, and it\'s the EYEPIECE that performs the actual magnification of that intermediate image. Concretely: an objective with focal length 100 cm forms an intermediate image of the Moon (angular diameter 0.5°) that\'s only about 0.87 cm across — the objective has genuinely REDUCED the apparent size to fit within its focal plane, not enlarged it; its real job is to gather light from a wide field of view and focus it into a small, detailed intermediate image, which the eyepiece then magnifies like an ordinary magnifying glass held up to a small photograph. Overall telescope magnification comes out to F_objective/f_eyepiece — both lenses genuinely contribute, and the eyepiece\'s contribution is never negligible. This is even more dramatic in a compound microscope: remove the eyepiece entirely and the objective alone (focal length 0.5 cm, tube length 15 cm) produces an intermediate image magnified only about 30×; put the eyepiece (focal length 2.5 cm) back and total magnification jumps to roughly 300× — the eyepiece alone contributes a genuine 10× factor that is completely lost without it, since total magnification is the PRODUCT m_objective × m_eyepiece, with neither factor being an afterthought.',
+    targetedMisconceptions: [`${OPTI}:MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS`, `${OPTI}:MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW`],
+    source: `${OPTI_SRC} — MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS (objective forms small real image, eyepiece magnifies) + MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW (eyepiece contributes real magnification factor)`,
+  },
+  {
+    conceptId: OPTI,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but backwards assumption: believing the telescope\'s OBJECTIVE lens is what magnifies a distant star or the Moon, making them appear bigger and closer. It doesn\'t — check the actual numbers: an objective with focal length 100 cm, viewing the Moon (angular diameter 0.5°), produces an intermediate image that is only about 0.87 cm across — the Moon itself is 3,476 km in diameter, so the objective has genuinely REDUCED the apparent size down to fit within its own focal plane, not enlarged it in any sense. The objective\'s actual job is to act as a collector and focuser: capturing light across a wide field of view and concentrating it into a small, sharply-focused REAL intermediate image. It\'s the EYEPIECE, viewing that small intermediate image the way an ordinary magnifying glass views a small photograph, that performs the actual magnification the observer experiences — magnification genuinely happens in two distinct steps, and skipping the eyepiece\'s role misses half the story. Second, closely related trap: treating a microscope\'s eyepiece as "just a window to look through," contributing nothing real to the total magnification, as if the total magnification were simply whatever the objective alone provides. Test this directly: remove the eyepiece from a compound microscope entirely, and project the objective\'s intermediate image onto a card — it\'s magnified by roughly 30× (for typical objective specs, f_o = 0.5 cm, tube length L = 15 cm, giving m_o = L/f_o = 30). Now put the eyepiece back (f_e = 2.5 cm) — total magnification jumps to about 300×, a genuine 10× contribution from the eyepiece alone that vanishes completely if it\'s removed. The eyepiece functions as a real, honest simple magnifier of the intermediate image, contributing its own factor D/f_e that multiplies (never simply adds to, or is ignored relative to) the objective\'s own magnification — total magnification is the PRODUCT m_objective × m_eyepiece, with neither term being negligible or merely decorative.',
+    targetedMisconceptions: [`${OPTI}:MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS`, `${OPTI}:MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW`],
+    source: `${OPTI_SRC} — MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS + MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const OPTI_PROBES: SeedProbe[] = [
+  {
+    conceptId: OPTI,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the actual role of a telescope\'s OBJECTIVE lens — does it magnify the distant object, or something else?',
+    choices: [
+      { text: 'It collects light and forms a small, focused REAL intermediate image (actually reducing the apparent size to fit the focal plane) — the eyepiece is what magnifies that intermediate image for the observer', isCorrect: true },
+      { text: 'The objective magnifies the distant object directly, making it appear larger and closer even before the eyepiece is involved', isCorrect: false, misconceptionId: `${OPTI}:MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS` },
+    ],
+    correctValue: 'objective collects/focuses light, eyepiece magnifies',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OPTI}:MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS`],
+    source: `${OPTI_SRC} — MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: OPTI,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A compound microscope\'s objective alone magnifies the intermediate image by 30×. Does adding the eyepiece contribute any additional real magnification, or is it "just a window" to look through?',
+    choices: [
+      { text: 'The eyepiece contributes a genuine additional magnification factor (e.g., 10×), making the total magnification the PRODUCT of both factors (30× × 10× = 300×) — it is a real, essential contributor, not just a window', isCorrect: true },
+      { text: 'The eyepiece is just a window for viewing — the total magnification is essentially the same as the objective\'s magnification alone (about 30×)', isCorrect: false, misconceptionId: `${OPTI}:MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW` },
+    ],
+    correctValue: 'eyepiece contributes real multiplicative magnification',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OPTI}:MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW`],
+    source: `${OPTI_SRC} — MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.single-slit ─────────────────────────────────────────────────────
+const SSLT = 'phys.opt.single-slit'
+const SSLT_SRC = 'docs/curriculum/blueprints/phys.opt.single-slit.md'
+
+const SSLT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The single-slit diffraction pattern has a critical structural asymmetry that trips up students moving over from Young\'s double-slit experiment: the CENTRAL maximum is exactly TWICE as wide as every secondary maximum, since it spans the full range between the m = ±1 dark fringes on either side of center — never the same width as the secondary maxima flanking it. At the very center of the pattern (m = 0, sin θ = 0), you get the BRIGHTEST point of the entire pattern — this is the exact opposite of Young\'s double-slit formula d sin θ = mλ, where m = 0 is the correct condition for CONSTRUCTIVE interference (a bright fringe); single-slit dark fringes instead occur at a sin θ = mλ for m = ±1, ±2, ±3... (note: m = 0 is deliberately EXCLUDED from the single-slit dark-fringe condition, since it corresponds to the central bright maximum, not a dark fringe). Beyond the central maximum, the secondary maxima are NOT equally bright — they decay rapidly in intensity following a sinc² envelope, with each successive secondary maximum dramatically dimmer than the one before it; the intensity distribution across the whole pattern (central maximum brightest, secondary maxima rapidly fading) is the visible signature of interference from countless points continuously distributed across ONE aperture, structurally different from Young\'s uniformly-spaced, roughly-equal-intensity fringes generated by just two discrete coherent point sources.',
+    targetedMisconceptions: [`${SSLT}:MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES`, `${SSLT}:MC-M=0-IS-DARK`],
+    source: `${SSLT_SRC} — MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES (central max is 2x width) + MC-M=0-IS-DARK (m=0 is the brightest point, not dark)`,
+  },
+  {
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption when first learning single-slit diffraction: expecting the central maximum to be the SAME width as the secondary (side) maxima flanking it, as if all the bright bands in the pattern were simply repeated copies of each other, evenly spaced and equally sized. They aren\'t — the dark fringes at m = ±1 are what BOUND the central maximum on each side, meaning the central maximum spans the FULL range between those two dark fringes (roughly 2θ₁ total angular width), making it EXACTLY TWICE as wide as any of the secondary maxima, each of which only spans the narrower gap between consecutive dark fringes farther out. Second, and even more consequential, since it directly carries over an error from Young\'s double-slit formula: assuming that m = 0 corresponds to a DARK fringe in single-slit diffraction, the way some students initially (and wrongly) associate m = 0 with darkness in other contexts. It\'s actually the OPPOSITE and the most important point in the whole pattern: at m = 0, sin θ = 0, meaning θ = 0 exactly at the center — this is the CENTRAL MAXIMUM, the single brightest point in the entire diffraction pattern, not a dark fringe at all. The single-slit dark-fringe condition, a sin θ = mλ, is deliberately defined ONLY for m = ±1, ±2, ±3, and so on — m = 0 is explicitly EXCLUDED from that dark-fringe formula precisely because it corresponds to the bright central peak, a structurally different situation from Young\'s double-slit formula d sin θ = mλ, where m = 0 correctly gives constructive interference (a bright fringe) — the two formulas look superficially similar but describe genuinely different physical setups (one continuous aperture vs. two discrete point sources) and must not be conflated.',
+    targetedMisconceptions: [`${SSLT}:MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES`, `${SSLT}:MC-M=0-IS-DARK`],
+    source: `${SSLT_SRC} — MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES + MC-M=0-IS-DARK, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SSLT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a single-slit diffraction pattern, how does the width of the CENTRAL maximum compare to the width of a SECONDARY maximum?',
+    choices: [
+      { text: 'The central maximum is exactly TWICE as wide as a secondary maximum, since it spans the full range between the m=±1 dark fringes on both sides', isCorrect: true },
+      { text: 'They are the same width — all the bright maxima in the pattern are essentially equally-sized repeated copies', isCorrect: false, misconceptionId: `${SSLT}:MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES` },
+    ],
+    correctValue: 'central maximum is twice as wide',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SSLT}:MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES`],
+    source: `${SSLT_SRC} — MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In single-slit diffraction, at m = 0 (sin θ = 0, θ = 0), is this point bright or dark?',
+    choices: [
+      { text: 'Bright — m=0 is the CENTRAL MAXIMUM, the single brightest point in the entire diffraction pattern; the dark-fringe condition a sinθ=mλ deliberately excludes m=0', isCorrect: true },
+      { text: 'Dark — m=0 is a dark fringe, the same way m=0 sometimes signals darkness in similar-looking formulas', isCorrect: false, misconceptionId: `${SSLT}:MC-M=0-IS-DARK` },
+    ],
+    correctValue: 'bright, the central maximum',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SSLT}:MC-M=0-IS-DARK`],
+    source: `${SSLT_SRC} — MC-M=0-IS-DARK trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -33150,6 +33510,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...REFLC_EXPLANATIONS,
   ...DISPR_EXPLANATIONS,
   ...POLR_EXPLANATIONS,
+  ...BREW_EXPLANATIONS,
+  ...TIR_EXPLANATIONS,
+  ...DIFR_EXPLANATIONS,
+  ...LPWR_EXPLANATIONS,
+  ...OPTI_EXPLANATIONS,
+  ...SSLT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -33532,4 +33898,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...REFLC_PROBES,
   ...DISPR_PROBES,
   ...POLR_PROBES,
+  ...BREW_PROBES,
+  ...TIR_PROBES,
+  ...DIFR_PROBES,
+  ...LPWR_PROBES,
+  ...OPTI_PROBES,
+  ...SSLT_PROBES,
 ]
