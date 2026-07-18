@@ -20682,6 +20682,1103 @@ const IPAB_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.vocab.word-formation-processes ─────────────────────────────────────
+const WFP = 'eng.vocab.word-formation-processes'
+const WFP_SRC = 'docs/curriculum/blueprints/eng.vocab.word-formation-processes.md'
+
+const WFP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WFP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'New English words don’t all get made the same way — there are ' +
+      'five distinct "word factories": derivation (root + affix, like ' +
+      '"happiness"), compounding (two whole words fused, like ' +
+      '"toothbrush"), conversion (a word\'s job changes with zero spelling ' +
+      'change, like the noun "email" becoming the verb "to email"), ' +
+      'blending (parts of two words merged, like "brunch"), and clipping ' +
+      '(a word shortened, like "gym" from "gymnasium"). Each is a genuinely ' +
+      'different process, not one generic "combining words" trick.',
+    targetedMisconceptions: [`${WFP}:MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY`],
+    source: `${WFP_SRC} — MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY (P28 five-word-factories conflict)`,
+  },
+  {
+    conceptId: WFP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Conversion is the sneaky one: it changes a word\'s grammatical role ' +
+      'with ZERO spelling or pronunciation change at all — "google" (noun, ' +
+      'the company/search) becomes "to google" (verb, to search online) ' +
+      'with no hidden suffix, no silent change, nothing added. If you find ' +
+      'yourself hunting for a hidden mark that isn\'t there, you\'re ' +
+      'looking for the wrong kind of evidence — conversion IS the absence ' +
+      'of any change beyond the word\'s job in the sentence.',
+    targetedMisconceptions: [`${WFP}:MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE`],
+    source: `${WFP_SRC} — MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE (P28 conversion-mirror conflict)`,
+  },
+  {
+    conceptId: WFP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Five structurally distinct word-formation processes exist — ' +
+      'derivation, compounding, conversion, blending, clipping — each with ' +
+      'its own mechanism, not variants of one generic "combining" process. ' +
+      'Conversion specifically involves a genuine zero-change grammatical ' +
+      'role shift (noun "google" to verb "to google"), so searching for a ' +
+      'hidden suffix or spelling change is searching for evidence that, by ' +
+      'definition, does not exist in true conversion.',
+    targetedMisconceptions: [
+      `${WFP}:MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY`,
+      `${WFP}:MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE`,
+    ],
+    source: `${WFP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const WFP_PROBES: SeedProbe[] = [
+  {
+    conceptId: WFP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "toothbrush" (two whole words fused) formed the same way as "gym" (shortened from "gymnasium")?',
+    choices: [
+      { text: 'No — "toothbrush" is compounding (fusing whole words) while "gym" is clipping (shortening); these are two distinct word-formation processes', isCorrect: true },
+      { text: 'Yes — all new words are formed the same generic way, by combining or changing parts', isCorrect: false, misconceptionId: `${WFP}:MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY` },
+    ],
+    correctValue: 'no, distinct processes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WFP}:MC-ALL-NEW-WORDS-ARE-FORMED-THE-SAME-WAY`],
+    source: `${WFP_SRC} — five-word-factories conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WFP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'The noun "email" became the verb "to email" with no spelling change at all. Does true conversion require some hidden suffix or spelling change to have happened?',
+    choices: [
+      { text: 'No — conversion is exactly a zero-change grammatical role shift; hunting for a hidden change is looking for evidence that shouldn\'t exist', isCorrect: true },
+      { text: 'Yes — conversion must involve some hidden suffix or spelling change even if it isn\'t obvious', isCorrect: false, misconceptionId: `${WFP}:MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE` },
+    ],
+    correctValue: 'no, zero change is the point',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WFP}:MC-CONVERSION-MUST-INVOLVE-SOME-HIDDEN-SUFFIX-OR-CHANGE`],
+    source: `${WFP_SRC} — conversion-mirror conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.idioms ────────────────────────────────────────────────────────
+const IDIOM = 'eng.vocab.idioms'
+const IDIOM_SRC = 'docs/curriculum/blueprints/eng.vocab.idioms.md'
+
+const IDIOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IDIOM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"It\'s raining cats and dogs" can\'t be decoded word-by-word — no ' +
+      'amount of translating "raining," "cats," and "dogs" separately gets ' +
+      'you to "raining heavily." An idiom is a fixed WHOLE-UNIT expression ' +
+      'whose meaning must be learned as one piece from context, like ' +
+      'learning a country\'s flag as a single symbol rather than decoding ' +
+      'each color and shape separately.',
+    targetedMisconceptions: [`${IDIOM}:MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY`],
+    source: `${IDIOM_SRC} — MC-A (P28 national-flag conflict)`,
+  },
+  {
+    conceptId: IDIOM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Swapping a word for its synonym breaks an idiom even when the ' +
+      'synonym is genuinely accurate — "kick the bucket" means "to die," ' +
+      'but "kick the pail" means nothing at all, despite "pail" being a ' +
+      'real synonym of "bucket." An idiom is a fixed chemical formula, not ' +
+      'a flexible recipe — change one ingredient and the whole reaction ' +
+      'stops working, so idioms must be learned and used word-for-word ' +
+      'exactly as fixed.',
+    targetedMisconceptions: [`${IDIOM}:MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR`],
+    source: `${IDIOM_SRC} — MC-B (P28 chemical-formula conflict)`,
+  },
+  {
+    conceptId: IDIOM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'An idiom\'s meaning must be learned as one fixed whole-unit ' +
+      'expression from context, never decoded word-by-word — and its exact ' +
+      'wording is fixed, so substituting even a genuine synonym ("kick the ' +
+      'pail" for "kick the bucket") breaks it entirely rather than ' +
+      'preserving the meaning.',
+    targetedMisconceptions: [
+      `${IDIOM}:MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY`,
+      `${IDIOM}:MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR`,
+    ],
+    source: `${IDIOM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const IDIOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: IDIOM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Can you figure out what "it\'s raining cats and dogs" means by translating "raining," "cats," and "dogs" separately?',
+    choices: [
+      { text: 'No — the idiom\'s meaning ("raining heavily") must be learned as one fixed whole-unit expression, not decoded word by word', isCorrect: true },
+      { text: 'Yes — you can figure out an idiom\'s meaning by translating each word literally', isCorrect: false, misconceptionId: `${IDIOM}:MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY` },
+    ],
+    correctValue: 'no, learn as whole unit',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IDIOM}:MC-A-YOU-CAN-FIGURE-OUT-AN-IDIOMS-MEANING-BY-TRANSLATING-EACH-WORD-LITERALLY`],
+    source: `${IDIOM_SRC} — national-flag conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IDIOM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"Pail" is a genuine synonym of "bucket." Can you say "kick the pail" instead of "kick the bucket" and keep the same idiomatic meaning?',
+    choices: [
+      { text: 'No — idioms are fixed expressions; swapping even a real synonym breaks the idiom entirely, since it must be used word-for-word as fixed', isCorrect: true },
+      { text: 'Yes — you can freely change words within an idiom as long as the meaning stays similar', isCorrect: false, misconceptionId: `${IDIOM}:MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR` },
+    ],
+    correctValue: 'no, fixed wording required',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IDIOM}:MC-B-YOU-CAN-FREELY-CHANGE-WORDS-WITHIN-AN-IDIOM-AS-LONG-AS-THE-MEANING-STAYS-SIMILAR`],
+    source: `${IDIOM_SRC} — chemical-formula conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.phrasal-verbs ─────────────────────────────────────────────────
+const PHRV = 'eng.vocab.phrasal-verbs'
+const PHRV_SRC = 'docs/curriculum/blueprints/eng.vocab.phrasal-verbs.md'
+
+const PHRV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHRV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Give up" means "to quit" — nothing about physically giving ' +
+      'something upward. A phrasal verb (verb + particle) is like the word ' +
+      '"breakfast": historically related to "break" + "fast," but you just ' +
+      'learn "breakfast" as one whole word today. Learn each phrasal ' +
+      'verb\'s WHOLE combination as a single vocabulary unit, not a sum of ' +
+      'its two literal parts.',
+    targetedMisconceptions: [`${PHRV}:MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS`],
+    source: `${PHRV_SRC} — MC-A (P28 breakfast-word-fusion conflict)`,
+  },
+  {
+    conceptId: PHRV,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Not every phrasal verb behaves the same way with an object. "Look ' +
+      'after" is INSEPARABLE — "look after the children" only, never "look ' +
+      'the children after." But "give up" is SEPARABLE — "give up the ' +
+      'fight" and "give the fight up" both work. Each phrasal verb is like ' +
+      'its own zipper: some open from either end, some only work one ' +
+      'specific way — you have to learn each one\'s behavior individually.',
+    targetedMisconceptions: [`${PHRV}:MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS`],
+    source: `${PHRV_SRC} — MC-B (P28 fixed-vs-openable-zipper conflict)`,
+  },
+  {
+    conceptId: PHRV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A phrasal verb\'s meaning is a fixed whole-unit sense that is often ' +
+      'not derivable from the verb and particle individually ("give up" = ' +
+      '"quit"), so it must be learned as one vocabulary item, like ' +
+      '"breakfast" is learned as one word rather than derived from "break" ' +
+      '+ "fast." Separately, separability is not uniform: each phrasal ' +
+      'verb is individually either separable (object can split the verb ' +
+      'and particle, or a noun object may follow both) or inseparable ' +
+      '(object must always follow the whole unit) — a pronoun object with ' +
+      'a separable phrasal verb must always go between the parts.',
+    targetedMisconceptions: [
+      `${PHRV}:MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS`,
+      `${PHRV}:MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS`,
+    ],
+    source: `${PHRV_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PHRV_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHRV,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"After trying for hours, she finally gave up." Does "gave up" here involve physically giving anything upward?',
+    choices: [
+      { text: 'No — "give up" is a fixed whole-unit phrasal verb meaning "to quit," with no derivable connection to giving something upward', isCorrect: true },
+      { text: 'Yes — a phrasal verb\'s meaning can usually be figured out from the verb and particle\'s literal meanings', isCorrect: false, misconceptionId: `${PHRV}:MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS` },
+    ],
+    correctValue: 'no, whole-unit meaning',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHRV}:MC-A-A-PHRASAL-VERBS-MEANING-CAN-USUALLY-BE-FIGURED-OUT-FROM-THE-VERB-AND-PARTICLES-LITERAL-MEANINGS`],
+    source: `${PHRV_SRC} — breakfast-word-fusion conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PHRV,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"She looked after the children" is correct. Can you also say "She looked the children after," the same way "give the fight up" works for "give up"?',
+    choices: [
+      { text: 'No — "look after" is inseparable and never allows the object to split it, unlike "give up," which is separable; each phrasal verb must be checked individually', isCorrect: true },
+      { text: 'Yes — you can always place the object either between the verb and particle or after both, regardless of which phrasal verb it is', isCorrect: false, misconceptionId: `${PHRV}:MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS` },
+    ],
+    correctValue: 'no, check separability individually',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHRV}:MC-B-YOU-CAN-ALWAYS-PLACE-THE-OBJECT-EITHER-BETWEEN-THE-VERB-AND-PARTICLE-OR-AFTER-BOTH-REGARDLESS-OF-WHICH-PHRASAL-VERB-IT-IS`],
+    source: `${PHRV_SRC} — fixed-vs-openable-zipper conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.etymology ─────────────────────────────────────────────────────
+const ETYM = 'eng.vocab.etymology'
+const ETYM_SRC = 'docs/curriculum/blueprints/eng.vocab.etymology.md'
+
+const ETYM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ETYM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Nice" came from Latin "nescius" ("ignorant") — its 1300s English ' +
+      'sense was close to "foolish." No living speaker uses "nice" to mean ' +
+      '"ignorant" today. A word\'s history explains where it came from but ' +
+      'doesn\'t get a vote on what it means NOW — like a river\'s source ' +
+      'doesn\'t control where the water ends up; only the river\'s mouth ' +
+      '(current usage) is where you actually drink from.',
+    targetedMisconceptions: [`${ETYM}:MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY`],
+    source: `${ETYM_SRC} — MC-A (P28 nice-ignorant-to-pleasant conflict)`,
+  },
+  {
+    conceptId: ETYM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Restaurant" didn\'t come from one simple source — it went Latin → ' +
+      'Old French verb "restaurer" → Modern French noun → borrowed into ' +
+      'English. "Khaki" came from Urdu/Hindi. English is a huge borrower: ' +
+      'many words traveled through two or three languages before landing ' +
+      'here, so never assume a word has one simple single-language origin ' +
+      'without checking its documented path.',
+    targetedMisconceptions: [`${ETYM}:MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING`],
+    source: `${ETYM_SRC} — MC-B (P28 restaurant/khaki multi-language-borrowing conflict)`,
+  },
+  {
+    conceptId: ETYM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A word\'s etymological origin explains its history but never ' +
+      'overrides current usage as the word\'s real, functioning meaning — ' +
+      'meaning legitimately drifts over centuries ("nice": ignorant → ' +
+      'pleasant). Separately, English vocabulary is substantially built ' +
+      'from historical borrowing across many languages, sometimes via ' +
+      'multi-step paths through more than one intermediate language ' +
+      '(restaurant: Latin → French → English) — never assume a single, ' +
+      'simple origin without checking the documented path.',
+    targetedMisconceptions: [
+      `${ETYM}:MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY`,
+      `${ETYM}:MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING`,
+    ],
+    source: `${ETYM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ETYM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ETYM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Nice" originally meant "ignorant" in the 1300s. Should you insist that meaning is the "true" or "correct" meaning today?',
+    choices: [
+      { text: 'No — current usage, however drifted, is what a word actually means today; etymology is history, not a rulebook for present usage', isCorrect: true },
+      { text: 'Yes — a word\'s original meaning is its true or correct meaning today', isCorrect: false, misconceptionId: `${ETYM}:MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY` },
+    ],
+    correctValue: 'no, current usage is real meaning',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ETYM}:MC-A-WORDS-ORIGINAL-MEANING-IS-ITS-TRUE-OR-CORRECT-MEANING-TODAY`],
+    source: `${ETYM_SRC} — nice-ignorant-to-pleasant conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ETYM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Restaurant" traveled Latin → Old French → Modern French → English. Does every English word trace back to one single, simple ancestor language with no borrowing?',
+    choices: [
+      { text: 'No — English vocabulary is substantially built from borrowing across many languages, sometimes through multi-step paths through more than one language', isCorrect: true },
+      { text: 'Yes — every word came from a single clear language with no borrowing', isCorrect: false, misconceptionId: `${ETYM}:MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING` },
+    ],
+    correctValue: 'no, extensive borrowing',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ETYM}:MC-EVERY-WORD-CAME-FROM-A-SINGLE-CLEAR-LANGUAGE-WITH-NO-BORROWING`],
+    source: `${ETYM_SRC} — restaurant/khaki multi-language-borrowing conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.thesaurus-and-dictionary-skills ───────────────────────────────
+const THES = 'eng.vocab.thesaurus-and-dictionary-skills'
+const THES_SRC = 'docs/curriculum/blueprints/eng.vocab.thesaurus-and-dictionary-skills.md'
+
+const THES_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THES,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A thesaurus entry is like a rack of shirts in roughly the same ' +
+      'color — not sorted by which one fits YOU best, just grouped by ' +
+      'similarity. "She was content she jumped up and down and screamed ' +
+      'with joy" sounds wrong because "content" (calm) doesn\'t fit that ' +
+      'intensity, even though it\'s the first-listed synonym of "happy." ' +
+      'Always try several options against your specific sentence before ' +
+      'choosing, never just grab the first one listed.',
+    targetedMisconceptions: [`${THES}:MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE`],
+    source: `${THES_SRC} — MC-A (P28 shirt-rack first-word conflict)`,
+  },
+  {
+    conceptId: THES,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Slim," "skinny," and "gaunt" are all thesaurus-listed synonyms of ' +
+      '"thin," but they are NOT interchangeable — "slim" sounds like a ' +
+      'compliment, "gaunt" implies unhealthy or worn-down. It\'s like paint ' +
+      'chips grouped as "red" — crimson and pink are related but not the ' +
+      'same shade. Always check a dictionary\'s usage label before ' +
+      'swapping between grouped synonyms, since connotation and register ' +
+      'can differ sharply even within one thesaurus entry.',
+    targetedMisconceptions: [`${THES}:MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION`],
+    source: `${THES_SRC} — MC-B (P28 paint-chip connotation conflict)`,
+  },
+  {
+    conceptId: THES,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A thesaurus entry groups related words by similarity, not by ' +
+      'best-fit ranking for any given sentence, so the first-listed option ' +
+      'must always be tested against context before use. Separately, ' +
+      'thesaurus-grouped synonyms are not fully interchangeable — each ' +
+      'carries its own connotation, register, or precise shade of meaning ' +
+      '("slim" vs. "gaunt"), verifiable via dictionary usage labels.',
+    targetedMisconceptions: [
+      `${THES}:MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE`,
+      `${THES}:MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION`,
+    ],
+    source: `${THES_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const THES_PROBES: SeedProbe[] = [
+  {
+    conceptId: THES,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A thesaurus lists "content" first under "happy." Should you always substitute the first-listed word without checking your sentence?',
+    choices: [
+      { text: 'No — thesaurus entries are grouped by similarity, not ranked by best fit; you must check several options against your specific sentence', isCorrect: true },
+      { text: 'Yes — the first word listed in a thesaurus entry is always the best choice', isCorrect: false, misconceptionId: `${THES}:MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE` },
+    ],
+    correctValue: 'no, check context first',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${THES}:MC-A-THE-FIRST-WORD-LISTED-IN-A-THESAURUS-ENTRY-IS-ALWAYS-THE-BEST-CHOICE`],
+    source: `${THES_SRC} — shirt-rack first-word conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: THES,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A thesaurus groups "slim," "skinny," and "gaunt" together as synonyms of "thin." Are all three fully interchangeable in every sentence?',
+    choices: [
+      { text: 'No — they carry different connotations (slim: positive, gaunt: negative/unhealthy); check a dictionary\'s usage label before swapping', isCorrect: true },
+      { text: 'Yes — all synonyms listed together are fully interchangeable in every situation', isCorrect: false, misconceptionId: `${THES}:MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION` },
+    ],
+    correctValue: 'no, connotations differ',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${THES}:MC-B-ALL-SYNONYMS-LISTED-TOGETHER-ARE-FULLY-INTERCHANGEABLE-IN-EVERY-SITUATION`],
+    source: `${THES_SRC} — paint-chip connotation conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.topic-sentences ─────────────────────────────────────────────
+const TOPS = 'eng.writing.topic-sentences'
+const TOPS_SRC = 'docs/curriculum/blueprints/eng.writing.topic-sentences.md'
+
+const TOPS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TOPS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"This paragraph is about dogs" only announces a subject — it makes ' +
+      'no claim the following sentences can prove. "Dogs make excellent ' +
+      'family pets because of their loyalty and trainability" states a ' +
+      'specific claim the paragraph can develop. A real topic sentence ' +
+      'gives the reader something specific to expect, not just a subject ' +
+      'label.',
+    targetedMisconceptions: [`${TOPS}:MC-A-TOPIC-SENTENCE-JUST-ANNOUNCES-THE-TOPIC-RATHER-THAN-MAKING-A-CLAIM`],
+    source: `${TOPS_SRC} — MC-A (P28 dogs-announcement-vs-claim conflict)`,
+  },
+  {
+    conceptId: TOPS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Trying to make a topic sentence "cover everything" produces vague ' +
+      'mush like "Dogs are interesting animals with many qualities" — that ' +
+      'could introduce almost ANY dog paragraph, so it previews nothing. ' +
+      '"Golden retrievers are especially well-suited to families with ' +
+      'young children" is specific and focused, like a sharp camera photo ' +
+      'instead of a blurry, zoomed-out one — specific is a strength, not a ' +
+      'limitation.',
+    targetedMisconceptions: [`${TOPS}:MC-A-TOPIC-SENTENCE-MUST-BE-VERY-GENERAL-AND-VAGUE-TO-COVER-EVERYTHING`],
+    source: `${TOPS_SRC} — MC-B (P28 camera-focus conflict)`,
+  },
+  {
+    conceptId: TOPS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A topic sentence must state a specific, developable claim about ' +
+      'its subject rather than merely announcing the subject ("this ' +
+      'paragraph is about..."), and that claim must be precise and focused ' +
+      'rather than broad and vague — a narrow, specific claim previews a ' +
+      'paragraph\'s actual content far better than a generic one that ' +
+      'could introduce almost any paragraph on the topic.',
+    targetedMisconceptions: [
+      `${TOPS}:MC-A-TOPIC-SENTENCE-JUST-ANNOUNCES-THE-TOPIC-RATHER-THAN-MAKING-A-CLAIM`,
+      `${TOPS}:MC-A-TOPIC-SENTENCE-MUST-BE-VERY-GENERAL-AND-VAGUE-TO-COVER-EVERYTHING`,
+    ],
+    source: `${TOPS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TOPS_PROBES: SeedProbe[] = [
+  {
+    conceptId: TOPS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "This paragraph will discuss recycling" give the reader a specific claim to expect, or just name the subject?',
+    choices: [
+      { text: 'Just names the subject — a real topic sentence must state a specific claim, not merely announce the topic', isCorrect: true },
+      { text: 'It\'s a fine topic sentence — a topic sentence just announces the topic rather than making a claim', isCorrect: false, misconceptionId: `${TOPS}:MC-A-TOPIC-SENTENCE-JUST-ANNOUNCES-THE-TOPIC-RATHER-THAN-MAKING-A-CLAIM` },
+    ],
+    correctValue: 'announcement only, needs a claim',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TOPS}:MC-A-TOPIC-SENTENCE-JUST-ANNOUNCES-THE-TOPIC-RATHER-THAN-MAKING-A-CLAIM`],
+    source: `${TOPS_SRC} — dogs-announcement-vs-claim conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TOPS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Should a topic sentence be made very general and vague so it can "cover" every possible detail in the paragraph?',
+    choices: [
+      { text: 'No — a specific, focused claim previews the paragraph\'s actual content far better than a vague one that could apply to anything', isCorrect: true },
+      { text: 'Yes — a topic sentence must be very general and vague to cover everything', isCorrect: false, misconceptionId: `${TOPS}:MC-A-TOPIC-SENTENCE-MUST-BE-VERY-GENERAL-AND-VAGUE-TO-COVER-EVERYTHING` },
+    ],
+    correctValue: 'no, specific is stronger',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TOPS}:MC-A-TOPIC-SENTENCE-MUST-BE-VERY-GENERAL-AND-VAGUE-TO-COVER-EVERYTHING`],
+    source: `${TOPS_SRC} — camera-focus conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.metaphor-and-simile ──────────────────────────────────────
+const METS = 'eng.literature.metaphor-and-simile'
+const METS_SRC = 'docs/curriculum/blueprints/eng.literature.metaphor-and-simile.md'
+
+const METS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: METS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Her voice was music" (metaphor) and "Her voice was like music" ' +
+      '(simile) aren\'t just a spelling difference — a metaphor asserts ' +
+      'identity boldly and directly, while a simile explicitly signals ' +
+      '"this is a comparison, not identity." That difference in directness ' +
+      'genuinely changes the effect, so don\'t just spot-check for "like" ' +
+      'or "as" and stop there — notice how much more forceful the ' +
+      'metaphor\'s claim lands.',
+    targetedMisconceptions: [`${METS}:MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS`],
+    source: `${METS_SRC} — MC-1 (P28 bold-claim-vs-soft-signal conflict)`,
+  },
+  {
+    conceptId: METS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"As it was raining, we stayed inside" uses "as" to mean "because" ' +
+      '— not a comparison at all. "Her dress was like her sister\'s dress" ' +
+      'compares two genuinely similar, literal things — not a figurative ' +
+      'leap. A simile requires "like"/"as" to make a figurative comparison ' +
+      'between essentially UNLIKE things; not every "like" or "as" is doing ' +
+      'that job, so always check the word\'s actual function before ' +
+      'calling something a simile.',
+    targetedMisconceptions: [`${METS}:MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE`],
+    source: `${METS_SRC} — MC-2 (P28 word-job-sorting conflict)`,
+  },
+  {
+    conceptId: METS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The metaphor/simile distinction is not merely mechanical word- ' +
+      'spotting for "like"/"as" — it reflects a genuine difference in ' +
+      'directness: metaphor asserts identity boldly, simile explicitly ' +
+      'signals comparison. Separately, "like"/"as" also serve non- ' +
+      'figurative jobs (causal "as," literal similarity between genuinely ' +
+      'similar things), so a simile requires confirming the word is ' +
+      'functioning as a figurative comparison between essentially unlike ' +
+      'things, not just its presence.',
+    targetedMisconceptions: [
+      `${METS}:MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS`,
+      `${METS}:MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE`,
+    ],
+    source: `${METS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const METS_PROBES: SeedProbe[] = [
+  {
+    conceptId: METS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The city was a jungle" (metaphor) and "The city was like a jungle" (simile) both compare the city to a jungle. Is the ONLY difference between them the presence of the word "like"?',
+    choices: [
+      { text: 'No — the metaphor asserts the comparison boldly and directly as identity, while the simile explicitly signals a comparison; directness itself differs, not just the word', isCorrect: true },
+      { text: 'Yes — the only difference between metaphor and simile is the word "like" or "as"', isCorrect: false, misconceptionId: `${METS}:MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS` },
+    ],
+    correctValue: 'no, directness differs too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${METS}:MC-THE-ONLY-DIFFERENCE-BETWEEN-METAPHOR-AND-SIMILE-IS-THE-WORD-LIKE-OR-AS`],
+    source: `${METS_SRC} — bold-claim-vs-soft-signal conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: METS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"As it was raining, we stayed inside." Is this sentence a simile because it contains the word "as"?',
+    choices: [
+      { text: 'No — "as" here means "because," not a figurative comparison; any comparison using "like" or "as" is a simile is a false generalization', isCorrect: true },
+      { text: 'Yes — any comparison using "like" or "as" is a simile', isCorrect: false, misconceptionId: `${METS}:MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE` },
+    ],
+    correctValue: 'no, "as" means "because" here',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${METS}:MC-ANY-COMPARISON-USING-LIKE-OR-AS-IS-A-SIMILE`],
+    source: `${METS_SRC} — word-job-sorting conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.irony ─────────────────────────────────────────────────────
+const IRON = 'eng.literature.irony'
+const IRON_SRC = 'docs/curriculum/blueprints/eng.literature.irony.md'
+
+const IRON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IRON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A fire station burning down is genuinely ironic — a pointed ' +
+      'contrast with the very institution\'s purpose. A car breaking down ' +
+      'on the way to an interview is just bad luck, with no meaningful ' +
+      'contrast to anything. Calling any unlucky coincidence "ironic" is ' +
+      'like calling any loud noise "thunder" — before labeling something ' +
+      'situational irony, ask: is there a specific, meaningful ' +
+      'contradiction here, or just misfortune?',
+    targetedMisconceptions: [`${IRON}:MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY`],
+    source: `${IRON_SRC} — MC-A (P28 fire-station-vs-flat-tire conflict)`,
+  },
+  {
+    conceptId: IRON,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Sarcasm IS a form of verbal irony, but not all verbal irony is ' +
+      'sarcasm — like boxing is exercise, but not all exercise is boxing. ' +
+      '"Oh yes, running a marathon sounds SO relaxing," said warmly to ' +
+      'tease a friend, is verbal irony without mockery. "Oh, GREAT job," ' +
+      'said cuttingly to criticize a mistake, is verbal irony AND sarcasm. ' +
+      'Check the tone and intent, not just whether the literal meaning is ' +
+      'reversed.',
+    targetedMisconceptions: [`${IRON}:MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM`],
+    source: `${IRON_SRC} — MC-B (P28 boxing-is-exercise conflict)`,
+  },
+  {
+    conceptId: IRON,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuine situational irony requires a specific, meaningful contrast ' +
+      'between what a situation represents or reasonably was expected, and ' +
+      'what actually happens — not merely any surprising or unlucky ' +
+      'coincidence. Separately, sarcasm is a mocking, often cutting subset ' +
+      'of the broader category of verbal irony; verbal irony more broadly ' +
+      'includes gentle, non-mocking uses, so tone and intent — not just ' +
+      'reversed literal meaning — determine whether an instance is ' +
+      'properly called sarcasm.',
+    targetedMisconceptions: [
+      `${IRON}:MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY`,
+      `${IRON}:MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM`,
+    ],
+    source: `${IRON_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const IRON_PROBES: SeedProbe[] = [
+  {
+    conceptId: IRON,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car breaks down on the way to a job interview. Is this situational irony?',
+    choices: [
+      { text: 'No — it\'s unlucky, but there\'s no meaningful, pointed contrast with anything the situation represents; not every unlucky event is situational irony', isCorrect: true },
+      { text: 'Yes — any unexpected or unlucky event is situational irony', isCorrect: false, misconceptionId: `${IRON}:MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY` },
+    ],
+    correctValue: 'no, just bad luck',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IRON}:MC-A-ANY-UNEXPECTED-OR-UNLUCKY-EVENT-IS-SITUATIONAL-IRONY`],
+    source: `${IRON_SRC} — fire-station-vs-flat-tire conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IRON,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Oh yes, running a marathon sounds SO relaxing," said warmly to tease a friend training for one. Is this exactly the same thing as sarcasm?',
+    choices: [
+      { text: 'No — it\'s verbal irony (saying the opposite of what\'s meant) without mockery; sarcasm is specifically the mocking subset of verbal irony', isCorrect: true },
+      { text: 'Yes — verbal irony is exactly the same thing as sarcasm', isCorrect: false, misconceptionId: `${IRON}:MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM` },
+    ],
+    correctValue: 'no, sarcasm is a mocking subset',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IRON}:MC-B-VERBAL-IRONY-IS-EXACTLY-THE-SAME-THING-AS-SARCASM`],
+    source: `${IRON_SRC} — boxing-is-exercise conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.poetry-basics ────────────────────────────────────────────
+const POETB = 'eng.literature.poetry-basics'
+const POETB_SRC = 'docs/curriculum/blueprints/eng.literature.poetry-basics.md'
+
+const POETB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POETB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"The bird flew away— / suddenly, / leaving only / silence." isn\'t ' +
+      'randomly chopped — the line breaks isolate "suddenly" and the final ' +
+      'lone word "silence" for deliberate emphasis and pause, an effect ' +
+      'the same words as one prose sentence wouldn\'t create. Line breaks ' +
+      'are a deliberate structural tool controlling pacing and emphasis, ' +
+      'not arbitrary visual chopping — always ask why the poet broke the ' +
+      'line THERE specifically.',
+    targetedMisconceptions: [`${POETB}:MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES`],
+    source: `${POETB_SRC} — MC-1 (P28 bird-flew-away line-break conflict)`,
+  },
+  {
+    conceptId: POETB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Rhyme and strict meter are OPTIONAL tools in a poet\'s toolkit, not ' +
+      'requirements. Free verse (no rhyme, no fixed meter) still uses ' +
+      'poetry\'s core, always-present features — condensed, carefully ' +
+      'chosen language and deliberate line breaks — making it just as ' +
+      'genuinely poetic as rhymed, metered poetry, just built with a ' +
+      'different tool selection from the same toolkit.',
+    targetedMisconceptions: [`${POETB}:MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER`],
+    source: `${POETB_SRC} — MC-2 (P28 free-verse-vs-rhymed conflict)`,
+  },
+  {
+    conceptId: POETB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A poem\'s line breaks are a deliberate structural tool controlling ' +
+      'emphasis, pacing, and meaning — never arbitrary visual chopping — ' +
+      'so the same content rendered in prose versus with specific line ' +
+      'breaks creates genuinely different effects. Separately, rhyme and ' +
+      'strict meter are optional stylistic choices, not requirements for ' +
+      'genuine poetry: free verse still exhibits poetry\'s core features ' +
+      '(condensed language, deliberate line/stanza structure, heightened ' +
+      'imagery) without them.',
+    targetedMisconceptions: [
+      `${POETB}:MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES`,
+      `${POETB}:MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER`,
+    ],
+    source: `${POETB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const POETB_PROBES: SeedProbe[] = [
+  {
+    conceptId: POETB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A poem breaks "The bird flew away, suddenly, leaving only silence" into separate short lines. Are these line breaks just random visual chopping?',
+    choices: [
+      { text: 'No — line breaks are a deliberate structural tool controlling emphasis and pacing, isolating words like "suddenly" and "silence" for deliberate effect', isCorrect: true },
+      { text: 'Yes — poetry is just prose written with line breaks in random places', isCorrect: false, misconceptionId: `${POETB}:MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES` },
+    ],
+    correctValue: 'no, deliberate emphasis tool',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${POETB}:MC-POETRY-IS-JUST-PROSE-WRITTEN-WITH-LINE-BREAKS-IN-RANDOM-PLACES`],
+    source: `${POETB_SRC} — bird-flew-away line-break conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: POETB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A free verse poem has no rhyme and no fixed meter. Does that mean it doesn\'t count as "real" poetry?',
+    choices: [
+      { text: 'No — free verse still uses poetry\'s core features (condensed language, deliberate line breaks); rhyme and meter are optional tools, not requirements', isCorrect: true },
+      { text: 'Yes — all poetry must rhyme and have a strict meter', isCorrect: false, misconceptionId: `${POETB}:MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER` },
+    ],
+    correctValue: 'no, free verse is genuine poetry',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${POETB}:MC-ALL-POETRY-MUST-RHYME-AND-HAVE-A-STRICT-METER`],
+    source: `${POETB_SRC} — free-verse-vs-rhymed conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.digital-communication ─────────────────────────────────
+const DIGCOM = 'eng.communication.digital-communication'
+const DIGCOM_SRC = 'docs/curriculum/blueprints/eng.communication.digital-communication.md'
+
+const DIGCOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIGCOM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"hey can u send the report? thx" fits a text to a close friend but ' +
+      'is a register mismatch in a professional email to a supervisor. ' +
+      'Different digital platforms carry different register expectations, ' +
+      'just like spoken contexts do — always match your register to the ' +
+      'specific platform and relationship, never use one uniform digital ' +
+      'style everywhere.',
+    targetedMisconceptions: [`${DIGCOM}:MC-THE-SAME-REGISTER-AND-STYLE-WORKS-ACROSS-ALL-DIGITAL-PLATFORMS`],
+    source: `${DIGCOM_SRC} — MC-1 (P28 platform-dial conflict)`,
+  },
+  {
+    conceptId: DIGCOM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Oh great, ANOTHER meeting, can\'t wait" reads as genuinely annoyed ' +
+      'OR playfully sarcastic — both readings are plausible in text with ' +
+      'no vocal tone or facial expression to disambiguate. Text strips away ' +
+      'the cues that make tone obvious in speech, so assume tone (especially ' +
+      'sarcasm or criticism) is genuinely easy to misread, and add ' +
+      'clarifying phrasing when misinterpretation risk is real.',
+    targetedMisconceptions: [`${DIGCOM}:MC-TONE-IS-EASY-TO-CONVEY-IN-TEXT-BASED-DIGITAL-COMMUNICATION`],
+    source: `${DIGCOM_SRC} — MC-2 (P28 muted-instrument conflict)`,
+  },
+  {
+    conceptId: DIGCOM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Different digital platforms carry different register expectations ' +
+      'requiring the writer to match style to the specific platform and ' +
+      'relationship, rather than applying one uniform digital register ' +
+      'everywhere. Separately, text-based communication strips away vocal ' +
+      'tone, facial expression, and immediate clarifying feedback, making ' +
+      'intended tone (especially sarcasm or subtle criticism) genuinely ' +
+      'easy to misread — assume this fragility and add explicit ' +
+      'tone-clarifying phrasing when misinterpretation risk is real.',
+    targetedMisconceptions: [
+      `${DIGCOM}:MC-THE-SAME-REGISTER-AND-STYLE-WORKS-ACROSS-ALL-DIGITAL-PLATFORMS`,
+      `${DIGCOM}:MC-TONE-IS-EASY-TO-CONVEY-IN-TEXT-BASED-DIGITAL-COMMUNICATION`,
+    ],
+    source: `${DIGCOM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DIGCOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIGCOM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"hey can u send the report? thx" is appropriate texting a close friend. Is it equally appropriate emailed to a supervisor?',
+    choices: [
+      { text: 'No — different digital platforms carry different register expectations; the same message can be a mismatch on another platform', isCorrect: true },
+      { text: 'Yes — the same register and style works across all digital platforms', isCorrect: false, misconceptionId: `${DIGCOM}:MC-THE-SAME-REGISTER-AND-STYLE-WORKS-ACROSS-ALL-DIGITAL-PLATFORMS` },
+    ],
+    correctValue: 'no, match register to platform',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIGCOM}:MC-THE-SAME-REGISTER-AND-STYLE-WORKS-ACROSS-ALL-DIGITAL-PLATFORMS`],
+    source: `${DIGCOM_SRC} — platform-dial conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DIGCOM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You text a sarcastic joke to someone who doesn\'t know you well. Will your intended playful tone be clearly understood the same way it would be if spoken aloud?',
+    choices: [
+      { text: 'No — text strips away vocal tone and facial expression, so intended tone (especially sarcasm) is genuinely easy to misread', isCorrect: true },
+      { text: 'Yes — tone is easy to convey in text-based digital communication', isCorrect: false, misconceptionId: `${DIGCOM}:MC-TONE-IS-EASY-TO-CONVEY-IN-TEXT-BASED-DIGITAL-COMMUNICATION` },
+    ],
+    correctValue: 'no, tone is fragile in text',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIGCOM}:MC-TONE-IS-EASY-TO-CONVEY-IN-TEXT-BASED-DIGITAL-COMMUNICATION`],
+    source: `${DIGCOM_SRC} — muted-instrument conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.minimal-pairs ──────────────────────────────────────────────
+const MINP = 'eng.phonetics.minimal-pairs'
+const MINP_SRC = 'docs/curriculum/blueprints/eng.phonetics.minimal-pairs.md'
+
+const MINP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MINP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Cat" /kæt/ and "bad" /bæd/ differ in TWO positions (first and last ' +
+      'sound), so they are NOT a minimal pair — only "cat"/"bat" (differing ' +
+      'in just the first sound) qualifies. A true minimal pair differs by ' +
+      'EXACTLY ONE phoneme, in the same position, everything else ' +
+      'identical — always transcribe both words into IPA and count the ' +
+      'differing positions before calling something a minimal pair.',
+    targetedMisconceptions: [`${MINP}:MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS`],
+    source: `${MINP_SRC} — MC-1 (P28 cat-bat-vs-cat-bad conflict)`,
+  },
+  {
+    conceptId: MINP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Night" and "knight" look different in spelling but are pronounced ' +
+      'identically (/naɪt/ both) — zero sound difference, so they\'re ' +
+      'homophones, NOT a minimal pair. Minimal pairs are defined by SOUND, ' +
+      'never by spelling or letter count — always transcribe to IPA first, ' +
+      'then compare sound-by-sound, since English spelling is far too ' +
+      'unreliable a guide to actual pronunciation.',
+    targetedMisconceptions: [`${MINP}:MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE`],
+    source: `${MINP_SRC} — MC-2 (P28 night-knight conflict)`,
+  },
+  {
+    conceptId: MINP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A true minimal pair differs by exactly one phoneme in the same ' +
+      'position, with every other sound identical — two or more differing ' +
+      'positions disqualifies the pair, regardless of overall similarity. ' +
+      'Separately, minimal-pair status is defined strictly by sound, never ' +
+      'by spelling: homophones like "night"/"knight" have zero sound ' +
+      'difference and are not minimal pairs despite differing letters — ' +
+      'always transcribe to IPA before judging.',
+    targetedMisconceptions: [
+      `${MINP}:MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS`,
+      `${MINP}:MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE`,
+    ],
+    source: `${MINP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const MINP_PROBES: SeedProbe[] = [
+  {
+    conceptId: MINP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Cat" /kæt/ and "bad" /bæd/ differ in the first AND last sound. Is this a minimal pair?',
+    choices: [
+      { text: 'No — a true minimal pair differs by exactly one phoneme in one position; two differing positions disqualifies it', isCorrect: true },
+      { text: 'Yes — any similar-sounding words are minimal pairs', isCorrect: false, misconceptionId: `${MINP}:MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS` },
+    ],
+    correctValue: 'no, two positions differ',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MINP}:MC-ANY-SIMILAR-WORDS-ARE-MINIMAL-PAIRS`],
+    source: `${MINP_SRC} — cat-bat-vs-cat-bad conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MINP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Night" and "knight" are spelled differently (different letter count) but pronounced identically, /naɪt/ both. Is spelling difference the same thing as sound difference here?',
+    choices: [
+      { text: 'No — minimal pairs are judged by sound, not spelling; "night"/"knight" are homophones with zero sound difference, not a minimal pair', isCorrect: true },
+      { text: 'Yes — spelling difference equals sound difference', isCorrect: false, misconceptionId: `${MINP}:MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE` },
+    ],
+    correctValue: 'no, judge by sound not spelling',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MINP}:MC-SPELLING-DIFFERENCE-EQUALS-SOUND-DIFFERENCE`],
+    source: `${MINP_SRC} — night-knight conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.syllable-stress ────────────────────────────────────────────
+const SYLS = 'eng.phonetics.syllable-stress'
+const SYLS_SRC = 'docs/curriculum/blueprints/eng.phonetics.syllable-stress.md'
+
+const SYLS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SYLS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Shouting "ba-NA-na" as loud as possible sounds unnatural — real ' +
+      'stress is a BUNDLE of cues: length, pitch change, and full vowel ' +
+      'quality together, not volume alone. The stressed syllable in ' +
+      '"banana" is longer and keeps a clear vowel, while the unstressed ' +
+      'syllables reduce to a weak schwa /ə/. Check length, pitch, and ' +
+      'vowel clarity together — never rely on loudness alone.',
+    targetedMisconceptions: [`${SYLS}:MC-STRESS-IS-JUST-LOUDNESS`],
+    source: `${SYLS_SRC} — MC-1 (P28 banana-shouting conflict)`,
+  },
+  {
+    conceptId: SYLS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"REcord" (noun) and "reCORD" (verb) have identical spelling but ' +
+      'different stress depending on grammatical role — English spelling ' +
+      'never marks stress at all. It isn\'t fully random either: many ' +
+      'two-syllable noun/verb pairs shift stress this way (PREsent/ ' +
+      'preSENT). Never expect spelling to show stress — check by ear or ' +
+      'dictionary, and watch for this noun/verb stress-shift pattern as a ' +
+      'real, learnable shortcut.',
+    targetedMisconceptions: [`${SYLS}:MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING`],
+    source: `${SYLS_SRC} — MC-2 (P28 record-noun-verb conflict)`,
+  },
+  {
+    conceptId: SYLS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Stress is a bundle of cues — length, pitch change, and full vowel ' +
+      'quality (with unstressed syllables reducing to schwa) — not ' +
+      'loudness alone, and overusing pure volume as the marker produces ' +
+      'unnatural speech. Separately, English spelling never marks stress ' +
+      'directly, yet placement is not fully random: many two-syllable noun/ ' +
+      'verb pairs shift stress predictably (REcord/reCORD) — check by ear ' +
+      'or reference, using the noun/verb pattern as a genuine, bounded ' +
+      'shortcut.',
+    targetedMisconceptions: [
+      `${SYLS}:MC-STRESS-IS-JUST-LOUDNESS`,
+      `${SYLS}:MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING`,
+    ],
+    source: `${SYLS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SYLS_PROBES: SeedProbe[] = [
+  {
+    conceptId: SYLS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is stress in English words marked purely by speaking louder on the stressed syllable?',
+    choices: [
+      { text: 'No — stress is a bundle of length, pitch change, and vowel quality together; volume alone produces unnatural, robotic-sounding stress', isCorrect: true },
+      { text: 'Yes — stress is just loudness', isCorrect: false, misconceptionId: `${SYLS}:MC-STRESS-IS-JUST-LOUDNESS` },
+    ],
+    correctValue: 'no, a bundle of cues',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SYLS}:MC-STRESS-IS-JUST-LOUDNESS`],
+    source: `${SYLS_SRC} — banana-shouting conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SYLS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"REcord" (noun) and "reCORD" (verb) are spelled identically but stressed differently. Does English spelling reliably fix a word\'s stress pattern?',
+    choices: [
+      { text: 'No — spelling never marks stress at all; stress must be learned by ear or reference, though patterns like the noun/verb shift do exist', isCorrect: true },
+      { text: 'Yes — stress pattern is fixed by spelling', isCorrect: false, misconceptionId: `${SYLS}:MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING` },
+    ],
+    correctValue: 'no, spelling never marks stress',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SYLS}:MC-STRESS-PATTERN-IS-FIXED-BY-SPELLING`],
+    source: `${SYLS_SRC} — record-noun-verb conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -20916,6 +22013,18 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...LDEV_EXPLANATIONS,
   ...PRNF_EXPLANATIONS,
   ...IPAB_EXPLANATIONS,
+  ...WFP_EXPLANATIONS,
+  ...IDIOM_EXPLANATIONS,
+  ...PHRV_EXPLANATIONS,
+  ...ETYM_EXPLANATIONS,
+  ...THES_EXPLANATIONS,
+  ...TOPS_EXPLANATIONS,
+  ...METS_EXPLANATIONS,
+  ...IRON_EXPLANATIONS,
+  ...POETB_EXPLANATIONS,
+  ...DIGCOM_EXPLANATIONS,
+  ...MINP_EXPLANATIONS,
+  ...SYLS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -21150,4 +22259,16 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...LDEV_PROBES,
   ...PRNF_PROBES,
   ...IPAB_PROBES,
+  ...WFP_PROBES,
+  ...IDIOM_PROBES,
+  ...PHRV_PROBES,
+  ...ETYM_PROBES,
+  ...THES_PROBES,
+  ...TOPS_PROBES,
+  ...METS_PROBES,
+  ...IRON_PROBES,
+  ...POETB_PROBES,
+  ...DIGCOM_PROBES,
+  ...MINP_PROBES,
+  ...SYLS_PROBES,
 ]
