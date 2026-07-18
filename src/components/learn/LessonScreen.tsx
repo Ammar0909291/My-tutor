@@ -1542,6 +1542,57 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug])
 
+  // Lesson initialization via dedicated endpoint — does NOT persist the
+  // navigation instruction as a USER message (unlike sendMessage which
+  // always writes to the DB). The instruction is passed ephemerally; only
+  // the ASSISTANT response is saved. Replaces sendMessage(false) for all
+  // lesson navigation paths (restart / review / next).
+  const callLessonInit = useCallback(async (
+    sid: string,
+    mode: 'restart' | 'review' | 'resume' | 'next',
+    lesson: CurriculumLesson,
+  ) => {
+    setIsStreaming(true)
+    const aid = `a-${Date.now()}`
+    setMessages((p) => [...p, { id: aid, role: 'assistant' as const, content: '', ts: Date.now(), streaming: true }])
+    try {
+      const res = await fetch('/api/learn/lesson-init', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: sid,
+          mode,
+          lessonTitle: lesson.lessonTitle,
+          lessonGoal: lesson.lessonGoal,
+          lessonOrder: lesson.order,
+          unitTitle: lesson.unitTitle,
+          totalLessons: curriculumLessons.length,
+          completedLessons: curriculumProgress.completedLessons,
+          teachingLanguage,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
+      setMessages((p) => p.map((m) => m.id === aid
+        ? { ...m, content: data.text as string, streaming: false, provider: data.provider }
+        : m,
+      ))
+    } catch (err) {
+      const recoveryText = teachingLanguage === 'ru'
+        ? 'Ой, связь прервалась. Попробуй ещё раз.'
+        : teachingLanguage === 'hi'
+        ? 'Connection ruk gaya. Dobara try karo.'
+        : 'Sorry, something went wrong loading the lesson. Please try again.'
+      setMessages((p) => p.map((m) => m.id === aid
+        ? { ...m, content: recoveryText, streaming: false }
+        : m,
+      ))
+      console.error('[lesson-init]', err)
+    } finally {
+      setIsStreaming(false)
+    }
+  }, [teachingLanguage, curriculumLessons.length, curriculumProgress.completedLessons])
+
   // Start revision mode for a completed/mastered topic — the richer
   // "previous lesson" restoration: patches TopicProgress to REVISION
   // (restores/reflects mastery + progress via topicProgressMap), shows the
@@ -1565,14 +1616,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       }
     }).catch(() => {})
     setRevisionTopic({ topicSlug: lesson.topicSlug, lessonTitle: lesson.lessonTitle })
-    const msg = teachingLanguage === 'ru'
-      ? `🔁 РЕЖИМ ПОВТОРЕНИЯ: Давай повторим тему "${lesson.lessonTitle}". Объясни ключевые концепции и дай практические задания.`
-      : teachingLanguage === 'hi'
-      ? `🔁 REVISION MODE: "${lesson.lessonTitle}" dobara padho. Key concepts explain karo aur practice exercises do.`
-      : `🔁 REVISION MODE: Let's review "${lesson.lessonTitle}". Please explain the key concepts and give me practice exercises.`
-    await sendMessage(sessionId, msg, false)
+    await callLessonInit(sessionId, 'review', lesson)
     setActiveTab('chat')
-  }, [subjectSlug, sessionId, teachingLanguage, sendMessage])
+  }, [subjectSlug, sessionId, callLessonInit])
 
   // Navigate to a previous (completed) lesson for review. Delegates to
   // startRevision — the existing, already-built restoration mechanism —
@@ -1587,13 +1633,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       await startRevision(lesson)
       return
     }
-    const reviewMsg = teachingLanguage === 'ru'
-      ? `Давай повторим урок ${lessonOrder}: ${lesson.lessonTitle}`
-      : teachingLanguage === 'hi'
-      ? `Lesson ${lessonOrder} repeat karte hain: ${lesson.lessonTitle}`
-      : `Let's review lesson ${lessonOrder}: ${lesson.lessonTitle}`
-    await sendMessage(sessionId, reviewMsg, true)
-  }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, teachingLanguage, sendMessage, startRevision])
+    await callLessonInit(sessionId, 'review', lesson)
+  }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, callLessonInit, startRevision])
 
   // Show a confirmation dialog before switching to any lesson (P0 UX).
   // Locked lessons are silently rejected — the UI should never offer them.
@@ -1613,33 +1654,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setLessonSwitchDialog(null)
 
     if (isRestart) {
-      // Re-open the current lesson — send the opening prompt again.
-      const reopenMsg = teachingLanguage === 'ru'
-        ? `Давай начнём урок "${target.lessonTitle}" заново. Пожалуйста, начни сначала.`
-        : teachingLanguage === 'hi'
-        ? `"${target.lessonTitle}" dobara shuru karte hain. Please restart from the beginning.`
-        : `Let's restart lesson "${target.lessonTitle}" from the beginning.`
-      await sendMessage(sessionId, reopenMsg, false)
+      await callLessonInit(sessionId, 'restart', target)
       setActiveTab('chat')
       return
     }
 
     if (target.order < curriculumProgress.currentLesson || target.topicSlug) {
-      // Backward navigation OR any KG-bound lesson — use startRevision which
-      // already handles the revision-mode message and navigation.
       await startRevision(target)
       return
     }
 
-    // Forward to an unlocked lesson beyond the current one.
-    const forwardMsg = teachingLanguage === 'ru'
-      ? `Продолжим со следующего урока ${target.order}: ${target.lessonTitle}`
-      : teachingLanguage === 'hi'
-      ? `Chalo lesson ${target.order} shuru karte hain: ${target.lessonTitle}`
-      : `Let's start lesson ${target.order}: ${target.lessonTitle}`
-    await sendMessage(sessionId, forwardMsg, false)
+    await callLessonInit(sessionId, 'next', target)
     setActiveTab('chat')
-  }, [lessonSwitchDialog, sessionId, teachingLanguage, curriculumProgress, sendMessage, startRevision])
+  }, [lessonSwitchDialog, sessionId, curriculumProgress, callLessonInit, startRevision])
 
   // Open the next lesson. Only ever called when canAdvanceToNextLesson()
   // is true (current lesson completed + next lesson unlocked per
@@ -1654,13 +1681,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (!sessionId) return
     const next = findNextLesson(curriculumLessons, curriculumProgress)
     if (!next) return
-    const startMsg = teachingLanguage === 'ru'
-      ? `Продолжим со следующего урока ${next.order}: ${next.lessonTitle}`
-      : teachingLanguage === 'hi'
-      ? `Chalo agla lesson ${next.order} shuru karte hain: ${next.lessonTitle}`
-      : `Let's continue with the next lesson: ${next.lessonTitle}`
-    await sendMessage(sessionId, startMsg, true)
-  }, [curriculumLessons, curriculumProgress, sessionId, teachingLanguage, sendMessage])
+    await callLessonInit(sessionId, 'next', next)
+  }, [curriculumLessons, curriculumProgress, sessionId, callLessonInit])
 
   // Initiate a skip: check risk then confirm or warn
   const initiateSkip = useCallback(async (lesson: CurriculumLesson) => {
@@ -3402,7 +3424,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
                 if (!lastAssistant) return null
                 return (
-                  <div className="hidden lg:flex" style={{ gap: 6, flexShrink: 0 }}>
+                  <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
                     <button
                       onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
                       disabled={isStreaming || !sessionId}
