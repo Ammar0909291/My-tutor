@@ -13865,6 +13865,292 @@ const RAG_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.listening.active-listening ────────────────────────────────────────────
+const ACTL = 'eng.listening.active-listening'
+const ACTL_SRC = 'docs/curriculum/blueprints/eng.listening.active-listening.md'
+
+const ACTL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACTL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Hearing is a passive physical process — sound waves reaching your ' +
+      'ears. Active listening is a deliberate, effortful process: attending ' +
+      'to meaning, noticing tone and body language, and engaging to show ' +
+      'and build genuine understanding. You could hear every word of a ' +
+      'story and still be unable to say what it was actually about or how ' +
+      'the speaker seemed to feel — that gap is the difference. Do not just ' +
+      'let words reach your ears — actively attend to meaning and watch ' +
+      'for nonverbal cues.',
+    targetedMisconceptions: [`${ACTL}:MC-HEARING-EQUALS-LISTENING`],
+    source: `${ACTL_SRC} — MC-HEARING-EQUALS-LISTENING (P28 repeat-words-vs-explain-story conflict evidence)`,
+  },
+  {
+    conceptId: ACTL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Active listening includes appropriate engagement signals — nodding, ' +
+      'brief verbal acknowledgments like "mm-hmm," eye contact, and ' +
+      'well-timed clarifying questions after the speaker finishes a ' +
+      'thought. Staying completely still and silent out of worry about ' +
+      'interrupting can actually make a speaker unsure whether they are ' +
+      'being heard at all. These signals show the speaker you are engaged; ' +
+      'they support active listening rather than violating it.',
+    targetedMisconceptions: [`${ACTL}:MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT`],
+    source: `${ACTL_SRC} — MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT (P28 silent-stillness-vs-engagement-signals conflict evidence)`,
+  },
+  {
+    conceptId: ACTL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Active listening is distinct from the passive physical act of ' +
+      'hearing: it requires attending to meaning, noticing tonal and ' +
+      'nonverbal cues, and engaging to build genuine understanding — one ' +
+      'can hear every word spoken and still fail to grasp the point or the ' +
+      'speaker\'s emotional register. Separately, active listening genuinely ' +
+      'includes visible engagement signals — nodding, brief verbal ' +
+      'acknowledgments, eye contact, well-timed questions after a thought ' +
+      'concludes — rather than complete silence, which can read to a ' +
+      'speaker as disengagement rather than respectful attention.',
+    targetedMisconceptions: [
+      `${ACTL}:MC-HEARING-EQUALS-LISTENING`,
+      `${ACTL}:MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT`,
+    ],
+    source: `${ACTL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ACTL_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACTL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A listener can repeat back several words from a story but cannot say what it was about or how the speaker felt. Were they actively listening?',
+    choices: [
+      { text: 'No — hearing the words is not the same as actively attending to meaning', isCorrect: true },
+      { text: 'Yes — hearing every word means they were listening', isCorrect: false, misconceptionId: `${ACTL}:MC-HEARING-EQUALS-LISTENING` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ACTL}:MC-HEARING-EQUALS-LISTENING`],
+    source: `${ACTL_SRC} — P28 repeat-words-vs-explain-story conflict as probe`,
+  },
+  {
+    conceptId: ACTL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A listener stays completely silent and still, worried that nodding or saying "mm-hmm" would be rude. Is this good active listening?',
+    choices: [
+      { text: 'No — appropriate engagement signals like nodding and brief acknowledgments support active listening, not interrupt it', isCorrect: true },
+      { text: 'Yes — active listening means staying completely silent', isCorrect: false, misconceptionId: `${ACTL}:MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ACTL}:MC-ACTIVE-LISTENING-MEANS-STAYING-SILENT`],
+    source: `${ACTL_SRC} — P28 silent-stillness-vs-engagement-signals conflict as probe`,
+  },
+]
+
+// ─── eng.listening.listening-for-gist ───────────────────────────────────────────
+const GIST = 'eng.listening.listening-for-gist'
+const GIST_SRC = 'docs/curriculum/blueprints/eng.listening.listening-for-gist.md'
+
+const GIST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GIST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Listening for GIST means understanding the overall topic or general ' +
+      'meaning WITHOUT needing to process every single word — a ' +
+      'deliberately different, more tolerant listening mode than detailed ' +
+      'comprehension. Catching the words "weather," "rain," and "tomorrow" ' +
+      'in an announcement lets you infer "this is a weather forecast ' +
+      'mentioning rain tomorrow," even if several other words were ' +
+      'unclear. For gist listening, focus on catching key content words ' +
+      'and deliberately let go of needing every single word.',
+    targetedMisconceptions: [`${GIST}:MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST`],
+    source: `${GIST_SRC} — MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST (P28 weather-forecast conflict evidence)`,
+  },
+  {
+    conceptId: GIST,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Listening for gist is a genuinely distinct, valuable STRATEGY, not a ' +
+      'lesser stage to outgrow — even highly proficient listeners ' +
+      'deliberately use gist listening to quickly preview content or decide ' +
+      'what deserves closer attention, such as scanning several news ' +
+      'headlines to decide which story to follow in detail. It is a ' +
+      'different TOOL for a different purpose than detailed listening, not ' +
+      'a weaker version of the same skill reserved for beginners.',
+    targetedMisconceptions: [`${GIST}:MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING`],
+    source: `${GIST_SRC} — MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING (P28 fluent-speakers-scan-headlines conflict evidence)`,
+  },
+  {
+    conceptId: GIST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Gist listening deliberately tolerates incomplete word-level ' +
+      'understanding: catching key content words and contextual cues is ' +
+      'sufficient to establish the general topic even with several ' +
+      'unfamiliar words or fast speech present — it is not a failed ' +
+      'attempt at full comprehension but a distinct comprehension mode ' +
+      'suited to a different purpose. Separately, gist listening is not a ' +
+      'lesser skill confined to beginners: skilled listeners deliberately ' +
+      'employ it to preview content and decide what merits full attention, ' +
+      'making it a strategic tool alongside, not beneath, detailed ' +
+      'listening.',
+    targetedMisconceptions: [
+      `${GIST}:MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST`,
+      `${GIST}:MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING`,
+    ],
+    source: `${GIST_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const GIST_PROBES: SeedProbe[] = [
+  {
+    conceptId: GIST,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A listener catches the words "weather," "rain," and "tomorrow" in an announcement but misses several other words. Can they understand the gist?',
+    choices: [
+      { text: 'Yes — key content words are often enough to grasp the general topic', isCorrect: true },
+      { text: 'No — missing any word means you cannot understand the gist at all', isCorrect: false, misconceptionId: `${GIST}:MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GIST}:MC-MUST-UNDERSTAND-EVERY-WORD-TO-UNDERSTAND-THE-GIST`],
+    source: `${GIST_SRC} — P28 weather-forecast conflict as probe`,
+  },
+  {
+    conceptId: GIST,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Do highly fluent, skilled listeners ever use gist listening, or is it only for beginners who "can\'t" listen for detail?',
+    choices: [
+      { text: 'Skilled listeners deliberately use gist listening too, to preview content and decide what deserves attention', isCorrect: true },
+      { text: 'Gist listening is a lower skill only needed by weaker listeners', isCorrect: false, misconceptionId: `${GIST}:MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING` },
+    ],
+    correctValue: 'skilled listeners use it too',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GIST}:MC-GIST-LISTENING-IS-A-LOWER-SKILL-THAN-DETAILED-LISTENING`],
+    source: `${GIST_SRC} — P28 fluent-speakers-scan-headlines conflict as probe`,
+  },
+]
+
+// ─── eng.listening.listening-for-detail ────────────────────────────────────────
+const LDET = 'eng.listening.listening-for-detail'
+const LDET_SRC = 'docs/curriculum/blueprints/eng.listening.listening-for-detail.md'
+
+const LDET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LDET,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Trying to catch every single word is like trying to catch every ' +
+      'raindrop in a storm — you will miss things and feel overwhelmed. If ' +
+      'a passage says "The museum tour starts at 2:30, right after the ' +
+      'gift shop reopens from lunch," a listener told "just find out what ' +
+      'time the tour starts" answers correctly with less stress than one ' +
+      'trying to catch every word. Before you listen, decide exactly what ' +
+      'you are listening for, and let the rest of the speech flow past ' +
+      'you.',
+    targetedMisconceptions: [`${LDET}:MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD`],
+    source: `${LDET_SRC} — MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD (P28 museum-tour-time conflict evidence)`,
+  },
+  {
+    conceptId: LDET,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Each detail you are asked for is usually a separate catch, like ' +
+      'separate items on a shopping list — missing one item does not mean ' +
+      'you failed to find any of them. Given a passage with 3 requested ' +
+      'details (a name, a time, a location) where you caught 2 of 3, ' +
+      'report the 2 you caught confidently rather than refusing to answer ' +
+      'anything. Treat each requested detail as its own independent task; ' +
+      'missing one does not erase what you caught for the others.',
+    targetedMisconceptions: [`${LDET}:MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED`],
+    source: `${LDET_SRC} — MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED (P28 2-of-3-details-caught conflict evidence)`,
+  },
+  {
+    conceptId: LDET,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Listening for detail is a targeted skill: identify the specific ' +
+      'information needed — a time, a name, a location — before listening, ' +
+      'and let surrounding speech pass without effort to retain it; ' +
+      'attempting to mentally transcribe everything produces overload and ' +
+      'a higher failure rate than selective attention. Separately, a ' +
+      'multi-detail listening task consists of independent sub-tasks: ' +
+      'missing one requested detail among several does not invalidate the ' +
+      'others successfully caught — report what was captured and, where a ' +
+      'repeat listen is available, target only the missing piece.',
+    targetedMisconceptions: [
+      `${LDET}:MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD`,
+      `${LDET}:MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED`,
+    ],
+    source: `${LDET_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LDET_PROBES: SeedProbe[] = [
+  {
+    conceptId: LDET,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'You need to find out what time a museum tour starts from a longer announcement. Should you try to catch every word, or focus only on the time?',
+    choices: [
+      { text: 'Focus only on the time — decide what you need before listening and let the rest pass', isCorrect: true },
+      { text: 'Try to catch every single word to be safe', isCorrect: false, misconceptionId: `${LDET}:MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD` },
+    ],
+    correctValue: 'focus only on the time',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LDET}:MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD`],
+    source: `${LDET_SRC} — P28 museum-tour-time conflict as probe`,
+  },
+  {
+    conceptId: LDET,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A passage asks for 3 details (a name, a time, a location). You caught 2 of the 3. Should you report the 2 you caught, or refuse to answer since you missed one?',
+    choices: [
+      { text: 'Report the 2 you caught — missing one detail does not erase what you caught for the others', isCorrect: true },
+      { text: 'Refuse to answer anything, since missing one detail means the whole task failed', isCorrect: false, misconceptionId: `${LDET}:MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED` },
+    ],
+    correctValue: 'report the 2 you caught',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LDET}:MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED`],
+    source: `${LDET_SRC} — P28 2-of-3-details-caught conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -14027,6 +14313,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...VISC_EXPLANATIONS,
   ...STEN_EXPLANATIONS,
   ...RAG_EXPLANATIONS,
+  ...ACTL_EXPLANATIONS,
+  ...GIST_EXPLANATIONS,
+  ...LDET_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -14189,4 +14478,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...VISC_PROBES,
   ...STEN_PROBES,
   ...RAG_PROBES,
+  ...ACTL_PROBES,
+  ...GIST_PROBES,
+  ...LDET_PROBES,
 ]
