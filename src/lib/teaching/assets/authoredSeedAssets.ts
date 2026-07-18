@@ -30308,6 +30308,275 @@ const BUSW_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.communication.professional-communication ──────────────────────────────
+const PROFC = 'eng.communication.professional-communication'
+const PROFC_SRC = 'docs/curriculum/blueprints/eng.communication.professional-communication.md'
+
+const PROFC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROFC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming channel choice doesn\'t matter as long as content is ' +
+      'accurate is like assuming it doesn\'t matter whether you deliver an ' +
+      'urgent warning by shouting it directly or mailing a letter — one ' +
+      'reaches in time, one doesn\'t. Choose channel based on urgency, need ' +
+      'for a documented record, and sensitivity — it\'s a functional ' +
+      'decision, not a cosmetic one.',
+    targetedMisconceptions: [`${PROFC}:MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT`],
+    source: `${PROFC_SRC} — MC-A (P28 shout-vs-letter conflict)`,
+  },
+  {
+    conceptId: PROFC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Reading a written document aloud verbatim is like holding up a map ' +
+      'briefly instead of describing a route to someone who can\'t pause ' +
+      'and study it — a listener only gets one pass and needs shorter ' +
+      'sentences, verbal signposts, and strategic repetition. Keep key ' +
+      'points consistent across channels, but adapt phrasing for spoken ' +
+      'delivery.',
+    targetedMisconceptions: [`${PROFC}:MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT`],
+    source: `${PROFC_SRC} — MC-B (P28 map-description conflict)`,
+  },
+  {
+    conceptId: PROFC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Channel choice (written, spoken, or both) is a functional decision ' +
+      'based on urgency, need for a documented record, and sensitivity — ' +
+      'not an arbitrary or cosmetic one, like choosing between shouting a ' +
+      'warning and mailing a letter. Separately, a spoken presentation of ' +
+      'written content must be adapted for listening (shorter sentences, ' +
+      'verbal signposts) rather than read verbatim, like describing a ' +
+      'route aloud rather than just holding up a map, while keeping key ' +
+      'points consistent across both channels.',
+    targetedMisconceptions: [
+      `${PROFC}:MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT`,
+      `${PROFC}:MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT`,
+    ],
+    source: `${PROFC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PROFC_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROFC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An urgent same-day deadline change is sent only by email, which the recipient doesn\'t check for hours. Does channel choice matter as long as the message content itself is accurate?',
+    choices: [
+      { text: 'Yes — channel choice is a functional decision based on urgency, need for a record, and sensitivity; the wrong channel can mean the message doesn\'t achieve its purpose even with accurate content', isCorrect: true },
+      { text: 'No — the channel (written vs. spoken) doesn\'t matter as long as the message content is right', isCorrect: false, misconceptionId: `${PROFC}:MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT` },
+    ],
+    correctValue: 'channel choice matters functionally, not just content',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROFC}:MC-A-THE-CHANNEL-WRITTEN-VS-SPOKEN-DOESNT-MATTER-AS-LONG-AS-THE-MESSAGE-CONTENT-IS-RIGHT`],
+    source: `${PROFC_SRC} — shout-vs-letter conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PROFC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student presenting a report reads the dense, written report text aloud word for word. Should a spoken presentation be a word-for-word reading of the written document?',
+    choices: [
+      { text: 'No — spoken delivery has different conventions (shorter sentences, verbal signposts, repetition of key points) since a listener can\'t pause or re-read; key points should stay consistent but phrasing must be adapted', isCorrect: true },
+      { text: 'Yes — a spoken presentation should be a word-for-word reading of the written document to ensure consistency', isCorrect: false, misconceptionId: `${PROFC}:MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT` },
+    ],
+    correctValue: 'no, spoken delivery must be adapted for listening',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROFC}:MC-B-A-SPOKEN-PRESENTATION-SHOULD-BE-A-WORD-FOR-WORD-READING-OF-THE-WRITTEN-DOCUMENT`],
+    source: `${PROFC_SRC} — map-description conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.presentation-design ─────────────────────────────────────
+const PDES = 'eng.communication.presentation-design'
+const PDES_SRC = 'docs/curriculum/blueprints/eng.communication.presentation-design.md'
+
+const PDES_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PDES,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Putting your full script on a slide is like handing someone a book ' +
+      'to read at the exact moment you\'re telling them a story out loud — ' +
+      'they must choose between reading and listening, and the slide ' +
+      'usually wins. Reduce each slide to a few key words, phrases, or ' +
+      'visuals that support the speech, not replace the audience\'s need ' +
+      'to listen.',
+    targetedMisconceptions: [`${PDES}:MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY`],
+    source: `${PDES_SRC} — MC-A (P28 book-while-storytelling conflict)`,
+  },
+  {
+    conceptId: PDES,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Adding a decorative image because a slide "needs something" is ' +
+      'like hanging an unrelated painting on a whiteboard used to explain ' +
+      'a math problem — it might look nicer, but does nothing to help ' +
+      'understanding, and can distract from what actually would help. ' +
+      'Every visual should be chosen because it clarifies the specific ' +
+      'point, not to fill space or look polished.',
+    targetedMisconceptions: [`${PDES}:MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL`],
+    source: `${PDES_SRC} — MC-B (P28 unrelated-painting conflict)`,
+  },
+  {
+    conceptId: PDES,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A slide\'s job is to reinforce spoken content, not duplicate it — ' +
+      'text-heavy slides force the audience to choose between reading and ' +
+      'listening, like handing someone a book while telling them a story. ' +
+      'Separately, every visual element must be chosen because it ' +
+      'clarifies the specific point, not for decoration or to seem ' +
+      'professional, like an unrelated painting on a whiteboard being used ' +
+      'to explain a problem.',
+    targetedMisconceptions: [
+      `${PDES}:MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY`,
+      `${PDES}:MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL`,
+    ],
+    source: `${PDES_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PDES_PROBES: SeedProbe[] = [
+  {
+    conceptId: PDES,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A slide is packed with three full sentences duplicating everything the speaker plans to say aloud. Does a good slide need to contain the full text of what the speaker will say?',
+    choices: [
+      { text: 'No — a slide should reduce content to key words, phrases, or visuals that support the spoken content, not compete with the speaker for the audience\'s attention', isCorrect: true },
+      { text: 'Yes — a good slide contains the full text of what the speaker will say', isCorrect: false, misconceptionId: `${PDES}:MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY` },
+    ],
+    correctValue: 'no, slides should support speech with minimal text',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PDES}:MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY`],
+    source: `${PDES_SRC} — book-while-storytelling conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PDES,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A slide includes an unrelated stock image chosen only to make the slide "look professional," with no connection to the point being made. Does every slide need decorative visual elements like this to look professional?',
+    choices: [
+      { text: 'No — every visual element should be chosen because it clarifies the specific spoken point, not merely to fill space or look polished; purely decorative visuals should be cut', isCorrect: true },
+      { text: 'Yes — every slide needs decorative visual elements to look professional', isCorrect: false, misconceptionId: `${PDES}:MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL` },
+    ],
+    correctValue: 'no, visuals must clarify, not decorate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PDES}:MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL`],
+    source: `${PDES_SRC} — unrelated-painting conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.editing-for-publication ─────────────────────────────────
+const EFP = 'eng.communication.editing-for-publication'
+const EFP_SRC = 'docs/curriculum/blueprints/eng.communication.editing-for-publication.md'
+
+const EFP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EFP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming a content-focused read also catches surface errors is ' +
+      'like assuming a driver focused on navigating traffic will also ' +
+      'notice a small windshield crack — both compete for the same ' +
+      'attention, and focusing on one reduces the chance of noticing the ' +
+      'other. Proofreading requires a separate, dedicated reading pass ' +
+      'focused specifically on surface form, not meaning.',
+    targetedMisconceptions: [`${EFP}:MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT`],
+    source: `${EFP_SRC} — MC-A (P28 windshield-crack-while-driving conflict)`,
+  },
+  {
+    conceptId: EFP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming strong content alone overcomes formatting and surface ' +
+      'issues is like assuming a brilliant job candidate\'s qualifications ' +
+      'fully compensate for showing up in wrinkled clothing — content and ' +
+      'surface presentation are genuinely separate evaluation dimensions. ' +
+      'Treat formatting compliance and surface-error-free proofreading as ' +
+      'a separate, equally necessary quality dimension.',
+    targetedMisconceptions: [`${EFP}:MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR`],
+    source: `${EFP_SRC} — MC-B (P28 wrinkled-clothing-job-interview conflict)`,
+  },
+  {
+    conceptId: EFP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Proofreading requires a genuinely different, dedicated reading ' +
+      'mode than content review — content-focused reading and surface-' +
+      'error-focused reading compete for the same attention, like a driver ' +
+      'focused on the road being less likely to notice a windshield crack. ' +
+      'Separately, formatting compliance and surface polish are a real, ' +
+      'separately-evaluated quality dimension that strong content doesn\'t ' +
+      'automatically compensate for, like qualifications not overcoming ' +
+      'wrinkled clothing at an interview.',
+    targetedMisconceptions: [
+      `${EFP}:MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT`,
+      `${EFP}:MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR`,
+    ],
+    source: `${EFP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const EFP_PROBES: SeedProbe[] = [
+  {
+    conceptId: EFP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A writer carefully reads through their essay once, confirming the logical flow makes sense, and assumes this also caught all spelling and punctuation errors. Does a careful content-focused read also effectively serve as proofreading?',
+    choices: [
+      { text: 'No — content-focused reading and surface-error-focused reading compete for the same attention; a reader focused on meaning naturally reads past small surface errors without registering them', isCorrect: true },
+      { text: 'Yes — if you\'ve already carefully read through a piece for content, you\'ve also effectively proofread it', isCorrect: false, misconceptionId: `${EFP}:MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT` },
+    ],
+    correctValue: 'no, proofreading requires a genuinely separate pass',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EFP}:MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT`],
+    source: `${EFP_SRC} — windshield-crack-while-driving conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EFP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A submission has genuinely strong content but fails several of a publication\'s formatting requirements and contains multiple surface errors. Will strong enough content mean formatting and surface errors won\'t really matter to an editor?',
+    choices: [
+      { text: 'No — formatting compliance and surface polish are evaluated as a separate, real quality dimension; a piece can be rejected or poorly received despite excellent content', isCorrect: true },
+      { text: 'Yes — if the content is strong enough, formatting and surface errors won\'t really matter to a reader or editor', isCorrect: false, misconceptionId: `${EFP}:MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR` },
+    ],
+    correctValue: 'no, formatting and surface polish are separately evaluated',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EFP}:MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR`],
+    source: `${EFP_SRC} — wrinkled-clothing-job-interview conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -30651,6 +30920,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...RMW_EXPLANATIONS,
   ...TECHW_EXPLANATIONS,
   ...BUSW_EXPLANATIONS,
+  ...PROFC_EXPLANATIONS,
+  ...PDES_EXPLANATIONS,
+  ...EFP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -30994,4 +31266,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...RMW_PROBES,
   ...TECHW_PROBES,
   ...BUSW_PROBES,
+  ...PROFC_PROBES,
+  ...PDES_PROBES,
+  ...EFP_PROBES,
 ]
