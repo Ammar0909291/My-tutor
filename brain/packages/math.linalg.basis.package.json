@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.basis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.basis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:04c76fe39bb34a73c41ec8ef57b8649b81462f52ddeb65f7e79cd59897736eda",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.basis.md": "sha256:5eb397ae7b3f890c7ec1df36b8397fd08f24a4d4e92e79f20967bcb696a07be3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.linalg.basis",
+    "name": "Basis",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.linear-independence",
+      "math.linalg.span"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.basis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.basis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.basis.md": "sha256:5eb397ae7b3f890c7ec1df36b8397fd08f24a4d4e92e79f20967bcb696a07be3"
+      },
+      "contentHash": "sha256:cd63348f0bede794721ad3faa9d2c1fae61d8a670a2241a3d33b890a7db4d925",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.basis.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.basis.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.basis.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.basis.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.basis\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.basis.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.basis.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.basis\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.basis/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.basis",
+      "title": "Basis — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.linalg.linear-independence**: no vector in the set is a combination of the others — one of the TWO requirements a basis must satisfy\n- **math.linalg.span**: span(S) is the set of all linear combinations of S — the OTHER requirement (spanning the whole space) a basis must satisfy\n\n### Target Knowledge State\nStudent can verify whether a candidate set is a basis by checking BOTH requirements (spans the space AND is linearly independent), recognizing that satisfying only one is insufficient; correctly recognize that a vector space generally has INFINITELY MANY different valid bases, not one unique \"the\" basis; and correctly compute a vector's coordinates relative to a GIVEN basis, recognizing that the SAME vector has DIFFERENT coordinate representations depending on which basis is used.\n\n### Conceptual Obstacles\n1. Verifying only the spanning condition (or only the independence condition) and declaring a set a basis, without checking BOTH — a spanning set with a redundant vector is not a basis (fails independence); an independent set that doesn't reach every vector in the space is not a basis either (fails spanning)\n2. Believing a vector space has ONE single, uniquely correct basis (typically confusing \"the standard basis\" with \"the only basis\") — every vector space (beyond the zero space) has infinitely many different valid bases, all equally legitimate\n3. Assuming a vector's coordinate representation is the same regardless of which basis is chosen — the SAME vector generally has DIFFERENT numerical coordinates relative to different bases; \"coordinates\" are always relative to a SPECIFIED basis, never an absolute property of the vector alone\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.basis",
+      "title": "SPANNING-SET-IS-AUTOMATICALLY-A-BASIS",
+      "content": "| MC-1 | SPANNING-SET-IS-AUTOMATICALLY-A-BASIS | Student verifies only ONE of the two basis requirements (spanning OR independence) and declares a basis, without checking both | Any spanning set with a redundant (dependent) vector, or any independent set that fails to span |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.basis",
+      "title": "ONLY-ONE-BASIS-EXISTS",
+      "content": "| MC-2 | ONLY-ONE-BASIS-EXISTS | Student believes a vector space has a single, unique basis (typically conflating \"the standard basis\" with \"the only basis\") | Any request to find or verify an alternative (non-standard) basis for a familiar space |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.basis",
+      "title": "COORDINATES-ARE-BASIS-INDEPENDENT",
+      "content": "| MC-3 | COORDINATES-ARE-BASIS-INDEPENDENT | Student assumes a vector's coordinates are fixed regardless of which basis is used, rather than recognizing coordinates are always RELATIVE to a specified basis | Any task computing the same vector's coordinates in two different bases |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.basis",
+      "title": "Both Conditions, Checked Explicitly",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Both Conditions, Checked Explicitly\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 64,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.basis",
+      "title": "One Condition Isn't Enough; Many Bases Exist; Coordinates Are Basis-Relative",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"One Condition Isn't Enough; Many Bases Exist; Coordinates Are Basis-Relative\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 123,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.basis",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 163,
+        "endLine": 379
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.basis",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess both-conditions verification, recognition of basis multiplicity, and correct coordinate computation under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Is $\\{(1,2),(2,4)\\}$ a basis for $\\mathbb R^2$? Justify.\n\n*Solution:* $(2,4)=2(1,2)$ — dependent (fails independence), and consequently does NOT span all of $\\mathbb R^2$ either (both vectors lie on the same line). NOT a basis.\n\n**Problem 2:** Give a basis for $\\mathbb R^2$ different from both the standard basis and any example already shown in this blueprint's lessons.\n\n*Solution:* Many valid answers exist, e.g. $\\{(1,3),(2,1)\\}$ — verify: spans (solvable for any target), independent (only trivial solution at (0,0)); any genuinely independent, spanning pair works.\n\n**Problem 3:** For $v=(6,2)$, compute coordinates relative to the basis $\\{(1,0),(1,1)\\}$.\n\n*Solution:* Solve $c_1(1,0)+c_2(1,1)=(6,2)$: $c_1+c_2=6$, $c_2=2$, so $c_1=4$. Coordinates: $(4,2)$.\n\n**Problem 4:** True or false: \"Every vector space has exactly one basis.\" Correct if false.\n\n*Solution:* **False.** Every nonzero vector space has infinitely many different valid bases (all satisfying spanning + independence); there is no single unique basis, though a \"standard basis\" is often chosen by convention for convenience.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** An image-compression engineer represents each small image patch as a vector in $\\mathbb R^2$ (two pixel-intensity values) and wants to choose a basis that makes typical patches easy to describe compactly.\n\n(a) Verify that $\\{(1,1),(1,-1)\\}$ (an \"average/difference\" basis: the first vector represents \"both pixels equal,\" the second represents \"pixels differ\") is a genuine basis for $\\mathbb R^2$.\n(b) For a patch $v=(100,98)$ (two nearly-equal pixel intensities), compute its coordinates in this average/difference basis, and explain why these coordinates might be MORE useful for compression than the standard basis's raw coordinates $(100,98)$.\n(c) A colleague argues: \"Since the standard basis is simpler and more intuitive, engineers should always just use it — introducing a different basis is unnecessary complexity for what is fundamentally the same vector space.\" Evaluate this argument, using your answer to (b) as a concrete counterexample to the implied claim that basis choice doesn't matter practically.\n\n**Expected solution:**\n\n(a) This is exactly A01's Candidate 2, already verified: spans $\\mathbb R^2$ (solvable for any target via $c_1=(a+b)/2, c_2=(a-b)/2$) and independent (only trivial solution at the origin) — genuine basis.\n\n(b) Using $c_1=(a+b)/2, c_2=(a-b)/2$ with $(a,b)=(100,98)$: $c_1=(100+98)/2=99$, $c_2=(100-98)/2=1$. Coordinates in this basis: $(99,1)$. This is MORE useful for compression because the SECOND coordinate (the \"difference\" component) is very small (1) when the two pixels are nearly equal — a compression scheme can store the large \"average\" value (99) with full precision and the small \"difference\" value (1) with very few bits (or discard it almost entirely for further compression), whereas the standard-basis coordinates $(100,98)$ give no such structural hint — both raw pixel values look equally significant and equally large, hiding the fact that the patch is nearly uniform.\n\n(c) The colleague's argument is **wrong in this practical context** — (b) is a direct, concrete counterexample to \"basis choice doesn't matter\": the SAME vector space (ℝ²) and the SAME vector $(100,98)$ reveal a genuinely useful structural property (near-uniformity, via a small difference coordinate) ONLY when described in the average/difference basis, a property that is NOT visible at all in the standard-basis coordinates. Basis choice is mathematically \"just\" a different, equally valid coordinate system (as established throughout this blueprint), but PRACTICALLY, different bases can make certain kinds of structure (like near-uniform patches) far easier to detect, exploit, or compress — this is exactly why real compression algorithms (e.g. JPEG, which uses a related transform) deliberately choose non-standard bases rather than always defaulting to the \"simpler\" standard one.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.9 × 5⌉ = ⌈4.5⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.linalg.dimension and math.linalg.coordinates; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.linalg.basis assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — SPANNING-SET-IS-AUTOMATICALLY-A-BASIS (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Verifying only spanning (or only independence) and declaring a basis is SPANNING-SET-IS-AUTOMATICALLY-A-BASIS. A basis requires BOTH conditions simultaneously — checking one alone never establishes it.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"{(1,0),(0,1),(3,4)} spans ℝ². Is it a basis?\"\n- MC-1 response: \"Yes, since it spans the space.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Spanning is only HALF the requirement — check independence too: is $(3,4)$ a combination of $(1,0)$ and $(0,1)$? Yes, $(3,4)=3(1,0)+4(0,1)$, a nontrivial dependency. This set spans but is NOT independent, so it is NOT a basis — a genuine basis is hiding inside it (just the first two vectors), but the full 3-element set fails the independence requirement.\"\n\nPractice: Determine whether {(1,1),(2,2),(0,1)} is a basis for ℝ², checking both conditions explicitly.\n\n---\n\n### Repair Action B02 — ONLY-ONE-BASIS-EXISTS (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Believing a vector space has one unique basis is ONLY-ONE-BASIS-EXISTS. Every nonzero vector space has infinitely many valid bases — 'the standard basis' is just one conventional choice among many equally legitimate ones.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is {(1,0),(0,1)} the ONLY basis for ℝ²?\"\n- MC-2 response: \"Yes, that's the definition of a basis for ℝ².\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check a different candidate directly: is $\\{(2,1),(1,3)\\}$ also a basis? Verify spanning (solvable for any target) and independence (only trivial solution) — both hold, confirming this is ALSO a genuine basis, distinct from the standard one. In fact infinitely many such pairs exist. 'The standard basis' is a common, convenient choice, not a uniqueness claim — 'a basis' (not 'the basis') is the more accurate way to refer to any specific one.\"\n\nPractice: Verify that {(1,2),(3,1)} is also a valid basis for ℝ², distinct from both the standard basis and the example just checked.\n\n---\n\n### Repair Action B03 — COORDINATES-ARE-BASIS-INDEPENDENT (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming a vector's coordinates are fixed regardless of basis is COORDINATES-ARE-BASIS-INDEPENDENT. Coordinates are always RELATIVE to a specified basis — the same vector gets different numerical coordinates in different bases.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"v=(7,3) in the standard basis. What are its coordinates in the basis {(1,1),(1,-1)}?\"\n- MC-3 response: \"(7,3), same as before.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Recompute for the NEW basis specifically — don't reuse the standard-basis numbers. Solve $c_1(1,1)+c_2(1,-1)=(7,3)$: $c_1+c_2=7$, $c_1-c_2=3$; adding gives $c_1=5$, subtracting gives $c_2=2$. Coordinates in this basis: $(5,2)$ — genuinely DIFFERENT numbers from $(7,3)$, even though both pairs of numbers describe the exact same vector $v$. Coordinates are a property of the PAIRING between a vector and a chosen basis, never the vector alone.\"\n\nPractice: For v=(9,1), compute its coordinates in the standard basis and separately in {(2,0),(0,1)}, confirming the two coordinate pairs differ.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Verify both basis conditions explicitly on a fresh candidate set |\n| SR-2 | +3 days | Exhibit a fresh basis for ℝ² distinct from any seen before, verifying both conditions |\n| SR-3 | +7 days | Compute a fresh vector's coordinates in two different bases and confirm they differ |\n| SR-4 | +14 days | Reconstruct the image-compression transfer probe's argument for why basis choice has genuine practical consequences |\n\nRetrieval flag: if student checks only one basis condition (MC-1) or assumes a unique basis exists (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1, this session) | math.linalg.linear-independence | Supplies one of the two basis requirements (no vector is a combination of the others) |\n| Requires (Tier-1, this session) | math.linalg.span | Supplies the other basis requirement (reaching every vector in the space) |\n| Unlocks | math.linalg.dimension | The dimension of a vector space is defined as the NUMBER of vectors in any basis (a well-defined, basis-independent count, even though the specific vectors differ across bases) |\n| Unlocks | math.linalg.coordinates | The coordinate-vector machinery introduced here (relative to a chosen basis) is developed fully in that blueprint |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies basis-dependent coordinates to an image-compression scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=4 → compact structure (2 main TAs + gate), matching the concept's tightly focused scope (one two-part definition, applied and contrasted across several bases) despite proficient difficulty\n- bloom=understand → V-4 = N/A (no P07 required; verification and coordinate-computation tasks, not open derivations)\n- CPA_entry = C for a proficient learner: checking BOTH conditions explicitly on two concrete candidate sets (the standard basis and a genuinely different one) anchors the two-part definition before any shortcut (\"looks spanning, so probably a basis\") can take hold\n\n**Key teaching insight:** MC-1 is this concept's root misconception because \"basis\" is defined by a CONJUNCTION of two properties, and a student's natural tendency (especially under time pressure) is to check the more visually obvious one (spanning, since it can often be eyeballed for familiar-looking vectors) and stop. A01 and A02 both deliberately show a case where spanning alone is INSUFFICIENT (Contrast 1's redundant third vector), making the two-part nature of the definition impossible to skip past unnoticed.\n\n**MC-2 and MC-3 as consequences of correctly understanding MC-1's two-part test:** Once a student accepts that MULTIPLE different sets can each independently satisfy both conditions (defeating MC-1), the natural next question is how many such bases exist (MC-2: infinitely many) and whether they all describe vectors the same way (MC-3: no, coordinates depend on the basis) — A02's Contrasts 2 and 3 are sequenced as direct follow-ups exploring the consequences of basis MULTIPLICITY, once that multiplicity itself has been established.\n\n**Sequencing note:** No cross-link concept exists yet for math.linalg.basis; the P76 transfer probe instead uses an image-compression scenario, chosen because it demonstrates a genuine PRACTICAL payoff for choosing a non-standard basis (revealing near-uniform structure via a small \"difference\" coordinate) — directly countering the \"just use the standard basis, it's simpler\" argument that MC-2's underlying intuition might otherwise support.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.linalg.basis ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.linalg.linear-independence ✓ (this session), math.linalg.span ✓ (this session) | PASS |\n| V-3 | CPA entry = C for proficient difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.9×5⌉=⌈4.5⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=4, tightly-scoped → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Image-compression average/difference basis; practical basis-choice consequences ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 163,
+        "endLine": 379
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.basis",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — proficient learner checks BOTH conditions explicitly on a candidate set before the formal definition is stated, then computes coordinates relative to two different bases for the same vector.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: verifying both conditions on the standard basis and on an alternative basis for ℝ²; P: a picture of two different valid \"grids\" (bases) for the same plane; A: formal definition and the uniqueness-of-representation theorem\n2. **A02 P06 CONTRAST PAIR** — a spanning-but-dependent set vs. a genuine basis (MC-1); the standard basis vs. a genuinely different valid basis for the same space (MC-2); the same vector's coordinates computed in two different bases, shown to differ (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.basis",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Verify both basis conditions explicitly on a fresh candidate set |\n| SR-2 | +3 days | Exhibit a fresh basis for ℝ² distinct from any seen before, verifying both conditions |\n| SR-3 | +7 days | Compute a fresh vector's coordinates in two different bases and confirm they differ |\n| SR-4 | +14 days | Reconstruct the image-compression transfer probe's argument for why basis choice has genuine practical consequences |\n\nRetrieval flag: if student checks only one basis condition (MC-1) or assumes a unique basis exists (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 310,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "math.linalg.basis/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.basis",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1, this session) | math.linalg.linear-independence | Supplies one of the two basis requirements (no vector is a combination of the others) |\n| Requires (Tier-1, this session) | math.linalg.span | Supplies the other basis requirement (reaching every vector in the space) |\n| Unlocks | math.linalg.dimension | The dimension of a vector space is defined as the NUMBER of vectors in any basis (a well-defined, basis-independent count, even though the specific vectors differ across bases) |\n| Unlocks | math.linalg.coordinates | The coordinate-vector machinery introduced here (relative to a chosen basis) is developed fully in that blueprint |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies basis-dependent coordinates to an image-compression scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.basis.md",
+        "startLine": 325,
+        "endLine": 340
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

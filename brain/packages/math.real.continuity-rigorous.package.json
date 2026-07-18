@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.continuity-rigorous-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.continuity-rigorous",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:52d04dca9693a8de803585ea71ce9898f98f0e1e344810116b6adeaa4d70b727",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.continuity-rigorous.md": "sha256:e6ce68bb5254dbbe4e1ddc8ec96eb5b64a5f231d3a5263e8549f2ed20cf464df"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.real.continuity-rigorous",
+    "name": "Continuity (ε-δ)",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.metric-space",
+      "math.calc.continuity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.continuity-rigorous-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.continuity-rigorous (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.continuity-rigorous.md": "sha256:e6ce68bb5254dbbe4e1ddc8ec96eb5b64a5f231d3a5263e8549f2ed20cf464df"
+      },
+      "contentHash": "sha256:d987a1012f4c5f09ea682cd51c4e18900af826781de32ecef69b8f1538a1bf1c",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.continuity-rigorous.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.continuity-rigorous.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.continuity-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.continuity-rigorous\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.continuity-rigorous.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.continuity-rigorous.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.continuity-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.continuity-rigorous\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.continuity-rigorous.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.continuity-rigorous.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.continuity-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.continuity-rigorous\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.continuity-rigorous/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "Continuity (ε-δ) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.real.metric-space**: open balls $B(x,r)$; the metric topology; this concept's \"preimages of open sets are open\" formulation is stated directly in metric-space language\n- **math.calc.continuity**: the informal/limit-based definition ($\\lim_{x\\to a}f(x)=f(a)$) — this concept SHARPENS that same idea into the rigorous ε-δ form, with the sequential and open-set characterizations as equivalent restatements\n\n### Target Knowledge State\nStudent can state and apply the ε-δ definition of continuity at a point ($\\forall\\epsilon>0\\,\\exists\\delta>0: |x-a|<\\delta\\Rightarrow|f(x)-f(a)|<\\epsilon$), correctly treating δ as something to be PRODUCED IN RESPONSE TO an arbitrary given ε (never chosen first); correctly apply the sequential criterion (f continuous at a iff $x_n\\to a\\Rightarrow f(x_n)\\to f(a)$ for EVERY sequence $x_n\\to a$, not just one convenient sequence); and correctly distinguish \"f is defined on a neighborhood of a\" from \"f is continuous at a,\" recognizing that mere definedness nearby says nothing about whether the limit as $x\\to a$ actually equals $f(a)$.\n\n### Conceptual Obstacles\n1. Reversing the logical order of the quantifiers — treating δ as chosen FIRST (independently) and then checking what ε values it happens to work for, rather than the correct order: an ARBITRARY ε is given first, and δ must be PRODUCED in response, generally shrinking as ε shrinks\n2. Verifying the sequential criterion using only ONE convenient sequence converging to $a$, and declaring continuity confirmed — the criterion requires the implication to hold for EVERY sequence converging to $a$, and a single sequence checked is not sufficient (though a single sequence FAILING is sufficient to prove DIScontinuity)\n3. Confusing \"f is defined at and near a\" with \"f is continuous at a\" — a function can be defined at every point of a neighborhood of $a$ (no domain gaps) while still failing continuity there, e.g. via a jump discontinuity or a removable discontinuity where $\\lim_{x\\to a}f(x)$ exists but disagrees with the actual value $f(a)$\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "DELTA-CHOSEN-BEFORE-EPSILON",
+      "content": "| MC-1 | DELTA-CHOSEN-BEFORE-EPSILON | Student picks a specific δ first, then checks what ε it happens to satisfy, reversing the required logical order (ε arbitrary and given; δ produced in response) | Any request to PROVE continuity via ε-δ (not merely illustrate it with one numeric pair) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "ONE-SEQUENCE-CONFIRMS-SEQUENTIAL-CONTINUITY",
+      "content": "| MC-2 | ONE-SEQUENCE-CONFIRMS-SEQUENTIAL-CONTINUITY | Student checks the sequential criterion using only one (often the simplest) sequence converging to a, and declares continuity confirmed | Any function where some sequences behave nicely but others (e.g. approaching from a different direction or pattern) reveal a discontinuity |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "DEFINED-NEARBY-MEANS-CONTINUOUS",
+      "content": "| MC-3 | DEFINED-NEARBY-MEANS-CONTINUOUS | Student assumes a function defined at every point near a (no domain gaps) must be continuous there, missing that the LIMIT must also equal the function's actual value at a | Any piecewise function with a jump or removable discontinuity, fully defined everywhere nearby |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "A Complete ε-δ Proof, δ as a Formula in ε",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"A Complete ε-δ Proof, δ as a Formula in ε\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 64,
+        "endLine": 126
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "ε First, Always; Every Sequence, Not One; Defined ≠ Continuous",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"ε First, Always; Every Sequence, Not One; Defined ≠ Continuous\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 126,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 166,
+        "endLine": 382
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess correct ε-δ proof construction, full-sequence-set verification, and the defined-vs-continuous distinction under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Prove $f(x)=5x$ is continuous at $a=2$, producing δ as a formula in ε.\n\n*Solution:* $|f(x)-10|=5|x-2|$. Need $5|x-2|<\\epsilon$: $\\delta=\\epsilon/5$. Then $|x-2|<\\delta \\Rightarrow |f(x)-10|<\\epsilon$.\n\n**Problem 2:** For $f(x)=x^2$ at $a=0$, is checking only the sequence $x_n=1/n\\to0$ sufficient to conclude continuity? What must ALSO be checked?\n\n*Solution:* Not sufficient on its own — the criterion requires EVERY sequence converging to 0, e.g. also $x_n=-1/n\\to0$ (giving $f(x_n)=1/n^2\\to0=f(0)$, consistent) and any other converging sequence. (In this specific case, $x^2$ genuinely IS continuous at 0, so all such checks would pass — but the METHOD of checking only one sequence is not, by itself, a valid proof.)\n\n**Problem 3:** $k(x)=\\begin{cases}x+1 & x\\ne3\\\\0 & x=3\\end{cases}$. Is $k$ defined at $x=3$? Is $k$ continuous at $x=3$?\n\n*Solution:* Defined at 3 (value 0). NOT continuous: $\\lim_{x\\to3}k(x)=\\lim_{x\\to3}(x+1)=4\\ne0=k(3)$ — a removable discontinuity, despite $k$ being defined at (and near) 3.\n\n**Problem 4:** True or false: \"If a δ-value is found that makes |f(x)−f(a)|<ε true for ε=1, the function is proven continuous.\" Justify.\n\n*Solution:* **False.** Continuity requires the implication to hold for EVERY ε>0, however small — verifying it for one specific ε (like 1) says nothing about smaller ε values, which must also be handled (generally via a formula δ(ε), not a single checked case).\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.calc.continuity)*\n\n**Prompt:** Recall from math.calc.continuity the informal/limit-based definition: $f$ is continuous at $a$ iff $\\lim_{x\\to a}f(x)=f(a)$.\n\n(a) Using the ε-δ definition of THIS blueprint, prove directly that $f(x)=x^2$ is continuous at $a=2$ (hint: $|x^2-4|=|x-2|\\cdot|x+2|$; you may assume $\\delta\\le1$ so that $|x+2|<5$ throughout, to bound the second factor).\n(b) Explain precisely how the ε-δ proof in (a) makes RIGOROUS the informal calculus statement \"$\\lim_{x\\to2}x^2=4$\" — what did the calculus-level definition leave imprecise that the ε-δ approach pins down exactly?\n(c) A student says: \"Since I already learned in calculus that all polynomials are continuous everywhere, doing an ε-δ proof for x² is pointless busywork — it's already a known fact.\" Evaluate this claim, explaining what the ε-δ proof provides that simply CITING the \"polynomials are continuous\" fact does not.\n\n**Expected solution:**\n\n(a) Given arbitrary $\\epsilon>0$. Restrict attention to $\\delta\\le1$ first (a standard technique): if $|x-2|<1$, then $1<x<3$, so $|x+2|<5$. Compute: $|x^2-4|=|x-2||x+2|$. If additionally $|x-2|<\\epsilon/5$, then $|x^2-4|<(\\epsilon/5)(5)=\\epsilon$ (using $|x+2|<5$ from the δ≤1 restriction). So choose $\\delta=\\min(1,\\epsilon/5)$ (the smaller of the two bounds, ensuring BOTH restrictions hold simultaneously). Then $|x-2|<\\delta \\Rightarrow |x^2-4|<\\epsilon$. ✓\n\n(b) The informal statement \"$\\lim_{x\\to2}x^2=4$\" describes the intuitive idea that $x^2$ gets \"close to\" 4 as $x$ gets \"close to\" 2, without formally specifying what \"close\" means or providing a mechanism to verify the claim for an ARBITRARY degree of closeness. The ε-δ proof makes this fully precise: \"close to 4\" becomes a specific, quantified tolerance ε, and \"close to 2\" becomes a correspondingly quantified tolerance δ, with an EXPLICIT, verifiable formula ($\\delta=\\min(1,\\epsilon/5)$) connecting the two — the proof doesn't just assert the limit exists, it constructs, for any conceivable precision demand ε, an exact recipe for how close x must be to 2 to guarantee that precision, closing every gap the informal \"gets close to\" language leaves open.\n\n(c) The claim conflates KNOWING a general theorem with UNDERSTANDING why it holds and being able to reproduce or adapt the argument. Citing \"polynomials are continuous\" (a true, useful, and appropriately reusable fact once established) is not the same as being able to CONSTRUCT the underlying ε-δ argument — the specific proof technique used here (factoring $x^2-4=(x-2)(x+2)$, bounding the second factor using a preliminary restriction $\\delta\\le1$, then choosing $\\delta=\\min(1,\\epsilon/5)$) is a genuinely reusable PATTERN that appears throughout analysis whenever a nonlinear function's continuity must be verified directly (e.g. for functions not covered by an existing \"is continuous\" theorem, or in contexts requiring uniform continuity or more delicate estimates). Doing the ε-δ proof once, even for an \"already known\" case like $x^2$, is how the general proof-construction skill (as opposed to just the specific fact) gets built — exactly the applied, procedural competence this blueprint's bloom=apply designation targets, distinct from simply memorizing that polynomials happen to be continuous.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.9 × 5⌉ = ⌈4.5⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.real.extreme-value-theorem and math.real.ivt; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.real.continuity-rigorous assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — DELTA-CHOSEN-BEFORE-EPSILON (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Choosing δ first and checking which ε it satisfies is DELTA-CHOSEN-BEFORE-EPSILON. The definition requires an ARBITRARY ε to be given FIRST, with δ PRODUCED as a formula in response — never the reverse order.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Prove f(x)=4x is continuous at a=1, starting by picking δ=0.02.\"\n- MC-1 response: computes what ε this δ satisfies and stops, treating that as the proof.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Start from the OTHER end: let ε be arbitrary (unknown, could be any positive number). Compute $|f(x)-4|=4|x-1|$. Need $4|x-1|<\\epsilon$, i.e. $|x-1|<\\epsilon/4$ — THIS is where δ comes from: $\\delta=\\epsilon/4$, a formula depending on ε, discovered by solving the inequality backward from the ε-bound, never chosen as an independent starting guess.\"\n\nPractice: Prove f(x)=7x is continuous at a=0, deriving δ as a formula in ε rather than picking a specific numeric δ first.\n\n---\n\n### Repair Action B02 — ONE-SEQUENCE-CONFIRMS-SEQUENTIAL-CONTINUITY (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Checking only one sequence and declaring continuity confirmed is ONE-SEQUENCE-CONFIRMS-SEQUENTIAL-CONTINUITY. The criterion requires EVERY sequence converging to a to satisfy the implication — one favorable sequence proves nothing; one FAILING sequence, however, is enough to prove discontinuity.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"For a step function, xₙ=1/n→0 gives f(xₙ)→f(0). Is f continuous at 0?\"\n- MC-2 response: \"Yes, since that sequence worked.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"One successful sequence establishes nothing about continuity — try a DIFFERENT sequence approaching 0, e.g. from the other side or along a different pattern. If EVERY such sequence gives the same limit $f(0)$, continuity holds; but finding even ONE sequence where $f(x_n)\\not\\to f(0)$ immediately proves DIScontinuity, overriding any number of previously-checked favorable sequences.\"\n\nPractice: For the function h(x)=⌊x⌋ (floor function) at x=1, check both xₙ=1-1/n→1 and xₙ=1+1/n→1, and determine whether h is continuous at 1.\n\n---\n\n### Repair Action B03 — DEFINED-NEARBY-MEANS-CONTINUOUS (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming a function defined everywhere near a point is automatically continuous there is DEFINED-NEARBY-MEANS-CONTINUOUS. Definedness only rules out domain gaps — continuity additionally requires the limit to exist and match the function's actual value.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A piecewise function is defined at every real number, with no gaps. Is it automatically continuous everywhere?\"\n- MC-3 response: \"Yes, since there are no gaps in its domain.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check the actual limit at any suspicious 'seam' point (where the pieces meet), not just whether a value is assigned there. A jump discontinuity — e.g. one piece approaching 4 from the left, another approaching 7 from the right — has NO domain gap (every x has a value) yet the two one-sided limits disagree, so the overall limit doesn't exist, and continuity fails. 'Defined' answers only 'does f(a) have a value'; 'continuous' additionally answers 'does the limit as x→a exist and equal that value.'\"\n\nPractice: For a piecewise function with pieces meeting at x=0 giving one-sided limits of 2 and 5 respectively, confirm it is defined everywhere near 0 yet discontinuous there.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Reconstruct the $f(x)=2x+1$ ε-δ proof from memory, re-deriving δ=ε/2 by solving the inequality, not recalling the number |\n| SR-2 | +3 days | Check a fresh piecewise function's continuity at a seam point using two genuinely different sequences |\n| SR-3 | +7 days | Identify a fresh function that is defined everywhere nearby yet discontinuous, and state precisely which piece of the definition fails |\n| SR-4 | +14 days | Reconstruct the x² ε-δ proof (including the δ=min(1,ε/5) restriction technique) from the A03 transfer probe |\n\nRetrieval flag: if student picks δ before ε (MC-1) or checks only one sequence to confirm continuity (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.real.metric-space | The open-set/preimage characterization of continuity is stated directly using that blueprint's open-ball machinery |\n| Requires (Tier-1) | math.calc.continuity | Supplies the informal limit-based definition this concept sharpens into the rigorous ε-δ form |\n| Unlocks | math.real.extreme-value-theorem | Relies on continuity (this rigorous form) plus compactness to guarantee attained maxima/minima |\n| Unlocks | math.real.ivt | The Intermediate Value Theorem's rigorous proof uses the ε-δ (or equivalently sequential) definition of continuity established here |\n\n**GR-9:** cross_links include math.calc.continuity (Tier 1) → P76_mode = cross-link probe (probe constructs the ε-δ proof for a function whose informal continuity was already accepted in calculus, and argues for what the rigorous proof adds beyond citing a known theorem).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=6 → standard structure (2 main TAs + gate), matching the concept's tightly focused scope (one rigorous definition, its two equivalent characterizations, applied via worked proofs) despite expert difficulty\n- bloom=apply → every checkpoint and the gate require CONSTRUCTING a proof or verification, not merely stating the definition\n- CPA_entry = C for an expert learner: one complete, fully worked ε-δ proof (linear function, δ derived as an explicit formula) anchors the correct logical order before the general definition's quantifier structure can be misread\n\n**Key teaching insight:** MC-1 is this concept's root misconception because it is THE canonical logical-order error of all of real analysis — every subsequent ε-δ-style proof (uniform continuity, limits of sequences, derivative definitions) repeats the identical \"arbitrary-then-produce\" pattern, so correcting it here has the largest possible downstream leverage. A01's proof is deliberately worked as \"solve the inequality backward to discover δ\" rather than \"state δ and verify,\" making the CORRECT logical order the only path presented, with the WRONG order (Contrast 1) introduced only afterward, explicitly labeled as invalid.\n\n**MC-2 and MC-3 as complementary discontinuity-detection tools:** The sequential criterion (MC-2's territory) and the defined-vs-continuous distinction (MC-3's territory) are two DIFFERENT ways a function can fail continuity, and A02's Contrasts 2 and 3 deliberately use overlapping example TYPES (both involve a jump/step-like structure) so the student sees that both diagnostic tools (trying multiple sequences; checking one-sided limits directly) converge on the identical conclusion for the same kind of discontinuity, reinforcing that they are two views of one underlying failure, not unrelated topics.\n\n**Sequencing note (cross-link):** math.calc.continuity (Tier 1, already authored) is a genuine, actionable cross-link — the P76 transfer probe explicitly bridges the informal calculus-level statement to the rigorous ε-δ proof, and directly confronts the \"this is already known, why prove it again\" objection that a student moving from calculus to analysis commonly raises.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.real.continuity-rigorous ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.real.metric-space ✓, math.calc.continuity ✓ | PASS |\n| V-3 | CPA entry = C for expert difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Proof-construction tasks throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | math.calc.continuity is Tier 1 → P76=cross-link probe ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.9×5⌉=⌈4.5⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=6, tightly-scoped → standard (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | x² epsilon-delta proof with delta=min(1,epsilon/5) restriction technique; known-fact-vs-proof-skill argument ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 166,
+        "endLine": 382
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — expert learner works a complete ε-δ proof for a specific simple function, producing δ as an explicit formula in terms of ε, before any general theorem or alternative characterization is introduced.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: complete ε-δ proof that $f(x)=2x+1$ is continuous at $a=3$, with δ derived as a formula in ε; P: a \"tolerance box\" picture showing δ shrinking as ε shrinks; A: the formal ε-δ definition and the equivalent sequential/open-set characterizations\n2. **A02 P06 CONTRAST PAIR** — δ-first vs. ε-first-then-δ, contrasted directly (MC-1); one convenient sequence vs. a genuinely discontinuity-revealing sequence (MC-2); a fully-defined-nearby function that still fails continuity, via a jump (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Reconstruct the $f(x)=2x+1$ ε-δ proof from memory, re-deriving δ=ε/2 by solving the inequality, not recalling the number |\n| SR-2 | +3 days | Check a fresh piecewise function's continuity at a seam point using two genuinely different sequences |\n| SR-3 | +7 days | Identify a fresh function that is defined everywhere nearby yet discontinuous, and state precisely which piece of the definition fails |\n| SR-4 | +14 days | Reconstruct the x² ε-δ proof (including the δ=min(1,ε/5) restriction technique) from the A03 transfer probe |\n\nRetrieval flag: if student picks δ before ε (MC-1) or checks only one sequence to confirm continuity (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 313,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "math.real.continuity-rigorous/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.continuity-rigorous",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.real.metric-space | The open-set/preimage characterization of continuity is stated directly using that blueprint's open-ball machinery |\n| Requires (Tier-1) | math.calc.continuity | Supplies the informal limit-based definition this concept sharpens into the rigorous ε-δ form |\n| Unlocks | math.real.extreme-value-theorem | Relies on continuity (this rigorous form) plus compactness to guarantee attained maxima/minima |\n| Unlocks | math.real.ivt | The Intermediate Value Theorem's rigorous proof uses the ε-δ (or equivalently sequential) definition of continuity established here |\n\n**GR-9:** cross_links include math.calc.continuity (Tier 1) → P76_mode = cross-link probe (probe constructs the ε-δ proof for a function whose informal continuity was already accepted in calculus, and argues for what the rigorous proof adds beyond citing a known theorem).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.continuity-rigorous.md",
+        "startLine": 328,
+        "endLine": 343
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
