@@ -31028,6 +31028,306 @@ const LENZ_PROBES: SeedProbe[] = [
 ]
 
 
+// ─── phys.meas.vector-products ───────────────────────────────────────────────
+const VPRD = 'phys.meas.vector-products'
+const VPRD_SRC = 'docs/curriculum/blueprints/phys.meas.vector-products.md'
+
+const VPRD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VPRD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'There are two genuinely different ways to "multiply" two vectors, and they encode opposite geometric ideas. The DOT product A·B = |A||B|cos θ is a SCALAR — it keeps only the ALIGNED part of one vector along the other, is maximal when the vectors point the same way (θ = 0°, cos θ = 1) and exactly zero when they are perpendicular (θ = 90°, cos θ = 0). The CROSS product A×B has magnitude |A×B| = |A||B|sin θ and is a VECTOR, perpendicular to BOTH original vectors (direction given by the right-hand rule) — it keeps only the PERPENDICULAR part, is exactly zero when the vectors are parallel (sin 0° = 0) and maximal at 90° (sin 90° = 1); geometrically, its magnitude equals the area of the parallelogram the two vectors span. Which physical quantity uses which product depends entirely on whether the physics cares about alignment or perpendicularity: work = F·d is a dot product (a scalar, no direction) because only the component of force ALONG the displacement actually does work — push against an immovable wall and however hard you push, zero work is done, since there is no displacement to align with; torque = r×F is a cross product (a vector, pointing along the rotation axis) because turning effectiveness depends on the PERPENDICULAR component of the force relative to the lever arm.',
+    targetedMisconceptions: [`${VPRD}:MC-SCALAR-MULTIPLY`, `${VPRD}:MC-DOT-CROSS-CONFUSION`],
+    source: `${VPRD_SRC} — Learning Objective + §5 dot/cross definitions and work/torque examples`,
+  },
+  {
+    conceptId: VPRD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong instinct when first meeting vector "multiplication": just multiplying the two magnitudes together, |A||B|, the way you would with ordinary numbers. Test it against something physical: push as hard as you like against a wall that doesn\'t move at all — you exert a large force, and you might even lean into it for a long "distance" of effort, yet you do exactly ZERO work. If work were simply force times distance with no regard for direction, you\'d have done plenty of work leaning into an immovable wall — but real work requires the force and the displacement to actually be aligned in the same direction, which is exactly what the dot product\'s cos θ factor captures (and here θ = 90° or the displacement is literally zero, either way giving zero work). Neither the bare product |A||B| nor either vector product alone means anything physical until you decide whether you care about ALIGNMENT (use the dot product, get a scalar, weighted by cos θ) or PERPENDICULARITY (use the cross product, get a vector, weighted by sin θ). Second trap: treating the dot and cross products as interchangeable or as two ways of getting the same kind of answer. They aren\'t — and physics itself tells you why they can\'t be: torque genuinely HAS a direction (which way something spins, described by an axis via the right-hand rule), while work is a pure quantity of energy with absolutely no direction attached. If dot and cross were the same, one of these two real physical quantities would be describing something impossible. The pattern to memorize: dot product uses cos θ, outputs a SCALAR, and is maximal when vectors are PARALLEL (aligned quantities like work and power use it); cross product uses sin θ, outputs a VECTOR, and is maximal when vectors are PERPENDICULAR (directional/rotational quantities like torque and angular momentum use it).',
+    targetedMisconceptions: [`${VPRD}:MC-SCALAR-MULTIPLY`, `${VPRD}:MC-DOT-CROSS-CONFUSION`],
+    source: `${VPRD_SRC} — MC-SCALAR-MULTIPLY + MC-DOT-CROSS-CONFUSION, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const VPRD_PROBES: SeedProbe[] = [
+  {
+    conceptId: VPRD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You push as hard as you can against a heavy wall that does not move at all. How much work do you do on the wall?',
+    choices: [
+      { text: 'Exactly zero — work is a dot product F·d, and with zero displacement (or force perpendicular to any motion), there is no aligned component to produce work, regardless of how large the force is', isCorrect: true },
+      { text: 'A large positive amount, proportional to how hard you pushed and how long you leaned into it', isCorrect: false, misconceptionId: `${VPRD}:MC-SCALAR-MULTIPLY` },
+    ],
+    correctValue: '0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VPRD}:MC-SCALAR-MULTIPLY`],
+    source: `${VPRD_SRC} — MC-SCALAR-MULTIPLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VPRD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Torque has a direction (an axis, via the right-hand rule) while work has no direction at all (it\'s pure energy). What does this tell you about the dot product and the cross product?',
+    choices: [
+      { text: 'They are fundamentally different: the dot product (used for work) gives a scalar with no direction, while the cross product (used for torque) gives a vector with a genuine direction — they are not interchangeable', isCorrect: true },
+      { text: 'Nothing in particular — the dot and cross products are basically two equivalent ways of multiplying vectors and give the same kind of result', isCorrect: false, misconceptionId: `${VPRD}:MC-DOT-CROSS-CONFUSION` },
+    ],
+    correctValue: 'dot gives scalar, cross gives vector, fundamentally different',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VPRD}:MC-DOT-CROSS-CONFUSION`],
+    source: `${VPRD_SRC} — MC-DOT-CROSS-CONFUSION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.mutual-inductance ───────────────────────────────────────────────
+const MUTL = 'phys.em.mutual-inductance'
+const MUTL_SRC = 'docs/curriculum/blueprints/phys.em.mutual-inductance.md'
+
+const MUTL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MUTL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When a changing current in coil 1 induces an EMF in a nearby coil 2, the two coils are mutually coupled, described by mutual inductance M: ε₂ = −M(dI₁/dt), and — remarkably — the exact same M also gives ε₁ = −M(dI₂/dt) if you instead drive coil 2 and measure the EMF induced back in coil 1. M is measured in henry (H), the same unit as self-inductance, and is bounded by the coupling coefficient k = M/√(L₁L₂), which ranges from k = 0 (no coupling — coils orthogonal or far apart) to k = 1 (perfect coupling — every field line from coil 1 threads coil 2, as in a transformer with an iron core channeling essentially all the flux). The central application is the ideal transformer: two coils sharing a core with k ≈ 1 give a voltage ratio V₂/V₁ = N₂/N₁ and, from power conservation, a current ratio I₁/I₂ = N₂/N₁ — exactly the reverse ratio. A step-up transformer (N₂ > N₁) raises voltage while dropping current by the same factor; a step-down transformer (N₂ < N₁) does the opposite; and for an ideal transformer the input and output power are exactly equal, P₁ = P₂. This voltage-for-current trade is why power is transmitted over long distances at very high voltage and low current (minimizing I²R line losses) and then stepped back down near the consumer.',
+    targetedMisconceptions: [`${MUTL}:MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC`, `${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER`],
+    source: `${MUTL_SRC} — Block 1-A (definition, symmetry) + Block 1-B (coupling coefficient) + Block 1-C (ideal transformer)`,
+  },
+  {
+    conceptId: MUTL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A very natural but wrong guess: since coil 2 might have far more turns than coil 1 (and so "collects more flux" from coil 1 than coil 1 collects from coil 2), the mutual inductance should be different depending on which coil drives which — M₁₂ ≠ M₂₁. It isn\'t — this is a genuine mathematical theorem (the Neumann formula, which computes M from the geometry of the two circuits) that M₁₂ = M₂₁ EXACTLY, for any two coils of any size, shape, or turn count whatsoever, with zero exceptions. The intuition that resolves the puzzle: yes, the coil with more turns does collect more flux per unit current from the other coil — but that same coil with more turns also has a correspondingly higher self-inductance, and these two effects balance out exactly so that driving coil 1 and measuring the EMF in coil 2 gives precisely the same M as driving coil 2 and measuring the EMF in coil 1. Second, much more consequential trap: believing that because a step-up transformer raises voltage, it somehow "amplifies power" or creates extra energy — some machine finally beating the rules. It absolutely does not, and this follows directly from energy conservation, the same principle that rules out any perpetual-motion machine: for an ideal transformer, input power exactly equals output power, P₁ = V₁I₁ = V₂I₂ = P₂, no exceptions. A step-up transformer trades current for voltage — exactly like a mechanical lever trades distance for force, lifting a heavy weight with a small force by moving through a proportionally larger distance, while the total work (force × distance) stays the same on both sides. If voltage goes up by a factor of 10 (N₂/N₁ = 10), current must go DOWN by that exact same factor of 10 to keep V×I unchanged; real transformers achieve 95–99.5% efficiency, meaning P₂ is always slightly LESS than P₁, never more.',
+    targetedMisconceptions: [`${MUTL}:MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC`, `${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER`],
+    source: `${MUTL_SRC} — MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC + MC-TRANSFORMER-CAN-AMPLIFY-POWER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MUTL_PROBES: SeedProbe[] = [
+  {
+    conceptId: MUTL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Coil 1 has few turns, coil 2 has many more turns. Is the mutual inductance M₁₂ (driving coil 1, measuring EMF in coil 2) the same as M₂₁ (driving coil 2, measuring EMF in coil 1)?',
+    choices: [
+      { text: 'Yes — M₁₂ = M₂₁ exactly, a mathematical theorem (Neumann\'s formula) that holds regardless of the coils\' turn counts, size, or shape', isCorrect: true },
+      { text: 'No — M₁₂ ≠ M₂₁ because coil 2, with more turns, collects more flux from coil 1 than coil 1 collects from coil 2', isCorrect: false, misconceptionId: `${MUTL}:MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC` },
+    ],
+    correctValue: 'yes, M12 = M21',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MUTL}:MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC`],
+    source: `${MUTL_SRC} — MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MUTL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A step-up transformer raises the voltage from 120 V to 1200 V (a factor of 10). What happens to the power delivered, assuming an ideal transformer?',
+    choices: [
+      { text: 'Power stays exactly the same (P₁ = P₂) — the current drops by the same factor of 10 that voltage rises, so V×I is unchanged; energy conservation forbids any power amplification', isCorrect: true },
+      { text: 'Power increases by roughly a factor of 10, since the transformer amplifies the voltage and therefore the power delivered', isCorrect: false, misconceptionId: `${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER` },
+    ],
+    correctValue: 'power unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER`],
+    source: `${MUTL_SRC} — MC-TRANSFORMER-CAN-AMPLIFY-POWER trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.magnetic-flux ────────────────────────────────────────────────────
+const MFLX = 'phys.em.magnetic-flux'
+const MFLX_SRC = 'docs/curriculum/blueprints/phys.em.magnetic-flux.md'
+
+const MFLX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MFLX,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Magnetic flux Φ_B through a surface counts the total number of magnetic field lines passing through it: Φ_B = ∫∫B·dA, which for a uniform field over a flat area A with normal at angle θ to B simplifies to Φ_B = BA cos θ, measured in weber (Wb = T·m² = V·s). When the surface faces the field head-on (θ = 0°), flux is maximum (Φ = BA); when the surface is edge-on to the field (θ = 90°), no field lines pass through it at all (Φ = 0), even though B itself is nonzero everywhere in the region — flux and field are fundamentally different quantities, one a property at a point (B, in tesla) and the other a property of a surface (Φ, in weber) that depends on B, the area, AND the orientation together. For a closed surface — one that fully encloses a volume — the total flux is always exactly zero, ∮B·dA = 0, Gauss\'s law for magnetism: every field line that enters must also exit, because magnetic field lines always form closed loops with no starting or ending points (no magnetic monopoles). For an N-turn coil, what actually matters for induction is the flux LINKAGE λ = NΦ_B — a 100-turn coil with Φ = 0.01 Wb per turn produces exactly the same induced EMF as a 1-turn coil with Φ = 1 Wb, since Faraday\'s law uses EMF = −dλ/dt = −N(dΦ_B/dt).',
+    targetedMisconceptions: [`${MFLX}:MC-FLUX-IS-THE-FIELD-STRENGTH`, `${MFLX}:MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO`],
+    source: `${MFLX_SRC} — Block 1-A (definition, geometric meaning) + Block 1-B (Gauss's law for magnetism) + Block 1-D (flux linkage)`,
+  },
+  {
+    conceptId: MFLX,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps around magnetic flux. First: treating "flux" and "field" as interchangeable words, as in saying "the flux at this point is 0.5 T" — that sentence doesn\'t even parse correctly, since B is measured in tesla (a property AT A POINT) while Φ_B is measured in weber = T·m² (a property that requires an entire SURFACE, both an area and an orientation, to even be defined). The same field B = 0.5 T gives zero flux through a surface parallel to it and a large flux through a surface perpendicular to it — think of rain: the rain RATE (mm/hour) is a fixed property of the storm, but how much rain actually lands in your bucket depends on the bucket\'s size AND how you angle it; tilting an identical bucket in the same storm catches less rain even though the rain rate hasn\'t changed at all. Second trap: assuming that because a magnet sitting inside a closed box has field lines emerging from its north pole, the total flux through the box\'s surface must be nonzero. It can\'t be — every single field line that exits the north pole eventually curves back around and re-enters through the south pole, and since both poles are inside the same box, every exiting line is also an entering line, and the count nets out to exactly zero. This is the direct consequence of there being no magnetic monopoles: unlike electric field lines, which genuinely start on positive charges and end on negative ones (giving Gauss\'s law for electricity a nonzero enclosed-charge answer), every magnetic field line is a closed loop with no beginning or end, so ∮B·dA = 0 holds for ANY closed surface around ANY arrangement of magnets or currents whatsoever.',
+    targetedMisconceptions: [`${MFLX}:MC-FLUX-IS-THE-FIELD-STRENGTH`, `${MFLX}:MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO`],
+    source: `${MFLX_SRC} — MC-FLUX-IS-THE-FIELD-STRENGTH + MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MFLX_PROBES: SeedProbe[] = [
+  {
+    conceptId: MFLX,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A uniform magnetic field B = 0.5 T fills a region. Is it meaningful to say "the flux at this point is 0.5 T"?',
+    choices: [
+      { text: 'No — flux requires an entire surface (area and orientation) to be defined at all, and is measured in weber (T·m²), not tesla; "flux at a point" mixes up two different quantities', isCorrect: true },
+      { text: 'Yes — flux and field strength are the same quantity, so the flux at any point equals the field value there', isCorrect: false, misconceptionId: `${MFLX}:MC-FLUX-IS-THE-FIELD-STRENGTH` },
+    ],
+    correctValue: 'no, flux requires a surface',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MFLX}:MC-FLUX-IS-THE-FIELD-STRENGTH`],
+    source: `${MFLX_SRC} — MC-FLUX-IS-THE-FIELD-STRENGTH trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MFLX,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bar magnet sits entirely inside a closed box. Field lines clearly emerge from its north pole. What is the total magnetic flux through the box\'s closed surface?',
+    choices: [
+      { text: 'Exactly zero — every field line that exits through the north pole curves back and re-enters through the south pole, which is also inside the box, so the net count is zero', isCorrect: true },
+      { text: 'Nonzero and positive, since field lines are clearly emerging from the north pole inside the box', isCorrect: false, misconceptionId: `${MFLX}:MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO` },
+    ],
+    correctValue: '0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MFLX}:MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO`],
+    source: `${MFLX_SRC} — MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.magnetic-materials ──────────────────────────────────────────────
+const MMAT = 'phys.em.magnetic-materials'
+const MMAT_SRC = 'docs/curriculum/blueprints/phys.em.magnetic-materials.md'
+
+const MMAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MMAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'All magnetism originates from moving charges at the atomic level — orbiting electrons (orbital magnetic moment) and, dominantly, electron SPIN (intrinsic spin magnetic moment). In most atoms, electron spins pair up and cancel (Pauli exclusion), leaving little or no net atomic moment, which is why materials respond to an external field in three very different ways. Diamagnetic materials (every material has this effect, but weakly) have no permanent atomic moment; the applied field induces tiny moments that OPPOSE it (Lenz\'s law at the atomic scale), giving a small negative susceptibility — examples include bismuth, water, gold, and copper. Paramagnetic materials have permanent atomic moments that are normally randomly oriented by thermal motion; an applied field partially aligns them against that thermal disorder, giving a small positive susceptibility that weakens as temperature rises (aluminium, platinum, oxygen gas). Ferromagnetic materials are the dramatic exception: a quantum exchange interaction aligns entire neighboring domains of spins together (Weiss domains), giving susceptibility up to a million times larger than paramagnets, permanent magnetization, and hysteresis — but only a handful of elements (iron, nickel, cobalt, and their alloys) show this behavior, and even they lose it above their Curie temperature and become merely paramagnetic.',
+    targetedMisconceptions: [`${MMAT}:MC-ALL-METALS-ARE-MAGNETIC`, `${MMAT}:MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES`],
+    source: `${MMAT_SRC} — Block 1-A (atomic origin) + Block 1-B (diamagnetic/paramagnetic/ferromagnetic classes)`,
+  },
+  {
+    conceptId: MMAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A very natural but wrong assumption: "metal" and "magnetic" mean the same thing, so iron, steel, copper, and aluminium should all stick to a magnet equally. Test it directly: iron filings cling strongly to a strong magnet, but aluminium foil, a copper coin, and a gold ring show essentially no attraction at all. Only iron, nickel, cobalt, and their alloys are ferromagnetic — the vast majority of metals (aluminium, copper, gold, silver, lead) are diamagnetic or only very weakly paramagnetic, with attraction far too weak to notice by hand. What determines magnetic behavior is the material\'s electronic structure — specifically, whether unpaired electron spins exist and whether a quantum exchange interaction aligns them across domains — not whether the material happens to conduct electricity or look metallic. Second trap: believing that cutting a bar magnet in half separates it into a "north piece" and a "south piece," the way cutting a rod with a positive charge on one end and negative on the other would separate two opposite electric charges. It can\'t work that way for magnets, because — unlike an electric dipole, which really does have two separate charges you can physically pull apart — magnetism arises from spinning charges (current loops), and every current loop, however small, has both a clockwise face and a counterclockwise face simultaneously. Cut a magnet and you get two SMALLER complete magnets, each with its own north and south pole; cut those again and you still get complete magnets, all the way down to a single atomic-scale magnetic dipole. No isolated magnetic monopole — a piece with only a north pole and no south — has ever been observed, despite extensive searches; this is exactly what Gauss\'s law for magnetism (∮B·dA = 0) predicts.',
+    targetedMisconceptions: [`${MMAT}:MC-ALL-METALS-ARE-MAGNETIC`, `${MMAT}:MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES`],
+    source: `${MMAT_SRC} — MC-ALL-METALS-ARE-MAGNETIC + MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MMAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: MMAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A strong magnet is tested against aluminium foil, a copper coin, and iron filings. What happens?',
+    choices: [
+      { text: 'The iron filings cling strongly; the aluminium foil and copper coin show essentially no attraction, since most metals are not ferromagnetic', isCorrect: true },
+      { text: 'All three are attracted about equally, since they are all metals and metals are magnetic', isCorrect: false, misconceptionId: `${MMAT}:MC-ALL-METALS-ARE-MAGNETIC` },
+    ],
+    correctValue: 'only iron is strongly attracted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MMAT}:MC-ALL-METALS-ARE-MAGNETIC`],
+    source: `${MMAT_SRC} — MC-ALL-METALS-ARE-MAGNETIC trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MMAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bar magnet is cut exactly in half. What do the two resulting pieces look like magnetically?',
+    choices: [
+      { text: 'Each piece is a complete smaller magnet with its own north AND south pole — magnetic monopoles do not exist', isCorrect: true },
+      { text: 'One piece has only the north pole and the other piece has only the south pole, since you cut the magnet at the point separating the two poles', isCorrect: false, misconceptionId: `${MMAT}:MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES` },
+    ],
+    correctValue: 'two complete magnets, each with N and S poles',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MMAT}:MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES`],
+    source: `${MMAT_SRC} — MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.self-inductance ─────────────────────────────────────────────────
+const SIND = 'phys.em.self-inductance'
+const SIND_SRC = 'docs/curriculum/blueprints/phys.em.self-inductance.md'
+
+const SIND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SIND,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Self-inductance L of a circuit is the ratio of the flux linkage through the circuit to the current producing it — a measure of how strongly the circuit\'s own changing current induces a back-EMF opposing that change, ε_L = −L(dI/dt). Self-inductance is the electromagnetic exact analogue of MASS in mechanics: L plays the role of m, current I plays the role of velocity v, and the back-EMF ε_L plays the role of inertial resistance to acceleration — just as mass resists CHANGES in velocity (not velocity itself), an inductor resists CHANGES in current (not current itself). In an RL circuit at t = 0 (current just starting), the inductor behaves like an open circuit, fighting the sudden change maximally; but at t → ∞, once the current has settled to a steady value, dI/dt = 0 exactly, so the back-EMF drops to zero and the inductor behaves like a plain wire (a short circuit) — an ideal inductor presents ZERO opposition to steady DC current, only to CHANGING current. The energy stored in an inductor\'s magnetic field is U_L = ½LI², and the RL time constant τ = L/R governs how quickly the circuit approaches that steady state.',
+    targetedMisconceptions: [`${SIND}:MC-INDUCTOR-OPPOSES-CURRENT-FLOW`, `${SIND}:MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES`],
+    source: `${SIND_SRC} — self-inductance definition + mass analogy + RL circuit steady-state behavior + energy formula`,
+  },
+  {
+    conceptId: SIND,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing an inductor "blocks DC current" or permanently reduces the current flowing through a circuit, the way a resistor does. Check the steady-state limit directly: at t → ∞ in an RL circuit, the current has stopped changing, so dI/dt = 0 exactly, which means the back-EMF ε_L = L×0 = 0 — with zero back-EMF, an ideal inductor (zero resistance) presents ZERO opposition to the current, behaving exactly like a plain wire, and the FULL steady-state current I = ε/R flows just as if the inductor weren\'t there at all. The mass analogy makes this precise: mass doesn\'t prevent motion, it resists CHANGES in velocity (acceleration); an inductor doesn\'t prevent current, it resists CHANGES in current (dI/dt). Only when current is actually changing — during startup, shutdown, or AC operation — does the inductor present real impedance (Z_L = ωL at frequency ω); at true DC steady state, that impedance vanishes to zero. Second trap: assuming a larger inductance L always stores more energy, ignoring current entirely. The energy formula U_L = ½LI² depends on BOTH quantities together, and current enters SQUARED — a large inductor carrying a small current can easily store far less energy than a small inductor carrying a large current. Concretely: L = 1 H at I = 0.1 A stores only 5 mJ, while L = 0.01 H (100× smaller) at I = 10 A (100× larger current) stores 500 mJ — a hundred times MORE energy, despite the inductance itself being a hundred times smaller. Maximizing stored energy means maximizing the product LI² together, never L in isolation.',
+    targetedMisconceptions: [`${SIND}:MC-INDUCTOR-OPPOSES-CURRENT-FLOW`, `${SIND}:MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES`],
+    source: `${SIND_SRC} — MC-INDUCTOR-OPPOSES-CURRENT-FLOW + MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SIND_PROBES: SeedProbe[] = [
+  {
+    conceptId: SIND,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In an RL circuit connected to a battery, a very long time has passed and the current has reached a completely steady value. What is the back-EMF of the inductor at this point, and how much opposition does it present?',
+    choices: [
+      { text: 'Back-EMF = 0 (since dI/dt = 0), and the inductor behaves like a plain wire, presenting zero opposition to the steady current', isCorrect: true },
+      { text: 'The back-EMF stays at its initial value, since inductors permanently oppose and reduce current flow', isCorrect: false, misconceptionId: `${SIND}:MC-INDUCTOR-OPPOSES-CURRENT-FLOW` },
+    ],
+    correctValue: 'zero back-EMF, zero opposition at steady state',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SIND}:MC-INDUCTOR-OPPOSES-CURRENT-FLOW`],
+    source: `${SIND_SRC} — MC-INDUCTOR-OPPOSES-CURRENT-FLOW trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SIND,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Inductor A has L = 1 H carrying I = 0.1 A. Inductor B has L = 0.01 H (100 times smaller) carrying I = 10 A (100 times larger). Which one stores more energy?',
+    choices: [
+      { text: 'Inductor B — U = ½LI² depends on current SQUARED, so B\'s much larger current more than compensates for its smaller inductance, giving it 100 times more stored energy', isCorrect: true },
+      { text: 'Inductor A — since it has the larger inductance L, and larger L always means more energy stored', isCorrect: false, misconceptionId: `${SIND}:MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES` },
+    ],
+    correctValue: 'Inductor B',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SIND}:MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES`],
+    source: `${SIND_SRC} — MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -31381,6 +31681,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...AMPL_EXPLANATIONS,
   ...FARD_EXPLANATIONS,
   ...LENZ_EXPLANATIONS,
+  ...VPRD_EXPLANATIONS,
+  ...MUTL_EXPLANATIONS,
+  ...MFLX_EXPLANATIONS,
+  ...MMAT_EXPLANATIONS,
+  ...SIND_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -31734,4 +32039,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...AMPL_PROBES,
   ...FARD_PROBES,
   ...LENZ_PROBES,
+  ...VPRD_PROBES,
+  ...MUTL_PROBES,
+  ...MFLX_PROBES,
+  ...MMAT_PROBES,
+  ...SIND_PROBES,
 ]
