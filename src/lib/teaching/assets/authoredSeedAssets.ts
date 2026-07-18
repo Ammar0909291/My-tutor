@@ -16715,6 +16715,295 @@ const SNDO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.compound-sentences ─────────────────────────────────────────
+const CMPS = 'eng.grammar.compound-sentences'
+const CMPS_SRC = 'docs/curriculum/blueprints/eng.grammar.compound-sentences.md'
+
+const CMPS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CMPS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A compound sentence needs TWO complete independent clauses joined ' +
+      'together — not just any sentence that happens to contain "and." ' +
+      '"Ben and Sara studied hard and passed the exam" is simple (a ' +
+      'compound subject and compound verb, still one clause); "Ben ' +
+      'studied hard, and Sara passed the exam" is compound (two full ' +
+      'independent clauses joined by comma + "and"). Before calling a ' +
+      'sentence compound, check both sides of the joining word for a ' +
+      'complete subject-verb pair that could stand alone as its own ' +
+      'sentence.',
+    targetedMisconceptions: [`${CMPS}:MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE`],
+    source: `${CMPS_SRC} — MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE (P28 Ben-and-Sara conflict)`,
+  },
+  {
+    conceptId: CMPS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A comma by itself is too weak to join two full independent ' +
+      'clauses — that’s called a comma splice, and it’s a real error ' +
+      '("The rain stopped, the sun came out" is incorrect). You need ' +
+      'either a semicolon ALONE ("The rain stopped; the sun came out"), ' +
+      'or a comma PLUS a coordinating conjunction together ("The rain ' +
+      'stopped, and the sun came out"). A semicolon never needs a ' +
+      'conjunction added after it for this job — it’s already strong ' +
+      'enough by itself.',
+    targetedMisconceptions: [`${CMPS}:MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS`],
+    source: `${CMPS_SRC} — MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS (P28 rain-stopped-sun-came-out conflict)`,
+  },
+  {
+    conceptId: CMPS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A compound sentence requires two complete independent clauses ' +
+      'joined together, not merely the presence of "and"/"or"/"but" — a ' +
+      'conjunction joining two subjects, verbs, or objects within one ' +
+      'clause keeps a sentence simple. Separately, there are exactly ' +
+      'three correct ways to join two independent clauses: comma plus a ' +
+      'coordinating conjunction, a semicolon alone, or a semicolon plus a ' +
+      'conjunctive adverb and comma. A bare comma with no conjunction is ' +
+      'never sufficient (a comma splice), and a semicolon never requires ' +
+      'an added conjunction.',
+    targetedMisconceptions: [
+      `${CMPS}:MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE`,
+      `${CMPS}:MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS`,
+    ],
+    source: `${CMPS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CMPS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CMPS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Ben and Sara studied hard and passed the exam" a compound sentence, since it contains "and"?',
+    choices: [
+      { text: 'No — it is simple, with one compound subject and one compound verb, but only one subject-verb pairing overall', isCorrect: true },
+      { text: 'Yes — any sentence containing "and" is compound', isCorrect: false, misconceptionId: `${CMPS}:MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE` },
+    ],
+    correctValue: 'no, simple sentence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMPS}:MC-ANY-CONJUNCTION-CREATES-A-COMPOUND-SENTENCE`],
+    source: `${CMPS_SRC} — Ben-and-Sara conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CMPS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "The rain stopped, the sun came out" correctly punctuated?',
+    choices: [
+      { text: 'No — this is a comma splice; a bare comma cannot join two independent clauses, it needs a coordinating conjunction added, or should use a semicolon instead', isCorrect: true },
+      { text: 'Yes — a comma alone is always enough to join two independent clauses', isCorrect: false, misconceptionId: `${CMPS}:MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS` },
+    ],
+    correctValue: 'no, comma splice',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMPS}:MC-A-SEMICOLON-AND-A-COMMA-ARE-INTERCHANGEABLE-JOINERS`],
+    source: `${CMPS_SRC} — rain-stopped-sun-came-out conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.apostrophes ─────────────────────────────────────────────────
+const APOS = 'eng.grammar.apostrophes'
+const APOS_SRC = 'docs/curriculum/blueprints/eng.grammar.apostrophes.md'
+
+const APOS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: APOS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Adding an apostrophe to any word ending in "s" is like putting a ' +
+      '"FRAGILE" sticker on every box you ship, regardless of whether it ' +
+      'actually contains something fragile — the apostrophe has a ' +
+      'SPECIFIC job (marking possession or a contraction), and slapping ' +
+      'it on everything that happens to end in "s" misuses it. "I have ' +
+      'three dog’s" is wrong — that’s just a simple plural (more than one ' +
+      'dog), which never needs an apostrophe: "I have three dogs." Before ' +
+      'adding an apostrophe, ask: am I showing BELONGING, or SHORTENING ' +
+      'two words? If neither, no apostrophe is needed.',
+    targetedMisconceptions: [`${APOS}:MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS`],
+    source: `${APOS_SRC} — MC-A (P28 three-dogs-vs-dogs-bone conflict)`,
+  },
+  {
+    conceptId: APOS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Applying one fixed apostrophe-placement rule regardless of ' +
+      'singular versus plural is like using the same size lock for a ' +
+      'single door and a set of double doors. For a SINGULAR possessor, ' +
+      'the apostrophe goes before the "s": "the dog’s bone" (one dog). ' +
+      'For a PLURAL possessor already ending in "s," the apostrophe goes ' +
+      'AFTER the "s," with no additional s added: "the dogs’ bones" ' +
+      '(multiple dogs). The placement depends on whether one or many are ' +
+      'doing the possessing.',
+    targetedMisconceptions: [`${APOS}:MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL`],
+    source: `${APOS_SRC} — MC-B (P28 dogs-bone-vs-dogs-bones conflict)`,
+  },
+  {
+    conceptId: APOS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'An apostrophe has two specific jobs — marking possession or ' +
+      'marking omitted letters in a contraction — and never belongs on a ' +
+      'simple plural just because a word ends in "s" ("three dogs," not ' +
+      '"three dog’s"). Separately, possessive apostrophe placement ' +
+      'depends on whether the possessor is singular or plural: singular ' +
+      'takes apostrophe-then-s ("the dog’s bone"), while a plural noun ' +
+      'already ending in "s" takes the apostrophe after the existing "s" ' +
+      'with nothing added ("the dogs’ bones"). One fixed placement rule ' +
+      'does not cover both cases.',
+    targetedMisconceptions: [
+      `${APOS}:MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS`,
+      `${APOS}:MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL`,
+    ],
+    source: `${APOS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const APOS_PROBES: SeedProbe[] = [
+  {
+    conceptId: APOS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "I have three dog\'s" need an apostrophe?',
+    choices: [
+      { text: 'No — this is a simple plural (more than one dog), with no possession or contraction; it should be "three dogs"', isCorrect: true },
+      { text: 'Yes — any word ending in "s" needs an apostrophe before it', isCorrect: false, misconceptionId: `${APOS}:MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS` },
+    ],
+    correctValue: 'no apostrophe needed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${APOS}:MC-A-ADD-AN-APOSTROPHE-BEFORE-ANY-S-AT-THE-END-OF-A-WORD-INCLUDING-SIMPLE-PLURALS`],
+    source: `${APOS_SRC} — three-dogs-vs-dogs-bone conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: APOS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does the apostrophe go in the same place for "the dog\'s bone" (one dog) and "the dogs\' bones" (multiple dogs)?',
+    choices: [
+      { text: 'No — singular possessive takes apostrophe-then-s ("dog\'s"), while plural possessive already ending in s takes the apostrophe after the s ("dogs\'")', isCorrect: true },
+      { text: 'Yes — possessive apostrophes always go in the same place regardless of singular or plural', isCorrect: false, misconceptionId: `${APOS}:MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL` },
+    ],
+    correctValue: 'no, placement differs',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${APOS}:MC-B-POSSESSIVE-APOSTROPHES-ALWAYS-GO-IN-THE-SAME-PLACE-REGARDLESS-OF-WHETHER-THE-NOUN-IS-SINGULAR-OR-PLURAL`],
+    source: `${APOS_SRC} — dogs-bone-vs-dogs-bones conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.quotation-marks ─────────────────────────────────────────────
+const QUOT = 'eng.grammar.quotation-marks'
+const QUOT_SRC = 'docs/curriculum/blueprints/eng.grammar.quotation-marks.md'
+
+const QUOT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QUOT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Placing quotation marks around indirect speech is like putting a ' +
+      'museum’s "authentic artifact" label on a modern replica — ' +
+      'quotation marks are a specific promise to the reader that these ' +
+      'are someone’s EXACT, verbatim words, not a paraphrase. "She said, ' +
+      '\'I am tired.\'" is direct speech, correctly quoted; "She said ' +
+      'that she was tired" is indirect speech (a paraphrase, with the ' +
+      'pronoun and tense shifted) and should NEVER be quoted. Only ever ' +
+      'quote a speaker’s exact, word-for-word statement.',
+    targetedMisconceptions: [`${QUOT}:MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO`],
+    source: `${QUOT_SRC} — MC-A (P28 she-said-I-am-tired-vs-that-she-was-tired conflict)`,
+  },
+  {
+    conceptId: QUOT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Punctuation placement relative to quotation marks is a fixed ' +
+      'convention, like which side of the road to drive on — within ' +
+      'standard American English writing, commas and periods go INSIDE ' +
+      'the closing quotation mark, every time: "I am tired," she said — ' +
+      'not "I am tired", she said. Treat this as a fixed, memorized rule ' +
+      'for this specific writing convention, even when the punctuation ' +
+      'isn’t logically part of the quoted words themselves.',
+    targetedMisconceptions: [`${QUOT}:MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE`],
+    source: `${QUOT_SRC} — MC-B (P28 comma-inside-vs-outside conflict)`,
+  },
+  {
+    conceptId: QUOT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Quotation marks are reserved exclusively for a speaker’s exact, ' +
+      'verbatim words (direct speech) — indirect/reported speech, being a ' +
+      'paraphrase with shifted pronouns and tense, should never be ' +
+      'quoted. Separately, standard American English convention places ' +
+      'commas and periods INSIDE the closing quotation mark as a fixed, ' +
+      'memorized rule, regardless of whether the punctuation is logically ' +
+      'part of the quoted content — this differs from some other English ' +
+      'varieties, but standard American convention is consistent on this ' +
+      'point.',
+    targetedMisconceptions: [
+      `${QUOT}:MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO`,
+      `${QUOT}:MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE`,
+    ],
+    source: `${QUOT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const QUOT_PROBES: SeedProbe[] = [
+  {
+    conceptId: QUOT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Should "She said that she was tired" have quotation marks around "that she was tired"?',
+    choices: [
+      { text: 'No — this is indirect/reported speech, a paraphrase, which should never be placed in quotation marks', isCorrect: true },
+      { text: 'Yes — reported speech should also be placed in quotation marks', isCorrect: false, misconceptionId: `${QUOT}:MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO` },
+    ],
+    correctValue: 'no, indirect speech is never quoted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QUOT}:MC-A-QUOTATION-MARKS-SHOULD-BE-USED-AROUND-INDIRECT-REPORTED-SPEECH-TOO`],
+    source: `${QUOT_SRC} — she-said-I-am-tired-vs-that-she-was-tired conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: QUOT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In standard American English convention, where does the comma go in "I am tired" she said — inside or outside the closing quotation mark?',
+    choices: [
+      { text: 'Inside — standard American convention places the comma before the closing quotation mark: "I am tired," she said', isCorrect: true },
+      { text: 'Outside — the comma goes after the closing quotation mark: "I am tired", she said', isCorrect: false, misconceptionId: `${QUOT}:MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE` },
+    ],
+    correctValue: 'inside the quotation mark',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QUOT}:MC-B-COMMAS-AND-END-PUNCTUATION-GO-OUTSIDE-THE-CLOSING-QUOTATION-MARK-IN-AMERICAN-ENGLISH-DIALOGUE`],
+    source: `${QUOT_SRC} — comma-inside-vs-outside conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -16907,6 +17196,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...NARR_EXPLANATIONS,
   ...MEDL_EXPLANATIONS,
   ...SNDO_EXPLANATIONS,
+  ...CMPS_EXPLANATIONS,
+  ...APOS_EXPLANATIONS,
+  ...QUOT_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -17099,4 +17391,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...NARR_PROBES,
   ...MEDL_PROBES,
   ...SNDO_PROBES,
+  ...CMPS_PROBES,
+  ...APOS_PROBES,
+  ...QUOT_PROBES,
 ]
