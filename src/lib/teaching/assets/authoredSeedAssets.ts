@@ -17196,6 +17196,495 @@ const WCLS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.literature.plot-structure ──────────────────────────────────────────
+const PLOT = 'eng.literature.plot-structure'
+const PLOT_SRC = 'docs/curriculum/blueprints/eng.literature.plot-structure.md'
+
+const PLOT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PLOT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The climax isn’t defined by how much physical action or noise ' +
+      'happens — it’s defined by being the turning point where the ' +
+      'central conflict’s outcome gets decided. Sometimes that’s a big ' +
+      'action scene, but sometimes it’s a quiet, tense decision or ' +
+      'realization. A loud chase scene mid-story might just be rising ' +
+      'action (a complication), while a quiet decisive choice later is ' +
+      'the real climax. The test is: does the outcome of the main ' +
+      'conflict get settled here, not how loud or fast-paced it is.',
+    targetedMisconceptions: [`${PLOT}:MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT`],
+    source: `${PLOT_SRC} — MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT (P28 loud-chase-vs-quiet-decision conflict)`,
+  },
+  {
+    conceptId: PLOT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Real stories almost never divide their length equally among the ' +
+      'five stages — rising action is very often the longest stage since ' +
+      'it builds tension through multiple complications, while ' +
+      'resolution is frequently quite brief. A story that spends 80% of ' +
+      'its length on rising action with a single brief closing paragraph ' +
+      'is still perfectly well-structured. Plot structure describes the ' +
+      'ORDER and FUNCTION of the stages, not their proportional length — ' +
+      'uneven length is the norm, not an exception.',
+    targetedMisconceptions: [`${PLOT}:MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION`],
+    source: `${PLOT_SRC} — MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION (P28 80-percent-rising-action conflict)`,
+  },
+  {
+    conceptId: PLOT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'The climax is the structural turning point where a story’s ' +
+      'central conflict outcome is decided — not necessarily the loudest ' +
+      'or most action-packed scene; a quiet decisive moment can be the ' +
+      'true climax while an earlier action sequence is merely rising-' +
+      'action complication. Separately, the five plot stages (exposition, ' +
+      'rising action, climax, falling action, resolution) are identified ' +
+      'by function, not by equal proportional length — real stories very ' +
+      'commonly devote most of their length to rising action with a brief ' +
+      'climax and resolution.',
+    targetedMisconceptions: [
+      `${PLOT}:MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT`,
+      `${PLOT}:MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION`,
+    ],
+    source: `${PLOT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PLOT_PROBES: SeedProbe[] = [
+  {
+    conceptId: PLOT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A heist story has a loud, action-packed chase scene mid-story, followed by a quiet scene where the protagonist decides whether to betray or protect their partner, which settles how the story ends. Which scene is the climax?',
+    choices: [
+      { text: 'The quiet betrayal-decision scene — it is the turning point that decides the central conflict’s outcome, regardless of the earlier scene being louder', isCorrect: true },
+      { text: 'The chase scene — it is the most exciting, action-packed moment', isCorrect: false, misconceptionId: `${PLOT}:MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT` },
+    ],
+    correctValue: 'the quiet decision scene',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PLOT}:MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT`],
+    source: `${PLOT_SRC} — loud-chase-vs-quiet-decision conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PLOT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A survival story spends 70% of its length on rising action, has a brief climax, and one paragraph of resolution. Is this a badly structured plot because the stages aren’t equal length?',
+    choices: [
+      { text: 'No — plot stages are identified by function, not equal length; uneven proportions like this are the norm in real stories', isCorrect: true },
+      { text: 'Yes — every story should divide its length roughly equally among the five stages', isCorrect: false, misconceptionId: `${PLOT}:MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION` },
+    ],
+    correctValue: 'no, valid structure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PLOT}:MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION`],
+    source: `${PLOT_SRC} — 80-percent-rising-action conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.character-development ───────────────────────────────────
+const CHAR = 'eng.literature.character-development'
+const CHAR_SRC = 'docs/curriculum/blueprints/eng.literature.character-development.md'
+
+const CHAR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHAR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Authors usually reveal character traits through what a character ' +
+      'DOES, SAYS, or THINKS, and how others react to them — not through ' +
+      'a direct label. A character who rushes into a burning building to ' +
+      'save a pet, with no narrator statement calling them "brave," still ' +
+      'reveals bravery through that action. In fact, showing traits ' +
+      'through action is usually considered stronger writing than simply ' +
+      'telling the reader what a character is like. Expect to infer ' +
+      'traits from behavior far more often than to find them stated ' +
+      'outright.',
+    targetedMisconceptions: [`${CHAR}:MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR`],
+    source: `${CHAR_SRC} — MC-A (P28 burning-building-vs-directly-stated conflict)`,
+  },
+  {
+    conceptId: CHAR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Real character growth is very often partial and specific, not a ' +
+      'complete personality overhaul. A character who begins impatient ' +
+      'and, by the end, has learned patience specifically with a younger ' +
+      'sibling — while remaining just as impatient at work or in traffic ' +
+      '— has still genuinely grown. A character can grow in one ' +
+      'relationship, one belief, or one specific behavior while staying ' +
+      'the same elsewhere — that’s still meaningful character ' +
+      'development, not "no growth."',
+    targetedMisconceptions: [`${CHAR}:MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL`],
+    source: `${CHAR_SRC} — MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL (P28 patience-with-sibling-only conflict)`,
+  },
+  {
+    conceptId: CHAR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Character traits are most commonly revealed through action, ' +
+      'dialogue, thought, and other characters’ reactions rather than a ' +
+      'direct authorial label — expect to infer traits from behavior, ' +
+      'treating any directly-stated trait as one piece of evidence among ' +
+      'several rather than the only valid source. Separately, character ' +
+      'growth is frequently partial and localized to a specific ' +
+      'relationship or behavior rather than a complete transformation — a ' +
+      'character who grows in one specific way while remaining unchanged ' +
+      'elsewhere has still undergone genuine, meaningful development.',
+    targetedMisconceptions: [
+      `${CHAR}:MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR`,
+      `${CHAR}:MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL`,
+    ],
+    source: `${CHAR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CHAR_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHAR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A character rushes into a burning building to save a pet, with no narrator statement saying they are "brave." Does this reveal a character trait?',
+    choices: [
+      { text: 'Yes — bravery is revealed through the character’s action, even without a direct label; traits are most often shown, not told', isCorrect: true },
+      { text: 'No — a trait is only genuine if the author directly states it', isCorrect: false, misconceptionId: `${CHAR}:MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR` },
+    ],
+    correctValue: 'yes, shown through action',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHAR}:MC-A-CHARACTERS-TRAITS-ARE-DIRECTLY-STATED-BY-THE-AUTHOR`],
+    source: `${CHAR_SRC} — burning-building-vs-directly-stated conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CHAR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A character learns patience specifically with a younger sibling by the story’s end, but remains just as impatient at work and in traffic. Does this count as real character growth?',
+    choices: [
+      { text: 'Yes — partial, specific growth in one area is genuine character development, not "no growth"', isCorrect: true },
+      { text: 'No — a character either changes completely or doesn’t change at all', isCorrect: false, misconceptionId: `${CHAR}:MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL` },
+    ],
+    correctValue: 'yes, partial growth counts',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHAR}:MC-A-CHARACTER-EITHER-CHANGES-COMPLETELY-OR-NOT-AT-ALL`],
+    source: `${CHAR_SRC} — patience-with-sibling-only conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.setting-and-atmosphere ──────────────────────────────────
+const SATM = 'eng.literature.setting-and-atmosphere'
+const SATM_SRC = 'docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md'
+
+const SATM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SATM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Treating setting as neutral background information is like ' +
+      'assuming a director’s choice of lighting and music for a scene has ' +
+      'no effect on the audience’s emotional experience, as long as the ' +
+      'scene’s literal location is the same — but the SAME room, lit and ' +
+      'scored differently, can feel completely different (menacing versus ' +
+      'cozy). "Creaking floorboards, dust-covered furniture, shadows in ' +
+      'every corner" and "warm sunlight through lace curtains, the smell ' +
+      'of fresh bread" describe the SAME old house, yet create eerie ' +
+      'versus nostalgic atmospheres — the writer’s specific descriptive ' +
+      'choices actively create atmosphere, not just neutral facts.',
+    targetedMisconceptions: [`${SATM}:MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT`],
+    source: `${SATM_SRC} — MC-A (P28 creaking-floorboards-vs-warm-sunlight conflict)`,
+  },
+  {
+    conceptId: SATM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Assuming a specific setting type always creates one fixed ' +
+      'atmosphere is like assuming a specific room in a house (say, a ' +
+      'kitchen) must always feel the same emotionally, regardless of who’s ' +
+      'using it or how it’s decorated — but the SAME kitchen can feel warm ' +
+      'and inviting for a family gathering or cold and clinical in a crime ' +
+      'scene. A forest described with "twisted, gnarled branches...an ' +
+      'unsettling silence" feels eerie, while the same forest described ' +
+      'with "dappled sunlight...birdsong" feels peaceful — no setting TYPE ' +
+      'has one automatic atmosphere; specific descriptive choices always ' +
+      'determine it.',
+    targetedMisconceptions: [`${SATM}:MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE`],
+    source: `${SATM_SRC} — MC-B (P28 eerie-forest-vs-peaceful-forest conflict)`,
+  },
+  {
+    conceptId: SATM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Setting description is not neutral background information — the ' +
+      'specific descriptive choices a writer makes actively create ' +
+      'atmosphere (the emotional mood evoked), the same way lighting and ' +
+      'music shape a film scene’s emotional register despite an identical ' +
+      'physical location. Separately, no setting type has one fixed, ' +
+      'automatic atmosphere — the same type of location (a forest, a ' +
+      'kitchen, a graveyard) can support sharply contrasting atmospheres ' +
+      'depending entirely on which specific details the writer chooses to ' +
+      'emphasize.',
+    targetedMisconceptions: [
+      `${SATM}:MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT`,
+      `${SATM}:MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE`,
+    ],
+    source: `${SATM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SATM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SATM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Two passages describe the SAME old house — one emphasizes "creaking floorboards, dust, shadows," the other "warm sunlight, the smell of fresh bread." Do these create the same emotional feeling in the reader?',
+    choices: [
+      { text: 'No — the same literal setting can create very different atmospheres depending on which specific details the writer emphasizes', isCorrect: true },
+      { text: 'Yes — setting is just neutral background information with no emotional effect', isCorrect: false, misconceptionId: `${SATM}:MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT` },
+    ],
+    correctValue: 'no, different atmospheres',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SATM}:MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT`],
+    source: `${SATM_SRC} — creaking-floorboards-vs-warm-sunlight conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SATM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "a forest" automatically an eerie setting, or automatically a peaceful one?',
+    choices: [
+      { text: 'Neither — the same setting type can support very different atmospheres depending on the specific descriptive details used', isCorrect: true },
+      { text: 'A forest is automatically peaceful, since forests always feel calm', isCorrect: false, misconceptionId: `${SATM}:MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE` },
+    ],
+    correctValue: 'neither, depends on details',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SATM}:MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE`],
+    source: `${SATM_SRC} — eerie-forest-vs-peaceful-forest conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.point-of-view ────────────────────────────────────────────
+const POV = 'eng.literature.point-of-view'
+const POV_SRC = 'docs/curriculum/blueprints/eng.literature.point-of-view.md'
+
+const POV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Assuming a first-person narrator always tells the complete, ' +
+      'unbiased truth is like assuming a single eyewitness’s account of a ' +
+      'car accident must be the full, completely accurate picture — but ' +
+      'eyewitnesses have limited viewpoints, personal biases, and ' +
+      'sometimes reasons to shade the truth in their own favor. A ' +
+      'first-person narrator is exactly this kind of single, limited ' +
+      'witness. Watch for details elsewhere in the text (other ' +
+      'characters’ reactions, inconsistencies) that might complicate or ' +
+      'contradict the narrator’s own framing of events.',
+    targetedMisconceptions: [`${POV}:MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS`],
+    source: `${POV_SRC} — MC-A (P28 self-flattering-account-vs-contradicting-detail conflict)`,
+  },
+  {
+    conceptId: POV,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Assuming third person limited and omniscient are the same because ' +
+      'both use "he/she" is like assuming two security camera setups are ' +
+      'identical because both use the word "camera" — but one might be a ' +
+      'single fixed camera showing only one room, while the other has ' +
+      'access to every room simultaneously. Third person limited ' +
+      'restricts the narrator to ONE character’s inner thoughts; third ' +
+      'person omniscient grants access to MULTIPLE characters’ thoughts, ' +
+      'or information no single character could know. Classify by SCOPE of ' +
+      'access, not by which pronoun is used.',
+    targetedMisconceptions: [`${POV}:MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE`],
+    source: `${POV_SRC} — MC-B (P28 one-character-thoughts-vs-multiple-characters-thoughts conflict)`,
+  },
+  {
+    conceptId: POV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A first-person narrator’s account is not automatically complete or ' +
+      'objectively true — like a single eyewitness, their knowledge is ' +
+      'limited to their own perspective, and a careful reader watches for ' +
+      'gaps, inconsistencies, or self-serving framing rather than ' +
+      'accepting the account uncritically. Separately, third person ' +
+      'limited and third person omniscient are distinguished by SCOPE of ' +
+      'access to characters’ inner thoughts (one character versus ' +
+      'multiple, or beyond what any character could know), not merely by ' +
+      'the shared use of third-person pronouns.',
+    targetedMisconceptions: [
+      `${POV}:MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS`,
+      `${POV}:MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE`,
+    ],
+    source: `${POV_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const POV_PROBES: SeedProbe[] = [
+  {
+    conceptId: POV,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A first-person narrator describes an argument in a way that flatters themselves, but another character’s described reaction doesn’t quite match the narrator’s account. Is the narrator’s account necessarily the complete, objective truth?',
+    choices: [
+      { text: 'No — a first-person narrator’s account can be incomplete or biased, and a careful reader watches for contradicting details', isCorrect: true },
+      { text: 'Yes — a first-person narrator, telling the story in their own words, always tells the complete, unbiased truth', isCorrect: false, misconceptionId: `${POV}:MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS` },
+    ],
+    correctValue: 'no, may be biased',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POV}:MC-A-A-FIRST-PERSON-NARRATOR-ALWAYS-TELLS-THE-COMPLETE-UNBIASED-TRUTH-ABOUT-EVERYTHING-THAT-HAPPENS`],
+    source: `${POV_SRC} — self-flattering-account-vs-contradicting-detail conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: POV,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Two third-person passages both use "he" and "she" instead of "I." One reveals only one character’s inner thoughts throughout; the other shifts between revealing multiple characters’ inner thoughts. Is the narrator’s access the same in both?',
+    choices: [
+      { text: 'No — one is third person limited (one character’s thoughts) and the other is third person omniscient (multiple characters’ thoughts); the pronoun alone doesn’t determine this', isCorrect: true },
+      { text: 'Yes — both use "he/she," so they are basically the same point of view', isCorrect: false, misconceptionId: `${POV}:MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE` },
+    ],
+    correctValue: 'no, different scope',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POV}:MC-B-THIRD-PERSON-OMNISCIENT-AND-THIRD-PERSON-LIMITED-ARE-BASICALLY-THE-SAME-THING-JUST-USING-HE-SHE`],
+    source: `${POV_SRC} — one-character-thoughts-vs-multiple-characters-thoughts conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.drama-basics ─────────────────────────────────────────────
+const DRAM = 'eng.literature.drama-basics'
+const DRAM_SRC = 'docs/curriculum/blueprints/eng.literature.drama-basics.md'
+
+const DRAM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DRAM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'In prose fiction, a narrator can tell you a character spoke ' +
+      '"gently" or "furiously" — drama has no narrator at all. "Get out." ' +
+      'reads as simple anger, but "Get out. [She says this calmly, almost ' +
+      'gently, then turns away.]" reveals a completely different, more ' +
+      'complex emotional state. Stage directions are the ONLY way a ' +
+      'playwright can convey tone, emotion, movement, and setting ' +
+      'information directly — they’re not optional decoration, they’re ' +
+      'doing essential narrative work that has nowhere else to go in this ' +
+      'genre.',
+    targetedMisconceptions: [`${DRAM}:MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY`],
+    source: `${DRAM_SRC} — MC (P28 get-out-calmly-vs-without-stage-direction conflict)`,
+  },
+  {
+    conceptId: DRAM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Drama isn’t prose with the quotation marks stripped out — it’s a ' +
+      'genuinely different genre built around live performance, ' +
+      'structured in acts and scenes, with absolutely no narrator’s voice ' +
+      'available. A prose narrator can simply state "She wondered if ' +
+      'she’d ever forgive him," but a playwright has no such channel — ' +
+      'that private thought must come through a soliloquy, an aside, a ' +
+      'revealing line of dialogue, or a stage direction noting a facial ' +
+      'expression. Everything the audience learns has to come through ' +
+      'dialogue, action, or stage directions.',
+    targetedMisconceptions: [`${DRAM}:MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED`],
+    source: `${DRAM_SRC} — MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED (P28 narrated-inner-thought-vs-no-narrator conflict)`,
+  },
+  {
+    conceptId: DRAM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Stage directions are not optional decorative detail — since drama ' +
+      'has no narrator, they are often the only channel conveying tone, ' +
+      'emotion, movement, or setting information a prose narrator would ' +
+      'otherwise supply directly. Separately, drama is not simply prose ' +
+      'reformatted without quotation marks — it is a genuinely distinct ' +
+      'genre with its own structural units (acts, scenes) and a complete ' +
+      'absence of narration, meaning private inner thoughts must be ' +
+      'conveyed through devices unique to the form (soliloquy, aside, ' +
+      'revealing dialogue) rather than narrated directly.',
+    targetedMisconceptions: [
+      `${DRAM}:MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY`,
+      `${DRAM}:MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED`,
+    ],
+    source: `${DRAM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DRAM_PROBES: SeedProbe[] = [
+  {
+    conceptId: DRAM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: '"Get out." reads very differently with the stage direction "[She says this calmly, almost gently, then turns away.]" added. Is this stage direction just optional decoration, like a descriptive flourish in a story?',
+    choices: [
+      { text: 'No — since drama has no narrator, stage directions are often the only way to convey tone and emotion; this one changes the entire interpretation', isCorrect: true },
+      { text: 'Yes — stage directions are skippable extra details, similar to descriptions in prose fiction', isCorrect: false, misconceptionId: `${DRAM}:MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY` },
+    ],
+    correctValue: 'no, essential information',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DRAM}:MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY`],
+    source: `${DRAM_SRC} — get-out-calmly-vs-without-stage-direction conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DRAM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In prose, a narrator can write "She wondered if she\'d ever forgive him." How would a playwright convey that same private thought in a play?',
+    choices: [
+      { text: 'Through a device unique to drama, like a soliloquy, an aside, a revealing line of dialogue, or a stage direction — since there is no narrator to state it directly', isCorrect: true },
+      { text: 'The same way — drama is just a story with the quotation marks removed, so the narrator can state it directly too', isCorrect: false, misconceptionId: `${DRAM}:MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED` },
+    ],
+    correctValue: 'through a drama-specific device',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DRAM}:MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED`],
+    source: `${DRAM_SRC} — narrated-inner-thought-vs-no-narrator conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -17393,6 +17882,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...QUOT_EXPLANATIONS,
   ...FRAG_EXPLANATIONS,
   ...WCLS_EXPLANATIONS,
+  ...PLOT_EXPLANATIONS,
+  ...CHAR_EXPLANATIONS,
+  ...SATM_EXPLANATIONS,
+  ...POV_EXPLANATIONS,
+  ...DRAM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -17590,4 +18084,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...QUOT_PROBES,
   ...FRAG_PROBES,
   ...WCLS_PROBES,
+  ...PLOT_PROBES,
+  ...CHAR_PROBES,
+  ...SATM_PROBES,
+  ...POV_PROBES,
+  ...DRAM_PROBES,
 ]
