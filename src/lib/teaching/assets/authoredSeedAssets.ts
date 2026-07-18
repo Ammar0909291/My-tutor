@@ -33128,6 +33128,366 @@ const SSLT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.photons ─────────────────────────────────────────────────────────
+const PHTN = 'phys.mod.photons'
+const PHTN_SRC = 'docs/curriculum/blueprints/phys.mod.photons.md'
+
+const PHTN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHTN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A photon is not a tiny classical ball tracing a definite trajectory — it is a quantum object described by a wavefunction, propagating as a wave and only appearing AS a particle at the moment of detection. Send single photons through a double slit one at a time, with long waits between each, and after many photons an interference pattern still gradually builds up on the screen — impossible for a genuine classical particle model, which would predict a simple Gaussian pile-up centered on whichever single slit each photon "actually" went through. Instead, each individual photon\'s wavefunction genuinely passes through BOTH slits simultaneously and interferes with itself; each detection event lands at a random position weighted by that interference probability, and only the accumulated statistics of many such random landings reveal the fringe pattern. A photon\'s energy, E = hf, depends ENTIRELY on frequency and never on beam brightness — a "brighter" beam simply means more photons arriving per second, never higher energy per individual photon. Compare a 5 mW red laser (λ=700nm) against a 1 mW violet laser (λ=400nm): the red beam, despite being 5× more powerful overall, actually emits roughly 9× MORE photons per second (about 1.76×10¹⁶/s vs. 2.0×10¹⁵/s) — because each individual red photon carries less energy (2.84×10⁻¹⁹ J) than each violet photon (4.97×10⁻¹⁹ J); the "brighter" beam has the LESS energetic individual photons.',
+    targetedMisconceptions: [`${PHTN}:MC-PHOTONS-ARE-TINY-BALLS`, `${PHTN}:MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS`],
+    source: `${PHTN_SRC} — MC-PHOTONS-ARE-TINY-BALLS (single-photon double-slit interference) + MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS (E=hf independent of intensity)`,
+  },
+  {
+    conceptId: PHTN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong picture, drawn from classical intuition: imagining a photon as a tiny ball that must pass through ONE specific slit or the other in a double-slit setup — after all, "the photon went through one slit, not both" feels obviously true for anything ball-like. But send single photons through the apparatus one at a time, with generous waits between each so there\'s never more than one photon in the apparatus at once, and after collecting many individual detection events, an interference pattern STILL gradually emerges — a result no classical-particle model can produce, since a genuine ball randomly choosing one slit or the other would build up a simple two-peaked (Gaussian) distribution, never the many-fringed interference pattern actually observed. The resolution: the photon\'s wavefunction — its probability amplitude, not the photon itself as a material object — genuinely passes through both slits simultaneously and interferes with itself; each individual detection event still lands as a single, whole particle at one random point, but that point is chosen with a probability shaped by the self-interference of the wavefunction. Second, closely related trap: conflating a beam\'s overall BRIGHTNESS (total power, watts) with the ENERGY of each individual photon inside it — assuming "the brighter beam has higher-energy photons." They\'re independent quantities entirely: a 5 mW red laser and a 1 mW violet laser differ in both photon COUNT and photon ENERGY, but not in the way intuition suggests. Each red photon (700 nm) carries E = hc/λ ≈ 2.84×10⁻¹⁹ J; each violet photon (400 nm) carries the LARGER value ≈ 4.97×10⁻¹⁹ J — violet photons are individually MORE energetic, despite the violet beam being dimmer overall. The red beam achieves its higher total power specifically by emitting far MORE (lower-energy) photons per second (≈1.76×10¹⁶/s) than the violet beam does of its (higher-energy) photons (≈2.0×10¹⁵/s) — total power = photon count × energy per photon, and these two factors trade off independently.',
+    targetedMisconceptions: [`${PHTN}:MC-PHOTONS-ARE-TINY-BALLS`, `${PHTN}:MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS`],
+    source: `${PHTN_SRC} — MC-PHOTONS-ARE-TINY-BALLS + MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const PHTN_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHTN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Single photons are sent through a double-slit apparatus one at a time, with long waits between each. What happens after many photons have been detected?',
+    choices: [
+      { text: 'An interference (fringe) pattern gradually builds up — each photon\'s wavefunction passes through both slits and interferes with itself, even though each individual detection is a single point', isCorrect: true },
+      { text: 'A simple two-peaked distribution builds up, since each photon must go through exactly one slit or the other, like a tiny ball', isCorrect: false, misconceptionId: `${PHTN}:MC-PHOTONS-ARE-TINY-BALLS` },
+    ],
+    correctValue: 'interference pattern emerges',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHTN}:MC-PHOTONS-ARE-TINY-BALLS`],
+    source: `${PHTN_SRC} — MC-PHOTONS-ARE-TINY-BALLS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PHTN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 5 mW red laser (λ=700nm) and a 1 mW violet laser (λ=400nm). Which laser\'s INDIVIDUAL photons are more energetic?',
+    choices: [
+      { text: 'The violet laser\'s photons are more energetic (E=hf is larger for higher frequency), even though the red beam has more total power (from emitting far more photons per second)', isCorrect: true },
+      { text: 'The red laser\'s photons are more energetic, since it is the brighter (higher power) beam overall', isCorrect: false, misconceptionId: `${PHTN}:MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS` },
+    ],
+    correctValue: 'violet photons are more energetic',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHTN}:MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS`],
+    source: `${PHTN_SRC} — MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.wave-particle-duality ──────────────────────────────────────────
+const WPD = 'phys.mod.wave-particle-duality'
+const WPD_SRC = 'docs/curriculum/blueprints/phys.mod.wave-particle-duality.md'
+
+const WPD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WPD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When an electron exhibits wave behavior in a double-slit experiment, it does NOT physically split — it always arrives as exactly ONE complete dot on the detection screen, never as two half-dots, and its mass and charge are never divided in any experiment. The famous single-electron double-slit video (Hitachi, 1989) makes this concrete: after just 10 electrons, you see 10 random single dots with no visible pattern; after 1000 electrons, the SAME random-looking individual dots have collectively built up a clear interference fringe pattern. What "spreads through both slits" is the electron\'s WAVEFUNCTION — its probability amplitude, a mathematical description of where it\'s likely to be found — never the physical electron itself, which remains a single whole unit throughout, detected at exactly one point each time. Wave-particle duality does NOT mean light or matter literally "alternates" between being a wave sometimes and a particle other times, like flipping between two different physical states — in the quantum formalism, BOTH descriptions are simultaneously and permanently true: the wavefunction is always a wave (evolving smoothly according to the Schrödinger equation), while any actual detection event always yields a particle-like outcome (one point, one click). Which classical language — "wave" or "particle" — happens to describe what you observe depends entirely on what kind of experiment you set up to measure, never on some hidden internal "mood" the quantum object cycles through on its own.',
+    targetedMisconceptions: [`${WPD}:MC-1`, `${WPD}:MC-3`],
+    source: `${WPD_SRC} — MC-1 (electron never physically splits, only its wavefunction spreads) + MC-3 (wave and particle descriptions are simultaneous, not alternating)`,
+  },
+  {
+    conceptId: WPD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong picture, triggered by the phrase "wave behavior": imagining that when an electron passes through a double slit and shows wave-like interference, the electron itself must physically SPLIT, sending half its mass and charge through each slit — the way a genuine water wave really does split and can carry half its energy through each of two openings. It doesn\'t: a single electron detected at the screen always produces exactly ONE dot, in exactly one location, never two half-dots or any fractional signal — mass and charge are never divided in any observed measurement. What actually spreads through both slits is the electron\'s WAVEFUNCTION, its probability amplitude — a mathematical description of likely locations, not a physical wave of matter — while the electron itself, whenever actually detected, always shows up as a single whole unit at a single point. This is directly visible in the real single-electron double-slit experiment (Hitachi, 1989): send electrons through one at a time, and the first 10 produce what look like 10 completely random individual dots with no visible pattern; only after collecting roughly 1000 electrons does the SAME kind of individual random-looking dots collectively reveal a clear interference fringe pattern — each dot representing one whole, undivided electron. Second, equally natural trap: interpreting "wave-particle duality" as meaning light (or matter) literally ALTERNATES between being a wave sometimes and a particle at other times — as if it were "a wave on Mondays and a particle on Tuesdays," switching identities depending on which experiment happens to be running that day. It doesn\'t alternate at all: in the actual quantum formalism, BOTH descriptions are simultaneously, permanently true — the wavefunction is ALWAYS a wave (evolving continuously according to quantum mechanics\' equations), while any genuine detection event ALWAYS produces a particle-like outcome (one location, one click, one dot). Which classical vocabulary — "wave" or "particle" — happens to describe what you actually observe depends entirely on what your experiment is designed to measure, never on the quantum object somehow deciding what it "is" at any given moment.',
+    targetedMisconceptions: [`${WPD}:MC-1`, `${WPD}:MC-3`],
+    source: `${WPD_SRC} — MC-1 + MC-3, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const WPD_PROBES: SeedProbe[] = [
+  {
+    conceptId: WPD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An electron passes through a double slit and shows interference behavior. Does the electron physically split, sending half its mass through each slit?',
+    choices: [
+      { text: 'No — the electron always arrives as exactly one complete dot at the detector; it is the electron\'s WAVEFUNCTION (probability amplitude) that spreads through both slits, never the electron itself', isCorrect: true },
+      { text: 'Yes — like a water wave, the electron genuinely splits, with half its mass and charge going through each slit', isCorrect: false, misconceptionId: `${WPD}:MC-1` },
+    ],
+    correctValue: 'no, electron never physically splits',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WPD}:MC-1`],
+    source: `${WPD_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WPD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does wave-particle duality mean light literally alternates between "being a wave" in some experiments and "being a particle" in others — switching identity depending on the day or setup?',
+    choices: [
+      { text: 'No — both descriptions are simultaneously true at all times; the wavefunction is always a wave, and any actual detection always gives a particle outcome, depending only on what the experiment measures', isCorrect: true },
+      { text: 'Yes — light genuinely alternates, acting as a wave sometimes and as a particle at other times, like switching between two different states', isCorrect: false, misconceptionId: `${WPD}:MC-3` },
+    ],
+    correctValue: 'no, both descriptions hold simultaneously',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WPD}:MC-3`],
+    source: `${WPD_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.compton-effect ──────────────────────────────────────────────────
+const CMPT = 'phys.mod.compton-effect'
+const CMPT_SRC = 'docs/curriculum/blueprints/phys.mod.compton-effect.md'
+
+const CMPT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CMPT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Compton scattering is a genuinely elastic collision between an X-ray photon and a free (or nearly-free) electron — energy and momentum are exactly conserved between them, giving the wavelength SHIFT formula Δλ = λ_C(1 − cos θ), where λ_C = h/(m_e c) is the fixed Compton wavelength (≈2.43 pm) and θ is the scattering angle. Notice something striking about this formula: the INITIAL wavelength λ never appears in it at all — the ABSOLUTE shift Δλ is the same fixed value at a given scattering angle, regardless of whether the incident light was an X-ray or visible light. What DOES depend on the initial wavelength is the FRACTIONAL shift Δλ/λ: for X-rays (λ ≈ 0.1 nm), the maximum shift (2λ_C ≈ 4.85 pm at θ=180°) is a substantial ≈5% of the wavelength — easily detectable with Compton\'s 1923 instruments; for visible light (λ ≈ 500 nm), the exact same absolute shift is only ≈0.001% of the wavelength — utterly undetectable by the technology of the time, which is precisely WHY Compton specifically chose X-rays for his experiment rather than visible light, not because the effect itself is somehow X-ray-specific. A classical wave model genuinely CANNOT explain this shift at all — it predicts scattered radiation at the SAME frequency as the incident wave (an oscillating electron simply re-radiates at its driving frequency), with no mechanism to produce any wavelength shift whatsoever; only the photon picture, with quantized momentum p = h/λ genuinely transferred to the electron in a real elastic collision, correctly predicts and explains the observed shift.',
+    targetedMisconceptions: [`${CMPT}:MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH`, `${CMPT}:MC-WAVE-MODEL-PREDICTS-SAME-RESULT`],
+    source: `${CMPT_SRC} — MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH (Δλ independent of λ, only Δλ/λ depends on it) + MC-WAVE-MODEL-PREDICTS-SAME-RESULT (classical wave model predicts no shift at all)`,
+  },
+  {
+    conceptId: CMPT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing the Compton wavelength shift Δλ depends on the initial wavelength of the incoming light — perhaps reasoning "shorter wavelength = bigger shift," confusing the ABSOLUTE shift with the FRACTIONAL shift. Look at the actual formula: Δλ = λ_C(1 − cos θ) — the initial wavelength λ simply does not appear anywhere in this equation; the shift depends ONLY on fixed physical constants (h, electron mass m_e, speed of light c) and the scattering angle θ. The ABSOLUTE shift is genuinely identical for X-rays and visible light scattered at the same angle. What DOES change with initial wavelength is the FRACTIONAL shift Δλ/λ: the maximum possible absolute shift is only about 4.85 picometers, which represents roughly 5% of a typical X-ray wavelength (≈0.1 nm) — easily measurable — but only about 0.001% of a visible-light wavelength (≈500 nm) — completely undetectable with the instruments available in 1923. This is exactly WHY Compton specifically used X-rays for his historic experiment: not because the underlying physics differs for X-rays, but because the SAME absolute shift is a much larger, more measurable FRACTION of a shorter starting wavelength. Second, related trap: assuming the classical wave model, given enough patching or creative reinterpretation, could somehow also explain the observed wavelength shift. It genuinely can\'t, not even in principle: the classical picture treats an incident electromagnetic wave as making a free electron oscillate at exactly the wave\'s own driving frequency, and an oscillating charge re-radiates at that SAME frequency it oscillates at — meaning classical wave theory predicts NO wavelength shift whatsoever, the scattered light should always come out at the identical wavelength as the incident light. Only the photon (particle) picture — where a genuine elastic collision between an actual quantized photon (carrying momentum p = h/λ) and an electron transfers real momentum and energy to the electron, exactly like a billiard-ball collision — correctly predicts and explains why the scattered photon emerges with a longer wavelength (lower energy) than it started with.',
+    targetedMisconceptions: [`${CMPT}:MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH`, `${CMPT}:MC-WAVE-MODEL-PREDICTS-SAME-RESULT`],
+    source: `${CMPT_SRC} — MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH + MC-WAVE-MODEL-PREDICTS-SAME-RESULT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CMPT_PROBES: SeedProbe[] = [
+  {
+    conceptId: CMPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Compare the Compton wavelength SHIFT (Δλ) for X-rays (λ≈0.1nm) versus visible light (λ≈500nm), scattered at the same angle θ. Which has the larger ABSOLUTE shift?',
+    choices: [
+      { text: 'They have the SAME absolute shift Δλ = λ_C(1−cosθ) — the initial wavelength doesn\'t appear in the formula at all; only the FRACTIONAL shift Δλ/λ differs (much larger, and detectable, for X-rays)', isCorrect: true },
+      { text: 'X-rays have a much larger absolute shift, since their shorter initial wavelength produces a bigger shift', isCorrect: false, misconceptionId: `${CMPT}:MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH` },
+    ],
+    correctValue: 'same absolute shift for both',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMPT}:MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH`],
+    source: `${CMPT_SRC} — MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CMPT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can the classical wave model of light explain the Compton wavelength shift, if patched or reinterpreted creatively?',
+    choices: [
+      { text: 'No — classical wave theory predicts an oscillating electron re-radiates at the SAME frequency as the incident wave, meaning it predicts NO wavelength shift at all; only the photon (particle collision) picture explains the observed shift', isCorrect: true },
+      { text: 'Yes — the classical wave model can also explain the shift with the right adjustments, since it can explain most other light phenomena', isCorrect: false, misconceptionId: `${CMPT}:MC-WAVE-MODEL-PREDICTS-SAME-RESULT` },
+    ],
+    correctValue: 'no, wave model predicts zero shift',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMPT}:MC-WAVE-MODEL-PREDICTS-SAME-RESULT`],
+    source: `${CMPT_SRC} — MC-WAVE-MODEL-PREDICTS-SAME-RESULT trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.x-rays ──────────────────────────────────────────────────────────
+const XRAY = 'phys.mod.x-rays'
+const XRAY_SRC = 'docs/curriculum/blueprints/phys.mod.x-rays.md'
+
+const XRAY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: XRAY,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'X-rays are NOT some fundamentally different kind of "radiation" separate from ordinary visible light — both are electromagnetic waves, both travel at exactly c, both obey E = hf, and both are quantized as photons; the ONLY difference between them is frequency and wavelength. The electromagnetic spectrum is one continuous range: radio, microwave, infrared, visible, ultraviolet, X-rays, gamma rays — visible light occupies roughly λ ≈ 400-700 nm, while X-rays occupy the much shorter λ ≈ 0.01-10 nm range; X-rays are simply very high-frequency (and therefore high-energy-per-photon) light, obeying all the identical equations as visible light, just with dramatically more energy per photon. When X-rays diffract off a crystal (Bragg diffraction, 2d sin θ = nλ), the angle θ is a GLANCING angle — measured from the CRYSTAL PLANE SURFACE itself, NOT from the normal to that surface, which is the opposite convention from ordinary optics (where angles of incidence and reflection are always measured from the normal). This matters numerically: if the Bragg angle is genuinely 30°, using the wrong convention (60° from the normal) in the formula gives 2d sin 60° = 1.73d instead of the correct 2d sin 30° = d — a substantial error. The glancing-angle convention makes physical sense: as θ → 0 (beam nearly parallel to the surface), there\'s essentially no penetration into the crystal; as θ → 90° (beam nearly perpendicular, going "straight in"), penetration is maximal.',
+    targetedMisconceptions: [`${XRAY}:MC-XRAY-DIFFERENT-FROM-LIGHT`, `${XRAY}:MC-BRAGG-ANGLE-FROM-NORMAL`],
+    source: `${XRAY_SRC} — MC-XRAY-DIFFERENT-FROM-LIGHT (X-rays are just high-frequency EM radiation) + MC-BRAGG-ANGLE-FROM-NORMAL (glancing angle, not normal-incidence convention)`,
+  },
+  {
+    conceptId: XRAY,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption, reinforced by everyday language treating "X-rays" and "light" as separate categories (and "radiation" carrying negative connotations): believing X-rays are fundamentally different from visible light, some genuinely different phenomenon rather than simply another region of the same underlying spectrum. They\'re not different in kind at all: both X-rays and visible light are electromagnetic waves, both travel at exactly the speed c, both obey the same energy relation E = hf, and both are quantized identically as photons — the ONLY thing that distinguishes them is frequency and wavelength, with visible light at roughly 400-700 nm and X-rays at the much shorter 0.01-10 nm. The electromagnetic spectrum is one seamless continuum from radio waves through microwaves, infrared, visible light, ultraviolet, X-rays, and finally gamma rays — X-rays are simply the section of that continuum with much higher frequency (and correspondingly much higher energy per photon) than visible light, obeying every one of the same physical equations. Second, a genuinely easy-to-make convention error: assuming the Bragg diffraction angle θ, in the formula 2d sin θ = nλ, is measured from the NORMAL to the crystal plane, the way angles of incidence and reflection are always measured in ordinary optics (following Snell\'s law conventions). It isn\'t — Bragg\'s law uses the GLANCING angle, measured from the crystal plane SURFACE itself, the opposite convention from standard optics. If the true Bragg angle is 30°, using the wrong (normal-based) convention would substitute 60° into the formula, giving 2d sin 60° = 1.73d instead of the correct 2d sin 30° = d — a substantial numerical error. This glancing-angle convention actually makes physical sense once you picture it: a beam that just grazes nearly parallel to the crystal surface (θ near 0°) barely penetrates into the crystal at all, while a beam hitting nearly perpendicular to the surface (θ near 90°) penetrates deeply — exactly the opposite geometric relationship from the normal-incidence convention used elsewhere in optics.',
+    targetedMisconceptions: [`${XRAY}:MC-XRAY-DIFFERENT-FROM-LIGHT`, `${XRAY}:MC-BRAGG-ANGLE-FROM-NORMAL`],
+    source: `${XRAY_SRC} — MC-XRAY-DIFFERENT-FROM-LIGHT + MC-BRAGG-ANGLE-FROM-NORMAL, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const XRAY_PROBES: SeedProbe[] = [
+  {
+    conceptId: XRAY,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are X-rays fundamentally a different type of radiation from visible light, or the same type of electromagnetic wave?',
+    choices: [
+      { text: 'They are the same type of electromagnetic wave — both travel at c, both obey E=hf, both are quantized as photons; they differ ONLY in frequency/wavelength range', isCorrect: true },
+      { text: 'X-rays are fundamentally different from light — they are a distinct category of radiation, not part of the same electromagnetic spectrum', isCorrect: false, misconceptionId: `${XRAY}:MC-XRAY-DIFFERENT-FROM-LIGHT` },
+    ],
+    correctValue: 'same EM wave type, differ only in frequency',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${XRAY}:MC-XRAY-DIFFERENT-FROM-LIGHT`],
+    source: `${XRAY_SRC} — MC-XRAY-DIFFERENT-FROM-LIGHT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: XRAY,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In Bragg\'s law, 2d sinθ = nλ, the angle θ = 30°. Is this angle measured from the crystal plane SURFACE, or from the NORMAL to the crystal plane?',
+    choices: [
+      { text: 'From the crystal plane SURFACE (the glancing angle) — this is the opposite convention from ordinary optics, where angles are measured from the normal', isCorrect: true },
+      { text: 'From the normal to the crystal plane, following the same convention used for angle of incidence in reflection and refraction', isCorrect: false, misconceptionId: `${XRAY}:MC-BRAGG-ANGLE-FROM-NORMAL` },
+    ],
+    correctValue: 'measured from the surface, not the normal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${XRAY}:MC-BRAGG-ANGLE-FROM-NORMAL`],
+    source: `${XRAY_SRC} — MC-BRAGG-ANGLE-FROM-NORMAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.binding-energy ──────────────────────────────────────────────────
+const BEEN = 'phys.mod.binding-energy'
+const BEEN_SRC = 'docs/curriculum/blueprints/phys.mod.binding-energy.md'
+
+const BEEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BEEN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Nuclear stability is measured by binding energy PER NUCLEON (BE/A), not total binding energy — and this per-nucleon measure PEAKS near mass number A ≈ 56 (at iron-56, BE/A ≈ 8.79 MeV/nucleon), meaning both very light AND very heavy nuclei are LESS stable per nucleon than mid-sized nuclei like iron. Uranium-238, despite having far more total nucleons and far more total binding energy than iron, has a LOWER binding energy per nucleon (≈7.57 MeV/nucleon) — more nucleons also means more mutual Coulomb repulsion between all the proton-proton pairs, which destabilizes heavy nuclei even as total binding energy grows; U-238 decays spontaneously (half-life 4.5 billion years) while Fe-56 is stable indefinitely. Binding energy itself is the energy RELEASED when free nucleons assemble into a nucleus — for helium-4, assembling from 2 free protons and 2 free neutrons releases 28.3 MeV, meaning the bound nucleus sits at a LOWER total energy than the separated free nucleons (exactly like a ball rolling down into a well releases energy going down); pulling the nucleus back apart into its individual free nucleons requires SUPPLYING that exact same 28.3 MeV back in, precisely the well\'s depth. This "energy well" framing also explains why fission of an ALREADY-light nucleus, like splitting iron-56 into two smaller silicon-28 pieces, would actually ABSORB energy rather than release it — silicon-28\'s BE/A (≈8.45 MeV/nucleon) is LOWER than iron\'s, so only fission of nuclei HEAVIER than the BE/A peak near iron actually releases net energy, converting some of the well\'s depth into kinetic energy of the fragments.',
+    targetedMisconceptions: [`${BEEN}:MC-1`, `${BEEN}:MC-3`],
+    source: `${BEEN_SRC} — MC-1 (BE/A peaks near iron, not monotonic with mass) + MC-3 (binding energy is released on assembly, required to dissociate)`,
+  },
+  {
+    conceptId: BEEN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing HEAVIER nuclei, with more nucleons, must always be MORE stable — reasoning "more nucleons → more bonds → more stable." Check the actual numbers: uranium-238 has binding energy per nucleon (BE/A) ≈ 7.57 MeV/nucleon, while iron-56, a much LIGHTER nucleus, has HIGHER BE/A ≈ 8.79 MeV/nucleon — iron is genuinely MORE stable per nucleon than uranium, despite having far fewer total nucleons; U-238 decays spontaneously (half-life 4.5 billion years), while Fe-56 remains stable indefinitely. Stability must be measured PER NUCLEON, never by raw total nucleon count: adding more nucleons does increase total binding energy, but it also adds more mutual Coulomb (electric) repulsion between every pair of protons in the nucleus, and beyond a certain mass (around A≈56, iron), this repulsion cost starts to outweigh the added binding, making heavier nuclei progressively LESS stable per nucleon, not more. Second, a genuine terminology trap: interpreting "binding energy" as the energy you must SUPPLY to build (assemble) a nucleus from its individual free nucleons — an entirely understandable misreading of the phrase "binding energy," but backwards. Assembling helium-4 from 2 free protons and 2 free neutrons actually RELEASES 28.3 MeV of energy, precisely because the bound configuration sits at a LOWER total energy than the separated free nucleons — exactly like a ball rolling down INTO a well releases energy as it falls, rather than requiring energy input to fall. Binding energy is the well\'s depth: assembly RELEASES that amount of energy (28.3 MeV for helium-4), while pulling the nucleus back apart into individual free nucleons requires SUPPLYING that exact same amount back in — the two directions are simply the reverse of each other, with the bound nucleus always at the lower-energy end.',
+    targetedMisconceptions: [`${BEEN}:MC-1`, `${BEEN}:MC-3`],
+    source: `${BEEN_SRC} — MC-1 + MC-3, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const BEEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: BEEN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Uranium-238 is much heavier than iron-56 (more total nucleons). Is U-238 more stable than Fe-56?',
+    choices: [
+      { text: 'No — Fe-56 has a HIGHER binding energy per nucleon (≈8.79 MeV) than U-238 (≈7.57 MeV); stability is measured per nucleon, and Fe-56 is more stable despite having far fewer total nucleons', isCorrect: true },
+      { text: 'Yes — with more total nucleons and more total binding energy, uranium-238 must be the more stable nucleus', isCorrect: false, misconceptionId: `${BEEN}:MC-1` },
+    ],
+    correctValue: 'no, iron-56 is more stable per nucleon',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BEEN}:MC-1`],
+    source: `${BEEN_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BEEN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you assemble a helium-4 nucleus from 2 free protons and 2 free neutrons, do you RELEASE or ABSORB the 28.3 MeV binding energy?',
+    choices: [
+      { text: 'RELEASE it — the bound nucleus sits at a lower energy than the free nucleons, so assembly releases 28.3 MeV, and pulling it back apart requires supplying that same energy', isCorrect: true },
+      { text: 'ABSORB it — "binding energy" is the energy you must put in to bind the nucleons together into a nucleus', isCorrect: false, misconceptionId: `${BEEN}:MC-3` },
+    ],
+    correctValue: 'releases 28.3 MeV during assembly',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BEEN}:MC-3`],
+    source: `${BEEN_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mod.atomic-spectra ──────────────────────────────────────────────────
+const ASPC = 'phys.mod.atomic-spectra'
+const ASPC_SRC = 'docs/curriculum/blueprints/phys.mod.atomic-spectra.md'
+
+const ASPC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ASPC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Absorption and emission spectra of the SAME element occur at EXACTLY the same wavelengths — Kirchhoff\'s law (1859) establishes this precisely: a gas absorbs and emits at identical wavelengths, since both processes correspond to the SAME atomic energy transition, just running in opposite directions (a 656 nm photon has exactly the right energy for hydrogen\'s n=3→n=2 transition, whether the atom is climbing UP by absorbing that photon or falling DOWN by emitting it). This is precisely how the dark Fraunhofer lines in the Sun\'s spectrum were first identified as hydrogen: they appear at exactly 656 nm, 486 nm, and other positions matching hydrogen\'s known EMISSION lines exactly, just visually inverted (dark absorption lines on a bright continuous background, rather than bright emission lines on a dark background). Hydrogen has infinitely many spectral SERIES, not just one — each series corresponds to transitions ending at a specific final energy level: the Lyman series (transitions ending at n=1) lies entirely in the ultraviolet (91-122 nm), completely invisible to the eye; the Balmer series (ending at n=2) happens to fall in the visible range and was historically discovered first, making it the most commonly discussed, but it\'s only ONE subset of hydrogen\'s full spectrum; the Paschen series (ending at n=3) lies in the infrared. Energy levels themselves follow E_n = −13.6/n² eV, and a common sign-reading error trips up the counterintuitive direction: as the quantum number n INCREASES, E_n becomes LESS negative (closer to zero) — meaning HIGHER energy, not lower — with the ground state n=1 (E₁ = −13.6 eV, the MOST negative value) actually being the LOWEST energy state, most tightly bound, while n→∞ (E=0) represents the highest energy, fully ionized state.',
+    targetedMisconceptions: [`${ASPC}:MC-1`, `${ASPC}:MC-3`],
+    source: `${ASPC_SRC} — MC-1 (absorption and emission occur at identical wavelengths, Kirchhoff's law) + MC-3 (higher n = less negative = higher energy, sign convention)`,
+  },
+  {
+    conceptId: ASPC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption, driven purely by how different the two spectra LOOK: believing hydrogen\'s absorption spectrum (dark lines on a bright rainbow background) and emission spectrum (bright lines on a dark background) must occur at DIFFERENT wavelengths, since the visual appearance is so strikingly different. They occur at EXACTLY the same wavelengths — Kirchhoff\'s law (1859) states precisely this: a gas absorbs and emits light at identical wavelengths, because both processes correspond to the exact same underlying atomic energy transition, running in opposite directions. A 656 nm photon carries precisely the right energy for hydrogen\'s n=3→n=2 transition; the atom absorbs a 656 nm photon to climb UP from n=2 to n=3, and emits a 656 nm photon when it falls back DOWN from n=3 to n=2 — same transition, same energy gap, same wavelength, just opposite direction of the photon\'s travel. This is precisely how the dark Fraunhofer lines in the Sun\'s spectrum were historically identified as hydrogen: they sit at exactly 656 nm, 486 nm, and other positions matching hydrogen\'s known emission lines position-for-position. Second, a genuine and very common sign-convention trap: assuming "higher quantum number n" must always mean "higher energy" is simply wrong when the ACTUAL rule (higher n really does mean higher energy in hydrogen, but through a counterintuitive mechanism) gets misapplied by ignoring the negative sign entirely — some students instead assume n=1 (a small number) must be the lower energy in some naive numeric sense without processing that E_n = −13.6/n² eV is NEGATIVE. The actual values: E₁ = −13.6 eV, E₂ = −3.4 eV, E₃ = −1.51 eV — as n increases, E_n genuinely becomes LESS NEGATIVE (moving closer to zero), which correctly means HIGHER energy; E_∞ = 0 eV is the highest possible energy (a fully ionized, unbound electron), while the ground state E₁ = −13.6 eV (the MOST negative value) is the LOWEST energy, the most tightly bound configuration. The negative sign specifically signals "bound" — more negative means more tightly bound, i.e., lower (more negative) energy, exactly like a ball deep in a well has more negative potential energy than one near the well\'s rim.',
+    targetedMisconceptions: [`${ASPC}:MC-1`, `${ASPC}:MC-3`],
+    source: `${ASPC_SRC} — MC-1 + MC-3, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ASPC_PROBES: SeedProbe[] = [
+  {
+    conceptId: ASPC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Hydrogen shows a dark absorption line at 656 nm and a bright emission line also very close to 656 nm. Is this a coincidence, or does Kirchhoff\'s law predict this?',
+    choices: [
+      { text: 'Not a coincidence — Kirchhoff\'s law states a gas absorbs and emits at EXACTLY the same wavelengths, since both correspond to the same atomic transition running in opposite directions', isCorrect: true },
+      { text: 'It is a coincidence — absorption and emission spectra generally occur at different wavelengths for the same element', isCorrect: false, misconceptionId: `${ASPC}:MC-1` },
+    ],
+    correctValue: 'not a coincidence, same wavelengths always',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ASPC}:MC-1`],
+    source: `${ASPC_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ASPC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In hydrogen, E₁ = −13.6 eV and E₃ = −1.51 eV. Which energy level, n=1 or n=3, has the HIGHER energy?',
+    choices: [
+      { text: 'n=3 has the higher energy — E₃ = −1.51 eV is LESS negative (closer to zero) than E₁ = −13.6 eV, and less negative means higher energy', isCorrect: true },
+      { text: 'n=1 has the higher energy, since it is the lower quantum number', isCorrect: false, misconceptionId: `${ASPC}:MC-3` },
+    ],
+    correctValue: 'n=3 has higher energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ASPC}:MC-3`],
+    source: `${ASPC_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -33516,6 +33876,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...LPWR_EXPLANATIONS,
   ...OPTI_EXPLANATIONS,
   ...SSLT_EXPLANATIONS,
+  ...PHTN_EXPLANATIONS,
+  ...WPD_EXPLANATIONS,
+  ...CMPT_EXPLANATIONS,
+  ...XRAY_EXPLANATIONS,
+  ...BEEN_EXPLANATIONS,
+  ...ASPC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -33904,4 +34270,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...LPWR_PROBES,
   ...OPTI_PROBES,
   ...SSLT_PROBES,
+  ...PHTN_PROBES,
+  ...WPD_PROBES,
+  ...CMPT_PROBES,
+  ...XRAY_PROBES,
+  ...BEEN_PROBES,
+  ...ASPC_PROBES,
 ]
