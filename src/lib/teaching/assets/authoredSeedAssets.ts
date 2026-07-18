@@ -34748,6 +34748,366 @@ const TLAW_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.spring-mass ─────────────────────────────────────────────────────
+const SPRM = 'phys.wave.spring-mass'
+const SPRM_SRC = 'docs/curriculum/blueprints/phys.wave.spring-mass.md'
+
+const SPRM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SPRM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A vertical spring-mass system has EXACTLY the same period as a horizontal one: T=2π√(m/k), with no gravity term. Here is why: when mass m hangs vertically on a spring, the equilibrium position shifts down by δ=mg/k from the spring\'s natural length (where the spring force balances weight). Measuring displacement y from this NEW equilibrium point, the net force is F_net=−k(δ+y)+mg=−kδ−ky+mg. Since kδ=mg by definition of equilibrium, these terms cancel: F_net=−ky. This gives a=−(k/m)y — pure SHM about the new equilibrium with ω=√(k/m), exactly the same as horizontal. Gravity shifts WHERE the oscillation is centered but does not change how fast it oscillates. A second, related error: assuming the static stretch at equilibrium contributes extra kinetic energy to the oscillation. The equilibrium stretch δ=mg/k stores PE=½kδ², but this energy was invested when the mass was first attached — it equals the gravitational PE lost as the mass descended by δ. It is NOT part of the oscillation energy. If the mass is displaced further by amplitude A from equilibrium and released, the oscillation energy is ½kA² — computed using displacement from equilibrium, never from natural length. The static stretch and the oscillation amplitude are independent quantities that must not be added together.',
+    targetedMisconceptions: [`${SPRM}:MC-VERTICAL-SPRING-DIFFERENT-PERIOD`, `${SPRM}:MC-STRETCHING-SPRING-ADDS-KE`],
+    source: `${SPRM_SRC} — MC-VERTICAL-SPRING-DIFFERENT-PERIOD (gravity shifts equilibrium, not period) + MC-STRETCHING-SPRING-ADDS-KE (static stretch vs oscillation amplitude are independent)`,
+  },
+  {
+    conceptId: SPRM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students believe "a vertical spring-mass oscillates differently from a horizontal one because gravity changes the equilibrium" and try to insert g into the period formula. Let\'s re-derive carefully. When a mass m hangs vertically on a spring, gravity does shift the equilibrium position downward by δ=mg/k from the spring\'s natural (unstretched) length — this is where the spring force exactly balances the weight. Now measure displacement y from this NEW equilibrium point (not from natural length). Newton\'s second law gives F_net=−k(δ+y)+mg=−kδ−ky+mg. But since δ was defined by the balance condition kδ=mg, the −kδ and +mg terms cancel exactly, leaving F_net=−ky — pure SHM with a=−(k/m)y and ω=√(k/m). Gravity does real work: it shifts WHERE the equilibrium sits, but once you measure from that new equilibrium, the restoring force and hence the period T=2π√(m/k) come out identical to the horizontal case, with no g anywhere in the formula. A second, related error: thinking the spring\'s static stretch at equilibrium injects extra kinetic energy into the oscillation, reasoning "the spring gives the mass extra kinetic energy because it\'s stretched further than the equilibrium." This confuses two separate energy budgets. The static equilibrium stretch δ=mg/k does store elastic PE=½kδ² — but that energy was invested once, when the mass was first attached and allowed to settle, and it exactly equals the gravitational PE the mass lost descending by δ. It is a fixed, already-accounted-for energy, not fuel for the oscillation. The oscillation\'s own energy comes only from how far the mass is displaced from equilibrium — if released from amplitude A away from equilibrium, the oscillation energy is ½kA², using A measured strictly from the equilibrium position, never from the spring\'s natural length. The static stretch energy and the oscillation energy do not add together; they are independent bookkeeping.',
+    targetedMisconceptions: [`${SPRM}:MC-VERTICAL-SPRING-DIFFERENT-PERIOD`, `${SPRM}:MC-STRETCHING-SPRING-ADDS-KE`],
+    source: `${SPRM_SRC} — MC-VERTICAL-SPRING-DIFFERENT-PERIOD + MC-STRETCHING-SPRING-ADDS-KE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SPRM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SPRM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a vertical spring-mass system have a different period than an identical horizontal spring-mass system, due to gravity?',
+    choices: [
+      { text: 'No — the period is T=2π√(m/k) in both cases; gravity only shifts the equilibrium position, it does not appear in the period formula', isCorrect: true },
+      { text: 'Yes — gravity must be included, giving a different, larger period for the vertical case', isCorrect: false, misconceptionId: `${SPRM}:MC-VERTICAL-SPRING-DIFFERENT-PERIOD` },
+    ],
+    correctValue: 'same period, T=2π√(m/k), no g term',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SPRM}:MC-VERTICAL-SPRING-DIFFERENT-PERIOD`],
+    source: `${SPRM_SRC} — MC-VERTICAL-SPRING-DIFFERENT-PERIOD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SPRM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A vertical spring is stretched δ=mg/k at equilibrium, then the mass is pulled an additional amplitude A and released. What is the oscillation energy?',
+    choices: [
+      { text: '½kA² — using only the amplitude measured from equilibrium; the static equilibrium stretch δ is separate, already-accounted-for energy', isCorrect: true },
+      { text: '½k(A+δ)² — the static stretch adds directly to the oscillation kinetic energy', isCorrect: false, misconceptionId: `${SPRM}:MC-STRETCHING-SPRING-ADDS-KE` },
+    ],
+    correctValue: '½kA², amplitude measured from equilibrium only',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPRM}:MC-STRETCHING-SPRING-ADDS-KE`],
+    source: `${SPRM_SRC} — MC-STRETCHING-SPRING-ADDS-KE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.pendulum ────────────────────────────────────────────────────────
+const PEND = 'phys.wave.pendulum'
+const PEND_SRC = 'docs/curriculum/blueprints/phys.wave.pendulum.md'
+
+const PEND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PEND,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A simple pendulum\'s period T=2π√(L/g) depends only on length L and gravitational field g — mass never appears. This is not a coincidence: the restoring force is F=−mg·sinθ≈−mgθ (small angle), and Newton\'s second law gives ma_t=−mgθ, so a_t=−gθ — the mass m cancels completely from both sides. A gold bob and a ping-pong ball on strings of identical length swing in exact synchrony, because both the restoring force AND the inertia scale with m in exactly the same way — this is a direct experimental demonstration of the equivalence principle (inertial mass equals gravitational mass). A second, separate property: for SMALL oscillations (amplitude θ₀≲15°), the period is independent of amplitude too — this isochronous property is precisely why pendulum clocks work: as the mainspring slowly loses energy and the swing amplitude shrinks, the clock keeps perfect time regardless. This relies on the small-angle approximation sinθ≈θ, valid to about 1% for θ<15°≈0.26 rad (at exactly 15°, sinθ=0.259 versus θ=0.262 — under 1% error). For LARGE amplitudes (θ₀>15°), this approximation breaks down and the true period does increase slightly with amplitude — an O(θ₀²) correction — but for typical pendulum-clock swings of just a few degrees, this correction is negligible.',
+    targetedMisconceptions: [`${PEND}:MC-PENDULUM-PERIOD-DEPENDS-ON-MASS`, `${PEND}:MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD`],
+    source: `${PEND_SRC} — MC-PENDULUM-PERIOD-DEPENDS-ON-MASS (mass cancels, equivalence principle) + MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD (isochronism for small angles)`,
+  },
+  {
+    conceptId: PEND,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students believe "a heavier pendulum bob swings more slowly" or "a lighter bob goes faster," expecting mass m to appear in the period formula. Galileo famously tested this intuition by dropping heavy and light balls simultaneously from the Leaning Tower of Pisa — they landed together (ignoring air resistance), and the same principle governs pendulums. Deriving carefully: the restoring force on a pendulum bob is F_restoring=−mg·sinθ≈−mgθ for small angles. Newton\'s second law then gives ma_t=−mgθ, which simplifies to a_t=−gθ, so ω=√(g/L) — the mass m has cancelled completely out of both sides of the equation. A gold bob and a ping-pong ball, hung on strings of the same length, swing in exact synchrony: the heavier bob has a proportionally larger restoring force (more weight pulling it back) but ALSO proportionally larger inertia (more mass resisting acceleration) — these two effects cancel exactly, because both scale identically with m. This is in fact a direct experimental test of the equivalence principle: inertial mass (resistance to acceleration) equals gravitational mass (source of weight), so mass always cancels from pendulum SHM. The formula T=2π√(L/g) genuinely contains no m. A second, separate error: assuming "a pendulum pulled back farther takes longer to swing back," i.e. that period depends on amplitude. For SMALL oscillations (θ₀ less than roughly 15°), the period T=2π√(L/g) is independent of amplitude — this isochronous property is exactly why mechanical pendulum clocks keep accurate time: as the driving mainspring slowly loses energy and the pendulum\'s swing amplitude gradually shrinks, the clock does not lose or gain time, because the period stays fixed regardless of amplitude. This relies on the small-angle approximation sinθ≈θ (in radians), accurate to about 1% for θ<15°≈0.26 rad — at exactly 15°, sinθ=0.259 versus θ=0.262, under 1% discrepancy. Only for LARGE amplitudes (θ₀ greater than about 15°) does this approximation break down, and the true period then does increase slightly with amplitude (an O(θ₀²) correction) — but for typical clock-pendulum swings of just a few degrees, this correction is entirely negligible, which is why the "small angle" qualifier must always be stated alongside T=2π√(L/g).',
+    targetedMisconceptions: [`${PEND}:MC-PENDULUM-PERIOD-DEPENDS-ON-MASS`, `${PEND}:MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD`],
+    source: `${PEND_SRC} — MC-PENDULUM-PERIOD-DEPENDS-ON-MASS + MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const PEND_PROBES: SeedProbe[] = [
+  {
+    conceptId: PEND,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gold pendulum bob and a ping-pong-ball pendulum bob, on strings of identical length, are released together. Which reaches the bottom of its swing first?',
+    choices: [
+      { text: 'Neither — they swing in exact synchrony, since mass cancels completely out of the pendulum period formula T=2π√(L/g)', isCorrect: true },
+      { text: 'The gold bob, because its greater weight produces a larger restoring force and thus a faster swing', isCorrect: false, misconceptionId: `${PEND}:MC-PENDULUM-PERIOD-DEPENDS-ON-MASS` },
+    ],
+    correctValue: 'both swing in synchrony, mass cancels',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PEND}:MC-PENDULUM-PERIOD-DEPENDS-ON-MASS`],
+    source: `${PEND_SRC} — MC-PENDULUM-PERIOD-DEPENDS-ON-MASS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PEND,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A pendulum clock\'s swing amplitude slowly shrinks as its mainspring loses energy over the week. Does the clock lose or gain time as a result?',
+    choices: [
+      { text: 'Neither — for small angles (θ₀≲15°), the period T=2π√(L/g) is independent of amplitude (isochronism), so the clock keeps accurate time despite the shrinking swing', isCorrect: true },
+      { text: 'The clock gains time, because a smaller amplitude swing takes longer to complete than a larger one', isCorrect: false, misconceptionId: `${PEND}:MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD` },
+    ],
+    correctValue: 'no time drift, small-angle period is amplitude-independent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PEND}:MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD`],
+    source: `${PEND_SRC} — MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.shm-energy ──────────────────────────────────────────────────────
+const SHME = 'phys.wave.shm-energy'
+const SHME_SRC = 'docs/curriculum/blueprints/phys.wave.shm-energy.md'
+
+const SHME_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SHME,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In SHM, kinetic energy is NOT constant — it varies continuously through the cycle. KE=½mv²=½m(ω√(A²−x²))²=½mω²(A²−x²). At the equilibrium position x=0: KE=½mω²A² (maximum, since the particle moves fastest through the centre). At the extremes x=±A: KE=0 (the particle is momentarily at rest before reversing direction). Since v genuinely varies with position, and KE=½mv², KE must vary too — across a full oscillation it swings sinusoidally between 0 and ½mω²A². What IS constant is the TOTAL mechanical energy: E=KE+PE=½mω²A², at every single position throughout the motion. As KE decreases (the particle slowing as it approaches the amplitude), PE increases correspondingly (elastic/gravitational energy is stored); as KE increases (the particle speeding up approaching equilibrium), PE decreases. Algebraically: KE=½mω²(A²−x²) and PE=½mω²x², so KE+PE=½mω²(A²−x²)+½mω²x²=½mω²A² — the x² terms cancel exactly, leaving a position-independent total. If you ever compute KE+PE at two different positions in an ideal (undamped) SHM system and get two different totals, that is a calculation error — most commonly, forgetting to evaluate PE correctly at a non-equilibrium position — not a genuine physical effect; total energy is conserved throughout ideal SHM.',
+    targetedMisconceptions: [`${SHME}:MC-SHM-ENERGY-CONSTANT-KE`, `${SHME}:MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION`],
+    source: `${SHME_SRC} — MC-SHM-ENERGY-CONSTANT-KE (KE varies with position, not constant) + MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION (total E is conserved, x² terms cancel)`,
+  },
+  {
+    conceptId: SHME,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students think the kinetic energy of a SHM particle is constant, reasoning "the particle moves at constant speed so KE doesn\'t change." This is factually wrong about the speed itself — a SHM particle\'s speed is NOT constant. We know from the motion equations that speed v=ω√(A²−x²), which clearly depends on position x. Substituting into KE=½mv² gives KE=½m·ω²(A²−x²)=½mω²(A²−x²) — a genuine function of position, not a constant. At the equilibrium position x=0, KE=½mω²A², its maximum value, because the particle is moving fastest there. At the extremes x=±A, KE=0 exactly, because the particle is momentarily at rest, about to reverse direction. Across one full oscillation, KE rises and falls sinusoidally between these two bounds — it is emphatically not constant. What actually IS conserved is the TOTAL mechanical energy, E=KE+PE. As the particle slows near the amplitude, kinetic energy converts into potential energy (the spring stretches or gravitational height increases, storing energy); as the particle speeds up approaching equilibrium, that stored potential energy converts back into kinetic energy. This is worth distinguishing sharply from a second, related error: some students, after correctly computing KE and PE at different points in the cycle, get different numeric totals and conclude that total energy genuinely depends on position — usually because of an arithmetic slip in evaluating PE at a non-equilibrium point. Algebraically, KE=½mω²(A²−x²) and PE=½mω²x², so KE+PE=½mω²(A²−x²)+½mω²x²=½mω²(A²−x²+x²)=½mω²A² — the x² terms cancel exactly regardless of which x you plug in, leaving the SAME total at every position. For example, at x=3cm with amplitude A=5cm: KE=½mω²(25−9)cm²=½mω²·16cm², PE=½mω²·9cm², and the sum is ½mω²·25cm²=½mω²A² — matching the total at any other position. If two different positions ever give two different totals in your own calculation, that signals a computational error, not a real physical effect: in ideal (undamped) SHM, total mechanical energy E=½mω²A²=½kA² is conserved throughout the entire motion.',
+    targetedMisconceptions: [`${SHME}:MC-SHM-ENERGY-CONSTANT-KE`, `${SHME}:MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION`],
+    source: `${SHME_SRC} — MC-SHM-ENERGY-CONSTANT-KE + MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SHME_PROBES: SeedProbe[] = [
+  {
+    conceptId: SHME,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the kinetic energy of a particle undergoing SHM constant throughout the motion?',
+    choices: [
+      { text: 'No — KE=½mω²(A²−x²) varies with position: maximum (½mω²A²) at equilibrium x=0, zero at the extremes x=±A', isCorrect: true },
+      { text: 'Yes — the particle moves at constant speed, so KE stays the same throughout the cycle', isCorrect: false, misconceptionId: `${SHME}:MC-SHM-ENERGY-CONSTANT-KE` },
+    ],
+    correctValue: 'KE varies with position, max at equilibrium, zero at extremes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SHME}:MC-SHM-ENERGY-CONSTANT-KE`],
+    source: `${SHME_SRC} — MC-SHM-ENERGY-CONSTANT-KE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SHME,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student computes KE+PE at x=3cm and gets a different total than at x=0 for the same SHM system (A=5cm). What does this indicate?',
+    choices: [
+      { text: 'A calculation error, most likely in evaluating PE — total energy E=½mω²A² is conserved at every position in ideal SHM, since the x² terms in KE and PE always cancel', isCorrect: true },
+      { text: 'A genuine physical effect — total mechanical energy in SHM legitimately depends on position', isCorrect: false, misconceptionId: `${SHME}:MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION` },
+    ],
+    correctValue: 'calculation error, total energy is conserved',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SHME}:MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION`],
+    source: `${SHME_SRC} — MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.damped-oscillations ─────────────────────────────────────────────
+const DAMP = 'phys.wave.damped-oscillations'
+const DAMP_SRC = 'docs/curriculum/blueprints/phys.wave.damped-oscillations.md'
+
+const DAMP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DAMP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Damping\'s dominant, visible effect is amplitude decay — the oscillation shrinks exponentially — NOT a change in frequency. The true damped frequency is ω_d=√(ω₀²−γ²), which does technically shift from the undamped ω₀, but for underdamped systems (the physically common case we actually observe oscillating), the damping rate γ is much smaller than ω₀, so ω_d≈ω₀ — the shift is negligible in practice. Concretely: for a typical lightly-damped system with ω₀=15.81 rad/s and ω_d=15.78 rad/s, the difference is only about 0.2% — far too small to detect in an ordinary lab measurement. It is only for very HEAVY damping (γ approaching ω₀) that the frequency shift becomes appreciable, and near critical damping the system barely oscillates at all. The "slowing down" a student perceives watching a dying oscillator is the amplitude shrinking, not the period lengthening. A second, separate point: energy does NOT decay at the same rate as amplitude. Amplitude decays as e^(−γt), but since energy E=½kA², energy decays as amplitude SQUARED: e^(−2γt) — twice as fast, in exponent terms. In the same time it takes amplitude to fall to A₀/e, energy has already fallen to E₀/e² — a much steeper drop. The two exponential timescales differ by exactly a factor of 2: amplitude time constant τ_A=1/γ, but energy time constant τ_E=1/(2γ)=τ_A/2. This distinction matters practically because the quality factor Q is defined in terms of energy (Q=2π×energy stored/energy lost per cycle), not amplitude — using amplitude decay in place of energy decay in a Q calculation gives the wrong answer by a factor of 2.',
+    targetedMisconceptions: [`${DAMP}:MC-DAMPING-CHANGES-FREQUENCY`, `${DAMP}:MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE`],
+    source: `${DAMP_SRC} — MC-DAMPING-CHANGES-FREQUENCY (frequency shift negligible for underdamped systems) + MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE (energy decays twice as fast, e^-2γt vs e^-γt)`,
+  },
+  {
+    conceptId: DAMP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A common statement is "damping slows the oscillation down — it reduces the frequency." Let\'s check this against numbers. The exact damped-oscillation frequency is ω_d=√(ω₀²−γ²), so technically, yes, damping does shift the frequency downward from the undamped natural frequency ω₀. But for a typical lightly-damped (underdamped) system — the kind we actually observe visibly oscillating, since heavily damped systems barely oscillate at all — the damping rate γ is much smaller than ω₀, so ω_d≈ω₀ to very high precision. A concrete example: for a system with ω₀=15.81 rad/s and γ small, ω_d comes out to 15.78 rad/s — a difference of just 0.2%. You would not be able to measure that difference with an ordinary lab timer. It is only when damping becomes very heavy (γ approaching ω₀, near critical damping) that the frequency shift becomes appreciable — and by that point the system is barely oscillating at all. So what a student perceives as an oscillator "slowing down" while dying out is actually the amplitude shrinking, not the period stretching — the timing between successive peaks stays almost exactly the same throughout the decay; only the height of each peak decreases. A second, related error: assuming "if amplitude halves after time t₁, then energy also halves after t₁" — i.e., that energy and amplitude decay at the same rate. They do not. Amplitude decays exponentially as e^(−γt). But energy is proportional to amplitude SQUARED (E=½kA²), so energy decays as (e^(−γt))²=e^(−2γt) — twice as fast in the exponent. Concretely: in the time it takes amplitude to fall by a factor of 1/e, energy has already fallen by a factor of 1/e² — a much steeper decline. The two associated time constants differ by exactly a factor of 2: the amplitude time constant is τ_A=1/γ, while the energy time constant is τ_E=1/(2γ)=τ_A/2. This is not just a bookkeeping detail — the quality factor Q, a standard measure of how "good" (lightly damped) an oscillator is, is DEFINED in terms of energy loss (Q=2π×energy stored/energy lost per cycle), not amplitude loss — so conflating the two decay rates leads directly to a Q calculation that is wrong by a factor of 2.',
+    targetedMisconceptions: [`${DAMP}:MC-DAMPING-CHANGES-FREQUENCY`, `${DAMP}:MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE`],
+    source: `${DAMP_SRC} — MC-DAMPING-CHANGES-FREQUENCY + MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DAMP_PROBES: SeedProbe[] = [
+  {
+    conceptId: DAMP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A lightly-damped oscillator has ω₀=15.81 rad/s. As it dies out, does its oscillation frequency noticeably decrease?',
+    choices: [
+      { text: 'No — for underdamped systems, ω_d=√(ω₀²−γ²)≈ω₀ (e.g. 15.78 rad/s, a ~0.2% shift); the visible "slowing down" is amplitude shrinking, not the period lengthening', isCorrect: true },
+      { text: 'Yes — damping directly reduces the oscillation frequency, which is why the oscillator visibly slows down as it dies out', isCorrect: false, misconceptionId: `${DAMP}:MC-DAMPING-CHANGES-FREQUENCY` },
+    ],
+    correctValue: 'frequency shift negligible for light damping',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DAMP}:MC-DAMPING-CHANGES-FREQUENCY`],
+    source: `${DAMP_SRC} — MC-DAMPING-CHANGES-FREQUENCY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DAMP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A damped oscillator\'s amplitude falls to half its original value after time t₁. What fraction of the original energy remains at t₁?',
+    choices: [
+      { text: 'Less than half — since E∝A², energy decays as e^(−2γt), twice as fast as amplitude\'s e^(−γt); halving amplitude means energy falls to (1/2)²=1/4 of the original', isCorrect: true },
+      { text: 'Exactly half — energy and amplitude decay at the same rate', isCorrect: false, misconceptionId: `${DAMP}:MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE` },
+    ],
+    correctValue: 'one quarter, since E proportional to A squared',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DAMP}:MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE`],
+    source: `${DAMP_SRC} — MC-ENERGY-DECAYS-SAME-RATE-AS-AMPLITUDE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.forced-oscillations ─────────────────────────────────────────────
+const FOSC = 'phys.wave.forced-oscillations'
+const FOSC_SRC = 'docs/curriculum/blueprints/phys.wave.forced-oscillations.md'
+
+const FOSC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FOSC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Resonance is a PEAK, not a single spike — it is a region of driving frequencies near ω₀ where amplitude is large, with the amplitude maximized exactly at resonance but still substantial for nearby frequencies too. For example, with ω₀=20 rad/s and γ=2, driving at ω_d=21 rad/s (slightly off resonance) still gives an amplitude much larger than driving far from resonance — the response does not collapse to zero just because ω_d isn\'t exactly ω₀. The width of this resonance peak is the bandwidth Δω=2γ; for low-Q systems (large γ), the peak is broad and the system responds strongly across a wide range of frequencies near ω₀. Only very high-Q systems (Q≫1) show sharp, nearly point-like resonance. Concretely, for Q=5, the bandwidth Δω=ω₀/Q=4 rad/s means the amplitude stays at least 70% of its maximum for any ω_d within ±2 rad/s of ω₀. A second, separate point: damping\'s effect on amplitude depends heavily on WHERE you are relative to resonance, not a blanket "more damping always means smaller amplitude." Consider a forced oscillator driven far BELOW resonance (ω_d≪ω₀): the steady-state amplitude there is approximately A≈F₀/k, essentially independent of damping — adding damping barely changes this low-frequency response. AT resonance, however, the peak amplitude A_res=QF₀/(mω₀²) does shrink as damping increases (lower Q). So damping reshapes the resonance curve — it lowers and broadens the peak — but off-peak (well below or well above resonance), amplitude is barely affected by how much damping you add. "More damping → smaller amplitude" is reliably true only AT resonance, not everywhere on the response curve.',
+    targetedMisconceptions: [`${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY`, `${FOSC}:MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE`],
+    source: `${FOSC_SRC} — MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY (resonance is a peak with bandwidth, not a point) + MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE (damping effect depends on position relative to resonance)`,
+  },
+  {
+    conceptId: FOSC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "resonance only happens when the driving frequency exactly equals ω₀ — any slight mismatch and there\'s no resonance," treating resonance as an all-or-nothing spike at a single exact frequency. Check this against the amplitude formula A(ω_d): for ω₀=20 rad/s and γ=2, drive slightly off resonance at ω_d=21 rad/s — is the amplitude zero, or much smaller than at resonance? It turns out the amplitude is still substantial, nowhere near zero. Resonance is better understood as a PEAK, a region of enhanced response, not a single infinitely-narrow spike. Amplitude is largest exactly at ω_d=ω₀, but it stays large for a genuine range of nearby frequencies too. The width of this peak — the bandwidth — is Δω=2γ; systems with low Q (meaning large γ, more damping) have broad peaks and respond strongly across a wide frequency range around ω₀, while only very high-Q systems (Q≫1) show the sharp, nearly point-like resonance the misconception imagines. Concretely: for Q=5, the bandwidth Δω=ω₀/Q=4 rad/s means amplitude stays at least 70% of maximum for any ω_d within ±2 rad/s of ω₀ — a genuinely wide window, not a knife-edge condition. A second, separate error is assuming "if you add damping to a forced oscillator, the amplitude always decreases" — a blanket rule that ignores WHERE you are relative to resonance. Consider a forced oscillator driven far BELOW resonance, ω_d≪ω₀: its steady-state amplitude is approximately A≈F₀/k, which barely depends on damping at all — adding more damping changes the resonance peak shape but has almost no effect on this low-frequency response. It is specifically AT resonance that damping matters: there, the peak amplitude A_res=QF₀/(mω₀²) does shrink as damping increases (because increasing damping lowers Q). So damping\'s real effect is to reshape the resonance curve — lowering and broadening the peak — while leaving the off-peak (well below or well above resonance) response largely unaffected. The rule "more damping → smaller amplitude" is only reliably true AT resonance, not as a universal statement about forced oscillators everywhere on the curve.',
+    targetedMisconceptions: [`${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY`, `${FOSC}:MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE`],
+    source: `${FOSC_SRC} — MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY + MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const FOSC_PROBES: SeedProbe[] = [
+  {
+    conceptId: FOSC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A forced oscillator has ω₀=20 rad/s, γ=2. Driven at ω_d=21 rad/s (slightly off resonance), what happens to the amplitude?',
+    choices: [
+      { text: 'It stays large — resonance is a peak with bandwidth Δω=2γ, not a single exact frequency; nearby frequencies still produce a substantial response', isCorrect: true },
+      { text: 'It drops to essentially zero, since resonance only occurs at exactly ω_d=ω₀', isCorrect: false, misconceptionId: `${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY` },
+    ],
+    correctValue: 'amplitude stays large near resonance, it is a peak not a point',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY`],
+    source: `${FOSC_SRC} — MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FOSC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A forced oscillator is driven far below its resonance frequency (ω_d≪ω₀). If damping is increased, does the steady-state amplitude decrease?',
+    choices: [
+      { text: 'No — far below resonance, A≈F₀/k is nearly independent of damping; damping mainly reshapes the peak AT resonance, not the off-peak response', isCorrect: true },
+      { text: 'Yes — increasing damping always reduces amplitude, regardless of driving frequency', isCorrect: false, misconceptionId: `${FOSC}:MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE` },
+    ],
+    correctValue: 'no, off-resonance amplitude is nearly damping-independent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FOSC}:MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE`],
+    source: `${FOSC_SRC} — MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.transverse-waves ────────────────────────────────────────────────
+const TVWV = 'phys.wave.transverse-waves'
+const TVWV_SRC = 'docs/curriculum/blueprints/phys.wave.transverse-waves.md'
+
+const TVWV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TVWV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a transverse wave, individual medium particles oscillate PERPENDICULAR to the wave\'s travel direction — at exactly 90° to it — never forward along with the wave pattern. Flick one end of a rope sideways: a wave pattern runs along the rope horizontally, but each section of rope only moves up and down vertically. Film a single point on the rope: it bobs between +A and −A, never moving horizontally along the rope\'s length. Wave speed v=fλ describes how fast the PATTERN travels along the rope; particle speed is an entirely different, perpendicular quantity, with maximum particle speed v_particle_max=Aω=2πfA occurring as each particle passes through its equilibrium point. Wave velocity (the disturbance pattern\'s speed) and particle velocity (each point\'s own perpendicular motion, v_p=dy/dt) are different vectors pointing in different directions — draw them at right angles: wave arrow horizontal, particle arrow vertical. A second, separate confusion involves the graph itself: amplitude A is the maximum VERTICAL displacement from equilibrium — the height of a crest above the rest line on a displacement-vs-position graph. Wavelength λ is instead a HORIZONTAL measurement — the distance between two adjacent points in phase, such as crest to crest. On a y-versus-x wave graph: look vertically from equilibrium (y=0) up to a crest, that height is A; look horizontally from one crest to the next crest, that distance is λ. Both happen to be measured in metres, which is precisely why they get confused, but they measure genuinely perpendicular things on the graph.',
+    targetedMisconceptions: [`${TVWV}:MC-TRANSVERSE-PARTICLES-MOVE-FORWARD`, `${TVWV}:MC-AMPLITUDE-IS-WAVELENGTH`],
+    source: `${TVWV_SRC} — MC-TRANSVERSE-PARTICLES-MOVE-FORWARD (particle motion perpendicular to wave velocity) + MC-AMPLITUDE-IS-WAVELENGTH (A is vertical, λ is horizontal, on a y-x graph)`,
+  },
+  {
+    conceptId: TVWV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students draw transverse wave particles moving IN the direction of wave propagation — essentially confusing wave velocity with particle velocity, imagining that as the wave travels rightward, the medium itself also flows rightward. This is not what happens. In a transverse wave, medium particles oscillate PERPENDICULAR to the wave\'s travel direction — at a full 90° to it. A concrete demonstration: flick one end of a rope sideways. A wave pattern visibly runs along the rope, moving horizontally down its length. But if you film just one marked point on the rope, that point only bobs up and down vertically, between +A and −A — it never travels horizontally along the rope at all; the rope material itself stays roughly in place, just oscillating perpendicular to the wave\'s direction of travel. The wave speed v=fλ tells you how fast the DISTURBANCE PATTERN moves along the rope; this is a completely separate quantity from particle speed, which is the speed of each individual bit of rope moving up and down. Particle speed is not even constant — it reaches its maximum, v_particle_max=Aω=2πfA, as each particle passes through its equilibrium position, and drops to zero at the extremes of its oscillation. The clean way to keep these straight: wave velocity and particle velocity are different vectors pointing in genuinely different (perpendicular) directions — sketch the wave-propagation arrow horizontal and the particle-oscillation arrow vertical, at right angles to each other. A second, separate and very common confusion is between amplitude A and wavelength λ — some students draw amplitude as the horizontal distance between two crests, which is actually the definition of wavelength. On a displacement-versus-position (y-versus-x) wave graph: amplitude A is a VERTICAL measurement — the height of a crest above the equilibrium line (y=0). Wavelength λ is instead a HORIZONTAL measurement — the distance along the x-axis from one crest to the next adjacent crest (or any two points that are "in phase," repeating the same part of the cycle). Concretely: look straight up from equilibrium to the top of a crest — that vertical distance is A. Look sideways from one crest to the next crest — that horizontal distance is λ. The two quantities happen to share the same unit, metres, which is exactly why students conflate them — but on the graph they measure two genuinely perpendicular directions, and must never be swapped.',
+    targetedMisconceptions: [`${TVWV}:MC-TRANSVERSE-PARTICLES-MOVE-FORWARD`, `${TVWV}:MC-AMPLITUDE-IS-WAVELENGTH`],
+    source: `${TVWV_SRC} — MC-TRANSVERSE-PARTICLES-MOVE-FORWARD + MC-AMPLITUDE-IS-WAVELENGTH, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TVWV_PROBES: SeedProbe[] = [
+  {
+    conceptId: TVWV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'As a transverse wave travels rightward along a rope, in which direction does a single marked point on the rope move?',
+    choices: [
+      { text: 'Perpendicular to the wave\'s travel direction — up and down (or side to side), never rightward along with the wave pattern', isCorrect: true },
+      { text: 'Rightward, in the same direction as the wave, since the medium travels along with the wave pattern', isCorrect: false, misconceptionId: `${TVWV}:MC-TRANSVERSE-PARTICLES-MOVE-FORWARD` },
+    ],
+    correctValue: 'perpendicular to wave direction',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TVWV}:MC-TRANSVERSE-PARTICLES-MOVE-FORWARD`],
+    source: `${TVWV_SRC} — MC-TRANSVERSE-PARTICLES-MOVE-FORWARD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TVWV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On a displacement-vs-position (y-x) wave graph, what does the horizontal distance between two adjacent crests represent?',
+    choices: [
+      { text: 'Wavelength λ — a horizontal measurement, distinct from amplitude A which is the vertical height of a crest above equilibrium', isCorrect: true },
+      { text: 'Amplitude — the horizontal distance between crests directly measures the wave\'s amplitude', isCorrect: false, misconceptionId: `${TVWV}:MC-AMPLITUDE-IS-WAVELENGTH` },
+    ],
+    correctValue: 'wavelength, horizontal measurement',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TVWV}:MC-AMPLITUDE-IS-WAVELENGTH`],
+    source: `${TVWV_SRC} — MC-AMPLITUDE-IS-WAVELENGTH trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -35163,6 +35523,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CARN_EXPLANATIONS,
   ...RFRG_EXPLANATIONS,
   ...TLAW_EXPLANATIONS,
+  ...SPRM_EXPLANATIONS,
+  ...PEND_EXPLANATIONS,
+  ...SHME_EXPLANATIONS,
+  ...DAMP_EXPLANATIONS,
+  ...FOSC_EXPLANATIONS,
+  ...TVWV_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -35578,4 +35944,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CARN_PROBES,
   ...RFRG_PROBES,
   ...TLAW_PROBES,
+  ...SPRM_PROBES,
+  ...PEND_PROBES,
+  ...SHME_PROBES,
+  ...DAMP_PROBES,
+  ...FOSC_PROBES,
+  ...TVWV_PROBES,
 ]
