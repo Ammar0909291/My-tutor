@@ -36788,6 +36788,186 @@ const HATM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.qm.angular-momentum-addition ───────────────────────────────────────────
+const AMAD = 'phys.qm.angular-momentum-addition'
+const AMAD_SRC = 'docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md'
+
+const AMAD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMAD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When combining angular momenta J=L+S, the z-COMPONENT quantum numbers genuinely DO add classically: Mⱼ=m_l+m_s (adding m_L=1 and m_S=1/2 correctly gives M=3/2). But the TOTAL angular momentum quantum number j does NOT simply add the same way — treating j like a classical vector sum is the error. Instead, j ranges over all values from |j₁−j₂| to j₁+j₂ in integer steps; states sharing the same M but different j must be found by properly diagonalizing the J² operator in the uncoupled basis, not by naive addition. A second, closely related error: assuming adding j₁=1 and j₂=1/2 gives only j=3/2. Actually, combining j₁=1 and j₂=1/2 gives TWO distinct possible total angular momenta: j=3/2 (contributing four states, since 2j+1=4) AND j=1/2 (contributing two states, since 2j+1=2). The total state count must match between the coupled and uncoupled descriptions: (2j₁+1)(2j₂+1)=3×2=6 states total in the uncoupled basis, and indeed 4+2=6 states total across the two allowed j values in the coupled basis — this consistency check confirms both j=3/2 and j=1/2 genuinely occur, not merely the "obvious" classical-looking sum j=3/2.',
+    targetedMisconceptions: [`${AMAD}:MC-AMA-VECTOR-ADD`, `${AMAD}:MC-AMA-ONE-TOTAL-J`],
+    source: `${AMAD_SRC} — MC-AMA-VECTOR-ADD (M values add, but j does not add classically) + MC-AMA-ONE-TOTAL-J (multiple j values result from addition, not just one)`,
+  },
+  {
+    conceptId: AMAD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "total angular momentum J=L+S just adds the z-components: M=m_L+m_S," and, working an example, "I add m_L=1 and m_S=1/2 to get M=3/2" — correct so far for the z-COMPONENT quantum numbers, but then incorrectly extend the same simple addition to the TOTAL angular momentum quantum number j itself. It is genuinely true that Mⱼ=m_l+m_s — the z-component projections DO add exactly as classical vector components would. But j, the total angular momentum quantum number, does NOT add this simply; j is not a classical vector magnitude that sums directly. Instead, when combining two angular momenta j₁ and j₂, the resulting total j can take any value ranging from |j₁−j₂| up through j₁+j₂, in integer steps — a whole SET of possible values, not one single sum. States sharing the same total M value but potentially different j must be properly disentangled by diagonalizing the J² operator within the uncoupled basis — this is a genuine quantum-mechanical calculation, not a simple classical addition. A second, closely related and equally common error: assuming that combining j₁=1 and j₂=1/2 gives only a single resulting total angular momentum, j=3/2, reasoning "total spin is just 1+1/2=3/2." This misses that TWO distinct total angular momentum values genuinely arise from this combination: j=3/2 (contributing four total states, since the multiplicity is 2j+1=4) AND SEPARATELY j=1/2 (contributing two more states, since 2j+1=2). A reliable consistency check confirms this: the total number of states must match between the uncoupled basis, (2j₁+1)(2j₂+1)=3×2=6 states, and the coupled basis, where summing the multiplicities of all resulting j values must also give exactly 6 — and indeed 4 (from j=3/2) plus 2 (from j=1/2) equals exactly 6, confirming that both j=3/2 AND j=1/2 genuinely occur as physically real possibilities, not merely the single "obvious-looking" classical-style sum of j=3/2 alone.',
+    targetedMisconceptions: [`${AMAD}:MC-AMA-VECTOR-ADD`, `${AMAD}:MC-AMA-ONE-TOTAL-J`],
+    source: `${AMAD_SRC} — MC-AMA-VECTOR-ADD + MC-AMA-ONE-TOTAL-J, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const AMAD_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMAD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When combining angular momenta J=L+S, does the total angular momentum quantum number j add the same simple way as the z-component quantum numbers (Mⱼ=m_l+m_s)?',
+    choices: [
+      { text: 'No — Mⱼ=m_l+m_s does add directly, but j ranges from |j₁−j₂| to j₁+j₂ and must be found by diagonalizing J², not by simple addition', isCorrect: true },
+      { text: 'Yes — j adds classically just like the z-components do, giving a single definite total j value directly from j₁+j₂', isCorrect: false, misconceptionId: `${AMAD}:MC-AMA-VECTOR-ADD` },
+    ],
+    correctValue: 'M adds directly but j does not, j ranges over multiple values',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMAD}:MC-AMA-VECTOR-ADD`],
+    source: `${AMAD_SRC} — MC-AMA-VECTOR-ADD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: AMAD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Combining j₁=1 and j₂=1/2, what total angular momentum j values result?',
+    choices: [
+      { text: 'Both j=3/2 (4 states) and j=1/2 (2 states) — total 6 states, matching (2j₁+1)(2j₂+1)=3×2=6', isCorrect: true },
+      { text: 'Only j=3/2 (from simply adding 1+1/2=3/2)', isCorrect: false, misconceptionId: `${AMAD}:MC-AMA-ONE-TOTAL-J` },
+    ],
+    correctValue: 'two values, j=3/2 and j=1/2',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMAD}:MC-AMA-ONE-TOTAL-J`],
+    source: `${AMAD_SRC} — MC-AMA-ONE-TOTAL-J trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.identical-particles ─────────────────────────────────────────────────
+const IDPT = 'phys.qm.identical-particles'
+const IDPT_SRC = 'docs/curriculum/blueprints/phys.qm.identical-particles.md'
+
+const IDPT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IDPT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When writing a two-particle wavefunction ψ(x₁,x₂), the labels "1" and "2" are NOT meaningfully tracking which specific particle is which — "particle 1 is at position x₁ and particle 2 is at position x₂, where particle 1 is the one on the left" treats the labels as if they refer to genuinely distinguishable, trackable individuals. But there is no physical observable that can distinguish two truly identical particles from one another — labels "1" and "2" are purely bookkeeping devices used in the mathematics, not references to physically distinguishable entities. The physical state must therefore be symmetric or antisymmetric under exchange of the two particles, so that |ψ(x₁,x₂)|²=|ψ(x₂,x₁)|² — an identical probability distribution regardless of which particle you arbitrarily call "1" and which you call "2." A second, separate and equally important error: assuming symmetrization only needs to be applied to the spatial part of the wavefunction, with the spin part somehow "handling itself separately." The FULL wavefunction must be symmetric or antisymmetric in ALL quantum numbers SIMULTANEOUSLY — spanning both space and spin together, not treated as two independent symmetrization problems. For fermions specifically, an overall antisymmetric total wavefunction can arise from EITHER an antisymmetric spatial part combined with a symmetric spin part (the spin-triplet configuration) OR a symmetric spatial part combined with an antisymmetric spin part (the spin-singlet configuration) — the exchange antisymmetry requirement applies to the COMBINED space×spin state as a whole, and spatial and spin symmetrization must be worked out jointly, never separately.',
+    targetedMisconceptions: [`${IDPT}:MC-IP-LABEL-MEANINGFUL`, `${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY`],
+    source: `${IDPT_SRC} — MC-IP-LABEL-MEANINGFUL (particle labels are bookkeeping, not tracking distinguishable particles) + MC-IP-EXCHANGE-SPATIAL-ONLY (symmetrization applies to combined space×spin state, not spatial part alone)`,
+  },
+  {
+    conceptId: IDPT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, writing ψ(x₁,x₂), say "particle 1 is at position x₁ and particle 2 is at position x₂ — I\'ll write ψ(x₁,x₂) where particle 1 is the one on the left," treating the numerical labels "1" and "2" as if they meaningfully track which specific, individually-identifiable particle is where — exactly as you naturally would for two distinguishable classical objects, like a red ball and a blue ball. This intuition fails for truly identical quantum particles. There is genuinely no physical observable — no measurement of any kind — that can distinguish two identical particles (say, two electrons) from one another; unlike a red ball and a blue ball, there is no intrinsic "tag" or property that lets you say "this specific one is particle 1." The labels 1 and 2 appearing in ψ(x₁,x₂) are purely mathematical bookkeeping devices used to write down the wavefunction, not references to physically distinguishable, individually trackable entities. Because of this, the physical state must be symmetric or antisymmetric under exchange of the two particles\' labels, guaranteeing |ψ(x₁,x₂)|²=|ψ(x₂,x₁)|² — the identical probability distribution results regardless of which particle you arbitrarily decide to call "1" and which you call "2," precisely because no physical distinction between them actually exists to justify treating the two labelings differently. A second, entirely separate and equally common error: assuming "symmetrization only applies to the spatial wavefunction," with the belief that "the spin part handles itself separately," as though spatial and spin symmetrization were two independent problems, each resolved on its own. This is false. The FULL wavefunction — spanning both spatial AND spin degrees of freedom together — must be symmetric or antisymmetric in ALL relevant quantum numbers SIMULTANEOUSLY, considered jointly, never as two separately-solved halves. For fermions specifically (particles obeying the Pauli exclusion principle), an overall ANTISYMMETRIC total wavefunction — the physically required form for identical fermions — can arise from either of two combinations: an antisymmetric SPATIAL part paired with a symmetric SPIN part (giving the so-called spin-triplet configuration), OR a symmetric SPATIAL part paired with an antisymmetric SPIN part (giving the spin-singlet configuration). Both combinations are physically valid ways of achieving overall antisymmetry — what matters is the antisymmetry of the FULL, combined space×spin state, not the spatial part being antisymmetric all by itself. The exchange-symmetry requirement genuinely applies to the combined state as an inseparable whole, and spatial symmetrization and spin symmetrization must always be considered and worked out together, jointly, never treated as two independent, separately-resolvable problems.',
+    targetedMisconceptions: [`${IDPT}:MC-IP-LABEL-MEANINGFUL`, `${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY`],
+    source: `${IDPT_SRC} — MC-IP-LABEL-MEANINGFUL + MC-IP-EXCHANGE-SPATIAL-ONLY, C2 misconception register with diagnostic phrase and correct understanding`,
+  },
+]
+
+const IDPT_PROBES: SeedProbe[] = [
+  {
+    conceptId: IDPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a two-electron wavefunction ψ(x₁,x₂), do the labels "1" and "2" refer to two physically distinguishable, individually trackable electrons?',
+    choices: [
+      { text: 'No — no observable distinguishes identical particles; the labels are purely mathematical bookkeeping, and the physical state must satisfy |ψ(x₁,x₂)|²=|ψ(x₂,x₁)|²', isCorrect: true },
+      { text: 'Yes — particle 1 and particle 2 are distinguishable individuals, tracked separately by their labels, just like a red ball and a blue ball', isCorrect: false, misconceptionId: `${IDPT}:MC-IP-LABEL-MEANINGFUL` },
+    ],
+    correctValue: 'labels are bookkeeping, particles are not distinguishable',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IDPT}:MC-IP-LABEL-MEANINGFUL`],
+    source: `${IDPT_SRC} — MC-IP-LABEL-MEANINGFUL trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IDPT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For two identical fermions, does the exchange-antisymmetry requirement apply only to the spatial part of the wavefunction, with the spin part handled independently?',
+    choices: [
+      { text: 'No — the FULL wavefunction (space×spin combined) must be antisymmetric; this can arise from antisymmetric-spatial×symmetric-spin (triplet) OR symmetric-spatial×antisymmetric-spin (singlet)', isCorrect: true },
+      { text: 'Yes — symmetrization applies only to the spatial wavefunction; the spin part is a separate, independent problem', isCorrect: false, misconceptionId: `${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY` },
+    ],
+    correctValue: 'antisymmetry applies to the combined space and spin state jointly',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY`],
+    source: `${IDPT_SRC} — MC-IP-EXCHANGE-SPATIAL-ONLY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.qm.pauli-exclusion ──────────────────────────────────────────────────────
+const PAUL = 'phys.qm.pauli-exclusion'
+const PAUL_SRC = 'docs/curriculum/blueprints/phys.qm.pauli-exclusion.md'
+
+const PAUL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PAUL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Pauli exclusion principle is NOT fundamentally about electric charge repulsion — "they push each other away electrically" is the wrong mechanism, even though Coulomb repulsion is the most familiar electron-electron interaction and makes this explanation tempting. Decisive counter-evidence: neutrons are electrically NEUTRAL, carrying no charge whatsoever, yet no two neutrons can ever occupy the same quantum state. Neutron star stability itself depends on neutron degeneracy pressure — a purely Pauli-based effect, with no electromagnetic component at all, since neutrons have no charge to repel electrically. If Pauli exclusion were simply about Coulomb repulsion, electrically neutral particles like neutrons would show no exclusion effect whatsoever — but they clearly do. Pauli exclusion actually arises from the ANTISYMMETRY requirement on the many-body wave function — a purely quantum-mechanical symmetry requirement, entirely unrelated to electric charge: any two identical fermions (same species, same spin state) cannot share a quantum state, because their joint wave function must be antisymmetric under exchange, which forces it to vanish identically whenever the two particles share all the same quantum numbers. A second, separate and very common error: assuming each atomic orbital can hold only ONE electron. A "2p orbital," specified only by quantum numbers (n=2, l=1, m_l), is not actually a FULLY specified quantum state — it is missing the spin quantum number. Adding m_s properly distinguishes (2,1,m_l,+½) from (2,1,m_l,−½) as two genuinely different, fully specified states, both allowed to be simultaneously occupied. Neon (Z=10) indeed has its 2p subshell filled with 6 electrons total — 2 electrons per m_l value, across 3 possible m_l values — confirmed directly by spectroscopy. The Pauli constraint genuinely applies to FULLY specified states, meaning all four quantum numbers (n, l, m_l, m_s) together: two electrons CAN legitimately share the same (n,l,m_l) as long as they have opposite m_s values. Each spatial orbital (n,l,m_l) can therefore hold exactly 2 electrons — one with m_s=+½ and one with m_s=−½ — never just 1.',
+    targetedMisconceptions: [`${PAUL}:MC-1`, `${PAUL}:MC-2`],
+    source: `${PAUL_SRC} — MC-1 (Pauli is just about charge repulsion) + MC-2 (each atomic orbital holds only 1 electron)`,
+  },
+  {
+    conceptId: PAUL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "why can\'t two electrons occupy the same state — is it because they repel each other?", say "they push each other away electrically," reasoning from Coulomb repulsion — the most familiar and intuitive electron-electron interaction, which naturally makes this explanation feel plausible. Test this against a decisive counter-example: neutrons are electrically NEUTRAL, carrying zero net charge — there is no Coulomb repulsion whatsoever between two neutrons. Yet no two neutrons can ever occupy the same quantum state; this is not a hypothetical claim but a physically essential fact, since neutron star stability against gravitational collapse depends directly on neutron DEGENERACY PRESSURE — a phenomenon that is purely Pauli-based, with absolutely no electromagnetic contribution, precisely because neutrons carry no charge to repel each other electrically in the first place. If Pauli exclusion genuinely were "just about" charge repulsion, then electrically neutral particles like neutrons would show no exclusion effect at all — but they demonstrably do, and neutron star physics depends critically on this fact. The correct mechanism: Pauli exclusion actually arises from the ANTISYMMETRY requirement imposed on the many-body wave function — a purely quantum-mechanical symmetry principle, entirely independent of and unrelated to electric charge. Any two identical fermions — same species, same spin state — simply CANNOT share the same quantum state, because their combined, joint wave function is required to be antisymmetric under particle exchange, and this antisymmetry condition mathematically forces the wave function to vanish identically whenever the two particles would otherwise share all the same quantum numbers. A concrete comparison worth internalizing: electrons (fermions that are also charged) experience BOTH the Pauli exclusion effect AND Coulomb repulsion simultaneously; neutrons (fermions that are neutral) experience Pauli exclusion but genuinely NOT Coulomb repulsion; photons (which are bosons, not fermions, and are also neutral) experience NEITHER Pauli exclusion NOR Coulomb repulsion — which is precisely why many photons can freely occupy the exact same quantum mode simultaneously, the physical basis underlying how a laser works. A second, entirely separate and equally common error: asked "how many electrons fit in a 2p orbital?", answering "one, since Pauli says no two can share the same state," forgetting that the spin quantum number m_s=±½ provides two genuinely distinct states within what is casually called a single "orbital." A "2p orbital," described only by the quantum numbers (n=2, l=1, m_l), is actually an INCOMPLETE specification of a quantum state — it is missing the spin quantum number entirely. Once you add m_s, you get two genuinely different, fully specified quantum states: (2,1,m_l,+½) and (2,1,m_l,−½) — both are legitimately allowed and can be simultaneously occupied by two different electrons, since they differ in at least one quantum number (m_s), satisfying the Pauli principle. Direct experimental confirmation: neon (atomic number Z=10) has its full 2p subshell containing exactly 6 electrons total — 2 electrons for each of the 3 possible m_l values (m_l=−1,0,+1) — a result directly confirmed by atomic spectroscopy. The Pauli exclusion principle genuinely applies to FULLY specified quantum states — meaning all four quantum numbers together: n, l, m_l, AND m_s — and two electrons CAN legitimately share the same (n,l,m_l) combination as long as they have opposite spin values, m_s=+½ and m_s=−½ respectively. The correct, general rule: each SPATIAL orbital, specified by (n,l,m_l), can hold exactly TWO electrons — never just one — with one electron having m_s=+½ and the other having m_s=−½.',
+    targetedMisconceptions: [`${PAUL}:MC-1`, `${PAUL}:MC-2`],
+    source: `${PAUL_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const PAUL_PROBES: SeedProbe[] = [
+  {
+    conceptId: PAUL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Neutron stars are stabilized against gravitational collapse by neutron degeneracy pressure. Neutrons carry no electric charge. What does this tell you about the fundamental origin of the Pauli exclusion principle?',
+    choices: [
+      { text: 'Pauli exclusion arises from the antisymmetry requirement on the many-body wave function — a purely quantum-mechanical effect unrelated to electric charge, since neutral neutrons still obey it', isCorrect: true },
+      { text: 'It must be a special exception, since Pauli exclusion is fundamentally about electric charge repulsion between particles', isCorrect: false, misconceptionId: `${PAUL}:MC-1` },
+    ],
+    correctValue: 'antisymmetry of wave function, unrelated to charge',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PAUL}:MC-1`],
+    source: `${PAUL_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PAUL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How many electrons can occupy a 2p spatial orbital (n=2, l=1, fixed m_l)?',
+    choices: [
+      { text: '2 — one with m_s=+½ and one with m_s=−½; these are two distinct fully-specified quantum states, both allowed by Pauli exclusion', isCorrect: true },
+      { text: '1 — Pauli exclusion means no two electrons can share the same orbital', isCorrect: false, misconceptionId: `${PAUL}:MC-2` },
+    ],
+    correctValue: '2 electrons, opposite spin states',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PAUL}:MC-2`],
+    source: `${PAUL_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -37237,6 +37417,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PBOX_EXPLANATIONS,
   ...HOSC_EXPLANATIONS,
   ...HATM_EXPLANATIONS,
+  ...AMAD_EXPLANATIONS,
+  ...IDPT_EXPLANATIONS,
+  ...PAUL_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -37686,4 +37869,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PBOX_PROBES,
   ...HOSC_PROBES,
   ...HATM_PROBES,
+  ...AMAD_PROBES,
+  ...IDPT_PROBES,
+  ...PAUL_PROBES,
 ]
