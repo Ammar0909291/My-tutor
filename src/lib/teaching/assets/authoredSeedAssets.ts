@@ -26598,6 +26598,723 @@ const ESSY_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.communication.discourse-markers-advanced ─────────────────────────────
+const DMA = 'eng.communication.discourse-markers-advanced'
+const DMA_SRC = 'docs/curriculum/blueprints/eng.communication.discourse-markers-advanced.md'
+
+const DMA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DMA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A discourse marker signals a SPECIFIC logical relationship — like a ' +
+      'stop sign and a yield sign giving genuinely different instructions ' +
+      'at an intersection. "However" signals contrast; using it where the ' +
+      'second idea actually adds to the first (not contrasts with it) ' +
+      'gives the reader false information about how the ideas connect. ' +
+      'Identify the actual relationship (contrast, cause, addition) before ' +
+      'choosing the marker.',
+    targetedMisconceptions: [`${DMA}:MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP`],
+    source: `${DMA_SRC} — MC-A (P28 false-contrast conflict)`,
+  },
+  {
+    conceptId: DMA,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An elaborate discourse marker that doesn\'t fit the context is like ' +
+      'wearing a tuxedo to a backyard barbecue — it draws attention to ' +
+      'itself instead of the message. A marker\'s job is to make the ' +
+      'logical connection clear; choose the marker — simple or ' +
+      'sophisticated — that most naturally and clearly signals the actual ' +
+      'relationship, not the most elaborate-sounding one.',
+    targetedMisconceptions: [`${DMA}:MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT`],
+    source: `${DMA_SRC} — MC-B (P28 tuxedo-at-a-barbecue conflict)`,
+  },
+  {
+    conceptId: DMA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Discourse markers signal specific logical relationships (contrast, ' +
+      'cause, addition) — like distinct traffic signs, not interchangeable ' +
+      'connectors; using the wrong one misleads the reader about how ideas ' +
+      'connect. Separately, an elaborate marker that doesn\'t naturally fit ' +
+      'draws attention to itself (like a tuxedo at a barbecue) rather than ' +
+      'clarifying the connection — natural fit and clarity matter more ' +
+      'than sounding sophisticated.',
+    targetedMisconceptions: [
+      `${DMA}:MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP`,
+      `${DMA}:MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT`,
+    ],
+    source: `${DMA_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DMA_PROBES: SeedProbe[] = [
+  {
+    conceptId: DMA,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The report was thorough. However, it included a detailed budget breakdown." Does "however" accurately signal the actual relationship between these two ideas?',
+    choices: [
+      { text: 'No — the second idea adds to the first (it\'s additive, not contrastive), so "however" falsely signals a contrast that isn\'t there; "furthermore" would fit', isCorrect: true },
+      { text: 'Yes — "however" is a general transition word and works fine here regardless of the actual relationship', isCorrect: false, misconceptionId: `${DMA}:MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP` },
+    ],
+    correctValue: 'no, the relationship is additive not contrastive',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DMA}:MC-A-DISCOURSE-MARKERS-ARE-INTERCHANGEABLE-CONNECTORS-REGARDLESS-OF-THE-ACTUAL-LOGICAL-RELATIONSHIP`],
+    source: `${DMA_SRC} — false-contrast conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DMA,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A paragraph replaces every simple connector ("but," "so," "also") with an elaborate alternative ("notwithstanding," "consequently," "furthermore") regardless of fit. Does this automatically make the writing better?',
+    choices: [
+      { text: 'No — elaborate markers that don\'t naturally fit the context sound forced and draw attention to themselves instead of clarifying the logical connection', isCorrect: true },
+      { text: 'Yes — more sophisticated-sounding discourse markers are always better than simple ones', isCorrect: false, misconceptionId: `${DMA}:MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT` },
+    ],
+    correctValue: 'no, natural fit and clarity matter more than elaborate sound',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DMA}:MC-B-MORE-SOPHISTICATED-SOUNDING-DISCOURSE-MARKERS-ARE-ALWAYS-BETTER-REGARDLESS-OF-NATURAL-FIT`],
+    source: `${DMA_SRC} — tuxedo-at-a-barbecue conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.cross-cultural-communication ───────────────────────────
+const CCC = 'eng.communication.cross-cultural-communication'
+const CCC_SRC = 'docs/curriculum/blueprints/eng.communication.cross-cultural-communication.md'
+
+const CCC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CCC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming your own culture\'s communication norms are the universal ' +
+      '"correct" default is like assuming your country\'s side of the road ' +
+      'for driving is the objectively right one — both are valid, ' +
+      'internally consistent conventions, neither the universal truth. ' +
+      'Directness, formality, and turn-taking vary by culture as equally ' +
+      'valid conventions, not one correct default and several deviations.',
+    targetedMisconceptions: [`${CCC}:MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY`],
+    source: `${CCC_SRC} — MC-A (P28 direct-vs-indirect-feedback conflict)`,
+  },
+  {
+    conceptId: CCC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming a whole culture shares one uniform communication style is ' +
+      'like assuming everyone from one large country has the exact same ' +
+      'accent and slang — real variation exists by region, generation, and ' +
+      'individual personality within any cultural group. Cultural awareness ' +
+      'means recognizing broad tendencies AND their genuine internal ' +
+      'variation, adapting to the actual person, not an assumed uniform ' +
+      'stereotype.',
+    targetedMisconceptions: [`${CCC}:MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION`],
+    source: `${CCC_SRC} — MC-B (P28 within-group variation conflict)`,
+  },
+  {
+    conceptId: CCC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'One\'s own culture\'s communication norms (directness, formality, ' +
+      'turn-taking) are one valid convention among several, not the ' +
+      'universal default — like differing but equally valid national ' +
+      'driving conventions. Separately, any cultural group shows genuine ' +
+      'internal variation by region, generation, and individual — broad ' +
+      'tendencies are a starting point for awareness, never a uniform rule ' +
+      'to apply to every member.',
+    targetedMisconceptions: [
+      `${CCC}:MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY`,
+      `${CCC}:MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION`,
+    ],
+    source: `${CCC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CCC_PROBES: SeedProbe[] = [
+  {
+    conceptId: CCC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'One culture delivers critical feedback directly and explicitly; another delivers it indirectly through implication to save face. Is the direct style objectively "more honest" or "clearer"?',
+    choices: [
+      { text: 'No — both are equally valid conventions for handling feedback in their respective cultures, not one correct default and one deviation', isCorrect: true },
+      { text: 'Yes — direct feedback is objectively more honest and clear; other styles are less clear communication', isCorrect: false, misconceptionId: `${CCC}:MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY` },
+    ],
+    correctValue: 'no, both conventions are equally valid',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CCC}:MC-A-MY-OWN-CULTURES-COMMUNICATION-NORMS-ARE-THE-UNIVERSAL-DEFAULT-AND-CORRECT-WAY`],
+    source: `${CCC_SRC} — direct-vs-indirect-feedback conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CCC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two individuals from the same broadly-labeled cultural group communicate quite differently from each other — one more direct, one more indirect. Does this mean the whole culture shares one uniform communication style?',
+    choices: [
+      { text: 'No — genuine regional, generational, and individual variation exists within any cultural group; broad tendencies are a starting point, not a fixed rule', isCorrect: true },
+      { text: 'Yes — if they share the same cultural label they should communicate in exactly the same style', isCorrect: false, misconceptionId: `${CCC}:MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION` },
+    ],
+    correctValue: 'no, real variation exists within any cultural group',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CCC}:MC-B-AN-ENTIRE-CULTURE-HAS-ONE-SINGLE-UNIFORM-COMMUNICATION-STYLE-WITH-NO-INTERNAL-VARIATION`],
+    source: `${CCC_SRC} — within-group variation conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.audience-and-purpose ──────────────────────────────────────
+const AUDP = 'eng.composition.audience-and-purpose'
+const AUDP_SRC = 'docs/curriculum/blueprints/eng.composition.audience-and-purpose.md'
+
+const AUDP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AUDP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Topic is WHAT you\'re writing about; purpose is WHAT YOU WANT THE ' +
+      'READING TO DO — inform, persuade, entertain, or express. Two essays ' +
+      'can share a topic (school uniforms) and have completely different ' +
+      'purposes (one argues for a policy, one explains how it works) — ' +
+      'like the same ingredient, chicken, making either soup or a ' +
+      'sandwich. Always name topic and purpose separately before writing.',
+    targetedMisconceptions: [`${AUDP}:MC-A-PURPOSE-IS-THE-TOPIC`],
+    source: `${AUDP_SRC} — MC-A (P28 same-topic-different-purpose conflict)`,
+  },
+  {
+    conceptId: AUDP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Audience isn\'t just "whoever happens to read it" — it\'s a set of ' +
+      'choices about what your reader already knows, cares about, and ' +
+      'needs, like packing a suitcase differently for a toddler\'s trip ' +
+      'versus a businessperson\'s conference. Before writing, ask: what do ' +
+      'they know, what do they care about, what\'s our relationship — the ' +
+      'answers should visibly change word choice and what you explain ' +
+      'versus assume.',
+    targetedMisconceptions: [`${AUDP}:MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT`],
+    source: `${AUDP_SRC} — MC-B (P28 photosynthesis-for-child-vs-professor conflict)`,
+  },
+  {
+    conceptId: AUDP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Topic (what you\'re writing about) and purpose (what you want the ' +
+      'reading to DO — inform, persuade, entertain, express) are separate ' +
+      'questions; the same facts can serve different purposes. Separately, ' +
+      'audience is an active design constraint — a set of choices about ' +
+      'what the reader already knows, values, and needs, like packing ' +
+      'differently for different travelers — not a passive fact about who ' +
+      'happens to read the text.',
+    targetedMisconceptions: [
+      `${AUDP}:MC-A-PURPOSE-IS-THE-TOPIC`,
+      `${AUDP}:MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT`,
+    ],
+    source: `${AUDP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const AUDP_PROBES: SeedProbe[] = [
+  {
+    conceptId: AUDP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two essays both have the topic "school uniforms" — one argues FOR a uniform policy, the other explains HOW the policy works. Do they have the same purpose because they share a topic?',
+    choices: [
+      { text: 'No — topic (what it\'s about) and purpose (what you want the reading to DO — persuade vs. inform) are separate; same topic can carry different purposes', isCorrect: true },
+      { text: 'Yes — the purpose of an essay is its topic, so same topic means same purpose', isCorrect: false, misconceptionId: `${AUDP}:MC-A-PURPOSE-IS-THE-TOPIC` },
+    ],
+    correctValue: 'no, topic and purpose are separate',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AUDP}:MC-A-PURPOSE-IS-THE-TOPIC`],
+    source: `${AUDP_SRC} — same-topic-different-purpose conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: AUDP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An explanation of photosynthesis written for a 7-year-old assumes no prior chemistry knowledge; one for a biology professor assumes chemical formulas are already known. Is "audience" just whoever happens to pick up the text, with no active adjustment needed?',
+    choices: [
+      { text: 'No — audience is a set of active choices about what the reader already knows, cares about, and needs; the writer must build this in deliberately', isCorrect: true },
+      { text: 'Yes — audience just means whoever reads it; the writing shouldn\'t need to change for different readers', isCorrect: false, misconceptionId: `${AUDP}:MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT` },
+    ],
+    correctValue: 'no, audience is an active design constraint',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AUDP}:MC-B-AUDIENCE-MEANS-WHOEVER-READS-IT`],
+    source: `${AUDP_SRC} — photosynthesis-for-child-vs-professor conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.applied-linguistics-intro ─────────────────────────────────
+const APLI = 'eng.linguistics.applied-linguistics-intro'
+const APLI_SRC = 'docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md'
+
+const APLI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: APLI,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming a teaching method is effective just because it\'s ' +
+      'traditional or familiar is like assuming a centuries-old medical ' +
+      'remedy must work simply because it\'s long-standing — but medicine ' +
+      'tests traditional practices against real evidence. Teaching methods ' +
+      'should be evaluated against actual acquisition-research findings ' +
+      '(meaningful input, communicative practice), not assumed effective ' +
+      'from familiarity alone.',
+    targetedMisconceptions: [`${APLI}:MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE`],
+    source: `${APLI_SRC} — MC-A (P28 rote-drill-vs-communicative-practice conflict)`,
+  },
+  {
+    conceptId: APLI,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A standardized test using only one prestige dialect\'s norms is like ' +
+      'a height-measuring device calibrated to only one unit system — it ' +
+      'produces systematically distorted results for anyone using a ' +
+      'different, equally valid convention. A test that penalizes ' +
+      'legitimate dialect features isn\'t neutrally measuring the ' +
+      'underlying skill; it\'s partly measuring dialect conformity, which ' +
+      'is not the same thing.',
+    targetedMisconceptions: [`${APLI}:MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL`],
+    source: `${APLI_SRC} — MC-B (P28 miscalibrated-height-device conflict)`,
+  },
+  {
+    conceptId: APLI,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Language-teaching methods should be evaluated against real ' +
+      'acquisition-research findings, not assumed effective merely because ' +
+      'they are traditional or familiar — medicine tests tradition against ' +
+      'evidence the same way. Separately, a standardized test using only ' +
+      'one dialect\'s norms can conflate dialect conformity with the ' +
+      'actual skill being measured, unfairly penalizing speakers of other, ' +
+      'equally legitimate dialects.',
+    targetedMisconceptions: [
+      `${APLI}:MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE`,
+      `${APLI}:MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL`,
+    ],
+    source: `${APLI_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const APLI_PROBES: SeedProbe[] = [
+  {
+    conceptId: APLI,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A teaching method relies purely on memorizing isolated vocabulary lists and grammar-rule drills with no communicative practice, but is common and traditional. Does its being traditional mean it must be effective?',
+    choices: [
+      { text: 'No — teaching methods should be evaluated against actual acquisition-research findings (meaningful input, communicative practice), not assumed effective from tradition alone', isCorrect: true },
+      { text: 'Yes — a teaching method that feels traditional or familiar must be effective', isCorrect: false, misconceptionId: `${APLI}:MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE` },
+    ],
+    correctValue: 'no, evaluate against acquisition research, not tradition',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${APLI}:MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE`],
+    source: `${APLI_SRC} — rote-drill-vs-communicative-practice conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: APLI,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A standardized test item marks a systematic, legitimate dialect grammatical feature as "incorrect," even though the student\'s underlying reading comprehension is genuinely demonstrated. Is this test a neutral, fair measure of comprehension?',
+    choices: [
+      { text: 'No — it conflates dialect conformity with the actual skill being measured, unfairly penalizing a legitimate dialect feature unrelated to comprehension', isCorrect: true },
+      { text: 'Yes — a standardized test using one dialect\'s norms is a neutral, fair measure of language skill', isCorrect: false, misconceptionId: `${APLI}:MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL` },
+    ],
+    correctValue: 'no, the test conflates dialect with the actual skill',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${APLI}:MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL`],
+    source: `${APLI_SRC} — miscalibrated-height-device conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.dialectology ───────────────────────────────────────────────
+const DIAL = 'eng.linguistics.dialectology'
+const DIAL_SRC = 'docs/curriculum/blueprints/eng.linguistics.dialectology.md'
+
+const DIAL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIAL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming dialect boundaries are sharp, single lines is like assuming ' +
+      'climate zones change abruptly at one line on a map — real ' +
+      'transitions are gradual, and different features (temperature, ' +
+      'rainfall; or vocabulary, pronunciation, grammar) each have their ' +
+      'own somewhat different transition zone (isogloss) that rarely stack ' +
+      'up into one shared border.',
+    targetedMisconceptions: [`${DIAL}:MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY`],
+    source: `${DIAL_SRC} — MC-A (P28 non-aligned-isoglosses conflict)`,
+  },
+  {
+    conceptId: DIAL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Treating a named dialect as one single unified thing everyone either ' +
+      'has or lacks is like treating "being a jazz musician" as requiring ' +
+      'every jazz technique ever invented — musicians share a family ' +
+      'resemblance while each having their own mix. A dialect is a BUNDLE ' +
+      'of many features; real speakers share most but rarely all of the ' +
+      'bundle, and individual variation is normal.',
+    targetedMisconceptions: [`${DIAL}:MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE`],
+    source: `${DIAL_SRC} — MC-B (P28 jazz-musician-family-resemblance conflict)`,
+  },
+  {
+    conceptId: DIAL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Dialect boundaries (isoglosses) are gradual, and different ' +
+      'linguistic features each follow their own somewhat different ' +
+      'transition path — like climate zones, not a single sharp border. ' +
+      'Separately, a named dialect is a bundle of many individual ' +
+      'features, not a monolithic all-or-nothing category; real speakers ' +
+      'typically share most but not all of the bundle, like jazz musicians ' +
+      'sharing a family resemblance without identical technique.',
+    targetedMisconceptions: [
+      `${DIAL}:MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY`,
+      `${DIAL}:MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE`,
+    ],
+    source: `${DIAL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const DIAL_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIAL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A dialect map shows a vocabulary isogloss, a pronunciation isogloss, and a grammar isogloss all crossing a region at different, non-aligned lines. Does this mean there is one single sharp "dialect border" everyone agrees on?',
+    choices: [
+      { text: 'No — each linguistic feature has its own isogloss, and these rarely align into one shared boundary; dialect regions involve gradual, overlapping transitions', isCorrect: true },
+      { text: 'Yes — dialect boundaries are sharp lines where everyone on one side speaks one way and everyone on the other speaks differently', isCorrect: false, misconceptionId: `${DIAL}:MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY` },
+    ],
+    correctValue: 'no, isoglosses for different features rarely align',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIAL}:MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY`],
+    source: `${DIAL_SRC} — non-aligned-isoglosses conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DIAL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two speakers are both broadly identified as speaking "the same regional dialect," but they differ from each other on several specific vocabulary and pronunciation features. Does this mean the dialect label refers to one single, uniform set every speaker shares identically?',
+    choices: [
+      { text: 'No — a named dialect is a bundle of many individual features; speakers typically share most but rarely all of them, and individual variation is normal', isCorrect: true },
+      { text: 'Yes — a dialect is one single unified thing that everyone in a region either fully has or entirely lacks', isCorrect: false, misconceptionId: `${DIAL}:MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE` },
+    ],
+    correctValue: 'no, a dialect is a feature bundle with normal variation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIAL}:MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE`],
+    source: `${DIAL_SRC} — jazz-musician-family-resemblance conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.corpus-linguistics-intro ──────────────────────────────────
+const CORPL = 'eng.linguistics.corpus-linguistics-intro'
+const CORPL_SRC = 'docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md'
+
+const CORPL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CORPL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trusting personal intuition over corpus data for frequency questions ' +
+      'is like trusting your gut about which of two mushrooms is more ' +
+      'common in a forest rather than actually surveying it — intuition is ' +
+      'built from a small, biased personal sample. For questions about how ' +
+      'OFTEN something occurs, trust systematic large-scale corpus data ' +
+      'over personal intuition.',
+    targetedMisconceptions: [`${CORPL}:MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA`],
+    source: `${CORPL_SRC} — MC-A (P28 forest-survey conflict)`,
+  },
+  {
+    conceptId: CORPL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming corpus rarity means ungrammatical is like assuming a rarely-' +
+      'prescribed but medically valid treatment must be invalid just ' +
+      'because it\'s uncommon — rarity and validity are separate ' +
+      'questions. A perfectly grammatical construction can simply be ' +
+      'needed less often (a specific style or context) without being ' +
+      'structurally broken; frequency and grammaticality are distinct.',
+    targetedMisconceptions: [`${CORPL}:MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL`],
+    source: `${CORPL_SRC} — MC-B (P28 rare-medical-treatment conflict)`,
+  },
+  {
+    conceptId: CORPL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Systematic large-scale corpus data beats individual intuition for ' +
+      'frequency questions — intuition is built from a small, biased ' +
+      'personal sample, like guessing a forest\'s mushroom distribution ' +
+      'without a real survey. Separately, corpus frequency (how often ' +
+      'something occurs) and syntactic grammaticality (whether it\'s ' +
+      'structurally well-formed) are distinct questions; a rare ' +
+      'construction can still be perfectly grammatical, like a rarely-used ' +
+      'but medically valid treatment.',
+    targetedMisconceptions: [
+      `${CORPL}:MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA`,
+      `${CORPL}:MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL`,
+    ],
+    source: `${CORPL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CORPL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CORPL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student guesses which of two near-synonymous phrasings is more common in actual usage, based purely on personal feeling, without checking any corpus data. Is personal intuition about frequency always as reliable as actual large-scale corpus data?',
+    choices: [
+      { text: 'No — individual intuition about frequency is notoriously unreliable compared to genuinely large-scale empirical corpus data', isCorrect: true },
+      { text: 'Yes — my own intuition about how language is usually used is always as reliable as corpus data', isCorrect: false, misconceptionId: `${CORPL}:MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA` },
+    ],
+    correctValue: 'no, corpus data is more reliable than intuition for frequency',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CORPL}:MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA`],
+    source: `${CORPL_SRC} — forest-survey conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CORPL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A passive-voice construction is grammatically well-formed but appears less frequently than its active-voice equivalent in casual corpus data. Does this rarity mean the construction must be ungrammatical?',
+    choices: [
+      { text: 'No — frequency (corpus linguistics\'s question) and grammaticality (syntax\'s question) are distinct; a rare construction can still be perfectly grammatical', isCorrect: true },
+      { text: 'Yes — if corpus data shows something is rare or unusual, it must be ungrammatical', isCorrect: false, misconceptionId: `${CORPL}:MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL` },
+    ],
+    correctValue: 'no, rarity and grammaticality are separate questions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CORPL}:MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL`],
+    source: `${CORPL_SRC} — rare-medical-treatment conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.presentation-skills ──────────────────────────────────────────
+const PRSK = 'eng.speaking.presentation-skills'
+const PRSK_SRC = 'docs/curriculum/blueprints/eng.speaking.presentation-skills.md'
+
+const PRSK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRSK,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A slide packed with full sentences duplicating everything you\'ll ' +
+      'say makes the audience read the slide instead of listening to you — ' +
+      'the visual competes with your delivery instead of supporting it. ' +
+      'Good slides work like a photo album caption (brief, supportive key ' +
+      'phrases, images, or data), not a novel page (complete text ' +
+      'replacing the need to listen).',
+    targetedMisconceptions: [`${PRSK}:MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY`],
+    source: `${PRSK_SRC} — MC (P28 dense-vs-supportive-slide conflict)`,
+  },
+  {
+    conceptId: PRSK,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Cramming as much information as possible into a presentation is ' +
+      'like overstuffing a suitcase with everything imaginable instead of ' +
+      'packing only what THIS trip needs — the audience can\'t absorb ' +
+      'everything at once. Choose the 3-4 most important points for this ' +
+      'specific audience and purpose and develop those well; depth on ' +
+      'fewer points beats superficial coverage of many.',
+    targetedMisconceptions: [`${PRSK}:MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE`],
+    source: `${PRSK_SRC} — MC-A (P28 12-points-vs-4-points conflict)`,
+  },
+  {
+    conceptId: PRSK,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Visual aids should support spoken delivery with key phrases, ' +
+      'images, or data — not duplicate everything the speaker will say, ' +
+      'like a photo-album caption rather than a novel page. Separately, an ' +
+      'effective presentation is selective: choosing the 3-4 most ' +
+      'important points for the specific audience and purpose, like ' +
+      'packing a suitcase for one particular trip, rather than cramming in ' +
+      'as much information as possible.',
+    targetedMisconceptions: [
+      `${PRSK}:MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY`,
+      `${PRSK}:MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE`,
+    ],
+    source: `${PRSK_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRSK_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRSK,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A slide contains 6 full sentences of dense text duplicating everything the speaker plans to say aloud. Is this an effective way to support a spoken presentation?',
+    choices: [
+      { text: 'No — a slide packed with full sentences makes the audience read it instead of listening; slides should show key phrases, images, or data that support the delivery', isCorrect: true },
+      { text: 'Yes — visual aids should contain everything the speaker will say, to make sure the audience doesn\'t miss anything', isCorrect: false, misconceptionId: `${PRSK}:MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY` },
+    ],
+    correctValue: 'no, slides should support delivery, not duplicate it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PRSK}:MC-VISUAL-AIDS-SHOULD-CONTAIN-EVERYTHING-THE-SPEAKER-WILL-SAY`],
+    source: `${PRSK_SRC} — dense-vs-supportive-slide conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRSK,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A presentation outline covers 12 different points superficially versus another covering 4 points in depth with clear examples, on the same topic. Does covering as much information as possible make a presentation better?',
+    choices: [
+      { text: 'No — effective presentations are selective, choosing the most important points for the specific audience and purpose rather than cramming in everything', isCorrect: true },
+      { text: 'Yes — a good presentation covers as much information as possible to demonstrate thorough preparation', isCorrect: false, misconceptionId: `${PRSK}:MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE` },
+    ],
+    correctValue: 'no, selective focus beats comprehensive coverage',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PRSK}:MC-A-GOOD-PRESENTATION-COVERS-AS-MUCH-INFORMATION-AS-POSSIBLE`],
+    source: `${PRSK_SRC} — 12-points-vs-4-points conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.thesis-statements ──────────────────────────────────────────────
+const THST = 'eng.writing.thesis-statements'
+const THST_SRC = 'docs/curriculum/blueprints/eng.writing.thesis-statements.md'
+
+const THST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Announcing a topic ("This essay is about school lunch programs") is ' +
+      'like saying "I\'m going to talk about weather" before a weather ' +
+      'report — it tells the general subject but commits to nothing. A ' +
+      'thesis is the actual forecast: a specific, checkable claim someone ' +
+      'could disagree with. Test it: could someone respond "I disagree" or ' +
+      '"prove it"? If not, it\'s still just an announcement.',
+    targetedMisconceptions: [`${THST}:MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT`],
+    source: `${THST_SRC} — MC-A (P28 announcement-vs-claim conflict)`,
+  },
+  {
+    conceptId: THST,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A good thesis is like a properly sized container for water — too ' +
+      'big ("social media is bad") and the evidence spreads too thin to ' +
+      'fill it; too small (one tiny fact) and there\'s nothing left to add ' +
+      'after the first sentence. Test your thesis by listing the 2-4 body ' +
+      'paragraphs it would require — if you can\'t limit or expand the ' +
+      'list to a manageable few, resize the thesis.',
+    targetedMisconceptions: [`${THST}:MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION`],
+    source: `${THST_SRC} — MC-B (P28 too-broad-vs-too-narrow conflict)`,
+  },
+  {
+    conceptId: THST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A thesis must make a specific, arguable claim — not just announce ' +
+      'that a topic exists, like the difference between "I\'ll talk about ' +
+      'weather" and an actual forecast. Separately, a thesis must be sized ' +
+      'to fit the essay: too broad and the evidence spreads too thin, too ' +
+      'narrow and there\'s nothing left to develop, like water poured into ' +
+      'a container of the wrong size.',
+    targetedMisconceptions: [
+      `${THST}:MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT`,
+      `${THST}:MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION`,
+    ],
+    source: `${THST_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const THST_PROBES: SeedProbe[] = [
+  {
+    conceptId: THST,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"In this essay I will talk about the causes of the American Revolution." Is this a strong thesis statement?',
+    choices: [
+      { text: 'No — it only announces the topic exists; it makes no actual claim a reader could agree or disagree with', isCorrect: true },
+      { text: 'Yes — stating the essay\'s topic clearly is exactly what a thesis statement needs to do', isCorrect: false, misconceptionId: `${THST}:MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT` },
+    ],
+    correctValue: 'no, it is an announcement, not a claim',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${THST}:MC-A-THESIS-IS-JUST-THE-TOPIC-ANNOUNCEMENT`],
+    source: `${THST_SRC} — announcement-vs-claim conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: THST,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Social media is bad." This is clearly an opinion. Does having an opinion alone make it a well-formed thesis for a standard multi-paragraph essay?',
+    choices: [
+      { text: 'No — it\'s too broad; listing its possible body paragraphs (mental health, privacy, misinformation, addiction...) produces an unmanageable, sprawling list no single essay could cover', isCorrect: true },
+      { text: 'Yes — a thesis just needs to be an opinion; any arguable statement works regardless of how broad or narrow it is', isCorrect: false, misconceptionId: `${THST}:MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION` },
+    ],
+    correctValue: 'no, a thesis must also be sized correctly',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${THST}:MC-B-THESIS-JUST-NEEDS-TO-BE-AN-OPINION`],
+    source: `${THST_SRC} — too-broad-vs-too-narrow conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -26897,6 +27614,14 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SOCL_EXPLANATIONS,
   ...PUBS_EXPLANATIONS,
   ...ESSY_EXPLANATIONS,
+  ...DMA_EXPLANATIONS,
+  ...CCC_EXPLANATIONS,
+  ...AUDP_EXPLANATIONS,
+  ...APLI_EXPLANATIONS,
+  ...DIAL_EXPLANATIONS,
+  ...CORPL_EXPLANATIONS,
+  ...PRSK_EXPLANATIONS,
+  ...THST_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -27196,4 +27921,12 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SOCL_PROBES,
   ...PUBS_PROBES,
   ...ESSY_PROBES,
+  ...DMA_PROBES,
+  ...CCC_PROBES,
+  ...AUDP_PROBES,
+  ...APLI_PROBES,
+  ...DIAL_PROBES,
+  ...CORPL_PROBES,
+  ...PRSK_PROBES,
+  ...THST_PROBES,
 ]
