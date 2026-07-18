@@ -16030,6 +16030,691 @@ const ENDP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.simple-sentences ───────────────────────────────────────────
+const SSEN = 'eng.grammar.simple-sentences'
+const SSEN_SRC = 'docs/curriculum/blueprints/eng.grammar.simple-sentences.md'
+
+const SSEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SSEN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Length is a trap here — a simple sentence can be long and dressed ' +
+      'up with lots of describing words, and a compound sentence can be ' +
+      'short and plain. "The exhausted, determined marathon runners from ' +
+      'twelve different countries crossed the finish line together and ' +
+      'collapsed onto the grass in relief" is still SIMPLE (one ' +
+      'independent clause, just with a compound subject/predicate and ' +
+      'extra modifiers), while "She left. He stayed." is two separate ' +
+      'clauses. "Simple" isn’t about word count; it’s about how many ' +
+      'independent clauses are doing the work — count independent ' +
+      'clauses, not words.',
+    targetedMisconceptions: [`${SSEN}:MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE`],
+    source: `${SSEN_SRC} — MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE (P28 long-simple-vs-short-compound conflict)`,
+  },
+  {
+    conceptId: SSEN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"And" (or "or"/"but") has more than one job. It can join two whole ' +
+      'clauses (making a compound sentence), but it can also just join ' +
+      'two subjects or two verbs inside ONE clause (keeping it simple). ' +
+      '"Maya and Diego finished the race and celebrated together" has one ' +
+      'compound subject and one compound predicate — still just ONE ' +
+      'clause, so it’s simple. When you see "and," check whether there is ' +
+      'a complete subject-verb pair on BOTH sides — only then does the ' +
+      'sentence become compound.',
+    targetedMisconceptions: [`${SSEN}:MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE`],
+    source: `${SSEN_SRC} — MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE (P28 Maya-and-Diego conflict)`,
+  },
+  {
+    conceptId: SSEN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A simple sentence is defined by clause count (exactly one ' +
+      'independent clause), not by length — a long sentence with a ' +
+      'compound subject, compound predicate, and multiple modifiers can ' +
+      'still be simple, while a short sentence with two independent ' +
+      'clauses is compound. Separately, the presence of "and," "or," or ' +
+      '"but" does not by itself signal a compound sentence — check ' +
+      'whether the conjunction joins two complete subject-verb pairs ' +
+      '(compound) or merely joins two subjects, verbs, or objects within ' +
+      'one clause (still simple).',
+    targetedMisconceptions: [
+      `${SSEN}:MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE`,
+      `${SSEN}:MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE`,
+    ],
+    source: `${SSEN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SSEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: SSEN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "The exhausted, determined marathon runners from twelve different countries crossed the finish line together and collapsed onto the grass in relief" a simple sentence, even though it is long?',
+    choices: [
+      { text: 'Yes — it has only one independent clause (one subject-verb pairing), just with a compound subject/predicate and extra modifiers', isCorrect: true },
+      { text: 'No — it is too long to be a simple sentence', isCorrect: false, misconceptionId: `${SSEN}:MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE` },
+    ],
+    correctValue: 'yes, simple',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SSEN}:MC-SIMPLE-SENTENCE-MEANS-SHORT-SENTENCE`],
+    source: `${SSEN_SRC} — long-simple-vs-short-compound conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SSEN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Maya and Diego finished the race and celebrated together" a simple or compound sentence?',
+    choices: [
+      { text: 'Simple — one compound subject ("Maya and Diego") and one compound predicate ("finished...and celebrated"), but only one subject-verb pairing', isCorrect: true },
+      { text: 'Compound — it has an "and" in it', isCorrect: false, misconceptionId: `${SSEN}:MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE` },
+    ],
+    correctValue: 'simple',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SSEN}:MC-A-SENTENCE-WITH-AND-IS-NEVER-SIMPLE`],
+    source: `${SSEN_SRC} — Maya-and-Diego conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.comma-usage ─────────────────────────────────────────────────
+const CUSE = 'eng.grammar.comma-usage'
+const CUSE_SRC = 'docs/curriculum/blueprints/eng.grammar.comma-usage.md'
+
+const CUSE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CUSE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Breath pauses and comma rules overlap often, which is why the ' +
+      '"pause test" feels like it works — but they are not the same ' +
+      'thing. A comma marks a specific grammatical job: separating list ' +
+      'items, joining two independent clauses, setting off an ' +
+      'introductory element, or bracketing nonessential information. If ' +
+      'none of those four jobs apply, no comma belongs there, breath or ' +
+      'no breath — for example, "The dog that lives next door barked all ' +
+      'night" takes no comma before "barked," even though many readers ' +
+      'pause there, since "that lives next door" is essential information.',
+    targetedMisconceptions: [`${CUSE}:MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING`],
+    source: `${CUSE_SRC} — MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING (P28 dog-that-lives-next-door conflict)`,
+  },
+  {
+    conceptId: CUSE,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The comma-before-"and" rule only applies when "and" is joining ' +
+      'two COMPLETE clauses — two full subject-verb pairs that could each ' +
+      'stand alone as their own sentence. "Maya ran, and jumped over the ' +
+      'hurdle" incorrectly adds a comma before a compound verb (no comma ' +
+      'needed); "Maya ran the race, and she won first place" correctly ' +
+      'uses a comma since both sides have their own subject-verb pair. ' +
+      'Before adding a comma in front of "and," "or," or "but," check ' +
+      'both sides for a complete subject-verb pair.',
+    targetedMisconceptions: [`${CUSE}:MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA`],
+    source: `${CUSE_SRC} — MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA (P28 Maya-ran-and-jumped conflict)`,
+  },
+  {
+    conceptId: CUSE,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A comma belongs only where it performs one of four specific ' +
+      'grammatical jobs — separating list items, joining two independent ' +
+      'clauses, setting off an introductory element, or bracketing ' +
+      'nonessential information — not wherever a reader would naturally ' +
+      'pause when speaking. Separately, a comma before "and"/"or"/"but" ' +
+      'is required only when the conjunction joins two complete ' +
+      'independent clauses (a full subject-verb pair on each side); when ' +
+      'it merely joins two verbs, subjects, or objects within a single ' +
+      'clause, no comma is needed, regardless of how the sentence sounds ' +
+      'read aloud.',
+    targetedMisconceptions: [
+      `${CUSE}:MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING`,
+      `${CUSE}:MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA`,
+    ],
+    source: `${CUSE_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CUSE_PROBES: SeedProbe[] = [
+  {
+    conceptId: CUSE,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "The dog that lives next door barked all night" need a comma before "barked," since many readers would naturally pause there?',
+    choices: [
+      { text: 'No — "that lives next door" is essential information, not one of the four comma jobs, so no comma belongs there regardless of the pause', isCorrect: true },
+      { text: 'Yes — a comma goes wherever you would naturally pause when reading aloud', isCorrect: false, misconceptionId: `${CUSE}:MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING` },
+    ],
+    correctValue: 'no comma',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CUSE}:MC-COMMA-GOES-WHEREVER-YOU-PAUSE-WHEN-SPEAKING`],
+    source: `${CUSE_SRC} — dog-that-lives-next-door conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CUSE,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does "Maya ran, and jumped over the hurdle" correctly use a comma before "and"?',
+    choices: [
+      { text: 'No — "and" here joins a compound verb ("ran...and jumped"), not two independent clauses, so no comma is needed', isCorrect: true },
+      { text: 'Yes — any two clauses joined by "and" need a comma', isCorrect: false, misconceptionId: `${CUSE}:MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA` },
+    ],
+    correctValue: 'no comma needed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CUSE}:MC-ANY-TWO-CLAUSES-JOINED-BY-AND-NEED-A-COMMA`],
+    source: `${CUSE_SRC} — Maya-ran-and-jumped conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.word-recognition ──────────────────────────────────────────────
+const WREC = 'eng.vocab.word-recognition'
+const WREC_SRC = 'docs/curriculum/blueprints/eng.vocab.word-recognition.md'
+
+const WREC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WREC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Decoding (sounding out the letters correctly) and word recognition ' +
+      '(connecting the printed word to a meaning you already know from ' +
+      'spoken vocabulary) are two different steps. Decoding gets you TO ' +
+      'the word’s pronunciation; recognition is realizing "oh, I know ' +
+      'this word — I’ve heard it spoken, and here’s what it means." A ' +
+      'word can be decoded perfectly and still not be recognized if it’s ' +
+      'not yet part of your spoken vocabulary. After decoding an ' +
+      'unfamiliar-looking printed word, always check whether you already ' +
+      'know it from speech.',
+    targetedMisconceptions: [`${WREC}:MC-DECODING-EQUALS-RECOGNIZING-MEANING`],
+    source: `${WREC_SRC} — MC-DECODING-EQUALS-RECOGNIZING-MEANING (P28 decode-then-check conflict)`,
+  },
+  {
+    conceptId: WREC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A printed word looking unfamiliar doesn’t mean the WORD itself is ' +
+      'unknown — it might just be a word you haven’t seen written down ' +
+      'very often yet, even though you already know it perfectly well ' +
+      'from listening and speaking. Decoding it can "unlock" a word you ' +
+      'already have in your spoken vocabulary — like "though," which ' +
+      'looks tricky in print but is instantly recognized once sounded ' +
+      'out. Before assuming an unfamiliar-looking printed word is ' +
+      'completely unknown, decode it fully first.',
+    targetedMisconceptions: [`${WREC}:MC-UNFAMILIAR-PRINTED-WORD-MEANS-UNKNOWN-WORD`],
+    source: `${WREC_SRC} — MC-UNFAMILIAR-PRINTED-WORD-MEANS-UNKNOWN-WORD (P28 though conflict)`,
+  },
+  {
+    conceptId: WREC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Decoding a printed word correctly and recognizing its meaning are ' +
+      'two separable steps — a word can be sounded out perfectly and ' +
+      'still not be recognized, if it isn’t yet part of one’s spoken ' +
+      'vocabulary. Conversely, a word’s unfamiliar printed appearance ' +
+      'does not mean it is genuinely unknown — decoding it fully first ' +
+      'often reveals that it is already a known spoken word, simply ' +
+      'unfamiliar in written form. Decode first, then separately check ' +
+      'for meaning recognition, rather than assuming either that ' +
+      'decoding success equals full comprehension or that an odd spelling ' +
+      'equals an unknown word.',
+    targetedMisconceptions: [
+      `${WREC}:MC-DECODING-EQUALS-RECOGNIZING-MEANING`,
+      `${WREC}:MC-UNFAMILIAR-PRINTED-WORD-MEANS-UNKNOWN-WORD`,
+    ],
+    source: `${WREC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const WREC_PROBES: SeedProbe[] = [
+  {
+    conceptId: WREC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student sounds out an unfamiliar-looking word perfectly but cannot say what it means or use it. Has this student "recognized" the word?',
+    choices: [
+      { text: 'No — decoding (pronouncing it correctly) and recognition (connecting it to a known meaning) are two different steps; decoding success alone doesn’t mean the word is recognized', isCorrect: true },
+      { text: 'Yes — decoding a word correctly means the task is done', isCorrect: false, misconceptionId: `${WREC}:MC-DECODING-EQUALS-RECOGNIZING-MEANING` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${WREC}:MC-DECODING-EQUALS-RECOGNIZING-MEANING`],
+    source: `${WREC_SRC} — decode-then-check conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WREC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student sees the word "though" and says "I don\'t know this word" without trying to sound it out. Is that a safe conclusion?',
+    choices: [
+      { text: 'No — decoding it first might reveal it is already a known spoken word, just unfamiliar in its written form', isCorrect: true },
+      { text: 'Yes — if a printed word looks unfamiliar, it must be an unknown word', isCorrect: false, misconceptionId: `${WREC}:MC-UNFAMILIAR-PRINTED-WORD-MEANS-UNKNOWN-WORD` },
+    ],
+    correctValue: 'no, decode first',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${WREC}:MC-UNFAMILIAR-PRINTED-WORD-MEANS-UNKNOWN-WORD`],
+    source: `${WREC_SRC} — though conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.handwriting-and-formation ──────────────────────────────────
+const HAND = 'eng.writing.handwriting-and-formation'
+const HAND_SRC = 'docs/curriculum/blueprints/eng.writing.handwriting-and-formation.md'
+
+const HAND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HAND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Stroke order and direction don’t just matter for how a single ' +
+      'letter looks right now — they matter for how smoothly, quickly, ' +
+      'and legibly you’ll write later, especially once letters need to ' +
+      'connect (cursive) or you write for a long time. Writing an "O" ' +
+      'bottom-to-top or counter-clockwise from the bottom might look the ' +
+      'same at slow speed, but it builds a motor habit that breaks down ' +
+      'at speed. Always start each letter at its designated starting ' +
+      'point and follow the standard stroke direction, even if an ' +
+      'alternate order produces a similar-looking result right now.',
+    targetedMisconceptions: [`${HAND}:MC-ANY-STROKE-ORDER-WORKS`],
+    source: `${HAND_SRC} — MC-ANY-STROKE-ORDER-WORKS (P28 write-five-os-fast conflict)`,
+  },
+  {
+    conceptId: HAND,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The baseline and other guide-lines exist to keep every letter the ' +
+      'same size and sitting in the same place — this is what makes ' +
+      'handwriting easy for other people (and future-you) to read ' +
+      'quickly, not just a rule for its own sake. Always place letters so ' +
+      'their base sits exactly on the baseline, and check tall/short ' +
+      'letter categories (ascenders like "b," x-height letters like "a," ' +
+      'and descenders like "p" that dip below the line) against the ' +
+      'guide lines before moving on.',
+    targetedMisconceptions: [`${HAND}:MC-SIZE-AND-BASELINE-DONT-MATTER`],
+    source: `${HAND_SRC} — MC-SIZE-AND-BASELINE-DONT-MATTER (P28 floating-letters-vs-printed-book conflict)`,
+  },
+  {
+    conceptId: HAND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Consistent stroke order and direction matter for handwriting speed ' +
+      'and legibility over time, even when an alternate order produces a ' +
+      'similar-looking result at slow speed — the habit either supports ' +
+      'or undermines fluent, joined writing later. Separately, baseline ' +
+      'and guide-line placement are functional, not decorative: keeping ' +
+      'every letter’s base on the baseline and respecting height ' +
+      'categories (ascenders, x-height, descenders) is what makes writing ' +
+      'quickly legible to a reader, not an arbitrary rule.',
+    targetedMisconceptions: [
+      `${HAND}:MC-ANY-STROKE-ORDER-WORKS`,
+      `${HAND}:MC-SIZE-AND-BASELINE-DONT-MATTER`,
+    ],
+    source: `${HAND_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const HAND_PROBES: SeedProbe[] = [
+  {
+    conceptId: HAND,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student writes an "O" starting from the bottom and going backward, but it looks fine right now. Does the stroke order matter?',
+    choices: [
+      { text: 'Yes — an inefficient stroke order slows writing down and causes problems later, especially for connected/cursive writing, even if it looks fine now', isCorrect: true },
+      { text: 'No — if the letter looks the same, any stroke order works', isCorrect: false, misconceptionId: `${HAND}:MC-ANY-STROKE-ORDER-WORKS` },
+    ],
+    correctValue: 'yes, stroke order matters',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HAND}:MC-ANY-STROKE-ORDER-WORKS`],
+    source: `${HAND_SRC} — write-five-os-fast conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: HAND,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does it matter whether letters sit on the baseline and are the correct height, or are the lines on the page just decorative?',
+    choices: [
+      { text: 'It matters — the lines keep every letter consistent in size and placement, which is what makes writing quick and easy for others to read', isCorrect: true },
+      { text: 'It doesn’t matter — size and baseline placement are not important', isCorrect: false, misconceptionId: `${HAND}:MC-SIZE-AND-BASELINE-DONT-MATTER` },
+    ],
+    correctValue: 'yes, it matters',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${HAND}:MC-SIZE-AND-BASELINE-DONT-MATTER`],
+    source: `${HAND_SRC} — floating-letters-vs-printed-book conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.narrative-elements ──────────────────────────────────────
+const NARR = 'eng.literature.narrative-elements'
+const NARR_SRC = 'docs/curriculum/blueprints/eng.literature.narrative-elements.md'
+
+const NARR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NARR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Plot isn’t a list of every single thing that happens — it’s ' +
+      'specifically the chain of events connected to the story’s central ' +
+      'conflict, each event causing or leading to the next, building ' +
+      'toward a resolution. A story can include many incidental details ' +
+      '(what a character had for breakfast, the weather on an unrelated ' +
+      'day) that aren’t part of the plot at all — they’re just texture. ' +
+      'To identify the plot, trace the events causally connected to the ' +
+      'central conflict and skip incidental details that don’t feed into ' +
+      'that chain.',
+    targetedMisconceptions: [`${NARR}:MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY`],
+    source: `${NARR_SRC} — MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY (P28 plot-critical-vs-incidental conflict)`,
+  },
+  {
+    conceptId: NARR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Setting isn’t just a factual label of where and when — it ' +
+      'actively shapes atmosphere (the emotional mood a scene creates), ' +
+      'constrains what characters can plausibly do, and often reinforces ' +
+      'the story’s themes symbolically. The same difficult decision feels ' +
+      'completely different in a warm, familiar kitchen versus an ' +
+      'abandoned, storm-battered building, because setting is doing real ' +
+      'narrative work, not just providing background facts. Ask not just ' +
+      '"where and when" but "what mood does this setting create, and how ' +
+      'does it shape what’s possible for the characters here?"',
+    targetedMisconceptions: [`${NARR}:MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT`],
+    source: `${NARR_SRC} — MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT (P28 kitchen-vs-storm conflict)`,
+  },
+  {
+    conceptId: NARR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Plot is the chain of events causally connected to a story’s ' +
+      'central conflict and its resolution — not an inventory of every ' +
+      'event mentioned; incidental details (background color, unrelated ' +
+      'small actions) are texture, not plot. Separately, setting actively ' +
+      'shapes atmosphere, constrains plausible character action, and can ' +
+      'reinforce theme symbolically — it is not a neutral where/when ' +
+      'label. The identical plot event reads very differently in a warm, ' +
+      'familiar space versus an isolating, threatening one, precisely ' +
+      'because setting performs real narrative work.',
+    targetedMisconceptions: [
+      `${NARR}:MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY`,
+      `${NARR}:MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT`,
+    ],
+    source: `${NARR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const NARR_PROBES: SeedProbe[] = [
+  {
+    conceptId: NARR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A story mentions a girl finding an old key, remembering her grandmother liked afternoon tea, then using the key to open a locked chest. Is "grandmother liked afternoon tea" part of the plot?',
+    choices: [
+      { text: 'No — it is an incidental detail, not causally connected to the central conflict; the plot is the discovery and using the key', isCorrect: true },
+      { text: 'Yes — the plot is everything that happens in the story', isCorrect: false, misconceptionId: `${NARR}:MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY` },
+    ],
+    correctValue: 'no, incidental detail',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NARR}:MC-PLOT-MEANS-EVERYTHING-THAT-HAPPENS-IN-THE-STORY`],
+    source: `${NARR_SRC} — plot-critical-vs-incidental conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: NARR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'The same difficult decision is set once in a warm, brightly-lit kitchen and once in a storm-battered, abandoned building. Is the setting "just background" in both cases?',
+    choices: [
+      { text: 'No — the setting actively shapes the mood and tension differently in each version, doing real narrative work beyond stating where/when', isCorrect: true },
+      { text: 'Yes — setting is just a factual label of where and when the story happens', isCorrect: false, misconceptionId: `${NARR}:MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT` },
+    ],
+    correctValue: 'no, setting shapes mood',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NARR}:MC-SETTING-IS-JUST-WHERE-AND-WHEN-A-STORY-HAPPENS-WITH-NO-OTHER-EFFECT`],
+    source: `${NARR_SRC} — kitchen-vs-storm conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.communication.media-literacy ───────────────────────────────────────
+const MEDL = 'eng.communication.media-literacy'
+const MEDL_SRC = 'docs/curriculum/blueprints/eng.communication.media-literacy.md'
+
+const MEDL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MEDL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming media coverage simply shows what happened, with no ' +
+      'constructed choices, is like assuming a photograph taken from a ' +
+      'specific angle shows the "whole" unedited reality — but the ' +
+      'photographer’s choice of angle, what’s included, and what’s ' +
+      'cropped out are all deliberate decisions. "Protesters Clash with ' +
+      'Police" and "Community Members Demand Accountability" can both be ' +
+      'technically accurate headlines about the SAME event, yet create ' +
+      'very different impressions. Even accurate, fact-based coverage ' +
+      'involves deliberate framing, selection, and emphasis at every ' +
+      'stage.',
+    targetedMisconceptions: [`${MEDL}:MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED`],
+    source: `${MEDL_SRC} — MC-A (P28 protesters-clash-vs-community-members-demand conflict)`,
+  },
+  {
+    conceptId: MEDL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming emotional or dramatic presentation is automatically ' +
+      'untrustworthy, while plain presentation is automatically ' +
+      'trustworthy, is like assuming a polished, professional-looking ' +
+      'website must be legitimate while a plain, text-only one must be a ' +
+      'scam — but design polish (or its absence) is a separate question ' +
+      'from whether the underlying information is accurate. ' +
+      'Trustworthiness depends on sourcing, accuracy, and transparency — ' +
+      'not on emotional tone or presentation style, which can vary ' +
+      'independently in either direction.',
+    targetedMisconceptions: [`${MEDL}:MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT`],
+    source: `${MEDL_SRC} — MC-B (P28 emotionally-engaging-vs-plain-inaccurate conflict)`,
+  },
+  {
+    conceptId: MEDL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'All media messages are constructed through deliberate production ' +
+      'choices — framing, word choice, what to include or omit — even ' +
+      'when the underlying facts are accurate; treating any coverage as a ' +
+      'neutral, unmediated window onto reality overlooks this. Separately, ' +
+      'a message’s emotional tone or production polish is a separate ' +
+      'question from its trustworthiness: an emotionally engaging, ' +
+      'well-produced piece can be accurately sourced, and a plain, ' +
+      'dry-toned piece can be poorly sourced. Evaluate substance ' +
+      '(sourcing, accuracy, transparency), not style, when judging ' +
+      'trustworthiness.',
+    targetedMisconceptions: [
+      `${MEDL}:MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED`,
+      `${MEDL}:MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT`,
+    ],
+    source: `${MEDL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const MEDL_PROBES: SeedProbe[] = [
+  {
+    conceptId: MEDL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Protesters Clash with Police" and "Community Members Demand Accountability" both describe the same, technically accurate underlying event. Do they create the same impression in a reader who only sees the headline?',
+    choices: [
+      { text: 'No — different framing choices (word choice, emphasis) shape a different impression, even though both are accurate; media coverage always involves constructed choices', isCorrect: true },
+      { text: 'Yes — accurate news coverage simply shows what happened, with no constructed choices involved', isCorrect: false, misconceptionId: `${MEDL}:MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED` },
+    ],
+    correctValue: 'no, different impressions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MEDL}:MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED`],
+    source: `${MEDL_SRC} — protesters-clash-vs-community-members-demand conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MEDL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'One media piece is emotionally engaging and well-produced but built on accurate, well-sourced facts. Another is plain and dry-toned but contains inaccurate, poorly sourced claims. Which is actually more trustworthy?',
+    choices: [
+      { text: 'The emotionally engaging piece — trustworthiness depends on accuracy and sourcing, not on emotional tone or presentation style', isCorrect: true },
+      { text: 'The plain, dry-toned piece — emotionally engaging content is automatically less trustworthy than plain content', isCorrect: false, misconceptionId: `${MEDL}:MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT` },
+    ],
+    correctValue: 'the emotionally engaging, accurate one',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MEDL}:MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT`],
+    source: `${MEDL_SRC} — emotionally-engaging-vs-plain-inaccurate conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.speech-sounds-overview ───────────────────────────────────
+const SNDO = 'eng.phonetics.speech-sounds-overview'
+const SNDO_SRC = 'docs/curriculum/blueprints/eng.phonetics.speech-sounds-overview.md'
+
+const SNDO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SNDO,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Speech sounds are things your mouth DOES — letters are marks on ' +
+      'paper that TRY to represent those sounds, but the match is often ' +
+      'imperfect. "Ship" has 4 letters but only 3 sounds (/ʃ/-/ɪ/-/p/), ' +
+      'since "sh" is one sound spelled with two letters; "box" has 3 ' +
+      'letters but 4 sounds, since "x" represents two sounds. Always ' +
+      'count sounds by listening, and count letters by looking — treat ' +
+      'them as two separate counting tasks that sometimes give different ' +
+      'answers.',
+    targetedMisconceptions: [`${SNDO}:MC-SOUNDS-EQUAL-LETTERS`],
+    source: `${SNDO_SRC} — MC-SOUNDS-EQUAL-LETTERS (P28 ship-letters-vs-sounds conflict)`,
+  },
+  {
+    conceptId: SNDO,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Speech sounds are not fixed, identical stamps — they vary ' +
+      'naturally by dialect, speaking speed, and neighboring sounds, ' +
+      'while still being recognized as "the same sound" by listeners of ' +
+      'that variety. "Butter" said with a quick flap sound in the middle ' +
+      '(common in US English) versus a hard "t" (common in UK English) ' +
+      'are both valid, real ways of making that sound — neither is ' +
+      '"wrong." Studying speech sounds means describing this real ' +
+      'variation, not policing a single "correct" version.',
+    targetedMisconceptions: [`${SNDO}:MC-SPEECH-SOUNDS-ARE-FIXED-UNITS`],
+    source: `${SNDO_SRC} — MC-SPEECH-SOUNDS-ARE-FIXED-UNITS (P28 butter-dialect conflict)`,
+  },
+  {
+    conceptId: SNDO,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Speech sounds (phonemes) and letters are two distinct systems — ' +
+      'one letter can represent different sounds in different words ' +
+      '("c" in "cat" vs. "city"), and one sound can be spelled multiple ' +
+      'ways ("f" in "fish," "phone," "laugh") — so counting letters is ' +
+      'not a reliable way to count sounds. Separately, speech sounds vary ' +
+      'naturally by dialect and speaking context while still being ' +
+      'recognized as the same underlying sound by listeners of that ' +
+      'variety; describing this variation accurately, rather than ' +
+      'treating one pronunciation as the sole "correct" version, is the ' +
+      'discipline of phonetics.',
+    targetedMisconceptions: [
+      `${SNDO}:MC-SOUNDS-EQUAL-LETTERS`,
+      `${SNDO}:MC-SPEECH-SOUNDS-ARE-FIXED-UNITS`,
+    ],
+    source: `${SNDO_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SNDO_PROBES: SeedProbe[] = [
+  {
+    conceptId: SNDO,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does the word "ship" have the same number of letters as sounds?',
+    choices: [
+      { text: 'No — "ship" has 4 letters but only 3 sounds, since "sh" together makes one sound', isCorrect: true },
+      { text: 'Yes — the number of letters always equals the number of sounds', isCorrect: false, misconceptionId: `${SNDO}:MC-SOUNDS-EQUAL-LETTERS` },
+    ],
+    correctValue: 'no, 4 letters 3 sounds',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SNDO}:MC-SOUNDS-EQUAL-LETTERS`],
+    source: `${SNDO_SRC} — ship-letters-vs-sounds conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SNDO,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Two people from different English-speaking regions pronounce the middle sound in "butter" slightly differently. Is one of them speaking incorrectly?',
+    choices: [
+      { text: 'No — both are real, valid dialect variations of the same sound, not an error', isCorrect: true },
+      { text: 'Yes — there is only one correct way to pronounce each sound', isCorrect: false, misconceptionId: `${SNDO}:MC-SPEECH-SOUNDS-ARE-FIXED-UNITS` },
+    ],
+    correctValue: 'no, both valid',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SNDO}:MC-SPEECH-SOUNDS-ARE-FIXED-UNITS`],
+    source: `${SNDO_SRC} — butter-dialect conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -16215,6 +16900,13 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PART_EXPLANATIONS,
   ...PAAG_EXPLANATIONS,
   ...ENDP_EXPLANATIONS,
+  ...SSEN_EXPLANATIONS,
+  ...CUSE_EXPLANATIONS,
+  ...WREC_EXPLANATIONS,
+  ...HAND_EXPLANATIONS,
+  ...NARR_EXPLANATIONS,
+  ...MEDL_EXPLANATIONS,
+  ...SNDO_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -16400,4 +17092,11 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PART_PROBES,
   ...PAAG_PROBES,
   ...ENDP_PROBES,
+  ...SSEN_PROBES,
+  ...CUSE_PROBES,
+  ...WREC_PROBES,
+  ...HAND_PROBES,
+  ...NARR_PROBES,
+  ...MEDL_PROBES,
+  ...SNDO_PROBES,
 ]
