@@ -31328,6 +31328,366 @@ const SIND_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.ac-basics ────────────────────────────────────────────────────────
+const ACB = 'phys.em.ac-basics'
+const ACB_SRC = 'docs/curriculum/blueprints/phys.em.ac-basics.md'
+
+const ACB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An AC source produces sinusoidal voltage v(t) = V_m sin(ωt), where V_m is the peak, ω = 2πf is angular frequency, and T = 1/f is the period. What appears on meters and appliance ratings is NOT the peak but the RMS (root-mean-square) value: V_rms = V_m/√2 ≈ 0.707V_m — defined so that an RMS voltage produces the same average power in a resistor as an equal DC voltage would; UK/EU mains is 230 V_rms (peak 325 V), US mains is 120 V_rms (peak 170 V). The three basic components behave completely differently in AC: a resistor keeps V and I exactly IN PHASE with opposition R unchanged by frequency; a capacitor has current LEADING voltage by 90°, with opposition (capacitive reactance) X_C = 1/(ωC) that DECREASES with frequency (a capacitor looks like a short circuit at high f, an open circuit at DC); an inductor has voltage LEADING current by 90°, with opposition (inductive reactance) X_L = ωL that INCREASES with frequency (an inductor looks like an open circuit at high f, a short circuit at DC) — remembered by the mnemonic CIVIL: in a Capacitor, I leads V; in a coiL, V leads I. In a series RLC circuit, total opposition is impedance Z = √(R² + (X_L−X_C)²), and at resonance (X_L = X_C, ω₀ = 1/√(LC)) impedance drops to its minimum value Z = R, giving maximum current and a power factor of exactly 1.',
+    targetedMisconceptions: [`${ACB}:MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM`, `${ACB}:MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC`],
+    source: `${ACB_SRC} — Block 1-A (waveform, RMS) + Block 1-B (R/L/C phase behavior, CIVIL mnemonic) + Block 1-C (impedance, resonance)`,
+  },
+  {
+    conceptId: ACB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A very natural but wrong guess: assuming RMS voltage is just the plain average of the AC waveform, so for a sine wave it should be V_m/2. Check the actual average of a full sine cycle directly: the positive and negative half-cycles are perfectly symmetric and cancel EXACTLY, giving a true average of zero — which would absurdly imply a lightbulb on a 325 V-peak supply sees zero net voltage. RMS stands for Root-Mean-SQUARE: you square the waveform first (making every value positive, since squares can\'t be negative), take the mean of THAT, then take the square root — for a sine wave this gives √(V_m²/2) = V_m/√2 ≈ 0.707V_m, distinct from both the plain average (0) and the "average of the absolute value" (2V_m/π ≈ 0.637V_m). The RMS definition is specifically engineered so that V_rms produces the same average heating power in a resistor as an equal DC voltage would — a genuinely useful physical definition, not an arbitrary one. Second trap: writing the arithmetic sum V_R + V_L + V_C = V_total for RMS or peak voltages in a series AC circuit — a habit carried over correctly from DC. In a resonant series RLC circuit, V_L and V_C can each individually reach 1000 V while the supply itself is only 50 V, because V_L and V_C are 180° out of phase with each other and nearly cancel in the total. INSTANTANEOUS voltages do add arithmetically at every instant (v(t) = v_R(t)+v_L(t)+v_C(t) is always exact) — but RMS or peak MAGNITUDES must be combined as phasors: V_total = √(V_R² + (V_L−V_C)²), exactly like adding two perpendicular forces with the Pythagorean theorem rather than simple addition.',
+    targetedMisconceptions: [`${ACB}:MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM`, `${ACB}:MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC`],
+    source: `${ACB_SRC} — MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM + MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ACB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sine-wave AC voltage has peak V_m = 325 V. What is its true average value over a full cycle, and what is its RMS value?',
+    choices: [
+      { text: 'True average = 0 (positive and negative halves cancel exactly); RMS = V_m/√2 ≈ 230 V, computed as the square root of the mean of the squared waveform', isCorrect: true },
+      { text: 'The average IS the RMS value, both equal to V_m/2 ≈ 162.5 V', isCorrect: false, misconceptionId: `${ACB}:MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM` },
+    ],
+    correctValue: 'average is 0, RMS is Vm/sqrt(2)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACB}:MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM`],
+    source: `${ACB_SRC} — MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ACB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a resonant series RLC circuit supplied by only 50 V (RMS), the voltage across the inductor and the voltage across the capacitor each measure 1000 V. Is this a contradiction of Kirchhoff\'s Voltage Law?',
+    choices: [
+      { text: 'No — V_L and V_C are 180° out of phase, so as RMS/peak magnitudes they must be combined as phasors (V_total = √(V_R² + (V_L−V_C)²)), not added arithmetically; individual component voltages can legitimately exceed the total supply voltage', isCorrect: true },
+      { text: 'Yes — since KVL requires V_R + V_L + V_C to arithmetically equal the supply voltage, something must be wrong with the circuit', isCorrect: false, misconceptionId: `${ACB}:MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC` },
+    ],
+    correctValue: 'no, voltages add as phasors not arithmetically',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACB}:MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC`],
+    source: `${ACB_SRC} — MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.electrical-power ────────────────────────────────────────────────
+const EPWR = 'phys.em.electrical-power'
+const EPWR_SRC = 'docs/curriculum/blueprints/phys.em.electrical-power.md'
+
+const EPWR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EPWR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electrical power is the rate at which electrical energy is converted — into heat, light, or mechanical work — and for a resistor there are three mathematically EQUIVALENT formulas, all derivable from work W = QV and Ohm\'s Law V = IR: P = IV, P = I²R, P = V²/R. Which to use is purely a matter of convenience based on what\'s already known: use P = I²R when I and R are given (skip computing V entirely); use P = V²/R when V and R are given (skip computing I entirely); use P = IV only when both are already known directly. Power dissipated as heat in a resistor (Joule heating) accumulates as Q_heat = I²Rt over time — this is why resistors carry power ratings and can overheat if driven beyond them, and why a "60 W" lamp rated for 240 V only outputs about 15 W if mistakenly run at 120 V (its fixed resistance R = V²/P = 960 Ω means power scales with the square of whatever voltage it actually receives). How power splits across multiple resistors depends critically on the circuit topology: in SERIES (same current I through each), P = I²R means the LARGER resistor dissipates MORE power; in PARALLEL (same voltage V across each), P = V²/R means the LARGER resistor dissipates LESS power — the exact opposite relationship, entirely because a different quantity (I vs. V) is being held fixed.',
+    targetedMisconceptions: [`${EPWR}:MC-POWER-IS-ALWAYS-IV`, `${EPWR}:MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER`],
+    source: `${EPWR_SRC} — Tier 2 (three equivalent power formulas, Joule heating, appliance rating example, series vs. parallel power)`,
+  },
+  {
+    conceptId: EPWR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A common inefficiency, not exactly wrong but wasteful: always reaching for P = IV even when V isn\'t given, forcing an unnecessary extra step. If you know I = 3 A and R = 50 Ω, the fastest path is P = I²R = 9×50 = 450 W directly — going through P = IV instead means first computing V = IR = 150 V, THEN P = (3)(150) = 450 W, the same answer with one wasted step. All three formulas P = IV, P = I²R, P = V²/R are exactly equivalent for a resistor obeying Ohm\'s Law; the discipline worth building is choosing the formula that uses the two quantities you\'re ALREADY given, rather than mechanically computing a third variable just to plug into the formula you happen to remember best. Second, more consequential trap: assuming "more resistance always means more power dissipated," without checking whether the elements in question are in series or parallel. The relationship literally flips depending on circuit topology: in a SERIES circuit, every element shares the SAME current, so P = I²R means larger R genuinely dissipates MORE power. But in a PARALLEL circuit, every branch shares the SAME voltage, so P = V²/R means larger R dissipates LESS power — a 100 Ω branch in parallel dissipates only 1/10th the power of a 10 Ω branch at the identical voltage, the reverse of the series case. The one question that resolves this every time: what\'s being held constant, current or voltage? Series → same I → power ∝ R. Parallel → same V → power ∝ 1/R.',
+    targetedMisconceptions: [`${EPWR}:MC-POWER-IS-ALWAYS-IV`, `${EPWR}:MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER`],
+    source: `${EPWR_SRC} — MC-POWER-IS-ALWAYS-IV + MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const EPWR_PROBES: SeedProbe[] = [
+  {
+    conceptId: EPWR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You know a resistor carries I = 3 A and has R = 50 Ω, but you are NOT given the voltage. What is the fastest way to find the power dissipated?',
+    choices: [
+      { text: 'P = I²R = 450 W directly — no need to compute V first, since both I and R are already known', isCorrect: true },
+      { text: 'You must first compute V = IR, then use P = IV, since P = IV is the correct power formula', isCorrect: false, misconceptionId: `${EPWR}:MC-POWER-IS-ALWAYS-IV` },
+    ],
+    correctValue: 'P = I^2 R directly, 450 W',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EPWR}:MC-POWER-IS-ALWAYS-IV`],
+    source: `${EPWR_SRC} — MC-POWER-IS-ALWAYS-IV trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EPWR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two resistors, 10 Ω and 100 Ω, are connected in PARALLEL across the same voltage source. Which one dissipates more power?',
+    choices: [
+      { text: 'The 10 Ω resistor — in parallel, both share the same voltage V, so P = V²/R means the SMALLER resistance dissipates MORE power', isCorrect: true },
+      { text: 'The 100 Ω resistor, since higher resistance always means more power dissipated', isCorrect: false, misconceptionId: `${EPWR}:MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER` },
+    ],
+    correctValue: 'the 10 ohm resistor dissipates more',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EPWR}:MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER`],
+    source: `${EPWR_SRC} — MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.electromagnetic-waves ───────────────────────────────────────────
+const EMW = 'phys.em.electromagnetic-waves'
+const EMW_SRC = 'docs/curriculum/blueprints/phys.em.electromagnetic-waves.md'
+
+const EMW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EMW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An electromagnetic wave is a self-sustaining ripple in the electric and magnetic fields themselves, requiring no physical medium: a changing E field creates a B field (Ampere-Maxwell), that changing B field creates an E field (Faraday), and the cycle propagates through empty space at c = 3×10⁸ m/s. In a plane wave traveling along x, E oscillates along y and B oscillates along z — perpendicular to each other AND to the direction of travel (a transverse wave) — with amplitudes locked together by E₀ = cB₀, and crucially E and B are exactly IN PHASE, both reaching their maxima and passing through zero at the same instant and location. Energy flows in the direction of propagation via the Poynting vector S = (1/μ₀)(E×B), with time-averaged intensity I = ½ε₀cE₀²; a wave that is absorbed exerts radiation pressure P_rad = I/c, while one that is fully reflected exerts DOUBLE that, P_rad = 2I/c (momentum reversal delivers twice the momentum transfer of absorption). Radio, microwaves, infrared, visible light, ultraviolet, X-rays, and gamma rays are all literally the same phenomenon — the electromagnetic spectrum — differing ONLY in frequency and wavelength, all traveling at the identical speed c = 3×10⁸ m/s in vacuum.',
+    targetedMisconceptions: [`${EMW}:MC-EM-WAVES-REQUIRE-A-MEDIUM`, `${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE`],
+    source: `${EMW_SRC} — Level 1 (self-sustaining field ripple) + Level 2 (wave structure, E₀=cB₀, Poynting vector, radiation pressure, EM spectrum)`,
+  },
+  {
+    conceptId: EMW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A historically persistent but false belief: that light (and all EM waves) need some physical medium to travel through — the 19th-century "luminiferous aether" — and that radio signals therefore couldn\'t reach satellites or spacecraft since there\'s no air in space. This was directly and definitively refuted by the Michelson-Morley experiment (1887), which searched for exactly such a medium by measuring whether light\'s speed changed with Earth\'s direction of motion through the supposed aether wind — and found absolutely no difference. Maxwell\'s wave equation shows why: ∇²E = μ₀ε₀ ∂²E/∂t² contains ONLY field properties (the constants μ₀ and ε₀), with no medium properties whatsoever — the fields themselves are the "medium" and the wave simultaneously, storing their own energy (u = ε₀E²) with no material substrate required. GPS satellites, deep-space probes, and the Hubble Space Telescope all demonstrate EM wave propagation through near-perfect vacuum every single day. Second trap: assuming E and B must be OUT of phase in an EM wave — since perpendicular directions "feel like" they should alternate, or by wrongly analogizing to a capacitor circuit where voltage and current genuinely are 90° out of phase. The actual plane-wave solutions, E_y = E₀sin(kx−ωt) and B_z = B₀sin(kx−ωt), share the EXACT SAME phase factor — when E is at its maximum, B is at its maximum too, simultaneously, at the same point in space. If they really were 90° out of phase, the Poynting vector S = E×B/μ₀ would time-average to exactly zero, meaning EM waves would carry no net energy at all — directly contradicted by the simple fact that sunlight visibly warms your skin. "Perpendicular" here refers only to their spatial oscillation planes (E along y, B along z), never to their timing, which is always perfectly synchronized.',
+    targetedMisconceptions: [`${EMW}:MC-EM-WAVES-REQUIRE-A-MEDIUM`, `${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE`],
+    source: `${EMW_SRC} — MC-EM-WAVES-REQUIRE-A-MEDIUM + MC-E-AND-B-FIELDS-OUT-OF-PHASE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const EMW_PROBES: SeedProbe[] = [
+  {
+    conceptId: EMW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Radio signals from a Mars rover travel across tens of millions of kilometers of near-perfect vacuum to reach Earth. Is this possible?',
+    choices: [
+      { text: 'Yes — EM waves are self-sustaining oscillations of the E and B fields themselves and require no physical medium at all, as the Michelson-Morley experiment confirmed', isCorrect: true },
+      { text: 'No — without air or some other medium to vibrate, no wave should be able to propagate across empty space', isCorrect: false, misconceptionId: `${EMW}:MC-EM-WAVES-REQUIRE-A-MEDIUM` },
+    ],
+    correctValue: 'yes, EM waves need no medium',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EMW}:MC-EM-WAVES-REQUIRE-A-MEDIUM`],
+    source: `${EMW_SRC} — MC-EM-WAVES-REQUIRE-A-MEDIUM trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EMW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a plane electromagnetic wave, at the instant the electric field E is at its maximum value, what is the magnetic field B doing?',
+    choices: [
+      { text: 'B is ALSO at its maximum value at that same instant and location — E and B are exactly in phase in an EM wave', isCorrect: true },
+      { text: 'B is at zero, since E and B alternate — when one is at its peak, the other should be at its minimum', isCorrect: false, misconceptionId: `${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE` },
+    ],
+    correctValue: 'B is also at maximum, in phase with E',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE`],
+    source: `${EMW_SRC} — MC-E-AND-B-FIELDS-OUT-OF-PHASE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.lc-circuits ──────────────────────────────────────────────────────
+const LCC = 'phys.em.lc-circuits'
+const LCC_SRC = 'docs/curriculum/blueprints/phys.em.lc-circuits.md'
+
+const LCC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LCC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An LC circuit (an inductor L plus a capacitor C, nothing else) oscillates electrically exactly the way a mass on a spring oscillates mechanically — charge Q plays the role of displacement x, current I = dQ/dt plays the role of velocity, electric energy ½Q²/C plays the role of spring potential energy ½kx², and magnetic energy ½LI² plays the role of kinetic energy ½mv². Applying KVL gives d²Q/dt² = −Q/(LC), the exact equation of simple harmonic motion, with solution Q(t) = Q₀cos(ω₀t) at angular frequency ω₀ = 1/√(LC). With no resistance, total energy is exactly conserved: U = ½Q²/C + ½LI² = Q₀²/(2C) = constant at every instant — energy continuously trades back and forth between the capacitor\'s electric field and the inductor\'s magnetic field, completing a full electric-to-magnetic-to-electric cycle twice per period Q(t) (since U_C ∝ cos²ωt and U_L ∝ sin²ωt oscillate at DOUBLE the frequency of Q itself). At t = 0 (Q = Q₀, I = 0), ALL the energy sits in the capacitor; at t = T/4 (Q = 0, I = I_max), ALL the energy has transferred to the inductor, giving I_max = Q₀ω₀ by energy conservation. Add a resistance R in series and this becomes a damped RLC oscillator, with genuine energy dissipation causing the oscillation amplitude to decay exponentially over time.',
+    targetedMisconceptions: [`${LCC}:MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE`, `${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL`],
+    source: `${LCC_SRC} — Block 1-A (mass-spring analogy, SHM derivation) + Block 1-B (energy oscillation between C and L)`,
+  },
+  {
+    conceptId: LCC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing an IDEAL LC circuit (with zero resistance) will eventually stop oscillating on its own, the way real-world oscillations always seem to fade. It won\'t — for R = 0, energy conservation is EXACT: U = ½Q²/C + ½LI² stays constant forever, with the mathematical solution Q(t) = Q₀cos(ω₀t) oscillating with CONSTANT amplitude indefinitely, no decay whatsoever. This is exactly analogous to an ideal frictionless mass-spring system, which is mathematically correct to oscillate forever with no energy loss — the ideal model isn\'t "wrong," it\'s simply describing a limiting case that real circuits only approximate, since any real circuit inevitably has SOME resistance (wire resistance, component losses) that causes genuine exponential decay. The decay comes entirely from R, never from L or C themselves; without R, the ideal LC oscillates forever. Second, more subtle trap: assuming that at the moment ALL the current has reached its maximum, the energy must be split roughly "half-and-half" between the capacitor and inductor, since both components are somehow "active." It isn\'t — at the exact instant of maximum current (I = I_max, Q = 0 simultaneously), the capacitor has ZERO charge and therefore ZERO stored energy, while the inductor holds the ENTIRE total energy, U_L = ½LI²_max = Q₀²/(2C) = U_total. The energy split genuinely alternates between 100%/0% and 0%/100% each quarter-cycle — a 50/50 split between capacitor and inductor is not the typical or "steady" state at all, it\'s only a brief passing moment that occurs exactly at t = T/8, 3T/8, 5T/8, and so on.',
+    targetedMisconceptions: [`${LCC}:MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE`, `${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL`],
+    source: `${LCC_SRC} — MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE + MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LCC_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An IDEAL LC circuit has zero resistance (R = 0). What happens to its oscillation amplitude over time?',
+    choices: [
+      { text: 'It stays exactly constant forever — with R = 0, energy is exactly conserved between the capacitor and inductor, and Q(t) = Q₀cos(ω₀t) never decays', isCorrect: true },
+      { text: 'It gradually decreases and the oscillation eventually stops, even with zero resistance, because energy naturally dissipates over time', isCorrect: false, misconceptionId: `${LCC}:MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE` },
+    ],
+    correctValue: 'stays constant forever',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCC}:MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE`],
+    source: `${LCC_SRC} — MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LCC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At the exact moment the current in an LC circuit reaches its maximum value I_max, how is the total energy split between the capacitor and the inductor?',
+    choices: [
+      { text: '0% in the capacitor, 100% in the inductor — at maximum current, the charge Q is exactly zero, so the capacitor holds no energy at all', isCorrect: true },
+      { text: 'Roughly 50% in each, since both components are actively involved when current is flowing', isCorrect: false, misconceptionId: `${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL` },
+    ],
+    correctValue: '0% capacitor, 100% inductor',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL`],
+    source: `${LCC_SRC} — MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.magnetic-dipole ──────────────────────────────────────────────────
+const MDIP = 'phys.em.magnetic-dipole'
+const MDIP_SRC = 'docs/curriculum/blueprints/phys.em.magnetic-dipole.md'
+
+const MDIP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MDIP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A magnetic dipole is fundamentally a current LOOP, with magnetic dipole moment m = NIA n̂ (N turns, current I, area A, direction given by the right-hand rule) — a structurally different object from an electric dipole, which is two genuinely separate point charges. The "north pole" of a magnetic dipole is simply the face where field lines exit (where your right thumb points when your fingers curl in the current direction); the "south pole" is where they re-enter — these are descriptions of the SAME current loop\'s field geometry, not two separate physical objects that could ever be pulled apart. Far from a magnetic dipole, the field falls off as B ∝ 1/r³ — one power of r faster than a single magnetic "pole" (which doesn\'t exist) would give at 1/r², and even faster than you might naively guess: on the dipole axis, B_axial = (μ₀/2π)(m/r³); on the equatorial plane, B_equatorial = (μ₀/4π)(m/r³), exactly half the axial value at the same distance. This 1/r³ falloff is the general signature of a DIPOLE (any multipole moment): a monopole field would go as 1/r², a dipole as 1/r³, a quadrupole as 1/r⁴ — each higher multipole order falls off one additional power of r faster, because it represents an increasingly fine cancellation between opposite-sign contributions.',
+    targetedMisconceptions: [`${MDIP}:MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES`, `${MDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED`],
+    source: `${MDIP_SRC} — dipole moment definition (current loop model) + far-field 1/r³ falloff (axial and equatorial)`,
+  },
+  {
+    conceptId: MDIP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A very natural but wrong model, carried over from electric dipoles: imagining a magnetic dipole as two separate "magnetic charges," a positive north charge and a negative south charge, that could in principle be physically separated — and then asking "where exactly is the north magnetic charge located?" There simply isn\'t one. Electric dipoles genuinely DO have two separable real charges (+q and −q) that you could physically pull apart with enough force; magnetic dipoles cannot be separated this way, because magnetism doesn\'t come from two kinds of "magnetic charge" at all — it comes from CIRCULATING CURRENT. Cut a bar magnet exactly in half and you get two SMALLER complete dipole magnets, each with its own north AND south pole, never an isolated north or isolated south; cut those again and you still get complete dipoles, all the way down to a single current loop, where the "north face" (where field exits) and "south face" (where field enters) are simply two descriptions of the SAME circulating current, inseparable by construction — exactly what Gauss\'s law for magnetism (∮B·dA = 0) guarantees. Second trap: applying the familiar 1/r² falloff (correct for a single point charge, or the Biot-Savart element law) to a dipole\'s far field. It falls off FASTER — as 1/r³. Check the numbers directly: at r = 20 cm, the actual axial dipole field comes out to about 7.55 μT; a naive 1/r² estimate using the same constants would predict something roughly 5 times larger. The dipole field is fundamentally a cancellation residual between two nearly equal and opposite contributions (the two "poles," or equivalently opposite sides of the current loop) — as you move farther away, those two contributions look increasingly alike and cancel MORE completely, so their difference (the actual field you measure) shrinks one power of r faster than either contribution alone would.',
+    targetedMisconceptions: [`${MDIP}:MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES`, `${MDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED`],
+    source: `${MDIP_SRC} — MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES + MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MDIP_PROBES: SeedProbe[] = [
+  {
+    conceptId: MDIP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student asks: "Exactly where is the positive magnetic charge located inside a bar magnet, separate from the negative magnetic charge?" What is the correct response?',
+    choices: [
+      { text: 'There is no such thing as a separate magnetic charge — magnetism comes from circulating current, and the "north" and "south" faces are just two descriptions of the same current loop\'s field geometry, never separable', isCorrect: true },
+      { text: 'The positive magnetic charge sits at the north end and the negative magnetic charge sits at the south end, and cutting the magnet there would separate them', isCorrect: false, misconceptionId: `${MDIP}:MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES` },
+    ],
+    correctValue: 'no separate magnetic charges exist',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MDIP}:MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES`],
+    source: `${MDIP_SRC} — MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MDIP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You double the distance from a magnetic dipole (from r to 2r) along its axis. By what factor does the field strength decrease?',
+    choices: [
+      { text: 'By a factor of 8 (2³) — the dipole field falls off as 1/r³, one power faster than a monopole\'s 1/r²', isCorrect: true },
+      { text: 'By a factor of 4 (2²) — the field falls off as 1/r², the same as any magnetic source', isCorrect: false, misconceptionId: `${MDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED` },
+    ],
+    correctValue: '8',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED`],
+    source: `${MDIP_SRC} — MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.maxwells-equations ──────────────────────────────────────────────
+const MAXW = 'phys.em.maxwells-equations'
+const MAXW_SRC = 'docs/curriculum/blueprints/phys.em.maxwells-equations.md'
+
+const MAXW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MAXW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Maxwell\'s four equations — Gauss\'s law for electricity (∮E·dA = Q_enc/ε₀), Gauss\'s law for magnetism (∮B·dA = 0), Faraday\'s law (∮E·dl = −dΦ_B/dt), and the Ampere-Maxwell law (∮B·dl = μ₀I_enc + μ₀ε₀dΦ_E/dt) — are not four independent, standalone statements but a single COUPLED system. Consider deep space, far from any charges or currents: if B changes at some point, Faraday\'s law says it creates a circulating E there; that changing E, by the Ampere-Maxwell law, creates a circulating B at a nearby point — each law drives the other in an ongoing feedback loop, and solving all four simultaneously (not any single one alone) produces the wave equation ∂²E/∂x² = μ₀ε₀∂²E/∂t², predicting a wave speed c = 1/√(μ₀ε₀) that Maxwell immediately recognized as the speed of light. The key term that makes this self-sustaining cycle possible in vacuum — where there\'s no real conduction current — is Maxwell\'s own addition, the DISPLACEMENT current I_d = ε₀dΦ_E/dt, added specifically to fix a genuine inconsistency in Ampere\'s original law (which gave different, contradictory answers for a charging capacitor depending on which surface you chose for the Amperian loop). Displacement current is NOT a flow of charge — no electrons cross a capacitor\'s vacuum gap — it is purely the time rate of change of electric flux, but it produces a magnetic field via Ampere\'s law that is physically indistinguishable from the field a real conduction current would produce.',
+    targetedMisconceptions: [`${MAXW}:MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT`, `${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT`],
+    source: `${MAXW_SRC} — the four coupled equations + displacement current as the fix enabling self-sustaining EM waves`,
+  },
+  {
+    conceptId: MAXW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but limiting way to first encounter Maxwell\'s equations: treating each one as a separate, self-contained rule to apply in isolation — computing B from Ampere\'s Law without ever considering whether a changing E might also be present, or believing "Faraday\'s Law only applies to inductors." This misses the entire point of what makes the equations revolutionary. In a region of space with no charges or currents at all (deep space, say), Faraday\'s law says a changing B creates a circulating E there; the Ampere-Maxwell law says that very same changing E then creates a circulating B nearby — each equation drives the OTHER, continuously, in a coupled feedback loop that neither equation alone could produce or predict. Solving all four equations SIMULTANEOUSLY (never any single one by itself) is what yields the wave equation and the prediction of electromagnetic radiation traveling at c = 1/√(μ₀ε₀) — remove any single one of the four and the "conversation" between E and B breaks down, and no self-sustaining wave emerges. Second trap: taking the name "displacement CURRENT" too literally, imagining actual electrons somehow jumping across the vacuum gap between a capacitor\'s plates. They don\'t — if charge carriers genuinely crossed the gap, the capacitor would be a dead short and could never actually charge up in the first place. Direct measurement confirms this: place an Amperian loop around the gap and measure B with a Hall probe, and you get EXACTLY what Ampere\'s law with I_d = ε₀dΦ_E/dt predicts — identical to the B field a real conduction current of the same magnitude would produce, even though zero charge physically crosses the gap. Displacement current is a mathematical source term representing the rate of change of electric flux, not a physical flow of charge; the magnetic field it produces is real and measurable, but its physical origin is purely the time-variation of E, which is exactly the generalization that made Ampere\'s law self-consistent and opened the door to predicting electromagnetic waves in the first place.',
+    targetedMisconceptions: [`${MAXW}:MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT`, `${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT`],
+    source: `${MAXW_SRC} — MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT + MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MAXW_PROBES: SeedProbe[] = [
+  {
+    conceptId: MAXW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In empty space far from any charges or currents, can Faraday\'s law and the Ampere-Maxwell law be applied completely independently of each other?',
+    choices: [
+      { text: 'No — they form a coupled feedback loop: a changing B (via Faraday) creates a circulating E, which (via Ampere-Maxwell) creates a circulating B, and solving BOTH together produces the electromagnetic wave equation', isCorrect: true },
+      { text: 'Yes — each of Maxwell\'s four equations is a self-contained, independent rule that can be applied and solved on its own', isCorrect: false, misconceptionId: `${MAXW}:MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT` },
+    ],
+    correctValue: 'no, they are coupled',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MAXW}:MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT`],
+    source: `${MAXW_SRC} — MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MAXW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A capacitor with a vacuum gap is being charged. Do actual electrons physically cross the gap as part of the "displacement current"?',
+    choices: [
+      { text: 'No — displacement current I_d = ε₀dΦ_E/dt is the rate of change of electric flux, not a flow of charge; no electrons cross the gap, though the B field it produces is identical to that of a real current', isCorrect: true },
+      { text: 'Yes — the displacement current is electrons jumping across the gap between the plates', isCorrect: false, misconceptionId: `${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT` },
+    ],
+    correctValue: 'no, no charge crosses the gap',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT`],
+    source: `${MAXW_SRC} — MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -31686,6 +32046,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...MFLX_EXPLANATIONS,
   ...MMAT_EXPLANATIONS,
   ...SIND_EXPLANATIONS,
+  ...ACB_EXPLANATIONS,
+  ...EPWR_EXPLANATIONS,
+  ...EMW_EXPLANATIONS,
+  ...LCC_EXPLANATIONS,
+  ...MDIP_EXPLANATIONS,
+  ...MAXW_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -32044,4 +32410,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...MFLX_PROBES,
   ...MMAT_PROBES,
   ...SIND_PROBES,
+  ...ACB_PROBES,
+  ...EPWR_PROBES,
+  ...EMW_PROBES,
+  ...LCC_PROBES,
+  ...MDIP_PROBES,
+  ...MAXW_PROBES,
 ]
