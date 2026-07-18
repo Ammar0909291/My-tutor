@@ -10405,6 +10405,395 @@ const CINEL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.phonics.alphabet-recognition ────────────────────────────────────────
+const ALPHA = 'eng.phonics.alphabet-recognition'
+const ALPHA_SRC = 'docs/curriculum/blueprints/eng.phonics.alphabet-recognition.md'
+
+const ALPHA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALPHA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'Every letter has two "costumes" — a big (capital) one and a small ' +
+      '(lowercase) one — but underneath the costume it is the same letter ' +
+      'with the same name and sound. Big B, little b: B... b... B... b — ' +
+      'same name, same sound, just written two ways, like how you can write ' +
+      'your own name in big letters or small letters and it is still your ' +
+      'name. So check the letter’s name and sound first, then just notice ' +
+      'which costume (case) it happens to be wearing — never treat case as ' +
+      'a different letter.',
+    targetedMisconceptions: [`${ALPHA}:MC-CASE-ARE-DIFFERENT-LETTERS`],
+    source: `${ALPHA_SRC} — MC-CASE-ARE-DIFFERENT-LETTERS (P30 costume bridge + P28 B/b conflict evidence)`,
+  },
+  {
+    conceptId: ALPHA,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.EARLY,
+    content:
+      '"b" and "d" are mirror images of each other — the exact same curve ' +
+      'and stick, just facing opposite directions — which is exactly why ' +
+      'they are so easy to mix up, and almost every beginning reader does. ' +
+      'Make a fist with your left hand and stick your thumb up: that is a ' +
+      '"b" shape, with the loop on the left. Your right hand, thumb up: ' +
+      'that is a "d" shape, loop on the right. Before naming a letter that ' +
+      'could be either one, always check WHICH WAY the loop or tail points ' +
+      '— do not just check what shape it is, since both letters share the ' +
+      'same shape.',
+    targetedMisconceptions: [`${ALPHA}:MC-SHAPE-CONFUSION-MIRROR-LETTERS`],
+    source: `${ALPHA_SRC} — MC-SHAPE-CONFUSION-MIRROR-LETTERS (P30 mirror-image bridge + Component 1 hand-shape check)`,
+  },
+  {
+    conceptId: ALPHA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — same two misconceptions, no child framing (foundations/03 §5 adult-register guard)
+    content:
+      'Each of the 26 letters has two written forms — a capital and a ' +
+      'lowercase — that share one name and one sound; the shapes differ, ' +
+      'the letter does not. Where this genuinely gets tricky is a small set ' +
+      'of mirror-image pairs: "b" and "d", "p" and "q" share the exact same ' +
+      'curve-and-stick shape, just facing opposite directions. Confusing ' +
+      'these is not a sign of difficulty — it is the single most common, ' +
+      'fully expected point of confusion for any new reader of the Latin ' +
+      'alphabet, at any age. The reliable check: identify which direction ' +
+      'the loop or tail points before naming the letter, rather than ' +
+      'judging by shape alone.',
+    targetedMisconceptions: [
+      `${ALPHA}:MC-CASE-ARE-DIFFERENT-LETTERS`,
+      `${ALPHA}:MC-SHAPE-CONFUSION-MIRROR-LETTERS`,
+    ],
+    source: `${ALPHA_SRC} — Component 8 adult/S9 adaptive flag (no shape/transfer assumption) + both misconceptions, adult register`,
+  },
+]
+
+const ALPHA_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALPHA,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Here is a big "M" and a little "m". Are they the same letter, or two different letters?',
+    choices: [
+      { text: 'The same letter — same name and sound, just two different "costumes"', isCorrect: true },
+      { text: 'Two different letters, because they look different', isCorrect: false, misconceptionId: `${ALPHA}:MC-CASE-ARE-DIFFERENT-LETTERS` },
+    ],
+    correctValue: 'the same letter',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ALPHA}:MC-CASE-ARE-DIFFERENT-LETTERS`],
+    source: `${ALPHA_SRC} — P28 B/b conflict as probe`,
+  },
+  {
+    conceptId: ALPHA,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Is this letter "b" or "d"? [shows a letter with the loop on the right side]',
+    choices: [
+      { text: '"d" — the loop points right, like a fist with the right thumb up', isCorrect: true },
+      { text: '"b" — it has a loop and a stick, so it must be "b"', isCorrect: false, misconceptionId: `${ALPHA}:MC-SHAPE-CONFUSION-MIRROR-LETTERS` },
+    ],
+    correctValue: 'd',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ALPHA}:MC-SHAPE-CONFUSION-MIRROR-LETTERS`],
+    source: `${ALPHA_SRC} — TA-4 mirror-letter discrimination as probe`,
+  },
+]
+
+// ─── eng.phonics.rhyming ──────────────────────────────────────────────────────
+const RHYME = 'eng.phonics.rhyming'
+const RHYME_SRC = 'docs/curriculum/blueprints/eng.phonics.rhyming.md'
+
+const RHYME_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RHYME,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'Rhyming is about what you HEAR, not what you SEE written down. Say ' +
+      '"bear" out loud, then say "chair" out loud — they sound the same at ' +
+      'the end, even though "bear" ends in the letters "ear" and "chair" ' +
+      'ends in "air". Now say "love" and "move" — those are spelled the ' +
+      'same way at the end ("-ove") but do NOT actually sound the same. Two ' +
+      'words rhyme when their ENDING SOUNDS match, no matter how the letters ' +
+      'are arranged — so always close your eyes and listen, instead of ' +
+      'picturing the spelling.',
+    targetedMisconceptions: [`${RHYME}:MC-SPELLING-MUST-MATCH`],
+    source: `${RHYME_SRC} — MC-SPELLING-MUST-MATCH (P28 bear/chair vs. love/move conflict evidence)`,
+  },
+  {
+    conceptId: RHYME,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'Rhyming words match at the END of the word, not the beginning. "Sun" ' +
+      'and "sit" both start the same way, but check their endings: sun ends ' +
+      'in "-un", sit ends in "-it" — different, so they do NOT rhyme. Now ' +
+      'check "sun" and "fun": both end in "-un" — same, so THOSE rhyme. ' +
+      'Words that match at the beginning instead have a different name ' +
+      '(alliteration), but that is not rhyming. To check a rhyme, always ' +
+      'compare the LAST chunk of sound in each word and ignore how the word ' +
+      'starts.',
+    targetedMisconceptions: [`${RHYME}:MC-FIRST-SOUND-IS-ENOUGH`],
+    source: `${RHYME_SRC} — MC-FIRST-SOUND-IS-ENOUGH (P28 sun/sit vs. sun/fun conflict evidence)`,
+  },
+  {
+    conceptId: RHYME,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Two words rhyme when their ending SOUNDS match — full stop. Two ' +
+      'traps to watch for. First: spelling can mislead in either direction. ' +
+      '"Bear" and "chair" look nothing alike at the end but rhyme perfectly; ' +
+      '"love" and "move" share the identical spelling "-ove" but do not ' +
+      'rhyme at all — judge by ear, never by eye. Second: rhyme is an ' +
+      'ending match, not a beginning match. "Sun" and "sit" share their ' +
+      'first sound, but that is alliteration, a different device entirely; ' +
+      'a genuine rhyme — "sun" and "fun" — shares its LAST sound. Isolate ' +
+      'the final sound-chunk of each word before comparing.',
+    targetedMisconceptions: [
+      `${RHYME}:MC-SPELLING-MUST-MATCH`,
+      `${RHYME}:MC-FIRST-SOUND-IS-ENOUGH`,
+    ],
+    source: `${RHYME_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RHYME_PROBES: SeedProbe[] = [
+  {
+    conceptId: RHYME,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Do "love" and "move" rhyme?',
+    choices: [
+      { text: 'No — say them out loud: they are spelled alike but do not sound alike at the end', isCorrect: true },
+      { text: 'Yes — they are both spelled "-ove" at the end', isCorrect: false, misconceptionId: `${RHYME}:MC-SPELLING-MUST-MATCH` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${RHYME}:MC-SPELLING-MUST-MATCH`],
+    source: `${RHYME_SRC} — P28 love/move conflict as probe`,
+  },
+  {
+    conceptId: RHYME,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Which word rhymes with "sun": "sit" or "fun"?',
+    choices: [
+      { text: '"fun" — both words end in the same "-un" sound', isCorrect: true },
+      { text: '"sit" — both words start with the same sound', isCorrect: false, misconceptionId: `${RHYME}:MC-FIRST-SOUND-IS-ENOUGH` },
+    ],
+    correctValue: 'fun',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${RHYME}:MC-FIRST-SOUND-IS-ENOUGH`],
+    source: `${RHYME_SRC} — P28 sun/sit vs. sun/fun conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.blending-segmenting ──────────────────────────────────────────
+const BLEND = 'eng.phonics.blending-segmenting'
+const BLEND_SRC = 'docs/curriculum/blueprints/eng.phonics.blending-segmenting.md'
+
+const BLEND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BLEND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'Blending means gliding sounds together smoothly, without a pause ' +
+      'between them — not naming letters one at a time. Say the letter ' +
+      'names fast, "buh... ah... tuh" — that does not turn into a real ' +
+      'word. Now stretch and glide the actual SOUNDS together with no stop: ' +
+      '"bbbaaat" → "bat". Stopping between sounds, especially adding an ' +
+      'extra "uh" after sounds like b, t, or k, breaks the word apart ' +
+      'instead of joining it — so glide each sound directly into the next ' +
+      'one until they merge into a word.',
+    targetedMisconceptions: [`${BLEND}:MC-BLENDING-IS-JUST-FAST-LETTERS`],
+    source: `${BLEND_SRC} — MC-BLENDING-IS-JUST-FAST-LETTERS (P28 buh-ah-tuh vs. bbbaaat conflict evidence)`,
+  },
+  {
+    conceptId: BLEND,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'Segmenting a word fully means breaking it all the way down to its ' +
+      'smallest individual sounds (phonemes) — syllables are a bigger, ' +
+      'in-between chunk, a useful first step but not the finish line. ' +
+      'Splitting "rabbit" into "rab" and "bit" finds the syllables — good ' +
+      'start — but "rab" can still be broken down further into its ' +
+      'separate sounds. After finding syllables, always keep breaking each ' +
+      'syllable down further into its individual sounds, checking that no ' +
+      'chunk can be split any smaller.',
+    targetedMisconceptions: [`${BLEND}:MC-SEGMENTING-STOPS-AT-SYLLABLES`],
+    source: `${BLEND_SRC} — MC-SEGMENTING-STOPS-AT-SYLLABLES (P28 rabbit/rab-bit conflict evidence)`,
+  },
+  {
+    conceptId: BLEND,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Blending is gliding individual sounds together with no pause between ' +
+      'them, not reciting letter names in sequence. Naming letters quickly — ' +
+      '"buh, ah, tuh" — never resolves into a word; stretching the actual ' +
+      'sounds without a break — "bbbaaat" — resolves immediately into ' +
+      '"bat". Segmenting is the reverse skill, and the common shortfall is ' +
+      'stopping at the syllable level: splitting "rabbit" into "rab" and ' +
+      '"bit" finds the syllables, a genuine intermediate step, but a full ' +
+      'segmentation continues down to the individual phonemes — ' +
+      '/r/-/æ/-/b/-/ɪ/-/t/. After finding syllables, always check whether ' +
+      'each one can still be split further.',
+    targetedMisconceptions: [
+      `${BLEND}:MC-BLENDING-IS-JUST-FAST-LETTERS`,
+      `${BLEND}:MC-SEGMENTING-STOPS-AT-SYLLABLES`,
+    ],
+    source: `${BLEND_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const BLEND_PROBES: SeedProbe[] = [
+  {
+    conceptId: BLEND,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Which way of saying the sounds in "sun" turns into the real word?',
+    choices: [
+      { text: 'Gliding the sounds together with no stops: "ssssuuunnn" → "sun"', isCorrect: true },
+      { text: 'Saying the letter names quickly: "suh... uh... nuh"', isCorrect: false, misconceptionId: `${BLEND}:MC-BLENDING-IS-JUST-FAST-LETTERS` },
+    ],
+    correctValue: 'gliding the sounds together',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${BLEND}:MC-BLENDING-IS-JUST-FAST-LETTERS`],
+    source: `${BLEND_SRC} — P28 buh-ah-tuh vs. bbbaaat conflict as probe`,
+  },
+  {
+    conceptId: BLEND,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.EARLY,
+    stem: 'You split "rabbit" into "rab" and "bit". Is that the full, smallest-sound segmentation, or is there more to do?',
+    choices: [
+      { text: 'There is more to do — each syllable can still be broken into individual sounds: /r/-/æ/-/b/-/ɪ/-/t/', isCorrect: true },
+      { text: 'That is fully segmented — syllables are the smallest chunk', isCorrect: false, misconceptionId: `${BLEND}:MC-SEGMENTING-STOPS-AT-SYLLABLES` },
+    ],
+    correctValue: 'there is more to do',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BLEND}:MC-SEGMENTING-STOPS-AT-SYLLABLES`],
+    source: `${BLEND_SRC} — P28 rabbit/rab-bit conflict as probe`,
+  },
+]
+
+// ─── eng.phonics.consonants ───────────────────────────────────────────────────
+const CONS = 'eng.phonics.consonants'
+const CONS_SRC = 'docs/curriculum/blueprints/eng.phonics.consonants.md'
+
+const CONS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CONS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'The letters "c" and "g" each represent TWO different sounds, ' +
+      'depending on which letter comes right after them — and this is a ' +
+      'real, learnable pattern, not randomness. Say "cat" — "c" makes a ' +
+      'hard /k/ sound. Say "city" — there, "c" makes a soft /s/ sound. The ' +
+      'pattern: usually a HARD sound before a, o, u ("cat", "cot", "cut", ' +
+      '"gum") and a SOFT sound before e, i, y ("city", "cent", "gem", ' +
+      '"giant"). Before saying the sound for "c" or "g", check the very ' +
+      'next letter — that tells you which sound to use.',
+    targetedMisconceptions: [`${CONS}:MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS`],
+    source: `${CONS_SRC} — MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS (P28 cat/city conflict evidence + hard/soft pattern rule)`,
+  },
+  {
+    conceptId: CONS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Most single consonant letters do reliably represent one sound in ' +
+      'isolation — but English also has silent letters and letter-' +
+      'combinations that break the simple one-letter-one-sound pattern. ' +
+      'Say "knife" out loud, naturally: you do not actually hear a /k/ ' +
+      'sound at the start — it starts right on the /n/. That silent "k" ' +
+      'is a real exception, not proof the whole system is unpredictable: ' +
+      'learn the reliable single-consonant sounds as the solid foundation ' +
+      'first, and treat exceptions like silent letters as a separate, ' +
+      'smaller list learned on top of that foundation.',
+    targetedMisconceptions: [`${CONS}:MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND`],
+    source: `${CONS_SRC} — MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND (P28 knife silent-k conflict evidence)`,
+  },
+  {
+    conceptId: CONS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      '"C" and "g" each carry two sounds, governed by a real, learnable ' +
+      'rule: hard before a/o/u ("cat", "cot", "cut", "gum"), soft before ' +
+      'e/i/y ("city", "cent", "gem", "giant"). Check the letter immediately ' +
+      'following before committing to a sound. Separately: most single ' +
+      'consonants are reliable one-letter-one-sound, but English carries a ' +
+      'layer of silent letters and digraphs on top of that reliable core — ' +
+      'the silent "k" in "knife" is a genuine, learnable exception, not ' +
+      'evidence the whole system is arbitrary. Treat the core pattern as ' +
+      'solid and the exceptions as a separate, shorter list learned ' +
+      'alongside it.',
+    targetedMisconceptions: [
+      `${CONS}:MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS`,
+      `${CONS}:MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND`,
+    ],
+    source: `${CONS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CONS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CONS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What sound does "c" make in "cent"?',
+    choices: [
+      { text: 'A soft /s/ sound — "c" before e, i, or y is usually soft', isCorrect: true },
+      { text: 'A hard /k/ sound — "c" always makes the same sound', isCorrect: false, misconceptionId: `${CONS}:MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS` },
+    ],
+    correctValue: '/s/',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CONS}:MC-C-AND-G-ARE-SINGLE-SOUND-LETTERS`],
+    source: `${CONS_SRC} — P28 cat/city hard/soft-c pattern as probe`,
+  },
+  {
+    conceptId: CONS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Do you hear a /k/ sound at the start of "knife" when you say it naturally?',
+    choices: [
+      { text: 'No — the "k" is silent; the word starts right on the /n/ sound', isCorrect: true },
+      { text: 'Yes — every letter must make its own sound, so the "k" must be pronounced', isCorrect: false, misconceptionId: `${CONS}:MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND` },
+    ],
+    correctValue: 'no, the k is silent',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CONS}:MC-EVERY-LETTER-MAKES-EXACTLY-ONE-SOUND`],
+    source: `${CONS_SRC} — P28 knife silent-k conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -10528,6 +10917,10 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...IMP_EXPLANATIONS,
   ...CELAS_EXPLANATIONS,
   ...CINEL_EXPLANATIONS,
+  ...ALPHA_EXPLANATIONS,
+  ...RHYME_EXPLANATIONS,
+  ...BLEND_EXPLANATIONS,
+  ...CONS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -10651,4 +11044,8 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...IMP_PROBES,
   ...CELAS_PROBES,
   ...CINEL_PROBES,
+  ...ALPHA_PROBES,
+  ...RHYME_PROBES,
+  ...BLEND_PROBES,
+  ...CONS_PROBES,
 ]
