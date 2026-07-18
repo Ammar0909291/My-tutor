@@ -9935,6 +9935,476 @@ const POWR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.tension ──────────────────────────────────────────────────────
+const TENS = 'phys.mech.tension'
+const TENS_SRC = 'docs/curriculum/blueprints/phys.mech.tension.md'
+
+const TENS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TENS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Try pushing a block across the floor with a length of rope — the ' +
+      'rope just goes slack and does nothing, because a rope can only ' +
+      'PULL, never push. That pull is tension, and it always acts on an ' +
+      'attached object pointing AWAY from the object, along the rope, ' +
+      'toward wherever the rope is anchored. For an idealised massless, ' +
+      'inextensible rope running over a frictionless pulley, the tension ' +
+      'is the SAME number all the way along the rope — the pull the rope ' +
+      'exerts on one end is identical in magnitude to the pull it exerts ' +
+      'on the other end, even if the two ends are attached to completely ' +
+      'different masses. That single fact is what lets you connect two ' +
+      'separate free-body diagrams (one per object) into one solvable ' +
+      'system.',
+    targetedMisconceptions: [`${TENS}:MC-ROPE-PUSHES`],
+    source: `${TENS_SRC} — §1 Learning Objective (pull-only, same-magnitude-throughout) + MC-ROPE-PUSHES`,
+  },
+  {
+    conceptId: TENS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 5 kg mass hangs from a rope over a pulley, connected to a lighter ' +
+      'mass on the other side, and the system is clearly accelerating — ' +
+      'yet it is tempting to set tension T = m·g = 50 N anyway, the same ' +
+      'value it would have if the mass just hung at rest. Test that ' +
+      'assumption with Newton’s Second Law on the hanging mass: ' +
+      'm g − T = m a → 50 − 50 = 5a → a = 0. That predicts NO ' +
+      'acceleration — but the system visibly moves. T = mg can only be ' +
+      'correct when a = 0 (true equilibrium); the moment the system ' +
+      'accelerates, the net force ON that mass (mg − T) is what DRIVES ' +
+      'the acceleration, so T must come out smaller than mg, not equal to ' +
+      'it. The only reliable method: write ΣF = ma separately for each ' +
+      'body and solve the resulting equations for T.',
+    targetedMisconceptions: [`${TENS}:MC-TENSION-EQUALS-WEIGHT`],
+    source: `${TENS_SRC} — MC-TENSION-EQUALS-WEIGHT conflict_evidence [P28], worked numbers`,
+  },
+  {
+    conceptId: TENS,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two blocks are connected by a rope over a frictionless pulley: ' +
+      'a 5 kg mass hanging freely and a 3 kg mass hanging on the other ' +
+      'side. Draw a separate free-body diagram for each mass. For the ' +
+      'heavier (5 kg) mass, taking downward as positive: 5g − T = 5a. For ' +
+      'the lighter (3 kg) mass, taking upward as positive since it rises: ' +
+      'T − 3g = 3a. Both share the same T (tension is uniform along an ' +
+      'ideal rope) and the same magnitude of a (the rope is inextensible, ' +
+      'so both masses speed up together). Adding the two equations ' +
+      'eliminates T directly: 5g − 3g = 8a → a = 2g/8 = 2.45 m/s². ' +
+      'Substituting back: T = 3(g + a) = 3(9.8 + 2.45) ≈ 36.75 N — ' +
+      'between the two weights (29.4 N and 49 N), exactly as it must be ' +
+      'for an accelerating system, never equal to either mass’s weight ' +
+      'alone.',
+    targetedMisconceptions: [`${TENS}:MC-TENSION-EQUALS-WEIGHT`],
+    source: `${TENS_SRC} — §5 two-body connected-system worked solution pattern (Atwood-style)`,
+  },
+]
+
+const TENS_PROBES: SeedProbe[] = [
+  {
+    conceptId: TENS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 5 kg mass hangs from a rope over a pulley in a system that is accelerating (not at rest). What is the tension T?',
+    choices: [
+      { text: 'Found from ΣF = ma on the mass — generally T ≠ mg while the system accelerates', isCorrect: true },
+      { text: 'T = mg = 49 N, same as if the mass were at rest', isCorrect: false, misconceptionId: `${TENS}:MC-TENSION-EQUALS-WEIGHT` },
+    ],
+    correctValue: 'T = m(g ± a), not mg',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TENS}:MC-TENSION-EQUALS-WEIGHT`],
+    source: `${TENS_SRC} — MC-TENSION-EQUALS-WEIGHT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TENS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a taut rope exert a pushing force on the object it is attached to?',
+    choices: [
+      { text: 'No — a rope can only pull, along its length, away from the object; it goes slack under any attempted push', isCorrect: true },
+      { text: 'Yes — a rope can push just like it can pull', isCorrect: false, misconceptionId: `${TENS}:MC-ROPE-PUSHES` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TENS}:MC-ROPE-PUSHES`],
+    source: `${TENS_SRC} — MC-ROPE-PUSHES trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.inclined-plane ───────────────────────────────────────────────
+const INCL = 'phys.mech.inclined-plane'
+const INCL_SRC = 'docs/curriculum/blueprints/phys.mech.inclined-plane.md'
+
+const INCL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INCL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The single trick that makes incline problems solvable is rotating ' +
+      'your axes to match the slope instead of staying horizontal and ' +
+      'vertical: pick one axis running along the slope (parallel) and one ' +
+      'perpendicular to it, then resolve weight into these tilted axes. ' +
+      'Weight mg splits into mg sinθ pulling the object DOWN the slope ' +
+      '(parallel component) and mg cosθ pressing the object INTO the ' +
+      'slope (perpendicular component). Write Newton’s Second Law along ' +
+      'each rotated axis separately: the perpendicular equation gives you ' +
+      'the normal force N = mg cosθ (since there is no acceleration ' +
+      'perpendicular to the slope), and the parallel equation — once you ' +
+      'know N and hence friction — gives you the acceleration along the ' +
+      'slope. Trying to solve the same problem with plain horizontal and ' +
+      'vertical axes instead tangles every equation together.',
+    targetedMisconceptions: [`${INCL}:MC-FRICTION-WRONG-N`],
+    source: `${INCL_SRC} — §1 Learning Objective (rotated-axis resolution, N before friction)`,
+  },
+  {
+    conceptId: INCL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Friction is always f = μN — but on an incline it is easy to ' +
+      'accidentally substitute the full weight mg for N instead of the ' +
+      'perpendicular component mg cosθ. Push that shortcut to its limit: ' +
+      'imagine the incline steepened all the way to a vertical wall ' +
+      '(θ = 90°). The correct normal force there is N = mg cos90° = 0 — a ' +
+      'vertical wall cannot press back on an object resting against it ' +
+      'with nothing else holding it up, so there is genuinely no friction ' +
+      'available. But the shortcut f = μmg would still predict a large ' +
+      'nonzero friction force even at 90°, which is physically impossible ' +
+      '— proof the shortcut is wrong for anything but a flat floor. The ' +
+      'correct two-step method: find N = mg cosθ from the perpendicular ' +
+      'equilibrium equation first, THEN compute f = μN = μ mg cosθ.',
+    targetedMisconceptions: [`${INCL}:MC-FRICTION-WRONG-N`],
+    source: `${INCL_SRC} — MC-FRICTION-WRONG-N conflict_evidence [P28] (90°-wall limiting case)`,
+  },
+  {
+    conceptId: INCL,
+    subjectSlug: 'physics',
+    familyKind: 'common_misconception_note',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Friction is not fixed to "always point up the slope" — it always ' +
+      'OPPOSES whichever way the object is actually moving (or about to ' +
+      'move) relative to the surface, so its direction flips depending on ' +
+      'the situation. A block sliding DOWN a slope feels friction acting ' +
+      'UP the slope, opposing that downward slide. But push the same ' +
+      'block UP the slope instead, and friction now acts DOWN the slope, ' +
+      'opposing the upward motion — the exact opposite direction from the ' +
+      'first case. Before drawing the friction arrow on any incline ' +
+      'problem, always state out loud which way the object is sliding (or ' +
+      'tending to slide) first, then draw friction pointing the other ' +
+      'way.',
+    targetedMisconceptions: [`${INCL}:MC-FRICTION-DIRECTION`],
+    source: `${INCL_SRC} — MC-FRICTION-DIRECTION bridge_text [P30] (motion-direction-first rule)`,
+  },
+]
+
+const INCL_PROBES: SeedProbe[] = [
+  {
+    conceptId: INCL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block sits on a 30° incline with coefficient of friction μ. What is the correct expression for the friction force?',
+    choices: [
+      { text: 'f = μ mg cos30° — using the normal force N = mg cos30°', isCorrect: true },
+      { text: 'f = μ mg — using the full weight directly', isCorrect: false, misconceptionId: `${INCL}:MC-FRICTION-WRONG-N` },
+    ],
+    correctValue: 'μ mg cos(30°)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INCL}:MC-FRICTION-WRONG-N`],
+    source: `${INCL_SRC} — MC-FRICTION-WRONG-N trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: INCL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block is sliding UP an incline (being pushed). Which direction does friction act on it?',
+    choices: [
+      { text: 'Down the slope — friction always opposes the direction of actual sliding, which here is upward', isCorrect: true },
+      { text: 'Up the slope — friction always acts up the slope regardless of motion direction', isCorrect: false, misconceptionId: `${INCL}:MC-FRICTION-DIRECTION` },
+    ],
+    correctValue: 'down the slope',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${INCL}:MC-FRICTION-DIRECTION`],
+    source: `${INCL_SRC} — MC-FRICTION-DIRECTION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.impulse ──────────────────────────────────────────────────────
+const IMP = 'phys.mech.impulse'
+const IMP_SRC = 'docs/curriculum/blueprints/phys.mech.impulse.md'
+
+const IMP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IMP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Compare a force of 1000 N acting for just 0.001 s against a force ' +
+      'of only 10 N acting for a full 1 s. Which one delivers the bigger ' +
+      'impulse? Impulse is J = F·Δt — force AND time both matter equally ' +
+      '— so the first gives J = 1000×0.001 = 1 N·s while the second gives ' +
+      'J = 10×1 = 10 N·s: the gentler, longer-lasting force wins by a ' +
+      'factor of ten, despite being a hundred times weaker at any single ' +
+      'instant. Impulse is never just "how hard," it is "how hard, for ' +
+      'how long" — exactly why a dripping tap can fill far more of a ' +
+      'bucket over a day than a single splash ever could, even though ' +
+      'each drop individually is tiny.',
+    targetedMisconceptions: [`${IMP}:MC-IMPULSE-IS-FORCE`],
+    source: `${IMP_SRC} — Component 3 MC-IMPULSE-IS-FORCE conflict_evidence [P28] (1000 N × 0.001 s vs 10 N × 1 s)`,
+  },
+  {
+    conceptId: IMP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 0.2 kg ball moves east at 5 m/s, bounces off a wall, and returns ' +
+      'west at 5 m/s. Taking the magnitudes and subtracting, |5| − |5| = 0, ' +
+      'suggests nothing happened to its momentum — but the ball plainly ' +
+      'reversed direction completely. The fix is to always keep the sign: ' +
+      'call east positive, so Δp = m(v_final − v_initial) = ' +
+      '0.2×(−5 − 5) = 0.2×(−10) = −2 kg·m/s. The impulse the wall exerted ' +
+      'was 2 N·s WESTWARD, not zero — a bounce-back is actually one of ' +
+      'the LARGEST possible impulses for a given speed, precisely because ' +
+      'the velocity has to swing all the way from +5 to −5, not just to ' +
+      'zero. Momentum change must always be computed with signed ' +
+      'velocities, never with magnitudes taken before subtracting.',
+    targetedMisconceptions: [`${IMP}:MC-DELTAP-DIRECTION`],
+    source: `${IMP_SRC} — Component 3 MC-DELTAP-DIRECTION conflict_evidence [P28] (bouncing-ball sign convention)`,
+  },
+  {
+    conceptId: IMP,
+    subjectSlug: 'physics',
+    familyKind: 'real_world_example',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'An airbag and a bare steering wheel can absorb exactly the same ' +
+      'change in a passenger’s momentum during a crash — same Δp — yet ' +
+      'one is survivable and the other often is not, because they differ ' +
+      'in the TIME over which that momentum change happens. The airbag ' +
+      'inflates and gently extends the collision over a fraction of a ' +
+      'second longer than bare metal would; since J = FΔt is fixed by how ' +
+      'much momentum has to change, stretching Δt out means the peak ' +
+      'force F drops sharply. Same impulse, longer time, dramatically ' +
+      'smaller force on the body — the entire safety principle behind ' +
+      'airbags, crumple zones, and even bending your knees when you land ' +
+      'a jump.',
+    targetedMisconceptions: [`${IMP}:MC-IMPULSE-IS-FORCE`],
+    source: `${IMP_SRC} — Component 3 MC-IMPULSE-IS-FORCE s6_path analogy (airbag safety principle)`,
+  },
+]
+
+const IMP_PROBES: SeedProbe[] = [
+  {
+    conceptId: IMP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Force A: 500 N for 0.002 s. Force B: 5 N for 0.5 s. Which delivers the larger impulse?',
+    choices: [
+      { text: 'Force B — J = 5×0.5 = 2.5 N·s, larger than Force A’s J = 500×0.002 = 1 N·s', isCorrect: true },
+      { text: 'Force A — it is a much bigger force, so it must deliver more impulse', isCorrect: false, misconceptionId: `${IMP}:MC-IMPULSE-IS-FORCE` },
+    ],
+    correctValue: 'Force B',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IMP}:MC-IMPULSE-IS-FORCE`],
+    source: `${IMP_SRC} — MC-IMPULSE-IS-FORCE discrimination_pairs, distractor-mapped`,
+  },
+  {
+    conceptId: IMP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ball moving east at 5 m/s bounces directly back west at 5 m/s. What is the magnitude of its momentum change, taking east as positive?',
+    choices: [
+      { text: '|m×(−5) − m×5| = 10m — the velocities must be subtracted WITH signs, not as magnitudes', isCorrect: true },
+      { text: 'Zero — the speed before and after is the same, 5 m/s', isCorrect: false, misconceptionId: `${IMP}:MC-DELTAP-DIRECTION` },
+    ],
+    correctValue: '10m (nonzero)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IMP}:MC-DELTAP-DIRECTION`],
+    source: `${IMP_SRC} — MC-DELTAP-DIRECTION trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.collisions-elastic ───────────────────────────────────────────
+const CELAS = 'phys.mech.collisions-elastic'
+const CELAS_SRC = 'docs/curriculum/blueprints/phys.mech.collisions-elastic.md'
+
+const CELAS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CELAS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Elastic" in physics has nothing to do with rubber bands — a ' +
+      'rubber ball bouncing off the floor actually loses 20–30% of its ' +
+      'kinetic energy to heat and deformation, making it only PARTIALLY ' +
+      'elastic, not the textbook case at all. A true elastic collision ' +
+      'is defined by two conditions holding simultaneously: total ' +
+      'momentum is conserved (true of every isolated collision, always) ' +
+      'AND total kinetic energy is conserved (true only for this special ' +
+      'case). Rigid billiard balls and colliding gas molecules come very ' +
+      'close to genuinely elastic; almost every everyday macroscopic ' +
+      'collision — cars, clay, people — is not. Before writing the ' +
+      'elastic-collision formulas, always confirm KE conservation is ' +
+      'actually justified for the situation.',
+    targetedMisconceptions: [`${CELAS}:MC-ALL-COLLISIONS-ELASTIC`],
+    source: `${CELAS_SRC} — Component 1 MC-ALL-COLLISIONS-ELASTIC (billiard-ball vs. rubber-ball vs. clay contrast)`,
+  },
+  {
+    conceptId: CELAS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a 1D elastic collision where a moving ball strikes an ' +
+      'IDENTICAL stationary ball head-on, a common guess is that both ' +
+      'balls end up stopped — but that would leave zero total momentum ' +
+      'after the collision when there was clearly nonzero momentum ' +
+      'before, which is impossible. The actual formulas for equal masses ' +
+      '(m₁ = m₂) give v₁f = 0 and v₂f = v₁ᵢ: the moving ball stops ' +
+      'completely and the previously-stationary ball takes off at exactly ' +
+      'the first ball’s original speed — a clean velocity EXCHANGE, not a ' +
+      'mutual stop. This is precisely the classic billiards result (the ' +
+      'cue ball stops dead; the object ball rolls away) and the ' +
+      'principle behind a Newton’s cradle, where pulling back and ' +
+      'releasing one ball sends exactly one ball swinging out the far ' +
+      'side.',
+    targetedMisconceptions: [`${CELAS}:MC-ELASTIC-EQUAL-MASSES-BOTH-STOP`],
+    source: `${CELAS_SRC} — Component 1 MC-ELASTIC-EQUAL-MASSES-BOTH-STOP (velocity-exchange formula, billiards/Newton's-cradle framing)`,
+  },
+]
+
+const CELAS_PROBES: SeedProbe[] = [
+  {
+    conceptId: CELAS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A rubber ball bounces off a hard floor and loses 25% of its kinetic energy to heat and deformation. Is this collision elastic?',
+    choices: [
+      { text: 'No — kinetic energy is not fully conserved, so it is (partially) inelastic, not elastic', isCorrect: true },
+      { text: 'Yes — rubber is elastic, so any rubber-ball bounce is an elastic collision', isCorrect: false, misconceptionId: `${CELAS}:MC-ALL-COLLISIONS-ELASTIC` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CELAS}:MC-ALL-COLLISIONS-ELASTIC`],
+    source: `${CELAS_SRC} — MC-ALL-COLLISIONS-ELASTIC trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CELAS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a 1D elastic collision, a moving ball strikes an identical stationary ball head-on. What happens?',
+    choices: [
+      { text: 'The moving ball stops completely; the stationary ball moves off at the first ball’s original speed (velocities exchange)', isCorrect: true },
+      { text: 'Both balls end up stationary after the collision', isCorrect: false, misconceptionId: `${CELAS}:MC-ELASTIC-EQUAL-MASSES-BOTH-STOP` },
+    ],
+    correctValue: 'velocities exchange',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CELAS}:MC-ELASTIC-EQUAL-MASSES-BOTH-STOP`],
+    source: `${CELAS_SRC} — MC-ELASTIC-EQUAL-MASSES-BOTH-STOP trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.collisions-inelastic ─────────────────────────────────────────
+const CINEL = 'phys.mech.collisions-inelastic'
+const CINEL_SRC = 'docs/curriculum/blueprints/phys.mech.collisions-inelastic.md'
+
+const CINEL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CINEL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A 1000 kg car moving east at 20 m/s crashes into a stationary ' +
+      '1500 kg car and the two lock together — crumpling severely. Before ' +
+      'the crash, momentum is 1000×20 = 20 000 kg·m/s. After sticking, ' +
+      'the combined 2500 kg mass moves at v_f = 20 000/2500 = 8 m/s, so ' +
+      'momentum after is 2500×8 = 20 000 kg·m/s — EXACTLY conserved, ' +
+      'despite all that visible crumpling. What the crash actually loses ' +
+      'is kinetic energy: ½×1000×20² − ½×2500×8² = 200 000 − 80 000 = ' +
+      '120 000 J, converted into heat, sound, and permanently bent metal. ' +
+      'Momentum is conserved in every isolated collision, elastic or not; ' +
+      'crumpling and deformation are exactly where the missing KINETIC ' +
+      'ENERGY goes, never where momentum "disappears" to.',
+    targetedMisconceptions: [`${CINEL}:MC-MOMENTUM-LOST-INELASTIC`],
+    source: `${CINEL_SRC} — Component 1 MC-MOMENTUM-LOST-INELASTIC conflict_evidence [P28] (car-crash momentum/KE numbers)`,
+  },
+  {
+    conceptId: CINEL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It’s tempting to assume that when two objects "stick together" in ' +
+      'a perfectly inelastic collision, they must end up at rest — but ' +
+      'that is only true in one special case. Two equal-mass objects, one ' +
+      'at rest and one moving at 6 m/s, stick together and move off at ' +
+      'v_f = (m×6 + m×0)/(2m) = 3 m/s — very much still moving, at HALF ' +
+      'the original speed, not zero. The combined object only ends up ' +
+      'genuinely at rest when the two initial momenta exactly cancel ' +
+      '(equal magnitude, opposite direction) — m₁u₁ + m₂u₂ = 0. In every ' +
+      'other case, treat "sticking" as momentum AVERAGING across the ' +
+      'combined mass, which is usually nonzero: v_f = ' +
+      '(m₁u₁ + m₂u₂)/(m₁ + m₂), solved fresh each time, never assumed to ' +
+      'be zero.',
+    targetedMisconceptions: [`${CINEL}:MC-PERFECTLY-INELASTIC-ZERO-VELOCITY`],
+    source: `${CINEL_SRC} — Component 1 MC-PERFECTLY-INELASTIC-ZERO-VELOCITY conflict_evidence [P28] (equal-mass sticking example)`,
+  },
+]
+
+const CINEL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CINEL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two cars collide and stick together, crumpling severely. Is total momentum conserved in this collision?',
+    choices: [
+      { text: 'Yes — momentum is conserved in any isolated collision; the crumpling converts kinetic energy to heat/deformation, not momentum', isCorrect: true },
+      { text: 'No — momentum is lost because the cars crumpled so much', isCorrect: false, misconceptionId: `${CINEL}:MC-MOMENTUM-LOST-INELASTIC` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CINEL}:MC-MOMENTUM-LOST-INELASTIC`],
+    source: `${CINEL_SRC} — MC-MOMENTUM-LOST-INELASTIC trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CINEL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A moving object collides perfectly inelastically (sticks) with an equal-mass object at rest. Does the combined object stop?',
+    choices: [
+      { text: 'No — generally not; it moves at half the original speed, and only stops if the two initial momenta exactly cancel', isCorrect: true },
+      { text: 'Yes — sticking together always brings the combined object to rest', isCorrect: false, misconceptionId: `${CINEL}:MC-PERFECTLY-INELASTIC-ZERO-VELOCITY` },
+    ],
+    correctValue: 'no, generally nonzero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CINEL}:MC-PERFECTLY-INELASTIC-ZERO-VELOCITY`],
+    source: `${CINEL_SRC} — MC-PERFECTLY-INELASTIC-ZERO-VELOCITY trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -10053,6 +10523,11 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...EQUIL_EXPLANATIONS,
   ...HOOKE_EXPLANATIONS,
   ...POWR_EXPLANATIONS,
+  ...TENS_EXPLANATIONS,
+  ...INCL_EXPLANATIONS,
+  ...IMP_EXPLANATIONS,
+  ...CELAS_EXPLANATIONS,
+  ...CINEL_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -10171,4 +10646,9 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...EQUIL_PROBES,
   ...HOOKE_PROBES,
   ...POWR_PROBES,
+  ...TENS_PROBES,
+  ...INCL_PROBES,
+  ...IMP_PROBES,
+  ...CELAS_PROBES,
+  ...CINEL_PROBES,
 ]
