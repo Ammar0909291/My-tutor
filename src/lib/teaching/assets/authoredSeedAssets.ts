@@ -12870,6 +12870,204 @@ const SKIM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.close-reading ──────────────────────────────────────────────────
+const CLRD = 'eng.reading.close-reading'
+const CLRD_SRC = 'docs/curriculum/blueprints/eng.reading.close-reading.md'
+
+const CLRD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CLRD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Close reading is not measured by how many times you read something ' +
+      'or how slowly you go — it is measured by how deeply you analyze ' +
+      'what is there. One student reads a passage slowly three times but ' +
+      'can only restate the literal plot afterward; another reads it once ' +
+      'but can point to three specific word choices and explain what each ' +
+      'contributes to tone or characterization. The second student did ' +
+      'close reading. Instead of just re-reading, actively annotate and ' +
+      'question: why did the author choose THIS specific word instead of ' +
+      'an obvious alternative?',
+    targetedMisconceptions: [`${CLRD}:MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES`],
+    source: `${CLRD_SRC} — MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES (P28 slow-reader-vs-attentive-reader conflict evidence)`,
+  },
+  {
+    conceptId: CLRD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Not every word rewards equal analytical attention — some words are ' +
+      'functional and ordinary, while others are doing special work: ' +
+      'unusual word choices, repeated motifs, positions emphasized at a ' +
+      'sentence\'s end, or surprising shifts in tone. Trying to ' +
+      'close-read every single word produces an unfocused, exhausting ' +
+      'analysis that misses the details that actually reward attention. ' +
+      'Scan first for details that stand out — unusual choices, ' +
+      'repetitions, emphasized positions — and focus your deep analysis ' +
+      'there instead of spreading equal effort across everything.',
+    targetedMisconceptions: [`${CLRD}:MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED`],
+    source: `${CLRD_SRC} — MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED (P28 exhaustive-vs-strategic-attention conflict evidence)`,
+  },
+  {
+    conceptId: CLRD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Close reading is defined by analytical depth, not by reading speed ' +
+      'or repetition count — reading a passage three times slowly while ' +
+      'only extracting the literal plot is not close reading, while a ' +
+      'single attentive pass that identifies specific word choices and ' +
+      'their function in tone or characterization genuinely is. ' +
+      'Separately, not every detail in a text merits equal analytical ' +
+      'attention: skilled close reading identifies which details are ' +
+      'doing special work — unusual diction, repeated motifs, ' +
+      'structurally emphasized positions, tonal shifts — and concentrates ' +
+      'analysis there, rather than distributing uniform effort across ' +
+      'ordinary, functional language.',
+    targetedMisconceptions: [
+      `${CLRD}:MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES`,
+      `${CLRD}:MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED`,
+    ],
+    source: `${CLRD_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CLRD_PROBES: SeedProbe[] = [
+  {
+    conceptId: CLRD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'One student reads a passage slowly three times but can only restate the plot. Another reads it once and can explain what three specific word choices contribute to tone. Who did close reading?',
+    choices: [
+      { text: 'The second student — close reading is defined by analytical depth, not speed or repetition', isCorrect: true },
+      { text: 'The first student — reading slowly and multiple times is what close reading means', isCorrect: false, misconceptionId: `${CLRD}:MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES` },
+    ],
+    correctValue: 'the second student',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CLRD}:MC-CLOSE-READING-MEANS-READING-SLOWLY-OR-RE-READING-MULTIPLE-TIMES`],
+    source: `${CLRD_SRC} — P28 slow-reader-vs-attentive-reader conflict as probe`,
+  },
+  {
+    conceptId: CLRD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Should a close reader give every single word in a passage equally deep analysis?',
+    choices: [
+      { text: 'No — focus deep analysis on standout details (unusual word choices, repetitions, emphasized positions), not every word equally', isCorrect: true },
+      { text: 'Yes — every detail in a text is equally significant and must be analyzed', isCorrect: false, misconceptionId: `${CLRD}:MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CLRD}:MC-EVERY-DETAIL-IN-A-TEXT-IS-EQUALLY-SIGNIFICANT-AND-MUST-BE-ANALYZED`],
+    source: `${CLRD_SRC} — P28 exhaustive-vs-strategic-attention conflict as probe`,
+  },
+]
+
+// ─── eng.reading.compare-and-contrast-texts ────────────────────────────────────
+const CCTX = 'eng.reading.compare-and-contrast-texts'
+const CCTX_SRC = 'docs/curriculum/blueprints/eng.reading.compare-and-contrast-texts.md'
+
+const CCTX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CCTX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Two summaries placed next to each other are not a comparison — they ' +
+      'are just two summaries. A genuine comparison explicitly connects ' +
+      'the texts: "Both texts describe a character facing a difficult ' +
+      'choice, but Text A\'s character chooses based on duty while Text ' +
+      'B\'s character chooses based on personal desire." After summarizing ' +
+      'each text separately (just the first step), go further: pick ' +
+      'specific dimensions to compare — theme, structure, tone — and ' +
+      'write sentences that explicitly connect the two texts on each one, ' +
+      'using comparison language like "both... but" or "unlike Text A...".',
+    targetedMisconceptions: [`${CCTX}:MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER`],
+    source: `${CCTX_SRC} — MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER (P28 back-to-back-summaries conflict evidence)`,
+  },
+  {
+    conceptId: CCTX,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Sharing a topic does not mean two texts are mostly alike — the SAME ' +
+      'event or theme can be handled in completely different ways. A ' +
+      'neutral, fact-based news report and a dramatic, emotionally-charged ' +
+      'survivor account can cover the identical historical event while ' +
+      'differing completely in structure and tone. A genuine comparison ' +
+      'investigates differences just as rigorously as similarities, ' +
+      'independently examining structure, tone, purpose, and perspective ' +
+      'for each text, even when the topic is identical.',
+    targetedMisconceptions: [`${CCTX}:MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME`],
+    source: `${CCTX_SRC} — MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME (P28 news-report-vs-survivor-account conflict evidence)`,
+  },
+  {
+    conceptId: CCTX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuine comparison requires explicitly connecting two texts on ' +
+      'shared dimensions — theme, structure, tone, character choices — ' +
+      'using direct comparison language; two summaries placed sequentially ' +
+      'with no linking analysis do not constitute a comparison, regardless ' +
+      'of how thorough each summary is individually. Separately, sharing a ' +
+      'topic does not imply similar treatment: the same event or theme can ' +
+      'be rendered through substantially different structure, tone, ' +
+      'purpose, and perspective. Each dimension must be independently ' +
+      'investigated for both texts rather than assumed similar because the ' +
+      'topic is shared.',
+    targetedMisconceptions: [
+      `${CCTX}:MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER`,
+      `${CCTX}:MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME`,
+    ],
+    source: `${CCTX_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CCTX_PROBES: SeedProbe[] = [
+  {
+    conceptId: CCTX,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A student writes a summary of Text A, then a separate summary of Text B, with no sentences linking them. Is this a genuine comparison?',
+    choices: [
+      { text: 'No — a genuine comparison explicitly connects the texts on shared dimensions using comparison language', isCorrect: true },
+      { text: 'Yes — summarizing both texts one after another is what comparing means', isCorrect: false, misconceptionId: `${CCTX}:MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CCTX}:MC-COMPARING-TWO-TEXTS-MEANS-SUMMARIZING-BOTH-ONE-AFTER-ANOTHER`],
+    source: `${CCTX_SRC} — P28 back-to-back-summaries conflict as probe`,
+  },
+  {
+    conceptId: CCTX,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A news report and a survivor\'s personal account both cover the same historical event. Does sharing a topic mean these two texts must be mostly similar?',
+    choices: [
+      { text: 'No — they can differ substantially in structure, tone, and perspective despite the shared topic', isCorrect: true },
+      { text: 'Yes — two texts on the same topic must be mostly the same', isCorrect: false, misconceptionId: `${CCTX}:MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CCTX}:MC-TWO-TEXTS-ON-THE-SAME-TOPIC-MUST-BE-MOSTLY-THE-SAME`],
+    source: `${CCTX_SRC} — P28 news-report-vs-survivor-account conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -13021,6 +13219,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...APT_EXPLANATIONS,
   ...PRED_EXPLANATIONS,
   ...SKIM_EXPLANATIONS,
+  ...CLRD_EXPLANATIONS,
+  ...CCTX_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -13172,4 +13372,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...APT_PROBES,
   ...PRED_PROBES,
   ...SKIM_PROBES,
+  ...CLRD_PROBES,
+  ...CCTX_PROBES,
 ]
