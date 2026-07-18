@@ -28117,6 +28117,509 @@ const TRAN_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── phys.mech.orbital-mechanics ────────────────────────────────────────────
+const ORB = 'phys.mech.orbital-mechanics'
+const ORB_SRC = 'docs/curriculum/blueprints/phys.mech.orbital-mechanics.md'
+
+const ORB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Compare two satellites: A orbiting at r = R_Earth, B orbiting four ' +
+      'times farther out at r = 4R_Earth. Orbital speed is ' +
+      'v = √(GM/r), so satellite B moves at only HALF of A’s speed — a ' +
+      'higher orbit means a SLOWER satellite, the opposite of what "more ' +
+      'energy up high" intuition suggests. It’s true that B has more ' +
+      'total mechanical energy than A (E = −GMm/2r becomes less negative ' +
+      'as r grows), but that extra energy went entirely into potential ' +
+      'energy, not speed — kinetic energy actually DECREASES with ' +
+      'altitude. The real-world numbers make this vivid: the ISS at ' +
+      '~400 km altitude orbits at about 7670 m/s with a 92-minute period, ' +
+      'while a geostationary satellite 35 786 km up crawls along at only ' +
+      '~3070 m/s but takes a full 24 hours — much higher, much slower.',
+    targetedMisconceptions: [`${ORB}:MC-HIGHER-ORBIT-FASTER`],
+    source: `${ORB_SRC} — Component 1 MC-HIGHER-ORBIT-FASTER conflict_evidence [P28] (ISS vs. GEO speed/period)`,
+  },
+  {
+    conceptId: ORB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems reasonable that a heavier satellite would need more speed ' +
+      'to stay in orbit — but write out the orbital force balance, ' +
+      'GMm/r² = mv²/r, and the satellite’s own mass m cancels from both ' +
+      'sides completely, leaving v² = GM/r with no m anywhere. A tiny ' +
+      '10 kg CubeSat and the 420 000 kg International Space Station, ' +
+      'both orbiting at the same radius r = 7000 km, move at the ' +
+      'IDENTICAL speed of about 7540 m/s. This mirrors Galileo’s famous ' +
+      'free-fall result that all objects accelerate at the same rate ' +
+      'regardless of mass — a circular orbit is really just continuous ' +
+      'free-fall where the object keeps "falling" toward the planet but ' +
+      'perpetually misses because of its sideways speed, so it makes ' +
+      'complete sense that mass drops out here exactly as it does in ' +
+      'ordinary free-fall.',
+    targetedMisconceptions: [`${ORB}:MC-ORBITAL-SPEED-DEPENDS-ON-MASS`],
+    source: `${ORB_SRC} — Component 1 MC-ORBITAL-SPEED-DEPENDS-ON-MASS conflict_evidence [P28] (CubeSat vs. ISS, mass cancellation)`,
+  },
+]
+
+const ORB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Satellite A orbits at r = R_Earth. Satellite B orbits at r = 4R_Earth. Which satellite moves faster?',
+    choices: [
+      { text: 'Satellite A — orbital speed v = √(GM/r) decreases as r increases, so the higher orbit (B) is slower', isCorrect: true },
+      { text: 'Satellite B — the higher orbit has more total energy, so it must be moving faster', isCorrect: false, misconceptionId: `${ORB}:MC-HIGHER-ORBIT-FASTER` },
+    ],
+    correctValue: 'Satellite A',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ORB}:MC-HIGHER-ORBIT-FASTER`],
+    source: `${ORB_SRC} — MC-HIGHER-ORBIT-FASTER trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ORB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 10 kg CubeSat and the 420 000 kg ISS both orbit Earth at the same radius r. Do they orbit at the same speed?',
+    choices: [
+      { text: 'Yes — v = √(GM/r) does not depend on the satellite’s own mass, which cancels out of the orbital force balance', isCorrect: true },
+      { text: 'No — the much heavier ISS needs a higher orbital speed to stay up', isCorrect: false, misconceptionId: `${ORB}:MC-ORBITAL-SPEED-DEPENDS-ON-MASS` },
+    ],
+    correctValue: 'yes, same speed',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ORB}:MC-ORBITAL-SPEED-DEPENDS-ON-MASS`],
+    source: `${ORB_SRC} — MC-ORBITAL-SPEED-DEPENDS-ON-MASS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.satellites ───────────────────────────────────────────────────
+const SAT = 'phys.mech.satellites'
+const SAT_SRC = 'docs/curriculum/blueprints/phys.mech.satellites.md'
+
+const SAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A geostationary orbit is not a design choice you can place "at any ' +
+      'altitude as long as the speed matches" — it is fixed by physics to ' +
+      'exactly ONE radius. The requirement T = 24 hours, combined with ' +
+      'T² = 4π²r³/(GM_Earth), has exactly one solution for r: about ' +
+      '42 157 km from Earth’s centre (roughly 35 786 km altitude). Pick a ' +
+      'lower altitude and the period is automatically shorter than 24 ' +
+      'hours (the satellite drifts across the sky); pick a higher one and ' +
+      'the period is automatically longer — there is no "different speed" ' +
+      'you can choose at a different altitude to compensate, because ' +
+      'orbital speed and period are both entirely determined by radius ' +
+      'through Kepler’s Third Law. Every geostationary satellite shares ' +
+      'this one specific altitude, differing only in which longitude they ' +
+      'occupy along that single equatorial ring.',
+    targetedMisconceptions: [`${SAT}:MC-GEO-ANYWHERE`],
+    source: `${SAT_SRC} — Component 1 MC-GEO-ANYWHERE conflict_evidence [P28] (T²∝r³ uniquely fixes r_GEO ≈ 42 157 km)`,
+  },
+  {
+    conceptId: SAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'News reports routinely say astronauts float because there is "zero ' +
+      'gravity" in space — but at the ISS’s 400 km altitude, gravity is ' +
+      'g = GM/r² ≈ 8.67 m/s², a full 88% of surface gravity, very much ' +
+      'still present. What actually causes weightlessness is that the ' +
+      'ISS — and everything and everyone inside it — is in continuous ' +
+      'FREE FALL, accelerating downward together at the same rate, so ' +
+      'nothing presses against anything else and no NORMAL FORCE exists ' +
+      'to create the sensation of weight. This is exactly the same ' +
+      'physics as the brief weightless feeling at the top of a roller ' +
+      'coaster drop, just sustained indefinitely because the sideways ' +
+      'orbital speed means the ISS keeps "missing" the Earth instead of ' +
+      'hitting it. Weightlessness means "no support force," never "no ' +
+      'gravity."',
+    targetedMisconceptions: [`${SAT}:MC-WEIGHTLESS-NO-GRAVITY`],
+    source: `${SAT_SRC} — Component 1 MC-WEIGHTLESS-NO-GRAVITY conflict_evidence [P28] (ISS g≈8.67 m/s², free-fall vs. no-normal-force)`,
+  },
+]
+
+const SAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a satellite be placed in a geostationary orbit at any altitude, as long as its speed is adjusted to match?',
+    choices: [
+      { text: 'No — T = 24 h combined with T² ∝ r³ fixes exactly one radius (~42 157 km); altitude and period cannot be chosen independently', isCorrect: true },
+      { text: 'Yes — any altitude works as long as the satellite moves at the right speed for a 24-hour period', isCorrect: false, misconceptionId: `${SAT}:MC-GEO-ANYWHERE` },
+    ],
+    correctValue: 'no, exactly one radius',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SAT}:MC-GEO-ANYWHERE`],
+    source: `${SAT_SRC} — MC-GEO-ANYWHERE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Astronauts aboard the ISS float freely. Is this because there is no gravity at that altitude?',
+    choices: [
+      { text: 'No — gravity there is still about 88% of surface gravity; astronauts float because the ISS is in continuous free fall, so there is no normal (support) force', isCorrect: true },
+      { text: 'Yes — gravity is essentially zero once you reach orbital altitude', isCorrect: false, misconceptionId: `${SAT}:MC-WEIGHTLESS-NO-GRAVITY` },
+    ],
+    correctValue: 'no, gravity is still strong',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SAT}:MC-WEIGHTLESS-NO-GRAVITY`],
+    source: `${SAT_SRC} — MC-WEIGHTLESS-NO-GRAVITY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.relative-motion ──────────────────────────────────────────────
+const RELM = 'phys.mech.relative-motion'
+const RELM_SRC = 'docs/curriculum/blueprints/phys.mech.relative-motion.md'
+
+const RELM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RELM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A passenger on a train moving at 80 km/h east reads a newspaper ' +
+      'held perfectly still in their hands. Relative to the passenger, ' +
+      'the newspaper’s velocity is zero. Relative to the ground, the same ' +
+      'newspaper moves at 80 km/h east. Both statements are simultaneously ' +
+      'TRUE — velocity genuinely has no meaning until you specify relative ' +
+      'to WHAT it is measured, because there is no universal, absolute ' +
+      'rest frame anywhere in physics. When someone casually says "the ' +
+      'car is going 60 km/h," they’re implicitly choosing the Earth’s ' +
+      'surface as the reference frame — but for any problem involving two ' +
+      'or more moving objects, that choice has to be made explicit: ' +
+      'v_A/C = v_A/B + v_B/C (the Galilean transformation), always ' +
+      'labelled by which two objects and which reference the velocity is ' +
+      'measured between.',
+    targetedMisconceptions: [`${RELM}:MC-VELOCITY-ABSOLUTE`],
+    source: `${RELM_SRC} — Component 1 MC-VELOCITY-ABSOLUTE conflict_evidence [P28] (train passenger/newspaper, dual-truth framing)`,
+  },
+  {
+    conceptId: RELM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A boat moves at 5 m/s north relative to the water it’s in, while ' +
+      'the river itself flows at 3 m/s east. It’s tempting to just add ' +
+      'the two speeds, 5 + 3 = 8 m/s — but that arithmetic shortcut only ' +
+      'works when both velocities point along the exact same line. Here ' +
+      'the two velocities are PERPENDICULAR, so they must be combined as ' +
+      'vectors: magnitude = √(5² + 3²) = √34 ≈ 5.83 m/s, at an angle of ' +
+      'arctan(3/5) ≈ 31° east of north — noticeably less than the naive ' +
+      '8 m/s sum. The rule, v_A/C = v_A/B + v_B/C, is always a VECTOR ' +
+      'equation: write each velocity in x- and y-components, add the ' +
+      'components separately, then recombine into a magnitude and ' +
+      'direction — simple scalar addition of speeds is only ever valid ' +
+      'for the special case where every velocity involved shares one ' +
+      'straight line.',
+    targetedMisconceptions: [`${RELM}:MC-FRAMES-ADD-SPEEDS`],
+    source: `${RELM_SRC} — Component 1 MC-FRAMES-ADD-SPEEDS conflict_evidence [P28] (boat-and-river, 5-3-4-5 vector triangle)`,
+  },
+]
+
+const RELM_PROBES: SeedProbe[] = [
+  {
+    conceptId: RELM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A passenger on a train moving at 80 km/h east holds a newspaper perfectly still relative to themselves. What is the newspaper’s velocity relative to the ground?',
+    choices: [
+      { text: '80 km/h east — velocity depends on the reference frame; it is zero relative to the passenger but 80 km/h east relative to the ground', isCorrect: true },
+      { text: 'Zero — the newspaper isn’t moving, so its velocity is zero in any frame', isCorrect: false, misconceptionId: `${RELM}:MC-VELOCITY-ABSOLUTE` },
+    ],
+    correctValue: '80 km/h east',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RELM}:MC-VELOCITY-ABSOLUTE`],
+    source: `${RELM_SRC} — MC-VELOCITY-ABSOLUTE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RELM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A boat moves at 5 m/s north relative to the water; the river flows at 3 m/s east. What is the boat’s speed relative to the ground?',
+    choices: [
+      { text: '√(5² + 3²) ≈ 5.83 m/s — the two velocities are perpendicular, so they must be added as vectors, not simply summed', isCorrect: true },
+      { text: '5 + 3 = 8 m/s — add the two speeds directly', isCorrect: false, misconceptionId: `${RELM}:MC-FRAMES-ADD-SPEEDS` },
+    ],
+    correctValue: '5.83 m/s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RELM}:MC-FRAMES-ADD-SPEEDS`],
+    source: `${RELM_SRC} — MC-FRAMES-ADD-SPEEDS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.electric-field ─────────────────────────────────────────────────
+const EFLD = 'phys.em.electric-field'
+const EFLD_SRC = 'docs/curriculum/blueprints/phys.em.electric-field.md'
+
+const EFLD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EFLD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Take a charged parallel-plate capacitor and disconnect the ' +
+      'battery — the charge stays on the plates, and so does the electric ' +
+      'field between them, even with absolutely nothing sitting in that ' +
+      'gap. Now slide a tiny test charge into that empty space: it feels ' +
+      'a force that was already there waiting, not one it created by ' +
+      'showing up. The test charge is a MEASURING tool that reveals the ' +
+      'field, exactly like a thermometer reveals a temperature that ' +
+      'existed before you inserted it — E = F/q₀ is a DEFINITION, a ' +
+      'recipe for measuring the field, never a statement that the field ' +
+      'needs q₀ to exist in the first place. The source charges create ' +
+      'the field; it fills the surrounding space regardless of whether ' +
+      'anything is there yet to feel it.',
+    targetedMisconceptions: [`${EFLD}:MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE`],
+    source: `${EFLD_SRC} — Component 3 MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE conflict_evidence [P28] (capacitor field persists with battery removed)`,
+  },
+  {
+    conceptId: EFLD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Field lines look like they’re showing you the path a released ' +
+      'charge would travel along — but they actually show only the ' +
+      'direction of FORCE at each individual point, never a trajectory. ' +
+      'Release a charged particle from rest exactly on a curved field ' +
+      'line, and it initially accelerates along that line, but its ' +
+      'growing inertia carries it forward past that instant, so the real ' +
+      'path curves AWAY from the field line rather than tracing it — only ' +
+      'a particle starting from rest in a perfectly straight, uniform ' +
+      'field genuinely follows its field line. A classic case makes this ' +
+      'vivid: fire an electron horizontally into a uniform field between ' +
+      'two plates (whose field lines are perfectly straight, running ' +
+      'vertically) and the electron’s actual trajectory is a curved ' +
+      'parabola, not a straight line — the field lines are one thing, the ' +
+      'particle’s path is another, connected only through force and the ' +
+      'particle’s own existing velocity.',
+    targetedMisconceptions: [`${EFLD}:MC-FIELD-LINES-SHOW-PARTICLE-PATH`],
+    source: `${EFLD_SRC} — Component 3 MC-FIELD-LINES-SHOW-PARTICLE-PATH conflict_evidence [P28] (electron parabolic trajectory vs. straight field lines)`,
+  },
+]
+
+const EFLD_PROBES: SeedProbe[] = [
+  {
+    conceptId: EFLD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A charged capacitor has its battery removed, but no test charge is placed between its plates. Does an electric field still exist in that empty gap?',
+    choices: [
+      { text: 'Yes — the field is created by the charge on the plates and exists independently of whether a test charge is present to measure it', isCorrect: true },
+      { text: 'No — an electric field only exists once a test charge is placed there to feel it', isCorrect: false, misconceptionId: `${EFLD}:MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EFLD}:MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE`],
+    source: `${EFLD_SRC} — MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EFLD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An electron enters a uniform electric field moving horizontally (perpendicular to the straight, vertical field lines). Does the electron travel along a field line?',
+    choices: [
+      { text: 'No — its trajectory is a parabola; field lines show force direction at each point, not the particle’s actual path', isCorrect: true },
+      { text: 'Yes — charged particles always travel along the field lines they encounter', isCorrect: false, misconceptionId: `${EFLD}:MC-FIELD-LINES-SHOW-PARTICLE-PATH` },
+    ],
+    correctValue: 'no, parabolic path',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EFLD}:MC-FIELD-LINES-SHOW-PARTICLE-PATH`],
+    source: `${EFLD_SRC} — MC-FIELD-LINES-SHOW-PARTICLE-PATH trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.electric-potential ─────────────────────────────────────────────
+const EPOT = 'phys.em.electric-potential'
+const EPOT_SRC = 'docs/curriculum/blueprints/phys.em.electric-potential.md'
+
+const EPOT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EPOT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Inside a charged conductor at electrostatic equilibrium, the ' +
+      'electric field E is exactly ZERO everywhere — yet the potential V ' +
+      'is NOT zero, it equals whatever the conductor’s surface potential ' +
+      'is. That single fact proves V and E cannot be the same thing. ' +
+      'Think of V as ALTITUDE and E as the STEEPNESS of the terrain ' +
+      '(the slope): a flat, high plateau can sit at a large altitude (V ' +
+      'large) while having zero slope (E = 0) — nobody would call a flat ' +
+      'plateau "steep" just because it’s high up. A steep cliff, by ' +
+      'contrast, can have a huge slope (E large) while spanning a much ' +
+      'smaller altitude change. The precise relationship is E = −dV/dr: ' +
+      'the field measures how FAST the potential changes with position, ' +
+      'never the potential’s absolute value itself.',
+    targetedMisconceptions: [`${EPOT}:MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD`],
+    source: `${EPOT_SRC} — Component 3 MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD conflict_evidence [P28] (conductor E=0, V≠0; altitude/slope analogy)`,
+  },
+  {
+    conceptId: EPOT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electric field E gets combined by vector (component-by-component) ' +
+      'addition, which makes it tempting to treat electric potential V ' +
+      'the same way — but V is a pure SCALAR, just a signed number with ' +
+      'no direction at all, exactly like gravitational potential energy ' +
+      'mgh has no direction. Combining potentials from several charges is ' +
+      'simple arithmetic: V_total = V₁ + V₂ + V₃ + ..., signs and all, ' +
+      'with no components, no angles, no vector diagrams required at all. ' +
+      'This is precisely what makes V so computationally convenient ' +
+      'compared to E: superposing the electric field from many charges ' +
+      'demands genuine vector addition (E_x = ΣE_{x,i}, E_y = ΣE_{y,i}), ' +
+      'while superposing potential from those same charges is nothing ' +
+      'more than adding up plain numbers.',
+    targetedMisconceptions: [`${EPOT}:MC-ELECTRIC-POTENTIAL-IS-A-VECTOR`],
+    source: `${EPOT_SRC} — Component 3 MC-ELECTRIC-POTENTIAL-IS-A-VECTOR conflict_evidence [P28] (scalar superposition vs. vector E superposition)`,
+  },
+]
+
+const EPOT_PROBES: SeedProbe[] = [
+  {
+    conceptId: EPOT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Inside a charged conductor at electrostatic equilibrium, the electric field E is exactly zero everywhere. Is the electric potential V also zero inside the conductor?',
+    choices: [
+      { text: 'No — V equals the (nonzero) surface potential throughout the conductor; E = 0 does not imply V = 0', isCorrect: true },
+      { text: 'Yes — if the field is zero, the potential must also be zero', isCorrect: false, misconceptionId: `${EPOT}:MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD` },
+    ],
+    correctValue: 'no, V is nonzero',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EPOT}:MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD`],
+    source: `${EPOT_SRC} — MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EPOT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two point charges create potentials V₁ and V₂ at a location. How do you find the total potential there?',
+    choices: [
+      { text: 'V_total = V₁ + V₂ — simple scalar (arithmetic) addition, since potential has no direction', isCorrect: true },
+      { text: 'Add V₁ and V₂ as vectors, using their x- and y-components', isCorrect: false, misconceptionId: `${EPOT}:MC-ELECTRIC-POTENTIAL-IS-A-VECTOR` },
+    ],
+    correctValue: 'scalar sum',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EPOT}:MC-ELECTRIC-POTENTIAL-IS-A-VECTOR`],
+    source: `${EPOT_SRC} — MC-ELECTRIC-POTENTIAL-IS-A-VECTOR trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.capacitance ────────────────────────────────────────────────────
+const CAPC = 'phys.em.capacitance'
+const CAPC_SRC = 'docs/curriculum/blueprints/phys.em.capacitance.md'
+
+const CAPC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CAPC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two 4 μF capacitors wired in SERIES do not combine to 8 μF the way ' +
+      'resistors in parallel might tempt you to guess — the correct rule ' +
+      'is 1/C_eq = 1/4 + 1/4 = 1/2, giving C_eq = 2 μF, HALF of either ' +
+      'individual capacitor, not a sum. The physical reason: in series, ' +
+      'the exact same charge Q must appear on every capacitor in the ' +
+      'chain, but the total voltage has to split across them — reaching ' +
+      'the same charge now needs MORE total voltage than either ' +
+      'capacitor alone would need, and since C = Q/V, more voltage for ' +
+      'the same charge means a smaller effective capacitance. Capacitors ' +
+      'combine EXACTLY OPPOSITE to resistors: reciprocals add in series, ' +
+      'plain values add in parallel — precisely the reverse of how ' +
+      'resistors behave, which is the single most useful memory hook for ' +
+      'keeping the two formulas straight.',
+    targetedMisconceptions: [`${CAPC}:MC-SERIES-CAPACITORS-ADD-DIRECTLY`],
+    source: `${CAPC_SRC} — Component 3 MC-SERIES-CAPACITORS-ADD-DIRECTLY conflict_evidence [P28] (two 4 μF in series → 2 μF, opposite-to-resistors mnemonic)`,
+  },
+  {
+    conceptId: CAPC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems intuitive that pulling capacitor plates FARTHER apart ' +
+      'should create "more room" to store charge, boosting capacitance — ' +
+      'but the formula C = ε₀A/d says the exact opposite: capacitance is ' +
+      'INVERSELY proportional to separation d, so doubling the gap HALVES ' +
+      'the capacitance. The physical reason is about field strength, not ' +
+      'available space: for the same applied voltage V, a larger ' +
+      'separation d means a WEAKER field E = V/d between the plates, and ' +
+      'a weaker field attracts less charge onto the plates in the first ' +
+      'place — Q = CV = ε₀AV/d genuinely shrinks as d grows. Closer ' +
+      'plates create a stronger field for the same voltage, pulling more ' +
+      'charge onto the plates and yielding higher capacitance; think of ' +
+      'the plates as attracting each other electrostatically — closer ' +
+      'together means stronger mutual attraction and more charge held.',
+    targetedMisconceptions: [`${CAPC}:MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE`],
+    source: `${CAPC_SRC} — Component 3 MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE conflict_evidence [P28] (C = ε₀A/d, field-strength reasoning)`,
+  },
+]
+
+const CAPC_PROBES: SeedProbe[] = [
+  {
+    conceptId: CAPC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two 4 μF capacitors are connected in series. What is the equivalent capacitance?',
+    choices: [
+      { text: '2 μF — from 1/C_eq = 1/4 + 1/4 = 1/2 (series capacitors combine like parallel resistors)', isCorrect: true },
+      { text: '8 μF — the two capacitances simply add together', isCorrect: false, misconceptionId: `${CAPC}:MC-SERIES-CAPACITORS-ADD-DIRECTLY` },
+    ],
+    correctValue: '2 uF',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CAPC}:MC-SERIES-CAPACITORS-ADD-DIRECTLY`],
+    source: `${CAPC_SRC} — MC-SERIES-CAPACITORS-ADD-DIRECTLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CAPC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If the separation between a parallel-plate capacitor’s plates is doubled (area unchanged), what happens to its capacitance?',
+    choices: [
+      { text: 'It halves — C = ε₀A/d is inversely proportional to plate separation d', isCorrect: true },
+      { text: 'It doubles — more space between the plates means more room to store charge', isCorrect: false, misconceptionId: `${CAPC}:MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE` },
+    ],
+    correctValue: 'halves',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CAPC}:MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE`],
+    source: `${CAPC_SRC} — MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -28433,6 +28936,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ARGB_EXPLANATIONS,
   ...RHDV_EXPLANATIONS,
   ...TRAN_EXPLANATIONS,
+  ...ORB_EXPLANATIONS,
+  ...SAT_EXPLANATIONS,
+  ...RELM_EXPLANATIONS,
+  ...EFLD_EXPLANATIONS,
+  ...EPOT_EXPLANATIONS,
+  ...CAPC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -28749,4 +29258,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ARGB_PROBES,
   ...RHDV_PROBES,
   ...TRAN_PROBES,
+  ...ORB_PROBES,
+  ...SAT_PROBES,
+  ...RELM_PROBES,
+  ...EFLD_PROBES,
+  ...EPOT_PROBES,
+  ...CAPC_PROBES,
 ]
