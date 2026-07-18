@@ -36008,6 +36008,426 @@ const HAJC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.rel.postulates ───────────────────────────────────────────────────────
+const POST = 'phys.rel.postulates'
+const POST_SRC = 'docs/curriculum/blueprints/phys.rel.postulates.md'
+
+const POST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POST,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Speeds do NOT add like ordinary Galilean velocities when one of them is the speed of light — a spaceship moving toward Earth at 0.8c that fires a headlight beam does NOT produce a beam measured at 0.8c+c=1.8c by an Earth observer. Galilean velocity addition works perfectly for everyday speeds, but it is only an approximation valid for speeds much less than c; at speeds comparable to c, it fails. The Michelson-Morley experiment measured the speed of light in two perpendicular directions as Earth orbited the Sun at 30 km/s, expecting a difference of roughly 30 km/s — but the measured difference was exactly zero. Repeated experiments confirm c=299,792,458 m/s regardless of the source\'s or the observer\'s motion. The light from the spaceship\'s headlight is measured by the Earth observer at exactly c, not 1.8c — the speed of light is a fundamental constant, a cosmic speed limit that never shifts no matter how the emitting source or observer is moving. A second, separate point: Einstein\'s first postulate — that the laws of physics are the same in all frames — applies specifically to INERTIAL frames, not to every conceivable frame. Someone riding a spinning merry-go-round saying "the laws of physics are the same in my frame" is conflating "all motion is relative" (true) with "all frames are equivalent" (false without the inertial restriction). A rotating frame is genuinely non-inertial — objects in it experience centrifugal and Coriolis pseudo-forces (balls appear to fly outward, a Foucault pendulum visibly precesses) — physics genuinely looks different there. The merry-go-round rider feels pushed outward; that outward push is the centrifugal pseudo-force, which is entirely absent in a true inertial frame. Postulate 1 applies only where no net pseudo-force is needed to explain apparent motions — no pseudo-forces, no acceleration; rotating, accelerating, and gravitating frames are non-inertial, and general relativity (not special relativity) is required to handle those cases.',
+    targetedMisconceptions: [`${POST}:MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS`, `${POST}:MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES`],
+    source: `${POST_SRC} — MC-1/MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS (c is invariant, Michelson-Morley) + MC-2/MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES (postulate 1 applies to inertial frames only)`,
+  },
+  {
+    conceptId: POST,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "0.8c+c=1.8c — it should be faster," applying ordinary Galilean velocity addition to light, treating the speed of light like any other everyday speed that simply adds when combined with another motion. Galilean addition genuinely does work, and works well, for everyday speeds far below c — that is why the intuition feels so natural. But it is only an approximation, valid specifically for speeds much smaller than c; at speeds comparable to c, it fails outright. The decisive experimental evidence is the Michelson-Morley experiment, which measured the speed of light in two perpendicular directions as Earth itself orbits the Sun at roughly 30 km/s — under Galilean reasoning, you would expect the measured speed of light to differ by about 30 km/s depending on direction, since Earth\'s own motion should add to or subtract from light\'s measured speed. The actual measured difference: exactly zero, confirmed by countless repeated experiments since. The speed of light comes out to c=299,792,458 m/s in every measurement, completely independent of how the light source or the observer happens to be moving. So for a spaceship moving toward Earth at 0.8c that fires a headlight forward, an Earth observer measures that light beam traveling at exactly c — not 1.8c, and not any value influenced by the spaceship\'s own speed. The speed of light functions as a genuine fundamental constant, effectively a cosmic speed limit that never shifts regardless of your own state of motion. A second, entirely separate error: assuming "all motion is relative, so all frames are equivalent" — extending Einstein\'s first postulate (that physical laws are the same in every frame) to EVERY conceivable reference frame, including non-inertial ones. Consider someone riding a spinning merry-go-round who insists "the laws of physics are the same in my frame" — is this consistent with Einstein\'s first postulate? It is not, and the error here is conflating two genuinely different statements: "all motion is relative" (which is true) with "all frames are equivalent" (which is false, unless you restrict specifically to inertial frames). A rotating reference frame like a merry-go-round is genuinely non-inertial: objects within it experience centrifugal and Coriolis pseudo-forces — balls appear to fly outward from the center, and a Foucault pendulum visibly precesses over time in ways it would not in an inertial frame. Physics genuinely looks and behaves differently in that rotating frame. The merry-go-round rider directly feels themselves being pushed outward — that sensation IS the centrifugal pseudo-force at work, a force that is completely absent in any genuinely inertial frame. Einstein\'s first postulate explicitly restricts itself to "inertial frames" — frames where no net pseudo-force is needed to explain apparent motion, meaning no pseudo-forces and no acceleration of the frame itself. Rotating frames, accelerating frames, and gravitating frames are all genuinely non-inertial, and it is general relativity — not special relativity\'s first postulate — that is required to properly handle physics in those settings.',
+    targetedMisconceptions: [`${POST}:MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS`, `${POST}:MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES`],
+    source: `${POST_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const POST_PROBES: SeedProbe[] = [
+  {
+    conceptId: POST,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A spaceship moves toward Earth at 0.8c and fires a headlight beam forward. How fast does an Earth observer measure the beam traveling?',
+    choices: [
+      { text: 'Exactly c — the speed of light is invariant in all inertial frames, confirmed by Michelson-Morley and countless subsequent experiments, regardless of source motion', isCorrect: true },
+      { text: '1.8c — Galilean velocity addition applies, so the ship\'s speed adds directly to the light\'s speed', isCorrect: false, misconceptionId: `${POST}:MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS` },
+    ],
+    correctValue: 'exactly c, invariant speed of light',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${POST}:MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS`],
+    source: `${POST_SRC} — MC-1/MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: POST,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does Einstein\'s first postulate (laws of physics are the same in all frames) apply to a spinning merry-go-round\'s reference frame?',
+    choices: [
+      { text: 'No — the merry-go-round is a non-inertial (rotating) frame, exhibiting centrifugal and Coriolis pseudo-forces; postulate 1 applies only to inertial frames', isCorrect: true },
+      { text: 'Yes — all motion is relative, so all frames, including rotating ones, are physically equivalent under postulate 1', isCorrect: false, misconceptionId: `${POST}:MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES` },
+    ],
+    correctValue: 'no, postulate 1 applies only to inertial frames',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POST}:MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES`],
+    source: `${POST_SRC} — MC-2/MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.rel.simultaneity ──────────────────────────────────────────────────────
+const SIML = 'phys.rel.simultaneity'
+const SIML_SRC = 'docs/curriculum/blueprints/phys.rel.simultaneity.md'
+
+const SIML_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SIML,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Relativity of simultaneity is NOT merely a light-travel-time effect — it is a genuine, fundamental feature of spacetime, not a correctable perceptual artifact. In Einstein\'s train thought experiment, the standard analysis (a platform observer positioned exactly at the midpoint, equidistant from both lightning strikes A and B) already fully accounts for equal light-travel times to that observer — yet the platform observer concludes the strikes were simultaneous, while the train observer (accounting equally carefully for light travel times in their own frame) concludes the front strike happened first. This disagreement PERSISTS even after all travel-time corrections have been properly applied — it is a genuine physical difference in what "simultaneous" means per frame, quantitatively described by Δt\'=−γvΔx/c². This formula has no separate "travel delay" correction factor tacked on — it IS already the fully corrected, proper simultaneity relationship between frames. Time-of-observation is not the same thing as time-of-event, and both frames are being carefully rigorous about this distinction; the disagreement is not a measurement error or an artifact of light delay, it is baked into the geometry of spacetime itself. A second, separate and crucial point: relativity of simultaneity does NOT mean causality itself becomes relative or reversible. For causally connected events, any signal linking cause to effect must travel at speed ≤c; if Event 1 causes Event 2, then Δx/Δt≤c for that causal signal, which means (cΔt)²≥(Δx)² — the events are TIME-LIKE separated. The Lorentz transformation cannot reverse the time-ordering of time-like separated events without requiring an observer speed exceeding c, which is physically impossible — so causally connected events have an ABSOLUTE time ordering in every inertial frame, with no exceptions. Only SPACE-LIKE separated events (where |Δx|>c|Δt|, meaning no signal at speed ≤c could possibly connect them) can have their temporal ordering disagree between frames — but such events cannot be causally connected in the first place, so no causal paradox ever arises from this reversal. The light cone divides spacetime into the absolute past, the absolute future, and "elsewhere" (space-like separated) — ordering is frame-dependent only in that "elsewhere" region, precisely where no causal link exists anyway.',
+    targetedMisconceptions: [`${SIML}:MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT`, `${SIML}:MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING`],
+    source: `${SIML_SRC} — MC-1/MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT (genuine spacetime feature, not a light-delay artifact) + MC-2/MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING (causal ordering is absolute for time-like separated events)`,
+  },
+  {
+    conceptId: SIML,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "the platform observer doesn\'t really see them simultaneously — the light just happens to arrive at the same time because of the geometry" or claim "Einstein\'s train experiment just shows a light travel delay, not anything fundamental" — treating the relativity of simultaneity as a mere perceptual artifact that could be "corrected away" by properly accounting for light travel times. This misses something crucial: the standard analysis of Einstein\'s train thought experiment ALREADY accounts for light travel time completely and correctly. The platform observer, positioned exactly at the midpoint between the two lightning strike locations A and B, is equidistant from both — light-travel-time corrections are already built into that setup by construction. Yet after this full, correct accounting, the platform observer concludes the two strikes genuinely were simultaneous, while the train observer — who is equally careful and correct about accounting for light travel times within their own moving frame — concludes that the front strike happened first. This disagreement does not vanish once you correct for light travel time; it PERSISTS after all such corrections have been properly applied. This is quantitatively described by the Lorentz transformation formula Δt\'=−γvΔx/c², which contains no separate "travel delay" term to subtract out — this formula IS already the fully corrected, proper simultaneity relationship connecting the two frames. The crucial distinction: time-of-observation (when you personally perceive an event, which does depend on light travel time) is fundamentally different from time-of-event (when the event actually occurred, in a given frame\'s own coordinates) — and both observers in this thought experiment are being fully rigorous about this distinction, not confusing the two. The disagreement between frames is not a measurement error, and not an artifact of light delay that could be fixed with better bookkeeping — it is a fundamental feature built into the geometry of spacetime itself. A second, entirely separate and equally serious error: concluding "if simultaneity is relative, then causality is also relative — maybe cause and effect can be reversed in some frame," or worrying that "event A causing event B might look like B causing A to some observer." This significantly overextends the relativity of simultaneity into territory it does not actually reach. For any two events that are genuinely CAUSALLY connected — where some real physical signal travels from the cause to the effect — that signal must travel at speed v_signal≤c (nothing can exceed light speed). If Event 1 causes Event 2, this means Δx/Δt≤c for the connecting signal, which rearranges to (cΔt)²≥(Δx)² — precisely the mathematical condition defining events that are TIME-LIKE separated. The Lorentz transformation is mathematically incapable of reversing the time ordering of time-like separated events without requiring an observer moving faster than light, which is physically forbidden — so causally connected events genuinely have an ABSOLUTE time ordering, agreed upon by every single inertial observer, with zero exceptions. It is only SPACE-LIKE separated events — where the spatial separation |Δx| exceeds what light could possibly bridge in the available time, |Δx|>c|Δt| — that can have their temporal ordering disagree between different frames. But here is the key resolution: such space-like separated events CANNOT be causally connected to begin with, precisely because no signal traveling at speed ≤c could possibly link them — so even though different frames may disagree on which space-like event happened "first," this disagreement never creates any actual causal paradox, since there was never a genuine cause-and-effect relationship between those particular events in the first place. The geometric picture makes this clean: the light cone structure of spacetime divides all events relative to a given point into an absolute past, an absolute future, and an "elsewhere" region (space-like separated) — frame-dependent ordering occurs only within that "elsewhere" region, which is exactly where no causal link could exist regardless of which frame you use.',
+    targetedMisconceptions: [`${SIML}:MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT`, `${SIML}:MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING`],
+    source: `${SIML_SRC} — MC-1 + MC-2, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SIML_PROBES: SeedProbe[] = [
+  {
+    conceptId: SIML,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In Einstein\'s train thought experiment, after fully correcting for light travel time to each observer, do the platform and train observers still disagree about whether the two lightning strikes were simultaneous?',
+    choices: [
+      { text: 'Yes — the disagreement persists after full travel-time correction; Δt\'=−γvΔx/c² is itself the fully corrected result, representing a genuine physical difference in simultaneity between frames', isCorrect: true },
+      { text: 'No — once you properly correct for light travel time, both observers would agree the strikes were simultaneous; the apparent disagreement is just an uncorrected delay artifact', isCorrect: false, misconceptionId: `${SIML}:MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT` },
+    ],
+    correctValue: 'disagreement persists, genuine physical effect not a travel-time artifact',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SIML}:MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT`],
+    source: `${SIML_SRC} — MC-1/MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SIML,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If simultaneity is relative between frames, could a fast-moving observer see event B (an effect) happen before event A (its cause)?',
+    choices: [
+      { text: 'No — causally connected events are time-like separated (|Δx|<c|Δt|), and their time ordering is absolute in every inertial frame; only space-like separated (causally disconnected) events can have frame-dependent ordering', isCorrect: true },
+      { text: 'Yes — since simultaneity is relative, causality is also relative, so cause and effect could appear reversed to some observer', isCorrect: false, misconceptionId: `${SIML}:MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING` },
+    ],
+    correctValue: 'no, causal ordering is absolute for time-like separated events',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SIML}:MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING`],
+    source: `${SIML_SRC} — MC-2/MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.rel.lorentz-transform ─────────────────────────────────────────────────
+const LRTZ = 'phys.rel.lorentz-transform'
+const LRTZ_SRC = 'docs/curriculum/blueprints/phys.rel.lorentz-transform.md'
+
+const LRTZ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LRTZ,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Galilean transformation does NOT work at all speeds — it is only an approximation valid for v≪c, and using it at relativistic speeds gives physically impossible results. Applying Galilean velocity addition to a light beam emitted forward from a spaceship moving at 0.9c gives u=c+0.9c=1.9c, violating Einstein\'s second postulate that the speed of light is c in all inertial frames (confirmed by Michelson-Morley and countless subsequent experiments). The correct Lorentz velocity addition gives u=(c+0.9c)/(1+c×0.9c/c²)=1.9c/1.9=c — exactly c in all frames, with no violation. The Galilean transformation was not simply "wrong" historically — it was untestably accurate for speeds ≪c, and the Lorentz transformation genuinely reduces to the Galilean one as v/c→0. But at relativistic speeds, the Lorentz transformation is the only one that correctly preserves the speed of light — the full time transformation t\'=γ(t−vx/c²), with its spatial correction term vx/c², is essential and can never simply be dropped. A second, separate and equally important error: assuming the time transformation is simply t\'=γt, conflating this with the FULL Lorentz time transformation. Consider two events at (t=0,x=0) and (t=0,x=L) in frame S — are they simultaneous in S\'? The full transformation gives t\'=γ(t−vx/c²): for event 1, t\'₁=γ(0−v×0/c²)=0; for event 2, t\'₂=γ(0−vL/c²)=−γvL/c²≠0. The events are genuinely NOT simultaneous in S\'. Time dilation (t\'=γΔτ) is only the SPECIAL CASE of the full Lorentz time transformation, applicable to a clock at rest in S\' (x\'=const) — it is not the complete formula. The full transformation t\'=γ(t−vx/c²) applies to any event\'s coordinates, and the spatial term vx/c² is precisely what produces the relativity of simultaneity: events at the same t but different x acquire different t\' values, which is exactly why simultaneity is frame-dependent for spatially separated events.',
+    targetedMisconceptions: [`${LRTZ}:MC-1`, `${LRTZ}:MC-2`],
+    source: `${LRTZ_SRC} — MC-1 ("Galilean transformation works for all speeds") + MC-2 ("time transformation is just t'=γt")`,
+  },
+  {
+    conceptId: LRTZ,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "u=u\'+v=c+0.9c=1.9c," applying the everyday Galilean velocity addition formula to a light beam emitted from a spaceship moving at 0.9c relative to Earth, assuming this classical formula applies at every speed. Galilean addition is correct and useful for everyday speeds, which is exactly why students naturally over-generalize it. But the speed of light is c in ALL inertial frames — Einstein\'s second postulate, confirmed by the Michelson-Morley experiment and every subsequent test since — so a result of 1.9c directly violates this fundamental principle. Instead, the correct relativistic (Lorentz) velocity addition formula gives u=(u\'+v)/(1+u\'v/c²)=(c+0.9c)/(1+c×0.9c/c²)=1.9c/1.9=c — exactly c, with no violation whatsoever. It is worth appreciating that the Galilean transformation was not simply "wrong" in Newton\'s era — it was untest-ably accurate for speeds far below c, the only speeds anyone could measure at the time. Mathematically, the Lorentz transformation genuinely reduces to the Galilean transformation as v/c→0 (expanding γ≈1 and noting that for everyday speeds the correction term vx/c² in the time transformation becomes negligible, allowing it to be dropped). But at relativistic speeds — speeds a meaningful fraction of c — only the Lorentz transformation correctly preserves the speed of light as an invariant; the full time transformation t\'=γ(t−vx/c²), including its spatial correction term, is essential at these speeds and can never simply be dropped or approximated away. A second, entirely separate and very common error: assuming "the time transformation is just t\'=γt" — treating the full Lorentz time transformation as though it were nothing more than the familiar time-dilation formula, and concluding "simultaneous means same t, so same t\' — simultaneity is absolute." This conflates two genuinely different things: time dilation, t\'=γΔτ, and the FULL Lorentz transformation for an event\'s time coordinate, t\'=γ(t−vx/c²). Test this directly: two events occur at (t=0,x=0) and (t=0,x=L) in frame S — are they simultaneous in S\'? Applying the full, correct transformation: for event 1 at (0,0), t\'₁=γ(0−v×0/c²)=0. For event 2 at (0,L), t\'₂=γ(0−vL/c²)=−γvL/c², which is genuinely NOT zero (assuming v and L are both nonzero). The two events, simultaneous in S, are emphatically NOT simultaneous in S\' — directly contradicting the assumption that "same t" in one frame automatically means "same t\'" in another. The resolution: time dilation, t\'=γΔτ, is only a SPECIAL CASE of the full Lorentz transformation — specifically, the case of a single clock that is at rest in S\' (meaning x\'=constant for that clock). The full, general time transformation, t\'=γ(t−vx/c²), applies to any event\'s coordinates whatsoever, not just to a stationary clock\'s readings. The spatial correction term vx/c² in this full formula is precisely what produces the relativity of simultaneity: two events sharing the same coordinate time t but occurring at different positions x will generally end up with different t\' values in a boosted frame — which is exactly why simultaneity turns out to be frame-dependent specifically for spatially separated events, and this spatial term is never something that can be safely ignored or dropped.',
+    targetedMisconceptions: [`${LRTZ}:MC-1`, `${LRTZ}:MC-2`],
+    source: `${LRTZ_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const LRTZ_PROBES: SeedProbe[] = [
+  {
+    conceptId: LRTZ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A spaceship moves at 0.9c relative to Earth and fires a light beam forward. Using the Galilean formula u=u\'+v gives 1.9c. What does relativistic velocity addition actually give?',
+    choices: [
+      { text: 'Exactly c — u=(u\'+v)/(1+u\'v/c²)=(c+0.9c)/(1+0.9)=1.9c/1.9=c; the Lorentz formula preserves the invariant speed of light', isCorrect: true },
+      { text: '1.9c — the Galilean transformation correctly applies at all speeds, including relativistic ones', isCorrect: false, misconceptionId: `${LRTZ}:MC-1` },
+    ],
+    correctValue: 'exactly c, relativistic velocity addition preserves invariance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LRTZ}:MC-1`],
+    source: `${LRTZ_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LRTZ,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two events occur at (t=0,x=0) and (t=0,x=L) in frame S — simultaneous in S. Are they simultaneous in a frame S\' moving at speed v relative to S?',
+    choices: [
+      { text: 'No — the full transformation t\'=γ(t−vx/c²) gives t\'₂=−γvL/c²≠0 for the second event, so the events are not simultaneous in S\'', isCorrect: true },
+      { text: 'Yes — since the time transformation is just t\'=γt, events simultaneous in one frame (same t) remain simultaneous in every frame', isCorrect: false, misconceptionId: `${LRTZ}:MC-2` },
+    ],
+    correctValue: 'not simultaneous in S-prime, spatial term vx/c^2 matters',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LRTZ}:MC-2`],
+    source: `${LRTZ_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.rel.length-contraction ────────────────────────────────────────────────
+const LCON = 'phys.rel.length-contraction'
+const LCON_SRC = 'docs/curriculum/blueprints/phys.rel.length-contraction.md'
+
+const LCON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LCON,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Length contraction does NOT physically compress the moving object — an astronaut riding on a fast-moving spaceship feels no compression whatsoever, because in the ship\'s own rest frame, the ship has its full proper length L₀ with no distortion, no force, and no squeezing. The contraction is only ever measured by an OUTSIDE frame observing the ship in relative motion. Length contraction is a genuine consequence of how different frames disagree about SIMULTANEITY — specifically, about when they measure the positions of the ship\'s two endpoints. The ship itself is not compressed in any physical sense; only its measured length differs between frames, because different frames disagree on which pair of events constitutes "measuring both endpoints at the same time." Neither frame is wrong; both are correct within their own reference frame — the ship\'s rest frame gives L₀, the outside frame gives L=L₀/γ, and both analyses correctly predict the same observable outcomes (such as the time it takes the ship to pass a ground observer). This is fundamentally different from a sound wave physically compressing air, where the air molecules genuinely move closer together — atoms within the moving spaceship are NOT actually closer together in the ship\'s own frame. A second, separate error: assuming length contraction applies to ALL spatial dimensions equally, expecting a moving sphere to shrink into a smaller sphere in every direction. It does not — length contraction is strictly LONGITUDINAL, affecting only the direction of relative motion. The Lorentz transform derivation shows this directly: x\'=γ(x−vt) contracts only the x-direction (the direction of motion), while y\'=y and z\'=z show literally NO change whatsoever in the perpendicular directions. This asymmetry arises because contraction occurs specifically because moving and stationary frames disagree about time, and this time-frame disagreement only couples to the direction of motion (x and t mix together in the Lorentz transform) — perpendicular directions are completely untouched by this coupling. A sphere moving along the x-axis appears as an oblate spheroid: flattened specifically along x, unchanged in y and z — it looks like a pancake, never like a uniformly smaller sphere.',
+    targetedMisconceptions: [`${LCON}:MC-1`, `${LCON}:MC-2`],
+    source: `${LCON_SRC} — MC-1 ("Length contraction physically compresses the object") + MC-2 ("Contraction applies to all dimensions")`,
+  },
+  {
+    conceptId: LCON,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "if you ride on the spaceship, does your body feel compressed?", say "the ship is squished as it speeds up" — treating the word "contraction" as implying genuine physical compression, the same everyday intuition you\'d apply to squeezing a physical object. Test this directly: in the ship\'s OWN rest frame, the ship retains its full proper length L₀ at all times — there is no compression, no distortion, and no force acting on the ship or its contents in that frame. An astronaut on board, measuring their own ship, finds it perfectly normal in every respect. The contraction is measured ONLY by an outside observer, in a different frame, watching the ship move past at high relative speed. What\'s actually happening: length contraction is a genuine consequence of how different frames disagree specifically about SIMULTANEITY — about exactly when each frame considers itself to be measuring the positions of the ship\'s two endpoints "at the same time." The ship itself is never physically compressed in any frame; only the MEASUREMENT of its length differs between frames, precisely because different frames disagree about which pair of events constitutes measuring both endpoints simultaneously. Crucially, neither frame is "wrong" here — both are entirely correct within their own reference frame: solving in the ship\'s frame gives the ship its full proper length L₀ with everything behaving normally; solving in the ground frame gives a contracted length L=L₀/γ; and both analyses, despite disagreeing on "the length," correctly predict identical observable outcomes, such as exactly how long the ship takes to pass a fixed ground observer. This differs sharply from an everyday sound wave physically compressing air, where the air molecules genuinely do move closer together in space — nothing analogous happens to the atoms inside a moving spaceship; those atoms are not actually closer together in the ship\'s own reference frame, no matter how fast the ship travels relative to some outside observer. A second, entirely separate and equally common error: assuming length contraction affects every spatial dimension equally — expecting, for instance, that a moving sphere should appear compressed into a smaller sphere overall, shrinking uniformly in every direction ("the whole object shrinks in all directions"). This is false. Length contraction is strictly LONGITUDINAL — it affects only the single spatial direction along which the object is actually moving, leaving directions perpendicular to the motion completely untouched. The Lorentz transform derivation makes this explicit: x\'=γ(x−vt) contracts specifically the x-direction (assuming motion is along x), while y\'=y and z\'=z show absolutely no change whatsoever in either perpendicular direction — a genuine prediction of special relativity, confirmed by the internal mathematical consistency of Maxwell\'s equations under Lorentz transformations. The underlying reason for this asymmetry: contraction arises because moving and stationary frames genuinely disagree about time, and this particular time-frame disagreement couples specifically to the spatial direction of motion — x and t mix together in the Lorentz transform precisely along that one direction — while directions perpendicular to the motion are entirely decoupled from this time-mixing effect and therefore remain completely unaffected. Concretely: a sphere moving along the x-axis appears not as a smaller sphere but as an oblate spheroid — flattened specifically along the x-direction while remaining completely unchanged in both the y and z directions — visually resembling a pancake shape, never a uniformly shrunken sphere.',
+    targetedMisconceptions: [`${LCON}:MC-1`, `${LCON}:MC-2`],
+    source: `${LCON_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const LCON_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCON,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does an astronaut riding a spaceship moving at relativistic speed feel their body physically compressed due to length contraction?',
+    choices: [
+      { text: 'No — in the ship\'s own rest frame, the ship has its full proper length with no compression or force; contraction is only measured by an outside frame, as a measurement effect from disagreement about simultaneity', isCorrect: true },
+      { text: 'Yes — as the ship speeds up, it and everything inside it physically squishes shorter along the direction of motion', isCorrect: false, misconceptionId: `${LCON}:MC-1` },
+    ],
+    correctValue: 'no physical compression, it is a measurement effect',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LCON}:MC-1`],
+    source: `${LCON_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LCON,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sphere moves at high speed along the x-axis. How does it appear to a stationary observer?',
+    choices: [
+      { text: 'As an oblate spheroid, flattened along x (the direction of motion) but unchanged in y and z — like a pancake, not a smaller sphere', isCorrect: true },
+      { text: 'As a uniformly smaller sphere, shrunk equally in all three dimensions', isCorrect: false, misconceptionId: `${LCON}:MC-2` },
+    ],
+    correctValue: 'flattened only along motion direction, pancake shape',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCON}:MC-2`],
+    source: `${LCON_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.rel.spacetime ──────────────────────────────────────────────────────────
+const SPTM = 'phys.rel.spacetime'
+const SPTM_SRC = 'docs/curriculum/blueprints/phys.rel.spacetime.md'
+
+const SPTM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SPTM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The spacetime interval s²=c²t²−x² is Lorentz INVARIANT — every inertial observer computes the exact same value, unlike Δx or Δt individually, which genuinely are frame-dependent. Direct computation confirms this: using the Lorentz transformation x\'=γ(x−vt), t\'=γ(t−vx/c²), one finds c²t\'²−x\'²=γ²(ct−βx)²−γ²(x−βct)²=γ²(1−β²)(c²t²−x²)=c²t²−x² exactly, since γ²(1−β²)=1 algebraically. The interval combines space and time in precisely the way that cancels the frame-mixing introduced by Lorentz boosts — that is exactly why s² (not Δx alone, not Δt alone) is the geometrically meaningful quantity for describing the separation between two events. What genuinely IS observer-dependent: Δx (subject to length contraction), Δt (subject to time dilation), and whether two events are judged simultaneous. What is genuinely frame-independent: s² itself, and more generally any four-vector inner product like A_μA^μ (though the magnitude of the purely spatial part, |A⃗|², remains frame-dependent). A second, separate point: spacelike-separated events (where s²<0 in the +−−− convention) are NOT unphysical or somehow "imaginary" — they are perfectly real, physical events, simply causally disconnected. The event "you read this word" and the event "a star exploded in Andromeda 3 seconds ago" have spacelike separation — both are genuinely real events, existing in spacetime, despite their spacelike relationship. Spacelike separation, |Δx|>c|Δt|, means the spatial separation between the events exceeds what light could possibly bridge in the available time — physically, this means no signal could have passed between them, so they cannot be causally related to each other. There exists SOME inertial frame in which any two spacelike-separated events are simultaneous (Δt\'=0), and the proper spatial distance √(−s²) represents the minimum spatial separation that any frame assigns them. This contrasts with timelike intervals (s²>0), where a cause genuinely can precede its effect with all frames agreeing on that causal order, and lightlike intervals (s²=0), where only light itself can connect the two events.',
+    targetedMisconceptions: [`${SPTM}:MC-1`, `${SPTM}:MC-2`],
+    source: `${SPTM_SRC} — MC-1 (spacetime interval s² is Lorentz invariant, exact QED derivation) + MC-2 (spacelike intervals are real physical events, just causally disconnected)`,
+  },
+  {
+    conceptId: SPTM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "if observer A measures s²=9m², what does observer B measure for the same two events?", say "B measures a different interval since they\'re moving differently" — over-generalizing the correct idea that "everything is relative" in relativity to include the spacetime interval itself, which is actually one of the theory\'s key INVARIANT quantities. Verify this directly by computing c²t\'²−x\'² using the Lorentz transformation x\'=γ(x−vt), t\'=γ(t−vx/c²): c²t\'²−x\'²=γ²(ct−βx)²−γ²(x−βct)²=γ²(1−β²)(c²t²−x²)=c²t²−x², using the algebraic identity γ²(1−β²)=1. This is an exact result, not an approximation — the invariance of s² holds precisely, for any boost velocity v. The reason this particular combination of space and time is special: it combines Δx and Δt in exactly the way needed to cancel out the frame-mixing that Lorentz boosts introduce — that is precisely why s² (rather than Δx alone, or Δt alone) is the geometrically meaningful quantity for describing how far apart two events genuinely are in spacetime. To be precise about what IS and ISN\'T frame-dependent: Δx (individually) is frame-dependent, subject to length contraction; Δt (individually) is frame-dependent, subject to time dilation; but s² itself is frame-INDEPENDENT — every inertial observer, no matter their relative velocity, computes the exact same numerical value for s² between two given events. A second, entirely separate error: believing that spacelike intervals (where s²<0, in the +−−− metric signature convention) are somehow "unphysical" or don\'t correspond to anything real — saying "spacelike is imaginary — it doesn\'t correspond to anything real," reasoning from the fact that s²<0 superficially "looks" mathematically unusual or negative in a way that seems unphysical. But consider a concrete example: the event "you read this word right now" and the event "a star exploded in the Andromeda galaxy 3 seconds ago" — these two events genuinely have spacelike separation from each other, and both are unquestionably real, physical events that actually happened. Spacelike separation does not mean "imaginary" or "nonexistent" — it specifically means there is NO causal connection possible between the two events. Precisely: spacelike means |Δx|>c|Δt| — the spatial separation between the events exceeds what a light signal could possibly bridge in the time available between them. Physically, this means no signal, traveling at any speed up to and including c, could have passed from one event to the other — they simply cannot be causally related, full stop, regardless of which frame you analyze them from. A useful additional fact: there exists SOME inertial frame in which any pair of spacelike-separated events actually appears simultaneous (Δt\'=0 in that particular frame) — and the "proper spatial distance" √(−s²) represents the minimum spatial separation that ANY frame will ever assign to that pair of events. This stands in useful contrast to the other two interval types: timelike intervals (s²>0) describe events where a cause genuinely CAN precede its effect, with every single inertial frame agreeing on that causal ordering without exception; lightlike intervals (s²=0) describe events connectable only by light itself, traveling at exactly c.',
+    targetedMisconceptions: [`${SPTM}:MC-1`, `${SPTM}:MC-2`],
+    source: `${SPTM_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const SPTM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SPTM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Observer A measures the spacetime interval between two events as s²=9m². What does observer B, moving at a different velocity, measure for the same two events?',
+    choices: [
+      { text: 's²=9m² — the spacetime interval is Lorentz invariant; every inertial observer computes the exact same value, unlike Δx or Δt individually', isCorrect: true },
+      { text: 'A different value — since B is moving differently, and "everything is relative" in relativity, B measures a different interval', isCorrect: false, misconceptionId: `${SPTM}:MC-1` },
+    ],
+    correctValue: 'same value 9m squared, s squared is invariant',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPTM}:MC-1`],
+    source: `${SPTM_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SPTM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two events have spacelike separation (s²<0 in the +−−− convention). Does this mean one (or both) of the events is unphysical or doesn\'t really exist?',
+    choices: [
+      { text: 'No — both events are perfectly real; spacelike separation just means they are causally disconnected (no signal at speed ≤c could link them), not that either event is nonexistent', isCorrect: true },
+      { text: 'Yes — a negative s² value indicates the events are imaginary or unphysical, not genuine physical occurrences', isCorrect: false, misconceptionId: `${SPTM}:MC-2` },
+    ],
+    correctValue: 'both events are real, just causally disconnected',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPTM}:MC-2`],
+    source: `${SPTM_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.rel.relativistic-momentum ─────────────────────────────────────────────
+const RMOM = 'phys.rel.relativistic-momentum'
+const RMOM_SRC = 'docs/curriculum/blueprints/phys.rel.relativistic-momentum.md'
+
+const RMOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RMOM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A rocket cannot reach the speed of light not because of a limit on FORCE or thrust — "we just don\'t have enough fuel/thrust yet" is the wrong framing entirely — but because of a genuine ENERGY barrier. The relativistic kinetic energy formula, KE=(γ−1)mc², diverges to infinity as v→c: reaching exactly c would require infinite energy, not merely a more powerful engine. This isn\'t about mechanical force limits at all; each additional increment of speed costs progressively more energy as γ grows explosively — accelerating from 0.99c to 0.999c genuinely costs more energy than accelerating from rest all the way up to 0.99c. The energy barrier is infinite; the speed barrier is fundamentally energetic in nature, not mechanical. Massless particles like photons naturally travel at exactly c precisely because they have no rest energy to overcome in the first place — the infinite-energy barrier only applies to particles with nonzero rest mass. A second, separate and very common error: the popularized phrase "E=mc² means mass can be converted to energy by destroying atoms," implying nuclear reactions somehow annihilate matter entirely, converting it wholesale into pure energy. This is not what actually happens. In nuclear fission, atoms are never destroyed — uranium genuinely transforms into barium plus krypton plus neutrons; the atoms\' constituent particles persist. What changes is that the total mass of the resulting products is very slightly LESS than the mass of the original uranium, and the energy released, Q=Δm·c², precisely accounts for this small mass difference — no matter is ever "annihilated" in the process. E=mc² actually says that mass IS itself a form of energy — specifically, stored energy — not that mass gets destroyed and magically becomes energy when "released." The small mass decrease Δm corresponds directly to the nuclear binding energy that gets released as kinetic energy and radiation; concretely, for uranium-238 fission, only about 0.09% of the original mass is released as energy — the vast majority, over 99.9%, of the mass-energy remains locked in the fission products themselves.',
+    targetedMisconceptions: [`${RMOM}:MC-1`, `${RMOM}:MC-2`],
+    source: `${RMOM_SRC} — MC-1 ("faster than light needs infinite force") + MC-2 ("E=mc² means mass converted to energy by destroying atoms")`,
+  },
+  {
+    conceptId: RMOM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "why can\'t a rocket reach c? Is it because we don\'t have a powerful enough engine?", say "we just don\'t have enough fuel/thrust yet" — applying classical thinking (F=ma, so with enough force, any speed becomes achievable in principle) directly to relativistic motion. This framing is fundamentally mistaken about WHAT kind of barrier prevents reaching c. The relativistic kinetic energy formula is KE=(γ−1)mc², and as v approaches c, γ diverges toward infinity, meaning the required kinetic energy also diverges toward infinity. You would need INFINITE energy to actually reach c, not merely a more powerful engine or more thrust — this genuinely is not a mechanical force-and-thrust limitation at all, it is a fundamentally energetic one. Each additional small increment of speed near c costs progressively, explosively more energy, because γ itself grows explosively as v→c: concretely, accelerating a particle from 0.99c to 0.999c actually requires MORE energy than accelerating that same particle from rest all the way up to 0.99c — a genuinely counterintuitive but mathematically exact consequence of how γ behaves near c. The correct way to frame this: the energy barrier to reaching c is infinite, and the "speed limit" is fundamentally energetic in nature, not mechanical — it is not that engines are insufficiently powerful, it is that no finite amount of energy, from any conceivable source, could ever be enough. This is also precisely why massless particles like photons naturally travel at exactly c: having zero rest mass, they have no rest energy that would need to be "overcome" by this infinite-energy barrier in the first place — the barrier specifically applies to particles that possess nonzero rest mass. A second, entirely separate and very commonly encountered error: interpreting the popularized phrase "E=mc²" to mean "mass can be converted to energy by destroying atoms," as if nuclear reactions somehow annihilate matter wholesale, converting it entirely into "pure energy." Ask directly: "how does a nuclear reactor convert mass to energy? Does it destroy atoms?" — and the honest answer is no, not in the way this phrasing implies. In nuclear fission, for instance, atoms are genuinely NOT destroyed: a uranium nucleus splits into barium, krypton, and several neutrons — all of these product particles continue to exist afterward, with their own individual masses. What actually happens is much more precise and specific: the TOTAL mass of the fission products turns out to be very slightly less than the mass of the original uranium nucleus, and this small mass difference, Δm, directly accounts for the energy released, via Q=Δm·c² — no matter whatsoever is "annihilated" or destroyed in this process; it is simply that a small fraction of the original rest-mass-energy converts into kinetic energy and radiation, while the vast bulk of the mass persists in the resulting fragments. The correct framing of E=mc² itself: it states that mass IS a form of energy — specifically STORED energy — not that mass literally gets destroyed and thereby "becomes" energy upon release. The mass decrease Δm corresponds directly and precisely to the nuclear binding energy that gets released in the reaction. As a concrete number worth internalizing: in the fission of uranium-238, only about 0.09% of the original nuclear mass is actually released as energy — the remaining 99.91% of the original mass persists, still present within the fission products themselves.',
+    targetedMisconceptions: [`${RMOM}:MC-1`, `${RMOM}:MC-2`],
+    source: `${RMOM_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const RMOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: RMOM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can\'t a rocket ever reach the speed of light, no matter how advanced its engine?',
+    choices: [
+      { text: 'Because the relativistic kinetic energy KE=(γ−1)mc² diverges to infinity as v→c — it would require infinite energy, a fundamental energetic barrier, not a mechanical force limitation', isCorrect: true },
+      { text: 'Because current rocket engines simply don\'t produce enough thrust/force yet — with sufficiently advanced engines, c could eventually be reached', isCorrect: false, misconceptionId: `${RMOM}:MC-1` },
+    ],
+    correctValue: 'infinite energy required, not a force/thrust limitation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RMOM}:MC-1`],
+    source: `${RMOM_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RMOM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In nuclear fission, uranium splits into barium, krypton, and neutrons, releasing energy. Are the original atoms "destroyed" and converted entirely into pure energy?',
+    choices: [
+      { text: 'No — the product atoms/particles still exist; only a tiny mass difference (Δm, about 0.09% for U-238) is released as energy via Q=Δm·c², while over 99.9% of the mass remains in the products', isCorrect: true },
+      { text: 'Yes — the uranium atoms are annihilated, with their entire mass converted directly into pure energy', isCorrect: false, misconceptionId: `${RMOM}:MC-2` },
+    ],
+    correctValue: 'atoms not destroyed, only small mass fraction converted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RMOM}:MC-2`],
+    source: `${RMOM_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.rel.mass-energy ───────────────────────────────────────────────────────
+const MEQ = 'phys.rel.mass-energy'
+const MEQ_SRC = 'docs/curriculum/blueprints/phys.rel.mass-energy.md'
+
+const MEQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MEQ,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a nuclear reaction releasing energy (say 200 MeV), the mass does NOT simply "disappear" and "become pure energy" as popular science framing often suggests. The products of a nuclear reaction still genuinely have mass — for uranium fission, only about 0.09% of the original mass "disappears," while 99.91% remains as product mass. What actually happens: some of the rest-mass energy, stored specifically in nuclear binding, is released as kinetic energy of the resulting products. Rest mass itself IS a form of energy — E₀=mc² — so when rest mass decreases, the corresponding energy simply appears in another form (kinetic energy, radiation); there is no genuine "conversion" happening, only a redistribution of energy between rest-mass form and kinetic form. Nuclear reactions release energy specifically because the product nucleons end up more tightly bound than before — this binding energy, which was stored as rest-mass energy via the mass defect, gets released as kinetic energy; the TOTAL energy (rest energy plus kinetic energy) remains exactly conserved throughout, with Q=Δmc² precisely quantifying the released energy as mass defect times c². A second, equally important and separate error: applying E=mc² to ALL of a particle\'s energy, not recognizing that this specific formula gives only the REST energy — for a moving particle, this is a crucial distinction. A proton moving at 0.8c does NOT simply "weigh more" in the sense of having total energy E=mc² using its rest mass m; rather, its total energy is E=γmc², which is strictly greater than mc² for any moving particle (γ>1 whenever v>0). The rest mass m is invariant — the same value in every reference frame — while the TOTAL energy genuinely varies with the observer\'s frame. The clean distinction: E₀=mc² is specifically the REST energy (subscript 0 denoting the rest frame); E_total=γmc² is the total energy, a different and generally larger quantity for any moving particle. The frame-invariant relationship connecting these is E²−(pc)²=(mc²)²=E₀² — this combination remains the same in every frame, even though E and p individually vary between frames, precisely mirroring how the spacetime interval s² stays invariant even though Δx and Δt individually vary.',
+    targetedMisconceptions: [`${MEQ}:MC-1`, `${MEQ}:MC-2`],
+    source: `${MEQ_SRC} — MC-1 ("mass disappears and becomes energy in nuclear reactions") + MC-2 ("E=mc² applies to all energy, not just rest energy")`,
+  },
+  {
+    conceptId: MEQ,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students, asked "in a nuclear reaction releasing 200 MeV, what happened to the mass?", say "the mass was converted to pure energy" — echoing the popular-science framing of "mass-to-energy conversion," which oversimplifies and slightly misrepresents what genuinely happens physically. Test this against the actual products of a nuclear reaction: they still definitely have mass — nothing about them has vanished into pure, massless energy. For uranium fission specifically, only about 0.09% of the original uranium mass "disappears" numerically in the sense of contributing to the released energy; the remaining 99.91% of the original mass persists, still present as the mass of the resulting fission products. What actually happens, precisely: some of the rest-mass energy — energy that was stored specifically in the nuclear binding forces holding the original nucleus together — gets released as kinetic energy carried by the reaction\'s products. The key conceptual correction: rest mass IS itself already a form of energy (E₀=mc²) — so when rest mass decreases slightly during a reaction, the corresponding amount of energy doesn\'t get "created" or "converted from nothing," it simply appears in a different, already-existing form (kinetic energy of the fragments, or radiation). There is no mysterious "conversion" of matter into an entirely different substance called "energy" — it is more accurate to describe this as a REDISTRIBUTION of energy between its rest-mass form and its kinetic form, with the total remaining exactly conserved. Nuclear reactions release energy specifically because the resulting product nucleons end up MORE tightly bound to each other than the reactant nucleons were — this binding energy, which was stored as rest-mass energy through what\'s called the "mass defect," gets released as kinetic energy of the products; the total energy (rest-mass energy plus kinetic energy, added together) is exactly conserved throughout the entire process, with the specific released amount given by Q=Δmc² — mass defect multiplied by c². A second, entirely separate and equally significant error: applying the famous formula E=mc² indiscriminately to describe the TOTAL energy of any particle in any state of motion, not recognizing that this specific, simple formula describes only the particle\'s REST energy. Consider a proton moving at 0.8c — what is its "mass" according to E=mc²? The temptation is to say "total energy=mc² so the proton \'weighs\' more when moving" — but this conflates two genuinely distinct quantities. E=mc² is specifically the REST energy (often written with a subscript, E₀=mc², to make this explicit) — it applies only when the particle is at rest, v=0. For a moving proton at 0.8c, the TOTAL energy is instead given by E=γmc², which is strictly larger than mc² whenever the particle is actually moving (since γ>1 for any v>0). Crucially, the rest mass m itself is INVARIANT — it takes the exact same numerical value in every single reference frame, regardless of how fast the particle happens to be moving relative to any given observer — while the particle\'s TOTAL energy genuinely does vary from frame to frame, depending on the particle\'s speed as measured in that particular frame. The clean, correct distinction to maintain: E₀=mc² is specifically the rest energy (the subscript 0 denotes evaluation in the particle\'s own rest frame); E_total=γmc² is the total energy, a generally different and larger quantity for any moving particle — these are two genuinely distinct physical quantities, not interchangeable expressions of "the same E=mc²." The reliably frame-INVARIANT relationship that connects energy and momentum together, valid in every reference frame without exception, is E²−(pc)²=(mc²)²=E₀² — this particular combination of E and p remains exactly the same number in every frame, even though E and p individually vary substantially between different observers\' frames, closely paralleling how the spacetime interval s² itself remains invariant even though Δx and Δt individually vary between frames.',
+    targetedMisconceptions: [`${MEQ}:MC-1`, `${MEQ}:MC-2`],
+    source: `${MEQ_SRC} — MC-1 + MC-2, conflict_evidence/bridge/replacement`,
+  },
+]
+
+const MEQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: MEQ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A nuclear reaction releases 200 MeV of energy. What actually happened to the mass?',
+    choices: [
+      { text: 'A tiny fraction of the rest mass (mass defect Δm) was released as kinetic energy via Q=Δmc²; the reaction products still have nearly all the original mass, and total energy is conserved', isCorrect: true },
+      { text: 'The mass was entirely converted to pure energy — the products have essentially no remaining mass from the original reactants', isCorrect: false, misconceptionId: `${MEQ}:MC-1` },
+    ],
+    correctValue: 'only a tiny mass fraction converted, most mass remains',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MEQ}:MC-1`],
+    source: `${MEQ_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MEQ,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A proton moves at 0.8c. Is its total energy given by E=mc², using its rest mass m?',
+    choices: [
+      { text: 'No — E=mc² gives only the rest energy E₀; the total energy of a moving particle is E=γmc², which is strictly greater than mc² since γ>1', isCorrect: true },
+      { text: 'Yes — E=mc² applies to a particle\'s total energy in any state of motion, not just at rest', isCorrect: false, misconceptionId: `${MEQ}:MC-2` },
+    ],
+    correctValue: 'E=mc squared is only rest energy, total energy is gamma m c squared',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MEQ}:MC-2`],
+    source: `${MEQ_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -36444,6 +36864,13 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CANT_EXPLANATIONS,
   ...PSNB_EXPLANATIONS,
   ...HAJC_EXPLANATIONS,
+  ...POST_EXPLANATIONS,
+  ...SIML_EXPLANATIONS,
+  ...LRTZ_EXPLANATIONS,
+  ...LCON_EXPLANATIONS,
+  ...SPTM_EXPLANATIONS,
+  ...RMOM_EXPLANATIONS,
+  ...MEQ_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -36880,4 +37307,11 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CANT_PROBES,
   ...PSNB_PROBES,
   ...HAJC_PROBES,
+  ...POST_PROBES,
+  ...SIML_PROBES,
+  ...LRTZ_PROBES,
+  ...LCON_PROBES,
+  ...SPTM_PROBES,
+  ...RMOM_PROBES,
+  ...MEQ_PROBES,
 ]
