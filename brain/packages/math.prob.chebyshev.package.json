@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.chebyshev-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.chebyshev",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d5b6a4e260244cfa68cf1ab1107e65260cc3234882232d65f5c8b4d4d157fab4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.chebyshev.md": "sha256:c61df3aeda0613b7f542796fc9878a095e13ea2a1ab14c78ee4722baa35b564e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.prob.chebyshev",
+    "name": "Chebyshev's Inequality",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.variance"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.chebyshev-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.chebyshev (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.chebyshev.md": "sha256:c61df3aeda0613b7f542796fc9878a095e13ea2a1ab14c78ee4722baa35b564e"
+      },
+      "contentHash": "sha256:497db3dd5493fecc666fa7fb0e8bc71f04f7106585a41f1edfe20784dbe3af80",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.chebyshev.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.chebyshev.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.chebyshev"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.chebyshev\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.chebyshev.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.chebyshev.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.chebyshev"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.chebyshev\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.chebyshev.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.chebyshev.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.chebyshev"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.chebyshev\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.chebyshev/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.chebyshev",
+      "title": "Chebyshev's Inequality — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.prob.variance**: Var(X)=E[(X−μ)²]; σ=√Var(X) as the standard deviation, the natural unit for measuring spread around the mean μ\n\n### Target Knowledge State\nStudent can state Chebyshev's inequality P(|X−μ|≥kσ)≤1/k² and apply it to bound the probability of a deviation from the mean using only μ and σ, without knowing the distribution's shape; correctly treat the result as an UPPER BOUND (often loose), never as the exact probability; recognise that the inequality applies to ANY distribution with finite mean and variance (its entire value is this universality); and correctly convert a raw deviation into standardized units k=deviation/σ before applying the formula.\n\n### Conceptual Obstacles\n1. Treating the ≤ as an = — reading P(|X−μ|≥kσ)≤1/k² as if it says the probability EQUALS 1/k², when the true probability for a specific distribution (e.g. Normal) is typically much smaller; Chebyshev gives a guaranteed ceiling, not the exact value\n2. Believing the inequality requires knowing the distribution — its entire purpose is the opposite: it holds for EVERY distribution with a finite mean and variance, with no assumption about shape (normal, skewed, discrete, unknown) at all\n3. Plugging a raw deviation value directly in for k instead of standardizing — k counts \"how many standard deviations away,\" so a deviation of 10 units with σ=5 means k=10/5=2, not k=10; skipping this conversion produces a nonsensical or wildly wrong bound\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.chebyshev",
+      "title": "BOUND-IS-EXACT",
+      "content": "| MC-1 | BOUND-IS-EXACT | Student treats P(\\|X−μ\\|≥kσ)≤1/k² as an equality, reporting 1/k² as THE probability rather than an upper bound on it | Any question asking \"what is the probability,\" answered by quoting 1/k² directly without noting it's a ceiling |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.chebyshev",
+      "title": "DISTRIBUTION-SPECIFIC-ASSUMPTION",
+      "content": "| MC-2 | DISTRIBUTION-SPECIFIC-ASSUMPTION | Student believes Chebyshev's inequality can only be applied when the distribution is known (e.g. only for Normal variables), missing that distribution-freeness is the theorem's entire point | Word problems that don't specify a distribution shape, or that explicitly give only a mean and standard deviation |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.chebyshev",
+      "title": "RAW-DEVIATION-NOT-STANDARDIZED",
+      "content": "| MC-3 | RAW-DEVIATION-NOT-STANDARDIZED | Student substitutes a raw deviation (in the variable's original units) directly as k, without dividing by σ first, producing a meaningless or badly wrong bound | Any problem stating a deviation in original units (e.g. \"differs from the mean by more than 10\") rather than already in units of σ |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.chebyshev",
+      "title": "A Universal, Loose Guarantee",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"A Universal, Loose Guarantee\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 63,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.chebyshev",
+      "title": "Loose Bound, Universal Scope, Standardized Units",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Loose Bound, Universal Scope, Standardized Units\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 123,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.chebyshev",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 170,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.chebyshev",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess bound-vs-exact discipline, distribution-free application, and standardization fluency under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** X has μ=30, σ=6. Bound P(|X−30|≥18).\n\n*Solution:* k=18/6=3. Bound ≤1/9.\n\n**Problem 2:** A survey response time has mean 40 seconds and standard deviation 5 seconds (distribution unknown). Bound the probability that a response takes at least 60 seconds or at most 20 seconds (i.e. |X−40|≥20).\n\n*Solution:* k=20/5=4. Bound ≤1/16=0.0625.\n\n**Problem 3:** True or false, with a one-sentence justification: \"If Chebyshev gives P(|X−μ|≥2σ)≤0.25, then the actual probability is 0.25.\" \n\n*Solution:* **False** — Chebyshev states an upper bound; the true probability can be (and for well-behaved distributions typically is) considerably smaller than 0.25.\n\n**Problem 4:** A quality metric has μ=75 and σ=3. Using Chebyshev, find the smallest k (as a whole number) such that the bound on P(|X−75|≥kσ) is at most 0.10, then state the corresponding raw deviation.\n\n*Solution:* Need 1/k²≤0.10, i.e. k²≥10, i.e. k≥√10≈3.16, so the smallest whole number is k=4. Bound at k=4: 1/16=0.0625≤0.10 ✓ (k=3 gives 1/9≈0.111>0.10, too large). Raw deviation: 4σ=4(3)=12.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** An investment fund reports average annual return μ=8% with standard deviation σ=15% (return distribution not modeled — could be skewed by rare large gains or losses).\n\n(a) Using Chebyshev, bound the probability that this year's return is either below −22% or above 38% (i.e. deviates from the mean by at least 30 percentage points).\n(b) A financial analyst claims: \"Since stock returns are famously NOT Normally distributed (they have 'fat tails' — extreme events more often than a Normal model predicts), Chebyshev's bound is actually MORE useful here than a Normal-based calculation would be, not less.\" Evaluate this claim, connecting it explicitly to what makes Chebyshev distribution-free.\n(c) If a second fund has the same μ=8% but σ=25% (more volatile), and you ask for the bound on the same absolute deviation (30 percentage points), would the new bound be larger or smaller than in (a)? Compute it and interpret why the direction makes sense.\n\n**Expected solution:**\n\n(a) k=30/15=2. Bound: P(|X−8%|≥30%) ≤ 1/2² = 1/4 = 0.25.\n\n(b) The analyst is correct, and for exactly the reason Chebyshev is designed for: a Normal-based calculation (e.g. reading a z-table for k=2, giving ≈0.0455) silently ASSUMES Normality, and if returns genuinely have fatter tails than Normal, that Normal-based number would UNDERSTATE the true tail risk — potentially badly. Chebyshev's bound (0.25) makes no such assumption at all; it remains valid regardless of how fat the tails actually are, precisely because its derivation never used a specific distributional shape. This is the practical payoff of distribution-freeness: in a domain (finance) where the \"known\" distributional assumptions are frequently wrong in the tails, a valid-for-everything (if loose) guarantee can be more trustworthy than a precise-but-fragile one.\n\n(c) New k = 30/25 = 1.2. Bound: 1/(1.2)² = 1/1.44 ≈ 0.694 — LARGER than the first fund's 0.25. This makes sense: with a bigger σ (25% vs 15%), the SAME 30-percentage-point deviation represents FEWER standard deviations away from the mean (1.2 vs 2), so it is less \"extreme\" in standardized terms, and Chebyshev can no longer guarantee as small a probability — a higher-volatility fund makes any FIXED absolute deviation less surprising, hence the weaker (larger) bound.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.prob.lln; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.prob.chebyshev assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — BOUND-IS-EXACT (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Reading P(\\|X−μ\\|≥kσ)≤1/k² as an equality is BOUND-IS-EXACT. Chebyshev gives a guaranteed CEILING, valid for every distribution — the true probability for any specific distribution is usually well below it.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Chebyshev gives P(\\|X−μ\\|≥2σ)≤0.25. What is the probability?\"\n- MC-1 response: \"0.25.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The correct reading is 'at most 0.25' — the true value could be much smaller. Concretely, for a Normal variable the real value at k=2 is about 0.0455, more than five times smaller than the Chebyshev ceiling. The bound has to cover EVERY possible distribution with that μ,σ, including unusually spread-out ones, so it must be at least as large as the worst case — for typical, well-behaved distributions it overshoots considerably.\"\n\nPractice: Compare the Chebyshev bound at k=3 (1/9≈0.111) to the actual Normal tail probability at k=3 (≈0.0027), and state the ratio between them.\n\n---\n\n### Repair Action B02 — DISTRIBUTION-SPECIFIC-ASSUMPTION (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Believing Chebyshev needs a known distribution shape is DISTRIBUTION-SPECIFIC-ASSUMPTION. The theorem's entire purpose is to work for ANY distribution with finite mean and variance — that universality is what makes it useful precisely when the shape is unknown.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"We're told only μ=50, σ=4, no distribution given. Can we bound P(\\|X−50\\|≥12)?\"\n- MC-2 response: \"No, we'd need to know the distribution first.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Yes, we can, immediately: k=12/4=3, bound ≤1/9. Chebyshev's derivation uses only the definition of variance (via Markov's inequality applied to (X−μ)²) — nothing about the shape of the distribution enters the proof at any step. Contrast with a Normal-table lookup, which DOES require assuming Normality; Chebyshev is the tool for exactly the situation where that assumption isn't available or isn't safe to make.\"\n\nPractice: Given only μ and σ for an unspecified distribution, compute the Chebyshev bound for k=1, k=2, and k=5, confirming no distributional information was used at any step.\n\n---\n\n### Repair Action B03 — RAW-DEVIATION-NOT-STANDARDIZED (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Plugging a raw deviation directly in for k is RAW-DEVIATION-NOT-STANDARDIZED. k always means 'number of standard deviations from the mean' — a raw deviation must be divided by σ first.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"μ=100, σ=5. Bound P(\\|X−100\\|≥20).\"\n- MC-3 response: \"k=20, so bound=1/20²=1/400.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"First convert: how many standard deviations is a deviation of 20, given σ=5? k=20/5=4 — the correct bound is 1/4²=1/16, not 1/400. Using k=20 directly claims the deviation is 20 STANDARD DEVIATIONS away (an enormous, much rarer event) rather than 20 raw units away (which is only 4 standard deviations here) — always perform deviation÷σ before applying the formula.\"\n\nPractice: For μ=60, σ=3, bound P(|X−60|≥21) by first computing k=21/3=7, then applying the formula, and compare to the (much smaller, wrong) bound obtained by mistakenly using k=21 directly.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the inequality from memory, including which quantity is the bound and which is the true (unknown) probability |\n| SR-2 | +3 days | Compute Chebyshev bounds at k=2 and k=3 and compare against the memorized Normal tail values (≈0.0455, ≈0.0027) to re-anchor the looseness of the bound |\n| SR-3 | +7 days | One standardization drill: given μ, σ, and a raw deviation, compute k correctly before applying the formula |\n| SR-4 | +14 days | Reconstruct the fat-tails/distribution-free argument (A03 transfer probe) explaining why a loose, universal bound can be more trustworthy than a precise, assumption-laden one |\n\nRetrieval flag: if student reports the Chebyshev bound as an exact probability (MC-1) or skips standardizing k (MC-3), re-execute B01/B03 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.prob.variance | σ (from Var(X)=σ²) is the unit in which k is measured; the inequality is meaningless without a finite variance to standardize against |\n| Unlocks | math.prob.lln | The (weak) Law of Large Numbers is proved by applying Chebyshev's inequality to the sample mean, whose variance shrinks with sample size — this concept supplies the exact tool that proof uses |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the inequality to a financial fat-tails scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=3 → compact structure (2 main TAs + gate), matching other h=3, proficient/apply Tier-2 concepts\n- bloom=apply → checkpoints and the gate emphasize direct computation (bounding specific probabilities) over derivation or proof\n- CPA_entry = C for a proficient learner: immediate numeric computation anchors \"this is a bound, not the answer\" before the formal statement can be misread as an equality\n\n**Key teaching insight:** All three misconceptions in this concept share a common thread — each involves treating a carefully hedged, general-purpose mathematical tool as if it were a precise, situation-specific calculation. MC-1 mistakes the ceiling for an exact value; MC-2 mistakes distribution-freeness for a limitation rather than the point; MC-3 mistakes the standardized unit for the raw one. A02's three contrasts are sequenced to hit exactly these three \"hedging\" properties in turn: looseness, universality, and standardization, so a student leaves with a correct mental model of Chebyshev as \"a guarantee that costs you precision in exchange for requiring almost nothing about the distribution.\"\n\n**Numeric literacy emphasis:** Because this concept is bloom=apply, every teaching action after A01 uses fresh numeric scenarios (bottling machine, survey response time, investment fund) rather than re-explaining the theorem abstractly — the goal is procedural fluency in setting up and standardizing k correctly under varied surface features (percentages, seconds, milliliters), which the transfer probe (A03) tests explicitly by varying σ across two funds and asking the student to reason about the DIRECTION of the resulting change in the bound.\n\n**Sequencing note:** No cross-link concept exists yet for math.prob.chebyshev; the P76 transfer probe instead uses a financial fat-tails scenario, chosen specifically because it is a well-known real domain where the distribution-free property (MC-2's territory) is a genuine practical advantage rather than a textbook abstraction.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.prob.chebyshev ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.prob.variance ✓ | PASS |\n| V-3 | CPA entry = C for proficient difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Computation-heavy checkpoints throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=3 → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Fat-tails financial scenario; σ-sensitivity direction reasoning ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 170,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.chebyshev",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — proficient learner computes the bound numerically for a stated μ, σ, and specific deviation before the general statement, anchoring \"upper bound, not exact value\" from the first example.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: numeric bound computation for k=2 and k=3 with a concrete μ, σ; P: a \"worst case\" visual (probability mass pushed as far into the tails as variance allows) showing why 1/k² is a ceiling, not the actual value; A: formal statement, standardization of k, and the universality (no distribution assumption) claim\n2. **A02 P06 CONTRAST PAIR** — Chebyshev's bound vs. the Normal distribution's actual (much smaller) tail probability at the same k (MC-1); applying Chebyshev to a distribution-free scenario vs. wrongly demanding to know the shape first (MC-2); raw deviation vs. standardized k (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.chebyshev",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the inequality from memory, including which quantity is the bound and which is the true (unknown) probability |\n| SR-2 | +3 days | Compute Chebyshev bounds at k=2 and k=3 and compare against the memorized Normal tail values (≈0.0455, ≈0.0027) to re-anchor the looseness of the bound |\n| SR-3 | +7 days | One standardization drill: given μ, σ, and a raw deviation, compute k correctly before applying the formula |\n| SR-4 | +14 days | Reconstruct the fat-tails/distribution-free argument (A03 transfer probe) explaining why a loose, universal bound can be more trustworthy than a precise, assumption-laden one |\n\nRetrieval flag: if student reports the Chebyshev bound as an exact probability (MC-1) or skips standardizing k (MC-3), re-execute B01/B03 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 317,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "math.prob.chebyshev/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.chebyshev",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.prob.variance | σ (from Var(X)=σ²) is the unit in which k is measured; the inequality is meaningless without a finite variance to standardize against |\n| Unlocks | math.prob.lln | The (weak) Law of Large Numbers is proved by applying Chebyshev's inequality to the sample mean, whose variance shrinks with sample size — this concept supplies the exact tool that proof uses |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the inequality to a financial fat-tails scenario, a genuinely new applied context rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.chebyshev.md",
+        "startLine": 332,
+        "endLine": 345
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

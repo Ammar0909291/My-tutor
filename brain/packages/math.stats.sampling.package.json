@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.sampling-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.sampling",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8736322311bca928e6ad6a1339cc33d2405c0cd89099218f536d857c15a5d6a0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.sampling.md": "sha256:f174eb8fc0e03306d3fe5dbd05feeb533305489e5abe46ea48b85f9a173ed925"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.stats.sampling",
+    "name": "Sampling Methods",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.stats.population-sample",
+      "math.prob.probability-axioms"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.sampling-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.sampling (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.sampling.md": "sha256:f174eb8fc0e03306d3fe5dbd05feeb533305489e5abe46ea48b85f9a173ed925"
+      },
+      "contentHash": "sha256:230e65beb9a1cca49c80c668489232c7e42688739cc621bf5bf557c8a1bdc170",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.sampling.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.sampling.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.sampling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.sampling\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.sampling/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.stats.sampling",
+      "title": "Sampling Methods — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.stats.population-sample**: a population is the complete set of units of interest; a sample is a subset drawn from it; inference uses the sample to draw conclusions about the population, and sampling must be REPRESENTATIVE to be valid\n- **math.prob.probability-axioms**: P(A)≥0, P(Ω)=1, additivity for mutually exclusive events — the machinery that makes \"each unit equally likely to be selected\" a precise, checkable probabilistic statement rather than a vague intention\n\n### Target Knowledge State\nStudent can define simple random sampling (SRS: every unit, and every subset of a given size, equally likely to be selected) and distinguish it from stratified sampling (population divided into strata, then SRS within each stratum) and cluster sampling (population divided into clusters, then entire clusters are sampled, with all units in a selected cluster included); correctly identify selection bias when a sampling method systematically favors some units over others; explain concretely why sample SIZE alone does not compensate for a biased sampling METHOD; and recognise \"random\" as a precise procedural guarantee (known, typically equal, selection probabilities) rather than a synonym for \"haphazard\" or \"convenient.\"\n\n### Conceptual Obstacles\n1. Believing a larger biased sample is more trustworthy than a smaller random one — sample size only reduces variability WITHIN a method that is already unbiased; a systematically biased method produces a wrong answer more precisely (with more confidence) as size grows, not a more correct one\n2. Confusing stratified sampling (SRS conducted separately WITHIN each subgroup) with cluster sampling (ENTIRE subgroups are sampled, with everyone inside included) — both \"divide the population into groups\" first, but what happens next is opposite: sample WITHIN groups (stratified) vs. sample BETWEEN groups (cluster)\n3. Treating \"random\" as a synonym for \"haphazard\" or \"whatever is convenient\" — a sample of convenience (e.g. surveying whoever walks by) is emphatically NOT random in the statistical sense, which requires every unit to have a known, typically equal, and pre-specified probability of selection\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.sampling",
+      "title": "LARGER-SAMPLE-FIXES-BIAS",
+      "content": "| MC-1 | LARGER-SAMPLE-FIXES-BIAS | Student believes a large biased sample is more reliable than a small properly randomized one, treating sample size as a cure for a flawed selection method | Any comparison between a large convenience/self-selected sample and a smaller genuinely random one; historical polling-failure scenarios |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.sampling",
+      "title": "STRATIFIED-CLUSTER-CONFUSION",
+      "content": "| MC-2 | STRATIFIED-CLUSTER-CONFUSION | Student conflates stratified sampling (SRS within each subgroup, ALL subgroups represented) with cluster sampling (whole subgroups selected, only SOME subgroups represented, but fully); cannot correctly classify a described procedure as one or the other | Any scenario describing \"the population is divided into groups\" without further detail on what happens next |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.sampling",
+      "title": "RANDOM-MEANS-HAPHAZARD",
+      "content": "| MC-3 | RANDOM-MEANS-HAPHAZARD | Student uses \"random\" to mean \"arbitrary,\" \"unplanned,\" or \"convenient\" (e.g. \"I randomly asked whoever was nearby\"), rather than a procedure with known, typically equal, selection probabilities for every unit | Any self-described \"random\" sample that is actually a convenience sample; word problems using \"random\" colloquially |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling",
+      "title": "Four Ways to Draw a Sample",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Four Ways to Draw a Sample\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 64,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling",
+      "title": "Size Doesn't Fix Bias; Stratified ≠ Cluster; Random ≠ Haphazard",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Size Doesn't Fix Bias; Stratified ≠ Cluster; Random ≠ Haphazard\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 122,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.sampling",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 173,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.sampling",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess correct classification of sampling methods, the size-vs-bias distinction, and the operational definition of \"random\" under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** A university surveys students by randomly selecting 50 out of the 15,000 total students, each with equal probability. Name this sampling method.\n\n*Solution:* Simple random sample (SRS) — every student has an equal, known chance of selection, with no grouping structure involved.\n\n**Problem 2:** A researcher divides a country into 500 voting districts, randomly selects 20 of them, and interviews every registered voter in those 20 districts. Name this method, and state one advantage it has over surveying a few voters from all 500 districts.\n\n*Solution:* Cluster sampling. Advantage: administratively cheaper/more feasible — interviewers only need to travel to 20 locations rather than a scattering of individuals across all 500 districts.\n\n**Problem 3:** A pollster claims: \"My sample of 8,000 self-selected online respondents is more trustworthy than a competitor's random sample of 800, because mine is 10 times bigger.\" Evaluate this claim.\n\n*Solution:* The claim is false as stated — size does not compensate for a biased selection method. If the 8,000 are self-selected (only those who choose to respond, and choose to visit the relevant website/link), the sample can be systematically unrepresentative regardless of size; the smaller random sample of 800, drawn so every unit has a known, typically equal probability of selection, can be more trustworthy despite being smaller, precisely because its method avoids selection bias.\n\n**Problem 4:** A school divides students into strata by grade level and draws a proportional SRS within each stratum. Explain in one sentence why this differs from simply drawing one large SRS from the whole school ignoring grade level.\n\n*Solution:* Stratifying GUARANTEES every grade level is represented in the sample (each stratum is separately sampled), whereas a single school-wide SRS could, by chance, over- or under-represent some grade levels (especially with a small sample size), even though it is still unbiased on average.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A national health survey wants to estimate the average commute time for workers across a large country. Three proposals are under consideration:\n\n**Proposal X:** Post the survey on a popular commuting app, open to anyone who wants to fill it out; expect roughly 200,000 responses.\n**Proposal Y:** Randomly select 150 towns from a national list of all towns, then survey every working adult in each selected town (a total of roughly 40,000 respondents).\n**Proposal Z:** From the national voter registration list (covering nearly all adults), randomly select 3,000 individuals, each with equal and known probability of selection.\n\n(a) Classify Y and Z by sampling method name.\n(b) Rank X, Y, and Z from MOST to LEAST likely to produce an accurate estimate of the national average commute time, and justify the ranking using the concepts from this blueprint (not simply by sample size).\n(c) A colleague argues: \"Z has the smallest sample, so it must be the least accurate.\" Explain precisely what is wrong with this reasoning, referencing the historical example from A02.\n\n**Expected solution:**\n\n(a) Y is a **cluster sample** (whole towns selected, everyone within them surveyed). Z is a **simple random sample** (individuals selected directly and independently from a near-complete population list, with equal, known probability).\n\n(b) Likely ranking: **Z, then Y, then X** (or Z and Y close, both well ahead of X). Z uses a controlled random draw from a list covering nearly the entire population, giving every adult a known, equal chance of selection — the gold-standard setup for representativeness, limited mainly by its smaller size (which affects PRECISION, i.e. how tight the estimate is, not whether it's systematically biased). Y is also genuinely randomized (towns are randomly selected) but risks a different issue: if commute times vary systematically by TYPE of town (e.g. urban vs. rural), and the 150 randomly selected towns happen to skew in one direction, or if towns are internally quite homogeneous in commute time, cluster sampling can be less precise than an equivalent-sized SRS or stratified sample (though it remains unbiased in expectation, since towns were randomly chosen). X is the clear worst: only people who use the commuting app AND choose to respond can be included — this systematically excludes non-commuters, non-app-users, and biases toward whichever demographic uses that app most, no matter how large the response count grows (echoing the Literary Digest failure exactly).\n\n(c) The colleague's reasoning applies size as if it were the only factor in accuracy, ignoring METHOD. Z's smaller size affects only its PRECISION (how much its estimate might vary from sample to sample) — but because its method (random selection from a near-complete list) has no systematic selection bias, Z's estimate is centered correctly (unbiased) even though based on fewer people. X's 200,000 responses, by contrast, are drawn from a method with built-in selection bias (only app users who choose to respond), so X's estimate can be confidently wrong — precisely the Literary Digest lesson: a huge biased sample produces a precise, confident, and WRONG answer, while a much smaller properly randomized sample (Gallup's ~50,000, or here Z's 3,000) is centered on the truth. Size determines how tightly an estimate clusters around whatever it's centered on; method determines what it's centered on in the first place.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.stats.sampling-distribution; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.stats.sampling assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — LARGER-SAMPLE-FIXES-BIAS (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Believing a bigger biased sample beats a smaller random one is LARGER-SAMPLE-FIXES-BIAS. Sample size only reduces the SPREAD of estimates around whatever the method is already centered on — it never corrects a systematically biased method's center.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A survey with 100,000 self-selected online responses versus a random sample of 1,000 — which is more trustworthy?\"\n- MC-1 response: \"The 100,000 one, since it's a much bigger sample.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Recall the 1936 Literary Digest: 2.4 million responses, drawn from a systematically skewed list, predicted the WRONG winner; Gallup's much smaller (~50,000) genuinely random sample got it right. Every additional self-selected response in a biased pool is drawn from the SAME flawed frame, so it sharpens a wrong estimate rather than correcting it. Mental model: sample size controls PRECISION (how tightly repeated samples would cluster); sampling METHOD controls WHETHER that cluster is centered on the truth. A huge biased sample is precisely wrong; a smaller random sample is roughly right.\"\n\nPractice: Explain in your own words why doubling the Literary Digest's response count (to 4.8 million, still from the same telephone/car-registration lists) would NOT have fixed its prediction.\n\n---\n\n### Repair Action B02 — STRATIFIED-CLUSTER-CONFUSION (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Conflating stratified with cluster sampling is STRATIFIED-CLUSTER-CONFUSION. Stratified samples WITHIN every group (all groups represented, partially); cluster samples WHOLE groups (only some groups represented, but completely).\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"A pollster divides a city into 50 neighborhoods and samples from some of them. Is this stratified or cluster?\"\n- MC-2 response: \"Can't tell / doesn't matter, they're basically the same idea.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The deciding question is: after dividing into groups, do you sample a PORTION from EVERY group (stratified — all 50 neighborhoods contribute something), or do you sample ALL of a FEW groups and NONE of the rest (cluster — a handful of neighborhoods contribute everything, most contribute nothing)? Picture it as a grid: stratified shades a thin strip across every row; cluster fully shades a few whole rows and leaves the rest blank. The two methods trade off differently too — stratified guarantees representation of every group but can be more expensive to administer broadly; cluster is administratively cheaper (visit fewer locations) but risks missing something if the skipped groups happen to differ.\"\n\nPractice: A hospital survey draws 5 patients from each of its 12 wards (stratified) versus randomly picking 3 of the 12 wards and surveying every patient in them (cluster) — state which method guarantees every ward is represented, and which is cheaper to administer if visiting each ward has a fixed cost.\n\n---\n\n### Repair Action B03 — RANDOM-MEANS-HAPHAZARD (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Using 'random' to mean 'haphazard' or 'convenient' is RANDOM-MEANS-HAPHAZARD. Statistically, random means every unit has a KNOWN, pre-specified (typically equal) probability of selection — a controlled procedure, not an absence of a plan.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is asking random people at a bus stop about their commute a random sample?\"\n- MC-3 response: \"Yes, since I'm not choosing who to ask on purpose — it's random who happens to be there.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Who happens to be AT the bus stop, at that TIME, on that DAY is itself a systematic filter — only bus riders, only people free at that hour, only people willing to talk to a stranger. None of them had a pre-specified, known probability of being asked; the surveyor did not control the selection at all. Genuine randomness requires the OPPOSITE of 'whoever happens to show up': a predetermined procedure (e.g. a numbered list and a random-number draw) where every unit's chance of inclusion is fixed and known in advance, independent of who happens to be convenient to reach.\"\n\nPractice: Contrast \"I'll call the first 50 names in the phone book\" (not random — early alphabetical names are systematically overrepresented relative to a true random draw) with \"I'll have a computer select 50 names uniformly at random from the full phone book\" (genuinely random), explaining the difference in selection probability for each phone-book entry under both procedures.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the four method definitions (SRS, stratified, cluster, systematic) from memory, with one distinguishing feature each |\n| SR-2 | +3 days | Re-explain the Literary Digest/Gallup 1936 contrast without looking it up, focusing on why size didn't fix the bias |\n| SR-3 | +7 days | Classify three fresh described sampling procedures as SRS/stratified/cluster/convenience, catching any disguised convenience sample |\n| SR-4 | +14 days | Reconstruct the transfer probe's size-vs-method ranking argument (A03) for a new scenario with a large biased sample vs. a small random one |\n\nRetrieval flag: if student ranks a larger sample as more trustworthy purely by size (MC-1) or mislabels a convenience sample as random (MC-3), re-execute B01/B03 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.stats.population-sample | Supplies the population/sample vocabulary and the \"representativeness\" goal that sampling methods are designed to achieve |\n| Requires (Tier-1) | math.prob.probability-axioms | Makes \"equally likely selection\" a precise, checkable probabilistic claim rather than an informal notion |\n| Unlocks | math.stats.sampling-distribution | The behavior of a statistic (e.g. the sample mean) computed from repeated SRS draws — this concept's SRS definition is the exact mechanism that distribution is built on |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the size-vs-method distinction to a fresh national-survey scenario rather than a named cross-linked concept).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=3 → compact structure (2 main TAs + gate), matching other h=3, developing/understand Tier-2 concepts\n- bloom=understand → V-4 = N/A (no P07 required; classification and justification tasks, not derivations)\n- CPA_entry = C for a developing learner: a concrete, physically traceable toy population (20 students, 2 groups) grounds all four method definitions before the formal vocabulary is introduced\n\n**Key teaching insight:** MC-1 (LARGER-SAMPLE-FIXES-BIAS) is the single highest-leverage misconception in this concept because it removes the STUDENT'S OWN MOTIVATION to learn method distinctions at all — if \"big enough\" always wins, method choice seems irrelevant. The Literary Digest/Gallup 1936 case is reused deliberately across A02 (introduction), B01 (repair), and the A03 transfer probe (application) specifically because it is a single, memorable, real historical event that makes the abstract size-vs-bias distinction concrete and falsifiable (an actual wrong election prediction, not a hypothetical).\n\n**MC-2 as a genuine terminology hazard:** Stratified and cluster sampling are frequently confused specifically because both begin with the identical first step (\"divide the population into groups\") — the entire teaching burden is on what happens AFTER that shared first step (sample within every group vs. sample whole groups), which A01's Stage P diagram and A02's Contrast 2 are both built to isolate visually.\n\n**Sequencing note:** No cross-link concept exists yet for math.stats.sampling; the P76 transfer probe instead uses a fresh national-survey scenario deliberately combining all three misconceptions at once (a convenience sample, a cluster sample, and a small random sample), requiring the student to apply the size-vs-method distinction, correct method classification, and the random-vs-haphazard distinction together in a single ranking task.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.stats.sampling ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.stats.population-sample ✓, math.prob.probability-axioms ✓ | PASS |\n| V-3 | CPA entry = C for developing difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | no cross_links → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=3 → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | National survey X/Y/Z ranking; size-vs-method reasoning ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 173,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.sampling",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — developing learner works through a small population example, physically distinguishing SRS, stratified, and cluster sampling procedures before any formal vocabulary is introduced.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: a 20-unit toy population sampled three different ways (SRS, stratified, cluster), tracing exactly which units get selected under each; P: a diagram contrasting \"sample within every group\" (stratified) against \"sample whole groups\" (cluster); A: formal definitions of SRS, stratified, cluster, systematic, multistage, and selection bias\n2. **A02 P06 CONTRAST PAIR** — large biased sample vs. small random sample using the Literary Digest/Gallup 1936 case (MC-1); stratified vs. cluster procedures on the same population (MC-2); a genuine random draw vs. a convenience sample both self-described as \"random\" (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.sampling",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Restate the four method definitions (SRS, stratified, cluster, systematic) from memory, with one distinguishing feature each |\n| SR-2 | +3 days | Re-explain the Literary Digest/Gallup 1936 contrast without looking it up, focusing on why size didn't fix the bias |\n| SR-3 | +7 days | Classify three fresh described sampling procedures as SRS/stratified/cluster/convenience, catching any disguised convenience sample |\n| SR-4 | +14 days | Reconstruct the transfer probe's size-vs-method ranking argument (A03) for a new scenario with a large biased sample vs. a small random one |\n\nRetrieval flag: if student ranks a larger sample as more trustworthy purely by size (MC-1) or mislabels a convenience sample as random (MC-3), re-execute B01/B03 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 324,
+        "endLine": 339
+      }
+    },
+    {
+      "assetId": "math.stats.sampling/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.sampling",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.stats.population-sample | Supplies the population/sample vocabulary and the \"representativeness\" goal that sampling methods are designed to achieve |\n| Requires (Tier-1) | math.prob.probability-axioms | Makes \"equally likely selection\" a precise, checkable probabilistic claim rather than an informal notion |\n| Unlocks | math.stats.sampling-distribution | The behavior of a statistic (e.g. the sample mean) computed from repeated SRS draws — this concept's SRS definition is the exact mechanism that distribution is built on |\n\n**GR-9:** cross_links: none in the KG for this concept; P76_mode = independence (the transfer probe applies the size-vs-method distinction to a fresh national-survey scenario rather than a named cross-linked concept).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.sampling.md",
+        "startLine": 339,
+        "endLine": 353
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
