@@ -43,6 +43,33 @@ export function canUseSpeechRecognition(lang: TeachingLang): boolean {
   return hasApi && SPEECH_RECOGNITION_LANGS.includes(lang)
 }
 
+// The Web Speech API has no SSML — it's the only way to shape rhythm for a
+// single continuous utterance. Splitting cleaned text into sentence-sized
+// segments and speaking them as a chain (small gap between each) gives real,
+// audible breathing pauses between ideas instead of one flat, rushed
+// read-through. Pure/testable on purpose — kept separate from the
+// window.speechSynthesis orchestration below.
+export function splitIntoSpeechSegments(text: string): string[] {
+  const parts = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g)
+  if (!parts) return [text]
+  return parts.map((p) => p.trim()).filter(Boolean)
+}
+
+// A question deserves a slightly longer breath before it's asked (Tutor Max
+// Review, Finding 4: "small pauses before questions") — a plain declarative
+// sentence gets the shorter, ordinary breathing gap.
+export function pauseBeforeSegment(segment: string | undefined): number {
+  if (!segment) return 0
+  return /\?\s*$/.test(segment) ? 450 : 220
+}
+
+// Questions are also spoken very slightly slower — natural conversational
+// emphasis, not a robotic flat rate. Explanatory sentences keep the caller's
+// configured rate untouched.
+export function rateForSegment(baseRate: number, segment: string): number {
+  return /\?\s*$/.test(segment) ? baseRate * 0.94 : baseRate
+}
+
 // Prime voices list on load — only in browser, never during SSR
 if (typeof window !== 'undefined' && typeof window.speechSynthesis !== 'undefined') {
   window.speechSynthesis.getVoices()
@@ -90,15 +117,32 @@ function _speakTextImpl(
 
   const safeSpeed = Math.min(Math.max(speed || 1, 0.5), 2)
   const locale = LANG_LOCALE[lang]
-  const utter = new SpeechSynthesisUtterance(clean)
-  utter.lang = locale
-  utter.pitch = config.pitch
-  utter.rate = config.rate * safeSpeed
-  utter.volume = 1.0
+  const segments = splitIntoSpeechSegments(clean)
 
-  if (onEnd) {
-    utter.onend = onEnd
-    utter.onerror = onEnd
+  // Speaks one sentence-sized segment at a time, waiting for a short,
+  // question-aware pause between each — the chain is what turns "one flat
+  // utterance" into natural breathing rhythm. onEnd (the caller's callback,
+  // e.g. clearing an "isSpeaking" UI flag) only fires once, after the last
+  // segment finishes or on error — callers can't tell the difference from
+  // the pre-chaining single-utterance behavior.
+  const speakFrom = (index: number, voice: SpeechSynthesisVoice | undefined) => {
+    if (myGeneration !== ttsGeneration) return
+    if (index >= segments.length) { onEnd?.(); return }
+    const segment = segments[index]
+    const utter = new SpeechSynthesisUtterance(segment)
+    utter.lang = locale
+    utter.pitch = config.pitch
+    utter.rate = rateForSegment(config.rate * safeSpeed, segment)
+    utter.volume = 1.0
+    if (voice) utter.voice = voice
+    utter.onend = () => {
+      if (myGeneration !== ttsGeneration) return
+      const next = segments[index + 1]
+      if (!next) { onEnd?.(); return }
+      setTimeout(() => speakFrom(index + 1, voice), pauseBeforeSegment(next))
+    }
+    utter.onerror = () => onEnd?.()
+    window.speechSynthesis.speak(utter)
   }
 
   // Guard prevents double-speak when both voiceschanged and the fallback timeout fire,
@@ -106,22 +150,21 @@ function _speakTextImpl(
   // already superseded this one (e.g. the caller navigated away while voices were
   // still loading).
   let spoken = false
-  const setVoice = () => {
+  const start = () => {
     if (spoken || myGeneration !== ttsGeneration) return
     spoken = true
     const voices = window.speechSynthesis.getVoices()
     const voice =
       voices.find((v) => v.lang === locale) ??
       voices.find((v) => v.lang.startsWith(lang))
-    if (voice) utter.voice = voice
-    window.speechSynthesis.speak(utter)
+    speakFrom(0, voice)
   }
 
   if (window.speechSynthesis.getVoices().length === 0) {
-    window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true })
-    setTimeout(setVoice, 500)
+    window.speechSynthesis.addEventListener('voiceschanged', start, { once: true })
+    setTimeout(start, 500)
   } else {
-    setVoice()
+    start()
   }
 }
 
