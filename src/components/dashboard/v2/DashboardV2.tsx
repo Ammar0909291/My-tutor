@@ -62,10 +62,6 @@ export function DashboardV2({ data }: DashboardV2Props) {
           {/* ── RESTORED EDUCATIONAL CAPABILITIES ── */}
           <SubjectsGrid subjects={data.subjects} />
 
-          {/* School Mode content cards intentionally hidden from the UI
-              (presentation layer only — SchoolExtras and School Mode data
-              are untouched). */}
-
           <AchievementCenter data={data.achievement} />
           <ActivityTimeline items={data.recentActivity} />
 

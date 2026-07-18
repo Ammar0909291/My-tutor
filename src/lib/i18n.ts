@@ -35,7 +35,12 @@ export const translations = {
     subj_english_desc: 'Технический и деловой английский для IT',
     subj_math_desc: 'От основ арифметики до продвинутой математики',
     subj_physics_desc: 'Как устроен физический мир — от движения до квантовой физики',
+    subj_math_label: 'Математика',
+    subj_physics_label: 'Физика',
     subj_start: 'Начать →',
+    nav_faq: 'FAQ',
+    theme_switch_light: 'Переключить на светлую тему',
+    theme_switch_dark: 'Переключить на тёмную тему',
     pricing_title: 'Просто и честно',
     plan_free_name: 'Попробовать',
     plan_free_price: '0₽',
@@ -274,6 +279,7 @@ export const translations = {
     lesson_init: 'Подключаемся к репетитору...',
     lesson_back_base: '← База',
     lesson_scroll_down: '↓',
+    learn_loading_lesson: 'Загружаем ваш урок…',
 
     /* ── Auth navigation ── */
     nav_back_home: 'На главную',
@@ -974,7 +980,6 @@ export const translations = {
     dashx_remove_subject_title: 'Убрать предмет',
     dashx_lesson_n: 'Урок {n}',
     dashx_add_subject: '＋ Добавить предмет',
-    nav_modes: 'Режимы',
 
     /* ── Dashboard: Achievements panel ── */
     dashx_achievements_title: '🏆 Достижения',
@@ -1106,7 +1111,12 @@ export const translations = {
     subj_english_desc: 'Technical and business English for IT',
     subj_math_desc: 'From basic arithmetic to advanced mathematics',
     subj_physics_desc: 'How the physical world works — from motion to quantum physics',
+    subj_math_label: 'Mathematics',
+    subj_physics_label: 'Physics',
     subj_start: 'Start →',
+    nav_faq: 'FAQ',
+    theme_switch_light: 'Switch to light theme',
+    theme_switch_dark: 'Switch to dark theme',
     pricing_title: 'Simple and fair',
     plan_free_name: 'Try',
     plan_free_price: 'Free',
@@ -1345,6 +1355,7 @@ export const translations = {
     lesson_init: 'Connecting to tutor...',
     lesson_back_base: '← Dashboard',
     lesson_scroll_down: '↓',
+    learn_loading_lesson: 'Loading your lesson…',
 
     /* ── Auth navigation ── */
     nav_back_home: 'Back to Home',
@@ -2045,7 +2056,6 @@ export const translations = {
     dashx_remove_subject_title: 'Remove subject',
     dashx_lesson_n: 'Lesson {n}',
     dashx_add_subject: '＋ Add a subject',
-    nav_modes: 'Modes',
 
     /* ── Dashboard: Achievements panel ── */
     dashx_achievements_title: '🏆 Achievements',
@@ -2177,7 +2187,12 @@ export const translations = {
     subj_english_desc: 'IT के लिए तकनीकी और व्यापारिक अंग्रेज़ी',
     subj_math_desc: 'बुनियादी अंकगणित से लेकर उन्नत गणित तक',
     subj_physics_desc: 'भौतिक दुनिया कैसे काम करती है — गति से लेकर क्वांटम भौतिकी तक',
+    subj_math_label: 'Mathematics',
+    subj_physics_label: 'Physics',
     subj_start: 'शुरू करें →',
+    nav_faq: 'FAQ',
+    theme_switch_light: 'Light theme par switch karo',
+    theme_switch_dark: 'Dark theme par switch karo',
     pricing_title: 'सरल और ईमानदार',
     plan_free_name: 'आज़माएं',
     plan_free_price: 'मुफ्त',
@@ -2416,6 +2431,7 @@ export const translations = {
     lesson_init: 'ट्यूटर से जुड़ रहे हैं...',
     lesson_back_base: '← डैशबोर्ड',
     lesson_scroll_down: '↓',
+    learn_loading_lesson: 'Aapka lesson load ho raha hai…',
 
     /* ── Auth navigation ── */
     nav_back_home: 'होम पर जाएं',
@@ -3117,7 +3133,6 @@ export const translations = {
     dashx_remove_subject_title: 'विषय हटाएं',
     dashx_lesson_n: 'पाठ {n}',
     dashx_add_subject: '＋ विषय जोड़ें',
-    nav_modes: 'मोड्स',
 
     /* ── Dashboard: Achievements panel ── */
     dashx_achievements_title: '🏆 Achievements',
