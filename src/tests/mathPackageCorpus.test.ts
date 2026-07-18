@@ -35,7 +35,7 @@ const compilableConceptIds = mathConceptIds.filter((id) => !(id in KNOWN_CONTENT
 
 describe('mathematics blueprint corpus — every blueprint compiles (except documented content gaps)', () => {
   it('has the full mathematics blueprint corpus on disk', () => {
-    expect(mathConceptIds.length).toBeGreaterThanOrEqual(181)
+    expect(mathConceptIds.length).toBeGreaterThanOrEqual(184)
   })
 
   it('compiles every non-gapped mathematics blueprint to a valid DRAFT package', () => {

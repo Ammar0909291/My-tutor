@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.higher-order-derivatives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.higher-order-derivatives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a323b9c575e3beea729a2051a26481486c480ca61f69d7e832f9793718a74f62",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md": "sha256:0adcb44bb7516c3b6284ba89ffb6acad83b89d1932213cbc6ee88a33ec815ff9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.higher-order-derivatives",
+    "name": "Higher-Order Derivatives",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.derivative-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.higher-order-derivatives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.higher-order-derivatives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md": "sha256:0adcb44bb7516c3b6284ba89ffb6acad83b89d1932213cbc6ee88a33ec815ff9"
+      },
+      "contentHash": "sha256:b99680bebed0c323f17356829d1cb5cc353a849a537e6cf6871c6ff76f7bc207",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.higher-order-derivatives.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.higher-order-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.higher-order-derivatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.higher-order-derivatives.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.higher-order-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.higher-order-derivatives\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.higher-order-derivatives.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md#TA-A03 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.higher-order-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.higher-order-derivatives\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.higher-order-derivatives/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Higher-Order Derivatives — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.derivative-rules**: the power rule $\\frac{d}{dx}(x^n)=nx^{n-1}$ — applied REPEATEDLY, once per order, to compute any higher-order derivative\n\n### Target Knowledge State\nStudent can compute $f''=(f')'$ (and higher orders $f''', f^{(4)},\\ldots$) by differentiating the PREVIOUS derivative again, never by squaring $f'$ or applying any shortcut that skips re-differentiation; correctly read the notation $\\frac{d^2y}{dx^2}$ as \"the second derivative of y\" (differentiate twice), never as $\\left(\\frac{dy}{dx}\\right)^2$ (the first derivative squared) — two genuinely different expressions; and correctly accumulate the coefficient when repeatedly applying the power rule to find an nth derivative (e.g. the third derivative of $x^5$ requires multiplying by 5, then 4, then 3 in sequence — not simply subtracting 3 from the original exponent while keeping the original coefficient).\n\n### Conceptual Obstacles\n1. Computing $f''$ as $(f')^2$ (squaring the first derivative) rather than differentiating $f'$ again — \"second derivative\" names an ITERATED operation (differentiate, then differentiate the result), not an algebraic operation applied to the first derivative's VALUE\n2. Reading $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$ — the notation's superscript placement (on $d$ and on $dx$, not wrapping the whole fraction) is easy to misread, but the two expressions are genuinely different: one is the second derivative, the other is the square of the first derivative, and they generally have completely different values\n3. Applying the power rule's exponent-decrement without accumulating the coefficient correctly across repeated applications — computing $\\frac{d^3}{dx^3}(x^5)$ by simply subtracting 3 from the exponent (giving $x^2$, forgetting the coefficient entirely) rather than tracking the coefficient through each of the three successive applications ($5x^4\\to20x^3\\to60x^2$)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "SECOND-DERIVATIVE-IS-FIRST-SQUARED",
+      "content": "| MC-1 | SECOND-DERIVATIVE-IS-FIRST-SQUARED | Student computes $f''$ as $(f')^2$, squaring the first derivative's expression instead of differentiating it again | Any function where $(f')^2$ and the genuine $f''=(f')'$ give visibly different results |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "NOTATION-D2Y-DX2-READ-AS-SQUARED-DERIVATIVE",
+      "content": "| MC-2 | NOTATION-D2Y-DX2-READ-AS-SQUARED-DERIVATIVE | Student reads $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$, conflating two genuinely different expressions | Any function where the second derivative and the squared first derivative differ numerically |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "EXPONENT-SUBTRACTED-COEFFICIENT-IGNORED",
+      "content": "| MC-3 | EXPONENT-SUBTRACTED-COEFFICIENT-IGNORED | Student computes an nth derivative of $x^k$ by subtracting $n$ from the exponent directly, without correctly accumulating the coefficient through each successive application of the power rule | Any third-or-higher-order derivative of a monomial with exponent ≥3 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Iterate the Derivative, Never Square It",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Iterate the Derivative, Never Square It\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 63,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Notation Precision; Full Coefficient Accumulation",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Notation Precision; Full Coefficient Accumulation\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 122,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 162,
+        "endLine": 377
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess iterated-differentiation discipline, notation precision, and full coefficient accumulation under transfer\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** For $f(x)=x^4$, compute $f''(x)$.\n\n*Solution:* $f'=4x^3$; $f''=4\\times3\\,x^2=12x^2$.\n\n**Problem 2:** For $y=x^2$, is $\\frac{d^2y}{dx^2}$ the same as $\\left(\\frac{dy}{dx}\\right)^2$? Compute both to confirm.\n\n*Solution:* $dy/dx=2x$. $d^2y/dx^2=2$ (constant). $(dy/dx)^2=4x^2$. Different — 2 vs. $4x^2$.\n\n**Problem 3:** For $f(x)=x^7$, compute $f'''(x)$, showing the coefficient accumulation at each step.\n\n*Solution:* $f'=7x^6$; $f''=7\\times6\\,x^5=42x^5$; $f'''=42\\times5\\,x^4=210x^4$.\n\n**Problem 4:** True or false: \"The second derivative of a function is that function's first derivative, squared.\" Correct if false.\n\n*Solution:* False. The second derivative is found by differentiating the first derivative AGAIN (iterating the derivative operator), not by squaring the first derivative's expression — these are different operations giving generally different results.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.de.second-order-ode)*\n\n**Prompt:** Recall from math.de.second-order-ode that a second-order ODE involves $y''$ (the second derivative) as an unknown function's own rate-of-change-of-rate-of-change, e.g. the equation $y''+y=0$.\n\n(a) Verify directly that $y=\\cos(x)$ satisfies $y''+y=0$ by computing $y'$ and $y''$ explicitly (NOT by squaring $y'$).\n(b) A student attempts to \"verify\" the same equation using $(y')^2+y=0$ instead of $y''+y=0$ (substituting the SQUARED first derivative where the second derivative belongs). Compute $(y')^2$ for $y=\\cos(x)$ and show this substituted equation does NOT hold, confirming why the distinction between $y''$ and $(y')^2$ is not just a notational nuance but genuinely changes which functions solve the equation.\n(c) Explain, in the context of this differential equation, why \"the notation looks similar\" (both involve a superscript \"2\" somewhere near $y$ or $y'$) is not a safe basis for treating $y''$ and $(y')^2$ interchangeably — connect explicitly to what a second-order ODE is actually modeling (e.g., the physical idea that $y''$ often represents acceleration, the rate of change of a RATE of change, not a squared velocity).\n\n**Expected solution:**\n\n(a) $y=\\cos(x)$: $y'=-\\sin(x)$; $y''=\\frac{d}{dx}(-\\sin x)=-\\cos(x)$. Check: $y''+y = -\\cos(x)+\\cos(x)=0$ ✓ — confirmed, $y=\\cos(x)$ genuinely satisfies $y''+y=0$.\n\n(b) $(y')^2=(-\\sin x)^2=\\sin^2(x)$. Substituting into \"$(y')^2+y=0$\": $\\sin^2(x)+\\cos(x)$ — this is NOT identically zero (e.g. at $x=0$: $\\sin^2(0)+\\cos(0)=0+1=1\\ne0$) — the equation FAILS when $(y')^2$ is substituted for $y''$. This confirms $y''$ and $(y')^2$ are not interchangeable: $y=\\cos(x)$ solves the genuine equation $y''+y=0$ but does NOT solve the superficially similar-looking $(y')^2+y=0$.\n\n(c) The notation's superficial resemblance (both \"involve a 2 near y\") is exactly the trap MC-2 warns against — but the underlying MEANING is entirely different. In many physical models, $y$ represents position, $y'$ represents velocity (rate of change of position), and $y''$ represents ACCELERATION (rate of change of VELOCITY, i.e. an iterated rate of change) — a physically meaningful, independently measurable quantity in its own right (e.g. Newton's second law, $F=ma$, uses $a=y''$ directly). By contrast, $(y')^2$ (velocity SQUARED) is a different physical quantity altogether (related to kinetic energy, $\\frac12mv^2$, not to force or acceleration) — the two notations aren't just mathematically different, they correspond to entirely different physical concepts, reinforcing that \"iterate the derivative\" and \"square the derivative's value\" must never be conflated, whether reasoning purely symbolically (as in this blueprint) or physically (as second-order ODEs frequently require).\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 4/5 (⌈0.8 × 5⌉ = ⌈4⌉ = 4)\n\n- S ≥ 4: MASTERY ACHIEVED → proceed to P74\n- S = 3: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 2: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.calc.concavity and math.de.second-order-ode; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.calc.higher-order-derivatives assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — SECOND-DERIVATIVE-IS-FIRST-SQUARED (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Computing f'' as (f')² is SECOND-DERIVATIVE-IS-FIRST-SQUARED. The second derivative means differentiating f' AGAIN — an iterated procedure, never a squaring of f''s value.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"f(x)=x². f'(x)=2x. What is f''(x)?\"\n- MC-1 response: \"(2x)²=4x².\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"f'' means: take f'=2x, and differentiate IT again (apply the power rule a second time): $\\frac{d}{dx}(2x)=2$. This is the genuine second derivative — a constant, 2 — completely different from squaring 2x to get 4x². 'Prime, prime' (or the superscript 2 in d²y/dx²) means 'differentiate twice,' never 'square the result.'\"\n\nPractice: For f(x)=x⁵, compute f' and then f'' by differentiating twice, and separately compute (f')² to confirm they differ.\n\n---\n\n### Repair Action B02 — NOTATION-D2Y-DX2-READ-AS-SQUARED-DERIVATIVE (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Reading d²y/dx² as (dy/dx)² is NOTATION-D2Y-DX2-READ-AS-SQUARED-DERIVATIVE. The superscript '2' in d²y/dx² attaches to the OPERATOR d/dx (applied twice), not to the whole fraction dy/dx (squared).\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"For y=x³, what is d²y/dx²?\"\n- MC-2 response: computes (dy/dx)²=(3x²)²=9x⁴ instead of the genuine second derivative.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"d²y/dx² means: apply d/dx to y, getting dy/dx=3x², THEN apply d/dx again to THAT result: $\\frac{d}{dx}(3x^2)=6x$. This is the second derivative, 6x — not 9x⁴ (which comes from squaring the first derivative's VALUE, an unrelated computation). The notation's superscripts are a historical convention for 'applied twice,' not literal squaring.\"\n\nPractice: For y=x⁴, compute d²y/dx² and (dy/dx)² separately, confirming the two notations give different expressions.\n\n---\n\n### Repair Action B03 — EXPONENT-SUBTRACTED-COEFFICIENT-IGNORED (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Subtracting the derivative order from the exponent while keeping the original coefficient is EXPONENT-SUBTRACTED-COEFFICIENT-IGNORED. Each successive differentiation multiplies the coefficient by the current exponent — this must be tracked through EVERY step, never skipped.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"f(x)=x⁶. What is f'''(x)?\"\n- MC-3 response: \"x³\" (subtracting 3 from 6, keeping coefficient 1).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Compute one derivative at a time, tracking the coefficient: $f'=6x^5$ (coefficient 6); $f''=6\\times5\\,x^4=30x^4$ (coefficient 30); $f'''=30\\times4\\,x^3=120x^3$ (coefficient 120). The correct answer is $120x^3$, not $x^3$ — the coefficient 120 comes from multiplying $6\\times5\\times4$ (three consecutive integers, one per differentiation step), never from simply keeping the original coefficient of 1 unchanged.\"\n\nPractice: For f(x)=x⁸, compute f'' by accumulating the coefficient through both steps explicitly.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute a fresh f'' by iterated differentiation, explicitly contrasting against (f')² |\n| SR-2 | +3 days | Compute d²y/dx² and (dy/dx)² side by side for a fresh function, confirming they differ |\n| SR-3 | +7 days | Compute a fresh third-or-higher-order derivative with full coefficient accumulation |\n| SR-4 | +14 days | Reconstruct the second-order ODE transfer probe's argument for why y'' and (y')² model different physical quantities |\n\nRetrieval flag: if student squares f' instead of iterating (MC-1) or misreads the d²y/dx² notation (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.calc.derivative-rules | Supplies the power rule, applied repeatedly (once per order) to compute any higher-order derivative |\n| Unlocks | math.calc.concavity | The sign of $f''$ determines concavity — a direct application of correctly computing (not squaring) the second derivative |\n| Unlocks | math.de.second-order-ode | Second-order ODEs are literally equations involving $y''$ — this concept supplies the exact operation those equations are built from |\n\n**GR-9:** cross_links include math.de.second-order-ode (Tier 1) → P76_mode = cross-link probe (probe verifies a genuine ODE solution using correct $y''$, then shows the superficially similar $(y')^2$ substitution fails, connecting the distinction to the physical meaning of acceleration vs. squared velocity).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=4 → compact structure (2 main TAs + gate), matching the concept's tightly focused scope (one iterated operation, one notation clarification, one coefficient-tracking pattern) despite advanced difficulty\n- bloom=apply → every checkpoint and the gate require executing the iterated differentiation procedure, not merely stating what higher-order derivatives are\n- CPA_entry = C for an advanced learner: computing $f''$ genuinely (by iteration) AND the wrong squared version side by side on the SAME function anchors the distinction in a direct numeric contrast before the notation (which visually invites the confusion) is introduced\n\n**Key teaching insight:** MC-1 and MC-2 are really the SAME misconception at two different levels — MC-1 is the conceptual error (squaring instead of iterating), and MC-2 is the notational vehicle that makes MC-1 easy to fall into (the superscript \"2\" in $\\frac{d^2y}{dx^2}$ visually resembles squaring notation). A01 and A02 are sequenced to first establish the CORRECT iterated computation unambiguously (via direct arithmetic, independent of notation), THEN introduce the formal notation, so the notation is anchored to an already-correct mental model rather than being the first and only source of understanding.\n\n**MC-3 as a downstream consequence of correct iteration:** Once the \"iterate, don't square\" principle (MC-1/MC-2) is established, MC-3 addresses a separate but related failure — even when correctly ITERATING the derivative operator, students can shortcut the ARITHMETIC of repeated power-rule application by jumping straight to a final exponent without accumulating the coefficient. B03's repair emphasizes doing this \"one step at a time,\" directly mirroring the iterative discipline just built for MC-1/MC-2.\n\n**Sequencing note (cross-link):** math.de.second-order-ode (Tier 1, already authored) is a genuine, actionable cross-link — the P76 transfer probe uses a concrete ODE verification to show that confusing $y''$ with $(y')^2$ isn't merely a notational slip but changes which functions actually SOLVE a given equation, grounding the abstract distinction in a consequential, checkable difference.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.calc.higher-order-derivatives ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.calc.derivative-rules ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 recommended | Iterated-differentiation execution tasks throughout A01-A03 ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | math.de.second-order-ode is Tier 1 → P76=cross-link probe ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=4/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.8×5⌉=⌈4⌉=4; PASS=4/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=4, tightly-scoped → compact (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | y''+y=0 ODE verification; acceleration-vs-squared-velocity physical argument ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 162,
+        "endLine": 377
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner computes $f''$ for a specific polynomial BOTH by iterated differentiation and by (incorrectly) squaring $f'$, directly comparing the two very different results, before the formal notation is introduced.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: $f(x)=x^3$, computing $f'$, then $f''$ by differentiating $f'$ again, contrasted numerically against $(f')^2$; P: an \"iterate, don't square\" arrow-chain picture; A: the formal notation ($f''$, $\\frac{d^2y}{dx^2}$) and the coefficient-accumulation pattern for repeated power-rule application\n2. **A02 P06 CONTRAST PAIR** — $f''$ vs. $(f')^2$ computed side by side, genuinely different values (MC-1/MC-2); a THIRD derivative computed correctly (full coefficient accumulation) vs. the naive exponent-only-subtraction shortcut (MC-3)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Recompute a fresh f'' by iterated differentiation, explicitly contrasting against (f')² |\n| SR-2 | +3 days | Compute d²y/dx² and (dy/dx)² side by side for a fresh function, confirming they differ |\n| SR-3 | +7 days | Compute a fresh third-or-higher-order derivative with full coefficient accumulation |\n| SR-4 | +14 days | Reconstruct the second-order ODE transfer probe's argument for why y'' and (y')² model different physical quantities |\n\nRetrieval flag: if student squares f' instead of iterating (MC-1) or misreads the d²y/dx² notation (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 309,
+        "endLine": 324
+      }
+    },
+    {
+      "assetId": "math.calc.higher-order-derivatives/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.higher-order-derivatives",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|---------------|\n| Requires (Tier-1) | math.calc.derivative-rules | Supplies the power rule, applied repeatedly (once per order) to compute any higher-order derivative |\n| Unlocks | math.calc.concavity | The sign of $f''$ determines concavity — a direct application of correctly computing (not squaring) the second derivative |\n| Unlocks | math.de.second-order-ode | Second-order ODEs are literally equations involving $y''$ — this concept supplies the exact operation those equations are built from |\n\n**GR-9:** cross_links include math.de.second-order-ode (Tier 1) → P76_mode = cross-link probe (probe verifies a genuine ODE solution using correct $y''$, then shows the superficially similar $(y')^2$ substitution fails, connecting the distinction to the physical meaning of acceleration vs. squared velocity).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.higher-order-derivatives.md",
+        "startLine": 324,
+        "endLine": 338
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
