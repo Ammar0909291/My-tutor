@@ -75,25 +75,14 @@ describe('route.ts structural lock: the freestanding dueForReview prompt advisor
   })
 })
 
-describe('data-source audit: ReviewSchedule (snapshot.dueForReview\'s source table) is written only by School Mode routes', () => {
-  it('prisma.reviewSchedule writes (create/update) exist only in update-pipeline.ts, called only from School practice/assessment submit routes', () => {
+describe('data-source audit: ReviewSchedule (snapshot.dueForReview\'s source table) is written only by update-pipeline.ts', () => {
+  it('prisma.reviewSchedule writes (create/update) exist in update-pipeline.ts', () => {
     const updatePipeline = fs.readFileSync(
       path.join(process.cwd(), 'src/lib/memory/update-pipeline.ts'),
       'utf-8',
     )
     expect(updatePipeline).toContain('prisma.reviewSchedule.create')
     expect(updatePipeline).toContain('prisma.reviewSchedule.update')
-
-    const practiceSubmit = fs.readFileSync(
-      path.join(process.cwd(), 'src/app/api/school/practice/submit/route.ts'),
-      'utf-8',
-    )
-    const assessmentSubmit = fs.readFileSync(
-      path.join(process.cwd(), 'src/app/api/school/assessment/submit/route.ts'),
-      'utf-8',
-    )
-    expect(practiceSubmit).toContain('updateMemoryFromPractice')
-    expect(assessmentSubmit).toContain('updateMemoryFromAssessment')
 
     // No Library-mode route/module writes to ReviewSchedule.
     expect(ROUTE_SOURCE).not.toContain('prisma.reviewSchedule.create')

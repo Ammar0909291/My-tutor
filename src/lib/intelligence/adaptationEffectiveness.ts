@@ -17,7 +17,6 @@ import { analyzeImprovement, type TopicScoreHistoryRow, type VisualEvidenceHisto
 import { getTeachingPlans } from './teachingPlan'
 import type { TeachingPlan, TeachingMethod } from './teachingPlan'
 import type { DifficultyLevel } from './learningDifficultyProfile'
-import { getSchoolChapters } from '@/lib/school/schoolRouting'
 
 export type EffectivenessLevel = 'high' | 'medium' | 'low' | 'regression'
 
@@ -186,35 +185,16 @@ export async function getAdaptationEffectivenessProfile(userId: string): Promise
   const targets = generatePracticeTargets(profile, attemptsRows)
   const retestCandidates = generateRetestCandidates(targets)
 
-  const userProfile = await prisma.profile.findUnique({
-    where: { userId },
-    select: { educationBoard: true, grade: true },
-  })
   const sessionRows = await prisma.practiceSession.findMany({
-    where: { userId, completedAt: { not: null }, score: { not: null } },
-    select: { subjectSlug: true, topicSlug: true, chapterId: true, score: true, completedAt: true },
+    where: { userId, completedAt: { not: null }, score: { not: null }, chapterId: null },
+    select: { subjectSlug: true, topicSlug: true, score: true, completedAt: true },
   })
 
   const validTopicKeys = new Set(attemptsRows.map((r) => `${r.subjectSlug}:${r.topicSlug}`))
-  const chaptersBySubject = new Map<string, ReturnType<typeof getSchoolChapters>>()
   const historyRows: TopicScoreHistoryRow[] = []
   for (const row of sessionRows) {
-    if (row.chapterId === null) {
-      if (validTopicKeys.has(`${row.subjectSlug}:${row.topicSlug}`)) {
-        historyRows.push({ subjectSlug: row.subjectSlug, topicSlug: row.topicSlug, score: row.score as number, completedAt: row.completedAt as Date })
-      }
-      continue
-    }
-    if (!userProfile?.educationBoard || !userProfile?.grade) continue
-    let chapters = chaptersBySubject.get(row.subjectSlug)
-    if (!chapters) {
-      chapters = getSchoolChapters(userProfile.educationBoard, row.subjectSlug, userProfile.grade)
-      chaptersBySubject.set(row.subjectSlug, chapters)
-    }
-    const chapter = chapters.find((c) => c.id === row.topicSlug)
-    if (!chapter) continue
-    for (const kgNodeId of chapter.kgNodeIds) {
-      historyRows.push({ subjectSlug: row.subjectSlug, topicSlug: kgNodeId, score: row.score as number, completedAt: row.completedAt as Date })
+    if (validTopicKeys.has(`${row.subjectSlug}:${row.topicSlug}`)) {
+      historyRows.push({ subjectSlug: row.subjectSlug, topicSlug: row.topicSlug, score: row.score as number, completedAt: row.completedAt as Date })
     }
   }
 

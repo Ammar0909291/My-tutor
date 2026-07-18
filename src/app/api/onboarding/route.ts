@@ -5,10 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { SubjectType, type Subject } from '@prisma/client'
 import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
-import { getBoard } from '@/lib/education'
 import { captureError } from '@/lib/monitoring'
-import { schoolOnboardingSchema } from '@/lib/schoolOnboardingSchema'
-import { shouldSkipSchoolOnboarding } from '@/lib/schoolOnboardingGuard'
 
 // CRITICAL-3 (Sprint D): the old check matched any error whose message
 // contained "Unique constraint", which could mask an unrelated write
@@ -57,11 +54,6 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-
-    if (body?.userType === 'SCHOOL_STUDENT') {
-      return handleSchoolStudent(session.user, userId, schoolOnboardingSchema.parse(body))
-    }
-
     const parsed = generalSchema.parse(body)
     // Normalize onto the 3 canonical tiers (src/lib/curriculum/levels.ts) at
     // the point of storage — the wizard only ever sends beginner/intermediate/
@@ -219,81 +211,3 @@ export async function POST(req: Request) {
   }
 }
 
-async function handleSchoolStudent(
-  sessionUser: { name?: string | null; email?: string | null },
-  userId: string,
-  parsed: z.infer<typeof schoolOnboardingSchema>,
-) {
-  const { board, grade, teachingLanguage } = parsed
-
-  const boardDef = getBoard(board)
-  if (!boardDef) {
-    return NextResponse.json({ success: false, error: `Unknown board: ${board}` }, { status: 400 })
-  }
-  if (!boardDef.grades.includes(grade)) {
-    return NextResponse.json({ success: false, error: `Grade ${grade} is not offered by ${boardDef.shortName}` }, { status: 400 })
-  }
-
-  // Same stale-JWT guard as the general path — reject instead of silently merging accounts.
-  let effectiveUserId = userId
-  try {
-    await prisma.user.upsert({
-      where: { id: userId },
-      update: { name: sessionUser.name ?? undefined },
-      create: {
-        id: userId,
-        email: sessionUser.email ?? `${userId}@mytutor.local`,
-        name: sessionUser.name ?? 'Student',
-      },
-    })
-  } catch (upsertErr: unknown) {
-    if (isEmailUniqueConflict(upsertErr)) {
-      console.warn('[onboarding] session userId absent from DB — session stale, sign-in required')
-      return NextResponse.json({ success: false, error: 'Session expired. Please sign in again.' }, { status: 401 })
-    }
-    throw upsertErr
-  }
-
-  const schoolFields = {
-    userType: 'SCHOOL_STUDENT' as const,
-    educationBoard: boardDef.id,
-    grade,
-    teachingLanguage,
-    country: 'in',
-  }
-
-  await prisma.$transaction(async (tx) => {
-    const existing = await tx.profile.findUnique({ where: { userId: effectiveUserId } })
-    const user = await tx.user.findUnique({ where: { id: effectiveUserId }, select: { onboardingCompleted: true } })
-
-    if (shouldSkipSchoolOnboarding(existing, user?.onboardingCompleted)) {
-      // LOW-4: guard against silent data loss — do not overwrite board/grade for a
-      // fully-completed school onboarding. Return without error so the client can
-      // redirect to the dashboard as if onboarding had just completed.
-      return
-    }
-
-    if (existing) {
-      await tx.profile.update({ where: { userId: effectiveUserId }, data: schoolFields })
-    } else {
-      await tx.profile.create({
-        data: {
-          userId: effectiveUserId,
-          displayName: sessionUser.name ?? 'Student',
-          selfDescription: `Class ${grade} student (${boardDef.shortName})`,
-          ...schoolFields,
-        },
-      })
-    }
-    await tx.user.update({ where: { id: effectiveUserId }, data: { onboardingCompleted: true } })
-  })
-
-  try {
-    await prisma.subscription.upsert({ where: { userId: effectiveUserId }, update: {}, create: { userId: effectiveUserId } })
-  } catch (subErr) {
-    console.warn('[onboarding] subscription upsert failed (non-fatal):', subErr)
-  }
-
-  console.log('[onboarding] success')
-  return NextResponse.json({ success: true })
-}

@@ -2,13 +2,7 @@ import { redirect } from 'next/navigation'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
 import { getStudyStreak } from '@/lib/school/achievements/streakEngine'
-import { getDailyStudyPlan } from '@/lib/school/adaptive/dailyPlan'
-import { getSchoolProgressForSubjects } from '@/lib/school/schoolProgress'
-import { getSubjectRoadmap, getOverallRoadmap, type RoadmapChapter } from '@/lib/school/roadmap/learningRoadmap'
-import { chapterDisplayTitle, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
-import { getExamReadinessForAllSubjects } from '@/lib/school/adaptive/examReadiness'
-import { getLearningNavigatorAction } from '@/lib/school/navigation/learningNavigator'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 import { getKnowledgeGraph } from '@/lib/curriculum/knowledgeGraph'
@@ -27,7 +21,6 @@ import type {
   AchievementData,
   ActivityItem,
   DailyQuestData,
-  SchoolExtrasData,
 } from '@/components/dashboard/v2/types'
 
 const DEFAULT_DAILY_GOAL_LESSONS = 3
@@ -126,24 +119,6 @@ export function buildPracticeModes(tutorHref: string, lang: Lang = 'en'): Practi
   ]
 }
 
-export function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string, lang: Lang = 'en'): SkillNodeData[] {
-  if (allChapters.length === 0) return []
-  let idx = allChapters.findIndex((c) => c.status === 'current')
-  if (idx === -1) idx = allChapters.length - 1
-  const start = Math.max(0, idx - 2)
-  const end = Math.min(allChapters.length, start + 5)
-  return allChapters.slice(start, end).map((c) => {
-    const raw = c.title ?? ''
-    const label = raw.length > 16 ? raw.slice(0, 15) + '…' : raw || t(lang, 'dashx_ch_n').replace('{n}', String(c.order))
-    return {
-      id: c.id,
-      status: c.status === 'completed' ? 'done' : c.status === 'current' ? 'current' : 'locked',
-      emoji: c.status === 'current' ? activeEmoji : c.status === 'upcoming' ? '🔒' : undefined,
-      label,
-    }
-  })
-}
-
 export function buildLibrarySkillPath(
   sp: { currentLesson: number; completedLessons: number[] } | undefined,
   activeEmoji: string,
@@ -163,7 +138,7 @@ export function buildLibrarySkillPath(
   return nodes
 }
 
-export async function getDashboardV2Data(userId: string, modeOverride?: 'library' | 'school'): Promise<DashboardV2Data> {
+export async function getDashboardV2Data(userId: string, _modeOverride?: 'library' | 'school'): Promise<DashboardV2Data> {
   const istBounds = getISTDayBoundsUTC()
   const week = currentWeekString()
 
@@ -266,206 +241,92 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
 
   const profile = user.profile
   const displayName = profile.displayName ?? user.name ?? 'Student'
-  // Single source of truth for the learner's selected app language: the
-  // same Profile.teachingLanguage field the client LanguageProvider PATCHes
-  // via /api/settings (src/components/ui/LanguageToggle.tsx) — reused here
-  // (not duplicated) so server-rendered text (greeting, empty states,
-  // leaderboard subtitle) matches whatever the client renders.
   const dashLang: Lang = (profile.teachingLanguage as Lang | null) ?? 'en'
   const xp = user.xpPoints ?? 0
-  // Cross-system navigation: a learner with board/grade set can view either
-  // experience without changing their stored profile or progress data —
-  // modeOverride lets the caller (the ?mode= query param on /dashboard)
-  // request the non-default view while keeping the same DashboardV2 shell.
-  const hasSchoolAccess = !!profile.educationBoard && !!profile.grade
-  // UI-visibility: School Mode is hidden from normal navigation, so the
-  // default (no ?mode= override) landing experience is always Library Mode
-  // regardless of userType. Direct navigation to the existing
-  // /dashboard?mode=school URL still works unchanged for already-enrolled
-  // school users — School Mode data/logic themselves are untouched.
-  const isSchool = modeOverride === 'school' ? hasSchoolAccess : false
   const userRole = (user.role as 'ADMIN' | 'USER') ?? 'USER'
 
   let continueLesson: ContinueLessonData
   let practiceModes: PracticeModeData[]
   let skillPath: SkillNodeData[]
-  let dailyGoalTarget: number
+  const dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
   let subjectCards: SubjectCardData[] = []
-  let school: SchoolExtrasData | null = null
 
-  if (isSchool) {
-    const board = profile.educationBoard!
-    const grade = profile.grade!
-    const schoolSlugs = getUserNavSubjects(profile, true).map((s) => s.slug)
+  // UI-visibility filter: only show subjects in the Educational Brain rollout.
+  const enrolledSubjects = (profile.subjects ?? []).filter((ps) => isEduBrainEnabled(ps.subject.slug))
+  const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
 
-    if (schoolSlugs.length === 0) {
-      continueLesson = emptyContinueLesson(dashLang)
-      practiceModes = buildPracticeModes('/learn', dashLang)
-      skillPath = []
-      dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
-    } else {
-      const [progressMap, dailyPlan, navigatorAction, examReadinessSummary, overallRoadmap] = await Promise.all([
-        withRetry(() => getSchoolProgressForSubjects(userId, board, grade, schoolSlugs)),
-        getDailyStudyPlan(userId, board, grade).catch(() => []),
-        getLearningNavigatorAction(userId, board, grade).catch(() => null),
-        getExamReadinessForAllSubjects(userId, board, grade).catch(() => null),
-        getOverallRoadmap(userId, board, grade).catch(() => null),
-      ])
-      dailyGoalTarget = dailyPlan.length > 0 ? dailyPlan.length : DEFAULT_DAILY_GOAL_LESSONS
-
-      let activeSlug = schoolSlugs[0]
-      let bestTime = -Infinity
-      for (const slug of schoolSlugs) {
-        const t = progressMap.get(slug)?.lastStudiedAt?.getTime() ?? -1
-        if (t > bestTime) { bestTime = t; activeSlug = slug }
-      }
-
-      const meta = SCHOOL_SUBJECT_META[activeSlug]
-      const activeProgress = progressMap.get(activeSlug)
-      const chapter = activeProgress?.position.current
-
-      if (chapter) {
-        const href = `/learn?subject=${activeSlug}&chapter=${encodeURIComponent(chapter.id)}`
-        continueLesson = {
-          emoji: meta?.icon ?? '📘',
-          label: `${meta?.label ?? activeSlug} · ${t(dashLang, 'dashx_chapter_n').replace('{n}', String(chapter.order))}`,
-          title: chapterDisplayTitle(chapter.title),
-          xpReward: 10,
-          estimatedMinutes: 15,
-          href,
-        }
-        practiceModes = buildPracticeModes(href, dashLang)
-      } else {
-        continueLesson = emptyContinueLesson(dashLang)
-        practiceModes = buildPracticeModes('/learn', dashLang)
-      }
-
-      const roadmap = await getSubjectRoadmap(userId, board, grade, activeSlug).catch(() => null)
-      skillPath = roadmap ? buildSchoolSkillPath(roadmap.allChapters, meta?.icon ?? '📘', dashLang) : []
-
-      // School subjects as dashboard content cards — same SubjectsGrid V2 component
-      // the Library Mode shell already uses; only the data source differs.
-      subjectCards = schoolSlugs.map((slug) => {
-        const subjMeta = SCHOOL_SUBJECT_META[slug]
-        const row = progressMap.get(slug)
-        const colors = SUBJECT_COLOR_MAP[slug] ?? DEFAULT_SUBJECT_COLORS
-        return {
-          slug,
-          name: subjMeta?.label ?? slug,
-          icon: subjMeta?.icon ?? '📘',
-          color: colors.color,
-          bgColor: colors.bgColor,
-          currentLesson: row?.position.current?.order ?? row?.totalCount ?? 1,
-          lastLessonTitle: row?.lastChapterTitle ?? null,
-          completionPercent: row?.percent ?? 0,
-          href: `/school/${slug}`,
-        }
-      })
-
-      school = {
-        navigatorAction,
-        dailyPlan,
-        academicJourney: overallRoadmap?.subjects.map((r) => ({
-          subjectSlug: r.subjectSlug,
-          subjectLabel: r.subjectLabel,
-          completedCount: r.completedCount,
-          totalCount: r.totalCount,
-          completionPercent: r.completionPercent,
-        })) ?? null,
-        examReadiness: examReadinessSummary?.subjects.map((s) => ({
-          subjectSlug: s.subjectSlug,
-          subjectLabel: s.subjectLabel,
-          readinessPercent: s.readinessPercent,
-          level: s.level,
-        })) ?? null,
-      }
-    }
-  } else {
-    // UI-visibility filter (presentation layer only): only show subjects
-    // still in the Educational Brain rollout — enrollment/DB rows for other
-    // subjects are untouched and keep working if reached by direct URL.
-    const enrolledSubjects = (profile.subjects ?? []).filter((ps) => isEduBrainEnabled(ps.subject.slug))
-    const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
-    dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
-
-    console.log('[Q2] studentProgress')
-    let studentProgressList: { subjectCode: string; currentLesson: number; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
-    try {
-      studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
-        where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
-        select: {
-          subjectCode: true,
-          currentLesson: true,
-          completedLessons: true,
-          lastStudiedAt: true,
-          lastLessonTitle: true,
-          completionPercent: true,
-        },
-      }))
-      console.log('[Q2 OK] studentProgress', studentProgressList.length)
-    } catch (err: any) {
-      console.error('[FAILED Q2] studentProgress', err?.code, err?.message, err?.meta)
-      throw err
-    }
-    const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
-
-    // Same placement logic as /api/curriculum's GET handler (see
-    // src/lib/curriculum/placement.ts) — before any real StudentProgress row
-    // exists, "Lesson 1" defaults to the learner's level-appropriate entry
-    // point instead of always literally 1, so the dashboard never disagrees
-    // with what /learn actually shows. Once a real row exists it always wins.
-    const curriculumLevel = normalizeToCanonicalLevel(profile.currentLevel)
-    const defaultCurrentLesson = (slug: string): number => {
-      const graph = getKnowledgeGraph(slug)
-      return graph ? computeCurriculumEntryOrder(graph, curriculumLevel) : 1
-    }
-
-    const activePs = [...enrolledSubjects].sort((a, b) => {
-      const ta = spMap.get(a.subject.slug)?.lastStudiedAt?.getTime() ?? 0
-      const tb = spMap.get(b.subject.slug)?.lastStudiedAt?.getTime() ?? 0
-      return tb - ta
-    })[0] ?? null
-
-    if (activePs) {
-      const slug = activePs.subject.slug
-      const sp = spMap.get(slug)
-      const lib = findLibrarySubject(slug)
-      const lessonNum = sp?.currentLesson ?? defaultCurrentLesson(slug)
-      const href = `/learn?subject=${slug}`
-      continueLesson = {
-        emoji: lib?.icon ?? '📘',
-        label: `${lib?.name ?? activePs.subject.name} · ${t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum))}`,
-        title: sp?.lastLessonTitle ?? t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum)),
-        xpReward: 10,
-        estimatedMinutes: 5,
-        href,
-      }
-      practiceModes = buildPracticeModes(href, dashLang)
-      skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘', dashLang)
-    } else {
-      continueLesson = emptyContinueLesson(dashLang)
-      practiceModes = buildPracticeModes('/learn', dashLang)
-      skillPath = []
-    }
-
-    subjectCards = enrolledSubjects.map((ps) => {
-      const slug = ps.subject.slug
-      const sp = spMap.get(slug)
-      const lib = findLibrarySubject(slug)
-      const colors = SUBJECT_COLOR_MAP[slug] ?? DEFAULT_SUBJECT_COLORS
-      return {
-        slug,
-        name: lib?.name ?? ps.subject.name,
-        icon: lib?.icon ?? '📘',
-        color: colors.color,
-        bgColor: colors.bgColor,
-        currentLesson: sp?.currentLesson ?? defaultCurrentLesson(slug),
-        lastLessonTitle: sp?.lastLessonTitle ?? null,
-        completionPercent: sp?.completionPercent ?? 0,
-        href: `/learn?subject=${slug}`,
-      }
-    })
+  console.log('[Q2] studentProgress')
+  let studentProgressList: { subjectCode: string; currentLesson: number; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
+  try {
+    studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
+      where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
+      select: {
+        subjectCode: true,
+        currentLesson: true,
+        completedLessons: true,
+        lastStudiedAt: true,
+        lastLessonTitle: true,
+        completionPercent: true,
+      },
+    }))
+    console.log('[Q2 OK] studentProgress', studentProgressList.length)
+  } catch (err: any) {
+    console.error('[FAILED Q2] studentProgress', err?.code, err?.message, err?.meta)
+    throw err
   }
+  const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
+
+  const curriculumLevel = normalizeToCanonicalLevel(profile.currentLevel)
+  const defaultCurrentLesson = (slug: string): number => {
+    const graph = getKnowledgeGraph(slug)
+    return graph ? computeCurriculumEntryOrder(graph, curriculumLevel) : 1
+  }
+
+  const activePs = [...enrolledSubjects].sort((a, b) => {
+    const ta = spMap.get(a.subject.slug)?.lastStudiedAt?.getTime() ?? 0
+    const tb = spMap.get(b.subject.slug)?.lastStudiedAt?.getTime() ?? 0
+    return tb - ta
+  })[0] ?? null
+
+  if (activePs) {
+    const slug = activePs.subject.slug
+    const sp = spMap.get(slug)
+    const lib = findLibrarySubject(slug)
+    const lessonNum = sp?.currentLesson ?? defaultCurrentLesson(slug)
+    const href = `/learn?subject=${slug}`
+    continueLesson = {
+      emoji: lib?.icon ?? '📘',
+      label: `${lib?.name ?? activePs.subject.name} · ${t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum))}`,
+      title: sp?.lastLessonTitle ?? t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum)),
+      xpReward: 10,
+      estimatedMinutes: 5,
+      href,
+    }
+    practiceModes = buildPracticeModes(href, dashLang)
+    skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘', dashLang)
+  } else {
+    continueLesson = emptyContinueLesson(dashLang)
+    practiceModes = buildPracticeModes('/learn', dashLang)
+    skillPath = []
+  }
+
+  subjectCards = enrolledSubjects.map((ps) => {
+    const slug = ps.subject.slug
+    const sp = spMap.get(slug)
+    const lib = findLibrarySubject(slug)
+    const colors = SUBJECT_COLOR_MAP[slug] ?? DEFAULT_SUBJECT_COLORS
+    return {
+      slug,
+      name: lib?.name ?? ps.subject.name,
+      icon: lib?.icon ?? '📘',
+      color: colors.color,
+      bgColor: colors.bgColor,
+      currentLesson: sp?.currentLesson ?? defaultCurrentLesson(slug),
+      lastLessonTitle: sp?.lastLessonTitle ?? null,
+      completionPercent: sp?.completionPercent ?? 0,
+      href: `/learn?subject=${slug}`,
+    }
+  })
 
   // Daily Goal ring
   const sessionsToday = sessionsTodayCount
@@ -595,6 +456,5 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     subjects: subjectCards,
     achievement,
     recentActivity,
-    school,
   }
 }

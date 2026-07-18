@@ -18,10 +18,10 @@
  */
 
 import { prisma } from '@/lib/db/prisma'
-import type { MasteryLevel } from './masteryIntelligence'
-import type { CalibrationLevel } from './confidenceCalibration'
-import type { MomentumLevel } from './learningMomentum'
-import type { TransferLevel } from './conceptTransfer'
+type MasteryLevel = 'AT_RISK' | 'DEVELOPING' | 'APPROACHING' | 'MASTERED' | 'TRUE_MASTERY' | 'FALSE_MASTERY'
+type CalibrationLevel = 'UNDERCONFIDENT' | 'CALIBRATED' | 'OVERCONFIDENT'
+type MomentumLevel = 'DECLINING_MOMENTUM' | 'STABLE' | 'STABLE_MOMENTUM' | 'BUILDING_MOMENTUM' | 'STRONG_MOMENTUM' | 'DISENGAGEMENT_RISK'
+type TransferLevel = 'TRANSFER_WEAK' | 'DEVELOPING_TRANSFER' | 'TRANSFER_STRONG'
 
 // ── Public types ──────────────────────────────────────────────────────────────
 

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
-import { getBoard } from '@/lib/education'
 
 export async function GET() {
   try {
@@ -31,7 +30,7 @@ export async function PATCH(req: NextRequest) {
     const session = await auth()
 
     if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    const { name, levelDescription, voicePreference, educationBoard, grade } = await req.json()
+    const { name, levelDescription, voicePreference } = await req.json()
 
     // LOW-1: trim before length check so whitespace-only strings are rejected.
     const trimmedName = typeof name === 'string' ? name.trim() : ''
@@ -47,21 +46,6 @@ export async function PATCH(req: NextRequest) {
     if (nameValid) profileData.displayName = trimmedName
     if (levelDescription !== undefined) profileData.selfDescription = levelDescription
     if (voicePreference !== undefined) profileData.voiceId = voicePreference
-
-    // School fields (Sprint BF) — only accepted together so board/grade can't
-    // get out of sync; validated against the education board registry.
-    if (educationBoard !== undefined || grade !== undefined) {
-      const boardDef = typeof educationBoard === 'string' ? getBoard(educationBoard) : undefined
-      if (!boardDef) {
-        return NextResponse.json({ error: 'Unknown board' }, { status: 400 })
-      }
-      if (typeof grade !== 'number' || !boardDef.grades.includes(grade)) {
-        return NextResponse.json({ error: `Grade must be one of ${boardDef.grades.join(', ')} for ${boardDef.shortName}` }, { status: 400 })
-      }
-      profileData.userType = 'SCHOOL_STUDENT'
-      profileData.educationBoard = boardDef.id
-      profileData.grade = grade
-    }
 
     if (Object.keys(profileData).length > 0) {
       await prisma.profile.upsert({

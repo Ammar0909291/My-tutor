@@ -103,35 +103,6 @@ export interface ActivityItem {
   bucket: 'today' | 'yesterday' | 'earlier'
 }
 
-// School-mode-only content cards (Sprint B Issue 2): rendered as additional
-// sections inside the same DashboardV2 shell, never as a separate dashboard.
-export interface SchoolExtrasData {
-  navigatorAction: import('@/lib/school/navigation/navigatorTypes').LearningNavigatorAction | null
-  dailyPlan: {
-    subjectSlug: string
-    subjectLabel: string
-    chapterId: string
-    title: string
-    estimatedMinutes: number
-    reason: string
-    priority: string
-    href: string
-  }[]
-  academicJourney: {
-    subjectSlug: string
-    subjectLabel: string
-    completedCount: number
-    totalCount: number
-    completionPercent: number
-  }[] | null
-  examReadiness: {
-    subjectSlug: string
-    subjectLabel: string
-    readinessPercent: number
-    level: string
-  }[] | null
-}
-
 export interface DashboardV2Data {
   topBar: TopBarData
   hero: HeroBannerData
@@ -144,6 +115,4 @@ export interface DashboardV2Data {
   subjects: SubjectCardData[]
   achievement: AchievementData
   recentActivity: ActivityItem[]
-  /** Present only for SCHOOL_STUDENT profiles; null for Library Mode. */
-  school?: SchoolExtrasData | null
 }

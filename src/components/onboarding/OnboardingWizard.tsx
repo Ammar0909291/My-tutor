@@ -9,10 +9,6 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
 import { CandyPage } from '@/components/ui/candy'
 
-// Mirrors the current EDUCATIONAL_BRAIN_SUBJECTS rollout gate
-// (src/lib/curriculum/subjectRollout.ts) — kept in sync so the fallback
-// shown before /api/subjects/library responds never flashes a subject the
-// live registry would filter out.
 const FALLBACK_SUBJECTS = [
   { id: 'english',     slug: 'english',     name: 'English',     icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
   { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
@@ -39,23 +35,10 @@ const PLACEHOLDER_CYCLE = [
 
 const STEPS_COUNT = 4
 
-// Mirrors the education board registry (src/lib/education) — kept as a small
-// static list so the full catalog module stays out of the client bundle.
-const SCHOOL_BOARDS = [
-  { id: 'cbse', shortName: 'CBSE', name: 'Central Board of Secondary Education', icon: '🏛️' },
-  { id: 'up_board', shortName: 'UP Board', name: 'Uttar Pradesh Board (UPMSP)', icon: '📚' },
-]
-const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
-
-type LearnerMode = 'school' | 'general' | null
-
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
   const { t, lang } = useLanguage()
   const { country } = useCountry()
-  const [mode, setMode] = useState<LearnerMode>(null)
-  const [boardId, setBoardId] = useState('')
-  const [grade, setGrade] = useState<number | null>(null)
-  const [schoolStep, setSchoolStep] = useState(1) // 1 = board, 2 = grade
+  const [started, setStarted] = useState(false)
   const [step, setStep] = useState(1)
   const [subjects, setSubjects] = useState<{ id: string; slug: string; name: string; icon?: string }[]>(FALLBACK_SUBJECTS)
   const [subjectSlugs, setSubjectSlugs] = useState<string[]>([])
@@ -67,15 +50,9 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const [placeholderIdx, setPlaceholderIdx] = useState(0)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Single source of truth for onboarding UI/content language: the app's
-  // selected language (Settings/LanguageToggle), not region — region only
-  // selects the AI/voice provider (see settings_region_hint).
   const teachingLang: TeachingLang = lang
 
   useEffect(() => {
-    // Fetch the full Subject Library (not just the legacy 4-subject /api/subjects)
-    // so every catalog entry — languages, programming, mathematics, sciences — is
-    // selectable at onboarding and resolves correctly against /api/onboarding.
     fetch('/api/subjects/library').then(r => r.json()).then((data: { success?: boolean; categories?: { subjects: { slug: string; name: string; icon?: string }[] }[] }) => {
       if (data?.success && Array.isArray(data.categories)) {
         const flat = data.categories.flatMap((c) => c.subjects.map((s) => ({ id: s.slug, slug: s.slug, name: s.name, icon: s.icon })))
@@ -96,32 +73,6 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   }
   const canProceed2 = skillLevel !== ''
   const canProceed3 = description.trim().length >= 20
-
-  async function handleSchoolFinish(selectedGrade: number) {
-    setGrade(selectedGrade)
-    setLoading(true); setError('')
-    try {
-      const res = await fetch('/api/onboarding', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userType: 'SCHOOL_STUDENT',
-          board: boardId,
-          grade: selectedGrade,
-          teachingLanguage: teachingLang,
-        }),
-      })
-      const data = await res.json()
-      if (!data.success) {
-        setError(data.error ?? t('ob_error_generic'))
-        setLoading(false); return
-      }
-      window.location.href = '/dashboard'
-    } catch {
-      setError(t('ob_error_network'))
-      setLoading(false)
-    }
-  }
 
   async function handleFinish() {
     setLoading(true); setError('')
@@ -153,9 +104,8 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
     speakText(PREVIEW_TEXT[teachingLang], teachingLang, v.key as VoiceType, undefined, country)
   }
 
-  // Path-aware progress: school = type + board + grade (3); general = type + 4 legacy steps (5)
-  const totalSteps = mode === 'school' ? 3 : mode === 'general' ? STEPS_COUNT + 1 : 3
-  const currentStep = mode === null ? 1 : mode === 'school' ? 1 + schoolStep : 1 + step
+  const totalSteps = STEPS_COUNT + 1
+  const currentStep = !started ? 1 : 1 + step
   const progressPct = ((currentStep - 1) / (totalSteps - 1)) * 100
 
   const SUBJ_ICON: Record<string, string> = { c: 'C', cpp: 'C++', python: '🐍', english: '🇬🇧' }
@@ -192,8 +142,8 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-lg">
 
-          {/* Step 0 — Who are you? */}
-          {mode === null && (
+          {/* Step 0 — Get started */}
+          {!started && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
                 {userName ? t('ob_who_title_named').replace('{name}', userName) : t('ob_who_title')}
@@ -201,11 +151,8 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
               <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
                 {t('ob_who_sub')}
               </p>
-              {/* School Student onboarding path intentionally hidden from the
-                  UI (presentation layer only — the mode==='school' steps
-                  below, /api/onboarding, and School Mode itself are untouched). */}
               <div className="space-y-4 mb-2">
-                <button onClick={() => setMode('general')}
+                <button onClick={() => setStarted(true)}
                   className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
                   style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-default)', minHeight: 88 }}>
                   <span className="text-3xl shrink-0">🚀</span>
@@ -222,77 +169,8 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
             </div>
           )}
 
-          {/* School Step 1 — Board */}
-          {mode === 'school' && schoolStep === 1 && (
-            <div className="animate-scale-in">
-              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                {t('ob_school_curriculum_title')}
-              </h1>
-              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {t('ob_school_curriculum_sub')}
-              </p>
-              <div className="space-y-4 mb-8">
-                {SCHOOL_BOARDS.map((b) => {
-                  const selected = boardId === b.id
-                  return (
-                    <button key={b.id} onClick={() => { setBoardId(b.id); setSchoolStep(2) }}
-                      className="w-full flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
-                      style={{
-                        background: selected ? 'var(--coral-muted)' : 'var(--bg-surface)',
-                        border: `1px solid ${selected ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                        minHeight: 88,
-                      }}>
-                      <span className="text-3xl shrink-0">{b.icon}</span>
-                      <div>
-                        <div className="font-bold text-base" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>{b.shortName}</div>
-                        <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{b.name}</div>
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-              <button onClick={() => setMode(null)} className="btn-ghost w-full py-3">{t('ob_back')}</button>
-            </div>
-          )}
-
-          {/* School Step 2 — Grade */}
-          {mode === 'school' && schoolStep === 2 && (
-            <div className="animate-scale-in">
-              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                {t('ob_school_grade_title')}
-              </h1>
-              <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {t('ob_school_grade_sub')}
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-                {SCHOOL_GRADES.map((g) => (
-                  <button key={g} onClick={() => handleSchoolFinish(g)} disabled={loading}
-                    className="rounded-2xl font-black text-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50"
-                    style={{
-                      background: grade === g ? 'var(--coral-muted)' : 'var(--bg-surface)',
-                      border: `1px solid ${grade === g ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                      color: grade === g ? 'var(--accent-primary)' : 'var(--text-primary)',
-                      fontFamily: 'var(--font-heading)',
-                      minHeight: 64,
-                    }}>
-                    {g}
-                  </button>
-                ))}
-              </div>
-              {error && (
-                <div className="mb-4 p-3.5 rounded-xl text-sm"
-                  style={{ background: 'var(--red-muted)', border: '1px solid var(--coral-border)', color: 'var(--red)' }}>
-                  {error}
-                </div>
-              )}
-              <button onClick={() => setSchoolStep(1)} disabled={loading} className="btn-ghost w-full py-3 disabled:opacity-50">
-                {loading ? t('ob_saving') : t('ob_back')}
-              </button>
-            </div>
-          )}
-
           {/* Step 1 — Subject */}
-          {mode === 'general' && step === 1 && (
+          {started && step === 1 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s1_title')}</h1>
               <p className={subjectSlugs.length > 0 ? 'text-sm mb-2' : 'text-sm mb-8'} style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
@@ -331,7 +209,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                 })}
               </div>
               <div className="flex gap-3">
-                <button onClick={() => setMode(null)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+                <button onClick={() => setStarted(false)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
                 <button onClick={() => setStep(2)} disabled={!canProceed1} className="btn-primary flex-1 py-3.5 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
                   {t('ob_next')}
                 </button>
@@ -339,8 +217,8 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
             </div>
           )}
 
-          {/* Step 2 — Current skill level (drives curriculum generation) */}
-          {mode === 'general' && step === 2 && (
+          {/* Step 2 — Current skill level */}
+          {started && step === 2 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
                 {t('ob_level_title')}
@@ -377,7 +255,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
 
           {/* Step 3 — Self description */}
-          {mode === 'general' && step === 3 && (
+          {started && step === 3 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s2_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s2_sub')}</p>
@@ -412,7 +290,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           )}
 
           {/* Step 4 — Voice */}
-          {mode === 'general' && step === 4 && (
+          {started && step === 4 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s3_title')}</h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s3_sub')}</p>

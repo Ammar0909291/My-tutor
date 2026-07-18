@@ -5,12 +5,8 @@ import { withRetry } from '@/lib/db/withRetry'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 import { t, type TranslationKey } from '@/lib/i18n'
-import { SubjectType } from '@prisma/client'
-import { getSchoolChapters, getChapterPosition, isSchoolSubject, schoolSubjectCode, chapterDisplayTitle, getGradeSubjects, SCHOOL_SUBJECT_META } from '@/lib/school/schoolRouting'
 import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 
-// Sprint BL — "Ask Tutor" quick-question chips on the chapter workspace deep
-// link in via ?ask=<key>, mapped to a localized prompt sent on session start.
 const ASK_PROMPT_KEYS: Record<string, TranslationKey> = {
   explain: 'chapter_ask_explain',
   examples: 'chapter_ask_examples',
@@ -18,7 +14,7 @@ const ASK_PROMPT_KEYS: Record<string, TranslationKey> = {
   basics: 'chapter_ask_basics',
 }
 
-export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string; chapter?: string; practice?: string; ask?: string } }) {
+export default async function LearnPage({ searchParams }: { searchParams?: { subject?: string; practice?: string; ask?: string } }) {
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
@@ -32,7 +28,6 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
     },
   }))
 
-  // Auto-heal: if profile exists but flag not set, fix it
   if (!user?.onboardingCompleted) {
     if (user?.profile) {
       await prisma.user.update({ where: { id: session.user.id }, data: { onboardingCompleted: true } })
@@ -45,74 +40,20 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
 
   let profile = user.profile
 
-  // School students have no ProfileSubject enrollment rows at all — their
-  // subject set is the board/grade catalog (same source the dashboard uses,
-  // via getUserNavSubjects). Resolved once here so both the default subject
-  // and the dropdown below stay in sync.
-  const isSchoolMode = profile.userType === 'SCHOOL_STUDENT' && !!profile.educationBoard && !!profile.grade
-
-  // Allow picking a specific subject for this session via /learn?subject=<slug>
-  // (e.g. the "Continue learning" link from /library/[slug]) — falls back to the
-  // learner's primary (first-enrolled, or first grade-catalog subject for school
-  // students) subject when absent.
   const requestedSlug = searchParams?.subject
-    ?? (isSchoolMode ? getGradeSubjects(profile.educationBoard!, profile.grade!)[0] : undefined)
   const requestedSubject = requestedSlug
     ? profile?.subjects.find((ps) => ps.subject.slug === requestedSlug)?.subject
     : undefined
   let primarySubject = requestedSubject ?? profile?.subjects[0]?.subject
 
-  // ─── School Mode (Sprint BI) ───
-  // School students arrive from /school/<subject> with an explicit chapter id.
-  // Resolve the chapter against the board catalog (falling back to the current
-  // chapter from namespaced progress), and ensure a Subject row exists so the
-  // session pipeline works without ProfileSubject enrollment.
-  let schoolChapterId: string | undefined
-  let schoolChapterTitle: string | undefined
-  if (
-    profile.userType === 'SCHOOL_STUDENT' && profile.educationBoard && profile.grade &&
-    requestedSlug && isSchoolSubject(profile.educationBoard, requestedSlug)
-  ) {
-    const chapters = getSchoolChapters(profile.educationBoard, requestedSlug, profile.grade)
-    if (chapters.length > 0) {
-      const sp = await prisma.studentProgress.findUnique({
-        where: { userId_subjectCode: { userId: session.user.id, subjectCode: schoolSubjectCode(profile.educationBoard, requestedSlug, profile.grade) } },
-        select: { completedLessons: true },
-      }).catch(() => null)
-      const pos = getChapterPosition(chapters, sp?.completedLessons ?? [])
-      const chapter = chapters.find((c) => c.id === searchParams?.chapter) ?? pos?.current
-      if (chapter) {
-        schoolChapterId = chapter.id
-        schoolChapterTitle = chapterDisplayTitle(chapter.title)
-        // SubjectType is cosmetic for non-code subjects — closest buckets used.
-        const SCHOOL_TYPE: Record<string, SubjectType> = {
-          mathematics: SubjectType.MATHEMATICS,
-          science: SubjectType.PHYSICS,
-          english: SubjectType.ENGLISH,
-          social_science: SubjectType.LANGUAGE,
-        }
-        const meta = SCHOOL_SUBJECT_META[requestedSlug]
-        primarySubject = await prisma.subject.upsert({
-          where: { slug: requestedSlug },
-          update: {},
-          create: { slug: requestedSlug, name: meta?.label ?? requestedSlug, type: SCHOOL_TYPE[requestedSlug] ?? SubjectType.LANGUAGE },
-        })
-      }
-    }
-  }
-
   // Auto-heal: profile has no subject linked — ensure subject exists then link it
   if (profile && !primarySubject) {
-    // Guarantee at least one subject exists (upsert python as safe default)
-    const SLUG_TO_TYPE: Record<string, 'C' | 'CPP' | 'PYTHON' | 'ENGLISH'> = {
-      c: 'C', cpp: 'CPP', python: 'PYTHON', english: 'ENGLISH',
-    }
     let anySubject = await prisma.subject.findFirst()
     if (!anySubject) {
       anySubject = await prisma.subject.upsert({
         where: { slug: 'python' },
         update: {},
-        create: { slug: 'python', name: 'Python', type: SLUG_TO_TYPE['python'] },
+        create: { slug: 'python', name: 'Python', type: 'PYTHON' },
       })
     }
 
@@ -134,7 +75,6 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       }).catch(() => null)
     }
 
-    // Re-fetch profile with subjects
     const refreshed = await prisma.profile.findUnique({
       where: { userId: session.user.id },
       include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
@@ -145,15 +85,11 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
     }
   }
 
-  // Last resort: if still no subject, use a stub so the lesson renders
   if (!profile) redirect('/onboarding')
   const resolvedSubject = primarySubject ?? { id: '', slug: 'python', name: 'Python' }
 
-  // All subjects for the lesson sidebar/dropdown — same source the dashboard
-  // uses, so the two views can never show different subject sets again.
-  const subjects = getUserNavSubjects(profile, isSchoolMode)
+  const subjects = getUserNavSubjects(profile, false)
 
-  // Server-side lesson position for resume — used in the opening message
   const studentProgress = resolvedSubject.id
     ? await prisma.studentProgress.findUnique({
         where: { userId_subjectCode: { userId: session.user.id, subjectCode: resolvedSubject.slug } },
@@ -161,7 +97,6 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       })
     : null
 
-  // Fetch last 3 completed sessions for memory context
   const pastSessions = resolvedSubject.id ? await withRetry(() => prisma.learnSession.findMany({
     where: {
       userId: session.user.id,
@@ -199,7 +134,6 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
         return `${lessonLabel} ${i + 1} (${date}): ${s.summary}`
       })
 
-    // Collect last 10 messages across past sessions
     const allMessages = pastSessions
       .flatMap((s) => s.messages)
       .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
@@ -217,12 +151,9 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       memoryContext = parts.join('\n\n')
     }
 
-    // For the opening greeting — use the most recent session's summary
     pastSessionsSummary = pastSessions[0]?.summary ?? null
   }
 
-  // Sprint BL — deep links from the chapter workspace ("Practice Chapter" /
-  // "Ask Tutor" chips)
   const autoOpenPractice = searchParams?.practice === '1'
   const askKey = searchParams?.ask ? ASK_PROMPT_KEYS[searchParams.ask] : undefined
   const initialPrompt = askKey ? t(teachingLang, askKey) : undefined
@@ -241,9 +172,8 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       subjects={subjects}
       displayName={profile.displayName}
       userId={session.user.id}
-      resumeLessonTitle={schoolChapterTitle ?? studentProgress?.lastLessonTitle ?? undefined}
-      resumeUnitTitle={schoolChapterId ? undefined : studentProgress?.lastUnitTitle ?? undefined}
-      schoolChapterId={schoolChapterId}
+      resumeLessonTitle={studentProgress?.lastLessonTitle ?? undefined}
+      resumeUnitTitle={studentProgress?.lastUnitTitle ?? undefined}
       autoOpenPractice={autoOpenPractice}
       initialPrompt={initialPrompt}
     />
