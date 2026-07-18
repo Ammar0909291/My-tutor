@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f4d35beddc950762434d585727f53dc0146d710aaf6560d09c8fba1ab90da0c1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph.md": "sha256:7e72f48d97022ceb7113626baada5a7e05b5b610c6a761662790199627edfd29"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.disc.graph",
+    "name": "Graph",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.set-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph.md": "sha256:7e72f48d97022ceb7113626baada5a7e05b5b610c6a761662790199627edfd29"
+      },
+      "contentHash": "sha256:6017b9356086e35c14bef9a9f429107d5f0297c5de4d32c1b4d92af40936f5c6",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a graph G=(V,E) as a set of vertices V and a set of edges E, and distinguish undirected (unordered-pair edges) from directed (ordered-pair edges) graphs.\n- LO2: Compute the degree of a vertex (number of incident edges, with a self-loop counting twice) in a given graph diagram or edge list.\n- LO3: State and apply the Handshaking Lemma (∑ᵥ deg(v) = 2|E|) to solve for an unknown quantity (number of edges, a missing degree, or to detect an impossible degree sequence).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.graph/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph",
+      "title": "DIRECTED-EDGE-ASSUMED-SYMMETRIC",
+      "content": "| MC-1 | DIRECTED-EDGE-ASSUMED-SYMMETRIC | Believing an edge (u,v) in a directed graph implies (v,u) also exists | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.disc.graph/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph",
+      "title": "SELF-LOOP-DEGREE-ONE",
+      "content": "| MC-2 | SELF-LOOP-DEGREE-ONE | Counting a self-loop as contributing 1 (not 2) to a vertex's degree | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.disc.graph/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph",
+      "title": "HANDSHAKE-SUM-EQUALS-EDGES",
+      "content": "| MC-3 | HANDSHAKE-SUM-EQUALS-EDGES | Believing ∑deg(v) = \\|E\\| rather than 2\\|E\\| | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.disc.graph/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph",
+      "title": "Vertices, Edges, and the Undirected/Directed Distinction (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Vertices, Edges, and the Undirected/Directed Distinction (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.graph/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph",
+      "title": "Self-Loops and the Handshaking Lemma (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Self-Loops and the Handshaking Lemma (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.graph/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 19,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.graph/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A graph has V={P,Q,R} and E={{P,Q},{Q,R},{P,R}}. State whether it's directed or undirected, and give deg(Q).\n  2. A directed graph has edges (X,Y) and (X,Z) only. Is there an edge (Y,X)? Why or why not?\n  3. A vertex has a self-loop and two ordinary edges. What is its degree?\n  4. An undirected graph has 6 edges. Vertices have degrees 3, 2, 2, and one unknown vertex. Find the unknown degree.\n- **P76 (Transfer Probe, mode = independence)**: \"A gathering of 7 people shakes hands with each other in various pairs — some pairs shake hands, some don't. Model this as a graph: what are the vertices, what are the edges, and is it directed or undirected? If the total number of handshakes given-and-received (each handshake counted once per participant) is 20, how many actual handshakes (edges) occurred?\" (Answer: vertices = people, edges = handshake pairs, undirected since a handshake is mutual; 20 = 2|E| → |E| = 10.) *Component 7 note: this probe intentionally mirrors the classic \"handshake\" framing of the Handshaking Lemma itself rather than cross-linking to `math.graph.graph`, since that blueprint does not yet exist.*\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action (below) before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 19,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.graph/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.graph",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set-theory` (sets, ordered pairs, Cartesian products E⊆V×V). No arithmetic beyond addition/doubling is required, but LO3 leans on comfort manipulating a simple linear equation (∑deg = 2|E|).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.graph/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.graph",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set-theory` (V and E as sets; E⊆V×V as a subset of the Cartesian product, giving the ordered-pair definition of directed edges formal grounding).\n- **Unlocks**: `math.disc.graph-connectivity` (paths, connectedness build directly on the vertex/edge/degree vocabulary here), `math.disc.graph-trees` (trees are connected acyclic graphs — a specialization of this concept).\n- **Cross-link**: KG lists `math.graph.graph` as a cross-link target. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.graph.graph.md`. Per the established P76_mode rule, this blueprint uses **independence** mode for its transfer probe rather than fabricating a cross-reference to unauthored content. A future revision, once `math.graph.graph` is authored, may add a genuine cross-link probe connecting this concept's foundational vertex/edge/degree definitions to that concept's likely broader graph-theory content (paths, cycles, graph isomorphism, etc.).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph.md",
+        "startLine": 99,
+        "endLine": 105
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.set-membership-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.set-membership",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8a75b1de5bee7688dc8ab8a182881497f13d635264b9d24c5d6bdbbb34afe247",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.set-membership.md": "sha256:7668d11d32c7502809a28d71011c01506d3c868a749666e925adebff77c83ac4"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 2,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 2
+  },
+  "concept": {
+    "conceptId": "math.found.set-membership",
+    "name": "Set Membership",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.set"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.set-membership-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.set-membership (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.set-membership.md": "sha256:7668d11d32c7502809a28d71011c01506d3c868a749666e925adebff77c83ac4"
+      },
+      "contentHash": "sha256:6b90fb7832095a6eb95c8951b144af265c3a9e90e36beea924c1d27c2ba55df7",
+      "ruleCount": 2,
+      "bandCounts": {
+        "3": 2
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.set-membership.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-membership.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-membership"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-membership\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-membership.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-membership.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-membership"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-membership\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.set-membership/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.set-membership",
+      "title": "Learning Objectives",
+      "content": "- LO1: Read and write the membership relation x ∈ A (\"x is an element of A\") and its negation x ∉ A, for a set A given by an explicit list of elements.\n- LO2: Correctly evaluate membership: given a concrete set and a candidate object, determine whether the object is a *member* (element) of the set versus merely *related to* or *contained within* it in some other way.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.set-membership",
+      "title": "ELEMENT-SUBSET-CONFUSION",
+      "content": "| MC-1 | ELEMENT-SUBSET-CONFUSION | Confusing $x \\in A$ with $\\{x\\} \\subseteq A$ (or writing $\\{2\\} \\in A$ when $2 \\in A$ is meant) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.set-membership",
+      "title": "SETS-CANNOT-BE-ELEMENTS",
+      "content": "| MC-2 | SETS-CANNOT-BE-ELEMENTS | Disbelieving that a set can itself be an element of another set | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.set-membership",
+      "title": "MEMBERSHIP-IS-ORDER-SENSITIVE",
+      "content": "| MC-3 | MEMBERSHIP-IS-ORDER-SENSITIVE | Treating membership as dependent on listed order or repeated listing (e.g. believing {1,1,2} \"has 1 twice\" as a fact about membership) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-membership",
+      "title": "Reading and Evaluating ∈ (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Reading and Evaluating ∈ (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-membership",
+      "title": "Element vs. Set-as-Element (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Element vs. Set-as-Element (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.set-membership",
+      "title": "Mastery Gate and Validation",
+      "content": "### P91 Mastery Gate (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n\n- **P77 (4-problem set)**:\n  1. Let $A = \\{a, e, i, o, u\\}$. Is $e \\in A$? Is $b \\in A$?\n  2. Let $A = \\{5, 10, 15\\}$. Is $\\{5\\} \\in A$? Is $5 \\in A$?\n  3. Let $B = \\{7, \\{8,9\\}\\}$. How many elements does B have, and is $8 \\in B$?\n  4. Explain why $\\{1,2,3\\}$ and $\\{3,1,2,2\\}$ have exactly the same membership facts for every object.\n- **P76 (Transfer Probe, mode = independence)**: \"A school's clubs list is $C = \\{\\text{Chess Club}, \\{\\text{Art Club, Music Club}\\}\\}$ — the second entry is itself a two-club sub-group treated as one bundled item. Is \"Chess Club\" ∈ C? Is the bundle {Art Club, Music Club} ∈ C? Is \"Art Club\" (alone) ∈ C? Explain each answer using the element/set-as-element distinction from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action (B01/B02/B03) before re-attempting P77.\n\n### Validation Checklist\n\n| ID | Check | Status |\n|---|---|---|\n| V-1 | concept_id matches filename | PASS |\n| V-2 | All 2 LOs map to at least one TA | PASS |\n| V-3 | requires resolves in KG | PASS (`math.found.set`) |\n| V-4 | unlocks concepts named accurately from KG | PASS |\n| V-5 | cross_links checked against disk before setting P76_mode | PASS (empty in KG → independence) |\n| V-6 | ≥1 Teaching Action present | PASS (A01, A02) |\n| V-7 | Misconception Registry non-empty | PASS (3 entries) |\n| V-8 | Every MC has a Protocol B repair action | PASS (B01, B02, B03) |\n| V-9 | P91 gate macro fully expanded | PASS |\n| V-10 | P77 problem set has exactly 4 problems | PASS |\n| V-11 | P76 transfer probe present with mode declared | PASS (independence) |\n| V-12 | MAMR correctly computed from mastery_threshold | PASS (⌈0.95×5⌉=5) |\n| V-13 | No cyclic prerequisite reference | PASS |\n| V-14 | All MC IDs referenced in TAs resolve in registry | PASS |\n| V-15 | CPA_entry_stage justified | PASS (Concrete: basket/list examples before symbol) |\n| V-16 | Worked examples cover all LOs | PASS (Ex1→LO1/LO2, Ex2→LO2, Ex3→LO2) |\n| V-17 | Teaching Notes justify structural choices | PASS |\n| V-18 | No architecture/runtime/schema changes | PASS (blueprint authoring only) |\n| V-19 | KG description terms reflected accurately | PASS |\n| V-20 | Component numbering matches established convention (0-8, 10; 9 skipped) | PASS |\n| AIR | Anti-Illusion-of-Retention: gate requires genuine transfer probe, not just repetition | PASS |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 91,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.set-membership",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set` (a set as a well-defined, unordered collection of distinct objects). This concept introduces the single relation that lets us talk about sets element-by-element.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 25,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.found.set-membership/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.set-membership",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set` (the definition of a set as an unordered, duplicate-free collection is what makes membership well-defined and order/repetition-independent).\n- **Unlocks**: `math.found.subset` (the very next concept, which builds the ⊆ relation directly on top of ∈: A⊆B is defined as \"every element of A is also an element of B\" — i.e., ∀x, x∈A ⟹ x∈B).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-membership.md",
+        "startLine": 77,
+        "endLine": 83
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
