@@ -1,6 +1,5 @@
 'use client'
 import { useEffect } from 'react'
-import Link from 'next/link'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy'
 
@@ -35,14 +34,13 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
             >
               {t('error_cta_retry')}
             </CandyButton>
-            <Link href="/dashboard" className="flex-1">
-              <CandyButton
-                className="w-full px-5 py-3 rounded-2xl text-sm"
-                style={{ background: 'var(--candy-card)', color: 'var(--candy-ink)', fontWeight: 800, border: 'none' }}
-              >
-                {t('error_cta_dashboard')}
-              </CandyButton>
-            </Link>
+            <CandyButton
+              onClick={() => { window.location.href = '/dashboard' }}
+              className="flex-1 px-5 py-3 rounded-2xl text-sm"
+              style={{ background: 'var(--candy-card)', color: 'var(--candy-ink)', fontWeight: 800, border: 'none' }}
+            >
+              {t('error_cta_dashboard')}
+            </CandyButton>
           </div>
         </Card>
       </div>

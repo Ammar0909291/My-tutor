@@ -4,6 +4,15 @@ const nextConfig = {
   experimental: {
     // Next.js 14.2 still uses the experimental key; top-level serverExternalPackages is 15+
     serverComponentsExternalPackages: ["@prisma/client", "bcryptjs", "ioredis"],
+    // BUG-1 FIX: Next.js output-file tracing only follows static import()
+    // statements — it never traces fs.readFileSync calls with computed paths.
+    // Without this, Vercel serverless functions that call getKnowledgeGraph()
+    // (which reads docs/{subject}/kg/graph.json at runtime) fail with ENOENT
+    // in production → /api/curriculum returns 500 → English/Math/Physics/etc.
+    // curriculum shows "No structured lesson plan for this subject yet."
+    outputFileTracingIncludes: {
+      '/**': ['./docs/**/*.json'],
+    },
   },
   images: {
     remotePatterns: [

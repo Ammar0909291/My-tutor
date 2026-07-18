@@ -30,7 +30,10 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
 
   if (!user?.onboardingCompleted) {
     if (user?.profile) {
-      await prisma.user.update({ where: { id: session.user.id }, data: { onboardingCompleted: true } })
+      // BUG-2 FIX: non-critical flag update — swallow transient DB errors so
+      // a Neon cold start doesn't throw to the error boundary; the update is
+      // best-effort and the page renders correctly either way.
+      await prisma.user.update({ where: { id: session.user.id }, data: { onboardingCompleted: true } }).catch(() => {})
     } else {
       redirect('/onboarding')
     }
@@ -90,11 +93,15 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
 
   const subjects = getUserNavSubjects(profile, false)
 
+  // BUG-2 FIX: wrap in try-catch so a Neon cold-start timeout or transient
+  // DB error doesn't throw to the Next.js error boundary ("Something went wrong").
+  // Returning null is the correct fallback — the lesson page renders without
+  // a resume hint, which is better than a crash.
   const studentProgress = resolvedSubject.id
     ? await prisma.studentProgress.findUnique({
         where: { userId_subjectCode: { userId: session.user.id, subjectCode: resolvedSubject.slug } },
         select: { lastLessonTitle: true, lastUnitTitle: true, currentLesson: true },
-      })
+      }).catch(() => null)
     : null
 
   const pastSessions = resolvedSubject.id ? await withRetry(() => prisma.learnSession.findMany({
