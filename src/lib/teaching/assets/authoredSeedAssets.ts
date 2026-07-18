@@ -11780,6 +11780,304 @@ const CAMOM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.print-to-meaning ─────────────────────────────────────────────
+const PTM = 'eng.reading.print-to-meaning'
+const PTM_SRC = 'docs/curriculum/blueprints/eng.reading.print-to-meaning.md'
+
+const PTM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PTM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Reading accurately and fluently is necessary but NOT sufficient for ' +
+      'comprehension. You read that whole paragraph perfectly — every word ' +
+      'right, nice pace, good expression. Now, without looking back: what ' +
+      'was the paragraph actually about? It is entirely possible to decode ' +
+      'every word correctly while your attention is elsewhere, producing ' +
+      'accurate sound without processed meaning. After — or while — ' +
+      'reading, actively check: can I explain what this said in my own ' +
+      'words? Correct pronunciation alone does not confirm understanding.',
+    targetedMisconceptions: [`${PTM}:MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION`],
+    source: `${PTM_SRC} — MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION (P28 fluent-but-unable-to-summarize conflict evidence)`,
+  },
+  {
+    conceptId: PTM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Comprehension exists on a SPECTRUM, not as an all-or-nothing switch. ' +
+      'You said you did not understand this paragraph at all — but you ' +
+      'just correctly told me who the main character was and what they ' +
+      'wanted. Is that "nothing," or a partial understanding you can build ' +
+      'on? You might fully understand the main idea but be unsure about ' +
+      'one specific word. Notice what you DID understand, identify the ' +
+      'SPECIFIC gaps, and apply a targeted strategy — rereading a confusing ' +
+      'sentence, using context clues — rather than treating any confusion ' +
+      'as total failure.',
+    targetedMisconceptions: [`${PTM}:MC-COMPREHENSION-IS-ALL-OR-NOTHING`],
+    source: `${PTM_SRC} — MC-COMPREHENSION-IS-ALL-OR-NOTHING (P28 partial-understanding conflict evidence)`,
+  },
+  {
+    conceptId: PTM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Accurate, fluent oral reading is necessary but not sufficient for ' +
+      'comprehension — it is entirely possible to decode every word ' +
+      'correctly while attention drifts elsewhere, producing correct sound ' +
+      'without processed meaning. After reading, actively check whether you ' +
+      'can restate the content in your own words, rather than treating ' +
+      'correct pronunciation as proof of understanding. Separately, ' +
+      'comprehension is not binary: partial understanding — grasping the ' +
+      'main idea while missing one specific detail or word — is a normal, ' +
+      'workable state, not a failure. The productive move is identifying ' +
+      'the specific gap and applying a targeted strategy (rereading, ' +
+      'context clues, self-questioning) rather than discarding everything ' +
+      'you did understand.',
+    targetedMisconceptions: [
+      `${PTM}:MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION`,
+      `${PTM}:MC-COMPREHENSION-IS-ALL-OR-NOTHING`,
+    ],
+    source: `${PTM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PTM_PROBES: SeedProbe[] = [
+  {
+    conceptId: PTM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student reads a paragraph aloud with perfect accuracy and expression but cannot say what it was about afterward. Did they comprehend it?',
+    choices: [
+      { text: 'No — accurate, fluent reading does not by itself guarantee comprehension', isCorrect: true },
+      { text: 'Yes — reading every word correctly and with good expression means they understood it', isCorrect: false, misconceptionId: `${PTM}:MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PTM}:MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION`],
+    source: `${PTM_SRC} — P28 fluent-but-unable-to-summarize conflict as probe`,
+  },
+  {
+    conceptId: PTM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student says they "understood nothing" about a paragraph, but they correctly identified the main character and what that character wanted. What does this suggest?',
+    choices: [
+      { text: 'They have a partial understanding to build on, not zero comprehension', isCorrect: true },
+      { text: 'They are right — any confusion means total failure to comprehend', isCorrect: false, misconceptionId: `${PTM}:MC-COMPREHENSION-IS-ALL-OR-NOTHING` },
+    ],
+    correctValue: 'partial understanding',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PTM}:MC-COMPREHENSION-IS-ALL-OR-NOTHING`],
+    source: `${PTM_SRC} — P28 partial-understanding conflict as probe`,
+  },
+]
+
+// ─── eng.reading.reading-fluency ───────────────────────────────────────────────
+const RFLU = 'eng.reading.reading-fluency'
+const RFLU_SRC = 'docs/curriculum/blueprints/eng.reading.reading-fluency.md'
+
+const RFLU_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RFLU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Reading fluency has THREE components working together: ACCURACY ' +
+      '(reading words correctly), appropriate RATE (not too slow, not ' +
+      'rushed), and EXPRESSION (intonation and phrasing that reflects the ' +
+      'text\'s meaning). You read that passage very fast — nice pace! But ' +
+      'you skipped two words and read it in a flat monotone. Speed alone, ' +
+      'without accuracy and meaningful expression, is not fluency — it can ' +
+      'work against comprehension if words are skipped to go faster. Judge ' +
+      'fluency by all three components together, not by speed alone.',
+    targetedMisconceptions: [`${RFLU}:MC-READING-FLUENCY-IS-JUST-SPEED`],
+    source: `${RFLU_SRC} — MC-READING-FLUENCY-IS-JUST-SPEED (P28 fast-but-flat conflict evidence)`,
+  },
+  {
+    conceptId: RFLU,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'While reading widely builds vocabulary and general experience, ' +
+      'REPEATED READING of the same specific passage — reading it multiple ' +
+      'times in a row — is a targeted, evidence-based technique that ' +
+      'noticeably builds automaticity and expression on that text. You have ' +
+      'read many different books this month, one time each — do you notice ' +
+      'your reading getting smoother on any SPECIFIC passage, the way it ' +
+      'would if you read the SAME short passage several times in a row? To ' +
+      'deliberately build fluency, practice repeated reading of the same ' +
+      'short passage, in addition to reading widely.',
+    targetedMisconceptions: [`${RFLU}:MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE`],
+    source: `${RFLU_SRC} — MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE (P28 many-books-once-each conflict evidence)`,
+  },
+  {
+    conceptId: RFLU,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Fluency is a three-part construct — accuracy, appropriate rate, and ' +
+      'expression reflecting meaning — not speed alone; fast but flat, ' +
+      'error-prone reading is not genuinely fluent, and can undermine ' +
+      'comprehension. Separately, fluency does not develop merely from ' +
+      'accumulating volume: reading many different texts once each builds ' +
+      'vocabulary and general exposure, but REPEATED reading of the same ' +
+      'specific passage is the evidence-based technique that targets ' +
+      'automaticity and expression on that text. Deliberate fluency practice ' +
+      'means rereading a short passage multiple times, alongside — not ' +
+      'instead of — broad reading.',
+    targetedMisconceptions: [
+      `${RFLU}:MC-READING-FLUENCY-IS-JUST-SPEED`,
+      `${RFLU}:MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE`,
+    ],
+    source: `${RFLU_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RFLU_PROBES: SeedProbe[] = [
+  {
+    conceptId: RFLU,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student reads very fast, skips two words, and reads in a flat monotone. Is this fluent reading?',
+    choices: [
+      { text: 'No — fluency needs accuracy and expression together with rate, not speed alone', isCorrect: true },
+      { text: 'Yes — reading quickly is the main sign of fluency', isCorrect: false, misconceptionId: `${RFLU}:MC-READING-FLUENCY-IS-JUST-SPEED` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RFLU}:MC-READING-FLUENCY-IS-JUST-SPEED`],
+    source: `${RFLU_SRC} — P28 fast-but-flat conflict as probe`,
+  },
+  {
+    conceptId: RFLU,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'Will reading many different new books, one time each, build the same fluency gains as rereading one short passage several times?',
+    choices: [
+      { text: 'No — repeated reading of the same passage is a distinct, targeted technique for building fluency', isCorrect: true },
+      { text: 'Yes — any reading volume builds fluency the same way', isCorrect: false, misconceptionId: `${RFLU}:MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RFLU}:MC-FLUENCY-DEVELOPS-AUTOMATICALLY-FROM-JUST-READING-MORE`],
+    source: `${RFLU_SRC} — P28 many-books-once-each conflict as probe`,
+  },
+]
+
+// ─── eng.reading.literal-comprehension ─────────────────────────────────────────
+const LCOM = 'eng.reading.literal-comprehension'
+const LCOM_SRC = 'docs/curriculum/blueprints/eng.reading.literal-comprehension.md'
+
+const LCOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LCOM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Literal comprehension means accurately understanding information ' +
+      'that is EXPLICITLY STATED in the text — it does NOT require ' +
+      'memorizing or reproducing the exact original wording. The text says ' +
+      '"The volcano erupted in 1883, killing thousands." You can say "A ' +
+      'volcano exploded in 1883 and many people died" and still show ' +
+      'genuine literal comprehension — the key facts are preserved, even ' +
+      'though the wording changed. Demonstrate literal comprehension by ' +
+      'accurately restating explicit facts in your own words, not by ' +
+      'memorizing the original sentence.',
+    targetedMisconceptions: [`${LCOM}:MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING`],
+    source: `${LCOM_SRC} — MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING (P28 volcano paraphrase conflict evidence)`,
+  },
+  {
+    conceptId: LCOM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Literal comprehension requires INTEGRATING individual word meanings ' +
+      'into an accurate understanding of what the sentence explicitly ' +
+      'states as a WHOLE. You know what every single word in "Only some of ' +
+      'the students passed the exam" means. But can you tell me exactly ' +
+      'who did what — did ALL the students pass, or only SOME? Knowing ' +
+      'every word\'s meaning is necessary but not sufficient; after ' +
+      'confirming you know each word, deliberately check whether you have ' +
+      'correctly combined them into what the sentence as a whole states — ' +
+      'including qualifying details like "only some" versus "all".',
+    targetedMisconceptions: [`${LCOM}:MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT`],
+    source: `${LCOM_SRC} — MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT (P28 only-some-vs-all conflict evidence)`,
+  },
+  {
+    conceptId: LCOM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Literal comprehension is accurate understanding of explicitly stated ' +
+      'information, demonstrated by restating it in one\'s own words — not ' +
+      'by reproducing the source text verbatim. "The volcano erupted in ' +
+      '1883, killing thousands" can be correctly paraphrased as "A volcano ' +
+      'exploded in 1883 and many people died" without any loss of literal ' +
+      'accuracy. Separately, knowing every individual word in a sentence ' +
+      'does not guarantee correct comprehension of the sentence as a whole ' +
+      '— "only some of the students passed" is frequently misread as "all ' +
+      'students passed" despite full word-level familiarity. Literal ' +
+      'comprehension requires integrating word meanings into the actual ' +
+      'stated proposition, including qualifying details.',
+    targetedMisconceptions: [
+      `${LCOM}:MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING`,
+      `${LCOM}:MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT`,
+    ],
+    source: `${LCOM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LCOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCOM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'The text says "The volcano erupted in 1883, killing thousands." A student says "A volcano exploded in 1883 and many people died." Does this show literal comprehension?',
+    choices: [
+      { text: 'Yes — the key explicit facts are preserved, even though the wording changed', isCorrect: true },
+      { text: 'No — literal comprehension requires the exact original wording', isCorrect: false, misconceptionId: `${LCOM}:MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LCOM}:MC-LITERAL-COMPREHENSION-MEANS-MEMORIZING-EXACT-WORDING`],
+    source: `${LCOM_SRC} — P28 volcano paraphrase conflict as probe`,
+  },
+  {
+    conceptId: LCOM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A student knows every word in "Only some of the students passed the exam" but says it means "all students passed." Does knowing every word guarantee correct comprehension?',
+    choices: [
+      { text: 'No — the words must be correctly combined, including qualifying details like "only some" vs. "all"', isCorrect: true },
+      { text: 'Yes — knowing every word\'s meaning is enough to understand the sentence', isCorrect: false, misconceptionId: `${LCOM}:MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LCOM}:MC-IF-I-UNDERSTAND-THE-WORDS-I-UNDERSTAND-THE-TEXT`],
+    source: `${LCOM_SRC} — P28 only-some-vs-all conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -11920,6 +12218,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...RDYN_EXPLANATIONS,
   ...AMOM_EXPLANATIONS,
   ...CAMOM_EXPLANATIONS,
+  ...PTM_EXPLANATIONS,
+  ...RFLU_EXPLANATIONS,
+  ...LCOM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -12060,4 +12361,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...RDYN_PROBES,
   ...AMOM_PROBES,
   ...CAMOM_PROBES,
+  ...PTM_PROBES,
+  ...RFLU_PROBES,
+  ...LCOM_PROBES,
 ]
