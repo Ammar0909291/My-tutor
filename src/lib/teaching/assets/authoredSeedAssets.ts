@@ -17004,6 +17004,198 @@ const QUOT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.sentence-fragments ─────────────────────────────────────────
+const FRAG = 'eng.grammar.sentence-fragments'
+const FRAG_SRC = 'docs/curriculum/blueprints/eng.grammar.sentence-fragments.md'
+
+const FRAG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FRAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Having a subject and verb somewhere in a group of words is like ' +
+      'having flour and water somewhere in your kitchen — necessary ' +
+      'ingredients, but not automatically a finished dish. "Because the ' +
+      'rain started." has a subject ("rain") and a verb ("started"), but ' +
+      'is still a fragment — "because" creates an expectation that MORE ' +
+      'is coming ("because the rain started... WHAT happened?"). Don’t ' +
+      'just check for a subject and a verb — check whether the words ' +
+      'express a genuinely COMPLETE thought that doesn’t leave the reader ' +
+      'expecting more.',
+    targetedMisconceptions: [`${FRAG}:MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT`],
+    source: `${FRAG_SRC} — MC-A (P28 because-the-rain-started conflict)`,
+  },
+  {
+    conceptId: FRAG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Always trying to pad a fragment into its own standalone sentence ' +
+      'is like trying to repair a puzzle piece that clearly belongs ' +
+      'attached to its neighbor by gluing random extra cardboard onto it ' +
+      'instead of just connecting it. "The team celebrated. Because they ' +
+      'had finally won the championship." reads awkwardly as two pieces; ' +
+      'the natural fix is to JOIN them: "The team celebrated because they ' +
+      'had finally won the championship." When you find a fragment, first ' +
+      'check whether it logically belongs attached to the sentence right ' +
+      'before or after it.',
+    targetedMisconceptions: [`${FRAG}:MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP`],
+    source: `${FRAG_SRC} — MC-B (P28 team-celebrated-because-they-had-won conflict)`,
+  },
+  {
+    conceptId: FRAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A subject and verb being present does not automatically make a ' +
+      'group of words a complete sentence — a subordinate clause like ' +
+      '"because the rain started" contains both but still leaves the ' +
+      'reader expecting more, since the subordinating word (because, ' +
+      'although, when) creates a dependency. Separately, the most natural ' +
+      'fix for a fragment is often to JOIN it to the adjacent sentence it ' +
+      'logically belongs with, rather than padding it into an artificial ' +
+      'standalone sentence — check whether joining reads more naturally ' +
+      'before considering other fixes.',
+    targetedMisconceptions: [
+      `${FRAG}:MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT`,
+      `${FRAG}:MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP`,
+    ],
+    source: `${FRAG_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const FRAG_PROBES: SeedProbe[] = [
+  {
+    conceptId: FRAG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is "Because the rain started." a complete sentence, since it has a subject ("rain") and a verb ("started")?',
+    choices: [
+      { text: 'No — it is a fragment; "because" leaves the reader expecting more information about what happened as a result', isCorrect: true },
+      { text: 'Yes — any group of words with a subject and a verb somewhere in it is a complete sentence', isCorrect: false, misconceptionId: `${FRAG}:MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT` },
+    ],
+    correctValue: 'no, fragment',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FRAG}:MC-A-A-GROUP-OF-WORDS-IS-A-COMPLETE-SENTENCE-AS-LONG-AS-IT-HAS-A-SUBJECT-AND-A-VERB-SOMEWHERE-IN-IT`],
+    source: `${FRAG_SRC} — because-the-rain-started conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FRAG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'To fix "The team celebrated. Because they had finally won the championship." should you pad the fragment into its own sentence, or join it to the sentence before it?',
+    choices: [
+      { text: 'Join it to the sentence before it: "The team celebrated because they had finally won the championship" — this reads far more naturally', isCorrect: true },
+      { text: 'Always pad the fragment out into its own standalone complete sentence', isCorrect: false, misconceptionId: `${FRAG}:MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP` },
+    ],
+    correctValue: 'join to the adjacent sentence',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FRAG}:MC-B-FIXING-A-FRAGMENT-ALWAYS-MEANS-ADDING-MORE-WORDS-TO-THE-SAME-STANDALONE-GROUP`],
+    source: `${FRAG_SRC} — team-celebrated-because-they-had-won conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.word-classes-overview ──────────────────────────────────────
+const WCLS = 'eng.grammar.word-classes-overview'
+const WCLS_SRC = 'docs/curriculum/blueprints/eng.grammar.word-classes-overview.md'
+
+const WCLS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WCLS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Word class is determined by how a word FUNCTIONS in a specific ' +
+      'sentence, not by some fixed label attached to the word forever. ' +
+      'Many English words (run, light, fast, cut, book) can serve as ' +
+      'different word classes depending on their role in context — "run" ' +
+      'is a verb in "I run every day" but a noun in "I went for a run." ' +
+      'Before labeling a word’s class, check what JOB it’s doing in THIS ' +
+      'specific sentence — don’t assume a fixed class based on the word ' +
+      'alone.',
+    targetedMisconceptions: [`${WCLS}:MC-WORD-CLASS-IS-FIXED-PER-WORD`],
+    source: `${WCLS_SRC} — MC-WORD-CLASS-IS-FIXED-PER-WORD (P28 run-as-verb-vs-noun conflict)`,
+  },
+  {
+    conceptId: WCLS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Word class is determined by grammatical FUNCTION and POSITION in a ' +
+      'sentence — does it take a determiner like "the"? does it show ' +
+      'action or being? does it modify another word? — not by whether the ' +
+      'underlying concept feels action-like or thing-like. "Arrival" ' +
+      'names an event but functions grammatically as a noun in "The ' +
+      'arrival surprised everyone," since it takes "the" and acts as the ' +
+      'subject — not a verb, even though "arrive" feels action-like.',
+    targetedMisconceptions: [`${WCLS}:MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE`],
+    source: `${WCLS_SRC} — MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE (P28 arrival-vs-arrive conflict)`,
+  },
+  {
+    conceptId: WCLS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Word class is not a fixed, permanent label attached to a word — ' +
+      'it is determined by the word’s grammatical function in a specific ' +
+      'sentence, and many common English words (run, light, book) shift ' +
+      'class depending on context. Separately, classification should rely ' +
+      'on grammatical signals (determiners, tense marking, modification ' +
+      'targets, sentence position) rather than surface meaning or topic — ' +
+      '"arrival" functions as a noun despite naming an event, because it ' +
+      'takes "the" and serves as the sentence’s subject.',
+    targetedMisconceptions: [
+      `${WCLS}:MC-WORD-CLASS-IS-FIXED-PER-WORD`,
+      `${WCLS}:MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE`,
+    ],
+    source: `${WCLS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const WCLS_PROBES: SeedProbe[] = [
+  {
+    conceptId: WCLS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "I went for a run," is "run" functioning as a verb, the same as in "I run every day"?',
+    choices: [
+      { text: 'No — here "run" functions as a noun (a thing, taking "a" before it), even though it\'s a verb in "I run every day"', isCorrect: true },
+      { text: 'Yes — "run" is always a verb, no matter how it\'s used', isCorrect: false, misconceptionId: `${WCLS}:MC-WORD-CLASS-IS-FIXED-PER-WORD` },
+    ],
+    correctValue: 'no, noun here',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${WCLS}:MC-WORD-CLASS-IS-FIXED-PER-WORD`],
+    source: `${WCLS_SRC} — run-as-verb-vs-noun conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WCLS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In "The arrival surprised everyone," is "arrival" a verb, since it describes an action-like event?',
+    choices: [
+      { text: 'No — "arrival" functions as a noun here; it takes "the" and acts as the sentence\'s subject, regardless of feeling action-like', isCorrect: true },
+      { text: 'Yes — if a word\'s meaning is about an action, it must be a verb', isCorrect: false, misconceptionId: `${WCLS}:MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE` },
+    ],
+    correctValue: 'no, noun',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${WCLS}:MC-WORD-CLASS-DETERMINED-BY-MEANING-ALONE`],
+    source: `${WCLS_SRC} — arrival-vs-arrive conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -17199,6 +17391,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CMPS_EXPLANATIONS,
   ...APOS_EXPLANATIONS,
   ...QUOT_EXPLANATIONS,
+  ...FRAG_EXPLANATIONS,
+  ...WCLS_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -17394,4 +17588,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CMPS_PROBES,
   ...APOS_PROBES,
   ...QUOT_PROBES,
+  ...FRAG_PROBES,
+  ...WCLS_PROBES,
 ]
