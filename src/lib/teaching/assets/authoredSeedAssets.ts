@@ -23866,6 +23866,555 @@ const PERW_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.linguistics.what-is-linguistics ──────────────────────────────────────
+const WIL = 'eng.linguistics.what-is-linguistics'
+const WIL_SRC = 'docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md'
+
+const WIL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WIL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A linguist studying why a regional dialect uses a specific ' +
+      'grammatical construction is documenting how language actually ' +
+      'works, not correcting it — like a biologist studying wolf behavior ' +
+      'without judging wolves for not acting like domestic dogs. ' +
+      'Linguistics is a descriptive science: it studies and explains how ' +
+      'language actually varies, including "non-standard" forms, rather ' +
+      'than prescribing how language "should" be used.',
+    targetedMisconceptions: [`${WIL}:MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES`],
+    source: `${WIL_SRC} — MC-A (P28 biologist-wolf-behavior conflict)`,
+  },
+  {
+    conceptId: WIL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Linguistics isn\'t one narrow subject about grammar — it branches ' +
+      'into distinct subfields (phonetics/phonology studies sounds, ' +
+      'morphology studies word structure, syntax studies sentence ' +
+      'structure, semantics studies meaning, sociolinguistics studies ' +
+      'social variation), just as medicine branches into cardiology, ' +
+      'neurology, and immunology. Ask which subfield a topic belongs to, ' +
+      'not whether it\'s "grammar."',
+    targetedMisconceptions: [`${WIL}:MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR`],
+    source: `${WIL_SRC} — MC-B (P28 medical-specialties conflict)`,
+  },
+  {
+    conceptId: WIL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Linguistics is a descriptive science documenting and explaining ' +
+      'how language actually works and varies — including dialects, ' +
+      'registers, and historical change treated as legitimate data — ' +
+      'rather than a prescriptive discipline enforcing "correct" grammar ' +
+      'rules. Separately, linguistics comprises multiple distinct ' +
+      'subfields (phonetics/phonology, morphology, syntax, semantics, ' +
+      'sociolinguistics) studying genuinely different aspects of ' +
+      'language, not one narrow grammar-focused topic.',
+    targetedMisconceptions: [
+      `${WIL}:MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES`,
+      `${WIL}:MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR`,
+    ],
+    source: `${WIL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const WIL_PROBES: SeedProbe[] = [
+  {
+    conceptId: WIL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A linguist studies why a regional dialect consistently uses a specific grammatical construction. Is the linguist\'s job to correct that dialect\'s "mistake"?',
+    choices: [
+      { text: 'No — linguistics is a descriptive science documenting how language actually works and varies, not a prescriptive activity correcting "errors"', isCorrect: true },
+      { text: 'Yes — linguistics is the study of correct grammar rules', isCorrect: false, misconceptionId: `${WIL}:MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES` },
+    ],
+    correctValue: 'no, linguistics describes not prescribes',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WIL}:MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES`],
+    source: `${WIL_SRC} — biologist-wolf-behavior conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WIL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A linguistics course includes units on how children acquire language and how languages change over centuries. Is linguistics really just one narrow subject about grammar rules?',
+    choices: [
+      { text: 'No — linguistics branches into distinct subfields (phonetics/phonology, morphology, syntax, semantics, sociolinguistics), studying genuinely different aspects of language', isCorrect: true },
+      { text: 'Yes — linguistics is just one single subject about grammar', isCorrect: false, misconceptionId: `${WIL}:MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR` },
+    ],
+    correctValue: 'no, it has distinct subfields',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WIL}:MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR`],
+    source: `${WIL_SRC} — medical-specialties conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.comparative-literature-intro ─────────────────────────────
+const CLIT = 'eng.literature.comparative-literature-intro'
+const CLIT_SRC = 'docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md'
+
+const CLIT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CLIT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traditions with no documented historical contact sharing a ' +
+      'similar narrative pattern doesn\'t mean one influenced the other ' +
+      '— like two isolated island populations independently developing ' +
+      'similar fishing tools because of shared environmental challenges, ' +
+      'not because one taught the other. Check for documented contact ' +
+      'before assuming direct influence; convergent development around a ' +
+      'shared human concern is a genuine alternative explanation.',
+    targetedMisconceptions: [`${CLIT}:MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER`],
+    source: `${CLIT_SRC} — MC-A (P28 isolated-island-fishing-tools conflict)`,
+  },
+  {
+    conceptId: CLIT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Saying two works "both explore family duty, so they\'re basically ' +
+      'the same" is like noting two different dishes both "use spice" ' +
+      'and concluding they\'re the same food — it flattens everything ' +
+      'that makes each distinct. Genuine comparison holds BOTH the real ' +
+      'similarity AND the real, culturally-rooted differences (what duty ' +
+      'means, how it\'s enacted) in view at once.',
+    targetedMisconceptions: [`${CLIT}:MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM`],
+    source: `${CLIT_SRC} — MC-B (P28 spice-flattening conflict)`,
+  },
+  {
+    conceptId: CLIT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A shared literary pattern between traditions with no documented ' +
+      'contact more likely reflects independent, convergent development ' +
+      'around a universal human concern than direct influence, so ' +
+      'historical contact evidence should be checked before assuming ' +
+      'borrowing. Separately, genuine comparative analysis must hold both ' +
+      'real similarities and real, culturally-rooted differences in view ' +
+      'simultaneously — flattening differences in the pursuit of ' +
+      'similarity produces an incomplete comparison.',
+    targetedMisconceptions: [
+      `${CLIT}:MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER`,
+      `${CLIT}:MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM`,
+    ],
+    source: `${CLIT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CLIT_PROBES: SeedProbe[] = [
+  {
+    conceptId: CLIT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two literary traditions with no documented historical contact both contain a similar coming-of-age narrative pattern. Must this mean one tradition directly influenced the other?',
+    choices: [
+      { text: 'No — with no documented contact, the similarity more likely reflects independent, convergent development around a shared human concern', isCorrect: true },
+      { text: 'Yes — any similarity between works from different traditions means one directly influenced the other', isCorrect: false, misconceptionId: `${CLIT}:MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER` },
+    ],
+    correctValue: 'no, check for documented contact first',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CLIT}:MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER`],
+    source: `${CLIT_SRC} — isolated-island-fishing-tools conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CLIT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two works from different cultures both explore family duty. Is it accurate to say they "have the same theme," full stop, without examining how each culture\'s context shapes what that duty actually means?',
+    choices: [
+      { text: 'No — genuine comparison must hold both the real similarity and the real, culturally-rooted differences in view; stopping at "same theme" flattens meaningful distinctions', isCorrect: true },
+      { text: 'Yes — comparing literature across cultures means ignoring or flattening out the real differences between them', isCorrect: false, misconceptionId: `${CLIT}:MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM` },
+    ],
+    correctValue: 'no, hold similarity and difference together',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CLIT}:MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM`],
+    source: `${CLIT_SRC} — spice-flattening conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.rhythm-and-timing ───────────────────────────────────────────
+const RTIM = 'eng.phonetics.rhythm-and-timing'
+const RTIM_SRC = 'docs/curriculum/blueprints/eng.phonetics.rhythm-and-timing.md'
+
+const RTIM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RTIM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"The CAT sat on the MAT" and "CATS sat on MATS" have different ' +
+      'numbers of unstressed syllables between the stressed words, yet ' +
+      'the time between CAT-beat and MAT-beat (or CATS and MATS) stays ' +
+      'roughly similar — English is STRESS-TIMED, compressing or ' +
+      'stretching unstressed syllables to keep stressed syllables at ' +
+      'roughly regular intervals, unlike syllable-timed languages where ' +
+      'every syllable gets equal duration.',
+    targetedMisconceptions: [`${RTIM}:MC-EACH-SYLLABLE-TAKES-EQUAL-TIME`],
+    source: `${RTIM_SRC} — MC-1 (P28 cat-sat-mat-compression conflict)`,
+  },
+  {
+    conceptId: RTIM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Knowing WHICH syllables are stressed (stress) isn\'t the same as ' +
+      'the TIMING pattern this creates across an utterance (rhythm). ' +
+      'Clapping on stressed syllables and noticing whether the claps are ' +
+      'evenly spaced in TIME reveals rhythm as a distinct, temporal layer ' +
+      'built on top of, but not identical to, stress placement.',
+    targetedMisconceptions: [`${RTIM}:MC-RHYTHM-IS-THE-SAME-AS-STRESS`],
+    source: `${RTIM_SRC} — MC-2 (P28 clap-timing-vs-stress conflict)`,
+  },
+  {
+    conceptId: RTIM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'English is stress-timed: stressed syllables recur at roughly ' +
+      'equal time intervals regardless of how many unstressed syllables ' +
+      'fall between them, since unstressed syllables compress or stretch ' +
+      'to fit — a genuinely different system from syllable-timed ' +
+      'languages, where every syllable gets roughly equal duration. ' +
+      'Separately, stress (which syllables are emphasized) and rhythm ' +
+      '(the resulting temporal timing pattern) are related but distinct ' +
+      'phenomena that should be identified separately.',
+    targetedMisconceptions: [
+      `${RTIM}:MC-EACH-SYLLABLE-TAKES-EQUAL-TIME`,
+      `${RTIM}:MC-RHYTHM-IS-THE-SAME-AS-STRESS`,
+    ],
+    source: `${RTIM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RTIM_PROBES: SeedProbe[] = [
+  {
+    conceptId: RTIM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The CAT sat on the MAT" has 2 unstressed syllables between the stresses; "CATS sat on MATS" has 0. Does each syllable take the same amount of time in natural English speech regardless of stress?',
+    choices: [
+      { text: 'No — English is stress-timed; unstressed syllables compress or stretch to keep stressed syllables at roughly regular intervals, not each syllable taking equal time', isCorrect: true },
+      { text: 'Yes — each syllable takes equal time', isCorrect: false, misconceptionId: `${RTIM}:MC-EACH-SYLLABLE-TAKES-EQUAL-TIME` },
+    ],
+    correctValue: 'no, stress-timed not syllable-timed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RTIM}:MC-EACH-SYLLABLE-TAKES-EQUAL-TIME`],
+    source: `${RTIM_SRC} — cat-sat-mat-compression conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RTIM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You correctly identified which syllables are stressed in a sentence. Is that the same thing as describing the sentence\'s rhythm?',
+    choices: [
+      { text: 'No — rhythm is the timing pattern this creates across the utterance, a distinct temporal layer built on top of, but not identical to, stress placement', isCorrect: true },
+      { text: 'Yes — rhythm is the same as stress', isCorrect: false, misconceptionId: `${RTIM}:MC-RHYTHM-IS-THE-SAME-AS-STRESS` },
+    ],
+    correctValue: 'no, rhythm is timing not just stress',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RTIM}:MC-RHYTHM-IS-THE-SAME-AS-STRESS`],
+    source: `${RTIM_SRC} — clap-timing-vs-stress conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.speaking.oral-fluency ──────────────────────────────────────────────────
+const ORFL = 'eng.speaking.oral-fluency'
+const ORFL_SRC = 'docs/curriculum/blueprints/eng.speaking.oral-fluency.md'
+
+const ORFL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORFL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A genuinely fluent speaker giving an unscripted answer still ' +
+      'pauses, uses fillers ("um," "well"), and sometimes restarts a ' +
+      'sentence. Fluency is about OVERALL flow and appropriate pacing, ' +
+      'not the complete absence of any pause or hesitation — treating any ' +
+      'pause as a failure sets an unrealistic standard even native ' +
+      'speakers don\'t meet.',
+    targetedMisconceptions: [`${ORFL}:MC-FLUENCY-MEANS-ZERO-HESITATION`],
+    source: `${ORFL_SRC} — MC-1 (P28 fluent-speaker-pauses conflict)`,
+  },
+  {
+    conceptId: ORFL,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Stopping mid-sentence for five seconds to fix a small grammar ' +
+      'mistake is more disruptive than the mistake itself would have ' +
+      'been. Oral fluency is about maintaining natural pace and flow — a ' +
+      'separate skill from grammatical accuracy. Let small, non- ' +
+      'disruptive errors pass and keep the conversation moving rather ' +
+      'than stopping to fix every one.',
+    targetedMisconceptions: [`${ORFL}:MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR`],
+    source: `${ORFL_SRC} — MC-2 (P28 five-second-pause-to-fix conflict)`,
+  },
+  {
+    conceptId: ORFL,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuinely fluent speech includes strategic pausing, filler use, ' +
+      'and occasional self-correction — fluency should be judged by ' +
+      'overall flow and appropriate pacing, not the complete absence of ' +
+      'hesitation. Separately, fluency and grammatical accuracy are ' +
+      'distinct skills: a minor, non-disruptive grammar slip costs less ' +
+      'to overall flow than a long pause to self-correct it, so letting ' +
+      'small errors pass is often the more skilled choice.',
+    targetedMisconceptions: [
+      `${ORFL}:MC-FLUENCY-MEANS-ZERO-HESITATION`,
+      `${ORFL}:MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR`,
+    ],
+    source: `${ORFL_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ORFL_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORFL,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A recording of a genuinely fluent speaker\'s unscripted answer includes several pauses and "um"s. Does this mean the speaker isn\'t actually fluent?',
+    choices: [
+      { text: 'No — fluency is about overall flow and appropriate pacing; natural pauses and fillers are a normal part of fluent speech, not a failure', isCorrect: true },
+      { text: 'Yes — fluency means zero hesitation', isCorrect: false, misconceptionId: `${ORFL}:MC-FLUENCY-MEANS-ZERO-HESITATION` },
+    ],
+    correctValue: 'no, pauses are normal in fluent speech',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ORFL}:MC-FLUENCY-MEANS-ZERO-HESITATION`],
+    source: `${ORFL_SRC} — fluent-speaker-pauses conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ORFL,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You stop mid-sentence for five seconds to fix a small grammar mistake. Is this necessary to maintain fluency?',
+    choices: [
+      { text: 'No — the long pause to fix a minor error is more disruptive than the error itself; fluency and grammatical perfection are separate skills, and letting small errors pass often preserves flow better', isCorrect: true },
+      { text: 'Yes — fluency requires perfect grammar', isCorrect: false, misconceptionId: `${ORFL}:MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR` },
+    ],
+    correctValue: 'no, flow matters more than perfection',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ORFL}:MC-FLUENCY-REQUIRES-PERFECT-GRAMMAR`],
+    source: `${ORFL_SRC} — five-second-pause-to-fix conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.creative-writing-forms ────────────────────────────────────────
+const CWF = 'eng.writing.creative-writing-forms'
+const CWF_SRC = 'docs/curriculum/blueprints/eng.writing.creative-writing-forms.md'
+
+const CWF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CWF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A rambling multi-page piece labeled "flash fiction" ignores the ' +
+      'form\'s real length constraint (under 500 words). Like ' +
+      'improvisational jazz, which follows its own real musical structure ' +
+      'despite not being sheet-music-exact, flash fiction has a genuine ' +
+      'length constraint and free verse\'s line breaks are deliberate ' +
+      'craft choices — "free" from standard meter, not free from all ' +
+      'craft.',
+    targetedMisconceptions: [`${CWF}:MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS`],
+    source: `${CWF_SRC} — MC-A (P28 improvisational-jazz conflict)`,
+  },
+  {
+    conceptId: CWF,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Cramming a full multi-scene plot into 400 words with nothing cut ' +
+      'doesn\'t work — like expecting a bite-sized appetizer to contain ' +
+      'exactly the same amount of food as a three-course meal, just ' +
+      'plated differently. Flash fiction demands selecting one moment and ' +
+      'implying the rest; each form demands genuinely different ' +
+      'compositional choices for the same content, not a shrunken or ' +
+      'reformatted version.',
+    targetedMisconceptions: [`${CWF}:MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM`],
+    source: `${CWF_SRC} — MC-B (P28 bite-sized-appetizer conflict)`,
+  },
+  {
+    conceptId: CWF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Non-standard creative forms (flash fiction, free verse) carry ' +
+      'genuine constraints of their own — flash fiction\'s extreme length ' +
+      'limit, free verse\'s deliberate line-break choices — rather than ' +
+      'being rule-free simply because they depart from standard prose. ' +
+      'Separately, content must be genuinely adapted to a chosen form\'s ' +
+      'specific compositional demands; the same structure does not work ' +
+      'equally well across forms without deliberate reshaping.',
+    targetedMisconceptions: [
+      `${CWF}:MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS`,
+      `${CWF}:MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM`,
+    ],
+    source: `${CWF_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const CWF_PROBES: SeedProbe[] = [
+  {
+    conceptId: CWF,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes a rambling, multi-page piece with no compression and calls it "flash fiction." Does calling something flash fiction or free verse mean it has no real rules or constraints?',
+    choices: [
+      { text: 'No — flash fiction has a genuine length constraint, and free verse\'s line breaks are deliberate craft choices; these forms have real constraints, just different ones from standard prose', isCorrect: true },
+      { text: 'Yes — a creative form like flash fiction or free verse has no rules or constraints', isCorrect: false, misconceptionId: `${CWF}:MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS` },
+    ],
+    correctValue: 'no, real constraints exist',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CWF}:MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS`],
+    source: `${CWF_SRC} — improvisational-jazz conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: CWF,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student tries to cram a full traditional multi-scene plot into 400 words of flash fiction without cutting anything. Will the same content and structure work equally well in any creative form?',
+    choices: [
+      { text: 'No — flash fiction demands selecting one moment and implying the rest; content must be genuinely adapted to each form\'s specific demands, not just shrunk', isCorrect: true },
+      { text: 'Yes — the same content and structure works equally well in any creative form', isCorrect: false, misconceptionId: `${CWF}:MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM` },
+    ],
+    correctValue: 'no, content must be adapted per form',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CWF}:MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM`],
+    source: `${CWF_SRC} — bite-sized-appetizer conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.the-writing-process ───────────────────────────────────────────
+const TWP = 'eng.writing.the-writing-process'
+const TWP_SRC = 'docs/curriculum/blueprints/eng.writing.the-writing-process.md'
+
+const TWP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TWP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Even celebrated, published authors go through multiple drafts, ' +
+      'editor feedback, and cut passages — nobody produces a finished, ' +
+      'polished piece in one pass, no matter how talented. Needing to ' +
+      'revise isn\'t a sign you\'re bad at writing; expect to revise every ' +
+      'time, treating your first draft as a rough sketch meant to be ' +
+      'reshaped.',
+    targetedMisconceptions: [`${TWP}:MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS`],
+    source: `${TWP_SRC} — MC-1 (P28 celebrated-author-revision conflict)`,
+  },
+  {
+    conceptId: TWP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Fixing spelling on a confusing, poorly-organized draft doesn\'t ' +
+      'solve its real problem — like painting a house with a badly- ' +
+      'designed floor plan instead of moving the walls first. Revising ' +
+      '(big-picture: organization, clarity, ideas) must happen before ' +
+      'editing (surface-level: spelling, grammar, punctuation) — they are ' +
+      'two different jobs, not the same activity.',
+    targetedMisconceptions: [`${TWP}:MC-EDITING-AND-REVISING-ARE-THE-SAME-THING`],
+    source: `${TWP_SRC} — MC-2 (P28 house-vs-paint-job conflict)`,
+  },
+  {
+    conceptId: TWP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Multiple drafts and substantial revision are a normal, universal ' +
+      'part of the writing process for all writers, regardless of skill ' +
+      'level — needing to revise is not evidence of an inadequate first ' +
+      'attempt. Separately, revising (reconsidering content, ' +
+      'organization, and clarity) and editing (surface-level correction ' +
+      'of spelling, grammar, punctuation) are distinct activities that ' +
+      'should generally happen in that order, not interchangeable terms ' +
+      'for the same task.',
+    targetedMisconceptions: [
+      `${TWP}:MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS`,
+      `${TWP}:MC-EDITING-AND-REVISING-ARE-THE-SAME-THING`,
+    ],
+    source: `${TWP_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TWP_PROBES: SeedProbe[] = [
+  {
+    conceptId: TWP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A celebrated, published author\'s work went through many drafts, editor feedback, and cut passages before publication. Does needing this much revision mean the author wasn\'t good enough to get it right the first time?',
+    choices: [
+      { text: 'No — even the most skilled writers go through multiple drafts and revision; this is simply how all serious writing gets made, not a sign of inadequate skill', isCorrect: true },
+      { text: 'Yes — good writers produce a finished piece in one pass', isCorrect: false, misconceptionId: `${TWP}:MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS` },
+    ],
+    correctValue: 'no, revision is universal and normal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TWP}:MC-GOOD-WRITERS-PRODUCE-A-FINISHED-PIECE-IN-ONE-PASS`],
+    source: `${TWP_SRC} — celebrated-author-revision conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TWP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A draft has a confusing, poorly-organized argument but perfect spelling and grammar. Would fixing spelling errors solve this draft\'s real problem?',
+    choices: [
+      { text: 'No — revising (fixing organization and clarity) and editing (fixing spelling/grammar) are different jobs; the big-picture organizational problem needs revision first, not editing', isCorrect: true },
+      { text: 'Yes — editing and revising are the same thing', isCorrect: false, misconceptionId: `${TWP}:MC-EDITING-AND-REVISING-ARE-THE-SAME-THING` },
+    ],
+    correctValue: 'no, revise organization first',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TWP}:MC-EDITING-AND-REVISING-ARE-THE-SAME-THING`],
+    source: `${TWP_SRC} — house-vs-paint-job conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -24135,6 +24684,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...EXPW_EXPLANATIONS,
   ...NARW_EXPLANATIONS,
   ...PERW_EXPLANATIONS,
+  ...WIL_EXPLANATIONS,
+  ...CLIT_EXPLANATIONS,
+  ...RTIM_EXPLANATIONS,
+  ...ORFL_EXPLANATIONS,
+  ...CWF_EXPLANATIONS,
+  ...TWP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -24404,4 +24959,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...EXPW_PROBES,
   ...NARW_PROBES,
   ...PERW_PROBES,
+  ...WIL_PROBES,
+  ...CLIT_PROBES,
+  ...RTIM_PROBES,
+  ...ORFL_PROBES,
+  ...CWF_PROBES,
+  ...TWP_PROBES,
 ]
