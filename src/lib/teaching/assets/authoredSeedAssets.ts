@@ -30667,6 +30667,367 @@ const NEGL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.magnetic-field ──────────────────────────────────────────────────
+const MFLD = 'phys.em.magnetic-field'
+const MFLD_SRC = 'docs/curriculum/blueprints/phys.em.magnetic-field.md'
+
+const MFLD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MFLD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Hold a compass near a wire carrying current and the needle deflects — move a magnet near a wire and a current appears. These reveal the magnetic field B, a vector region of space where magnetic forces act on moving charges and current-carrying conductors, measured in tesla (1 T = 1 N/(A·m)). Unlike electric field lines, which start and end on charges, B field lines always form closed loops — they circle around currents (right-hand rule: wrap fingers around the wire with thumb in the current direction, and fingers show B\'s direction) and run from north to south pole outside a bar magnet, then continue S to N inside the magnet to close the loop. Field sources: moving electric charges (discovered by Ørsted, 1820), permanent magnets (microscopic magnetic moments), and changing electric fields (Maxwell\'s addition). For a long straight wire carrying current I, B = μ₀I/(2πr) at perpendicular distance r, where μ₀ = 4π×10⁻⁷ T·m/A. A key structural fact — Gauss\'s law for magnetism, ∮B·dA = 0 — states there are no magnetic monopoles: cut a bar magnet in half and you get two complete magnets, never an isolated N or S pole.',
+    targetedMisconceptions: [`${MFLD}:MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE`, `${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES`],
+    source: `${MFLD_SRC} — Tier 1 (compass/wire demo) + Tier 2 (right-hand rule, B = μ₀I/2πr, no-monopoles)`,
+  },
+  {
+    conceptId: MFLD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong analogy: treating magnetic poles like electric charges, so field lines seem to "start" at the north pole and "end" at the south pole. Electric field lines really do start on + charges and end on − charges (∮E·dA = Q_enc/ε₀ ≠ 0), but Gauss\'s law for magnetism says ∮B·dA = 0 exactly — no magnetic monopoles exist. A field line that emerges from the north pole doesn\'t stop at the south pole; it continues INSIDE the magnet from S back to N, closing the loop. Proof by experiment: cut a bar magnet in half and you never separate an isolated N from an isolated S — you get two complete magnets, each with its own N and S pole. Second trap: believing a magnetic field exerts force on a charge that isn\'t moving. It can\'t — the magnetic force is F = qv×B, and for a stationary charge v = 0, so F = q(0)×B = 0 exactly, no matter how strong B is. Place a proton at rest between strong magnets and it feels nothing from them; only once it starts moving does it curve. This is why magnets don\'t attract a neutral wire carrying no current, but do attract a current-carrying wire — the moving electrons inside feel F = qv×B even though the wire itself is stationary.',
+    targetedMisconceptions: [`${MFLD}:MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE`, `${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES`],
+    source: `${MFLD_SRC} — MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE + MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MFLD_PROBES: SeedProbe[] = [
+  {
+    conceptId: MFLD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bar magnet is cut exactly in half. What do you get?',
+    choices: [
+      { text: 'Two complete magnets, each with its own north and south pole — isolated magnetic monopoles have never been observed', isCorrect: true },
+      { text: 'One piece with just the north pole and another piece with just the south pole', isCorrect: false, misconceptionId: `${MFLD}:MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE` },
+    ],
+    correctValue: 'two complete magnets',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MFLD}:MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE`],
+    source: `${MFLD_SRC} — MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MFLD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A proton sits at rest inside a strong magnetic field B. What magnetic force does it feel?',
+    choices: [
+      { text: 'Zero — F = qv×B requires velocity, and a stationary charge (v = 0) feels no magnetic force regardless of how strong B is', isCorrect: true },
+      { text: 'A force proportional to B, since it is sitting inside a strong magnetic field', isCorrect: false, misconceptionId: `${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES` },
+    ],
+    correctValue: '0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES`],
+    source: `${MFLD_SRC} — MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.magnetic-force ──────────────────────────────────────────────────
+const MFOR = 'phys.em.magnetic-force'
+const MFOR_SRC = 'docs/curriculum/blueprints/phys.em.magnetic-force.md'
+
+const MFOR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MFOR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A charge q moving with velocity v in a magnetic field B feels the Lorentz magnetic force F = q(v×B), with magnitude F = qvB sinθ where θ is the angle between v and B: zero when v is parallel to B, maximum when v is perpendicular to B, and the direction is always perpendicular to BOTH v and B (right-hand rule for a positive charge, reversed for negative). Because F is always perpendicular to v, the magnetic force can never do work — P = F·v = 0 always — so it changes a particle\'s direction of motion but never its speed or kinetic energy. Enter a uniform B field perpendicular to your velocity and the magnetic force provides exactly the centripetal force for circular motion: qvB = mv²/r, giving cyclotron radius r = mv/(qB) and a period T = 2πm/(qB) that is independent of speed — the basis of mass spectrometers (heavier ions trace larger circles) and cyclotron accelerators. For a current-carrying wire of length L in field B, the force is F = IL×B (magnitude BIL sinθ); applied to two parallel wires, the mutual force per length is F/L = μ₀I₁I₂/(2πd) — and for currents in the SAME direction this force is ATTRACTIVE, while opposite-direction currents repel.',
+    targetedMisconceptions: [`${MFOR}:MC-MAGNETIC-FORCE-DOES-WORK`, `${MFOR}:MC-PARALLEL-CURRENTS-REPEL`],
+    source: `${MFOR_SRC} — Block 1-A (Lorentz force) + Block 1-B (cyclotron radius) + Block 1-C (force between wires)`,
+  },
+  {
+    conceptId: MFOR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps in magnetic force reasoning. First: assuming a magnetic force can speed up (or slow down) a charged particle, since it obviously "pushes" it around. It can\'t change speed — work = F·v·Δt, and F = qv×B is always exactly perpendicular to v, so F·v = 0 at every instant, meaning power delivered is always zero. The magnetic force is exactly like the tension in a string swinging a ball in a circle: it constantly redirects the ball without ever speeding it up or slowing it down, because tension too is always perpendicular to the velocity. A charged particle circling in a pure magnetic field keeps the same kinetic energy forever — only its direction changes. Second trap: assuming that two wires carrying current in the same direction repel each other, by analogy with "like charges repel" in electrostatics. Magnetism doesn\'t follow that rule. Trace it through: wire 1\'s current creates a B field that circles around it (right-hand rule); at wire 2\'s location, that field points into the page; the force on wire 2\'s current (F = IL×B) then points TOWARD wire 1 — same-direction currents ATTRACT. This was historically important enough that the ampere itself is defined from this attractive force: 1 A is the current producing a force of 2×10⁻⁷ N per meter between two parallel wires 1 m apart. Opposite-direction currents repel — the exact reverse of the same-direction case.',
+    targetedMisconceptions: [`${MFOR}:MC-MAGNETIC-FORCE-DOES-WORK`, `${MFOR}:MC-PARALLEL-CURRENTS-REPEL`],
+    source: `${MFOR_SRC} — MC-MAGNETIC-FORCE-DOES-WORK + MC-PARALLEL-CURRENTS-REPEL, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MFOR_PROBES: SeedProbe[] = [
+  {
+    conceptId: MFOR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A charged particle moves in a circle inside a uniform magnetic field, with no other forces acting. What happens to its kinetic energy over time?',
+    choices: [
+      { text: 'It stays exactly constant — the magnetic force is always perpendicular to velocity, so it does zero work and only changes direction, never speed', isCorrect: true },
+      { text: 'It increases steadily, since the magnetic force keeps accelerating the particle around the loop', isCorrect: false, misconceptionId: `${MFOR}:MC-MAGNETIC-FORCE-DOES-WORK` },
+    ],
+    correctValue: 'stays constant',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MFOR}:MC-MAGNETIC-FORCE-DOES-WORK`],
+    source: `${MFOR_SRC} — MC-MAGNETIC-FORCE-DOES-WORK trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: MFOR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two long parallel wires both carry current in the SAME direction. Do they attract or repel each other?',
+    choices: [
+      { text: 'They attract — same-direction currents attract, the opposite of how like electric charges behave', isCorrect: true },
+      { text: 'They repel, just like two like electric charges repel each other', isCorrect: false, misconceptionId: `${MFOR}:MC-PARALLEL-CURRENTS-REPEL` },
+    ],
+    correctValue: 'attract',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MFOR}:MC-PARALLEL-CURRENTS-REPEL`],
+    source: `${MFOR_SRC} — MC-PARALLEL-CURRENTS-REPEL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.biot-savart ─────────────────────────────────────────────────────
+const BSAV = 'phys.em.biot-savart'
+const BSAV_SRC = 'docs/curriculum/blueprints/phys.em.biot-savart.md'
+
+const BSAV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BSAV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Biot-Savart law gives the magnetic field dB produced by a tiny current element I dl at a field point a distance r away: dB = (μ₀/4π)(I dl × r̂)/r², with magnitude dB = (μ₀/4π)(I dl sinθ)/r², where θ is the angle between dl and r̂ (the unit vector from the element to the field point). The total field is found by superposition, integrating dB over the whole current path: B = ∫dB. This mirrors Coulomb\'s law structurally — same 1/r² element dependence, dq replaced by I dl — but the source is now a vector (current element) rather than a scalar (charge), so the field direction comes from a cross product instead of simple radial pointing. Two workhorse results follow from integrating this element law: an infinite straight wire gives B = μ₀I/(2πR) at perpendicular distance R (direction found via right-hand rule — curl fingers from current direction toward r̂), and a circular current loop of radius R gives B = μ₀I/(2R) at its center, or more generally B = μ₀IR²/[2(R²+x²)^(3/2)] at distance x along the axis — which reduces to the familiar B ∝ 1/x³ dipole field far from the loop.',
+    targetedMisconceptions: [`${BSAV}:MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE`, `${BSAV}:MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES`],
+    source: `${BSAV_SRC} — Block 1-A (the law, Coulomb analogy) + Block 1-B (infinite wire, circular loop standard results)`,
+  },
+  {
+    conceptId: BSAV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps around Biot-Savart. First: treating the single-current-element form dB = μ₀qv×r̂/(4πr²) as fully general for any moving charge in any situation. The Biot-Savart law strictly describes steady currents in conductors — a continuous, ongoing flow. The single-charge version is derived from it by treating q as a tiny current element (I dl → qv), and it is only reliably valid in the regime v << c with steady, non-accelerating motion; an accelerating charge radiates and neither the static Biot-Savart form nor the simple static B field applies. Second, and much more consequential: assuming the field always falls off as 1/r², the same way the element dB does. It doesn\'t, once you integrate over an extended source — exactly parallel to how a point charge gives E ∝ 1/r² by Coulomb\'s law, but an infinite line of charge gives E ∝ 1/r and an infinite plane gives E = constant. For magnetism: the element law dB ∝ 1/r² is only the starting point; integrating along an infinite straight wire gives B = μ₀I/(2πR) ∝ 1/R (one power weaker), while far from a current loop (a magnetic dipole) the field falls as B ∝ 1/r³ (one power steeper), and inside an infinite solenoid B = μ₀nI is completely uniform, with no r-dependence at all. The lesson: always integrate the actual geometry — never assume 1/r² carries over from the element law to the whole source.',
+    targetedMisconceptions: [`${BSAV}:MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE`, `${BSAV}:MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES`],
+    source: `${BSAV_SRC} — MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE + MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const BSAV_PROBES: SeedProbe[] = [
+  {
+    conceptId: BSAV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Biot-Savart element law says dB ∝ 1/r². What is the field of an INFINITE straight wire, once you integrate over the whole wire?',
+    choices: [
+      { text: 'B = μ₀I/(2πR) ∝ 1/R — integrating the 1/r² element over an infinite line weakens the falloff by one power of r', isCorrect: true },
+      { text: 'B ∝ 1/R², the same falloff as the element law, since that\'s the fundamental law', isCorrect: false, misconceptionId: `${BSAV}:MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES` },
+    ],
+    correctValue: 'B is proportional to 1/R',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BSAV}:MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES`],
+    source: `${BSAV_SRC} — MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BSAV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the formula B = (μ₀/4π)(qv×r̂)/r² for a single moving charge the fundamental statement of the Biot-Savart law?',
+    choices: [
+      { text: 'No — the fundamental law describes steady currents in conductors; the single-charge form is a derived special case, valid only for v << c with steady, non-accelerating motion', isCorrect: true },
+      { text: 'Yes — it applies exactly to any single moving charge in any situation, since current is just made of moving charges', isCorrect: false, misconceptionId: `${BSAV}:MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE` },
+    ],
+    correctValue: 'no, it is a derived special case',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BSAV}:MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE`],
+    source: `${BSAV_SRC} — MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.amperes-law ─────────────────────────────────────────────────────
+const AMPL = 'phys.em.amperes-law'
+const AMPL_SRC = 'docs/curriculum/blueprints/phys.em.amperes-law.md'
+
+const AMPL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AMPL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ampere\'s law states that the line integral of B around any closed path (an "Amperian loop") equals μ₀ times the total current passing through any surface bounded by that path: ∮B·dl = μ₀I_enc. It contains exactly the same physics as the Biot-Savart law — Ampere\'s law is the integral form, Biot-Savart the differential-element form — but the two are useful in different situations: Ampere\'s law only makes B easy to extract when the geometry has enough symmetry (cylindrical, planar, or toroidal) to guarantee B is constant in magnitude and parallel to dl everywhere on the chosen loop. Standard results: outside an infinite wire (radius a), B = μ₀I/(2πr) (matching Biot-Savart); inside a solid conductor with uniform current density, B = μ₀Ir/(2πa²) — increasing LINEARLY with r; inside an infinite solenoid (n turns per meter), B = μ₀nI, uniform, with B = 0 outside; inside a toroid, B = μ₀NI/(2πr), and B = 0 outside since the enclosed current is zero there. Maxwell later discovered the law breaks down for a charging capacitor — choosing a flat surface through the wire vs. a bulging surface through the gap gives different I_enc for the same loop — and fixed it by adding the displacement current, I_d = ε₀dΦ_E/dt, giving the Ampere-Maxwell law ∮B·dl = μ₀(I_enc + I_d), which shows a changing electric field alone creates a circulating magnetic field, the key mechanism behind electromagnetic waves.',
+    targetedMisconceptions: [`${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY`, `${AMPL}:MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES`],
+    source: `${AMPL_SRC} — Block 1-A (the law, symmetry requirement) + Block 1-B (wire/solenoid/toroid results) + Block 1-C (displacement current)`,
+  },
+  {
+    conceptId: AMPL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps in applying Ampere\'s law. First: thinking the B appearing in ∮B·dl = μ₀I_enc is somehow only the field FROM the enclosed current, ignoring any currents outside the loop. It isn\'t — B at every point on the Amperian loop is the TOTAL field from ALL currents, inside and outside. What\'s special is that outside currents\' contributions to the LINE INTEGRAL specifically cancel out around the closed path, by exactly the same geometric argument as Gauss\'s law for electricity (where E at each point on a Gaussian surface is from all charges, but the surface integral still evaluates to only the enclosed charge). So the correct statement is never "B is only from the enclosed current" — it\'s "the total B integrates to μ₀I_enc, because outside contributions cancel in the sum." Second trap: assuming Ampere\'s law is a computational shortcut for ANY current geometry, including a bent wire or a single current-carrying loop viewed off-axis. It isn\'t — Ampere\'s law ∮B·dl = μ₀I_enc is always exactly TRUE, but only USEFUL for finding B when symmetry forces B to be constant in magnitude and parallel to dl all the way around some closed path. A short or bent wire has no such symmetry: the equation still holds, but you can\'t pull B out of the integral, so it gives you no way to solve for B — you\'d need to fall back on Biot-Savart\'s direct integration instead. Ampere\'s law shines only for infinite wires, solenoids, and toroids — genuinely symmetric current distributions.',
+    targetedMisconceptions: [`${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY`, `${AMPL}:MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES`],
+    source: `${AMPL_SRC} — MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY + MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const AMPL_PROBES: SeedProbe[] = [
+  {
+    conceptId: AMPL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You want to use Ampere\'s law to find B for a short, bent piece of wire. What happens?',
+    choices: [
+      { text: 'Ampere\'s law ∮B·dl = μ₀I_enc is still exactly true, but it is USELESS for solving for B here, since there is no symmetry that makes B constant and parallel to dl around any loop — you would need Biot-Savart instead', isCorrect: true },
+      { text: 'Ampere\'s law works fine here, just like it does for an infinite straight wire — it applies to any current geometry equally well', isCorrect: false, misconceptionId: `${AMPL}:MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES` },
+    ],
+    correctValue: 'true but useless without symmetry',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMPL}:MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES`],
+    source: `${AMPL_SRC} — MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: AMPL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On an Amperian loop that encloses only wire 1 (there is also a nearby wire 2 outside the loop), what does the B in ∮B·dl actually represent at each point?',
+    choices: [
+      { text: 'The TOTAL magnetic field from BOTH wires — outside currents still contribute to B, but their net contribution to the closed-loop integral cancels out', isCorrect: true },
+      { text: 'Only the field produced by the enclosed wire 1; wire 2 contributes nothing to B anywhere on the loop', isCorrect: false, misconceptionId: `${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY` },
+    ],
+    correctValue: 'total field from all currents',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY`],
+    source: `${AMPL_SRC} — MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.faradays-law ────────────────────────────────────────────────────
+const FARD = 'phys.em.faradays-law'
+const FARD_SRC = 'docs/curriculum/blueprints/phys.em.faradays-law.md'
+
+const FARD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FARD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Faraday\'s law: the EMF induced in a closed loop equals the negative rate of change of magnetic flux through it, ε = −dΦ_B/dt for one turn, or ε = −N dΦ_B/dt for an N-turn coil, where Φ_B = ∫∫B·dA. The negative sign IS Lenz\'s law — the induced EMF always drives current whose own magnetic field opposes the flux change that created it. Since Φ_B = BA cosθ, there are exactly three independent ways to change flux, each producing EMF: changing B (a moving magnet, or a nearby solenoid\'s current changing), changing A (a loop physically expanding or shrinking), or changing θ (a rotating coil — this is the AC generator). A conductor of length L moving with velocity v perpendicular to B generates a motional EMF ε = BLv, because the moving free electrons feel F = qv×B, separating charge until a potential difference builds up. For an AC generator — a coil of N turns and area A spinning at angular frequency ω in field B — the flux is Φ(t) = NBA cos(ωt), and Faraday\'s law gives ε(t) = NBAω sin(ωt) = ε₀ sin(ωt): the EMF and the flux are exactly 90° out of phase, since the derivative of a cosine is a sine shifted by a quarter cycle.',
+    targetedMisconceptions: [`${FARD}:MC-EMF-REQUIRES-A-CONDUCTOR`, `${FARD}:MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM`],
+    source: `${FARD_SRC} — Block 1-A (the law, three ways to change flux) + Block 1-B (motional EMF) + Block 1-C (AC generator)`,
+  },
+  {
+    conceptId: FARD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps around Faraday\'s law. First: believing electromagnetic induction only happens where there\'s an actual wire loop to carry the current. The deeper, Maxwell-equation form of the law is ∮E·dl = −dΦ_B/dt — a statement purely about the electric field in space, with no wire required. A changing magnetic flux induces a circulating electric field EVERYWHERE in the region, whether or not a conductor happens to be sitting there; put a wire in that region and the induced E drives a measurable current (EMF), but the field itself exists regardless — this is exactly the mechanism that lets electromagnetic waves propagate through empty vacuum, with no conductor anywhere. Second, more counterintuitive trap: assuming a generator produces its LARGEST EMF exactly when the coil is oriented to catch the MOST flux (face-on to B). It\'s the opposite — ε = −dΦ/dt, so EMF depends on flux\'s RATE of change, not its size. When Φ is at a maximum (coil face perpendicular to B), it is momentarily not changing at all — like a ball thrown straight up, which has maximum height but zero velocity at the top — so dΦ/dt = 0 and ε = 0 exactly. EMF is actually maximum when Φ = 0 (coil edge-on to B, cutting field lines fastest). Plotting them out, Φ(t) = Φ₀cos(ωt) and ε(t) = ε₀sin(ωt) are 90° out of phase: whenever one peaks, the other is passing through zero.',
+    targetedMisconceptions: [`${FARD}:MC-EMF-REQUIRES-A-CONDUCTOR`, `${FARD}:MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM`],
+    source: `${FARD_SRC} — MC-EMF-REQUIRES-A-CONDUCTOR + MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const FARD_PROBES: SeedProbe[] = [
+  {
+    conceptId: FARD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a rotating AC generator coil, at what orientation is the induced EMF at its MAXIMUM?',
+    choices: [
+      { text: 'When the coil is edge-on to B (flux Φ = 0), because that\'s when flux is changing FASTEST, and EMF depends on the rate of change of flux, not flux itself', isCorrect: true },
+      { text: 'When the coil is face-on to B (flux Φ is at its maximum), since more flux naturally means more induced EMF', isCorrect: false, misconceptionId: `${FARD}:MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM` },
+    ],
+    correctValue: 'edge-on, when flux is zero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FARD}:MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM`],
+    source: `${FARD_SRC} — MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: FARD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does Faraday\'s law of induction require a physical wire loop to be present in a region of changing magnetic flux?',
+    choices: [
+      { text: 'No — the Maxwell form ∮E·dl = −dΦ_B/dt shows a changing B induces a circulating E field in empty space itself, with no conductor needed; a wire is just a way to detect/use that field', isCorrect: true },
+      { text: 'Yes — with no wire loop present, there is nothing for the changing flux to act on, so no induction occurs at all', isCorrect: false, misconceptionId: `${FARD}:MC-EMF-REQUIRES-A-CONDUCTOR` },
+    ],
+    correctValue: 'no, a wire is not required',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FARD}:MC-EMF-REQUIRES-A-CONDUCTOR`],
+    source: `${FARD_SRC} — MC-EMF-REQUIRES-A-CONDUCTOR trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.lenzs-law ───────────────────────────────────────────────────────
+const LENZ = 'phys.em.lenzs-law'
+const LENZ_SRC = 'docs/curriculum/blueprints/phys.em.lenzs-law.md'
+
+const LENZ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LENZ,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Lenz\'s law: the induced current always flows in the direction that OPPOSES the change in magnetic flux that caused it — this is the physical meaning behind the minus sign in Faraday\'s law, ε = −dΦ_B/dt. It is a direct consequence of energy conservation: if the induced current instead reinforced the flux change, that positive feedback would let the system generate energy from nothing — a genuine perpetual-motion violation. Because the induced response always opposes, an external agent must do real work to force the flux change, and that work becomes exactly the electrical energy delivered by the induced current — energy conserved, not created. The step-by-step procedure: (1) identify whether the original flux through the loop is increasing or decreasing; (2) the induced current must create ITS OWN magnetic field to oppose that specific change — if Φ is increasing, induced B points opposite to the original B; if Φ is decreasing, induced B reinforces (points the same way as) the original B; (3) use the right-hand rule to convert that required induced-B direction into an actual current direction around the loop. Three major applications follow directly: eddy-current braking (a conductor moving through B feels an induced force opposing its own motion — used in train and roller-coaster brakes), back-EMF in motors (a spinning armature induces an EMF opposing the applied voltage, which self-limits current and prevents burnout at running speed), and transformers (Lenz\'s law governs how the secondary\'s induced current responds to the primary\'s changing flux).',
+    targetedMisconceptions: [`${LENZ}:MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT`, `${LENZ}:MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION`],
+    source: `${LENZ_SRC} — Block 1-A (statement, energy-conservation grounding) + Block 1-B (step-by-step procedure) + Block 1-C (braking, back-EMF, transformers)`,
+  },
+  {
+    conceptId: LENZ,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps in applying Lenz\'s law. First: thinking the induced current opposes the ORIGINAL current or the original B field itself, rather than the CHANGE in flux. It doesn\'t work that way — the same original B direction can produce OPPOSITE induced-B directions depending on whether flux is increasing or decreasing. If B (into the page, say) is increasing, the induced current creates a B field OUT of the page to fight the increase. But if that same B (still into the page) is instead decreasing, the induced current creates a B field INTO the page — the SAME direction as the original — to help sustain what\'s draining away. The key word is always CHANGE, not the field itself: if flux is perfectly constant, no matter how large, there is zero EMF and zero induced current at all — think of it as electromagnetic inertia, resisting changes in flux exactly the way ordinary inertia resists changes in velocity, not resisting velocity itself. Second trap: worrying that Lenz\'s law, by producing a current that seems to "help itself," secretly violates energy conservation. It does the opposite — it ENFORCES energy conservation. When a magnet approaches a loop, the induced current creates a repulsive force opposing the approach (verified by the geometry of the induced field), so an external agent must supply real mechanical work to push the magnet in against that resistance — and that exact amount of work reappears as I²R heat dissipated by the induced current. If Lenz\'s law were reversed (attraction instead of repulsion), the magnet would accelerate itself faster and faster toward the loop, inducing ever more current, in an impossible runaway feedback loop that manufactures energy from nothing. The opposing direction Lenz\'s law demands is precisely what keeps the books balanced.',
+    targetedMisconceptions: [`${LENZ}:MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT`, `${LENZ}:MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION`],
+    source: `${LENZ_SRC} — MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT + MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LENZ_PROBES: SeedProbe[] = [
+  {
+    conceptId: LENZ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A magnetic field (into the page) through a loop is DECREASING. What direction does the induced current\'s own magnetic field point, according to Lenz\'s law?',
+    choices: [
+      { text: 'Into the page — the SAME direction as the original field, because the induced current opposes the DECREASE by trying to sustain the fading flux', isCorrect: true },
+      { text: 'Out of the page — opposite to the original field, because induced current always opposes the original field\'s direction', isCorrect: false, misconceptionId: `${LENZ}:MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT` },
+    ],
+    correctValue: 'into the page, same direction as original',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LENZ}:MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT`],
+    source: `${LENZ_SRC} — MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LENZ,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A magnet is pushed toward a conducting loop, and the induced current repels the magnet (Lenz\'s law). Does this repulsion mean the system is generating energy from nothing?',
+    choices: [
+      { text: 'No — the repulsion means an external agent must do real mechanical work to push the magnet in, and that work exactly equals the I²R electrical energy dissipated; energy is conserved, not created', isCorrect: true },
+      { text: 'Yes — the induced current appears without any external energy input, which is a form of perpetual motion', isCorrect: false, misconceptionId: `${LENZ}:MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION` },
+    ],
+    correctValue: 'no, energy is conserved via external work',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LENZ}:MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION`],
+    source: `${LENZ_SRC} — MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION trigger case as probe, distractor-mapped`,
+  },
+]
+
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -31014,6 +31375,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PDES_EXPLANATIONS,
   ...EFP_EXPLANATIONS,
   ...NEGL_EXPLANATIONS,
+  ...MFLD_EXPLANATIONS,
+  ...MFOR_EXPLANATIONS,
+  ...BSAV_EXPLANATIONS,
+  ...AMPL_EXPLANATIONS,
+  ...FARD_EXPLANATIONS,
+  ...LENZ_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -31361,4 +31728,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PDES_PROBES,
   ...EFP_PROBES,
   ...NEGL_PROBES,
+  ...MFLD_PROBES,
+  ...MFOR_PROBES,
+  ...BSAV_PROBES,
+  ...AMPL_PROBES,
+  ...FARD_PROBES,
+  ...LENZ_PROBES,
 ]
