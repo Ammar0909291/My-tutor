@@ -21779,6 +21779,914 @@ const SYLS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.literature.imagery ───────────────────────────────────────────────────
+const IMAG = 'eng.literature.imagery'
+const IMAG_SRC = 'docs/curriculum/blueprints/eng.literature.imagery.md'
+
+const IMAG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IMAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"The sharp, acrid smell of burnt toast filled the kitchen" contains ' +
+      'no metaphor or simile at all — yet it\'s still genuine imagery, ' +
+      'because it appeals vividly and precisely to smell. Imagery is like ' +
+      'a photograph: a perfectly clear, unstylized photo can be just as ' +
+      'vivid as an artistically distorted one. Don\'t require figurative ' +
+      'language for imagery — ask only whether the language appeals ' +
+      'specifically and vividly to one of the five senses.',
+    targetedMisconceptions: [`${IMAG}:MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT`],
+    source: `${IMAG_SRC} — MC-A (P28 unstylized-photograph conflict)`,
+  },
+  {
+    conceptId: IMAG,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Stopping at "this is imagery appealing to smell" is like a music ' +
+      'critic stopping at "this piece uses violins" without ever ' +
+      'describing the mood those violins create. Always go further: what ' +
+      'SPECIFIC mood, atmosphere, or emphasis does this particular ' +
+      'sensory detail produce in this particular context? Naming the ' +
+      'sense is only the first half of the analysis.',
+    targetedMisconceptions: [`${IMAG}:MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK`],
+    source: `${IMAG_SRC} — MC-B (P28 music-critic conflict)`,
+  },
+  {
+    conceptId: IMAG,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Imagery is defined by vivid sensory specificity, not by whether it ' +
+      'uses figurative comparison — precise literal sensory description ' +
+      'counts as genuine imagery just as much as a metaphor or simile for ' +
+      'the same sensation. Separately, identifying which sense a piece of ' +
+      'imagery appeals to is only the first step of analysis; the ' +
+      'specific mood, atmosphere, or emphasis the sensory detail produces ' +
+      'in context must also be explained.',
+    targetedMisconceptions: [
+      `${IMAG}:MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT`,
+      `${IMAG}:MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK`,
+    ],
+    source: `${IMAG_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const IMAG_PROBES: SeedProbe[] = [
+  {
+    conceptId: IMAG,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"The sharp, acrid smell of burnt toast filled the kitchen" contains no metaphor or simile. Does it still count as imagery?',
+    choices: [
+      { text: 'Yes — imagery requires vivid sensory appeal, not figurative language; precise literal sensory description is genuine imagery too', isCorrect: true },
+      { text: 'No — imagery must be figurative, using metaphor or simile to count', isCorrect: false, misconceptionId: `${IMAG}:MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT` },
+    ],
+    correctValue: 'yes, literal sensory detail counts',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IMAG}:MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT`],
+    source: `${IMAG_SRC} — unstylized-photograph conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: IMAG,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You identify a piece of imagery as "appealing to smell." Is naming the sense the complete analytical task?',
+    choices: [
+      { text: 'No — you must also explain the specific mood, atmosphere, or emphasis the sensory detail creates in context; naming the sense is only the first step', isCorrect: true },
+      { text: 'Yes — identifying which sense imagery appeals to is the whole analytical task', isCorrect: false, misconceptionId: `${IMAG}:MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK` },
+    ],
+    correctValue: 'no, must explain the effect too',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IMAG}:MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK`],
+    source: `${IMAG_SRC} — music-critic conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.literary-genres-overview ─────────────────────────────────
+const LGEN = 'eng.literature.literary-genres-overview'
+const LGEN_SRC = 'docs/curriculum/blueprints/eng.literature.literary-genres-overview.md'
+
+const LGEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LGEN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A prose poem is written in continuous paragraphs like fiction, but ' +
+      'uses condensed, image-rich, rhythmic language characteristic of ' +
+      'poetry — forcing it into just one genre box is wrong. Genre ' +
+      'categories are useful organizing tools, not rigid boxes every work ' +
+      'must fit cleanly into: hybrid works that deliberately blend genre ' +
+      'techniques are a normal, legitimate part of literature.',
+    targetedMisconceptions: [`${LGEN}:MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY`],
+    source: `${LGEN_SRC} — MC-1 (P28 prose-poem-hybrid conflict)`,
+  },
+  {
+    conceptId: LGEN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Literary nonfiction (memoir, personal essay, narrative journalism) ' +
+      'deliberately uses many of fiction\'s techniques — scene ' +
+      'development, figurative language, deliberate structure, thematic ' +
+      'development — while remaining grounded in real, factual events. ' +
+      'Nonfiction isn\'t automatically un-literary: the factual grounding, ' +
+      'not the absence of craft, is what distinguishes it from fiction.',
+    targetedMisconceptions: [`${LGEN}:MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT`],
+    source: `${LGEN_SRC} — MC-2 (P28 shared-craft-toolkit conflict)`,
+  },
+  {
+    conceptId: LGEN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genre boundaries are often blurry, and hybrid works that blend ' +
+      'techniques from multiple genres (a prose poem, a verse drama) are ' +
+      'a legitimate, normal part of literature rather than classification ' +
+      'failures requiring a forced single-category label. Separately, ' +
+      'literary nonfiction genuinely employs fiction-like craft (scene ' +
+      'development, figurative language, structure, theme) while remaining ' +
+      'factually grounded — factual grounding, not absence of craft, is ' +
+      'the genre-defining distinction.',
+    targetedMisconceptions: [
+      `${LGEN}:MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY`,
+      `${LGEN}:MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT`,
+    ],
+    source: `${LGEN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const LGEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: LGEN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A prose poem uses poetry\'s condensed, rhythmic language but is written in continuous prose paragraphs. Must it be forced into exactly one genre category?',
+    choices: [
+      { text: 'No — hybrid works that blend genre techniques are a normal, legitimate part of literature, not classification failures', isCorrect: true },
+      { text: 'Yes — a work must fit cleanly into exactly one genre category', isCorrect: false, misconceptionId: `${LGEN}:MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY` },
+    ],
+    correctValue: 'no, hybrids are legitimate',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LGEN}:MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY`],
+    source: `${LGEN_SRC} — prose-poem-hybrid conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LGEN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A memoir passage uses vivid scene-setting, a deliberate narrative arc, and figurative language to recount a real event. Does being nonfiction mean it has no genuine literary technique or craft?',
+    choices: [
+      { text: 'No — literary nonfiction deliberately uses many of fiction\'s techniques while remaining grounded in real events; factual grounding, not absence of craft, defines it', isCorrect: true },
+      { text: 'Yes — nonfiction is just facts with no literary technique or craft', isCorrect: false, misconceptionId: `${LGEN}:MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT` },
+    ],
+    correctValue: 'no, nonfiction can use genuine craft',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LGEN}:MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT`],
+    source: `${LGEN_SRC} — shared-craft-toolkit conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.poetic-forms ─────────────────────────────────────────────
+const PFORM = 'eng.literature.poetic-forms'
+const PFORM_SRC = 'docs/curriculum/blueprints/eng.literature.poetic-forms.md'
+
+const PFORM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PFORM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Calling a poem "a sonnet" and stopping there is like treating a ' +
+      'wine glass\'s shape as irrelevant to drinking wine — but the shape ' +
+      'actually concentrates aroma and directs flow, genuinely changing ' +
+      'the experience. A sonnet\'s structural "turn" (a shift in argument ' +
+      'partway through) does real work — always ask: what does this ' +
+      'SPECIFIC structure let the poem DO that a different structure ' +
+      'couldn\'t?',
+    targetedMisconceptions: [`${PFORM}:MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING`],
+    source: `${PFORM_SRC} — MC-A (P28 wine-glass-shape conflict)`,
+  },
+  {
+    conceptId: PFORM,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Free verse lacking a FIXED rule doesn\'t mean it has no structure ' +
+      'at all — like a jazz improviser still makes deliberate, structured ' +
+      'choices (which notes, which rhythms, when to pause) guided by ' +
+      'craft, not randomness. A free verse poet\'s specific line-break and ' +
+      'white-space choices are real, purposeful decisions, just not ones ' +
+      'fixed in advance by a predetermined pattern.',
+    targetedMisconceptions: [`${PFORM}:MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED`],
+    source: `${PFORM_SRC} — MC-B (P28 jazz-improvisation conflict)`,
+  },
+  {
+    conceptId: PFORM,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A poem\'s conventional form is not merely a classificatory label — ' +
+      'its specific structural constraints (a sonnet\'s turn, a haiku\'s ' +
+      'compression) actively shape the poem\'s meaning and effect, so ' +
+      'identifying a form should always be followed by asking what that ' +
+      'structure specifically enables. Separately, free verse\'s absence ' +
+      'of a fixed pattern does not mean absence of form: deliberate ' +
+      'structural choices (line breaks, white space, rhythm variation) ' +
+      'constitute a real, considered craft even without a pre-set rule.',
+    targetedMisconceptions: [
+      `${PFORM}:MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING`,
+      `${PFORM}:MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED`,
+    ],
+    source: `${PFORM_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PFORM_PROBES: SeedProbe[] = [
+  {
+    conceptId: PFORM,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sonnet has a structural "turn" at line nine, shifting from despair to hard-won hope. Is calling this poem "a sonnet" just a label with no further effect on meaning?',
+    choices: [
+      { text: 'No — the sonnet\'s specific structure (buildup, then turn) actively shapes how the meaning unfolds; a shapeless version would lose that effect entirely', isCorrect: true },
+      { text: 'Yes — a poem\'s form is just a label with no effect on meaning', isCorrect: false, misconceptionId: `${PFORM}:MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING` },
+    ],
+    correctValue: 'no, form shapes meaning',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PFORM}:MC-A-A-POEMS-FORM-IS-JUST-A-LABEL-WITH-NO-EFFECT-ON-MEANING`],
+    source: `${PFORM_SRC} — wine-glass-shape conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PFORM,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A free verse poem has no fixed meter or rhyme scheme. Does that mean it has no form or rules at all, so it isn\'t really crafted?',
+    choices: [
+      { text: 'No — free verse poets make deliberate structural choices (line breaks, white space, rhythm) that constitute a real, considered form, even without a pre-set pattern', isCorrect: true },
+      { text: 'Yes — free verse has no form or rules at all, so it\'s not really crafted', isCorrect: false, misconceptionId: `${PFORM}:MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED` },
+    ],
+    correctValue: 'no, deliberate choices still made',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PFORM}:MC-B-FREE-VERSE-HAS-NO-FORM-OR-RULES-AT-ALL-SO-ITS-NOT-REALLY-CRAFTED`],
+    source: `${PFORM_SRC} — jazz-improvisation conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.literature.symbolism ─────────────────────────────────────────────────
+const SYMB = 'eng.literature.symbolism'
+const SYMB_SRC = 'docs/curriculum/blueprints/eng.literature.symbolism.md'
+
+const SYMB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SYMB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A character\'s umbrella mentioned each time it rains is just ' +
+      'practical gear — repetition alone doesn\'t make something a symbol. ' +
+      'A grandmother\'s clock whose slowing, inconsistent ticking mirrors ' +
+      'her declining health IS a genuine symbol, because the story invests ' +
+      'it with meaning beyond its literal function. Always ask: does the ' +
+      'story connect this object\'s changes to a larger theme, or is it ' +
+      'just practically present?',
+    targetedMisconceptions: [`${SYMB}:MC-ANY-OBJECT-MENTIONED-REPEATEDLY-IN-A-STORY-IS-AUTOMATICALLY-A-SYMBOL`],
+    source: `${SYMB_SRC} — MC-1 (P28 investment-meter conflict)`,
+  },
+  {
+    conceptId: SYMB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A story where darkness brings comfort and safety (not conventional ' +
+      '"darkness = danger") isn\'t using the symbol "wrong" — the same ' +
+      'object can be costumed differently by different stories. Common ' +
+      'symbolic associations (rose = love, dove = peace) are cultural ' +
+      'defaults, not fixed universal rules — always trace what THIS ' +
+      'specific story does with the object, rather than assuming the ' +
+      'conventional association automatically applies.',
+    targetedMisconceptions: [`${SYMB}:MC-A-SYMBOL-HAS-ONE-FIXED-UNIVERSAL-MEANING-ACROSS-ALL-STORIES`],
+    source: `${SYMB_SRC} — MC-2 (P28 costume-change conflict)`,
+  },
+  {
+    conceptId: SYMB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Genuine symbolism requires the story to invest a recurring object ' +
+      'with meaning beyond its literal function — mere repetition of a ' +
+      'purely functional object is not sufficient evidence of symbolic ' +
+      'significance. Separately, a symbol\'s meaning must be traced within ' +
+      'each story\'s own specific context rather than assumed from ' +
+      'conventional cultural associations, which a story may follow or ' +
+      'deliberately subvert.',
+    targetedMisconceptions: [
+      `${SYMB}:MC-ANY-OBJECT-MENTIONED-REPEATEDLY-IN-A-STORY-IS-AUTOMATICALLY-A-SYMBOL`,
+      `${SYMB}:MC-A-SYMBOL-HAS-ONE-FIXED-UNIVERSAL-MEANING-ACROSS-ALL-STORIES`,
+    ],
+    source: `${SYMB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SYMB_PROBES: SeedProbe[] = [
+  {
+    conceptId: SYMB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A character\'s car is mentioned five times purely because they drive it often, with no thematic weight. Is this automatically a symbol just because it\'s repeated?',
+    choices: [
+      { text: 'No — genuine symbolism requires the story to invest the object with meaning beyond its literal function; mere repetition of a practical object is not enough', isCorrect: true },
+      { text: 'Yes — any object mentioned repeatedly in a story is automatically a symbol', isCorrect: false, misconceptionId: `${SYMB}:MC-ANY-OBJECT-MENTIONED-REPEATEDLY-IN-A-STORY-IS-AUTOMATICALLY-A-SYMBOL` },
+    ],
+    correctValue: 'no, needs invested meaning',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SYMB}:MC-ANY-OBJECT-MENTIONED-REPEATEDLY-IN-A-STORY-IS-AUTOMATICALLY-A-SYMBOL`],
+    source: `${SYMB_SRC} — investment-meter conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SYMB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A story associates darkness with comfort and safety rather than the conventional "darkness = danger." Is the story using the symbol "wrong"?',
+    choices: [
+      { text: 'No — a symbol\'s meaning must be traced within each story\'s own context, which may follow or deliberately subvert the conventional cultural association', isCorrect: true },
+      { text: 'Yes — a symbol has one fixed, universal meaning across all stories', isCorrect: false, misconceptionId: `${SYMB}:MC-A-SYMBOL-HAS-ONE-FIXED-UNIVERSAL-MEANING-ACROSS-ALL-STORIES` },
+    ],
+    correctValue: 'no, meaning is story-specific',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SYMB}:MC-A-SYMBOL-HAS-ONE-FIXED-UNIVERSAL-MEANING-ACROSS-ALL-STORIES`],
+    source: `${SYMB_SRC} — costume-change conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.phonetic-transcription ────────────────────────────────────
+const PTRANS = 'eng.phonetics.phonetic-transcription'
+const PTRANS_SRC = 'docs/curriculum/blueprints/eng.phonetics.phonetic-transcription.md'
+
+const PTRANS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PTRANS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Know" has 4 letters but transcribes as /noʊ/, just 2 symbols — no ' +
+      '/k/ sound is actually pronounced. Transcription represents SOUNDS, ' +
+      'not letters: say the word aloud first, segment it into its actual ' +
+      'spoken sounds, and only then assign one IPA symbol per sound — ' +
+      'never map letter-by-letter from spelling.',
+    targetedMisconceptions: [`${PTRANS}:MC-TRANSCRIPTION-IS-SYMBOL-SUBSTITUTION-FOR-LETTERS`],
+    source: `${PTRANS_SRC} — MC-1 (P28 know-transcription conflict)`,
+  },
+  {
+    conceptId: PTRANS,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Dance" transcribes as /dæns/ in General American but /dɑːns/ in ' +
+      'Received Pronunciation — both are correct for their respective ' +
+      'dialects. Phonetic transcription always reflects a SPECIFIC accent, ' +
+      'so there is no single universally correct transcription for every ' +
+      'English speaker; a transcription is correct if it accurately ' +
+      'represents how a real speaker of a specified variety actually says ' +
+      'the word.',
+    targetedMisconceptions: [`${PTRANS}:MC-ONE-CORRECT-TRANSCRIPTION-EXISTS`],
+    source: `${PTRANS_SRC} — MC-2 (P28 dance-dialect conflict)`,
+  },
+  {
+    conceptId: PTRANS,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Phonetic transcription represents actual spoken sounds, never a ' +
+      'letter-to-symbol lookup — the symbol count frequently diverges ' +
+      'from the letter count once silent letters and digraphs are ' +
+      'accounted for. Separately, transcription is inherently dialect- ' +
+      'specific: no single universally correct transcription exists for ' +
+      'every English speaker, since real pronunciation varies legitimately ' +
+      'by dialect (General American vs. Received Pronunciation, for ' +
+      'example).',
+    targetedMisconceptions: [
+      `${PTRANS}:MC-TRANSCRIPTION-IS-SYMBOL-SUBSTITUTION-FOR-LETTERS`,
+      `${PTRANS}:MC-ONE-CORRECT-TRANSCRIPTION-EXISTS`,
+    ],
+    source: `${PTRANS_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PTRANS_PROBES: SeedProbe[] = [
+  {
+    conceptId: PTRANS,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The word "know" has 4 letters. Should its IPA transcription have 4 symbols, one per letter?',
+    choices: [
+      { text: 'No — transcription represents sounds, not letters; "know" transcribes as /noʊ/, just 2 symbols, since the "k" is silent', isCorrect: true },
+      { text: 'Yes — transcription is symbol substitution for letters', isCorrect: false, misconceptionId: `${PTRANS}:MC-TRANSCRIPTION-IS-SYMBOL-SUBSTITUTION-FOR-LETTERS` },
+    ],
+    correctValue: 'no, 2 symbols',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PTRANS}:MC-TRANSCRIPTION-IS-SYMBOL-SUBSTITUTION-FOR-LETTERS`],
+    source: `${PTRANS_SRC} — know-transcription conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PTRANS,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Dance" is transcribed /dæns/ by one source and /dɑːns/ by another. Must one of these be wrong?',
+    choices: [
+      { text: 'No — transcription always reflects a specific dialect; both are correct for their respective varieties (General American vs. Received Pronunciation)', isCorrect: true },
+      { text: 'Yes — one correct transcription exists for every word', isCorrect: false, misconceptionId: `${PTRANS}:MC-ONE-CORRECT-TRANSCRIPTION-EXISTS` },
+    ],
+    correctValue: 'no, both valid by dialect',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PTRANS}:MC-ONE-CORRECT-TRANSCRIPTION-EXISTS`],
+    source: `${PTRANS_SRC} — dance-dialect conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonetics.sentence-stress ────────────────────────────────────────────
+const SNST = 'eng.phonetics.sentence-stress'
+const SNST_SRC = 'docs/curriculum/blueprints/eng.phonetics.sentence-stress.md'
+
+const SNST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SNST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Saying "I WANT TO GO TO THE STORE" with every word equally loud ' +
+      'sounds robotic. Natural English stresses CONTENT words (nouns, main ' +
+      'verbs, adjectives, adverbs) and reduces FUNCTION words (articles, ' +
+      'prepositions, auxiliaries — "to" becomes /tə/, "the" becomes /ðə/). ' +
+      'Before speaking a sentence, identify which words are content ' +
+      '(stress these) and which are function (reduce these).',
+    targetedMisconceptions: [`${SNST}:MC-EVERY-WORD-GETS-EQUAL-STRESS`],
+    source: `${SNST_SRC} — MC-1 (P28 equal-stress-reading conflict)`,
+  },
+  {
+    conceptId: SNST,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"I CAN swim" (plain statement) usually reduces "can," but "Yes, I ' +
+      'CAN do it!" (emphatic reply) stresses it for contrast. The content/ ' +
+      'function split is a strong DEFAULT, not a fixed, unchangeable label ' +
+      'per word — a word\'s grammatical role and the speaker\'s intent to ' +
+      'emphasize or contrast can both shift which words get stressed in a ' +
+      'specific sentence.',
+    targetedMisconceptions: [`${SNST}:MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD`],
+    source: `${SNST_SRC} — MC-2 (P28 can-emphatic-shift conflict)`,
+  },
+  {
+    conceptId: SNST,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Natural English sentences are not evenly stressed — content words ' +
+      'carry stress while function words are typically unstressed and ' +
+      'reduced, and giving every word equal weight produces unnaturally ' +
+      'flat, robotic-sounding speech. Separately, the content/function ' +
+      'split is a strong default rather than a fixed per-word label: a ' +
+      'word\'s grammatical role and deliberate emphatic or contrastive ' +
+      'intent can both shift which words receive stress in a given ' +
+      'sentence.',
+    targetedMisconceptions: [
+      `${SNST}:MC-EVERY-WORD-GETS-EQUAL-STRESS`,
+      `${SNST}:MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD`,
+    ],
+    source: `${SNST_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SNST_PROBES: SeedProbe[] = [
+  {
+    conceptId: SNST,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Should every word in "I want to go to the store" get equal stress and emphasis when spoken naturally?',
+    choices: [
+      { text: 'No — content words (WANT, STORE) are stressed while function words (to, to, the) are reduced; equal stress on every word sounds unnatural', isCorrect: true },
+      { text: 'Yes — every word gets equal stress', isCorrect: false, misconceptionId: `${SNST}:MC-EVERY-WORD-GETS-EQUAL-STRESS` },
+    ],
+    correctValue: 'no, content words get stress',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SNST}:MC-EVERY-WORD-GETS-EQUAL-STRESS`],
+    source: `${SNST_SRC} — equal-stress-reading conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SNST,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Can" is usually unstressed as an auxiliary ("I can swim"). Is a word\'s content/function stress status always fixed, no matter the sentence?',
+    choices: [
+      { text: 'No — grammatical role and emphatic intent can shift stress; "Yes, I CAN do it!" stresses "can" for contrastive emphasis', isCorrect: true },
+      { text: 'Yes — the content/function split is fixed per word', isCorrect: false, misconceptionId: `${SNST}:MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD` },
+    ],
+    correctValue: 'no, context and emphasis shift it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SNST}:MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD`],
+    source: `${SNST_SRC} — can-emphatic-shift conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.phonics.print-concepts ───────────────────────────────────────────────
+const PRINT = 'eng.phonics.print-concepts'
+const PRINT_SRC = 'docs/curriculum/blueprints/eng.phonics.print-concepts.md'
+
+const PRINT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRINT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'Cover the picture on a page and someone can still read the exact ' +
+      'same words every time. Cover the words instead, and two people ' +
+      'describing the picture will say different things. The picture ' +
+      'helps you imagine the story, but the PRINT is what actually says ' +
+      'the story — the same words, in the same order, every single time ' +
+      'anyone reads this page.',
+    targetedMisconceptions: [`${PRINT}:MC-PICTURE-IS-THE-STORY`],
+    source: `${PRINT_SRC} — MC-1 (P28 cover-and-compare conflict)`,
+  },
+  {
+    conceptId: PRINT,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.EARLY,
+    content:
+      'The blank spaces between letter-clusters aren\'t empty by accident ' +
+      '— they\'re a signal. Everything between two spaces is exactly one ' +
+      'word: "a" is one word with one letter; "elephant" is one word with ' +
+      'eight letters — both are single words because each is surrounded ' +
+      'by space, not because of how many letters or sounds they contain.',
+    targetedMisconceptions: [`${PRINT}:MC-SPACES-ARE-DECORATION`],
+    source: `${PRINT_SRC} — MC-2 (P28 word-counting-by-gaps conflict)`,
+  },
+  {
+    conceptId: PRINT,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Print, not illustration, carries a text\'s fixed message — the same ' +
+      'printed words produce the same reading every time, while a picture ' +
+      'alone permits varying descriptions. Separately, a word in print is ' +
+      'defined by the spaces surrounding it, not by its letter or sound ' +
+      'count — the space itself functions as a genuine word-boundary ' +
+      'marker, not mere decoration.',
+    targetedMisconceptions: [
+      `${PRINT}:MC-PICTURE-IS-THE-STORY`,
+      `${PRINT}:MC-SPACES-ARE-DECORATION`,
+    ],
+    source: `${PRINT_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const PRINT_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRINT,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.EARLY,
+    stem: 'On a picture-book page, does the picture or the print say the exact same thing every single time it\'s read?',
+    choices: [
+      { text: 'The print — it carries the fixed message; the picture just helps you imagine the story and can be described differently each time', isCorrect: true },
+      { text: 'The picture — the picture is the story', isCorrect: false, misconceptionId: `${PRINT}:MC-PICTURE-IS-THE-STORY` },
+    ],
+    correctValue: 'print carries the fixed message',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PRINT}:MC-PICTURE-IS-THE-STORY`],
+    source: `${PRINT_SRC} — cover-and-compare conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRINT,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Are the blank spaces between letter-clusters in print just decoration, with no real job?',
+    choices: [
+      { text: 'No — spaces mark where one word ends and the next begins; everything between two spaces is exactly one word', isCorrect: true },
+      { text: 'Yes — spaces are decoration', isCorrect: false, misconceptionId: `${PRINT}:MC-SPACES-ARE-DECORATION` },
+    ],
+    correctValue: 'no, spaces mark word boundaries',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PRINT}:MC-SPACES-ARE-DECORATION`],
+    source: `${PRINT_SRC} — word-counting-by-gaps conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.academic-vocabulary ────────────────────────────────────────────
+const ACVOC = 'eng.vocab.academic-vocabulary'
+const ACVOC_SRC = 'docs/curriculum/blueprints/eng.vocab.academic-vocabulary.md'
+
+const ACVOC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACVOC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Mitochondria" is technical, biology-only jargon — you wouldn\'t ' +
+      'expect it in a history essay. "Significant" is general academic ' +
+      'vocabulary — it appears naturally in biology, history, and ' +
+      'literature essays alike. Before calling a word "academic ' +
+      'vocabulary," ask: would this word plausibly appear in an essay ' +
+      'about a completely different subject too? If yes, it\'s general ' +
+      'academic vocabulary; if not, it\'s technical jargon for one field.',
+    targetedMisconceptions: [`${ACVOC}:MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY`],
+    source: `${ACVOC_SRC} — MC-A (P28 screwdriver-vs-soldering-iron conflict)`,
+  },
+  {
+    conceptId: ACVOC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"They had an argument about the results" (a disagreement) and "The ' +
+      'essay\'s argument is supported by three pieces of evidence" (a ' +
+      'reasoned case) use "argument" very differently. Academic writing ' +
+      'often narrows a common word into a sharper, more precise sense — ' +
+      'always check whether a familiar word is being used in its ordinary ' +
+      'everyday sense or a more precise academic sense.',
+    targetedMisconceptions: [`${ACVOC}:MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH`],
+    source: `${ACVOC_SRC} — MC-B (P28 argument-everyday-vs-academic conflict)`,
+  },
+  {
+    conceptId: ACVOC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'General academic vocabulary recurs across every discipline ' +
+      '(significant, analyze, evidence), distinct from technical jargon ' +
+      'belonging to one field only (mitochondria) — the cross-subject- ' +
+      'recurrence test distinguishes them. Separately, common words often ' +
+      'carry a sharper, more precise academic sense than their everyday ' +
+      'sense suggests ("argument" as a reasoned case, not a disagreement), ' +
+      'requiring an explicit sense-check in academic contexts.',
+    targetedMisconceptions: [
+      `${ACVOC}:MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY`,
+      `${ACVOC}:MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH`,
+    ],
+    source: `${ACVOC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ACVOC_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACVOC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is "mitochondria" (biology-only jargon) the same kind of word as "significant" (which appears across biology, history, and literature essays)?',
+    choices: [
+      { text: 'No — "mitochondria" is technical jargon belonging to one field; "significant" is general academic vocabulary recurring across every discipline', isCorrect: true },
+      { text: 'Yes — any unfamiliar or complex-sounding word in an academic text counts as academic vocabulary', isCorrect: false, misconceptionId: `${ACVOC}:MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY` },
+    ],
+    correctValue: 'no, check cross-subject recurrence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACVOC}:MC-A-ANY-UNFAMILIAR-OR-COMPLEX-SOUNDING-WORD-IN-AN-ACADEMIC-TEXT-COUNTS-AS-ACADEMIC-VOCABULARY`],
+    source: `${ACVOC_SRC} — screwdriver-vs-soldering-iron conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ACVOC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does "argument" mean the same thing in "they had an argument" (casual) and "the essay\'s argument is supported by evidence" (academic)?',
+    choices: [
+      { text: 'No — academic words often carry a more precise sense than their everyday sense; here "argument" shifts from "disagreement" to "reasoned case"', isCorrect: true },
+      { text: 'Yes — academic words mean the same thing in academic writing as they do in everyday casual speech', isCorrect: false, misconceptionId: `${ACVOC}:MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH` },
+    ],
+    correctValue: 'no, academic sense is sharper',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACVOC}:MC-B-ACADEMIC-WORDS-MEAN-THE-SAME-THING-IN-ACADEMIC-WRITING-AS-THEY-DO-IN-EVERYDAY-CASUAL-SPEECH`],
+    source: `${ACVOC_SRC} — argument-everyday-vs-academic conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.vocab.semantic-fields ────────────────────────────────────────────────
+const SEMF = 'eng.vocab.semantic-fields'
+const SEMF_SRC = 'docs/curriculum/blueprints/eng.vocab.semantic-fields.md'
+
+const SEMF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SEMF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Joy," "anger," "fear," and "sadness" don\'t mean the same thing at ' +
+      'all — yet they form a genuine semantic field: the emotion domain. ' +
+      'It\'s like a family that shares a connection without looking ' +
+      'identical. Don\'t expect words in a semantic field to mean the same ' +
+      'thing — ask instead whether they share a broader conceptual domain, ' +
+      'even with very different individual meanings.',
+    targetedMisconceptions: [`${SEMF}:MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD`],
+    source: `${SEMF_SRC} — MC-A (P28 family-resemblance conflict)`,
+  },
+  {
+    conceptId: SEMF,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Umbrella" often appears alongside "rain," but it\'s an object/tool, ' +
+      'not a weather phenomenon — like "lifeguard" and "ocean" are always ' +
+      'mentioned together despite being a person and a body of water. ' +
+      'Frequent co-occurrence (collocation) is a different relationship ' +
+      'than genuine shared-domain membership (semantic field) — check ' +
+      'whether words describe the same KIND of thing, not just whether ' +
+      'they appear together.',
+    targetedMisconceptions: [`${SEMF}:MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD`],
+    source: `${SEMF_SRC} — MC-B (P28 lifeguard-vs-ocean conflict)`,
+  },
+  {
+    conceptId: SEMF,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A semantic field is defined by shared conceptual domain, not ' +
+      'shared meaning — words like joy/anger/fear/sadness belong to the ' +
+      'emotion field despite carrying very different individual meanings, ' +
+      'distinguishing a semantic field from a synonym set. Separately, ' +
+      'frequent co-occurrence (collocation, e.g. "umbrella" with "rain") ' +
+      'is a distinct relationship from genuine shared-domain membership; ' +
+      'field membership requires both words to describe the same kind of ' +
+      'thing.',
+    targetedMisconceptions: [
+      `${SEMF}:MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD`,
+      `${SEMF}:MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD`,
+    ],
+    source: `${SEMF_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SEMF_PROBES: SeedProbe[] = [
+  {
+    conceptId: SEMF,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Joy," "anger," "fear," and "sadness" all belong to the emotion semantic field. Must they mean nearly the same thing to belong to that field?',
+    choices: [
+      { text: 'No — a semantic field shares a conceptual domain, not a meaning; these words mean very different things despite sharing the emotion domain', isCorrect: true },
+      { text: 'Yes — a semantic field is just a list of synonyms for one word', isCorrect: false, misconceptionId: `${SEMF}:MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD` },
+    ],
+    correctValue: 'no, shared domain not meaning',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SEMF}:MC-A-A-SEMANTIC-FIELD-IS-JUST-A-LIST-OF-SYNONYMS-FOR-ONE-WORD`],
+    source: `${SEMF_SRC} — family-resemblance conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SEMF,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: '"Umbrella" often appears in the same sentences as "rain." Does that mean "umbrella" belongs to the weather semantic field?',
+    choices: [
+      { text: 'No — "umbrella" is an object/tool, not a weather phenomenon; frequent co-occurrence (collocation) is not the same as genuine shared-domain membership', isCorrect: true },
+      { text: 'Yes — any words that often appear together in the same context belong to the same semantic field', isCorrect: false, misconceptionId: `${SEMF}:MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD` },
+    ],
+    correctValue: 'no, collocation differs from field membership',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SEMF}:MC-B-ANY-WORDS-THAT-OFTEN-APPEAR-TOGETHER-IN-THE-SAME-CONTEXT-BELONG-TO-THE-SAME-SEMANTIC-FIELD`],
+    source: `${SEMF_SRC} — lifeguard-vs-ocean conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.writing.supporting-details ───────────────────────────────────────────
+const SUPD = 'eng.writing.supporting-details'
+const SUPD_SRC = 'docs/curriculum/blueprints/eng.writing.supporting-details.md'
+
+const SUPD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUPD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '"Golden retrievers were originally bred in Scotland" is true about ' +
+      'the topic but doesn\'t support a claim about temperament. Being ' +
+      'true and about the same subject isn\'t enough — a genuine ' +
+      'supporting detail must directly develop or prove the SPECIFIC claim ' +
+      'your topic sentence made, not just any fact about the general ' +
+      'subject.',
+    targetedMisconceptions: [`${SUPD}:MC-ANY-TRUE-STATEMENT-ABOUT-THE-TOPIC-COUNTS-AS-A-SUPPORTING-DETAIL`],
+    source: `${SUPD_SRC} — MC-1 (P28 golden-retriever-breeding conflict)`,
+  },
+  {
+    conceptId: SUPD,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A paragraph with 3 well-explained details is usually stronger than ' +
+      'one with 6 thin, underdeveloped ones — like 3 sturdy pillars ' +
+      'holding up a roof firmly, versus 6 flimsy sticks that wobble ' +
+      'despite being more numerous. Quantity isn\'t the goal; choose your ' +
+      'strongest 2-4 details and develop each one with enough explanation ' +
+      'to make it convincing.',
+    targetedMisconceptions: [`${SUPD}:MC-MORE-SUPPORTING-DETAILS-ALWAYS-MAKES-A-PARAGRAPH-STRONGER`],
+    source: `${SUPD_SRC} — MC-2 (P28 three-pillars-vs-six-sticks conflict)`,
+  },
+  {
+    conceptId: SUPD,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'A genuine supporting detail must directly develop or evidence the ' +
+      'topic sentence\'s specific claim, not merely share its general ' +
+      'subject — topical truth alone is insufficient. Separately, a ' +
+      'smaller number of well-chosen, well-developed details is usually ' +
+      'more convincing than many thin, underdeveloped ones, so quality and ' +
+      'development should be prioritized over raw quantity.',
+    targetedMisconceptions: [
+      `${SUPD}:MC-ANY-TRUE-STATEMENT-ABOUT-THE-TOPIC-COUNTS-AS-A-SUPPORTING-DETAIL`,
+      `${SUPD}:MC-MORE-SUPPORTING-DETAILS-ALWAYS-MAKES-A-PARAGRAPH-STRONGER`,
+    ],
+    source: `${SUPD_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const SUPD_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUPD,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'The topic sentence is "Golden retrievers make excellent family pets because of their gentle temperament." Does the true fact "Golden retrievers were originally bred in Scotland" count as a supporting detail here?',
+    choices: [
+      { text: 'No — it\'s true about the topic but doesn\'t support the specific claim about temperament; a supporting detail must develop the specific claim, not just be topically true', isCorrect: true },
+      { text: 'Yes — any true statement about the topic counts as a supporting detail', isCorrect: false, misconceptionId: `${SUPD}:MC-ANY-TRUE-STATEMENT-ABOUT-THE-TOPIC-COUNTS-AS-A-SUPPORTING-DETAIL` },
+    ],
+    correctValue: 'no, must match the specific claim',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUPD}:MC-ANY-TRUE-STATEMENT-ABOUT-THE-TOPIC-COUNTS-AS-A-SUPPORTING-DETAIL`],
+    source: `${SUPD_SRC} — golden-retriever-breeding conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SUPD,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Does piling on as many supporting details as possible (say, 6 thin ones) always make a paragraph stronger than using 3 well-developed ones?',
+    choices: [
+      { text: 'No — 3 well-chosen, well-developed details are usually more convincing than 6 thin, underdeveloped ones; quality and development matter more than quantity', isCorrect: true },
+      { text: 'Yes — more supporting details always makes a paragraph stronger', isCorrect: false, misconceptionId: `${SUPD}:MC-MORE-SUPPORTING-DETAILS-ALWAYS-MAKES-A-PARAGRAPH-STRONGER` },
+    ],
+    correctValue: 'no, quality over quantity',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUPD}:MC-MORE-SUPPORTING-DETAILS-ALWAYS-MAKES-A-PARAGRAPH-STRONGER`],
+    source: `${SUPD_SRC} — three-pillars-vs-six-sticks conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -22025,6 +22933,16 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...DIGCOM_EXPLANATIONS,
   ...MINP_EXPLANATIONS,
   ...SYLS_EXPLANATIONS,
+  ...IMAG_EXPLANATIONS,
+  ...LGEN_EXPLANATIONS,
+  ...PFORM_EXPLANATIONS,
+  ...SYMB_EXPLANATIONS,
+  ...PTRANS_EXPLANATIONS,
+  ...SNST_EXPLANATIONS,
+  ...PRINT_EXPLANATIONS,
+  ...ACVOC_EXPLANATIONS,
+  ...SEMF_EXPLANATIONS,
+  ...SUPD_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -22271,4 +23189,14 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...DIGCOM_PROBES,
   ...MINP_PROBES,
   ...SYLS_PROBES,
+  ...IMAG_PROBES,
+  ...LGEN_PROBES,
+  ...PFORM_PROBES,
+  ...SYMB_PROBES,
+  ...PTRANS_PROBES,
+  ...SNST_PROBES,
+  ...PRINT_PROBES,
+  ...ACVOC_PROBES,
+  ...SEMF_PROBES,
+  ...SUPD_PROBES,
 ]
