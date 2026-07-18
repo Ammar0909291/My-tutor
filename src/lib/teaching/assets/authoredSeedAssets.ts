@@ -31688,6 +31688,366 @@ const MAXW_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.resistivity ─────────────────────────────────────────────────────
+const RSTV = 'phys.em.resistivity'
+const RSTV_SRC = 'docs/curriculum/blueprints/phys.em.resistivity.md'
+
+const RSTV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RSTV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Copper wire conducts easily; rubber blocks current almost completely — this material-specific property is resistivity ρ, measured in Ω·m, connecting the microscopic material property to the macroscopic circuit resistance via R = ρL/A (L = length, A = cross-sectional area). Materials classify by resistivity: conductors like metals have ρ < 10⁻⁶ Ω·m; semiconductors like silicon fall between 10⁻⁶ and 10⁶ Ω·m; insulators like rubber and glass have ρ > 10⁶ Ω·m; and superconductors have ρ = 0 exactly below a critical temperature. Copper wire scales predictably: doubling the length doubles R (electrons travel farther, suffering more collisions along the way); doubling the radius quadruples the cross-sectional area A = πr², so R drops to one-quarter — thicker wire gives electrons more parallel paths, lowering resistance. Temperature dependence differs fundamentally by material type: metals have a POSITIVE temperature coefficient (R increases with heating, since the fixed number of free electrons collides more often with an increasingly vibrating lattice), while semiconductors have a NEGATIVE temperature coefficient (R decreases dramatically with heating, since thermal energy excites many more electrons across the band gap into the conduction band, and this exponential increase in carrier density overwhelms any collision-rate effect).',
+    targetedMisconceptions: [`${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE`, `${RSTV}:MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE`],
+    source: `${RSTV_SRC} — Tier 1 (material property) + Tier 2 (R=ρL/A, classification by resistivity, temperature dependence)`,
+  },
+  {
+    conceptId: RSTV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A tempting but backwards intuition: believing a LONGER wire gives electrons "more path to flow through," making conduction easier — like a wider highway with more lanes. Compute it directly: a 1 m copper wire has resistance R₁ = ρ/A; a 2 m wire of the same material and thickness has R₂ = 2ρ/A = exactly 2R₁ — DOUBLE the resistance, not less. The physical reason is the opposite of "more path": electrons genuinely must travel FARTHER, suffering MORE collisions with the lattice along the way, and each collision costs momentum — more collisions per unit charge transported means more resistance, exactly the way connecting two equal resistors in series doubles the total. Think of water flowing through a pipe: a LONGER pipe has more friction and resists flow more, not less, for the same driving pressure. Second trap: applying the metal formula R = R₀[1 + αΔT] with its POSITIVE temperature coefficient α to semiconductors, or assuming "everything gets more resistive when heated." It\'s the opposite for semiconductors: silicon\'s resistivity is about 640 Ω·m at 20°C but drops to roughly 4 Ω·m at 100°C — more than a hundredfold DECREASE. The mechanism is entirely different from metals: in a metal, the number of free electrons is essentially fixed, and heating only shortens the average time between collisions (τ decreases), slightly increasing ρ; in a semiconductor, heating THERMALLY EXCITES vastly more electrons across the band gap into the conduction band, exponentially increasing the number of available charge carriers, and this carrier-density effect completely dominates and overwhelms any collision-rate effect — this negative-temperature-coefficient behavior is precisely what makes semiconductors useful as thermistors (temperature sensors).',
+    targetedMisconceptions: [`${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE`, `${RSTV}:MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE`],
+    source: `${RSTV_SRC} — MC-LONGER-WIRE-HAS-LOWER-RESISTANCE + MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RSTV_PROBES: SeedProbe[] = [
+  {
+    conceptId: RSTV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 m copper wire has resistance R₁. A 2 m wire of the identical material and thickness has resistance R₂. What is R₂ in terms of R₁?',
+    choices: [
+      { text: 'R₂ = 2R₁ — resistance R = ρL/A is directly proportional to length; the longer wire means electrons travel farther and suffer more collisions', isCorrect: true },
+      { text: 'R₂ = R₁/2 — the longer wire gives electrons more path to flow through, making conduction easier and resistance lower', isCorrect: false, misconceptionId: `${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE` },
+    ],
+    correctValue: 'R2 = 2 R1',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE`],
+    source: `${RSTV_SRC} — MC-LONGER-WIRE-HAS-LOWER-RESISTANCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RSTV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A silicon sample is heated from 20°C to 100°C. What happens to its resistivity?',
+    choices: [
+      { text: 'It decreases dramatically (over 100-fold) — heating excites many more electrons across the band gap into the conduction band, exponentially increasing carrier density', isCorrect: true },
+      { text: 'It increases, following the same positive-temperature-coefficient formula R = R₀[1+αΔT] used for metals', isCorrect: false, misconceptionId: `${RSTV}:MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE` },
+    ],
+    correctValue: 'decreases dramatically',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RSTV}:MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE`],
+    source: `${RSTV_SRC} — MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.solenoid ─────────────────────────────────────────────────────────
+const SOLN = 'phys.em.solenoid'
+const SOLN_SRC = 'docs/curriculum/blueprints/phys.em.solenoid.md'
+
+const SOLN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SOLN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Inside a long (ideally infinite) solenoid with n turns per unit length carrying current I, the magnetic field is perfectly uniform: B = μ₀nI — derived from Ampere\'s law using a rectangular loop straddling the solenoid wall, where the "inside" side contributes BL, the two perpendicular sides contribute nothing (B ⊥ dl there), and the "outside" side contributes nothing (B = 0 outside, by symmetry). Critically, the solenoid\'s RADIUS never appears anywhere in this formula — a 2 cm-radius solenoid and a 20 cm-radius solenoid, with the same turns-per-length n and the same current I, produce IDENTICAL field strength inside, because B depends only on how densely the wire is wound (n) and how much current flows (I), never on how wide the coil is. What radius DOES affect is the total flux threading the coil and hence the inductance, L = μ₀n²Al where A = πR² — a wider solenoid stores more energy and has higher inductance for the same n and I, but the field strength itself stays the same. Outside an infinite solenoid, B = 0 exactly; for a real, finite solenoid this holds only as an approximation far from the solenoid and away from its ends — genuine fringe fields bulge out near the open ends and decay rapidly (roughly as 1/r³, like a magnetic dipole), which is why devices like MRI machines need substantial magnetic shielding.',
+    targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS`, `${SOLN}:MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY`],
+    source: `${SOLN_SRC} — Ampere's law derivation of B = μ₀nI (no radius dependence) + fringe-field behavior of real solenoids`,
+  },
+  {
+    conceptId: SOLN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong guess: assuming a WIDER solenoid produces a STRONGER magnetic field inside, since it seems like "more solenoid" should mean "more field." Trace the Ampere\'s law derivation directly: B = μ₀nI — the radius R simply never appears anywhere in this result. Two solenoids, one with a 2 cm radius and one with a 20 cm radius, wound with the identical turns-per-unit-length n and carrying the identical current I, produce EXACTLY the same field strength inside, no matter how different their widths are; the field inside an infinite solenoid is genuinely uniform regardless of how wide the coil is. What DOES change with radius is the inductance, L = μ₀n²Al (through the area A = πR² term) — a wider solenoid has more total flux threading it and stores more magnetic energy, but the FIELD STRENGTH itself is unaffected. This closely parallels the parallel-plate capacitor: E = σ/ε₀ between the plates is independent of plate area, but a larger plate does give you more capacitance C. Second trap: treating "B = 0 outside a solenoid" as an exact, universal statement that applies to every real solenoid. It\'s exact ONLY for the idealized infinite solenoid — a genuinely useful approximation for practical calculations far from the ends, but real, finite solenoids have honest fringe fields bulging out near their open ends and extending some distance outward, decaying rapidly (roughly as 1/r³, exactly like a magnetic dipole\'s far field) rather than vanishing instantly at the solenoid\'s surface. This is precisely why MRI machines, which use extremely strong solenoid electromagnets, require substantial room-sized magnetic shielding — the "B = 0 outside" idealization would predict no shielding is ever necessary, which is simply false for a real, finite device.',
+    targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS`, `${SOLN}:MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY`],
+    source: `${SOLN_SRC} — MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS + MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SOLN_PROBES: SeedProbe[] = [
+  {
+    conceptId: SOLN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two solenoids have the same turns-per-length n and carry the same current I, but Solenoid A has radius 2 cm and Solenoid B has radius 20 cm (10 times wider). How do their internal field strengths compare?',
+    choices: [
+      { text: 'They are exactly equal — B = μ₀nI has no radius dependence at all, so a wider solenoid gives the identical field strength inside as a narrower one with the same n and I', isCorrect: true },
+      { text: 'Solenoid B (wider) has a much stronger field, since it has more overall volume and coil material', isCorrect: false, misconceptionId: `${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS` },
+    ],
+    correctValue: 'equal field strength',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS`],
+    source: `${SOLN_SRC} — MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SOLN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An MRI machine uses a very strong, real (finite) solenoid electromagnet. Is it accurate to say the field is exactly zero everywhere outside the solenoid, so no shielding is needed?',
+    choices: [
+      { text: 'No — B = 0 outside is exact only for an idealized infinite solenoid; real, finite solenoids have genuine fringe fields near their ends that decay gradually (roughly 1/r³), which is exactly why MRI machines need substantial shielding', isCorrect: true },
+      { text: 'Yes — B = μ₀nI inside and B = 0 outside are both exact laws that apply to any real solenoid, so no external shielding should ever be necessary', isCorrect: false, misconceptionId: `${SOLN}:MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY` },
+    ],
+    correctValue: 'no, real solenoids have fringe fields outside',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY`],
+    source: `${SOLN_SRC} — MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.rc-circuits ──────────────────────────────────────────────────────
+const RCC = 'phys.em.rc-circuits'
+const RCC_SRC = 'docs/curriculum/blueprints/phys.em.rc-circuits.md'
+
+const RCC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RCC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When a capacitor charges through a resistor from a battery, the process is governed by the time constant τ = RC, and the capacitor\'s behavior genuinely changes over the course of charging — it is NOT one fixed thing throughout. At t = 0 (uncharged, V_C = 0), the capacitor exerts zero back-EMF, so it behaves exactly like a SHORT CIRCUIT: the full current I(0) = ε/R flows immediately, as if the capacitor weren\'t there at all. As charge accumulates, V_C rises and increasingly opposes further current flow; at t → ∞ (fully charged, V_C = ε), the back-EMF exactly cancels the source EMF, current falls to exactly zero, and the capacitor now behaves like an OPEN CIRCUIT. In between, both quantities follow smooth exponentials: V_C(t) = ε(1 − e^(−t/τ)) rising toward ε, and I(t) = (ε/R)e^(−t/τ) decaying toward zero. The two extreme statements — "capacitor acts as a short circuit" and "capacitor blocks DC" — are both true, but only as the INITIAL and FINAL limiting cases of the same continuous exponential process, never as a description of the whole charging process at once.',
+    targetedMisconceptions: [`${RCC}:MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R`, `${RCC}:MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS`],
+    source: `${RCC_SRC} — time constant τ=RC + capacitor's time-varying behavior (short circuit at t=0, open circuit at t→∞)`,
+  },
+  {
+    conceptId: RCC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A tempting but backwards intuition: believing a LARGER resistance R somehow provides "more drive," charging the capacitor FASTER — perhaps because it seems like a bigger component should do more. Push this claim to its logical extreme to see it break: if larger R really meant faster charging, then R → ∞ (a fully open circuit) should charge the capacitor instantly, in zero time — but with R = ∞, absolutely NO current flows at all, so the capacitor never charges whatsoever. Going the other direction, R → 0 (a short circuit) charges the capacitor as fast as physically possible, not slower. The actual relationship, τ = RC, shows R and C enter completely symmetrically: doubling EITHER one doubles the charging time. A larger R genuinely limits the instantaneous current I = (ε − V_C)/R at every moment throughout the process, so each coulomb of charge simply takes longer to arrive at the plates — smaller R (not larger) is what charges the capacitor faster, precisely because it allows more current to flow at every instant. Second, equally common trap: assuming a capacitor is an open circuit from the very first instant the switch closes, reasoning that "capacitors block DC, so no current flows at t = 0." If this were literally true, the capacitor would never accumulate ANY charge at all — it would stay uncharged forever, contradicting its entire purpose. Measure the actual current immediately after closing the switch and you find I(0) = ε/R exactly — as if the capacitor were simply replaced by a plain wire — because at t = 0 the capacitor is uncharged (V_C = 0), contributes zero back-EMF, and offers zero opposition to current. "Capacitors block DC" is a completely accurate description ONLY of the final steady state, at t → ∞, once the capacitor is fully charged and V_C = ε — never a description of the initial instant when the switch first closes.',
+    targetedMisconceptions: [`${RCC}:MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R`, `${RCC}:MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS`],
+    source: `${RCC_SRC} — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R + MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RCC_PROBES: SeedProbe[] = [
+  {
+    conceptId: RCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You increase the resistance R in an RC charging circuit while keeping C and ε fixed. What happens to the charging time (the time constant τ = RC)?',
+    choices: [
+      { text: 'It increases — larger R limits the instantaneous current at every moment, so charge takes longer to accumulate on the plates; τ = RC grows proportionally with R', isCorrect: true },
+      { text: 'It decreases — larger R "drives" the circuit harder, charging the capacitor faster', isCorrect: false, misconceptionId: `${RCC}:MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R` },
+    ],
+    correctValue: 'time constant increases with R',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RCC}:MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R`],
+    source: `${RCC_SRC} — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RCC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A switch is closed at t = 0, connecting an uncharged capacitor to a battery ε through resistor R. What is the current I(0) at the very instant the switch closes?',
+    choices: [
+      { text: 'I(0) = ε/R — at t = 0 the capacitor is uncharged (V_C = 0) and contributes zero back-EMF, so it behaves like a plain wire (short circuit), allowing the maximum current to flow', isCorrect: true },
+      { text: 'I(0) = 0 — the capacitor blocks DC, so no current can flow through the circuit the instant the switch is closed', isCorrect: false, misconceptionId: `${RCC}:MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS` },
+    ],
+    correctValue: 'I(0) = epsilon/R',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RCC}:MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS`],
+    source: `${RCC_SRC} — MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.wheatstone-bridge ────────────────────────────────────────────────
+const WHTB = 'phys.em.wheatstone-bridge'
+const WHTB_SRC = 'docs/curriculum/blueprints/phys.em.wheatstone-bridge.md'
+
+const WHTB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WHTB,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A Wheatstone bridge measures an unknown resistance X by comparing it against three known resistors (P, Q, R) arranged in a diamond configuration with a galvanometer bridging the middle; you adjust one resistor until the galvanometer reads exactly ZERO current (the "null" or "balance" condition), at which point the balance equation X = QR/P holds. This is a NULL measurement — like balancing a mechanical scale, you never need to know how strongly gravity pulls (the battery\'s EMF), you simply adjust one arm until both sides are equal and the indicator (galvanometer) reads zero; the balance condition doesn\'t involve EMF anywhere in the equation, so even doubling the battery voltage leaves the balance point completely unchanged. Crucially, "balance" is about RATIOS between the four resistors, not about all of them being equal — a working bridge might have P = 100 Ω, Q = 10 Ω, R = 47 Ω, X = 4.7 Ω, four genuinely different values, satisfying P/Q = R/X = 10 exactly; countless other resistor combinations satisfy the same cross-multiplied condition P×X = Q×R, all producing a perfectly balanced (zero-current) bridge.',
+    targetedMisconceptions: [`${WHTB}:MC-WHEATSTONE-BRIDGE-MEASURES-EMF`, `${WHTB}:MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS`],
+    source: `${WHTB_SRC} — null-measurement principle + balance condition X=QR/P (ratio-based, not equality-based)`,
+  },
+  {
+    conceptId: WHTB,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong assumption: believing the Wheatstone bridge somehow measures the battery\'s EMF, or that the EMF value matters for the final resistance result. At balance, the galvanometer reads exactly zero — no current flows through it at all — and looking at the balance equation X = QR/P directly, EMF doesn\'t appear ANYWHERE in it. Even doubling the battery\'s voltage entirely, the balance point (the value of the adjustable resistor that zeros the galvanometer) doesn\'t shift at all — the result is purely a statement about RESISTANCE RATIOS, completely independent of how much driving voltage is applied. This is exactly why the Wheatstone bridge is called a null measurement: like balancing a mechanical scale, you never need to know exactly how hard gravity pulls — you simply adjust one side until both are equal and the indicator settles at zero. Second, equally common trap: assuming the bridge only balances when all four resistors are literally equal to each other, P = Q = R = X. That\'s far too restrictive — a genuine working example might use P = 100 Ω, Q = 10 Ω, R = 47 Ω, and X = 4.7 Ω, four completely different values, and this satisfies the balance condition P/Q = R/X exactly (both ratios equal 10), giving a perfectly zero galvanometer reading. Balance is fundamentally about matching RATIOS, not matching individual values — the cross-multiplied condition P×X = Q×R is satisfied by countless combinations of four different resistors, with the fully-equal case (P=Q=R=X) being just one single special example among an infinite family of valid balanced configurations.',
+    targetedMisconceptions: [`${WHTB}:MC-WHEATSTONE-BRIDGE-MEASURES-EMF`, `${WHTB}:MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS`],
+    source: `${WHTB_SRC} — MC-WHEATSTONE-BRIDGE-MEASURES-EMF + MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const WHTB_PROBES: SeedProbe[] = [
+  {
+    conceptId: WHTB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A Wheatstone bridge is balanced (galvanometer reads zero), giving an unknown resistance X. The battery\'s EMF is then doubled. What happens to the measured value of X?',
+    choices: [
+      { text: 'X stays exactly the same — the balance condition X = QR/P doesn\'t involve EMF at all, since balance is purely a ratio between the four resistors', isCorrect: true },
+      { text: 'X changes, since a larger EMF drives more current through the bridge and shifts the balance point', isCorrect: false, misconceptionId: `${WHTB}:MC-WHEATSTONE-BRIDGE-MEASURES-EMF` },
+    ],
+    correctValue: 'X unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WHTB}:MC-WHEATSTONE-BRIDGE-MEASURES-EMF`],
+    source: `${WHTB_SRC} — MC-WHEATSTONE-BRIDGE-MEASURES-EMF trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WHTB,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A Wheatstone bridge has P = 100 Ω, Q = 10 Ω, R = 47 Ω, X = 4.7 Ω — four different resistor values. Can this bridge still be balanced (galvanometer reads zero)?',
+    choices: [
+      { text: 'Yes — balance only requires P/Q = R/X (here both equal 10), a ratio match; the four resistors do not need to be equal to each other', isCorrect: true },
+      { text: 'No — a Wheatstone bridge can only balance when all four resistors are equal to each other (P = Q = R = X)', isCorrect: false, misconceptionId: `${WHTB}:MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS` },
+    ],
+    correctValue: 'yes, ratios matter not equality',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WHTB}:MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS`],
+    source: `${WHTB_SRC} — MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.potentiometer ────────────────────────────────────────────────────
+const POTM = 'phys.em.potentiometer'
+const POTM_SRC = 'docs/curriculum/blueprints/phys.em.potentiometer.md'
+
+const POTM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POTM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In physics, a potentiometer is a precision NULL-BALANCE measurement instrument — a uniform wire carrying a steady driver current, creating a known, evenly-distributed potential gradient along its length, used together with a galvanometer to measure an unknown EMF ε_x by finding the balance length l where the galvanometer current is exactly zero: ε_x = kl (k = the potential gradient per unit length). This is a genuinely different device from the everyday "potentiometer" in electronics (a three-terminal variable resistor, like a volume knob) — same name, completely different purpose; in physics, "potentiometer" always means this null-balance measurement circuit unless stated otherwise. The critical advantage of the potentiometer over an ordinary voltmeter: at the null point, the galvanometer reads exactly zero current, which means ZERO current is being drawn from the cell under test at that instant — with I = 0, the terminal voltage relation V_terminal = ε − Ir simplifies to V_terminal = ε exactly (the Ir term vanishes completely), so the potentiometer measures the TRUE, open-circuit EMF of the source, not its terminal voltage under load. An ordinary voltmeter, by contrast, always draws SOME current (even a very good one draws a small amount), which means it inherently measures a slightly reduced terminal voltage rather than the true EMF — the potentiometer\'s zero-current null condition is exactly what eliminates this systematic error.',
+    targetedMisconceptions: [`${POTM}:MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR`, `${POTM}:MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE`],
+    source: `${POTM_SRC} — null-balance instrument definition (physics vs. electronics meaning) + zero-current advantage over a voltmeter`,
+  },
+  {
+    conceptId: POTM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A very understandable naming collision: hearing "potentiometer" and immediately thinking of the common three-terminal variable resistor used in electronics (like a volume knob), since that\'s the everyday meaning of the word. In physics, "potentiometer" refers to something structurally and functionally different: a precision measurement instrument built from a uniform wire carrying a steady driver current, creating a known potential gradient, paired with a galvanometer to find a NULL (zero-current) balance point. A variable resistor changes its resistance to control current in a circuit; a physics potentiometer, by contrast, is used to MEASURE an unknown EMF precisely, by finding the exact wire length where the galvanometer reads zero. Same word, two genuinely different devices — context (physics measurement vs. everyday electronics) tells you which one is meant, and in this topic it always means the null-balance measurement circuit. Second, more consequential trap: assuming the potentiometer measures "the voltage the battery delivers" — i.e., confusing its null-balance EMF reading with an ordinary terminal-voltage measurement. It measures something subtly but importantly different: at the exact null point, the galvanometer reads zero current, meaning literally zero current is being drawn FROM the cell under test at that instant. With I = 0, the terminal voltage relation V_terminal = ε − Ir collapses to V_terminal = ε exactly (the Ir drop vanishes entirely since I = 0) — so the potentiometer measures the TRUE, open-circuit EMF, never the terminal voltage under any actual load. An ordinary voltmeter, even a very good one, always draws some small current from the source it\'s measuring, so it inherently reads a slightly reduced terminal voltage rather than the true EMF; the potentiometer\'s defining advantage is precisely that its zero-current null condition eliminates this systematic error completely.',
+    targetedMisconceptions: [`${POTM}:MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR`, `${POTM}:MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE`],
+    source: `${POTM_SRC} — MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR + MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const POTM_PROBES: SeedProbe[] = [
+  {
+    conceptId: POTM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a physics context, is "potentiometer" the same device as the common three-terminal variable resistor (volume-knob style) used in everyday electronics?',
+    choices: [
+      { text: 'No — the physics potentiometer is a null-balance measurement instrument (uniform wire + galvanometer) used to measure EMF precisely, a fundamentally different device from a variable resistor', isCorrect: true },
+      { text: 'Yes — a potentiometer is just a variable resistor used to control current, regardless of context', isCorrect: false, misconceptionId: `${POTM}:MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR` },
+    ],
+    correctValue: 'no, different devices',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POTM}:MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR`],
+    source: `${POTM_SRC} — MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: POTM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At the null point of a potentiometer measurement, the galvanometer reads exactly zero current. What voltage does the potentiometer measure at this point — the true EMF or the terminal voltage under load?',
+    choices: [
+      { text: 'The true, open-circuit EMF — with zero current drawn from the source (I=0), V_terminal = ε − Ir simplifies to exactly ε, so no load-dependent voltage drop occurs', isCorrect: true },
+      { text: 'The terminal voltage under load — same as what an ordinary voltmeter would read', isCorrect: false, misconceptionId: `${POTM}:MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE` },
+    ],
+    correctValue: 'true EMF',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POTM}:MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE`],
+    source: `${POTM_SRC} — MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.meas.vector-addition ───────────────────────────────────────────────
+const VADD = 'phys.meas.vector-addition'
+const VADD_SRC = 'docs/curriculum/blueprints/phys.meas.vector-addition.md'
+
+const VADD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VADD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Walk 3 tiles east, then 4 tiles north — how far are you from where you started, measured in a straight line? Not 7. Because vectors carry direction, they don\'t simply add like plain numbers: walking head-to-tail, the straight-line "resultant" that closes the path from start to finish is exactly 5 tiles (the classic 3-4-5 right triangle), found via √(3²+4²) by the Pythagorean theorem, since the two walks are perpendicular. In general, add vectors head-to-tail (or equivalently, resolve each into orthogonal components Vₓ = V cos θ, V_y = V sin θ, add the x-components together and the y-components together separately, then reconstruct the resultant magnitude √(Vₓ²+V_y²) and direction tan⁻¹(V_y/Vₓ)). The resultant\'s size depends entirely on the ANGLE between the vectors, not just their individual magnitudes: for two vectors of size a and b, the resultant can range anywhere from |a−b| (when they point in exactly opposite directions and partially cancel) up to a+b (when they point in exactly the same direction and fully reinforce) — meaning the resultant of two vectors can genuinely be SMALLER than either one individually, something that never happens when adding ordinary scalar numbers.',
+    targetedMisconceptions: [`${VADD}:MC-SCALAR-SUM`, `${VADD}:MC-RESULTANT-ALWAYS-LARGER`],
+    source: `${VADD_SRC} — TA-1/TA-2 (two-walks anchor, head-to-tail addition, angle-dependence) + TA-3 (component resolution)`,
+  },
+  {
+    conceptId: VADD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The most natural but wrong instinct when combining two vectors: simply adding their magnitudes together, the way ordinary numbers add, giving 3 + 4 = 7 for a 3 N force and a 4 N force regardless of the angle between them. Walk it out physically: walk 3 tiles east, then 4 tiles north — if the distances simply added, you\'d be 7 tiles from your starting point in a straight line. Measure the actual straight-line distance and it\'s exactly 5, not 7 (Pythagorean theorem: √(3²+4²) = 5) — where did the other 2 "go"? Nowhere — they were never there in the first place, because vectors carry direction, and only when two vectors point in EXACTLY the same direction do their magnitudes add straight (giving 7); at a right angle, you close a triangle and get 5; pointing in exactly opposite directions, you get the DIFFERENCE, |3−4| = 1. Second, related trap: assuming that combining two vectors must always produce something BIGGER than either one alone — since "adding" intuitively feels like it should grow the total. It doesn\'t have to: imagine two people pushing on the same box with equal force from exactly opposite sides — two genuinely real forces, both nonzero — and the net push on the box is exactly ZERO, because the vectors point in opposite directions and cancel completely. More generally, the resultant of two vectors with magnitudes a and b can range anywhere from |a−b| (fully opposed, partial or total cancellation) up to a+b (fully aligned, full reinforcement) — "bigger" is only GUARANTEED when the two vectors happen to point in exactly the same direction; at any other angle, especially near-opposition, the resultant can be smaller than either original vector, or even exactly zero.',
+    targetedMisconceptions: [`${VADD}:MC-SCALAR-SUM`, `${VADD}:MC-RESULTANT-ALWAYS-LARGER`],
+    source: `${VADD_SRC} — MC-SCALAR-SUM + MC-RESULTANT-ALWAYS-LARGER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const VADD_PROBES: SeedProbe[] = [
+  {
+    conceptId: VADD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A box is pulled with a 3 N force pointing east and a 4 N force pointing north, at the same time. What is the magnitude of the single resultant force?',
+    choices: [
+      { text: '5 N — found via the Pythagorean theorem √(3²+4²), since the two forces are perpendicular and add head-to-tail, not by simply adding the magnitudes', isCorrect: true },
+      { text: '7 N — simply add the two magnitudes together, 3 N + 4 N', isCorrect: false, misconceptionId: `${VADD}:MC-SCALAR-SUM` },
+    ],
+    correctValue: '5 N',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VADD}:MC-SCALAR-SUM`],
+    source: `${VADD_SRC} — MC-SCALAR-SUM trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: VADD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two people push equally hard (5 N each) on opposite sides of a box, directly opposing each other. What is the magnitude of the net (resultant) force on the box?',
+    choices: [
+      { text: '0 N — the two equal, oppositely-directed forces cancel completely; combining two nonzero vectors can produce a result smaller than either one, even exactly zero', isCorrect: true },
+      { text: '10 N — combining two forces should always produce something bigger than either force alone', isCorrect: false, misconceptionId: `${VADD}:MC-RESULTANT-ALWAYS-LARGER` },
+    ],
+    correctValue: '0 N',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VADD}:MC-RESULTANT-ALWAYS-LARGER`],
+    source: `${VADD_SRC} — MC-RESULTANT-ALWAYS-LARGER trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -32052,6 +32412,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...LCC_EXPLANATIONS,
   ...MDIP_EXPLANATIONS,
   ...MAXW_EXPLANATIONS,
+  ...RSTV_EXPLANATIONS,
+  ...SOLN_EXPLANATIONS,
+  ...RCC_EXPLANATIONS,
+  ...WHTB_EXPLANATIONS,
+  ...POTM_EXPLANATIONS,
+  ...VADD_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -32416,4 +32782,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...LCC_PROBES,
   ...MDIP_PROBES,
   ...MAXW_PROBES,
+  ...RSTV_PROBES,
+  ...SOLN_PROBES,
+  ...RCC_PROBES,
+  ...WHTB_PROBES,
+  ...POTM_PROBES,
+  ...VADD_PROBES,
 ]
