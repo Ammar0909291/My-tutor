@@ -27850,6 +27850,273 @@ const CITE_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.composition.argumentation-basics ──────────────────────────────────────
+const ARGB = 'eng.composition.argumentation-basics'
+const ARGB_SRC = 'docs/curriculum/blueprints/eng.composition.argumentation-basics.md'
+
+const ARGB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARGB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Piling up overlapping reasons is like building a table with more ' +
+      'legs of the exact same short length instead of legs that actually ' +
+      'reach the ground — it adds clutter, not stability. Before adding a ' +
+      'point, ask: is this genuinely a NEW kind of reason, or the same ' +
+      'point in different words? Two or three fully developed, truly ' +
+      'distinct points beat five overlapping ones.',
+    targetedMisconceptions: [`${ARGB}:MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT`],
+    source: `${ARGB_SRC} — MC-A (P28 table-legs-same-length conflict)`,
+  },
+  {
+    conceptId: ARGB,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organizing your points is like planning where to serve dishes in a ' +
+      'meal — the same three dishes in a different order create a ' +
+      'different overall experience. After choosing your points, ' +
+      'deliberately decide an order and be able to explain why: building ' +
+      'toward your strongest point, or leading with it to hook a ' +
+      'skeptical reader.',
+    targetedMisconceptions: [`${ARGB}:MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD`],
+    source: `${ARGB_SRC} — MC-B (P28 meal-courses-order conflict)`,
+  },
+  {
+    conceptId: ARGB,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'A strong argument is built from a few genuinely distinct, well-' +
+      'developed points, not the maximum number possible — like table legs ' +
+      'of the same inadequate length adding clutter, not stability. ' +
+      'Separately, the order of those points is a deliberate choice that ' +
+      'changes how convincing the argument feels, like courses served in ' +
+      'different sequence at a meal — organization is never a cosmetic ' +
+      'afterthought.',
+    targetedMisconceptions: [
+      `${ARGB}:MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT`,
+      `${ARGB}:MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD`,
+    ],
+    source: `${ARGB_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const ARGB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARGB,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An outline for "school should start later" lists five points: tired students, tired teachers, tired parents, tired bus drivers, tired everyone. Does having five points automatically make this a stronger argument than two well-developed, genuinely different points?',
+    choices: [
+      { text: 'No — these five points are really the same underlying idea restated; two or three genuinely distinct, well-developed points almost always beat several overlapping ones', isCorrect: true },
+      { text: 'Yes — more reasons is always a stronger argument regardless of whether they overlap', isCorrect: false, misconceptionId: `${ARGB}:MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT` },
+    ],
+    correctValue: 'no, distinct developed points beat overlapping quantity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARGB}:MC-A-MORE-REASONS-IS-ALWAYS-A-STRONGER-ARGUMENT`],
+    source: `${ARGB_SRC} — table-legs-same-length conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ARGB,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same three strong points about a position are arranged once randomly and once with the strongest, most specific point placed last for impact. Does the order change how convincing the argument feels, given identical points?',
+    choices: [
+      { text: 'Yes — placement affects emphasis; the same points in a different order can feel more or less convincing, so organization matters even when the points themselves are good', isCorrect: true },
+      { text: 'No — argument organization doesn\'t matter as long as the points themselves are good', isCorrect: false, misconceptionId: `${ARGB}:MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD` },
+    ],
+    correctValue: 'yes, order changes how convincing an argument feels',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARGB}:MC-B-ARGUMENT-ORGANIZATION-DOESNT-MATTER-AS-LONG-AS-THE-POINTS-ARE-GOOD`],
+    source: `${ARGB_SRC} — meal-courses-order conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.composition.rhetorical-devices ────────────────────────────────────────
+const RHDV = 'eng.composition.rhetorical-devices'
+const RHDV_SRC = 'docs/curriculum/blueprints/eng.composition.rhetorical-devices.md'
+
+const RHDV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RHDV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Naming a device ("this is repetition") is like correctly ' +
+      'identifying a tool as "a hammer" — true, but it doesn\'t say what ' +
+      'the hammer actually DID in this situation. After naming a device, ' +
+      'always add "which creates the effect of ___" — if your analysis ' +
+      'stops at the name, you\'ve done half the job.',
+    targetedMisconceptions: [`${RHDV}:MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT`],
+    source: `${RHDV_SRC} — MC-A (P28 hammer-and-job conflict)`,
+  },
+  {
+    conceptId: RHDV,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Not every repeated word is a rhetorical choice — that\'s like ' +
+      'calling every brick in a building "architecture" just because it ' +
+      'repeats. Real rhetorical repetition is noticeable, structurally ' +
+      'placed, and tied to meaning; ordinary words like "the" or "and" ' +
+      'repeating because language requires them are not deliberate ' +
+      'devices.',
+    targetedMisconceptions: [`${RHDV}:MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE`],
+    source: `${RHDV_SRC} — MC-B (P28 every-brick-is-architecture conflict)`,
+  },
+  {
+    conceptId: RHDV,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Naming a rhetorical device is only half the analysis — like naming ' +
+      'a tool "a hammer" without saying what job it did; always add what ' +
+      'specific effect it creates. Separately, not every repeated word is ' +
+      'a deliberate device — ordinary grammatical repetition ("the," ' +
+      '"and") is just how language works, unlike a brick repeating that\'s ' +
+      'not automatically "architecture"; genuine devices are noticeable, ' +
+      'structurally placed, and meaningful.',
+    targetedMisconceptions: [
+      `${RHDV}:MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT`,
+      `${RHDV}:MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE`,
+    ],
+    source: `${RHDV_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const RHDV_PROBES: SeedProbe[] = [
+  {
+    conceptId: RHDV,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student analysis states only: "This passage uses repetition." Is naming the device this way a complete rhetorical device analysis?',
+    choices: [
+      { text: 'No — naming the device is only half the task; the analysis must also explain the specific effect the device produces in this passage', isCorrect: true },
+      { text: 'Yes — naming the device is the same as explaining its effect; once you\'ve identified it correctly, the analysis is complete', isCorrect: false, misconceptionId: `${RHDV}:MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT` },
+    ],
+    correctValue: 'no, naming alone is incomplete; effect must be explained',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RHDV}:MC-A-NAMING-THE-DEVICE-IS-THE-SAME-AS-EXPLAINING-ITS-EFFECT`],
+    source: `${RHDV_SRC} — hammer-and-job conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RHDV,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The word "the" appears eight times in a paragraph simply because ordinary sentences require it. Is this repetition automatically a deliberate rhetorical device?',
+    choices: [
+      { text: 'No — genuine rhetorical devices are noticeable, structurally placed, and tied to meaning; ordinary grammatical repetition like "the" is just how language naturally works', isCorrect: true },
+      { text: 'Yes — any repeated word or balanced phrase is automatically a deliberate device', isCorrect: false, misconceptionId: `${RHDV}:MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE` },
+    ],
+    correctValue: 'no, ordinary grammatical repetition is not a deliberate device',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RHDV}:MC-B-ANY-REPEATED-WORD-OR-BALANCED-PHRASE-IS-AUTOMATICALLY-A-DELIBERATE-DEVICE`],
+    source: `${RHDV_SRC} — every-brick-is-architecture conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.linguistics.translation-studies-intro ─────────────────────────────────
+const TRAN = 'eng.linguistics.translation-studies-intro'
+const TRAN_SRC = 'docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md'
+
+const TRAN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TRAN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming a good translation is word-for-word substitution is like ' +
+      'converting a recipe\'s units by swapping each number directly ' +
+      'without recalculating actual proportions — the numbers look right ' +
+      'but the real meaning is wrong. Good translation requires ' +
+      'recalculating for MEANING and natural expression, not swapping ' +
+      'words one-for-one.',
+    targetedMisconceptions: [`${TRAN}:MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER`],
+    source: `${TRAN_SRC} — MC-A (P28 recipe-unit-conversion conflict)`,
+  },
+  {
+    conceptId: TRAN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Assuming there\'s exactly one correct translation is like assuming ' +
+      'there\'s exactly one correct way to adapt a novel into a film — ' +
+      'different priorities (literal meaning vs. rhythm, wordplay vs. ' +
+      'literal content) produce different, equally defensible choices. Ask ' +
+      'what trade-off each translation navigates, not which one is ' +
+      '"correct."',
+    targetedMisconceptions: [`${TRAN}:MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG`],
+    source: `${TRAN_SRC} — MC-B (P28 novel-to-film-adaptation conflict)`,
+  },
+  {
+    conceptId: TRAN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Translation requires recalculating for meaning and natural target-' +
+      'language expression, not word-for-word substitution — like ' +
+      'converting recipe units by recalculating actual proportions, not ' +
+      'swapping numbers directly. Separately, different translations of ' +
+      'the same passage can each be legitimate, defensible choices ' +
+      'reflecting different priorities, like different filmmakers\' ' +
+      'equally valid adaptations of the same novel — there is rarely one ' +
+      'single "correct" translation.',
+    targetedMisconceptions: [
+      `${TRAN}:MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER`,
+      `${TRAN}:MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG`,
+    ],
+    source: `${TRAN_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const TRAN_PROBES: SeedProbe[] = [
+  {
+    conceptId: TRAN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A translator replaces each word of an idiomatic expression with its closest word-for-word equivalent, producing an awkward, confusing result in the target language. Is word-for-word substitution what makes a translation "good"?',
+    choices: [
+      { text: 'No — languages rarely have perfectly matching vocabulary or idiom; a good translation conveys the same meaning and effect, even if that requires departing from literal word matching', isCorrect: true },
+      { text: 'Yes — a good translation is a mechanical word-for-word substitution from one language to another', isCorrect: false, misconceptionId: `${TRAN}:MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER` },
+    ],
+    correctValue: 'no, translation must preserve meaning, not literal wording',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${TRAN}:MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER`],
+    source: `${TRAN_SRC} — recipe-unit-conversion conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: TRAN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two published translations of the same poem exist — one prioritizes preserving rhyme and rhythm at some cost to exact literal meaning, the other prioritizes exact literal meaning at some cost to rhythm. Must one of these simply be "wrong"?',
+    choices: [
+      { text: 'No — both are legitimate responses to a genuine trade-off, reflecting different defensible priorities; there is rarely one single correct translation', isCorrect: true },
+      { text: 'Yes — there is always exactly one correct translation for a given passage, and all others are wrong', isCorrect: false, misconceptionId: `${TRAN}:MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG` },
+    ],
+    correctValue: 'no, multiple legitimate translations can coexist',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${TRAN}:MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG`],
+    source: `${TRAN_SRC} — novel-to-film-adaptation conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -28163,6 +28430,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...COMPL_EXPLANATIONS,
   ...DBAT_EXPLANATIONS,
   ...CITE_EXPLANATIONS,
+  ...ARGB_EXPLANATIONS,
+  ...RHDV_EXPLANATIONS,
+  ...TRAN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -28476,4 +28746,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...COMPL_PROBES,
   ...DBAT_PROBES,
   ...CITE_PROBES,
+  ...ARGB_PROBES,
+  ...RHDV_PROBES,
+  ...TRAN_PROBES,
 ]
