@@ -13168,6 +13168,104 @@ const CRIT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.reading.evaluating-sources ─────────────────────────────────────────────
+const EVSR = 'eng.reading.evaluating-sources'
+const EVSR_SRC = 'docs/curriculum/blueprints/eng.reading.evaluating-sources.md'
+
+const EVSR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EVSR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Professional appearance is easy to fake and expensive to produce ' +
+      'even with false content — polished design tells you nothing about ' +
+      'whether the underlying claims are actually true. A slick website ' +
+      'with no named author and a domain registered anonymously last month ' +
+      'can make the same claim as a plainer site with a named, credentialed ' +
+      'author and cited peer-reviewed studies. Real credibility comes from ' +
+      'authorship (who wrote it, and are they qualified?), evidence (what ' +
+      'supports the claims?), and track record — not from how nice the ' +
+      'website looks.',
+    targetedMisconceptions: [`${EVSR}:MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL`],
+    source: `${EVSR_SRC} — MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL (P28 slick-vs-plain-site conflict evidence)`,
+  },
+  {
+    conceptId: EVSR,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Credibility is not a fixed, all-or-nothing label stamped on an ' +
+      'entire source forever — it varies by specific claim and topic. A ' +
+      'generally reputable news source can cite one specific claim outside ' +
+      'its usual expertise without adequate sourcing, while a source with a ' +
+      'known bias on political topics can still accurately report a simple ' +
+      'verifiable sports score. Instead of labeling a whole source ' +
+      '"reliable" or "unreliable" forever, evaluate each specific claim on ' +
+      'its own merits.',
+    targetedMisconceptions: [`${EVSR}:MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE`],
+    source: `${EVSR_SRC} — MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE (P28 reputable-source-single-error conflict evidence)`,
+  },
+  {
+    conceptId: EVSR,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // Adult-register variant — both misconceptions, no child framing
+    content:
+      'Source credibility is determined by authorship qualifications, ' +
+      'cited evidence, and track record — not by visual polish, which is ' +
+      'inexpensive to produce regardless of content accuracy. Separately, ' +
+      'credibility is not a fixed, binary property of an entire source: it ' +
+      'varies by specific claim and topic, since even generally reliable ' +
+      'sources can be under-sourced outside their area of expertise, and ' +
+      'generally biased sources can accurately report simple, verifiable ' +
+      'facts. Evaluate each claim on its own merits — authorship, evidence, ' +
+      'and specific relevance — rather than applying a single blanket ' +
+      'judgment to an entire source.',
+    targetedMisconceptions: [
+      `${EVSR}:MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL`,
+      `${EVSR}:MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE`,
+    ],
+    source: `${EVSR_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const EVSR_PROBES: SeedProbe[] = [
+  {
+    conceptId: EVSR,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A slick, professionally-designed website makes a health claim with no named author or cited studies. Is it credible because it looks professional?',
+    choices: [
+      { text: 'No — check authorship, cited evidence, and track record, not visual polish', isCorrect: true },
+      { text: 'Yes — professional design and official appearance signal reliability', isCorrect: false, misconceptionId: `${EVSR}:MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EVSR}:MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL`],
+    source: `${EVSR_SRC} — P28 slick-vs-plain-site conflict as probe`,
+  },
+  {
+    conceptId: EVSR,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A generally reputable news source makes one specific claim outside its usual expertise without adequate sourcing. Does this make the entire source unreliable forever?',
+    choices: [
+      { text: 'No — evaluate each specific claim on its own merits; credibility varies by claim and topic', isCorrect: true },
+      { text: 'Yes — a source is either completely reliable or completely unreliable', isCorrect: false, misconceptionId: `${EVSR}:MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EVSR}:MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE`],
+    source: `${EVSR_SRC} — P28 reputable-source-single-error conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -13322,6 +13420,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CLRD_EXPLANATIONS,
   ...CCTX_EXPLANATIONS,
   ...CRIT_EXPLANATIONS,
+  ...EVSR_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -13476,4 +13575,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CLRD_PROBES,
   ...CCTX_PROBES,
   ...CRIT_PROBES,
+  ...EVSR_PROBES,
 ]
