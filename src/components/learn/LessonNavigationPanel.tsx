@@ -16,6 +16,7 @@ interface LessonNavigationPanelProps {
   teachingLanguage?: string
   disabled?: boolean
   onPrevious: () => void
+  onCurrent?: () => void
   onNext: () => void
 }
 
@@ -49,7 +50,7 @@ function statusBadge(lesson: CurriculumLesson | null, ctx: {
 export function LessonNavigationPanel({
   previousLesson, currentLesson, nextLesson, totalLessons,
   progress, topicProgressMap, availableTopicSlugs, teachingLanguage,
-  disabled, onPrevious, onNext,
+  disabled, onPrevious, onCurrent, onNext,
 }: LessonNavigationPanelProps) {
   if (!currentLesson) return null
   const isRu = teachingLanguage === 'ru'
@@ -125,7 +126,17 @@ export function LessonNavigationPanel({
       </button>
 
       {/* Current Lesson */}
-      <div style={slotStyle(INDIGO)}>
+      <button
+        onClick={onCurrent}
+        disabled={disabled || !onCurrent}
+        title={isRu ? 'Начать урок заново' : 'Restart this lesson'}
+        aria-label={isRu ? 'Текущий урок' : isHi ? 'Current lesson' : 'Current lesson'}
+        style={{
+          ...slotStyle(INDIGO),
+          textAlign: 'left',
+          cursor: onCurrent && !disabled ? 'pointer' : 'default',
+        }}
+      >
         <span style={{ ...labelStyle, color: INDIGO }}>
           {isRu ? 'Текущий' : isHi ? 'Current' : 'Current'}
           {totalLessons > 0 && (
@@ -139,7 +150,7 @@ export function LessonNavigationPanel({
         {currentBadge && (
           <span style={{ fontSize: 10, color: currentBadge.color }}>{currentBadge.icon} {currentBadge.label}</span>
         )}
-      </div>
+      </button>
 
       {/* Next Lesson / Continue to Next Lesson */}
       <button

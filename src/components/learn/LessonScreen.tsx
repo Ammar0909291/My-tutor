@@ -883,6 +883,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [revisionTopic, setRevisionTopic] = useState<RevisionTopic>(null)
   const [skipWarning, setSkipWarning] = useState<SkipWarning>(null)
 
+  // Lesson-switch confirmation dialog (P0 UX — navigation owned by UI, not LLM)
+  const [lessonSwitchDialog, setLessonSwitchDialog] = useState<{
+    target: CurriculumLesson
+    isReview: boolean   // already completed or mastered
+    isRestart: boolean  // same as the current lesson
+  } | null>(null)
+
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [terminalOutput, setTerminalOutput] = useState('')
@@ -1588,6 +1595,52 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     await sendMessage(sessionId, reviewMsg, true)
   }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, teachingLanguage, sendMessage, startRevision])
 
+  // Show a confirmation dialog before switching to any lesson (P0 UX).
+  // Locked lessons are silently rejected — the UI should never offer them.
+  const requestLessonSwitch = useCallback((target: CurriculumLesson) => {
+    const ctx = { progress: curriculumProgress, topicProgressMap, availableTopicSlugs }
+    const state = computeLessonLockState(target, ctx)
+    if (state.isLocked) return
+    const isRestart = target.order === curriculumProgress.currentLesson
+    const isReview = !isRestart && (state.isCompleted || state.isMastered)
+    setLessonSwitchDialog({ target, isReview, isRestart })
+  }, [curriculumProgress, topicProgressMap, availableTopicSlugs])
+
+  // Perform the lesson switch after the user confirms the dialog.
+  const confirmLessonSwitch = useCallback(async () => {
+    if (!lessonSwitchDialog || !sessionId) return
+    const { target, isRestart } = lessonSwitchDialog
+    setLessonSwitchDialog(null)
+
+    if (isRestart) {
+      // Re-open the current lesson — send the opening prompt again.
+      const reopenMsg = teachingLanguage === 'ru'
+        ? `Давай начнём урок "${target.lessonTitle}" заново. Пожалуйста, начни сначала.`
+        : teachingLanguage === 'hi'
+        ? `"${target.lessonTitle}" dobara shuru karte hain. Please restart from the beginning.`
+        : `Let's restart lesson "${target.lessonTitle}" from the beginning.`
+      await sendMessage(sessionId, reopenMsg, false)
+      setActiveTab('chat')
+      return
+    }
+
+    if (target.order < curriculumProgress.currentLesson || target.topicSlug) {
+      // Backward navigation OR any KG-bound lesson — use startRevision which
+      // already handles the revision-mode message and navigation.
+      await startRevision(target)
+      return
+    }
+
+    // Forward to an unlocked lesson beyond the current one.
+    const forwardMsg = teachingLanguage === 'ru'
+      ? `Продолжим со следующего урока ${target.order}: ${target.lessonTitle}`
+      : teachingLanguage === 'hi'
+      ? `Chalo lesson ${target.order} shuru karte hain: ${target.lessonTitle}`
+      : `Let's start lesson ${target.order}: ${target.lessonTitle}`
+    await sendMessage(sessionId, forwardMsg, false)
+    setActiveTab('chat')
+  }, [lessonSwitchDialog, sessionId, teachingLanguage, curriculumProgress, sendMessage, startRevision])
+
   // Open the next lesson. Only ever called when canAdvanceToNextLesson()
   // is true (current lesson completed + next lesson unlocked per
   // prerequisites) — the Lesson Navigation Panel disables the button
@@ -2273,6 +2326,104 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         </div>
       )}
 
+      {/* Lesson-switch confirmation dialog (P0 UX — UI-owned navigation) */}
+      {lessonSwitchDialog && currentLessonData && (() => {
+        const { target, isReview, isRestart } = lessonSwitchDialog
+        const isRu = teachingLanguage === 'ru'
+        const isHi = teachingLanguage === 'hi'
+        const title = isRestart
+          ? (isRu ? 'Начать урок заново?' : isHi ? 'Lesson restart karein?' : 'Restart this lesson?')
+          : (isRu ? 'Перейти к другому уроку?' : isHi ? 'Dusre lesson mein jaayein?' : 'Leave current lesson?')
+        return (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
+            onClick={() => setLessonSwitchDialog(null)}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 9999,
+              background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(3px)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              padding: '1rem',
+            }}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'var(--bg-surface)', borderRadius: 14,
+                border: '1px solid var(--border-subtle)',
+                padding: '24px 24px 20px',
+                maxWidth: 400, width: '100%',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.45)',
+              }}
+            >
+              <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12, color: 'var(--text-primary)' }}>
+                {title}
+              </h3>
+
+              {isReview ? (
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
+                  {isRu
+                    ? `Вы уже завершили этот урок. Хотите повторить «${target.lessonTitle}»?`
+                    : isHi
+                    ? `Aapne yeh lesson pehle se complete kiya hai. Kya aap "${target.lessonTitle}" review karna chahenge?`
+                    : `You have already completed this lesson. Would you like to review "${target.lessonTitle}" again?`}
+                </p>
+              ) : isRestart ? (
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
+                  {isRu
+                    ? `Tutor Max начнёт урок «${target.lessonTitle}» заново. Прогресс урока и освоение сохранены.`
+                    : isHi
+                    ? `Tutor Max "${target.lessonTitle}" dobara shuru karega. Aapka progress aur mastery save hai.`
+                    : `Tutor Max will restart "${target.lessonTitle}" from the beginning. Your progress and mastery are saved.`}
+                </p>
+              ) : (
+                <>
+                  <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 10 }}>
+                    {isRu
+                      ? <><strong style={{ color: 'var(--text-primary)' }}>Сейчас:</strong> {currentLessonData.lessonTitle}<br/><strong style={{ color: 'var(--text-primary)' }}>Перейти к:</strong> {target.lessonTitle}</>
+                      : isHi
+                      ? <><strong style={{ color: 'var(--text-primary)' }}>Abhi:</strong> {currentLessonData.lessonTitle}<br/><strong style={{ color: 'var(--text-primary)' }}>Jaana hai:</strong> {target.lessonTitle}</>
+                      : <><strong style={{ color: 'var(--text-primary)' }}>Currently studying:</strong> {currentLessonData.lessonTitle}<br/><strong style={{ color: 'var(--text-primary)' }}>Switch to:</strong> {target.lessonTitle}</>}
+                  </p>
+                  <ul style={{ fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
+                    {(isRu
+                      ? ['ваш текущий прогресс сохранён', 'незавершённое освоение зафиксировано', 'вы можете вернуться в любое время']
+                      : isHi
+                      ? ['aapka current progress save hai', 'adhura mastery record mein hai', 'aap kabhi bhi resume kar sakte hain']
+                      : ['your current progress is saved', 'unfinished mastery remains recorded', 'you can resume anytime']
+                    ).map((line) => <li key={line}>{line}</li>)}
+                  </ul>
+                </>
+              )}
+
+              <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+                <button
+                  onClick={() => setLessonSwitchDialog(null)}
+                  style={{
+                    padding: '8px 16px', borderRadius: 8, border: '1px solid var(--border-subtle)',
+                    background: 'transparent', color: 'var(--text-secondary)',
+                    fontSize: 13, fontWeight: 500, cursor: 'pointer',
+                  }}
+                >
+                  {isRu ? 'Отмена' : isHi ? 'Cancel' : 'Cancel'}
+                </button>
+                <button
+                  onClick={confirmLessonSwitch}
+                  style={{
+                    padding: '8px 18px', borderRadius: 8, border: 'none',
+                    background: UI.indigo, color: '#fff',
+                    fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                  }}
+                >
+                  {isRu ? 'Продолжить' : isHi ? 'Continue' : 'Continue'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
+
       {/* Final Assessment modal (Sprint N — TASK 5/6) */}
       {finalAssessmentOpen && (
         <FinalAssessmentModal
@@ -2762,7 +2913,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         const isLockExpanded = expandedLockedTopic === lesson.topicSlug
                         const isSkipWarningShown = skipWarning?.topicSlug === lesson.topicSlug
 
-                        const canNavigate = (isCompleted || isPrevious || isMastered || isRevision) && !isCurrent
+                        // Any unlocked (non-locked, non-current) lesson is navigable —
+                        // includes completed, mastered, revision, previous, and unlocked-but-unstarted.
+                        const canNavigate = !isCurrent && !isLocked
                         const canReview = (isCompleted || isMastered) && !isCurrent && lesson.topicSlug !== undefined
                         const canSkip = !isLocked && !isCompleted && !isMastered && !isRevision && !isSkipped && !isCurrent && lesson.topicSlug !== undefined
 
@@ -2786,8 +2939,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                               onClick={() => {
                                 if (isLocked && lesson.topicSlug) {
                                   setExpandedLockedTopic((prev) => prev === lesson.topicSlug ? null : lesson.topicSlug!)
+                                } else if (isCurrent) {
+                                  requestLessonSwitch(lesson)
                                 } else if (canNavigate) {
-                                  navigateToLesson(lesson.order)
+                                  requestLessonSwitch(lesson)
                                 }
                               }}
                               style={{
@@ -3346,8 +3501,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 availableTopicSlugs={availableTopicSlugs}
                 teachingLanguage={teachingLanguage}
                 disabled={isStreaming || !sessionId}
-                onPrevious={() => previousLessonData && navigateToLesson(previousLessonData.order)}
-                onNext={() => advanceToNextLesson()}
+                onPrevious={() => previousLessonData && requestLessonSwitch(previousLessonData)}
+                onCurrent={() => currentLessonData && requestLessonSwitch(currentLessonData)}
+                onNext={() => nextLessonData && requestLessonSwitch(nextLessonData)}
               />
             )}
 
