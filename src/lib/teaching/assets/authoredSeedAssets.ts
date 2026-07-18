@@ -29329,6 +29329,93 @@ const RESPW_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.composition.academic-writing-conventions ──────────────────────────────
+const AWC = 'eng.composition.academic-writing-conventions'
+const AWC_SRC = 'docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md'
+
+const AWC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AWC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Academic objectivity doesn\'t mean having no opinion — it means ' +
+      'having a claim grounded in evidence and expressed with appropriate ' +
+      'confidence, like a judge who reaches a clear verdict without ' +
+      'refusing to decide, basing it transparently on the evidence. Take a ' +
+      'position, but ground it in evidence rather than personal assertion.',
+    targetedMisconceptions: [`${AWC}:MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL`],
+    source: `${AWC_SRC} — MC-A (P28 judges-verdict conflict)`,
+  },
+  {
+    conceptId: AWC,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Hedging language is like a volume dial, not a mute button — it ' +
+      'should be set to match how strong the evidence actually is, not ' +
+      'turned down uniformly on every statement. A well-replicated finding ' +
+      'deserves confident language; a single preliminary study deserves ' +
+      'more caution; these should sound different, not identically vague.',
+    targetedMisconceptions: [`${AWC}:MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING`],
+    source: `${AWC_SRC} — MC-B (P28 volume-dial-not-mute-button conflict)`,
+  },
+  {
+    conceptId: AWC,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    content:
+      'Academic objectivity requires a clear, evidence-grounded claim ' +
+      'expressed with appropriate confidence — not the absence of any ' +
+      'position, like a judge who reaches a verdict transparently based on ' +
+      'evidence rather than refusing to decide. Separately, hedging ' +
+      'language must be calibrated to actual evidence strength, like a ' +
+      'volume dial rather than a mute button — uniform hedging on every ' +
+      'claim hides real differences in evidence strength from the reader.',
+    targetedMisconceptions: [
+      `${AWC}:MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL`,
+      `${AWC}:MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING`,
+    ],
+    source: `${AWC_SRC} — both misconceptions, adult register (foundations/03 §5 adult-register guard)`,
+  },
+]
+
+const AWC_PROBES: SeedProbe[] = [
+  {
+    conceptId: AWC,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes "There are many different views on climate policy" instead of taking a specific, evidence-based position. Does academic objectivity mean avoiding any clear claim or argument?',
+    choices: [
+      { text: 'No — academic objectivity means having a claim grounded in evidence and expressed with appropriate confidence, not avoiding a position entirely', isCorrect: true },
+      { text: 'Yes — academic objectivity means having no opinion or argument at all', isCorrect: false, misconceptionId: `${AWC}:MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL` },
+    ],
+    correctValue: 'no, objectivity requires a claim grounded in evidence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AWC}:MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL`],
+    source: `${AWC_SRC} — judges-verdict conflict as probe, distractor-mapped`,
+  },
+  {
+    conceptId: AWC,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student writes "It may possibly be the case that X could potentially occur" for a well-replicated scientific finding AND for a single preliminary study AND for a widely-debated theoretical claim, using identical uniform hedging for all three. Does this accurately represent their genuinely different evidence strength?',
+    choices: [
+      { text: 'No — hedging language should be calibrated to match each claim\'s actual evidence strength, not applied uniformly regardless of how strong the evidence is', isCorrect: true },
+      { text: 'Yes — hedging language means being vague or weak about everything uniformly, regardless of evidence strength', isCorrect: false, misconceptionId: `${AWC}:MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING` },
+    ],
+    correctValue: 'no, hedging must be calibrated to evidence strength',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AWC}:MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING`],
+    source: `${AWC_SRC} — volume-dial-not-mute-button conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -29659,6 +29746,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PERT_EXPLANATIONS,
   ...COMPE_EXPLANATIONS,
   ...RESPW_EXPLANATIONS,
+  ...AWC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -29989,4 +30077,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PERT_PROBES,
   ...COMPE_PROBES,
   ...RESPW_PROBES,
+  ...AWC_PROBES,
 ]
