@@ -35108,6 +35108,426 @@ const TVWV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.interference ────────────────────────────────────────────────────
+const INTF = 'phys.wave.interference'
+const INTF_SRC = 'docs/curriculum/blueprints/phys.wave.interference.md'
+
+const INTF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INTF,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Destructive interference does NOT destroy energy — it only redistributes it. Consider two 1W speakers pointing at each other in a destructive interference pattern: if the energy genuinely vanished, a calorimeter placed between them would heat nothing and the overall energy balance would fail — but energy is conserved in every wave experiment ever measured. What actually happens: energy is moved FROM the points of destructive cancellation TO the points of constructive doubling. In a two-slit pattern, the dark fringes contribute zero energy locally, but the bright fringes (which are 4× as intense as a single source alone) collect it all — the area-averaged total intensity across the whole pattern is exactly what two incoherent (non-interfering) sources would give. A second, separate error: assuming interference only occurs when the two sources have identical amplitudes, treating unequal-amplitude overlap as merely "partial" or not real interference. This is false — interference happens whenever any two coherent waves overlap, regardless of amplitude. The general resultant amplitude formula is A_res=√(A₁²+A₂²+2A₁A₂cosφ), which works for any A₁ and A₂. When A₁=A₂=A₀, this simplifies to 2A₀|cos(φ/2)|, giving complete cancellation (zero) at the minima. But when A₁≠A₂, the minimum intensity is |A₁−A₂|>0 — nonzero, but still genuinely interference, just with reduced contrast. Fringe visibility V=(I_max−I_min)/(I_max+I_min) quantifies this contrast: V=1 for equal amplitudes (perfect cancellation possible), and 0<V<1 for unequal amplitudes (partial cancellation) — both cases are real interference, differing only in visibility, not in kind.',
+    targetedMisconceptions: [`${INTF}:MC-INTERFERENCE-DESTROYS-ENERGY`, `${INTF}:MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE`],
+    source: `${INTF_SRC} — MC-INTERFERENCE-DESTROYS-ENERGY (energy redistributed, not destroyed) + MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE (unequal amplitudes still interfere, reduced visibility)`,
+  },
+  {
+    conceptId: INTF,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "destructive interference means the waves cancel and the energy disappears" — treating the dark regions as a genuine loss of energy from the universe. Test this against a concrete scenario: two 1W speakers pointing at each other, set up in a destructive interference pattern. If the sound energy genuinely vanished at the cancellation points, a calorimeter placed between the speakers would register no heating, and the total energy balance for the system would fail to add up — but we know from every wave experiment ever performed that energy is strictly conserved. So what is actually happening? Energy is not destroyed by superposition — it is redistributed. The points of destructive cancellation are exactly, precisely paired with points of constructive doubling elsewhere in the pattern; the energy that "would have" landed at a dark-fringe location is instead concentrated at a bright-fringe location. In a two-slit interference pattern, dark fringes contribute zero energy, but bright fringes — which reach 4× the intensity a single source alone would give — collect that missing energy exactly. If you average intensity over the whole pattern, the result matches exactly what two INCOHERENT (non-interfering) sources would deliver: total energy is unchanged, only its spatial distribution shifts. A second, independent error: claiming interference only genuinely occurs when the two overlapping sources have identical amplitudes, and that unequal-amplitude cases are "partial" or somehow not real interference. Consider real radio engineering: signals from two antennas of different transmission power reach a receiver and genuinely interfere — engineers explicitly calculate this to avoid dead zones in coverage. If unequal amplitudes truly could not interfere, this entire branch of radio engineering would be nonsensical — yet it works reliably. The general superposition formula A_res=√(A₁²+A₂²+2A₁A₂cosφ) applies to ANY two amplitudes A₁ and A₂, equal or not. When A₁=A₂=A₀, it simplifies to 2A₀|cos(φ/2)|, allowing the amplitude to reach exactly zero at minima — perfect cancellation. But when A₁≠A₂, the minimum amplitude is instead |A₁−A₂|, which is greater than zero — the waves still genuinely interfere, they simply cannot cancel completely, producing reduced (but nonzero) contrast rather than "no interference." This contrast is precisely quantified by the fringe visibility V=(I_max−I_min)/(I_max+I_min): V=1 exactly when amplitudes are equal, and 0<V<1 for unequal amplitudes — a matter of degree, never a binary "interference or no interference."',
+    targetedMisconceptions: [`${INTF}:MC-INTERFERENCE-DESTROYS-ENERGY`, `${INTF}:MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE`],
+    source: `${INTF_SRC} — MC-INTERFERENCE-DESTROYS-ENERGY + MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const INTF_PROBES: SeedProbe[] = [
+  {
+    conceptId: INTF,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two 1W speakers produce a destructive interference pattern between them. At a point of total cancellation, where did that sound energy go?',
+    choices: [
+      { text: 'It was redistributed to the constructive-interference points elsewhere in the pattern — total energy is conserved, only its spatial distribution changed', isCorrect: true },
+      { text: 'It simply disappeared — destructive interference destroys energy at the points of cancellation', isCorrect: false, misconceptionId: `${INTF}:MC-INTERFERENCE-DESTROYS-ENERGY` },
+    ],
+    correctValue: 'energy redistributed to constructive points, not destroyed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTF}:MC-INTERFERENCE-DESTROYS-ENERGY`],
+    source: `${INTF_SRC} — MC-INTERFERENCE-DESTROYS-ENERGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: INTF,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two coherent waves with unequal amplitudes A₁ and A₂ (A₁≠A₂) overlap. Do they interfere?',
+    choices: [
+      { text: 'Yes — interference occurs for any two coherent waves regardless of amplitude; the minimum amplitude is |A₁−A₂|>0 (reduced but real contrast, not perfect cancellation)', isCorrect: true },
+      { text: 'No — interference only occurs when amplitudes are exactly equal; unequal amplitudes produce something other than real interference', isCorrect: false, misconceptionId: `${INTF}:MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE` },
+    ],
+    correctValue: 'yes, unequal amplitudes still interfere with reduced visibility',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTF}:MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE`],
+    source: `${INTF_SRC} — MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.longitudinal-waves ──────────────────────────────────────────────
+const LONG = 'phys.wave.longitudinal-waves'
+const LONG_SRC = 'docs/curriculum/blueprints/phys.wave.longitudinal-waves.md'
+
+const LONG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LONG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Longitudinal waves DO have a well-defined wavelength — it is the distance between two adjacent compressions (or equivalently, two adjacent rarefactions). On a longitudinal wave diagram showing compressions (dense regions) and rarefactions (sparse regions), λ is simply the compression-to-compression distance. For sound in air at 440 Hz: λ=343/440=0.78m — a perfectly well-defined wavelength, computed the same way as for any periodic wave. The displacement-versus-position graph for a longitudinal wave is still sinusoidal in shape — the only difference from a transverse wave is that the displacement is oriented along the direction of propagation rather than perpendicular to it. Compression (maximum rightward particle displacement) corresponds structurally to a "crest"; rarefaction (maximum leftward displacement) corresponds to a "trough." Every wave property — λ, f, T, A, and v=fλ — applies identically to longitudinal and transverse waves. A second, separate error: believing that when sound travels from a speaker to your ear, the air itself "blows" or streams from the speaker to your ear. It does not. Air molecules oscillate back and forth LOCALLY — a single air molecule near the speaker vibrates only a fraction of a millimetre (the acoustic displacement amplitude, typically 10-100 nanometres at normal volumes). The sound\'s ENERGY travels at ~340 m/s as a propagating pattern of compressions, but individual molecules oscillate at the sound frequency while staying essentially in the same average location. If air molecules genuinely streamed at 340 m/s toward your ear, you would feel a powerful wind every time someone spoke nearby — you don\'t, because the wave pattern propagates while the matter itself stays behind, oscillating in place.',
+    targetedMisconceptions: [`${LONG}:MC-LONGITUDINAL-NO-WAVELENGTH`, `${LONG}:MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE`],
+    source: `${LONG_SRC} — MC-LONGITUDINAL-NO-WAVELENGTH (compression-to-compression distance is λ) + MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE (particles oscillate locally, pattern propagates)`,
+  },
+  {
+    conceptId: LONG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "longitudinal waves don\'t have a wavelength because you can\'t see crests and troughs," unable to identify λ in a compression wave diagram. This is a genuine misreading of the geometry, not a real absence of wavelength. Longitudinal waves absolutely do have a well-defined wavelength: it is the distance between two adjacent compressions (or, equivalently, between two adjacent rarefactions). On a longitudinal wave diagram showing dense regions (compressions) and sparse regions (rarefactions), λ is simply the compression-to-compression spacing — for sound in air at 440 Hz, this works out to λ=343/440=0.78m, using the exact same formula (v=fλ) as any other wave. If you plot the displacement-versus-position graph for a longitudinal wave, it is STILL sinusoidal — the only real difference from a transverse wave is that the plotted displacement points along the direction of propagation rather than perpendicular to it. Structurally, compression (where particles are maximally displaced in the forward direction) plays the same mathematical role as a "crest," and rarefaction (maximally displaced backward) plays the same role as a "trough" — same mathematics, different geometry. All the familiar wave properties (λ, f, T, A, and the relation v=fλ) apply identically whether the wave is longitudinal or transverse. A second, separate and quite common error: believing that when you hear sound from a speaker, the air itself physically "blows" or streams from the speaker toward your ear, as if delivering the sound like a gust of wind. This is not what happens. Individual air molecules oscillate back and forth LOCALLY around their equilibrium positions — a single air molecule near the speaker vibrates only a tiny fraction of a millimetre (typical acoustic displacement amplitudes at normal volumes are on the order of 10 to 100 nanometres). What DOES travel the full distance from speaker to ear, at roughly 340 m/s, is the ENERGY of the sound, carried as a propagating pattern of compressions and rarefactions — while each individual molecule oscillates at the sound\'s frequency but stays essentially in place, near its original average position. A clear check on this: if air molecules genuinely streamed at 340 m/s from speaker to ear, you would feel a strong, continuous wind every single time someone spoke near you — which obviously does not happen. The wave PATTERN propagates through the medium; the medium\'s matter itself stays behind, merely oscillating in place as the pattern passes through.',
+    targetedMisconceptions: [`${LONG}:MC-LONGITUDINAL-NO-WAVELENGTH`, `${LONG}:MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE`],
+    source: `${LONG_SRC} — MC-LONGITUDINAL-NO-WAVELENGTH + MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LONG_PROBES: SeedProbe[] = [
+  {
+    conceptId: LONG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a longitudinal sound wave have a well-defined wavelength, given that you cannot see crests and troughs the way you can on a transverse wave?',
+    choices: [
+      { text: 'Yes — λ is the distance between two adjacent compressions (or two adjacent rarefactions); e.g. for 440 Hz sound in air, λ=343/440=0.78m', isCorrect: true },
+      { text: 'No — longitudinal waves lack a wavelength because there are no visible crests and troughs to measure between', isCorrect: false, misconceptionId: `${LONG}:MC-LONGITUDINAL-NO-WAVELENGTH` },
+    ],
+    correctValue: 'yes, compression-to-compression distance is the wavelength',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LONG}:MC-LONGITUDINAL-NO-WAVELENGTH`],
+    source: `${LONG_SRC} — MC-LONGITUDINAL-NO-WAVELENGTH trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: LONG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When you hear a friend speak from across the room, does the air itself travel from their mouth to your ear?',
+    choices: [
+      { text: 'No — air molecules oscillate locally (amplitudes of ~10-100nm); only the sound energy, as a compression pattern, travels the distance at ~340m/s', isCorrect: true },
+      { text: 'Yes — the air streams from the speaker\'s mouth to the listener\'s ear, carrying the sound like a gust of wind', isCorrect: false, misconceptionId: `${LONG}:MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE` },
+    ],
+    correctValue: 'no, particles oscillate locally, only the pattern travels',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LONG}:MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE`],
+    source: `${LONG_SRC} — MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.sound-waves ──────────────────────────────────────────────────────
+const SNDW = 'phys.wave.sound-waves'
+const SNDW_SRC = 'docs/curriculum/blueprints/phys.wave.sound-waves.md'
+
+const SNDW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SNDW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Sound is a mechanical wave — it fundamentally requires a material medium (matter: gas, liquid, or solid) to propagate, and CANNOT travel through vacuum. In vacuum there are simply no particles present to compress and rarefy, which is the actual physical mechanism by which sound moves. The classic "bell jar" experiment demonstrates this directly: an electric bell ringing inside a sealed jar becomes progressively inaudible as air is pumped out of the jar, even though the bell keeps visibly ringing. This is also why the Apollo astronauts could hear each other while inside their pressurized cabin (which contains an air medium) but could not hear any sound at all outside the cabin without radio communication — there is no sound possible in the vacuum of space, which is why movie space battles depicting explosion sounds are physically incorrect. Mathematically, sound speed is given by v=√(B/ρ), where B is the medium\'s bulk modulus and ρ is its density; vacuum has neither a meaningful B nor ρ, so the formula reduces to the physically meaningless 0/0 — no medium means no sound, full stop. A second, entirely separate error: confusing pitch with loudness. Pitch (perceived as "high" or "low") corresponds to frequency; loudness (perceived as "soft" or "loud") corresponds to amplitude (and hence intensity). A trumpet playing softly at A4 (440 Hz) and a whisper also at 440 Hz share the exact same pitch — identical frequency — despite having very different loudness (different amplitude). A bass drum produces a LOW pitch (low frequency, ~50-100 Hz) at very HIGH loudness (large amplitude); a dog whistle produces a HIGH pitch (>20 kHz) often at relatively LOW loudness. Frequency and amplitude are two independent knobs: the frequency knob controls pitch, the amplitude knob controls loudness — a high-pitched sound can be quiet or loud, and a low-pitched sound can equally be quiet or loud.',
+    targetedMisconceptions: [`${SNDW}:MC-SOUND-TRAVELS-IN-VACUUM`, `${SNDW}:MC-PITCH-IS-LOUDNESS`],
+    source: `${SNDW_SRC} — MC-SOUND-TRAVELS-IN-VACUUM (sound needs a medium, bell jar experiment) + MC-PITCH-IS-LOUDNESS (frequency controls pitch, amplitude controls loudness, independent)`,
+  },
+  {
+    conceptId: SNDW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "sound travels through space" or are surprised that Moon landing broadcasts required radio transmission rather than direct sound, unable to explain why movies depict "silent space." The physics is unambiguous: sound is a mechanical wave, meaning it requires a material medium — matter of some kind, whether gas, liquid, or solid — in order to propagate at all. In a vacuum, there are no particles present to compress and rarefy, and that compression-rarefaction mechanism IS how sound physically moves through a medium; with no medium, there is nothing for the wave to move through. The classic laboratory demonstration is the "bell jar" experiment: an electric bell rings continuously inside a sealed glass jar, and as air is progressively pumped out of the jar (creating a partial vacuum), the sound becomes fainter and fainter until it is completely inaudible — even though you can still see the bell\'s clapper visibly striking. This exact physics explains a real historical fact: NASA Apollo astronauts could hear each other perfectly while inside their pressurized spacecraft cabin (which contains breathable air, a genuine medium), but could hear absolutely nothing from outside the cabin without radio communication — there is no sound whatsoever in the vacuum of space, which is precisely why movie space battles with audible explosions and laser blasts are physically incorrect, however dramatically effective. Quantitatively, sound speed follows v=√(B/ρ), where B is the medium\'s bulk modulus (its resistance to compression) and ρ is its density; vacuum possesses neither a meaningful bulk modulus nor density, so the formula collapses to the physically meaningless expression 0/0 — confirming algebraically what the bell-jar experiment shows physically: no medium means no sound, without exception. A second, entirely separate and very common confusion: mixing up pitch with loudness. Pitch — what we perceive as a note being "high" or "low" — corresponds directly to frequency. Loudness — what we perceive as "soft" or "loud" — corresponds instead to amplitude, and hence to intensity. Concrete comparison: a trumpet played softly at concert pitch A4 (440 Hz) and someone whispering that exact same note A4 (also 440 Hz) share IDENTICAL pitch, since their frequencies match precisely — yet they have very different loudness, because their amplitudes differ substantially. Going further: a bass drum produces a distinctly LOW pitch (low frequency, roughly 50-100 Hz) while being extremely LOUD (large amplitude) — proving pitch and loudness are not the same axis. Meanwhile a dog whistle produces a very HIGH pitch (above 20 kHz, beyond human hearing range for adults) while often being relatively quiet to a dog\'s ear (comparatively low amplitude for its purpose). The key insight: frequency and amplitude are two entirely independent physical "knobs" on a wave. A singer holding one steady note (frequency, and hence pitch, unchanged) can nonetheless get progressively louder (amplitude increasing, hence loudness increasing) — proving conclusively that pitch and loudness vary independently of one another, controlled by different physical parameters entirely.',
+    targetedMisconceptions: [`${SNDW}:MC-SOUND-TRAVELS-IN-VACUUM`, `${SNDW}:MC-PITCH-IS-LOUDNESS`],
+    source: `${SNDW_SRC} — MC-SOUND-TRAVELS-IN-VACUUM + MC-PITCH-IS-LOUDNESS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SNDW_PROBES: SeedProbe[] = [
+  {
+    conceptId: SNDW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a movie, two spaceships explode in the vacuum of deep space, and the audience hears loud explosion sounds. Is this physically accurate?',
+    choices: [
+      { text: 'No — sound is a mechanical wave requiring a material medium; vacuum has no particles to compress and rarefy, so there is genuinely no sound in space', isCorrect: true },
+      { text: 'Yes — sound, like light, can travel through the vacuum of space over astronomical distances', isCorrect: false, misconceptionId: `${SNDW}:MC-SOUND-TRAVELS-IN-VACUUM` },
+    ],
+    correctValue: 'no, sound cannot travel through vacuum',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SNDW}:MC-SOUND-TRAVELS-IN-VACUUM`],
+    source: `${SNDW_SRC} — MC-SOUND-TRAVELS-IN-VACUUM trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SNDW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A bass drum produces a low, very loud sound. A dog whistle produces a high, relatively quiet sound. What determines "high vs low" versus "loud vs quiet" here?',
+    choices: [
+      { text: 'Frequency determines pitch (high/low); amplitude determines loudness (loud/quiet) — they are independent physical parameters', isCorrect: true },
+      { text: 'The same parameter — a higher-pitched sound is inherently louder than a lower-pitched one', isCorrect: false, misconceptionId: `${SNDW}:MC-PITCH-IS-LOUDNESS` },
+    ],
+    correctValue: 'frequency controls pitch, amplitude controls loudness, independently',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SNDW}:MC-PITCH-IS-LOUDNESS`],
+    source: `${SNDW_SRC} — MC-PITCH-IS-LOUDNESS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.sound-intensity ─────────────────────────────────────────────────
+const SNDI = 'phys.wave.sound-intensity'
+const SNDI_SRC = 'docs/curriculum/blueprints/phys.wave.sound-intensity.md'
+
+const SNDI_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SNDI,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The decibel scale is LOGARITHMIC, not linear — 10 dB represents a 10× increase in intensity, NOT a simple 2× increase, and dB values must never be treated as directly proportional to "loudness amount." Concretely: 20 dB=10² =100× the threshold intensity; 30 dB=10³=1000×; 60 dB=10⁶=1,000,000× the threshold intensity. A 60 dB office is therefore NOT "3 times louder" than a 20 dB library (as naive linear reasoning might suggest from 60/20=3) — it is actually 10⁴=10,000 times more intense, because each additional 10 dB step multiplies intensity by a factor of 10. Mathematically: β=10·log₁₀(I/I₀), so a change of +10 dB means log₁₀(I/I₀) increases by exactly 1, meaning I increases by a factor of 10¹=10; a change of +20 dB means I increases by 10²=100; and roughly, each +3 dB corresponds to approximately ×2 in intensity. The logarithm exists precisely because it compresses the enormous physical range of human hearing (from roughly 10⁻¹² to 1 W/m², a factor of a trillion) into a manageable 0-120 dB scale. Never add dB values linearly when reasoning about intensity ratios — always convert to actual intensity first. A second, separate and equally important distinction: intensity (measured objectively in W/m² with a calibrated microphone) is NOT the same thing as loudness (a subjective human perception that depends on frequency as well as intensity). A 1000 Hz tone at 60 dB is perceived by human ears as LOUDER than an 80 Hz tone at that exact same 60 dB intensity level — because the human ear is measurably less sensitive at low frequencies, a pattern captured by the Fletcher-Munson equal-loudness contours. The phon and sone scales attempt to quantify this perceived loudness while correcting for frequency sensitivity, but they are fundamentally not the same measurement as dB (which is purely objective). A sound can be physically intense yet perceived as not very loud (for example, if it falls outside the frequency range the ear is sensitive to), while a quieter sound at a frequency the ear favors can be perceived as louder than its raw intensity would suggest.',
+    targetedMisconceptions: [`${SNDI}:MC-DECIBELS-LINEAR`, `${SNDI}:MC-INTENSITY-SAME-AS-LOUDNESS`],
+    source: `${SNDI_SRC} — MC-DECIBELS-LINEAR (dB is logarithmic, +10dB = ×10 intensity) + MC-INTENSITY-SAME-AS-LOUDNESS (intensity is objective W/m², loudness is subjective and frequency-dependent)`,
+  },
+  {
+    conceptId: SNDI,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "20 dB is twice as loud as 10 dB" or "60 dB is three times 20 dB," treating the decibel scale as if it behaves linearly — as if you could simply divide or subtract dB values the way you would with an ordinary linear physical quantity. The decibel scale is actually LOGARITHMIC, and this changes everything about how ratios work. Every +10 dB step represents a ×10 increase in actual intensity, not a ×2 increase and not an additive change. Concretely: 20 dB corresponds to 10²=100× the reference threshold intensity; 30 dB corresponds to 10³=1000×; and 60 dB corresponds to a staggering 10⁶=1,000,000× the threshold intensity. So a 60 dB office is genuinely NOT "3 times louder" than a 20 dB library, even though 60÷20=3 might suggest that under linear reasoning — the office is actually 10⁴=10,000 times more intense than the library, because each successive 10 dB increment multiplies the intensity by a full factor of 10, compounding rather than adding. The underlying formula makes this precise: β=10·log₁₀(I/I₀). A +10 dB change means log₁₀(I/I₀) has increased by exactly 1, which means I has increased by 10¹=10×. A +20 dB change means I has increased by 10²=100×. As a useful rule of thumb, roughly every +3 dB corresponds to approximately a ×2 change in intensity. The entire reason the decibel scale is logarithmic in the first place is to compress the enormous physical range of human hearing — from about 10⁻¹² W/m² (the threshold of hearing) up to about 1 W/m² (the threshold of pain), a factor of roughly a trillion — into a manageable, human-readable 0 to 120 dB scale. The critical takeaway: never add or subtract dB values as if reasoning linearly about intensity ratios — always convert dB differences back to actual intensity ratios using the logarithmic formula first. A second, entirely separate and equally common confusion: equating intensity (a purely physical, objective quantity measured in W/m², obtainable with a calibrated microphone) directly with loudness (a subjective human PERCEPTION that depends not just on intensity but also on frequency). Concretely: a 1000 Hz tone measured at 60 dB is perceived by human listeners as distinctly LOUDER than an 80 Hz tone measured at that exact same 60 dB intensity level — this happens because the human ear is measurably less sensitive at low frequencies than at mid-range frequencies, a well-documented pattern captured by the Fletcher-Munson equal-loudness contours. Scientists developed the phon scale and sone scale specifically to try to quantify this subjective, frequency-corrected perceived loudness — but these are fundamentally different measurements from dB, which remains a purely objective physical quantity with no frequency correction built in. As one worked illustration: at exactly 1000 Hz, 1 phon happens to equal 1 dB by definition, but at 100 Hz, a sound that is perceptually judged to be 40 phon actually requires roughly 50 dB of physical intensity level to achieve that same perceived loudness — a clear demonstration that intensity (dB) and perceived loudness (phon) are genuinely different quantities, related only through a frequency-dependent correction, never simply interchangeable.',
+    targetedMisconceptions: [`${SNDI}:MC-DECIBELS-LINEAR`, `${SNDI}:MC-INTENSITY-SAME-AS-LOUDNESS`],
+    source: `${SNDI_SRC} — MC-DECIBELS-LINEAR + MC-INTENSITY-SAME-AS-LOUDNESS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SNDI_PROBES: SeedProbe[] = [
+  {
+    conceptId: SNDI,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A quiet library measures 20 dB and a busy office measures 60 dB. How many times more intense is the office compared to the library?',
+    choices: [
+      { text: '10,000 times more intense (10⁴), since each +10 dB step multiplies intensity by 10, and the difference is 40 dB = four steps', isCorrect: true },
+      { text: '3 times more intense, since 60 dB divided by 20 dB equals 3', isCorrect: false, misconceptionId: `${SNDI}:MC-DECIBELS-LINEAR` },
+    ],
+    correctValue: '10,000 times, logarithmic scale',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SNDI}:MC-DECIBELS-LINEAR`],
+    source: `${SNDI_SRC} — MC-DECIBELS-LINEAR trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SNDI,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1000 Hz tone and an 80 Hz tone both measure exactly 60 dB intensity. Do they sound equally loud to a human listener?',
+    choices: [
+      { text: 'No — the 1000 Hz tone sounds louder, because human hearing sensitivity varies with frequency (Fletcher-Munson contours); intensity (dB) and perceived loudness are not the same thing', isCorrect: true },
+      { text: 'Yes — equal decibel readings always mean equal perceived loudness, since dB directly measures loudness', isCorrect: false, misconceptionId: `${SNDI}:MC-INTENSITY-SAME-AS-LOUDNESS` },
+    ],
+    correctValue: 'no, perceived loudness is frequency-dependent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SNDI}:MC-INTENSITY-SAME-AS-LOUDNESS`],
+    source: `${SNDI_SRC} — MC-INTENSITY-SAME-AS-LOUDNESS trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.wave-speed ──────────────────────────────────────────────────────
+const WSPD = 'phys.wave.wave-speed'
+const WSPD_SRC = 'docs/curriculum/blueprints/phys.wave.wave-speed.md'
+
+const WSPD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WSPD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Wave speed in a given medium is determined entirely by the medium\'s own properties — never by the wave\'s amplitude. Sound at 120 dB (the pain threshold) and sound at 40 dB (a quiet office) both travel through the same air at identical speed, ~343 m/s. A large ocean swell and a tiny ripple travel at the same phase speed, for the same wavelength in deep water. The governing formulas make this explicit: v=√(T/μ) for a wave on a string (T=tension, μ=linear mass density), or v=√(B/ρ) for a wave in a fluid (B=bulk modulus, ρ=density) — amplitude simply does not appear anywhere in either formula. Amplitude instead affects a completely different quantity: energy and intensity (I∝A²), never speed. If amplitude genuinely affected wave speed, then loud thunder would reach you before quiet thunder from the same distance — it does not; all thunder, loud or soft, arrives at the same time from the same source distance. A second, entirely separate error: assuming higher-frequency waves travel faster than lower-frequency ones. In most simple, non-dispersive media, ALL frequencies of a wave travel at exactly the same speed. A thunderclap, which contains a broadband mix of many frequencies simultaneously, arrives as one coherent "crack" — you do not hear a drawn-out rainbow of frequencies arriving separately over time. Light in vacuum is an even starker example: radio waves (MHz), visible light (~10¹⁴ Hz), and gamma rays (~10²² Hz) — spanning 16 orders of magnitude in frequency — all travel at exactly the same speed, c=3×10⁸ m/s. In a non-dispersive medium, since v=fλ and v is fixed, different frequencies simply correspond to different wavelengths — not different speeds. Only in a genuinely DISPERSIVE medium (such as glass for light, or deep water for certain wave types) does v actually vary with frequency — but this is the deliberate exception requiring explicit treatment via a dispersion relation, never the default assumption.',
+    targetedMisconceptions: [`${WSPD}:MC-SPEED-DEPENDS-ON-AMPLITUDE`, `${WSPD}:MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY`],
+    source: `${WSPD_SRC} — MC-SPEED-DEPENDS-ON-AMPLITUDE (speed depends on medium only, not amplitude) + MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY (non-dispersive media: v constant across frequency)`,
+  },
+  {
+    conceptId: WSPD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students say "a louder sound travels faster" or "a bigger wave moves quicker," assuming amplitude affects wave speed. Test this directly: sound at 120 dB (the pain threshold, an extremely intense sound) and sound at 40 dB (a quiet office, a much less intense sound) both travel through the exact same air at exactly the same speed, roughly 343 m/s — the loudness makes no difference whatsoever to how fast the sound reaches you. Similarly, a large ocean swell and a tiny surface ripple travel at the same phase speed, for waves of the same wavelength in deep water — the swell\'s much larger amplitude does not make it move any faster. The reason is visible directly in the governing physics formulas: for a wave on a string, v=√(T/μ) (T is tension, μ is linear mass density); for a wave in a fluid, v=√(B/ρ) (B is bulk modulus, ρ is density). Notice that amplitude, A, appears in NEITHER formula — wave speed is determined purely by properties of the medium (its elasticity/restoring-force strength and its density/inertia), never by how large the wave itself is. Amplitude instead governs an entirely different physical quantity: energy and intensity, related by I∝A² — amplitude affects how much energy the wave carries, not how fast that energy travels. A clean real-world check: if amplitude genuinely affected wave speed, then loud claps of thunder would reach your ears measurably before quiet, distant rumbles of thunder from a storm at the same distance — but this never happens; thunder of any loudness, from the same distance, always arrives at the same time. A second, entirely separate error: believing that higher-frequency waves inherently travel faster than lower-frequency ones — for instance, assuming all high musical notes arrive at a listener\'s ear before low notes from the same source. In most ordinary, non-dispersive media, this is false: ALL frequencies of a wave travel at precisely the same speed. Consider a thunderclap, which contains an extremely broad mixture of frequencies simultaneously — you hear it arrive as a single coherent "crack," not as a smeared-out sequence of different pitches arriving at different times. An even more dramatic example: light traveling through vacuum. Radio waves (megahertz frequencies), visible light (roughly 10¹⁴ Hz), and gamma rays (roughly 10²² Hz) — spanning sixteen orders of magnitude in frequency — all travel at EXACTLY the same speed, c=3×10⁸ m/s, with zero exceptions, in vacuum. In any non-dispersive medium, since the relation v=fλ holds and v itself stays fixed regardless of frequency, different frequencies simply correspond to proportionally different wavelengths — not to different propagation speeds. It is only in a genuinely DISPERSIVE medium — glass, for visible light, or deep water, for certain wave regimes — that wave speed v actually does vary measurably with frequency f. But this dispersive behavior is the deliberate exception, requiring its own explicit dispersion-relation treatment, and should never be assumed as the default; at this level, always assume non-dispersive behavior unless a problem explicitly states otherwise.',
+    targetedMisconceptions: [`${WSPD}:MC-SPEED-DEPENDS-ON-AMPLITUDE`, `${WSPD}:MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY`],
+    source: `${WSPD_SRC} — MC-SPEED-DEPENDS-ON-AMPLITUDE + MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const WSPD_PROBES: SeedProbe[] = [
+  {
+    conceptId: WSPD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a very loud (120 dB) sound travel faster through air than a quiet (40 dB) sound?',
+    choices: [
+      { text: 'No — both travel at exactly the same speed (~343 m/s); wave speed depends only on the medium\'s properties (v=√(B/ρ)), never on amplitude', isCorrect: true },
+      { text: 'Yes — a louder, higher-amplitude sound travels faster through the same medium', isCorrect: false, misconceptionId: `${WSPD}:MC-SPEED-DEPENDS-ON-AMPLITUDE` },
+    ],
+    correctValue: 'same speed, independent of amplitude',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WSPD}:MC-SPEED-DEPENDS-ON-AMPLITUDE`],
+    source: `${WSPD_SRC} — MC-SPEED-DEPENDS-ON-AMPLITUDE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WSPD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In vacuum, do gamma rays (~10²² Hz) travel faster than radio waves (~10⁶ Hz)?',
+    choices: [
+      { text: 'No — all electromagnetic frequencies travel at exactly c=3×10⁸ m/s in vacuum (a non-dispersive medium); frequency does not affect speed', isCorrect: true },
+      { text: 'Yes — higher-frequency waves like gamma rays travel faster than lower-frequency waves like radio', isCorrect: false, misconceptionId: `${WSPD}:MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY` },
+    ],
+    correctValue: 'same speed c, frequency-independent in vacuum',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WSPD}:MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY`],
+    source: `${WSPD_SRC} — MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.wave-optics ──────────────────────────────────────────────────────
+const WOPT = 'phys.opt.wave-optics'
+const WOPT_SRC = 'docs/curriculum/blueprints/phys.opt.wave-optics.md'
+
+const WOPT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WOPT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Interference conserves energy — it does not create or destroy it, despite dark fringes appearing to have "lost" light and bright fringes appearing to have "gained" it. Verify this by measuring total power arriving at a screen in two cases: with one slit open, uniform illumination at power P; with both slits open, an interference pattern with bright fringes reaching 4I₀ and dark fringes at 0. Integrating intensity over the whole screen for the two-slit case: ∫I dA=∫4I₀cos²(δ/2) dA. Since the average value of cos²(δ/2) over a full cycle is exactly 1/2, the total works out to 4I₀×(1/2)×(screen area)=2I₀×(screen area) — exactly double the one-slit power, precisely what two independent slits should contribute. The bright fringes ARE brighter than the naive 2I₀ (they reach 4I₀ with two coherent sources) exactly because the dark fringes are darker than expected (0 instead of 2I₀) — the two effects balance perfectly; energy is redistributed in space, never created or destroyed. A second, separate and equally important point: coherence requires more than matching frequency — it requires a FIXED, stable phase relationship over the observation time. Two identical sodium lamps, emitting the exact same 589 nm wavelength, placed side by side, produce NO stable interference fringes on a screen, even though their frequencies match exactly. The reason: each lamp consists of billions of independent atoms, each emitting light in random, independent phase bursts. At any given instant there is a random phase difference between the two beams, and this phase difference shifts far faster than any detector can respond (around 10¹⁵ times per second) — averaging out to uniform illumination with no visible pattern. Same frequency is necessary but NOT sufficient for coherence. This is exactly why the standard Young\'s double-slit experiment uses a SINGLE source and splits it into two paths — both resulting "sources" are derived from the identical atomic emissions and therefore share the same phase history, maintaining the fixed relationship that true coherence requires.',
+    targetedMisconceptions: [`${WOPT}:MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY`, `${WOPT}:MC-COHERENCE-MEANS-SAME-FREQUENCY`],
+    source: `${WOPT_SRC} — MC-1/MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY (integrated intensity conserved) + MC-2/MC-COHERENCE-MEANS-SAME-FREQUENCY (same frequency insufficient, fixed phase required)`,
+  },
+  {
+    conceptId: WOPT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students state "dark fringes prove energy is lost" or "bright fringes prove energy is created by interference" — treating the visible pattern of dark and bright regions as literal evidence that light interference violates energy conservation. Check this with an actual power measurement across the whole screen. Case 1: one slit open — uniform illumination at some power P. Case 2: both slits open — an interference pattern emerges, with bright fringes reaching intensity 4I₀ and dark fringes dropping to exactly 0. If you integrate the intensity over the ENTIRE screen in case 2: ∫I dA=∫4I₀cos²(δ/2) dA. The key mathematical fact is that the average value of cos²(δ/2), taken over a full oscillation, is exactly 1/2 — so the total integrated power comes out to 4I₀×(1/2)×(screen area)=2I₀×(screen area), which is precisely double the power from a single slit — exactly what two independent slits, each contributing power, should together provide. So energy is genuinely conserved: it is redistributed spatially, not created or destroyed. The bright fringes appear brighter than a naive "just add the two intensities" expectation of 2I₀ (they actually reach 4I₀) precisely because the dark fringes are dimmer than that same naive expectation (0 instead of 2I₀) — these two deviations balance exactly, position by position, guaranteeing the screen-wide total matches simple energy addition. Think of interference as literally redistributing energy in space: the energy that "would have" arrived at a dark-fringe location is instead concentrated at a bright-fringe location nearby. A second, entirely separate misconception: assuming any two light sources of the same color (i.e., matching frequency) will produce visible interference fringes — for example, believing "two light bulbs of the same color are coherent" or "any two red lasers will produce interference fringes." Test this against a real experiment: place two identical sodium lamps, both emitting the same 589 nm wavelength, next to each other and aim them at a screen. Despite having matched frequencies, they produce NO stable, visible interference fringes — just uniform illumination. Why? Each lamp is made of billions of individual atoms, each emitting short bursts of light with essentially random, independent phase. At any given instant, the phase difference between the two lamps\' combined light is effectively random, and this phase relationship keeps shifting at a rate around 10¹⁵ times per second — far too fast for any detector (including your eye) to track, so the interference pattern averages out to featureless uniform brightness. The crucial lesson: matching frequency is NECESSARY for interference but definitely NOT SUFFICIENT — genuine coherence additionally requires a FIXED, stable phase relationship that persists over the observation time. This is exactly why the standard Young\'s double-slit experiment deliberately uses a single light source and splits its light into two separate paths (rather than using two independent lamps): both resulting beams are derived from the identical set of atomic emission events, and therefore inherit and share the same phase history throughout, maintaining the constant phase relationship that observable interference genuinely requires.',
+    targetedMisconceptions: [`${WOPT}:MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY`, `${WOPT}:MC-COHERENCE-MEANS-SAME-FREQUENCY`],
+    source: `${WOPT_SRC} — MC-1/MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY + MC-2/MC-COHERENCE-MEANS-SAME-FREQUENCY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const WOPT_PROBES: SeedProbe[] = [
+  {
+    conceptId: WOPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a two-slit interference pattern, dark fringes have zero intensity and bright fringes reach 4I₀ (four times a single slit\'s intensity). Does this mean energy was created at the bright fringes?',
+    choices: [
+      { text: 'No — integrating intensity over the whole screen gives exactly double the one-slit power (2I₀×area); energy is redistributed from dark-fringe locations to bright-fringe locations, never created or destroyed', isCorrect: true },
+      { text: 'Yes — the bright fringes reaching 4I₀ (more than double 2I₀) proves interference genuinely creates extra energy', isCorrect: false, misconceptionId: `${WOPT}:MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY` },
+    ],
+    correctValue: 'energy conserved, redistributed not created',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WOPT}:MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY`],
+    source: `${WOPT_SRC} — MC-1/MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: WOPT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two identical sodium lamps, both emitting 589 nm light, are placed side by side and aimed at a screen. Do they produce visible interference fringes?',
+    choices: [
+      { text: 'No — despite matching frequency, each lamp emits independent random-phase bursts from billions of atoms; the phase difference fluctuates too fast (~10¹⁵ Hz) for a stable pattern, producing uniform illumination instead', isCorrect: true },
+      { text: 'Yes — since both lamps emit the same wavelength (589 nm), they are coherent and will produce stable bright and dark fringes', isCorrect: false, misconceptionId: `${WOPT}:MC-COHERENCE-MEANS-SAME-FREQUENCY` },
+    ],
+    correctValue: 'no fringes, same frequency is not sufficient for coherence',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WOPT}:MC-COHERENCE-MEANS-SAME-FREQUENCY`],
+    source: `${WOPT_SRC} — MC-2/MC-COHERENCE-MEANS-SAME-FREQUENCY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.youngs-experiment ────────────────────────────────────────────────
+const YOUN = 'phys.opt.youngs-experiment'
+const YOUN_SRC = 'docs/curriculum/blueprints/phys.opt.youngs-experiment.md'
+
+const YOUN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: YOUN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In Young\'s double-slit experiment, fringe width β=λD/d — and since d sits in the DENOMINATOR, WIDER slit separation produces NARROWER (more closely-spaced) fringes, the opposite of the naive intuition that "wider slits should give wider fringes." Compute side by side: Setup A with d=0.5mm, D=1m, λ=500nm gives β=500×10⁻⁹×1/(0.5×10⁻³)=1.0mm. Setup B with d=2mm (four times larger separation), same D and λ, gives β=500×10⁻⁹×1/(2×10⁻³)=0.25mm — four times CLOSER together, not wider. The physical reason: path difference Δ=yd/D changes four times more rapidly with y when d is larger, so the next bright fringe (reached when Δ=λ) occurs at a proportionally smaller y. Useful check: β×d=λD is a constant for fixed λ and D — doubling d exactly halves β, and halving d exactly doubles β. To genuinely widen fringes, you must reduce d, increase D, or increase λ — never increase d. A second, separate error: assuming the central (zeroth-order) bright fringe always sits at the geometric centre of the screen, regardless of what is placed in the experimental setup. Before any modification: at y=0, the geometric paths S₁P and S₂P are equal, so Δ=0, and the bright central fringe genuinely sits at screen centre. But after inserting a slab (refractive index n=1.5, thickness t=0.1mm) covering slit S₁: the optical path through S₁ becomes longer by (n−1)t=5×10⁻⁵m. At y=0, the GEOMETRIC paths are still equal, but the total OPTICAL paths are no longer equal — the ray through S₁ is now 5×10⁻⁵m longer optically, so Δ≠0 at screen centre. The true zero-optical-path-difference point has shifted toward the S₁ side of the screen, to wherever the extra geometric path through S₂ exactly compensates for the slab\'s optical path extension. The central bright fringe marks where total OPTICAL path difference equals zero, not where the screen\'s geometric centre happens to be — these two coincide only when both slit paths are optically identical. The shift is quantified as y₀=(n−1)t×D/d toward the S₁ side, with every other fringe shifting by that same amount and fringe width β remaining unchanged.',
+    targetedMisconceptions: [`${YOUN}:MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION`, `${YOUN}:MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER`],
+    source: `${YOUN_SRC} — MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION (β=λD/d, d in denominator, inverse relationship) + MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER (zero-optical-path point shifts with slab insertion)`,
+  },
+  {
+    conceptId: YOUN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Some students believe moving the two slits farther apart makes the interference fringes wider or more spread out — essentially assuming β is directly proportional to d, when the true relationship is β=λD/d, with d in the DENOMINATOR, making them inversely related. Test this with actual numbers. Setup A: d=0.5mm, D=1m, λ=500nm gives β=500×10⁻⁹×1/(0.5×10⁻³)=1.0mm — a relatively coarse fringe pattern. Setup B: d=2mm, four times the slit separation of Setup A, with the same D and λ, gives β=500×10⁻⁹×1/(2×10⁻³)=0.25mm — a much FINER fringe pattern, four times closer together than Setup A, precisely the OPPOSITE of what the naive "wider slits, wider fringes" intuition predicts. The physical explanation: path difference at a screen position y is Δ=yd/D — with a larger d, this path difference changes four times more rapidly as y increases, so the next bright fringe (which occurs when Δ reaches exactly one wavelength, λ) is reached at a proportionally SMALLER y — meaning fringes are packed closer together, not spread further apart. A handy check to internalize the relationship: β×d=λD is a fixed constant for given λ and D — so doubling d exactly halves β, and halving d exactly doubles β. To genuinely widen the fringe spacing, you must instead reduce the slit separation d, increase the screen distance D, or increase the wavelength λ — increasing d always does the opposite of "widening." A second, entirely separate error: assuming the central (n=0) bright fringe is always located at the exact geometric centre of the screen, no matter what is placed in the experimental setup. Before any modification, this assumption happens to be correct: at the screen\'s geometric centre (y=0), the two paths S₁P and S₂P to that point are exactly equal in length, giving path difference Δ=0, which is precisely the condition for the central bright fringe — so it does sit at screen centre in the unmodified setup. But this coincidence breaks the moment the two slit paths stop being optically identical. Consider inserting a thin glass slab (refractive index n=1.5, thickness t=0.1mm) directly in front of slit S₁ only: the OPTICAL path length through S₁ (which accounts for the slower speed of light inside glass) becomes longer than the simple geometric path by an extra amount (n−1)t=5×10⁻⁵m. Now, at the screen\'s geometric centre y=0, the two GEOMETRIC path lengths are still exactly equal as before — but the two OPTICAL path lengths are no longer equal, since the S₁ path now carries this extra 5×10⁻⁵m of optical delay; so Δ (optical, not geometric) is no longer zero at y=0. The genuinely zero-optical-path-difference point — which is where the true central bright fringe actually forms — has physically shifted toward the S₁ side of the screen, moving specifically to the location where the extra geometric path length via S₂ exactly cancels out the slab\'s added optical delay through S₁. The key conceptual correction: the central bright fringe marks wherever total OPTICAL path difference equals zero — never simply "the geometric centre of the screen" as a fixed location — and these two only coincide when both slit paths remain optically identical, a condition that breaks the instant something like a glass slab is placed in front of just one slit. The shift is quantified precisely as y₀=(n−1)t×D/d toward the S₁ side, with the entire fringe pattern shifting together by this same amount and the fringe spacing β itself remaining completely unaffected by the shift.',
+    targetedMisconceptions: [`${YOUN}:MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION`, `${YOUN}:MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER`],
+    source: `${YOUN_SRC} — MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION + MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const YOUN_PROBES: SeedProbe[] = [
+  {
+    conceptId: YOUN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In Young\'s double-slit experiment, if slit separation d is increased from 0.5mm to 2mm (keeping D and λ fixed), what happens to fringe width β?',
+    choices: [
+      { text: 'It decreases (from 1.0mm to 0.25mm) — β=λD/d has d in the denominator, so larger d gives narrower, more closely-packed fringes', isCorrect: true },
+      { text: 'It increases proportionally — wider slit separation produces wider, more spread-out fringes', isCorrect: false, misconceptionId: `${YOUN}:MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION` },
+    ],
+    correctValue: 'fringe width decreases, inverse relationship with d',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${YOUN}:MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION`],
+    source: `${YOUN_SRC} — MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: YOUN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A thin glass slab is placed in front of slit S₁ only in a Young\'s double-slit setup. Where does the central (zeroth-order) bright fringe now appear?',
+    choices: [
+      { text: 'Shifted toward the S₁ side of the screen, to the location where total optical path difference equals zero — not at the screen\'s geometric centre anymore', isCorrect: true },
+      { text: 'Still exactly at the screen\'s geometric centre (y=0), since the central fringe is always located there regardless of what is placed in front of a slit', isCorrect: false, misconceptionId: `${YOUN}:MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER` },
+    ],
+    correctValue: 'shifted toward S1, zero-optical-path-difference point moves',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${YOUN}:MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER`],
+    source: `${YOUN_SRC} — MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER trigger case as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -35529,6 +35949,13 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...DAMP_EXPLANATIONS,
   ...FOSC_EXPLANATIONS,
   ...TVWV_EXPLANATIONS,
+  ...INTF_EXPLANATIONS,
+  ...LONG_EXPLANATIONS,
+  ...SNDW_EXPLANATIONS,
+  ...SNDI_EXPLANATIONS,
+  ...WSPD_EXPLANATIONS,
+  ...WOPT_EXPLANATIONS,
+  ...YOUN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -35950,4 +36377,11 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...DAMP_PROBES,
   ...FOSC_PROBES,
   ...TVWV_PROBES,
+  ...INTF_PROBES,
+  ...LONG_PROBES,
+  ...SNDW_PROBES,
+  ...SNDI_PROBES,
+  ...WSPD_PROBES,
+  ...WOPT_PROBES,
+  ...YOUN_PROBES,
 ]
