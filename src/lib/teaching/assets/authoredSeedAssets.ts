@@ -29416,6 +29416,368 @@ const AWC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.gauss-law ───────────────────────────────────────────────────────
+const GAUS = 'phys.em.gauss-law'
+const GAUS_SRC = 'docs/curriculum/blueprints/phys.em.gauss-law.md'
+
+const GAUS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GAUS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Imagine you are inside a room, and outside is a source of light. Count how many light rays escape through the walls — no matter how oddly shaped the room is, that count depends only on how much light the source emits, not on the shape of the room. Gauss\'s Law says the same about electric field lines: the total electric flux through any closed surface equals the total charge enclosed divided by ε₀, Φ_E = ∮E·dA = Q_enc/ε₀, regardless of the surface\'s shape. This lets you find E for symmetric charge distributions without summing forces on every tiny patch. The strategy: (1) identify the symmetry — spherical, cylindrical, or planar; (2) choose a Gaussian surface matching that symmetry so E is uniform and parallel to dA everywhere; (3) pull E out of the integral, Φ = E × A_surface; (4) set equal to Q_enc/ε₀ and solve for E. Standard results follow: point charge and uniformly charged sphere (outside) both give E = kQ/r²; infinite line gives E = λ/(2πε₀r); infinite plane gives E = σ/(2ε₀); and inside any conductor in electrostatic equilibrium, E = 0 exactly, because a Gaussian surface drawn just inside the conductor encloses zero charge.',
+    targetedMisconceptions: [`${GAUS}:MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES`, `${GAUS}:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO`],
+    source: `${GAUS_SRC} — Tier 1 (light-source analogy) + Tier 2 (flux integral, symmetry strategy, standard results table)`,
+  },
+  {
+    conceptId: GAUS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A common misread: "Gauss\'s Law only applies to spherical charge distributions." Not true — Gauss\'s Law ∮E·dA = Q_enc/ε₀ holds for ANY closed surface and ANY charge distribution; it is an exact law of electrostatics, like conservation of energy. What is limited is its usefulness for CALCULATING E: pulling E out of the integral requires E to be uniform and perpendicular to the surface everywhere, which is only guaranteed for three symmetries — spherical (use a concentric sphere), cylindrical (use a coaxial cylinder), planar (use a pillbox). For an irregular charge distribution, Gauss\'s Law is still exactly true, just not useful for solving for E directly — you\'d fall back to superposition instead. A second misread: "the field inside a conductor is weak but not zero." If E ≠ 0 inside a conductor, free electrons would feel a force and move — but electrostatic equilibrium means charges are at rest, a contradiction. So E must be exactly zero everywhere inside a conductor. Proof by Gauss\'s Law: draw a Gaussian surface just inside the conductor\'s surface; since all excess charge resides on the outer surface, Q_enc = 0 for this surface, so E = 0. This is exactly why a Faraday cage blocks external fields — free electrons rearrange on the surface until their field exactly cancels the external field inside, and this cancellation is exact, not approximate.',
+    targetedMisconceptions: [`${GAUS}:MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES`, `${GAUS}:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO`],
+    source: `${GAUS_SRC} — MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES + MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const GAUS_PROBES: SeedProbe[] = [
+  {
+    conceptId: GAUS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A charge distribution has an irregular, non-symmetric shape. Which statement about Gauss\'s Law is correct?',
+    choices: [
+      { text: 'Gauss\'s Law ∮E·dA = Q_enc/ε₀ is still exactly true, but it isn\'t useful for directly solving for E without symmetry', isCorrect: true },
+      { text: 'Gauss\'s Law fails and cannot be applied to irregular, non-spherical charge distributions', isCorrect: false, misconceptionId: `${GAUS}:MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES` },
+    ],
+    correctValue: 'still true, not useful for calculation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GAUS}:MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES`],
+    source: `${GAUS_SRC} — MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: GAUS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A solid conducting sphere carries charge Q and is in electrostatic equilibrium. What is the electric field at a point inside the conductor, 3 cm from the center?',
+    choices: [
+      { text: 'E = 0 exactly — a Gaussian surface just inside the conductor encloses zero charge', isCorrect: true },
+      { text: 'E = kQ/r² using r = 3 cm, same formula as outside', isCorrect: false, misconceptionId: `${GAUS}:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO` },
+    ],
+    correctValue: '0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GAUS}:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO`],
+    source: `${GAUS_SRC} — MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.electric-dipole ─────────────────────────────────────────────────
+const EDIP = 'phys.em.electric-dipole'
+const EDIP_SRC = 'docs/curriculum/blueprints/phys.em.electric-dipole.md'
+
+const EDIP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EDIP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A water molecule (H₂O) isn\'t simply neutral — oxygen pulls electrons closer, making one end slightly negative and the other slightly positive. This is an electric dipole: two charges of equal magnitude but opposite sign, separated by a small distance d. The dipole moment is p = qd, pointing from the negative to the positive charge, with SI unit C·m. Put a dipole in a uniform field E and it feels a torque, τ = p × E (magnitude pE sinθ), that tries to align p with E — like a compass needle in Earth\'s magnetic field. The potential energy is U = −p·E = −pE cosθ, minimized (most stable) when p is parallel to E and maximized when antiparallel. In a NON-uniform field, a dipole also feels a net force, F = ∇(p·E), pulling it toward regions of stronger field — this is why polar molecules are attracted to charged objects. The field the dipole itself produces falls off faster than a single charge\'s: along the axis, E_axial = 2kp/r³; along the perpendicular bisector, E_equatorial = kp/r³ — both scale as 1/r³, one power of r faster than a point charge\'s 1/r².',
+    targetedMisconceptions: [`${EDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE`, `${EDIP}:MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY`],
+    source: `${EDIP_SRC} — Tier 1 (water molecule analogy) + Tier 2 (dipole moment, torque, potential energy, force in non-uniform field, field formulas)`,
+  },
+  {
+    conceptId: EDIP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps with dipole fields. First: assuming the dipole field falls off as 1/r², same as a single point charge. It doesn\'t — a dipole has zero net charge, so the "monopole" 1/r² term vanishes entirely, and the leading surviving term goes as 1/r³ (kp/r³ equatorial, 2kp/r³ axial). Physically, the positive and negative ends nearly cancel at large distances because their individual 1/r² fields point in nearly opposite directions there; the residual field is proportional to the tiny separation d (captured in p = qd) divided by one extra factor of r. At r = 10× the dipole size, the dipole field is roughly 10× weaker than a naive 1/r² estimate would predict. Second trap: assuming a dipole released at some angle θ ≠ 0 in a field snaps instantly to alignment. It doesn\'t — torque τ = pE sinθ provides angular ACCELERATION, not instantaneous rotation. Released from rest at θ = 90° with no damping, the dipole speeds up as θ decreases, overshoots θ = 0, decelerates as the torque reverses sign, and oscillates — exactly like a pendulum released from horizontal. Only with damping (viscosity in a fluid, radiation losses) does it eventually settle at θ = 0. This is why molecular dipoles in a liquid only partially align with an applied field — thermal agitation competes with alignment, and damping from collisions is what lets them settle rather than oscillate forever.',
+    targetedMisconceptions: [`${EDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE`, `${EDIP}:MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY`],
+    source: `${EDIP_SRC} — MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE + MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const EDIP_PROBES: SeedProbe[] = [
+  {
+    conceptId: EDIP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At a distance r = 1.0 m from a dipole (p = 2.0 × 10⁻¹⁰ C·m), you increase the distance to r = 2.0 m. By what factor does the equatorial field E decrease?',
+    choices: [
+      { text: 'By a factor of 8 (E ∝ 1/r³, so doubling r reduces E by 2³ = 8)', isCorrect: true },
+      { text: 'By a factor of 4 (E ∝ 1/r², same as a point charge)', isCorrect: false, misconceptionId: `${EDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE` },
+    ],
+    correctValue: '8',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE`],
+    source: `${EDIP_SRC} — MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EDIP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A dipole at rest is released at θ = 90° to a uniform field E, with no damping present. What happens?',
+    choices: [
+      { text: 'It oscillates through θ = 0, overshoots, and swings back and forth like a pendulum — it never simply stops at θ = 0', isCorrect: true },
+      { text: 'It immediately snaps to θ = 0 and stays there, because the torque points toward alignment', isCorrect: false, misconceptionId: `${EDIP}:MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY` },
+    ],
+    correctValue: 'oscillates like a pendulum',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EDIP}:MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY`],
+    source: `${EDIP_SRC} — MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.energy-capacitor ────────────────────────────────────────────────
+const ENCA = 'phys.em.energy-capacitor'
+const ENCA_SRC = 'docs/curriculum/blueprints/phys.em.energy-capacitor.md'
+
+const ENCA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENCA,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A capacitor stores energy in the electric field between its plates — like a compressed spring stores mechanical energy. Charge it, disconnect it from the source, and that energy stays there until needed; camera flashes use capacitors because they dump a lot of energy far faster than a battery alone can. Charging from 0 to final charge Q requires work: at intermediate charge q, the voltage is v = q/C, and adding a small extra charge dq costs dW = v dq = q dq/C. Integrating from 0 to Q gives three equivalent formulas: U = ½CV² = Q²/(2C) = ½QV — use whichever matches the given quantities. Doubling the voltage quadruples the energy, since U depends on V². A deeper way to see where the energy actually lives: it is stored in the electric field itself, with energy density u_E = ½ε₀E² (J/m³), not "on the plates" as charge. For a parallel-plate capacitor, U = u_E × volume = ½ε₀E² × (Ad), and substituting E = V/d recovers U = ½CV² exactly — confirming the field-energy picture is consistent with the plate-charge picture.',
+    targetedMisconceptions: [`${ENCA}:MC-ENERGY-STORED-ON-THE-PLATES`, `${ENCA}:MC-CAPACITOR-DISCHARGES-INSTANTLY`],
+    source: `${ENCA_SRC} — Tier 1 (spring/camera-flash analogy) + Tier 2 (work-integral derivation of the three energy formulas, field energy density)`,
+  },
+  {
+    conceptId: ENCA,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A frequent error: thinking energy is stored "as charge on the plates," so more charge always means more energy regardless of voltage. Test it: two capacitors both holding Q = 10 μC — C₁ = 10 μF gives V = 1 V and U = ½QV = 5×10⁻⁶ J; C₂ = 1 μF gives V = 10 V and U = 5×10⁻⁵ J. Same charge, but C₂ stores ten times more energy, because the energy lives in the field (u_E = ½ε₀E²) and a smaller capacitance at the same Q means a higher voltage, a stronger field, and a higher energy density between the plates. The plates merely set the boundary conditions for the field; the charge alone doesn\'t determine the energy — voltage (equivalently, field strength) does. A second common error: assuming a capacitor discharges instantly when connected to a circuit. It doesn\'t, unless the resistance is truly zero. Connect a charged capacitor through a resistor R and the voltage decays exponentially, V(t) = V₀e^(−t/RC), governed by the time constant τ = RC — like a bucket draining through a tap: a bigger bucket (larger C) or a smaller tap opening (larger R) both mean a slower drain. "95% discharged" corresponds to about t = 3τ, not t = 0⁺. Only a genuine short circuit (R → 0) approaches instantaneous discharge, and even then the stored energy has to go somewhere — typically dissipated as heat and a spark.',
+    targetedMisconceptions: [`${ENCA}:MC-ENERGY-STORED-ON-THE-PLATES`, `${ENCA}:MC-CAPACITOR-DISCHARGES-INSTANTLY`],
+    source: `${ENCA_SRC} — MC-ENERGY-STORED-ON-THE-PLATES + MC-CAPACITOR-DISCHARGES-INSTANTLY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ENCA_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENCA,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two capacitors both hold the same charge Q, but C₁ = 10 μF while C₂ = 1 μF (ten times smaller). Which one stores more energy, and why?',
+    choices: [
+      { text: 'C₂ stores more energy — the smaller capacitance means a higher voltage (V = Q/C) and thus a stronger field, and U = Q²/(2C) is larger for smaller C', isCorrect: true },
+      { text: 'They store equal energy, since energy depends only on the charge Q, which is the same for both', isCorrect: false, misconceptionId: `${ENCA}:MC-ENERGY-STORED-ON-THE-PLATES` },
+    ],
+    correctValue: 'C2 stores more',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENCA}:MC-ENERGY-STORED-ON-THE-PLATES`],
+    source: `${ENCA_SRC} — MC-ENERGY-STORED-ON-THE-PLATES trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ENCA,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A charged capacitor is connected to a resistor R (not a short circuit). How does its voltage change over time?',
+    choices: [
+      { text: 'It decays exponentially, V(t) = V₀e^(−t/RC), governed by the time constant τ = RC', isCorrect: true },
+      { text: 'It drops to zero essentially instantly, regardless of the resistance value', isCorrect: false, misconceptionId: `${ENCA}:MC-CAPACITOR-DISCHARGES-INSTANTLY` },
+    ],
+    correctValue: 'exponential decay with time constant RC',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENCA}:MC-CAPACITOR-DISCHARGES-INSTANTLY`],
+    source: `${ENCA_SRC} — MC-CAPACITOR-DISCHARGES-INSTANTLY trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.dielectrics ─────────────────────────────────────────────────────
+const DIEL = 'phys.em.dielectrics'
+const DIEL_SRC = 'docs/curriculum/blueprints/phys.em.dielectrics.md'
+
+const DIEL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIEL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Insert a rubber eraser between the plates of a capacitor and the capacitance goes up. Why? The rubber\'s molecules, though neutral overall, develop tiny electric dipoles when the external field pushes their positive and negative charges slightly apart (electronic, ionic, or — for molecules with a permanent dipole like water — orientational polarisation). These aligned dipoles create bound surface charges that produce an opposing field inside the material, reducing the net field between the plates. With a weaker field for the same charge, the voltage drops — and since C = Q/V, capacitance rises. The dielectric constant κ (relative permittivity) captures this: C = κC₀, always κ ≥ 1 (vacuum: κ = 1; polyester ≈ 3.2; glass ≈ 7; water ≈ 80). At FIXED charge Q (battery disconnected before inserting the dielectric): C increases by κ, V = Q/C decreases by κ, E = V/d decreases by κ, and U = Q²/(2C) decreases by κ — the capacitor loses energy, which goes into the mechanical work of pulling the dielectric slab into the gap. At FIXED voltage V (battery still connected): C increases by κ, Q = CV increases by κ, E = V/d stays unchanged (same V, same d), and U = ½CV² increases by κ — the extra energy is drawn from the battery.',
+    targetedMisconceptions: [`${DIEL}:MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD`, `${DIEL}:MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES`],
+    source: `${DIEL_SRC} — Tier 1 (rubber eraser analogy) + Tier 2 (dielectric constant, fixed-Q vs fixed-V comparison table, polarisation mechanisms)`,
+  },
+  {
+    conceptId: DIEL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural but wrong guess: "the dielectric has charges in it, so it must ADD to the field." The opposite happens. When a dielectric is inserted at fixed charge Q, its bound surface charges oppose the free charges on the plates — if the top plate carries +σ, the dielectric develops −σ_b touching it and +σ_b on the far side, and these bound charges partially cancel the free charge\'s field. The net field is E = (σ − σ_b)/ε₀ < σ/ε₀ = E₀ — strictly LESS than without the dielectric. That reduced E means a reduced V = Ed, which is exactly why C = Q/V goes UP: the dielectric doesn\'t add field, it partially shields it, and the shielding is what raises the capacitance. A second trap: treating κ as a fixed number that applies at every frequency. It doesn\'t — different polarisation mechanisms respond on different timescales. Water has κ_static ≈ 80 at DC, where slow orientational polarisation (dipoles physically rotating) can fully contribute. But water is transparent — at optical frequencies (~10¹⁴ Hz) those slow rotations can\'t keep up, so only fast electronic polarisation survives, and κ_optical ≈ n² ≈ 1.77 (using water\'s refractive index n ≈ 1.33). This is also why microwave ovens (2.45 GHz) heat food but not a ceramic plate: water\'s orientational dipoles can still follow gigahertz oscillations and absorb energy from the friction of rotating against neighbors, while ceramic has essentially no such freely-rotating dipoles at that frequency.',
+    targetedMisconceptions: [`${DIEL}:MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD`, `${DIEL}:MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES`],
+    source: `${DIEL_SRC} — MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD + MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DIEL_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIEL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A dielectric (κ = 3) is inserted between the plates of a capacitor charged to Q, then disconnected from the battery. What happens to the electric field E between the plates?',
+    choices: [
+      { text: 'E decreases by a factor of 3 — bound charges in the dielectric oppose the free charges, partially cancelling the field', isCorrect: true },
+      { text: 'E increases by a factor of 3, because the dielectric adds its own charges to the field', isCorrect: false, misconceptionId: `${DIEL}:MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD` },
+    ],
+    correctValue: 'decreases by factor 3',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIEL}:MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD`],
+    source: `${DIEL_SRC} — MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DIEL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water has κ_static ≈ 80 at DC but is transparent to visible light. What does this tell you about the dielectric constant κ?',
+    choices: [
+      { text: 'κ is frequency-dependent — slow orientational polarisation contributes at DC but can\'t follow optical-frequency oscillations, so κ_optical (≈ n² ≈ 1.77) is much smaller', isCorrect: true },
+      { text: 'This is a contradiction — κ should be the same 80 at all frequencies, including light', isCorrect: false, misconceptionId: `${DIEL}:MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES` },
+    ],
+    correctValue: 'kappa is frequency-dependent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIEL}:MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES`],
+    source: `${DIEL_SRC} — MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.kirchhoffs-laws ─────────────────────────────────────────────────
+const KVL2 = 'phys.em.kirchhoffs-laws'
+const KVL2_SRC = 'docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md'
+
+const KVL2_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KVL2,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When a circuit has multiple loops and branches that can\'t be reduced by simple series/parallel rules, Kirchhoff\'s two laws solve it systematically, no matter how complex. KCL (Current Law): at any junction, total current in equals total current out, ΣI_in = ΣI_out — charge is conserved, current doesn\'t pile up at a node. KVL (Voltage Law): around any closed loop, the sum of all voltage rises and drops is zero, ΣΔV = 0 — energy is conserved, a charge returning to its starting point has the same potential as when it left. The sign convention for KVL: traversing a battery from − to + is a voltage rise (+ε); traversing + to − is a drop (−ε); traversing a resistor IN the direction of assumed current is a drop (−IR); traversing AGAINST the assumed current is a rise (+IR). The solving strategy: label all branch currents with assumed directions (an arbitrary wrong guess just produces a negative answer, meaning reverse the direction), apply KCL at each independent node, apply KVL around each independent loop, then solve the simultaneous equations. For a circuit with b branches and n nodes, you need n−1 independent KCL equations and b−(n−1) independent KVL equations — together giving exactly b equations for b unknown branch currents.',
+    targetedMisconceptions: [`${KVL2}:MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS`, `${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL`],
+    source: `${KVL2_SRC} — Tier 1 (KCL/KVL statement) + Tier 2 (sign convention, solving strategy, equation-counting rule)`,
+  },
+  {
+    conceptId: KVL2,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps when applying Kirchhoff\'s laws. First: thinking KVL "only works for simple loops with one battery and one resistor," and hesitating to apply it to a loop whose branches carry currents shared with other loops. But KVL is a statement of energy conservation — it holds for ANY closed path through ANY circuit, however complex. A loop with three batteries and five resistors, with branches shared across multiple loops, still satisfies ΣΔV = 0 around it exactly; what grows with complexity is only the number of simultaneous equations you must solve, not the validity of the law itself. Second, and more common: getting the sign wrong when traversing a resistor. The rule follows directly from how current relates to potential: conventional current flows from high to low potential, so traversing a resistor IN the direction of the assumed current means moving downhill in potential — that\'s a voltage DROP, written −IR in the KVL sum. Traversing AGAINST the current direction means going uphill — a voltage RISE, +IR. For a battery traversed from − to + (going against the conventional current direction inside the battery, from low to high potential) that\'s a rise, +ε; + to − is a drop, −ε. Apply these four rules consistently in one traversal direction (clockwise or counter-clockwise, your choice) and the resulting equation is guaranteed correct — a negative solved current just means the true direction is opposite to what you assumed, not that the sign rule failed.',
+    targetedMisconceptions: [`${KVL2}:MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS`, `${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL`],
+    source: `${KVL2_SRC} — MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS + MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const KVL2_PROBES: SeedProbe[] = [
+  {
+    conceptId: KVL2,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A circuit has three batteries and five resistors, with several branches shared across multiple loops. Does KVL (ΣΔV = 0) still apply to each individual closed loop?',
+    choices: [
+      { text: 'Yes — KVL holds for any closed loop in any circuit, however complex; complexity only increases the number of simultaneous equations needed, not whether the law applies', isCorrect: true },
+      { text: 'No — KVL only works reliably for simple loops with a single battery and a single resistor', isCorrect: false, misconceptionId: `${KVL2}:MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS` },
+    ],
+    correctValue: 'yes, KVL always applies',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KVL2}:MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS`],
+    source: `${KVL2_SRC} — MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: KVL2,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'While writing a KVL equation, you traverse a resistor in the SAME direction as the assumed current I. What sign should you write for the IR term?',
+    choices: [
+      { text: '−IR (a voltage drop) — traversing in the direction of current means moving from higher to lower potential', isCorrect: true },
+      { text: '+IR (a voltage rise), because current is flowing through the resistor', isCorrect: false, misconceptionId: `${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL` },
+    ],
+    correctValue: '-IR',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL`],
+    source: `${KVL2_SRC} — MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL trigger case as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.em.emf ──────────────────────────────────────────────────────────────
+const EMFC = 'phys.em.emf'
+const EMFC_SRC = 'docs/curriculum/blueprints/phys.em.emf.md'
+
+const EMFC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EMFC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'EMF (electromotive force) is not a force at all — it is the energy per unit charge supplied by a source (battery, generator, thermocouple) to drive current around a circuit, ε = W/q, measured in volts (J/C). The name is a 200-year-old historical misnomer; "electromotive energy per charge" would be accurate. A battery converts chemical energy into electrical energy; a generator converts mechanical energy; a solar cell converts light energy — EMF is the rating of how much electrical energy a source can supply per coulomb, whether or not current is actually flowing. Every real source has internal resistance r, and when current I flows, the terminal voltage — what the external circuit actually receives — is V_terminal = ε − Ir while discharging, or V_terminal = ε + Ir while being charged (current forced backward through it). In open circuit (I = 0), V_terminal = ε exactly — the measured voltage equals the EMF only when no current flows. In short circuit (R_ext = 0), I = ε/r is the maximum possible current, limited only by internal resistance, and V_terminal = 0 — dangerous, because all the power dissipates inside the source. Power splits three ways: P_total = εI supplied by the source, P_ext = V_terminal × I delivered externally, and P_internal = I²r wasted inside; maximum power transfer to an external load occurs when R_ext = r, at 50% efficiency.',
+    targetedMisconceptions: [`${EMFC}:MC-EMF-IS-A-FORCE`, `${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF`],
+    source: `${EMFC_SRC} — Block 1-A (core definition, unit check) + Block 1-B (energy interpretation, power split) + Block 1-C (open/short circuit, max power transfer)`,
+  },
+  {
+    conceptId: EMFC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two traps around EMF. First: treating it as a literal mechanical force, as in "the battery pushes electrons with a force of 12 volts." A quick unit check rules this out — force is measured in Newtons (kg·m/s²), while EMF is measured in Volts, which are Joules per Coulomb — a completely different kind of quantity, energy per charge, not force. Think of EMF as a pump rating: it tells you how much energy the pump gives each litre of water, not how hard it physically pushes. Second, and more consequential in practice: assuming terminal voltage always equals EMF, so measuring a battery\'s voltage under load and calling that number "the EMF." A 9 V battery reads 9.0 V in open circuit — that IS the EMF — but connect it to a 1 Ω load and it might read only 8.0 V, because internal resistance is real and current flowing through it costs voltage: V_terminal = ε − Ir. Every real battery behaves as an ideal EMF source ε in series with its internal resistance r; with no current flowing, no voltage drops across r, so terminal voltage equals ε exactly — but the moment current flows, the Ir drop eats into what\'s actually available. This is why a phone battery doesn\'t deliver full voltage right up until it suddenly "dies" — internal resistance rises as the battery depletes, and the Ir drop under load grows correspondingly, even while the open-circuit EMF barely changes.',
+    targetedMisconceptions: [`${EMFC}:MC-EMF-IS-A-FORCE`, `${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF`],
+    source: `${EMFC_SRC} — MC-EMF-IS-A-FORCE + MC-TERMINAL-VOLTAGE-EQUALS-EMF, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const EMFC_PROBES: SeedProbe[] = [
+  {
+    conceptId: EMFC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says "the battery pushes electrons with a force of 12 volts." What is wrong with this statement?',
+    choices: [
+      { text: 'EMF is measured in volts (J/C), which is energy per unit charge, not a force (Newtons) — the units don\'t even match a force', isCorrect: true },
+      { text: 'Nothing is wrong — 12 volts is a perfectly valid way to describe the pushing force on electrons', isCorrect: false, misconceptionId: `${EMFC}:MC-EMF-IS-A-FORCE` },
+    ],
+    correctValue: 'EMF is energy per charge, not a force',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EMFC}:MC-EMF-IS-A-FORCE`],
+    source: `${EMFC_SRC} — MC-EMF-IS-A-FORCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: EMFC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 9 V battery (open-circuit reading 9.0 V) is connected to a 1 Ω load and now reads 8.0 V. What does this tell you?',
+    choices: [
+      { text: 'The EMF is still 9 V, but internal resistance r causes a voltage drop Ir under load, so V_terminal = ε − Ir < ε', isCorrect: true },
+      { text: 'The EMF itself dropped from 9 V to 8 V because of the load', isCorrect: false, misconceptionId: `${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF` },
+    ],
+    correctValue: 'EMF unchanged, terminal voltage drops due to internal resistance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF`],
+    source: `${EMFC_SRC} — MC-TERMINAL-VOLTAGE-EQUALS-EMF trigger case as probe, distractor-mapped`,
+  },
+]
+
+
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -29747,6 +30109,12 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...COMPE_EXPLANATIONS,
   ...RESPW_EXPLANATIONS,
   ...AWC_EXPLANATIONS,
+  ...GAUS_EXPLANATIONS,
+  ...EDIP_EXPLANATIONS,
+  ...ENCA_EXPLANATIONS,
+  ...DIEL_EXPLANATIONS,
+  ...KVL2_EXPLANATIONS,
+  ...EMFC_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -30078,4 +30446,10 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...COMPE_PROBES,
   ...RESPW_PROBES,
   ...AWC_PROBES,
+  ...GAUS_PROBES,
+  ...EDIP_PROBES,
+  ...ENCA_PROBES,
+  ...DIEL_PROBES,
+  ...KVL2_PROBES,
+  ...EMFC_PROBES,
 ]
