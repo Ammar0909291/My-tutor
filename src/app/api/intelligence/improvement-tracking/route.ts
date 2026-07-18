@@ -23,8 +23,6 @@ import {
   type TopicScoreHistoryRow,
   type VisualEvidenceHistoryRow,
 } from '@/lib/intelligence/improvementTracking'
-import { getSchoolChapters } from '@/lib/school/schoolRouting'
-
 export async function GET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -39,53 +37,18 @@ export async function GET() {
   const targets = generatePracticeTargets(profile, attemptsRows)
   const retestCandidates = generateRetestCandidates(targets)
 
-  // For school chapter sessions (chapterId set), PracticeSession.topicSlug
-  // is the chapter ID, not a KG-node topicSlug (see
-  // docs/EDUCATIONAL_INTELLIGENCE_IMPROVEMENT_AUDIT.md) — expand each into
-  // one history point per KG node it covers, via the same
-  // chapter.kgNodeIds lookup the existing submit routes already use. For
-  // legacy topic-level sessions (chapterId null), topicSlug is already a
-  // KG-node ID — confirmed by checking it against the user's own
-  // TopicProgress rows, so subject-level rows (e.g. mock tests, whose
-  // topicSlug is the subjectSlug itself) are correctly excluded.
-  const userProfile = await prisma.profile.findUnique({
-    where: { userId },
-    select: { educationBoard: true, grade: true },
-  })
-
   const sessionRows = await prisma.practiceSession.findMany({
-    where: { userId, completedAt: { not: null }, score: { not: null } },
-    select: { subjectSlug: true, topicSlug: true, chapterId: true, score: true, completedAt: true },
+    where: { userId, completedAt: { not: null }, score: { not: null }, chapterId: null },
+    select: { subjectSlug: true, topicSlug: true, score: true, completedAt: true },
   })
 
   const validTopicKeys = new Set(attemptsRows.map((r) => `${r.subjectSlug}:${r.topicSlug}`))
-  const chaptersBySubject = new Map<string, ReturnType<typeof getSchoolChapters>>()
-
   const historyRows: TopicScoreHistoryRow[] = []
   for (const row of sessionRows) {
-    if (row.chapterId === null) {
-      if (validTopicKeys.has(`${row.subjectSlug}:${row.topicSlug}`)) {
-        historyRows.push({
-          subjectSlug: row.subjectSlug,
-          topicSlug: row.topicSlug,
-          score: row.score as number,
-          completedAt: row.completedAt as Date,
-        })
-      }
-      continue
-    }
-    if (!userProfile?.educationBoard || !userProfile?.grade) continue
-    let chapters = chaptersBySubject.get(row.subjectSlug)
-    if (!chapters) {
-      chapters = getSchoolChapters(userProfile.educationBoard, row.subjectSlug, userProfile.grade)
-      chaptersBySubject.set(row.subjectSlug, chapters)
-    }
-    const chapter = chapters.find((c) => c.id === row.topicSlug)
-    if (!chapter) continue
-    for (const kgNodeId of chapter.kgNodeIds) {
+    if (validTopicKeys.has(`${row.subjectSlug}:${row.topicSlug}`)) {
       historyRows.push({
         subjectSlug: row.subjectSlug,
-        topicSlug: kgNodeId,
+        topicSlug: row.topicSlug,
         score: row.score as number,
         completedAt: row.completedAt as Date,
       })

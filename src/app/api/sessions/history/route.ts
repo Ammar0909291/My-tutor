@@ -5,17 +5,16 @@ import { withRetry } from '@/lib/db/withRetry'
 import { MessageRole } from '@prisma/client'
 
 /**
- * Full conversation history for a subject — WhatsApp-style.
+ * Recent conversation history for a subject — WhatsApp-style.
  *
- * Returns EVERY user/assistant message this learner has ever exchanged in
- * this subject, across ALL sessions (active and completed), in chronological
- * order, with no limit. This feeds the UI ONLY: the AI context window is
- * built independently inside /api/learn/chat (HISTORY_LIMIT there is
- * deliberately untouched), so restoring the complete visible history never
- * changes prompt size or token usage.
+ * Returns the most recent HISTORY_DISPLAY_LIMIT messages for this learner
+ * and subject, across ALL sessions (active and completed), in chronological
+ * order. This feeds the UI ONLY: the AI context window is built independently
+ * inside /api/learn/chat (capped at 30) and is never affected by this limit.
  *
- * Rows are never archived or trimmed anywhere in the app, so this endpoint
- * is the single source of truth for "nothing was ever lost".
+ * The cap prevents multi-second load times for active learners who have
+ * accumulated hundreds of sessions. Old messages remain in the DB and can be
+ * fetched with pagination if needed.
  */
 export async function GET(req: Request) {
   const session = await auth()
@@ -36,16 +35,23 @@ export async function GET(req: Request) {
       subject: { slug: subjectSlug },
     },
   }
-  // Secondary key keeps same-millisecond pairs (user turn + fast reply) in
-  // stable order.
-  const orderBy = [{ createdAt: 'asc' as const }, { id: 'asc' as const }]
+  // Cap at the 200 most recent messages for display. AI context is built
+  // independently in /api/learn/chat (capped at 30) — this limit only
+  // affects the visible conversation window, not teaching quality.
+  // Fetching unbounded history blocks mount for active learners with
+  // hundreds of sessions (each message is a full @db.Text column).
+  const HISTORY_DISPLAY_LIMIT = 200
 
   try {
-    const messages = await withRetry(() => prisma.message.findMany({
+    // Fetch newest-first so `take` keeps the most-recent end, then reverse
+    // to restore chronological order for the UI.
+    const raw = await withRetry(() => prisma.message.findMany({
       where,
-      orderBy,
+      orderBy: [{ createdAt: 'desc' as const }, { id: 'desc' as const }],
+      take: HISTORY_DISPLAY_LIMIT,
       select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true },
     }))
+    const messages = raw.reverse()
 
     return NextResponse.json({ success: true, data: { messages } })
   } catch (err) {
@@ -56,11 +62,13 @@ export async function GET(req: Request) {
     // messages simply render with no badge, which is the correct fallback.
     console.error('[sessions/history GET] query with provider failed, retrying without it:', err)
     try {
-      const messages = await withRetry(() => prisma.message.findMany({
+      const rawFallback = await withRetry(() => prisma.message.findMany({
         where,
-        orderBy,
+        orderBy: [{ createdAt: 'desc' as const }, { id: 'desc' as const }],
+        take: HISTORY_DISPLAY_LIMIT,
         select: { id: true, role: true, content: true, createdAt: true, sessionId: true },
       }))
+      const messages = rawFallback.reverse()
       return NextResponse.json({ success: true, data: { messages } })
     } catch (fallbackErr) {
       console.error('[sessions/history GET]', fallbackErr)

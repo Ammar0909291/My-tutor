@@ -19,7 +19,7 @@
  * checkpoint system.
  */
 
-import type { DifficultyMode } from '@/lib/school/adaptive/learningProfile'
+type DifficultyMode = string
 
 export interface WorkedExample {
   concept: string

@@ -54,7 +54,11 @@ export async function POST(req: Request) {
       },
       orderBy: { startedAt: "desc" },
       include: {
-        messages: { orderBy: { createdAt: "asc" } },
+        // Cap to the most-recent 30 messages — matches HISTORY_LIMIT in
+        // /api/learn/chat. This is a fallback path only (used when the
+        // /api/sessions/history call in LessonScreen fails). Loading every
+        // message from a long-running session was the dominant cost here.
+        messages: { orderBy: { createdAt: "desc" }, take: 30 },
       },
     });
 

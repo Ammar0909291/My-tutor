@@ -41,9 +41,11 @@ function statusBadge(lesson: CurriculumLesson | null, ctx: {
 
 /**
  * Lesson Navigation Panel — Previous / Current / Next, inside the Tutor Max
- * chat panel. All three cards are interactive buttons that route through
- * LessonScreen's requestLessonSwitch() controller — no lesson switch ever
- * bypasses the confirmation dialog or lock validation.
+ * chat panel. Purely presentational: every field it renders is data
+ * LessonScreen.tsx already fetched (CurriculumLesson[], CurriculumProgress,
+ * topicProgressMap, availableTopicSlugs). Lock/mastery/completion state is
+ * computed by the same computeLessonLockState() the Curriculum Roadmap
+ * tree uses, so the two views can never disagree.
  */
 export function LessonNavigationPanel({
   previousLesson, currentLesson, nextLesson, totalLessons,
@@ -70,7 +72,6 @@ export function LessonNavigationPanel({
     border: `1px solid ${accent ? `${accent}44` : 'var(--border-subtle)'}`,
     background: accent ? `${accent}0c` : 'transparent',
     display: 'flex', flexDirection: 'column', gap: 3,
-    textAlign: 'left',
   })
 
   const labelStyle: React.CSSProperties = {
@@ -100,10 +101,10 @@ export function LessonNavigationPanel({
         onClick={onPrevious}
         disabled={disabled || !previousLesson}
         title={previousLesson ? previousLesson.lessonTitle : undefined}
-        aria-label={isRu ? 'Предыдущий урок' : isHi ? 'Pichla lesson' : 'Previous lesson'}
+        aria-label={isRu ? 'Предыдущий урок' : 'Previous lesson'}
         style={{
           ...slotStyle(),
-          cursor: previousLesson && !disabled ? 'pointer' : 'default',
+          textAlign: 'left', cursor: previousLesson && !disabled ? 'pointer' : 'default',
           opacity: previousLesson ? 1 : 0.45,
         }}
       >
@@ -124,15 +125,15 @@ export function LessonNavigationPanel({
         )}
       </button>
 
-      {/* Current Lesson — clickable: opens restart dialog */}
+      {/* Current Lesson */}
       <button
         onClick={onCurrent}
         disabled={disabled || !onCurrent}
-        title={isRu ? 'Начать урок заново' : isHi ? 'Lesson restart karo' : 'Restart this lesson'}
-        aria-label={isRu ? 'Текущий урок — нажмите, чтобы начать заново' : isHi ? 'Current lesson — tap to restart' : 'Current lesson — click to restart'}
-        aria-current="true"
+        title={isRu ? 'Начать урок заново' : 'Restart this lesson'}
+        aria-label={isRu ? 'Текущий урок' : isHi ? 'Current lesson' : 'Current lesson'}
         style={{
           ...slotStyle(INDIGO),
+          textAlign: 'left',
           cursor: onCurrent && !disabled ? 'pointer' : 'default',
         }}
       >
@@ -156,11 +157,11 @@ export function LessonNavigationPanel({
         onClick={onNext}
         disabled={!nextEnabled}
         title={nextLockedReason ?? (nextLesson ? nextLesson.lessonTitle : undefined)}
-        aria-label={isRu ? 'Следующий урок' : isHi ? 'Agla lesson' : 'Next lesson'}
+        aria-label={isRu ? 'Следующий урок' : 'Next lesson'}
         aria-disabled={!nextEnabled}
         style={{
           ...slotStyle(isCurrentCompleted && nextEnabled ? GREEN : undefined),
-          cursor: nextEnabled ? 'pointer' : 'default',
+          textAlign: 'left', cursor: nextEnabled ? 'pointer' : 'default',
           opacity: nextLesson ? (nextEnabled ? 1 : 0.55) : 0.45,
         }}
       >

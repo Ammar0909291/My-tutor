@@ -4,7 +4,6 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { awardXP } from '@/lib/xp'
 import { generateJSON } from '@/lib/ai/client'
-import { getSchoolChapters } from '@/lib/school/schoolRouting'
 import { computeLessonCompletionPercent, isLessonSetCompleted } from '@/lib/lessonProgress'
 
 const schema = z.object({
@@ -103,18 +102,7 @@ export async function PATCH(req: Request) {
     const body = await req.json()
     const { subjectCode, completedLesson, totalLessons: clientTotalLessons, lessonTitle, lessonGoal, mastered, topicSlug } = schema.parse(body)
 
-    // MED-7: derive totalLessons from the server-authoritative catalog.
-    // subjectCode format for School Mode: "boardId:subjectSlug:grade"
-    // For Library Mode the subjectCode is just the slug (e.g. "physics") —
-    // in that case fall back to the client-provided value so subjects can
-    // actually be marked completed.
-    const [boardId, subjectSlug, gradeStr] = subjectCode.split(':')
-    const grade = parseInt(gradeStr ?? '', 10)
-    const catalogChapters = (boardId && subjectSlug && !isNaN(grade))
-      ? getSchoolChapters(boardId, subjectSlug, grade)
-      : []
-    const isSchoolMode = catalogChapters.length > 0
-    const totalLessons = isSchoolMode ? catalogChapters.length : (clientTotalLessons ?? undefined)
+    const totalLessons = clientTotalLessons ?? undefined
 
     const existing = await prisma.studentProgress.findUnique({
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
@@ -240,9 +228,7 @@ export async function PATCH(req: Request) {
         }).catch((err) => console.error('[curriculum/progress] skip topic-progress write failed', err))
       }
 
-      if (!isSchoolMode) {
-        // Library Mode only (School's session/concept model is untouched by
-        // this fix — see route.ts's `if (!schoolCtx)` scoping throughout).
+      {
         // Clear the stale concept pointer on the learner's most recent
         // active session for this subject so the next turn re-resolves the
         // entry concept for the NEW currentLesson instead of re-teaching
