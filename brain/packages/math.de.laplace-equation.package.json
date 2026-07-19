@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.laplace-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.laplace-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:907ec5531701285f2527812a4cacb4157db71eba49ca6db6de382d9abe120b4e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.laplace-equation.md": "sha256:634e9b66a997ed6acba926a39eabedc1e2f706a8b453abe849fe36a2550c2fbd"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.laplace-equation",
+    "name": "Laplace's Equation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.de.separation-of-variables-pde"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.laplace-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.laplace-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.laplace-equation.md": "sha256:634e9b66a997ed6acba926a39eabedc1e2f706a8b453abe849fe36a2550c2fbd"
+      },
+      "contentHash": "sha256:191b8da9d9017dcebe2350cfa3197ef4952aaeb58f7372694cde8b9a30574d8e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-equation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-equation.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-equation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-equation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-equation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-equation.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-equation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-equation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-equation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.laplace-equation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Learning Objectives",
+      "content": "- LO1: State **Laplace's Equation**, $\\nabla^2u = u_{xx}+u_{yy}=0$, and recognize it as `math.de.pde`'s own canonical **elliptic** example — a purely SPATIAL equilibrium condition with no time variable, describing a state that has already settled (e.g. the final, unchanging steady-state temperature distribution on a plate).\n- LO2: Solve Laplace's Equation on a **rectangle** using the **separation of variables** technique already mastered (`math.de.separation-of-variables-pde`) — directly reapplying that technique's separation ansatz, eigenvalue problem, and Fourier-series-matching steps, with the only change being the specific PDE and boundary conditions involved.\n- LO3: State, at an orientation level (per this corpus's established precedent for large-scope research/expert-tier concepts), the **mean value property** (a harmonic function's value at any point equals the average of its values on any circle centered there) and the **maximum principle** (a harmonic function on a bounded region attains its maximum and minimum on the BOUNDARY, never in the interior) — and recognize **conformal mapping** as the named technique for solving Laplace's Equation on more complex (non-rectangular, non-disk) domains, without deriving that technique here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-equation",
+      "title": "INTERIOR-HARMONIC-VALUE-ASSUMED-UNBOUNDED-BY-BOUNDARY",
+      "content": "| MC-1 | INTERIOR-HARMONIC-VALUE-ASSUMED-UNBOUNDED-BY-BOUNDARY | Believing a harmonic function's interior values could exceed the range of its boundary values, missing the maximum principle's guarantee that extremes occur only on the boundary | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-equation",
+      "title": "LAPLACE-SEPARATION-CONFUSED-WITH-HEAT-EQUATION-SEPARATION",
+      "content": "| MC-2 | LAPLACE-SEPARATION-CONFUSED-WITH-HEAT-EQUATION-SEPARATION | Applying the heat equation's decaying-exponential time-solution form to Laplace's Equation, missing that Laplace's Equation has no time variable and the second spatial variable instead produces hyperbolic sine/cosine solutions | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-equation",
+      "title": "HARMONIC-FUNCTION-ASSUMED-TO-REQUIRE-NO-BOUNDARY-DATA",
+      "content": "| MC-3 | HARMONIC-FUNCTION-ASSUMED-TO-REQUIRE-NO-BOUNDARY-DATA | Believing a harmonic function is fully determined by the equation $\\nabla^2u=0$ alone, without recognizing that boundary conditions are still required to pin down a UNIQUE solution (just as with the heat/wave equations) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Laplace's Equation as Settled Equilibrium (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Laplace's Equation as Settled Equilibrium (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Separation of Variables, Same Technique, New Equation (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Separation of Variables, Same Technique, New Equation (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-equation",
+      "title": "The Maximum Principle: Interior Values Are Bounded by the Boundary (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Maximum Principle: Interior Values Are Bounded by the Boundary (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why Laplace's Equation has no time variable, connecting this to the elliptic classification and the equilibrium/steady-state physical interpretation.\n  2. Set up (following Example 2's structure) the separation of variables for $u_{xx}+u_{yy}=0$ on the rectangle $0\\le x\\le\\pi$, $0\\le y\\le2$, with $u(0,y)=u(\\pi,y)=0$ and $u(x,0)=0$, $u(x,2)=g(x)$ — identify the eigenvalue problem and its solution, reusing the already-known $X_n,\\lambda_n$ from Example 2 where applicable.\n  3. Using the maximum principle, explain what you can conclude about the interior values of a harmonic function on a disk if its boundary values are all between $-5$ and $5$.\n  4. Explain, in your own words, what conformal mapping is used for in this context (solving Laplace's Equation), without needing to describe HOW it works mechanically.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.cx.harmonic-functions` is not yet authored; a future revision may add a genuine cross-link probe into the complex-analysis characterization of harmonic functions once that entry exists)**: \"An electrical engineer models the steady-state electric potential $u(x,y)$ inside a rectangular region with no charges present, satisfying Laplace's Equation, with specified potentials on all four edges. (a) Explain why this is an appropriate application of Laplace's Equation, referencing the equilibrium/no-time-variable framing from Component 3. (b) Using the maximum principle, explain what the engineer can immediately conclude about the potential at any interior point, given only the RANGE of potentials specified on the boundary, without solving the full separation-of-variables problem. (c) If the region were instead an oddly-shaped, non-rectangular area, explain (at the level of naming the technique, not deriving it) what method the engineer would need to reach for instead of direct separation of variables.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.separation-of-variables-pde` (the separation ansatz $u(x,t)=X(x)T(t)$, the resulting eigenvalue problem, and assembling the general solution via a Fourier series matching the boundary/initial data).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.laplace-equation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.laplace-equation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.separation-of-variables-pde` (the separation ansatz, eigenvalue-problem derivation, and Fourier-series-matching procedure this concept directly reapplies to a new PDE).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists `math.cx.harmonic-functions` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.cx.harmonic-functions.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the complex-analysis characterization of harmonic functions (as real/imaginary parts of holomorphic functions) once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-equation.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

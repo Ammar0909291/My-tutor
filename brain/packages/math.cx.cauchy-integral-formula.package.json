@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.cauchy-integral-formula-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.cauchy-integral-formula",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:94a7c2e529ed429e4863df5cc10b7736b9bc3c09bce866ec428ff195ac7542a6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md": "sha256:0071240560dd7480f5caad776890ed62a40942d85d21edc6449c5a100975c93f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.cauchy-integral-formula",
+    "name": "Cauchy Integral Formula",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.cx.cauchy-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.cauchy-integral-formula-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.cauchy-integral-formula (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md": "sha256:0071240560dd7480f5caad776890ed62a40942d85d21edc6449c5a100975c93f"
+      },
+      "contentHash": "sha256:01276e27d6f18b21f2e1688ae6a8dcc17c665be2b15b8f998a749640f291357d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-integral-formula.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-integral-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-integral-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-integral-formula.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-integral-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-integral-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-integral-formula.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-integral-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-integral-formula\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-integral-formula.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-integral-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-integral-formula\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.cauchy-integral-formula/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Cauchy Integral Formula** precisely: if $f$ is holomorphic on and inside a simple closed curve $C$, then for any $z_0$ **strictly inside** $C$, $f(z_0) = \\frac{1}{2\\pi i}\\oint_C \\frac{f(z)}{z-z_0}\\,dz$ — and correctly verify all its hypotheses (holomorphicity on and inside $C$; $z_0$ genuinely interior, not on or outside $C$) before applying it.\n- LO2: Apply the formula directly to EVALUATE contour integrals of the form $\\oint_C \\frac{f(z)}{z-z_0}\\,dz$ by recognizing the integral equals $2\\pi i\\cdot f(z_0)$ — turning a potentially difficult direct contour integration into a simple evaluation of $f$ at one point.\n- LO3: Recognize the profound structural implication: a holomorphic function's values EVERYWHERE INSIDE a curve are completely determined by its values ON the curve's boundary alone — directly refuting the misconception that the formula is merely a computational shortcut, rather than a statement about a deep rigidity property unique to holomorphic functions with no real-analysis analogue.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "INTERIOR-EXTERIOR-DISTINCTION-FOR-Z0-IGNORED",
+      "content": "| MC-1 | INTERIOR-EXTERIOR-DISTINCTION-FOR-Z0-IGNORED | Applying the Cauchy Integral Formula without checking whether $z_0$ is genuinely inside the curve $C$, missing that a different rule (Cauchy's Theorem, giving zero) applies when $z_0$ is outside | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "CAUCHY-INTEGRAL-FORMULA-TREATED-AS-MERE-COMPUTATIONAL-TRICK",
+      "content": "| MC-2 | CAUCHY-INTEGRAL-FORMULA-TREATED-AS-MERE-COMPUTATIONAL-TRICK | Viewing the formula only as a shortcut for evaluating integrals, without recognizing its deeper structural meaning — that holomorphic functions are entirely determined by their boundary values | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "INTEGRAND-SINGULARITY-AT-Z0-OVERLOOKED-AS-A-PROBLEM",
+      "content": "| MC-3 | INTEGRAND-SINGULARITY-AT-Z0-OVERLOOKED-AS-A-PROBLEM | Failing to recognize why $f(z)/(z-z_0)$ is not itself holomorphic at $z_0$ (hence why Cauchy's Theorem alone doesn't apply directly, requiring the separate Cauchy Integral Formula machinery) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "The Formula's Surprising Content, Verified Against Known Territory (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula's Surprising Content, Verified Against Known Territory (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Using the Formula to Evaluate Integrals Quickly (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Using the Formula to Evaluate Integrals Quickly (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Interior vs. Exterior: The Formula Only Applies to Points Inside C (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Interior vs. Exterior: The Formula Only Applies to Points Inside C (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Evaluate $\\oint_C\\frac{e^z}{z-1}\\,dz$ where $C$ is $|z|=3$, verifying first that $z_0=1$ is inside $C$.\n  2. Evaluate $\\oint_C\\frac{\\cos z}{z}\\,dz$ where $C$ is $|z|=1$, using the Cauchy Integral Formula with $f(z)=\\cos z$ and $z_0=0$.\n  3. For $\\oint_C\\frac{z^2}{z-5}\\,dz$ where $C$ is $|z|=2$, determine whether $z_0=5$ is inside or outside $C$, and state (without necessarily computing further) which rule (Cauchy's Theorem or the Cauchy Integral Formula) applies, and why.\n  4. Explain, in your own words, why the Cauchy Integral Formula is described as revealing that a holomorphic function is \"rigid\" — using the idea that boundary values completely determine interior values.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer working with a holomorphic function $f(z)$ representing a physical field needs to determine the field's value at an interior point $z_0=i$ of a region bounded by the circle $|z|=3$, but can only directly measure the field's values along the boundary curve. (a) Explain, using the Cauchy Integral Formula, how the engineer could in principle recover $f(i)$ purely from boundary measurements, without needing any interior measurements at all. (b) Explain why this recovery would NOT be possible for an arbitrary (non-holomorphic) physical field — what specifically about holomorphicity makes this boundary-to-interior recovery valid? (c) If the engineer mistakenly tried to apply the same reasoning to a point $z_0=5$ (outside the circle $|z|=3$), explain what would go wrong, and what the correct value of the corresponding contour integral would be instead, referencing Example 3's interior/exterior contrast.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.cauchy-theorem` ($\\oint_C f(z)\\,dz=0$ for $f$ holomorphic on a simply connected domain, and the counterexample $\\oint_C\\frac1z\\,dz=2\\pi i$ when a singularity is enclosed).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-integral-formula/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.cauchy-integral-formula",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.cauchy-theorem` ($\\oint_Cf(z)\\,dz=0$ for holomorphic $f$ on a simply connected domain, and the $\\oint_C\\frac1z\\,dz=2\\pi i$ counterexample this concept's formula directly generalizes and remains consistent with).\n- **Unlocks**: `math.cx.higher-derivatives` (differentiating the Cauchy Integral Formula under the integral sign yields formulas for ALL derivatives of $f$, directly building on this concept).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-integral-formula.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
