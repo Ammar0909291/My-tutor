@@ -30,12 +30,14 @@ import {
   SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
 } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
+import { CHEMISTRY_EXPLANATIONS, CHEMISTRY_PROBES } from '../../src/lib/teaching/assets/chemistrySeedAssets'
 
-// One seed pass covers both collections: the frozen-Brain transcriptions
-// (brainSeedAssets) and the blueprint-grounded authored batch
-// (authoredSeedAssets). Same idempotency, KG-validation, and status rules.
-const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
-const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
+// One seed pass covers all collections: the frozen-Brain transcriptions
+// (brainSeedAssets), the blueprint-grounded authored batch
+// (authoredSeedAssets), and per-subject authored assets (chemistrySeedAssets).
+// Same idempotency, KG-validation, and status rules.
+const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
+const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES]
 import { hashContent } from '../../src/lib/teaching/assets/similarity'
 
 const prisma = new PrismaClient()
