@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.baire-category-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.baire-category",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6149d9f5fd82d8a59142c486d8fb1dfe603a62b9f15673f2ada4bd679d56784a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.baire-category.md": "sha256:e12a73eb1b784ac6d2e360f6b5d8b95754cde826535c5e290322baf7e2a7dc6d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.baire-category",
+    "name": "Baire Category Theorem",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.completeness-metric",
+      "math.real.open-sets"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.baire-category-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.baire-category (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.baire-category.md": "sha256:e12a73eb1b784ac6d2e360f6b5d8b95754cde826535c5e290322baf7e2a7dc6d"
+      },
+      "contentHash": "sha256:4308bfaa13bce4a0450c910152b05343be3e91e51289e50b48600266cf9054cc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.baire-category.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.baire-category.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.baire-category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.baire-category\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.baire-category.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.baire-category.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.baire-category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.baire-category\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.baire-category.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.baire-category.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.baire-category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.baire-category\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.baire-category.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.baire-category.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.baire-category"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.baire-category\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.baire-category/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.baire-category",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **nowhere dense** precisely — a set whose CLOSURE has EMPTY INTERIOR (contains no open ball at all) — correctly distinguishing this from the informal notions of \"small,\" \"sparse,\" or merely \"not dense.\"\n- LO2: Apply the Baire Category Theorem to show that a specific metric space is NOT complete, by exhibiting it as a countable union of nowhere dense sets and observing this would contradict the theorem if the space WERE complete.\n- LO3: Connect the theorem to `math.fnal.open-mapping-theorem`'s own orientation-level dependency — explaining concretely how Baire Category supplies the essential completeness-dependent step in that theorem's proof, and why that concept's own counterexample (an incomplete space) genuinely fails to satisfy Baire Category's hypothesis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.baire-category",
+      "title": "NOWHERE-DENSE-CONFLATED-WITH-INFORMAL-SMALLNESS",
+      "content": "| MC-1 | NOWHERE-DENSE-CONFLATED-WITH-INFORMAL-SMALLNESS | Believing \"nowhere dense\" just means a set is countable or informally small, missing the precise empty-interior-of-closure definition | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.baire-category",
+      "title": "BAIRE-CATEGORY-ASSUMED-TO-APPLY-WITHOUT-COMPLETENESS",
+      "content": "| MC-2 | BAIRE-CATEGORY-ASSUMED-TO-APPLY-WITHOUT-COMPLETENESS | Believing the Baire Category Theorem applies to any metric space regardless of completeness, missing that completeness is the theorem's essential hypothesis | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.baire-category",
+      "title": "BAIRE-CATEGORY-TREATED-AS-PURELY-ABSTRACT",
+      "content": "| MC-3 | BAIRE-CATEGORY-TREATED-AS-PURELY-ABSTRACT | Believing Baire Category is a purely abstract result with no genuine connection to practical theorems, missing its role as the essential engine behind the Open Mapping Theorem | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.baire-category",
+      "title": "Nowhere Dense Is About Closure's Interior, Not Informal Smallness (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Nowhere Dense Is About Closure's Interior, Not Informal Smallness (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.baire-category",
+      "title": "Baire Category as a Completeness-Detection Tool (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Baire Category as a Completeness-Detection Tool (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.baire-category",
+      "title": "Baire Category Is the Engine Behind the Open Mapping Theorem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Baire Category Is the Engine Behind the Open Mapping Theorem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.baire-category",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.baire-category",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine whether $\\mathbb{Z}\\subset\\mathbb{R}$ is nowhere dense, dense, or neither, justifying via the closure/interior definition.\n  2. Explain why a finite union (as opposed to a countable union) of nowhere-dense sets in a complete space is automatically forbidden from covering the whole space too, using the theorem's statement.\n  3. Using Baire Category, argue that the space of polynomials on $[0,1]$ with the sup norm (a countable-dimensional, hence expressible via a countable \"basis-indexed\" union argument) is not complete. (Sketch the reasoning; a full construction is not required.)\n  4. Explain, in your own words, why `math.fnal.open-mapping-theorem`'s bounded-inverse corollary genuinely needs BOTH spaces complete, referencing Baire Category's own completeness hypothesis.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.fnal.open-mapping-theorem`)**: \"A functional analyst is reviewing a proof that relies on the Open Mapping Theorem's bounded-inverse corollary, applied to two specific normed spaces. (a) Using this lesson's Baire Category framework, explain what property of BOTH spaces the analyst must first verify before trusting the corollary. (b) The analyst discovers one of the spaces is only densely embedded in a larger complete space (i.e., it is itself incomplete), analogous to $c_{00}$ inside $c_0$ from that theorem's own counterexample. Using this lesson's Example 2 reasoning (about ℚ), explain how the analyst could DIRECTLY verify this space's incompleteness via a Baire-category argument, rather than simply citing the earlier counterexample by analogy. (c) A junior colleague argues 'since the Open Mapping Theorem itself doesn't mention Baire Category by name in its statement, the theorem's validity shouldn't actually depend on it — it's just a proof technique, not a real requirement.' Explain specifically why this argument is incorrect.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.baire-category",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.completeness-metric` (complete metric spaces, Cauchy sequences converging within the space) and `math.real.open-sets` (open sets, closed sets, closure, interior).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.baire-category/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.baire-category",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.completeness-metric` (the completeness hypothesis this theorem's conclusion depends on), `math.real.open-sets` (closure and interior, the machinery the nowhere-dense definition directly uses).\n- **Unlocks**: (none — KG lists no unlocks for this concept).\n- **Cross-link**: KG lists `math.fnal.open-mapping-theorem` as a cross-link — **authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode; that concept's own blueprint explicitly flagged this exact connection as deferred, pending this concept's authoring). $P76_{mode}=$ **cross-link probe**, directly fulfilling that concept's own anticipated dependency by explaining concretely how Baire Category supplies its proof's essential completeness-dependent step, and connecting to that concept's own $c_{00}$ counterexample.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.baire-category.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

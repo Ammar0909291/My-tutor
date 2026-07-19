@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.inequality-1var-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.inequality-1var",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cd2346f13d798623c553a1864fbc9c62f93dbb247d4b38de6b2cea1eaf7fb540",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.inequality-1var.md": "sha256:af81e41927de32572eaf0dda841afb950366b28f1b78ce65b8a07511a41a7453"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.inequality-1var",
+    "name": "Linear Inequality in One Variable",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.alg.linear-equation-1var"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.inequality-1var-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.inequality-1var (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.inequality-1var.md": "sha256:af81e41927de32572eaf0dda841afb950366b28f1b78ce65b8a07511a41a7453"
+      },
+      "contentHash": "sha256:dcd7c6de35fa5aac4e3718e437af5d209bfea482e3d06887996d2dc9495ca206",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-1var.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-1var.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-1var\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-1var.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-1var.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-1var\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-1var.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-1var.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-1var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-1var.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-1var.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-1var\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.inequality-1var/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve a linear inequality with the **variable on both sides** (e.g., $3x+5<7x-11$) by first collecting variable terms onto ONE side — recognizing this rearrangement step must happen BEFORE checking whether a sign flip is needed, since the sign of the isolating coefficient is only determined AFTER collecting terms.\n- LO2: Solve and interpret a **compound (two-sided/three-part)** linear inequality of the form $a<mx+b<c$ by applying the SAME operation to ALL THREE PARTS simultaneously — including reversing BOTH inequality directions (and the resulting order) when multiplying or dividing all three parts by a negative.\n- LO3: Recognize **degenerate cases** — a linear inequality whose variable terms cancel entirely during solving can reduce to an ALWAYS-TRUE statement (solution: all real numbers) or an ALWAYS-FALSE statement (solution: the empty set) — genuinely different outcomes from the general interval-solution case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "SIGN-FLIP-CHECKED-BEFORE-COLLECTING-VARIABLE-TERMS",
+      "content": "| MC-1 | SIGN-FLIP-CHECKED-BEFORE-COLLECTING-VARIABLE-TERMS | Believing the sign-flip rule can be applied directly to a variable-on-both-sides inequality before collecting variable terms onto one side, missing that this rearrangement must happen first | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "COMPOUND-INEQUALITY-PARTS-MANIPULATED-INDEPENDENTLY",
+      "content": "| MC-2 | COMPOUND-INEQUALITY-PARTS-MANIPULATED-INDEPENDENTLY | Believing each part of a compound inequality can be manipulated independently, missing that all three parts must receive the identical operation simultaneously | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "EVERY-LINEAR-INEQUALITY-ASSUMED-TO-YIELD-AN-INTERVAL",
+      "content": "| MC-3 | EVERY-LINEAR-INEQUALITY-ASSUMED-TO-YIELD-AN-INTERVAL | Believing every linear inequality's solution must be some genuine interval, missing the degenerate all-real and empty-set cases arising when variable terms cancel | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Collect Variable Terms First, Then Check the Sign (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Collect Variable Terms First, Then Check the Sign (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "All Three Parts of a Compound Inequality Move Together (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"All Three Parts of a Compound Inequality Move Together (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Variable Terms Can Cancel, Leaving All-Real or Empty-Set Solutions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Variable Terms Can Cancel, Leaving All-Real or Empty-Set Solutions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Solve $5x-3>2x+9$, collecting variable terms before checking for a sign flip.\n  2. Solve the compound inequality $2\\le3x-4\\le11$.\n  3. Solve $-4<-x+2<6$, correctly flipping both directions and reordering.\n  4. Solve $3(x+2)<3x+7$ and $3(x+2)<3x+5$, identifying which (if either) is degenerate and of which type.\n- **P76 (Transfer Probe, mode = independence)**: \"A quality-control engineer needs a part's measured length $L$ (in mm) to satisfy $-2<3L-8<10$ to pass inspection. (a) Solve this compound inequality for $L$, applying operations to all three parts. (b) A colleague, checking a related specification, encounters $2(L+1)<2L+9$ and, after expanding and simplifying, gets confused when the variable disappears entirely. Using this lesson's degenerate-case reasoning, explain what this outcome means for the specification (all measurements pass, or none do), and how to tell which. (c) The colleague also proposes solving a variable-on-both-sides inequality by checking the sign of the ORIGINAL left-side coefficient before doing any rearrangement, to 'save a step.' Explain specifically why this shortcut can give the wrong answer, using this lesson's collect-first principle.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.linear-equation-1var` (solving linear equations by isolating the variable) and, informally, `math.alg.inequality`'s already-established point-vs-interval distinction and single-side sign-flip rule (this concept's own new content builds on, but does not re-teach, that foundation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-1var/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.inequality-1var",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.linear-equation-1var` (the isolate-the-variable technique this concept's collect-then-solve procedure directly builds on).\n- **Unlocks**: `math.alg.inequality-2var` (extends single-variable inequality solving to two variables and their graphical regions).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-1var.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
