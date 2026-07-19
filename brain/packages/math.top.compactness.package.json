@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.compactness-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.compactness",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2f3771e952a8751806c5f55a949b4cb58181e7789743f9accd97f4437170a03b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.compactness.md": "sha256:fb42ae4bc464c16f9db06a37239d58041ed0131be40bba5041800442c3b6cab4"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.compactness",
+    "name": "Compactness (Topology)",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.compactness-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.compactness (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.compactness.md": "sha256:fb42ae4bc464c16f9db06a37239d58041ed0131be40bba5041800442c3b6cab4"
+      },
+      "contentHash": "sha256:caa598ab695c68d2c5d9fa5f3e82589717d59edf5fc5b85cb6d811b93e9e4601",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.compactness.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.compactness.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.compactness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.compactness.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.compactness.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.compactness\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.compactness.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.compactness.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.compactness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.compactness.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.compactness.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.compactness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.compactness/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.compactness",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define compactness for a **general topological space** $X$ — every open cover has a finite subcover — recognizing this is the IDENTICAL definition already mastered in `math.real.compactness`, now stated for an arbitrary topological space rather than specifically $\\mathbb{R}^n$.\n- LO2: Recognize that Heine-Borel's \"closed and bounded\" characterization does **NOT** extend to general topological spaces — \"bounded\" is not even a meaningful notion without a metric — so compactness in a general space must be verified directly via the open-cover definition, never via a closed-and-bounded shortcut.\n- LO3: Apply the two key general-topology preservation properties — **closed subsets of compact spaces are compact**, and the **continuous image of a compact space is compact** — via direct concrete verification.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.compactness/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.compactness",
+      "title": "HEINE-BOREL-ASSUMED-TO-EXTEND-GENERALLY",
+      "content": "| MC-1 | HEINE-BOREL-ASSUMED-TO-EXTEND-GENERALLY | Believing \"closed and bounded\" characterizes compactness in any topological space, missing that this is a special convenience of ℝⁿ's metric structure, not a general topological fact | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.compactness/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.compactness",
+      "title": "GENERAL-DEFINITION-ASSUMED-TO-NEED-NEW-MACHINERY",
+      "content": "| MC-2 | GENERAL-DEFINITION-ASSUMED-TO-NEED-NEW-MACHINERY | Believing moving from the ℝⁿ-specific compactness definition to the general topological-space definition requires new verification techniques, missing that the definition is identical | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.compactness/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.compactness",
+      "title": "EVERY-SUBSET-OF-COMPACT-ASSUMED-COMPACT",
+      "content": "| MC-3 | EVERY-SUBSET-OF-COMPACT-ASSUMED-COMPACT | Believing every subset of a compact space is automatically compact, missing that only CLOSED subsets are guaranteed to inherit compactness | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.compactness/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.compactness",
+      "title": "No Metric, Still Compact — Boundedness Isn't the Real Definition (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"No Metric, Still Compact — Boundedness Isn't the Real Definition (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.compactness/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.compactness",
+      "title": "The Definition Transfers Exactly, No New Machinery (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Definition Transfers Exactly, No New Machinery (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.compactness/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.compactness",
+      "title": "Closed Subsets and Continuous Images Preserve Compactness — Not Every Subset Does (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Closed Subsets and Continuous Images Preserve Compactness — Not Every Subset Does (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.compactness/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.compactness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.compactness/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.compactness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the general topological-space definition of compactness, without reference to any metric or notion of distance.\n  2. Explain why a 5-element set with the discrete topology is compact, without invoking boundedness.\n  3. Determine whether $(0,2)\\subset\\mathbb{R}$ is compact, using the open-cover definition directly (adapting the $(0,1)$ argument).\n  4. Give a non-closed subset of $[0,1]$ (other than $(0,1)$) and explain why it need not be compact, even though $[0,1]$ itself is.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.real.compactness`)**: \"A topologist studies the space $\\mathbb{R}$ with the standard topology, and separately studies an abstract topological space $Y$ built from a completely different construction with no natural metric. (a) Using `math.real.compactness`'s own $(0,1)$ argument, restate why $(0,1)\\subset\\mathbb{R}$ fails to be compact, this time framed purely in terms of the general open-cover definition (no Heine-Borel). (b) The topologist wants to determine whether a specific subset of $Y$ is compact, but $Y$ has no metric, so 'bounded' is not a meaningful question there. Explain what verification approach remains available, and why it is the SAME approach used for $(0,1)$ in part (a). (c) A colleague argues 'since $(0,1)$ fails Heine-Borel's boundedness-adjacent closedness condition in $\\mathbb{R}$, and $Y$ has no notion of boundedness at all, nothing meaningful can be said about compactness in $Y$.' Explain specifically why this argument is wrong, referencing the general open-cover definition's independence from any metric structure.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.compactness/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.compactness",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (open sets, continuity via open sets) and, via the cross-link, `math.real.compactness` (the open-cover/finite-subcover definition already applied concretely to $(0,1)$ and $[0,1]$ in $\\mathbb{R}$, and the Heine-Borel theorem specific to $\\mathbb{R}^n$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.compactness/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.compactness",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (open sets and continuity, the framework this concept's general definition is stated within).\n- **Unlocks**: `math.top.tychonoff` (Tychonoff's theorem on products of compact spaces, building directly on this concept's general open-cover definition).\n- **Cross-link**: KG lists `math.real.compactness` as a cross-link — **authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **cross-link probe**, engaging directly with that concept's own $(0,1)$ open-cover argument (its TA-A01/Example 1) to confirm the general topological-space definition matches the ℝⁿ-specific instance exactly, and to test the boundedness-free reasoning required when no metric is available.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.compactness.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
