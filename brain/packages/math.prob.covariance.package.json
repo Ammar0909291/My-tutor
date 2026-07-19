@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.covariance-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.covariance",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b009cf4ca607464bd35251ae13700d1cf9a77e1e3714c3aba228e41d03576d47",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.covariance.md": "sha256:7c4c9cc3900e611dc7aa0b1a664c698c5e03fe89afa8360151a9332d0ee737cc"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.covariance",
+    "name": "Covariance",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.variance",
+      "math.prob.joint-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.covariance-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.covariance (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.covariance.md": "sha256:7c4c9cc3900e611dc7aa0b1a664c698c5e03fe89afa8360151a9332d0ee737cc"
+      },
+      "contentHash": "sha256:1923e12f2be20f09e8bc6ad5d181389fabf1559c6ed1cb832d540764f6031875",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.covariance.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.covariance.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.covariance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.covariance\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.covariance.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.covariance.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.covariance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.covariance\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.covariance.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.covariance.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.covariance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.covariance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.covariance.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.covariance.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.covariance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.covariance\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.covariance/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.covariance",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **covariance** $\\text{Cov}(X,Y)=E[(X-\\mu_X)(Y-\\mu_Y)]$, and apply the computational shortcut $\\text{Cov}(X,Y)=E[XY]-E[X]E[Y]$ (directly parallel to `math.prob.variance`'s own shortcut $\\text{Var}(X)=E[X^2]-(E[X])^2$) to compute it from a joint distribution.\n- LO2: Interpret the **sign** of covariance: positive means $X$ and $Y$ tend to be above (or below) their respective means TOGETHER; negative means one tends to be above its mean when the other is below — directly reusing `math.prob.joint-distribution`'s own joint-distribution framework to verify this interpretation on a concrete example.\n- LO3: Prove that **independence implies zero covariance**, but the **converse fails** — constructing a specific example where $\\text{Cov}(X,Y)=0$ yet $X,Y$ are provably NOT independent (in fact perfectly, deterministically related) — directly refuting the misconception that zero covariance is equivalent to independence.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.covariance",
+      "title": "ZERO-COVARIANCE-ASSUMED-TO-IMPLY-INDEPENDENCE",
+      "content": "| MC-1 | ZERO-COVARIANCE-ASSUMED-TO-IMPLY-INDEPENDENCE | Believing Cov(X,Y)=0 implies X and Y are independent, missing that covariance only detects linear co-movement and can be blind to other real forms of dependence | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.covariance",
+      "title": "COVARIANCE-SIGN-INTERPRETATION-REVERSED",
+      "content": "| MC-2 | COVARIANCE-SIGN-INTERPRETATION-REVERSED | Reversing the interpretation of covariance's sign (e.g. believing negative covariance means the variables move together) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.covariance",
+      "title": "COVARIANCE-SHORTCUT-FORMULA-COMPUTED-WITH-WRONG-MARGINALS",
+      "content": "| MC-3 | COVARIANCE-SHORTCUT-FORMULA-COMPUTED-WITH-WRONG-MARGINALS | Computing E[X] or E[Y] incorrectly from the joint distribution (e.g. using the joint probabilities directly instead of first finding the correct marginal distribution) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.covariance",
+      "title": "Covariance via the Shortcut Formula (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Covariance via the Shortcut Formula (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.covariance",
+      "title": "Sign of Covariance, Contrasted Directly (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sign of Covariance, Contrasted Directly (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.covariance",
+      "title": "Zero Covariance Does Not Mean Independent (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Zero Covariance Does Not Mean Independent (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.covariance",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.covariance",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For the joint PMF $P(X=0,Y=0)=0.4$, $P(X=0,Y=1)=0.1$, $P(X=1,Y=0)=0.1$, $P(X=1,Y=1)=0.4$, compute $\\text{Cov}(X,Y)$ using the shortcut formula.\n  2. Based on your answer to problem 1, interpret the sign: do $X$ and $Y$ tend to move together or oppositely?\n  3. Verify directly that independent random variables have zero covariance, using the fact $E[XY]=E[X]E[Y]$ for independent $X,Y$.\n  4. Construct (or describe) a DIFFERENT example (not $Y=X^2$) of two dependent random variables with zero covariance, briefly justifying why the dependence is \"invisible\" to covariance.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.stats.covariance-matrix` is not yet authored; a future revision may add a genuine cross-link probe into the multivariate covariance-matrix framework once that entry exists)**: \"A financial analyst computes the covariance between two stocks' daily returns, $\\text{Cov}(X,Y)$, and finds it is very close to zero. (a) Explain what this covariance value alone tells the analyst about whether the two stocks tend to move together or independently, and what it does NOT necessarily tell them. (b) A colleague claims 'zero covariance means these two stocks are completely unrelated — knowing one tells you nothing about the other.' Using Example 3's reasoning, explain why this claim is not necessarily justified, even if the covariance truly is zero. (c) Suggest, in general terms, what additional analysis (beyond just covariance) the analyst might want to check before concluding the two stocks are genuinely unrelated.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.covariance",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.variance` ($\\text{Var}(X)=E[X^2]-(E[X])^2$, and the general habit of using an expectation-shortcut formula rather than the defining-formula directly) and `math.prob.joint-distribution` (the joint distribution of $(X,Y)$, and computing quantities like $E[XY]$ by summing/integrating over the joint PMF/PDF).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.covariance/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.covariance",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.variance` (the E[X²]-(E[X])² shortcut pattern this concept's own shortcut directly parallels), `math.prob.joint-distribution` (the joint PMF/PDF this concept's E[XY] computation is built from).\n- **Unlocks**: `math.prob.correlation` (the normalized version of covariance, dividing by the standard deviations).\n- **Cross-link**: KG lists `math.stats.covariance-matrix` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.stats.covariance-matrix.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the multivariate covariance-matrix framework (directly connecting to `math.linalg.symmetric-matrix`'s own covariance-matrix example) once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.covariance.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.adjunction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.adjunction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dccb38986e13d8304c4ba26452b6580690366ac8c0906d508355f6dbd0258615",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.adjunction.md": "sha256:81368e6d525e6e15cf3e64c30b706052a06abbcef4028416af69283ac5c1bee9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cat.adjunction",
+    "name": "Adjunction",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.cat.functor",
+      "math.cat.natural-transformation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.adjunction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.adjunction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.adjunction.md": "sha256:81368e6d525e6e15cf3e64c30b706052a06abbcef4028416af69283ac5c1bee9"
+      },
+      "contentHash": "sha256:011ef144029dee5e7f83eca4bc21725352466a3cd59aeda2c088289aad615f4d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.adjunction.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.adjunction.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.adjunction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.adjunction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.adjunction.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.adjunction.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.adjunction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.adjunction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.adjunction.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.adjunction.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.adjunction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.adjunction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.adjunction.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.adjunction.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.adjunction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.adjunction\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.adjunction/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.adjunction",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the defining condition of an **adjunction**, $F\\dashv G$ (\"$F$ is left adjoint to $G$\"): a natural BIJECTION $\\text{Hom}_\\mathcal{D}(FA,B) \\cong \\text{Hom}_\\mathcal{C}(A,GB)$ for functors $F:\\mathcal{C}\\to\\mathcal{D}$, $G:\\mathcal{D}\\to\\mathcal{C}$ — at an orientation level (per this corpus's established precedent for large-scope research-tier concepts), correctly stating the condition and identifying which functor is \"left\" versus \"right,\" without deriving the full theory of adjoint functors.\n- LO2: Recognize the **free/forgetful pair** ($F=$ free functor, $G=$ forgetful functor, already introduced in `math.cat.functor`) as the CANONICAL example of an adjunction, directly resolving that concept's own observed puzzle — that $F(U(G))$ is generally NOT isomorphic to the original object $G$ — by explaining how the adjunction's hom-set bijection is the PRECISE, correct relationship between $F$ and $G$, replacing the naive (and false) expectation that they should simply \"undo\" each other.\n- LO3: State, at orientation level, the roles of the **unit** $\\eta:1_\\mathcal{C}\\Rightarrow GF$ and **counit** $\\varepsilon:FG\\Rightarrow1_\\mathcal{D}$ (both natural transformations, per `math.cat.natural-transformation`) as the concrete maps witnessing the adjunction, and recognize (via Mac Lane's own framing, \"adjoint functors arise everywhere\") that adjunctions are a pervasive organizing pattern across mathematics, not an isolated exotic construction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.adjunction",
+      "title": "ADJOINT-FUNCTORS-ASSUMED-TO-BE-INVERSES",
+      "content": "| MC-1 | ADJOINT-FUNCTORS-ASSUMED-TO-BE-INVERSES | Believing left and right adjoint functors should \"undo\" each other like inverse functions, rather than recognizing the adjunction's hom-set bijection as the genuinely correct (weaker, but still precise) relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.adjunction",
+      "title": "LEFT-RIGHT-ADJOINT-DIRECTION-CONFUSED",
+      "content": "| MC-2 | LEFT-RIGHT-ADJOINT-DIRECTION-CONFUSED | Confusing which functor is the left adjoint and which is the right adjoint in a given adjunction (e.g. reversing free and forgetful) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.adjunction",
+      "title": "ADJUNCTION-TREATED-AS-AN-ISOLATED-EXOTIC-CONSTRUCTION",
+      "content": "| MC-3 | ADJUNCTION-TREATED-AS-AN-ISOLATED-EXOTIC-CONSTRUCTION | Viewing the free/forgetful adjunction as a one-off curiosity specific to groups, rather than recognizing it as one instance of a pervasive cross-mathematics pattern | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.adjunction",
+      "title": "The Hom-Set Bijection, at Orientation Level (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Hom-Set Bijection, at Orientation Level (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.adjunction",
+      "title": "Resolving the Earlier Puzzle: F and U Don't Invert, They Adjoin (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Resolving the Earlier Puzzle: F and U Don't Invert, They Adjoin (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.adjunction",
+      "title": "Unit, Counit, and Ubiquity (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Unit, Counit, and Ubiquity (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.adjunction",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.adjunction",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the adjunction condition $F\\dashv G$ in your own words, identifying which functor is \"left\" and which is \"right\" for the free/forgetful pair.\n  2. For $A=\\{x,y,z\\}$ (a three-element set), describe (without full computation) what a group homomorphism $F(A)\\to B$ corresponds to, per the adjunction's hom-set bijection.\n  3. Explain, referencing `math.cat.functor`'s own observation, why the adjunction is a better way to relate $F$ and $U$ than expecting them to be inverse to each other.\n  4. Describe, in general terms, what the unit map $\\eta_A:A\\to U(F(A))$ does, using the two-generator example from Example 3 as your reference.\n- **P76 (Transfer Probe, mode = independence)**: \"A computer science student encounters an adjunction between the 'discrete category' functor $D:\\mathbf{Set}\\to\\mathbf{Cat}$ (sending a set to the category with that set as objects and only identity morphisms) and the 'objects' forgetful functor $\\text{Ob}:\\mathbf{Cat}\\to\\mathbf{Set}$ (sending a category to its underlying set of objects). (a) Using the pattern established for free/forgetful, state what hom-set bijection you would EXPECT this adjunction to satisfy (you do not need to verify it rigorously). (b) Explain, in general terms, what the unit map for this adjunction should intuitively do, by analogy with Example 3's free-group unit map. (c) Explain why recognizing this as 'yet another instance of the same adjunction pattern,' rather than an entirely new concept to learn from scratch, is exactly the payoff Mac Lane's 'adjoint functors arise everywhere' remark is pointing at.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.adjunction",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cat.functor` (structure-preserving maps between categories, and specifically the forgetful functor $U:\\mathbf{Grp}\\to\\mathbf{Set}$ and free functor $F:\\mathbf{Set}\\to\\mathbf{Grp}$ examples, including the observation that $F(U(G))$ is generally not isomorphic to $G$) and `math.cat.natural-transformation` ($\\eta:F\\Rightarrow G$ between functors, and the naturality-square condition).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.adjunction/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.adjunction",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cat.functor` (the free and forgetful functors this concept's canonical example directly reuses, including that concept's own unresolved observation about $F(U(G))$), `math.cat.natural-transformation` (the naturality condition the adjunction's hom-set bijection must satisfy, and the unit/counit as specific natural transformations).\n- **Unlocks**: `math.cat.monad` (a monad is built directly from an adjunction, via $GF$ together with the unit and a multiplication derived from the counit).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.adjunction.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
