@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.optimization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.optimization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d048b2c5c32fc2d29a88347506c81db25ff147715c3deb228cebe415fec14bc7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.optimization.md": "sha256:16ccf68ee2df0f797271012ec28de19cb1f31cfe5c3e369823f16fd5f854cb6c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.optimization",
+    "name": "Optimization (Calculus)",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.local-extrema"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.optimization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.optimization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.optimization.md": "sha256:16ccf68ee2df0f797271012ec28de19cb1f31cfe5c3e369823f16fd5f854cb6c"
+      },
+      "contentHash": "sha256:d39ed0b908b085c0b34ca23c418cf611371715d6d2f18d7706930ac5ebdaf2da",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.optimization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.optimization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.optimization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.optimization.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.optimization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.optimization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.optimization.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.optimization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.optimization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.optimization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.optimization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.optimization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.optimization",
+      "title": "Learning Objectives",
+      "content": "- LO1: Find the **global maximum and minimum** of a continuous function $f$ on a **closed interval** $[a,b]$ by the **Closed Interval Method**: evaluate $f$ at ALL critical points inside $(a,b)$ AND at both endpoints $a,b$; the largest value is the global max, the smallest is the global min.\n- LO2: Correctly recognize that the Closed Interval Method's endpoint-inclusion step is essential — a global extremum can occur AT an endpoint even where $f'\\neq0$ there — and that omitting endpoint checks can miss the true global max/min entirely.\n- LO3: Find global extrema of a function over ALL REALS (an unbounded domain, no endpoints to check), correctly recognizing this requires ADDITIONAL end-behavior analysis (as $x\\to\\pm\\infty$) since there are no finite endpoints to evaluate, and that a global extremum may fail to exist at all in this unbounded setting.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.optimization",
+      "title": "ENDPOINTS-SKIPPED-WHEN-NO-CRITICAL-POINTS",
+      "content": "| MC-1 | ENDPOINTS-SKIPPED-WHEN-NO-CRITICAL-POINTS | Believing that if a function has no critical points inside an interval, it has no global max/min on that interval, forgetting endpoints are always candidates regardless of critical-point count | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.optimization",
+      "title": "UNBOUNDED-DOMAIN-ASSUMED-TO-STILL-GUARANTEE-GLOBAL-EXTREMA",
+      "content": "| MC-2 | UNBOUNDED-DOMAIN-ASSUMED-TO-STILL-GUARANTEE-GLOBAL-EXTREMA | Believing a global maximum/minimum must exist for any continuous function, even over an unbounded domain, not recognizing the Extreme Value Theorem's guarantee specifically requires a closed, BOUNDED interval | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.optimization",
+      "title": "LOCAL-EXTREMUM-ASSUMED-AUTOMATICALLY-GLOBAL",
+      "content": "| MC-3 | LOCAL-EXTREMUM-ASSUMED-AUTOMATICALLY-GLOBAL | Believing a local maximum/minimum found via critical-point analysis is automatically the GLOBAL maximum/minimum, without comparing against other candidates (other critical points, endpoints, or end behavior) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.optimization",
+      "title": "The Closed Interval Method (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Closed Interval Method (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.optimization",
+      "title": "Endpoints Are Always Candidates, and the Unbounded-Domain Case (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Endpoints Are Always Candidates, and the Unbounded-Domain Case (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.optimization",
+      "title": "Composite Applied Optimization Problem (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composite Applied Optimization Problem (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.optimization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.optimization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find the global max/min of $f(x)=x^3-6x^2+9x$ on $[0,5]$ using the Closed Interval Method.\n  2. Find the global max/min of $g(x)=\\sqrt{x}$ on $[1,9]$ (note: $g'(x)=\\frac{1}{2\\sqrt x}$ is never zero — check carefully what this implies for the procedure).\n  3. Determine whether $h(x)=-x^2+4$ has a global maximum over ALL of $\\mathbb{R}$, and if so, find it; separately determine whether it has a global minimum over all of $\\mathbb{R}$, explaining your reasoning using end behavior.\n  4. A rectangular box with a square base (side $x$) and no top is to be built using exactly 300 square inches of material. Set up the volume function in terms of $x$ alone, identify the natural domain restriction, and find the value of $x$ maximizing volume using the full Closed Interval Method procedure.\n- **P76 (Transfer Probe, mode = independence)**: \"A shipping company wants to design a rectangular box (with a square base of side $x$ and height $h$) with FIXED total surface area of 600 square inches, maximizing volume. (a) Express volume $V$ as a function of $x$ alone (eliminating $h$ using the surface-area constraint), and determine the natural domain restriction on $x$ (recall both $x>0$ and the resulting $h$ must be positive). (b) Find all critical points of $V(x)$ within this domain. (c) Apply the full Closed Interval Method (including checking the domain's boundary behavior, even if the true endpoints correspond to a degenerate box with zero volume) to confirm the critical point you found genuinely gives the GLOBAL maximum volume, not merely a local one.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.optimization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.local-extrema` (the First and Second Derivative Tests for classifying critical points as LOCAL max/min — this concept extends that local classification to a genuinely GLOBAL search).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.optimization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.optimization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.local-extrema` (the local classification tools this concept extends to a genuinely global search).\n- **Unlocks**: `math.opt.unconstrained-optimization` (the more general, often multivariable optimization theory building directly on this concept's global-search procedure).\n- **Cross-link**: KG lists `math.opt.unconstrained-optimization` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.opt.unconstrained-optimization.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's single-variable Closed Interval Method directly to that concept's generalization to multivariable unconstrained optimization (where \"checking the boundary\" becomes checking the boundary of a higher-dimensional region, and critical points are found via the gradient vanishing rather than a single derivative).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.optimization.md",
+        "startLine": 95,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

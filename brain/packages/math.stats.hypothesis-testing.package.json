@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.hypothesis-testing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.hypothesis-testing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bf9892dd0850fdf69b653cf6bc09109fe3fecd3c766941ccecbe0218474bc33f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.hypothesis-testing.md": "sha256:3f18b292f37073d453e72e609b8a4b6c96fe13d3c972d4fdde60bd934cf392fe"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.stats.hypothesis-testing",
+    "name": "Hypothesis Testing",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.stats.sampling-distribution",
+      "math.prob.conditional-probability"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.hypothesis-testing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.hypothesis-testing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.hypothesis-testing.md": "sha256:3f18b292f37073d453e72e609b8a4b6c96fe13d3c972d4fdde60bd934cf392fe"
+      },
+      "contentHash": "sha256:a9c0273670e88dab8577b185ed19b2564dcdc421403f31638f69bd91c449b9d0",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.hypothesis-testing.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.hypothesis-testing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.hypothesis-testing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.hypothesis-testing.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.hypothesis-testing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.hypothesis-testing\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.hypothesis-testing.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.hypothesis-testing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.hypothesis-testing\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.hypothesis-testing/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the five-step hypothesis-testing procedure — (i) state $H_0$ (null hypothesis) and $H_1$ (alternative hypothesis), (ii) collect data, (iii) compute a test statistic, (iv) find the **p-value** (or compare to a critical region), (v) make a decision — and correctly formulate $H_0$/$H_1$ for a given research question.\n- LO2: Correctly interpret the **p-value** as \"the probability of observing data at least as extreme as what was observed, ASSUMING $H_0$ is true\" — and explicitly reject the common misinterpretation that the p-value is \"the probability $H_0$ is true\" (a fundamentally different, and generally uncomputable-this-way, quantity).\n- LO3: Distinguish **Type I error** (rejecting $H_0$ when it's actually true — a \"false positive,\" controlled by the significance level $\\alpha$) from **Type II error** (failing to reject $H_0$ when it's actually false — a \"false negative\"), and explain the inherent trade-off between them.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "P-VALUE-INTERPRETED-AS-PROBABILITY-H0-TRUE",
+      "content": "| MC-1 | P-VALUE-INTERPRETED-AS-PROBABILITY-H0-TRUE | Believing the p-value directly gives the probability that the null hypothesis is true, reversing the conditional direction of what the p-value actually computes | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "FAIL-TO-REJECT-INTERPRETED-AS-PROVING-H0",
+      "content": "| MC-2 | FAIL-TO-REJECT-INTERPRETED-AS-PROVING-H0 | Believing \"fail to reject $H_0$\" means $H_0$ has been PROVEN true, rather than recognizing it only means insufficient evidence was found to reject it (absence of evidence is not evidence of absence) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "TYPE-I-AND-TYPE-II-ERROR-CONFLATED",
+      "content": "| MC-3 | TYPE-I-AND-TYPE-II-ERROR-CONFLATED | Confusing which error (Type I vs. Type II) corresponds to which mistake (false positive vs. false negative), or believing reducing one automatically reduces the other | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "The Five-Step Procedure and the P-Value's Meaning (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Five-Step Procedure and the P-Value's Meaning (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "Correcting the P-Value Misinterpretation, and the Error Trade-off (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Correcting the P-Value Misinterpretation, and the Error Trade-off (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A factory claims its light bulbs last 1000 hours on average. State appropriate $H_0$ and $H_1$ for testing whether the TRUE average is actually LESS than claimed.\n  2. A hypothesis test yields a p-value of 0.08, with $\\alpha=0.05$. State the decision (reject or fail to reject $H_0$), and explain what the p-value of 0.08 actually means in terms of the data and $H_0$.\n  3. Explain precisely why \"there's an 8% chance $H_0$ is true\" is NOT the correct interpretation of a p-value of 0.08.\n  4. A quality-control test for airplane parts has $H_0$=\"part is safe,\" $H_1$=\"part is defective.\" Describe, in context, what a Type I error and a Type II error would each mean here, and explain which error type would typically be considered more costly in this specific setting.\n- **P76 (Transfer Probe, mode = independence)**: \"A pharmaceutical company runs a clinical trial testing whether a new drug lowers blood pressure more than a placebo, with $H_0$: no difference, $H_1$: drug lowers blood pressure more. The trial yields a p-value of 0.03. (a) Using this lesson's precise definition, state exactly what this p-value of 0.03 represents (in terms of $H_0$ and the observed data), and what decision follows at the standard $\\alpha=0.05$ threshold. (b) A news headline reports 'Scientists 97% certain the new drug works!' — using this lesson's p-value/probability-of-$H_0$ distinction, explain precisely what is wrong with this headline's interpretation of the 0.03 result. (c) The company later worries about approving a drug that doesn't actually work (a costly, reputation-damaging Type I error) versus rejecting a drug that actually does work (a Type II error, a missed medical opportunity) — explain how the company might justify choosing a STRICTER significance level (e.g. $\\alpha=0.01$ instead of 0.05) for this specific decision, using this lesson's error trade-off.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.sampling-distribution` (the distribution of a sample statistic like $\\bar X$ across repeated samples, and the standard error $\\sigma/\\sqrt n$) and `math.prob.conditional-probability` (the notation $P(A|B)$, needed to correctly parse the p-value's precise conditional meaning).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.stats.hypothesis-testing/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.hypothesis-testing",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.sampling-distribution` (the distribution of $\\bar X$ under repeated sampling, needed to compute the test statistic and p-value), `math.prob.conditional-probability` (the $P(A|B)$ notation and meaning this concept's entire p-value interpretation depends on getting right).\n- **Unlocks**: none — this is a terminal node in the current Mathematics Knowledge Graph (no further concepts build on it as a prerequisite).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.hypothesis-testing.md",
+        "startLine": 98,
+        "endLine": 104
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

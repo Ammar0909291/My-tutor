@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.proportion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.proportion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:078a537c6d3b5d4d0046ff87001d54183f4913196b02d738d23a1ef5cac6939e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.proportion.md": "sha256:f0d43f402ad767a8d703e51b710478558fb160a1abc4428a56c87f4f4af76562"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.proportion",
+    "name": "Proportion",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.arith.ratios"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.proportion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.proportion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.proportion.md": "sha256:f0d43f402ad767a8d703e51b710478558fb160a1abc4428a56c87f4f4af76562"
+      },
+      "contentHash": "sha256:1b585380caf66d29cbbb580e0236a682645eb6cb7c24e0ca782333baa9938835",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.proportion.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.proportion.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.proportion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.proportion.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.proportion.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.proportion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.proportion.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.proportion.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.proportion\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.proportion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.proportion",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **proportion** as an equation stating two ratios are equal, $\\frac{a}{b}=\\frac{c}{d}$, and solve for an unknown term using **cross-multiplication** ($ad=bc$).\n- LO2: Set up a proportion correctly from a word problem, paying careful attention to matching the CORRECT quantities in corresponding positions (e.g. not mixing up which quantity goes in the numerator versus denominator across the two ratios).\n- LO3: Apply proportional reasoning to scale/map problems, and correctly distinguish a genuinely proportional relationship (constant ratio) from a superficially similar but NON-proportional one (e.g. one involving a fixed additive offset), recognizing that not every \"two quantities that grow together\" relationship is a true proportion.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.proportion",
+      "title": "QUANTITY-POSITIONS-MISMATCHED-ACROSS-RATIOS",
+      "content": "| MC-1 | QUANTITY-POSITIONS-MISMATCHED-ACROSS-RATIOS | Setting up a proportion with corresponding quantity types in inconsistent positions across the two ratios (e.g. one ratio's numerator matching the other ratio's denominator type instead), producing an answer to the wrong question | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.proportion",
+      "title": "ANY-INCREASING-RELATIONSHIP-ASSUMED-PROPORTIONAL",
+      "content": "| MC-2 | ANY-INCREASING-RELATIONSHIP-ASSUMED-PROPORTIONAL | Believing any relationship where both quantities increase together must be a true proportion, without checking whether their ratio actually stays constant | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.proportion",
+      "title": "CROSS-MULTIPLICATION-APPLIED-WITHOUT-VALID-PROPORTION-SETUP",
+      "content": "| MC-3 | CROSS-MULTIPLICATION-APPLIED-WITHOUT-VALID-PROPORTION-SETUP | Applying the cross-multiplication mechanical procedure to an equation that isn't actually a valid proportion setup in the first place (e.g. mismatched units or quantities), producing a numerically \"correct\" but meaningless answer | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.proportion",
+      "title": "Cross-Multiplication, via a Scale Model (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cross-Multiplication, via a Scale Model (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.proportion",
+      "title": "Correct Setup Matters, and Genuine vs. Superficial Proportionality (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Correct Setup Matters, and Genuine vs. Superficial Proportionality (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.proportion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.proportion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Solve $\\frac{5}{8}=\\frac{x}{40}$ for $x$ using cross-multiplication.\n  2. A recipe uses 3 cups of flour for every 2 cups of sugar. If a baker wants to use 10 cups of flour, set up and solve a proportion to find how much sugar is needed, being careful to keep flour and sugar consistently positioned.\n  3. A phone plan costs a flat $20 fee plus $0.05 per text. Determine, by checking the ratio cost/(number of texts) at two different text counts, whether cost is proportional to the number of texts.\n  4. A student sets up a map-scale proportion as $\\frac{\\text{map distance}_1}{\\text{real distance}_2} = \\frac{\\text{map distance}_2}{\\text{real distance}_1}$ (mismatched pairing). Explain what is wrong with this setup and how to fix it.\n- **P76 (Transfer Probe, mode = independence)**: \"A photographer is enlarging a photo while maintaining its exact original aspect ratio (width:height). The original photo is 4 inches wide by 6 inches tall. (a) Set up and solve a proportion to find the height of an enlarged version that is 10 inches wide, being careful to keep width and height consistently positioned in both ratios. (b) A separate photo-printing service instead charges a flat $2 setup fee plus $0.50 per square inch of print area — explain, using this lesson's ratio-constancy test, why the relationship between total cost and print area is NOT a true proportion, even though cost clearly increases as area increases.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.proportion",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.ratios` (a ratio $a:b$ or $\\frac{a}{b}$ as a comparison of two quantities by division).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.proportion/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.proportion",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.ratios` (the ratio concept this entire equation-of-two-ratios definition builds on directly).\n- **Unlocks**: `math.arith.direct-variation` (direct variation, $y=kx$, is exactly the genuinely-proportional relationship this concept's Example 3 contrasts against non-proportional cases), `math.arith.inverse-variation` (inverse variation, $xy=k$, is a related but structurally different proportional relationship building on the same ratio-constancy reasoning).\n- **Cross-link**: KG lists `math.func.linear-function` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.func.linear-function.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's genuine-proportionality test directly to that concept's classification of $y=mx$ (proportional, passes through the origin) versus $y=mx+b$ with $b\\neq0$ (linear but not proportional) — exactly the distinction Example 3 draws informally here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.proportion.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
