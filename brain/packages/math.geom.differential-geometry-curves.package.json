@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.differential-geometry-curves-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.differential-geometry-curves",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:daba98a66ae91b50c9bbc155820aeeb83f3f7900c7c309343659fba59b37457f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md": "sha256:8ab9bb79abcb86755a109e8bf993633ed8b7fd5fdc899ef0cdd3ec91a5d631ae"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.differential-geometry-curves",
+    "name": "Curves in Space",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.calc.parametric-curves",
+      "math.geom.vectors-3d"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.differential-geometry-curves-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.differential-geometry-curves (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md": "sha256:8ab9bb79abcb86755a109e8bf993633ed8b7fd5fdc899ef0cdd3ec91a5d631ae"
+      },
+      "contentHash": "sha256:46bb955d74426671ad8d6989f3c813317f75bc888904dbf7c4183635d45b03d8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-curves.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-curves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-curves.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-curves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-curves.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-curves\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-curves.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-curves\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.differential-geometry-curves/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Learning Objectives",
+      "content": "- LO1: Represent a space curve as a **vector-valued position function** $\\vec r(t) = (x(t),y(t),z(t))$ — directly fusing `math.calc.parametric-curves`' $(x(t),y(t))$ tracing with `math.geom.vectors-3d`'s $(a,b,c)$ component vectors into a single moving-point object — and compute the **velocity vector** $\\vec r\\,'(t)$ and the **unit tangent vector** $T(t)=\\vec r\\,'(t)/|\\vec r\\,'(t)|$, correctly distinguishing the two (the velocity vector's length is the curve's SPEED at $t$, which is generally NOT $1$; only $T(t)$ is normalized).\n- LO2: Compute **arc length** $L=\\int_a^b|\\vec r\\,'(t)|\\,dt$ over a parameter interval, and explain what it means to **reparametrize by arc length** $s$ — obtaining $\\vec r(s)$ with $|d\\vec r/ds|\\equiv1$ everywhere — as a genuine change of variables (solving $s(t)=\\int_a^{t}|\\vec r\\,'(u)|\\,du$ and inverting), not merely relabeling the existing parameter $t$ as $s$.\n- LO3 (orientation level — full computational depth deferred to the dedicated child concepts `math.geom.curvature` and `math.geom.frenet-serret`): recognize **curvature** $\\kappa = |dT/ds|$ as a LOCAL, pointwise measure of how sharply the curve turns (large $\\kappa$ = tight turn, $\\kappa=0$ = locally straight), and recognize the **Frenet-Serret frame** $(T,N,B)$ — unit tangent, principal normal, binormal — as the moving frame whose rate of twist out of the $(T,N)$-plane defines **torsion** $\\tau$, without yet deriving the full Frenet-Serret differential equations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "VELOCITY-VECTOR-ASSUMED-UNIT-SPEED",
+      "content": "| MC-1 | VELOCITY-VECTOR-ASSUMED-UNIT-SPEED | Believing the velocity vector $\\vec r\\,'(t)$ is automatically a unit vector, conflating it with the unit tangent $T(t)$, and skipping the normalization step | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "ARC-LENGTH-REPARAMETRIZATION-TREATED-AS-RELABELING",
+      "content": "| MC-2 | ARC-LENGTH-REPARAMETRIZATION-TREATED-AS-RELABELING | Believing reparametrizing a curve by arc length $s$ is just substituting the symbol $s$ for $t$, missing that it requires solving $s(t)=\\int|\\vec r\\,'(u)|\\,du$ and inverting it | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "CURVATURE-TREATED-AS-ONE-GLOBAL-NUMBER",
+      "content": "| MC-3 | CURVATURE-TREATED-AS-ONE-GLOBAL-NUMBER | Treating curvature as a single overall property describing an entire curve, rather than a pointwise (local) quantity that can vary from point to point along the same curve | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Velocity Is Not Automatically Unit Speed (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Velocity Is Not Automatically Unit Speed (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Arc-Length Reparametrization Is a Real Computation, Not a Relabeling (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Arc-Length Reparametrization Is a Real Computation, Not a Relabeling (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Curvature Is Local, Not a Single Global Number (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Curvature Is Local, Not a Single Global Number (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $\\vec r(t) = (t^2, t, 0)$, compute $\\vec r\\,'(t)$, the speed $|\\vec r\\,'(t)|$, and the unit tangent $T(t)$ at $t=1$.\n  2. Set up (but do not necessarily fully evaluate) the arc-length integral $L=\\int_0^1|\\vec r\\,'(t)|\\,dt$ for the curve in problem 1, and explain in words what reparametrizing this curve by arc length would require solving for.\n  3. Explain why a straight line has curvature $\\kappa=0$ at every point, referencing what happens to the unit tangent vector $T$ as you move along it.\n  4. A roller coaster track is modeled as a space curve. Explain, using the concept of curvature as a LOCAL quantity, why two different points on the same track can feel like \"gentle\" and \"sharp\" turns to a rider, even though it's a single continuous curve.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotic arm's fingertip traces a path $\\vec r(t)=(3\\cos t, 3\\sin t, 0.5t)$ (a helix of radius $3$) while welding along a spiral seam. (a) Compute the fingertip's velocity vector and speed at a general time $t$. (b) Explain what it would mean, physically, for the arm's CONTROL software to reparametrize this path by arc length instead of by $t$ — specifically, why a welding robot's software might prefer to command motion in terms of \\\"distance traveled\\\" rather than \\\"time elapsed.\\\" (c) Without computing an exact formula, explain qualitatively how you'd expect the curvature of this helix to compare to the curvature of a flat circle of the same radius $3$ (i.e., the same helix with its $z$-component removed) — is the helix's turn as sharp, sharper, or gentler, and why might the vertical rise affect this?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.parametric-curves` ($(x(t),y(t))$ parametrization, tracking direction of increasing $t$, recognizing that eliminating the parameter loses direction/range information) and `math.geom.vectors-3d` (component vectors $(a,b,c)$, magnitude $|(a,b,c)|=\\sqrt{a^2+b^2+c^2}$, dot and cross products, unit vectors $\\hat u = u/|u|$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-curves/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.differential-geometry-curves",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.parametric-curves` (2D parametrization, tracking direction of increasing $t$ — extended here to $(x(t),y(t),z(t))$), `math.geom.vectors-3d` (component vectors, 3D magnitude, dot/cross products — supplying every computational tool this concept applies to a moving point).\n- **Unlocks**: `math.geom.differential-geometry-surfaces` (extends curves' local-geometry apparatus — curvature, moving frames — to 2D surfaces embedded in $\\mathbb{R}^3$).\n- **Cross-link**: KG lists no cross-links for this concept.\n- **KG hierarchy note (not a `requires`/`unlocks`/`cross_links` relationship, but relevant to scope)**: the KG lists `math.geom.curvature` and `math.geom.frenet-serret` as this concept's `children` — neither is authored yet. This blueprint deliberately treats curvature, torsion, and the Frenet-Serret frame at ORIENTATION level (LO3), reserving the full computational derivations (the Frenet-Serret differential equations, the determinant/cross-product curvature formula) for those two dedicated child concepts when authored, rather than duplicating that depth here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-curves.md",
+        "startLine": 90,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

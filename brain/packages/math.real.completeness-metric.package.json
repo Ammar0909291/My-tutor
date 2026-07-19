@@ -1,0 +1,310 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.completeness-metric-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.completeness-metric",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0cfab313335fc4d92305595e42b276f269c9396c4591ac410fc3ce7c08b08005",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.completeness-metric.md": "sha256:0c9b1d6771879c23390db18a5961aa223e81008ff2191a246db07a9fafbb738e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.completeness-metric",
+    "name": "Completeness of Metric Spaces",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.real.metric-space",
+      "math.real.cauchy-sequence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.completeness-metric-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.completeness-metric (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.completeness-metric.md": "sha256:0c9b1d6771879c23390db18a5961aa223e81008ff2191a246db07a9fafbb738e"
+      },
+      "contentHash": "sha256:b4097e8fed73bb7bea9dd47c9532b42ea4903829a62c1f70feaffa22587bea40",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.completeness-metric.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.completeness-metric.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.completeness-metric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.completeness-metric\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.completeness-metric.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.completeness-metric.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.completeness-metric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.completeness-metric\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.completeness-metric.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.completeness-metric.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.completeness-metric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.completeness-metric\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.completeness-metric.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.completeness-metric.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.completeness-metric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.completeness-metric\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.completeness-metric/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.completeness-metric",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **metric space** $(X,d)$ as **complete** iff every Cauchy sequence in $X$ (using the metric $d$ directly, per `math.real.cauchy-sequence`'s $\\varepsilon$-$N$ criterion) converges to a limit that lies in $X$ — recognizing this as the general metric-space version of the completeness idea already encountered (via a different, normed-space-specific route) in `math.fnal.completeness`.\n- LO2: Verify completeness (or its failure) for a specific metric space via direct construction — in particular, confirm that $(C([a,b]), \\|\\cdot\\|_\\infty)$ (continuous functions with the SUP metric) **is** complete (a uniform limit of continuous functions is continuous), a genuinely different case from `math.fnal.completeness`'s own $L^1$-norm counterexample on the SAME underlying set of functions.\n- LO3: State, at orientation level (per this corpus's established precedent for large-scope research/expert-tier concepts), the **completion** construction (every metric space embeds densely into a complete space — e.g. $\\mathbb{Q}$ embeds densely into $\\mathbb{R}$) and the role of the **Baire Category Theorem** in complete metric spaces, without deriving either in full.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.completeness-metric",
+      "title": "SUP-METRIC-COMPLETENESS-ASSUMED-TO-FAIL-LIKE-L1-NORM",
+      "content": "| MC-1 | SUP-METRIC-COMPLETENESS-ASSUMED-TO-FAIL-LIKE-L1-NORM | Assuming C([a,b]) must fail to be complete under ANY metric, having seen it fail under the L¹ norm, missing that the sup metric specifically preserves completeness | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.completeness-metric",
+      "title": "COMPLETION-CONFUSED-WITH-COMPLETENESS-ITSELF",
+      "content": "| MC-2 | COMPLETION-CONFUSED-WITH-COMPLETENESS-ITSELF | Confusing \"completing\" a metric space (constructing a larger complete space containing it densely) with the space simply \"being complete\" (a property it either already has or lacks) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.completeness-metric",
+      "title": "BAIRE-CATEGORY-THEOREM-ASSUMED-TO-HOLD-WITHOUT-COMPLETENESS",
+      "content": "| MC-3 | BAIRE-CATEGORY-THEOREM-ASSUMED-TO-HOLD-WITHOUT-COMPLETENESS | Believing the Baire Category Theorem's conclusion holds for any metric space, missing that completeness is an essential hypothesis | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.completeness-metric",
+      "title": "The Completeness Criterion, Directly Reusing Already-Known Territory (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Completeness Criterion, Directly Reusing Already-Known Territory (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.completeness-metric",
+      "title": "C([a,b]) With the Sup Metric IS Complete: A New Complementary Result (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"C([a,b]) With the Sup Metric IS Complete: A New Complementary Result (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.completeness-metric",
+      "title": "Completion and the Baire Category Theorem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Completion and the Baire Category Theorem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.completeness-metric",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.completeness-metric",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the definition of completeness for a general metric space $(X,d)$, using the Cauchy criterion explicitly phrased with $d$.\n  2. Explain, referencing Example 2, why a Cauchy sequence in the sup metric on $C([a,b])$ produces a function that is guaranteed to be continuous, while a similar argument fails for the $L^1$ norm (as `math.fnal.completeness` already showed).\n  3. Explain what it means for $\\mathbb{Q}$ to be \"dense\" in $\\mathbb{R}$, and how this relates to $\\mathbb{R}$ being the completion of $\\mathbb{Q}$.\n  4. State (without proving) what the Baire Category Theorem guarantees, and identify which hypothesis (completeness) is essential for it to hold.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.fnal.completeness`)**: \"Recall from your `math.fnal.completeness` lesson that $(C([0,1]),\\|\\cdot\\|_1)$ (the $L^1$ norm) is NOT complete — a sequence of ramp functions converges in $L^1$ to a discontinuous step function outside the space. (a) Explain precisely why the SAME argument (constructing ramp functions approaching a step function) does NOT work to disprove completeness of $(C([0,1]),\\|\\cdot\\|_\\infty)$ (the sup metric) — what goes wrong with the ramp-function construction when measured in the sup metric instead of $L^1$? (b) Using this lesson's Example 2 argument, confirm directly that $(C([0,1]),\\|\\cdot\\|_\\infty)$ IS complete. (c) Explain what general lesson this contrast (same space, same functions, opposite completeness verdicts under two different metrics) teaches about the relationship between completeness and the SPECIFIC choice of metric or norm, connecting explicitly back to that lesson's own framing.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.completeness-metric",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.metric-space` (a metric $d(x,y)$ satisfying identity/symmetry/triangle-inequality, and standard examples including $C([a,b])$ with the sup metric) and `math.real.cauchy-sequence` (the $\\varepsilon$-$N$ Cauchy criterion, and the already-established fact that $\\mathbb{Q}$ is not complete — a Cauchy sequence of rationals converging to $\\sqrt2\\notin\\mathbb{Q}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.completeness-metric/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.completeness-metric",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.metric-space` (the metric $d$ and its axioms, and the sup-metric example on $C([a,b])$ this concept builds directly on), `math.real.cauchy-sequence` (the $\\varepsilon$-$N$ Cauchy criterion and the already-established $\\mathbb{Q}$-vs-$\\mathbb{R}$ completeness contrast this concept restates in general metric-space language).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists `math.fnal.completeness` as a cross-link — **verified authored** via `ls docs/curriculum/blueprints/math.fnal.completeness.md` — so P76_mode = **cross-link probe**, directly reusing that blueprint's own $C([0,1])$-with-$L^1$-norm incompleteness result as the transfer probe's anchor, contrasted against this concept's own sup-metric completeness result, per this corpus's established cross-link-probe convention. (Note: `math.real.cauchy-sequence` and `math.fnal.completeness` each independently flagged THIS concept as an unauthored future cross-link target when they were themselves authored; now that this concept exists, those two blueprints' own transfer probes could in principle be extended in a future revision, though per established corpus practice this blueprint does not retroactively edit already-completed work.)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.completeness-metric.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

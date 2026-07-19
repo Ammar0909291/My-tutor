@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.parallel-lines-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.parallel-lines",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e0e9f5f1eaa94c33a57000b1476e1c4d67e36910b4c60a2a0e6e288458c3c3e6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.parallel-lines.md": "sha256:d825018410902023c292e1776425e0a1ad5cdc89436a8d05e96d8c448160624b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.parallel-lines",
+    "name": "Parallel Lines",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.angle-pairs",
+      "math.geom.line"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.parallel-lines-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.parallel-lines (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.parallel-lines.md": "sha256:d825018410902023c292e1776425e0a1ad5cdc89436a8d05e96d8c448160624b"
+      },
+      "contentHash": "sha256:0fb5f6e7345f4365be6dc3a9779760efece354b588dd6a130ef41e2646327d66",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.parallel-lines.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallel-lines.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallel-lines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallel-lines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parallel-lines.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallel-lines.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallel-lines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallel-lines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parallel-lines.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallel-lines.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallel-lines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallel-lines\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parallel-lines.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallel-lines.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallel-lines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallel-lines\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.parallel-lines/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **parallel lines** as two lines (in the same plane) that never meet, and identify a **transversal** — a third line crossing both parallel lines, creating EIGHT angles total (four at each intersection).\n- LO2: State and apply the three transversal-angle relationships — **corresponding angles** (equal, same relative position at each intersection), **alternate interior angles** (equal, on opposite sides of the transversal, between the two parallel lines), and **co-interior angles** (supplementary, same side of the transversal, between the two parallel lines) — directly deriving these from `math.geom.angle-pairs`'s own vertical-angle and linear-pair relationships rather than treating them as three independent new facts to memorize.\n- LO3: Apply the **converse** of these relationships: if a transversal crossing two lines produces EQUAL corresponding angles (or equal alternate interior angles, or supplementary co-interior angles), the two lines MUST be parallel — directly refuting the misconception that these angle relationships are one-directional facts (usable only to deduce angle measures FROM known-parallel lines), missing that the SAME relationships can be used in reverse to PROVE two lines are parallel in the first place.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "ANGLE-RELATIONSHIPS-TREATED-AS-ONE-DIRECTIONAL",
+      "content": "| MC-1 | ANGLE-RELATIONSHIPS-TREATED-AS-ONE-DIRECTIONAL | Believing the corresponding/alternate-interior/co-interior angle relationships can only be used to deduce angles FROM known-parallel lines, missing that the converse allows concluding parallelism FROM observed angle relationships | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "THREE-ANGLE-RELATIONSHIPS-TREATED-AS-INDEPENDENT-FACTS",
+      "content": "| MC-2 | THREE-ANGLE-RELATIONSHIPS-TREATED-AS-INDEPENDENT-FACTS | Memorizing corresponding/alternate-interior/co-interior as three unrelated rules, rather than recognizing alternate-interior and co-interior are directly derivable from corresponding angles plus already-known vertical-angle and linear-pair facts | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "TRANSVERSAL-ANGLE-POSITIONS-MISIDENTIFIED",
+      "content": "| MC-3 | TRANSVERSAL-ANGLE-POSITIONS-MISIDENTIFIED | Confusing which specific pair of the eight angles counts as \"corresponding,\" \"alternate interior,\" or \"co-interior,\" especially when the transversal is drawn at an unusual angle | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Parallel Lines and the Transversal's Eight Angles (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Parallel Lines and the Transversal's Eight Angles (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Deriving the Three Relationships From Already-Known Facts (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deriving the Three Relationships From Already-Known Facts (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "The Converse: Angle Relationships Prove Parallelism (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Converse: Angle Relationships Prove Parallelism (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Two parallel lines are crossed by a transversal, and one angle measures $115°$. Find the measure of its corresponding angle, its alternate interior angle (if applicable to that position), and its co-interior partner (if applicable).\n  2. Explain, using vertical angles, why alternate interior angles must be equal, given that corresponding angles are equal.\n  3. Explain, using linear pairs, why co-interior angles must be supplementary, given that alternate interior angles are equal.\n  4. Two lines are crossed by a transversal, and the alternate interior angles are measured to be $82°$ and $82°$ (equal). Using the converse, what can you conclude about the two lines, even without being told anything about them in advance?\n- **P76 (Transfer Probe, mode = independence)**: \"A surveyor is checking whether two property boundary lines are truly parallel by measuring the angles a straight fence line (acting as a transversal) makes when it crosses both boundaries. (a) Explain what SPECIFIC angle measurements the surveyor should look for (and what relationship among them) to CONCLUDE the two boundary lines are parallel, using the converse relationships from this lesson. (b) If the surveyor measures the co-interior angles as $95°$ and $89°$ (not summing to $180°$), explain what this tells them about the two boundary lines. (c) Explain why the surveyor needs to check only ONE of the three relationships (corresponding, alternate interior, or co-interior) to draw a valid conclusion, rather than needing to verify all three.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.angle-pairs` (complementary/supplementary sums, vertical angles equal, linear pairs supplementary) and `math.geom.line` (a line as a one-dimensional figure determined by two points).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.parallel-lines/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.parallel-lines",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.angle-pairs` (the vertical-angle and linear-pair facts this concept's derivation chain directly builds on), `math.geom.line` (the line definition this concept's parallel/transversal structure is built from).\n- **Unlocks**: `math.geom.quadrilateral` (properties of parallelograms rely directly on parallel-line angle relationships), `math.geom.geometric-proof` (the converse relationships established here are a standard tool for formally proving lines parallel).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallel-lines.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
