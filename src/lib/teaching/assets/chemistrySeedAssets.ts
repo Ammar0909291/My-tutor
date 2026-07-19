@@ -2322,6 +2322,980 @@ const EMUL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.thermo.heat-capacities ─────────────────────────────────────────────
+const HEATC = 'chem.thermo.heat-capacities'
+const HEATC_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.heat-capacities'
+
+const HEATC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HEATC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Heat capacity asks: how much energy to raise 1 mole by 1 K? For gases, ' +
+      'the answer depends on the CONDITIONS. At constant volume (C_v), all heat ' +
+      'goes into raising internal energy (kinetic energy of motion). At constant ' +
+      'pressure (C_p), some heat also does expansion work (PΔV), so C_p is always ' +
+      'BIGGER than C_v — you need extra energy to both heat AND expand. For an ' +
+      'ideal gas: C_p − C_v = R (exactly, from ΔH = ΔU + RT for 1 mole). The ratio ' +
+      'γ = C_p/C_v tells you molecular complexity: monatomic gases (He, Ar) have ' +
+      'γ = 1.67 (only translational motion — 3 degrees of freedom). Diatomic gases ' +
+      '(N₂, O₂) have γ = 1.4 (translational + rotational — 5 degrees of freedom). ' +
+      'The EQUIPARTITION THEOREM says each degree of freedom contributes ½R to C_v — ' +
+      'more ways to store energy (rotation, vibration) means more heat needed for ' +
+      'the same temperature rise.',
+    targetedMisconceptions: [`${HEATC}:MC1`],
+    source: `${HEATC_SRC} — Cp, Cv, γ=Cp/Cv, equipartition theorem`,
+  },
+  {
+    conceptId: HEATC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "C_p and C_v are the same thing, just measured differently." ' +
+      'No — they represent genuinely different physical processes. C_v: heat a ' +
+      'RIGID sealed container — 100% of the heat raises the kinetic energy of ' +
+      'molecules (temperature). C_p: heat a gas in a piston that can expand — some ' +
+      'heat goes into PUSHING the piston (doing work against atmospheric pressure), ' +
+      'so LESS is left to raise temperature for the same heat input... meaning ' +
+      'you need MORE heat to achieve the same ΔT. That\'s why C_p > C_v. Second trap: ' +
+      '"Diatomic gases store energy the same way as monatomic." No — monatomic gases ' +
+      'can only translate (move through space); diatomic gases can ALSO rotate (tumble) ' +
+      'and vibrate (stretch/compress the bond), giving them more places to "hide" energy, ' +
+      'hence higher heat capacity.',
+    targetedMisconceptions: [`${HEATC}:MC1`, `${HEATC}:MC2`],
+    source: `${HEATC_SRC} — misconception: Cp=Cv; monatomic and diatomic store energy identically`,
+  },
+]
+
+const HEATC_PROBES: SeedProbe[] = [
+  {
+    conceptId: HEATC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is Cp always greater than Cv for an ideal gas?',
+    choices: [
+      { text: 'At constant pressure, some heat energy does expansion work (PΔV) instead of raising temperature, so more total heat is needed for the same ΔT', isCorrect: true },
+      { text: 'Cp and Cv measure different gases, so they can\'t be directly compared', isCorrect: false, misconceptionId: `${HEATC}:MC1` },
+      { text: 'Pressure itself requires extra energy to maintain', isCorrect: false, misconceptionId: `${HEATC}:MC3` },
+    ],
+    correctValue: 'Expansion work at constant pressure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HEATC}:MC3`],
+    source: `${HEATC_SRC} — distractor targets "pressure requires energy to maintain" misconception`,
+  },
+  {
+    conceptId: HEATC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does a diatomic gas like N₂ have a higher molar heat capacity than a monatomic gas like He?',
+    choices: [
+      { text: 'N₂ can store energy in rotational and vibrational motion in addition to translation, giving it more degrees of freedom to absorb heat', isCorrect: true },
+      { text: 'N₂ molecules are heavier, so they simply need more energy to move at all', isCorrect: false, misconceptionId: `${HEATC}:MC2` },
+    ],
+    correctValue: 'More degrees of freedom (rotation, vibration)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HEATC}:MC2`],
+    source: `${HEATC_SRC} — misconception: heat capacity differences are about mass, not degrees of freedom`,
+  },
+]
+
+// ─── chem.state.molar-mass-gas ───────────────────────────────────────────────
+const MMGAS = 'chem.state.molar-mass-gas'
+const MMGAS_SRC = 'docs/chemistry/kg/graph.json — chem.state.molar-mass-gas'
+
+const MMGAS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MMGAS,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'You can find a gas\'s molar mass WITHOUT knowing its formula — just measure ' +
+      'its density! Rearrange PV = nRT using n = mass/M: PM = (mass/V)RT = dRT, ' +
+      'so M = dRT/P. Measure density at known T and P, solve for M. This tells you ' +
+      'the MOLECULAR (actual) molar mass, which combined with the EMPIRICAL formula ' +
+      '(from % composition) tells you the TRUE molecular formula. Example: empirical ' +
+      'formula CH₂O (mass 30) but measured molar mass is 180 → multiply by 6 → ' +
+      'true formula C₆H₁₂O₆ (glucose). GRAHAM\'S LAW connects effusion rate to molar ' +
+      'mass: rate₁/rate₂ = √(M₂/M₁) — lighter gases effuse (escape through a tiny ' +
+      'hole) FASTER, because at a given temperature they move faster (same KE, ' +
+      'lower mass = higher velocity). This is literally how uranium isotopes were ' +
+      'separated (UF₆ gas, tiny mass difference, thousands of effusion stages).',
+    targetedMisconceptions: [`${MMGAS}:MC1`],
+    source: `${MMGAS_SRC} — molar mass via density, empirical vs molecular formula, Graham's law`,
+  },
+  {
+    conceptId: MMGAS,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Heavier gases effuse faster because they have more momentum." ' +
+      'BACKWARDS. At a given temperature, ALL gas molecules have the same AVERAGE ' +
+      'kinetic energy (½mv² = constant). If mass is bigger, velocity must be SMALLER ' +
+      'to keep KE the same. So LIGHTER gases move faster and effuse faster — that\'s ' +
+      'the entire point of Graham\'s Law: rate ∝ 1/√M. Helium (M=4) effuses much ' +
+      'faster than CO₂ (M=44) — that\'s why helium balloons deflate overnight while ' +
+      'CO₂-filled ones stay inflated longer; He atoms are small AND fast, easily ' +
+      'escaping through microscopic pores in the balloon material. Second trap: ' +
+      '"Empirical formula and molecular formula are always the same." Only when ' +
+      'the simplest whole-number ratio already matches the true formula (like H₂O). ' +
+      'Otherwise the molecular formula is a whole-number MULTIPLE of the empirical one.',
+    targetedMisconceptions: [`${MMGAS}:MC1`, `${MMGAS}:MC2`],
+    source: `${MMGAS_SRC} — misconception: heavier gases effuse faster; empirical = molecular formula always`,
+  },
+]
+
+const MMGAS_PROBES: SeedProbe[] = [
+  {
+    conceptId: MMGAS,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Hydrogen gas (M=2) effuses through a pinhole 4 times faster than gas X. What is the molar mass of gas X?',
+    choices: [
+      { text: '32 g/mol — Graham\'s law: rate_H2/rate_X = √(M_X/M_H2) → 4 = √(M_X/2) → M_X = 32', isCorrect: true },
+      { text: '8 g/mol — rate ratio 4 means mass ratio 4, so M_X = 2×4 = 8', isCorrect: false, misconceptionId: `${MMGAS}:MC3` },
+      { text: '0.5 g/mol — heavier gas means slower rate, so divide instead of multiply', isCorrect: false, misconceptionId: `${MMGAS}:MC1` },
+    ],
+    correctValue: '32 g/mol',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MMGAS}:MC3`],
+    source: `${MMGAS_SRC} — distractor targets linear (not square-root) rate-mass relationship`,
+  },
+  {
+    conceptId: MMGAS,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does a helium balloon deflate faster than an air-filled balloon of the same size?',
+    choices: [
+      { text: 'Helium atoms are lighter, so at the same temperature they move faster (same average KE, lower mass → higher velocity) and effuse through pores more readily', isCorrect: true },
+      { text: 'Helium atoms are heavier and push through the rubber pores more forcefully', isCorrect: false, misconceptionId: `${MMGAS}:MC1` },
+    ],
+    correctValue: 'Lighter atoms move faster at same T',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MMGAS}:MC1`],
+    source: `${MMGAS_SRC} — misconception: heavier particles effuse faster`,
+  },
+]
+
+// ─── chem.state.real-gases ───────────────────────────────────────────────────
+const REALG = 'chem.state.real-gases'
+const REALG_SRC = 'docs/chemistry/kg/graph.json — chem.state.real-gases'
+
+const REALG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REALG,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The ideal gas law assumes molecules have ZERO volume and ZERO attraction. ' +
+      'Real gases break both assumptions, especially at HIGH pressure (molecules ' +
+      'squeezed close, their own volume matters) and LOW temperature (molecules ' +
+      'move slowly enough for attractions to matter). Van der Waals fixed both: ' +
+      '(P + an²/V²)(V − nb) = nRT. The "a" term ADDS pressure back (real gas has ' +
+      'lower measured pressure than ideal because attractive forces pull molecules ' +
+      'inward, away from walls, reducing wall impacts). The "b" term SUBTRACTS ' +
+      'volume (real molecules occupy space, so less "free" volume is available for ' +
+      'motion than the container size suggests). COMPRESSIBILITY FACTOR Z = PV/nRT ' +
+      'measures deviation: Z=1 is ideal. Z<1 means attractive forces dominate ' +
+      '(gas is MORE compressible than ideal — pulled together). Z>1 means molecular ' +
+      'volume dominates (gas resists compression more than ideal).',
+    targetedMisconceptions: [`${REALG}:MC1`],
+    source: `${REALG_SRC} — deviations from ideal, Z factor, van der Waals, critical constants`,
+  },
+  {
+    conceptId: REALG,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "Real gases always deviate in the same direction from ideal ' +
+      'behavior." No — deviation depends on conditions. At MODERATE pressure, ' +
+      'attractive forces dominate → Z < 1 (gas compresses more easily than ideal). ' +
+      'At VERY HIGH pressure, molecular volume dominates → Z > 1 (gas resists ' +
+      'further compression because molecules are already touching). The curve for ' +
+      'real gases dips BELOW Z=1 first, then rises ABOVE it as pressure increases — ' +
+      'it\'s not a simple one-directional deviation. Second trap: "All gases deviate ' +
+      'equally from ideal behavior." No — gases with stronger intermolecular forces ' +
+      '(like NH₃, which hydrogen bonds) deviate MORE than gases with weak forces ' +
+      '(like He, which barely interacts). This is why He is the "most ideal" real gas ' +
+      'while NH₃ and CO₂ deviate significantly even at moderate pressures.',
+    targetedMisconceptions: [`${REALG}:MC1`, `${REALG}:MC2`],
+    source: `${REALG_SRC} — misconception: deviation is uniform/directionless; all gases deviate equally`,
+  },
+]
+
+const REALG_PROBES: SeedProbe[] = [
+  {
+    conceptId: REALG,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At very high pressure, a real gas shows Z > 1 (PV > nRT). This is because:',
+    choices: [
+      { text: 'Molecular volume becomes significant — the gas resists further compression more than the ideal law predicts', isCorrect: true },
+      { text: 'Intermolecular attractions become stronger at high pressure, pulling molecules together', isCorrect: false, misconceptionId: `${REALG}:MC1` },
+      { text: 'The gas begins to liquefy, which increases apparent volume', isCorrect: false },
+    ],
+    correctValue: 'Molecular volume dominates',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REALG}:MC1`],
+    source: `${REALG_SRC} — distractor targets "attraction explains Z>1" (attraction explains Z<1)`,
+  },
+  {
+    conceptId: REALG,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which gas would you expect to deviate MOST from ideal behavior at room temperature: He or NH₃? Why?',
+    choices: [
+      { text: 'NH₃ — it has strong hydrogen bonding (large intermolecular attraction), while He has almost no intermolecular forces, making it nearly ideal', isCorrect: true },
+      { text: 'He — smaller atoms are more affected by pressure and volume corrections', isCorrect: false, misconceptionId: `${REALG}:MC2` },
+    ],
+    correctValue: 'NH₃ (stronger intermolecular forces)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REALG}:MC2`],
+    source: `${REALG_SRC} — misconception: smaller atoms deviate more (deviation tracks intermolecular force strength)`,
+  },
+]
+
+// ─── chem.atomic.quantum-numbers ─────────────────────────────────────────────
+const QNUM = 'chem.atomic.quantum-numbers'
+const QNUM_SRC = 'docs/chemistry/kg/graph.json — chem.atomic.quantum-numbers'
+
+const QNUM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QNUM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Four numbers completely describe an electron\'s "address" in an atom — like a ' +
+      'postal address gets more specific at each level. PRINCIPAL (n = 1,2,3...): ' +
+      'the "floor" — determines overall energy and size, bigger n = further from ' +
+      'nucleus, higher energy. AZIMUTHAL (l = 0 to n−1): the "room shape" — ' +
+      'determines the ORBITAL TYPE (l=0 is s, l=1 is p, l=2 is d, l=3 is f) and ' +
+      'sub-shell energy. MAGNETIC (m_l = −l to +l): the "orientation" — which ' +
+      'specific orbital within a sub-shell (p has 3 orientations: px, py, pz). ' +
+      'SPIN (m_s = +½ or −½): each orbital holds exactly 2 electrons, spinning ' +
+      'opposite ways (Pauli exclusion). So for n=2, l can be 0 or 1 (2s or 2p sub-shells); ' +
+      'for l=1, m_l can be −1, 0, +1 (three p orbitals); each orbital holds 2 electrons ' +
+      'of opposite spin. This four-number system uniquely identifies every electron ' +
+      'in every atom — no two electrons in the same atom share all four values.',
+    targetedMisconceptions: [`${QNUM}:MC1`],
+    source: `${QNUM_SRC} — n, l, ml, ms quantum numbers, physical significance`,
+  },
+  {
+    conceptId: QNUM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "l can range from 0 to n." WRONG — l ranges from 0 to n−1. For n=1, ' +
+      'only l=0 is allowed (1s only — no 1p exists!). For n=2, l can be 0 or 1 ' +
+      '(2s and 2p exist, but NOT 2d). This is why the periodic table has the shape ' +
+      'it does — d orbitals don\'t appear until n=3 (3d), f orbitals not until n=4 (4f). ' +
+      'Second trap: "m_l values run from 0 to l." Wrong — m_l runs from −l to +l, ' +
+      'INCLUDING zero, giving (2l+1) possible values. For l=1 (p), that\'s −1, 0, +1 ' +
+      '= 3 orbitals. For l=2 (d), that\'s −2,−1,0,+1,+2 = 5 orbitals. Memorize the ' +
+      'PATTERN, not a number: number of orbitals in a sub-shell = 2l+1.',
+    targetedMisconceptions: [`${QNUM}:MC1`, `${QNUM}:MC2`],
+    source: `${QNUM_SRC} — misconception: l ranges 0 to n; ml ranges 0 to l`,
+  },
+]
+
+const QNUM_PROBES: SeedProbe[] = [
+  {
+    conceptId: QNUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which sub-shell does NOT exist: 1p, 2p, 3d, or 4f?',
+    choices: [
+      { text: '1p — for n=1, l can only be 0 (l goes from 0 to n−1), so only 1s exists', isCorrect: true },
+      { text: '3d — d orbitals never exist for any n value below 4', isCorrect: false, misconceptionId: `${QNUM}:MC3` },
+      { text: '4f — f orbitals never exist for any n below 5', isCorrect: false },
+    ],
+    correctValue: '1p does not exist',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QNUM}:MC3`],
+    source: `${QNUM_SRC} — distractor targets wrong minimum-n rules for d and f sub-shells`,
+  },
+  {
+    conceptId: QNUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How many orbitals are in the 3d sub-shell (l=2)?',
+    choices: [
+      { text: '5 orbitals — number of orbitals = 2l+1 = 2(2)+1 = 5, with ml values −2,−1,0,+1,+2', isCorrect: true },
+      { text: '2 orbitals — ml only takes values 0 and l', isCorrect: false, misconceptionId: `${QNUM}:MC2` },
+    ],
+    correctValue: '5 orbitals',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${QNUM}:MC2`],
+    source: `${QNUM_SRC} — misconception: ml range starts at 0, not −l`,
+  },
+]
+
+// ─── chem.atomic.orbitals ────────────────────────────────────────────────────
+const ORBIT = 'chem.atomic.orbitals'
+const ORBIT_SRC = 'docs/chemistry/kg/graph.json — chem.atomic.orbitals'
+
+const ORBIT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An orbital is a PROBABILITY CLOUD — the 3D region where you\'re 90-95% likely ' +
+      'to find an electron. Not a path, not a fixed location — a fuzzy region shaped ' +
+      'by quantum mechanics. S ORBITALS are spherical — 1s is a solid ball, 2s is a ' +
+      'ball with a spherical shell of near-zero probability inside it (a RADIAL NODE). ' +
+      'P ORBITALS are dumbbell-shaped, with TWO lobes and a node (zero probability ' +
+      'plane) through the nucleus — this is an ANGULAR NODE. Three p orbitals (px, py, pz) ' +
+      'point along the three axes. D ORBITALS are more complex — four have a cloverleaf ' +
+      'shape (4 lobes), one (dz²) looks like a p orbital with a donut around the middle. ' +
+      'Total nodes = n−1 (radial + angular combined). More nodes = higher energy within ' +
+      'the same n. Orbital SHAPE (angular part) determines how atoms bond directionally — ' +
+      'that\'s the foundation of molecular geometry.',
+    targetedMisconceptions: [`${ORBIT}:MC1`],
+    source: `${ORBIT_SRC} — s/p/d/f orbital shapes, radial/angular nodes, energy diagrams`,
+  },
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The most persistent misconception in chemistry: "An orbital is the PATH an ' +
+      'electron travels, like a planet\'s orbit." This is the Bohr picture, and it\'s ' +
+      'WRONG. Electrons don\'t travel in defined paths — Heisenberg\'s uncertainty ' +
+      'principle says you can\'t know both position and momentum precisely. An orbital ' +
+      'is a STATISTICAL description — a 3D probability distribution built from millions ' +
+      'of hypothetical position measurements. The electron doesn\'t "orbit" through the ' +
+      'dumbbell shape of a p orbital — it has some probability of BEING FOUND anywhere ' +
+      'within that shape at any instant, with zero probability exactly at the node. ' +
+      'Second trap: "p orbitals have a hole in the middle where the electron never goes." ' +
+      'More precisely: the node is a plane (2D) of zero probability, but the two LOBES ' +
+      'on either side are part of the SAME orbital, same electron, not "two electrons ' +
+      'in two lobes."',
+    targetedMisconceptions: [`${ORBIT}:MC1`, `${ORBIT}:MC2`],
+    source: `${ORBIT_SRC} — misconception: orbitals are orbital paths; p-orbital lobes are separate electrons`,
+  },
+]
+
+const ORBIT_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What does a "node" in an atomic orbital represent?',
+    choices: [
+      { text: 'A region (point, plane, or surface) where the probability of finding the electron is exactly zero', isCorrect: true },
+      { text: 'The exact path the electron travels around the nucleus', isCorrect: false, misconceptionId: `${ORBIT}:MC1` },
+      { text: 'A boundary where the electron changes from one orbital to another', isCorrect: false },
+    ],
+    correctValue: 'Zero probability region',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORBIT}:MC1`],
+    source: `${ORBIT_SRC} — distractor targets orbit-path misconception applied to nodes`,
+  },
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 2p orbital has two lobes separated by a nodal plane. A student says "one electron lives in each lobe." Is this correct?',
+    choices: [
+      { text: 'No — a single 2p orbital describes ONE electron\'s probability distribution across BOTH lobes; the electron has zero probability exactly at the node but nonzero probability in either lobe', isCorrect: true },
+      { text: 'Yes — each lobe represents a separate electron location, like two rooms', isCorrect: false, misconceptionId: `${ORBIT}:MC2` },
+    ],
+    correctValue: 'No — one orbital, one electron\'s full distribution',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORBIT}:MC2`],
+    source: `${ORBIT_SRC} — misconception: p-orbital lobes house separate electrons`,
+  },
+]
+
+// ─── chem.kinet.photochemistry ───────────────────────────────────────────────
+const PHOTOC = 'chem.kinet.photochemistry'
+const PHOTOC_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.photochemistry'
+
+const PHOTOC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PHOTOC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Some reactions need LIGHT, not heat, to start. A PRIMARY photochemical process ' +
+      'is direct: a photon is absorbed and immediately breaks a bond or excites a ' +
+      'molecule (Cl₂ + hν → 2Cl•). SECONDARY processes follow — the excited species ' +
+      'reacts further without needing more light (Cl• + H₂ → HCl + H•, a chain reaction). ' +
+      'QUANTUM YIELD (Φ) = molecules reacted / photons absorbed. Φ=1 means perfect ' +
+      'efficiency. Chain reactions can give Φ >> 1 (one photon triggers thousands of ' +
+      'reactions via propagation) — the H₂+Cl₂ reaction has Φ up to 10⁶! Or Φ < 1 if ' +
+      'excited molecules lose energy without reacting (fluorescence, collisions). ' +
+      'BEER-LAMBERT LAW connects light absorption to concentration: A = εcl (absorbance ' +
+      '= molar absorptivity × concentration × path length) — this is how spectrophotometers ' +
+      'measure concentration. Photochemical ozone formation (NO₂ + hν → NO + O) is the ' +
+      'seed reaction for smog.',
+    targetedMisconceptions: [`${PHOTOC}:MC1`],
+    source: `${PHOTOC_SRC} — primary/secondary processes, quantum yield, Beer-Lambert`,
+  },
+  {
+    conceptId: PHOTOC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Quantum yield can never exceed 1 — you can\'t get more product molecules ' +
+      'than photons absorbed." FALSE for CHAIN REACTIONS. One photon creates ONE radical ' +
+      '(primary step), but that radical can propagate a chain reacting thousands of times ' +
+      'before termination — each propagation step consumes no additional photons. So Φ ' +
+      'measures TOTAL molecules reacted per photon ABSORBED (not "per photon needed"), ' +
+      'and a self-sustaining chain can make this number huge. Second trap: "All light ' +
+      'that hits a molecule gets absorbed." No — only photons matching the molecule\'s ' +
+      'exact energy gap (electronic transition energy) get absorbed; the rest pass through ' +
+      'or scatter. This is why colored substances absorb specific wavelengths (giving ' +
+      'them their complementary color) while transmitting others.',
+    targetedMisconceptions: [`${PHOTOC}:MC1`],
+    source: `${PHOTOC_SRC} — misconception: quantum yield ≤ 1 always (false for chain reactions)`,
+  },
+]
+
+const PHOTOC_PROBES: SeedProbe[] = [
+  {
+    conceptId: PHOTOC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The H₂ + Cl₂ photochemical reaction has a quantum yield of about 10⁶. This means:',
+    choices: [
+      { text: 'Each absorbed photon triggers a chain reaction producing about a million HCl molecules before the chain terminates', isCorrect: true },
+      { text: 'The reaction is impossible since quantum yield can never exceed 1', isCorrect: false, misconceptionId: `${PHOTOC}:MC1` },
+      { text: 'A million photons are needed to make just one HCl molecule', isCorrect: false, misconceptionId: `${PHOTOC}:MC2` },
+    ],
+    correctValue: 'One photon triggers a million-step chain',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHOTOC}:MC1`, `${PHOTOC}:MC2`],
+    source: `${PHOTOC_SRC} — distractor targets "Φ≤1 always" and inverted quantum yield definition`,
+  },
+  {
+    conceptId: PHOTOC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A colored solution absorbs green light strongly but transmits red and blue light. Why doesn\'t it absorb ALL wavelengths equally?',
+    choices: [
+      { text: 'Absorption occurs only when photon energy exactly matches an electronic transition energy gap in the molecule — other wavelengths pass through unabsorbed', isCorrect: true },
+      { text: 'The solution is too dilute to absorb every wavelength — a concentrated solution would absorb all colors', isCorrect: false, misconceptionId: `${PHOTOC}:MC3` },
+    ],
+    correctValue: 'Only matching-energy photons are absorbed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOTOC}:MC3`],
+    source: `${PHOTOC_SRC} — misconception: selective absorption is a concentration effect, not an energy-matching effect`,
+  },
+]
+
+// ─── chem.kinet.rate-law ─────────────────────────────────────────────────────
+const RATEL = 'chem.kinet.rate-law'
+const RATEL_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.rate-law'
+
+const RATEL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RATEL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The rate law expresses HOW rate depends on concentration: rate = k[A]^m[B]^n. ' +
+      'The exponents m, n are the ORDER with respect to each reactant — found ONLY ' +
+      'by experiment, never by looking at the balanced equation. Overall order = m+n. ' +
+      'The INITIAL RATE METHOD finds these: run several trials, changing ONE ' +
+      'concentration at a time while holding others fixed, and observe how the rate ' +
+      'changes. If doubling [A] doubles the rate → order 1 in A. If doubling [A] ' +
+      'quadruples the rate → order 2 in A. If doubling [A] does nothing → order 0 in A. ' +
+      'The rate constant k has UNITS that depend on overall order (this is a giveaway ' +
+      'clue): zero order → mol/(L·s); first order → 1/s; second order → L/(mol·s). ' +
+      'Once you know the rate law, you integrate it to predict concentration over time — ' +
+      'that\'s where half-life formulas come from.',
+    targetedMisconceptions: [`${RATEL}:MC1`],
+    source: `${RATEL_SRC} — rate law, order, rate constant units, initial-rate method`,
+  },
+  {
+    conceptId: RATEL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Recurring trap: "The rate law exponents equal the stoichiometric coefficients." ' +
+      'FALSE in general — only true for ELEMENTARY reactions (single-step mechanisms). ' +
+      'Most reactions you balance are OVERALL equations representing multiple steps, ' +
+      'and the rate law reflects only the SLOWEST (rate-determining) step\'s stoichiometry. ' +
+      'For 2NO + O₂ → 2NO₂, the coefficients are 2 and 1, but the EXPERIMENTAL rate law ' +
+      'is rate = k[NO]²[O₂] — coincidentally matching here, but you can\'t assume this ' +
+      'without experimental data. For H₂ + Br₂ → 2HBr, the actual rate law is ' +
+      'rate = k[H₂][Br₂]^(1/2) / (1 + k\'[HBr]/[Br₂]) — nothing like the simple ' +
+      'coefficients (1,1) would suggest! Always determine rate laws EXPERIMENTALLY.',
+    targetedMisconceptions: [`${RATEL}:MC1`],
+    source: `${RATEL_SRC} — misconception: rate law exponents = stoichiometric coefficients`,
+  },
+]
+
+const RATEL_PROBES: SeedProbe[] = [
+  {
+    conceptId: RATEL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In an experiment, doubling [A] while keeping [B] constant quadruples the rate. Doubling [B] while keeping [A] constant doubles the rate. The rate law is:',
+    choices: [
+      { text: 'rate = k[A]²[B]¹ — quadrupling from doubling means order 2 in A; doubling from doubling means order 1 in B', isCorrect: true },
+      { text: 'rate = k[A][B] — matches typical stoichiometric coefficients', isCorrect: false, misconceptionId: `${RATEL}:MC1` },
+      { text: 'rate = k[A]⁴[B]² — directly use the multiplication factors as exponents', isCorrect: false, misconceptionId: `${RATEL}:MC2` },
+    ],
+    correctValue: 'rate = k[A]²[B]',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RATEL}:MC1`, `${RATEL}:MC2`],
+    source: `${RATEL_SRC} — distractor targets "exponent = coefficient" and "exponent = rate multiplier"`,
+  },
+  {
+    conceptId: RATEL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For 2NO₂ + F₂ → 2NO₂F, can you determine the rate law directly from the balanced equation?',
+    choices: [
+      { text: 'No — the rate law must be determined experimentally, since this equation likely represents multiple elementary steps and the rate law reflects only the slowest step', isCorrect: true },
+      { text: 'Yes — rate = k[NO₂]²[F₂] follows directly from the coefficients', isCorrect: false, misconceptionId: `${RATEL}:MC1` },
+    ],
+    correctValue: 'No — requires experimental determination',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RATEL}:MC1`],
+    source: `${RATEL_SRC} — misconception: overall balanced equation gives rate law directly`,
+  },
+]
+
+// ─── chem.kinet.arrhenius ────────────────────────────────────────────────────
+const ARRH = 'chem.kinet.arrhenius'
+const ARRH_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.arrhenius'
+
+const ARRH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Why does heating a reaction speed it up so dramatically — often DOUBLING the ' +
+      'rate for just a 10°C rise? The Arrhenius equation: k = Ae^(−Ea/RT). Ea is the ' +
+      'ACTIVATION ENERGY — the energy barrier reactants must climb before they can ' +
+      'become products (even for exothermic reactions!). A is the FREQUENCY FACTOR — ' +
+      'related to how often molecules collide with the correct orientation. The ' +
+      'exponential term e^(−Ea/RT) is the fraction of molecules with enough energy to ' +
+      'react — and this fraction is EXTREMELY sensitive to temperature because it\'s ' +
+      'exponential, not linear. COLLISION THEORY explains why: for a reaction to occur, ' +
+      'molecules must (1) collide, (2) with enough energy (≥ Ea), (3) with the correct ' +
+      'orientation. Raising T doesn\'t just increase collision frequency slightly — it ' +
+      'dramatically increases the FRACTION of collisions with energy ≥ Ea (the tail of ' +
+      'the Maxwell-Boltzmann distribution). Plotting ln k vs 1/T gives a straight line ' +
+      'with slope −Ea/R — the standard way to find activation energy experimentally.',
+    targetedMisconceptions: [`${ARRH}:MC1`],
+    source: `${ARRH_SRC} — Arrhenius equation, Ea, frequency factor, collision theory`,
+  },
+  {
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Major misconception: "Exothermic reactions have zero activation energy since ' +
+      'they release energy overall." FALSE. Even highly exothermic reactions (like ' +
+      'combustion) need an initial energy input (a spark, a match) to start — that\'s ' +
+      'the activation energy. Paper doesn\'t spontaneously combust at room temperature ' +
+      'despite the reaction being hugely exothermic, BECAUSE Ea is high — you need to ' +
+      'supply that energy first (with a match) before the exothermic release takes over. ' +
+      'Ea is about the PATHWAY (the energy hill reactants must climb), completely ' +
+      'independent of the overall ΔH (start vs. end energy). Second trap: "A catalyst ' +
+      'changes ΔH of the reaction." No — catalysts only LOWER Ea by providing an alternative ' +
+      'pathway; ΔH (determined by reactant/product energies, a state function) is unchanged. ' +
+      'The catalyst makes the SAME reaction faster, not a different, more favorable one.',
+    targetedMisconceptions: [`${ARRH}:MC1`, `${ARRH}:MC2`],
+    source: `${ARRH_SRC} — misconception: exothermic = zero Ea; catalysts change ΔH`,
+  },
+]
+
+const ARRH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Combustion of paper is highly exothermic (releases lots of energy), yet paper doesn\'t spontaneously catch fire at room temperature. This is because:',
+    choices: [
+      { text: 'The reaction has a significant activation energy barrier — a spark or flame is needed to supply enough energy for molecules to react, even though the overall process releases energy', isCorrect: true },
+      { text: 'Exothermic reactions require the addition of a catalyst before they can begin', isCorrect: false, misconceptionId: `${ARRH}:MC2` },
+      { text: 'The reaction is actually endothermic at room temperature and only becomes exothermic when heated', isCorrect: false },
+    ],
+    correctValue: 'Activation energy barrier exists independent of ΔH',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARRH}:MC1`],
+    source: `${ARRH_SRC} — distractor targets "exothermic reactions have no activation barrier"`,
+  },
+  {
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A catalyst speeds up a reaction by lowering Ea from 100 kJ/mol to 60 kJ/mol. What happens to ΔH of the reaction?',
+    choices: [
+      { text: 'ΔH is unchanged — the catalyst only provides an alternative pathway with lower Ea; ΔH depends only on the energy of reactants and products (a state function)', isCorrect: true },
+      { text: 'ΔH decreases by 40 kJ/mol, matching the drop in Ea', isCorrect: false, misconceptionId: `${ARRH}:MC2` },
+    ],
+    correctValue: 'ΔH unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARRH}:MC2`],
+    source: `${ARRH_SRC} — misconception: catalysts change reaction thermodynamics (ΔH)`,
+  },
+]
+
+// ─── chem.sol.solubility ─────────────────────────────────────────────────────
+const SOLUB = 'chem.sol.solubility'
+const SOLUB_SRC = 'docs/chemistry/kg/graph.json — chem.sol.solubility'
+
+const SOLUB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SOLUB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Solubility depends on temperature and pressure, but DIFFERENTLY for solids vs. ' +
+      'gases. Most SOLIDS become more soluble as temperature rises (dissolution is ' +
+      'often endothermic — extra thermal energy helps break the solid\'s lattice). ' +
+      'GASES do the opposite — solubility DECREASES with rising temperature (that\'s ' +
+      'why a warm soda goes flat faster, and why warm water holds less dissolved ' +
+      'oxygen, stressing fish in summer). HENRY\'S LAW governs gas solubility: ' +
+      'P_gas = K_H × x_gas (partial pressure is proportional to mole fraction dissolved). ' +
+      'Higher pressure pushes MORE gas into solution — that\'s why soda is bottled ' +
+      'under pressure (CO₂ stays dissolved) and why deep-sea divers must decompress ' +
+      'slowly (nitrogen dissolved in blood at high pressure would form dangerous ' +
+      'bubbles if pressure drops too fast — "the bends"). Henry\'s Law breaks down for ' +
+      'gases that react with the solvent (like NH₃ or HCl in water — these don\'t follow ' +
+      'simple physical dissolution).',
+    targetedMisconceptions: [`${SOLUB}:MC1`],
+    source: `${SOLUB_SRC} — solubility factors, Henry's law, carbonation, diving applications`,
+  },
+  {
+    conceptId: SOLUB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Big trap: "All substances become more soluble when heated, just like sugar in ' +
+      'water." This is true for MOST solids but the OPPOSITE for gases. Heating soda ' +
+      'releases dissolved CO₂ (goes flat); heating a river in summer reduces dissolved ' +
+      'O₂ (stressing fish, worsened by warmer water also needing MORE oxygen for faster ' +
+      'fish metabolism — a double stress). The reason: gas dissolution is typically ' +
+      'EXOTHERMIC (gas molecules losing kinetic energy as they enter solution), so by ' +
+      'Le Chatelier\'s principle, heating (adding energy) shifts equilibrium AWAY from ' +
+      'the dissolved state. Second trap: "Henry\'s Law says solubility is proportional ' +
+      'to pressure for ALL gases." Only for gases that DON\'T react with the solvent. ' +
+      'CO₂ in water partially reacts (forms carbonic acid), so its true behavior deviates ' +
+      'from ideal Henry\'s Law at high concentrations.',
+    targetedMisconceptions: [`${SOLUB}:MC1`],
+    source: `${SOLUB_SRC} — misconception: gases behave like solids (more soluble when heated)`,
+  },
+]
+
+const SOLUB_PROBES: SeedProbe[] = [
+  {
+    conceptId: SOLUB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does a bottle of soda go flat faster when left in a warm room compared to a cold refrigerator?',
+    choices: [
+      { text: 'Gas solubility decreases as temperature increases — warming shifts equilibrium away from dissolved CO₂, releasing it as bubbles', isCorrect: true },
+      { text: 'Heat breaks the chemical bonds holding CO₂ in the liquid, similar to how heat dissolves sugar faster', isCorrect: false, misconceptionId: `${SOLUB}:MC1` },
+    ],
+    correctValue: 'Gas solubility decreases with temperature',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SOLUB}:MC1`],
+    source: `${SOLUB_SRC} — distractor targets applying solid-solubility intuition to gases`,
+  },
+  {
+    conceptId: SOLUB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A deep-sea diver must ascend slowly to avoid "the bends." Explain using Henry\'s Law.',
+    choices: [
+      { text: 'At depth, high pressure dissolves more N₂ in blood (Henry\'s Law). Rapid ascent drops pressure suddenly, and dissolved N₂ can\'t escape gradually — it forms bubbles in blood/tissue, which is dangerous.', isCorrect: true },
+      { text: 'Deep water is colder, which makes more gas dissolve; ascending warms the diver and gas escapes safely regardless of speed', isCorrect: false, misconceptionId: `${SOLUB}:MC2` },
+    ],
+    correctValue: 'Pressure drop releases dissolved N₂ as bubbles',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SOLUB}:MC2`],
+    source: `${SOLUB_SRC} — misconception: attributing the bends to temperature rather than pressure change`,
+  },
+]
+
+// ─── chem.thermo.gibbs ───────────────────────────────────────────────────────
+const GIBBS = 'chem.thermo.gibbs'
+const GIBBS_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.gibbs'
+
+const GIBBS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GIBBS,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Neither ΔH nor ΔS alone predicts spontaneity — you need BOTH, combined as ' +
+      'Gibbs Free Energy: ΔG = ΔH − TΔS. ΔG < 0 → spontaneous (products favored). ' +
+      'ΔG > 0 → non-spontaneous (as written; reverse is spontaneous). ΔG = 0 → ' +
+      'equilibrium. This single equation resolves the classic puzzle: why do SOME ' +
+      'endothermic reactions happen spontaneously (like ice melting above 0°C, or ' +
+      'dissolving NH₄NO₃ which cools the solution)? Because even though ΔH > 0 ' +
+      '(unfavorable), if ΔS > 0 enough (favorable) and T is large enough, TΔS can ' +
+      'OUTWEIGH ΔH, making ΔG negative overall. Four combinations: ΔH<0,ΔS>0 → always ' +
+      'spontaneous. ΔH>0,ΔS<0 → never spontaneous. ΔH<0,ΔS<0 → spontaneous only at LOW T. ' +
+      'ΔH>0,ΔS>0 → spontaneous only at HIGH T. The link to equilibrium: ΔG° = −RT ln K — ' +
+      'a very negative ΔG° means K is huge (reaction goes essentially to completion).',
+    targetedMisconceptions: [`${GIBBS}:MC1`],
+    source: `${GIBBS_SRC} — Gibbs free energy, spontaneity criteria, ΔG°=−RTlnK`,
+  },
+  {
+    conceptId: GIBBS,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The classic trap: "Exothermic reactions (ΔH<0) are always spontaneous." False! ' +
+      'If ΔS is sufficiently negative and T is high, TΔS can outweigh a negative ΔH, ' +
+      'making ΔG positive (non-spontaneous). Example: 2H₂(g) + O₂(g) → 2H₂O(l) is ' +
+      'strongly exothermic (ΔH very negative) AND has ΔS very negative (3 mol gas → ' +
+      '2 mol liquid, big entropy DECREASE) — at very high temperature, this reaction ' +
+      'could theoretically become non-spontaneous. Second trap: "Spontaneous means fast." ' +
+      'NO — spontaneity (ΔG<0) tells you the reaction is THERMODYNAMICALLY FAVORABLE, ' +
+      'not that it happens quickly. Diamond → graphite is spontaneous (ΔG<0) but takes ' +
+      'geological timescales because of a huge activation energy barrier (a KINETIC ' +
+      'limitation, unrelated to thermodynamic favorability). Thermodynamics answers ' +
+      '"can it happen?"; kinetics answers "how fast?"',
+    targetedMisconceptions: [`${GIBBS}:MC1`, `${GIBBS}:MC2`],
+    source: `${GIBBS_SRC} — misconception: exothermic = always spontaneous; spontaneous = fast`,
+  },
+]
+
+const GIBBS_PROBES: SeedProbe[] = [
+  {
+    conceptId: GIBBS,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A reaction has ΔH = +40 kJ/mol and ΔS = +100 J/(mol·K). At what approximate temperature does it become spontaneous?',
+    choices: [
+      { text: 'Above 400 K — ΔG = ΔH − TΔS = 0 when T = ΔH/ΔS = 40000/100 = 400 K; above this, TΔS > ΔH making ΔG negative', isCorrect: true },
+      { text: 'It is never spontaneous since ΔH is positive', isCorrect: false, misconceptionId: `${GIBBS}:MC1` },
+      { text: 'It is always spontaneous since ΔS is positive', isCorrect: false, misconceptionId: `${GIBBS}:MC3` },
+    ],
+    correctValue: 'Above ~400 K',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GIBBS}:MC1`, `${GIBBS}:MC3`],
+    source: `${GIBBS_SRC} — distractor targets "ΔH sign alone determines spontaneity" from both directions`,
+  },
+  {
+    conceptId: GIBBS,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Diamond converting to graphite has ΔG < 0 (spontaneous) at room temperature, yet diamonds don\'t turn into graphite in your lifetime. Explain.',
+    choices: [
+      { text: 'Spontaneity (ΔG<0) only tells you the reaction is thermodynamically favorable, not how fast it happens — this reaction has an enormous activation energy barrier making it kinetically negligible', isCorrect: true },
+      { text: 'The calculation must be wrong — if it were truly spontaneous, it would happen quickly', isCorrect: false, misconceptionId: `${GIBBS}:MC2` },
+    ],
+    correctValue: 'Spontaneous ≠ fast (kinetics vs thermodynamics)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GIBBS}:MC2`],
+    source: `${GIBBS_SRC} — misconception: conflating thermodynamic spontaneity with reaction rate`,
+  },
+]
+
+// ─── chem.thermo.third-law ───────────────────────────────────────────────────
+const THIRDL = 'chem.thermo.third-law'
+const THIRDL_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.third-law'
+
+const THIRDL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THIRDL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Unlike enthalpy (which has no absolute zero — we only measure ΔH), entropy DOES ' +
+      'have a true zero point. The Third Law: a perfect crystal at 0 K has EXACTLY ZERO ' +
+      'entropy (S=0). Why? At 0 K, all thermal motion stops, and a perfect crystal has ' +
+      'only ONE possible arrangement (W=1 microstate) — so S = k_B ln(1) = 0. This gives ' +
+      'us ABSOLUTE entropies: unlike ΔH (which needs a reference), we can calculate S° ' +
+      'for any substance by measuring heat capacity from 0 K up to the temperature of ' +
+      'interest and integrating: S°(T) = ∫(C_p/T)dT. This is why entropy tables list ' +
+      'ABSOLUTE values (S° for O₂ gas = 205 J/mol·K) while enthalpy tables list ΔH°_f ' +
+      '(relative to elements). Some substances have RESIDUAL entropy even at 0 K — ' +
+      'CO has S(0)>0 because the crystal can freeze in a random C-O/O-C orientation ' +
+      'mixture, so it\'s NOT a perfect single arrangement.',
+    targetedMisconceptions: [`${THIRDL}:MC1`],
+    source: `${THIRDL_SRC} — third law, absolute entropy, residual entropy, Kirchhoff's equation`,
+  },
+  {
+    conceptId: THIRDL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Misconception: "Entropy tables and enthalpy tables work the same way — both use ' +
+      'arbitrary reference points." FALSE. Enthalpy has no absolute zero — we always ' +
+      'measure ΔH RELATIVE to elements in standard states (ΔH°_f of an element = 0 by ' +
+      'convention, an arbitrary choice). But entropy has a TRUE physical zero (perfect ' +
+      'crystal at 0 K), so entropy tables list ABSOLUTE values, not relative ones. This ' +
+      'is why you\'ll see S°(O₂) = 205 J/(mol·K) as a standalone number, while ΔH°_f(O₂) = 0 ' +
+      'by definition (it\'s already an element). Second trap: "All substances have zero ' +
+      'entropy at 0 K." Only PERFECT crystals do. Glasses (amorphous solids, frozen in a ' +
+      'disordered structure) and molecules with orientational disorder (like CO, N₂O) ' +
+      'retain RESIDUAL entropy even at absolute zero because they never reach a single ' +
+      'perfectly ordered microstate.',
+    targetedMisconceptions: [`${THIRDL}:MC1`, `${THIRDL}:MC2`],
+    source: `${THIRDL_SRC} — misconception: entropy uses arbitrary reference like enthalpy; all substances reach S=0`,
+  },
+]
+
+const THIRDL_PROBES: SeedProbe[] = [
+  {
+    conceptId: THIRDL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why can we tabulate ABSOLUTE standard entropies (S°) but only RELATIVE standard enthalpies of formation (ΔH°f)?',
+    choices: [
+      { text: 'The Third Law gives entropy a true zero point (perfect crystal at 0 K has S=0); enthalpy has no such natural zero, so we must define it relative to elements by convention', isCorrect: true },
+      { text: 'It\'s an arbitrary historical convention with no physical justification', isCorrect: false, misconceptionId: `${THIRDL}:MC1` },
+    ],
+    correctValue: 'Third Law gives entropy a true zero',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${THIRDL}:MC1`],
+    source: `${THIRDL_SRC} — distractor targets "arbitrary convention" (there is a physical basis)`,
+  },
+  {
+    conceptId: THIRDL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Carbon monoxide (CO) has nonzero residual entropy at 0 K. Why doesn\'t it obey the simple Third Law prediction of S=0?',
+    choices: [
+      { text: 'CO crystals can freeze with molecules randomly oriented as C-O or O-C (nearly identical dipole moments), so the crystal isn\'t in a single perfectly ordered microstate — W>1 even at 0 K', isCorrect: true },
+      { text: 'The Third Law only applies to elements, not compounds like CO', isCorrect: false, misconceptionId: `${THIRDL}:MC2` },
+    ],
+    correctValue: 'Orientational disorder in the crystal',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${THIRDL}:MC2`],
+    source: `${THIRDL_SRC} — misconception: Third Law scope limited to elements`,
+  },
+]
+
+// ─── chem.env.ozone ───────────────────────────────────────────────────────────
+const OZONE = 'chem.env.ozone'
+const OZONE_SRC = 'docs/chemistry/kg/graph.json — chem.env.ozone'
+
+const OZONE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OZONE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The CHAPMAN CYCLE naturally creates and destroys stratospheric ozone: UV splits ' +
+      'O₂ → 2O; O + O₂ → O₃ (formation); UV splits O₃ → O₂ + O (destruction); ' +
+      'O + O₃ → 2O₂ (destruction). Normally this cycle is in balance. CFCs (chlorofluorocarbons, ' +
+      'once used in refrigerants/aerosols) disrupted it: UV breaks C-Cl bonds in the ' +
+      'stratosphere, releasing Cl radicals. Cl acts as a CATALYST in a destructive cycle: ' +
+      'Cl + O₃ → ClO + O₂; ClO + O → Cl + O₂ (net: O₃ + O → 2O₂, and Cl is REGENERATED — ' +
+      'one Cl atom can destroy ~100,000 ozone molecules before being removed). The POLAR ' +
+      'VORTEX over Antarctica creates extremely cold conditions where polar stratospheric ' +
+      'clouds form, providing surfaces that dramatically accelerate this chemistry each ' +
+      'spring — creating the "ozone hole." The Montreal Protocol (1987) phased out CFCs ' +
+      'globally, and the ozone layer is now recovering — one of humanity\'s clearest ' +
+      'environmental success stories.',
+    targetedMisconceptions: [`${OZONE}:MC1`],
+    source: `${OZONE_SRC} — Chapman cycle, CFC catalytic destruction, polar vortex, Montreal Protocol`,
+  },
+  {
+    conceptId: OZONE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "One CFC molecule destroys one ozone molecule, so damage is ' +
+      'proportional to CFC quantity released." Actually MUCH worse — Cl acts CATALYTICALLY, ' +
+      'meaning it\'s regenerated after each destruction cycle and can destroy roughly ' +
+      '100,000 ozone molecules before finally being removed from the stratosphere ' +
+      '(by reacting with methane or other species to form stable HCl). This is why even ' +
+      'small amounts of CFCs caused massive ozone depletion. Second trap: "The ozone hole ' +
+      'is a permanent hole, like a puncture." No — it\'s a seasonal, cyclical depletion ' +
+      '(worst in Antarctic spring, September-November) caused by the specific chemistry ' +
+      'that requires polar stratospheric clouds (only present in extreme cold) plus ' +
+      'returning sunlight to drive the photochemistry. It partially recovers each year ' +
+      'as conditions change, and — thanks to the Montreal Protocol — the multi-decade ' +
+      'trend is now improving.',
+    targetedMisconceptions: [`${OZONE}:MC1`, `${OZONE}:MC2`],
+    source: `${OZONE_SRC} — misconception: 1:1 CFC-ozone destruction; ozone hole is a permanent static hole`,
+  },
+]
+
+const OZONE_PROBES: SeedProbe[] = [
+  {
+    conceptId: OZONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is a single chlorine atom from CFC breakdown able to destroy roughly 100,000 ozone molecules?',
+    choices: [
+      { text: 'Cl acts as a catalyst — it is regenerated at the end of each destruction cycle (Cl+O₃→ClO+O₂; ClO+O→Cl+O₂) and can repeat the cycle many times before being removed', isCorrect: true },
+      { text: 'One chlorine atom physically breaks apart 100,000 ozone molecules through direct collisions', isCorrect: false, misconceptionId: `${OZONE}:MC1` },
+    ],
+    correctValue: 'Catalytic regeneration',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OZONE}:MC1`],
+    source: `${OZONE_SRC} — distractor targets stoichiometric (1:1) misconception vs catalytic mechanism`,
+  },
+  {
+    conceptId: OZONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Antarctic ozone hole is worst in September-November (Antarctic spring) and partially recovers other times of year. What does this seasonal pattern tell you?',
+    choices: [
+      { text: 'The ozone hole is not a permanent static hole but a dynamic, cyclical depletion driven by conditions (polar stratospheric clouds forming in extreme cold + returning sunlight) that peak seasonally', isCorrect: true },
+      { text: 'CFCs are only released into the atmosphere during Antarctic spring', isCorrect: false, misconceptionId: `${OZONE}:MC2` },
+    ],
+    correctValue: 'Seasonal/dynamic depletion, not a permanent static hole',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OZONE}:MC2`],
+    source: `${OZONE_SRC} — misconception: ozone hole is a permanent puncture rather than a cyclical phenomenon`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -2354,6 +3328,18 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...AIRPOL_EXPLANATIONS,
   ...WATSOL_EXPLANATIONS,
   ...EMUL_EXPLANATIONS,
+  ...HEATC_EXPLANATIONS,
+  ...MMGAS_EXPLANATIONS,
+  ...REALG_EXPLANATIONS,
+  ...QNUM_EXPLANATIONS,
+  ...ORBIT_EXPLANATIONS,
+  ...PHOTOC_EXPLANATIONS,
+  ...RATEL_EXPLANATIONS,
+  ...ARRH_EXPLANATIONS,
+  ...SOLUB_EXPLANATIONS,
+  ...GIBBS_EXPLANATIONS,
+  ...THIRDL_EXPLANATIONS,
+  ...OZONE_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -2386,4 +3372,16 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...AIRPOL_PROBES,
   ...WATSOL_PROBES,
   ...EMUL_PROBES,
+  ...HEATC_PROBES,
+  ...MMGAS_PROBES,
+  ...REALG_PROBES,
+  ...QNUM_PROBES,
+  ...ORBIT_PROBES,
+  ...PHOTOC_PROBES,
+  ...RATEL_PROBES,
+  ...ARRH_PROBES,
+  ...SOLUB_PROBES,
+  ...GIBBS_PROBES,
+  ...THIRDL_PROBES,
+  ...OZONE_PROBES,
 ]
