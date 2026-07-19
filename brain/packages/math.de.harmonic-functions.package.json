@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.harmonic-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.harmonic-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:785f135d3e751b0c8674246addb2cd564c22557b414d6ffc524063e170da6c4c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.harmonic-functions.md": "sha256:59da85e45630b0ac56441b60636df3403330fb713051593ca6cba4bb0420753a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.harmonic-functions",
+    "name": "Harmonic Functions",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.laplace-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.harmonic-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.harmonic-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.harmonic-functions.md": "sha256:59da85e45630b0ac56441b60636df3403330fb713051593ca6cba4bb0420753a"
+      },
+      "contentHash": "sha256:c099420064069ea232fb3a4f3d0528b95686e322740879246ae8f3d8a00f7df8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-functions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-functions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-functions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-functions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-functions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-functions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-functions.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-functions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.harmonic-functions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.harmonic-functions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.harmonic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.harmonic-functions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.harmonic-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Learning Objectives",
+      "content": "- LO1 (full depth — orientation-only in the parent `math.de.laplace-equation`): state and verify the **mean value property** in full — a harmonic function's value at any point equals the average of its values on any circle centered there and lying within the domain — and derive the **maximum/minimum principle** as its direct consequence (an interior value strictly exceeding every value on a surrounding circle would contradict being that circle's own average).\n- LO2 (new content beyond the parent): state and apply the **uniqueness of the Dirichlet problem** — two harmonic functions on a bounded region that agree on the ENTIRE boundary must be identical throughout the interior — derived by applying the maximum/minimum principle to their difference (itself harmonic, and zero on the boundary).\n- LO3 (cross-link probe, engaging `math.cx.analytic-functions` and `math.cx.cauchy-riemann`): recognize that the real and imaginary parts of ANY holomorphic function are automatically harmonic, derived directly from the Cauchy-Riemann equations (`math.cx.cauchy-riemann`) together with the guarantee that a holomorphic function's components have continuous mixed partials (`math.cx.analytic-functions`) — a genuine cross-subject source of harmonic functions requiring no separate verification.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "MEAN-VALUE-PROPERTY-AS-APPROXIMATION",
+      "content": "| MC-1 | MEAN-VALUE-PROPERTY-AS-APPROXIMATION | Believing the mean value property only holds approximately, or only for \"nice\"/special harmonic functions, rather than exactly for every harmonic function and every valid circle | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "INTERIOR-CHECK-ASSUMED-NECESSARY",
+      "content": "| MC-2 | INTERIOR-CHECK-ASSUMED-NECESSARY | Believing confirming two harmonic functions are identical requires checking interior points too, missing that boundary agreement alone, via the maximum principle applied to the difference, is already sufficient | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "HARMONIC-AND-HOLOMORPHIC-UNRELATED",
+      "content": "| MC-3 | HARMONIC-AND-HOLOMORPHIC-UNRELATED | Believing harmonic functions and holomorphic functions are separate, unrelated topics, missing that the Cauchy-Riemann equations directly force any holomorphic function's real and imaginary parts to be harmonic | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "The Mean Value Property Is Exact, Not Approximate (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Mean Value Property Is Exact, Not Approximate (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Boundary Agreement Alone Forces Interior Agreement (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Boundary Agreement Alone Forces Interior Agreement (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Holomorphic Functions Are a Free Source of Harmonic Functions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Holomorphic Functions Are a Free Source of Harmonic Functions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify the mean value property for $u(x,y)=xy$ (confirm it's harmonic first) at the origin over a circle of radius $r$, by computing the average of $u(r\\cos\\theta,r\\sin\\theta)$ over $\\theta\\in[0,2\\pi]$ and comparing to $u(0,0)$.\n  2. Two harmonic functions on the unit disk both equal $\\cos2\\theta$ on the boundary circle. Using the maximum principle applied to their difference, explain why they must be identical throughout the disk.\n  3. Verify that $v=2xy$ (the imaginary part of $z^2$ from Example 3) is harmonic by DIRECT computation of $v_{xx}+v_{yy}$, without invoking the Cauchy-Riemann-based shortcut.\n  4. Explain, referencing this lesson's derivation, why $u(x,y)=x^3-3xy^2$ (which is $\\mathrm{Re}(z^3)$) must automatically be harmonic without computing $u_{xx}+u_{yy}$ directly — then verify this by direct computation.\n- **P76 (Transfer Probe, mode = cross-link probe, engaging BOTH `math.cx.cauchy-riemann` and `math.cx.analytic-functions`)**: \"Let $f(z)=e^z=e^x\\cos y+i\\,e^x\\sin y$, so $u=e^x\\cos y$, $v=e^x\\sin y$. (a) Using the Cauchy-Riemann equations from `math.cx.cauchy-riemann`, verify $f$ is holomorphic. (b) Using `math.cx.analytic-functions`'s guarantee that a holomorphic function's mixed partials agree, show directly that $u=e^x\\cos y$ satisfies Laplace's equation. (c) Without redoing the general derivation, explain in your own words why this pattern works for ANY holomorphic function, not just this specific example.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.laplace-equation` ($\\nabla^2u=u_{xx}+u_{yy}=0$; harmonic functions as steady-state/equilibrium solutions; separation of variables on a rectangle; the mean value property and maximum principle already NAMED there at orientation level, without full derivation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.harmonic-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.harmonic-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.laplace-equation` (the equation $\\nabla^2u=0$ itself, the equilibrium/steady-state framing, and its own orientation-level naming of the mean value property and maximum principle, which this concept develops to full depth).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.cx.analytic-functions` and `math.cx.cauchy-riemann`, BOTH verified authored via `ls docs/curriculum/blueprints/`. $P76_{mode}=$ **cross-link probe**, engaging both targets together (Example 3, Teaching Action A03, and the P76 transfer probe all directly cite both concepts' own guarantees — Cauchy-Riemann's equations and analytic-functions' continuous-mixed-partials fact — rather than just one).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.harmonic-functions.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
