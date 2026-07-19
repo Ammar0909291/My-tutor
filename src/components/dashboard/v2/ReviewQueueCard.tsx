@@ -43,8 +43,12 @@ export function ReviewQueueCard() {
   useEffect(() => {
     let cancelled = false
     fetch('/api/learner/review-queue')
-      .then((r) => r.json())
-      .then((data: ReviewQueueState) => { if (!cancelled) setState(data) })
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json() })
+      .then((data: ReviewQueueState) => {
+        // Guard: API may return a non-array shape on errors — ensure the expected fields exist.
+        if (!Array.isArray(data?.overdue) || !Array.isArray(data?.dueToday)) throw new Error('bad shape')
+        if (!cancelled) setState(data)
+      })
       .catch(() => { if (!cancelled) setState({ overdue: [], dueToday: [], totalDue: 0 }) })
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
