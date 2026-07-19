@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.convergence-theorems-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.convergence-theorems",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:40baa316cd5c11707663b7300024e35f527390e0446b8bcb52546f18838526a5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.convergence-theorems.md": "sha256:423401a7dad9b836adec2414849b598309b55be790ab27303cbccc4129b2379a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.meas.convergence-theorems",
+    "name": "Convergence Theorems",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.meas.lebesgue-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.convergence-theorems-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.convergence-theorems (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.convergence-theorems.md": "sha256:423401a7dad9b836adec2414849b598309b55be790ab27303cbccc4129b2379a"
+      },
+      "contentHash": "sha256:e03d4a7e6316af60ac0c51bef6c7a2acbc850a2f94c928948db851efb8dc0477",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.convergence-theorems.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.convergence-theorems.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.convergence-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.convergence-theorems\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.convergence-theorems.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.convergence-theorems.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.convergence-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.convergence-theorems\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.convergence-theorems.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.convergence-theorems.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.convergence-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.convergence-theorems\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.convergence-theorems.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.convergence-theorems.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.convergence-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.convergence-theorems\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.convergence-theorems/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Monotone Convergence Theorem (MCT)**: if $0\\le f_n\\uparrow f$ almost everywhere, then $\\int f_n\\,d\\mu\\to\\int f\\,d\\mu$ — and recognize that swapping $\\lim$ and $\\int$ is NOT automatic in general (as `math.real.uniform-convergence` already showed can fail for MERE pointwise convergence without uniformity), but MCT guarantees it holds under the specific hypothesis of monotone increase.\n- LO2: State **Fatou's Lemma** $\\int\\liminf f_n\\,d\\mu\\le\\liminf\\int f_n\\,d\\mu$ (an INEQUALITY, not an equality) and the **Dominated Convergence Theorem (DCT)** — if $|f_n|\\le g$ for an integrable $g$, and $f_n\\to f$ a.e., then $\\int f_n\\to\\int f$ — and recognize DCT's domination hypothesis as the tool that RULES OUT the kind of \"mass escaping to infinity\" failure that can occur without it.\n- LO3 (orientation level — full proof machinery deferred): recognize, without full derivation, that MCT, Fatou's Lemma, and DCT are NOT three independent facts but form a logical CHAIN — Fatou's Lemma is typically proved FROM MCT, and DCT is typically proved FROM Fatou's Lemma — previewing the standard order in which measure theory develops these three results.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "LIM-INT-INTERCHANGE-ASSUMED-AUTOMATIC",
+      "content": "| MC-1 | LIM-INT-INTERCHANGE-ASSUMED-AUTOMATIC | Believing swapping $\\lim$ and $\\int$ always works automatically for the Lebesgue integral, missing that MCT's monotone-increase hypothesis is a specific necessary condition | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "FATOU-ASSUMED-EQUALITY",
+      "content": "| MC-2 | FATOU-ASSUMED-EQUALITY | Believing Fatou's Lemma guarantees equality $\\int\\liminf f_n=\\liminf\\int f_n$, missing that it gives only an inequality, which can be strict | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "THREE-THEOREMS-ASSUMED-INDEPENDENT",
+      "content": "| MC-3 | THREE-THEOREMS-ASSUMED-INDEPENDENT | Believing MCT, Fatou's Lemma, and DCT are three independent results each needing separate unrelated proofs, missing that they form one logical dependency chain | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "MCT Identifies a Genuinely Different Sufficient Condition From Uniform Convergence (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"MCT Identifies a Genuinely Different Sufficient Condition From Uniform Convergence (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "Fatou's Inequality Can Be Strict — Mass Genuinely Escapes (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Fatou's Inequality Can Be Strict — Mass Genuinely Escapes (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "These Are One Dependency Chain, Not Three Separate Facts (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"These Are One Dependency Chain, Not Three Separate Facts (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State MCT, identifying precisely which hypothesis (monotone increase, non-negativity) makes it applicable.\n  2. Verify $f_n(x)=x^n\\cdot\\mathbb{1}_{[0,1)}(x)$ (decreasing? increasing? check first) does or does not satisfy MCT's hypotheses, and if it does, state what the theorem then guarantees.\n  3. Using the spike-sequence idea from Example 2 (perhaps with different heights/widths), construct a sequence where Fatou's inequality is strict, and explain why DCT's domination hypothesis fails for it.\n  4. Explain, in one or two sentences, the logical dependency relationship among MCT, Fatou's Lemma, and DCT.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.real.uniform-convergence`)**: \"Consider $f_n(x)=\\dfrac{\\sin(nx)}{n}$ on $[0,\\pi]$, which converges UNIFORMLY to $f(x)=0$ (by `math.real.uniform-convergence`'s own uniform-convergence criterion, since $\\sup_x|f_n(x)-0|=1/n\\to0$). (a) Explain why `math.real.uniform-convergence` already guarantees $\\int_0^\\pi f_n\\,dx\\to\\int_0^\\pi f\\,dx=0$ for this Riemann-integrable case, without needing MCT, Fatou, or DCT at all. (b) Now suppose a DIFFERENT sequence $g_n$ converges only POINTWISE (not uniformly) to some limit $g$, but happens to be monotone increasing and non-negative — explain which of the three Lebesgue convergence theorems applies, and why uniform convergence is not required here. (c) Contrast these two scenarios: when does uniform convergence alone suffice, and when do you instead need one of MCT/Fatou/DCT's own distinct hypotheses?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.lebesgue-integral` ($\\int f\\,d\\mu$ as a supremum over simple functions, extending the Riemann integral).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.convergence-theorems/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.convergence-theorems",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.lebesgue-integral` ($\\int f\\,d\\mu$ as a supremum over simple functions, the integral this concept's three theorems govern the limiting behavior of).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.real.uniform-convergence`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.real.uniform-convergence`'s own uniform-convergence criterion directly in Component 3's contrast and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.convergence-theorems.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

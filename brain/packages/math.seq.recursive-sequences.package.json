@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.recursive-sequences-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.recursive-sequences",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d499689d967426b90ae833fbf9fa5a4ca58ca1841d6da8f98a9b959dcb629c83",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.recursive-sequences.md": "sha256:b1a2960f89d43946701cf5061aa114e5747d9e1fa76bdb5136cb2b144a138df2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.recursive-sequences",
+    "name": "Recursive Sequences",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.sequence",
+      "math.found.proof-by-induction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.recursive-sequences-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.recursive-sequences (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.recursive-sequences.md": "sha256:b1a2960f89d43946701cf5061aa114e5747d9e1fa76bdb5136cb2b144a138df2"
+      },
+      "contentHash": "sha256:8877daa6125404ddcaf8329eb901b4cd5ef70f901527dbb3abc30e2b8399ef04",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.recursive-sequences.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.recursive-sequences.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.recursive-sequences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.recursive-sequences\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.recursive-sequences.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.recursive-sequences.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.recursive-sequences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.recursive-sequences\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.recursive-sequences.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.recursive-sequences.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.recursive-sequences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.recursive-sequences\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.recursive-sequences.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.recursive-sequences.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.recursive-sequences"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.recursive-sequences\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.recursive-sequences/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **recursive sequence** as `math.seq.sequence`'s own function $\\mathbb{N}\\to$ (a set), but SPECIFIED by giving initial conditions plus a rule $a_n=f(a_{n-1},a_{n-2},\\dots)$ for later terms in terms of EARLIER ones — a genuinely different specification method from an explicit closed-form formula $a_n=g(n)$, though both describe sequences in `math.seq.sequence`'s general sense.\n- LO2: Compute terms of a recursively-defined sequence (e.g. Fibonacci) by repeated application of the recurrence, and recognize that computing $a_n$ this way requires knowing ALL earlier referenced terms first — you cannot \"jump ahead\" to $a_{100}$ without passing through the terms it depends on.\n- LO3 (orientation level — full closed-form-solving theory deferred): recognize, without full derivation, that `math.found.proof-by-induction` is the natural tool for PROVING properties of a recursively-defined sequence (since the recurrence's own structure — depending on earlier terms — mirrors induction's own \"truth at $n$ implies truth at $n+1$\" structure), and that solving a recurrence into an explicit closed form (via the characteristic-equation method) is a DIFFERENT, separate task, deferred to `math.disc.recurrence-relation`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "RECURSIVE-SEQUENCE-ASSUMED-DIFFERENT-KIND-OF-OBJECT",
+      "content": "| MC-1 | RECURSIVE-SEQUENCE-ASSUMED-DIFFERENT-KIND-OF-OBJECT | Believing a recursively-defined sequence is a fundamentally different kind of mathematical object from an explicit-formula sequence, missing that both are genuine sequences, differing only in specification method | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "RECURSIVE-TERMS-ASSUMED-DIRECTLY-COMPUTABLE",
+      "content": "| MC-2 | RECURSIVE-TERMS-ASSUMED-DIRECTLY-COMPUTABLE | Believing $a_n$ can be computed directly for a recursively-defined sequence without first computing the earlier terms it depends on, missing the inherent sequential-buildup requirement | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "INDUCTION-PROOF-ASSUMED-TO-GIVE-CLOSED-FORM",
+      "content": "| MC-3 | INDUCTION-PROOF-ASSUMED-TO-GIVE-CLOSED-FORM | Believing proving a property of a recursive sequence via induction also produces its explicit closed-form formula, missing that solving the recurrence is a separate task | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Recursive Definition Is a Different SPECIFICATION Method, Not a Different Kind of Object (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Recursive Definition Is a Different SPECIFICATION Method, Not a Different Kind of Object (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "You Cannot Skip Ahead in a Recursive Sequence (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"You Cannot Skip Ahead in a Recursive Sequence (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Proving a Property Is Not the Same Task as Solving the Recurrence (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Proving a Property Is Not the Same Task as Solving the Recurrence (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the first 6 terms of the sequence defined by $a_1=2$, $a_n=3a_{n-1}-1$ for $n\\ge2$.\n  2. Explain why computing $a_{10}$ for this sequence requires first computing $a_1$ through $a_9$.\n  3. Using induction, prove $a_n>1$ for all $n\\ge1$ in the sequence from problem 1.\n  4. Explain, in one or two sentences, why proving $a_n>1$ via induction is a different task from finding an explicit closed-form formula for $a_n$.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.disc.recurrence-relation`)**: \"A population model is given recursively by $P_1=100$, $P_n=P_{n-1}+50$ for $n\\ge2$. (a) Compute $P_5$, showing each step's dependency on the previous term. (b) Use induction to prove $P_n=100+50(n-1)$ for all $n\\ge1$ (verifying this closed form matches the recursive definition at every step). (c) Explain, citing `math.disc.recurrence-relation`'s characteristic-equation method, how one would approach FINDING such a closed-form formula in the first place for a recurrence where the answer isn't already guessed — as distinct from merely VERIFYING a proposed closed form via induction, which is what part (b) did.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.seq.sequence` (a sequence as a function $\\mathbb{N}\\to$ (a set), listing values $a_1,a_2,a_3,\\dots$) and `math.found.proof-by-induction` (base case + \"$n$ implies $n+1$\" as a proof technique).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.seq.recursive-sequences/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.recursive-sequences",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.seq.sequence` (the general definition of a sequence, of which recursively-defined sequences are one specification method) and `math.found.proof-by-induction` (the base-case-plus-inductive-step technique this concept's LO3 directly applies).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.disc.recurrence-relation`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.disc.recurrence-relation`'s own characteristic-equation method directly in Component 3's task-separation argument and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.recursive-sequences.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

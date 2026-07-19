@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.algebraic-graph-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.algebraic-graph-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ef5ebaa1c7750a3ea0d228e12bb8ae42208e43c17a34c72cb3e4ee6695b1e36d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md": "sha256:c444bfd96f92d9c5c083b61ebfa8d8284128d3827162eb558bd67a8ce10a0760"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.algebraic-graph-theory",
+    "name": "Algebraic Graph Theory",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.graph.graph",
+      "math.linalg.eigenvalues"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.algebraic-graph-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.algebraic-graph-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md": "sha256:c444bfd96f92d9c5c083b61ebfa8d8284128d3827162eb558bd67a8ce10a0760"
+      },
+      "contentHash": "sha256:5342bcf07e205085b4f952f6b4f5095710e7dce2f8e2177e198176fc58ad0ed8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.algebraic-graph-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.algebraic-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.algebraic-graph-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.algebraic-graph-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.algebraic-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.algebraic-graph-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.algebraic-graph-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.algebraic-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.algebraic-graph-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.algebraic-graph-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.algebraic-graph-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.algebraic-graph-theory\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.algebraic-graph-theory/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the **graph Laplacian** $L=D-A$ (degree matrix minus adjacency matrix) for a given graph (from `math.graph.graph`'s own vertex/edge/degree definitions), and compute its EIGENVALUES via `math.linalg.eigenvalues`'s own machinery — recognizing that turning a purely COMBINATORIAL object (a graph) into a MATRIX is precisely what makes linear-algebraic tools like eigenvalues applicable to it at all.\n- LO2: Verify that $\\lambda_1=0$ is ALWAYS an eigenvalue of $L$ (with eigenvector the all-ones vector), and that its MULTIPLICITY equals the number of CONNECTED COMPONENTS of the graph — a genuinely combinatorial fact (connectivity) read off from a purely algebraic quantity (eigenvalue multiplicity).\n- LO3 (orientation level — full Cheeger-inequality and spectral-clustering derivation deferred): recognize, without full derivation, that the SECOND-smallest eigenvalue $\\lambda_2$ (the \"algebraic connectivity\" or Fiedler value) relates to how well-connected/expansive the graph is (via the Cheeger inequality), previewing spectral clustering's use of eigenvectors to partition a graph into well-connected pieces.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "EIGENVALUE-TOOLS-ASSUMED-DIRECTLY-APPLICABLE-TO-GRAPHS",
+      "content": "| MC-1 | EIGENVALUE-TOOLS-ASSUMED-DIRECTLY-APPLICABLE-TO-GRAPHS | Believing eigenvalue machinery applies directly to a graph without first converting it into a matrix like the Laplacian, missing that the Laplacian is the essential algebraic bridge | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "MULTIPLICITY-COMPONENT-MATCH-ASSUMED-COINCIDENTAL",
+      "content": "| MC-2 | MULTIPLICITY-COMPONENT-MATCH-ASSUMED-COINCIDENTAL | Believing the match between eigenvalue-0 multiplicity and connected-component count is coincidental for particular examples, missing that it is a general guaranteed theorem | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "LAMBDA-2-ASSUMED-BINARY-CONNECTIVITY-INDICATOR",
+      "content": "| MC-3 | LAMBDA-2-ASSUMED-BINARY-CONNECTIVITY-INDICATOR | Believing $\\lambda_2$ only distinguishes connected from disconnected graphs, missing that its magnitude quantifies robustness of connectivity via the Cheeger inequality | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "The Laplacian Is What Makes Eigenvalue Tools Applicable to a Graph At All (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Laplacian Is What Makes Eigenvalue Tools Applicable to a Graph At All (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "Eigenvalue Multiplicity Genuinely Encodes Connectivity (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Eigenvalue Multiplicity Genuinely Encodes Connectivity (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "$\\lambda_2$ Distinguishes Robustly- From Fragile-Connected Graphs (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"$\\\\lambda_2$ Distinguishes Robustly- From Fragile-Connected Graphs (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Construct the Laplacian $L$ for the star graph $S_3$ (one central vertex connected to 3 leaves).\n  2. Compute the eigenvalues of your answer to problem 1, and verify $\\lambda_1=0$ appears with multiplicity $1$ (since $S_3$ is connected).\n  3. For a graph with 3 connected components, state (without necessarily computing it in full) what multiplicity you'd expect for eigenvalue $0$ of its Laplacian.\n  4. Explain, in one or two sentences, why $\\lambda_2$ being small versus large conveys more information than merely \"connected versus disconnected.\"\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.linalg.eigenvalues`)**: \"A social network is modeled as a graph where two 'clusters' of tightly-connected users are joined by only a single 'bridge' edge between them. (a) Without computing exact eigenvalues, predict qualitatively whether this graph's $\\lambda_2$ would be small or large, and justify your prediction using the Cheeger-inequality intuition about edge expansion. (b) Explain, citing `math.linalg.eigenvalues`'s own eigenvalue/eigenvector machinery directly, why computing this graph's Laplacian eigenvalues requires nothing conceptually new beyond what you already know about eigenvalues — only a new MATRIX (the Laplacian) to apply that machinery to. (c) Explain how the Fiedler vector (the eigenvector for $\\lambda_2$) could be used to automatically detect the two clusters via spectral clustering, without manually inspecting the graph's structure.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.graph.graph` ($G=(V,E)$, degree $\\deg(v)$, the handshaking lemma) and `math.linalg.eigenvalues` ($Av=\\lambda v$, eigenvalues as scaling factors along eigenvector directions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.algebraic-graph-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.algebraic-graph-theory",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.graph.graph` (vertices, edges, degree, the handshaking lemma — the combinatorial data assembled into the Laplacian) and `math.linalg.eigenvalues` ($Av=\\lambda v$, the eigenvalue/eigenvector machinery this concept applies to the Laplacian matrix).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.linalg.eigenvalues`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored (also a direct prerequisite). $P76_{mode}=$ **cross-link probe**, engaging `math.linalg.eigenvalues`'s own eigenvalue/eigenvector machinery directly in Component 3's bridging argument and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.algebraic-graph-theory.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
