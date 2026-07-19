@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.laurent-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.laurent-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:42f71ced6d424955f00fcbd1e1ced8c5fdd0079a5261fe260659a0273dab8085",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.laurent-series.md": "sha256:5818ba8e726f0f8a088f4ba1c9ec09125ed4e99a9db437c1421cd1e643a79e87"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.laurent-series",
+    "name": "Laurent Series",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.cx.singularities",
+      "math.cx.power-series-cx"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.laurent-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.laurent-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.laurent-series.md": "sha256:5818ba8e726f0f8a088f4ba1c9ec09125ed4e99a9db437c1421cd1e643a79e87"
+      },
+      "contentHash": "sha256:e882162fdf43eb99d07b26b5624cca5cd68b97832dfb37f2816f2754360936e3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.laurent-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.laurent-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.laurent-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.laurent-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.laurent-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.laurent-series.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.laurent-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.laurent-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.laurent-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.laurent-series.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.laurent-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.laurent-series\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.laurent-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.laurent-series.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.laurent-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.laurent-series\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.laurent-series/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the Laurent series $f(z)=\\sum_{n=-\\infty}^{\\infty}a_n(z-z_0)^n$ valid in an annulus $r<|z-z_0|<R$, identifying the **principal part** (all terms with $n<0$) as the genuinely NEW piece beyond an ordinary power series (from `math.cx.power-series-cx`, which has only $n\\ge0$ terms and requires no annulus, just a disk).\n- LO2: Compute the Laurent series of a function with an isolated singularity by direct algebraic manipulation (geometric series expansion, known Taylor series substitution) rather than always evaluating the contour-integral coefficient formula $a_n=\\frac{1}{2\\pi i}\\oint_C\\frac{f(z)}{(z-z_0)^{n+1}}dz$ directly.\n- LO3: Classify an isolated singularity's type — removable, pole, or essential — by examining the Laurent series' principal part directly (zero terms, finitely many terms, or infinitely many terms respectively), connecting this ALGEBRAIC test to the LIMITING-BEHAVIOR test (`math.cx.singularities`'s boundedness/blow-up/path-dependence criteria) as two different lenses on the exact same classification.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.laurent-series",
+      "title": "LAURENT-SERIES-AS-UNRELATED-NEW-OBJECT",
+      "content": "| MC-1 | LAURENT-SERIES-AS-UNRELATED-NEW-OBJECT | Believing a Laurent series requires entirely new manipulation techniques unrelated to ordinary power series, missing that the analytic part behaves identically and only negative powers are new | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.laurent-series",
+      "title": "FINITE-PRINCIPAL-PART-MISCLASSIFIED-AS-ESSENTIAL",
+      "content": "| MC-2 | FINITE-PRINCIPAL-PART-MISCLASSIFIED-AS-ESSENTIAL | Believing a principal part with several nonzero terms (but finitely many) could indicate an essential singularity, missing that ANY finite principal part, regardless of how many terms, always means a pole | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.laurent-series",
+      "title": "LAURENT-COEFFICIENTS-REQUIRE-CONTOUR-INTEGRATION",
+      "content": "| MC-3 | LAURENT-COEFFICIENTS-REQUIRE-CONTOUR-INTEGRATION | Believing every Laurent coefficient must be computed by directly evaluating the contour integral formula, missing that algebraic substitution of known series is the standard, far more practical technique | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.laurent-series",
+      "title": "The Principal Part Is the Genuinely New Ingredient (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Principal Part Is the Genuinely New Ingredient (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Same Three-Way Classification, Two Different Tests (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Same Three-Way Classification, Two Different Tests (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Algebra First, Contour Integral Only When Forced (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Algebra First, Contour Integral Only When Forced (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find the Laurent series of $\\frac{\\cos z-1}{z^2}$ about $z_0=0$ by substituting the known Taylor series for $\\cos z$, and state whether its principal part is zero, finite, or infinite.\n  2. Given the Laurent series of some $g(z)$ has nonzero terms at $z^{-1}$ and $z^{-3}$ but none more negative, classify the singularity at $z_0=0$ and state the pole's order.\n  3. Find the Laurent series of $\\frac{1}{z(z-1)}$ in the annulus $0<|z|<1$ using the geometric series expansion of $\\frac1{1-z}$, and identify its principal part.\n  4. Explain, without doing any new computation, why the classification you get from a function's Laurent series principal part must always agree with the classification you would get from checking its limiting behavior directly.\n- **P76 (Transfer Probe, mode = independence)**: \"An electrical engineer models a filter's transfer function as $H(s)=\\dfrac{1}{s^2}e^{1/s}$ near $s=0$ (a combination of the pole and essential-singularity examples from this lesson). (a) Using algebraic substitution of known series (not the contour-integral formula), find the Laurent series of $H(s)$ about $s_0=0$. (b) Based on the principal part's structure, classify the singularity at $s=0$ — is it more like a pole, an essential singularity, or something distinct from both individual pieces? (c) A colleague argues 'since one factor contributes a pole and the other an essential singularity, the combination must average out to something in between, like a higher-order pole.' Using your actual Laurent series from part (a), explain specifically why this averaging intuition is wrong.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.singularities` (isolated singularities; the three-way classification removable/pole/essential via limiting behavior — boundedness, blow-up, or path-dependence — and Riemann's Removable Singularity Theorem) and `math.cx.power-series-cx` (ordinary power series $\\sum_{n=0}^\\infty a_n(z-z_0)^n$, radius of convergence via the ratio test, identical in form to real power series).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.laurent-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.laurent-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.singularities` (the removable/pole/essential classification via limiting behavior, reclassified here via an equivalent algebraic test on the Laurent series' principal part — this concept deliberately reuses the SAME three functions, $\\sin z/z$, $1/z^2$, $e^{1/z}$, already established there), `math.cx.power-series-cx` (ordinary power series, whose ratio-test/radius-of-convergence machinery carries over unchanged to the Laurent series' analytic part).\n- **Unlocks**: `math.cx.residue-theorem` (uses the Laurent series' $a_{-1}$ coefficient — the residue — directly for contour integral evaluation).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.laurent-series.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

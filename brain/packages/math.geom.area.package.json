@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.area-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.area",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8cc3de5fd8ca800e416b2f6bf8812e81fc4e6dc57dfd649e73fd38a6b16c7e7d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.area.md": "sha256:a49a9775f11ea2ff2f309374ddfb39bac74912ecf92612e67f61beec59739995"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.area",
+    "name": "Area",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.area-polygon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.area-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.area (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.area.md": "sha256:a49a9775f11ea2ff2f309374ddfb39bac74912ecf92612e67f61beec59739995"
+      },
+      "contentHash": "sha256:d870eec6c6b4f67a9986281b77923e6a0c3df611c5f681df9129b30cc5b1b89f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.area.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.area/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.area",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the general definition of area as a measure of two-dimensional extent — invariant under rigid motion (translation/rotation), additive under decomposition into non-overlapping pieces (the total area of a figure equals the sum of the areas of any partition of it, regardless of HOW it is partitioned) — and distinguish this MEASURE concept from perimeter, a fundamentally different attribute of the same figure.\n- LO2: Derive how area scales under uniform linear scaling — scaling every linear dimension of a figure by factor $k$ scales its area by $k^2$, NOT by $k$ — using a concrete decomposition argument, not just formula-memorization.\n- LO3: Justify the circle area formula $A=\\pi r^2$ as a LIMIT of the already-mastered regular-polygon area technique (`math.geom.area-polygon`) — inscribing regular $n$-gons of increasing $n$ inside a fixed circle and observing their areas converge toward the circle's area — recognizing this limiting process as exactly what `math.calc.integral-area` will make fully rigorous.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.area/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.area",
+      "title": "AREA-PERIMETER-CONFLATED",
+      "content": "| MC-1 | AREA-PERIMETER-CONFLATED | Believing larger perimeter implies larger area (or vice versa), missing that area and perimeter are independent measurements of the same figure | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.area/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.area",
+      "title": "LINEAR-SCALING-OF-AREA",
+      "content": "| MC-2 | LINEAR-SCALING-OF-AREA | Believing that scaling a figure's linear dimensions by $k$ scales its area by $k$ as well, missing that area scales by $k^2$ | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.area/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.area",
+      "title": "CIRCLE-AREA-AS-ISOLATED-FORMULA",
+      "content": "| MC-3 | CIRCLE-AREA-AS-ISOLATED-FORMULA | Believing $A=\\pi r^2$ is an arbitrary, unrelated formula to memorize, missing that it is the limit of the regular-polygon decomposition technique as the number of sides grows | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.area/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area",
+      "title": "Area vs. Perimeter, and Decomposition-Independence (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Area vs. Perimeter, and Decomposition-Independence (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.area/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area",
+      "title": "Scaling Squares, Not Doubles (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Scaling Squares, Not Doubles (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.area/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area",
+      "title": "The Circle Area Formula Is Not an Isolated Fact (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Circle Area Formula Is Not an Isolated Fact (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.area/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.area/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.area",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A figure is decomposed two different ways by two different students, giving totals of $40$ and $37$. Explain what this discrepancy means (and what it does NOT mean about area itself).\n  2. A square of side $5$ is scaled by $k=3$. Give the new side length and the new area, and verify the area ratio is $k^2$, not $k$.\n  3. Compute the area of a regular $20$-gon inscribed in a unit circle using $\\tfrac{n}{2}\\sin(2\\pi/n)$, and state how close it is to $\\pi$.\n  4. A rectangle and a triangle have equal perimeters. Explain why this alone does not tell you which (if either) has the greater area.\n- **P76 (Transfer Probe, mode = independence)**: \"A city planner is comparing two irregularly-shaped parks. Park A has been surveyed by decomposing it into 5 triangular plots; Park B has been surveyed by decomposing it into a different set of 8 triangular and rectangular plots. (a) Explain why comparing the SUM of each park's plot areas is a valid way to compare their total areas, even though the two parks were decomposed using entirely different methods. (b) A colleague proposes: 'Park A must be smaller than Park B, since Park A has a shorter total boundary (perimeter) around it.' Using this lesson's area/perimeter distinction, explain why this reasoning is invalid. (c) The planner also wants to estimate the area of a large circular pond in Park B. Explain, using this lesson's polygon-to-circle limiting idea, how an increasingly fine polygon approximation could estimate the pond's area without a direct circle-area measurement tool.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.area/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.area",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.area-polygon` (decomposing a polygon into triangles to compute its area; the regular-polygon shortcut $A=\\tfrac12 a p$ where $a$ is the apothem and $p$ the perimeter, verified against direct triangle decomposition for a regular hexagon).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.area/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.area",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.area-polygon` (the triangle-decomposition technique and the regular-polygon $\\tfrac12ap$ shortcut this concept's circle-limiting argument directly reuses).\n- **Unlocks**: `math.geom.surface-area` (extends the additivity/decomposition idea to the surfaces of 3D solids), `math.calc.integral-area` (makes the polygon-to-circle limiting process from LO3 fully rigorous via integration).\n- **Cross-link**: KG lists `math.calc.integral-area` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe once that entry exists, connecting LO3's numerical convergence to the actual limit-of-Riemann-sums definition of area under a curve.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
