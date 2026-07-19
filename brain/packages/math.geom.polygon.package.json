@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.polygon-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.polygon",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:091c319c4ec7d37c7c85177807613ac2b2e90949651d2722827f91e831cb37c8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.polygon.md": "sha256:dfdc4ec68238feaec481c410e12caf4fe3959b87097d02fc48b072756a8efe44"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.polygon",
+    "name": "Polygon",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.geom.line-segment",
+      "math.geom.triangle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.polygon-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.polygon (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.polygon.md": "sha256:dfdc4ec68238feaec481c410e12caf4fe3959b87097d02fc48b072756a8efe44"
+      },
+      "contentHash": "sha256:639281164ea35d941351a5611be32ce9d903ce3341079a9384a46cb56f317303",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.polygon/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.polygon",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **polygon** as a closed plane figure bounded entirely by straight line segments, name polygons by their number of sides (triangle=3, quadrilateral=4, pentagon=5, hexagon=6, etc.), and identify non-examples (figures with a curved side, or not fully closed).\n- LO2: Distinguish a **regular** polygon (all sides AND all angles equal) from an **irregular** polygon (failing at least one of these two conditions), and correctly classify given polygons, recognizing that equal sides alone (without equal angles, or vice versa) is not sufficient for regularity.\n- LO3: State and apply the **interior angle sum formula** for a polygon with $n$ sides, $(n-2)\\times180°$, derived by decomposing the polygon into triangles from one vertex, and use it to find a missing angle or to determine the number of sides given the angle sum.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.polygon",
+      "title": "EQUAL-SIDES-ASSUMED-SUFFICIENT-FOR-REGULARITY",
+      "content": "| MC-1 | EQUAL-SIDES-ASSUMED-SUFFICIENT-FOR-REGULARITY | Believing equal side lengths alone (without also checking equal angles) is sufficient to classify a polygon as regular | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.polygon",
+      "title": "INTERIOR-ANGLE-SUM-FORMULA-CITED-WITHOUT-DERIVATION",
+      "content": "| MC-2 | INTERIOR-ANGLE-SUM-FORMULA-CITED-WITHOUT-DERIVATION | Using $(n-2)\\times180°$ as a memorized formula without understanding the triangulation argument it comes from, leading to errors when the formula must be applied in reverse (solving for $n$) | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.polygon",
+      "title": "POLYGON-DEFINITION-CURVED-SIDE-OVERLOOKED",
+      "content": "| MC-3 | POLYGON-DEFINITION-CURVED-SIDE-OVERLOOKED | Classifying a figure with one or more curved sides as a polygon, overlooking the \"straight line segments only\" requirement | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon",
+      "title": "Naming Polygons and the Closed/Straight-Sides Definition (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Naming Polygons and the Closed/Straight-Sides Definition (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon",
+      "title": "Regular vs. Irregular, and the Interior Angle Sum (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Regular vs. Irregular, and the Interior Angle Sum (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.polygon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Name the polygon with 9 sides, and find its interior angle sum.\n  2. A polygon has all four sides equal to 5cm but its angles measure $80°,100°,80°,100°$. Is this polygon regular? Justify using both conditions.\n  3. A regular polygon has an interior angle sum of $1440°$. Find the number of sides, and find the measure of each individual interior angle.\n  4. Explain, using the triangulation argument (not just citing the formula), why a heptagon's (7-sided polygon's) interior angles sum to $900°$.\n- **P76 (Transfer Probe, mode = independence)**: \"An architect is designing a gazebo with a floor plan shaped like a regular polygon, and wants the interior angle at each corner to measure exactly $135°$ for structural/aesthetic reasons. (a) Using the interior angle formula, determine how many sides this polygon must have. (b) A colleague proposes instead a floor plan where all sides are equal in length (for material-cutting efficiency) but doesn't require all angles to be equal — using this lesson's regular/irregular distinction, explain whether this design could still achieve a consistent $135°$ angle at every corner, or why it might not.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.polygon",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.line-segment` (a segment as the finite, bounded part of a line between two endpoints — the building block of every polygon side) and `math.geom.triangle` (the simplest polygon, its 180° angle sum, and the trigonometric/geometric groundwork this concept generalizes).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.polygon/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.polygon",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.line-segment` (the sides of any polygon are line segments by definition), `math.geom.triangle` (the simplest polygon, and the 180°-angle-sum fact the general formula's triangulation argument directly builds on).\n- **Unlocks**: `math.geom.area` (computing polygon area, especially for regular polygons, builds directly on this concept's side/angle classification).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

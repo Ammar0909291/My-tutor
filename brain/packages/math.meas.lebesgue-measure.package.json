@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.lebesgue-measure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.lebesgue-measure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:126f9d8eae49c2e6b35f512e0fe53fad5c0ad6c6cfc29605ac6a77da3b474ef0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.lebesgue-measure.md": "sha256:4ca48943f38fac178b22389b269456191f0ffdd51bab58055a3f2c5904c6b7cc"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.meas.lebesgue-measure",
+    "name": "Lebesgue Measure",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.meas.measure"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.lebesgue-measure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.lebesgue-measure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.lebesgue-measure.md": "sha256:4ca48943f38fac178b22389b269456191f0ffdd51bab58055a3f2c5904c6b7cc"
+      },
+      "contentHash": "sha256:c3c88187831b5a084f0f2df628dcacfdd6e98716d2a072c2c8ced341afaa6333",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-measure.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-measure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-measure.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-measure\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-measure.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-measure\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.lebesgue-measure/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **outer measure** $m^*(E) = \\inf\\left\\{\\sum_n |I_n| : E\\subseteq\\bigcup_n I_n\\right\\}$ (the infimum over all countable interval covers of $E$, of the total cover length), compute it for simple sets, and verify $m^*([a,b])=b-a$ for a closed interval.\n- LO2: State **Carathéodory's criterion** for measurability — $E$ is (Lebesgue) measurable if for every \"test set\" $A$, $m^*(A) = m^*(A\\cap E)+m^*(A\\setminus E)$ — and explain informally why this splitting condition is the right notion of \"well-behaved\" for a set, extending the everyday idea of length far beyond intervals.\n- LO3: State the key properties of Lebesgue measure — translation invariance ($m(E+t)=m(E)$ for any real shift $t$) and countable additivity on measurable sets — and recognize that the **Vitali set** is a genuine, concrete example of a **non-measurable** set, showing the outer measure alone (without the Carathéodory restriction) cannot be countably additive on ALL subsets of $\\mathbb{R}$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "DENSITY-CONFLATED-WITH-POSITIVE-MEASURE",
+      "content": "| MC-1 | DENSITY-CONFLATED-WITH-POSITIVE-MEASURE | Believing a topologically dense set (like the rationals in $[0,1]$) must have substantial/positive measure, not recognizing a countable dense set can still have Lebesgue measure zero | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "NON-MEASURABLE-SETS-DISMISSED-AS-HYPOTHETICAL",
+      "content": "| MC-2 | NON-MEASURABLE-SETS-DISMISSED-AS-HYPOTHETICAL | Believing non-measurable sets like the Vitali set are a purely theoretical worry with no genuine mathematical force, rather than recognizing them as concrete proof that the outer measure's restriction to measurable sets is a real necessity | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "OUTER-MEASURE-ASSUMED-COUNTABLY-ADDITIVE-ON-ALL-SETS",
+      "content": "| MC-3 | OUTER-MEASURE-ASSUMED-COUNTABLY-ADDITIVE-ON-ALL-SETS | Believing $m^*$ itself (before restricting to measurable sets via Carathéodory's criterion) is already countably additive on every subset of $\\mathbb{R}$, missing the entire motivation for the Carathéodory restriction | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Outer Measure via Interval Covering (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Outer Measure via Interval Covering (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Carathéodory's Criterion and Non-Measurability (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Carathéodory's Criterion and Non-Measurability (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify $m^*([2,7])=5$ using the interval-covering infimum argument.\n  2. Explain why $m^*(\\{1/n : n=1,2,3,\\ldots\\})=0$ (a countable set converging to 0), using the same covering technique as Example 2.\n  3. Using translation invariance, find $m([1,4]+7)$ without recomputing the interval-covering infimum directly.\n  4. Explain, in your own words, why the existence of the Vitali set shows that the RESTRICTION to measurable sets (via Carathéodory's criterion) is a genuine mathematical necessity, not an arbitrary or overly cautious choice.\n- **P76 (Transfer Probe, mode = independence)**: \"A statistician modeling continuous data (e.g. arrival times of customers throughout a day, modeled as real numbers in $[0,24]$) needs a way to assign 'probability mass zero' to any specific FINITE or COUNTABLE list of exact times (e.g., the probability a customer arrives at EXACTLY 3:00:00.000... PM), while still assigning positive probability to genuine time INTERVALS (e.g., between 3pm and 4pm). (a) Using this lesson's fact that countable sets have Lebesgue measure zero, explain why this statistical intuition (individual exact times carry zero probability, intervals carry positive probability) is exactly mirrored by Lebesgue measure's own behavior on countable vs. interval sets. (b) Explain briefly why the statistician does not need to worry, in ordinary practice, about encountering a genuinely non-measurable set like the Vitali set when working with realistic data-generating processes.\" *Component 7 note: this scenario was chosen independently rather than cross-linking to `math.real.riemann-integral`, since that blueprint does not yet exist.*\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.measure` (the general measure axioms, $\\mu(\\emptyset)=0$ and countable additivity for disjoint sets, and the measure-space triple $(X,\\mathcal{F},\\mu)$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-measure/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.lebesgue-measure",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.measure` (the general measure axioms this concept's Lebesgue measure is a specific, concrete instance of).\n- **Unlocks**: `math.meas.lebesgue-integral` (the Lebesgue integral is defined directly using this measure), `math.meas.measure-zero` (measure-zero sets, central to \"almost everywhere\" reasoning throughout analysis, are defined directly using this concept's measure).\n- **Cross-link**: KG lists `math.real.riemann-integral` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.real.riemann-integral.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's measure-zero notion directly to the classical criterion for Riemann integrability (a bounded function is Riemann integrable iff its set of discontinuities has Lebesgue measure zero) — one of the most celebrated connections between the two integration theories.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-measure.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
