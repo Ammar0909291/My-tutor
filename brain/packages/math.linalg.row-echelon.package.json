@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.row-echelon-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.row-echelon",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a494fea5dcc438fe01d63a2fa7444f8177cf141660706f8a24d37582034d11be",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.row-echelon.md": "sha256:4255d539647ae4d2995a6c6bc3cefad659485103a0d239f8f256a4a5d5a0e922"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.row-echelon",
+    "name": "Row Echelon Form",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.row-reduction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.row-echelon-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.row-echelon (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.row-echelon.md": "sha256:4255d539647ae4d2995a6c6bc3cefad659485103a0d239f8f256a4a5d5a0e922"
+      },
+      "contentHash": "sha256:99586a443b6ab7543deabdc28976549c8f679fb0c355eac593bff914b7dd514f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.row-echelon.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.row-echelon.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.row-echelon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.row-echelon\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.row-echelon.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.row-echelon.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.row-echelon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.row-echelon\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.row-echelon.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.row-echelon.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.row-echelon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.row-echelon\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.row-echelon.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.row-echelon.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.row-echelon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.row-echelon\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.row-echelon/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "Learning Objectives",
+      "content": "- LO1: Convert a matrix already in **row echelon form (REF)** — zeros below each pivot, from `math.linalg.row-reduction` — into **reduced row echelon form (RREF)** by additionally clearing zeros ABOVE each pivot (back-elimination) and scaling each pivot row so the pivot itself equals exactly $1$.\n- LO2: State and use the fact that **RREF is unique** for a given matrix — unlike REF itself (which can differ depending on the specific sequence of row operations chosen), every valid path of row operations leads to the SAME final RREF — directly refuting the misconception that different valid row-reduction sequences might produce different \"correct\" RREF results.\n- LO3: Identify **pivot columns** (corresponding to **basic variables**, uniquely determined by the system) and **non-pivot columns** (corresponding to **free variables**, which can take any value), and use this distinction to write the **general solution** of a system with infinitely many solutions in parametric form.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "FREE-VARIABLE-COLUMN-CONFUSED-WITH-NO-SOLUTION",
+      "content": "| MC-1 | FREE-VARIABLE-COLUMN-CONFUSED-WITH-NO-SOLUTION | Believing a non-pivot (free-variable) column signals that the system has no solution, rather than correctly recognizing it as a sign of infinitely many solutions | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "RREF-ASSUMED-NON-UNIQUE-LIKE-REF",
+      "content": "| MC-2 | RREF-ASSUMED-NON-UNIQUE-LIKE-REF | Believing RREF, like ordinary REF, can differ depending on the specific row-operation sequence chosen, missing the guarantee that RREF is always unique | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "PIVOT-SCALING-TO-1-STEP-OMITTED",
+      "content": "| MC-3 | PIVOT-SCALING-TO-1-STEP-OMITTED | Achieving zeros above and below each pivot but forgetting to scale each pivot row so the pivot itself equals exactly 1, producing an REF-like result that is not genuinely RREF | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "From REF to RREF: One More Pass, Upward (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From REF to RREF: One More Pass, Upward (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "RREF's Uniqueness: A Guarantee Worth Trusting (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"RREF's Uniqueness: A Guarantee Worth Trusting (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "Free Variables: When Back-Substitution Alone Isn't Enough (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Free Variables: When Back-Substitution Alone Isn't Enough (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Starting from the REF matrix $\\left(\\begin{array}{cc|c}1&3&7\\\\0&2&6\\end{array}\\right)$, complete the reduction to RREF, showing each step.\n  2. Read the numeric solution directly off your RREF result from problem 1, with no back-substitution required.\n  3. Row-reduce $\\left(\\begin{array}{ccc|c}1&1&2&4\\\\2&2&5&11\\end{array}\\right)$ to RREF, identify the pivot and non-pivot columns, and write the general solution parametrically in terms of the free variable.\n  4. Explain, in your own words, why RREF's uniqueness is useful for checking whether two students' row-reduction work is correct, even if their intermediate steps looked completely different.\n- **P76 (Transfer Probe, mode = independence)**: \"An economist sets up a system of equations modeling supply-and-demand equilibrium across 3 markets with 4 unknown price variables, and row-reduces the system to RREF, finding pivots in only 3 of the 4 columns. (a) Explain what this tells the economist about the number of basic variables versus free variables in this system. (b) Explain why the economist should NOT conclude the system has no solution, given that one column lacks a pivot — what does this column's lack of a pivot actually indicate instead? (c) Explain how the economist would write the general solution for the price variables, using the free variable as a parameter, and what this means practically (e.g., that the equilibrium isn't fully pinned down without additional information).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.row-reduction` (the systematic column-by-column elimination producing REF — pivots forming a rightward staircase, zeros below each pivot — and back-substitution for systems with a unique solution).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.row-echelon/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.row-echelon",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.row-reduction` (the REF result and back-substitution procedure this concept extends into RREF and free-variable parametrization).\n- **Unlocks**: `math.linalg.rank` (the rank of a matrix is defined directly as the number of pivots in its RREF), `math.linalg.null-space` (found directly from RREF's free-variable parametrization of solutions to $Ax=0$).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.row-echelon.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
