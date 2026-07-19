@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.lebesgue-integral-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.lebesgue-integral",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:72e3360b37de7b58739a27be6b9ebf13e03201d02169ef63a1bdaf3e25f0e978",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.lebesgue-integral.md": "sha256:3e13a4a989bd8b7c4b8f282528c57db5600e4894de2a779c38ff732523ce6679"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.meas.lebesgue-integral",
+    "name": "Lebesgue Integral",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.meas.simple-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.lebesgue-integral-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.lebesgue-integral (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.lebesgue-integral.md": "sha256:3e13a4a989bd8b7c4b8f282528c57db5600e4894de2a779c38ff732523ce6679"
+      },
+      "contentHash": "sha256:62f3b7205d81b8e2f8f5efff37c876293ed9878c8a0fbdf087cc71c6f77d3a87",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-integral.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-integral\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-integral.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-integral\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-integral.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-integral\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lebesgue-integral.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lebesgue-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lebesgue-integral\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.lebesgue-integral/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **Lebesgue integral** of a non-negative measurable function $f$ as $\\int f\\,d\\mu = \\sup\\{\\int\\varphi\\,d\\mu : \\varphi \\text{ simple}, 0\\le\\varphi\\le f\\}$ — the SUPREMUM of already-known, easy simple-function integrals over all simple functions that stay below $f$ — directly reusing `math.meas.simple-function`'s finite-sum computation as the building block.\n- LO2: Extend the definition to a general (possibly negative-valued) measurable function via the **positive/negative part decomposition** $f=f^+-f^-$ (where $f^+=\\max(f,0)$, $f^-=\\max(-f,0)$, both non-negative), defining $\\int f\\,d\\mu = \\int f^+\\,d\\mu-\\int f^-\\,d\\mu$ when both parts are finite.\n- LO3: State (via a cross-link to the already-mastered rigorous Riemann integral) that the Lebesgue integral **genuinely generalizes** the Riemann integral — every Riemann integrable function is Lebesgue integrable with the SAME value — and that the Lebesgue integral integrates STRICTLY MORE functions, directly refuting the misconception that the two integrals are simply two different names for the identical concept, applicable to exactly the same class of functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "LEBESGUE-AND-RIEMANN-TREATED-AS-EQUIVALENT-THEORIES",
+      "content": "| MC-1 | LEBESGUE-AND-RIEMANN-TREATED-AS-EQUIVALENT-THEORIES | Believing the Lebesgue integral is just a different method for computing the same integrals Riemann integration already handles, missing that it integrates a strictly larger class of functions | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "POSITIVE-NEGATIVE-PART-DECOMPOSITION-MISAPPLIED",
+      "content": "| MC-2 | POSITIVE-NEGATIVE-PART-DECOMPOSITION-MISAPPLIED | Incorrectly computing $f^+$ or $f^-$ (e.g. forgetting that both must be non-negative everywhere, or sign errors in $f^-=\\max(-f,0)$) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "SUPREMUM-CONSTRUCTION-CONFUSED-WITH-A-SINGLE-APPROXIMATING-SEQUENCE",
+      "content": "| MC-3 | SUPREMUM-CONSTRUCTION-CONFUSED-WITH-A-SINGLE-APPROXIMATING-SEQUENCE | Believing the Lebesgue integral's value depends on which specific approximating sequence of simple functions is chosen, rather than recognizing it as the supremum over ALL valid simple functions below $f$ (a fixed, well-defined number regardless of which sequence is used to approach it) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Building the Integral as a Supremum of Already-Known Simple Integrals (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Building the Integral as a Supremum of Already-Known Simple Integrals (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "The f⁺/f⁻ Split for Signed Functions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The f⁺/f⁻ Split for Signed Functions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Genuine Generalization: A Function Riemann Cannot Touch (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Genuine Generalization: A Function Riemann Cannot Touch (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain, in your own words, why the Lebesgue integral of a non-negative function is defined as a SUPREMUM rather than some other kind of limit or bound.\n  2. For $f(x)=x-2$ on $[0,3]$, compute $f^+$ and $f^-$ explicitly, and use them to find $\\int f\\,d\\mu$.\n  3. Explain why the function $g(x) = \\mathbb{1}_{\\mathbb{Q}}(x)\\cdot x$ on $[0,1]$ (equal to $x$ on rationals, $0$ on irrationals) fails to be Riemann integrable, using the upper/lower Darboux sum reasoning from Example 3.\n  4. Compute the Lebesgue integral of the function $g$ from problem 3 directly, using the fact that the rationals have Lebesgue measure zero.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.real.riemann-integral`)**: \"Recall from your `math.real.riemann-integral` lesson that Riemann integrability requires $\\inf_P U(f,P) = \\sup_P L(f,P)$ over all partitions $P$, and that this criterion FAILS for the Dirichlet-type function (upper sums always $1$, lower sums always $0$). (a) Explain precisely which step of the Darboux-sum construction breaks down for such a function, connecting it to the density of rationals and irrationals in any subinterval. (b) Using THIS lesson's Lebesgue framework, explain why the SAME function is trivially integrable once you recognize it as (a multiple of) an indicator function of a measure-zero set. (c) Explain why this specific example proves the Lebesgue integral is not merely a reformulation of Riemann's theory but a genuine extension — citing the KG's own framing that 'every Riemann integrable function is Lebesgue integrable with the same value,' while the converse fails for functions like this one.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.simple-function` (a simple function $\\varphi=\\sum a_i\\mathbb{1}_{E_i}$, and its exact finite-sum integral $\\int\\varphi\\,d\\mu=\\sum a_i\\mu(E_i)$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.lebesgue-integral/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.lebesgue-integral",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.simple-function` (the finite-sum integral this concept's supremum construction is built entirely from).\n- **Unlocks**: `math.meas.convergence-theorems` (limit theorems — monotone/dominated convergence — that make the Lebesgue integral's true power evident), `math.meas.lp-space` ($L^p$ spaces built directly from Lebesgue-integrable functions).\n- **Cross-link**: KG lists `math.real.riemann-integral` as a cross-link — **verified authored** via `ls docs/curriculum/blueprints/math.real.riemann-integral.md` — so P76_mode = **cross-link probe**, directly reusing that blueprint's own Darboux-sum criterion and its stated fact that continuous functions are Riemann integrable, per this corpus's established cross-link-probe convention.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lebesgue-integral.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
