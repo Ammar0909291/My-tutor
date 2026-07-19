@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.arc-length-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.arc-length",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:13c82a9903f8a243cc4c63da33560fdcac5dfff77ce769d4096da097f5e0465a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.arc-length.md": "sha256:2539c25d79ab491da51c267f947482dfb5f31fbd66b3fb564fc686f1aad00d79"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.arc-length",
+    "name": "Arc Length",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.definite-integral",
+      "math.calc.derivative-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.arc-length-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.arc-length (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.arc-length.md": "sha256:2539c25d79ab491da51c267f947482dfb5f31fbd66b3fb564fc686f1aad00d79"
+      },
+      "contentHash": "sha256:bf37b60cac82385cc867458eaefb7eb42221baaa86237581294770d9c7b24fac",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.arc-length.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.arc-length.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.arc-length"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.arc-length\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.arc-length.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.arc-length.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.arc-length"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.arc-length\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.arc-length.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.arc-length.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.arc-length"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.arc-length\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.arc-length.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.arc-length.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.arc-length"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.arc-length\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.arc-length/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.arc-length",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the arc length formula $L=\\int_a^b\\sqrt{1+[f'(x)]^2}\\,dx$ by approximating the curve with SHORT STRAIGHT-LINE SEGMENTS (each segment's length computed via the Pythagorean theorem, $\\sqrt{(\\Delta x)^2+(\\Delta y)^2}$), and recognize the formula as the LIMIT of this approximation as the segments shrink — a direct application of `math.calc.definite-integral`'s own Riemann-sum-as-a-limit idea.\n- LO2: Compute arc length for a specific curve by differentiating $f$ (via `math.calc.derivative-rules`) to get $f'(x)$, then evaluating the resulting definite integral, and recognize why $\\sqrt{1+[f'(x)]^2}$ (not simply $f'(x)$ or $|f'(x)|$) is the correct integrand.\n- LO3 (orientation level — full parametric/polar derivation deferred): recognize, without full derivation, that the arc length formula GENERALIZES to parametric curves ($x(t),y(t)$) as $L=\\int\\sqrt{[x'(t)]^2+[y'(t)]^2}\\,dt$ and to polar curves — previewing `math.geom.differential-geometry-curves`'s own more general Frenet-Serret framework for curves in higher dimensions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.arc-length",
+      "title": "ARC-LENGTH-FORMULA-ASSUMED-UNRELATED-TO-RIEMANN-SUMS",
+      "content": "| MC-1 | ARC-LENGTH-FORMULA-ASSUMED-UNRELATED-TO-RIEMANN-SUMS | Believing the arc length formula is an independent new formula unrelated to the Riemann-sum-as-a-limit idea, missing that it is the identical construction applied to segment lengths | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.arc-length",
+      "title": "ARC-LENGTH-INTEGRAND-ASSUMED-TO-BE-BARE-DERIVATIVE",
+      "content": "| MC-2 | ARC-LENGTH-INTEGRAND-ASSUMED-TO-BE-BARE-DERIVATIVE | Believing arc length can be computed by integrating just $f'(x)$ directly, missing that the Pythagorean-derived $\\sqrt{1+[f'(x)]^2}$ is the correct integrand | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.arc-length",
+      "title": "PARAMETRIC-FORMULA-ASSUMED-UNRELATED-ALTERNATIVE",
+      "content": "| MC-3 | PARAMETRIC-FORMULA-ASSUMED-UNRELATED-ALTERNATIVE | Believing the parametric arc length formula is an unrelated alternative technique, missing that it is a direct generalization reducing to the explicit-function formula as a special case | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.arc-length",
+      "title": "The Formula Is Exactly a Riemann-Sum Limit, For Lengths Instead of Areas (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Is Exactly a Riemann-Sum Limit, For Lengths Instead of Areas (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.arc-length",
+      "title": "The Integrand Comes From the Pythagorean Theorem, Not the Bare Derivative (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Integrand Comes From the Pythagorean Theorem, Not the Bare Derivative (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.arc-length",
+      "title": "The Parametric Formula Is a Generalization, Not an Unrelated Alternative (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Parametric Formula Is a Generalization, Not an Unrelated Alternative (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.arc-length",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.arc-length",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Set up (but don't necessarily fully evaluate) the arc length integral for $f(x)=x^3$ on $[0,2]$.\n  2. Compute the arc length of $f(x)=\\frac25x^{5/2}$ on $[0,4]$ (using the power rule to find $f'(x)$ first).\n  3. Explain why the integrand $\\sqrt{1+[f'(x)]^2}$, not simply $f'(x)$, is the correct quantity to integrate for arc length.\n  4. Express $f(x)=x^2$ parametrically ($x(t)=t$, $y(t)=t^2$), and verify the parametric arc length integral matches the explicit-function integral for the same curve.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.geom.differential-geometry-curves`)**: \"A roller coaster track segment follows the curve $y=\\frac{1}{12}x^3$ for $x\\in[0,3]$ (in some length unit). (a) Compute the exact arc length of this track segment, showing the derivative computation and the resulting integral evaluation. (b) Explain why the integrand $\\sqrt{1+[f'(x)]^2}$ is not simply the slope $f'(x)$, citing the Pythagorean-theorem derivation. (c) `math.geom.differential-geometry-curves` develops curvature $\\kappa$ and torsion $\\tau$ for smooth curves in $\\mathbb{R}^n$ via the Frenet-Serret apparatus — explain, without deriving it, why this 2D arc length formula is a special case of that more general framework's own arc-length machinery for parametrized curves.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.arc-length",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.definite-integral` (the definite integral as a limit of Riemann sums) and `math.calc.derivative-rules` (the power rule and other basic differentiation rules, needed to compute $f'(x)$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.arc-length/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.arc-length",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.definite-integral` (the Riemann-sum-as-a-limit construction this concept's derivation directly reuses) and `math.calc.derivative-rules` (the power rule used to compute $f'(x)$ for the worked examples).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.geom.differential-geometry-curves`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.geom.differential-geometry-curves`'s own Frenet-Serret framework directly in Component 3's generalization note and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.arc-length.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

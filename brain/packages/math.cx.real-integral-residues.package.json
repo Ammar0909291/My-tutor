@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.real-integral-residues-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.real-integral-residues",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b24e5d77d0b747e593ffeb0592e5bfca6e56e800c2e088057d74e68b665ccc61",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.real-integral-residues.md": "sha256:d77101fca75cf2d696473d29b7a53af254bbb68d584c071d4f3b5b6365bc5873"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.real-integral-residues",
+    "name": "Evaluating Real Integrals via Residues",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.cx.residue-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.real-integral-residues-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.real-integral-residues (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.real-integral-residues.md": "sha256:d77101fca75cf2d696473d29b7a53af254bbb68d584c071d4f3b5b6365bc5873"
+      },
+      "contentHash": "sha256:76ea497fcf015531ed931cfe2e757eb195433f7a93636fa35ba2662a889ec4c9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.real-integral-residues.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.real-integral-residues.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.real-integral-residues"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.real-integral-residues\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.real-integral-residues.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.real-integral-residues.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.real-integral-residues"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.real-integral-residues\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.real-integral-residues.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.real-integral-residues.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.real-integral-residues"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.real-integral-residues\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.real-integral-residues.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.real-integral-residues.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.real-integral-residues"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.real-integral-residues\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.real-integral-residues/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Learning Objectives",
+      "content": "- LO1: Set up the CLOSED-CONTOUR extension technique: to evaluate a REAL integral $\\int_{-\\infty}^\\infty f(x)\\,dx$ (an `math.calc.improper-integrals` improper integral, defined as a limit), extend $f$ to a function of a COMPLEX variable and close the real-axis segment $[-R,R]$ with a large semicircular arc $C_R$ in the upper (or lower) half-plane, forming a closed contour to which `math.cx.residue-theorem` directly applies.\n- LO2: Apply the residue theorem to the closed contour, then argue the SEMICIRCULAR ARC's contribution vanishes as $R\\to\\infty$ (via an explicit bounding estimate), leaving ONLY the real-axis integral equal to $2\\pi i$ times the sum of residues inside — recognizing this vanishing-arc argument as the essential step making the real-integral evaluation valid.\n- LO3 (orientation level — full Jordan's lemma proof deferred): recognize, without full derivation, that for integrands with an OSCILLATORY exponential factor $e^{iax}$ (as in Fourier-type integrals), the naive arc-vanishing bound can FAIL, and Jordan's lemma supplies the specifically-tailored (weaker, but sufficient) estimate needed to still guarantee the arc's contribution vanishes in THAT case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "RESIDUE-THEOREM-ASSUMED-DIRECTLY-APPLICABLE-TO-OPEN-INTEGRAL",
+      "content": "| MC-1 | RESIDUE-THEOREM-ASSUMED-DIRECTLY-APPLICABLE-TO-OPEN-INTEGRAL | Believing the residue theorem applies directly to the open real-axis integral, missing that closing the contour with a semicircular arc is the essential setup step | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "ARC-VANISHING-ASSUMED-AUTOMATIC",
+      "content": "| MC-2 | ARC-VANISHING-ASSUMED-AUTOMATIC | Believing the closed-contour value from the residue theorem automatically equals the real integral with no further justification, missing that the arc's vanishing must be separately shown | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "ARC-VANISHING-BOUND-ASSUMED-UNIVERSAL",
+      "content": "| MC-3 | ARC-VANISHING-BOUND-ASSUMED-UNIVERSAL | Believing the same simple arc-vanishing bound works for any integrand, missing that oscillatory integrands require Jordan's lemma's specifically different estimate | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Closing the Contour Is the Essential Setup Move (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Closing the Contour Is the Essential Setup Move (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "The Residue Computation Alone Is Not the Full Evaluation (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Residue Computation Alone Is Not the Full Evaluation (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Oscillatory Integrands Need a Genuinely Different Vanishing Argument (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Oscillatory Integrands Need a Genuinely Different Vanishing Argument (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $\\int_{-\\infty}^\\infty\\frac{1}{x^2+4}\\,dx$, identify the poles of the complex extension and state which lie in the upper half-plane.\n  2. Compute the residue at the enclosed pole from problem 1, and state what the residue theorem gives for the closed contour.\n  3. Verify the arc's contribution vanishes for problem 1's integrand as $R\\to\\infty$, using an ML-type bound.\n  4. Explain, without full proof, why $\\int_{-\\infty}^\\infty\\frac{\\cos(2x)}{x^2+4}\\,dx$ requires Jordan's lemma rather than the simpler bound from problem 3.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.calc.improper-integrals`)**: \"A signal-processing application requires evaluating $\\int_{-\\infty}^\\infty\\frac{x\\sin x}{x^2+9}\\,dx$ (related to a Fourier transform of a signal). (a) Explain, citing `math.calc.improper-integrals`'s own definition of this integral as a limit, why this is a genuine improper integral requiring careful justification, not just a formal symbol. (b) Set up the closed-contour extension (identifying the relevant complex function and its poles), and explain why the arc's vanishing here would require Jordan's lemma rather than the simpler polynomial bound. (c) Explain conceptually why the specific structure needed for Jordan's lemma to apply (an oscillatory factor $e^{iax}$ with $a>0$, paired with the upper half-plane) matters for whether this technique can be used at all.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.residue-theorem` ($\\oint_Cf(z)\\,dz=2\\pi i\\sum\\mathrm{Res}(f,z_k)$, summing residues at poles enclosed by $C$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.real-integral-residues/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.real-integral-residues",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.residue-theorem` ($\\oint_Cf(z)\\,dz=2\\pi i\\sum\\mathrm{Res}(f,z_k)$, the machinery this concept applies to a closed contour built from a real-axis segment plus an arc).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.calc.improper-integrals`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.calc.improper-integrals`'s own limit-based definition directly in Component 3's setup and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.real-integral-residues.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

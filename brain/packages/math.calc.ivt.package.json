@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.ivt-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.ivt",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ec1945f236eb3d27e175a70c7158b63e031f99b56a5868ecc48b50cf5cfa42d7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.ivt.md": "sha256:8868f1cc06d2d8388fa420f29c71d07175c9551cc1b911e98e509a86621e9714"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.ivt",
+    "name": "Intermediate Value Theorem",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.continuity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.ivt-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.ivt (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.ivt.md": "sha256:8868f1cc06d2d8388fa420f29c71d07175c9551cc1b911e98e509a86621e9714"
+      },
+      "contentHash": "sha256:125db10f1397e8556fec008e1d9a8b5fe09f6cf7344c163aec777f5d19961ba9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.ivt.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ivt.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ivt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ivt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ivt.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ivt.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ivt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ivt\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ivt.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ivt.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ivt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ivt\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ivt.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ivt.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ivt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ivt\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.ivt/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.ivt",
+      "title": "Learning Objectives",
+      "content": "- LO1: State IVT: if $f$ is continuous on $[a,b]$ (via `math.calc.continuity`'s own $\\lim_{x\\to a}f(x)=f(a)$ definition, applied at every point) and $N$ is between $f(a)$ and $f(b)$, then SOME $c\\in(a,b)$ satisfies $f(c)=N$ — and recognize CONTINUITY as the essential hypothesis making this guarantee valid, not a minor technical footnote.\n- LO2: Apply IVT to prove a root EXISTS (i.e. some $c$ with $f(c)=0$) purely via checking a SIGN CHANGE at the endpoints, without solving for or approximating the root's actual value.\n- LO3 (orientation level — full numerical root-finding deferred): recognize, without full derivation, that IVT GUARANTEES a root exists but gives NO method for actually FINDING it — previewing that iterative numerical methods (bisection, Newton's method) are needed to actually locate the root IVT promises, deferred to `math.num.root-finding`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.ivt",
+      "title": "IVT-ASSUMED-TO-HOLD-WITHOUT-CONTINUITY",
+      "content": "| MC-1 | IVT-ASSUMED-TO-HOLD-WITHOUT-CONTINUITY | Believing IVT's conclusion holds even if $f$ has a discontinuity in the interval, as long as the endpoints straddle the target value, missing that continuity is the essential hypothesis | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.ivt",
+      "title": "ROOT-EXISTENCE-PROOF-ASSUMED-TO-NEED-LOCATION",
+      "content": "| MC-2 | ROOT-EXISTENCE-PROOF-ASSUMED-TO-NEED-LOCATION | Believing proving root existence via IVT also requires estimating where the root is, missing that the sign-change check alone is a complete existence proof | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.ivt",
+      "title": "IVT-ASSUMED-TO-LOCATE-THE-ROOT",
+      "content": "| MC-3 | IVT-ASSUMED-TO-LOCATE-THE-ROOT | Believing IVT itself provides a method for finding the root's numeric location, missing that it is purely existential and locating requires separate iterative methods | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ivt",
+      "title": "Continuity Is What Prevents \"Jumping Over\" a Value (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Continuity Is What Prevents \\\"Jumping Over\\\" a Value (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ivt",
+      "title": "A Sign Change Alone Is a Complete Existence Proof (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Sign Change Alone Is a Complete Existence Proof (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ivt",
+      "title": "Existence Is Not the Same as Locating the Root (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Existence Is Not the Same as Locating the Root (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ivt",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.ivt",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify $f(x)=x^2-7$ is continuous on $[2,3]$, check the sign of $f(2)$ and $f(3)$, and state what IVT concludes.\n  2. For $g(x)=1/x$ on $[-1,1]$ (note $g$ is undefined, hence discontinuous, at $x=0$), check $g(-1)=-1<0$ and $g(1)=1>0$, and explain why IVT does NOT apply here despite the sign change.\n  3. Using only a sign check (no solving), prove $h(x)=x^3-x-3$ has a root in $(1,2)$.\n  4. Explain, in one or two sentences, why IVT's existence guarantee does not by itself tell you the root's approximate numeric value.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models a bridge's structural stress as a continuous function $S(t)$ of temperature $t$, and wants to know if there's a temperature where stress exactly equals a critical threshold $S_0$, given $S(0°C)=800$ (below threshold $S_0=1000$) and $S(40°C)=1200$ (above threshold). (a) State what IVT guarantees here, and justify why continuity of $S$ is essential to this conclusion (not merely a technical formality). (b) Explain why this existence guarantee, by itself, does not tell the engineer the SPECIFIC temperature at which the critical stress occurs. (c) Propose, in general terms (without computing it), how the engineer might use an iterative approach like bisection to actually narrow down the critical temperature, given that IVT alone confirms such a temperature exists somewhere in $(0°C,40°C)$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.ivt",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.continuity` ($f$ continuous at $a$ iff $\\lim_{x\\to a}f(x)=f(a)$, and on an interval if continuous at every point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.ivt/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.ivt",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.continuity` (the $\\lim_{x\\to a}f(x)=f(a)$ definition, the essential hypothesis IVT depends on).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.num.root-finding`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ivt.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
