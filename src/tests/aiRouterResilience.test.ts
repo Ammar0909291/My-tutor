@@ -97,6 +97,28 @@ describe('AI router resilience', () => {
     })
   })
 
+  describe('empty-completion retry budget (callGroq)', () => {
+    // Replica of the retry max_tokens calculation in router.ts's callGroq —
+    // an empty completion from a reasoning model likely means the original
+    // budget was exhausted mid-reasoning, so the retry must get materially
+    // more headroom, not the same budget that just failed.
+    function retryMaxTokens(originalMaxTokens: number): number {
+      return Math.max(originalMaxTokens * 2, 2048)
+    }
+
+    it('doubles a typical chat budget (1024 -> 2048)', () => {
+      expect(retryMaxTokens(1024)).toBe(2048)
+    })
+
+    it('doubles a larger budget past the 2048 floor (2048 -> 4096)', () => {
+      expect(retryMaxTokens(2048)).toBe(4096)
+    })
+
+    it('a tiny budget is still floored at 2048, not merely doubled', () => {
+      expect(retryMaxTokens(100)).toBe(2048)
+    })
+  })
+
   describe('provider routing', () => {
     it('Russian user with Yandex creds → yandex', () => {
       expect(selectProvider('ru', true)).toBe('yandex')

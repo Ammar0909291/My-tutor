@@ -2249,7 +2249,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           [...historyMessages, { role: 'user', content: message }],
           systemPrompt,
           country,
-          1024,
+          // Was 1024. gpt-oss-20b is a reasoning model — it spends output
+          // tokens on internal reasoning BEFORE the final answer, so a tight
+          // completion budget can be exhausted mid-reasoning, yielding an
+          // empty `content` (not an error). route.ts then returns a 502
+          // ("Empty response from model"), which the client renders as the
+          // "Sorry, I got cut off" recovery message — this is the root
+          // cause of that message recurring every few turns rather than
+          // reflecting a genuine provider outage each time. Raised to give
+          // real headroom for reasoning + this app's long teaching replies.
+          2048,
           teachingLang,
           { userId, subject: learnSession.subject.slug },
         )
@@ -2482,7 +2491,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   [...historyMessages, { role: 'user', content: message }],
                   systemPrompt + violationAppendix,
                   country,
-                  1024,
+                  2048, // see the primary routeAI() call above for why this was raised from 1024
                   teachingLang,
                   { userId, subject: learnSession.subject.slug },
                 )

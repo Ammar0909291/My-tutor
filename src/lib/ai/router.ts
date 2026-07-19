@@ -23,12 +23,18 @@ async function callGroq(
   const response = await groq.chat.completions.create(req)
   const text = response.choices[0]?.message?.content ?? ''
   if (text) return text
-  // Empty content (null choice or null message) — transient model issue.
-  // The SDK maxRetries:2 only covers HTTP errors, not 200-OK-with-null-content.
-  // One explicit retry is sufficient for the common transient overload case.
-  console.warn('[routeAI] Groq returned empty content, retrying once')
+  // Empty content (null choice or null message). gpt-oss-20b is a reasoning
+  // model that spends completion tokens on internal reasoning before the
+  // final answer — the likely cause here is the reasoning consuming the
+  // whole max_tokens budget before any final content was emitted, not a
+  // one-off transient glitch. Retrying with the SAME max_tokens would very
+  // plausibly exhaust the same way again (this is the root cause traced to
+  // the recurring "Sorry, I got cut off" message in production). Retry with
+  // a materially larger budget so the retry has real headroom to actually
+  // finish reasoning and still produce a final answer.
+  console.warn('[routeAI] Groq returned empty content, retrying once with a larger token budget')
   await consumeAIBudget()
-  const retry = await groq.chat.completions.create(req)
+  const retry = await groq.chat.completions.create({ ...req, max_tokens: Math.max(req.max_tokens * 2, 2048) })
   return retry.choices[0]?.message?.content ?? ''
 }
 
