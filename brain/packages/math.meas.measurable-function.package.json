@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.measurable-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.measurable-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:45fcc442ba16fc7f48ffc621c119247ecc73780d1423455a6425a1f51e4853e8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.measurable-function.md": "sha256:42a90dabc2dd9690a64043ec24392c235048ada79ad9a77d7ace2e3e14d8c101"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.meas.measurable-function",
+    "name": "Measurable Function",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.meas.sigma-algebra"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.measurable-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.measurable-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.measurable-function.md": "sha256:42a90dabc2dd9690a64043ec24392c235048ada79ad9a77d7ace2e3e14d8c101"
+      },
+      "contentHash": "sha256:9964e360e691f697292a1c2e31a53d4dcf4cfd28f141157631f9752fa89a2267",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.measurable-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measurable-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measurable-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measurable-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measurable-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measurable-function.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measurable-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measurable-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measurable-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measurable-function.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measurable-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measurable-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.measurable-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.measurable-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $f:(X,\\mathcal{F})\\to(Y,\\mathcal{G})$ (between two measurable spaces) as **measurable** iff $f^{-1}(E)\\in\\mathcal{F}$ for **every** $E\\in\\mathcal{G}$ — the preimage of every measurable target set is itself measurable in the source — and verify this condition directly for a simple function.\n- LO2: State the practical **Borel-measurability test**: for $f:\\mathbb{R}\\to\\mathbb{R}$ (or into $\\mathbb{R}$ with its Borel σ-algebra), it suffices to check that $f^{-1}((a,b))$ (the preimage of every OPEN INTERVAL, or more generally every open set) is measurable — NOT needing to check every conceivable Borel set individually.\n- LO3: State that **every continuous function on $\\mathbb{R}$ is automatically Borel measurable**, and explain WHY this follows directly from the topological definition of continuity (preimages of open sets are open, hence measurable) — correctly recognizing measurability as a genuinely WEAKER requirement than continuity (a measurable function need not be continuous).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.measurable-function",
+      "title": "MEASURABLE-ASSUMED-EQUIVALENT-TO-CONTINUOUS",
+      "content": "| MC-1 | MEASURABLE-ASSUMED-EQUIVALENT-TO-CONTINUOUS | Believing measurability and continuity are equivalent conditions, rather than recognizing measurability as strictly weaker (every continuous function is measurable, but not vice versa) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.measurable-function",
+      "title": "ALL-BOREL-SETS-ASSUMED-TO-REQUIRE-INDIVIDUAL-CHECKING",
+      "content": "| MC-2 | ALL-BOREL-SETS-ASSUMED-TO-REQUIRE-INDIVIDUAL-CHECKING | Believing verifying measurability requires checking the preimage of every individual Borel set, rather than recognizing checking just a generating collection (like open intervals) suffices | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.measurable-function",
+      "title": "MEASURABILITY-DEFINITION-DIRECTION-REVERSED",
+      "content": "| MC-3 | MEASURABILITY-DEFINITION-DIRECTION-REVERSED | Stating the measurability condition backwards — checking $f(A)\\in\\mathcal{G}$ for $A\\in\\mathcal{F}$ (forward image) rather than the correct $f^{-1}(E)\\in\\mathcal{F}$ for $E\\in\\mathcal{G}$ (preimage) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measurable-function",
+      "title": "The Measurability Definition, and the Practical Open-Set Test (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Measurability Definition, and the Practical Open-Set Test (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measurable-function",
+      "title": "Measurable-But-Not-Continuous, and Why Open Sets Suffice (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Measurable-But-Not-Continuous, and Why Open Sets Suffice (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measurable-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.measurable-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that $f(x)=3x+1$ is Borel measurable by checking the preimage of a general open interval $(a,b)$.\n  2. Consider the function $h(x)=|x|$ (continuous, but with a \"corner\" at 0, not differentiable there). Explain why $h$ is nonetheless Borel measurable, citing the relevant general fact.\n  3. Define a step function taking value 2 on $(-\\infty,3)$ and value 5 on $[3,\\infty)$. Verify it is measurable despite its discontinuity at $x=3$, by checking preimages of a few representative open intervals.\n  4. Explain precisely why \"continuous implies measurable\" is a one-directional implication, using the step-function example to demonstrate the converse fails.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.prob.random-variable`)**: \"Recall from your `math.prob.random-variable` lesson that a random variable is defined as a function $X:\\Omega\\to\\mathbb{R}$ assigning a real number to each outcome — and that lesson's own notes explicitly flagged that the FULL formal definition actually requires $X$ to be a MEASURABLE function (a requirement that lesson deferred as 'not yet available' at the time it was authored). (a) Using THIS lesson's measurability definition, state precisely what additional condition $X:\\Omega\\to\\mathbb{R}$ must satisfy, beyond simply being 'a function,' to formally qualify as a random variable (hint: $X^{-1}(E)$ must be an event — i.e., must lie in the σ-algebra of events on $\\Omega$ — for every Borel set $E\\subseteq\\mathbb{R}$). (b) Explain why, for a FINITE or countable sample space $\\Omega$ (like a die roll, from that lesson's own worked example) where every subset counts as an event, this measurability condition is automatically satisfied for ANY function $X:\\Omega\\to\\mathbb{R}$ — meaning the measurability requirement is invisible/automatic at that lesson's level, only becoming a genuine additional constraint for uncountable sample spaces.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.measurable-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.sigma-algebra` (the σ-algebra $\\mathcal{F}$ on a set $X$, and the measurable space $(X,\\mathcal{F})$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.measurable-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.measurable-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.sigma-algebra` (the measurable spaces $(X,\\mathcal{F})$ and $(Y,\\mathcal{G})$ this concept's functions map between).\n- **Unlocks**: `math.meas.lebesgue-integral` (the Lebesgue integral is defined specifically for measurable functions — this concept's definition is the essential prerequisite object).\n- **Cross-link**: KG lists `math.prob.random-variable` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.prob.random-variable.md` **is already authored** — read directly (via grep) to confirm that blueprint explicitly defers full formal treatment of measurability, stating \"math.meas.measurable-function is NOT a Tier 1 concept; treat cross_links as empty\" at its own authoring time. The P76 transfer probe above directly closes this loop, requiring the learner to state the precise measurability condition a random variable must satisfy and to explain why it is invisible (automatically satisfied) for the finite/countable sample spaces that concept's own worked examples used.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measurable-function.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
