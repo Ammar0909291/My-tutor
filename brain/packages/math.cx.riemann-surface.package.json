@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.riemann-surface-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.riemann-surface",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2fd32bff7258d5bf91c22ee051eb4e83965878499704591315c9306b7e0757b6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.riemann-surface.md": "sha256:c0d0d1dd6250107ffac3804dd1e680e40d0947871a9df0bdb2984e30959a182c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.riemann-surface",
+    "name": "Riemann Surface",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.55,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.cx.analytic-continuation",
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.riemann-surface-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.riemann-surface (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.riemann-surface.md": "sha256:c0d0d1dd6250107ffac3804dd1e680e40d0947871a9df0bdb2984e30959a182c"
+      },
+      "contentHash": "sha256:eb75d92fbcef27c008f87ab12c6d354da8410c0fe992b9db04484a671515cd43",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-surface.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-surface.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-surface"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-surface\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-surface.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-surface.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-surface"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-surface\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-surface.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-surface.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-surface"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-surface\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-surface.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-surface.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-surface"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-surface\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.riemann-surface/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize the core motivating problem — multivalued functions like $\\log z$ (whose value changes by $2\\pi i$ after a loop around $0$, per `math.cx.analytic-continuation`'s own monodromy example) and $\\sqrt z$ are NOT genuinely single-valued functions on $\\mathbb C\\setminus\\{0\\}$ — and recognize a **Riemann surface** as a new domain (a one-dimensional complex manifold) built specifically so these functions BECOME single-valued there.\n- LO2: Construct the Riemann surface for $\\log z$ as an **infinite-sheeted helical cover** of $\\mathbb C\\setminus\\{0\\}$ — each sheet corresponding to adding a multiple of $2\\pi i$, stacked so that going around the origin once moves you to the NEXT sheet rather than back to the same point — directly resolving `math.cx.analytic-continuation`'s monodromy issue as a domain-construction problem, not a paradox.\n- LO3 (orientation level — full topological treatment deferred to the cross-linked child): recognize that COMPACT Riemann surfaces are classified by **genus** (sphere = genus $0$, torus = genus $1$, etc.), and recognize **branch points** (like $z=0$ for $\\sqrt z$, where sheets genuinely merge after finitely many loops) as a distinct phenomenon from $\\log z$'s never-closing infinite helical structure — deferred to `math.top.covering-space` for the full topological framework.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "MULTIVALUEDNESS-TREATED-AS-PATCHABLE-QUIRK",
+      "content": "| MC-1 | MULTIVALUEDNESS-TREATED-AS-PATCHABLE-QUIRK | Believing a multivalued function's misbehavior should be patched with an ad-hoc convention (like a principal branch), missing that it signals the function's true domain must genuinely change | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "RIEMANN-SURFACE-ASSUMED-MERELY-NOTATIONAL",
+      "content": "| MC-2 | RIEMANN-SURFACE-ASSUMED-MERELY-NOTATIONAL | Believing the Riemann surface construction is a notational bookkeeping trick, missing that it is a genuine, rigorous new geometric domain on which the function is honestly single-valued | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "ALL-MULTIVALUED-FUNCTIONS-ASSUMED-INFINITE-SHEETED",
+      "content": "| MC-3 | ALL-MULTIVALUED-FUNCTIONS-ASSUMED-INFINITE-SHEETED | Believing every multivalued function requires an infinite, never-closing Riemann surface like $\\log z$'s, missing that branch points (like $\\sqrt z$'s) produce genuinely different, finite-sheeted structures | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Multivaluedness Signals the Wrong Domain, Not a Bug to Patch (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Multivaluedness Signals the Wrong Domain, Not a Bug to Patch (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "The Helical Surface Is a Genuine New Geometric Domain (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Helical Surface Is a Genuine New Geometric Domain (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Branch Points Differ Fundamentally From Log z's Infinite Structure (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Branch Points Differ Fundamentally From Log z's Infinite Structure (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain, using `math.cx.analytic-continuation`'s own monodromy example, why $\\log z$ cannot be treated as an ordinary single-valued function on $\\mathbb C\\setminus\\{0\\}$.\n  2. Explain how the helical Riemann surface construction (stacking infinitely many sheets) makes $\\log z$ single-valued, referencing what happens when you cross the branch cut.\n  3. Verify that going around the origin TWICE with $\\sqrt z$ returns to the starting value (a computation confirming $\\sqrt z$ has exactly $2$ sheets, not infinitely many).\n  4. Explain the difference between a branch point (like $z=0$ for $\\sqrt z$) and $\\log z$'s own infinite helical structure, in terms of what happens after finitely many loops around the origin.\n- **P76 (Transfer Probe, mode = independence)**: \"Consider $f(z)=z^{1/3}$ (the cube root function) on $\\mathbb C\\setminus\\{0\\}$. (a) Determine how many times you must loop around the origin before $f(z)$ returns to its original value (i.e., how many 'sheets' this function's Riemann surface has), using the same reasoning style as this lesson's $\\sqrt z$ analysis. (b) Explain whether $z=0$ is a branch point for $f(z)=z^{1/3}$, and if so, contrast its structure with $\\log z$'s own infinite helical structure. (c) Explain, in your own words, why building the correct Riemann surface for a multivalued function is a more honest mathematical solution than simply picking a 'principal branch' convention and ignoring the rest of the surface.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.analytic-continuation` (the monodromy phenomenon: continuing $\\log z$ around a loop enclosing the origin returns to the same point with a different value, $2\\pi i$ added) and `math.top.topological-space` (the general notion of a space with open sets, needed to make sense of a \"one-dimensional complex manifold\").",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-surface/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.riemann-surface",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-continuation` (the monodromy phenomenon this concept's entire motivation directly resolves) and `math.top.topological-space` (the general notion of a space, needed to make sense of a \"one-dimensional complex manifold\").\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.top.covering-space`, checked via `ls docs/curriculum/blueprints/` at the time of authoring THIS blueprint and confirmed not yet authored. $P76_{mode}=$ **independence**. (Note: `math.top.covering-space` is authored later in this same batch, and its own blueprint engages this concept as a genuine cross-link probe, directly formalizing the \"evenly covered\"/universal-cover framework underlying both the log z and √z constructions built here.)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-surface.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

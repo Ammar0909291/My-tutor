@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.eulers-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.eulers-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:525604195e17ca7fe6e545f2c38300d8cccf4372870fd1fea2a71f4a46453e20",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.eulers-theorem.md": "sha256:c93e4754f788d31737f2802db145fd38208ecdd2b3f3a2528b941f86fc621baa"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.eulers-theorem",
+    "name": "Euler's Theorem",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.fermats-little-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.eulers-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.eulers-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.eulers-theorem.md": "sha256:c93e4754f788d31737f2802db145fd38208ecdd2b3f3a2528b941f86fc621baa"
+      },
+      "contentHash": "sha256:b1da7416f90217ddb9fa2a7823c363e9384a8f7d963e05c4b15bd02fae29419b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.eulers-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.eulers-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.eulers-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.eulers-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.eulers-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State **Euler's Theorem**: if $\\gcd(a,n)=1$, then $a^{\\varphi(n)}\\equiv1\\pmod n$, where $\\varphi(n)$ is Euler's totient function (the count of integers in $[1,n]$ coprime to $n$) — and recognize this as a DIRECT generalization of `math.nt.fermats-little-theorem`'s $a^{p-1}\\equiv1\\pmod p$: when $n=p$ is PRIME, $\\varphi(p)=p-1$ exactly, so Euler's Theorem reduces LITERALLY to Fermat's Little Theorem.\n- LO2: Apply Euler's Theorem to a COMPOSITE modulus (where Fermat's Little Theorem does not apply at all, since it requires a prime modulus) — correctly computing $\\varphi(n)$ for a small composite $n$ and verifying the theorem's conclusion directly.\n- LO3 (orientation level — full treatment deferred to the unlocked child): recognize Euler's Theorem as the mathematical foundation of RSA encryption, where the modulus $n=pq$ (a product of two large primes) makes $\\varphi(n)=(p-1)(q-1)$ computable ONLY by someone who knows the factorization of $n$ — deferred to `math.nt.rsa-basics`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "EULER-AND-FERMAT-ASSUMED-UNRELATED",
+      "content": "| MC-1 | EULER-AND-FERMAT-ASSUMED-UNRELATED | Believing Euler's Theorem and Fermat's Little Theorem are separate facts that merely resemble each other, missing that Euler's Theorem literally reduces to Fermat's when $n$ is prime | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "EULERS-THEOREM-ASSUMED-PRIME-ONLY",
+      "content": "| MC-2 | EULERS-THEOREM-ASSUMED-PRIME-ONLY | Believing Euler's Theorem, like Fermat's Little Theorem, only applies to prime moduli, missing that its real power is applying to composite moduli too | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "PHI-N-ASSUMED-ALWAYS-EASY",
+      "content": "| MC-3 | PHI-N-ASSUMED-ALWAYS-EASY | Believing $\\varphi(n)$ is always easy to compute directly from $n$ alone, missing that for $n=pq$ (large unknown primes), computing $\\varphi(n)$ genuinely requires knowing the factorization | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Euler's Theorem Literally Contains Fermat's, Not Just Resembles It (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Euler's Theorem Literally Contains Fermat's, Not Just Resembles It (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "The Real Power Is Composite Moduli, Where Fermat's Says Nothing (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Real Power Is Composite Moduli, Where Fermat's Says Nothing (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Computing φ(n) Requires Knowing the Factorization (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Computing φ(n) Requires Knowing the Factorization (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\varphi(11)$ ($11$ is prime) and verify it equals $p-1=10$, confirming Euler's Theorem reduces to Fermat's Little Theorem for this prime.\n  2. Compute $\\varphi(15)$ ($15=3\\times5$, composite) by counting integers $1$–$15$ coprime to $15$, and state what Euler's Theorem predicts for $a^{\\varphi(15)}\\bmod15$ when $\\gcd(a,15)=1$.\n  3. Verify Euler's Theorem directly for $n=15$, $a=2$ (check $\\gcd(2,15)=1$, then compute $2^{\\varphi(15)}\\bmod15$ using your answer from problem 2).\n  4. Explain why Euler's Theorem, unlike Fermat's Little Theorem, can be applied directly to a modulus like $n=15$, and explain what makes this generalization valuable for cryptographic applications (referencing this lesson's RSA preview).\n- **P76 (Transfer Probe, mode = independence)**: \"A cryptographic system uses modulus $n=21=3\\times7$. (a) Compute $\\varphi(21)$ directly, by either counting coprime integers or using the fact that $\\varphi(pq)=(p-1)(q-1)$ for distinct primes $p,q$. (b) Verify Euler's Theorem for $a=2$ (check $\\gcd(2,21)=1$ first), computing $2^{\\varphi(21)}\\bmod21$. (c) Explain why someone who only knows $n=21$ (without being told it factors as $3\\times7$) would need to factor $n$ first before being able to compute $\\varphi(21)$ directly via the $(p-1)(q-1)$ formula — and why this exact difficulty is what RSA encryption relies on for larger $n$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.nt.fermats-little-theorem` ($a^{p-1}\\equiv1\\pmod p$ for prime $p$ with $p\\nmid a$, and the genuine failure of the conclusion when the hypothesis is violated).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.eulers-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.eulers-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.fermats-little-theorem` (the special-case statement $a^{p-1}\\equiv1\\pmod p$ this concept directly generalizes, and its own hypothesis-violation example this concept's structure mirrors).\n- **Unlocks**: `math.nt.rsa-basics` (will fully develop the RSA foundation previewed at orientation level in LO3; not yet authored).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.eulers-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

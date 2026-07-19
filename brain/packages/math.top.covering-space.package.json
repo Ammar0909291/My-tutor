@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.covering-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.covering-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:855f904ce2f7c945a54da08256891740ff0e7ea53c2fd11287a32c6c00ffdf7d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.covering-space.md": "sha256:2258ee5681c80122ee0b1c38ba5089a042b3545a0c7aa91bd3e28e6206889a0e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.covering-space",
+    "name": "Covering Space",
+    "difficultyRaw": "research",
+    "bloom": "apply",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.top.fundamental-group"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.covering-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.covering-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.covering-space.md": "sha256:2258ee5681c80122ee0b1c38ba5089a042b3545a0c7aa91bd3e28e6206889a0e"
+      },
+      "contentHash": "sha256:2dc597d8c5003f6912e054f123405bf0c10b4b1bb29347f7a2be3e7d46134715",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.covering-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.covering-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.covering-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.covering-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.covering-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.covering-space.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.covering-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.covering-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.covering-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.covering-space.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.covering-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.covering-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.covering-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.covering-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.covering-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.covering-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.covering-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.covering-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **covering map** $p:\\tilde X\\to X$: every point $x\\in X$ has an open neighborhood $U$ such that $p^{-1}(U)$ is a DISJOINT UNION of open sets, each mapped HOMEOMORPHICALLY onto $U$ by $p$ (\"evenly covered\") — and recognize `math.cx.riemann-surface`'s own helical $\\log z$ construction as a concrete instance (the surface evenly covers $\\mathbb C\\setminus\\{0\\}$, with each small disk covered by infinitely many disjoint disk-copies, one per sheet).\n- LO2: Define the **universal cover** as the simply-connected covering space (trivial $\\pi_1$) — and recognize `math.cx.riemann-surface`'s own $\\log z$ helical surface as literally the universal cover of $\\mathbb C\\setminus\\{0\\}$, correctly distinguishing this SPECIAL, distinguished covering space from covering spaces in general (which need NOT be simply connected).\n- LO3 (orientation level — named further theory): recognize the **Galois correspondence** — subgroups of $\\pi_1(X)$ correspond bijectively to covering spaces of $X$ — as a precise, rigorous bijection (not a loose analogy), concretely illustrated by `math.cx.riemann-surface`'s own $\\log z$ (trivial subgroup) and $\\sqrt z$ (index-$2$ subgroup) examples.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.covering-space",
+      "title": "EVENLY-COVERED-UNDERSPECIFIED",
+      "content": "| MC-1 | EVENLY-COVERED-UNDERSPECIFIED | Believing \"evenly covered\" merely requires a connected preimage or surjectivity, missing the specific disjoint-union-of-homeomorphic-copies structure it requires, and why the origin must be excluded from log z's base | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.covering-space",
+      "title": "ALL-COVERING-SPACES-ASSUMED-SIMPLY-CONNECTED",
+      "content": "| MC-2 | ALL-COVERING-SPACES-ASSUMED-SIMPLY-CONNECTED | Believing every covering space is automatically simply connected, conflating covering spaces in general with the specific, distinguished universal cover | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.covering-space",
+      "title": "GALOIS-CORRESPONDENCE-ASSUMED-LOOSE-ANALOGY",
+      "content": "| MC-3 | GALOIS-CORRESPONDENCE-ASSUMED-LOOSE-ANALOGY | Believing the Galois correspondence between subgroups of $\\pi_1(X)$ and covering spaces is a loose naming analogy, missing that it is a precise, checkable bijection | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.covering-space",
+      "title": "Evenly Covered Means Disjoint Homeomorphic Copies, Nothing Less (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Evenly Covered Means Disjoint Homeomorphic Copies, Nothing Less (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.covering-space",
+      "title": "Not Every Covering Space Is Simply Connected (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Not Every Covering Space Is Simply Connected (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.covering-space",
+      "title": "The Galois Correspondence Is a Precise Bijection, Not a Loose Analogy (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Galois Correspondence Is a Precise Bijection, Not a Loose Analogy (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.covering-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.covering-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the precise definition of \"evenly covered\" and explain why the point $z=0$ must be excluded from the base space $\\mathbb C\\setminus\\{0\\}$ for $\\log z$'s helical covering to make sense.\n  2. Explain why the helical Riemann surface for $\\log z$ is simply connected, referencing what happens to a loop that starts and ends at the same point on that surface.\n  3. Determine whether $\\sqrt z$'s $2$-sheeted Riemann surface is simply connected, by considering what happens when a loop in the base $\\mathbb C\\setminus\\{0\\}$ winds around the origin exactly twice.\n  4. State which subgroup of $\\pi_1(\\mathbb C\\setminus\\{0\\})\\cong\\mathbb Z$ corresponds to $\\log z$'s covering, and which corresponds to $\\sqrt z$'s covering, according to the Galois correspondence.\n- **P76 (Transfer Probe, mode = cross-link probe, engaging `math.cx.riemann-surface`)**: \"Recall from `math.cx.riemann-surface` that the cube root function $z^{1/3}$ has a $3$-sheeted Riemann surface (loops must wind around the origin exactly $3$ times to return to the starting value). (a) Using this lesson's covering-space framework, explain precisely what 'evenly covered' means for this $3$-sheeted surface over the base $\\mathbb C\\setminus\\{0\\}$. (b) Determine whether this $3$-sheeted surface is simply connected, by considering what happens to a loop winding around the origin exactly $3$ times. (c) State which specific subgroup of $\\pi_1(\\mathbb C\\setminus\\{0\\})\\cong\\mathbb Z$ corresponds to this $3$-sheeted covering, according to the Galois correspondence, and explain your reasoning by analogy with this lesson's $\\log z$ (trivial subgroup) and $\\sqrt z$ (subgroup $2\\mathbb Z$) examples.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.covering-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.fundamental-group` ($\\pi_1(X,x_0)$, loops up to based homotopy, and the group structure under concatenation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.covering-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.covering-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.fundamental-group` ($\\pi_1(X,x_0)$ and the group structure of loops under based homotopy, the algebraic object this concept's correspondence connects covering spaces to).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.cx.riemann-surface`, verified authored via `ls docs/curriculum/blueprints/` (authored earlier in this same batch). $P76_{mode}=$ **cross-link probe**, directly formalizing that concept's own log z/√z constructions within the rigorous evenly-covered/universal-cover/Galois-correspondence framework this concept develops.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.covering-space.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
