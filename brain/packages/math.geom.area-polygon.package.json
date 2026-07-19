@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.area-polygon-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.area-polygon",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:013fddc12e5de3936bbc5a7628b608979669e12cd9666359d9488bb8d15941fd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.area-polygon.md": "sha256:de9bbebf4dcd6f8bc809dd5e561b3bdaee704c0172ab1068e9c3ec52e6b6bcb7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.area-polygon",
+    "name": "Area of Polygons",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.area-triangle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.area-polygon-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.area-polygon (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.area-polygon.md": "sha256:de9bbebf4dcd6f8bc809dd5e561b3bdaee704c0172ab1068e9c3ec52e6b6bcb7"
+      },
+      "contentHash": "sha256:36afb9586db71bcf88a52ab8a18b11529c41baad47cc5219a71f638b4decea4d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.area-polygon.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-polygon.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-polygon\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area-polygon.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-polygon.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-polygon\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area-polygon.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-polygon.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-polygon\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area-polygon.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-polygon.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-polygon\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.area-polygon/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute a polygon's area by **decomposition into triangles** (drawing diagonals from one vertex to split the polygon into non-overlapping triangles, summing their areas via `math.geom.area-triangle`'s own formulas) — a GENERAL method working for ANY simple polygon, regular or irregular.\n- LO2: Apply the parallelogram area formula ($bh$) and the trapezoid area formula ($\\frac12(b_1+b_2)h$) as shortcuts, recognizing BOTH are DERIVABLE via triangle decomposition — specifically, a parallelogram decomposes into TWO congruent triangles (summing to $bh$, not $\\frac12bh$, which is only one triangle's area).\n- LO3: Apply the regular polygon formula $\\text{Area}=\\frac12ap$ (apothem times perimeter, halved), recognizing it comes from decomposing a regular $n$-gon into $n$ congruent isosceles triangles (each with height = apothem, base = one side) — directly the SAME triangle-decomposition principle from LO1, not an unrelated new formula.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.area-polygon",
+      "title": "POLYGON-AREA-FORMULAS-TREATED-AS-INDEPENDENT-FACTS",
+      "content": "| MC-1 | POLYGON-AREA-FORMULAS-TREATED-AS-INDEPENDENT-FACTS | Believing the parallelogram, trapezoid, and regular-polygon area formulas are three independent facts to memorize separately, missing they are all derivable from triangle decomposition | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.area-polygon",
+      "title": "PARALLELOGRAM-AREA-MISTAKENLY-USES-TRIANGLE-FORMULA",
+      "content": "| MC-2 | PARALLELOGRAM-AREA-MISTAKENLY-USES-TRIANGLE-FORMULA | Believing a parallelogram's area is 1/2*base*height (the triangle formula), missing that a parallelogram is made of two triangles, summing to base*height | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.area-polygon",
+      "title": "TRIANGLE-DECOMPOSITION-ASSUMED-ONLY-FOR-REGULAR-POLYGONS",
+      "content": "| MC-3 | TRIANGLE-DECOMPOSITION-ASSUMED-ONLY-FOR-REGULAR-POLYGONS | Believing triangle decomposition only works for regular or symmetric polygons, missing that it is a fully general method for any simple polygon | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Decomposition Works for Any Simple Polygon (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Decomposition Works for Any Simple Polygon (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Parallelogram Is Two Triangles, Not One (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Parallelogram Is Two Triangles, Not One (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-polygon",
+      "title": "The Regular Polygon Formula Is n-Triangle Decomposition (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Regular Polygon Formula Is n-Triangle Decomposition (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Decompose a pentagon of your choice (with given vertex coordinates) into triangles from one vertex, and compute its total area.\n  2. Compute the area of a parallelogram with base $10$ and height $3$, and explain why the answer is not $\\frac12(10)(3)$.\n  3. Compute the area of a trapezoid with parallel sides $5$ and $9$, and height $4$, using $\\frac12(b_1+b_2)h$.\n  4. For a regular octagon with side $3$ and apothem $a\\approx3.62$, compute the area using $\\frac12ap$, and explain what $n$-triangle decomposition this formula represents.\n- **P76 (Transfer Probe, mode = independence)**: \"A landscape architect needs to compute the area of an irregularly-shaped garden plot with 6 straight sides, none of them parallel or equal in length. (a) Explain why none of the standard shortcut formulas (parallelogram, trapezoid, regular polygon) apply directly to this plot. (b) Describe the general method the architect should use instead, referencing this lesson's triangle-decomposition approach. (c) A colleague suggests that since the plot happens to have exactly 6 sides, the regular-hexagon formula $\\frac12ap$ might still apply approximately. Explain why this would be a mistake, given the plot is not a REGULAR hexagon.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.area-triangle` (Area $=\\frac12\\times\\text{base}\\times\\text{height}$, using the perpendicular altitude; Heron's formula from side lengths alone).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.area-polygon/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.area-polygon",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.area-triangle` (the $\\frac12bh$ and Heron's formula this concept's decomposition method directly sums).\n- **Unlocks**: `math.geom.area` (a broader treatment of area across shape families, building on this concept's decomposition and shortcut-formula machinery).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-polygon.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

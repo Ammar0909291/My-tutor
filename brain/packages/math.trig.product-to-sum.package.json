@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.product-to-sum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.product-to-sum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ba258fb86294809673cc91cef0cb83949c75a091b13c405f8a6729129ebc53cb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.product-to-sum.md": "sha256:aa52656e6a30eddb91562c1f60d8e6cabf3731fadc5e087155b3a8d2eb4c657b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.product-to-sum",
+    "name": "Product-to-Sum and Sum-to-Product Formulas",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.trig.sum-difference-formulas"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.product-to-sum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.product-to-sum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.product-to-sum.md": "sha256:aa52656e6a30eddb91562c1f60d8e6cabf3731fadc5e087155b3a8d2eb4c657b"
+      },
+      "contentHash": "sha256:81cc0508f2d79187008ff13d59fb369bdf746cd413da4886ea2b2b2152528610",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.product-to-sum.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.product-to-sum.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.product-to-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.product-to-sum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.product-to-sum.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.product-to-sum.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.product-to-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.product-to-sum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.product-to-sum.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.product-to-sum.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.product-to-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.product-to-sum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.product-to-sum.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.product-to-sum.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.product-to-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.product-to-sum\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.product-to-sum/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the remaining three product-to-sum formulas — $\\cos A\\sin B$, $\\cos A\\cos B$, $\\sin A\\sin B$ — by adding or subtracting the appropriate pair of sum/difference formulas, completing what `math.trig.sum-difference-formulas`'s own Example 3 already began (that concept derived $\\sin A\\cos B=\\frac12[\\sin(A+B)+\\sin(A-B)]$ by ADDING the two sine formulas) — correctly matching each product to its specific required combination, never confusing the four.\n- LO2: Derive the **sum-to-product** direction (the reverse conversion, e.g. $\\sin X+\\sin Y=2\\sin\\left(\\frac{X+Y}2\\right)\\cos\\left(\\frac{X-Y}2\\right)$) via a genuine substitution ($A=\\frac{X+Y}2$, $B=\\frac{X-Y}2$) — recognizing this requires solving for $A,B$ explicitly, not merely \"reading the product-to-sum formula backward\" informally.\n- LO3: Apply product-to-sum conversion to make an otherwise-difficult integral directly computable — converting a product of trig functions with no simple antiderivative into a sum of simpler terms that integrate immediately, one at a time.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "PRODUCT-TO-SUM-FORMULAS-CONFLATED",
+      "content": "| MC-1 | PRODUCT-TO-SUM-FORMULAS-CONFLATED | Believing the four product-to-sum formulas are interchangeable or essentially the same, missing that each requires its own specific addition/subtraction combination | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "SUM-TO-PRODUCT-TREATED-AS-INFORMAL-REVERSAL",
+      "content": "| MC-2 | SUM-TO-PRODUCT-TREATED-AS-INFORMAL-REVERSAL | Believing sum-to-product conversion is just reading the product-to-sum formula backward informally, missing the genuine substitution/solving step required | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "PRODUCT-TO-SUM-CONVERSIONS-ASSUMED-PURELY-ALGEBRAIC",
+      "content": "| MC-3 | PRODUCT-TO-SUM-CONVERSIONS-ASSUMED-PURELY-ALGEBRAIC | Believing these conversions are algebraic curiosities with no practical use, missing their role in making otherwise-difficult integrals routine | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Four Distinct Combinations, Not One Formula (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Four Distinct Combinations, Not One Formula (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Sum-to-Product Needs Solving, Not Just Reversing (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sum-to-Product Needs Solving, Not Just Reversing (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Products Without Simple Antiderivatives Become Routine as Sums (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Products Without Simple Antiderivatives Become Routine as Sums (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Derive $\\cos A\\cos B$ in terms of a sum, showing which two formulas you add.\n  2. Derive $\\sin A\\sin B$ in terms of a difference, showing which two formulas you subtract and in which order.\n  3. Convert $\\cos(7x)-\\cos(3x)$ into product form, solving explicitly for the correct $A$ and $B$.\n  4. Compute $\\int\\cos(5x)\\sin(x)\\,dx$ by first converting the product to a sum.\n- **P76 (Transfer Probe, mode = independence)**: \"An acoustic engineer analyzes a signal that is the SUM of two pure tones, $\\sin(440t)+\\sin(444t)$ (two very close frequencies, producing an audible 'beating' effect). (a) Convert this sum into product form, and explain what the resulting product's two factors represent physically (one slowly-varying envelope, one fast-oscillating carrier). (b) A colleague, working with a DIFFERENT signal that is a genuine PRODUCT of two tones, $\\sin(440t)\\cos(4t)$, wants to understand its frequency content by converting it to a sum. Perform this conversion. (c) Explain why the engineer needed genuinely different techniques (sum-to-product for one signal, product-to-sum for the other) rather than treating both conversions as interchangeable.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.trig.sum-difference-formulas` ($\\cos(A\\mp B)=\\cos A\\cos B\\pm\\sin A\\sin B$, $\\sin(A\\pm B)=\\sin A\\cos B\\pm\\cos A\\sin B$; the derivation of $\\sin A\\cos B=\\frac12[\\sin(A+B)+\\sin(A-B)]$ as a direct consequence of these, by adding the two sine formulas).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.trig.product-to-sum/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.product-to-sum",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.trig.sum-difference-formulas` (the four sum/difference formulas this concept's product-to-sum identities are all built from, and whose own Example 3 already derived one of the four).\n- **Unlocks**: `math.calc.trig-integrals` (uses product-to-sum conversion directly to make products of sines/cosines integrable).\n- **Cross-link**: KG lists `math.calc.trig-integrals` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into trigonometric integration techniques once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.product-to-sum.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
