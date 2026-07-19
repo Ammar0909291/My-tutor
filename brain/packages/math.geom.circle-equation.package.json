@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.circle-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.circle-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3068ddd52b60ee72d97c39f9184e0e07847e295617424d0f954e8e6a4da7b5a8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.circle-equation.md": "sha256:8413a6ed4c7be6bede1abab08f24bacb5b61da6d4d68fdfa7ed04375d6ff42c9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.circle-equation",
+    "name": "Equation of a Circle",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.geom.circle",
+      "math.geom.coordinate-plane"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.circle-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.circle-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.circle-equation.md": "sha256:8413a6ed4c7be6bede1abab08f24bacb5b61da6d4d68fdfa7ed04375d6ff42c9"
+      },
+      "contentHash": "sha256:d57204b748b3e101e6de1eb6fd6f80fd35cfb82b86b4f9827389c519edc93a6f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-equation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-equation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-equation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-equation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-equation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-equation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-equation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-equation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-equation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-equation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.circle-equation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the standard-form circle equation $(x-h)^2+(y-k)^2=r^2$ directly from the distance formula — a circle is the set of points at distance EXACTLY $r$ from center $(h,k)$ — correctly squaring both sides (not leaving the radius unsquared).\n- LO2: Convert a circle's equation from EXPANDED form ($x^2+y^2+Dx+Ey+F=0$) to standard form via completing the square, correctly identifying the center and radius — and recognize that NOT every such expanded equation represents a genuine circle: the resulting \"radius²\" can be zero (a single degenerate point) or negative (no real solutions at all).\n- LO3: Apply the standard-form equation to determine whether a given point lies INSIDE, ON, or OUTSIDE a circle, by directly comparing $(x-h)^2+(y-k)^2$ to $r^2$ — without needing to solve the equation for either variable.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-equation",
+      "title": "RADIUS-NOT-SQUARED-IN-EQUATION",
+      "content": "| MC-1 | RADIUS-NOT-SQUARED-IN-EQUATION | Believing the standard-form circle equation has the radius (not radius squared) on the right-hand side | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-equation",
+      "title": "EXPANDED-FORM-ASSUMED-ALWAYS-A-GENUINE-CIRCLE",
+      "content": "| MC-2 | EXPANDED-FORM-ASSUMED-ALWAYS-A-GENUINE-CIRCLE | Believing every equation of the form x²+y²+Dx+Ey+F=0 represents a genuine circle, missing that completing the square can yield a degenerate point or empty set | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-equation",
+      "title": "POSITION-CHECK-ASSUMED-TO-REQUIRE-SOLVING",
+      "content": "| MC-3 | POSITION-CHECK-ASSUMED-TO-REQUIRE-SOLVING | Believing determining a point's position relative to a circle requires solving the equation for a variable, missing the much simpler direct-comparison method | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-equation",
+      "title": "The Right Side Is Radius Squared, Not Radius (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Right Side Is Radius Squared, Not Radius (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Completing the Square Can Reveal a Degenerate or Empty Case (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Completing the Square Can Reveal a Degenerate or Empty Case (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Position Is Determined by Direct Comparison (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Position Is Determined by Direct Comparison (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Write the standard-form equation for a circle with center $(-2,5)$ and radius $3$, and verify the point $(-2,8)$ lies on it.\n  2. Convert $x^2+y^2+6x-2y+6=0$ to standard form, identifying the center and radius.\n  3. Determine whether $x^2+y^2+2x+2y+3=0$ represents a genuine circle, a degenerate point, or an empty set.\n  4. Without solving the equation, determine whether $(5,5)$ is inside, on, or outside the circle $(x-2)^2+(y-1)^2=20$.\n- **P76 (Transfer Probe, mode = independence)**: \"A GPS-based delivery system models a driver's service radius as a circle of radius $8$ km centered at a warehouse at coordinates $(0,0)$. (a) Write the standard-form equation for this service-area circle. (b) A customer at coordinates $(6,7)$ wants to know if they're within the service area, without the system needing to solve the circle's equation. Using this lesson's direct-comparison method, determine whether the customer is inside, on, or outside the service circle. (c) A software engineer, refactoring the system, proposes representing the service area using the expanded-form equation $x^2+y^2-64=0$ instead, arguing 'it's mathematically equivalent and simpler to store.' Using this lesson's degenerate/empty-case reasoning, explain what check the engineer should still perform before trusting that ANY expanded-form equation used elsewhere in the system genuinely represents a circle with positive radius, rather than a degenerate point or empty set.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.circle` (circle definition, radius, center) and `math.geom.coordinate-plane` (Cartesian coordinates, the distance formula).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.circle-equation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.circle-equation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.circle` (the circle/center/radius definition this concept's equation formalizes), `math.geom.coordinate-plane` (Cartesian coordinates and the distance formula this concept's derivation directly uses).\n- **Unlocks**: `math.geom.conic-sections` (the circle equation is the simplest instance of the general conic-section equation family this concept sets up).\n- **Cross-link**: KG lists `math.geom.conic-sections` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe once that entry exists, connecting the circle's standard-form equation to the broader conic-section family (ellipses, parabolas, hyperbolas) as variations on the same completing-the-square technique.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-equation.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

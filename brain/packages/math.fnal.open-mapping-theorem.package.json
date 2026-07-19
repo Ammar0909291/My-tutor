@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.open-mapping-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.open-mapping-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2c00571fc204c1dac0d88bfabf3e2e407377e48ba725a3b031ea013f89dd3081",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md": "sha256:5c9df2258f2b04e92e22bb187e9a24ba43440d6316249bbeeccecf8fef6e9462"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.open-mapping-theorem",
+    "name": "Open Mapping Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.fnal.banach-space",
+      "math.fnal.bounded-operator"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.open-mapping-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.open-mapping-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md": "sha256:5c9df2258f2b04e92e22bb187e9a24ba43440d6316249bbeeccecf8fef6e9462"
+      },
+      "contentHash": "sha256:3eedc097fa99e9eae5d61a446e3421d65b84a57c240589ab4efd83ec083a27f8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.open-mapping-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.open-mapping-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.open-mapping-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.open-mapping-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.open-mapping-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.open-mapping-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.open-mapping-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.open-mapping-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.open-mapping-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.open-mapping-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.open-mapping-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.open-mapping-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.open-mapping-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Open Mapping Theorem precisely — a **surjective** bounded linear operator $T:X\\to Y$ between **Banach spaces** is **open** (images of open sets are open) — correctly distinguishing \"open\" (IMAGES of open sets are open) from continuity/boundedness (PREIMAGES of open sets are open, already guaranteed for every bounded operator) — the opposite direction.\n- LO2: Apply the key corollary — a **bijective** bounded linear operator between Banach spaces has a **bounded inverse** — recognizing this as a genuinely surprising \"automatic continuity\" result, and correctly identifying that **completeness of BOTH spaces** is essential to it, via a concrete counterexample when completeness fails.\n- LO3 *(orientation-level, given the theorem's proof depends on the Baire Category theorem, itself not yet authored)*: Recognize that the theorem's proof genuinely relies on completeness through the **Baire Category theorem**, without deriving that argument in full.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "OPEN-MAPPING-CONFLATED-WITH-CONTINUITY",
+      "content": "| MC-1 | OPEN-MAPPING-CONFLATED-WITH-CONTINUITY | Believing boundedness/continuity of an operator already guarantees images of open sets are open, missing that this is the opposite direction from continuity's preimage property | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "COMPLETENESS-NOT-REQUIRED-FOR-BOUNDED-INVERSE-COROLLARY",
+      "content": "| MC-2 | COMPLETENESS-NOT-REQUIRED-FOR-BOUNDED-INVERSE-COROLLARY | Believing the bounded-inverse corollary holds for bijective bounded operators between any normed spaces, missing that completeness of BOTH spaces is essential | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "SURJECTIVITY-NOT-REQUIRED-FOR-OPENNESS",
+      "content": "| MC-3 | SURJECTIVITY-NOT-REQUIRED-FOR-OPENNESS | Believing every bounded linear operator between Banach spaces is automatically open regardless of surjectivity, missing that surjectivity is a necessary hypothesis | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Open (Images) Is the Opposite Direction from Continuous (Preimages) (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Open (Images) Is the Opposite Direction from Continuous (Preimages) (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Surjectivity Is a Genuinely Necessary Hypothesis (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Surjectivity Is a Genuinely Necessary Hypothesis (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Completeness Is Essential to the Bounded-Inverse Corollary (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Completeness Is Essential to the Bounded-Inverse Corollary (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain the difference between \"T is continuous\" and \"T is open,\" in terms of preimages vs. images of open sets.\n  2. Give an example (other than the projection in Example 1) of a bounded linear operator that is not open, and explain which hypothesis it fails.\n  3. Explain why $T^{-1}$ being unbounded in Example 2 does not contradict the Open Mapping Theorem's corollary.\n  4. State all the hypotheses the Open Mapping Theorem requires (spaces, linearity, boundedness, surjectivity), and explain what would need to be verified before applying it to a new operator.\n- **P76 (Transfer Probe, mode = independence)**: \"A numerical analyst constructs a bijective bounded linear operator $T$ between two normed vector spaces used to model a discretized system, and wants to conclude the inverse operator (needed for solving the system) is automatically bounded. (a) State what additional property of the two spaces must be verified before applying the Open Mapping Theorem's corollary. (b) The analyst discovers one of the spaces is a proper, non-complete subspace of a larger Banach space (analogous to $c_{00}$ inside $c_0$). Using this lesson's counterexample reasoning, explain what could go wrong if the analyst assumes the inverse is bounded anyway. (c) A colleague argues 'since $T$ itself is bounded and bijective, the inverse operator must be given by a perfectly well-defined linear formula, so it should automatically be bounded too, regardless of completeness.' Explain specifically why this argument is incorrect, referencing Example 2's explicit unbounded-ratio computation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.banach-space` (complete normed vector space) and `math.fnal.bounded-operator` ($T$ bounded iff $\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|<\\infty$, equivalently continuous everywhere).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.open-mapping-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.open-mapping-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.banach-space` (the completeness hypothesis both LO2 and LO3 depend on), `math.fnal.bounded-operator` (the continuity/boundedness property this concept's \"open\" property is contrasted against).\n- **Unlocks**: `math.fnal.closed-graph-theorem` (a related consequence of the same completeness/Baire-category machinery).\n- **Cross-link**: KG lists `math.real.baire-category` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe once that entry exists, connecting this concept's LO3 orientation-level mention of the Baire Category theorem to that concept's own full treatment.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.open-mapping-theorem.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
