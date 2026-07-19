@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.convolution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.convolution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9dade8412a97fe059f5224bf8a081875ee7908984f41d5bbae917d3a1bba1fac",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.convolution.md": "sha256:c920142e4f658a22c801c62486dfdeaf2304d646b24b7a108eefcd8e9500fae5"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.convolution",
+    "name": "Convolution",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.meas.lebesgue-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.convolution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.convolution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.convolution.md": "sha256:c920142e4f658a22c801c62486dfdeaf2304d646b24b7a108eefcd8e9500fae5"
+      },
+      "contentHash": "sha256:ea1b48f43c36a6850856e1aa8c8372ab8b79525db3d940ea0759eeb7cb367bdf",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.convolution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.convolution.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.convolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.convolution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.convolution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.convolution.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.convolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.convolution\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.convolution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.convolution.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.convolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.convolution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.convolution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.convolution.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.convolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.convolution\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.convolution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.convolution",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **convolution** $(f*g)(x)=\\int f(x-y)g(y)\\,dy$, compute it directly for a simple pair of functions (the \"flip-and-slide\" geometric interpretation), and verify $f*g=g*f$ (commutativity, via a change of variables) — despite the asymmetric-looking flip-and-slide picture.\n- LO2: State **Young's inequality** $\\|f*g\\|_r\\le\\|f\\|_p\\|g\\|_q$ (with $\\frac1r=\\frac1p+\\frac1q-1$) at the level of recognizing what it controls — the convolution's own integrability is governed by the inputs' integrability, in a specific exponent-balancing trade-off — and correctly identify which exponent combination applies in a given scenario.\n- LO3 (cross-link probe, engaging `math.de.fourier-transform`): recognize the **convolution theorem** $\\mathcal F(f*g)=\\mathcal F(f)\\cdot\\mathcal F(g)$ — convolution in the original domain becomes ORDINARY MULTIPLICATION in the Fourier (frequency) domain — directly reusing that concept's own transform machinery, and recognize why this is an enormously valuable simplification.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.convolution",
+      "title": "CONVOLUTION-ASSUMED-NON-COMMUTATIVE",
+      "content": "| MC-1 | CONVOLUTION-ASSUMED-NON-COMMUTATIVE | Believing $f*g$ and $g*f$ could be different, given the visually asymmetric flip-and-slide construction, missing that a change of variables proves commutativity always | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.convolution",
+      "title": "YOUNGS-INEQUALITY-EXPONENTS-ASSUMED-ARBITRARY",
+      "content": "| MC-2 | YOUNGS-INEQUALITY-EXPONENTS-ASSUMED-ARBITRARY | Believing Young's inequality's exponent relationship is an arbitrary formula to memorize, missing that it expresses a genuine, checkable integrability trade-off | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.convolution",
+      "title": "CONVOLUTION-THEOREM-ASSUMED-MERE-CURIOSITY",
+      "content": "| MC-3 | CONVOLUTION-THEOREM-ASSUMED-MERE-CURIOSITY | Believing the convolution theorem is a computational curiosity with limited practical value, missing that it provides a genuine, often dramatic simplification strategy | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.convolution",
+      "title": "Convolution Is Commutative, Despite the Asymmetric Picture (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Convolution Is Commutative, Despite the Asymmetric Picture (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.convolution",
+      "title": "Young's Inequality's Exponent Relationship Is a Genuine Trade-Off (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Young's Inequality's Exponent Relationship Is a Genuine Trade-Off (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.convolution",
+      "title": "The Convolution Theorem Is a Genuine Simplification, Not a Curiosity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Convolution Theorem Is a Genuine Simplification, Not a Curiosity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.convolution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.convolution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $(f*g)(x)$ directly for $f(x)=g(x)=\\mathbf 1_{[0,2]}(x)$ (0 elsewhere), identifying the resulting piecewise \"triangle-like\" function.\n  2. Verify $f*g=g*f$ for the functions in problem 1 by checking that your answer doesn't depend on which function you call $f$ versus $g$.\n  3. For $f\\in L^2$ and $g\\in L^2$ (so $p=q=2$), use Young's inequality to determine what integrability class $r$ the convolution $f*g$ belongs to.\n  4. Explain, in your own words, why computing $\\mathcal F(f*g)=\\mathcal F(f)\\cdot\\mathcal F(g)$ is often much easier than directly computing the convolution integral, referencing this lesson's contrast.\n- **P76 (Transfer Probe, mode = cross-link probe, engaging `math.de.fourier-transform`)**: \"An audio engineer wants to apply a smoothing filter to a noisy signal $f(t)$, modeled as computing $(f*g)(t)$ where $g$ is a chosen smoothing kernel. (a) Using `math.de.fourier-transform`'s own transform machinery, explain the two-step strategy (transform, then what operation, then transform back) that avoids directly computing the convolution integral. (b) If the engineer already knows $\\mathcal F(f)(\\omega)$ and $\\mathcal F(g)(\\omega)$ individually, explain exactly what single operation combines them to get $\\mathcal F(f*g)(\\omega)$. (c) Explain why this two-step strategy is especially valuable in signal processing, where signals are processed by many successive filters (many successive convolutions) — referencing what would happen to the total computational effort if each filter required a fresh direct convolution integral versus a single multiplication in the frequency domain.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.convolution",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.lebesgue-integral` (integrating a function against a measure, and the machinery needed to make sense of the convolution integral rigorously).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.convolution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.convolution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.lebesgue-integral` (the integration machinery underlying the convolution integral's rigorous definition).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.de.convolution-theorem` (checked via `ls`, confirmed NOT YET authored) and `math.de.fourier-transform` (checked via `ls`, confirmed AUTHORED). $P76_{mode}=$ **cross-link probe**, engaging `math.de.fourier-transform` directly (that concept's own transform machinery is cited and applied throughout Example 3 and the P76 transfer probe).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.convolution.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

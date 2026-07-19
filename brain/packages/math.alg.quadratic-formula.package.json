@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.quadratic-formula-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.quadratic-formula",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6c6584821f08bf85a8145781a6dd6b9f3ada6ff168275e4b6ecd1c81e628ac15",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.quadratic-formula.md": "sha256:55f016f6e9c498df92a46b1a9987fe575240af682e2482546726b04481c73469"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.quadratic-formula",
+    "name": "Quadratic Formula",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.completing-the-square"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.quadratic-formula-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.quadratic-formula (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.quadratic-formula.md": "sha256:55f016f6e9c498df92a46b1a9987fe575240af682e2482546726b04481c73469"
+      },
+      "contentHash": "sha256:3eb81057d6f33c4079e70987630209bb59966e0f02caa09ae6caaaf165162015",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-formula.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-formula.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-formula.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-formula.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-formula\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-formula.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-formula.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-formula\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-formula.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-formula.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-formula\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.quadratic-formula/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the quadratic formula **symbolically** from completing the square, applied to the GENERAL $ax^2+bx+c=0$ (not a specific numeric case) — reusing `math.alg.completing-the-square`'s own non-monic procedure (factor out $a$, complete the square, solve) — confirming it produces exactly $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$.\n- LO2: Apply the quadratic formula DIRECTLY to solve a new quadratic equation, without re-deriving it via completing the square each time — recognizing the formula as a genuine computational SHORTCUT once derived, not requiring the full completing-the-square process to be repeated for every new equation.\n- LO3 (orientation level — full classification deferred to the unlocked child): recognize the expression $b^2-4ac$ (the **discriminant**, appearing under the square root) as controlling the NUMBER and TYPE of roots (two real, one repeated real, or two complex) — without deriving the full classification, deferred to `math.alg.discriminant`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "FORMULA-ASSUMED-UNRELATED-TO-COMPLETING-SQUARE",
+      "content": "| MC-1 | FORMULA-ASSUMED-UNRELATED-TO-COMPLETING-SQUARE | Believing the quadratic formula is a separate, independently memorized fact, missing that it is literally the symbolic output of the already-known completing-the-square procedure | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "RE-DERIVATION-ASSUMED-NECESSARY-EACH-TIME",
+      "content": "| MC-2 | RE-DERIVATION-ASSUMED-NECESSARY-EACH-TIME | Believing each new quadratic equation still requires completing the square (or re-deriving the formula) rather than direct substitution into the already-derived formula | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "ROOT-COUNT-ASSUMED-TO-REQUIRE-FULL-SOLVING",
+      "content": "| MC-3 | ROOT-COUNT-ASSUMED-TO-REQUIRE-FULL-SOLVING | Believing a quadratic must be fully solved to determine how many real roots it has, missing that the discriminant's sign alone answers this without solving | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "The Formula Is the Output of a Procedure You Already Trust (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Is the Output of a Procedure You Already Trust (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "The Formula Replaces Re-Derivation With Substitution (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Formula Replaces Re-Derivation With Substitution (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "The Discriminant's Sign Answers \"How Many Roots?\" Without Solving (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Discriminant's Sign Answers \\\"How Many Roots?\\\" Without Solving (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Derive the quadratic formula symbolically for $ax^2+bx+c=0$, following Example 1's steps (briefly is fine, rather than reproducing every line).\n  2. Solve $3x^2-2x-5=0$ by direct substitution into the quadratic formula (do not complete the square).\n  3. Explain why using the quadratic formula directly is more efficient than completing the square from scratch for every new quadratic equation, once the formula itself is known to be correct.\n  4. Without solving it, determine how many real roots $x^2-6x+9=0$ has, using only the discriminant's value.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to solve $4x^2+12x+9=0$ to find where a projectile's height equals zero. (a) Compute the discriminant first, and use its value to predict, before solving, how many distinct real roots the equation has. (b) Solve the equation directly using the quadratic formula. (c) Explain why computing the discriminant first (before fully solving) can be a useful strategy — for instance, if the engineer only needed to know whether the projectile's path touches the ground at exactly one point, two points, or never, without needing the exact numerical times.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.completing-the-square` (the full non-monic completing-the-square procedure — factor out $a$, complete the square, solve — already verified on a specific numeric quadratic in that concept's own Example 3).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-formula/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.quadratic-formula",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.completing-the-square` (the full non-monic procedure this concept's derivation directly generalizes symbolically, and whose own Example 3 already verified the procedure on a specific numeric quadratic).\n- **Unlocks**: `math.alg.discriminant` (will fully develop the root-count classification previewed at orientation level in LO3; not yet authored).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-formula.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
