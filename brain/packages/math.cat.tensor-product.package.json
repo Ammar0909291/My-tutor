@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.tensor-product-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.tensor-product",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3018e7045009148292c12756407447027fc51d0ea11df81ce1fddccb394ffa73",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.tensor-product.md": "sha256:0600c64bae05e2f59a81010284cfc47f4c7d9640fce65788fc53be41dc433869"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cat.tensor-product",
+    "name": "Tensor Product (Categorical)",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.5,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.cat.limits"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.tensor-product-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.tensor-product (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.tensor-product.md": "sha256:0600c64bae05e2f59a81010284cfc47f4c7d9640fce65788fc53be41dc433869"
+      },
+      "contentHash": "sha256:76afe64c3d304302f832cf3913bd5304ee6ca2b2672fc7806b253fee531a82be",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.tensor-product.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.tensor-product.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.tensor-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.tensor-product\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.tensor-product.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.tensor-product.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.tensor-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.tensor-product\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.tensor-product.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.tensor-product.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.tensor-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.tensor-product\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.tensor-product.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.tensor-product.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.tensor-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.tensor-product\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.tensor-product/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.tensor-product",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **monoidal category** $(C,\\otimes,I)$ — a bifunctor $\\otimes:C\\times C\\to C$ together with a unit object $I$, satisfying associativity and unit laws — and recognize $(\\mathrm{Vect},\\otimes,k)$, with $\\otimes$ the ordinary vector-space tensor product from `math.linalg.tensor`, as the CONCRETE instance this abstract structure generalizes.\n- LO2: Verify that $(\\mathrm{Set},\\times,\\{*\\})$ satisfies the monoidal laws only **up to natural isomorphism**, not literal equality — i.e. $A\\times(B\\times C)\\ne(A\\times B)\\times C$ as literal sets, but there is a canonical, coherent isomorphism between them.\n- LO3 (orientation level — full coherence theory deferred): recognize, without full derivation, that **symmetric** monoidal structure ($A\\otimes B\\cong B\\otimes A$) is EXTRA data, not automatic, previewing $(\\mathrm{Ab},\\otimes_\\mathbb{Z},\\mathbb{Z})$ as a further concrete instance.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.tensor-product",
+      "title": "CATEGORICAL-TENSOR-ASSUMED-UNRELATED-TO-VECT",
+      "content": "| MC-1 | CATEGORICAL-TENSOR-ASSUMED-UNRELATED-TO-VECT | Believing the categorical monoidal-category definition is an unrelated abstract structure, missing that $(\\mathrm{Vect},\\otimes,k)$ — using `math.linalg.tensor`'s own construction — is the concrete instance it directly generalizes | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.tensor-product",
+      "title": "MONOIDAL-LAWS-ASSUMED-LITERAL-EQUALITY",
+      "content": "| MC-2 | MONOIDAL-LAWS-ASSUMED-LITERAL-EQUALITY | Believing associativity/unit laws mean literal equality of objects, missing that they hold up to coherent natural isomorphism | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.tensor-product",
+      "title": "SYMMETRY-ASSUMED-AUTOMATIC",
+      "content": "| MC-3 | SYMMETRY-ASSUMED-AUTOMATIC | Believing every monoidal category automatically satisfies $A\\otimes B\\cong B\\otimes A$, missing that symmetric monoidal structure is additional, separately verified data | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.tensor-product",
+      "title": "The Abstract Axioms Are Read Off an Already-Verified Concrete Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Abstract Axioms Are Read Off an Already-Verified Concrete Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.tensor-product",
+      "title": "\"Up To Isomorphism\" Is Not \"Equal\" (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"\\\"Up To Isomorphism\\\" Is Not \\\"Equal\\\" (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.tensor-product",
+      "title": "Symmetric Structure Must Be Verified, Not Assumed (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Symmetric Structure Must Be Verified, Not Assumed (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.tensor-product",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.tensor-product",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the three data $(C,\\otimes,I)$ a monoidal category requires, and the two law-types (associativity, unit) they must satisfy.\n  2. Explain why $(\\mathrm{Vect},\\otimes,k)$, using `math.linalg.tensor`'s own tensor product, satisfies bifunctoriality.\n  3. For $A=\\{1\\},B=\\{2,3\\}$, write out $(\\{*\\}\\times A)$ and $A$ explicitly, and state the natural isomorphism between them (the unit law).\n  4. Explain, without full proof, why symmetric monoidal structure is an ADDITIONAL property rather than automatic for any monoidal category.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.linalg.tensor`)**: \"Consider $(\\mathrm{Ab},\\otimes_\\mathbb{Z},\\mathbb{Z})$, the tensor product of abelian groups over $\\mathbb{Z}$. (a) Identify the unit object and explain, by analogy with `math.linalg.tensor`'s field-as-scalars case, why $\\mathbb{Z}\\otimes_\\mathbb{Z}A\\cong A$. (b) State whether $(\\mathrm{Ab},\\otimes_\\mathbb{Z},\\mathbb{Z})$ is symmetric monoidal, and what would need verifying to confirm it. (c) Contrast this categorical tensor product with `math.linalg.tensor`'s own vector-space tensor product: what is preserved in the generalization from $\\mathrm{Vect}$ to $\\mathrm{Ab}$, and what is abstracted away?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.tensor-product",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cat.limits` (universal properties and natural isomorphism, the exact tool needed to state the monoidal laws correctly as \"up to iso\" rather than \"on the nose\").",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.tensor-product/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.tensor-product",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cat.limits` (universal properties and natural isomorphism, the exact machinery needed to state the monoidal laws correctly as \"up to iso\").\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.linalg.tensor`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored (earlier in this same batch). $P76_{mode}=$ **cross-link probe**, engaging `math.linalg.tensor`'s own field-as-unit-object construction directly in Example 1 and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.tensor-product.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

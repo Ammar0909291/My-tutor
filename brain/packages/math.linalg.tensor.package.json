@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.tensor-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.tensor",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7de9093de330c3d9d68480d736e9578de414dd8649ef5b1f5c09f74b48bd1985",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.tensor.md": "sha256:52c95027b50f39f43346f3fd1601d590659cc0193e30fa06bf93e41069b07f08"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.tensor",
+    "name": "Tensor",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.linalg.vector-space",
+      "math.linalg.linear-map"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.tensor-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.tensor (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.tensor.md": "sha256:52c95027b50f39f43346f3fd1601d590659cc0193e30fa06bf93e41069b07f08"
+      },
+      "contentHash": "sha256:cfcc982a2d52f3ef069c61d2d698939c792867a445807f2cc946c7028233a517",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.tensor.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.tensor.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.tensor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.tensor\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.tensor.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.tensor.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.tensor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.tensor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.tensor.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.tensor.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.tensor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.tensor\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.tensor.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.tensor.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.tensor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.tensor\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.tensor/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.tensor",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a tensor of type $(r,s)$ as a MULTILINEAR map $T:V\\times\\cdots\\times V\\times V^*\\times\\cdots\\times V^*\\to F$ ($r$ copies of $V$, $s$ copies of $V^*$) — linear in EACH argument separately — and recognize vectors (type $(1,0)$), dual vectors (type $(0,1)$), and matrices (type $(1,1)$) as SPECIAL CASES of this one unifying framework, not as separate, unrelated objects.\n- LO2: Construct the **tensor product** $\\otimes$ of two tensors (e.g. two vectors) to build a higher-rank tensor, and VERIFY the result is itself genuinely multilinear.\n- LO3 (orientation level — full generalization deferred to the cross-linked child): recognize, without full derivation, that tensors provide the natural language for physics (e.g. the metric tensor), and recognize that $\\otimes$ generalizes vastly beyond vector spaces to entire categories, deferred to `math.cat.tensor-product`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.tensor",
+      "title": "VECTORS-COVECTORS-MATRICES-TREATED-AS-SEPARATE",
+      "content": "| MC-1 | VECTORS-COVECTORS-MATRICES-TREATED-AS-SEPARATE | Believing vectors, covectors, and matrices are three separate kinds of objects, missing that they are special cases of one unifying multilinear-map (tensor) framework | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.tensor",
+      "title": "TENSOR-PRODUCT-TREATED-AS-MERELY-SYMBOLIC",
+      "content": "| MC-2 | TENSOR-PRODUCT-TREATED-AS-MERELY-SYMBOLIC | Believing the tensor product $u\\otimes v$ is a formal symbolic pairing with no independent multilinear-map meaning, missing that it must be verified genuinely multilinear | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.tensor",
+      "title": "TENSORS-ASSUMED-INSIGNIFICANT",
+      "content": "| MC-3 | TENSORS-ASSUMED-INSIGNIFICANT | Believing tensors are an obscure abstraction with no real physical or further-mathematical significance, missing their physics applications and vast categorical generalization | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.tensor",
+      "title": "Vectors, Covectors, and Matrices Are One Framework, Not Three (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Vectors, Covectors, and Matrices Are One Framework, Not Three (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.tensor",
+      "title": "The Tensor Product Must Be Verified Multilinear, Not Assumed (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Tensor Product Must Be Verified Multilinear, Not Assumed (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.tensor",
+      "title": "Tensors Have Real Applications and a Vast Generalization (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Tensors Have Real Applications and a Vast Generalization (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.tensor",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.tensor",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why a vector $v\\in V$, viewed as a functional on $V^*$ via $v(f)=f(v)$, is genuinely linear in $f$.\n  2. For covectors $f,g\\in V^*$ (type $(0,1)$ tensors), describe what type of tensor $f\\otimes g$ would be, and state the general rule (in terms of $r,s$) for the type of a tensor product of a type $(r_1,s_1)$ tensor and a type $(r_2,s_2)$ tensor.\n  3. Verify that the matrix-as-tensor construction $A(f,v)=f(Av)$ is linear in $v$ (holding $f$ fixed), completing the bilinearity check begun in Component 3.\n  4. Explain, in your own words, why a matrix representing a linear map can be understood as a type $(1,1)$ tensor, rather than a fundamentally different kind of object from vectors and covectors.\n- **P76 (Transfer Probe, mode = independence)**: \"In continuum mechanics, the STRESS TENSOR $\\sigma$ at a point in a material is a type $(0,2)$ tensor, describing how forces act across surfaces of different orientations. (a) Using this lesson's multilinear-map framework, explain what it means for $\\sigma$ to be 'linear in each argument separately,' in terms of the physical inputs it takes. (b) Explain why representing the stress tensor as a matrix is not a coincidence but a direct consequence of it being a $(1,1)$-or-$(0,2)$-type tensor, connecting to this lesson's unification of matrices within the tensor framework. (c) If two stress states $\\sigma_1$ and $\\sigma_2$ (each type $(0,2)$) needed to be combined into a single higher-rank object via $\\sigma_1\\otimes\\sigma_2$, explain what TYPE the resulting tensor would be, using the general tensor-product type rule from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.tensor",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.vector-space` (vector spaces and their axioms) and `math.linalg.linear-map` (linear maps and their defining conditions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.tensor/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.tensor",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.vector-space` (vector spaces generally) and `math.linalg.linear-map` (linear maps, the building block of the multilinear generalization this concept develops).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.cat.tensor-product`, checked via `ls docs/curriculum/blueprints/` at the time of authoring THIS blueprint and confirmed not yet authored. $P76_{mode}=$ **independence**. (Note: `math.cat.tensor-product` is authored later in this same batch, and its own blueprint engages this concept as a genuine cross-link probe, showing $(\\mathrm{Vect},\\otimes,k)$ as one concrete instance of the general categorical framework.)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.tensor.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
