@@ -926,6 +926,20 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [curriculumLessons, setCurriculumLessons] = useState<CurriculumLesson[]>([])
   const [curriculumLoaded, setCurriculumLoaded] = useState(false)
   const [curriculumProgress, setCurriculumProgress] = useState<CurriculumProgress>({ currentLesson: 1, completedLessons: [] })
+  // P0 (lesson-state desync): curriculumProgress.currentLesson is the single
+  // scalar the header, roadmap tree, and LessonNavigationPanel all read (via
+  // computeLessonLockState) — but it has 3 independent async writers (initial
+  // curriculum fetch, skip/complete/restart PATCH responses, and every chat
+  // turn's opportunistic data.lessonOrder sync). A chat request in flight
+  // BEFORE a skip/restart, resolving AFTER it, was overwriting the freshly
+  // corrected lesson pointer with the stale pre-skip value — a genuine
+  // out-of-order-response race, not a "multiple sources of truth" problem
+  // (there is one scalar; the bug is writers racing on it). Bumped only by
+  // the authoritative, user-initiated actions (skip/complete/restart);
+  // sendMessage captures the generation at dispatch and discards its own
+  // opportunistic update if an authoritative action landed while it was
+  // in flight. Same generation-guard idiom already used for TTS (ttsGeneration).
+  const progressGenerationRef = useRef(0)
   const [xpCelebration, setXpCelebration] = useState(false)
   const fireConfetti = useConfetti()
   const [expandedUnits, setExpandedUnits] = useState<number[]>([1])
@@ -1251,6 +1265,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       })
       const data = await res.json()
       if (data.success) {
+        // Authoritative, user-initiated action — always wins over any
+        // in-flight chat response's opportunistic lessonOrder sync.
+        progressGenerationRef.current += 1
         setCurriculumProgress(data.progress)
         // P0-4 fix: only celebrate a genuine completion — "Skip Anyway" is a
         // recorded knowledge gap, not an achievement.
@@ -1280,7 +1297,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         body: JSON.stringify({ subjectCode: subjectSlug, lessonOrder, topicSlug }),
       })
       const data = await res.json()
-      if (data.success) setCurriculumProgress(data.progress)
+      if (data.success) {
+        progressGenerationRef.current += 1
+        setCurriculumProgress(data.progress)
+      }
     } catch { /* ignore */ }
   }, [subjectSlug])
 
@@ -1436,19 +1456,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Send message
   const sendMessage = useCallback(async (sid: string, text: string, showInUI = true, voiceSignal?: VoiceTimingSignal) => {
     setIsStreaming(true)
+    // P0 (duplicate AI responses): captured at dispatch time, checked before
+    // applying this call's opportunistic lessonOrder sync below. If a
+    // skip/complete/restart landed while this request was in flight, this
+    // call's view of "current lesson" is stale and must not overwrite the
+    // authoritative one.
+    const dispatchGeneration = progressGenerationRef.current
     if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
     let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } } = {}
     try {
-      // Retry up to 2 times on failure. Retryable = a dropped/hung connection
-      // (fetchWithTimeout aborts a stalled request instead of hanging forever
-      // — the mobile-Safari infinite-spinner root cause), OR a transient server
-      // failure (5xx/429), OR a soft AI fallback (provider:'fallback', the
-      // model timed out server-side). Every retry re-sends the SAME sid+text,
-      // so conversation context is preserved and the model gets another try
-      // before the student sees anything.
+      // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
+      // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
+      // — the mobile-Safari infinite-spinner fix). Do NOT retry a completed
+      // response (!res.ok / a soft AI fallback) — the Groq SDK and the server
+      // already own 429/5xx retry+backoff internally (groq-sdk maxRetries:2).
+      // Retrying a COMPLETED failure here on top of that turns one transient
+      // 429 into up to 9 real provider calls and, since route.ts persists the
+      // user message unconditionally and never reads req.signal, duplicate/
+      // overlapping server-side turns that can each independently produce a
+      // tutor reply — the proven cause of the observed duplicate-explanation
+      // bug and of the rate-limit death spiral that follows it. A clean
+      // failure now fails once, fast, exactly as it did before the mobile-
+      // Safari stability sprint that introduced this regression.
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
           res = await fetchWithTimeout('/api/learn/chat', {
@@ -1466,10 +1498,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             }),
           }, 30000)
           data = await res.json().catch(() => ({}))
-          if (attempt < 2 && (!res.ok || isFallbackResponse(data))) {
-            await new Promise((r) => setTimeout(r, (attempt + 1) * 1200))
-            continue
-          }
           break
         } catch (fetchErr) {
           if (attempt === 2) throw fetchErr
@@ -1492,7 +1520,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // this fresh from studentProgress.currentLesson on every single chat
       // turn, so treating it as authoritative here keeps Roadmap from ever
       // silently lagging behind what Tutor Max is actually teaching.
-      if (typeof data.lessonOrder === 'number') {
+      // P0 (lesson-state desync): guarded by the generation captured at
+      // dispatch — if a skip/complete/restart happened while this request
+      // was in flight, this response's lessonOrder reflects the OLD
+      // pre-action state and must not clobber the authoritative one that
+      // already landed (see progressGenerationRef declaration above).
+      if (typeof data.lessonOrder === 'number' && progressGenerationRef.current === dispatchGeneration) {
         setCurriculumProgress((prev) =>
           prev.currentLesson === data.lessonOrder && (!data.completedLessons || prev.completedLessons.length === data.completedLessons.length)
             ? prev
@@ -1826,12 +1859,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // turn already re-resolves its active concept from that same live
   // currentLesson value (route.ts) — so this only needs to prompt Tutor
   // Max to actually start teaching it in the ongoing conversation.
-  const advanceToNextLesson = useCallback(async () => {
+  // P0 (lesson start flow): routed through the same requestLessonSwitch →
+  // confirmLessonSwitch → "Start Lesson?" preview gate every other lesson
+  // transition uses, instead of calling callLessonInit directly. This was
+  // the one entry point where teaching began immediately with no preview —
+  // now every path funnels through the single canonical gate.
+  const advanceToNextLesson = useCallback(() => {
     if (!sessionId) return
     const next = findNextLesson(curriculumLessons, curriculumProgress)
     if (!next) return
-    await callLessonInit(sessionId, 'next', next)
-  }, [curriculumLessons, curriculumProgress, sessionId, callLessonInit])
+    requestLessonSwitch(next)
+  }, [curriculumLessons, curriculumProgress, sessionId, requestLessonSwitch])
 
   // Initiate a skip: check risk then confirm or warn
   const initiateSkip = useCallback(async (lesson: CurriculumLesson) => {
@@ -2155,13 +2193,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         setInput('')
         clearDraft(`lesson_${subjectSlug}`)
         if (textareaRef.current) textareaRef.current.style.height = 'auto'
-        const target = nextLessonData
-        const priorOrder = target.order - 1
-        if (priorOrder >= 1 && !curriculumProgress.completedLessons.includes(priorOrder)) {
-          const priorLesson = curriculumLessons.find((l) => l.order === priorOrder)
-          if (priorLesson) await handleLessonComplete(priorOrder, priorLesson, false)
-        }
-        await callLessonInit(sessionId!, 'next', target)
+        // P0 (lesson start flow): same canonical preview-then-confirm gate
+        // as the nav-panel Next button — typing "next lesson" in chat must
+        // not start teaching immediately either.
+        requestLessonSwitch(nextLessonData)
         return true
       }
     } else if (PREV_INTENT_RE.test(trimmed)) {
@@ -3822,12 +3857,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     if (navPanelCloseTimer.current) clearTimeout(navPanelCloseTimer.current)
                     setNavPanelOpen(true)
                   }}
+                  // P0 (chat navigation, item 7): touch devices have no hover
+                  // state — onMouseEnter alone never fires from a tap, so the
+                  // panel was unreachable on mobile even though it's already
+                  // hidden-by-default. onClick toggles it explicitly; works
+                  // as a harmless click-to-pin on desktop too.
+                  onClick={() => setNavPanelOpen((v) => !v)}
                   style={{
                     height: 5, borderBottom: '1px solid var(--border-subtle)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'opacity 150ms ease',
                     opacity: navPanelOpen ? 0 : 0.6,
-                    // Kept as the hover trigger (default pointer-events) —
+                    cursor: 'pointer',
+                    // Kept as the hover/tap trigger (default pointer-events) —
                     // its footprint is a fixed, tiny 5px strip, not the
                     // variable/taller expanded panel, so it never blocks
                     // meaningfully more than the handle itself ever visually
@@ -3838,6 +3880,16 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 >
                   <div style={{ width: 36, height: 3, borderRadius: 2, background: 'var(--border-default)' }} />
                 </div>
+                {/* Tap-outside-to-close backdrop — only present while open,
+                    so it never intercepts clicks otherwise. Mirrors the
+                    existing subject-switcher dismiss pattern in this file. */}
+                {navPanelOpen && (
+                  <div
+                    aria-hidden="true"
+                    onClick={() => setNavPanelOpen(false)}
+                    style={{ position: 'fixed', inset: 0, zIndex: 19 }}
+                  />
+                )}
                 <div
                   data-testid="lesson-nav-overlay"
                   onMouseEnter={() => {
@@ -3946,37 +3998,86 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* FIX 1 (stabilization): "Start Lesson" gate — selecting/opening a
                   lesson only selects it; the AI does not start teaching until the
                   learner presses this button. */}
-              {!lessonStarted && messages.length === 0 && (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 14, paddingTop: 40 }}>
-                  <EagleMascot variant="hero" size={56} />
-                  {(pendingLesson ?? currentLessonData) && (
-                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', textAlign: 'center' }}>
-                      {(pendingLesson ?? currentLessonData)!.lessonTitle}
-                    </p>
-                  )}
-                  <button
-                    onClick={() => {
-                      // A confirmed lesson switch defers its actual start to
-                      // this click (see confirmLessonSwitch) — run that
-                      // instead of the normal mount-time startLesson() flow.
-                      if (pendingLessonRunRef.current) {
-                        const run = pendingLessonRunRef.current
-                        pendingLessonRunRef.current = null
-                        setPendingLesson(null)
-                        setLessonStarted(true)
-                        void run()
-                      } else {
-                        startLesson()
-                      }
-                    }}
-                    style={{
-                      padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
-                      background: UI.indigo, color: '#fff', border: 'none',
-                    }}>
-                    {t('start_lesson_btn')}
-                  </button>
-                </div>
-              )}
+              {!lessonStarted && messages.length === 0 && (() => {
+                // P0 (lesson start flow): this is the ONE chokepoint every
+                // lesson-entry path funnels through before teaching begins —
+                // first open, refresh, and (after the routing fix below) every
+                // nav-panel/roadmap/typed "next lesson" transition too. All
+                // fields shown are real, already-fetched data (lessonGoal,
+                // unit, position, real prerequisite gaps from lockReasons) —
+                // nothing here is invented per-lesson content.
+                const previewLesson = pendingLesson ?? currentLessonData
+                const totalLessons = curriculumLessons.length
+                const missingPrereqs = previewLesson?.topicSlug ? lockReasons[previewLesson.topicSlug]?.missingPrereqs : undefined
+                // Same complexity-banding heuristic the AI's own opening
+                // prompt already commits to (see startLesson()'s "Estimated
+                // Duration" instruction) — kept in sync so this preview and
+                // what Tutor Max actually says never disagree.
+                const goalLen = previewLesson?.lessonGoal?.length ?? 0
+                const durationEstimate = goalLen === 0 ? null : goalLen < 60 ? '8–10 min' : goalLen < 160 ? '12–15 min' : '18–20 min'
+                return (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 32, paddingBottom: 32, paddingLeft: 20, paddingRight: 20 }}>
+                    <EagleMascot variant="hero" size={52} />
+                    {previewLesson && (
+                      <div style={{ maxWidth: 420, width: '100%', display: 'flex', flexDirection: 'column', gap: 10, textAlign: 'center' }}>
+                        <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                          {totalLessons > 0 ? `${t('lesson_preview_lesson_label')} ${previewLesson.order} / ${totalLessons}` : `${t('lesson_preview_lesson_label')} ${previewLesson.order}`}
+                          {previewLesson.unitTitle ? ` · ${previewLesson.unitTitle}` : ''}
+                        </p>
+                        <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)' }}>
+                          {previewLesson.lessonTitle}
+                        </p>
+                        {previewLesson.lessonGoal && (
+                          <div style={{ textAlign: 'left', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '10px 14px' }}>
+                            <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>
+                              {t('lesson_preview_about_label')}
+                            </p>
+                            <p style={{ fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                              {previewLesson.lessonGoal}
+                            </p>
+                          </div>
+                        )}
+                        {missingPrereqs && missingPrereqs.length > 0 && (
+                          <div style={{ textAlign: 'left', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '10px 14px' }}>
+                            <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>
+                              {t('lesson_preview_prereqs_label')}
+                            </p>
+                            <p style={{ fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                              {missingPrereqs.map((p) => p.title).join(', ')}
+                            </p>
+                          </div>
+                        )}
+                        {durationEstimate && (
+                          <p style={{ fontSize: 11.5, color: 'var(--text-dim)' }}>
+                            {t('lesson_preview_duration_label')}: {durationEstimate}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                    <button
+                      onClick={() => {
+                        // A confirmed lesson switch defers its actual start to
+                        // this click (see confirmLessonSwitch) — run that
+                        // instead of the normal mount-time startLesson() flow.
+                        if (pendingLessonRunRef.current) {
+                          const run = pendingLessonRunRef.current
+                          pendingLessonRunRef.current = null
+                          setPendingLesson(null)
+                          setLessonStarted(true)
+                          void run()
+                        } else {
+                          startLesson()
+                        }
+                      }}
+                      style={{
+                        padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
+                        background: UI.indigo, color: '#fff', border: 'none', marginTop: 4,
+                      }}>
+                      {t('start_lesson_btn')}
+                    </button>
+                  </div>
+                )
+              })()}
 
               {/* Welcome / loading state — EagleMascot replaces the generic initials avatar */}
               {lessonStarted && messages.length === 0 && !connectStalled && (

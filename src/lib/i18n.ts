@@ -882,6 +882,10 @@ export const translations = {
     coach_time_120: '2 часа',
     /* ── Sprint N: Progression & Completion ── */
     start_lesson_btn: '▶ Начать урок',
+    lesson_preview_lesson_label: 'Урок',
+    lesson_preview_about_label: 'О чём этот урок',
+    lesson_preview_prereqs_label: 'Стоит повторить перед началом',
+    lesson_preview_duration_label: 'Примерное время',
     complete_lesson_btn: '✅ Завершить урок',
     lesson_completed_btn: '✓ Урок завершён',
     progress_lesson_label: 'Урок',
@@ -1960,6 +1964,10 @@ export const translations = {
     coach_time_120: '2 hours',
     /* ── Sprint N: Progression & Completion ── */
     start_lesson_btn: '▶ Start Lesson',
+    lesson_preview_lesson_label: 'Lesson',
+    lesson_preview_about_label: 'What this lesson is about',
+    lesson_preview_prereqs_label: 'Worth reviewing first',
+    lesson_preview_duration_label: 'Estimated duration',
     complete_lesson_btn: '✅ Complete Lesson',
     lesson_completed_btn: '✓ Lesson Completed',
     progress_lesson_label: 'Lesson',
@@ -3027,6 +3035,10 @@ export const translations = {
     coach_time_120: '2 hours',
     /* ── Sprint N: Progression & Completion ── */
     start_lesson_btn: '▶ पाठ शुरू करें',
+    lesson_preview_lesson_label: 'Lesson',
+    lesson_preview_about_label: 'Yeh lesson kis baare mein hai',
+    lesson_preview_prereqs_label: 'Shuru karne se pehle revise karein',
+    lesson_preview_duration_label: 'Estimated duration',
     complete_lesson_btn: '✅ पाठ पूरा करें',
     lesson_completed_btn: '✓ पाठ पूर्ण',
     progress_lesson_label: 'पाठ',

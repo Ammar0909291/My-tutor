@@ -8,6 +8,20 @@ import { MessageRole } from '@prisma/client'
 import { t, type TranslationKey } from '@/lib/i18n'
 import { getUserNavSubjects } from '@/lib/subjects/getUserNavSubjects'
 
+// P0 (subject switching, Lesson Flow sprint item 1): auth() already forces
+// this route dynamic (any cookies()/auth() call opts a route out of static
+// rendering) — this export makes that explicit and removes any ambiguity
+// about the Next.js client Router Cache serving a stale RSC payload for a
+// previously-visited ?subject= URL, which is the textbook mechanism behind
+// "switching subjects shows stale state until a hard refresh." The actual
+// subject/curriculum/roadmap reset itself is driven by
+// <LessonScreen key={resolvedSubject.slug}> below — a genuine React key
+// change unmounts and remounts the component, clearing every local
+// useState/useRef it owns. That mechanism was already correct; this export
+// closes the one remaining doubt about whether a stale cached render could
+// ever be served instead of a fresh one.
+export const dynamic = 'force-dynamic'
+
 const ASK_PROMPT_KEYS: Record<string, TranslationKey> = {
   explain: 'chapter_ask_explain',
   examples: 'chapter_ask_examples',

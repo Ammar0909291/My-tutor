@@ -58,7 +58,7 @@ const CURRENCY_NAMES: Record<string, string> = {
   '€': 'euro',
 }
 
-import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
+import { speakifyIpaNotation } from '@/lib/text/ipaToSpeech'
 
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -70,12 +70,17 @@ function pluralize(value: string, singular: string): string {
 
 export function cleanTextForTTS(text: string): string {
   let t = text
-  // IPA/phonetic notation is written for the eye, not the ear — a speech
-  // engine either skips it or mispronounces it letter-by-letter regardless
-  // of the student's level, so this runs unconditionally (independent of
-  // the beginner-only stripping in the chat route, which is about what's
-  // shown on screen).
-  t = stripIpaNotation(t)
+  // P0 (Lesson Flow sprint, item 6): IPA transcriptions ("/kæt/", connected
+  // speech like "/aɪ æm ˈɡoʊɪŋ tə ðə stɔːr/") used to be silently DELETED
+  // here via stripIpaNotation() — a phonics lesson teaching a pronunciation
+  // produced silence where the sound should have been spoken. Replaced with
+  // speakifyIpaNotation(), which converts each /.../ span to an approximate
+  // plain-text spelling a general-purpose voice can actually pronounce,
+  // instead of removing it. Runs unconditionally (independent of the
+  // beginner-only DISPLAY-text stripping in the chat route, which is a
+  // separate, deliberate decision about what's shown on screen — this is
+  // about what's spoken, and speech should never go silent on real content).
+  t = speakifyIpaNotation(t)
   // Remove [CODE]...[/CODE] blocks entirely
   t = t.replace(/\[CODE\][\s\S]*?\[\/CODE\]/gi, '')
   // Remove triple backtick code blocks
