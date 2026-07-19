@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.orthogonal-basis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.orthogonal-basis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6e84e4d9e43d43532eaab58c7eae714f0b884ff7bb3c8f7c5c99221827d7d825",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md": "sha256:a317684dc81a7752e1a7a740c57ff71ed48ba9a3b035eb1ca8f1a9d1cbe725aa"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.orthogonal-basis",
+    "name": "Orthogonal and Orthonormal Basis",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.orthogonality",
+      "math.linalg.basis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.orthogonal-basis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.orthogonal-basis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md": "sha256:a317684dc81a7752e1a7a740c57ff71ed48ba9a3b035eb1ca8f1a9d1cbe725aa"
+      },
+      "contentHash": "sha256:694c276ae397afde662446cdf65dddee9af72f055e3a101149b0c2544e15e102",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.orthogonal-basis.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.orthogonal-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.orthogonal-basis\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.orthogonal-basis.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.orthogonal-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.orthogonal-basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.orthogonal-basis.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.orthogonal-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.orthogonal-basis\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.orthogonal-basis.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.orthogonal-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.orthogonal-basis\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.orthogonal-basis/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Learning Objectives",
+      "content": "- LO1: Verify whether a given basis is **orthogonal** (every pair of distinct basis vectors has dot product zero) and, further, whether it is **orthonormal** (orthogonal AND every vector has unit length) — recognizing orthonormal as the strictly stronger condition.\n- LO2: Compute the coordinates of a vector $v$ in an **orthonormal basis** $\\{e_1,\\dots,e_n\\}$ directly via $v = \\sum_i \\langle v,e_i\\rangle e_i$ — i.e. the $i$-th coordinate is simply the inner product $\\langle v,e_i\\rangle$ — without needing to solve a linear system, directly refuting the misconception that finding coordinates in ANY basis always requires solving simultaneous equations.\n- LO3: Explain why this direct-coordinate shortcut ($c_i=\\langle v,e_i\\rangle$) **fails** for a general (non-orthonormal) basis, and correctly identify that the simplification is a consequence specifically of orthonormality, not a property of all bases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "ONB-COORDINATE-SHORTCUT-OVERGENERALIZED",
+      "content": "| MC-1 | ONB-COORDINATE-SHORTCUT-OVERGENERALIZED | Applying the direct inner-product coordinate formula $c_i=\\langle v,e_i\\rangle$ to a basis that is not orthonormal, believing it works for any basis | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "ORTHOGONAL-CONFLATED-WITH-ORTHONORMAL",
+      "content": "| MC-2 | ORTHOGONAL-CONFLATED-WITH-ORTHONORMAL | Treating \"orthogonal basis\" and \"orthonormal basis\" as synonymous, missing that orthonormal additionally requires unit length | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "ORTHOGONAL-VECTORS-ASSUMED-AUTOMATICALLY-SPANNING",
+      "content": "| MC-3 | ORTHOGONAL-VECTORS-ASSUMED-AUTOMATICALLY-SPANNING | Assuming any set of mutually orthogonal nonzero vectors automatically forms a basis of the full space, without checking the count matches the space's dimension | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Orthogonal vs. Orthonormal, and Normalizing (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Orthogonal vs. Orthonormal, and Normalizing (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Coordinates for Free: the ONB Shortcut (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Coordinates for Free: the ONB Shortcut (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "The Shortcut Requires Orthonormality Specifically (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Shortcut Requires Orthonormality Specifically (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify whether $\\{(1,1,0),(1,-1,0),(0,0,1)\\}$ is an orthogonal basis of $\\mathbb{R}^3$, and if so, normalize it into an orthonormal basis.\n  2. Using the orthonormal basis you found in problem 1, find the coordinates of $v=(2,4,3)$ via the direct inner-product shortcut, and verify your answer reconstructs $v$.\n  3. Explain, without doing any further computation, why applying the shortcut formula $c_i=\\langle v,e_i\\rangle$ to the STANDARD basis $\\{(1,0,0),(0,1,0),(0,0,1)\\}$ happens to give correct coordinates too — is the standard basis orthonormal?\n  4. A student uses the coordinate shortcut on the basis $\\{(2,0),(1,1)\\}$ (which is NOT orthogonal — verify this first) and gets an answer that seems too good to be true. Explain, referencing Example 3, why this shortcut result cannot be trusted here.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing engineer represents audio signals as vectors in a high-dimensional space, and uses an orthonormal basis of 'basis waveforms' (analogous to $e_1,\\dots,e_n$ here) to decompose any incoming signal $v$. (a) Explain why the engineer can compute each coordinate (how much of each basis waveform is present in the signal) using a simple inner-product computation, rather than solving a large system of equations, directly citing the property that makes this possible. (b) If the engineer instead used a basis of waveforms that were NOT mutually orthogonal, explain what specifically would go wrong if they still tried to use the simple inner-product shortcut. (c) Explain why, for a system processing thousands of signals per second, the availability of this shortcut (rather than needing to solve a system for every single signal) is not just a convenience but essential.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.orthogonality` (two vectors are orthogonal iff their dot product is zero, and orthogonal vectors are automatically linearly independent) and `math.linalg.basis` (a basis is a linearly independent spanning set, and every vector has a UNIQUE representation as a linear combination of basis vectors).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.orthogonal-basis/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.orthogonal-basis",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.orthogonality` (the dot-product-zero definition and the automatic-independence property this concept's basis structure relies on), `math.linalg.basis` (the independent-and-spanning definition and uniqueness-of-coordinates property this concept specializes).\n- **Unlocks**: `math.linalg.gram-schmidt` (the algorithmic process for CONSTRUCTING an orthonormal basis from an arbitrary one), `math.linalg.projection` (projections onto subspaces are computed directly using an orthonormal/orthogonal basis's coordinate structure).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.orthogonal-basis.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

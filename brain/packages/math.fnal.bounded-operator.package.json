@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.bounded-operator-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.bounded-operator",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e582c7734fc1b92979ad6ca254e82590acb549a21fd9e807982d965b6ff059ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.bounded-operator.md": "sha256:66c6b66d816271fa3e3aace26ca91eab05cf4d0b3ca1d2ec37692ab3ebc86afc"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.bounded-operator",
+    "name": "Bounded Linear Operator",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.fnal.banach-space",
+      "math.linalg.linear-map"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.bounded-operator-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.bounded-operator (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.bounded-operator.md": "sha256:66c6b66d816271fa3e3aace26ca91eab05cf4d0b3ca1d2ec37692ab3ebc86afc"
+      },
+      "contentHash": "sha256:ae8bc8b571a6a591118bc79804e86dad25e786361f721e15082ffb5cb13d9113",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.bounded-operator.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.bounded-operator.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.bounded-operator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.bounded-operator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.bounded-operator.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.bounded-operator.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.bounded-operator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.bounded-operator\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.bounded-operator.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.bounded-operator.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.bounded-operator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.bounded-operator\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.bounded-operator.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.bounded-operator.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.bounded-operator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.bounded-operator\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.bounded-operator/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a linear map $T:X\\to Y$ between normed spaces as **bounded** iff $\\|T\\| := \\sup_{\\|x\\|\\le1}\\|Tx\\| < \\infty$ — i.e. $T$ does not stretch the unit ball's vectors by an unbounded amount — and compute $\\|T\\|$ directly for a specific finite-dimensional operator.\n- LO2: State and use the equivalence: **$T$ is bounded iff $T$ is continuous everywhere** — directly refuting the misconception (common when first meeting this in infinite dimensions) that boundedness is a strictly stronger or unrelated condition from continuity, when in fact for linear maps they coincide exactly.\n- LO3: Recognize $B(X,Y)$, the space of all bounded linear operators from $X$ to $Y$, as itself a **normed vector space under the operator norm** $\\|T\\|$ — and (citing `math.fnal.banach-space`) that $B(X,Y)$ is itself a Banach space whenever $Y$ is a Banach space, regardless of whether $X$ is.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "BOUNDED-AND-CONTINUOUS-TREATED-AS-INDEPENDENT",
+      "content": "| MC-1 | BOUNDED-AND-CONTINUOUS-TREATED-AS-INDEPENDENT | Believing boundedness and continuity are two unrelated properties requiring separate verification for a linear map, rather than recognizing they are exactly equivalent for linear maps specifically | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "B-X-Y-COMPLETENESS-ASSUMED-TO-NEED-BOTH-SPACES-COMPLETE",
+      "content": "| MC-2 | B-X-Y-COMPLETENESS-ASSUMED-TO-NEED-BOTH-SPACES-COMPLETE | Assuming $B(X,Y)$'s status as a Banach space depends on both $X$ and $Y$ being complete, rather than recognizing it depends only on $Y$'s completeness | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "OPERATOR-NORM-COMPUTED-ONLY-AT-BASIS-VECTORS",
+      "content": "| MC-3 | OPERATOR-NORM-COMPUTED-ONLY-AT-BASIS-VECTORS | Computing $\\|T\\|$ by checking only the images of basis vectors, rather than correctly taking the supremum over the entire unit ball (which, while achieved at a specific point, is not automatically one of the basis vectors) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "The Operator Norm as \"Maximum Stretch Factor\" (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Operator Norm as \\\"Maximum Stretch Factor\\\" (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "Bounded and Continuous Are the Same Fact for Linear Maps (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bounded and Continuous Are the Same Fact for Linear Maps (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "B(X,Y) Inherits Structure from Y (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"B(X,Y) Inherits Structure from Y (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\|T\\|$ for $T:\\mathbb{R}^2\\to\\mathbb{R}^2$ given by $T(x,y)=(2x,-4y)$, using the Euclidean norm.\n  2. Explain, using the Lipschitz-style inequality from Example 2, why a bounded linear operator with $\\|T\\|=5$ must satisfy $\\|Tx-Ty\\|\\le5\\|x-y\\|$ for all $x,y$, and why this directly implies continuity.\n  3. For two bounded operators $T_1,T_2:X\\to Y$ with $\\|T_1\\|=4$ and $\\|T_2\\|=6$, use the triangle inequality for the operator norm to give the tightest upper bound you can state for $\\|T_1+T_2\\|$.\n  4. Explain, in your own words, why $B(X,Y)$ being a Banach space is guaranteed by $Y$'s completeness alone, without needing $X$ to be complete — referencing the definition of the operator norm's supremum over $\\|x\\|\\le1$.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.linear-map`)**: \"Recall from your `math.linalg.linear-map` lesson the linear map $T:\\mathbb{R}^2\\to\\mathbb{R}^2$ defined by its basis action $T(1,0)=(3,1)$, $T(0,1)=(-2,4)$, with matrix representation $A=\\begin{pmatrix}3&-2\\\\1&4\\end{pmatrix}$. (a) Explain why this $T$, being a linear map between finite-dimensional spaces, is AUTOMATICALLY a bounded operator — citing the fact that finite-dimensional linear maps are always bounded, unlike the infinite-dimensional case where boundedness must be checked. (b) Using that lesson's basis-determination fact (a linear map is completely determined by its action on a basis) together with THIS lesson's operator-norm definition, explain why knowing $\\|T(1,0)\\|$ and $\\|T(0,1)\\|$ alone is not enough to directly read off $\\|T\\|$ — the supremum must be taken over the ENTIRE unit ball, not just the basis vectors' images. (c) That lesson's Contrast 1 showed a linear map is fully forced by its basis images (no independent freedom elsewhere) — explain how this same forcing fact makes computing $\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|$ a finite, tractable computation rather than requiring you to check infinitely many vectors independently.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.linear-map` (a linear map $T$ satisfies additivity $T(u+v)=T(u)+T(v)$ and homogeneity $T(cv)=cT(v)$, and is completely determined by its action on a basis) and `math.fnal.banach-space` (a complete normed vector space, and why completeness is a load-bearing structural property).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.bounded-operator/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.bounded-operator",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.banach-space` (the completeness property $B(X,Y)$ inherits from $Y$), `math.linalg.linear-map` (the additivity/homogeneity definition this concept adds the boundedness condition to).\n- **Unlocks**: `math.fnal.spectral-theory`, `math.fnal.open-mapping-theorem` (both major functional-analysis results studying bounded operators specifically).\n- **Cross-link**: KG lists `math.linalg.linear-map` as a cross-link — **verified authored** via `ls docs/curriculum/blueprints/math.linalg.linear-map.md` — so P76_mode = **cross-link probe**, directly reusing that blueprint's own basis-determined linear map example ($T(1,0)=(3,1)$, $T(0,1)=(-2,4)$) as the transfer probe's anchor, per this corpus's established cross-link-probe convention.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.bounded-operator.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

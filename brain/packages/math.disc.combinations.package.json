@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.combinations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.combinations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:681532d9498867eae4f6a730ae082dcee9a848f93d915693496505004b3922b4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.combinations.md": "sha256:91f5d1619a72e66051fd59d5b4b0c1b53d3fe531ffc21e9768590e5af7f3768b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.combinations",
+    "name": "Combinations",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.permutations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.combinations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.combinations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.combinations.md": "sha256:91f5d1619a72e66051fd59d5b4b0c1b53d3fe531ffc21e9768590e5af7f3768b"
+      },
+      "contentHash": "sha256:5f02dab0be585f319fd4cfc800ecccc771e9b98d9610469cf343a874dfe8d5be",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.combinations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.combinations.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.combinations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.combinations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.combinations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.combinations.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.combinations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.combinations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.combinations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.combinations.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.combinations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.combinations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.combinations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.combinations.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.combinations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.combinations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.combinations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.combinations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive and apply the combination formula $C(n,r) = \\frac{n!}{r!(n-r)!}$ for the number of **unordered** selections of $r$ items from $n$ distinct items — by starting from $P(n,r)$ (`math.disc.permutations`) and dividing by $r!$ to remove the redundant orderings within each selected group.\n- LO2: State and verify **Pascal's identity**, $C(n,r) = C(n-1,r-1) + C(n-1,r)$, by a combinatorial argument (splitting on whether one specific item is included in the selection or not) rather than pure algebra.\n- LO3: State and interpret the combinatorial identity $\\sum_{k=0}^n C(n,k) = 2^n$ (the total number of subsets of an $n$-element set), and correctly choose combinations over permutations whenever a problem's setup has no roles or ordering — directly refuting the misconception that $C(n,r)$ and $P(n,r)$ are interchangeable formulas for \"choosing $r$ from $n$.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.combinations",
+      "title": "COMBINATIONS-AND-PERMUTATIONS-TREATED-AS-INTERCHANGEABLE",
+      "content": "| MC-1 | COMBINATIONS-AND-PERMUTATIONS-TREATED-AS-INTERCHANGEABLE | Assuming a problem is entirely solved with either $C(n,r)$ or $P(n,r)$ throughout, without checking whether different stages of the same problem have different order-matters status | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.combinations",
+      "title": "DIVISION-BY-R-FACTORIAL-OMITTED",
+      "content": "| MC-2 | DIVISION-BY-R-FACTORIAL-OMITTED | Computing $P(n,r)$ when $C(n,r)$ was actually required, forgetting to divide out the $r!$ redundant orderings within each selected group | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.combinations",
+      "title": "PASCALS-IDENTITY-TREATED-AS-UNMOTIVATED-ALGEBRA",
+      "content": "| MC-3 | PASCALS-IDENTITY-TREATED-AS-UNMOTIVATED-ALGEBRA | Memorizing Pascal's identity as a symbolic manipulation fact without understanding the combinatorial \"in-or-out\" argument that explains why it must be true | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.combinations",
+      "title": "Dividing Out the Redundant Orderings (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Dividing Out the Redundant Orderings (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.combinations",
+      "title": "Pascal's Identity, Proved by Splitting on One Item (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pascal's Identity, Proved by Splitting on One Item (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.combinations",
+      "title": "Combinations vs. Permutations: the Test Applies Per Sub-Task (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Combinations vs. Permutations: the Test Applies Per Sub-Task (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.combinations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.combinations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A pizza shop offers 8 toppings; how many different 3-topping pizzas can be made (order of toppings doesn't matter)? Use $C(n,r)$ and justify why combinations (not permutations) apply.\n  2. Verify Pascal's identity numerically for $C(7,3)=C(6,2)+C(6,3)$, computing all three values directly.\n  3. Using $\\sum_{k=0}^n C(n,k)=2^n$, state how many total subsets (including the empty set and the full set) a 5-element set has, and verify by computing $\\sum_{k=0}^5 C(5,k)$ term by term.\n  4. A lottery draws 6 numbers from 49 (order the numbers are drawn doesn't matter for winning). Explain why this uses $C(49,6)$, not $P(49,6)$, and compute the ratio $P(49,6)/C(49,6)$ — what does this ratio represent?\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.alg.binomial-theorem` is not yet authored; a future revision may add a genuine cross-link probe into the algebraic binomial expansion once that entry exists)**: \"A tournament organizer needs to (a) select 5 teams out of 20 registered teams to advance to the playoffs, and then (b) assign those 5 advancing teams to 5 specific playoff time slots (Slot 1 through Slot 5). (a) Explain which formula, $C$ or $P$, applies to selecting the 5 advancing teams, and compute the count. (b) Explain which formula applies to assigning the 5 teams to the 5 specific time slots, and compute that count. (c) Explain, referencing Example 3's captain/co-captain structure, why this tournament scenario needs BOTH formulas at different stages rather than just one.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.combinations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.permutations` (the ordered-arrangement formula $P(n,r)=\\frac{n!}{(n-r)!}$, and critically, that blueprint's own Example 3/MC-1, which first raised the order-matters-vs-doesn't distinction that this concept now formalizes on the \"doesn't matter\" side).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.combinations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.combinations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.permutations` (the ordered-count formula $P(n,r)$ this concept's core formula is directly derived from, and the order-matters test first introduced there).\n- **Unlocks**: `math.disc.binomial-theorem` (the binomial coefficients are exactly the $C(n,r)$ values taught here), `math.disc.inclusion-exclusion` (a counting technique building on combination-style set-counting).\n- **Cross-link**: KG lists `math.alg.binomial-theorem` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.alg.binomial-theorem.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the algebraic binomial expansion once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.combinations.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
