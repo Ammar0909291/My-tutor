@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.fourier-transform-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.fourier-transform",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5d32e538a8e59fde41a17add5be47957db020d99f9cfb7c0da63c6fd9fb7e4f7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.fourier-transform.md": "sha256:240ddfb98e632aff51e77da6bb6f587e44e6d46ccbaaa7f7b64d4c27d890d627"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.fourier-transform",
+    "name": "Fourier Transform",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.de.fourier-series",
+      "math.calc.improper-integrals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.fourier-transform-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.fourier-transform (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.fourier-transform.md": "sha256:240ddfb98e632aff51e77da6bb6f587e44e6d46ccbaaa7f7b64d4c27d890d627"
+      },
+      "contentHash": "sha256:839c5bf1d5715f92271c26e54c0034c2ade000932b9ece0e99478945eb07b661",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-transform.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-transform.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-transform\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-transform.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-transform.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-transform\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-transform.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-transform.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-transform\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-transform.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-transform.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-transform\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.fourier-transform/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the Fourier transform $\\hat f(\\omega)=\\int_{-\\infty}^\\infty f(t)e^{-i\\omega t}\\,dt$ as the **non-periodic analogue** of the Fourier series — recognizing it replaces the DISCRETE sum over integer $n$ (Fourier series coefficients) with a CONTINUOUS integral over $\\omega$, since a non-periodic function has no single fundamental period to build discrete harmonics from.\n- LO2: Recognize the transform's defining integral is itself an **improper integral** (`math.calc.improper-integrals`), requiring $f$ to satisfy a suitable decay/integrability condition (e.g. $\\int_{-\\infty}^\\infty|f(t)|\\,dt<\\infty$) to genuinely converge — and identify a specific function for which this condition fails.\n- LO3: Apply the key **differentiation property** — the Fourier transform of $f'(t)$ is $i\\omega\\hat f(\\omega)$ — verified via integration by parts, and explain why this property (converting differentiation into multiplication) makes the transform a powerful tool for solving ODEs/PDEs by reducing them to algebraic equations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-transform",
+      "title": "FOURIER-TRANSFORM-AS-UNRELATED-TOOL",
+      "content": "| MC-1 | FOURIER-TRANSFORM-AS-UNRELATED-TOOL | Believing the Fourier transform is a completely different, unrelated tool from the Fourier series, missing that it is the continuous-frequency limit of the same discrete machinery | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-transform",
+      "title": "TRANSFORM-CONVERGENCE-ASSUMED-UNIVERSAL",
+      "content": "| MC-2 | TRANSFORM-CONVERGENCE-ASSUMED-UNIVERSAL | Believing the Fourier transform's defining integral converges for every function regardless of decay behavior, missing that integrability/decay conditions must be checked | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-transform",
+      "title": "DIFFERENTIATION-PROPERTY-TREATED-AS-CURIOSITY",
+      "content": "| MC-3 | DIFFERENTIATION-PROPERTY-TREATED-AS-CURIOSITY | Believing the multiplication-by-iω differentiation property is a mere computational curiosity, missing that it is precisely what converts differential equations into algebraic ones | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-transform",
+      "title": "The Transform Is the Fourier Series' Continuous-Frequency Limit (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Transform Is the Fourier Series' Continuous-Frequency Limit (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Convergence Requires Decay, Not Guaranteed for Every Function (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Convergence Requires Decay, Not Guaranteed for Every Function (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Differentiation Becomes Multiplication, Turning Calculus into Algebra (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Differentiation Becomes Multiplication, Turning Calculus into Algebra (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain, in your own words, why the Fourier transform uses a continuous integral over ω rather than a discrete sum over integer n.\n  2. Determine whether $f(t)=e^{-t^2}$ (a Gaussian) satisfies the absolute-integrability condition needed for its transform to converge as an ordinary improper integral.\n  3. Using integration by parts, verify that the transform of $f''(t)$ is $(i\\omega)^2\\hat f(\\omega)=-\\omega^2\\hat f(\\omega)$.\n  4. Explain why solving $f'(t)+3f(t)=g(t)$ via the Fourier transform reduces to solving an algebraic (not differential) equation for $\\hat f(\\omega)$.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing engineer needs to solve a linear ODE describing a physical system's response to a non-periodic input signal $g(t)$, and decides to use the Fourier transform. (a) Explain why the engineer's ODE, once transformed, becomes an algebraic equation in $\\hat f(\\omega)$, referencing this lesson's differentiation property. (b) The engineer's input signal $g(t)$ turns out not to decay at all as $t\\to\\pm\\infty$ (e.g., a constant background signal). Using this lesson's convergence reasoning, explain what issue this raises for computing $\\hat g(\\omega)$ via the ordinary improper-integral definition. (c) A colleague argues 'since Fourier series already handle periodic signals perfectly well, there's no real reason to use a separate 'transform' tool for non-periodic ones — it must just be a renamed version of the same technique with no genuinely new content.' Explain specifically what IS genuinely new about the transform, beyond simply extending the same idea.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.fourier-series` (representing a periodic function as $f(x)=\\frac{a_0}2+\\sum(a_n\\cos(n\\pi x/L)+b_n\\sin(n\\pi x/L))$, coefficients via orthogonality integrals) and `math.calc.improper-integrals` (integrals with infinite limits, defined as limits of proper integrals, convergent or divergent).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.fourier-transform/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.fourier-transform",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.fourier-series` (the discrete-frequency machinery this concept generalizes to a continuous spectrum), `math.calc.improper-integrals` (the convergence framework the transform's defining integral is an instance of).\n- **Unlocks**: (none — KG lists no unlocks for this concept).\n- **Cross-link**: KG lists `math.fnal.fourier-transform` and `math.meas.l2-space` as cross-links — **neither yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add genuine cross-link transfer probes once either entry exists, connecting this concept's differentiation property to the functional-analytic operator perspective (`math.fnal.fourier-transform`) or the $L^2$ isometry perspective (`math.meas.l2-space`, Plancherel's theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-transform.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

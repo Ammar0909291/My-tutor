@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.conic-sections-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.conic-sections",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:17d731b8ed731df7903363e56cb096476573cd16756df1aeefcff0d3d4d8c957",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.conic-sections.md": "sha256:da51b44cc588e7870b659a2ef738faecb61a4634af8c8adc15cbf1cce9e9a03f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.conic-sections",
+    "name": "Conic Sections",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.geom.circle-equation",
+      "math.alg.quadratic-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.conic-sections-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.conic-sections (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.conic-sections.md": "sha256:da51b44cc588e7870b659a2ef738faecb61a4634af8c8adc15cbf1cce9e9a03f"
+      },
+      "contentHash": "sha256:141a923c1d56b2bd3da4b0f211268193d1893f857ebc2a3ef5250d5595091436",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.conic-sections.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.conic-sections.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.conic-sections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.conic-sections\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.conic-sections.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.conic-sections.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.conic-sections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.conic-sections\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.conic-sections.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.conic-sections.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.conic-sections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.conic-sections\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.conic-sections.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.conic-sections.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.conic-sections"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.conic-sections\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.conic-sections/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that circles, ellipses, parabolas, and hyperbolas are ALL instances of the **general second-degree equation** $Ax^2+Cy^2+Dx+Ey+F=0$ (axis-aligned case), classified by the coefficient PATTERN of $A,C$: $A=C\\ne0$ → circle; $A,C$ same sign but unequal → ellipse; $A,C$ opposite signs → hyperbola; exactly one of $A,C$ zero → parabola — NOT four unrelated equation families to memorize independently.\n- LO2: Classify and convert a given second-degree equation to a recognizable standard form by completing the square, directly GENERALIZING `math.geom.circle-equation`'s own completing-the-square technique — the SAME algebraic method, applied with differing leading coefficients $A,C$, requires no new technique for ellipses or hyperbolas.\n- LO3: Connect the ALGEBRAIC (equation) representation of a conic to its **parametric** representation (`math.calc.parametric-curves`) — verifying a specific parametrization satisfies the corresponding algebraic equation directly, confirming both views describe the identical curve.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.conic-sections",
+      "title": "CONIC-TYPES-TREATED-AS-UNRELATED-FAMILIES",
+      "content": "| MC-1 | CONIC-TYPES-TREATED-AS-UNRELATED-FAMILIES | Believing circles, ellipses, parabolas, and hyperbolas are four separate, unrelated equation types, missing that they are unified by one general second-degree equation | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.conic-sections",
+      "title": "COMPLETING-SQUARE-ASSUMED-CIRCLE-SPECIFIC",
+      "content": "| MC-2 | COMPLETING-SQUARE-ASSUMED-CIRCLE-SPECIFIC | Believing completing the square only works for circles and a fundamentally different technique is needed for ellipses/hyperbolas, missing that the identical procedure generalizes directly | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.conic-sections",
+      "title": "ALGEBRAIC-AND-PARAMETRIC-VIEWS-TREATED-AS-COMPETING",
+      "content": "| MC-3 | ALGEBRAIC-AND-PARAMETRIC-VIEWS-TREATED-AS-COMPETING | Believing a conic's algebraic equation and parametric representation are unrelated or that only one is the \"true\" definition, missing that both consistently describe the identical curve | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.conic-sections",
+      "title": "One General Equation, Not Four Unrelated Families (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"One General Equation, Not Four Unrelated Families (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Completing the Square Transfers Directly (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Completing the Square Transfers Directly (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Algebraic and Parametric Views Are Consistent, Not Competing (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Algebraic and Parametric Views Are Consistent, Not Competing (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Classify $x^2-4y^2=16$ by its coefficient pattern (circle, ellipse, parabola, or hyperbola), and justify.\n  2. Complete the square on $x^2+4y^2-6x+16y+9=0$ to identify the conic type, center, and standard-form equation.\n  3. Verify that the parametrization $x=4\\cos\\theta,y=2\\sin\\theta$ satisfies the ellipse equation $\\dfrac{x^2}{16}+\\dfrac{y^2}4=1$.\n  4. Explain why $Ax^2+Cy^2+Dx+Ey+F=0$ with $A=0$ and $C=0$ simultaneously would not represent any of the four conic types.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.calc.parametric-curves`)**: \"A robotics engineer programs a robotic arm to trace an elliptical path given by $\\dfrac{(x-3)^2}{25}+\\dfrac{(y-1)^2}9=1$, but the arm's motion controller only accepts parametric input $x(\\theta),y(\\theta)$, not implicit equations. (a) Using `math.calc.parametric-curves`'s own parametrization technique, write a parametrization $x(\\theta),y(\\theta)$ for this ellipse, and verify it satisfies the given algebraic equation directly. (b) A colleague argues 'since the controller uses the parametric form, the original algebraic equation is now irrelevant to the design — only the parametric version genuinely describes the intended path.' Explain, using this lesson's consistency principle, why this argument overstates the distinction between the two representations. (c) The colleague also proposes classifying the conic type directly from the parametric form alone, without reference to the algebraic equation's coefficients. Explain why the algebraic form's $A,C$ coefficient comparison remains the more direct classification tool, even when a parametrization is already available.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.circle-equation` (standard-form circle equation, completing the square, distinguishing genuine circles from degenerate/empty cases) and `math.alg.quadratic-equation` (quadratic expressions and their algebraic manipulation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.conic-sections/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.conic-sections",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.circle-equation` (the completing-the-square technique this concept generalizes to ellipses and hyperbolas), `math.alg.quadratic-equation` (quadratic algebraic manipulation this concept's general second-degree equation builds on).\n- **Unlocks**: `math.calc.parametric-curves` (this concept's KG-listed unlock; the parametric representations LO3 connects to).\n- **Cross-link**: KG lists `math.calc.parametric-curves` as a cross-link — **authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **cross-link probe**, engaging directly with that concept's own parametrization technique to verify the algebraic/parametric consistency principle in LO3/Example 3.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.conic-sections.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
