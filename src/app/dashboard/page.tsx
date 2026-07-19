@@ -31,7 +31,11 @@ export default async function DashboardPage() {
 
   if (!user?.profile) redirect('/onboarding')
   if (!user.onboardingCompleted) {
-    await withRetry(() => prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } }))
+    // Same P0 hang class as the user fetch above — this update was missing
+    // its withTimeout wrapper, so a stalled/pool-exhausted connection here
+    // could keep this server component (and loading.tsx) hanging forever
+    // even though the fetch above it was correctly bounded.
+    await withTimeout(withRetry(() => prisma.user.update({ where: { id: userId }, data: { onboardingCompleted: true } })), 12000, 'dashboard-onboarding-heal')
   }
 
   console.log('[D5] dashboard data start')
