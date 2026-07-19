@@ -255,25 +255,36 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   const enrolledSubjects = (profile.subjects ?? []).filter((ps) => isEduBrainEnabled(ps.subject.slug))
   const slugs = getUserNavSubjects(profile, false).map((s) => s.slug)
 
+  // Q2 (studentProgress) and Q3 (rank, below) are mutually independent —
+  // Q2 needs only Q1's `slugs`, Q3 needs only Q1's `myWeeklyXP` — but were
+  // previously two sequential round-trips. Running them in parallel removes
+  // one full DB round-trip of latency from the critical path, directly
+  // reducing how often getDashboardV2Data's 18s withTimeout budget
+  // (dashboard/page.tsx) gets exceeded under real production DB latency —
+  // a timeout there throws and surfaces the app-wide error.tsx boundary
+  // ("Something went wrong"), which is what this was found investigating.
   console.log('[Q2] studentProgress')
   let studentProgressList: { subjectCode: string; currentLesson: number; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
-  try {
-    studentProgressList = await withRetry(() => prisma.studentProgress.findMany({
-      where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
-      select: {
-        subjectCode: true,
-        currentLesson: true,
-        completedLessons: true,
-        lastStudiedAt: true,
-        lastLessonTitle: true,
-        completionPercent: true,
-      },
-    }))
-    console.log('[Q2 OK] studentProgress', studentProgressList.length)
-  } catch (err: any) {
+  const studentProgressPromise = withRetry(() => prisma.studentProgress.findMany({
+    where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
+    select: {
+      subjectCode: true,
+      currentLesson: true,
+      completedLessons: true,
+      lastStudiedAt: true,
+      lastLessonTitle: true,
+      completionPercent: true,
+    },
+  })).then((rows) => { console.log('[Q2 OK] studentProgress', rows.length); return rows }).catch((err: any) => {
     console.error('[FAILED Q2] studentProgress', err?.code, err?.message, err?.meta)
     throw err
-  }
+  })
+  console.log('[Q3] rank')
+  const rankPromise = myWeeklyXP
+    ? prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } }).then((n) => { console.log('[Q3 OK] rank', n + 1); return n + 1 }).catch((err) => { console.error('[FAILED Q3] rank', err?.code, err?.message); return null })
+    : (console.log('[Q3 SKIP] no weeklyXP row'), Promise.resolve(null))
+  const [studentProgressResolved, myRank] = await Promise.all([studentProgressPromise, rankPromise])
+  studentProgressList = studentProgressResolved
   const spMap = new Map(studentProgressList.map((sp) => [sp.subjectCode, sp]))
 
   const curriculumLevel = normalizeToCanonicalLevel(profile.currentLevel)
@@ -342,11 +353,6 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   // League
   const myXP = myWeeklyXP?.xp ?? 0
   const tier = getLeagueForXP(myXP)
-  console.log('[Q3] rank')
-  const myRank = myWeeklyXP
-    ? await prisma.weeklyXP.count({ where: { week, xp: { gt: myWeeklyXP.xp }, user: { isDeleted: false } } }).then((n) => { console.log('[Q3 OK] rank', n + 1); return n + 1 }).catch((err) => { console.error('[FAILED Q3] rank', err?.code, err?.message); return null })
-    : null
-  if (!myWeeklyXP) console.log('[Q3 SKIP] no weeklyXP row')
 
   const entries: LeagueEntry[] = weeklyTop.map((e, i) => {
     const isMe = e.userId === userId
