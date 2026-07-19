@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.interpolation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.interpolation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:063496c694d54f4ca20f7a76367d9e418822cb1a331e7e8ef9cfa7cf80aa88c8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.interpolation.md": "sha256:55fcf58459be1a6faf50cef414349c9b9a9312fe78017a2ac157f780238146af"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.num.interpolation",
+    "name": "Polynomial Interpolation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.polynomial",
+      "math.linalg.linear-system"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.interpolation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.interpolation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.interpolation.md": "sha256:55fcf58459be1a6faf50cef414349c9b9a9312fe78017a2ac157f780238146af"
+      },
+      "contentHash": "sha256:04a28047db858fc5a240e63bdb860f84f63654d464c29b5cd60ce4e984af2b2f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.interpolation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.interpolation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.interpolation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.interpolation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.interpolation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.interpolation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.interpolation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.interpolation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.interpolation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.interpolation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.interpolation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.interpolation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.interpolation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.interpolation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.interpolation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.interpolation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.interpolation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.interpolation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Given $n+1$ data points with distinct $x$-values, recognize that there is a UNIQUE polynomial of degree $\\le n$ passing through all of them, and construct it via the **Lagrange form** $L(x)=\\sum_i y_i\\prod_{j\\ne i}\\frac{x-x_j}{x_i-x_j}$ — a sum of basis polynomials each engineered to be $1$ at its own node and $0$ at every other node.\n- LO2: Verify uniqueness DIRECTLY — recognize that setting up the $n+1$ conditions $p(x_i)=y_i$ for a degree-$\\le n$ polynomial gives an $(n+1)\\times(n+1)$ linear system (via `math.linalg.linear-system`) with a unique solution (the Vandermonde system), so interpolation is genuinely a special case of solving a linear system, not a separate unrelated technique.\n- LO3 (orientation level — full numerical-stability theory deferred): recognize, without full derivation, **Runge's phenomenon** — high-degree polynomial interpolation on EQUALLY SPACED points can oscillate wildly near the interval's edges, so more data points do not automatically mean a better fit.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.interpolation",
+      "title": "LAGRANGE-FORM-ASSUMED-ARBITRARY",
+      "content": "| MC-1 | LAGRANGE-FORM-ASSUMED-ARBITRARY | Believing the Lagrange formula is an arbitrary-looking expression, missing that each basis term $\\ell_i(x)$ is deliberately engineered as an indicator function equal to $1$ at its own node and $0$ elsewhere | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.interpolation",
+      "title": "INTERPOLATION-ASSUMED-UNRELATED-TO-LINEAR-SYSTEMS",
+      "content": "| MC-2 | INTERPOLATION-ASSUMED-UNRELATED-TO-LINEAR-SYSTEMS | Believing polynomial interpolation is a separate technique from solving linear systems, missing that the $n+1$ interpolation conditions ARE a linear system whose unique solvability guarantees the interpolant's uniqueness | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.interpolation",
+      "title": "MORE-POINTS-ASSUMED-TO-ALWAYS-IMPROVE-FIT",
+      "content": "| MC-3 | MORE-POINTS-ASSUMED-TO-ALWAYS-IMPROVE-FIT | Believing more equally-spaced interpolation points always produce a more accurate fit, missing Runge's phenomenon — high-degree interpolation can oscillate wildly near the interval's edges | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.interpolation",
+      "title": "Each Lagrange Basis Term Is an Engineered Indicator (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Each Lagrange Basis Term Is an Engineered Indicator (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.interpolation",
+      "title": "Interpolation Is a Linear System In Disguise (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Interpolation Is a Linear System In Disguise (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.interpolation",
+      "title": "More Matched Points Can Make the Fit Worse (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"More Matched Points Can Make the Fit Worse (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.interpolation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.interpolation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Construct the Lagrange basis polynomials $\\ell_0,\\ell_1$ for the two points $(0,1)$ and $(3,10)$.\n  2. Set up (but don't necessarily fully solve) the linear system corresponding to interpolating the 3 points $(0,1),(1,4),(2,9)$ with a degree-$\\le2$ polynomial in standard form.\n  3. Explain why the interpolating polynomial for $n+1$ distinct-$x$ data points is guaranteed UNIQUE, citing the Vandermonde system's invertibility.\n  4. Without computing it, explain the risk of interpolating 20 equally-spaced samples of a sharply peaked function with a single degree-19 polynomial.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer has 4 sensor readings $(0,2),(1,5),(2,4),(3,11)$ and wants a single polynomial passing through all 4 to interpolate between readings. (a) Explain, citing the Vandermonde-system argument, why a UNIQUE degree-$\\le3$ polynomial through these 4 points exists. (b) Construct the Lagrange basis polynomial $\\ell_0(x)$ for the first node. (c) The engineer proposes taking 50 more equally-spaced readings and fitting a single degree-49 polynomial for maximum accuracy — evaluate this proposal, citing Runge's phenomenon.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.num.interpolation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.polynomial` (polynomials as $a_nx^n+\\cdots+a_0$, degree, and the ring structure) and `math.linalg.linear-system` (systems $Ax=b$ and their consistent/inconsistent/unique-solution classification via rank).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.interpolation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.num.interpolation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.polynomial` (polynomials, degree, and the standard-form coefficient representation used in Example 2) and `math.linalg.linear-system` (the rank-based unique/inconsistent/dependent classification directly certifying the Vandermonde system's unique solvability).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.interpolation.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

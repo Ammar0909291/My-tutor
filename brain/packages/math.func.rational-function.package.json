@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.rational-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.rational-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:619a9d7bd874d018bb598c7dc2ff92c919c06729cedf5f10aed9a9243c9ef450",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.rational-function.md": "sha256:8638c56913aaac4de855f425f06433ae6f10f31a1e793ad2bf6c37008a59976b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.func.rational-function",
+    "name": "Rational Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.rational-expressions",
+      "math.func.polynomial-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.rational-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.rational-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.rational-function.md": "sha256:8638c56913aaac4de855f425f06433ae6f10f31a1e793ad2bf6c37008a59976b"
+      },
+      "contentHash": "sha256:da25ab41ade91dd1ef6ae987a78e15b4c57ec1c37fa5f75eb63f502301f7ecac",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.rational-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-function.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-function\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-function.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-function.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-function.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.rational-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.rational-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **rational function** $f(x)=p(x)/q(x)$ (with $p,q$ polynomial functions from `math.func.polynomial-function`) and determine its DOMAIN by finding the zeros of $q(x)$ — recognizing the domain restriction as inherited directly from division being undefined at zero, not an arbitrary rule.\n- LO2: Distinguish a **vertical asymptote** (a zero of $q(x)$ that is NOT also a zero of $p(x)$, or survives after `math.alg.rational-expressions`'s own cancellation of common factors) from a **hole** (a zero of $q(x)$ that IS cancelled against a matching factor of $p(x)$) — recognizing these as genuinely different behaviors at superficially similar-looking excluded points.\n- LO3 (orientation level — full end-behavior/asymptote-degree theory deferred): recognize, without full derivation, that a rational function's behavior as $x\\to\\pm\\infty$ (horizontal asymptote, slant asymptote, or neither) is governed by comparing the DEGREES of $p$ and $q$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.rational-function",
+      "title": "DOMAIN-RESTRICTION-ASSUMED-SPECIAL-RULE",
+      "content": "| MC-1 | DOMAIN-RESTRICTION-ASSUMED-SPECIAL-RULE | Believing determining a rational function's domain is a special new procedure, missing that it is inherited directly from \"division by zero is undefined,\" applied by finding the denominator's zeros | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.rational-function",
+      "title": "DENOMINATOR-ZERO-ASSUMED-TO-ALWAYS-BE-ASYMPTOTE",
+      "content": "| MC-2 | DENOMINATOR-ZERO-ASSUMED-TO-ALWAYS-BE-ASYMPTOTE | Believing every zero of the denominator automatically produces a vertical asymptote, missing that a cancelling factor produces a hole instead | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.rational-function",
+      "title": "END-BEHAVIOR-ASSUMED-INDEPENDENT-OF-DEGREE",
+      "content": "| MC-3 | END-BEHAVIOR-ASSUMED-INDEPENDENT-OF-DEGREE | Believing a rational function's end behavior depends only on both parts being polynomials, missing that comparing $\\deg(p)$ to $\\deg(q)$ determines horizontal-, slant-, or no-asymptote behavior | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-function",
+      "title": "Domain Exclusion Is Just \"No Division By Zero,\" Applied to a Function (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Domain Exclusion Is Just \\\"No Division By Zero,\\\" Applied to a Function (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-function",
+      "title": "A Zero of the Denominator Isn't Automatically an Asymptote (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Zero of the Denominator Isn't Automatically an Asymptote (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-function",
+      "title": "End Behavior Depends on Comparing Degrees, Not Just \"Both Are Polynomials\" (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"End Behavior Depends on Comparing Degrees, Not Just \\\"Both Are Polynomials\\\" (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.rational-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find the domain of $f(x)=\\dfrac{x-3}{x^2-9}$ by locating the zeros of the denominator.\n  2. For $f(x)=\\dfrac{(x-1)(x+4)}{(x-1)(x-5)}$, determine which excluded point is a hole and which is a vertical asymptote, and justify each classification.\n  3. Compare the end behavior of $f(x)=\\dfrac{3}{x-1}$ and $g(x)=\\dfrac{3x}{x-1}$ by comparing degrees, without graphing.\n  4. Explain, in one or two sentences, why a hole and a vertical asymptote can both arise from \"a zero of the denominator\" yet represent genuinely different behaviors.\n- **P76 (Transfer Probe, mode = independence)**: \"A cost-per-unit model is given by $C(x)=\\dfrac{(x-10)(x+50)}{(x-10)(x-2)}$, where $x$ is the number of units produced. (a) Determine the domain, and classify the excluded point $x=10$ as a hole or vertical asymptote, justifying your answer via cancellation. (b) Classify the excluded point $x=2$ similarly. (c) Compare the numerator's and denominator's degrees to determine the model's long-run behavior as production $x$ grows large, and explain what this predicts economically (e.g., cost per unit approaching a stable constant, growing without bound, or something else).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.rational-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.rational-expressions` (simplifying $p(x)/q(x)$ by factoring and canceling common factors) and `math.func.polynomial-function` (polynomial functions as continuous, degree-and-leading-coefficient-governed functions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.rational-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.rational-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.rational-expressions` (simplifying $p(x)/q(x)$ via factoring and cancellation, directly reused to distinguish holes from vertical asymptotes) and `math.func.polynomial-function` (the polynomial functions $p,q$ this concept combines via division).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-function.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

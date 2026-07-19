@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.lu-factorization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.lu-factorization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8068b95334a794bb957a746597bfacecffee3b28815437cd36c2abab7d8df063",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.lu-factorization.md": "sha256:c92e74b545c982d65e89251b73f98c3eeb98dca3ba38abee9caa10d891dfcd27"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.lu-factorization",
+    "name": "LU Factorization",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.row-reduction",
+      "math.linalg.matrix-multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.lu-factorization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.lu-factorization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.lu-factorization.md": "sha256:c92e74b545c982d65e89251b73f98c3eeb98dca3ba38abee9caa10d891dfcd27"
+      },
+      "contentHash": "sha256:6d82c7f7efe8532911eae3c3ee9dc76981d47c3bb530bb6d2f139c2726c38f40",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.lu-factorization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.lu-factorization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.lu-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.lu-factorization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.lu-factorization.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.lu-factorization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.lu-factorization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.lu-factorization.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.lu-factorization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.lu-factorization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.lu-factorization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.lu-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.lu-factorization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.lu-factorization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that the row-reduction ELIMINATION steps `math.linalg.row-reduction` already performs (to reach row echelon form $U$) can be recorded as multipliers, and that these multipliers assemble directly into a LOWER TRIANGULAR matrix $L$ satisfying $A=LU$ — LU factorization is not new arithmetic, it is BOOKKEEPING of row reduction's own elimination steps.\n- LO2: Recognize the PAYOFF of having $A=LU$ once computed: solving $Ax=b$ for MULTIPLE different $b$ vectors (with the SAME $A$) becomes two cheap triangular solves — forward substitution for $Ly=b$, then back substitution for $Ux=y$ — avoiding re-doing the full elimination from scratch for every new $b$.\n- LO3 (orientation level — full pivoting theory deferred): recognize, without full derivation, that when a pivot position is zero (or dangerously small), a ROW SWAP is needed, requiring a permutation matrix $P$ and the modified factorization $PA=LU$, deferred to `math.num.lu-factorization`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "LU-COMPUTATION-ASSUMED-SEPARATE-NEW-ARITHMETIC",
+      "content": "| MC-1 | LU-COMPUTATION-ASSUMED-SEPARATE-NEW-ARITHMETIC | Believing computing $L$ and $U$ requires separate new arithmetic distinct from row reduction, missing that $L$'s entries are exactly row reduction's own multipliers, recorded rather than discarded | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "LU-PAYOFF-ASSUMED-SINGLE-USE",
+      "content": "| MC-2 | LU-PAYOFF-ASSUMED-SINGLE-USE | Believing LU factorization's value applies even when solving $Ax=b$ only once, missing that its real payoff is reusing $L,U$ across multiple right-hand sides | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "A-EQUALS-LU-ASSUMED-ALWAYS-VALID",
+      "content": "| MC-3 | A-EQUALS-LU-ASSUMED-ALWAYS-VALID | Believing every matrix admits a plain $A=LU$ factorization via ordinary elimination, missing that a zero pivot forces a row swap, requiring $PA=LU$ instead | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "LU Factorization Records What Row Reduction Already Throws Away (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"LU Factorization Records What Row Reduction Already Throws Away (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "The Real Payoff Is Reuse Across Multiple $b$ Vectors (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Real Payoff Is Reuse Across Multiple $b$ Vectors (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "A Zero Pivot Breaks the Simple $A=LU$ Story (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Zero Pivot Breaks the Simple $A=LU$ Story (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\begin{pmatrix}1&0\\\\3&1\\end{pmatrix}\\begin{pmatrix}2&1\\\\0&4\\end{pmatrix}$ computed out to a single matrix, identify which factor is $L$ and which is $U$, and verify $LU=A$ by direct multiplication.\n  2. Perform row reduction on $A=\\begin{pmatrix}2&1\\\\4&5\\end{pmatrix}$, recording the multiplier used, and assemble $L$ and $U$.\n  3. Given a matrix $A$ already factored as $A=LU$ and a NEW right-hand side $b$, describe the two-step process (forward then back substitution) to solve $Ax=b$ without re-eliminating $A$.\n  4. Explain, without fully carrying out the factorization, why a matrix with a zero $(1,1)$ entry cannot be factored as $A=LU$ using elimination exactly as written.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineering firm repeatedly solves $Ax=b_k$ for the SAME stiffness matrix $A$ but many different load vectors $b_1,b_2,\\dots,b_{50}$ across a design season. (a) Explain, citing the bookkeeping argument from Example 1, why computing $A=LU$ ONCE is worthwhile here even though it costs the same elimination work as one ordinary row reduction. (b) Describe the two-step process used to solve for each new $b_k$ once $L,U$ are known. (c) Suppose partway through, the firm discovers $A$'s $(2,2)$ pivot position becomes zero after the first elimination step for a redesigned structure — explain what must change about the factorization approach.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.row-reduction` (the systematic column-by-column elimination process reaching row echelon form, and back-substitution as its own separate follow-up step) and `math.linalg.matrix-multiplication` (computing matrix products, needed to VERIFY $LU=A$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.lu-factorization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.lu-factorization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.row-reduction` (the systematic elimination process this concept's $L$ directly records, and back-substitution reused unchanged for the $Ux=y$ step) and `math.linalg.matrix-multiplication` (verifying $LU=A$ by direct computation).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.num.lu-factorization`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.lu-factorization.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
