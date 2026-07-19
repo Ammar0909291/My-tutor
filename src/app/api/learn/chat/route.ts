@@ -2250,6 +2250,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (assembled) {
         text = assembled.text
         provider = 'memory'
+        // Structured provider log — visible in Vercel logs, never sent to
+        // client. Proves Explanation Memory is being served without Groq.
+        console.log(
+          '[learn/chat] RESPONSE provider=memory' +
+          ` concept=${resolvedConceptId ?? 'unknown'}` +
+          ` subject=${learnSession.subject.slug}` +
+          ` source=ExplanationMemory` +
+          ` assets=[${assembled.usedAssetIds.join(',')}]` +
+          ` confidence=${assembled.explanationConfidence?.toFixed(3) ?? 'n/a'}` +
+          ` chars=${text.length}`
+        )
       } else {
         const routed = await routeAI(
           [...historyMessages, { role: 'user', content: message }],
@@ -2271,7 +2282,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         text = routed.text
         provider = routed.provider
         finishReason = routed.finishReason
-        console.log('[learn/chat] provider:', provider, 'finish_reason:', finishReason, text ? `(${text.length} chars)` : '(EMPTY)')
+        // Structured provider log — shows when Groq IS called and why
+        // (concept not seeded, gate suppressed, or DB miss).
+        console.log(
+          `[learn/chat] RESPONSE provider=${provider}` +
+          ` concept=${resolvedConceptId ?? 'unknown'}` +
+          ` subject=${learnSession.subject.slug}` +
+          ` source=${resolvedConceptId && isExplanationMemoryEnabled() ? 'Groq(no-memory-hit)' : 'Groq'}` +
+          ` finish_reason=${finishReason}` +
+          ` chars=${text ? text.length : 0}`
+        )
       }
 
       if (!text) {

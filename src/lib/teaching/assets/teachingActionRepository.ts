@@ -49,15 +49,32 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       }))
 
     const best = pickBest(state, rows, options)
-    if (!best) return null
-
-    return {
-      assetId: best.asset.assetId,
-      stem: best.asset.probeAsset!.stem,
-      choices: (best.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
-      correctValue: best.asset.probeAsset!.correctValue,
-      confidence: best.confidence,
+    if (best) {
+      return {
+        assetId: best.asset.assetId,
+        stem: best.asset.probeAsset!.stem,
+        choices: (best.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
+        correctValue: best.asset.probeAsset!.correctValue,
+        confidence: best.confidence,
+      }
     }
+
+    // Grade-band fallback: authored probe for the right concept is always
+    // better than Groq generating one — serve the best available grade band.
+    if (rows.length > 0) {
+      const fallback = pickBest(state, rows, options, 0)
+      if (fallback) {
+        return {
+          assetId: fallback.asset.assetId,
+          stem: fallback.asset.probeAsset!.stem,
+          choices: (fallback.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
+          correctValue: fallback.asset.probeAsset!.correctValue,
+          confidence: fallback.confidence,
+        }
+      }
+    }
+
+    return null
   } catch (err) {
     console.warn('[teachingActionRepository] findBestProbe failed, falling back to LLM:', err)
     return null

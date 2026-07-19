@@ -60,14 +60,38 @@ export async function findBestExplanation(
       }))
 
     const best = pickBest(state, rows, options)
-    if (!best) return null
-
-    return {
-      assetId: best.asset.assetId,
-      content: best.asset.explanationAsset!.content,
-      familyKind: best.asset.familyKind,
-      confidence: best.confidence,
+    if (best) {
+      return {
+        assetId: best.asset.assetId,
+        content: best.asset.explanationAsset!.content,
+        familyKind: best.asset.familyKind,
+        confidence: best.confidence,
+      }
     }
+
+    // Grade-band fallback: if no candidate cleared the confidence threshold
+    // but there ARE authored assets for this concept+language+ACTIVE, serve
+    // the best-scoring one anyway. All seeded content was human-curated for
+    // this specific concept — a grade-band mismatch is a presentation
+    // difference, not a correctness failure. Groq is never preferable over
+    // authored content that exists for the right concept.
+    if (rows.length > 0) {
+      const fallback = pickBest(state, rows, options, 0)
+      if (fallback) {
+        console.log(
+          `[explanationMemory] grade-band fallback: serving ${fallback.asset.assetId}` +
+          ` (score=${fallback.confidence}, state.gradeBand=${state.gradeBand})`
+        )
+        return {
+          assetId: fallback.asset.assetId,
+          content: fallback.asset.explanationAsset!.content,
+          familyKind: fallback.asset.familyKind,
+          confidence: fallback.confidence,
+        }
+      }
+    }
+
+    return null
   } catch (err) {
     console.warn('[explanationMemory] findBestExplanation failed, falling back to LLM:', err)
     return null
