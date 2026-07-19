@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.fourier-series-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.fourier-series-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7e4d0d68db3fad28278f1e03c5403fe5102d12ebe742bf3d079d55fcd89de8f8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.fourier-series-intro.md": "sha256:679717f9554576c7f4b3e486d7455f9916988c0fddcfe0f99f0be8ade072e063"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.fourier-series-intro",
+    "name": "Fourier Series (Introduction)",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.calc.definite-integral",
+      "math.trig.trig-functions",
+      "math.seq.series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.fourier-series-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.fourier-series-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.fourier-series-intro.md": "sha256:679717f9554576c7f4b3e486d7455f9916988c0fddcfe0f99f0be8ade072e063"
+      },
+      "contentHash": "sha256:6f6886826adb7b839f34659a1b9bc3ca2136b68de15ed28d5aeadda4c648f66f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.fourier-series-intro.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.fourier-series-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.fourier-series-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.fourier-series-intro.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.fourier-series-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.fourier-series-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.fourier-series-intro.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.fourier-series-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.fourier-series-intro\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.fourier-series-intro.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.fourier-series-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.fourier-series-intro\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.fourier-series-intro/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Fourier series representation $f(x) = \\dfrac{a_0}{2} + \\sum_{n=1}^{\\infty}\\left(a_n\\cos(nx)+b_n\\sin(nx)\\right)$ for a periodic function (period $2\\pi$) — recognizing this as a genuine INFINITE sum (directly using `math.seq.series`'s own infinite-series machinery, not a finite truncation) built from `math.trig.trig-functions`'s periodic building blocks.\n- LO2: Compute Fourier coefficients via the ORTHOGONALITY integrals $a_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\cos(nx)\\,dx$, $b_n=\\frac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin(nx)\\,dx$ (directly using `math.calc.definite-integral`'s integration machinery), and explain WHY these specific integrals isolate exactly one coefficient — because $\\int_{-\\pi}^{\\pi}\\sin(mx)\\sin(nx)\\,dx=0$ for $m\\ne n$ (and similarly for cosine), \"filtering out\" every other term.\n- LO3 (orientation level — full Hilbert-space theory beyond this concept's own scope): recognize that $\\{1,\\cos(x),\\sin(x),\\cos(2x),\\sin(2x),\\ldots\\}$ form an ORTHOGONAL set under the $L^2$ inner product $\\langle f,g\\rangle=\\int_{-\\pi}^{\\pi}fg\\,dx$ (per `math.fnal.hilbert-space`'s own framework), and that computing a Fourier coefficient is literally computing an inner product against this orthogonal basis — exactly the same operation as finding one coordinate of a vector in an orthogonal basis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "FOURIER-SERIES-ASSUMED-FINITE",
+      "content": "| MC-1 | FOURIER-SERIES-ASSUMED-FINITE | Believing a periodic function's Fourier series can always be captured exactly using only finitely many sine/cosine terms, missing that the representation is genuinely infinite in general | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "ORTHOGONALITY-INTEGRALS-TREATED-AS-ARBITRARY-FORMULAS",
+      "content": "| MC-2 | ORTHOGONALITY-INTEGRALS-TREATED-AS-ARBITRARY-FORMULAS | Treating the Fourier coefficient formulas as arbitrary rules to memorize, missing that orthogonality is precisely why these specific integrals isolate one coefficient at a time | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "FOURIER-COEFFICIENTS-TREATED-AS-UNRELATED-TO-ORTHOGONAL-PROJECTION",
+      "content": "| MC-3 | FOURIER-COEFFICIENTS-TREATED-AS-UNRELATED-TO-ORTHOGONAL-PROJECTION | Believing computing Fourier coefficients is a separate technique unrelated to the general idea of projecting onto an orthogonal basis, missing the direct structural connection | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Genuinely Infinite, Not a Finite Approximation Shortcut (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Genuinely Infinite, Not a Finite Approximation Shortcut (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Orthogonality Filters Out Every Other Term (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Orthogonality Filters Out Every Other Term (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Fourier Coefficients Are Inner-Product Projections (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Fourier Coefficients Are Inner-Product Projections (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why the square wave's Fourier series from Example 1 cannot be exactly reproduced by any finite number of terms, referencing the Gibbs phenomenon.\n  2. Compute $a_1=\\frac1\\pi\\int_{-\\pi}^{\\pi}x\\cos(x)\\,dx$ for $f(x)=x$, and explain (without full computation) why you should expect this to equal $0$, given that $f(x)=x$ is an odd function and $\\cos(x)$ is even.\n  3. Explain, using the orthogonality property $\\int_{-\\pi}^\\pi\\sin(mx)\\sin(nx)\\,dx=0$ for $m\\ne n$, why multiplying by $\\sin(2x)$ and integrating would isolate $b_2$ specifically, not any other coefficient.\n  4. Explain the connection between computing a Fourier coefficient and finding a vector's coordinate in an orthogonal basis, referencing the inner product $\\langle f,g\\rangle=\\int_{-\\pi}^\\pi fg\\,dx$.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.fnal.hilbert-space`; note `math.de.heat-equation` is not yet authored)**: \"Recall from `math.fnal.hilbert-space` that an orthonormal basis lets you decompose any vector into a sum of coordinate-times-basis-vector terms, each coordinate found via an inner product. (a) Explain precisely how the Fourier series $f(x)=\\frac{a_0}{2}+\\sum(a_n\\cos(nx)+b_n\\sin(nx))$ is exactly this kind of decomposition, with $\\{1,\\cos(x),\\sin(x),\\ldots\\}$ playing the role of an orthogonal basis for a suitable space of periodic functions. (b) Explain why the coefficient formulas divide by $\\pi$ (rather than some other constant), referencing the specific value of $\\int_{-\\pi}^{\\pi}\\sin^2(nx)\\,dx$ or $\\int_{-\\pi}^\\pi\\cos^2(nx)\\,dx$ (each basis function's own squared 'length'). (c) `math.de.heat-equation` is not yet authored in this corpus, but is listed as this concept's own unlock target — explain, in general terms, why representing a temperature distribution as a Fourier series (a sum of simple sine/cosine 'modes') might be a natural first step toward solving a heat-flow problem, without needing to know that concept's specific content yet.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.definite-integral` (evaluating $\\int_a^b f(x)\\,dx$, including integration by parts), `math.trig.trig-functions` ($\\sin,\\cos$ periodicity, standard values), and `math.seq.series` (infinite series, partial sums, convergence).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.fourier-series-intro/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.fourier-series-intro",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.definite-integral` (the integration machinery the coefficient formulas are built from), `math.trig.trig-functions` (the periodic sine/cosine building blocks), `math.seq.series` (the infinite-sum framework this concept's representation genuinely requires).\n- **Unlocks**: `math.de.heat-equation` (uses Fourier series to decompose temperature distributions into simple sine/cosine modes — not yet authored).\n- **Cross-links**: `math.fnal.hilbert-space` (P76_mode = cross-link probe, already authored — supplies the inner-product/orthogonal-basis framework LO3 directly instantiates); `math.de.heat-equation` (not yet authored, checked via `ls docs/curriculum/blueprints/` — the transfer probe's part (c) engages this target at a conceptual, non-technical level appropriate given it is unauthored, per the corpus's established handling of mixed cross-link status).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.fourier-series-intro.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.distance-formula-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.distance-formula",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bfadc7d00d577bdba175e965c50926327711002ddce6b8757eac0b0632308063",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.distance-formula.md": "sha256:338f5508ac8df041e076afc54ad11a05a1cf8ee0561d7c9a4591b0f254c3d0f3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.distance-formula",
+    "name": "Distance Formula",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.geom.pythagorean-theorem",
+      "math.geom.coordinate-plane"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.distance-formula-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.distance-formula (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.distance-formula.md": "sha256:338f5508ac8df041e076afc54ad11a05a1cf8ee0561d7c9a4591b0f254c3d0f3"
+      },
+      "contentHash": "sha256:87ed628e803b1f75f962b0cd2444bc84608fdba3f1d2cce794af7fd59d246e31",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.distance-formula.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.distance-formula.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.distance-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.distance-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.distance-formula.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.distance-formula.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.distance-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.distance-formula\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.distance-formula.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.distance-formula.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.distance-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.distance-formula\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.distance-formula.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.distance-formula.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.distance-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.distance-formula\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.distance-formula/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the distance formula $d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$ by constructing a right triangle between two points — the horizontal leg has length $|x_2-x_1|$, the vertical leg has length $|y_2-y_1|$ (using `math.geom.coordinate-plane`'s own signed-coordinate differences), and the direct distance is the hypotenuse, found via `math.geom.pythagorean-theorem`'s own $c=\\sqrt{a^2+b^2}$.\n- LO2: Recognize that swapping which point is called $(x_1,y_1)$ versus $(x_2,y_2)$ never changes the computed distance — since $(x_2-x_1)^2=(x_1-x_2)^2$ (squaring eliminates the sign) — even though `math.geom.coordinate-plane` emphasized that ORDER matters for identifying which point is which, it does not matter for computing the distance BETWEEN them.\n- LO3: Apply the distance formula correctly even when the two points share the same $x$-coordinate or the same $y$-coordinate (a purely vertical or horizontal segment), recognizing the SAME formula handles these cases automatically — one squared term simply becomes zero — with no special-casing needed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.distance-formula",
+      "title": "COORDINATE-DIFFERENCES-ADDED-WITHOUT-SQUARING",
+      "content": "| MC-1 | COORDINATE-DIFFERENCES-ADDED-WITHOUT-SQUARING | Adding the horizontal and vertical coordinate differences directly, rather than squaring, summing, and taking the square root per the Pythagorean relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.distance-formula",
+      "title": "POINT-ORDER-ASSUMED-TO-AFFECT-DISTANCE",
+      "content": "| MC-2 | POINT-ORDER-ASSUMED-TO-AFFECT-DISTANCE | Believing swapping which point is called (x₁,y₁) versus (x₂,y₂) changes the computed distance, missing that squaring eliminates the sign difference | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.distance-formula",
+      "title": "VERTICAL-OR-HORIZONTAL-SEGMENTS-ASSUMED-TO-NEED-A-SEPARATE-FORMULA",
+      "content": "| MC-3 | VERTICAL-OR-HORIZONTAL-SEGMENTS-ASSUMED-TO-NEED-A-SEPARATE-FORMULA | Believing the general distance formula must be modified or replaced for purely vertical or horizontal segments, missing that it already simplifies correctly on its own | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Building the Right Triangle From Coordinate Differences (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Building the Right Triangle From Coordinate Differences (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Point Order Doesn't Affect Distance (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Point Order Doesn't Affect Distance (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.distance-formula",
+      "title": "No Special Case Needed for Vertical or Horizontal Segments (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"No Special Case Needed for Vertical or Horizontal Segments (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the distance between $(0,0)$ and $(6,8)$.\n  2. Compute the distance between $(2,3)$ and $(-1,7)$, then recompute with the points swapped, confirming the answer is identical.\n  3. Compute the distance between $(-4,5)$ and $(-4,-3)$ (a vertical segment), and confirm it matches the ordinary vertical distance.\n  4. Explain why a student who adds the horizontal and vertical coordinate differences directly (without squaring) instead of using the full formula gets an incorrect distance in general.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.norm`)**: \"Recall from `math.linalg.norm` that the norm $\\|v\\|$ of a vector $v=(v_1,v_2)$ is $\\sqrt{v_1^2+v_2^2}$, computed via the Pythagorean theorem in exactly the same way. (a) Explain precisely how this lesson's distance formula between two points $(x_1,y_1)$ and $(x_2,y_2)$ is exactly the norm of the DIFFERENCE vector $(x_2-x_1, y_2-y_1)$. (b) That lesson also discussed the sup-norm and other $p$-norms, giving genuinely different numeric answers for the same vector. Explain why the ordinary (Euclidean) distance formula in this lesson corresponds specifically to the $p=2$ norm, not any other choice of $p$. (c) Explain why the same symmetry property from LO2 (swapping point order doesn't change distance) directly follows from the norm's own homogeneity property, $\\|\\alpha v\\|=|\\alpha|\\|v\\|$, applied with $\\alpha=-1$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.pythagorean-theorem` ($a^2+b^2=c^2$ for a right triangle's legs $a,b$ and hypotenuse $c$; solving for the hypotenuse via $c=\\sqrt{a^2+b^2}$) and `math.geom.coordinate-plane` (points as ordered pairs $(x,y)$; signed horizontal and vertical distances from the origin; order and sign both matter for identifying a point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.distance-formula/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.distance-formula",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.pythagorean-theorem` (the $c=\\sqrt{a^2+b^2}$ formula this concept applies directly to coordinate-difference legs), `math.geom.coordinate-plane` (the signed coordinate differences this concept's legs are built from).\n- **Unlocks**: `math.geom.circle-equation` (a circle is the set of points at a fixed distance from a center — directly using this concept's formula), `math.geom.midpoint-formula` (a related coordinate-geometry construction between two points).\n- **Cross-link (P76_mode = cross-link probe against `math.linalg.norm`, already authored)**: the transfer probe explicitly connects this concept's concrete two-point distance formula to that concept's abstract vector-norm framework, framing the distance formula as the norm of the difference vector, specifically the $p=2$ case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.distance-formula.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
