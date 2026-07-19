@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.banach-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.banach-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:015a99e566eb536b8bfd304a0d588609ef170de894dc06ca6b72fac67f073e4c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.banach-space.md": "sha256:402c88f557786eca1d4a4075b16e1faf24b445e428ca6be4736e80b8887f24cf"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.banach-space",
+    "name": "Banach Space",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.fnal.completeness"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.banach-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.banach-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.banach-space.md": "sha256:402c88f557786eca1d4a4075b16e1faf24b445e428ca6be4736e80b8887f24cf"
+      },
+      "contentHash": "sha256:24189a77b71c92d976565b392f72b929b4219ea76c29a02e1d1ca9e88f6ed4c5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.banach-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.banach-space.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.banach-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.banach-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.banach-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.banach-space.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.banach-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.banach-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.banach-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.banach-space.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.banach-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.banach-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.banach-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.banach-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.banach-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.banach-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.banach-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **Banach space** as exactly a **complete normed vector space** — a normed space $(X,\\|\\cdot\\|)$ in which every Cauchy sequence converges — recognizing this as a definition built by combining two already-known concepts, not a new independent idea.\n- LO2: Name and verify (at the level of recalling the defining property, not re-deriving completeness from scratch) the standard family of Banach space examples: $\\mathbb{R}^n$ under any norm, $C(K)$ (continuous functions on a compact set) with the sup-norm, and the sequence spaces $\\ell^p$ — while recognizing that **not every** normed space qualifies (`math.fnal.completeness`'s own counterexample, $C([0,1])$ with the $L^1$ norm, is explicitly **not** Banach).\n- LO3: Explain, at an orientation level (per this corpus's established precedent for research-tier concepts), why completeness is load-bearing for functional analysis: fixed-point theorems, spectral theory, and most major functional-analytic theorems require a complete space to guarantee limits of approximating sequences actually exist within the space being studied — directly refuting the misconception that completeness is a minor technical footnote rather than a working requirement.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.banach-space",
+      "title": "NORMED-SPACE-ASSUMED-ALWAYS-BANACH",
+      "content": "| MC-1 | NORMED-SPACE-ASSUMED-ALWAYS-BANACH | Assuming every normed vector space is automatically a Banach space, rather than recognizing Banach as the strictly smaller subclass requiring a verified completeness property | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.banach-space",
+      "title": "COMPLETENESS-HYPOTHESIS-TREATED-AS-FOOTNOTE",
+      "content": "| MC-2 | COMPLETENESS-HYPOTHESIS-TREATED-AS-FOOTNOTE | Treating the \"Banach space\" or \"complete\" hypothesis in a functional-analysis theorem as a minor technicality, rather than recognizing it as the specific requirement making limit/fixed-point arguments valid | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.banach-space",
+      "title": "ALL-NORMS-ON-INFINITE-DIMENSIONS-ASSUMED-EQUIVALENT",
+      "content": "| MC-3 | ALL-NORMS-ON-INFINITE-DIMENSIONS-ASSUMED-EQUIVALENT | Over-generalizing the finite-dimensional fact (\"all norms on $\\mathbb{R}^n$ are equivalent, so completeness is norm-independent there\") to infinite-dimensional spaces, where different norms genuinely can differ on completeness (as $C([0,1])$'s sup-norm vs. $L^1$-norm directly demonstrates) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Banach Space as a Direct Combination (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Banach Space as a Direct Combination (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Banach vs. Merely Normed: a Genuine Non-Example (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Banach vs. Merely Normed: a Genuine Non-Example (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Why Completeness Is Load-Bearing (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Why Completeness Is Load-Bearing (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the definition of a Banach space using only terms already defined in `math.fnal.normed-space` and `math.fnal.completeness` — no new symbols.\n  2. Explain, citing the specific counterexample, why $(C([0,1]),\\|\\cdot\\|_1)$ is a normed space but not a Banach space.\n  3. The Riesz–Fischer theorem states $L^p(\\mu)$ is complete for $1\\le p\\le\\infty$. Explain what this tells you about whether $L^1([0,1])$ is a Banach space, and how this relates to $C([0,1])$-with-$L^1$-norm's failure to be one.\n  4. Explain in your own words why an iterative algorithm that produces a Cauchy sequence needs its ambient space to be a Banach space (not just any normed space) before you can conclude the algorithm actually converges to a solution.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.meas.lp-space` is not yet authored; a future revision may add a genuine cross-link probe into the general $L^p$ space framework once that entry exists)**: \"An engineer is designing an iterative numerical solver that operates on the space of continuous functions $C([0,1])$, measuring convergence with the $L^1$ norm — exactly the setup from `math.fnal.completeness`'s incompleteness example. (a) Explain why the engineer cannot rely on a Cauchy-sequence argument alone to guarantee their solver converges to a continuous solution. (b) The engineer is told that switching their convergence criterion to the sup-norm instead (under which $C([0,1])$ **is** complete) would fix this problem — explain, using the Banach space definition, why this specific change resolves the issue. (c) Alternatively, the engineer could keep the $L^1$ norm but reformulate the problem in $L^1([0,1])$ instead of $C([0,1])$ — explain why this also works, using the Riesz–Fischer theorem.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.completeness` (a normed space is complete iff every Cauchy sequence converges within it, and completeness is not automatic — the $C([0,1])$-with-$L^1$-norm counterexample) — a Banach space is precisely a normed space with this property.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.banach-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.banach-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.completeness` (the completeness property this concept's definition directly incorporates).\n- **Unlocks**: `math.fnal.open-mapping-theorem`, `math.fnal.hahn-banach` (both major functional-analysis theorems that take \"Banach space\" as a standing hypothesis, exactly the load-bearing role explained in Component 3/LO3).\n- **Cross-link**: KG lists `math.meas.lp-space` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.meas.lp-space.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the general $L^p$ space framework once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.banach-space.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

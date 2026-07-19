@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.permutations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.permutations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:05870f50a8779ef2fb0794e5aaf83adba684f846150db2b11189e36d9e9b658c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.permutations.md": "sha256:c9edacdf1f8a0b25963d706a9ef205f6e6f2309d2e8bd27f8aa672d064d527a3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.permutations",
+    "name": "Permutations",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.counting-principles",
+      "math.arith.multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.permutations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.permutations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.permutations.md": "sha256:c9edacdf1f8a0b25963d706a9ef205f6e6f2309d2e8bd27f8aa672d064d527a3"
+      },
+      "contentHash": "sha256:f41cbaa1f597ade12088438d8a0b015013bf96677ab177e8253301c3d0b5a38a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.permutations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.permutations.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.permutations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.permutations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.permutations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.permutations.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.permutations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.permutations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.permutations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.permutations.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.permutations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.permutations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.permutations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.permutations.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.permutations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.permutations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.permutations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.permutations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the ordered-arrangement formula $P(n,r) = \\frac{n!}{(n-r)!}$ to count the number of ways to arrange $r$ items chosen from $n$ distinct items, when **order matters** — derived directly from the multiplication principle (`math.disc.counting-principles`): $n$ choices for the first position, $n-1$ for the second, ..., down to $n-r+1$ for the $r$-th.\n- LO2: Distinguish three permutation variants and apply each correctly: **circular permutations** ($(n-1)!$, arrangements around a circle where rotations are considered identical), **permutations with repetition allowed** ($n^r$, when items can be reused), and **permutations with identical objects** ($\\frac{n!}{n_1!n_2!\\cdots}$, when some of the $n$ items are indistinguishable from each other).\n- LO3: Recognize the defining feature that separates a permutation problem from any other counting problem: **order matters** — directly refuting the misconception that \"permutation\" just means \"any arrangement problem,\" including ones where the arrangement's order is actually irrelevant (previewing the order-doesn't-matter case that `math.disc.combinations` handles next).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.permutations",
+      "title": "PERMUTATION-ASSUMED-SYNONYMOUS-WITH-ANY-SELECTION",
+      "content": "| MC-1 | PERMUTATION-ASSUMED-SYNONYMOUS-WITH-ANY-SELECTION | Treating any \"choose $r$ from $n$\" problem as a permutation problem, without checking whether order/role actually matters in the specific scenario | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.permutations",
+      "title": "IDENTICAL-OBJECTS-OVERCOUNTED-WITH-NAIVE-FACTORIAL",
+      "content": "| MC-2 | IDENTICAL-OBJECTS-OVERCOUNTED-WITH-NAIVE-FACTORIAL | Applying the basic $n!$ (or $P(n,r)$) formula to a multiset containing indistinguishable items, without dividing out the redundant permutations of the identical copies | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.permutations",
+      "title": "CIRCULAR-PERMUTATION-COUNTED-AS-LINEAR",
+      "content": "| MC-3 | CIRCULAR-PERMUTATION-COUNTED-AS-LINEAR | Applying the linear permutation count $n!$ to a circular arrangement problem, without recognizing that rotations of the same arrangement must be treated as identical | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.permutations",
+      "title": "Deriving P(n,r) from the Multiplication Principle (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving P(n,r) from the Multiplication Principle (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.permutations",
+      "title": "Three Permutation Variants, Directly Contrasted (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Permutation Variants, Directly Contrasted (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.permutations",
+      "title": "Order Matters: the Defining Test (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Order Matters: the Defining Test (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.permutations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.permutations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. In how many ways can a president, vice-president, and treasurer be chosen from a club of 12 members (all three roles distinct, order matters)? Use the $P(n,r)$ formula.\n  2. 6 distinct charms are to be arranged on a circular bracelet (rotations considered identical). How many distinct arrangements are possible?\n  3. How many distinct arrangements are there of the letters in the word \"MISSISSIPPI\" (11 letters: 1 M, 4 I's, 4 S's, 2 P's)?\n  4. A 4-character password uses only the letters A–Z, and letters ARE allowed to repeat. How many possible passwords are there? Explain why this is $26^4$ and not $P(26,4)$.\n- **P76 (Transfer Probe, mode = independence)**: \"A relay race team of 4 runners (Alex, Bianca, Carlos, Dana) needs to decide the order in which each runner runs their assigned leg of the race (1st leg, 2nd leg, 3rd leg, 4th leg). (a) Explain why this is a permutation problem, using the order-matters test from Example 3. (b) Compute the number of possible running orders. (c) Now suppose the coach instead just needs to pick which 2 of the 4 runners will attend a separate strategy meeting (no distinct roles — just attendance). Explain why this second scenario is NOT a permutation problem, even though it also involves 'choosing from the same 4 people.'\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.permutations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.counting-principles` (the multiplication principle: independent sequential choices with $m$ and $n$ options combine to give $m\\cdot n$ total outcomes) and `math.arith.multiplication` (computing the products this formula requires) — the permutation formula is a direct repeated application of the multiplication principle across $r$ sequential \"choose one of the remaining items\" steps.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.permutations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.permutations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.counting-principles` (the multiplication principle this formula is a repeated, sequential application of), `math.arith.multiplication` (the arithmetic this formula's computation directly requires).\n- **Unlocks**: `math.disc.combinations` (the order-doesn't-matter counterpart, directly previewed and motivated by this blueprint's Example 3/MC-1 distinction).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.permutations.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

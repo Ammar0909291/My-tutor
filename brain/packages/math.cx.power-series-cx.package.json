@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.power-series-cx-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.power-series-cx",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6e7e0b3536bf8ccb0cfc1171f2bd9016419872458ad6acf2e1894b251c5b3777",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.power-series-cx.md": "sha256:5378e2fa86dfbfd93a177dd19e7e765c4d12561fd026dbd0d6a6e5feec27d80e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.power-series-cx",
+    "name": "Power Series in ℂ",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.analytic-functions",
+      "math.calc.power-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.power-series-cx-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.power-series-cx (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.power-series-cx.md": "sha256:5378e2fa86dfbfd93a177dd19e7e765c4d12561fd026dbd0d6a6e5feec27d80e"
+      },
+      "contentHash": "sha256:617c46e4afd7b63a8bcb0d25e02d1829403a2187f0abe80a22c9a2bcfbc23d51",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.power-series-cx.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.power-series-cx.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.power-series-cx"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.power-series-cx\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.power-series-cx.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.power-series-cx.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.power-series-cx"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.power-series-cx\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.power-series-cx.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.power-series-cx.md#TA-A03 (addresses MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.power-series-cx"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.power-series-cx\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.power-series-cx.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.power-series-cx.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.power-series-cx"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.power-series-cx\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.power-series-cx/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a complex power series $\\sum_{n=0}^\\infty a_n(z-z_0)^n$ and find its **radius of convergence** $R$ using the ratio test (or root test) applied to $|a_n|$ — recognizing this is the **identical procedure** already mastered in `math.calc.power-series`, with no new technique required.\n- LO2: Correctly interpret $|z-z_0|<R$ as a **disk** of radius $R$ centered at $z_0$ in the complex plane (not an interval on the real line) — directly refuting the misconception that convergence-region reasoning transfers from ℝ's two endpoints to ℂ's boundary in the same simple way, since ℂ's boundary is an entire **circle** of points, each of which may behave differently.\n- LO3: State the central theorem this concept exists to deliver: a function **holomorphic** on an open set $U$ is **locally equal to its Taylor series** there (directly citing `math.cx.analytic-functions`'s holomorphic $\\Leftrightarrow$ analytic equivalence) — recognizing this as a genuinely stronger guarantee than in ℝ, where a real-differentiable (even $C^\\infty$) function need not equal its Taylor series at all.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "BOUNDARY-CIRCLE-ASSUMED-UNIFORM-BEHAVIOR",
+      "content": "| MC-1 | BOUNDARY-CIRCLE-ASSUMED-UNIFORM-BEHAVIOR | Assuming that if a complex power series converges (or diverges) at one point on its boundary circle $\\|z-z_0\\|=R$, it must behave the same way at every point on that circle | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "RATIO-TEST-ASSUMED-TO-NEED-MODIFICATION-IN-C",
+      "content": "| MC-2 | RATIO-TEST-ASSUMED-TO-NEED-MODIFICATION-IN-C | Believing the ratio/root test procedure for finding $R$ must be adapted or changed when moving from real to complex power series, rather than recognizing it transfers completely unchanged | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "REAL-SMOOTH-EQUALS-TAYLOR-SERIES-ASSUMED-GENERAL",
+      "content": "| MC-3 | REAL-SMOOTH-EQUALS-TAYLOR-SERIES-ASSUMED-GENERAL | Assuming that because SOME real $C^\\infty$ functions (like $\\sin x$) equal their Taylor series, this is the general rule for smooth functions, missing that in ℝ it is not guaranteed (unlike the automatic guarantee for holomorphic functions in ℂ) | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "The Ratio Test Transfers Directly, No New Technique (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Ratio Test Transfers Directly, No New Technique (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "From Interval to Disk: the Boundary Is a Whole Circle (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"From Interval to Disk: the Boundary Is a Whole Circle (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "Holomorphic ⟹ Equals Its Taylor Series, a Guarantee Absent in ℝ (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Holomorphic ⟹ Equals Its Taylor Series, a Guarantee Absent in ℝ (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find the radius of convergence of $\\sum_{n=0}^\\infty \\frac{z^n}{2^n}$ using the ratio test, and describe the region of convergence geometrically (in terms of $z$'s distance from the origin).\n  2. For $\\sum_{n=1}^\\infty \\frac{z^n}{n^2}$, find $R$, and then determine whether the series converges at BOTH $z=1$ and $z=-1$ on the boundary circle (using the fact that $\\sum 1/n^2$ and $\\sum(-1)^n/n^2$ are both known to converge absolutely).\n  3. Explain why $f(z) = 1/(1-z)$ (holomorphic on $|z|<1$) equaling its geometric series Taylor expansion $\\sum z^n$ there is an instance of the central theorem of this concept, referencing `math.cx.analytic-functions` directly.\n  4. A student claims: \"since the real function $\\sin(x)$ is $C^\\infty$ everywhere and DOES equal its Taylor series everywhere, all complex holomorphic functions should behave the same way as all smooth real functions.\" Explain what's wrong with this reasoning, using the $e^{-1/x^2}$ counterexample.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.calc.power-series`)**: \"Recall from your `math.calc.power-series` lesson that the real power series $\\sum_{n=1}^\\infty \\frac{x^n}{n}$ has radius of convergence $R=1$, converges at $x=-1$ (alternating series test) but diverges at $x=1$ (harmonic series) — so its real interval of convergence is $[-1,1)$. (a) Using the IDENTICAL series but now as a function of a complex variable $z$, state its radius of convergence $R$ in $\\mathbb{C}$, and explain why the ratio-test computation is literally unchanged from the real case. (b) Describe the complex region of convergence as a disk, and identify the two SPECIFIC points on its boundary circle that correspond exactly to the real endpoints $x=1$ and $x=-1$ from that lesson. (c) Explain why, even though this complex series shares those same two boundary points' behavior with the real case, the boundary circle also contains infinitely many OTHER complex points (e.g. $z=i$) that the real-only analysis never had to consider at all.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.power-series` (the real power series $\\sum c_n(x-a)^n$, its radius of convergence $R$ found via the ratio test, and the endpoint-testing procedure at $x=a\\pm R$) and `math.cx.analytic-functions` (holomorphic $\\Leftrightarrow$ analytic in $\\mathbb{C}$, a genuine equivalence with no real-analysis counterpart).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.power-series-cx/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.power-series-cx",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-functions` (the holomorphic $\\Leftrightarrow$ analytic equivalence this concept's central theorem directly restates using power-series language), `math.calc.power-series` (the ratio-test radius-of-convergence procedure and endpoint-testing habit this concept transfers into $\\mathbb{C}$).\n- **Unlocks**: `math.cx.identity-theorem` (which relies on holomorphic functions being locally determined by their power series, established here).\n- **Cross-link**: KG lists `math.calc.power-series` as a cross-link — **verified authored** via `ls docs/curriculum/blueprints/math.calc.power-series.md` — so P76_mode = **cross-link probe**, directly reusing that blueprint's own worked example ($\\sum z^n/n$, $R=1$, boundary behavior at $x=\\pm1$) as the transfer probe's anchor, per this corpus's established cross-link-probe convention (verified by reading the target file's content, not just gesturing at a shared topic).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.power-series-cx.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
