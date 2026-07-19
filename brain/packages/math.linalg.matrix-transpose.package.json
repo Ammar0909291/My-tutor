@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.matrix-transpose-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.matrix-transpose",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:335285be94664f057706bd1fe035b8c03ea421a98396c7a460100fb4c4aaf560",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.matrix-transpose.md": "sha256:a085dc9d0ef02000c2a9102dca5ae38d61c3c367bf4bde78cbeb3fd31fd728cf"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.matrix-transpose",
+    "name": "Matrix Transpose",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.linalg.matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.matrix-transpose-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.matrix-transpose (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.matrix-transpose.md": "sha256:a085dc9d0ef02000c2a9102dca5ae38d61c3c367bf4bde78cbeb3fd31fd728cf"
+      },
+      "contentHash": "sha256:152e37c0a3f724810bece1f3b0f3121ce00bee427610f3635fdd25e5f016861e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-transpose.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-transpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-transpose\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-transpose.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-transpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-transpose\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-transpose.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-transpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-transpose\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-transpose.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-transpose"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-transpose\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.matrix-transpose/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the transpose $A^T$ of a matrix by applying $(A^T)_{ij}=A_{ji}$ — the entry in row $i$, column $j$ of $A^T$ equals the entry in row $j$, column $i$ of $A$ — turning rows of $A$ into columns of $A^T$.\n- LO2: State and apply the two key transpose identities: $(A^T)^T=A$ (transposing twice returns the original matrix) and $(AB)^T = B^TA^T$ — noting the **order reversal**, directly refuting the misconception that $(AB)^T=A^TB^T$.\n- LO3: Recognize a **symmetric matrix** as one satisfying $A=A^T$, and verify this condition requires a matrix to be **square** with $A_{ij}=A_{ji}$ for every pair $i,j$ — connecting the transpose operation to this special matrix class.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "TRANSPOSE-PRODUCT-ORDER-NOT-REVERSED",
+      "content": "| MC-1 | TRANSPOSE-PRODUCT-ORDER-NOT-REVERSED | Assuming $(AB)^T = A^TB^T$ (same order), rather than the correct $(AB)^T=B^TA^T$ (reversed order) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "SYMMETRY-CHECKED-ON-NON-SQUARE-MATRIX",
+      "content": "| MC-2 | SYMMETRY-CHECKED-ON-NON-SQUARE-MATRIX | Attempting to evaluate whether a non-square matrix is symmetric, missing that symmetry requires the matrix to be square as a precondition | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "TRANSPOSE-INDEX-RULE-APPLIED-BACKWARD",
+      "content": "| MC-3 | TRANSPOSE-INDEX-RULE-APPLIED-BACKWARD | Writing $(A^T)_{ij}=A_{ij}$ (no actual swap) or swapping the wrong pair of indices, rather than correctly applying $(A^T)_{ij}=A_{ji}$ | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Flipping Rows Into Columns (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Flipping Rows Into Columns (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "The Product-Transpose Identity Reverses Order (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Product-Transpose Identity Reverses Order (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Symmetric Matrices Require Square Shape (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Symmetric Matrices Require Square Shape (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the transpose of $M = \\begin{pmatrix}0&1\\\\2&3\\\\4&5\\end{pmatrix}$, and state the dimensions of both $M$ and $M^T$.\n  2. Verify $(A^T)^T=A$ directly for the matrix $A$ from Example 1, by transposing $A^T$ and confirming it matches $A$.\n  3. For $A=\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$ and $B=\\begin{pmatrix}2&1\\\\0&1\\end{pmatrix}$, compute $(AB)^T$ directly and also compute $B^TA^T$, confirming they match.\n  4. Explain why the matrix $\\begin{pmatrix}1&2\\\\3&4\\\\5&6\\end{pmatrix}$ cannot be symmetric, without computing its transpose numerically — using the square-shape requirement alone.\n- **P76 (Transfer Probe, mode = independence)**: \"A data-science team represents a dataset as a matrix $D$ where each row is one observation and each column is one feature. They compute the matrix $C = D^TD$ (transpose of $D$ times $D$) as part of building a covariance-like summary. (a) If $D$ is $100\\times5$ (100 observations, 5 features), state the dimensions of $D^T$ and of $C=D^TD$. (b) Prove that $C$ is always symmetric, i.e. $C^T=C$, using the product-transpose identity $(D^TD)^T = D^T(D^T)^T$ and the double-transpose identity. (c) Explain why this symmetry guarantee is useful to know BEFORE doing any numerical computation, rather than checking it after the fact for each dataset.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.matrix` (a matrix as an $m\\times n$ rectangular array of numbers, with row/column indexing $A_{ij}$) — transpose is a specific rearrangement operation on that indexed array.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-transpose/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.matrix-transpose",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.matrix` (the row/column-indexed array structure $A_{ij}$ this operation rearranges).\n- **Unlocks**: `math.linalg.symmetric-matrix` (the symmetric-matrix class defined directly via $A=A^T$, introduced here in LO3 as a preview).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-transpose.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.estimator-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.estimator",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a229aad0e0e493b8c466d199dc3798a0d2b96b58f6fe7ac0f8f4d9928008b3cf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.estimator.md": "sha256:3113ca3766ad05da6e3fc52a9039853e60f32d4240b918fe3e1d8474b5954385"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.estimator",
+    "name": "Estimator",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.sampling-distribution",
+      "math.prob.expected-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.estimator-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.estimator (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.estimator.md": "sha256:3113ca3766ad05da6e3fc52a9039853e60f32d4240b918fe3e1d8474b5954385"
+      },
+      "contentHash": "sha256:b83f30eedb28718bb1b8b464cd482a31929e380bd1f04228fa6e1d46f2851729",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.estimator.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.estimator.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.estimator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.estimator\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.estimator.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.estimator.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.estimator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.estimator\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.estimator.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.estimator.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.estimator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.estimator\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.estimator.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.estimator.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.estimator"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.estimator\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.estimator/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.estimator",
+      "title": "Learning Objectives",
+      "content": "- LO1: Distinguish an **estimator** ($\\hat\\theta$, a rule/function of the sample, e.g. \"take the sample mean\") from an **estimate** (the specific number that rule produces for one particular sample) — directly refuting the misconception that these two words are interchangeable.\n- LO2: Define **unbiasedness** ($E[\\hat\\theta]=\\theta$, the estimator's average value across all possible samples equals the true parameter) and verify it for a specific estimator using the linearity of expectation.\n- LO3: Define **consistency** (as sample size $n\\to\\infty$, $\\hat\\theta$ converges to $\\theta$) and explain why an estimator can be unbiased but not very useful in a single small sample, or consistent but biased for small $n$ — the two properties are related but distinct guarantees.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.estimator",
+      "title": "ESTIMATOR-AND-ESTIMATE-CONFLATED",
+      "content": "| MC-1 | ESTIMATOR-AND-ESTIMATE-CONFLATED | Treating \"estimator\" and \"estimate\" as interchangeable terms, rather than distinguishing the fixed rule (estimator) from its sample-specific numeric output (estimate) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.estimator",
+      "title": "UNBIASEDNESS-ASSUMED-TO-IMPLY-CONSISTENCY",
+      "content": "| MC-2 | UNBIASEDNESS-ASSUMED-TO-IMPLY-CONSISTENCY | Assuming an unbiased estimator must also be consistent (improve with more data), rather than recognizing these as independent properties | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.estimator",
+      "title": "SAMPLE-STATISTIC-ASSUMED-ALWAYS-UNBIASED",
+      "content": "| MC-3 | SAMPLE-STATISTIC-ASSUMED-ALWAYS-UNBIASED | Assuming any reasonable-looking sample statistic is automatically an unbiased estimator of the corresponding population parameter, without verifying $E[\\hat\\theta]=\\theta$ directly (e.g. the naive sample variance $\\frac{1}{n}\\sum(X_i-\\bar X)^2$ is actually biased) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.estimator",
+      "title": "Estimator (the Rule) vs. Estimate (the Number) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Estimator (the Rule) vs. Estimate (the Number) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.estimator",
+      "title": "Unbiasedness via Linearity of Expectation (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Unbiasedness via Linearity of Expectation (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.estimator",
+      "title": "Unbiasedness Is Not Consistency (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Unbiasedness Is Not Consistency (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.estimator",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.estimator",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A researcher proposes the estimator \"$\\hat\\sigma^2 = \\frac{1}{n}\\sum(X_i-\\bar X)^2$\" for the population variance. Explain, in your own words, what makes this an *estimator* rather than an *estimate*, using this specific formula.\n  2. Given $\\hat p = \\frac{1}{n}\\sum_{i=1}^n Y_i$ where each $Y_i$ is 1 or 0 (indicating success/failure) with $E[Y_i]=p$, use linearity of expectation to show $\\hat p$ is unbiased for $p$.\n  3. Explain why an estimator that only uses the last observation, $\\hat\\theta'' = X_n$, is unbiased for $\\mu$ (if each $X_i$ has mean $\\mu$) but not consistent, paralleling the reasoning in Example 3.\n  4. Two statisticians compute the sample mean from the SAME dataset of 50 values and get the same number, 63.4. Is 63.4 the \"estimator\" or the \"estimate\" here? Justify your answer.\n- **P76 (Transfer Probe, mode = independence)**: \"A quality-control engineer wants to estimate the true defect rate $p$ of a manufacturing line. They propose two rules: Estimator A samples 100 items and reports the proportion defective; Estimator B samples just 5 items and reports the proportion defective. (a) Explain why both A and B can be unbiased estimators of $p$ despite using very different sample sizes. (b) Explain, using the concept of consistency, why Estimator A is more trustworthy in practice even though both are unbiased. (c) If the engineer only ever samples exactly 5 items every single time (never increasing $n$), can Estimator B still be called consistent? Justify your answer using the definition of consistency directly.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.estimator",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.sampling-distribution` (a statistic like $\\bar X$ has its own probability distribution across repeated samples, with $E[\\bar X]=\\mu$ and standard error $\\sigma/\\sqrt n$) and `math.prob.expected-value` (computing $E[X]$ and its linearity) — an estimator's bias and variance properties are computed directly using these tools.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.stats.estimator/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.estimator",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.sampling-distribution` (the sampling-distribution machinery — $E[\\bar X]=\\mu$, standard error $\\sigma/\\sqrt n$ — that unbiasedness and consistency are defined against), `math.prob.expected-value` (linearity of expectation, used directly to verify unbiasedness).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.estimator.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

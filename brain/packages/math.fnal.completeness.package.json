@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.completeness-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.completeness",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5b2f3cad5755290c6c34cb0f09440f152dbf96338bcf94060758ef01fbe5d2be",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.completeness.md": "sha256:e3933e0cd53ae96850179af4e6ed4895b0a1c5aa70fad4740afac457923dfc9c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.completeness",
+    "name": "Completeness",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.fnal.normed-space",
+      "math.real.cauchy-sequence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.completeness-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.completeness (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.completeness.md": "sha256:e3933e0cd53ae96850179af4e6ed4895b0a1c5aa70fad4740afac457923dfc9c"
+      },
+      "contentHash": "sha256:1e4a401f9d8d6f3447833a77bb855f1530559622a85093e251e3ec420193fd42",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.completeness.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.completeness.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.completeness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.completeness\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.completeness.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.completeness.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.completeness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.completeness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.completeness.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.completeness.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.completeness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.completeness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.completeness.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.completeness.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.completeness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.completeness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.completeness/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.completeness",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **completeness** of a normed space $(X,\\|\\cdot\\|)$: $X$ is complete iff **every** Cauchy sequence in $X$ converges to a limit that is itself in $X$ — extending the Cauchy criterion for $\\mathbb{R}$ (`math.real.cauchy-sequence`) to a general normed space.\n- LO2: Recognize that completeness is a genuine, checkable **property of the space itself**, not automatic — verify that $\\mathbb{R}^n$ (with any standard norm) is complete, and understand why a Cauchy sequence in an *incomplete* space can fail to converge **within that space**, directly refuting the misconception that \"Cauchy\" and \"complete\" are the same idea.\n- LO3: Work through the canonical example of an incomplete normed space: $C([0,1])$ (continuous functions) equipped with the $L^1$ norm is **not** complete — a Cauchy sequence of continuous functions can converge (in $L^1$) to a discontinuous limit function, which lies outside $C([0,1])$ itself.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.completeness",
+      "title": "CAUCHY-AND-COMPLETE-CONFLATED",
+      "content": "| MC-1 | CAUCHY-AND-COMPLETE-CONFLATED | Treating \"Cauchy\" and \"convergent/complete\" as synonymous, rather than recognizing completeness as a separate, space-dependent property required for a Cauchy sequence's convergence to be guaranteed | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.completeness",
+      "title": "COMPLETENESS-ASSUMED-INHERITED-BY-ANY-NORM",
+      "content": "| MC-2 | COMPLETENESS-ASSUMED-INHERITED-BY-ANY-NORM | Assuming that because a vector space is complete under one norm, it must be complete under every possible norm placed on it, rather than recognizing completeness can depend on the specific norm chosen | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.completeness",
+      "title": "INCOMPLETE-SPACE-ASSUMED-TO-HAVE-NO-CONVERGENT-SEQUENCES",
+      "content": "| MC-3 | INCOMPLETE-SPACE-ASSUMED-TO-HAVE-NO-CONVERGENT-SEQUENCES | Believing that in an incomplete space, NO Cauchy sequences converge, rather than recognizing only SOME Cauchy sequences fail to converge (those whose limits fall exactly in the missing \"holes\") | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.completeness",
+      "title": "Completeness as a Direct Generalization of the Cauchy Criterion (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Completeness as a Direct Generalization of the Cauchy Criterion (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.completeness",
+      "title": "Completeness Is Not Automatic (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Completeness Is Not Automatic (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.completeness",
+      "title": "The Canonical Incomplete Normed Space, $C([0,1])$ with $L^1$ (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Canonical Incomplete Normed Space, $C([0,1])$ with $L^1$ (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.completeness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.completeness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the definition of completeness for a normed space $(X,\\|\\cdot\\|)$, using the $\\varepsilon$-$N$ Cauchy criterion explicitly in your answer.\n  2. Explain, referencing Example 2, why the SAME sequence of rational numbers can be Cauchy in both $\\mathbb{Q}$ and $\\mathbb{R}$, yet only be said to \"converge\" in one of them.\n  3. In your own words, explain what it means for $C([0,1])$ with the $L^1$ norm to be \"not complete,\" using the ramp-function example (or a similar one) as concrete evidence.\n  4. True or false, with justification: \"since $(\\mathbb{R}^2, \\|\\cdot\\|_2)$ is complete, EVERY normed space built on $\\mathbb{R}^2$ (using any norm at all) must also be complete.\"\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.real.completeness-metric` is not yet authored; a future revision may add a genuine cross-link probe into the general metric-space completeness framework once that entry exists)**: \"A numerical-methods engineer is designing an iterative algorithm that generates a sequence of continuous functions $g_1, g_2, g_3,\\dots$ approximating a solution, measured in the $L^1$ norm. They observe the sequence is Cauchy in $L^1$. (a) Explain why this alone does NOT guarantee the algorithm converges to a continuous function. (b) Using the concept of completeness, explain what property the SPACE the functions live in would need to have in order to guarantee the limit is itself continuous. (c) The engineer is told $L^1([0,1])$ (unlike $C([0,1])$) is complete — explain what this tells them about where the limit of their Cauchy sequence is guaranteed to exist, even if that limit might not be continuous.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.completeness",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.normed-space` (a vector space $X$ with a norm $\\|\\cdot\\|$ satisfying definiteness/homogeneity/triangle-inequality, and the induced metric $d(x,y)=\\|x-y\\|$) and `math.real.cauchy-sequence` (the $\\varepsilon$-$N$ Cauchy criterion for real sequences, and the Cauchy Criterion for $\\mathbb{R}$: Cauchy $\\Leftrightarrow$ convergent, by completeness — plus that blueprint's own worked example showing this equivalence fails in $\\mathbb{Q}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.completeness/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.completeness",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.normed-space` (the norm $\\|\\cdot\\|$ and induced metric this concept's Cauchy criterion is built from), `math.real.cauchy-sequence` (the $\\varepsilon$-$N$ Cauchy definition and the $\\mathbb{Q}$-vs-$\\mathbb{R}$ completeness example directly reused here).\n- **Unlocks**: `math.fnal.banach-space` (a Banach space is defined as exactly a complete normed space — the concept taught here is its defining property).\n- **Cross-link**: KG lists `math.real.completeness-metric` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.real.completeness-metric.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the general metric-space completeness framework once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.completeness.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
