@@ -2241,6 +2241,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       let text: string
       let provider: string
+      // The provider's own reason the completion ended ('stop', 'length',
+      // etc.) — 'n/a' for memory-served responses, which never call a
+      // model. Logged below so a future empty-response failure carries
+      // real evidence instead of requiring another guess (see the
+      // "Sorry, I got cut off" investigation this was added for).
+      let finishReason: string | null = 'n/a (memory-served)'
       if (assembled) {
         text = assembled.text
         provider = 'memory'
@@ -2264,9 +2270,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         )
         text = routed.text
         provider = routed.provider
+        finishReason = routed.finishReason
+        console.log('[learn/chat] provider:', provider, 'finish_reason:', finishReason, text ? `(${text.length} chars)` : '(EMPTY)')
       }
 
       if (!text) {
+        console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
         return NextResponse.json({ success: false, error: 'Empty response from model' }, { status: 502 })
       }
 
