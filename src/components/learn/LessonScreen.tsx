@@ -989,6 +989,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     isReview: boolean   // already completed or mastered
     isRestart: boolean  // same as the current lesson
   } | null>(null)
+  // The lesson a confirmed switch is waiting to actually begin teaching for.
+  // Confirming "Continue" in the switch dialog used to call callLessonInit
+  // immediately, starting the conversation without the learner ever
+  // pressing "Start Lesson" for the NEW lesson — the same gate every other
+  // entry point respects. pendingLesson holds the target for display (its
+  // title, on the Start Lesson welcome screen) while pendingLessonRunRef
+  // holds the actual side-effect, deferred until that button is clicked.
+  const [pendingLesson, setPendingLesson] = useState<CurriculumLesson | null>(null)
+  const pendingLessonRunRef = useRef<(() => Promise<void>) | null>(null)
 
   // Terminal
   const [terminalOpen, setTerminalOpen] = useState(false)
@@ -1742,22 +1751,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setActiveTab('chat')
   }, [subjectSlug, sessionId, callLessonInit])
 
-  // Navigate to a previous (completed) lesson for review. Delegates to
-  // startRevision — the existing, already-built restoration mechanism —
-  // whenever the lesson is KG-bound (topicSlug present); only legacy
-  // DB-curriculum lessons without a topicSlug (e.g. the original c/cpp/
-  // python/english rows) fall back to a plain review message.
-  const navigateToLesson = useCallback(async (lessonOrder: number) => {
-    if (lessonOrder >= curriculumProgress.currentLesson) return
-    const lesson = curriculumLessons.find((l) => l.order === lessonOrder)
-    if (!lesson || !sessionId) return
-    if (lesson.topicSlug) {
-      await startRevision(lesson)
-      return
-    }
-    await callLessonInit(sessionId, 'review', lesson)
-  }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, callLessonInit, startRevision])
-
   // Show a confirmation dialog before switching to any lesson (P0 UX).
   // Free navigation: the Lesson Navigation Panel's Previous/Next buttons and
   // the Learning Roadmap tree are no longer lock-gated in the UI (lock state
@@ -1774,15 +1767,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setLessonSwitchDialog({ target, isReview, isRestart })
   }, [curriculumProgress, topicProgressMap, availableTopicSlugs])
 
-  // Perform the lesson switch after the user confirms the dialog.
+  // Confirming the switch dialog selects the target lesson — it must NOT
+  // start teaching it. That only happens once the learner explicitly
+  // presses "Start Lesson" on the resulting welcome screen, same gate as
+  // every other entry point (first open, refresh, etc.). Resets to the
+  // pre-start UI and stores the actual side-effect for the button to run.
   const confirmLessonSwitch = useCallback(async () => {
     if (!lessonSwitchDialog || !sessionId) return
     const { target, isRestart } = lessonSwitchDialog
     setLessonSwitchDialog(null)
+    setMessages([])
+    setLessonStarted(false)
+    initializedRef.current = false
+    setPendingLesson(target)
 
     if (isRestart) {
-      await callLessonInit(sessionId, 'restart', target)
-      setActiveTab('chat')
+      pendingLessonRunRef.current = async () => {
+        await callLessonInit(sessionId, 'restart', target)
+        setActiveTab('chat')
+      }
       return
     }
 
@@ -1791,7 +1794,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // NEVER be routed here (that was the bug: `|| target.topicSlug` sent
     // every KG lesson, including the very next one, into review mode).
     if (target.order < curriculumProgress.currentLesson) {
-      await startRevision(target)
+      pendingLessonRunRef.current = async () => { await startRevision(target) }
       return
     }
 
@@ -1800,16 +1803,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // it now as a non-celebrated completion so curriculum progress actually
     // advances — same mechanism "Skip Anyway" already uses, just silent
     // here since the student is choosing to move on via the nav panel.
-    const priorOrder = target.order - 1
-    if (priorOrder >= 1 && !curriculumProgress.completedLessons.includes(priorOrder)) {
-      const priorLesson = curriculumLessons.find((l) => l.order === priorOrder)
-      if (priorLesson) {
-        await handleLessonComplete(priorOrder, priorLesson, false)
+    pendingLessonRunRef.current = async () => {
+      const priorOrder = target.order - 1
+      if (priorOrder >= 1 && !curriculumProgress.completedLessons.includes(priorOrder)) {
+        const priorLesson = curriculumLessons.find((l) => l.order === priorOrder)
+        if (priorLesson) {
+          await handleLessonComplete(priorOrder, priorLesson, false)
+        }
       }
+      await callLessonInit(sessionId, 'next', target)
+      setActiveTab('chat')
     }
-
-    await callLessonInit(sessionId, 'next', target)
-    setActiveTab('chat')
   }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, callLessonInit, startRevision, handleLessonComplete])
 
   // Open the next lesson. Free navigation: the Lesson Navigation Panel's
@@ -3019,8 +3023,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 teachingLanguage={teachingLanguage}
                 onGapClick={(topicSlug) => {
                   const lesson = curriculumLessons.find((l) => l.topicSlug === topicSlug)
+                  // Routed through requestLessonSwitch (the confirm dialog +
+                  // deferred-start gate) instead of calling navigateToLesson
+                  // directly — that bypassed "Start Lesson" the same way the
+                  // nav panel used to before this fix.
                   if (lesson && lesson.order < curriculumProgress.currentLesson && sessionId) {
-                    navigateToLesson(lesson.order)
+                    requestLessonSwitch(lesson)
                   }
                 }}
               />
@@ -3941,13 +3949,26 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {!lessonStarted && messages.length === 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 14, paddingTop: 40 }}>
                   <EagleMascot variant="hero" size={56} />
-                  {currentLessonData && (
+                  {(pendingLesson ?? currentLessonData) && (
                     <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', textAlign: 'center' }}>
-                      {currentLessonData.lessonTitle}
+                      {(pendingLesson ?? currentLessonData)!.lessonTitle}
                     </p>
                   )}
                   <button
-                    onClick={startLesson}
+                    onClick={() => {
+                      // A confirmed lesson switch defers its actual start to
+                      // this click (see confirmLessonSwitch) — run that
+                      // instead of the normal mount-time startLesson() flow.
+                      if (pendingLessonRunRef.current) {
+                        const run = pendingLessonRunRef.current
+                        pendingLessonRunRef.current = null
+                        setPendingLesson(null)
+                        setLessonStarted(true)
+                        void run()
+                      } else {
+                        startLesson()
+                      }
+                    }}
                     style={{
                       padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
                       background: UI.indigo, color: '#fff', border: 'none',
