@@ -1520,6 +1520,808 @@ const ELCOND_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.thermo.first-law ───────────────────────────────────────────────────
+const THFL = 'chem.thermo.first-law'
+const THFL_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.first-law'
+
+const THFL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: THFL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The First Law is conservation of energy in disguise: energy can\'t be ' +
+      'created or destroyed, only converted. For a system: ΔU = q + w (IUPAC ' +
+      'sign convention: q positive = heat IN, w positive = work done ON the ' +
+      'system). The internal energy U is everything inside — kinetic + potential ' +
+      'of all particles. At CONSTANT VOLUME: w = 0 (no expansion), so ΔU = q_v — ' +
+      'heat measured in a bomb calorimeter IS ΔU directly. At CONSTANT PRESSURE ' +
+      '(most real reactions — open beaker): the system does PΔV work pushing ' +
+      'the atmosphere, so q_p = ΔU + PΔV = ΔH (enthalpy). That\'s why we use ' +
+      'ΔH for reactions: it\'s the heat you MEASURE at constant pressure. ' +
+      'The key formula connecting them: ΔH = ΔU + ΔnRT (where Δn = moles of ' +
+      'gas products − moles of gas reactants).',
+    targetedMisconceptions: [`${THFL}:MC1`],
+    source: `${THFL_SRC} — first law, ΔU = q + w, PV work, ΔH = ΔU + ΔnRT`,
+  },
+  {
+    conceptId: THFL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "ΔH and ΔU are always the same." They\'re only the same ' +
+      'when Δn_gas = 0 (no net change in moles of gas). If a reaction PRODUCES ' +
+      'gas (Δn > 0), the system does PΔV work pushing the atmosphere, so ' +
+      'ΔH > ΔU — some internal energy went into expansion work instead of heat. ' +
+      'If gases are consumed (Δn < 0), surroundings do work ON the system, ' +
+      'so ΔH < ΔU. Example: C(s) + O₂(g) → CO₂(g), Δn = 0, so ΔH ≈ ΔU. ' +
+      'But 2C(s) + O₂(g) → 2CO(g), Δn = +1, so ΔH = ΔU + RT ≈ ΔU + 2.5 kJ. ' +
+      'The sign convention trap: in IUPAC, w = +PΔV for work done ON system ' +
+      '(compression); some textbooks use w = −PΔV (work done BY system). ' +
+      'Check which convention before plugging in numbers.',
+    targetedMisconceptions: [`${THFL}:MC1`, `${THFL}:MC2`],
+    source: `${THFL_SRC} — misconception: ΔH = ΔU always; sign convention confusion`,
+  },
+]
+
+const THFL_PROBES: SeedProbe[] = [
+  {
+    conceptId: THFL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the reaction N₂(g) + 3H₂(g) → 2NH₃(g), Δn_gas = 2 − 4 = −2. Which is true?',
+    choices: [
+      { text: 'ΔH < ΔU — moles of gas decrease, so ΔnRT is negative and ΔH = ΔU + (−2)RT', isCorrect: true },
+      { text: 'ΔH > ΔU — the reaction produces something so enthalpy must be larger', isCorrect: false, misconceptionId: `${THFL}:MC1` },
+      { text: 'ΔH = ΔU — they\'re always equal for gas-phase reactions', isCorrect: false, misconceptionId: `${THFL}:MC1` },
+    ],
+    correctValue: 'ΔH < ΔU',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${THFL}:MC1`],
+    source: `${THFL_SRC} — distractor targets "ΔH = ΔU always" misconception`,
+  },
+  {
+    conceptId: THFL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a bomb calorimeter (constant volume), you measure the heat released as 400 kJ. Is this ΔH or ΔU?',
+    choices: [
+      { text: 'ΔU — at constant volume, no PV work is done, so q_v = ΔU directly', isCorrect: true },
+      { text: 'ΔH — heat measured in any calorimeter is always ΔH', isCorrect: false, misconceptionId: `${THFL}:MC2` },
+    ],
+    correctValue: 'ΔU',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${THFL}:MC2`],
+    source: `${THFL_SRC} — misconception: calorimetric heat is always ΔH (only true at constant P)`,
+  },
+]
+
+// ─── chem.state.gas-laws ─────────────────────────────────────────────────────
+const GASL = 'chem.state.gas-laws'
+const GASL_SRC = 'docs/chemistry/kg/graph.json — chem.state.gas-laws'
+
+const GASL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GASL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Gas behavior boils down to four variables: P, V, n, T. The gas laws ' +
+      'describe what happens when you fix some and change others. BOYLE: fix T ' +
+      'and n → PV = constant (squeeze the gas, pressure rises). CHARLES: fix P ' +
+      'and n → V/T = constant (heat the gas, it expands). GAY-LUSSAC: fix V ' +
+      'and n → P/T = constant (heat a rigid container, pressure rises). ' +
+      'AVOGADRO: fix T and P → V/n = constant (more moles, more volume). ' +
+      'Combine them all: PV = nRT (ideal gas equation). R = 8.314 J/(mol·K) = ' +
+      '0.0821 L·atm/(mol·K). T must ALWAYS be in Kelvin (K = °C + 273.15). ' +
+      'This equation predicts any one variable if you know the other three. ' +
+      'It fails at high P (molecules have volume) and low T (intermolecular ' +
+      'forces matter) — that\'s where van der Waals corrections come in.',
+    targetedMisconceptions: [`${GASL}:MC1`],
+    source: `${GASL_SRC} — Boyle, Charles, Gay-Lussac, Avogadro, PV=nRT`,
+  },
+  {
+    conceptId: GASL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The deadliest gas-law mistake: using CELSIUS in PV = nRT. The ideal gas ' +
+      'law requires ABSOLUTE temperature (Kelvin). Why? Because Charles\'s Law ' +
+      'says V ∝ T — at 0°C volume would be zero, which is physically impossible. ' +
+      'The correct zero is 0 K (−273.15°C), where molecular motion stops and ' +
+      'volume would truly reach zero for an ideal gas. If you use °C, you get ' +
+      'absurd results (negative volumes, wrong pressures). Always convert first: ' +
+      'T(K) = T(°C) + 273.15. Second trap: STP has changed! Old STP: 0°C, 1 atm, ' +
+      'molar volume 22.4 L. IUPAC STP: 0°C, 1 bar (not 1 atm), molar volume ' +
+      '22.7 L. Check which your textbook uses before quoting 22.4 L.',
+    targetedMisconceptions: [`${GASL}:MC1`, `${GASL}:MC2`],
+    source: `${GASL_SRC} — misconception: using °C in PV=nRT; outdated STP values`,
+  },
+]
+
+const GASL_PROBES: SeedProbe[] = [
+  {
+    conceptId: GASL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gas occupies 10 L at 27°C and 1 atm. What volume does it occupy at 127°C and 1 atm?',
+    choices: [
+      { text: '13.3 L — V₁/T₁ = V₂/T₂ → 10/300 = V₂/400 → V₂ = 13.3 L (must use Kelvin)', isCorrect: true },
+      { text: '47 L — V₁/T₁ = V₂/T₂ → 10/27 = V₂/127 → V₂ = 47 L (used °C directly)', isCorrect: false, misconceptionId: `${GASL}:MC1` },
+      { text: '5 L — doubled temperature halves the volume at constant pressure', isCorrect: false, misconceptionId: `${GASL}:MC3` },
+    ],
+    correctValue: '13.3 L',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GASL}:MC1`, `${GASL}:MC3`],
+    source: `${GASL_SRC} — distractor targets "using °C" and "T doubles so V halves" misconceptions`,
+  },
+  {
+    conceptId: GASL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can\'t we use Celsius temperature directly in PV = nRT?',
+    choices: [
+      { text: 'Because gas volume is proportional to ABSOLUTE temperature — at 0°C gases still have significant volume; only at 0 K would ideal gas volume reach zero', isCorrect: true },
+      { text: 'It\'s just a convention — you could use °C if you changed the value of R', isCorrect: false, misconceptionId: `${GASL}:MC1` },
+    ],
+    correctValue: 'V ∝ T requires absolute scale',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GASL}:MC1`],
+    source: `${GASL_SRC} — misconception: Celsius works if you adjust R`,
+  },
+]
+
+// ─── chem.atomic.bohr-model ──────────────────────────────────────────────────
+const BOHR = 'chem.atomic.bohr-model'
+const BOHR_SRC = 'docs/chemistry/kg/graph.json — chem.atomic.bohr-model'
+
+const BOHR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BOHR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Bohr took Rutherford\'s nuclear atom and added ONE rule: electrons can only ' +
+      'orbit at specific ALLOWED radii where angular momentum = n(h/2π). This single ' +
+      'quantization condition gives: (1) Energy levels: E_n = −13.6/n² eV (for H). ' +
+      'n=1 is most stable (ground state); energy INCREASES (becomes less negative) ' +
+      'as n increases. (2) Radii: r_n = 0.529 × n² Å — orbits get MUCH bigger at ' +
+      'higher n. (3) Spectrum explained: electron jumping from n=3→2 releases ' +
+      'ΔE = 13.6(1/4 − 1/9) = 1.89 eV → red light (656 nm, Hα line). Every spectral ' +
+      'line is a specific n₂→n₁ transition. LIMITATIONS: works perfectly for H (one ' +
+      'electron), but fails for multi-electron atoms (can\'t explain splitting of lines, ' +
+      'Zeeman effect, or chemical bonding). Replaced by quantum mechanics, but the ' +
+      'energy-level picture remains conceptually useful.',
+    targetedMisconceptions: [`${BOHR}:MC1`],
+    source: `${BOHR_SRC} — Bohr postulates, energy levels, radii, limitations`,
+  },
+  {
+    conceptId: BOHR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Dangerous half-truth: "Electrons orbit like planets." Bohr used circular ' +
+      'orbits as a MODEL, but electrons don\'t have definite paths — quantum ' +
+      'mechanics shows they exist as probability clouds (orbitals, not orbits). ' +
+      'Bohr\'s model works for ENERGY predictions in hydrogen but fails on ' +
+      'everything else. Another trap: "n=1 has the most energy because it\'s ' +
+      'closest to the nucleus." OPPOSITE — n=1 is the LOWEST energy (most ' +
+      'negative: −13.6 eV). Being close to the nucleus means MORE tightly bound, ' +
+      'which means you\'d need MORE energy to remove the electron. Lower n = lower ' +
+      'energy = more stable. Think of it as a deeper well: ground floor is the ' +
+      'lowest energy, not the highest.',
+    targetedMisconceptions: [`${BOHR}:MC1`, `${BOHR}:MC2`],
+    source: `${BOHR_SRC} — misconception: electrons orbit like planets; n=1 has most energy`,
+  },
+]
+
+const BOHR_PROBES: SeedProbe[] = [
+  {
+    conceptId: BOHR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the hydrogen atom, which energy level has the MOST negative (lowest) energy?',
+    choices: [
+      { text: 'n = 1 (E₁ = −13.6 eV — closest to nucleus, most tightly bound)', isCorrect: true },
+      { text: 'n = ∞ (furthest from nucleus means lowest energy)', isCorrect: false, misconceptionId: `${BOHR}:MC2` },
+      { text: 'n = 1 has the highest energy because it\'s closest to the positive nucleus', isCorrect: false, misconceptionId: `${BOHR}:MC2` },
+    ],
+    correctValue: 'n = 1',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BOHR}:MC2`],
+    source: `${BOHR_SRC} — distractor targets "close to nucleus = high energy" misconception`,
+  },
+  {
+    conceptId: BOHR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does the Bohr model fail for helium (2 electrons) while working perfectly for hydrogen (1 electron)?',
+    choices: [
+      { text: 'Bohr\'s model cannot account for electron-electron repulsion — with 2+ electrons, interelectronic forces make the problem unsolvable with simple circular orbits', isCorrect: true },
+      { text: 'Helium\'s nucleus is too heavy for the Bohr equations to work', isCorrect: false, misconceptionId: `${BOHR}:MC3` },
+    ],
+    correctValue: 'Electron-electron repulsion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOHR}:MC3`],
+    source: `${BOHR_SRC} — misconception: Bohr fails due to nuclear mass (it fails due to multi-electron interactions)`,
+  },
+]
+
+// ─── chem.kinet.rate ─────────────────────────────────────────────────────────
+const RATE = 'chem.kinet.rate'
+const RATE_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.rate'
+
+const RATE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RATE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Thermodynamics tells you IF a reaction can happen; KINETICS tells you HOW ' +
+      'FAST. Rate = change in concentration per unit time. For A → B: rate = ' +
+      '−Δ[A]/Δt = +Δ[B]/Δt (negative for reactant because it\'s decreasing). ' +
+      'Average rate is over an interval; INSTANTANEOUS rate is the slope of the ' +
+      'concentration-vs-time curve at one point (the derivative). Five factors ' +
+      'affect rate: (1) Concentration — more molecules, more collisions. ' +
+      '(2) Temperature — faster molecules, more energetic collisions. ' +
+      '(3) Surface area — more exposed surface, more contact. (4) Catalyst — ' +
+      'provides an alternative pathway with lower activation energy. ' +
+      '(5) Nature of reactants — ionic reactions in solution are often instantaneous; ' +
+      'covalent bond-breaking reactions are slower. For stoichiometry like ' +
+      '2A + B → 3C: rate = −(1/2)Δ[A]/Δt = −Δ[B]/Δt = +(1/3)Δ[C]/Δt.',
+    targetedMisconceptions: [`${RATE}:MC1`],
+    source: `${RATE_SRC} — average/instantaneous rate, factors affecting rate`,
+  },
+  {
+    conceptId: RATE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two major traps: (1) "Rate of disappearance of A equals rate of appearance ' +
+      'of B." Only true if the stoichiometric coefficients are equal! For ' +
+      '2A → B, A disappears TWICE as fast as B appears. You must divide by the ' +
+      'coefficient: rate = −(1/2)d[A]/dt = d[B]/dt. (2) "Doubling concentration ' +
+      'always doubles the rate." Only true for FIRST-ORDER reactions. For second ' +
+      'order (rate ∝ [A]²), doubling [A] QUADRUPLES the rate. For zero order, ' +
+      'doubling [A] has NO effect. You can\'t know the order from the balanced ' +
+      'equation — it must be determined EXPERIMENTALLY. The stoichiometric ' +
+      'coefficients do NOT tell you the rate law.',
+    targetedMisconceptions: [`${RATE}:MC1`, `${RATE}:MC2`],
+    source: `${RATE_SRC} — misconception: rate equals for all species; coefficients = order`,
+  },
+]
+
+const RATE_PROBES: SeedProbe[] = [
+  {
+    conceptId: RATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the reaction 2NO₂ → 2NO + O₂, if d[O₂]/dt = 0.05 M/s, what is −d[NO₂]/dt?',
+    choices: [
+      { text: '0.10 M/s — O₂ appears at 1/1 coefficient rate, NO₂ disappears at 2/1 = twice that rate', isCorrect: true },
+      { text: '0.05 M/s — rate is the same for all species in a reaction', isCorrect: false, misconceptionId: `${RATE}:MC1` },
+      { text: '0.025 M/s — NO₂ has coefficient 2 so divide by 2', isCorrect: false, misconceptionId: `${RATE}:MC3` },
+    ],
+    correctValue: '0.10 M/s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RATE}:MC1`, `${RATE}:MC3`],
+    source: `${RATE_SRC} — distractor targets "all species change at same rate" misconception`,
+  },
+  {
+    conceptId: RATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student looks at the reaction 2A + B → C and says "the reaction is second order in A and first order in B because the coefficients are 2 and 1." Is this correct?',
+    choices: [
+      { text: 'No — reaction order must be determined experimentally, not from stoichiometric coefficients. The balanced equation shows overall mole ratios, not the rate law.', isCorrect: true },
+      { text: 'Yes — stoichiometric coefficients directly give the reaction order', isCorrect: false, misconceptionId: `${RATE}:MC2` },
+    ],
+    correctValue: 'No — order is experimental',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RATE}:MC2`],
+    source: `${RATE_SRC} — misconception: coefficients = reaction order`,
+  },
+]
+
+// ─── chem.sol.types ──────────────────────────────────────────────────────────
+const SOLT = 'chem.sol.types'
+const SOLT_SRC = 'docs/chemistry/kg/graph.json — chem.sol.types'
+
+const SOLT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SOLT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A solution is a homogeneous mixture at the molecular level. The component ' +
+      'present in larger amount is the SOLVENT; the one dissolved is the SOLUTE. ' +
+      'Solutions aren\'t limited to liquids: air is a gas-in-gas solution, soda ' +
+      'water is gas-in-liquid, brass is solid-in-solid. WHY does something dissolve? ' +
+      '"Like dissolves like" — polar solvents (water) dissolve polar/ionic solutes ' +
+      '(NaCl, sugar); nonpolar solvents (hexane) dissolve nonpolar solutes (oil, ' +
+      'grease). The thermodynamic reason: dissolution happens when the energy ' +
+      'released by solute-solvent interactions (solvation) compensates for the ' +
+      'energy needed to break solute-solute and solvent-solvent interactions. ' +
+      'IDEAL solutions follow Raoult\'s Law perfectly (P_A = x_A · P°_A); real ' +
+      'solutions deviate positively (weaker interactions → higher vapor pressure) ' +
+      'or negatively (stronger interactions → lower VP, like HCl+H₂O).',
+    targetedMisconceptions: [`${SOLT}:MC1`],
+    source: `${SOLT_SRC} — solution types, like-dissolves-like, ideal vs non-ideal`,
+  },
+  {
+    conceptId: SOLT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "Dissolving is a chemical reaction." For ionic/molecular ' +
+      'solutes in water: dissolving is usually PHYSICAL. NaCl dissociates into ' +
+      'Na⁺ and Cl⁻ ions (no new bonds formed — the ionic crystal just separates ' +
+      'and gets hydrated). Sugar molecules separate and get surrounded by water ' +
+      '(hydrogen bonding, no covalent change). You can get them back by evaporation. ' +
+      'Exception: some "dissolving" IS reactive (HCl in water → H₃O⁺ + Cl⁻ involves ' +
+      'proton transfer — a chemical change). The test: can you recover the original ' +
+      'substance by physical means? Yes → physical dissolution. No → chemical reaction. ' +
+      'Another trap: "Solutions are always liquids." Wrong — alloys (solid solutions), ' +
+      'air (gaseous solution), and even hydrogen dissolved in palladium (gas in solid) ' +
+      'are all solutions.',
+    targetedMisconceptions: [`${SOLT}:MC1`, `${SOLT}:MC2`],
+    source: `${SOLT_SRC} — misconception: dissolving = chemical reaction; solutions = liquids only`,
+  },
+]
+
+const SOLT_PROBES: SeedProbe[] = [
+  {
+    conceptId: SOLT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Oil does not dissolve in water but dissolves readily in hexane. This is best explained by:',
+    choices: [
+      { text: '"Like dissolves like" — oil and hexane are both nonpolar, so their intermolecular forces are compatible', isCorrect: true },
+      { text: 'Hexane reacts with oil to form a new compound that is soluble', isCorrect: false, misconceptionId: `${SOLT}:MC1` },
+      { text: 'Hexane is a stronger solvent than water', isCorrect: false, misconceptionId: `${SOLT}:MC3` },
+    ],
+    correctValue: 'Like dissolves like',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SOLT}:MC1`, `${SOLT}:MC3`],
+    source: `${SOLT_SRC} — distractor targets "dissolving = reaction" and "stronger solvent" misconceptions`,
+  },
+  {
+    conceptId: SOLT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A solution shows a vapor pressure LOWER than predicted by Raoult\'s Law. What does this indicate about solute-solvent interactions?',
+    choices: [
+      { text: 'Solute-solvent interactions are STRONGER than solute-solute and solvent-solvent — molecules escape less readily (negative deviation)', isCorrect: true },
+      { text: 'Solute-solvent interactions are weaker — molecules are held less tightly in solution', isCorrect: false, misconceptionId: `${SOLT}:MC4` },
+    ],
+    correctValue: 'Stronger interactions (negative deviation)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SOLT}:MC4`],
+    source: `${SOLT_SRC} — misconception: lower VP = weaker interactions (opposite is true)`,
+  },
+]
+
+// ─── chem.thermo.enthalpy ────────────────────────────────────────────────────
+const ENTH = 'chem.thermo.enthalpy'
+const ENTH_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.enthalpy'
+
+const ENTH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Enthalpy (H) is the heat content at constant pressure. ΔH < 0 → EXOTHERMIC ' +
+      '(releases heat — combustion, neutralization). ΔH > 0 → ENDOTHERMIC (absorbs ' +
+      'heat — dissolving NH₄NO₃, photosynthesis). Standard enthalpy of formation ' +
+      '(ΔH°_f) is the enthalpy change when 1 mole of a compound forms from its ' +
+      'elements in their standard states. By definition, ΔH°_f of any element in ' +
+      'its standard state = 0. HESS\'S LAW: since H is a state function, ΔH for a ' +
+      'reaction is the SAME regardless of path. So: ΔH°_rxn = Σ ΔH°_f(products) − ' +
+      'Σ ΔH°_f(reactants). This is incredibly powerful — you can calculate ΔH for ' +
+      'reactions you\'ve never measured, just from tabulated formation enthalpies. ' +
+      'Alternatively: ΔH ≈ Σ(bonds broken) − Σ(bonds formed) — breaking bonds ' +
+      'costs energy, forming bonds releases it.',
+    targetedMisconceptions: [`${ENTH}:MC1`],
+    source: `${ENTH_SRC} — enthalpy, Hess's law, ΔH°f, bond energy method`,
+  },
+  {
+    conceptId: ENTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The bond-energy trap: "Breaking bonds releases energy." WRONG — breaking ' +
+      'bonds ALWAYS requires energy input (endothermic). Forming bonds ALWAYS ' +
+      'releases energy (exothermic). A reaction is exothermic overall when the ' +
+      'energy released by forming new bonds EXCEEDS the energy needed to break ' +
+      'old ones. Students confuse this because explosions "break things apart," ' +
+      'but the energy in an explosion comes from the NEW bonds formed in the ' +
+      'products (CO₂, H₂O) being much stronger than the old bonds broken in the ' +
+      'fuel. Another trap: "Exothermic reactions are spontaneous and endothermic ' +
+      'are not." False — spontaneity depends on ΔG (= ΔH − TΔS), not ΔH alone. ' +
+      'Melting ice is endothermic but spontaneous above 0°C (entropy drives it).',
+    targetedMisconceptions: [`${ENTH}:MC1`, `${ENTH}:MC2`],
+    source: `${ENTH_SRC} — misconception: breaking bonds releases energy; exothermic = spontaneous`,
+  },
+]
+
+const ENTH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the reaction H₂(g) + ½O₂(g) → H₂O(l), we break H-H and O=O bonds and form O-H bonds. The reaction is exothermic because:',
+    choices: [
+      { text: 'Energy released by forming 2 O-H bonds exceeds energy needed to break 1 H-H and ½ O=O bonds', isCorrect: true },
+      { text: 'Breaking the H-H bond releases energy which powers the reaction', isCorrect: false, misconceptionId: `${ENTH}:MC1` },
+      { text: 'All combustion reactions are exothermic by definition regardless of bond energies', isCorrect: false },
+    ],
+    correctValue: 'Forming bonds releases more than breaking costs',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTH}:MC1`],
+    source: `${ENTH_SRC} — distractor targets "breaking bonds releases energy" misconception`,
+  },
+  {
+    conceptId: ENTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Given: ΔH°f[CO₂(g)] = −393 kJ/mol, ΔH°f[H₂O(l)] = −286 kJ/mol, ΔH°f[C₂H₆(g)] = −85 kJ/mol. Calculate ΔH° for C₂H₆ + 7/2 O₂ → 2CO₂ + 3H₂O.',
+    choices: [
+      { text: '−1559 kJ/mol: [2(−393) + 3(−286)] − [(−85) + 0] = −786 − 858 + 85 = −1559', isCorrect: true },
+      { text: '−1644 kJ/mol: forgot that ΔH°f of reactant is subtracted, not added', isCorrect: false, misconceptionId: `${ENTH}:MC3` },
+    ],
+    correctValue: '−1559 kJ/mol',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTH}:MC3`],
+    source: `${ENTH_SRC} — misconception: adding all ΔH°f without proper products-minus-reactants formula`,
+  },
+]
+
+// ─── chem.thermo.entropy ─────────────────────────────────────────────────────
+const ENTR = 'chem.thermo.entropy'
+const ENTR_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.entropy'
+
+const ENTR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENTR,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Entropy (S) measures the NUMBER OF WAYS particles can be arranged — more ' +
+      'ways = higher entropy. Gas > liquid > solid (gas molecules can be anywhere ' +
+      'in the container; solid molecules are locked in place). The Second Law: the ' +
+      'total entropy of the universe ALWAYS increases for a spontaneous process. ' +
+      'A reaction can decrease the system\'s entropy IF the surroundings\' entropy ' +
+      'increases by more (heat released warms the surroundings, giving their ' +
+      'molecules more arrangements). ΔS°_rxn = Σ S°(products) − Σ S°(reactants). ' +
+      'Key patterns: more moles of gas → higher S; dissolution → higher S; higher ' +
+      'temperature → higher S; larger/more complex molecules → higher S. ' +
+      'Entropy is NOT "disorder" in the colloquial sense — it\'s a precise ' +
+      'statistical mechanical quantity: S = k_B ln(W), where W is the number ' +
+      'of microstates.',
+    targetedMisconceptions: [`${ENTR}:MC1`],
+    source: `${ENTR_SRC} — entropy, second law, standard entropy, spontaneity`,
+  },
+  {
+    conceptId: ENTR,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Biggest entropy misconception: "The Second Law says everything tends toward ' +
+      'disorder, so life and crystals violate it." Wrong on two counts: (1) The ' +
+      'Second Law applies to the UNIVERSE (system + surroundings), not the system ' +
+      'alone. Living things maintain low internal entropy by EXPORTING entropy to ' +
+      'surroundings (heat, CO₂). (2) "Disorder" is a misleading translation of ' +
+      'entropy — what actually increases is the number of MICROSTATES. A crystal ' +
+      'forming from solution decreases system entropy but releases heat (exothermic), ' +
+      'increasing surroundings\' entropy by more. The universe\'s total entropy still ' +
+      'increases. Never judge spontaneity by system entropy alone — you need ΔS_universe ' +
+      'or equivalently ΔG = ΔH − TΔS (which packages both system and surroundings).',
+    targetedMisconceptions: [`${ENTR}:MC1`, `${ENTR}:MC2`],
+    source: `${ENTR_SRC} — misconception: 2nd law applies to system alone; life violates it`,
+  },
+]
+
+const ENTR_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENTR,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which process has the LARGEST positive ΔS?',
+    choices: [
+      { text: 'CaCO₃(s) → CaO(s) + CO₂(g) — a solid produces a gas (large entropy increase)', isCorrect: true },
+      { text: 'H₂O(l) → H₂O(s) — freezing increases order so must increase entropy', isCorrect: false, misconceptionId: `${ENTR}:MC1` },
+      { text: 'N₂(g) + 3H₂(g) → 2NH₃(g) — moles of gas decrease (4→2) so ΔS < 0', isCorrect: false },
+    ],
+    correctValue: 'CaCO₃ decomposition (gas produced)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTR}:MC1`],
+    source: `${ENTR_SRC} — distractor targets "freezing increases entropy" misconception`,
+  },
+  {
+    conceptId: ENTR,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "Living organisms violate the Second Law because they maintain internal order." Evaluate this.',
+    choices: [
+      { text: 'Incorrect — organisms are OPEN systems that export entropy to surroundings (heat, waste). The total entropy of organism + surroundings still increases. The 2nd Law applies to the universe, not the system alone.', isCorrect: true },
+      { text: 'Correct — biological systems are exceptions to the Second Law', isCorrect: false, misconceptionId: `${ENTR}:MC2` },
+    ],
+    correctValue: 'Incorrect — open system exports entropy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTR}:MC2`],
+    source: `${ENTR_SRC} — misconception: life violates the second law`,
+  },
+]
+
+// ─── chem.env.air-pollution ──────────────────────────────────────────────────
+const AIRPOL = 'chem.env.air-pollution'
+const AIRPOL_SRC = 'docs/chemistry/kg/graph.json — chem.env.air-pollution'
+
+const AIRPOL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AIRPOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Air pollutants are PRIMARY (emitted directly: CO, SO₂, NO, particulates) or ' +
+      'SECONDARY (formed by reactions in the atmosphere: O₃, PAN, H₂SO₄). ' +
+      'PHOTOCHEMICAL SMOG forms when sunlight drives reactions between NOₓ and VOCs: ' +
+      'NO₂ + UV → NO + O; O + O₂ → O₃ (ground-level ozone — a lung irritant, ' +
+      'distinct from protective stratospheric ozone). ACID RAIN: SO₂ and NOₓ ' +
+      'react with water vapor to form H₂SO₄ and HNO₃, lowering rain pH below 5.6. ' +
+      'Effects: corrodes limestone/marble, acidifies lakes (killing fish), damages ' +
+      'plant cuticles. CO is dangerous because it binds hemoglobin 200× more ' +
+      'strongly than O₂ — even small concentrations prevent oxygen transport. ' +
+      'Control strategies: catalytic converters (2CO + 2NO → 2CO₂ + N₂), scrubbers ' +
+      '(remove SO₂ from flue gas), electrostatic precipitators (remove particulates).',
+    targetedMisconceptions: [`${AIRPOL}:MC1`],
+    source: `${AIRPOL_SRC} — primary/secondary pollutants, smog, acid rain, control`,
+  },
+  {
+    conceptId: AIRPOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "Ozone is always bad/always good." It\'s BOTH — location ' +
+      'matters. In the stratosphere (20-30 km), O₃ absorbs UV-B/C and protects ' +
+      'life — depletion there is harmful. At ground level (troposphere), O₃ is a ' +
+      'toxic pollutant that irritates lungs and damages crops — formation there ' +
+      '(from NOₓ + sunlight) is harmful. Same molecule, different effects based ' +
+      'purely on WHERE it is. "Good up high, bad nearby." Another misconception: ' +
+      '"CO₂ is a pollutant." In the classical air-pollution sense, CO₂ is NOT a ' +
+      'pollutant (it\'s non-toxic at ambient levels and is a natural atmospheric ' +
+      'component). It IS a greenhouse gas contributing to climate change — but ' +
+      'that\'s a different problem from air pollution. Don\'t conflate them.',
+    targetedMisconceptions: [`${AIRPOL}:MC1`],
+    source: `${AIRPOL_SRC} — misconception: ozone is uniformly good or bad; CO₂ = classical pollutant`,
+  },
+]
+
+const AIRPOL_PROBES: SeedProbe[] = [
+  {
+    conceptId: AIRPOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Photochemical smog is classified as a SECONDARY pollutant because:',
+    choices: [
+      { text: 'It forms from chemical reactions in the atmosphere (NOₓ + VOCs + sunlight → O₃ + PAN), not emitted directly', isCorrect: true },
+      { text: 'It is the second most dangerous pollutant after CO', isCorrect: false, misconceptionId: `${AIRPOL}:MC2` },
+      { text: 'It affects only the secondary target organs (lungs, not blood)', isCorrect: false },
+    ],
+    correctValue: 'Formed by atmospheric reactions, not emitted directly',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AIRPOL}:MC2`],
+    source: `${AIRPOL_SRC} — distractor targets "secondary = second most important" misconception`,
+  },
+  {
+    conceptId: AIRPOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student says: "We should eliminate all ozone since it causes smog." What\'s wrong with this statement?',
+    choices: [
+      { text: 'Ground-level O₃ is harmful (smog component), but stratospheric O₃ is essential (UV shield). We need to reduce tropospheric O₃ while protecting stratospheric O₃ — they require opposite actions.', isCorrect: true },
+      { text: 'Nothing wrong — ozone is always a pollutant that should be eliminated', isCorrect: false, misconceptionId: `${AIRPOL}:MC1` },
+    ],
+    correctValue: 'Location determines whether ozone is helpful or harmful',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AIRPOL}:MC1`],
+    source: `${AIRPOL_SRC} — misconception: ozone is uniformly bad`,
+  },
+]
+
+// ─── chem.env.water-soil ─────────────────────────────────────────────────────
+const WATSOL = 'chem.env.water-soil'
+const WATSOL_SRC = 'docs/chemistry/kg/graph.json — chem.env.water-soil'
+
+const WATSOL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WATSOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Water pollution is measured by BIOCHEMICAL OXYGEN DEMAND (BOD): the O₂ ' +
+      'consumed by microbes decomposing organic matter in 5 days at 20°C. ' +
+      'High BOD = lots of organic waste = less dissolved O₂ for fish. ' +
+      'EUTROPHICATION: excess nutrients (N, P from fertilizers/sewage) → algal ' +
+      'bloom → algae die → decomposition consumes O₂ → fish die. Heavy metals ' +
+      '(Hg, Pb, Cd) are dangerous because they BIOACCUMULATE — each level of the ' +
+      'food chain concentrates them further (mercury in fish is 10,000× water levels). ' +
+      'GREEN CHEMISTRY (Anastas & Warner, 12 principles) aims to prevent pollution ' +
+      'at source: atom economy (minimize waste atoms), use catalysts over ' +
+      'stoichiometric reagents, design for degradation, avoid toxic solvents. ' +
+      'The shift: from "treat pollution after creation" to "design processes that ' +
+      'don\'t create pollution."',
+    targetedMisconceptions: [`${WATSOL}:MC1`],
+    source: `${WATSOL_SRC} — BOD, eutrophication, heavy metals, green chemistry principles`,
+  },
+  {
+    conceptId: WATSOL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "High dissolved oxygen means the water is polluted." OPPOSITE — high ' +
+      'dissolved O₂ means the water is CLEAN and can support aquatic life. It\'s ' +
+      'high BOD (biochemical oxygen DEMAND — how much O₂ microbes consume) that ' +
+      'indicates pollution. Polluted water has high BOD and LOW dissolved O₂. ' +
+      'Another misconception: "Eutrophication is caused by toxic chemicals." No — ' +
+      'it\'s caused by NUTRIENTS (nitrogen, phosphorus) that are individually harmless ' +
+      'but trigger explosive algal growth. The algae themselves aren\'t toxic (usually); ' +
+      'the problem is what happens when they die — decomposition bacteria consume all ' +
+      'available oxygen, creating dead zones. It\'s an indirect mechanism, not direct ' +
+      'poisoning.',
+    targetedMisconceptions: [`${WATSOL}:MC1`, `${WATSOL}:MC2`],
+    source: `${WATSOL_SRC} — misconception: high O₂ = polluted; eutrophication = toxic chemicals`,
+  },
+]
+
+const WATSOL_PROBES: SeedProbe[] = [
+  {
+    conceptId: WATSOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A water sample has a BOD of 350 mg/L. This indicates:',
+    choices: [
+      { text: 'Heavy organic pollution — microbes need 350 mg of O₂ per litre to decompose the organic waste present', isCorrect: true },
+      { text: 'Very clean water — high BOD means lots of oxygen available', isCorrect: false, misconceptionId: `${WATSOL}:MC1` },
+      { text: 'The water contains 350 mg/L of dissolved oxygen', isCorrect: false, misconceptionId: `${WATSOL}:MC3` },
+    ],
+    correctValue: 'Heavy organic pollution',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WATSOL}:MC1`, `${WATSOL}:MC3`],
+    source: `${WATSOL_SRC} — distractor targets "high BOD = clean" and "BOD = dissolved O₂" misconceptions`,
+  },
+  {
+    conceptId: WATSOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A lake receives runoff from farmland rich in nitrogen and phosphorus fertilizers. Why might fish start dying even though the fertilizers themselves are non-toxic?',
+    choices: [
+      { text: 'Eutrophication: nutrients trigger algal bloom → algae die → microbial decomposition consumes dissolved O₂ → fish suffocate from lack of oxygen (not direct toxicity)', isCorrect: true },
+      { text: 'The fertilizers directly poison the fish by accumulating in their tissues', isCorrect: false, misconceptionId: `${WATSOL}:MC2` },
+    ],
+    correctValue: 'Eutrophication (oxygen depletion)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WATSOL}:MC2`],
+    source: `${WATSOL_SRC} — misconception: eutrophication is direct chemical poisoning`,
+  },
+]
+
+// ─── chem.surface.emulsions ──────────────────────────────────────────────────
+const EMUL = 'chem.surface.emulsions'
+const EMUL_SRC = 'docs/chemistry/kg/graph.json — chem.surface.emulsions'
+
+const EMUL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EMUL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Mix oil and water vigorously — you get an EMULSION (tiny droplets of one ' +
+      'liquid dispersed in another). But wait — leave it alone and it separates. ' +
+      'WHY? Because oil-water interfaces are energetically unfavorable. EMULSIFYING ' +
+      'AGENTS (surfactants) solve this: molecules with a hydrophilic HEAD (loves ' +
+      'water) and a hydrophobic TAIL (loves oil). They sit at the oil-water ' +
+      'interface, reducing surface tension and preventing droplets from merging. ' +
+      'Soap, detergents, lecithin (in egg yolk — that\'s why egg makes mayonnaise ' +
+      'stable). Two types: OIL-IN-WATER (O/W: oil droplets in water — milk, cream) ' +
+      'and WATER-IN-OIL (W/O: water droplets in oil — butter, cold cream). Test: ' +
+      'O/W is dilutable with water; W/O is dilutable with oil. GELS are the reverse ' +
+      'concept: a solid network trapping liquid (jelly, agar).',
+    targetedMisconceptions: [`${EMUL}:MC1`],
+    source: `${EMUL_SRC} — emulsion types, emulsifying agents, O/W vs W/O, gels`,
+  },
+  {
+    conceptId: EMUL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Misconception: "Emulsions are permanent — once mixed, they stay mixed." ' +
+      'No — emulsions are THERMODYNAMICALLY UNSTABLE. They\'re stabilized ' +
+      'KINETICALLY by emulsifiers that slow down coalescence, but given enough ' +
+      'time (or heat/salt), they can break (creaming, flocculation, coalescence). ' +
+      'That\'s why old milk separates and why salad dressing needs shaking. ' +
+      'Only MICROEMULSIONS (particle size < 100 nm, formed spontaneously) are ' +
+      'thermodynamically stable. Regular emulsions (1-1000 nm) always need an ' +
+      'emulsifier AND mechanical energy (mixing) to form and are inherently ' +
+      'metastable — the emulsifier is a kinetic barrier, not a thermodynamic solution.',
+    targetedMisconceptions: [`${EMUL}:MC1`],
+    source: `${EMUL_SRC} — misconception: emulsions are thermodynamically stable permanent mixtures`,
+  },
+]
+
+const EMUL_PROBES: SeedProbe[] = [
+  {
+    conceptId: EMUL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Milk is an emulsion of fat droplets in water. Adding a few drops of water to milk has no effect, but adding oil causes separation. This confirms milk is:',
+    choices: [
+      { text: 'Oil-in-water (O/W) type — the continuous phase is water, so it\'s dilutable with water but not oil', isCorrect: true },
+      { text: 'Water-in-oil (W/O) type — milk contains mostly water so the water must be dispersed', isCorrect: false, misconceptionId: `${EMUL}:MC2` },
+      { text: 'A true solution — milk is transparent and homogeneous', isCorrect: false, misconceptionId: `${EMUL}:MC3` },
+    ],
+    correctValue: 'O/W emulsion',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EMUL}:MC2`, `${EMUL}:MC3`],
+    source: `${EMUL_SRC} — distractor targets "mostly water = W/O" and "milk is a solution" misconceptions`,
+  },
+  {
+    conceptId: EMUL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does mayonnaise (an emulsion) eventually separate if stored too long?',
+    choices: [
+      { text: 'Emulsions are thermodynamically unstable — the emulsifier (lecithin) provides only a kinetic barrier against coalescence, which weakens over time', isCorrect: true },
+      { text: 'The emulsifier breaks down chemically and stops working — if it stayed intact the emulsion would last forever', isCorrect: false, misconceptionId: `${EMUL}:MC1` },
+    ],
+    correctValue: 'Thermodynamic instability (kinetic barrier only)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EMUL}:MC1`],
+    source: `${EMUL_SRC} — misconception: emulsions are permanent if emulsifier is present`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -1542,6 +2344,16 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...SPEC_EXPLANATIONS,
   ...PHOTO_EXPLANATIONS,
   ...ELCOND_EXPLANATIONS,
+  ...THFL_EXPLANATIONS,
+  ...GASL_EXPLANATIONS,
+  ...BOHR_EXPLANATIONS,
+  ...RATE_EXPLANATIONS,
+  ...SOLT_EXPLANATIONS,
+  ...ENTH_EXPLANATIONS,
+  ...ENTR_EXPLANATIONS,
+  ...AIRPOL_EXPLANATIONS,
+  ...WATSOL_EXPLANATIONS,
+  ...EMUL_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -1564,4 +2376,14 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...SPEC_PROBES,
   ...PHOTO_PROBES,
   ...ELCOND_PROBES,
+  ...THFL_PROBES,
+  ...GASL_PROBES,
+  ...BOHR_PROBES,
+  ...RATE_PROBES,
+  ...SOLT_PROBES,
+  ...ENTH_PROBES,
+  ...ENTR_PROBES,
+  ...AIRPOL_PROBES,
+  ...WATSOL_PROBES,
+  ...EMUL_PROBES,
 ]
