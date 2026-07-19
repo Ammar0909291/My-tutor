@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.cholesky-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.cholesky",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:831c5c19aca8abc8f8757ad4498f47659c520d9585e0166310104b5f4d332a0f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.cholesky.md": "sha256:31391dd16d66425a2528138fec3422b0048c5bb7138373e89dae93a969959400"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.cholesky",
+    "name": "Cholesky Decomposition",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.positive-definite",
+      "math.linalg.lu-factorization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.cholesky-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.cholesky (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.cholesky.md": "sha256:31391dd16d66425a2528138fec3422b0048c5bb7138373e89dae93a969959400"
+      },
+      "contentHash": "sha256:10a3d24663bde96643b36fc78a860a623b5c3fa4f6c965efb8949bb70fa33713",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.cholesky.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cholesky.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cholesky\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cholesky.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cholesky.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cholesky\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cholesky.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cholesky.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cholesky\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cholesky.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cholesky.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cholesky"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cholesky\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.cholesky/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.cholesky",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that for a SYMMETRIC positive definite matrix $A$ (from `math.linalg.positive-definite`), the general LU factorization $A=LU$ (from `math.linalg.lu-factorization`) SPECIALIZES to $A=LL^T$ — a single lower-triangular factor $L$ with positive diagonal entries, exploiting symmetry to avoid storing $L$ and $U$ separately.\n- LO2: Compute the Cholesky factor $L$ for a small symmetric positive definite matrix directly via the recursive column-by-column formulas, and VERIFY $LL^T=A$.\n- LO3 (orientation level — full complexity analysis deferred): recognize, without full derivation, that Cholesky is roughly HALF the computational work of general LU factorization on the same matrix, because symmetry lets $L$ alone encode all the information $L$ and $U$ together would otherwise carry, deferred to `math.num.cholesky`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cholesky",
+      "title": "CHOLESKY-ASSUMED-SEPARATE-METHOD",
+      "content": "| MC-1 | CHOLESKY-ASSUMED-SEPARATE-METHOD | Believing Cholesky decomposition is an entirely separate factorization technique, missing that it is LU factorization specialized by symmetry into a single triangular factor | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cholesky",
+      "title": "CHOLESKY-ASSUMED-TO-REQUIRE-LU-FIRST",
+      "content": "| MC-2 | CHOLESKY-ASSUMED-TO-REQUIRE-LU-FIRST | Believing the Cholesky factor $L$ must be obtained by running general LU factorization first and then symmetrizing, missing that $L$ can be computed directly via recursive formulas | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cholesky",
+      "title": "CHOLESKY-ASSUMED-SAME-COST-AS-LU",
+      "content": "| MC-3 | CHOLESKY-ASSUMED-SAME-COST-AS-LU | Believing Cholesky decomposition costs roughly the same computational work as general LU factorization, missing that computing only one triangular factor is roughly half the work | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cholesky",
+      "title": "Cholesky Is LU Specialized By Symmetry, Not a New Method (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cholesky Is LU Specialized By Symmetry, Not a New Method (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cholesky",
+      "title": "$L$ Can Be Computed Directly, Without Running LU First (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$L$ Can Be Computed Directly, Without Running LU First (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cholesky",
+      "title": "One Triangular Factor Is Genuinely Cheaper Than Two (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"One Triangular Factor Is Genuinely Cheaper Than Two (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cholesky",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.cholesky",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\begin{pmatrix}9&3\\\\3&5\\end{pmatrix}$, verify positive-definiteness via leading principal minors, then compute the Cholesky factor $L$ directly using the recursive formulas.\n  2. Verify $LL^T=A$ for your answer to problem 1.\n  3. Explain why the Cholesky factor's diagonal entries are guaranteed to be REAL and POSITIVE (rather than requiring a complex square root) whenever $A$ is genuinely positive definite.\n  4. Without full derivation, explain why Cholesky decomposition uses roughly half the arithmetic of general LU factorization for the same symmetric matrix.\n- **P76 (Transfer Probe, mode = independence)**: \"A structural engineering system produces a symmetric positive definite stiffness matrix $K=\\begin{pmatrix}16&4\\\\4&5\\end{pmatrix}$ that must be factored repeatedly for different load vectors across a design iteration. (a) Verify $K$ is positive definite. (b) Compute its Cholesky factor $L$ directly via the recursive formulas. (c) Explain, citing both the symmetry-specialization argument and the half-the-work argument, why an engineer would deliberately choose Cholesky over general LU factorization for this matrix, given that $K$ is known in advance to be symmetric positive definite.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.cholesky",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.positive-definite` (the definition $x^TAx>0$ for all nonzero $x$, and its equivalent characterizations) and `math.linalg.lu-factorization` (the general $A=LU$ factorization, its bookkeeping-of-elimination-multipliers construction, and its two-triangular-solve payoff).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.cholesky/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.cholesky",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.positive-definite` (the definition and leading-principal-minors test certifying $A$'s positive-definiteness, the precondition for Cholesky's real positive diagonal) and `math.linalg.lu-factorization` (the general $A=LU$ factorization this concept specializes by symmetry).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.num.cholesky`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cholesky.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

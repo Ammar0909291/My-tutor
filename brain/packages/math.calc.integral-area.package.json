@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.integral-area-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.integral-area",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dcc59c2398d5af5c8be7a5d72f89f17d09b8c6b92fb39378b920e471bcdaef5d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.integral-area.md": "sha256:9ad25c1acccebe55ad7299258a872ed313db123df5efb754dbd095eb77bad7c8"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.integral-area",
+    "name": "Area by Integration",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.definite-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.integral-area-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.integral-area (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.integral-area.md": "sha256:9ad25c1acccebe55ad7299258a872ed313db123df5efb754dbd095eb77bad7c8"
+      },
+      "contentHash": "sha256:cc405b640d4c454e5bdb71df4f2176328c4dc243793f1ee89c90a17e15ec8e69",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.integral-area.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integral-area.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integral-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integral-area\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.integral-area.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integral-area.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integral-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integral-area\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.integral-area.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integral-area.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integral-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integral-area\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.integral-area.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integral-area.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integral-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integral-area\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.integral-area/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.integral-area",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the area under a curve $y=f(x)\\ge0$ on $[a,b]$ as $\\int_a^bf(x)\\,dx$, recognizing this as a direct APPLICATION of `math.calc.definite-integral`'s own limit-of-Riemann-sums definition, not a new operation.\n- LO2: Compute the area BETWEEN two curves $f(x)\\ge g(x)$ on $[a,b]$ as $\\int_a^b[f(x)-g(x)]\\,dx$, recognizing the integrand as the height of each vertical strip (top minus bottom), and correctly identify WHICH function is on top before setting up the integral.\n- LO3 (orientation level — full sign-handling theory deferred): recognize, without full derivation, that when $f(x)$ is NEGATIVE on part of $[a,b]$, the definite integral $\\int_a^bf(x)\\,dx$ computes SIGNED area (subtracting area below the axis), so computing genuine unsigned area requires splitting the interval at $f$'s zeros and using $\\int|f(x)|\\,dx$ region by region.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.integral-area",
+      "title": "AREA-UNDER-CURVE-ASSUMED-NEW-OPERATION",
+      "content": "| MC-1 | AREA-UNDER-CURVE-ASSUMED-NEW-OPERATION | Believing computing area under a curve is a genuinely new operation distinct from the definite integral, missing that the area IS the definite integral's value when $f\\ge0$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.integral-area",
+      "title": "TOP-BOTTOM-ORDER-ASSUMED-ARBITRARY",
+      "content": "| MC-2 | TOP-BOTTOM-ORDER-ASSUMED-ARBITRARY | Believing the area-between-curves integrand can be set up as either $f-g$ or $g-f$ regardless of which curve is on top, missing that reversing the order flips the sign | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.integral-area",
+      "title": "SIGNED-INTEGRAL-ASSUMED-TO-ALWAYS-GIVE-UNSIGNED-AREA",
+      "content": "| MC-3 | SIGNED-INTEGRAL-ASSUMED-TO-ALWAYS-GIVE-UNSIGNED-AREA | Believing $\\int_a^bf(x)\\,dx$ always computes genuine unsigned area even when $f$ is negative somewhere, missing that negative regions subtract rather than add, requiring splitting at zeros | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integral-area",
+      "title": "Area Under a Curve Is the Definite Integral, Not a New Operation (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Area Under a Curve Is the Definite Integral, Not a New Operation (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integral-area",
+      "title": "Getting the Top and Bottom Backwards Flips the Sign (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Getting the Top and Bottom Backwards Flips the Sign (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integral-area",
+      "title": "A Single Integral Can Silently Cancel Area Below the Axis (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Single Integral Can Silently Cancel Area Below the Axis (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integral-area",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.integral-area",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the area under $f(x)=3x^2$ on $[0,3]$ via the definite integral.\n  2. Verify $f(x)=6-x\\ge g(x)=x^2$ on $[-1,2]$ at the endpoints and one interior point, then set up (and evaluate) the area-between-curves integral.\n  3. For $f(x)=x-2$ on $[0,5]$, identify where $f$ changes sign, and set up (without necessarily fully evaluating) the correctly split expression for the genuine unsigned area.\n  4. Explain, in one or two sentences, why reversing which function is \"on top\" in an area-between-curves setup produces the negative of the correct answer rather than an equally valid alternative.\n- **P76 (Transfer Probe, mode = independence)**: \"A cross-section of a riverbed's flow-rate difference between two measurement methods is modeled by $f(t)=8-t^2$ (upstream) and $g(t)=t$ (downstream) for $t\\in[0,3]$ (in appropriate units). (a) Verify which function is on top over this interval. (b) Set up and evaluate the area between the two curves, representing the net accumulated difference. (c) Suppose instead a single function $h(t)=4-t^2$ representing net flow difference is given, and $h$ is negative for part of $[0,3]$ — explain what would go wrong if you simply evaluated $\\int_0^3h(t)\\,dt$ to answer 'what is the total accumulated MAGNITUDE of the difference,' and describe the fix.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.integral-area",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.definite-integral` (the definite integral as the limit of Riemann sums, and the Fundamental Theorem of Calculus for evaluation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.integral-area/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.integral-area",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.definite-integral` (the definite integral as the limit of Riemann sums and its Fundamental-Theorem-of-Calculus evaluation, directly reused as the mechanism computing area).\n- **Unlocks**: `math.calc.volume-revolution` per the KG (this concept's area-between-curves and vertical-strip reasoning is the direct precursor to computing volumes of revolution via disks/washers).\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integral-area.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

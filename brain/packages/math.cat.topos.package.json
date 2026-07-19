@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.topos-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.topos",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:760b369fe016d99b6430538a4f46f8e3fe786b80ee9f06b52cd6840b73ab58c4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.topos.md": "sha256:44acd192994447a4697907461dae08f6d279a696f5126af8a55097e4862ac57a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cat.topos",
+    "name": "Topos",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.4,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.cat.limits",
+      "math.cat.adjunction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.topos-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.topos (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.topos.md": "sha256:44acd192994447a4697907461dae08f6d279a696f5126af8a55097e4862ac57a"
+      },
+      "contentHash": "sha256:bcb62284d4749c24b2972b9a6aecc3d686def00f75d80129f34c052d7bf50082",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.topos.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.topos.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.topos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.topos\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.topos.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.topos.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.topos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.topos\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.topos.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.topos.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.topos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.topos\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.topos.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.topos.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.topos"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.topos\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.topos/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.topos",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **elementary topos** as a category with (a) finite limits (from `math.cat.limits`), (b) exponentials $B^A$ (function objects, satisfying a universal property that is itself an adjunction — from `math.cat.adjunction` — between $-\\times A$ and $(-)^A$), and (c) a **subobject classifier** $\\Omega$, an object representing the \"true/false\" of membership abstractly.\n- LO2: Understand the subobject classifier's defining universal property in $\\mathrm{Set}$ — every subset $S\\subseteq X$ corresponds bijectively to a unique characteristic function $\\chi_S:X\\to\\{0,1\\}$ — and recognize $\\Omega=\\{0,1\\}$ in $\\mathrm{Set}$ as the CONCRETE instance the abstract topos axiom generalizes.\n- LO3 (orientation level — full internal-logic and sheaf theory deferred): recognize, without full derivation, that a topos's internal logic is generally **intuitionistic**, not classical (the law of excluded middle need not hold internally), and that Grothendieck toposes (sheaves on a site) generalize $\\mathrm{Set}$ far beyond ordinary sets, bridging logic, geometry, and algebra.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.topos/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.topos",
+      "title": "TOPOS-ASSUMED-JUST-FINITE-LIMITS",
+      "content": "| MC-1 | TOPOS-ASSUMED-JUST-FINITE-LIMITS | Believing \"topos\" is essentially just \"a category with finite limits\" with exponentials/subobject-classifier as minor add-ons, missing that all three conditions are independently required | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cat.topos/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.topos",
+      "title": "SUBOBJECT-CLASSIFIER-ASSUMED-ARBITRARY",
+      "content": "| MC-2 | SUBOBJECT-CLASSIFIER-ASSUMED-ARBITRARY | Believing $\\Omega=\\{0,1\\}$ in $\\mathrm{Set}$ is simply a conventional choice with no deeper universal property, missing that it is defined precisely by its bijective subset-classifying correspondence | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cat.topos/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.topos",
+      "title": "TOPOS-INTERNAL-LOGIC-ASSUMED-CLASSICAL",
+      "content": "| MC-3 | TOPOS-INTERNAL-LOGIC-ASSUMED-CLASSICAL | Believing every topos automatically satisfies classical excluded middle since it is \"set-like,\" missing that a topos's internal logic is generally intuitionistic | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cat.topos/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.topos",
+      "title": "A Topos Needs All Three Ingredients Together, Reusing Two You Already Know (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"A Topos Needs All Three Ingredients Together, Reusing Two You Already Know (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cat.topos/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.topos",
+      "title": "$\\Omega$ Formalizes \"Characteristic Function,\" Not an Arbitrary Object (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$\\\\Omega$ Formalizes \\\"Characteristic Function,\\\" Not an Arbitrary Object (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cat.topos/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.topos",
+      "title": "Not Every Topos Obeys Classical Logic (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Not Every Topos Obeys Classical Logic (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cat.topos/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.topos",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cat.topos/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.topos",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the three defining conditions of an elementary topos.\n  2. Explain why the exponential-object condition is, precisely, an adjunction between $-\\times A$ and $(-)^A$, citing `math.cat.adjunction` directly.\n  3. For $X=\\{1,2,3,4\\}$ and $S=\\{2,4\\}$, write out the characteristic function $\\chi_S:X\\to\\{0,1\\}$ explicitly, and verify the reverse direction (recovering $S$ from $\\chi_S$).\n  4. Explain, without full derivation, why a topos's internal logic need not satisfy the classical law of excluded middle.\n- **P76 (Transfer Probe, mode = independence)**: \"Consider the category of $G$-sets (sets equipped with an action of a fixed group $G$), which is also known to be a topos. (a) Without computing it explicitly, explain what role its subobject classifier $\\Omega$ must play, by analogy with $\\Omega=\\{0,1\\}$'s subset-classifying property in $\\mathrm{Set}$. (b) Explain why simply having finite limits and exponentials would NOT be enough to certify this category as a topos, without a subobject classifier. (c) A colleague claims 'since $G$-sets behave a lot like ordinary sets, its internal logic must be classical, just like $\\mathrm{Set}$'s' — evaluate this claim, citing the sheaf-topos contrast from Example 3.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 2/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cat.topos/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.topos",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cat.limits` (finite limits and universal properties, one of the three defining topos axioms) and `math.cat.adjunction` (adjoint functors, the exact framework the exponential object's universal property is stated in).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.topos/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.topos",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cat.limits` (finite limits, one of the three defining topos conditions) and `math.cat.adjunction` (adjoint functors, the exact framework the exponential object's currying universal property is stated in).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.topos.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
