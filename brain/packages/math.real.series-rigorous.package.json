@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.series-rigorous-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.series-rigorous",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f8cf475784246ea0007e0ff00675ddd56f1b3eba049ab2714e1be78ac67e9b56",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.series-rigorous.md": "sha256:9188235f3426f733dc09e14606cde330ff8fd714a8a67bfd3648eae3c7aa6d33"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.series-rigorous",
+    "name": "Series (Rigorous)",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.convergence-sequences",
+      "math.seq.series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.series-rigorous-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.series-rigorous (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.series-rigorous.md": "sha256:9188235f3426f733dc09e14606cde330ff8fd714a8a67bfd3648eae3c7aa6d33"
+      },
+      "contentHash": "sha256:2a1b5addd28c62368857fd4290618d5b2773bf2f8d266dbe05624cbd9d4d59ef",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.series-rigorous.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.series-rigorous.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.series-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.series-rigorous\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.series-rigorous.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.series-rigorous.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.series-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.series-rigorous\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.series-rigorous.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.series-rigorous.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.series-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.series-rigorous\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.series-rigorous.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.series-rigorous.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.series-rigorous"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.series-rigorous\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.series-rigorous/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Cauchy criterion for series**: $\\sum a_n$ converges if and only if its partial sums $\\{S_n\\}$ form a Cauchy sequence — $\\forall\\varepsilon>0\\ \\exists N: m>n>N\\Rightarrow|S_m-S_n|=\\left|\\sum_{k=n+1}^m a_k\\right|<\\varepsilon$ — recognizing this introduces NO new convergence notion, but reduces series convergence entirely to the already-mastered Cauchy-sequence machinery applied to the partial-sum sequence.\n- LO2: Prove that **absolute convergence** ($\\sum|a_n|<\\infty$) implies (ordinary) convergence, via the Cauchy criterion ($|S_m-S_n|\\le\\sum_{k=n+1}^m|a_k|$, so a Cauchy absolute-partial-sum sequence forces the actual partial sums to be Cauchy too) — and recognize this is a SUFFICIENT, not necessary, condition: convergent series need not be absolutely convergent.\n- LO3: Distinguish absolute convergence's **rearrangement-invariance** (the sum is unchanged by any reordering of terms) from conditional convergence's **rearrangement-sensitivity** (the Riemann Rearrangement Theorem: a conditionally convergent series can be reordered to converge to ANY target value, or to diverge) — recognizing this as a genuine failure of the finite-sum intuition that reordering never changes a sum.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.series-rigorous",
+      "title": "SERIES-CONVERGENCE-AS-NEW-NOTION",
+      "content": "| MC-1 | SERIES-CONVERGENCE-AS-NEW-NOTION | Believing the Cauchy criterion for series introduces a genuinely new type of convergence, missing that it is ordinary Cauchy-sequence convergence applied directly to the partial sums | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.series-rigorous",
+      "title": "CONVERGENCE-ASSUMED-TO-IMPLY-ABSOLUTE-CONVERGENCE",
+      "content": "| MC-2 | CONVERGENCE-ASSUMED-TO-IMPLY-ABSOLUTE-CONVERGENCE | Believing every convergent series must also be absolutely convergent, missing that conditionally convergent series exist (converging through cancellation without absolute convergence) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.series-rigorous",
+      "title": "REARRANGEMENT-ASSUMED-UNIVERSALLY-INVARIANT",
+      "content": "| MC-3 | REARRANGEMENT-ASSUMED-UNIVERSALLY-INVARIANT | Believing every convergent series' sum is unaffected by reordering its terms (as with a finite sum), missing that this fails for conditionally convergent series per the Riemann Rearrangement Theorem | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Series Convergence Is Just Cauchy-Sequence Convergence of Partial Sums (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Series Convergence Is Just Cauchy-Sequence Convergence of Partial Sums (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Absolute Convergence Is Sufficient, Not Necessary (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Absolute Convergence Is Sufficient, Not Necessary (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Reordering Can Change a Conditionally Convergent Sum (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Reordering Can Change a Conditionally Convergent Sum (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Using the Cauchy criterion directly, find $N$ (in terms of $\\varepsilon$) confirming $\\{S_n\\}$ is Cauchy for $\\sum_{n=1}^\\infty\\frac1{3^n}$.\n  2. Determine whether $\\sum_{n=1}^\\infty\\frac{(-1)^{n+1}}{n^2}$ is absolutely convergent, conditionally convergent, or divergent, justifying with both the series and its absolute-value series.\n  3. Explain why the argument \"$\\sum|a_n|<\\infty$ implies $\\sum a_n$ converges\" cannot be reversed to \"$\\sum a_n$ converges implies $\\sum|a_n|<\\infty$,\" using a specific counterexample.\n  4. Explain, in your own words, why a finite sum's reordering-invariance does not automatically transfer to every convergent infinite series.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist computing a perturbation series finds it converges to a value $V$, but later discovers the series is only CONDITIONALLY convergent (its absolute-value series diverges). (a) Explain, using this lesson's Cauchy-criterion reasoning, why conditional convergence alone is still enough to guarantee the original ordering of terms produces a well-defined limit $V$. (b) A collaborator reorders the same infinite list of terms (perhaps for computational convenience) and obtains a DIFFERENT numerical value $V'\\ne V$. Using the Riemann Rearrangement Theorem, explain how this is possible even though no term was changed, added, or removed — only reordered. (c) The collaborator argues 'since both orderings use the exact same terms, summing to different values must indicate a calculation error somewhere.' Explain specifically why this argument is incorrect for a conditionally (but not absolutely) convergent series.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.convergence-sequences` (the rigorous $\\varepsilon$-$N$ convergence definition and the Cauchy $\\Leftrightarrow$ convergent equivalence in $\\mathbb{R}$, established via `math.real.cauchy-sequence`) and `math.seq.series` (partial sums $S_n=a_1+\\cdots+a_n$; a series converges to $S$ if $\\lim_{n\\to\\infty}S_n=S$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.series-rigorous/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.series-rigorous",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.convergence-sequences` (the rigorous $\\varepsilon$-$N$ definition and the Cauchy $\\Leftrightarrow$ convergent equivalence this concept applies directly to partial sums), `math.seq.series` (partial sums and the basic convergence-as-limit-of-partial-sums definition).\n- **Unlocks**: `math.real.absolute-convergence` (extends this concept's LO2/LO3 distinction into a full theory of absolute vs. conditional convergence and further convergence tests).\n- **Cross-link**: KG lists `math.seq.comparison-test` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe once that entry exists, connecting the comparison test's term-by-term bounding technique to this concept's absolute-convergence sufficiency argument.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.series-rigorous.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
