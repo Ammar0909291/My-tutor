@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.congruent-triangles-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.congruent-triangles",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4b4ca7679fbea940995d20874ff66f9c29bd80aed323ca6da30a1155fa20e3c9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.congruent-triangles.md": "sha256:e4aed7c75467f0e2c31124d7715df4a8959af372cc74bf43f870d307cb7045c3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.congruent-triangles",
+    "name": "Congruent Triangles",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.geom.triangle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.congruent-triangles-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.congruent-triangles (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.congruent-triangles.md": "sha256:e4aed7c75467f0e2c31124d7715df4a8959af372cc74bf43f870d307cb7045c3"
+      },
+      "contentHash": "sha256:5ca3f21812a44fda7084d4ad73ac3dac1b264f113a448a3803d02be1b5d2a9f8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.congruent-triangles.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.congruent-triangles.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.congruent-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.congruent-triangles\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.congruent-triangles.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.congruent-triangles.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.congruent-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.congruent-triangles\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.congruent-triangles.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.congruent-triangles.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.congruent-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.congruent-triangles\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.congruent-triangles.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.congruent-triangles.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.congruent-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.congruent-triangles\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.congruent-triangles/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define triangle **congruence** (identical shape AND size — all corresponding sides EQUAL and all corresponding angles EQUAL) and distinguish it from **similarity** (`math.geom.similar-triangles` — same shape, possibly different size, corresponding sides only PROPORTIONAL) — congruence is the special case of similarity with scale factor $k=1$.\n- LO2: Apply the valid congruence criteria — SSS, SAS, ASA, AAS, and HL (right triangles only) — to determine congruence from just 3 corresponding parts, correctly requiring EQUAL (not merely proportional) measurements throughout.\n- LO3: Recognize which combinations of 3 corresponding parts do **NOT** reliably establish congruence — specifically AAA (three equal angles, which only guarantees similarity) and SSA (two sides and a non-included angle, the genuinely ambiguous case) — and correctly reject them as valid criteria.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "CONGRUENCE-CONFLATED-WITH-SIMILARITY",
+      "content": "| MC-1 | CONGRUENCE-CONFLATED-WITH-SIMILARITY | Believing matching shape (equal angles) alone establishes congruence, missing that congruence additionally requires corresponding sides to be EQUAL, not merely proportional | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "AAA-TREATED-AS-CONGRUENCE-CRITERION",
+      "content": "| MC-2 | AAA-TREATED-AS-CONGRUENCE-CRITERION | Believing three matching angles (AAA) establishes triangle congruence, missing that it only ever establishes similarity, since angle-equality alone says nothing about absolute size | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "SSA-TREATED-AS-VALID-CRITERION",
+      "content": "| MC-3 | SSA-TREATED-AS-VALID-CRITERION | Believing SSA (two sides and a non-included angle) is a valid congruence criterion like SAS, missing the ambiguous case where two non-congruent triangles can satisfy identical SSA measurements | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "Congruence Is Similarity's Special Case, k = 1 (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Congruence Is Similarity's Special Case, k = 1 (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "AAA Fixes Shape, Never Size (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"AAA Fixes Shape, Never Size (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "SSA Is Ambiguous, Unlike ASA or SAS (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"SSA Is Ambiguous, Unlike ASA or SAS (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Given $\\triangle ABC$ with sides $5,6,7$ and $\\triangle DEF$ with sides $10,12,14$, state whether they are congruent, similar, or both, and justify.\n  2. Given two triangles sharing angles $40°,80°,60°$ but no side information, state the strongest conclusion you can draw (congruent, similar, or neither) and why.\n  3. Explain, using the ambiguous case, why SSA cannot be used to certify two triangles as congruent even when the given three measurements match exactly.\n  4. Identify which of the five valid congruence criteria (SSS, SAS, ASA, AAS, HL) applies when given two angles and the side between them, and explain why this differs from AAS.\n- **P76 (Transfer Probe, mode = independence)**: \"A carpenter is verifying that two triangular braces, cut to the same design, are truly identical in size before installing them as a matched pair. (a) The carpenter measures all three angles of both braces and finds them identical. Using this lesson's AAA-vs-congruence distinction, explain why this measurement alone does NOT confirm the braces are the same size. (b) The carpenter then measures two sides and an angle NOT between them on each brace, finding all three measurements identical between the two braces. Using this lesson's SSA ambiguous-case reasoning, explain why this still does not confirm congruence, even though three corresponding measurements match. (c) A colleague suggests 'since we've now checked angles (part a) AND two sides plus an angle (part b), that's plenty of information — surely combining these checks confirms congruence.' Explain specifically what is still missing, and name a genuine, valid congruence criterion (SSS, SAS, ASA, AAS, or HL) the carpenter could use instead to properly confirm the braces are identical.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle` (triangle definition, sides, angles, the angle-sum property).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.congruent-triangles/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.congruent-triangles",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle` (the basic triangle definition and angle-sum property this concept's criteria build on).\n- **Unlocks**: `math.geom.geometric-proof` (uses congruence criteria as standard justification steps in formal two-column proofs).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**. Note: although not a formal `requires` or `cross_links` entry, this concept's LO1 directly connects to already-authored `math.geom.similar-triangles`, framing congruence as similarity's $k=1$ special case, without re-teaching that concept's own AA/SAS/SSS similarity criteria or scale-factor content.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.congruent-triangles.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
