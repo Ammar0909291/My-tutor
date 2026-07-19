@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.hyperbolic-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.hyperbolic-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:021c847fbfbea2f21417c576edf1fae346651ec31ef6b9b475c23c61bdac0b94",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md": "sha256:5b0fae45d25eb4f6f698c81181d44862dedb3e8f5572efbe6bc056bfe351c56a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.hyperbolic-functions",
+    "name": "Hyperbolic Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.exponential-function",
+      "math.trig.trig-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.hyperbolic-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.hyperbolic-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md": "sha256:5b0fae45d25eb4f6f698c81181d44862dedb3e8f5572efbe6bc056bfe351c56a"
+      },
+      "contentHash": "sha256:b17ce5694dc272bca8be288af410e4a64aaa6af819fe20db6ecce19459024622",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.hyperbolic-functions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.hyperbolic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.hyperbolic-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.hyperbolic-functions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.hyperbolic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.hyperbolic-functions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.hyperbolic-functions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.hyperbolic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.hyperbolic-functions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.hyperbolic-functions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.hyperbolic-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.hyperbolic-functions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.hyperbolic-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $\\sinh x=\\dfrac{e^x-e^{-x}}2$, $\\cosh x=\\dfrac{e^x+e^{-x}}2$, $\\tanh x=\\dfrac{\\sinh x}{\\cosh x}$ directly in terms of `math.alg.exponential-function`'s $e^x$, and compute values / verify $\\sinh$ is ODD and $\\cosh$ is EVEN directly from these definitions.\n- LO2: Derive and apply the hyperbolic identity $\\cosh^2x-\\sinh^2x=1$ — critically different in SIGN from `math.trig.trig-functions`'s $\\cos^2\\theta+\\sin^2\\theta=1$ — and connect it directly to the unit HYPERBOLA $x^2-y^2=1$ (as opposed to the unit CIRCLE $x^2+y^2=1$ ordinary trig parametrizes), explaining precisely where the name \"hyperbolic\" comes from.\n- LO3 (orientation level — full derivation deferred to the unlocked child): recognize, without deriving, that hyperbolic functions have derivative rules directly analogous to but with characteristic sign differences from ordinary trig derivatives, deferred to `math.calc.hyperbolic-derivatives`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "HYPERBOLIC-DEFINED-VIA-ANGLE",
+      "content": "| MC-1 | HYPERBOLIC-DEFINED-VIA-ANGLE | Believing $\\sinh$/$\\cosh$ are defined using some geometric \"hyperbolic angle\" measured like radians on a circle, missing that they are defined purely algebraically from $e^x$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "HYPERBOLIC-IDENTITY-SIGN-COPIED-FROM-TRIG",
+      "content": "| MC-2 | HYPERBOLIC-IDENTITY-SIGN-COPIED-FROM-TRIG | Assuming the hyperbolic identity has the same plus sign as $\\cos^2\\theta+\\sin^2\\theta=1$, missing the characteristic minus sign in $\\cosh^2x-\\sinh^2x=1$ that gives these functions their name | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "HYPERBOLIC-DERIVATIVES-ASSUMED-TO-MIRROR-TRIG-SIGNS",
+      "content": "| MC-3 | HYPERBOLIC-DERIVATIVES-ASSUMED-TO-MIRROR-TRIG-SIGNS | Assuming hyperbolic derivative rules always introduce the same sign flips as ordinary trig derivatives, missing that $\\dfrac d{dx}[\\cosh x]=\\sinh x$ does not pick up the minus sign that $\\dfrac d{dx}[\\cos x]=-\\sin x$ has | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Defined From $e^x$ Alone, No Angle Involved (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Defined From $e^x$ Alone, No Angle Involved (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "The Identity's Minus Sign Is Not Optional (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Identity's Minus Sign Is Not Optional (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Derivative Signs Don't Always Mirror Ordinary Trig (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Derivative Signs Don't Always Mirror Ordinary Trig (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\sinh(1)$ and $\\cosh(1)$ directly from the exponential definitions (leave in terms of $e$, or approximate numerically).\n  2. Verify that $\\tanh(0)=0$ directly from the definitions of $\\sinh$ and $\\cosh$ at $x=0$.\n  3. Starting from the definitions, derive $\\cosh^2x-\\sinh^2x=1$ (reproduce Example 2's algebra) and state explicitly why this proves $(\\cosh t,\\sinh t)$ traces the hyperbola $x^2-y^2=1$.\n  4. A student claims $\\dfrac d{dx}[\\cosh x]=-\\sinh x$, reasoning by analogy with ordinary trig. Explain why this is incorrect, referencing this lesson's derivative-sign preview.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer studying the shape of a hanging cable (a catenary) encounters the function $y=\\cosh(x/a)$ for a constant $a$. (a) Using the definition of $\\cosh$, compute $y$ at $x=0$ and explain what this represents physically (the lowest point of the cable). (b) Verify that $y$ is an EVEN function ($y(x)=y(-x)$) directly from the definition, and explain what this predicts about the cable's shape. (c) A colleague suggests that since $\\cos(x/a)$ also equals $1$ at $x=0$ and is also even, $\\cosh(x/a)$ and $\\cos(x/a)$ must behave similarly everywhere. Using this lesson's hyperbola-vs-circle distinction, explain why this assumption is wrong — specifically, what happens to each function as $x$ grows large in magnitude.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.exponential-function` ($e^x$ and its basic properties) and `math.trig.trig-functions` (the ordinary sine/cosine functions and the identity $\\cos^2\\theta+\\sin^2\\theta=1$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.trig.hyperbolic-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.hyperbolic-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.exponential-function` ($e^x$, the sole building block of every definition in this concept) and `math.trig.trig-functions` (ordinary sine/cosine and the identity $\\cos^2\\theta+\\sin^2\\theta=1$, this concept's constant point of contrast).\n- **Unlocks**: `math.calc.hyperbolic-derivatives` (will fully derive the derivative rules previewed at orientation level in LO3; not yet authored).\n- **Cross-link**: KG lists `math.calc.hyperbolic-derivatives`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.hyperbolic-functions.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.binomial-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.binomial-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0056f41cba0f432e3cf03a0ecdf2011c3f85951e8faf6c1d6373348f6d21bc84",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.binomial-theorem.md": "sha256:0b61ffcd689f764142a562a641ce75d68e8189f3aa25911ca3c477f8e3dc12a8"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.binomial-theorem",
+    "name": "Binomial Theorem",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.polynomial",
+      "math.disc.combinations",
+      "math.found.proof-by-induction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.binomial-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.binomial-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.binomial-theorem.md": "sha256:0b61ffcd689f764142a562a641ce75d68e8189f3aa25911ca3c477f8e3dc12a8"
+      },
+      "contentHash": "sha256:8a1bbddcfe1e710408f6bcb03a10a486e169e755ae2745b8822cd5c118708750",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.binomial-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.binomial-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.binomial-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.binomial-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.binomial-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.binomial-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.binomial-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.binomial-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.binomial-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.binomial-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.binomial-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.binomial-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.binomial-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Binomial Theorem**, $(a+b)^n=\\sum_{k=0}^n\\binom nk a^{n-k}b^k$, using `math.disc.combinations`'s own $\\binom nk$ notation and meaning directly, and expand small cases ($n=2,3$) to confirm agreement with the already-familiar direct expansions.\n- LO2: **Prove** the Binomial Theorem via `math.found.proof-by-induction`, recognizing that the inductive step's algebra works BECAUSE of Pascal's identity $\\binom nk+\\binom n{k+1}=\\binom{n+1}{k+1}$ specifically, not as generic algebraic simplification.\n- LO3 (orientation level — the KG's own named applications): recognize Pascal's triangle as a direct visual encoding of the coefficients $\\binom nk$ (each row one value of $n$), and recognize — without deriving why — that these same coefficients become the probabilities in `math.prob.discrete-distributions`'s binomial distribution.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "BINOMIAL-DISTRIBUTED-AS-LINEAR",
+      "content": "| MC-1 | BINOMIAL-DISTRIBUTED-AS-LINEAR | Believing $(a+b)^n=a^n+b^n$ (the \"freshman's dream\"), missing every cross term the exponent's actual expansion requires | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "INDUCTION-STEP-TREATED-AS-GENERIC-ALGEBRA",
+      "content": "| MC-2 | INDUCTION-STEP-TREATED-AS-GENERIC-ALGEBRA | Believing the induction proof's inductive step works through generic algebraic simplification, missing that Pascal's identity is the specific combinatorial mechanism making the coefficients combine correctly | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "PASCALS-TRIANGLE-TREATED-AS-COINCIDENCE",
+      "content": "| MC-3 | PASCALS-TRIANGLE-TREATED-AS-COINCIDENCE | Treating Pascal's triangle and the binomial coefficients $\\binom nk$ as separate topics sharing numbers coincidentally, rather than recognizing the triangle as a direct visual encoding of the same coefficients | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Cross Terms Are Not Optional (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cross Terms Are Not Optional (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Pascal's Identity Is the Induction Step's Actual Mechanism (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pascal's Identity Is the Induction Step's Actual Mechanism (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Pascal's Triangle and Binomial Coefficients Are the Same Object (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pascal's Triangle and Binomial Coefficients Are the Same Object (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Expand $(a+b)^4$ using the Binomial Theorem, and verify your answer contains exactly $5$ terms with coefficients matching Pascal's triangle's row for $n=4$.\n  2. Explain why $(a+b)^2$ is NOT equal to $a^2+b^2$, identifying the missing term(s) explicitly.\n  3. In the induction step from $n=3$ to $n=4$, identify which two coefficients from the $n=3$ expansion combine (via Pascal's identity) to produce the coefficient of $a^3b$ in the $n=4$ expansion, and verify the arithmetic.\n  4. Using Pascal's triangle's row for $n=5$, state the probability of getting exactly $3$ heads in $5$ flips of a fair coin (without deriving why this connection holds).\n- **P76 (Transfer Probe, mode = independence)**: \"A student is asked to expand $(x-2)^5$ using the Binomial Theorem. (a) Rewrite $(x-2)^5$ in the form $(a+b)^n$, identifying $a$, $b$, and $n$ correctly (being careful with the sign). (b) Using the Binomial Theorem and Pascal's triangle's row for $n=5$ ($1,5,10,10,5,1$), write out the full expansion, tracking the alternating signs carefully. (c) Explain what would go wrong if a student instead assumed $(x-2)^5=x^5-2^5$, and identify which misconception from this lesson that assumption reflects.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.polynomial` (multiplying and combining polynomial terms), `math.disc.combinations` (the meaning and computation of $\\binom nk$, the number of ways to choose $k$ items from $n$), and `math.found.proof-by-induction` (base case, inductive hypothesis, inductive step).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.binomial-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.binomial-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.polynomial` (combining and multiplying polynomial terms), `math.disc.combinations` (the $\\binom nk$ notation this concept's coefficients directly reuse), and `math.found.proof-by-induction` (the base-case/inductive-step machinery this concept's proof directly applies).\n- **Unlocks**: `math.prob.discrete-distributions` (will develop the binomial-distribution connection previewed at orientation level in LO3; not yet authored).\n- **Cross-link**: KG lists `math.prob.discrete-distributions`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.binomial-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.riemann-hypothesis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.riemann-hypothesis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4a1328dbdf9d3733b4fc7ac3690f6a31a25c0b3407cff777e1c52ec707e1bdc0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md": "sha256:c2fda15591d739ff99ad49e68907a3f4785a9471af1fae124763c109273b19a7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.riemann-hypothesis",
+    "name": "Riemann Hypothesis",
+    "difficultyRaw": "research",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.5,
+    "estimatedHours": 100,
+    "prerequisites": [
+      "math.nt.prime-number-theorem",
+      "math.cx.riemann-zeta"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.riemann-hypothesis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.riemann-hypothesis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md": "sha256:c2fda15591d739ff99ad49e68907a3f4785a9471af1fae124763c109273b19a7"
+      },
+      "contentHash": "sha256:38107e1aa7cfd650939a8cf3b1b1e3e88e6af55e9f3b6ef4b76798448d0ae515",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.riemann-hypothesis.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.riemann-hypothesis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.riemann-hypothesis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.riemann-hypothesis.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.riemann-hypothesis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.riemann-hypothesis\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.riemann-hypothesis.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.riemann-hypothesis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.riemann-hypothesis\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.riemann-hypothesis.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.riemann-hypothesis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.riemann-hypothesis\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.riemann-hypothesis/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Learning Objectives (all three orientation level — see Component 8 for why)",
+      "content": "- LO1 (orientation level): State the Riemann Hypothesis precisely — every nontrivial zero of $\\zeta(s)$ has real part exactly $\\tfrac12$ — and correctly locate it on the spectrum between the PROVEN, weaker \"zero-free region\" fact (`math.nt.prime-number-theorem`'s own actual proof mechanism: $\\zeta(s)\\ne0$ on the line $\\mathrm{Re}(s)=1$) and the CONJECTURED, much stronger exact-location claim RH makes.\n- LO2 (orientation level): Recognize why RH is equivalent to \"the best possible error term in the Prime Number Theorem\" — the closer all zeros are confirmed to sit to the critical line $\\mathrm{Re}(s)=\\tfrac12$, the tighter the provable bound on $|\\pi(x)-\\mathrm{Li}(x)|$ becomes, with RH representing the theoretically tightest such bound — directly extending `math.nt.prime-number-theorem`'s own zero-location-controls-correction-terms mechanism.\n- LO3 (orientation level): Recognize RH's status as one of the seven Clay Millennium Prize Problems (unsolved, \\$1 million prize), and correctly distinguish overwhelming PARTIAL evidence (numerical verification of trillions of zeros; the PROVEN fact that at least 40% of nontrivial zeros lie on the critical line) from an actual general PROOF — reinforcing intellectual honesty about the boundary between evidence and proof in mathematics.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "ZERO-FREE-REGION-CONFLATED-WITH-RH",
+      "content": "| MC-1 | ZERO-FREE-REGION-CONFLATED-WITH-RH | Conflating the proven, weaker \"zero-free region on $\\mathrm{Re}(s)=1$\" fact (the actual mechanism of the 1896 PNT proof) with the still-open, much stronger Riemann Hypothesis (all nontrivial zeros exactly on $\\mathrm{Re}(s)=\\tfrac12$) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "PNT-TRUTH-MADE-CONTINGENT-ON-RH",
+      "content": "| MC-2 | PNT-TRUTH-MADE-CONTINGENT-ON-RH | Believing the Prime Number Theorem's own truth depends on the Riemann Hypothesis, missing that PNT is already fully proven independently (1896, via the weaker zero-free region) and RH would only sharpen the error bound | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "PARTIAL-EVIDENCE-MISTAKEN-FOR-PROOF",
+      "content": "| MC-3 | PARTIAL-EVIDENCE-MISTAKEN-FOR-PROOF | Believing overwhelming partial evidence (trillions of verified zeros, a proven 40%-on-the-line result) amounts to a proof of the full Riemann Hypothesis, rather than recognizing the categorical gap between extensive evidence and a general proof | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Locating RH on the Proven-to-Conjectured Spectrum (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Locating RH on the Proven-to-Conjectured Spectrum (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "The Prime Number Theorem's Truth Does Not Depend on RH (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Prime Number Theorem's Truth Does Not Depend on RH (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Overwhelming Evidence Is Not the Same as Proof (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Overwhelming Evidence Is Not the Same as Proof (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the Riemann Hypothesis precisely, and identify which part of the statement (the \"$\\tfrac12$\") makes it a conjecture rather than an already-established fact.\n  2. Explain the difference between the \"zero-free region\" fact (used in the actual 1896 proof of the Prime Number Theorem) and the Riemann Hypothesis itself, in terms of which is proven and which is still open.\n  3. A classmate argues the Prime Number Theorem is \"not really proven\" because the Riemann Hypothesis (which is related to primes) is still unsolved. Explain what is wrong with this reasoning, using this lesson's proven-vs-conjectured distinction.\n  4. Explain why numerically verifying ten trillion zeros all lying on the critical line does not constitute a proof of the Riemann Hypothesis.\n- **P76 (Transfer Probe, mode = independence)**: \"A science journalist writes: 'Mathematicians have now proven that at least 40% of the zeros of the zeta function lie on the critical line, so the Riemann Hypothesis is nearly proven — only 60% left to go, and computers have already checked trillions more.' (a) Identify what is factually accurate in this statement and what is a misleading framing of mathematical proof. (b) Explain why '40% proven plus billions of numerical checks' does not add up to 'nearly proven' in the sense mathematicians require. (c) If the Riemann Hypothesis were proven false tomorrow (a single nontrivial zero found off the critical line), would this threaten the Prime Number Theorem itself? Explain your answer using this lesson's distinction between PNT's proof (already complete) and RH's role (a further refinement of the error term).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.riemann-zeta` (the zeta function, its analytic continuation, the Euler product, the functional equation, and the honest statement that RH is unproven despite numerical support) and `math.nt.prime-number-theorem` (the actual 1896 proof of the PNT via a contour integral of $\\zeta'(s)/\\zeta(s)$, and the crucial fact that this proof uses only the WEAKER, already-proven zero-free region on $\\mathrm{Re}(s)=1$ — not RH).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.riemann-hypothesis/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.riemann-hypothesis",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.prime-number-theorem` (the actual 1896 proof mechanism via the weaker zero-free region, which this concept's LO1/LO2 directly contrast against RH's stronger claim) and `math.cx.riemann-zeta` (the zeta function, its zeros, and that concept's own honest \"RH is unproven\" statement, which this concept extends with much greater precision and context).\n- **Unlocks**: none listed in the KG for this concept — a genuine terminal node, appropriate for an unsolved capstone problem.\n- **Cross-link**: KG lists `math.cx.riemann-zeta`, confirmed authored via `ls docs/curriculum/blueprints/`. However, this cross-link target is already this concept's own direct PREREQUISITE (not a separate lateral connection) — the KG lists it in both `requires` and `cross_links` for the same underlying relationship. Since the prerequisite relationship already fully accounts for the connection (reused throughout LO1–LO3 and every worked example), a distinct cross-link PROBE would be redundant with the prerequisite-reuse already present in this blueprint. $P76_{mode}=$ **independence**, with the transfer probe instead synthesizing across BOTH prerequisites at once (the zeta function's zeros and the PNT's actual proof mechanism).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.riemann-hypothesis.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
