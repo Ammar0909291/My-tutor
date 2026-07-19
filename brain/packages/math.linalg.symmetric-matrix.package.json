@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.symmetric-matrix-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.symmetric-matrix",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2b6b0f5820bf74a0e634a6e6c68e117c3459566fe26fdfb250e87ea33e56758b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md": "sha256:0f4be7aeedebbe1f43d20bff87fb440e4d5a4ba45e2bc6bf9c815db3b8adb6be"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.symmetric-matrix",
+    "name": "Symmetric Matrix",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.linalg.matrix-transpose"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.symmetric-matrix-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.symmetric-matrix (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md": "sha256:0f4be7aeedebbe1f43d20bff87fb440e4d5a4ba45e2bc6bf9c815db3b8adb6be"
+      },
+      "contentHash": "sha256:42429ed58ef4b1911e451129360587b9d991e4e2b3e951f5d893d1c5a083d3ce",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.symmetric-matrix.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.symmetric-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.symmetric-matrix\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.symmetric-matrix.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.symmetric-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.symmetric-matrix\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.symmetric-matrix.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.symmetric-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.symmetric-matrix\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.symmetric-matrix.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.symmetric-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.symmetric-matrix\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.symmetric-matrix/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Learning Objectives",
+      "content": "- LO1: Verify whether a given square matrix is **symmetric** ($A=A^T$), directly reusing `math.linalg.matrix-transpose`'s own definition, and recognize the equivalent entry-wise condition $A_{ij}=A_{ji}$ for every pair $i,j$ — a mirror symmetry across the main diagonal.\n- LO2: State, at an orientation level (without deriving the full Spectral Theorem, which belongs to a future concept), the two headline consequences of symmetry: a symmetric matrix's eigenvalues are always **real** (never complex, unlike a general matrix), and eigenvectors corresponding to DIFFERENT eigenvalues are automatically **orthogonal** to each other — directly refuting the misconception that these strong guarantees hold for any square matrix, not just symmetric ones.\n- LO3: Recognize symmetric matrices in their most common real-world forms — a **covariance matrix** in statistics and a **Hessian matrix** (second-derivative matrix) in optimization — and explain, in each case, WHY the matrix is guaranteed to be symmetric by its own construction, rather than merely happening to be symmetric by coincidence.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "REAL-EIGENVALUES-ORTHOGONAL-EIGENVECTORS-OVERGENERALIZED",
+      "content": "| MC-1 | REAL-EIGENVALUES-ORTHOGONAL-EIGENVECTORS-OVERGENERALIZED | Believing every square matrix (not just symmetric ones) is guaranteed to have real eigenvalues and orthogonal eigenvectors | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "SYMMETRY-VERIFIED-BY-SPOT-CHECKING-ONE-PAIR",
+      "content": "| MC-2 | SYMMETRY-VERIFIED-BY-SPOT-CHECKING-ONE-PAIR | Concluding a matrix is symmetric after checking only one or two off-diagonal pairs, rather than confirming every pair matches | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "SYMMETRIC-MATRICES-IN-PRACTICE-ASSUMED-COINCIDENTAL",
+      "content": "| MC-3 | SYMMETRIC-MATRICES-IN-PRACTICE-ASSUMED-COINCIDENTAL | Failing to recognize that certain matrices (covariance, Hessian) are symmetric by GUARANTEED construction from their definitions, treating their symmetry as a coincidental numerical fact instead | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Symmetric Means Mirrored Across the Diagonal (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Symmetric Means Mirrored Across the Diagonal (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Real Eigenvalues, Orthogonal Eigenvectors: A Guarantee, Not a Coincidence (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Real Eigenvalues, Orthogonal Eigenvectors: A Guarantee, Not a Coincidence (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Symmetry by Construction: Covariance and Hessian Matrices (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Symmetry by Construction: Covariance and Hessian Matrices (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine whether $\\begin{pmatrix}1&5&2\\\\5&3&-1\\\\2&-1&7\\end{pmatrix}$ is symmetric, checking each off-diagonal pair explicitly.\n  2. Find the eigenvalues of $A=\\begin{pmatrix}3&2\\\\2&3\\end{pmatrix}$ and confirm they are real.\n  3. Explain why a Hessian matrix (second-partial-derivatives matrix) is guaranteed to be symmetric for a sufficiently smooth function, citing the relevant theorem about mixed partial derivatives.\n  4. A student claims that since a particular non-symmetric $3\\times3$ matrix happens to have all real eigenvalues in one specific example, this proves non-symmetric matrices always have real eigenvalues too. Explain what's wrong with this reasoning.\n- **P76 (Transfer Probe, mode = independence)**: \"A machine-learning engineer computes the Hessian matrix of a loss function during an optimization algorithm, to understand the curvature of the loss surface at a given point. (a) Explain why the engineer can be confident, before computing a single entry, that this Hessian matrix will be symmetric. (b) Explain why the guarantee of REAL eigenvalues for this (symmetric) Hessian matters practically — what would go wrong, or be harder to interpret, if the engineer instead had to deal with potentially complex eigenvalues when analyzing the loss surface's curvature? (c) If the engineer's optimization software instead computed a non-symmetric matrix at some intermediate step (perhaps due to a numerical approximation error), explain why they should NOT assume that matrix's eigenvalues are still guaranteed real, referencing the distinction this lesson establishes.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.matrix-transpose` ($(A^T)_{ij}=A_{ji}$, and the already-introduced preview that symmetric matrices satisfy $A=A^T$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.symmetric-matrix/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.symmetric-matrix",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.matrix-transpose` (the $A^T$ definition and the $A=A^T$ symmetry condition first previewed there).\n- **Unlocks**: `math.linalg.spectral-theorem` (the full statement and proof of the real-eigenvalues/orthogonal-eigenvectors guarantee, only stated at orientation level here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.symmetric-matrix.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
