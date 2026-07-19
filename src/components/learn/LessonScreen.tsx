@@ -6,7 +6,7 @@ import {
   Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
   Bookmark, MoreVertical, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
-  Network, ListChecks,
+  Network, ListChecks, PanelRightOpen,
 } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
@@ -728,6 +728,102 @@ function QuickActionsAndCheck({
               </button>
             )
           })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Desktop-only flyout for QuickActionsAndCheck (UI/UX P0 sprint). Root cause
+// this replaces: the quick-actions rail used to be a permanent 28%-wide grid
+// column on every non-code lesson, competing with the chat panel for space
+// even though it's used far less often than the conversation itself. This
+// renders collapsed to a small floating handle by default; hovering it (or
+// the expanded panel) reveals the full action list, and moving the mouse
+// away collapses it again — pure CSS transitions (width + opacity), no JS
+// state, so there's no re-render or flicker on hover and no layout shift
+// anywhere else on the page (this is `position: fixed`, entirely outside
+// the grid's document flow — it can never push or resize the chat/curriculum
+// columns). Desktop-only by design (`hidden md:block`): on mobile the
+// existing "Code" tab already shows/hides this exact content on tap, which
+// already satisfies "hidden until tapped" without needing a second control.
+function FloatingQuickActions(props: {
+  teachingLanguage: TeachingLang
+  sessionId: string | null
+  sendMessage: (sid: string, text: string, showInUI?: boolean, voiceSignal?: VoiceTimingSignal) => Promise<void>
+  setActiveTab: (tab: ActiveTab) => void
+}) {
+  return (
+    // Root cause of the panel never actually expanding on hover: both children
+    // below are `position: absolute`, taken out of normal flow entirely — a
+    // parent with no other content and no explicit size collapses to a 0×0
+    // box even though its absolutely-positioned children render visibly.
+    // `:hover` only ever matches an element's own painted area, so `.group`
+    // could never register as hovered no matter where the pointer sat over
+    // the (visually real, but geometrically parent-less) handle. Giving the
+    // wrapper explicit dimensions — sized to the max expanded width AND tall
+    // enough to contain the expanded panel's own content (not just the 56px
+    // handle — a shorter wrapper would let the mouse "exit" the hoverable box
+    // the instant it moved down into the lower part of the expanded list,
+    // collapsing the panel while still visually over it), right-aligned to
+    // match the handle/panel's own right:0 anchoring — makes its box
+    // genuinely cover both children, so hovering the handle (or the expanded
+    // panel itself) actually triggers `.group:hover` as intended.
+    <div
+      className="hidden md:flex group"
+      style={{
+        position: 'fixed', top: '50%', right: 0, transform: 'translateY(-50%)', zIndex: 30,
+        width: 240, height: 340, justifyContent: 'flex-end', alignItems: 'center',
+      }}
+    >
+      {/* Handle — always visible, sits flush against the viewport edge.
+          Root cause of the hover state never visually taking effect: opacity
+          (here) and width (on the panel below) were originally set via the
+          inline `style` prop for their COLLAPSED/default value, with only the
+          HOVERED value expressed as a Tailwind `group-hover:` class. Inline
+          styles always win over any class-based rule regardless of selector
+          specificity (short of `!important`) — so the inline collapsed value
+          permanently overrode the class-based hovered value, and the hover
+          rule (confirmed present and correct in the compiled CSS) could
+          never actually take visual effect. Fix: express BOTH the default
+          and the hovered value as Tailwind classes (`opacity-100` here,
+          `w-0 opacity-0 pointer-events-none` below) so they share the same
+          origin and the hover variant's later cascade position correctly
+          wins, instead of one being inline and unbeatable. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)',
+          width: 34, height: 56, borderRadius: '12px 0 0 12px',
+          background: UI.indigo, color: '#fff',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: '-2px 2px 8px rgba(0,0,0,0.18)',
+          transition: 'opacity 180ms ease',
+        }}
+        className="opacity-100 group-hover:opacity-0"
+      >
+        <PanelRightOpen size={16} />
+      </div>
+
+      {/* Expanded panel — width/opacity animate on hover; pointer-events off
+          while collapsed so the invisible expanded area never eats clicks
+          meant for the chat panel behind it. See the handle comment above
+          for why width/opacity/pointer-events must be Tailwind classes here
+          too, not inline style values. */}
+      <div
+        role="region"
+        aria-label={props.teachingLanguage === 'ru' ? 'Быстрые действия' : 'Quick actions'}
+        style={{
+          overflow: 'hidden',
+          maxHeight: 340, background: 'var(--bg-surface)',
+          borderRadius: '14px 0 0 14px', border: '1px solid var(--border-subtle)', borderRight: 'none',
+          boxShadow: '-4px 4px 16px rgba(0,0,0,0.22)',
+          transition: 'width 220ms ease, opacity 180ms ease',
+        }}
+        className="w-0 opacity-0 pointer-events-none group-hover:w-[240px] group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:w-[240px] group-focus-within:opacity-100 group-focus-within:pointer-events-auto"
+      >
+        <div style={{ width: 240 }}>
+          <QuickActionsAndCheck {...props} />
         </div>
       </div>
     </div>
@@ -2811,13 +2907,22 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             )}
           </div>
           <ThemeToggle />
-          <div style={{
-            width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
-            background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }} title={displayName ?? 'Student'}>
+          {/* UI/UX P0: was a plain <div> — looked like a clickable avatar
+              (rounded, colored, initials — the standard convention) but had
+              no onClick, no cursor:pointer, no role. Wired to /settings, the
+              same destination the dashboard's own nav header already uses
+              for this exact avatar (src/components/dashboard/v2/NavHeader.tsx),
+              rather than inventing a second, inconsistent account surface. */}
+          <Link href="/settings" title={displayName ?? 'Student'}
+            aria-label={teachingLanguage === 'ru' ? 'Настройки профиля' : 'Profile settings'}
+            style={{
+              width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+              background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              textDecoration: 'none', cursor: 'pointer',
+            }}>
             {(displayName ?? 'S').trim().charAt(0).toUpperCase()}
-          </div>
+          </Link>
         </div>
       </header>
 
@@ -2844,11 +2949,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       </div>
 
       {/* ══ 3-PANEL GRID ══════════════════════════════════════════════════ */}
-      {/* Mobile: single column, one panel visible per activeTab. Desktop (md+): all three side by side. */}
+      {/* Mobile: single column, one panel visible per activeTab. Desktop (md+): all three side by side.
+          isNotebook (non-code subjects) is only a 2-column desktop grid: the third
+          "quick actions" panel is never a permanent grid column there — see
+          FloatingQuickActions below, which reclaims that width for the chat panel
+          and renders quick actions as a collapsed-by-default hover flyout instead. */}
       <div
         className={
           maximizedPanel ? 'grid grid-cols-1'
-          : isNotebook ? 'grid grid-cols-1 md:grid-cols-[22%_50%_28%]'
+          : isNotebook ? 'grid grid-cols-1 md:grid-cols-[22%_78%]'
           : 'grid grid-cols-1 md:grid-cols-[25%_45%_30%]'
         }
         style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: 16, padding: 16 }}
@@ -3364,8 +3473,16 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         </Panel>
         </div>
 
-        {/* ══ PANEL 2 — CODE EDITOR (45%) / QUICK ACTIONS + QUICK CHECK for non-code subjects ══ */}
-        <div className={activeTab !== 'code' ? 'hidden md:contents' : 'contents'}
+        {/* ══ PANEL 2 — CODE EDITOR (45%) for code subjects / QUICK ACTIONS on MOBILE
+             ONLY for non-code subjects ══
+             isNotebook desktop: this panel is never rendered in the grid — it stays
+             md:hidden unconditionally, and FloatingQuickActions (below the grid)
+             renders the same content as a collapsed hover flyout instead, so the
+             28% column it used to reserve goes back to the chat panel. Mobile
+             behavior (tap the "Code" tab to open quick actions) is unchanged. */}
+        <div className={isNotebook
+            ? (activeTab !== 'code' ? 'hidden' : 'contents') + ' md:hidden'
+            : (activeTab !== 'code' ? 'hidden md:contents' : 'contents')}
           style={maximizedPanel && maximizedPanel !== 'code' ? { display: 'none' } : undefined}>
         <Panel accentColor={isNotebook ? UI.indigo : '#79C0FF'} style={{ order: isNotebook ? 3 : 2 }}>
           <div style={{ flexDirection: 'column', height: '100%' }}
@@ -4146,6 +4263,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         </div>
 
       </div>{/* end grid */}
+
+      {/* Desktop-only quick-actions flyout — see FloatingQuickActions comment.
+          Not rendered at all for code subjects (they use the code editor in
+          Panel 2 instead) or while any panel is maximized (would sit on top
+          of the maximized view for no reason). */}
+      {isNotebook && !maximizedPanel && (
+        <FloatingQuickActions
+          teachingLanguage={teachingLanguage}
+          sessionId={sessionId}
+          sendMessage={sendMessage}
+          setActiveTab={setActiveTab}
+        />
+      )}
 
       {/* ══ @keyframes spin (inline) ════════════════════════════════════ */}
       <style>{`

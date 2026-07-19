@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   lookupConceptVisual, getConceptVisualType, getConceptSceneGenerator,
-  shouldForceVisualRender, resolveResponseVisual,
+  shouldForceVisualRender, resolveResponseVisual, textPromisesUnfulfilledVisual,
 } from '@/lib/teaching/visualRegistry'
 
 describe('visualRegistry', () => {
@@ -321,5 +321,29 @@ describe('resolveResponseVisual', () => {
 
   it('force-render never fabricates a visual when the registry has none', () => {
     expect(resolveResponseVisual(null, true, null)).toBeNull()
+  })
+})
+
+describe('textPromisesUnfulfilledVisual', () => {
+  // The exact reported bug: the model says a visual is coming but no tag
+  // was emitted, so nothing renders unless this text-level promise itself
+  // becomes a force-render trigger.
+  it('detects the exact reported phrase', () => {
+    expect(textPromisesUnfulfilledVisual("Here's a visual example of how forces balance.")).toBe(true)
+  })
+
+  it('detects common phrasings of the same promise', () => {
+    expect(textPromisesUnfulfilledVisual('Take a look at the diagram below to see the setup.')).toBe(true)
+    expect(textPromisesUnfulfilledVisual('Below is a chart showing the trend.')).toBe(true)
+    expect(textPromisesUnfulfilledVisual('See the graph for how velocity changes over time.')).toBe(true)
+  })
+
+  it('does not fire on ordinary explanatory text with no visual promise', () => {
+    expect(textPromisesUnfulfilledVisual('Newton\'s first law says an object stays at rest unless acted on by a force.')).toBe(false)
+  })
+
+  it('does not fire on unrelated uses of "here is" or "look at"', () => {
+    expect(textPromisesUnfulfilledVisual("Here's the formula you'll need: F = ma.")).toBe(false)
+    expect(textPromisesUnfulfilledVisual('Look at the second term in the equation.')).toBe(false)
   })
 })

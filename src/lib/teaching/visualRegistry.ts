@@ -406,6 +406,27 @@ export function shouldForceVisualRender(
   return learnerRequest === 'diagram' && availableVisual !== null
 }
 
+// P0 (UI/UX sprint): "Tutor Max says a visual is coming, nothing renders."
+// Root cause — force-render previously fired only for an explicit STUDENT
+// request ('diagram') or 3+ remediation attempts; it never looked at what
+// the ASSISTANT's own turn actually said. An LLM turn is free to write
+// "here's a visual example..." in prose without emitting the VISUAL:<type>
+// tag (or emitting one detectVisual() doesn't recognize), and unless the
+// student happened to ask for a diagram first, resolveResponseVisual() had
+// nothing to force-render against — the promise in the text and the actual
+// attached visual were decided by two completely independent mechanisms
+// that never talked to each other. Same deterministic, no-AI-reasoning
+// keyword-match pattern as the rest of this file (detectVisual, VECTOR_RE):
+// scan the assistant's own cleaned text for a stated visual promise, so the
+// force-render path in resolveResponseVisual() also covers "the model
+// promised, the registry has something to show" — not just "the student
+// asked, the registry has something to show".
+const VISUAL_PROMISE_RE = /\b(here'?s|here is|below is|see the|look at the|take a look at|check out the)\b[^.!?\n]{0,40}\b(visual|diagram|graph|chart|illustration|image|figure|plot)\b/i
+
+export function textPromisesUnfulfilledVisual(text: string): boolean {
+  return VISUAL_PROMISE_RE.test(text)
+}
+
 /**
  * Resolve the final responseVisual for the turn: the LLM's own parsed tag
  * wins when present (it may be a more specific match than the registry

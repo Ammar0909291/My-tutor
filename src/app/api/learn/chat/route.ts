@@ -2314,11 +2314,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // whether the LLM emitted the VISUAL:<type> tag itself. The LLM's
         // own tag is honored when present; this only fills the gap when the
         // model described the diagram in prose instead of rendering it.
+        // UI/UX P0: also force-render when the model's OWN text promises a
+        // visual ("here's a visual example...") that never got attached —
+        // see textPromisesUnfulfilledVisual()'s comment for why the prior
+        // force-render trigger (student asked) missed this case entirely.
         try {
-          const { resolveResponseVisual } = await import('@/lib/teaching/visualRegistry')
+          const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
+          const forceForPromise = !responseVisual && schoolAvailableVisualHoisted !== null && textPromisesUnfulfilledVisual(cleanText)
           responseVisual = resolveResponseVisual(
             responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
-            schoolForceVisualRenderHoisted,
+            schoolForceVisualRenderHoisted || forceForPromise,
             schoolAvailableVisualHoisted,
           )
         } catch { /* non-fatal */ }
@@ -2381,11 +2386,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // present (it may legitimately pick a more specific match); this
         // only fills the gap when the model described the diagram in prose
         // instead of rendering it — the exact failure mode this closes.
+        // UI/UX P0: also force-render when the model's OWN text promises a
+        // visual ("here's a visual example...") that never got attached —
+        // see textPromisesUnfulfilledVisual()'s comment for why the prior
+        // force-render trigger (student asked) missed this case entirely.
         {
-          const { resolveResponseVisual } = await import('@/lib/teaching/visualRegistry')
+          const { resolveResponseVisual, textPromisesUnfulfilledVisual } = await import('@/lib/teaching/visualRegistry')
+          const forceForPromise = !responseVisual && availableVisualHoisted !== null && textPromisesUnfulfilledVisual(cleanText)
           responseVisual = resolveResponseVisual(
             responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
-            forceVisualRenderHoisted,
+            forceVisualRenderHoisted || forceForPromise,
             availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
           )
         }
