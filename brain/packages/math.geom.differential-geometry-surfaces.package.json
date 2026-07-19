@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.differential-geometry-surfaces-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.differential-geometry-surfaces",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:173f2a24a50864d0cda4551c717bd2ac46bfbb7969e1dfabd369d1c5e7682951",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md": "sha256:d8e39a61d04f2338bcfb762965bfc9c7db90084f721cb2b42a18447ab8e66af2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.differential-geometry-surfaces",
+    "name": "Differential Geometry of Surfaces",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 30,
+    "prerequisites": [
+      "math.geom.differential-geometry-curves",
+      "math.calc.partial-derivatives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.differential-geometry-surfaces-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.differential-geometry-surfaces (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md": "sha256:d8e39a61d04f2338bcfb762965bfc9c7db90084f721cb2b42a18447ab8e66af2"
+      },
+      "contentHash": "sha256:d60aa9791bcd3a3c33e30d5305e6b608d566d36b7f9e98ea0c8691de3dd1170c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-surfaces.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-surfaces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-surfaces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-surfaces.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-surfaces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-surfaces\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-surfaces.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-surfaces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-surfaces\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.differential-geometry-surfaces.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.differential-geometry-surfaces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.differential-geometry-surfaces\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Learning Objectives",
+      "content": "- LO1: Parametrize a surface via $\\mathbf{r}(u,v)=(x(u,v),y(u,v),z(u,v))$ — extending `math.geom.differential-geometry-curves`' single-parameter $\\mathbf{r}(t)$ to TWO parameters, using `math.calc.partial-derivatives`' notation for the tangent vectors $\\mathbf{r}_u=\\partial\\mathbf{r}/\\partial u$, $\\mathbf{r}_v=\\partial\\mathbf{r}/\\partial v$ — and compute the **first fundamental form** $E=\\mathbf{r}_u\\cdot\\mathbf{r}_u$, $F=\\mathbf{r}_u\\cdot\\mathbf{r}_v$, $G=\\mathbf{r}_v\\cdot\\mathbf{r}_v$, recognizing $E,F,G$ as FUNCTIONS of $(u,v)$ — genuinely varying from point to point on the surface — not fixed constants.\n- LO2 (concrete for two simple, fully-verified surfaces; general derivation orientation level): using the unit normal $\\mathbf{n}=(\\mathbf{r}_u\\times\\mathbf{r}_v)/\\|\\mathbf{r}_u\\times\\mathbf{r}_v\\|$ and second partial derivatives $\\mathbf{r}_{uu},\\mathbf{r}_{uv},\\mathbf{r}_{vv}$ (per `math.calc.partial-derivatives`), compute the **second fundamental form** coefficients $L=\\mathbf{n}\\cdot\\mathbf{r}_{uu}$, $M=\\mathbf{n}\\cdot\\mathbf{r}_{uv}$, $N=\\mathbf{n}\\cdot\\mathbf{r}_{vv}$, and from them the **Gaussian curvature** $K=\\dfrac{LN-M^2}{EG-F^2}$ — recognizing that $K$ can be zero (or negative), not only positive, contrary to a sphere-based intuition.\n- LO3 (orientation level — a profound result stated and illustrated, not derived): state the **Gauss-Bonnet Theorem** — for a closed surface $S$, $\\displaystyle\\iint_S K\\,dA = 2\\pi\\chi(S)$, where $\\chi(S)$ is the surface's **Euler characteristic**, a purely TOPOLOGICAL invariant — and recognize that bending a surface (without tearing) can change the pointwise Gaussian curvature $K$ dramatically, yet the INTEGRAL of $K$ over the whole surface never changes, because $\\chi(S)$ itself cannot change under such a deformation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "FIRST-FUNDAMENTAL-FORM-TREATED-AS-CONSTANT",
+      "content": "| MC-1 | FIRST-FUNDAMENTAL-FORM-TREATED-AS-CONSTANT | Believing E, F, G are fixed numbers describing an entire surface, rather than functions of position (u,v) that can genuinely vary from point to point | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "GAUSSIAN-CURVATURE-ASSUMED-ALWAYS-POSITIVE",
+      "content": "| MC-2 | GAUSSIAN-CURVATURE-ASSUMED-ALWAYS-POSITIVE | Assuming a visibly curved surface (like a cylinder) must have positive Gaussian curvature, missing that K is the product of two principal curvatures and can be zero (or negative) even for a visibly bent surface | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "EULER-CHARACTERISTIC-ASSUMED-TO-CHANGE-UNDER-BENDING",
+      "content": "| MC-3 | EULER-CHARACTERISTIC-ASSUMED-TO-CHANGE-UNDER-BENDING | Believing a surface's topological invariant χ(S) changes when the surface is bent (without tearing), conflating it with the freely-changing pointwise Gaussian curvature | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Two Tangent Vectors, and E, F, G as Functions of Position (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Tangent Vectors, and E, F, G as Functions of Position (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "A Visibly Bent Surface Can Have Zero Gaussian Curvature (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Visibly Bent Surface Can Have Zero Gaussian Curvature (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Bending Changes Curvature Pointwise, Never Its Total (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Bending Changes Curvature Pointwise, Never Its Total (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For the plane $\\mathbf{r}(u,v)=(u,v,0)$, compute the first fundamental form $E,F,G$ and state whether they vary with position.\n  2. For the cone from Example 1, explain why $E=v^2$ shows the surface is \"more stretched\" farther from its apex, referencing the first fundamental form.\n  3. Explain, using the cylinder's $K=0$ result, why a cylinder is called a \"developable\" surface (one that can be flattened without stretching), while a sphere is not.\n  4. If a closed surface has $\\chi(S)=0$ (like a torus) and is bent into many different torus-like shapes, explain what stays fixed about $\\iint_S K\\,dA$ across all of them.\n- **P76 (Transfer Probe, mode = independence)**: \"A manufacturer wants to design a metal panel by bending a FLAT sheet (never stretching or tearing it) into a curved shape for a car body. (a) Using the cylinder's Gaussian curvature result from this lesson, explain why a cylindrical (single-direction) bend is achievable by bending a flat sheet, but a dome-like (sphere-like, positively curved in both directions) shape is NOT achievable without stretching or cutting the material. (b) Explain, in terms of the first fundamental form, what 'never stretching' actually preserves about the sheet during any allowed bend. (c) A different engineer claims that bending the flat sheet into a complicated wavy shape must change its 'total topological character.' Using the Gauss-Bonnet theorem's distinction between pointwise curvature and the topological invariant, explain what is actually true here.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.differential-geometry-curves` (the position vector $\\mathbf{r}(t)$, velocity/speed/unit tangent, arc length, and curvature as a genuinely LOCAL, pointwise quantity for space curves) and `math.calc.partial-derivatives` ($\\partial f/\\partial x$, $\\partial f/\\partial y$, second-order partials $f_{xx},f_{yy},f_{xy}$, and Clairaut's theorem on mixed partials).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.differential-geometry-surfaces/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.differential-geometry-surfaces",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.differential-geometry-curves` (the position-vector/tangent-vector machinery and the \"curvature is local\" principle this concept extends to two parameters), `math.calc.partial-derivatives` (the $\\partial/\\partial u$, $\\partial/\\partial v$ notation and second-order partials this concept's fundamental forms are built from directly).\n- **Unlocks**: none — this is a terminal node in the current KG (its own `related` field cites `math.top.riemannian-geometry`, a further generalization not yet present in this KG).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.differential-geometry-surfaces.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

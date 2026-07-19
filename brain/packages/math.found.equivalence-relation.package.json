@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.equivalence-relation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.equivalence-relation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3167a8d5599b1b9f6bce34967bd3d5b7c7e23d0ebe88a02da9c295b9734e973d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.equivalence-relation.md": "sha256:4929cfa2aa0c19e5291f3aa37b2fed14adf8e13c358acd83be1f0dd47d003f6f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.equivalence-relation",
+    "name": "Equivalence Relation",
+    "difficultyRaw": "developing",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.reflexive-relation",
+      "math.found.symmetric-relation",
+      "math.found.transitive-relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.equivalence-relation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.equivalence-relation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.equivalence-relation.md": "sha256:4929cfa2aa0c19e5291f3aa37b2fed14adf8e13c358acd83be1f0dd47d003f6f"
+      },
+      "contentHash": "sha256:ba78dfc7a347bed11814021fe2f54ce98bd4675b08a0bfac77b11b4fda56cae0",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-relation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-relation.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-relation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-relation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-relation.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-relation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-relation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-relation.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-relation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-relation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-relation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-relation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.equivalence-relation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **equivalence relation** as one satisfying ALL THREE of `math.found.reflexive-relation`, `math.found.symmetric-relation`, and `math.found.transitive-relation` SIMULTANEOUSLY, and verify a given relation by directly reusing each prerequisite's own established checking procedure in turn.\n- LO2: State the **Partition Theorem** in both directions: an equivalence relation on $A$ partitions $A$ into disjoint **equivalence classes** $[a]=\\{x\\in A : x\\sim a\\}$ (with any two classes either completely identical or completely disjoint, never partially overlapping); and conversely, any partition of $A$ into disjoint blocks defines a valid equivalence relation by declaring elements related exactly when they lie in the same block.\n- LO3: Recognize that missing even ONE of the three required properties breaks the entire equivalence relation — extending each prerequisite's own \"for all, no partial credit\" finding to the combined three-property case — and that a relation missing a property can produce inconsistent, ill-defined \"classes\" that fail to genuinely partition the set.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "PARTIAL-PROPERTY-SET-ASSUMED-SUFFICIENT",
+      "content": "| MC-1 | PARTIAL-PROPERTY-SET-ASSUMED-SUFFICIENT | Believing a relation satisfying only 1 or 2 of the 3 required properties (reflexive, symmetric, transitive) is \"basically\" an equivalence relation, missing that all three are simultaneously required | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "EQUIVALENCE-CLASSES-ASSUMED-CAN-PARTIALLY-OVERLAP",
+      "content": "| MC-2 | EQUIVALENCE-CLASSES-ASSUMED-CAN-PARTIALLY-OVERLAP | Believing two equivalence classes could share some but not all elements, rather than recognizing they must be either fully identical or fully disjoint | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "PARTITION-CORRESPONDENCE-ASSUMED-ONE-DIRECTIONAL",
+      "content": "| MC-3 | PARTITION-CORRESPONDENCE-ASSUMED-ONE-DIRECTIONAL | Believing only the relation-to-partition direction holds, missing that any given partition also automatically defines a valid equivalence relation | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Checking All Three Properties, Reusing Established Procedures (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Checking All Three Properties, Reusing Established Procedures (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Classes Are Identical or Disjoint, Never Partial; The Converse Also Works (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Classes Are Identical or Disjoint, Never Partial; The Converse Also Works (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 7,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Missing One Property Breaks Everything (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Missing One Property Breaks Everything (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 14,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\{1,2,3,4,5,6\\}$ and $R=\\{(a,b):a\\equiv b\\pmod3\\}$, verify all three properties and identify $R$'s equivalence classes.\n  2. Confirm that the equivalence classes from problem 1 are pairwise disjoint and that their union is all of $A$.\n  3. Given the partition $\\{\\{1,4\\},\\{2,5\\},\\{3,6\\}\\}$ of $A=\\{1,2,3,4,5,6\\}$, construct the equivalence relation it defines via \"same block,\" and verify it matches problem 1's relation.\n  4. A relation $R$ on $\\{1,2,3\\}$ is reflexive and transitive but NOT symmetric. Explain why $R$ is not an equivalence relation, and why its \"classes\" (if you tried to define them the same way) would not behave like genuine equivalence classes.\n- **P76 (Transfer Probe, mode = independence)**: \"A university groups students into study sections by declaring two students 'equivalent' if they are enrolled in the exact same set of courses this semester. (a) Verify, in general terms, why this 'same course set' relation is reflexive, symmetric, and transitive. (b) Explain what the resulting equivalence classes represent in this context, and why two different students' classes could never partially overlap (share some but not all members). (c) Suppose instead the university starts from an existing set of disjoint sections (a partition of the student body) and DEFINES 'equivalent' as 'assigned to the same section.' Explain why this automatically produces a valid equivalence relation, without needing to independently re-verify reflexivity, symmetry, and transitivity from scratch.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.reflexive-relation` ($(a,a)\\in R$ for EVERY $a\\in A$, checked universally not existentially), `math.found.symmetric-relation` ($(a,b)\\in R\\Rightarrow(b,a)\\in R$ for all $a,b$, with a single missing mirror disproving symmetry entirely), and `math.found.transitive-relation` ($(a,b),(b,c)\\in R\\Rightarrow(a,c)\\in R$, vacuously true when no chains exist).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-relation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.equivalence-relation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.reflexive-relation`, `math.found.symmetric-relation`, `math.found.transitive-relation` (the three individual properties this concept combines, each contributing its own established checking procedure directly reused here).\n- **Unlocks**: `math.found.equivalence-class` (a dedicated deeper treatment of the class construction previewed in LO2), `math.abst.quotient-group` (uses an equivalence relation to build quotient structures in group theory), `math.nt.congruence` (congruence mod $n$ is the canonical number-theoretic example of an equivalence relation, previewed via Example 1's \"same parity\" instance).\n- **Cross-links**: KG lists `math.nt.congruence` and `math.abst.quotient-group` as cross-links — **neither is yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into congruence arithmetic or quotient-group construction once either entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-relation.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

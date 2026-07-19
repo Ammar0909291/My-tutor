@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.convergence-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.convergence-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a37b3afcdcd3ae7c1bfe98d39ca391a36df1fb692b391b1edc025ee004711d4d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.convergence-types.md": "sha256:da97bd5927693c58387325909d04faac9fc506bb39ea08886e6c43483ef16a2d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.convergence-types",
+    "name": "Modes of Convergence",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.prob.random-variable",
+      "math.real.convergence-sequences"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.convergence-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.convergence-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.convergence-types.md": "sha256:da97bd5927693c58387325909d04faac9fc506bb39ea08886e6c43483ef16a2d"
+      },
+      "contentHash": "sha256:0a5b7b1528299fd19a4b6994fcf26b48a2a0f6a60204798ab151499dad189196",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.convergence-types.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.convergence-types.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.convergence-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.convergence-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.convergence-types.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.convergence-types.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.convergence-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.convergence-types\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.convergence-types.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.convergence-types.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.convergence-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.convergence-types\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.convergence-types.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.convergence-types.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.convergence-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.convergence-types\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.convergence-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **convergence in probability**, $X_n\\xrightarrow{P}X$ iff for every $\\varepsilon>0$, $P(|X_n-X|>\\varepsilon)\\to0$ as $n\\to\\infty$ — directly generalizing `math.real.convergence-sequences`' $\\varepsilon$–$N$ definition (values $a_n$ getting close to $L$) to a statement about the PROBABILITY of being far apart shrinking, rather than requiring actual values to converge for any single outcome.\n- LO2: Define **almost sure convergence**, $X_n\\to X$ a.s. iff $P(\\lim_n X_n=X)=1$ — meaning for almost every fixed outcome $\\omega$ (all except a probability-zero set), the ORDINARY sequence of real numbers $X_n(\\omega)$ converges to $X(\\omega)$ in the exact $\\varepsilon$–$N$ sense already mastered — and recognize the key distinction from LO1: a.s. convergence requires genuine pointwise $\\varepsilon$–$N$ convergence for almost every outcome, while convergence in probability only requires the PROBABILITY of a large gap to shrink, with no single outcome's sequence needing to converge at all.\n- LO3 (concrete counterexample-driven; full Lp/distribution machinery at working level): define **convergence in $L^p$** ($E[|X_n-X|^p]\\to0$) and **convergence in distribution** ($F_n(x)\\to F(x)$ at every continuity point of $F$ — the weakest mode, requiring only that the CDFs match in the limit, with no requirement that $X_n$ and $X$ even be defined on the same probability space), and state the hierarchy $\\text{a.s.}\\Rightarrow\\text{in probability}\\Rightarrow\\text{in distribution}$ as a chain of STRICTLY one-directional implications, each demonstrated false in reverse by a concrete counterexample.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.convergence-types",
+      "title": "CONVERGENCE-IN-PROBABILITY-ASSUMED-EQUIVALENT-TO-ALMOST-SURE",
+      "content": "| MC-1 | CONVERGENCE-IN-PROBABILITY-ASSUMED-EQUIVALENT-TO-ALMOST-SURE | Believing convergence in probability automatically implies almost sure convergence, missing that the probability of a large gap shrinking is strictly weaker than every individual outcome's sequence actually converging | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.convergence-types",
+      "title": "CONVERGENCE-IN-DISTRIBUTION-ASSUMED-TO-IMPLY-VALUE-CLOSENESS",
+      "content": "| MC-2 | CONVERGENCE-IN-DISTRIBUTION-ASSUMED-TO-IMPLY-VALUE-CLOSENESS | Believing convergence in distribution means the actual values of X_n and X get close, missing that it is purely a statement about CDFs matching in the limit, with no requirement of value closeness at all | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.convergence-types",
+      "title": "CONVERGENCE-IN-PROBABILITY-REQUIRES-EXACT-ZERO",
+      "content": "| MC-3 | CONVERGENCE-IN-PROBABILITY-REQUIRES-EXACT-ZERO | Believing convergence in probability requires P(\\|X_n−X\\|>ε) to become exactly zero for large n, rather than merely approaching zero in the limit while possibly remaining positive for every finite n | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.convergence-types",
+      "title": "From Value-Closeness to Probability-of-Gap Shrinking (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Value-Closeness to Probability-of-Gap Shrinking (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Converging in Probability Without Any Single Outcome Converging (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Converging in Probability Without Any Single Outcome Converging (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Distribution Convergence Ignores Value-Closeness; Probability-of-Gap Never Needs to Hit Zero (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Distribution Convergence Ignores Value-Closeness; Probability-of-Gap Never Needs to Hit Zero (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 13,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 22,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the formal definitions of convergence in probability and almost sure convergence, and explain in one sentence each what makes almost sure convergence the stronger requirement.\n  2. Using Example 1's moving-spike sequence, explain concretely why NO single outcome $\\omega\\in[0,1]$ produces a convergent sequence $X_n(\\omega)$, even though $X_n\\xrightarrow{P}0$.\n  3. Explain why $X_n=-X$ (for $X\\sim N(0,1)$) converging in distribution to $X$ does not imply $X_n\\xrightarrow{P}X$, referencing the actual gap $|X_n-X|$.\n  4. State the full hierarchy of the four convergence modes from strongest to weakest, and explain (using this lesson's counterexamples) why each implication is one-directional.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.real.convergence-sequences`)**: \"Recall from `math.real.convergence-sequences` that a sequence of real numbers $a_n\\to L$ requires $\\forall\\varepsilon>0\\,\\exists N: n>N\\Rightarrow|a_n-L|<\\varepsilon$, checked for arbitrary $\\varepsilon$, never just one convenient value. (a) Explain precisely how almost sure convergence uses this EXACT definition, just applied separately to each fixed outcome $\\omega$ (excluding a probability-zero set). (b) Explain why convergence in probability, by contrast, applies that same $\\varepsilon$–$N$ style reasoning not to the random variable's values directly, but to the sequence of NUMBERS $P(|X_n-X|>\\varepsilon)$ instead — i.e., which sequence is actually the one being shown to converge to $0$ in the ordinary sense? (c) A classmate claims that because 'sequence convergence' and 'convergence in probability' both use an $\\varepsilon$-based definition, they must be 'basically the same idea, just relabeled.' Using Example 1's moving-spike sequence, explain specifically what is different about WHAT is required to converge in each case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 22,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.random-variable` (a random variable $X:\\Omega\\to\\mathbb{R}$ is a FUNCTION on the outcome space, not a fixed value; $P(X=x)$ is a probability, not the random variable itself) and `math.real.convergence-sequences` (the $\\varepsilon$–$N$ definition $a_n\\to L$ iff $\\forall\\varepsilon>0\\,\\exists N: n>N\\Rightarrow|a_n-L|<\\varepsilon$, requiring an argument valid for ARBITRARY $\\varepsilon$, not one convenient choice).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.convergence-types/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.convergence-types",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.random-variable` (the random variable as a function $X:\\Omega\\to\\mathbb{R}$, never a fixed value — the object this concept's four convergence modes are all defined for), `math.real.convergence-sequences` (the $\\varepsilon$–$N$ definition this concept's convergence-in-probability and almost-sure definitions both directly reuse, in two different roles).\n- **Unlocks**: `math.prob.lln` (the Law of Large Numbers, typically stated as either an almost sure or in-probability convergence result — this concept supplies the precise vocabulary for which mode is being claimed), `math.prob.clt` (the Central Limit Theorem, a convergence-in-distribution result — this concept's LO3 supplies the exact meaning of that claim).\n- **Cross-link (P76_mode = cross-link probe against `math.real.convergence-sequences`, already authored, and already a `requires` prerequisite)**: the transfer probe explicitly traces both convergence-in-probability and almost-sure convergence back to that concept's own $\\varepsilon$–$N$ definition, in two structurally different roles (applied to the probability sequence vs. applied pointwise per outcome).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.convergence-types.md",
+        "startLine": 95,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
