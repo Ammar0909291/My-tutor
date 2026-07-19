@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.exponential-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.exponential-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:319f3e5b84836f0c50348f58e61b6690e4ddcbb1af318eb497a30dd02101ac94",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.exponential-function.md": "sha256:9a404febfdc5db9a6dde44bb2cd9e644e5e4199e962af61456489ac1bbea31c6"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.exponential-function",
+    "name": "Exponential Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.exponent-rules",
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.exponential-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.exponential-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.exponential-function.md": "sha256:9a404febfdc5db9a6dde44bb2cd9e644e5e4199e962af61456489ac1bbea31c6"
+      },
+      "contentHash": "sha256:57cb12ad0f03de33a79d1138597cbeeb85b0cd9d7d6a2553b27ad92413e2abbd",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-function.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-function.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.exponential-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **exponential function** $f(x)=a^x$ with base $a>0, a\\neq1$, evaluate it at both integer and non-integer (rational, using already-known rational exponent rules) values of $x$, and correctly explain WHY the base restrictions ($a>0$, $a\\neq1$) are necessary.\n- LO2: Distinguish **exponential growth** ($a>1$, function increasing) from **exponential decay** ($0<a<1$, function decreasing), correctly identifying which regime a given base falls into, and sketch/describe the graph's key features (always positive, horizontal asymptote at $y=0$, $y$-intercept at $(0,1)$) for both cases.\n- LO3: Correctly distinguish an exponential function $a^x$ (variable in the EXPONENT) from a power function $x^a$ (variable in the BASE) — two structurally different functions that are easy to conflate given their superficially similar notation, with genuinely different growth behaviors.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponential-function",
+      "title": "EXPONENTIAL-CONFLATED-WITH-POWER-FUNCTION",
+      "content": "| MC-1 | EXPONENTIAL-CONFLATED-WITH-POWER-FUNCTION | Believing $a^x$ (exponential, variable in exponent) and $x^a$ (power function, variable in base) are the same type of function due to superficial notational similarity | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponential-function",
+      "title": "BASE-RESTRICTIONS-TREATED-AS-ARBITRARY",
+      "content": "| MC-2 | BASE-RESTRICTIONS-TREATED-AS-ARBITRARY | Treating the $a>0, a\\neq1$ base restrictions as arbitrary rules to memorize, rather than understanding the specific mathematical reasons (real-valuedness; avoiding the degenerate constant case) behind each | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Y-INTERCEPT-ASSUMED-TO-VARY-BY-BASE",
+      "content": "| MC-3 | Y-INTERCEPT-ASSUMED-TO-VARY-BY-BASE | Believing the exponential function's $y$-intercept depends on the specific base $a$, rather than recognizing $f(0)=a^0=1$ always, for EVERY valid base | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Evaluating the Exponential Function, and the Base Restrictions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Evaluating the Exponential Function, and the Base Restrictions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Growth vs. Decay, and Exponential vs. Power Function (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Growth vs. Decay, and Exponential vs. Power Function (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $f(x)=5^x$, compute $f(-2)$, $f(0)$, and $f\\left(\\frac13\\right)$ (leave the last in radical form if not a whole number).\n  2. Classify $g(x)=\\left(\\frac34\\right)^x$ as exponential growth or decay, and state the $y$-intercept and horizontal asymptote.\n  3. Compare $f(x)=3^x$ and $g(x)=x^3$ at $x=2$, $x=0$, and $x=-1$, noting where their values agree, disagree, or diverge substantially.\n  4. Explain why $a=1$ is excluded from the exponential function's base, using a specific example to illustrate what would go wrong (or rather, what would be uninteresting) if it were allowed.\n- **P76 (Transfer Probe, mode = independence)**: \"A radioactive substance decays according to $A(t) = A_0(0.5)^{t/h}$ where $h$ is the half-life and $A_0$ is the initial amount. Separately, an investment grows according to $V(t)=V_0(1.05)^t$ (5% annual growth). (a) Identify which of these two models is exponential DECAY and which is exponential GROWTH, justifying using the base's relationship to 1. (b) A financial analyst mistakenly models the investment's growth using $V(t)=V_0\\cdot t^{1.05}$ instead (a power function, variable in the base) — using this lesson's exponential-vs-power distinction, explain why this would give a dramatically different (and incorrect) long-term prediction compared to the correct exponential model, especially for large $t$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.exponent-rules` (integer, zero, negative, and rational exponent laws) and `math.func.function-concept` (the general domain/codomain/rule structure of a function).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.exponential-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.exponent-rules` (integer/zero/negative/rational exponent laws, needed to evaluate the function at any real input), `math.func.function-concept` (the general function structure this concept instantiates).\n- **Unlocks**: `math.alg.logarithm` (the logarithm is defined directly as the exponential function's inverse).\n- **Cross-link**: KG lists `math.func.exponential-function` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.func.exponential-function.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's growth/decay classification directly to that concept's likely broader treatment of exponential functions within general function theory (transformations, composition with other function types, etc.).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-function.md",
+        "startLine": 95,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
