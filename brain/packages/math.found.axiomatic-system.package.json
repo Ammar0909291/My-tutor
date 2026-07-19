@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.axiomatic-system-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.axiomatic-system",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2450b63239a6e6566d100751487638f037af8611baca4f7186d4579e19083b21",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.axiomatic-system.md": "sha256:a319854d3db58f8f592480f5212dc7faf11326affd980b5b33a1d3eb5e0d5cce"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.axiomatic-system",
+    "name": "Axiomatic System",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.found.axiom",
+      "math.found.logic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.axiomatic-system-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.axiomatic-system (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.axiomatic-system.md": "sha256:a319854d3db58f8f592480f5212dc7faf11326affd980b5b33a1d3eb5e0d5cce"
+      },
+      "contentHash": "sha256:84b89a6f3f3b88b48542c1202c183c6942b387cb1d39de09b2261cfe04b41fe1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.axiomatic-system.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiomatic-system.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiomatic-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiomatic-system\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiomatic-system.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiomatic-system.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiomatic-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiomatic-system\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiomatic-system.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiomatic-system.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiomatic-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiomatic-system\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiomatic-system.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiomatic-system.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiomatic-system"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiomatic-system\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.axiomatic-system/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an axiomatic system as **axioms PLUS the rules of logic**, working together — recognizing that a list of axioms ALONE, without an accompanying deduction system, cannot generate any theorems at all.\n- LO2: Distinguish three genuinely DIFFERENT properties an axiomatic system may or may not have — **consistency** (no contradiction derivable), **completeness** (every true statement in the system's language is provable), and **independence** (no axiom is derivable from the others) — checking each separately rather than treating them as interchangeable notions of \"a good system.\"\n- LO3: Recognize that changing a system's axioms produces a genuinely **different** axiomatic system with different theorems — there is no single \"correct\" axiomatic system for a given subject; different, individually consistent axiom choices (e.g., Euclidean vs. non-Euclidean geometry) yield different, equally legitimate theories.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "AXIOMATIC-SYSTEM-AS-AXIOMS-ALONE",
+      "content": "| MC-1 | AXIOMATIC-SYSTEM-AS-AXIOMS-ALONE | Believing a list of axioms alone, without rules of logic, constitutes a functioning axiomatic system, missing that logic's deductive rules are an equally essential separate component | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "CONSISTENCY-COMPLETENESS-INDEPENDENCE-CONFLATED",
+      "content": "| MC-2 | CONSISTENCY-COMPLETENESS-INDEPENDENCE-CONFLATED | Believing consistency, completeness, and independence are interchangeable notions of \"a good system,\" missing that they are three logically distinct properties requiring separate verification | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "UNIQUE-CORRECT-AXIOMATIC-SYSTEM-ASSUMED",
+      "content": "| MC-3 | UNIQUE-CORRECT-AXIOMATIC-SYSTEM-ASSUMED | Believing there is exactly one \"correct\" axiomatic system for a given subject, missing that different, individually consistent axiom choices can yield different, equally legitimate theories | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Axioms Without Logic Generate No Theorems (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Axioms Without Logic Generate No Theorems (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Three Properties, Checked Separately, Behaving Independently (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Properties, Checked Separately, Behaving Independently (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Different Axioms, Different (Equally Legitimate) Theories (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Different Axioms, Different (Equally Legitimate) Theories (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why a list of axioms with no accompanying logical inference rules cannot, by itself, constitute a functioning axiomatic system.\n  2. For the axiom set $\\{Q,\\ P\\to Q\\}$, check whether $P\\to Q$ is derivable from $Q$ alone, and state whether the set is independent.\n  3. Explain the difference between a system being \"consistent\" and a system being \"complete,\" using a concrete example where one holds without the other.\n  4. Describe one specific way changing a single axiom of a consistent system could produce a different but still consistent system, using an example other than the Euclidean/hyperbolic geometry case.\n- **P76 (Transfer Probe, mode = independence)**: \"A logician is designing a new formal system for a specialized area of mathematics, and has written down a promising list of axioms. (a) Explain what ELSE the logician must specify, beyond just the axioms, before the system can actually derive any theorems. (b) The logician verifies the system is consistent (no contradiction derivable) and feels confident the system is therefore 'good enough' to use. Using this lesson's three-properties distinction, explain what the logician has NOT yet verified, and why consistency alone doesn't guarantee those other properties. (c) A colleague suggests modifying one of the axioms slightly to simplify a particular proof, arguing 'since the original system was already consistent, this small change couldn't possibly create a genuinely different theory — it's still basically the same system.' Explain, using the Euclidean/hyperbolic contrast, why this argument is not necessarily correct.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.axiom` (an axiom as a foundational assumption, accepted without proof, a negotiable starting point rather than a \"self-evident truth\") and `math.found.logic` (valid reasoning, deductive rules, the structure of mathematical statements).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.axiomatic-system/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.axiomatic-system",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.axiom` (the foundational-assumption concept this system's axioms directly are), `math.found.logic` (the deductive rules this concept's derivation machinery directly uses).\n- **Unlocks**: `math.found.set-theory-axiomatic` (ZFC as a concrete, fully worked instance of an axiomatic system, building directly on this concept's framework).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiomatic-system.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

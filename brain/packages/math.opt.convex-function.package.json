@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.convex-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.convex-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb9313e324a075eef2ffbad47840069ef8dceb5336e953018dc2dd465c8986e2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.convex-function.md": "sha256:4db4d8f4068d4a4b75af35870c8d39c6b3d8e86604c5e791daf39e7acd9e42b5"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.opt.convex-function",
+    "name": "Convex Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.concavity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.convex-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.convex-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.convex-function.md": "sha256:4db4d8f4068d4a4b75af35870c8d39c6b3d8e86604c5e791daf39e7acd9e42b5"
+      },
+      "contentHash": "sha256:33df9081fec6a2fc83c4dc5b3ace02904314352cdee854f8861c151f15fca740",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-function.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-function\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-function.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-function.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-function.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.convex-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.convex-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define convexity via the **chord inequality** $f(\\lambda x+(1-\\lambda)y)\\le\\lambda f(x)+(1-\\lambda)f(y)$ for $\\lambda\\in[0,1]$ — \"the chord lies on or above the graph\" — correctly including the boundary case where EQUALITY holds throughout (linear functions), not requiring strict inequality or visible upward curvature.\n- LO2: Apply the key consequence — **every local minimum of a convex function is global** — via a direct proof-by-contradiction argument, and apply **Jensen's inequality** $f(E[X])\\le E[f(X)]$ concretely on a specific random variable.\n- LO3: Verify the equivalence between the chord-inequality definition and the **Hessian positive-semidefinite criterion** ($\\nabla^2f\\succeq0$) concretely on a specific function, directly reusing `math.linalg.positive-definite`'s own eigenvalue test.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-function",
+      "title": "CONVEXITY-REQUIRES-VISIBLE-CURVATURE",
+      "content": "| MC-1 | CONVEXITY-REQUIRES-VISIBLE-CURVATURE | Believing a convex function must visibly curve upward everywhere, ruling out linear functions, missing that the non-strict chord inequality includes equality (linear functions) as a valid case | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-function",
+      "title": "CONVEX-LOCAL-MIN-ASSUMED-NOT-NECESSARILY-GLOBAL",
+      "content": "| MC-2 | CONVEX-LOCAL-MIN-ASSUMED-NOT-NECESSARILY-GLOBAL | Believing a convex function could have a local minimum that isn't the global minimum, missing the every-local-min-is-global theorem | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-function",
+      "title": "CHORD-INEQUALITY-AND-HESSIAN-TEST-TREATED-AS-SEPARATE",
+      "content": "| MC-3 | CHORD-INEQUALITY-AND-HESSIAN-TEST-TREATED-AS-SEPARATE | Believing the chord-inequality definition and the Hessian positive-semidefinite criterion are two separate, independently-checked properties, missing that they are equivalent characterizations | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-function",
+      "title": "Equality Counts Too — Linear Functions Are Convex (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Equality Counts Too — Linear Functions Are Convex (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-function",
+      "title": "Local Minimum Forces Global, By Contradiction (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Local Minimum Forces Global, By Contradiction (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-function",
+      "title": "Chord Inequality and Hessian Test Are Equivalent, Not Separate Checks (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Chord Inequality and Hessian Test Are Equivalent, Not Separate Checks (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.convex-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify the chord inequality directly for $f(x)=|x|$ at $x=-2,y=2,\\lambda=0.5$.\n  2. Explain why $f(x)=-x^2$ is NOT convex, using the chord inequality with a specific counterexample pair of points.\n  3. Compute the Hessian of $f(x,y)=x^2+4y^2$ and determine convexity using the eigenvalue test.\n  4. Verify Jensen's Inequality for $f(x)=x^2$ and a random variable taking values $0,2,4$ each with probability $\\frac13$.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.positive-definite`)**: \"A machine learning engineer needs to verify that a loss function $f(w_1,w_2)=w_1^2+2w_2^2+w_1w_2$ used in a training algorithm is convex, to guarantee gradient descent finds the global minimum. (a) Compute the Hessian of $f$, and using `math.linalg.positive-definite`'s own eigenvalue or leading-principal-minor test, determine whether it is positive semidefinite. (b) A colleague, skeptical of matrix methods, wants to verify convexity directly via the chord inequality on a couple of specific test points instead. Explain what such a spot-check would and would NOT conclusively establish, compared to the Hessian test covering all points at once. (c) The colleague also asks: 'if the Hessian test says the function is convex, does that also automatically tell us gradient descent will find the local minimum quickly, or just that whatever local minimum it finds is guaranteed to be the true global minimum?' Explain specifically what the convexity property does and does not guarantee here.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.opt.convex-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.concavity` (concave/convex curvature via the second derivative sign, for single-variable functions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.convex-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.opt.convex-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.concavity` (single-variable curvature via the second derivative, this concept generalizes to the multivariable chord/Hessian framework).\n- **Unlocks**: `math.opt.convex-optimization` (uses convexity's every-local-min-is-global property as the central reason convex optimization problems are tractable).\n- **Cross-link**: KG lists `math.linalg.positive-definite` as a cross-link — **authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **cross-link probe**, directly reusing that concept's own eigenvalue test to verify the Hessian criterion in LO3/Example 3.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-function.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
