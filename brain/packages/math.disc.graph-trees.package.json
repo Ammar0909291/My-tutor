@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-trees-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-trees",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6b73a38784ee758dd65afece6a4873c693be65f6484fd4b7c44f1c7a2a7ee60d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-trees.md": "sha256:8425f23d892f7ed8233d5389842250a2e2aa789344bdc87db8ee0aff03a95a17"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-trees",
+    "name": "Trees",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.graph-connectivity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-trees-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-trees (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-trees.md": "sha256:8425f23d892f7ed8233d5389842250a2e2aa789344bdc87db8ee0aff03a95a17"
+      },
+      "contentHash": "sha256:703f703992bb09a0a43c5cd646b24856ab3b8dfff7d2d561117d8957476a206f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-trees.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-trees.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-trees"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-trees\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-trees.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-trees.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-trees"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-trees\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-trees.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-trees.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-trees"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-trees\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-trees.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-trees.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-trees"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-trees\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-trees/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-trees",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **tree** as a graph that is BOTH connected AND acyclic — SIMULTANEOUSLY — directly reusing `math.disc.graph-connectivity`'s own connectedness and cycle definitions, and verify a specific graph is/isn't a tree by checking BOTH conditions.\n- LO2: Apply the counting property that a tree with $n$ vertices has EXACTLY $n-1$ edges — and recognize this is a NECESSARY but NOT SUFFICIENT condition: a disconnected graph can also have exactly $n-1$ edges without being a tree.\n- LO3: Distinguish a **rooted tree** (one vertex designated root, inducing a parent-child hierarchy) from the underlying **free (unrooted) tree** — recognizing the SAME free tree can be rooted at DIFFERENT vertices, producing genuinely different hierarchies.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-trees",
+      "title": "TREE-ASSUMED-FROM-EITHER-CONDITION-ALONE",
+      "content": "| MC-1 | TREE-ASSUMED-FROM-EITHER-CONDITION-ALONE | Believing a graph is a tree if it is either connected or acyclic alone, missing that both conditions must hold simultaneously | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-trees",
+      "title": "N-MINUS-1-EDGES-ASSUMED-SUFFICIENT",
+      "content": "| MC-2 | N-MINUS-1-EDGES-ASSUMED-SUFFICIENT | Believing a graph with exactly n-1 edges (for n vertices) must automatically be a tree, missing that this is necessary but not sufficient without also verifying connectedness | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-trees",
+      "title": "TREE-HIERARCHY-ASSUMED-ROOT-INDEPENDENT",
+      "content": "| MC-3 | TREE-HIERARCHY-ASSUMED-ROOT-INDEPENDENT | Believing a tree has one single intrinsic hierarchy regardless of the chosen root, missing that different roots produce genuinely different hierarchies from the same free tree | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-trees",
+      "title": "Connected AND Acyclic, Not Either Alone (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Connected AND Acyclic, Not Either Alone (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-trees",
+      "title": "n−1 Edges Doesn't Guarantee a Tree (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"n−1 Edges Doesn't Guarantee a Tree (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-trees",
+      "title": "The Same Tree, Different Roots, Different Hierarchies (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Same Tree, Different Roots, Different Hierarchies (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-trees",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-trees",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine whether a graph with vertices $\\{1,2,3,4,5\\}$ and edges $\\{(1,2),(2,3),(3,4),(4,5),(5,1)\\}$ is a tree, justifying via both conditions.\n  2. Construct a graph with $5$ vertices and $4$ edges that is NOT a tree, and identify which requirement it fails.\n  3. For the free tree with edges $\\{(P,Q),(Q,R),(R,S)\\}$, determine the parent-child hierarchy when rooted at $Q$, and separately when rooted at $P$.\n  4. Explain why a tree with $n$ vertices cannot have fewer than $n-1$ edges while remaining connected.\n- **P76 (Transfer Probe, mode = independence)**: \"A file-system designer models a directory structure as a tree, with folders as vertices and containment relationships as edges. (a) Explain what it means, in this context, for the directory structure to satisfy BOTH tree conditions (connected and acyclic), and what a violation of each would look like in practice (e.g., a folder unreachable from the root, or a folder that is somehow its own ancestor). (b) The designer verifies the structure has exactly (number of folders − 1) containment edges and concludes this alone proves it's a valid tree structure. Using this lesson's n−1-edges-is-not-sufficient reasoning, explain what additional check the designer still needs to perform. (c) The designer then wants to display the SAME folder structure with a different folder chosen as the display root (e.g., showing a subfolder's contents as if it were the top level). Explain why this is possible without changing the underlying tree, and what specifically changes in the resulting hierarchy.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.graph-trees",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph-connectivity` (paths, cycles, and connectedness — a path between every pair of vertices).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.graph-trees/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.graph-trees",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph-connectivity` (the path/cycle/connectedness definitions this concept's tree definition directly combines).\n- **Unlocks**: `math.disc.spanning-tree` (a tree connecting all vertices of a larger graph, building directly on this concept's tree definition and edge-count property).\n- **Cross-link**: KG lists `math.graph.tree` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-trees.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
