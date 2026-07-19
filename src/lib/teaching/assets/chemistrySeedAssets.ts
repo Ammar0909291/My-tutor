@@ -3296,6 +3296,985 @@ const OZONE_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.atomic.electronic-config ───────────────────────────────────────────
+const ECONF = 'chem.atomic.electronic-config'
+const ECONF_SRC = 'docs/chemistry/kg/graph.json — chem.atomic.electronic-config'
+
+const ECONF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ECONF,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electronic configuration is the "seating chart" of electrons in an atom, ' +
+      'built with three rules. AUFBAU PRINCIPLE: fill lowest energy orbitals first ' +
+      '(follow the (n+l) rule — 4s fills before 3d because 4s has lower n+l). ' +
+      'PAULI EXCLUSION: max 2 electrons per orbital, and they must have opposite ' +
+      'spin. HUND\'S RULE: within a sub-shell (like the three 2p orbitals), electrons ' +
+      'spread out singly across all orbitals FIRST before any pairing up — this ' +
+      'minimizes repulsion, like strangers on a bus spreading to empty rows before ' +
+      'sitting next to someone. So carbon (6 electrons): 1s² 2s² 2p² means the two ' +
+      '2p electrons go in DIFFERENT p orbitals (not paired), both spinning the same ' +
+      'way. This single seating chart explains almost everything about an element\'s ' +
+      'chemistry — how many bonds it forms, its position in the periodic table, its ' +
+      'reactivity, all follow from where the OUTERMOST (valence) electrons sit.',
+    targetedMisconceptions: [`${ECONF}:MC1`],
+    source: `${ECONF_SRC} — Aufbau, Pauli exclusion, Hund's rule, filling order`,
+  },
+  {
+    conceptId: ECONF,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Persistent trap: "Orbitals fill in strict numerical order: 1s, 2s, 2p, 3s, 3p, ' +
+      '3d, 4s..." WRONG. The actual order follows increasing (n+l): 4s (n+l=4) fills ' +
+      'BEFORE 3d (n+l=5), even though 3 < 4. That\'s why potassium is [Ar]4s¹, not ' +
+      '[Ar]3d¹. This trips up almost every beginner. Use the diagonal filling ' +
+      'rule/Madelung rule chart, not simple counting. Second trap, equally important: ' +
+      '"When forming ions, remove electrons in the same order they were added ' +
+      '(reverse Aufbau)." FALSE — for transition metals, once 3d electrons are ' +
+      'present, 4s electrons are actually higher in energy and are removed FIRST ' +
+      'when forming cations. So Fe (electron config [Ar]4s²3d⁶) loses electrons to ' +
+      'form Fe²⁺ as [Ar]3d⁶ (both 4s electrons gone), NOT by removing 3d electrons ' +
+      'first as naive reverse-filling would suggest.',
+    targetedMisconceptions: [`${ECONF}:MC1`, `${ECONF}:MC2`],
+    source: `${ECONF_SRC} — misconception: strict numerical filling order; ions lose electrons in reverse fill order`,
+  },
+]
+
+const ECONF_PROBES: SeedProbe[] = [
+  {
+    conceptId: ECONF,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which orbital fills BEFORE 3d in a ground-state atom?',
+    choices: [
+      { text: '4s — it has lower (n+l) value than 3d (4+0=4 vs 3+2=5), so it fills first despite having a higher principal quantum number', isCorrect: true },
+      { text: 'Nothing — 3d always fills immediately after 3p since 3 comes before 4', isCorrect: false, misconceptionId: `${ECONF}:MC1` },
+    ],
+    correctValue: '4s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECONF}:MC1`],
+    source: `${ECONF_SRC} — distractor targets strict numerical (not n+l) filling assumption`,
+  },
+  {
+    conceptId: ECONF,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Iron\'s ground-state configuration is [Ar]4s²3d⁶. What is the configuration of Fe²⁺?',
+    choices: [
+      { text: '[Ar]3d⁶ — both 4s electrons are removed first when forming the cation, since 4s becomes higher energy than 3d once occupied', isCorrect: true },
+      { text: '[Ar]4s²3d⁴ — electrons are removed from 3d first since it was filled last', isCorrect: false, misconceptionId: `${ECONF}:MC2` },
+    ],
+    correctValue: '[Ar]3d⁶',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECONF}:MC2`],
+    source: `${ECONF_SRC} — misconception: ions lose electrons in reverse of filling order`,
+  },
+]
+
+// ─── chem.atomic.quantum-mech-model ──────────────────────────────────────────
+const QMM = 'chem.atomic.quantum-mech-model'
+const QMM_SRC = 'docs/chemistry/kg/graph.json — chem.atomic.quantum-mech-model'
+
+const QMM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: QMM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Bohr\'s model worked for hydrogen but broke everywhere else. Schrödinger\'s ' +
+      'quantum mechanical model replaced fixed orbits with a WAVE EQUATION: Ĥψ = Eψ. ' +
+      'Solving it gives ψ (the wavefunction) — and |ψ|² gives the PROBABILITY of ' +
+      'finding the electron at any point. This naturally produces the quantum numbers ' +
+      '(n, l, m_l) as mathematical solutions, not assumed postulates. Two foundational ' +
+      'principles justify this shift: DE BROGLIE (1924) showed matter has wave ' +
+      'properties (λ = h/mv) — if electrons are waves, they can\'t have a precise orbit, ' +
+      'only a standing-wave pattern (which is exactly what an orbital shape represents). ' +
+      'HEISENBERG UNCERTAINTY (1927): Δx·Δp ≥ h/4π — you fundamentally cannot know ' +
+      'both position and momentum precisely simultaneously. This isn\'t a measurement ' +
+      'limitation — it\'s built into reality at the quantum scale. Together these ' +
+      'principles FORCE the probabilistic picture: orbitals, not orbits.',
+    targetedMisconceptions: [`${QMM}:MC1`],
+    source: `${QMM_SRC} — Schrödinger equation, de Broglie, Heisenberg uncertainty`,
+  },
+  {
+    conceptId: QMM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Misconception: "Heisenberg uncertainty is just a limitation of our measuring ' +
+      'instruments — with better technology we could measure both position and ' +
+      'momentum precisely." FALSE. This is a fundamental property of nature, not an ' +
+      'engineering problem. It arises from the wave nature of matter itself: a wave ' +
+      'with a precisely defined wavelength (momentum) is necessarily spread out over ' +
+      'all space (no defined position), and vice versa — this is mathematics, not ' +
+      'instrument error. Second trap: "De Broglie\'s matter waves mean electrons ' +
+      'physically oscillate like ocean waves." No — the "wave" is a PROBABILITY ' +
+      'amplitude wave (ψ), not a physical undulation of the particle through space. ' +
+      'The electron doesn\'t wiggle; the probability of finding it at different ' +
+      'locations follows a wave pattern (which is why electron diffraction experiments ' +
+      'show interference patterns — a purely wave phenomenon — even from single ' +
+      'electrons sent one at a time).',
+    targetedMisconceptions: [`${QMM}:MC1`, `${QMM}:MC2`],
+    source: `${QMM_SRC} — misconception: uncertainty is measurement error; matter waves are physical oscillations`,
+  },
+]
+
+const QMM_PROBES: SeedProbe[] = [
+  {
+    conceptId: QMM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The Heisenberg Uncertainty Principle states that we cannot simultaneously know an electron\'s exact position and momentum. This is because:',
+    choices: [
+      { text: 'It is a fundamental property of quantum systems arising from wave-particle duality, not a limitation of measurement technology', isCorrect: true },
+      { text: 'Our current instruments are not precise enough — future technology will overcome this limit', isCorrect: false, misconceptionId: `${QMM}:MC1` },
+    ],
+    correctValue: 'Fundamental property, not instrument limitation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${QMM}:MC1`],
+    source: `${QMM_SRC} — distractor targets "measurement limitation" misconception`,
+  },
+  {
+    conceptId: QMM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Electron diffraction experiments show interference patterns even when electrons are sent one at a time through a double slit. What does this reveal about de Broglie\'s "matter waves"?',
+    choices: [
+      { text: 'Each individual electron behaves as a probability wave, interfering with itself statistically — the wave represents probability amplitude, not a physical oscillation of the particle', isCorrect: true },
+      { text: 'Electrons must be physically vibrating as they travel through space, like tiny ocean waves', isCorrect: false, misconceptionId: `${QMM}:MC2` },
+    ],
+    correctValue: 'Wave = probability amplitude, not physical oscillation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${QMM}:MC2`],
+    source: `${QMM_SRC} — misconception: matter waves are literal physical undulations`,
+  },
+]
+
+// ─── chem.period.modern-periodic-law ─────────────────────────────────────────
+const MODPER = 'chem.period.modern-periodic-law'
+const MODPER_SRC = 'docs/chemistry/kg/graph.json — chem.period.modern-periodic-law'
+
+const MODPER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MODPER,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Moseley (1913) fixed Mendeleev\'s table by proving: properties of elements are ' +
+      'a periodic function of ATOMIC NUMBER (not mass). This resolved every anomaly — ' +
+      'Ar (Z=18) correctly comes before K (Z=19) even though Ar is slightly heavier, ' +
+      'because we order by protons, not mass. The modern table\'s STRUCTURE directly ' +
+      'reflects electron configuration: PERIODS (rows) = principal quantum number n ' +
+      '(period 3 = elements filling n=3 orbitals). GROUPS (columns) = same number of ' +
+      'valence electrons = similar chemistry (Group 1 alkali metals all have 1 valence ' +
+      'electron, all form +1 ions). BLOCKS: s-block (Groups 1-2, filling s orbitals), ' +
+      'p-block (Groups 13-18, filling p orbitals), d-block (transition metals, filling d), ' +
+      'f-block (lanthanides/actinides, filling f). The table isn\'t arbitrary — it\'s a ' +
+      'direct map of quantum mechanical electron filling, which is WHY elements in the ' +
+      'same group behave similarly.',
+    targetedMisconceptions: [`${MODPER}:MC1`],
+    source: `${MODPER_SRC} — modern periodic law (atomic number), periods/groups/blocks structure`,
+  },
+  {
+    conceptId: MODPER,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Elements in the same PERIOD (row) have similar chemistry because they\'re ' +
+      'close together." FALSE — elements in the same GROUP (column) share chemistry, ' +
+      'not the same period. Sodium (period 3, group 1) and chlorine (period 3, group 17) ' +
+      'are in the SAME period but have wildly different properties (reactive metal vs. ' +
+      'reactive nonmetal). Sodium and potassium (both group 1, different periods) share ' +
+      'nearly identical chemistry (both form +1 ions, both react violently with water). ' +
+      'The key insight: chemistry depends on VALENCE electron count and configuration ' +
+      '(constant down a group), not on being physically "near" other elements on the ' +
+      'chart. Second trap: "The periodic table is just a historical curiosity, ' +
+      'memorized facts." No — it\'s a direct consequence of quantum mechanics; you can ' +
+      'PREDICT an unknown element\'s properties just from its position, because position ' +
+      'encodes electron configuration.',
+    targetedMisconceptions: [`${MODPER}:MC1`],
+    source: `${MODPER_SRC} — misconception: same period = similar chemistry (it's same group)`,
+  },
+]
+
+const MODPER_PROBES: SeedProbe[] = [
+  {
+    conceptId: MODPER,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Sodium (Na) and potassium (K) share very similar chemical properties. This is because they:',
+    choices: [
+      { text: 'Are in the same GROUP (both Group 1) and therefore have the same number of valence electrons (1)', isCorrect: true },
+      { text: 'Are in the same PERIOD and are therefore chemically similar', isCorrect: false, misconceptionId: `${MODPER}:MC1` },
+      { text: 'Have similar atomic masses', isCorrect: false },
+    ],
+    correctValue: 'Same group, same valence electron count',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MODPER}:MC1`],
+    source: `${MODPER_SRC} — distractor targets "same period = similar chemistry" misconception`,
+  },
+  {
+    conceptId: MODPER,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why do sodium (Group 1, Period 3) and chlorine (Group 17, Period 3) have completely different chemical behavior despite being in the same period?',
+    choices: [
+      { text: 'They have very different numbers of valence electrons (1 vs 7) and therefore very different reactivity patterns — period position alone doesn\'t determine chemistry, group (valence electron count) does', isCorrect: true },
+      { text: 'They can\'t actually be that different since they\'re in the same row of the table', isCorrect: false, misconceptionId: `${MODPER}:MC1` },
+    ],
+    correctValue: 'Different valence electron counts (different groups)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MODPER}:MC1`],
+    source: `${MODPER_SRC} — misconception: period proximity implies chemical similarity`,
+  },
+]
+
+// ─── chem.period.periodic-properties ─────────────────────────────────────────
+const PERPROP = 'chem.period.periodic-properties'
+const PERPROP_SRC = 'docs/chemistry/kg/graph.json — chem.period.periodic-properties'
+
+const PERPROP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Atomic size, ionization energy, and electron affinity all trace back to ONE ' +
+      'idea: EFFECTIVE NUCLEAR CHARGE (Z_eff) — how strongly the nucleus actually pulls ' +
+      'on the outermost electrons after accounting for shielding by inner electrons. ' +
+      'ACROSS a period (left to right): protons increase but shielding stays roughly ' +
+      'constant (same shell) → Z_eff increases → electrons pulled in tighter → ATOMIC ' +
+      'RADIUS DECREASES. DOWN a group: new shells add (more shielding) despite more ' +
+      'protons → outer electrons are further from nucleus → RADIUS INCREASES. Same logic ' +
+      'flips for IONIZATION ENERGY (energy to remove an electron): higher Z_eff = ' +
+      'harder to remove = ionization energy INCREASES across a period, DECREASES down ' +
+      'a group. Think of it as a tug-of-war: more protons pulling harder (across) vs. ' +
+      'more distance and shielding weakening the pull (down).',
+    targetedMisconceptions: [`${PERPROP}:MC1`],
+    source: `${PERPROP_SRC} — atomic radius, ionization energy, electron affinity, Z_eff`,
+  },
+  {
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "More protons always means smaller atomic radius, everywhere on the ' +
+      'table." Only true WITHIN a period. Down a group, protons increase too, but the ' +
+      'radius INCREASES — because a whole new electron shell is added, and shielding ' +
+      'from inner electrons dominates over the extra nuclear charge. You must separate ' +
+      'the TWO trends (across vs. down) — they have opposite reasons. Second trap: ' +
+      '"Cations are always smaller and anions always bigger than their parent atom, ' +
+      'by the same logic in every case." True in general, but the MAGNITUDE varies: ' +
+      'removing an electron from a full shell (like Na → Na⁺, removing the entire 3s ' +
+      'shell) causes a HUGE radius drop, while removing an electron from a partially ' +
+      'filled shell causes a smaller change. Always check WHICH shell is affected, not ' +
+      'just count electrons.',
+    targetedMisconceptions: [`${PERPROP}:MC1`, `${PERPROP}:MC2`],
+    source: `${PERPROP_SRC} — misconception: more protons = smaller radius universally; ion size change is uniform`,
+  },
+]
+
+const PERPROP_PROBES: SeedProbe[] = [
+  {
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Lithium (Z=3) has a larger atomic radius than fluorine (Z=9), even though fluorine has more protons. Why?',
+    choices: [
+      { text: 'Fluorine has much higher effective nuclear charge (more protons, same shell, minimal extra shielding), pulling its valence electrons in much tighter than lithium\'s single valence electron', isCorrect: true },
+      { text: 'More protons should always mean a larger radius since there\'s more nuclear material', isCorrect: false, misconceptionId: `${PERPROP}:MC3` },
+    ],
+    correctValue: 'Higher Z_eff in F pulls electrons in tighter',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERPROP}:MC3`],
+    source: `${PERPROP_SRC} — distractor targets "more protons = bigger atom" misconception`,
+  },
+  {
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Sodium\'s radius is 186 pm; Na⁺ is only 102 pm — a dramatic drop. Explain why the drop is so large.',
+    choices: [
+      { text: 'Removing Na\'s single valence electron eliminates the entire outermost (n=3) shell, so Na⁺ has one fewer occupied shell than Na — a structural change, not just "one less electron"', isCorrect: true },
+      { text: 'Removing any single electron from any atom always causes approximately the same percentage radius decrease', isCorrect: false, misconceptionId: `${PERPROP}:MC2` },
+    ],
+    correctValue: 'Loss of an entire electron shell',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERPROP}:MC2`],
+    source: `${PERPROP_SRC} — misconception: ionization causes uniform radius change regardless of shell structure`,
+  },
+]
+
+// ─── chem.equil.concept ──────────────────────────────────────────────────────
+const EQCON = 'chem.equil.concept'
+const EQCON_SRC = 'docs/chemistry/kg/graph.json — chem.equil.concept'
+
+const EQCON_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EQCON,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Equilibrium is DYNAMIC, not static. In a closed system, forward and reverse ' +
+      'reactions both keep happening — but at EQUAL RATES, so concentrations stop ' +
+      'changing (even though molecules keep converting back and forth constantly). ' +
+      'Think of a busy escalator: people keep going up and down, but if the number ' +
+      'going up equals the number going down each minute, the crowd size on each floor ' +
+      'stays constant — that\'s equilibrium, not "nothing happening." Equilibrium can ' +
+      'be reached from EITHER direction — start with pure reactants or pure products, ' +
+      'you\'ll reach the SAME equilibrium composition (at the same temperature). This is ' +
+      'only possible in a CLOSED system — an open system (where products escape, like ' +
+      'CO₂ bubbling out of an open beaker) never reaches true equilibrium. Signs you\'re ' +
+      'at equilibrium: constant color, constant pressure, constant concentrations — ' +
+      'but the REACTION hasn\'t stopped, it\'s just balanced.',
+    targetedMisconceptions: [`${EQCON}:MC1`],
+    source: `${EQCON_SRC} — dynamic equilibrium concept, reversibility, closed system requirement`,
+  },
+  {
+    conceptId: EQCON,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The single most damaging misconception in this topic: "Equilibrium means the ' +
+      'reaction has stopped." Absolutely not — both forward and reverse reactions are ' +
+      'still happening at full speed, they\'re just happening at EQUAL rates so no NET ' +
+      'change is observable. If you could tag molecules with radioactive isotopes, ' +
+      'you\'d see constant interconversion even at "equilibrium." Second trap: ' +
+      '"Equilibrium means equal concentrations of reactants and products." FALSE — ' +
+      'equilibrium means CONSTANT concentrations, which could be 99% reactants and 1% ' +
+      'product (equilibrium lies far left) or the reverse. The RATIO is fixed by K, ' +
+      'not by any rule that it must be 50/50. A reaction can be "at equilibrium" while ' +
+      'still being almost entirely reactants, if K is very small.',
+    targetedMisconceptions: [`${EQCON}:MC1`, `${EQCON}:MC2`],
+    source: `${EQCON_SRC} — misconception: equilibrium = reaction stopped; equilibrium = equal concentrations`,
+  },
+]
+
+const EQCON_PROBES: SeedProbe[] = [
+  {
+    conceptId: EQCON,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A reaction reaches equilibrium in a sealed flask. What is actually happening at the molecular level?',
+    choices: [
+      { text: 'Forward and reverse reactions continue at equal rates, so concentrations appear constant even though molecules keep converting', isCorrect: true },
+      { text: 'All reactions have completely stopped — no molecules are converting in either direction', isCorrect: false, misconceptionId: `${EQCON}:MC1` },
+      { text: 'The concentrations of reactants and products have become exactly equal', isCorrect: false, misconceptionId: `${EQCON}:MC2` },
+    ],
+    correctValue: 'Forward/reverse continue at equal rates',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EQCON}:MC1`, `${EQCON}:MC2`],
+    source: `${EQCON_SRC} — distractor targets "reaction stopped" and "equal concentrations" misconceptions`,
+  },
+  {
+    conceptId: EQCON,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A reaction at equilibrium has 95% reactants and 5% products. Is this truly "at equilibrium"?',
+    choices: [
+      { text: 'Yes — equilibrium means constant concentrations over time, not equal concentrations; K is simply small for this reaction, meaning it favors reactants heavily', isCorrect: true },
+      { text: 'No — true equilibrium requires roughly equal amounts of reactants and products', isCorrect: false, misconceptionId: `${EQCON}:MC2` },
+    ],
+    correctValue: 'Yes — equilibrium ≠ equal concentrations',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EQCON}:MC2`],
+    source: `${EQCON_SRC} — misconception: equilibrium requires roughly equal concentrations`,
+  },
+]
+
+// ─── chem.equil.kc-kp ────────────────────────────────────────────────────────
+const KCKP = 'chem.equil.kc-kp'
+const KCKP_SRC = 'docs/chemistry/kg/graph.json — chem.equil.kc-kp'
+
+const KCKP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KCKP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The equilibrium constant K quantifies WHERE equilibrium lies — a fixed number ' +
+      '(at a given temperature) equal to [products]^coeff / [reactants]^coeff at ' +
+      'equilibrium. K_c uses concentrations (mol/L); K_p uses partial pressures (for ' +
+      'gases) — connected by K_p = K_c(RT)^Δn. LARGE K (>>1) means products dominate at ' +
+      'equilibrium (reaction goes essentially to completion). SMALL K (<<1) means ' +
+      'reactants dominate (reaction barely proceeds). K depends ONLY on TEMPERATURE — ' +
+      'not on initial concentrations, not on catalysts, not on pressure changes (though ' +
+      'those can shift WHERE equilibrium lands, K itself stays fixed at constant T). ' +
+      'Pure solids and liquids are OMITTED from K expressions (their "concentration" — ' +
+      'density — doesn\'t change). The REACTION QUOTIENT Q uses the SAME formula but with ' +
+      'CURRENT (non-equilibrium) concentrations — comparing Q to K tells you which ' +
+      'direction the reaction will shift (Q<K → forward; Q>K → reverse).',
+    targetedMisconceptions: [`${KCKP}:MC1`],
+    source: `${KCKP_SRC} — Kc, Kp, relationship, temperature dependence, reaction quotient`,
+  },
+  {
+    conceptId: KCKP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Critical trap: "Adding a catalyst changes K." FALSE. A catalyst speeds up BOTH ' +
+      'forward and reverse reactions EQUALLY, so equilibrium is reached FASTER but the ' +
+      'equilibrium position (and K) is completely unchanged. Catalysts affect kinetics, ' +
+      'not thermodynamics. Second trap: "Adding more reactant changes K." Also false — ' +
+      'adding reactant shifts the POSITION of equilibrium (more product forms, per Le ' +
+      'Chatelier), but the VALUE of K stays the same because the new equilibrium state ' +
+      'still satisfies the same ratio. Only TEMPERATURE changes K (since K relates to ' +
+      'ΔG° via ΔG° = −RT ln K, and ΔG° itself is temperature-dependent). Third trap: ' +
+      '"Solid reactants/products should appear in K expressions with their molar ' +
+      'concentration." No — pure solids and liquids have essentially constant "activity" ' +
+      '(effectively 1), so they\'re omitted entirely from K expressions, not included ' +
+      'as a fixed number.',
+    targetedMisconceptions: [`${KCKP}:MC1`, `${KCKP}:MC2`],
+    source: `${KCKP_SRC} — misconception: catalysts/concentration changes affect K (only temperature does)`,
+  },
+]
+
+const KCKP_PROBES: SeedProbe[] = [
+  {
+    conceptId: KCKP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Adding a catalyst to a reaction at equilibrium will:',
+    choices: [
+      { text: 'Have no effect on K or the equilibrium position — it speeds up both forward and reverse rates equally, reaching equilibrium faster but not changing it', isCorrect: true },
+      { text: 'Increase K by making the forward reaction proceed faster than the reverse', isCorrect: false, misconceptionId: `${KCKP}:MC1` },
+      { text: 'Shift equilibrium toward products since catalysts favor product formation', isCorrect: false, misconceptionId: `${KCKP}:MC1` },
+    ],
+    correctValue: 'No effect on K or equilibrium position',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KCKP}:MC1`],
+    source: `${KCKP_SRC} — distractor targets "catalyst affects K" misconception`,
+  },
+  {
+    conceptId: KCKP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the reaction CaCO₃(s) ⇌ CaO(s) + CO₂(g), why does the equilibrium expression only include [CO₂] and not CaCO₃ or CaO?',
+    choices: [
+      { text: 'Pure solids have constant activity (effectively 1) regardless of the amount present, so they are omitted from the K expression entirely', isCorrect: true },
+      { text: 'Solids are simply included as a fixed constant value equal to their molar mass', isCorrect: false, misconceptionId: `${KCKP}:MC3` },
+    ],
+    correctValue: 'Pure solids/liquids are omitted (constant activity)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KCKP}:MC3`],
+    source: `${KCKP_SRC} — misconception: solids included as a fixed numeric term rather than omitted`,
+  },
+]
+
+// ─── chem.equil.kw-ph ────────────────────────────────────────────────────────
+const KWPH = 'chem.equil.kw-ph'
+const KWPH_SRC = 'docs/chemistry/kg/graph.json — chem.equil.kw-ph'
+
+const KWPH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KWPH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Even "pure" water ionizes slightly: H₂O ⇌ H⁺ + OH⁻ (or more accurately, ' +
+      '2H₂O ⇌ H₃O⁺ + OH⁻). At 25°C, K_w = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴. Since pure water ' +
+      'produces equal H⁺ and OH⁻, [H⁺] = [OH⁻] = 1.0 × 10⁻⁷ M — this defines NEUTRAL. ' +
+      'pH = −log[H⁺] compresses this huge range into a workable scale: pH 7 is neutral, ' +
+      '<7 is acidic (more H⁺), >7 is basic (more OH⁻, less H⁺). K_w is a CONSTANT at a ' +
+      'given temperature — in ANY aqueous solution, [H⁺][OH⁻] always equals K_w. So if ' +
+      'you know [H⁺], you automatically know [OH⁻] = K_w/[H⁺]. Adding acid increases ' +
+      '[H⁺], which (to keep the product constant) forces [OH⁻] DOWN — acid and base ' +
+      'aren\'t independent, they\'re coupled through this single equilibrium. K_w ' +
+      'increases with temperature (water\'s self-ionization is endothermic), so neutral ' +
+      'pH is actually LESS than 7 at higher temperatures.',
+    targetedMisconceptions: [`${KWPH}:MC1`],
+    source: `${KWPH_SRC} — Kw, pH scale, neutral point, temperature dependence`,
+  },
+  {
+    conceptId: KWPH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Big trap: "Neutral pH is always exactly 7, at any temperature." FALSE — pH 7 is ' +
+      'neutral only at 25°C. Water\'s self-ionization is endothermic, so heating water ' +
+      'increases K_w, meaning MORE H⁺ and OH⁻ form (equally, so it\'s still neutral) but ' +
+      'at a HIGHER concentration — giving a LOWER pH for "neutral" at higher temperature ' +
+      '(e.g., neutral pH ≈ 6.14 at 50°C, still equal [H⁺]=[OH⁻], just not 7). "Neutral" ' +
+      'is defined by [H⁺]=[OH⁻], NOT by "pH=7" as an absolute rule. Second trap: "Acids ' +
+      'have zero OH⁻ ions." False — even strongly acidic solutions contain SOME OH⁻ ' +
+      '(vanishingly small, but never truly zero, because K_w must always be satisfied). ' +
+      'A pH=1 solution ([H⁺]=0.1M) still has [OH⁻] = 10⁻¹⁴/0.1 = 10⁻¹³ M — tiny but ' +
+      'nonzero.',
+    targetedMisconceptions: [`${KWPH}:MC1`, `${KWPH}:MC2`],
+    source: `${KWPH_SRC} — misconception: neutral pH is always exactly 7; acids have zero OH⁻`,
+  },
+]
+
+const KWPH_PROBES: SeedProbe[] = [
+  {
+    conceptId: KWPH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At 50°C, Kw increases to 5.5×10⁻¹⁴ (from 1.0×10⁻¹⁴ at 25°C). What is the pH of NEUTRAL water at 50°C?',
+    choices: [
+      { text: 'About 6.63 — [H⁺]=[OH⁻]=√Kw=√(5.5×10⁻¹⁴)≈2.35×10⁻⁷, so pH=−log(2.35×10⁻⁷)≈6.63 (still neutral despite pH<7)', isCorrect: true },
+      { text: 'Exactly 7.00 — neutral water always has pH 7 regardless of temperature', isCorrect: false, misconceptionId: `${KWPH}:MC1` },
+    ],
+    correctValue: '≈6.63 (still neutral, [H+]=[OH-])',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KWPH}:MC1`],
+    source: `${KWPH_SRC} — distractor targets "neutral = pH 7 always" misconception`,
+  },
+  {
+    conceptId: KWPH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does a strongly acidic solution (pH=1) contain ANY hydroxide ions (OH⁻)?',
+    choices: [
+      { text: 'Yes — a tiny but nonzero amount. Since [H+][OH-] = Kw always holds, [OH-] = Kw/[H+] = 10⁻¹⁴/0.1 = 10⁻¹³ M', isCorrect: true },
+      { text: 'No — acidic solutions contain zero hydroxide ions by definition', isCorrect: false, misconceptionId: `${KWPH}:MC2` },
+    ],
+    correctValue: 'Yes — tiny nonzero amount',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KWPH}:MC2`],
+    source: `${KWPH_SRC} — misconception: acids have absolutely zero OH⁻`,
+  },
+]
+
+// ─── chem.kinet.mechanism ────────────────────────────────────────────────────
+const MECH = 'chem.kinet.mechanism'
+const MECH_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.mechanism'
+
+const MECH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MECH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'A balanced equation shows the overall transformation, but rarely the ACTUAL ' +
+      'molecular process. A reaction MECHANISM breaks it into ELEMENTARY STEPS — each ' +
+      'representing one actual molecular collision or rearrangement. Species that appear ' +
+      'in intermediate steps but cancel out overall are INTERMEDIATES (formed then ' +
+      'consumed — never appear in the overall equation). The RATE-DETERMINING STEP (RDS) ' +
+      'is the SLOWEST elementary step — like a highway with one narrow bridge, the ' +
+      'overall traffic flow rate is set by the bottleneck, not the fast sections. The ' +
+      'RDS\'s stoichiometry directly gives the experimental rate law (for elementary ' +
+      'steps ONLY, unlike overall equations). A valid mechanism must: (1) sum to the ' +
+      'overall balanced equation, (2) have elementary steps consistent with molecularity ' +
+      '(unimolecular, bimolecular — termolecular is very rare, requiring 3 simultaneous ' +
+      'collisions), (3) predict the experimentally observed rate law via its RDS.',
+    targetedMisconceptions: [`${MECH}:MC1`],
+    source: `${MECH_SRC} — reaction mechanisms, intermediates, rate-determining step`,
+  },
+  {
+    conceptId: MECH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "A catalyst appears in the overall balanced equation." No — like ' +
+      'intermediates, catalysts are CONSUMED in an early step and REGENERATED in a ' +
+      'later step, so they cancel out of the overall equation too. The difference: ' +
+      'an intermediate is FORMED then consumed (appears as a product first, then ' +
+      'reactant); a catalyst is CONSUMED then regenerated (appears as a reactant first, ' +
+      'then product). Both are invisible in the overall equation but both are essential ' +
+      'to the mechanism — check the mechanism steps, not the overall equation, to find ' +
+      'them. Second trap: "Multiple mechanisms could equally well explain the same rate ' +
+      'law, so mechanism determination is arbitrary/unfalsifiable." Partially true — ' +
+      'multiple mechanisms CAN be consistent with one rate law, which is why chemists ' +
+      'say a mechanism is never "proven," only "not yet disproven" — but mechanisms are ' +
+      'tested against MULTIPLE lines of evidence (isotope labeling, intermediate ' +
+      'detection, stereochemistry) that can rule out incorrect proposals.',
+    targetedMisconceptions: [`${MECH}:MC1`, `${MECH}:MC2`],
+    source: `${MECH_SRC} — misconception: catalysts appear in overall equation; mechanisms are arbitrary`,
+  },
+]
+
+const MECH_PROBES: SeedProbe[] = [
+  {
+    conceptId: MECH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In a two-step mechanism, Step 1: A + B → C (slow); Step 2: C → D (fast). What is the experimental rate law?',
+    choices: [
+      { text: 'rate = k[A][B] — the rate-determining step (slowest, Step 1) sets the overall rate, and its molecularity gives the rate law directly', isCorrect: true },
+      { text: 'rate = k[C] — the rate law comes from the fast step since that\'s what produces the final product', isCorrect: false, misconceptionId: `${MECH}:MC3` },
+      { text: 'rate = k[A][B][C] — include all species from both steps', isCorrect: false },
+    ],
+    correctValue: 'rate = k[A][B]',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MECH}:MC3`],
+    source: `${MECH_SRC} — distractor targets "fast step determines rate" misconception`,
+  },
+  {
+    conceptId: MECH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A proposed mechanism includes a catalyst X. Should X appear in the overall balanced equation for the reaction?',
+    choices: [
+      { text: 'No — X is consumed in an early step and regenerated in a later step, so it cancels out of the overall equation, just like an intermediate cancels out (but in the opposite order: reactant-then-product vs. product-then-reactant)', isCorrect: true },
+      { text: 'Yes — catalysts must appear in the overall equation since they participate directly in the reaction', isCorrect: false, misconceptionId: `${MECH}:MC1` },
+    ],
+    correctValue: 'No — catalysts cancel out like intermediates',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MECH}:MC1`],
+    source: `${MECH_SRC} — misconception: catalysts show up in the overall stoichiometric equation`,
+  },
+]
+
+// ─── chem.kinet.integrated-rate ──────────────────────────────────────────────
+const INTRATE = 'chem.kinet.integrated-rate'
+const INTRATE_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.integrated-rate'
+
+const INTRATE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INTRATE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The differential rate law (rate = k[A]^n) tells you the SPEED at any instant, ' +
+      'but doesn\'t directly give concentration at a future time. INTEGRATING solves ' +
+      'this. For ZERO ORDER: [A] = [A]₀ − kt (linear decrease — plot [A] vs t is a ' +
+      'straight line). For FIRST ORDER: ln[A] = ln[A]₀ − kt (plot ln[A] vs t is linear); ' +
+      'half-life t½ = 0.693/k — CONSTANT, independent of starting concentration (this ' +
+      'is the special hallmark of first-order kinetics, used for radioactive decay and ' +
+      'many drug elimination processes). For SECOND ORDER: 1/[A] = 1/[A]₀ + kt (plot ' +
+      '1/[A] vs t is linear); half-life DEPENDS on starting concentration ' +
+      '(t½ = 1/(k[A]₀)) — gets LONGER as reaction proceeds and concentration drops. ' +
+      'The PRACTICAL use: plot your data three ways (linear, ln, reciprocal) — whichever ' +
+      'gives a straight line reveals the reaction order, and the slope gives you k.',
+    targetedMisconceptions: [`${INTRATE}:MC1`],
+    source: `${INTRATE_SRC} — integrated rate laws, half-life formulas by order`,
+  },
+  {
+    conceptId: INTRATE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Big trap: "Half-life is always constant, regardless of reaction order." FALSE — ' +
+      'this is ONLY true for first-order reactions. For zero order, half-life DECREASES ' +
+      'as the reaction proceeds (t½ = [A]₀/2k — smaller [A]₀ means smaller t½, so ' +
+      'successive half-lives get SHORTER). For second order, half-life INCREASES as the ' +
+      'reaction proceeds (t½ = 1/(k[A]₀) — as [A]₀ decreases each round, t½ grows). ' +
+      'This constant-half-life property is UNIQUE to first order and is exactly why it\'s ' +
+      'used to identify first-order kinetics experimentally (radioactive decay always ' +
+      'shows constant half-life — that\'s strong evidence it\'s first order). Second trap: ' +
+      '"You determine reaction order by looking at the balanced equation exponents." As ' +
+      'covered before — always experimental, never assumed from stoichiometry, even ' +
+      'when choosing which integrated rate law to test.',
+    targetedMisconceptions: [`${INTRATE}:MC1`],
+    source: `${INTRATE_SRC} — misconception: constant half-life applies to all reaction orders`,
+  },
+]
+
+const INTRATE_PROBES: SeedProbe[] = [
+  {
+    conceptId: INTRATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A radioactive isotope has a half-life of 10 days regardless of how much sample you start with. This constant half-life property indicates the decay is:',
+    choices: [
+      { text: 'First order — constant half-life independent of starting concentration is the defining signature of first-order kinetics', isCorrect: true },
+      { text: 'Zero order — the amount decreasing at a constant rate implies zero order', isCorrect: false, misconceptionId: `${INTRATE}:MC2` },
+      { text: 'It could be any order — half-life is always constant regardless of order', isCorrect: false, misconceptionId: `${INTRATE}:MC1` },
+    ],
+    correctValue: 'First order',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTRATE}:MC1`, `${INTRATE}:MC2`],
+    source: `${INTRATE_SRC} — distractor targets "half-life always constant" and "constant decrease = zero order" misconceptions`,
+  },
+  {
+    conceptId: INTRATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a second-order reaction, does each successive half-life get longer, shorter, or stay the same as the reaction proceeds?',
+    choices: [
+      { text: 'Longer — t½ = 1/(k[A]) depends inversely on the current concentration, and as [A] decreases through the reaction, each successive half-life takes more time', isCorrect: true },
+      { text: 'Stays the same — half-life is always constant for any reaction order, just like first order', isCorrect: false, misconceptionId: `${INTRATE}:MC1` },
+    ],
+    correctValue: 'Longer (increasing half-lives)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${INTRATE}:MC1`],
+    source: `${INTRATE_SRC} — misconception: applying first-order constant-half-life property universally`,
+  },
+]
+
+// ─── chem.kinet.catalysis ────────────────────────────────────────────────────
+const CATAL = 'chem.kinet.catalysis'
+const CATAL_SRC = 'docs/chemistry/kg/graph.json — chem.kinet.catalysis'
+
+const CATAL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CATAL,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A catalyst speeds up a reaction by providing an ALTERNATIVE PATHWAY with lower ' +
+      'activation energy — it does NOT get consumed overall (it\'s regenerated at the ' +
+      'end) and does NOT change ΔH or K (only kinetics, not thermodynamics — covered ' +
+      'earlier). HOMOGENEOUS catalysis: catalyst is in the SAME phase as reactants ' +
+      '(dissolved acid catalyzing an ester hydrolysis in solution) — works by forming a ' +
+      'reactive intermediate. HETEROGENEOUS catalysis: catalyst is in a DIFFERENT phase ' +
+      '(solid catalyst, gas reactants — like the solid Pt/Pd/Rh in a car\'s catalytic ' +
+      'converter) — works through ADSORPTION: reactant molecules stick to the catalyst ' +
+      'surface, weakening their own bonds and aligning them favorably for reaction, then ' +
+      'products desorb. ENZYMES are biological catalysts — highly specific (lock-and-key ' +
+      'or induced-fit binding to a substrate), can accelerate reactions by factors of ' +
+      'millions to trillions, and are themselves proteins that fold to create precisely ' +
+      'shaped active sites.',
+    targetedMisconceptions: [`${CATAL}:MC1`],
+    source: `${CATAL_SRC} — homogeneous/heterogeneous catalysis, enzymes, mechanism`,
+  },
+  {
+    conceptId: CATAL,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A catalyst makes a non-spontaneous reaction happen." FALSE — a catalyst ' +
+      'can ONLY speed up a reaction that is already thermodynamically favorable (ΔG<0). ' +
+      'It cannot make ΔG negative if it wasn\'t already; it just gets you to the (already ' +
+      'favorable) equilibrium faster. If a reaction is non-spontaneous, no catalyst will ' +
+      'make it happen spontaneously — you\'d need to supply energy (couple it to another ' +
+      'reaction, apply electricity, etc.), which is a fundamentally different intervention. ' +
+      'Second trap: "More catalyst always means a proportionally faster reaction, without ' +
+      'limit." For heterogeneous catalysis, rate depends on available SURFACE AREA — once ' +
+      'all reactant molecules are adsorbed onto available catalyst sites, adding MORE ' +
+      'catalyst (without more surface area exposed) won\'t help further; the rate can ' +
+      'plateau (saturation kinetics), similar to enzyme kinetics reaching V_max.',
+    targetedMisconceptions: [`${CATAL}:MC1`, `${CATAL}:MC2`],
+    source: `${CATAL_SRC} — misconception: catalysts enable non-spontaneous reactions; unlimited rate increase with more catalyst`,
+  },
+]
+
+const CATAL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CATAL,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A reaction has ΔG = +50 kJ/mol (non-spontaneous). Can a catalyst make this reaction proceed spontaneously?',
+    choices: [
+      { text: 'No — a catalyst only lowers activation energy to speed up an already-favorable reaction; it cannot change ΔG or make a non-spontaneous reaction spontaneous', isCorrect: true },
+      { text: 'Yes — a sufficiently effective catalyst can overcome any thermodynamic barrier', isCorrect: false, misconceptionId: `${CATAL}:MC1` },
+    ],
+    correctValue: 'No — catalysts cannot change thermodynamic favorability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CATAL}:MC1`],
+    source: `${CATAL_SRC} — distractor targets "catalysts make anything happen" misconception`,
+  },
+  {
+    conceptId: CATAL,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a heterogeneous catalytic reaction, doubling the amount of solid catalyst (while keeping surface area exposed to reactants the same, e.g. by stacking pellets) has what effect on rate?',
+    choices: [
+      { text: 'Little to no effect — heterogeneous catalysis depends on available SURFACE AREA in contact with reactants, not the bulk quantity of catalyst material', isCorrect: true },
+      { text: 'The rate doubles — more catalyst always proportionally speeds up the reaction', isCorrect: false, misconceptionId: `${CATAL}:MC2` },
+    ],
+    correctValue: 'Little effect (surface area matters, not bulk amount)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CATAL}:MC2`],
+    source: `${CATAL_SRC} — misconception: catalyst quantity (not surface area) determines rate enhancement`,
+  },
+]
+
+// ─── chem.surface.adsorption ─────────────────────────────────────────────────
+const ADSORB = 'chem.surface.adsorption'
+const ADSORB_SRC = 'docs/chemistry/kg/graph.json — chem.surface.adsorption'
+
+const ADSORB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ADSORB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Adsorption is molecules sticking to a SURFACE (different from absorption, where ' +
+      'molecules penetrate INTO the bulk — activated charcoal ADSORBS gases onto its ' +
+      'surface, while a sponge ABSORBS water into its structure). Two types: PHYSISORPTION ' +
+      '(weak van der Waals forces, low heat release ~20-40 kJ/mol, reversible, multilayer ' +
+      'possible, not very selective, decreases with temperature) and CHEMISORPTION ' +
+      '(actual chemical bonds form, much higher heat release ~80-400 kJ/mol, often ' +
+      'irreversible, strictly monolayer, highly selective/specific to certain surfaces, ' +
+      'INCREASES with temperature initially since bond formation needs some activation ' +
+      'energy). Adsorption depends on SURFACE AREA — that\'s why activated charcoal is ' +
+      'porous (huge internal surface area per gram, ~500-1500 m²/g) and why catalysts are ' +
+      'often finely divided or supported on porous materials. This underlies gas masks, ' +
+      'water purification, and heterogeneous catalysis.',
+    targetedMisconceptions: [`${ADSORB}:MC1`],
+    source: `${ADSORB_SRC} — adsorption vs absorption, physisorption vs chemisorption`,
+  },
+  {
+    conceptId: ADSORB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Common confusion: "Adsorption and absorption are the same process, just spelled ' +
+      'differently." No — they describe fundamentally different locations. Adsorption is ' +
+      'a SURFACE phenomenon (molecules accumulate ON the surface, 2D-like); absorption is ' +
+      'a BULK phenomenon (molecules distribute THROUGHOUT the material, 3D). Silica gel ' +
+      'packets in shoe boxes ADSORB moisture onto their vast internal surface; a paper ' +
+      'towel ABSORBS spilled water into its fibers. Second trap: "All adsorption weakens ' +
+      'with increasing temperature, following simple physical intuition." Only true for ' +
+      'PHYSISORPTION (van der Waals forces weaken with more thermal agitation). ' +
+      'CHEMISORPTION often INCREASES initially with temperature because forming actual ' +
+      'chemical bonds requires activation energy — heat helps overcome this barrier, up ' +
+      'to a point, before eventually decreasing at very high temperatures as bonds start ' +
+      'breaking (desorption dominates).',
+    targetedMisconceptions: [`${ADSORB}:MC1`, `${ADSORB}:MC2`],
+    source: `${ADSORB_SRC} — misconception: adsorption = absorption; all adsorption decreases with temperature`,
+  },
+]
+
+const ADSORB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ADSORB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Silica gel packets placed in a shoebox absorb moisture from the air onto their porous surface. This process is more accurately called:',
+    choices: [
+      { text: 'Adsorption — moisture molecules accumulate ON the vast internal surface of the porous silica, not distributed throughout its bulk structure', isCorrect: true },
+      { text: 'Absorption — since the packet takes up moisture from its surroundings, the terms are interchangeable', isCorrect: false, misconceptionId: `${ADSORB}:MC1` },
+    ],
+    correctValue: 'Adsorption (surface phenomenon)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ADSORB}:MC1`],
+    source: `${ADSORB_SRC} — distractor targets conflating adsorption with absorption`,
+  },
+  {
+    conceptId: ADSORB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A gas undergoing chemisorption on a metal surface shows increasing adsorption as temperature rises from 25°C to 150°C, unlike typical physisorption. Why?',
+    choices: [
+      { text: 'Chemisorption involves forming actual chemical bonds, which requires activation energy — moderate heating helps overcome this barrier, unlike physisorption\'s weak van der Waals forces which simply weaken with more thermal agitation', isCorrect: true },
+      { text: 'This is impossible — all forms of adsorption must decrease with increasing temperature without exception', isCorrect: false, misconceptionId: `${ADSORB}:MC2` },
+    ],
+    correctValue: 'Chemisorption requires activation energy, unlike physisorption',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ADSORB}:MC2`],
+    source: `${ADSORB_SRC} — misconception: all adsorption behaves like physisorption (monotonic decrease with T)`,
+  },
+]
+
+// ─── chem.thermo.cell-thermo ──────────────────────────────────────────────────
+const CELLTH = 'chem.thermo.cell-thermo'
+const CELLTH_SRC = 'docs/chemistry/kg/graph.json — chem.thermo.cell-thermo'
+
+const CELLTH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CELLTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Electrochemistry links THREE thermodynamic quantities through one bridge equation: ' +
+      'ΔG° = −nFE°_cell (n = moles of electrons transferred, F = Faraday constant ' +
+      '96,485 C/mol). A POSITIVE cell potential (E°>0) means a NEGATIVE ΔG° (spontaneous) ' +
+      '— this is why a battery with positive voltage can do work spontaneously. This also ' +
+      'connects to K via the earlier relation ΔG° = −RT ln K, giving: E°_cell = ' +
+      '(RT/nF) ln K — a cell\'s voltage directly tells you the equilibrium constant of its ' +
+      'underlying redox reaction. The NERNST EQUATION extends this to NON-standard ' +
+      'conditions: E = E° − (RT/nF) ln Q — as the reaction proceeds and Q approaches K, E ' +
+      'approaches zero (a "dead" battery is one that has REACHED equilibrium, Q=K, E=0 — ' +
+      'no more driving force). Temperature dependence of E° connects to ΔS° via ' +
+      '(∂E°/∂T) = ΔS°/nF — measuring how voltage changes with temperature reveals the ' +
+      'entropy change of the cell reaction.',
+    targetedMisconceptions: [`${CELLTH}:MC1`],
+    source: `${CELLTH_SRC} — ΔG°=−nFE°, Nernst equation, E°-K relationship`,
+  },
+  {
+    conceptId: CELLTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "A dead battery (E=0) means the reactants are completely used up." FALSE — ' +
+      'a dead battery has reached EQUILIBRIUM (Q=K), which typically still has substantial ' +
+      'reactant AND product present (unless K is extremely large). E=0 doesn\'t mean ' +
+      '"empty," it means "no more driving force for net current flow" — forward and ' +
+      'reverse electron transfer rates have become equal, just like chemical equilibrium. ' +
+      'Second trap: "A more negative ΔG° always means a bigger cell voltage." Not exactly ' +
+      '— the relationship ΔG° = −nFE° means voltage ALSO depends on n (electrons ' +
+      'transferred). A reaction with very negative ΔG° but large n could have a smaller ' +
+      'E° than a reaction with less negative ΔG° but smaller n. Always account for n when ' +
+      'comparing ΔG° values to voltages across different reactions.',
+    targetedMisconceptions: [`${CELLTH}:MC1`, `${CELLTH}:MC2`],
+    source: `${CELLTH_SRC} — misconception: dead battery = reactants exhausted; ΔG° and E° comparisons ignore n`,
+  },
+]
+
+const CELLTH_PROBES: SeedProbe[] = [
+  {
+    conceptId: CELLTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A battery reads E = 0 V (dead). What does this tell you about the reactants inside?',
+    choices: [
+      { text: 'The cell reaction has reached equilibrium (Q=K) — substantial reactant may still remain, but there is no more net driving force for current flow', isCorrect: true },
+      { text: 'All the original reactants have been completely consumed', isCorrect: false, misconceptionId: `${CELLTH}:MC1` },
+    ],
+    correctValue: 'Reached equilibrium, not necessarily depleted',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CELLTH}:MC1`],
+    source: `${CELLTH_SRC} — distractor targets "dead battery = empty" misconception`,
+  },
+  {
+    conceptId: CELLTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Reaction A has ΔG° = −200 kJ/mol with n=4 electrons transferred. Reaction B has ΔG° = −100 kJ/mol with n=1. Which has the larger cell potential E°?',
+    choices: [
+      { text: 'Reaction B — E° = −ΔG°/(nF); despite A having more negative ΔG°, dividing by n=4 gives a smaller E° than B\'s division by n=1', isCorrect: true },
+      { text: 'Reaction A — more negative ΔG° always means a larger E° regardless of n', isCorrect: false, misconceptionId: `${CELLTH}:MC2` },
+    ],
+    correctValue: 'Reaction B (smaller n gives larger E° here)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CELLTH}:MC2`],
+    source: `${CELLTH_SRC} — misconception: comparing ΔG° directly to E° while ignoring n`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -3340,6 +4319,18 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...GIBBS_EXPLANATIONS,
   ...THIRDL_EXPLANATIONS,
   ...OZONE_EXPLANATIONS,
+  ...ECONF_EXPLANATIONS,
+  ...QMM_EXPLANATIONS,
+  ...MODPER_EXPLANATIONS,
+  ...PERPROP_EXPLANATIONS,
+  ...EQCON_EXPLANATIONS,
+  ...KCKP_EXPLANATIONS,
+  ...KWPH_EXPLANATIONS,
+  ...MECH_EXPLANATIONS,
+  ...INTRATE_EXPLANATIONS,
+  ...CATAL_EXPLANATIONS,
+  ...ADSORB_EXPLANATIONS,
+  ...CELLTH_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -3384,4 +4375,16 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...GIBBS_PROBES,
   ...THIRDL_PROBES,
   ...OZONE_PROBES,
+  ...ECONF_PROBES,
+  ...QMM_PROBES,
+  ...MODPER_PROBES,
+  ...PERPROP_PROBES,
+  ...EQCON_PROBES,
+  ...KCKP_PROBES,
+  ...KWPH_PROBES,
+  ...MECH_PROBES,
+  ...INTRATE_PROBES,
+  ...CATAL_PROBES,
+  ...ADSORB_PROBES,
+  ...CELLTH_PROBES,
 ]
