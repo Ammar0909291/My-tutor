@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.extended-euclidean-algorithm-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.extended-euclidean-algorithm",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:292dfd49d9265bc3d3b290a4d0aa781154b6eb78546b19b48016a3ab70f6d991",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md": "sha256:d57aa0cdb44483ae4876510f0c68a7dbabe03843ea3e4a007258b25ef1ff0a1b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.extended-euclidean-algorithm",
+    "name": "Extended Euclidean Algorithm",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.euclidean-algorithm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.extended-euclidean-algorithm-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.extended-euclidean-algorithm (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md": "sha256:d57aa0cdb44483ae4876510f0c68a7dbabe03843ea3e4a007258b25ef1ff0a1b"
+      },
+      "contentHash": "sha256:fa700e53317f5cd82bf9b6ba30cd21a2e76c8b73cb2c6b50a0f4292f862eafa0",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.extended-euclidean-algorithm.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.extended-euclidean-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.extended-euclidean-algorithm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.extended-euclidean-algorithm.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.extended-euclidean-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.extended-euclidean-algorithm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.extended-euclidean-algorithm.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.extended-euclidean-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.extended-euclidean-algorithm\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.extended-euclidean-algorithm.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.extended-euclidean-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.extended-euclidean-algorithm\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the goal of the **Extended Euclidean Algorithm**: not just computing $\\gcd(a,b)$ (already known from `math.nt.euclidean-algorithm`), but ALSO finding integers $x,y$ such that $ax+by=\\gcd(a,b)$ — recognizing this as strictly MORE information than the ordinary algorithm provides, not a different computation of the same gcd.\n- LO2: Execute the extension by working BACKWARD through the ordinary Euclidean Algorithm's sequence of divisions, substituting each remainder equation back into the previous one until $\\gcd(a,b)$ is expressed purely in terms of the original $a$ and $b$.\n- LO3: Recognize that the integers $x,y$ found are **not unique** — infinitely many other valid $(x,y)$ pairs exist for the same $a,b$ — directly refuting the misconception that the specific $x,y$ produced by the back-substitution process is \"the\" unique correct answer, when it is merely one valid solution among infinitely many.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "EXTENDED-ALGORITHM-OUTPUT-ASSUMED-UNIQUE",
+      "content": "| MC-1 | EXTENDED-ALGORITHM-OUTPUT-ASSUMED-UNIQUE | Believing the specific integer pair $(x,y)$ produced by the Extended Euclidean Algorithm is the unique solution to $ax+by=\\gcd(a,b)$, missing that infinitely many other valid pairs exist | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "BACKWARD-SUBSTITUTION-DIRECTION-CONFUSED",
+      "content": "| MC-2 | BACKWARD-SUBSTITUTION-DIRECTION-CONFUSED | Substituting the division equations in the wrong order (forward instead of backward), or substituting the wrong remainder at a given step, producing an incorrect final coefficient pair | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "EXTENDED-ALGORITHM-CONFLATED-WITH-JUST-FINDING-GCD",
+      "content": "| MC-3 | EXTENDED-ALGORITHM-CONFLATED-WITH-JUST-FINDING-GCD | Running only the ordinary Euclidean Algorithm (finding just the gcd) when asked for the Extended version, missing that the coefficients $x,y$ are the entire additional point of the extension | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "The Extended Goal: gcd Plus Coefficients (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Extended Goal: gcd Plus Coefficients (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "Working Backward Through the Division Steps (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Working Backward Through the Division Steps (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "The Solution (x,y) Is Not Unique (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Solution (x,y) Is Not Unique (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Run the ordinary Euclidean Algorithm on $a=99,b=27$ to find $\\gcd(99,27)$, recording each division step.\n  2. Using your division steps from problem 1, work backward to find integers $x,y$ with $99x+27y=\\gcd(99,27)$.\n  3. Verify your answer to problem 2 by direct substitution back into $99x+27y$.\n  4. Given ONE solution $(x_0,y_0)$ to $ax+by=\\gcd(a,b)$, explain (using the general non-uniqueness formula or your own reasoning) how you could generate a second, different valid solution pair.\n- **P76 (Transfer Probe, mode = independence)**: \"A cryptography student needs to find the modular inverse of $17$ modulo $43$ — meaning an integer $x$ such that $17x\\equiv1\\pmod{43}$. They recall that finding such an $x$ is closely related to solving $17x+43y=\\gcd(17,43)$ for integer $x,y$. (a) Run the ordinary Euclidean Algorithm to confirm $\\gcd(17,43)=1$. (b) Use the Extended Euclidean Algorithm's backward-substitution process to find specific integers $x,y$ with $17x+43y=1$. (c) Explain why finding this $x$ (from part b) directly gives the modular inverse of $17$ mod $43$ that the student needs — connecting the equation $17x+43y=1$ to the congruence $17x\\equiv1\\pmod{43}$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.nt.euclidean-algorithm` (computing $\\gcd(a,b)$ via repeated replacement of $(a,b)$ with $(b,a\\bmod b)$ until the remainder is $0$, and the identity $\\gcd(a,b)=\\gcd(b,a\\bmod b)$ this relies on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.extended-euclidean-algorithm/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.extended-euclidean-algorithm",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.euclidean-algorithm` (the sequence of division steps this concept's backward pass operates on, and the $\\gcd(a,b)=\\gcd(b,a\\bmod b)$ identity underlying it).\n- **Unlocks**: `math.nt.modular-inverse` (the modular inverse of $a$ modulo $n$ is found directly via the $x$ coefficient of $ax+ny=1$, exactly the output this concept produces).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.extended-euclidean-algorithm.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

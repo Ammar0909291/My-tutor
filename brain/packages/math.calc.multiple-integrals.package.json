@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.multiple-integrals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.multiple-integrals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e6edd8c2712af707b8ea290a2178cb4222b9aa0e663bfc49dda0baa9a777451c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.multiple-integrals.md": "sha256:9eceb3b81a369148d4bd4c6ba1c2042583a7653ad445cf2dd2cb7172a2c72f3e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.multiple-integrals",
+    "name": "Multiple Integrals",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.calc.definite-integral",
+      "math.calc.multivariable-intro"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.multiple-integrals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.multiple-integrals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.multiple-integrals.md": "sha256:9eceb3b81a369148d4bd4c6ba1c2042583a7653ad445cf2dd2cb7172a2c72f3e"
+      },
+      "contentHash": "sha256:d91e4396e98276fdbace0866306604fb9c7ff82b0f03ce455314f28e163fd766",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.multiple-integrals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multiple-integrals.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multiple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multiple-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multiple-integrals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multiple-integrals.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multiple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multiple-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multiple-integrals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multiple-integrals.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multiple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multiple-integrals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multiple-integrals.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multiple-integrals.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multiple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multiple-integrals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.multiple-integrals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Interpret the **double integral** $\\iint_R f(x,y)\\,dA$ over a region $R$ as the volume between the surface $z=f(x,y)$ and the $xy$-plane (for $f\\ge0$), directly extending `math.calc.definite-integral`'s \"signed area\" interpretation to \"signed volume.\"\n- LO2: Compute a double integral over a **rectangular region** as an **iterated integral**, $\\int_c^d\\int_a^b f(x,y)\\,dx\\,dy$, integrating with respect to one variable at a time (holding the other fixed, per `math.calc.multivariable-intro`'s partial-derivative-style treatment) — and apply **Fubini's Theorem** to justify that the order of integration can be swapped freely when $f$ is continuous on the rectangle.\n- LO3: Compute a double integral over a **non-rectangular region** by correctly determining variable (function-dependent) bounds for the inner integral — directly refuting the misconception that the inner integral's bounds are always constants, when in general they depend on the outer variable.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "INNER-INTEGRAL-BOUNDS-ASSUMED-ALWAYS-CONSTANT",
+      "content": "| MC-1 | INNER-INTEGRAL-BOUNDS-ASSUMED-ALWAYS-CONSTANT | Believing the inner integral's bounds are always fixed numbers, missing that a non-rectangular region requires the inner bounds to be functions of the outer variable | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "ORDER-OF-INTEGRATION-ASSUMED-TO-ALWAYS-MATTER",
+      "content": "| MC-2 | ORDER-OF-INTEGRATION-ASSUMED-TO-ALWAYS-MATTER | Believing swapping the order of integration always changes the result (or is never permitted), missing Fubini's Theorem's guarantee for continuous integrands over the correctly re-described region | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "REGION-BOUNDARY-CURVES-MISIDENTIFIED-AS-UPPER-OR-LOWER",
+      "content": "| MC-3 | REGION-BOUNDARY-CURVES-MISIDENTIFIED-AS-UPPER-OR-LOWER | Reversing which curve serves as the upper bound and which as the lower bound for the inner integral, especially when the two boundary curves cross or are similar in shape | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Double Integral as Signed Volume (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Double Integral as Signed Volume (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Iterated Integration and Fubini's Order-Swap Guarantee (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Iterated Integration and Fubini's Order-Swap Guarantee (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Non-Rectangular Regions Need Variable Bounds (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Non-Rectangular Regions Need Variable Bounds (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\iint_R (2x+3y)\\,dA$ over $R=[0,1]\\times[0,2]$, integrating $x$ first.\n  2. Repeat problem 1 integrating $y$ first instead, and confirm both orders give the same answer (citing Fubini's Theorem).\n  3. Set up (do not necessarily fully evaluate) the iterated integral for $\\iint_R xy\\,dA$ where $R$ is the region bounded by $y=\\sqrt x$ and $y=x^2$ for $0\\le x\\le1$, identifying the correct variable bounds for the inner integral.\n  4. A student sets up $\\int_0^1\\int_0^1 xy\\,dy\\,dx$ for the region described in problem 3. Explain specifically why this is incorrect, referencing the actual shape of the region.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to compute the total mass of a thin metal plate shaped like the region between $y=4-x^2$ (a downward parabola) and $y=0$ (the $x$-axis), for $-2\\le x\\le2$, where the plate's density at each point is given by $\\rho(x,y)=1+x^2$. (a) Set up the iterated double integral $\\iint_R\\rho(x,y)\\,dA$ for this region, being careful to determine the correct (possibly variable) bounds for the inner integral. (b) Explain why using constant bounds $y$ from $0$ to $4$ (the maximum height of the parabola) would give an INCORRECT setup for this particular plate's mass, even though $4$ is technically the tallest point of the region. (c) Explain, referencing Fubini's Theorem, whether you could instead integrate with respect to $x$ first and $y$ second for this region, and what would be different about setting up THOSE bounds compared to your answer in part (a).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.definite-integral` (the single-variable definite integral as signed area, a limit of Riemann sums) and `math.calc.multivariable-intro` (functions of several variables, with domain a subset of $\\mathbb{R}^n$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.multiple-integrals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.multiple-integrals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.definite-integral` (the signed-area interpretation this concept extends to signed volume), `math.calc.multivariable-intro` (functions of two or more variables, the domain this concept integrates over).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multiple-integrals.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

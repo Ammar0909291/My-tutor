@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.product-rule-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.product-rule",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e116a35d7829c05fdf379763ce401c23cdc3ae03f933ff6714ae705f44e7d0fb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.product-rule.md": "sha256:7398c0eeb1b8d4b6802d9f625979b1de05a10260a1246c2276edcd700082311c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.product-rule",
+    "name": "Product Rule",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.derivative-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.product-rule-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.product-rule (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.product-rule.md": "sha256:7398c0eeb1b8d4b6802d9f625979b1de05a10260a1246c2276edcd700082311c"
+      },
+      "contentHash": "sha256:7401eb3dd772da5a65ebfb99a84385781f1ed245fa332eee15ae0b8e1a7278e1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.product-rule.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.product-rule.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.product-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.product-rule\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.product-rule.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.product-rule.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.product-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.product-rule\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.product-rule.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.product-rule.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.product-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.product-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.product-rule.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.product-rule.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.product-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.product-rule\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.product-rule/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.product-rule",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the **Product Rule**, $(fg)'=f'g+fg'$ — the derivative of a product is the derivative of the first times the second, PLUS the first times the derivative of the second — directly resolving `math.calc.derivative-rules`'s own flagged open misconception (that derivatives distribute over products as $f'g'$).\n- LO2: Correctly identify WHEN the Product Rule is genuinely necessary (a product of two functions that cannot be easily simplified into a single term first) versus when direct simplification (expanding or combining exponents) is simpler — recognizing the Product Rule as a tool of last resort for products, not a mandatory first step for every product-shaped expression.\n- LO3: Apply the Product Rule correctly to products involving MORE than two factors, or as an intermediate step in a larger expression, by treating one factor as \"the rest of the product\" grouped together — directly refuting the misconception that the Product Rule only applies to a product of exactly two named functions written in the exact textbook form.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.product-rule",
+      "title": "DERIVATIVE-DISTRIBUTED-OVER-PRODUCT",
+      "content": "| MC-1 | DERIVATIVE-DISTRIBUTED-OVER-PRODUCT | Computing $(fg)'$ as $f'g'$ (multiplying the two individual derivatives) instead of the correct $f'g+fg'$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.product-rule",
+      "title": "PRODUCT-RULE-RESTRICTED-TO-EXACTLY-TWO-NAMED-FACTORS",
+      "content": "| MC-2 | PRODUCT-RULE-RESTRICTED-TO-EXACTLY-TWO-NAMED-FACTORS | Believing the Product Rule only applies to a product of exactly two explicitly named functions in the textbook template, missing that grouping factors extends it to any number of factors | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.product-rule",
+      "title": "PRODUCT-RULE-APPLIED-WHERE-SIMPLIFICATION-IS-SIMPLER",
+      "content": "| MC-3 | PRODUCT-RULE-APPLIED-WHERE-SIMPLIFICATION-IS-SIMPLER | Reflexively applying the full Product Rule to every product-shaped expression, even when direct algebraic simplification (combining like powers) would be far simpler | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.product-rule",
+      "title": "The Correct Rule, Directly Resolving the Deferred Question (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Correct Rule, Directly Resolving the Deferred Question (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.product-rule",
+      "title": "Simplify First When Possible (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Simplify First When Possible (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.product-rule",
+      "title": "Extending to Three or More Factors (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Extending to Three or More Factors (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.product-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.product-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Differentiate $y=x^3\\cos x$ using the Product Rule, showing $f,g,f',g'$ explicitly before assembling the final answer.\n  2. Differentiate $y=(2x^3)(5x^4)$ BOTH by direct simplification first and by the full Product Rule, and confirm both methods give the same answer.\n  3. Differentiate $y=x^2e^x\\ln x$ (three factors), by grouping two factors together and applying the Product Rule twice.\n  4. A student computes $\\frac{d}{dx}[x^4\\sin x]$ as $4x^3\\cos x$ (multiplying the two individual derivatives). Explain what's wrong with this reasoning and provide the correct derivative.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist models the kinetic energy of a system with time-varying mass as $E(t) = \\frac{1}{2}m(t)v(t)^2$, where both the mass $m(t)$ and velocity $v(t)$ change over time (e.g. a rocket burning fuel while accelerating). (a) Treating $v(t)^2$ as a single 'chunk,' set up the Product Rule to differentiate $E(t)$ with respect to time, identifying which piece is $f$ and which is the chunk $g$. (b) Explain why simply computing $m'(t)\\cdot(v(t)^2)'$ (multiplying the two individual derivatives) would give a physically meaningless and mathematically incorrect result here, referencing the correct Product Rule structure. (c) If the physicist ALSO needed to account for a third time-varying quantity (e.g. a drag coefficient), explain how you would extend your Product Rule setup from part (a) to handle three time-varying factors.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.product-rule",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.derivative-rules` (the power rule, constant multiple rule, sum/difference rule — and that concept's own explicit flag that $\\frac{d}{dx}[f(x)g(x)]\\ne f'(x)g'(x)$, deferring the correct rule to this concept).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.product-rule/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.product-rule",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.derivative-rules` (the power/constant-multiple/sum-difference rules, and that concept's own explicitly deferred question — what IS $(fg)'$, if not $f'g'$ — resolved here).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.product-rule.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
