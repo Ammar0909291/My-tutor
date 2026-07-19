@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.system-3var-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.system-3var",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:661d0ccd6a9a9bcc5313f48e8ee38390ef6a44801f7d4ed6b44ceee386b74516",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.system-3var.md": "sha256:3b1a4d42d5c40e7c2d809d8501d4dd27552b10d7f76927dc6bed17a445d33746"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.system-3var",
+    "name": "Systems of 3 Equations in 3 Variables",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.system-linear-equations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.system-3var-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.system-3var (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.system-3var.md": "sha256:3b1a4d42d5c40e7c2d809d8501d4dd27552b10d7f76927dc6bed17a445d33746"
+      },
+      "contentHash": "sha256:0e8125baff7ec69a17c8367962f71f05df817bf7a85d14a9a5bb30bab6c1a6c7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.system-3var.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-3var.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-3var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-3var\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.system-3var.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-3var.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-3var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-3var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.system-3var.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-3var.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-3var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-3var\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.system-3var.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-3var.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-3var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-3var\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.system-3var/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.system-3var",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve a system of 3 equations in 3 unknowns via an **elimination cascade** — eliminate the same variable from TWO different pairs of equations to produce a genuinely reduced 2-variable, 2-equation system, then solve THAT system using the already-mastered `math.alg.system-linear-equations` elimination method.\n- LO2: Extend the 2-variable prerequisite's three solution cases (unique, none, infinite) to 3 variables, recognizing that the **infinite-solutions** case is now RICHER than before: it can describe either a **line** (a 1-parameter family, when exactly one equation is redundant) or an entire **plane** (a 2-parameter family, when two of the three equations are redundant) — not always a line, as the 2-variable case's own \"infinite = a line\" finding might suggest.\n- LO3: Recognize that a genuine contradiction ($0=k$, $k\\neq0$) found from ANY two of the three equations proves the whole system has no solution immediately, regardless of the third equation or which variable-elimination order was chosen — and preview `math.linalg.row-reduction`'s systematic augmented-matrix procedure as a more reliable alternative for larger or more error-prone systems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.system-3var",
+      "title": "SINGLE-ELIMINATION-ROUND-ASSUMED-SUFFICIENT",
+      "content": "| MC-1 | SINGLE-ELIMINATION-ROUND-ASSUMED-SUFFICIENT | Treating one reduced 2-variable equation as already solvable for both remaining variables, forgetting that a second elimination round (using a different pair of original equations) is needed to produce a genuine 2-equation, 2-variable system | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.system-3var",
+      "title": "INFINITE-SOLUTIONS-ASSUMED-ALWAYS-A-LINE",
+      "content": "| MC-2 | INFINITE-SOLUTIONS-ASSUMED-ALWAYS-A-LINE | Assuming the infinite-solutions case for a 3-variable system is always a line, as in the 2-variable case, missing that two redundant equations (rather than one) produce a plane's worth of solutions instead | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.system-3var",
+      "title": "CONTRADICTION-TREATED-AS-METHOD-ERROR",
+      "content": "| MC-3 | CONTRADICTION-TREATED-AS-METHOD-ERROR | Encountering a genuine contradiction (0=k, k≠0) from two of the three equations and assuming a mistake was made in variable choice or elimination order, rather than recognizing this proves the system has no solution regardless of method | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-3var",
+      "title": "The Elimination Cascade Needs Two Rounds (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Elimination Cascade Needs Two Rounds (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-3var",
+      "title": "Infinite Solutions Can Be a Line OR a Plane Now (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Infinite Solutions Can Be a Line OR a Plane Now (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-3var",
+      "title": "One Contradiction Settles Everything, and a Preview of a More Systematic Method (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"One Contradiction Settles Everything, and a Preview of a More Systematic Method (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-3var",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.system-3var",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Solve $x+y+z=4$, $x-y+z=2$, $2x+y-z=1$ using the elimination cascade (two rounds), stating the unique solution.\n  2. Solve $x+2y+z=5$, $2x+4y+2z=10$, $3x+6y+3z=15$, and state whether the solution set is a point, a line, or a plane.\n  3. Determine whether $x+y+z=3$, $2x+2y+2z=8$, $x-y+z=1$ has a solution, showing the elimination step that reveals the answer.\n  4. Explain, in your own words, why the \"infinitely many solutions\" case for a 3-variable system can be either a line or a plane, depending on how many of the three equations are redundant.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.row-reduction`)**: \"A chemist needs to balance a reaction requiring three unknown quantities $x,y,z$ of reactants, governed by three conservation equations. (a) Using the elimination cascade from this lesson, describe the two rounds of elimination you would perform to reduce this to a 2-variable system. (b) Suppose the chemist's colleague instead sets up the SAME three equations as an augmented matrix and applies `math.linalg.row-reduction`'s systematic column-by-column procedure. Explain why both approaches — your elimination cascade and the colleague's row reduction — must arrive at the identical solution (point, line, or plane), even though the colleague's method never requires deciding, by hand, which pairs of equations to combine first. (c) For a hypothetical system of 10 equations in 10 unknowns, explain why the row-reduction approach would be strongly preferred over manually planning an elimination cascade.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.system-3var",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.system-linear-equations` (a 2-variable system has three solution cases — unique solution, no solution, infinitely many solutions on a line; elimination combines equations to cancel one variable; $0=0$ signals a redundant/dependent equation, $0=k$ ($k\\neq0$) signals a contradiction).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.system-3var/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.system-3var",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.system-linear-equations` (the 2-variable elimination technique this concept's final reduction step directly reuses, and the three-solution-case framework this concept extends to 3 variables).\n- **Unlocks**: `math.linalg.row-reduction` (the systematic augmented-matrix procedure that formalizes exactly the elimination cascade this concept teaches by hand — already authored; see the cross-link note below).\n- **Cross-link (P76_mode = cross-link probe against `math.linalg.row-reduction`, already authored)**: the transfer probe explicitly connects this concept's hand-planned elimination cascade to `math.linalg.row-reduction`'s systematic column-by-column procedure, previewing why the latter becomes preferable as systems grow larger — reusing that concept's own established emphasis on elimination order no longer needing to be planned by hand.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-3var.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

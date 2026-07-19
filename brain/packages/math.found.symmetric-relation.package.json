@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.symmetric-relation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.symmetric-relation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5a2bc9fcb04faeec37ad137f06e6d971deda631fbc83ee3f3241b2677438c7b4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.symmetric-relation.md": "sha256:563a82be7108990595b385dc9240c5cca079914937ae69ed0350d3d056eef799"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.symmetric-relation",
+    "name": "Symmetric Relation",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.symmetric-relation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.symmetric-relation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.symmetric-relation.md": "sha256:563a82be7108990595b385dc9240c5cca079914937ae69ed0350d3d056eef799"
+      },
+      "contentHash": "sha256:6d985b691f23bdb65a369e44669bd089791a892057973f664883a332b6b7d041",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.symmetric-relation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.symmetric-relation.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.symmetric-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.symmetric-relation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.symmetric-relation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.symmetric-relation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.symmetric-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.symmetric-relation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.symmetric-relation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.symmetric-relation.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.symmetric-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.symmetric-relation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.symmetric-relation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.symmetric-relation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.symmetric-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.symmetric-relation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.symmetric-relation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **symmetric relation**: $R$ on $A$ is symmetric if $(a,b)\\in R \\Rightarrow (b,a)\\in R$ for **all** $a,b\\in A$ — and verify symmetry for a given small finite relation by checking, for EVERY listed pair, that its \"mirror\" pair is also present.\n- LO2: Recognize the **matrix signature** of symmetry — using `math.found.relation`'s own matrix representation $M$, $R$ is symmetric exactly when $M[i][j]=M[j][i]$ for every pair of indices $i,j$ (the matrix is symmetric across its main diagonal) — and correctly check this position-by-position, not by comparing rows and columns as ordered lists.\n- LO3: Correctly handle the two edge cases the \"for all\" definition implies: a relation containing only pairs of the form $(a,a)$ (self-loops) is symmetric (since $(a,a)\\Rightarrow(a,a)$ trivially), and the **empty relation** is vacuously symmetric (there are no pairs to violate the condition) — while also recognizing that a single missing mirror pair, anywhere in $R$, is enough to disprove symmetry entirely.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "SINGLE-COUNTEREXAMPLE-SUFFICIENT-OVERLOOKED",
+      "content": "| MC-1 | SINGLE-COUNTEREXAMPLE-SUFFICIENT-OVERLOOKED | Believing a relation is \"basically symmetric\" if most pairs have their mirror present, missing that even one (a,b)∈R without (b,a)∈R disproves symmetry entirely | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "SYMMETRIC-MATRIX-CHECK-MISAPPLIED",
+      "content": "| MC-2 | SYMMETRIC-MATRIX-CHECK-MISAPPLIED | Attempting to verify matrix symmetry by comparing rows to columns as overall lists, rather than checking specific entries M[i][j] vs M[j][i] position-by-position | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "VACUOUS-OR-SELF-LOOP-SYMMETRY-DENIED",
+      "content": "| MC-3 | VACUOUS-OR-SELF-LOOP-SYMMETRY-DENIED | Believing a relation containing only self-loop pairs (a,a), or the empty relation, fails to be symmetric, missing that both trivially/vacuously satisfy the condition | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "Checking Every Pair for Its Mirror (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Checking Every Pair for Its Mirror (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "One Missing Mirror Is Enough to Break Symmetry (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"One Missing Mirror Is Enough to Break Symmetry (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "The Matrix Check, and the Empty/Self-Loop Edge Cases (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Matrix Check, and the Empty/Self-Loop Edge Cases (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 13,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\{1,2,3,4\\}$ and $R=\\{(1,2),(2,1),(3,4),(4,3)\\}$, verify whether $R$ is symmetric by checking every pair.\n  2. For $A=\\{1,2,3\\}$ and $R=\\{(1,2),(2,1),(2,3)\\}$, determine whether $R$ is symmetric, identifying the specific pair (if any) that breaks symmetry.\n  3. Write out the matrix $M$ for the relation in problem 1, and verify $M[i][j]=M[j][i]$ for every entry.\n  4. Is the relation $R=\\{(2,2)\\}$ on $A=\\{1,2,3\\}$ symmetric? Is the empty relation on $A$ symmetric? Explain both using the \"for all\" definition.\n- **P76 (Transfer Probe, mode = independence)**: \"A social network models 'is friends with' as a relation $R$ on the set of users, where $(a,b)\\in R$ means 'user $a$ lists user $b$ as a friend.' (a) In a network where friendship must always be mutual (if $a$ friends $b$, then $b$ automatically friends $a$ too), explain why this relation is symmetric. (b) A different app allows one-way 'follows' relationships (like $a$ follows $b$ without $b$ following $a$ back). If even a SINGLE user follows someone who doesn't follow them back, explain why the entire 'follows' relation for that app fails to be symmetric, even if most users do follow each other back. (c) Explain what it would mean, in this social-network context, for the 'follows' relation to be the empty relation, and why that case would still count as symmetric.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.relation` (a relation $R$ on $A$ is a subset of ordered pairs $A\\times A$; the matrix representation $M[i][j]=1$ iff $(a_i,a_j)\\in R$; domain, codomain, and image).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.symmetric-relation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.symmetric-relation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.relation` (the definition of a relation as a set of ordered pairs, and its matrix representation this concept's LO2 directly reuses).\n- **Unlocks**: `math.found.equivalence-relation` (reflexive + symmetric + transitive combined — this concept supplies the symmetric component).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.symmetric-relation.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

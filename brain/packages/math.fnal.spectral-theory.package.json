@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.spectral-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.spectral-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:15a8ab9a858856bad1e2e17da87d5fbcf9f87f16127da42b9278429102129e90",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.spectral-theory.md": "sha256:e5b0d482abff791a55a492c0f8a549f7bd852bd6c94cc3f86c837f106fd44547"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.spectral-theory",
+    "name": "Spectral Theory",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.fnal.bounded-operator",
+      "math.fnal.hilbert-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.spectral-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.spectral-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.spectral-theory.md": "sha256:e5b0d482abff791a55a492c0f8a549f7bd852bd6c94cc3f86c837f106fd44547"
+      },
+      "contentHash": "sha256:ae6d11145991756837acaaa446dd3088e60fba000476eb91a24a3b709be34c7e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.spectral-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.spectral-theory.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.spectral-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.spectral-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.spectral-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.spectral-theory.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.spectral-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.spectral-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.spectral-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.spectral-theory.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.spectral-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.spectral-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.spectral-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.spectral-theory.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.spectral-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.spectral-theory\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.spectral-theory/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **spectrum** $\\sigma(T) = \\{\\lambda\\in\\mathbb{C} : T-\\lambda I \\text{ is not invertible (with bounded inverse)}\\}$ and the **resolvent set** $\\rho(T)=\\mathbb{C}\\setminus\\sigma(T)$ for a bounded operator $T$ on a Hilbert space — directly generalizing `math.linalg.eigenvalues`' finite-dimensional definition ($\\lambda$ an eigenvalue iff $A-\\lambda I$ is singular iff $\\det(A-\\lambda I)=0$) to infinite dimensions, where determinants no longer exist and \"not invertible\" must replace \"$\\det=0$\" as the defining condition — and recognize that, unlike in finite dimensions, a point of $\\sigma(T)$ need **not** be an actual eigenvalue (an eigenvector for that $\\lambda$ need not exist at all).\n- LO2: State that for **self-adjoint** bounded operators, $\\sigma(T)\\subseteq\\mathbb{R}$ — directly generalizing `math.linalg.spectral-theorem`'s finding that real symmetric matrices have real eigenvalues — and recognize that this infinite-dimensional fact is verified through operator-theoretic invertibility arguments, NOT by finding roots of a characteristic polynomial (which does not exist for a general infinite-dimensional operator).\n- LO3 (orientation level — full spectral-measure construction beyond this corpus's current scope): state the general **Spectral Theorem** — every normal (in particular self-adjoint) bounded operator on a Hilbert space \"diagonalizes\" via a **spectral measure**, a genuinely more general object than `math.linalg.spectral-theorem`'s finite sum $A=Q\\Lambda Q^T$ — and recognize that a spectral measure can represent a **continuous** spectrum (uncountably many spectral values with no discrete eigenvector basis at all), not merely \"the same finite construction with more terms.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "SPECTRUM-POINT-ASSUMED-TO-BE-EIGENVALUE",
+      "content": "| MC-1 | SPECTRUM-POINT-ASSUMED-TO-BE-EIGENVALUE | Carrying the finite-dimensional equivalence \"not invertible = has an eigenvector\" into infinite dimensions, where a spectral value can arise from a failure of surjectivity alone, with no eigenvector attached | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "REAL-SPECTRUM-PROOF-METHOD-ASSUMED-POLYNOMIAL-BASED",
+      "content": "| MC-2 | REAL-SPECTRUM-PROOF-METHOD-ASSUMED-POLYNOMIAL-BASED | Assuming that verifying a self-adjoint operator's spectrum is real requires computing something analogous to a characteristic polynomial, missing that the infinite-dimensional proof uses operator-theoretic invertibility arguments instead | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "SPECTRAL-MEASURE-TREATED-AS-EXTENDED-FINITE-SUM",
+      "content": "| MC-3 | SPECTRAL-MEASURE-TREATED-AS-EXTENDED-FINITE-SUM | Believing the general Spectral Theorem's spectral measure is just the finite eigenvalue/eigenvector decomposition with more terms, missing that a continuous spectrum with no eigenvectors requires a qualitatively different kind of object | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "From Determinants to Invertibility (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Determinants to Invertibility (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "A Spectral Point That Is Not an Eigenvalue (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Spectral Point That Is Not an Eigenvalue (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "Real Spectrum Without a Polynomial, and a Measure Instead of a Finite Sum (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Real Spectrum Without a Polynomial, and a Measure Instead of a Finite Sum (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 23,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why the shift operator $S$ from Example 1 has $\\|S\\|=1$ and why $0\\in\\sigma(S)$, citing specifically which invertibility condition (injectivity or surjectivity) fails.\n  2. Explain why $0$ is not an eigenvalue of $S$, even though $0\\in\\sigma(S)$.\n  3. For the multiplication operator $M$ on $L^2[0,1]$ from Example 2, explain why $\\lambda=2$ is in the resolvent set $\\rho(M)$ (i.e. $M-2I$ has a bounded inverse), referencing the boundedness of $1/(x-2)$ on $[0,1]$.\n  4. Explain, in your own words, why the general Spectral Theorem needs a spectral MEASURE rather than a finite sum of eigenprojections, using $M$'s complete lack of eigenvectors as your example.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.eigenvalues` and `math.linalg.spectral-theorem`)**: \"Recall from `math.linalg.eigenvalues` that a finite matrix's eigenvalues are found by solving $\\det(A-\\lambda I)=0$, and from `math.linalg.spectral-theorem` that a real symmetric matrix factors as $A=Q\\Lambda Q^T$ using a FINITE, complete list of eigenvalues and orthonormal eigenvectors. (a) Explain precisely why the determinant-based method for finding eigenvalues cannot be applied to the shift operator $S$ or the multiplication operator $M$ from this lesson's examples. (b) Both $S$ and $M$ turned out to have spectral points with NO corresponding eigenvectors — explain why this could never happen for a finite symmetric (or even general) matrix, referencing rank-nullity. (c) `math.linalg.spectral-theorem`'s $Q$ was built by collecting a FINITE list of normalized eigenvectors as columns. Explain why this exact construction is impossible for the operator $M$, and what kind of object (per this lesson's LO3) would need to replace it.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 23,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.bounded-operator` ($\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|<\\infty$; bounded iff continuous for linear maps; $B(X,Y)$ as a normed, often Banach, space) and `math.fnal.hilbert-space` (a complete inner product space; the Projection Theorem at orientation level; Hilbert $\\Rightarrow$ Banach but not conversely).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.spectral-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.spectral-theory",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.bounded-operator` (the operator norm and $B(X,Y)$'s own structure, needed to define \"bounded inverse\" precisely), `math.fnal.hilbert-space` (the setting — a complete inner product space — in which this concept's operators act).\n- **Unlocks**: `math.fnal.compact-operator-spectrum` (the special, more tractable case where the spectrum consists only of eigenvalues accumulating at most at $0$ — resolving, for that operator class specifically, this concept's own LO1 caveat about non-eigenvalue spectral points).\n- **Cross-links (P76_mode = cross-link probe against `math.linalg.eigenvalues` and `math.linalg.spectral-theorem`, both already authored)**: `math.linalg.eigenvalues` supplies the finite-dimensional eigenvalue definition and characteristic-equation method this concept's LO1 directly generalizes (and the rank-nullity fact underlying MC-1's finite-dimensional equivalence); `math.linalg.spectral-theorem` supplies the finite factorization $A=Q\\Lambda Q^T$ this concept's LO3 generalizes to a spectral measure, and its real-symmetric-matrix example is directly reused as the contrast target in Teaching Action A03.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.spectral-theory.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
