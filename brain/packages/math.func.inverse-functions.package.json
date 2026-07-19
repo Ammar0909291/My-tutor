@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.inverse-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.inverse-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c4df8c1bd30d926a183e9a12895219e24586dac8f0f3a82b65b04355336794bc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.inverse-functions.md": "sha256:08090a8afb4d6d8e251807ff934a6ab6e7123f3cf20380abee05e7329a6c3d37"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.func.inverse-functions",
+    "name": "Inverse Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.func.bijection"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.inverse-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.inverse-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.inverse-functions.md": "sha256:08090a8afb4d6d8e251807ff934a6ab6e7123f3cf20380abee05e7329a6c3d37"
+      },
+      "contentHash": "sha256:bc14b2a27b4c9afda83f342abd4bf9f480850f6385eeeb12be57194ad6264cf7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.inverse-functions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.inverse-functions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.inverse-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.inverse-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.inverse-functions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.inverse-functions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.inverse-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.inverse-functions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.inverse-functions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.inverse-functions.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.inverse-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.inverse-functions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.inverse-functions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.inverse-functions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.inverse-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.inverse-functions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.inverse-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **inverse function** $f^{-1}$ of a bijective function $f$ as the function satisfying BOTH $f^{-1}(f(x))=x$ (for all $x$ in $f$'s domain) and $f(f^{-1}(y))=y$ (for all $y$ in $f$'s codomain) — directly building on `math.func.bijection`'s own \"exactly one preimage\" construction of $f^{-1}$ as a genuine function.\n- LO2: Find $f^{-1}$ algebraically for a specific bijective function (solve $y=f(x)$ for $x$, then swap variable names), and verify the result using a GENERAL algebraic argument valid for ARBITRARY $x$ — not by checking the identity at one sampled numerical value, which proves nothing about every other input.\n- LO3: Recognize that a function must FIRST be bijective (restricting the domain if necessary, exactly per `math.func.bijection`'s gatekeeping requirement) before a genuine inverse function exists at all, and correctly identify that the graph of $f^{-1}$ is the reflection of $f$'s graph over the line $y=x$ — not over the $x$-axis or $y$-axis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.inverse-functions",
+      "title": "INVERSE-VERIFIED-BY-SAMPLING",
+      "content": "| MC-1 | INVERSE-VERIFIED-BY-SAMPLING | Believing checking f⁻¹(f(x))=x for one specific numerical value proves the candidate inverse is correct, rather than requiring a general algebraic argument valid for all x | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.inverse-functions",
+      "title": "INVERSE-ASSUMED-TO-EXIST-WITHOUT-BIJECTIVITY-CHECK",
+      "content": "| MC-2 | INVERSE-ASSUMED-TO-EXIST-WITHOUT-BIJECTIVITY-CHECK | Believing an inverse function can be found for any function as long as y=f(x) can be somehow solved for x, missing that bijectivity (per math.func.bijection) must hold first, or the domain must be restricted | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.inverse-functions",
+      "title": "INVERSE-GRAPH-REFLECTED-OVER-WRONG-AXIS",
+      "content": "| MC-3 | INVERSE-GRAPH-REFLECTED-OVER-WRONG-AXIS | Believing the graph of f⁻¹ is obtained by reflecting f's graph over the x-axis (or y-axis), rather than over the line y=x | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Constructing and Verifying Generally, Not by Sampling (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Constructing and Verifying Generally, Not by Sampling (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Bijectivity First, Inverse Second (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bijectivity First, Inverse Second (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.inverse-functions",
+      "title": "The Graph Reflects Over y=x, Not the x-Axis (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Graph Reflects Over y=x, Not the x-Axis (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find $f^{-1}$ for $f(x)=2x-5$, and verify $f^{-1}(f(x))=x$ generally (not for just one number).\n  2. Explain why $f(x)=x^3$ is bijective on all of $\\mathbb{R}$ (no domain restriction needed), and find its inverse.\n  3. Explain why $f(x)=|x|$ has no inverse function on all of $\\mathbb{R}$, and state a domain restriction that would make it invertible.\n  4. If $(3,7)$ is a point on the graph of a bijective function $f$, state the corresponding point on the graph of $f^{-1}$, and explain which reflection line justifies your answer.\n- **P76 (Transfer Probe, mode = independence)**: \"A currency conversion function $f(d) = 82.5d$ converts $d$ US dollars into an equivalent amount of Indian rupees (at a fixed exchange rate). (a) Explain why this function is bijective on its natural domain (positive real numbers), and find its inverse function $f^{-1}$. (b) Explain, in plain terms, what $f^{-1}$ represents in this currency context, and verify $f(f^{-1}(y))=y$ generally for arbitrary $y$. (c) A bank employee claims that since currency conversion 'obviously has an inverse' (you can always convert rupees back to dollars), NO function used for financial conversions ever needs to be checked for bijectivity first. Using this lesson's $f(x)=x^2$ counterexample, explain why this claim is not generally true, even though it happens to hold for this particular linear conversion function.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.func.bijection` (a function is bijective iff both injective and surjective; bijectivity guarantees every codomain element has EXACTLY one preimage; attempting to invert a non-bijective function produces something that fails to be a genuine function).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.inverse-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.inverse-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.func.bijection` (the injective+surjective combination this concept's existence claim depends on entirely, and the \"exactly one preimage\" construction of $f^{-1}$ as a genuine function).\n- **Unlocks**: `math.trig.inverse-trig` (the trigonometric functions' own domain-restricted inverses, e.g. $\\arcsin$, directly instantiate this concept's LO3 domain-restriction requirement), `math.alg.logarithm` (the logarithm is defined as the inverse of the exponential function, another direct instantiation of this concept).\n- **Cross-link**: KG lists `math.trig.inverse-trig` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into inverse trigonometric functions' domain restrictions once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.inverse-functions.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

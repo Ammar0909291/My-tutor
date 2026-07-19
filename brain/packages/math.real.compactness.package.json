@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.compactness-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.compactness",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cc48989988bc8a9f49da87d9c495bf7b18a6f315ae2401d2a73ff45e3927b5fb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.compactness.md": "sha256:c3f965d77883e4e1255d72b5216d94566c2a485c33646979f8acba257ca8feb1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.compactness",
+    "name": "Compactness",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.open-sets"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.compactness-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.compactness (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.compactness.md": "sha256:c3f965d77883e4e1255d72b5216d94566c2a485c33646979f8acba257ca8feb1"
+      },
+      "contentHash": "sha256:5cbba4b08cbb49e1b6580bc1f9a509460e19ec7bcd69ba4865f92b371b87396d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.compactness.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.compactness.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.compactness\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.compactness.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.compactness.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.compactness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.compactness.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.compactness.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.compactness\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.compactness.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.compactness.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.compactness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.compactness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.compactness/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.compactness",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **open cover** of $K$ (a collection of open sets whose union contains $K$) and define $K$ as **compact** if EVERY open cover has a FINITE subcover — correctly recognizing this is a universal claim about ALL possible covers, not merely a claim that some well-chosen cover happens to reduce to a finite subcollection.\n- LO2: State the **Heine-Borel theorem** (specific to $\\mathbb{R}^n$): $K$ is compact iff $K$ is BOTH closed AND bounded — recognizing that bounded ALONE is not sufficient (nor is closed alone); both conditions from `math.real.open-sets`'s own closed-set definition are required together.\n- LO3: State **sequential compactness** (every sequence in $K$ has a subsequence converging to a point actually WITHIN $K$) as an equivalent characterization in metric spaces, correctly distinguishing \"the subsequence converges to some real number\" from \"the subsequence converges to a point genuinely inside $K$ itself.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.compactness/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.compactness",
+      "title": "SOME-COVER-REDUCIBLE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS",
+      "content": "| MC-1 | SOME-COVER-REDUCIBLE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS | Believing finding some open cover that reduces to a finite subcover proves compactness, missing that EVERY open cover must have this property, not just one convenient example | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.compactness/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.compactness",
+      "title": "BOUNDED-ALONE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS",
+      "content": "| MC-2 | BOUNDED-ALONE-ASSUMED-SUFFICIENT-FOR-COMPACTNESS | Believing boundedness alone guarantees compactness in ℝⁿ, missing that closedness is an independently required condition per Heine-Borel | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.compactness/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.compactness",
+      "title": "SEQUENCE-CONVERGENCE-TO-ANY-LIMIT-ASSUMED-SUFFICIENT-FOR-SEQUENTIAL-COMPACTNESS",
+      "content": "| MC-3 | SEQUENCE-CONVERGENCE-TO-ANY-LIMIT-ASSUMED-SUFFICIENT-FOR-SEQUENTIAL-COMPACTNESS | Believing a sequence inside K having a convergent subsequence (to any real number) proves K is sequentially compact, missing that the limit point must itself belong to K | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.compactness/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.compactness",
+      "title": "One Bad Cover Is Enough to Disprove Compactness (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"One Bad Cover Is Enough to Disprove Compactness (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.compactness/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.compactness",
+      "title": "Bounded Alone Is Not Enough — Both Conditions Are Required (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bounded Alone Is Not Enough — Both Conditions Are Required (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.compactness/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.compactness",
+      "title": "The Limit Must Land Back Inside K (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Limit Must Land Back Inside K (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.compactness/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.compactness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.compactness/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.compactness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Show that the open cover $\\{(-n,n) : n=1,2,3,\\ldots\\}$ of $\\mathbb{R}$ has no finite subcover, and explain what this proves about $\\mathbb{R}$'s compactness.\n  2. Using Heine-Borel, determine whether $[2,\\infty)$ is compact, justifying your answer via both the closed and bounded conditions.\n  3. Using Heine-Borel, determine whether $(0,5]$ is compact, identifying specifically which condition (closed or bounded) fails, if any.\n  4. Give a sequence inside $(0,5]$ that converges to a point NOT in $(0,5]$, and explain why this shows $(0,5]$ is not sequentially compact.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to guarantee that an optimization algorithm searching over a parameter set $K\\subseteq\\mathbb{R}^n$ will always find a genuine best solution (not just get arbitrarily close without ever reaching it). (a) Using Heine-Borel, explain what two conditions the engineer should verify about $K$ to have confidence the search set is compact. (b) Suppose $K$ is defined by a strict inequality, like $K=\\{x : \\|x\\|<10\\}$ (an open ball) — explain, using this lesson's $(0,1)$ example as a direct analogy, why this specific $K$ fails to be compact, and what could go wrong for the optimization search as a result. (c) Explain how changing the definition to $K=\\{x:\\|x\\|\\le10\\}$ (a closed ball) resolves the issue, connecting this directly to the closed-vs-bounded distinction from Heine-Borel.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.compactness/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.compactness",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.open-sets` (the open ball $B(x,r)$; a set is open if every point is interior; a set is closed if its complement is open, equivalently if it contains all its limit points; open and closed are not opposites in the naive sense).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.compactness/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.compactness",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.open-sets` (open balls, interior points, the closed-set definition via complements/limit points this concept's Heine-Borel characterization directly reuses).\n- **Unlocks**: `math.real.extreme-value-theorem` (a continuous function on a compact set always attains a maximum and minimum — this concept's compactness is exactly the hypothesis that theorem requires).\n- **Cross-link**: KG lists `math.top.compactness` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into the general topological-space definition of compactness (open-cover based, without reference to a metric) once that entry exists — this metric-space treatment is exactly the motivating special case for that later abstraction, paralleling `math.real.open-sets`' own noted relationship to `math.top.open-sets`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.compactness.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
