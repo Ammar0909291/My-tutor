@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.matrix-inverse-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.matrix-inverse",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d06d7c94aeacbd1ba57852b64186e0a20c1ba47ca07e5db84b1799b109870d92",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.matrix-inverse.md": "sha256:301430158780c1b8fd17b354df5a005ac0cddb2981304f08e6b2123cd82ae07a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.linalg.matrix-inverse",
+    "name": "Matrix Inverse",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.matrix-multiplication",
+      "math.linalg.determinant"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.matrix-inverse-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.matrix-inverse (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.matrix-inverse.md": "sha256:301430158780c1b8fd17b354df5a005ac0cddb2981304f08e6b2123cd82ae07a"
+      },
+      "contentHash": "sha256:6bcf063c118cf47f005446d193d612830a506bf8d3e91d5745c1264680354fbe",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-inverse.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-inverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-inverse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-inverse.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-inverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-inverse\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-inverse.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-inverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-inverse\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.matrix-inverse/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **inverse** $A^{-1}$ of a square matrix $A$ as the (unique, when it exists) matrix satisfying $AA^{-1}=A^{-1}A=I$, and state the key equivalence: $A$ is invertible **iff** $\\det(A)\\neq0$ (equivalently, iff rank$(A)=n$, iff the columns are linearly independent).\n- LO2: Compute $A^{-1}$ for a $2\\times2$ matrix using the direct formula $A^{-1}=\\frac{1}{\\det(A)}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$ for $A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, and for larger matrices using **row reduction** on the augmented matrix $[A|I]\\to[I|A^{-1}]$.\n- LO3: Correctly identify when a matrix is **singular** (non-invertible, $\\det(A)=0$) BEFORE attempting to compute an inverse, and explain why row reduction on a singular matrix's augmented form will fail to reach $[I|\\ldots]$ — recognizing this failure as diagnostic, not a computational error.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "INVERTIBILITY-NOT-CHECKED-FIRST",
+      "content": "| MC-1 | INVERTIBILITY-NOT-CHECKED-FIRST | Attempting to compute a matrix inverse (via the 2×2 formula or row reduction) without first checking whether the determinant is nonzero, wasting effort on a singular matrix | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "SINGULAR-ROW-REDUCTION-TREATED-AS-ERROR",
+      "content": "| MC-2 | SINGULAR-ROW-REDUCTION-TREATED-AS-ERROR | Believing an all-zero row appearing during row reduction on $[A|I]$ indicates a computational mistake to fix, rather than recognizing it as the correct, diagnostic confirmation that $A$ is singular | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "INVERSE-FORMULA-APPLIED-WITHOUT-DIVIDING-BY-DETERMINANT",
+      "content": "| MC-3 | INVERSE-FORMULA-APPLIED-WITHOUT-DIVIDING-BY-DETERMINANT | When using the 2×2 inverse formula, swapping and negating the entries correctly but forgetting to divide the entire result by $\\det(A)$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "The 2×2 Inverse Formula, and Verifying $AA^{-1}=I$ (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The 2×2 Inverse Formula, and Verifying $AA^{-1}=I$ (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "Singular Matrices: Diagnosis, Not Failure (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Singular Matrices: Diagnosis, Not Failure (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find $A^{-1}$ for $A=\\begin{pmatrix}5&3\\\\2&2\\end{pmatrix}$ using the 2×2 formula, and verify $AA^{-1}=I$.\n  2. Determine whether $B=\\begin{pmatrix}4&6\\\\2&3\\end{pmatrix}$ is invertible, by checking $\\det(B)$ FIRST, before attempting any row reduction.\n  3. Find $C^{-1}$ for $C=\\begin{pmatrix}2&0&0\\\\0&3&0\\\\0&0&4\\end{pmatrix}$ using row reduction (or by recognizing its diagonal structure directly).\n  4. Explain what it means, concretely, if row reduction on $[D|I]$ produces an all-zero row on the left side partway through — is this an error to fix, or a conclusion to accept?\n- **P76 (Transfer Probe, mode = independence)**: \"A system of equations modeling a supply chain is written in matrix form $A\\mathbf{x}=\\mathbf{b}$, where $A$ encodes the relationships between suppliers and products. Before attempting to solve for $\\mathbf{x}$ by computing $A^{-1}\\mathbf{b}$, an analyst wants to verify this approach will even work. (a) Using this lesson's invertibility criterion, explain what specific property of $A$ (checkable via the determinant) must hold before $A^{-1}$ exists at all. (b) The analyst computes $\\det(A)=0$ — explain what this means for the supply chain system (in terms of the columns of $A$ being linearly DEPENDENT), and why attempting $A^{-1}\\mathbf{b}$ is not just difficult but genuinely impossible in this case, rather than a case requiring more computational effort.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.matrix-multiplication` (computing $AB$, and that matrix multiplication is generally non-commutative) and `math.linalg.determinant` (computing $\\det(A)$, and that $\\det(A)\\neq0$ iff $A$ is invertible — already stated there as a key fact, now put to full use here).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-inverse/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.matrix-inverse",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.matrix-multiplication` (needed to verify $AA^{-1}=I$ and to understand the row-reduction procedure's mechanics), `math.linalg.determinant` (the invertibility criterion $\\det(A)\\neq0$ this entire concept is built around).\n- **Unlocks**: `math.linalg.cramer-rule` (Cramer's Rule uses determinants and the inverse relationship to solve linear systems directly).\n- **Cross-link**: KG lists `math.abst.group-inverse` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.abst.group-inverse.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's matrix-inverse-existence criterion directly to the general abstract-algebra notion of an inverse element in a group (invertible matrices under multiplication form a group, $GL_n$, with this concept's $A^{-1}$ being exactly that group's inverse operation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-inverse.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

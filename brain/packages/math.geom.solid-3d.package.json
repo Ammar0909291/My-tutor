@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.solid-3d-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.solid-3d",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bea9e20437b8ff4cd8416ab8b4861f1ea28e26f670b52bef965861e0434e257f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.solid-3d.md": "sha256:a8e6ffec652efcc6853936ec1b4c2770b5f9ea8ad26893c812d03ca6fd44b3da"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.solid-3d",
+    "name": "Three-Dimensional Solids",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.geom.polygon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.solid-3d-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.solid-3d (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.solid-3d.md": "sha256:a8e6ffec652efcc6853936ec1b4c2770b5f9ea8ad26893c812d03ca6fd44b3da"
+      },
+      "contentHash": "sha256:b6f16405d3253c2a0eed80fb362614868556861ac949741c5b1bf4f2d0b9841b",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.solid-3d.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.solid-3d.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.solid-3d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.solid-3d\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.solid-3d.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.solid-3d.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.solid-3d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.solid-3d\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.solid-3d.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.solid-3d.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.solid-3d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.solid-3d\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.solid-3d/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.solid-3d",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify and describe the standard families of three-dimensional solids: **prisms** (uniform polygon cross-section extended along an axis), **pyramids** (a polygon base tapering to a single apex), **cones** and **cylinders** (circular-base analogues of pyramids/prisms), and **spheres** (no flat faces at all).\n- LO2: Count the **faces (F)**, **edges (E)**, and **vertices (V)** of a given polyhedron (a solid with flat polygonal faces), and state and apply **Euler's formula** $V-E+F=2$ to verify a count or to find a missing count given the other two.\n- LO3: Recognize that Euler's formula applies specifically to **polyhedra without holes** (topologically sphere-like solids) — correctly identify that curved solids like spheres, cones, and cylinders require adjusted/different counting conventions (e.g. treating a curved surface as a single \"face\" is a convention choice, not a universal rule), and that a solid with a hole (like a torus/donut shape) genuinely violates $V-E+F=2$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.solid-3d",
+      "title": "EULERS-FORMULA-OVERGENERALIZED-TO-CURVED-SOLIDS",
+      "content": "| MC-1 | EULERS-FORMULA-OVERGENERALIZED-TO-CURVED-SOLIDS | Believing Euler's formula $V-E+F=2$ applies universally to all 3D solids, including curved ones (spheres, cones, cylinders), rather than recognizing it as specifically derived for flat-faced polyhedra without holes | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.solid-3d",
+      "title": "PRISM-PYRAMID-CONFLATED",
+      "content": "| MC-2 | PRISM-PYRAMID-CONFLATED | Confusing prisms (uniform cross-section throughout) with pyramids (tapering to a single apex), particularly for solids with unfamiliar or irregular polygon bases | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.solid-3d",
+      "title": "HOLE-IN-SOLID-ASSUMED-TO-STILL-SATISFY-EULERS-FORMULA",
+      "content": "| MC-3 | HOLE-IN-SOLID-ASSUMED-TO-STILL-SATISFY-EULERS-FORMULA | Believing a solid with a hole through it (like a torus) must still satisfy $V-E+F=2$ if it is counted carefully enough, rather than recognizing the formula's value genuinely differs for such solids | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.solid-3d",
+      "title": "The Standard Solid Families, via Physical Models (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Standard Solid Families, via Physical Models (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.solid-3d",
+      "title": "Euler's Formula, Its Scope, and Solids with Holes (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Euler's Formula, Its Scope, and Solids with Holes (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.solid-3d",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.solid-3d",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Identify which solid family (prism, pyramid, cone, cylinder, sphere) best describes: a can of soup, a wizard's hat, a gemstone with a rectangular cross-section extended along its length.\n  2. A square pyramid has 5 faces (1 square base + 4 triangular sides), 8 edges, and 5 vertices. Verify Euler's formula for this solid.\n  3. A polyhedron has 12 vertices and 30 edges. Using Euler's formula, find the number of faces.\n  4. Explain why applying $V-E+F=2$ directly to a sphere (which has no clearly countable faces, edges, or vertices in the usual sense) doesn't straightforwardly make sense the way it does for a cube, connecting your answer to what kind of solid the formula was actually derived for.\n- **P76 (Transfer Probe, mode = independence)**: \"A furniture designer is prototyping a decorative object built by gluing together flat polygon panels (no curved surfaces at all) with 8 vertices and 12 edges. (a) Using Euler's formula, predict how many flat panel faces the finished object must have. (b) The designer's alternative prototype instead uses a smoothly curved ceramic donut shape (a torus) with a hole through the middle — explain, using this lesson's discussion of solids-with-holes, why you could NOT use the same $V-E+F=2$ formula to predict a missing count for this second object, even in principle, regardless of how carefully faces/edges/vertices might be defined for it.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.solid-3d",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.polygon` (closed straight-sided plane figures, which serve as the cross-sections/bases of prisms and pyramids).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.solid-3d/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.solid-3d",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.polygon` (the polygon bases/cross-sections that define prisms and pyramids).\n- **Unlocks**: `math.geom.surface-area` (computing surface area requires correctly identifying and measuring each face of a solid, exactly as classified here), `math.geom.volume` (volume formulas are specific to each solid family identified here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.solid-3d.md",
+        "startLine": 98,
+        "endLine": 104
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
