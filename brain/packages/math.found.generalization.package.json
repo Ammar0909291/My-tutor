@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.generalization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.generalization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a2cc935c52d9d344d98a8e114f2d1aaba4f97b98030c2e5fa122a13ffdfe35fa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.generalization.md": "sha256:0a7cad161affd27b7f7b282d8bf9d8b43509fc41cc5fce79a8c9215ad3ff7ad1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.generalization",
+    "name": "Generalization",
+    "difficultyRaw": "foundational",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.pattern-recognition",
+      "math.found.abstraction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.generalization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.generalization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.generalization.md": "sha256:0a7cad161affd27b7f7b282d8bf9d8b43509fc41cc5fce79a8c9215ad3ff7ad1"
+      },
+      "contentHash": "sha256:72ab8b22acea6f33fe26d18769ad50fa3ada67102b33028c441afc863dd01e83",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.generalization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.generalization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.generalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.generalization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.generalization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.generalization.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.generalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.generalization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.generalization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.generalization.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.generalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.generalization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.generalization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.generalization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.generalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.generalization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.generalization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.generalization",
+      "title": "Learning Objectives",
+      "content": "- LO1: Distinguish generalization (asserting a claim holds for a BROAD, often infinite, class of cases beyond those examined) from `math.found.pattern-recognition` (finding a rule that fits a SPECIFIC given sequence) and `math.found.abstraction` (identifying which properties are essential across contexts) — recognizing generalization typically combines both: pattern-recognition supplies candidate structure, abstraction identifies which features are essential, and generalization is the further, distinct act of asserting the claim extends beyond the examined cases.\n- LO2: Recognize that a generalization is a **conjecture**, not yet an established fact — no finite number of confirming cases, however many, can PROVE a generalization true for every case, only a genuine proof (`math.found.proof`) can.\n- LO3: Distinguish a **valid** generalization (an invariant structure genuinely present across the full intended class) from an **overgeneralization** (a claim that holds for the examined cases but fails once a single sufficiently different or untested case is checked), using a concrete counterexample test.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.generalization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.generalization",
+      "title": "CONFIRMING-CASES-CONSTITUTE-PROOF",
+      "content": "| MC-1 | CONFIRMING-CASES-CONSTITUTE-PROOF | Believing that checking a generalization against many specific cases proves it true for all cases, missing that no finite number of confirmations can rule out a future counterexample | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.generalization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.generalization",
+      "title": "INSUFFICIENT-VARIATION-IN-TESTED-CASES",
+      "content": "| MC-2 | INSUFFICIENT-VARIATION-IN-TESTED-CASES | Believing testing multiple cases that are all structurally similar to each other (e.g., all odd primes) sufficiently tests a generalization about a broader class (e.g., all primes), missing the need for structurally atypical test cases | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.generalization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.generalization",
+      "title": "SURFACE-SIMILARITY-MISTAKEN-FOR-INVARIANT-STRUCTURE",
+      "content": "| MC-3 | SURFACE-SIMILARITY-MISTAKEN-FOR-INVARIANT-STRUCTURE | Generalizing a property observed across several similar-looking cases to a much broader class, without identifying whether the genuine underlying structural cause actually extends to that broader class | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.found.generalization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.generalization",
+      "title": "Generalization Is a New Act, Beyond Finding a Rule or Identifying Essentials (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Generalization Is a New Act, Beyond Finding a Rule or Identifying Essentials (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.generalization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.generalization",
+      "title": "Confirming Cases Never Prove a Generalization (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Confirming Cases Never Prove a Generalization (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.generalization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.generalization",
+      "title": "Test Structurally Varied Cases, Not Just More of the Same Kind (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Test Structurally Varied Cases, Not Just More of the Same Kind (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 15,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.found.generalization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.generalization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 22,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.found.generalization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.generalization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. The claim \"$2^{2^n}+1$ is always prime\" was checked and found true for $n=0,1,2,3,4$ (the Fermat primes). Explain why this does not constitute a proof, and state what a single counterexample at $n=5$ would show.\n  2. A student tests \"the product of two consecutive integers is always even\" only on positive integers $2\\times3=6$, $5\\times6=30$, $9\\times10=90$. Identify a structurally different case (not yet tested) that should also be checked, and evaluate whether the claim survives it.\n  3. A learner observes that a square and an equilateral triangle both have \"all sides equal\" and generalizes \"all polygons with equal side lengths are regular.\" Give a counterexample (a polygon with all equal side lengths that is NOT regular) and identify the genuine invariant structure the learner missed.\n  4. Explain, in your own words, the difference between \"this generalization is well-supported by evidence\" and \"this generalization is proven.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A researcher studying a new numerical sequence finds that the first 15 terms all satisfy a proposed formula $a_n=n^2-n+11$. (a) Explain what checking these 15 terms does and does NOT establish about the formula holding for every $n$. (b) The researcher wants to test the generalization more rigorously before attempting a proof. Describe what KIND of additional test case(s) would be most informative to check next, and why 'checking 15 more terms in the same range' would add little value. (c) A colleague claims 'since the formula has held for 15 straight terms, it is now essentially proven, and a formal proof would just be a formality.' Using this lesson's distinction between a well-supported conjecture and a proof, explain specifically why this claim is incorrect.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 22,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.found.generalization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.generalization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.pattern-recognition` (the 4-step process of identifying a rule from specific instances, and that a finite sequence may admit more than one fitting rule) and `math.found.abstraction` (identifying essential shared properties across contexts while ignoring irrelevant surface details).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.generalization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.generalization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.pattern-recognition` (supplies the rule-finding process this concept extends into a broader claim), `math.found.abstraction` (supplies the essential-property identification this concept relies on to distinguish genuine invariant structure from surface similarity, as in Example 3).\n- **Unlocks**: `math.found.proof` (the only way to actually ESTABLISH a generalization as a mathematical fact, per LO2), `math.found.axiom` (the starting principles any proof of a generalization must ultimately rest on).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.generalization.md",
+        "startLine": 95,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
