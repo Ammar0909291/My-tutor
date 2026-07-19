@@ -4,16 +4,21 @@
  * Responsible for: automatic Knowledge Asset bootstrap.
  *
  * On every cold start (local dev and Vercel), if the AssetIdentity table
- * is empty, the authored seed assets (brainSeedAssets + authoredSeedAssets)
- * are inserted as ACTIVE rows so assembleLesson() starts serving authored
- * content immediately — without requiring manual `npm run seed:brain-assets`.
+ * has fewer rows than the expected seed total, the authored seed assets
+ * (brainSeedAssets + authoredSeedAssets) are inserted as ACTIVE rows so
+ * assembleLesson() starts serving authored content immediately — without
+ * requiring manual `npm run seed:brain-assets`.
  *
  * Design:
- *  - Fast path: a single COUNT query. If rows exist, exits in < 5 ms.
+ *  - Fast path: a single COUNT query checked against the expected total.
+ *    If rows ≥ expected, exits in < 5 ms.
+ *  - Partial-seed safe: COUNT < expected triggers a resume run; per-slug
+ *    dedup skips already-inserted rows and inserts the missing ones.
+ *  - Concurrency safe: P2002 (unique constraint on canonicalSlug) is caught
+ *    per-asset and treated as skip, so two simultaneous cold starts both
+ *    converge on a complete catalogue without aborting each other.
  *  - Never blocks request handling — runs in the background after the
  *    server is ready (Next.js calls register() before the first request).
- *  - Idempotent: the seed script's canonicalSlug uniqueness check prevents
- *    duplicates on repeated cold starts.
  *  - Opt-out: set DISABLE_ASSET_BOOTSTRAP=true to skip entirely.
  */
 export async function register() {
@@ -34,14 +39,7 @@ async function bootstrapAssets() {
     const prisma = new PrismaClient()
 
     try {
-      const existing = await prisma.assetIdentity.count()
-      if (existing > 0) {
-        console.log(`[instrumentation] asset bootstrap: ${existing} rows already present — skipping`)
-        return
-      }
-
-      console.log('[instrumentation] asset bootstrap: table empty — seeding authored assets...')
-
+      // Load seed arrays first so we know the expected total before querying.
       const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug } =
         await import('./lib/teaching/assets/brainSeedAssets')
       const { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } =
@@ -51,6 +49,17 @@ async function bootstrapAssets() {
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
+      const EXPECTED_TOTAL = ALL_EXPLANATIONS.length + ALL_PROBES.length
+
+      const existing = await prisma.assetIdentity.count()
+      if (existing >= EXPECTED_TOTAL) {
+        console.log(`[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} rows present — skipping`)
+        return
+      }
+
+      console.log(
+        `[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} rows present — seeding missing assets...`
+      )
 
       let created = 0
       let skipped = 0
@@ -59,78 +68,89 @@ async function bootstrapAssets() {
         const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
         const dup = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
         if (dup) { skipped++; continue }
-        await prisma.assetIdentity.create({
-          data: {
-            family: AssetFamily.EXPLANATION,
-            familyKind: e.familyKind,
-            conceptId: e.conceptId,
-            language: SEED_LANGUAGE,
-            gradeBand: e.gradeBand,
-            authorId: SEED_AUTHOR_ID,
-            authorKind: AuthorKind.HUMAN_CURATOR,
-            status: AssetStatus.ACTIVE,
-            version: 1,
-            canonicalSlug,
-            contentHash: hashContent(e.content),
-            tags: [e.subjectSlug, e.familyKind],
-            intellectualProperty: 'proprietary',
-            curriculumMappings: [],
-            incompatibilities: [],
-            prerequisites: [],
-            explanationAsset: {
-              create: {
-                content: e.content,
-                style: ExplanationStyle.CONCRETE,
-                readingLevel: 0,
-                lengthChars: e.content.length,
-                targetedMisconceptions: e.targetedMisconceptions,
+        try {
+          await prisma.assetIdentity.create({
+            data: {
+              family: AssetFamily.EXPLANATION,
+              familyKind: e.familyKind,
+              conceptId: e.conceptId,
+              language: SEED_LANGUAGE,
+              gradeBand: e.gradeBand,
+              authorId: SEED_AUTHOR_ID,
+              authorKind: AuthorKind.HUMAN_CURATOR,
+              status: AssetStatus.ACTIVE,
+              version: 1,
+              canonicalSlug,
+              contentHash: hashContent(e.content),
+              tags: [e.subjectSlug, e.familyKind],
+              intellectualProperty: 'proprietary',
+              curriculumMappings: [],
+              incompatibilities: [],
+              prerequisites: [],
+              explanationAsset: {
+                create: {
+                  content: e.content,
+                  style: ExplanationStyle.CONCRETE,
+                  readingLevel: 0,
+                  lengthChars: e.content.length,
+                  targetedMisconceptions: e.targetedMisconceptions,
+                },
               },
             },
-          },
-        })
-        created++
+          })
+          created++
+        } catch (createErr: any) {
+          // P2002 = concurrent cold start already inserted this slug — safe to skip.
+          if (createErr?.code === 'P2002') { skipped++; continue }
+          throw createErr
+        }
       }
 
       for (const p of ALL_PROBES) {
         const canonicalSlug = seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)
         const dup = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
         if (dup) { skipped++; continue }
-        await prisma.assetIdentity.create({
-          data: {
-            family: AssetFamily.PROBE,
-            familyKind: p.probeKind,
-            conceptId: p.conceptId,
-            language: SEED_LANGUAGE,
-            gradeBand: p.gradeBand,
-            authorId: SEED_AUTHOR_ID,
-            authorKind: AuthorKind.HUMAN_CURATOR,
-            status: AssetStatus.ACTIVE,
-            version: 1,
-            canonicalSlug,
-            contentHash: hashContent(p.stem),
-            tags: [p.subjectSlug, p.probeKind],
-            intellectualProperty: 'proprietary',
-            curriculumMappings: [],
-            incompatibilities: [],
-            prerequisites: [],
-            probeAsset: {
-              create: {
-                stem: p.stem,
-                choices: p.choices ? (p.choices as unknown as object) : undefined,
-                correctValue: p.correctValue,
-                keywords: [],
-                difficulty: p.difficulty,
-                targetedMisconceptions: p.targetedMisconceptions,
-                requiredVisuals: [],
+        try {
+          await prisma.assetIdentity.create({
+            data: {
+              family: AssetFamily.PROBE,
+              familyKind: p.probeKind,
+              conceptId: p.conceptId,
+              language: SEED_LANGUAGE,
+              gradeBand: p.gradeBand,
+              authorId: SEED_AUTHOR_ID,
+              authorKind: AuthorKind.HUMAN_CURATOR,
+              status: AssetStatus.ACTIVE,
+              version: 1,
+              canonicalSlug,
+              contentHash: hashContent(p.stem),
+              tags: [p.subjectSlug, p.probeKind],
+              intellectualProperty: 'proprietary',
+              curriculumMappings: [],
+              incompatibilities: [],
+              prerequisites: [],
+              probeAsset: {
+                create: {
+                  stem: p.stem,
+                  choices: p.choices ? (p.choices as unknown as object) : undefined,
+                  correctValue: p.correctValue,
+                  keywords: [],
+                  difficulty: p.difficulty,
+                  targetedMisconceptions: p.targetedMisconceptions,
+                  requiredVisuals: [],
+                },
               },
             },
-          },
-        })
-        created++
+          })
+          created++
+        } catch (createErr: any) {
+          if (createErr?.code === 'P2002') { skipped++; continue }
+          throw createErr
+        }
       }
 
       console.log(
-        `[instrumentation] asset bootstrap complete: created=${created} skipped=${skipped} total=${ALL_EXPLANATIONS.length + ALL_PROBES.length}`
+        `[instrumentation] asset bootstrap complete: created=${created} skipped=${skipped} total=${EXPECTED_TOTAL}`
       )
     } finally {
       await prisma.$disconnect()
