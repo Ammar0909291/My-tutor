@@ -26,6 +26,18 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           <p className="text-sm" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>
             {t('error_body')}
           </p>
+          {error.digest && (
+            // Production strips the real error message/stack for security,
+            // but Next.js's error.digest is a stable ID that correlates to
+            // the exact server-side log line — safe to show (it leaks
+            // nothing about the failure itself) and is otherwise impossible
+            // to recover from a screenshot alone, which repeatedly made it
+            // impossible to tell a timeout apart from a genuinely different
+            // thrown error when this screen was reported from production.
+            <p className="text-xs select-all" style={{ color: 'var(--candy-ink-soft)', opacity: 0.6, fontFamily: 'monospace' }}>
+              Error ID: {error.digest}
+            </p>
+          )}
           <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
             <CandyButton
               onClick={() => reset()}
