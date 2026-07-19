@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.logarithmic-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.logarithmic-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d309b7bc445b98a0c1cc226dc853fa73d0a99b57b6e565c5c81fe2c89f3d0261",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.logarithmic-function.md": "sha256:ddf139645186db03863dcd24b745dae8a4647a3c682da3e6c8141cb92d740896"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.func.logarithmic-function",
+    "name": "Logarithmic Function",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.alg.logarithm",
+      "math.func.inverse-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.logarithmic-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.logarithmic-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.logarithmic-function.md": "sha256:ddf139645186db03863dcd24b745dae8a4647a3c682da3e6c8141cb92d740896"
+      },
+      "contentHash": "sha256:85437e931f21687070bfbb9197b5585af1f374f1107e19cef534908223836750",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.logarithmic-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.logarithmic-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.logarithmic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.logarithmic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.logarithmic-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.logarithmic-function.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.logarithmic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.logarithmic-function\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.logarithmic-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.logarithmic-function.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.logarithmic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.logarithmic-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.logarithmic-function.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.logarithmic-function.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.logarithmic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.logarithmic-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.logarithmic-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize $\\log_a(x)$ as the **inverse function** of $a^x$ (reusing `math.func.inverse-functions`'s own inverse machinery) with domain and range SWAPPED from the exponential — since $a^x$ has range $(0,\\infty)$, $\\log_a(x)$ has DOMAIN $(0,\\infty)$, correctly explaining why the log of a nonpositive number is undefined as a direct consequence of this swap, not an arbitrary restriction.\n- LO2: **Graph** $\\log_a(x)$ as the reflection of $a^x$ across the line $y=x$ (reusing `math.func.inverse-functions`'s own reflection technique), correctly deriving the resulting key features (vertical asymptote at $x=0$, passing through $(1,0)$) as direct consequences of the exponential's own already-known features (horizontal asymptote $y=0$, $y$-intercept $(0,1)$), not as independently memorized facts.\n- LO3 (orientation level — full derivation deferred to the unlocked child): recognize the **natural logarithm** $\\ln x$ specifically as $\\log_e(x)$, the inverse of `math.func.exponential-function`'s natural exponential $e^x$, and recognize, without deriving, that its derivative is exactly $1/x$ — deferred to `math.calc.derivative-ln`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "LOG-DOMAIN-ASSUMED-ARBITRARY",
+      "content": "| MC-1 | LOG-DOMAIN-ASSUMED-ARBITRARY | Believing the domain restriction $(0,\\infty)$ on $\\log_a(x)$ is an arbitrary rule to memorize, missing that it is a direct, derivable consequence of $a^x$'s own range | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "LOG-GRAPH-ASSUMED-INDEPENDENT-FACTS",
+      "content": "| MC-2 | LOG-GRAPH-ASSUMED-INDEPENDENT-FACTS | Believing the log function's graph must be separately memorized, missing that every key feature is a direct reflection of the already-known exponential graph across $y=x$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "LN-X-ASSUMED-ARBITRARILY-CHOSEN",
+      "content": "| MC-3 | LN-X-ASSUMED-ARBITRARILY-CHOSEN | Believing $\\ln x$ is an arbitrarily named logarithm with no special calculus significance, missing that it is specifically singled out as the inverse of the self-derivative exponential $e^x$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "The Domain Restriction Is Derived, Not Arbitrary (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Domain Restriction Is Derived, Not Arbitrary (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "The Graph Is Reflected, Not Independently Memorized (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Graph Is Reflected, Not Independently Memorized (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "$\\ln x$ Is Singled Out Because $e^x$ Is Special (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"$\\\\ln x$ Is Singled Out Because $e^x$ Is Special (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Since $f(x)=5^x$ has range $(0,\\infty)$, state the domain of its inverse $\\log_5(x)$, and explain why $\\log_5(-3)$ is undefined using the inverse-domain-range-swap reasoning.\n  2. Given that $3^x$ passes through $(0,1)$ with horizontal asymptote $y=0$, state the corresponding point and asymptote for $\\log_3(x)$'s graph, using the reflection-across-$y=x$ argument.\n  3. Explain why $\\ln x$ is specifically defined as $\\log_e(x)$ rather than a log to some other base, referencing this lesson's connection to $e^x$.\n  4. A student says \"the derivative of $\\ln x$ is complicated because logarithms are complicated functions.\" Using this lesson's preview, explain why this intuition is actually backwards.\n- **P76 (Transfer Probe, mode = independence)**: \"A scientist models sound intensity using the decibel formula, which involves $\\log_{10}(x)$. (a) Explain, using the inverse-function domain/range-swap reasoning from this lesson, why $\\log_{10}$ of a negative sound-intensity value would be mathematically undefined (not merely 'a weird edge case'). (b) If $10^x$ has a $y$-intercept at $(0,1)$ and horizontal asymptote $y=0$, state the corresponding features of $\\log_{10}(x)$'s graph. (c) Explain why scientists might prefer using $\\log_{10}$ specifically (rather than $\\ln$) for a decibel-style formula, while mathematicians studying calculus overwhelmingly prefer $\\ln$ — referencing this lesson's discussion of what makes $e$ special.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.logarithm` ($\\log_a(x)$ as the exponent to which $a$ must be raised to give $x$) and `math.func.inverse-functions` (the domain/range swap and graph-reflection-across-$y=x$ techniques for constructing an inverse function).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.logarithmic-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.logarithmic-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.logarithm` (the basic definition of $\\log_a(x)$ as an exponent) and `math.func.inverse-functions` (the domain/range-swap and reflection-across-$y=x$ techniques this concept applies directly).\n- **Unlocks**: `math.calc.derivative-ln` (will fully derive $\\dfrac d{dx}[\\ln x]=\\dfrac1x$, previewed at orientation level in LO3; not yet authored).\n- **Cross-link**: KG lists `math.calc.derivative-ln`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.logarithmic-function.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

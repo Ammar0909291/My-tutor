@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.generating-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.generating-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:be0a720b3f24cbd870c0fe825324a563b45a5b4c4fc7f13bd24ecbebd42329ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.generating-functions.md": "sha256:2a7eaca20f88563ca0270f4e1b528d5e9415db53458559d546b554b155a692a4"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.generating-functions",
+    "name": "Generating Functions",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.disc.combinatorics",
+      "math.disc.recurrence-relation",
+      "math.seq.series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.generating-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.generating-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.generating-functions.md": "sha256:2a7eaca20f88563ca0270f4e1b528d5e9415db53458559d546b554b155a692a4"
+      },
+      "contentHash": "sha256:c4c721f382754ab4d0577054ede4b05c47a21223d7f49d182448d05dafa9866e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.generating-functions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.generating-functions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.generating-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.generating-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.generating-functions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.generating-functions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.generating-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.generating-functions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.generating-functions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.generating-functions.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.generating-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.generating-functions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.generating-functions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.generating-functions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.generating-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.generating-functions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.generating-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.generating-functions",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **ordinary generating function (OGF)** $A(x)=\\sum a_nx^n$ for a sequence $\\{a_n\\}$ as a FORMAL power series — a bookkeeping device whose COEFFICIENTS carry the sequence's information — and construct it directly for a simple known sequence, reusing `math.seq.series`'s own geometric series machinery.\n- LO2: Apply generating functions to **solve a recurrence relation** — reusing `math.disc.recurrence-relation`'s own Fibonacci-style recurrence — by translating the recurrence into an algebraic equation for $A(x)$ and solving for $A(x)$ in closed form, recognizing this as a genuinely DIFFERENT technique from that concept's characteristic-equation method, not a restatement of it.\n- LO3 (orientation level — surveying the concept's own two named children): recognize the **exponential generating function (EGF)** $B(x)=\\sum a_nx^n/n!$ as a variant suited to LABELED structures, contrasting it with the OGF's suitability for unlabeled counting — deferred to `math.disc.ogf`/`math.disc.egf` for full development.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.generating-functions",
+      "title": "GENERATING-FUNCTION-REQUIRES-NUMERICAL-EVALUATION",
+      "content": "| MC-1 | GENERATING-FUNCTION-REQUIRES-NUMERICAL-EVALUATION | Believing a generating function must converge for or be evaluated at a specific numerical $x$ to be valid, missing that as a formal power series, the COEFFICIENTS alone carry all the meaning | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.generating-functions",
+      "title": "GENERATING-FUNCTIONS-CONFLATED-WITH-CHARACTERISTIC-EQUATIONS",
+      "content": "| MC-2 | GENERATING-FUNCTIONS-CONFLATED-WITH-CHARACTERISTIC-EQUATIONS | Believing generating functions are just another name for the characteristic-equation method, missing that they are a genuinely different, series-manipulation-based technique for solving the same class of problems | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.generating-functions",
+      "title": "OGF-EGF-TREATED-AS-INTERCHANGEABLE",
+      "content": "| MC-3 | OGF-EGF-TREATED-AS-INTERCHANGEABLE | Treating OGF and EGF as arbitrary notational variants of the same information, missing that they encode fundamentally different counting-problem types (unlabeled vs. labeled structures) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.generating-functions",
+      "title": "A Bookkeeping Device, Not a Function to Evaluate (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"A Bookkeeping Device, Not a Function to Evaluate (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.generating-functions",
+      "title": "Generating Functions Solve Recurrences Through a Genuinely Different Route (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Generating Functions Solve Recurrences Through a Genuinely Different Route (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.generating-functions",
+      "title": "The Same Formal Series Can Mean Different Things Under OGF vs. EGF (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Same Formal Series Can Mean Different Things Under OGF vs. EGF (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.generating-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.generating-functions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Construct the ordinary generating function for the sequence $a_n=2$ for all $n\\ge0$ (a constant sequence), expressing it as a closed-form fraction.\n  2. Using the recurrence $a_n=3a_{n-1}$ with $a_0=1$, derive the equation $A(x)(1-3x)=1$ and solve for $A(x)$ in closed form.\n  3. Explain why generating functions are a genuinely different technique from the characteristic-equation method, even though both can solve the same recurrence, referencing Example 2's Fibonacci derivation.\n  4. State the EGF for the sequence $a_n=n!$ (counting labeled permutations) and explain what this coefficient convention represents, contrasting it with the OGF of the constant sequence $a_n=1$.\n- **P76 (Transfer Probe, mode = independence)**: \"A sequence satisfies $b_n=2b_{n-1}+1$ for $n\\ge1$, with $b_0=0$. (a) Let $B(x)=\\sum b_nx^n$. Using the recurrence, derive an algebraic equation relating $B(x)$ to itself (following the style of Example 2's Fibonacci derivation), and solve for $B(x)$ in closed form. (b) Explain why this generating-function approach counts as a genuinely different solution method from the characteristic-equation approach, even if both would eventually produce an equivalent closed-form formula for $b_n$. (c) A classmate insists that generating functions are 'just repackaged characteristic equations.' Using this lesson's distinction, explain what they're missing.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.generating-functions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.combinatorics` (bijective and recursive counting techniques, and its own preview naming generating functions), `math.disc.recurrence-relation` (the characteristic-equation method for solving recurrences, and the Fibonacci recurrence $F_n=F_{n-1}+F_{n-2}$), and `math.seq.series` (the geometric series and its closed-form sum).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.generating-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.generating-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.combinatorics` (which itself previewed generating functions as a named further technique — this concept directly fulfills that forward reference), `math.disc.recurrence-relation` (the Fibonacci recurrence and characteristic-equation method this concept's Example 2 directly contrasts against), and `math.seq.series` (the geometric series sum formula reused directly in Example 1).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.prob.generating-function`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.generating-functions.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

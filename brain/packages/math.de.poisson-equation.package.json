@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.poisson-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.poisson-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:54660575c7523452676a39b4ae2c82571a4f56b43c213b7f762a2e7348c99758",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.poisson-equation.md": "sha256:c5c16fb8650d9d848aee63da7fea2863e563c18491a638011c79c388b36aa899"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.poisson-equation",
+    "name": "Poisson's Equation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.laplace-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.poisson-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.poisson-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.poisson-equation.md": "sha256:c5c16fb8650d9d848aee63da7fea2863e563c18491a638011c79c388b36aa899"
+      },
+      "contentHash": "sha256:425095eb49015f7b93aaa2f392ecb22c2610f8733a3919b519481d55d57b4342",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.poisson-equation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.poisson-equation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.poisson-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.poisson-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.poisson-equation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.poisson-equation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.poisson-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.poisson-equation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.poisson-equation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.poisson-equation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.poisson-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.poisson-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.poisson-equation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.poisson-equation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.poisson-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.poisson-equation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.poisson-equation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Learning Objectives",
+      "content": "- LO1: State **Poisson's Equation** $\\nabla^2u=f$ as the NONHOMOGENEOUS generalization of `math.de.laplace-equation` (the special case $f\\equiv0$), and recognize that Laplace's Equation's special properties relying on $f\\equiv0$ (the mean value property, the maximum principle) do NOT automatically carry over unchanged to the nonhomogeneous case.\n- LO2: Apply Poisson's Equation to a physical modeling context — electrostatics, where $\\nabla^2V=-\\rho/\\varepsilon_0$ relates the electric potential $V$ to a charge density $\\rho$ — correctly identifying which physical quantity plays the role of $f$, and interpreting $f=0$ (Laplace's Equation) as describing a charge-FREE region.\n- LO3 (orientation level — full treatment deferred to the unlocked cross-link): recognize **Green's functions** as the named technique for solving Poisson's Equation when $f$ is a genuine source term — finding the response to a single point-source, then superposing over the actual source distribution — deferred to `math.de.greens-function`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.poisson-equation",
+      "title": "LAPLACE-PROPERTIES-ASSUMED-TO-EXTEND",
+      "content": "| MC-1 | LAPLACE-PROPERTIES-ASSUMED-TO-EXTEND | Believing Laplace's Equation's special properties (mean value property, maximum principle) automatically extend unchanged to Poisson's Equation, missing that these are consequences specific to the homogeneous $f\\equiv0$ case | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.poisson-equation",
+      "title": "POISSON-AND-LAPLACE-ASSUMED-UNRELATED",
+      "content": "| MC-2 | POISSON-AND-LAPLACE-ASSUMED-UNRELATED | Believing Poisson's Equation and Laplace's Equation require entirely separate, unrelated theory, missing that Laplace's Equation is the direct special case $f\\equiv0$ of Poisson's Equation | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.poisson-equation",
+      "title": "GREENS-FUNCTIONS-ASSUMED-MERELY-NOTATIONAL",
+      "content": "| MC-3 | GREENS-FUNCTIONS-ASSUMED-MERELY-NOTATIONAL | Believing Green's functions are just a convenient notation for writing the answer, missing the specific point-source-then-superpose STRATEGY they represent, genuinely different from separation of variables | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Laplace's Special Properties Do Not Automatically Extend (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Laplace's Special Properties Do Not Automatically Extend (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Poisson's Equation Contains Laplace's Equation as a Special Case (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Poisson's Equation Contains Laplace's Equation as a Special Case (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Green's Functions Solve by Point-Source, Then Superpose (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Green's Functions Solve by Point-Source, Then Superpose (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State Poisson's Equation and explain, in one sentence, how it differs from Laplace's Equation.\n  2. For $u=y^2$ satisfying $\\nabla^2u=f$, compute $f$ directly, and check whether $u$ satisfies the mean value property at the origin over a circle of radius $r$ (compute the average and compare to $u(0,0)$).\n  3. In the electrostatic potential equation $\\nabla^2V=-\\rho/\\varepsilon_0$, explain what the equation reduces to in a charge-free region, and name which equation this matches.\n  4. Explain, in general terms, why Green's functions solve Poisson's Equation by first considering a single point source, referencing the superposition idea from this lesson.\n- **P76 (Transfer Probe, mode = independence)**: \"A gravitational potential $\\Phi$ in Newtonian gravity satisfies Poisson's Equation $\\nabla^2\\Phi=4\\pi G\\rho$, where $\\rho$ is mass density and $G$ is the gravitational constant. (a) Explain what this equation reduces to in the empty vacuum of space, far from any mass ($\\rho=0$), and name the resulting equation. (b) A student assumes that because the gravitational potential equation 'looks like' Laplace's Equation, it must satisfy the same mean value property everywhere $\\rho$ is nonzero. Using this lesson's electrostatics-style reasoning and Example 1's counterexample, explain why this assumption is incorrect. (c) Explain, in general terms, how a Green's-function approach would build the solution for an arbitrary mass distribution $\\rho$ from the response to a single point mass.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.laplace-equation` ($\\nabla^2u=u_{xx}+u_{yy}=0$, the steady-state/equilibrium framing, the mean value property, and the maximum principle).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.poisson-equation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.poisson-equation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.laplace-equation` (the equation $\\nabla^2u=0$, its equilibrium framing, the mean value property, and the maximum principle — this concept's entire framing is built around contrasting with and generalizing that concept's special homogeneous case).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.de.greens-function`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.poisson-equation.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
