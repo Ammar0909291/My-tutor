@@ -4275,6 +4275,581 @@ const CELLTH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.period.ionization-energy ───────────────────────────────────────────
+const IONE = 'chem.period.ionization-energy'
+const IONE_SRC = 'docs/chemistry/kg/graph.json — chem.period.ionization-energy'
+
+const IONE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IONE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ionization energy (IE) is the energy needed to remove an electron from a ' +
+      'gaseous atom: X(g) → X⁺(g) + e⁻. SUCCESSIVE ionization energies always ' +
+      'increase (IE₁ < IE₂ < IE₃...) because removing an electron from an ' +
+      'increasingly positive ion is progressively harder — fewer electrons repel ' +
+      'each other, and the same nuclear charge now pulls on fewer electrons ' +
+      '(higher effective charge per electron). But there\'s a dramatic JUMP when ' +
+      'you cross into a new (inner, more stable) shell: sodium\'s IE₂ is about 10× ' +
+      'IE₁ because IE₂ requires breaking into the stable, full n=2 shell after the ' +
+      'single 3s electron is gone. These jumps are how we EXPERIMENTALLY confirm ' +
+      'shell structure — the size of the jump tells you exactly how many valence ' +
+      'electrons an atom has, matching the group number.',
+    targetedMisconceptions: [`${IONE}:MC1`],
+    source: `${IONE_SRC} — ionization energy trends, successive IEs, shell structure evidence`,
+  },
+  {
+    conceptId: IONE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Ionization energy increases perfectly smoothly across a period, no ' +
+      'exceptions." False — there are two well-known dips. Be(IE) > B(IE) even though ' +
+      'B has more protons: removing from B\'s single 2p electron is EASIER than ' +
+      'disturbing Be\'s stable, full 2s² sub-shell. Similarly N(IE) > O(IE): N\'s ' +
+      'half-filled 2p³ is extra stable (each orbital singly occupied, minimal ' +
+      'repulsion), while O\'s 2p⁴ has one PAIRED orbital, and removing that paired ' +
+      'electron is easier due to electron-electron repulsion in the same orbital. ' +
+      'These aren\'t random exceptions — they follow directly from stable ' +
+      'half-filled/fully-filled sub-shell configurations. Second trap: "Removing the ' +
+      'FIRST electron is always the same difficulty as removing electrons from a ' +
+      'similar atom." Depends entirely on which sub-shell that electron sits in.',
+    targetedMisconceptions: [`${IONE}:MC1`, `${IONE}:MC2`],
+    source: `${IONE_SRC} — misconception: smooth monotonic IE trend (ignoring Be/B and N/O exceptions)`,
+  },
+]
+
+const IONE_PROBES: SeedProbe[] = [
+  {
+    conceptId: IONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Nitrogen has a HIGHER first ionization energy than oxygen, even though oxygen has more protons. Why?',
+    choices: [
+      { text: 'Nitrogen\'s half-filled 2p³ configuration is extra stable (each orbital singly occupied); oxygen\'s 2p⁴ has a paired electron that is easier to remove due to electron-electron repulsion', isCorrect: true },
+      { text: 'This is impossible — more protons always means higher ionization energy across a period', isCorrect: false, misconceptionId: `${IONE}:MC1` },
+    ],
+    correctValue: 'Nitrogen\'s half-filled stability',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IONE}:MC1`],
+    source: `${IONE_SRC} — distractor targets assumption of strictly monotonic IE increase`,
+  },
+  {
+    conceptId: IONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Sodium\'s IE₂ (10,000 kJ/mol) is dramatically larger than IE₁ (496 kJ/mol) — nearly 20 times bigger. What does this jump reveal?',
+    choices: [
+      { text: 'After losing its single 3s valence electron, the next electron must come from the stable, full n=2 shell — breaking into a completed inner shell requires vastly more energy', isCorrect: true },
+      { text: 'IE₂ is always about 20 times IE₁ for every element, regardless of electron configuration', isCorrect: false, misconceptionId: `${IONE}:MC2` },
+    ],
+    correctValue: 'Reveals shell structure (breaking into full inner shell)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IONE}:MC2`],
+    source: `${IONE_SRC} — misconception: IE jump ratios are universal rather than structure-dependent`,
+  },
+]
+
+// ─── chem.period.electron-affinity ───────────────────────────────────────────
+const EAFF = 'chem.period.electron-affinity'
+const EAFF_SRC = 'docs/chemistry/kg/graph.json — chem.period.electron-affinity'
+
+const EAFF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EAFF,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electron affinity (EA) measures the energy CHANGE when an atom GAINS an ' +
+      'electron: X(g) + e⁻ → X⁻(g). Most atoms RELEASE energy (EA negative by the ' +
+      'ΔH convention, or reported as positive "affinity" in older texts — check ' +
+      'your textbook\'s sign convention!) because the added electron experiences net ' +
+      'attraction to the nucleus. ELECTRONEGATIVITY is related but distinct — it\'s a ' +
+      'dimensionless number (Pauling scale, 0.7-4.0) describing an atom\'s tendency to ' +
+      'attract electrons WITHIN A BOND (a relative, comparative property), while ' +
+      'electron affinity is a measurable energy for an ISOLATED atom gaining an ' +
+      'electron. Both increase across a period (more protons pulling harder) and ' +
+      'decrease down a group (more shielding, electron added further away). Fluorine ' +
+      'has the highest electronegativity (4.0) but NOT the most negative electron ' +
+      'affinity — chlorine\'s EA is actually more negative than fluorine\'s, because ' +
+      'fluorine\'s very small atomic size creates significant electron-electron ' +
+      'repulsion when adding yet another electron to an already crowded 2p subshell.',
+    targetedMisconceptions: [`${EAFF}:MC1`],
+    source: `${EAFF_SRC} — electron affinity vs electronegativity, periodic trends`,
+  },
+  {
+    conceptId: EAFF,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Electron affinity and electronegativity are the same thing, just ' +
+      'different names." No — electronegativity is a relative, unitless number ' +
+      'describing bonding behavior; electron affinity is a measurable energy for a ' +
+      'free atom. They correlate but aren\'t identical, and can even DISAGREE on ' +
+      'ranking (fluorine has the highest electronegativity but not the most negative ' +
+      'EA — chlorine does, due to fluorine\'s small size causing electron crowding). ' +
+      'Second trap: "All atoms release energy when gaining an electron." False — noble ' +
+      'gases and some others have POSITIVE (unfavorable) electron affinity because ' +
+      'their stable, full sub-shells strongly resist adding an extra electron — you\'d ' +
+      'have to force it in, requiring energy INPUT rather than release. This is exactly ' +
+      'why noble gases don\'t readily form anions.',
+    targetedMisconceptions: [`${EAFF}:MC1`, `${EAFF}:MC2`],
+    source: `${EAFF_SRC} — misconception: EA and electronegativity are identical; EA always favorable`,
+  },
+]
+
+const EAFF_PROBES: SeedProbe[] = [
+  {
+    conceptId: EAFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Chlorine has a more negative (more favorable) electron affinity than fluorine, even though fluorine is more electronegative. Why?',
+    choices: [
+      { text: 'Fluorine\'s very small atomic size causes significant electron-electron repulsion when adding another electron to its already crowded 2p subshell, partially offsetting the favorable nuclear attraction', isCorrect: true },
+      { text: 'This is a measurement error — electron affinity and electronegativity should always rank elements identically', isCorrect: false, misconceptionId: `${EAFF}:MC1` },
+    ],
+    correctValue: 'Fluorine\'s small size causes electron repulsion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EAFF}:MC1`],
+    source: `${EAFF_SRC} — distractor targets assumption that EA and electronegativity must rank identically`,
+  },
+  {
+    conceptId: EAFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Would neon (a noble gas) release or absorb energy when forced to gain an electron?',
+    choices: [
+      { text: 'Absorb energy (positive/unfavorable electron affinity) — neon\'s full, stable 2p⁶ configuration strongly resists adding an extra electron', isCorrect: true },
+      { text: 'Release energy — all atoms release energy when gaining an electron, without exception', isCorrect: false, misconceptionId: `${EAFF}:MC2` },
+    ],
+    correctValue: 'Absorb energy (unfavorable)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EAFF}:MC2`],
+    source: `${EAFF_SRC} — misconception: all electron affinities are energetically favorable`,
+  },
+]
+
+// ─── chem.period.atomic-radius ───────────────────────────────────────────────
+const ARAD = 'chem.period.atomic-radius'
+const ARAD_SRC = 'docs/chemistry/kg/graph.json — chem.period.atomic-radius'
+
+const ARAD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ARAD,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Atomic radius is tricky to define (electron clouds don\'t have a sharp edge), ' +
+      'so chemists use operational definitions: COVALENT radius (half the distance ' +
+      'between nuclei in a covalently bonded pair), METALLIC radius (half the distance ' +
+      'between nuclei in a metal lattice), or VAN DER WAALS radius (half the distance ' +
+      'between non-bonded touching atoms). ISOELECTRONIC SPECIES (same number of ' +
+      'electrons) offer a clean comparison: Na⁺, Mg²⁺, Al³⁺, F⁻, O²⁻, N³⁻ ALL have 10 ' +
+      'electrons (neon configuration), but different radii — MORE protons pulling on ' +
+      'the SAME number of electrons means a SMALLER radius. So among this isoelectronic ' +
+      'series, N³⁻ (7 protons, 10 electrons) is largest, and Al³⁺ (13 protons, 10 ' +
+      'electrons) is smallest — same electron count, but the greater positive charge ' +
+      'compresses the electron cloud more tightly.',
+    targetedMisconceptions: [`${ARAD}:MC1`],
+    source: `${ARAD_SRC} — radius definitions, isoelectronic series comparison`,
+  },
+  {
+    conceptId: ARAD,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Among isoelectronic ions, the one with MORE electrons is bigger." This ' +
+      'confuses the comparison — isoelectronic means they ALL have the SAME number of ' +
+      'electrons by definition (that\'s what "iso-electronic" means). The variable is ' +
+      'PROTONS (nuclear charge), not electrons. More protons = stronger pull on the ' +
+      'same electron count = smaller radius. Students sometimes think "more charge = ' +
+      'bigger ion" by analogy to macroscopic objects (more stuff = bigger), but at the ' +
+      'atomic scale MORE positive charge means TIGHTER electron binding, hence SMALLER ' +
+      'size. Second trap: "Ionic radius trends always mirror atomic radius trends within ' +
+      'a period." Not necessarily — crossing from cations to anions within a period ' +
+      'causes a big radius JUMP (cations are smaller than the parent atom; anions are ' +
+      'larger), so ionic radius trends have a discontinuity that atomic radius trends ' +
+      'don\'t.',
+    targetedMisconceptions: [`${ARAD}:MC1`, `${ARAD}:MC2`],
+    source: `${ARAD_SRC} — misconception: more charge = bigger isoelectronic ion; ionic/atomic trends identical`,
+  },
+]
+
+const ARAD_PROBES: SeedProbe[] = [
+  {
+    conceptId: ARAD,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Among the isoelectronic species N³⁻, O²⁻, F⁻, Na⁺, Mg²⁺, Al³⁺ (all with 10 electrons), which has the SMALLEST radius?',
+    choices: [
+      { text: 'Al³⁺ — with 13 protons pulling on only 10 electrons, it has the highest effective nuclear charge per electron among this group, compressing the electron cloud most tightly', isCorrect: true },
+      { text: 'N³⁻ — it has the most negative charge, so by analogy to "more charge = bigger" it should be smallest', isCorrect: false, misconceptionId: `${ARAD}:MC1` },
+    ],
+    correctValue: 'Al³⁺',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARAD}:MC1`],
+    source: `${ARAD_SRC} — distractor targets "more charge = bigger" misconception applied to isoelectronic species`,
+  },
+  {
+    conceptId: ARAD,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is Na⁺ (102 pm) much smaller than the neutral Na atom (186 pm), while Cl⁻ (181 pm) is much larger than the neutral Cl atom (99 pm)?',
+    choices: [
+      { text: 'Cations lose their outermost shell (losing electrons reduces electron-electron repulsion, letting remaining electrons pull in tighter), while anions gain electrons (increasing repulsion, expanding the cloud) — same "charge added" direction, opposite radius effect', isCorrect: true },
+      { text: 'Both should get smaller when charged, since adding or removing charge always compresses atoms', isCorrect: false, misconceptionId: `${ARAD}:MC2` },
+    ],
+    correctValue: 'Cations shrink, anions expand',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARAD}:MC2`],
+    source: `${ARAD_SRC} — misconception: assuming charge changes always shrink radius`,
+  },
+]
+
+// ─── chem.period.valency ─────────────────────────────────────────────────────
+const VALEN = 'chem.period.valency'
+const VALEN_SRC = 'docs/chemistry/kg/graph.json — chem.period.valency'
+
+const VALEN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VALEN,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Valency is the combining capacity of an atom — how many bonds it typically ' +
+      'forms, usually determined by how many electrons it needs to gain, lose, or ' +
+      'share to reach a stable (often noble-gas-like) configuration. OXIDATION STATE ' +
+      'is a related but more precise bookkeeping tool: the hypothetical charge an atom ' +
+      'would have if all bonds were 100% ionic (electrons assigned entirely to the more ' +
+      'electronegative atom). Rules: elements in their elemental form = 0. Simple ' +
+      'monatomic ions = their charge. Oxygen is usually −2 (except in peroxides, −1, or ' +
+      'OF₂, +2). Hydrogen is usually +1 (except in metal hydrides like NaH, where it\'s ' +
+      '−1). The SUM of oxidation states in a neutral compound = 0; in a polyatomic ion, ' +
+      'it equals the ion\'s charge. Oxidation state is essential for identifying redox ' +
+      'reactions (oxidation = increase in oxidation state; reduction = decrease) even ' +
+      'when electron transfer isn\'t obviously "complete" (as in purely covalent bonds).',
+    targetedMisconceptions: [`${VALEN}:MC1`],
+    source: `${VALEN_SRC} — valency, oxidation state rules, redox bookkeeping`,
+  },
+  {
+    conceptId: VALEN,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Oxidation state represents the REAL charge on an atom in a molecule." ' +
+      'FALSE for covalent compounds — oxidation state is a BOOKKEEPING FICTION, an ' +
+      'accounting convention that assumes complete electron transfer even in bonds ' +
+      'that are actually shared (covalent). In CH₄, carbon is assigned oxidation state ' +
+      '−4 (as if it took all 4 bonding electron pairs), but carbon doesn\'t actually ' +
+      'carry a real −4 charge — the bonds are covalent, electrons are SHARED, not ' +
+      'transferred. Oxidation state is a useful TOOL for tracking electron flow in ' +
+      'redox reactions, not a literal physical charge measurement (that would be a ' +
+      'partial charge from electronegativity difference, a much smaller and different ' +
+      'quantity). Second trap: "Hydrogen is always +1." Exception: in metal hydrides ' +
+      '(NaH, CaH₂), hydrogen is −1 because the metal is far less electronegative than ' +
+      'hydrogen there — always check what hydrogen is bonded to.',
+    targetedMisconceptions: [`${VALEN}:MC1`, `${VALEN}:MC2`],
+    source: `${VALEN_SRC} — misconception: oxidation state = real charge; hydrogen always +1`,
+  },
+]
+
+const VALEN_PROBES: SeedProbe[] = [
+  {
+    conceptId: VALEN,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In CH₄ (methane), carbon is assigned oxidation state −4. Does carbon actually carry a real −4 charge?',
+    choices: [
+      { text: 'No — oxidation state is a bookkeeping convention that assumes complete electron transfer, but the C-H bonds are covalent (shared electrons), so carbon does not carry a literal −4 charge', isCorrect: true },
+      { text: 'Yes — oxidation state directly measures the actual electric charge on each atom in a molecule', isCorrect: false, misconceptionId: `${VALEN}:MC1` },
+    ],
+    correctValue: 'No — it\'s a bookkeeping convention, not a real charge',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VALEN}:MC1`],
+    source: `${VALEN_SRC} — distractor targets "oxidation state = literal charge" misconception`,
+  },
+  {
+    conceptId: VALEN,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the oxidation state of hydrogen in NaH (sodium hydride)?',
+    choices: [
+      { text: '−1 — sodium is less electronegative than hydrogen here, so hydrogen is assigned the electrons in this bond, breaking the usual "hydrogen is +1" pattern', isCorrect: true },
+      { text: '+1 — hydrogen is always assigned +1 in every compound without exception', isCorrect: false, misconceptionId: `${VALEN}:MC2` },
+    ],
+    correctValue: '−1',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VALEN}:MC2`],
+    source: `${VALEN_SRC} — misconception: hydrogen oxidation state is universally +1`,
+  },
+]
+
+// ─── chem.equil.le-chatelier ─────────────────────────────────────────────────
+const LECHAT = 'chem.equil.le-chatelier'
+const LECHAT_SRC = 'docs/chemistry/kg/graph.json — chem.equil.le-chatelier'
+
+const LECHAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LECHAT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Le Chatelier\'s Principle: if you disturb a system at equilibrium, it shifts to ' +
+      'PARTIALLY counteract the disturbance (never fully cancels it — that would mean ' +
+      'nothing changed at all). Three main disturbances: CONCENTRATION — add reactant, ' +
+      'equilibrium shifts forward (toward products) to consume some of the excess. ' +
+      'PRESSURE/VOLUME (gas reactions only) — compress the system, equilibrium shifts ' +
+      'toward the side with FEWER gas molecules (reduces the "crowding"). TEMPERATURE — ' +
+      'treat heat as a reactant (endothermic) or product (exothermic); adding heat shifts ' +
+      'equilibrium toward the ENDOTHERMIC direction (the side that "absorbs" the extra ' +
+      'heat). Crucially: temperature is the ONLY disturbance that changes K itself — ' +
+      'concentration and pressure changes shift the POSITION of equilibrium but K stays ' +
+      'fixed (as covered earlier). Adding an INERT gas at constant volume changes total ' +
+      'pressure but doesn\'t affect partial pressures of reactants/products, so NO shift ' +
+      'occurs.',
+    targetedMisconceptions: [`${LECHAT}:MC1`],
+    source: `${LECHAT_SRC} — Le Chatelier's principle, concentration/pressure/temperature disturbances`,
+  },
+  {
+    conceptId: LECHAT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Major trap: "Adding an inert gas to an equilibrium mixture always shifts the ' +
+      'equilibrium." Depends entirely on the CONDITIONS. At CONSTANT VOLUME, adding ' +
+      'inert gas increases total pressure but does NOT change the partial pressures or ' +
+      'concentrations of reactants/products — no shift occurs (Le Chatelier only responds ' +
+      'to changes in the actual reacting species\' concentrations/pressures). At CONSTANT ' +
+      'PRESSURE, adding inert gas forces the container to EXPAND (to keep total pressure ' +
+      'constant), which DOES dilute the reacting species — this behaves like a pressure ' +
+      'decrease, shifting equilibrium toward the side with MORE gas molecules. Same ' +
+      'action (add inert gas), opposite outcomes depending on whether volume or pressure ' +
+      'is held fixed. Second trap: "Le Chatelier\'s principle explains WHY equilibrium ' +
+      'shifts (the mechanism)." It only PREDICTS the direction — the actual mechanism is ' +
+      'that the disturbance makes Q≠K temporarily, and the system responds by reacting ' +
+      'until Q=K again.',
+    targetedMisconceptions: [`${LECHAT}:MC1`, `${LECHAT}:MC2`],
+    source: `${LECHAT_SRC} — misconception: inert gas always shifts equilibrium (depends on constant V vs P)`,
+  },
+]
+
+const LECHAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: LECHAT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Adding an inert gas (like argon) to an equilibrium mixture at CONSTANT VOLUME will:',
+    choices: [
+      { text: 'Cause no shift — partial pressures/concentrations of the actual reacting species are unchanged, even though total pressure increases', isCorrect: true },
+      { text: 'Shift equilibrium toward the side with fewer gas moles, since total pressure increased', isCorrect: false, misconceptionId: `${LECHAT}:MC1` },
+      { text: 'Shift equilibrium toward the side with more gas moles', isCorrect: false, misconceptionId: `${LECHAT}:MC1` },
+    ],
+    correctValue: 'No shift (at constant volume)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LECHAT}:MC1`],
+    source: `${LECHAT_SRC} — distractor targets "any pressure increase shifts equilibrium" misconception`,
+  },
+  {
+    conceptId: LECHAT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For an exothermic reaction A ⇌ B + heat, does raising the temperature increase or decrease K?',
+    choices: [
+      { text: 'Decrease K — treating heat as a product, adding more heat shifts equilibrium backward (toward reactant A), meaning at the new (higher) temperature, less product is favored, so K decreases', isCorrect: true },
+      { text: 'K is unaffected by temperature — only concentration and pressure changes affect K', isCorrect: false, misconceptionId: `${LECHAT}:MC2` },
+    ],
+    correctValue: 'K decreases for exothermic reactions when heated',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LECHAT}:MC2`],
+    source: `${LECHAT_SRC} — misconception: temperature does not affect K (only temperature does, uniquely)`,
+  },
+]
+
+// ─── chem.equil.acids-bases ──────────────────────────────────────────────────
+const ACBASE = 'chem.equil.acids-bases'
+const ACBASE_SRC = 'docs/chemistry/kg/graph.json — chem.equil.acids-bases'
+
+const ACBASE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACBASE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Three theories, each broader than the last. ARRHENIUS (narrowest): acids produce ' +
+      'H⁺ in water, bases produce OH⁻ in water — works fine for aqueous solutions but ' +
+      'fails for non-aqueous chemistry. BRØNSTED-LOWRY (broader): acid = proton (H⁺) ' +
+      'DONOR, base = proton ACCEPTOR — works in any solvent, and introduces CONJUGATE ' +
+      'PAIRS (an acid and the base formed after it donates H⁺ differ by exactly one ' +
+      'proton: HCl/Cl⁻, NH₄⁺/NH₃). LEWIS (broadest): acid = electron pair ACCEPTOR, ' +
+      'base = electron pair DONOR — this explains acid-base behavior with NO protons ' +
+      'involved at all, like BF₃ (electron-deficient boron, accepts a lone pair) reacting ' +
+      'with NH₃ (donates its lone pair). Every Brønsted-Lowry acid-base reaction IS also ' +
+      'a Lewis acid-base reaction, but Lewis theory captures MORE reactions (like metal ' +
+      'ion complexation, Cu²⁺ + 4NH₃ → [Cu(NH₃)₄]²⁺, where NH₃ acts as a Lewis base ' +
+      'donating electron pairs to the metal).',
+    targetedMisconceptions: [`${ACBASE}:MC1`],
+    source: `${ACBASE_SRC} — Arrhenius, Brønsted-Lowry, Lewis acid-base theories`,
+  },
+  {
+    conceptId: ACBASE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A strong conjugate acid always has a strong conjugate base." OPPOSITE ' +
+      'relationship — a STRONG acid has a WEAK conjugate base (HCl is a strong acid; ' +
+      'Cl⁻ is an extremely weak base, barely reacting with water at all). This is ' +
+      'because a strong acid readily gives up its proton — meaning its conjugate base ' +
+      'has little tendency to grab that proton back. Conversely, a WEAK acid (like ' +
+      'acetic acid) has a relatively STRONGER conjugate base (acetate ion, which does ' +
+      'have some tendency to accept a proton back — that\'s why acetate solutions are ' +
+      'measurably basic). Second trap: "Every acid-base reaction must involve H⁺ ' +
+      'transfer." False for Lewis acid-base reactions — BF₃ + NH₃ → F₃B-NH₃ involves NO ' +
+      'protons at all, just a coordinate covalent bond forming from NH₃\'s lone pair ' +
+      'filling boron\'s empty orbital. Lewis theory is the most general framework precisely ' +
+      'because it doesn\'t require protons.',
+    targetedMisconceptions: [`${ACBASE}:MC1`, `${ACBASE}:MC2`],
+    source: `${ACBASE_SRC} — misconception: strong acid = strong conjugate base; acid-base always involves H⁺`,
+  },
+]
+
+const ACBASE_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACBASE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'HCl is a strong acid. What can you conclude about its conjugate base, Cl⁻?',
+    choices: [
+      { text: 'Cl⁻ is an extremely weak base — strong acids readily donate their proton, meaning the resulting conjugate base has little tendency to reclaim it', isCorrect: true },
+      { text: 'Cl⁻ must also be a strong base, since strong acids produce strong conjugate bases', isCorrect: false, misconceptionId: `${ACBASE}:MC1` },
+    ],
+    correctValue: 'Cl⁻ is a very weak base',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACBASE}:MC1`],
+    source: `${ACBASE_SRC} — distractor targets "strong acid → strong conjugate base" misconception`,
+  },
+  {
+    conceptId: ACBASE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'BF₃ reacts with NH₃ to form F₃B-NH₃, with no protons transferred at all. Is this an acid-base reaction?',
+    choices: [
+      { text: 'Yes — by Lewis theory, BF₃ (electron-pair acceptor, boron has an empty orbital) is the acid and NH₃ (electron-pair donor) is the base; no protons are required for this classification', isCorrect: true },
+      { text: 'No — a reaction can only be called acid-base if H⁺ is transferred between species', isCorrect: false, misconceptionId: `${ACBASE}:MC2` },
+    ],
+    correctValue: 'Yes — Lewis acid-base reaction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACBASE}:MC2`],
+    source: `${ACBASE_SRC} — misconception: restricting acid-base classification to proton-transfer reactions only`,
+  },
+]
+
+// ─── chem.equil.solubility ───────────────────────────────────────────────────
+const KSPEQ = 'chem.equil.solubility'
+const KSPEQ_SRC = 'docs/chemistry/kg/graph.json — chem.equil.solubility'
+
+const KSPEQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KSPEQ,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'For SPARINGLY soluble salts (like AgCl), a tiny equilibrium exists between the ' +
+      'solid and its dissolved ions: AgCl(s) ⇌ Ag⁺(aq) + Cl⁻(aq). The solubility product ' +
+      'K_sp = [Ag⁺][Cl⁻] — the solid is omitted (constant activity, as with any pure ' +
+      'solid in K expressions). A SMALL K_sp means very little dissolves. You can compute ' +
+      'MOLAR SOLUBILITY (s, in mol/L) from K_sp — for a 1:1 salt like AgCl, K_sp = s², so ' +
+      's = √K_sp. For a 1:2 salt like PbCl₂: K_sp = [Pb²⁺][Cl⁻]² = s(2s)² = 4s³. The ' +
+      'COMMON ION EFFECT: adding a common ion (like extra Cl⁻ from NaCl) to a saturated ' +
+      'AgCl solution SHIFTS equilibrium backward (Le Chatelier), DECREASING AgCl\'s ' +
+      'solubility — this is why seawater (rich in common ions) can precipitate certain ' +
+      'salts more readily than fresh water. Compare Q (ion product using current ' +
+      'concentrations) to K_sp: Q<K_sp means more can dissolve (unsaturated); Q>K_sp ' +
+      'means precipitation will occur (supersaturated).',
+    targetedMisconceptions: [`${KSPEQ}:MC1`],
+    source: `${KSPEQ_SRC} — Ksp, molar solubility calculation, common ion effect`,
+  },
+  {
+    conceptId: KSPEQ,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Comparing K_sp values directly tells you which salt is MORE soluble, ' +
+      'always." Only valid for salts with the SAME stoichiometric ratio (like comparing ' +
+      'two 1:1 salts, AgCl vs. AgBr, where s=√K_sp for both). But comparing a 1:1 salt\'s ' +
+      'K_sp to a 1:2 salt\'s K_sp directly can be MISLEADING — the molar solubility ' +
+      'formula differs (s vs. (K_sp/4)^(1/3)), so a numerically SMALLER K_sp for a 1:2 ' +
+      'salt could still mean HIGHER actual solubility than a 1:1 salt with a larger K_sp. ' +
+      'Always convert to molar solubility (s) before comparing across different ' +
+      'stoichiometries. Second trap: "Adding a common ion has no effect if the amount ' +
+      'added is small." Even a small common ion addition shifts equilibrium (Le ' +
+      'Chatelier applies at any magnitude) — the EXTENT of the solubility decrease ' +
+      'scales with how much common ion is added, but the DIRECTION (decrease) is always ' +
+      'true regardless of amount.',
+    targetedMisconceptions: [`${KSPEQ}:MC1`],
+    source: `${KSPEQ_SRC} — misconception: comparing Ksp directly across different stoichiometries`,
+  },
+]
+
+const KSPEQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: KSPEQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Salt A (1:1 stoichiometry) has Ksp = 1×10⁻¹⁰. Salt B (1:2 stoichiometry, like PbCl₂) has Ksp = 4×10⁻⁹. Which has HIGHER molar solubility?',
+    choices: [
+      { text: 'Cannot assume from Ksp alone — must calculate: Salt A: s=√(10⁻¹⁰)≈10⁻⁵ M; Salt B: s=(Ksp/4)^(1/3)=(10⁻⁹)^(1/3)≈10⁻³ M. Salt B is actually far MORE soluble despite similar-looking Ksp values.', isCorrect: true },
+      { text: 'Salt B, simply because it has the larger numerical Ksp value', isCorrect: false, misconceptionId: `${KSPEQ}:MC1` },
+    ],
+    correctValue: 'Salt B has much higher molar solubility (must calculate, not compare Ksp directly)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${KSPEQ}:MC1`],
+    source: `${KSPEQ_SRC} — distractor targets directly comparing Ksp across different stoichiometries`,
+  },
+  {
+    conceptId: KSPEQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A saturated AgCl solution has some NaCl added (common ion Cl⁻). What happens to the amount of dissolved AgCl?',
+    choices: [
+      { text: 'It decreases — the added Cl⁻ shifts the AgCl(s) ⇌ Ag⁺+Cl⁻ equilibrium backward (Le Chatelier), causing some AgCl to precipitate out of solution', isCorrect: true },
+      { text: 'It stays the same, since Ksp is a constant and doesn\'t change with added ions', isCorrect: false, misconceptionId: `${KSPEQ}:MC2` },
+    ],
+    correctValue: 'AgCl solubility decreases',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KSPEQ}:MC2`],
+    source: `${KSPEQ_SRC} — misconception: constant Ksp means solubility itself never changes with conditions`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -4331,6 +4906,13 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...CATAL_EXPLANATIONS,
   ...ADSORB_EXPLANATIONS,
   ...CELLTH_EXPLANATIONS,
+  ...IONE_EXPLANATIONS,
+  ...EAFF_EXPLANATIONS,
+  ...ARAD_EXPLANATIONS,
+  ...VALEN_EXPLANATIONS,
+  ...LECHAT_EXPLANATIONS,
+  ...ACBASE_EXPLANATIONS,
+  ...KSPEQ_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -4387,4 +4969,11 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...CATAL_PROBES,
   ...ADSORB_PROBES,
   ...CELLTH_PROBES,
+  ...IONE_PROBES,
+  ...EAFF_PROBES,
+  ...ARAD_PROBES,
+  ...VALEN_PROBES,
+  ...LECHAT_PROBES,
+  ...ACBASE_PROBES,
+  ...KSPEQ_PROBES,
 ]
