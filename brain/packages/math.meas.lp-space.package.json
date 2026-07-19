@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.lp-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.lp-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d97fa956158bb38da25f326d97f54c69eabbd74a537a010421d5f8dc90ed0b01",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.lp-space.md": "sha256:fd11461c0cfa275afd7169d87d2b5155b1fc5a4c2fb6f726abfdefefbbe4ee31"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.meas.lp-space",
+    "name": "Lᵖ Spaces",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.meas.lebesgue-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.lp-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.lp-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.lp-space.md": "sha256:fd11461c0cfa275afd7169d87d2b5155b1fc5a4c2fb6f726abfdefefbbe4ee31"
+      },
+      "contentHash": "sha256:e808fc6c558afa9f18a8c66768cde04dfdd5d0af603e09b1550cd19448e542f7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.lp-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lp-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lp-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lp-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lp-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lp-space.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lp-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lp-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lp-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lp-space.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lp-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lp-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.lp-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.lp-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.lp-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.lp-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.lp-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.lp-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $L^p = \\{f \\text{ measurable} : \\int|f|^p\\,d\\mu<\\infty\\}$ with norm $\\|f\\|_p=\\left(\\int|f|^p\\,d\\mu\\right)^{1/p}$ — directly reusing `math.meas.lebesgue-integral`'s own integral definition, applied to $|f|^p$ rather than $f$ directly — and correctly verify $L^p$ membership by checking the specific integral $\\int|f|^p\\,d\\mu$ is finite, recognizing this is genuinely NOT the same condition as $f$ merely being bounded.\n- LO2: State **Hölder's inequality** $\\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_q$ for CONJUGATE exponents $1/p+1/q=1$ (where $q$ is uniquely determined by $p$, not a free choice) and **Minkowski's inequality** ($\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p$, the triangle inequality for $\\|\\cdot\\|_p$) — directly connecting to `math.fnal.normed-space`'s own triangle-inequality axiom, confirming $\\|\\cdot\\|_p$ genuinely makes $L^p$ a normed space.\n- LO3: State the Riesz-Fischer theorem — $L^p$ is COMPLETE (a genuine Banach space) for every $1\\le p\\le\\infty$ — and recognize that $L^2$ specifically is also a genuine HILBERT space (via the inner product $\\langle f,g\\rangle=\\int fg\\,d\\mu$ inducing $\\|\\cdot\\|_2$), while for $p\\ne2$, $L^p$ is Banach but genuinely NOT Hilbert — no inner product induces the $L^p$ norm when $p\\ne2$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.lp-space",
+      "title": "LP-MEMBERSHIP-CONFLATED-WITH-BOUNDEDNESS",
+      "content": "| MC-1 | LP-MEMBERSHIP-CONFLATED-WITH-BOUNDEDNESS | Believing L^p membership is essentially the same as boundedness or general \"good behavior,\" missing that it is the specific condition that the integral of \\|f\\|^p be finite | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.lp-space",
+      "title": "EVERY-LP-ASSUMED-HILBERT",
+      "content": "| MC-2 | EVERY-LP-ASSUMED-HILBERT | Believing every L^p space (for any p) is automatically a Hilbert space with an inner product, missing that only p=2 gives an inner-product-inducible norm | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.lp-space",
+      "title": "CONJUGATE-EXPONENT-Q-ASSUMED-FREE-OR-EQUAL-TO-P",
+      "content": "| MC-3 | CONJUGATE-EXPONENT-Q-ASSUMED-FREE-OR-EQUAL-TO-P | Believing the conjugate exponent q in Hölder's inequality is a free choice or automatically equal to p, missing that it is uniquely determined by 1/p+1/q=1 | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lp-space",
+      "title": "L^p Membership Is a Specific Integral Condition (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"L^p Membership Is a Specific Integral Condition (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lp-space",
+      "title": "The Conjugate Exponent q Is Determined, Not Chosen (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Conjugate Exponent q Is Determined, Not Chosen (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lp-space",
+      "title": "Complete Everywhere, Hilbert Only at p=2 (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Complete Everywhere, Hilbert Only at p=2 (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.lp-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.lp-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. On $[1,\\infty)$, determine whether $f(x)=1/x^{1.5}$ belongs to $L^1([1,\\infty))$, showing the integral computation.\n  2. Find the conjugate exponent $q$ for $p=4$, using $1/p+1/q=1$.\n  3. Explain why $L^2$ carries an inner product while $L^3$ does not, referencing the induced-norm mechanism from `math.fnal.hilbert-space`.\n  4. Explain why \"L^p is complete for every p\" and \"L^p is Hilbert for every p\" are genuinely different claims, one true and one false in general.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.fnal.hilbert-space` and `math.fnal.normed-space`)**: \"Recall from `math.fnal.normed-space` that a normed space's triangle inequality must hold for ANY two elements, and from `math.fnal.hilbert-space` that only some normed spaces' norms actually arise from an inner product (the sup-norm on C([a,b]) famously does not). (a) Explain precisely how Minkowski's inequality for $\\|\\cdot\\|_p$ is exactly `math.fnal.normed-space`'s triangle-inequality axiom, verified for this specific norm. (b) Explain why $L^2$'s inner product $\\langle f,g\\rangle=\\int fg\\,d\\mu$ succeeding at inducing $\\|\\cdot\\|_2$, while no analogous construction succeeds for $\\|\\cdot\\|_1$ or $\\|\\cdot\\|_3$, directly parallels `math.fnal.hilbert-space`'s own sup-norm counterexample. (c) Explain why, despite this structural difference, ALL of these $L^p$ spaces are still guaranteed to be genuine Banach spaces.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.lp-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.lebesgue-integral` ($\\int f\\,d\\mu$ as a supremum over simple functions; the positive/negative part decomposition for general functions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.lp-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.lp-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.lebesgue-integral` (the integral $\\int f\\,d\\mu$ this concept applies to $|f|^p$).\n- **Unlocks**: `math.meas.l2-space` (a dedicated deeper treatment of the special $p=2$ case this concept's LO3 previews).\n- **Cross-links (P76_mode = cross-link probe against both `math.fnal.hilbert-space` and `math.fnal.normed-space`, both already authored)**: `math.fnal.normed-space` supplies the triangle-inequality axiom Minkowski's inequality verifies for $\\|\\cdot\\|_p$; `math.fnal.hilbert-space` supplies the induced-norm mechanism and the \"not every norm comes from an inner product\" caution this concept's $L^2$-versus-$L^{p\\ne2}$ contrast directly instantiates.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.lp-space.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

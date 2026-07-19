@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.area-triangle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.area-triangle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:20f054a15e676b858e7dfb2c46228b2a69faed65e142e08a7173e9353d536ae9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.area-triangle.md": "sha256:6a7e567151b89373ddcc9fdd9b4fb1f1fda9fe77e6a86e9bf9009b50276ee73c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.area-triangle",
+    "name": "Area of a Triangle",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.triangle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.area-triangle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.area-triangle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.area-triangle.md": "sha256:6a7e567151b89373ddcc9fdd9b4fb1f1fda9fe77e6a86e9bf9009b50276ee73c"
+      },
+      "contentHash": "sha256:fc295e49e853d1ad630460bb338d61c6df3b0669fb1cbab725370da28ed0bcd0",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.area-triangle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-triangle.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area-triangle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-triangle.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-triangle\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area-triangle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-triangle.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-triangle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.area-triangle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.area-triangle.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.area-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.area-triangle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.area-triangle/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute a triangle's area as $\\frac12\\times\\text{base}\\times\\text{height}$, correctly identifying \"height\" as the PERPENDICULAR distance (the altitude, per `math.geom.triangle`'s own definition) from a vertex to the line containing the opposite side — never any other slant side.\n- LO2: Compute area via **Heron's formula** $\\sqrt{s(s-a)(s-b)(s-c)}$, where $s=\\frac{a+b+c}{2}$ is the semiperimeter — using ONLY the three side lengths, with no height information needed at all.\n- LO3: Recognize when Heron's formula is preferred or necessary (only side lengths are known, with no perpendicular pair readily available) versus when $\\frac12bh$ is more direct (a height is already given or trivially computable), and verify both formulas give the SAME area for the same triangle.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.area-triangle",
+      "title": "HEIGHT-CONFUSED-WITH-A-SLANT-SIDE",
+      "content": "| MC-1 | HEIGHT-CONFUSED-WITH-A-SLANT-SIDE | Using one of the triangle's other sides (not the perpendicular altitude) as \"height\" in the area formula, producing an incorrect area | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.area-triangle",
+      "title": "HERONS-FORMULA-ASSUMED-TO-NEED-HEIGHT",
+      "content": "| MC-2 | HERONS-FORMULA-ASSUMED-TO-NEED-HEIGHT | Believing Heron's formula requires knowing the triangle's height in addition to its three sides, missing that it uses only the side lengths | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.area-triangle",
+      "title": "THE-TWO-AREA-FORMULAS-ASSUMED-COULD-DISAGREE",
+      "content": "| MC-3 | THE-TWO-AREA-FORMULAS-ASSUMED-COULD-DISAGREE | Believing the base-height formula and Heron's formula could give genuinely different areas for the same triangle | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Height Means Perpendicular, Never a Slant Side (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Height Means Perpendicular, Never a Slant Side (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Heron's Formula Needs Only the Sides (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Heron's Formula Needs Only the Sides (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Both Formulas Always Agree; Choose the More Direct One (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Both Formulas Always Agree; Choose the More Direct One (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the area of a triangle with base $12$ and altitude $5$.\n  2. Compute the area of a triangle with sides $a=8,b=15,c=17$ using Heron's formula.\n  3. Verify that problem 2's triangle is actually a right triangle (check $8^2+15^2=17^2$), then compute its area using $\\frac12bh$ with the two legs, and confirm it matches your Heron's-formula answer.\n  4. Explain why using a triangle's slant side (rather than its perpendicular altitude) as \"height\" in $\\frac12bh$ produces an incorrect area.\n- **P76 (Transfer Probe, mode = independence)**: \"A land surveyor measures a triangular plot's three boundary side lengths directly with a tape measure, but has no way to measure any perpendicular height across the uneven terrain. (a) Explain why Heron's formula is the appropriate tool for computing this plot's area, referencing what information it needs and doesn't need. (b) A colleague suggests instead measuring the perpendicular distance from one corner to the opposite boundary line, to use $\\frac12bh$ — explain why this could, in principle, give the same area as Heron's formula, but would require additional fieldwork the surveyor may not have access to. (c) Explain why, regardless of which method is used, the two computations must agree once fully carried out.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle` (the altitude is a perpendicular auxiliary segment from a vertex to the opposite side — explicitly NOT one of the triangle's three boundary sides, a distinction that concept itself already corrects as a common confusion).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.area-triangle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.area-triangle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle` (the altitude's precise perpendicular definition, and its explicit distinction from an ordinary side, this concept's LO1 directly reuses).\n- **Unlocks**: `math.geom.area-polygon` (extends area computation to general polygons, often by decomposing into triangles and applying this concept's own formulas).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.area-triangle.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

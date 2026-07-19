@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.gradient-methods-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.gradient-methods",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3ac96a99d4d3ae8ce936fa31dabed24d69623159232a2bfd5bc0c98dd33265af",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.gradient-methods.md": "sha256:07f74a37d5fe439033f4d7181c9b712e5b73f66a9e71fab4e234bfa5d05f7288"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.opt.gradient-methods",
+    "name": "Gradient Descent",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.opt.unconstrained-optimization",
+      "math.calc.gradient"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.gradient-methods-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.gradient-methods (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.gradient-methods.md": "sha256:07f74a37d5fe439033f4d7181c9b712e5b73f66a9e71fab4e234bfa5d05f7288"
+      },
+      "contentHash": "sha256:c6bdd2e733e955c8eb7378e5555f590cdcac43c87612fd9749b0b7530158869d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.gradient-methods.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.gradient-methods.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.gradient-methods"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.gradient-methods\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.gradient-methods.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.gradient-methods.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.gradient-methods"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.gradient-methods\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.gradient-methods.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.gradient-methods.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.gradient-methods"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.gradient-methods\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.gradient-methods.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.gradient-methods.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.gradient-methods"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.gradient-methods\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.gradient-methods/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the gradient descent update rule $x_{k+1}=x_k-\\alpha_k\\nabla f(x_k)$ — directly reusing `math.calc.gradient`'s own steepest-ascent fact ($\\nabla f$ points toward steepest ASCENT, so $-\\nabla f$ points toward steepest DESCENT) — and perform several iterations by hand for a simple function, moving in the CORRECT (negative gradient) direction.\n- LO2: Recognize the critical role of the step size $\\alpha_k$: too large a step can cause DIVERGENCE (overshooting away from the minimum) even for a simple convex function, while too small a step converges reliably but slowly — directly refuting the assumption that any positive step size guarantees convergence.\n- LO3: State the convergence-rate distinction from `math.opt.unconstrained-optimization`'s own local-vs-global framework: for general convex $f$ with Lipschitz gradient, convergence is only SUBLINEAR (rate $O(1/k)$), while for STRONGLY convex $f$, convergence is LINEAR (geometric) — a genuinely faster guarantee — directly refuting the assumption that gradient descent converges at one fixed, automatic rate regardless of the function's own convexity structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "GRADIENT-DESCENT-DIRECTION-SIGN-ERROR",
+      "content": "| MC-1 | GRADIENT-DESCENT-DIRECTION-SIGN-ERROR | Believing gradient descent moves in the direction of the gradient itself rather than its negative, confusing steepest ascent with steepest descent | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "ANY-POSITIVE-STEP-SIZE-ASSUMED-SUFFICIENT",
+      "content": "| MC-2 | ANY-POSITIVE-STEP-SIZE-ASSUMED-SUFFICIENT | Believing any positive step size guarantees convergence, missing that too large a step size can cause the iterates to diverge, even for a simple convex function | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "CONVERGENCE-RATE-ASSUMED-UNIFORM-ACROSS-ALL-CONVEX-FUNCTIONS",
+      "content": "| MC-3 | CONVERGENCE-RATE-ASSUMED-UNIFORM-ACROSS-ALL-CONVEX-FUNCTIONS | Believing gradient descent converges at the same rate for every convex function, missing the genuine distinction between sublinear (merely convex) and linear (strongly convex) convergence guarantees | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Subtract the Gradient, Never Add It (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Subtract the Gradient, Never Add It (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Step Size Choice Is Critical, Not Automatic (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Step Size Choice Is Critical, Not Automatic (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Strongly Convex Converges Faster (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Strongly Convex Converges Faster (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $f(x)=3x^2$, starting at $x_0=2$ with step size $\\alpha=0.1$, compute $x_1$ and $x_2$ using gradient descent.\n  2. Explain why a student who computes $x_1=x_0+\\alpha\\nabla f(x_0)$ has made a critical directional error.\n  3. For $f(x)=x^2$ with step size $\\alpha=2$ (very large), compute $x_1,x_2,x_3$ starting from $x_0=1$, and describe what happens to the sequence.\n  4. Explain why gradient descent applied to a strongly convex function is guaranteed a faster convergence rate than the same algorithm applied to a merely convex (but not strongly convex) function.\n- **P76 (Transfer Probe, mode = independence)**: \"A machine learning engineer trains a model by minimizing a loss function $f(\\theta)$ over the model's parameters $\\theta$, using gradient descent. (a) Explain, using LO1's steepest-ascent/descent fact, why the parameter update rule subtracts (rather than adds) the gradient at each training step. (b) The engineer notices the training loss is oscillating wildly and increasing rather than decreasing — using this lesson's Example 2, explain the most likely cause and what adjustment (referencing $\\alpha_k$) should be tried first. (c) The engineer is training two different models: one whose loss function is strongly convex, and one whose loss function is only weakly (merely) convex near its minimum. Explain why the engineer should expect noticeably different convergence behavior between the two, even using the identical gradient descent algorithm and step-size rule.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.opt.unconstrained-optimization` (stationary points $\\nabla f(x^*)=0$; the Hessian test for local minima; local vs. global optima) and `math.calc.gradient` ($\\nabla f$ points in the direction of steepest ascent; its magnitude is the maximum rate of change).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.gradient-methods/reference/1",
+      "kind": "reference",
+      "conceptId": "math.opt.gradient-methods",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.opt.unconstrained-optimization` (stationary points and the Hessian test this concept's iterative search ultimately aims to satisfy), `math.calc.gradient` (the steepest-ascent fact this concept's descent direction directly negates).\n- **Unlocks**: `math.opt.stochastic-gradient` (a noisy, sampled variant of this exact update rule), `math.opt.newton-optimization` (an alternative iterative method using second-order (Hessian) information instead of just the gradient).\n- **Cross-link**: KG lists `math.num.newtons-method` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe contrasting gradient descent's first-order iteration with Newton's method's second-order iteration once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.gradient-methods.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
