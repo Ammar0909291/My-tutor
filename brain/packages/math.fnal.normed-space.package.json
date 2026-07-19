@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.normed-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.normed-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7d183a912390d2f965342f472d3da31de4947c8bd292b7cda198e5db96dd5876",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.normed-space.md": "sha256:d2a20959248f8c0526b1d987cf5bd48be37f410e369febea049273ac8318f790"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.fnal.normed-space",
+    "name": "Normed Space",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.vector-space",
+      "math.linalg.norm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.normed-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.normed-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.normed-space.md": "sha256:d2a20959248f8c0526b1d987cf5bd48be37f410e369febea049273ac8318f790"
+      },
+      "contentHash": "sha256:4002c1cb04fd95cdec3ffe7bec96f06417dba05518f91c7cae8266717473a982",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.normed-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.normed-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.normed-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.normed-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.normed-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.normed-space.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.normed-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.normed-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.normed-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.normed-space.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.normed-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.normed-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.normed-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.normed-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **normed space** as a vector space $X$ equipped with a **norm** $\\|\\cdot\\|:X\\to[0,\\infty)$ satisfying three axioms: (i) $\\|x\\|=0 \\iff x=0$ (definiteness), (ii) $\\|\\alpha x\\| = |\\alpha|\\|x\\|$ for scalars $\\alpha$ (homogeneity), (iii) $\\|x+y\\|\\leq\\|x\\|+\\|y\\|$ (the triangle inequality) — and verify these axioms hold for a specific example.\n- LO2: Explain and verify that **every norm induces a metric** via $d(x,y)=\\|x-y\\|$, checking that this induced $d$ satisfies the metric axioms directly from the norm axioms, and recognize this as the precise mechanism connecting normed-space theory to general metric-space theory.\n- LO3: Recognize that a single vector space can carry **multiple genuinely different norms** — e.g. $\\mathbb{R}^n$ with the Euclidean norm $\\|\\cdot\\|_2$ versus the $\\sup$-norm $\\|\\cdot\\|_\\infty$, or the function space $C([a,b])$ with its sup-norm — and that \"normed space\" always refers to the PAIR (vector space, specific norm), not the vector space alone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.normed-space",
+      "title": "NORM-TREATED-AS-SPACE-INDEPENDENT-UNIQUE-QUANTITY",
+      "content": "| MC-1 | NORM-TREATED-AS-SPACE-INDEPENDENT-UNIQUE-QUANTITY | Believing \"the norm\" of a vector is a single, unambiguous number independent of which norm function is chosen, rather than recognizing a vector space can carry multiple genuinely different valid norms | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.normed-space",
+      "title": "INDUCED-METRIC-AXIOMS-ASSUMED-WITHOUT-VERIFICATION",
+      "content": "| MC-2 | INDUCED-METRIC-AXIOMS-ASSUMED-WITHOUT-VERIFICATION | Assuming the induced metric $d(x,y)=\\|x-y\\|$ automatically satisfies the metric axioms without connecting each metric axiom back to the specific norm axiom that justifies it | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.normed-space",
+      "title": "NORM-AXIOMS-CHECKED-ONLY-FOR-POSITIVE-SCALARS",
+      "content": "| MC-3 | NORM-AXIOMS-CHECKED-ONLY-FOR-POSITIVE-SCALARS | When verifying the homogeneity axiom $\\|\\alpha x\\|=|\\alpha|\\|x\\|$, testing only positive scalars and missing the absolute-value requirement for negative $\\alpha$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.normed-space",
+      "title": "The Three Norm Axioms, Grounded in the Euclidean Norm (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Three Norm Axioms, Grounded in the Euclidean Norm (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.normed-space",
+      "title": "Multiple Norms on One Space, and the Induced-Metric Verification (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiple Norms on One Space, and the Induced-Metric Verification (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.normed-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.normed-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify the three norm axioms for $v=(0,-6)\\in\\mathbb{R}^2$ using the Euclidean norm, checking each axiom explicitly with a specific scalar for axiom 2.\n  2. Compute $\\|(3,4)\\|_2$, $\\|(3,4)\\|_\\infty$, and $\\|(3,4)\\|_1$ (the taxicab/1-norm, $\\sum|v_i|$), confirming they give three genuinely different numbers for the same vector.\n  3. Using the induced-metric formula, find the distance between $x=(2,-1)$ and $y=(5,3)$ in $(\\mathbb{R}^2,\\|\\cdot\\|_2)$.\n  4. Explain why $\\|x-y\\|=0$ if and only if $x=y$, tracing the argument back to the norm's own definiteness axiom.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.norm` and `math.real.metric-space`)**: \"Recall from your `math.linalg.norm` lesson that $\\|v\\|=\\sqrt{v\\cdot v}$ satisfies positivity, homogeneity, and the triangle inequality — and from your `math.real.metric-space` lesson that a metric $d$ must satisfy $d(x,y)=0\\iff x=y$, symmetry, and its own triangle inequality. (a) Using THIS lesson's induced-metric formula $d(x,y)=\\|x-y\\|$, explicitly verify all three metric axioms for $d$, citing exactly which norm axiom from `math.linalg.norm` justifies each metric axiom step. (b) That metric-space lesson gave $\\mathbb{R}^n$ (Euclidean) and $C([a,b])$ (sup metric) as named examples of metric spaces — using this lesson's normed-space framework, identify the SPECIFIC norm on each of these vector spaces that induces exactly the metric named in that lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.normed-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.vector-space` (the 8 vector-space axioms) and `math.linalg.norm` (the vector norm $\\|v\\|=\\sqrt{v\\cdot v}$ and the general $p$-norm, already stated there to satisfy positivity, homogeneity, and the triangle inequality — this concept generalizes that concrete construction to an abstract axiomatic setting).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.normed-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.normed-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.vector-space` (the vector-space structure a norm is defined on top of), `math.linalg.norm` (the concrete Euclidean/$p$-norm construction this concept abstracts into a general axiomatic definition).\n- **Unlocks**: `math.fnal.completeness` (completeness of a normed space is defined using Cauchy sequences measured via this concept's norm), `math.fnal.banach-space` (a Banach space is defined as a complete normed space — this concept's entire structure).\n- **Cross-link**: KG lists `math.linalg.norm` and `math.real.metric-space` as cross-links. Verified via directory listing that BOTH `docs/curriculum/blueprints/math.linalg.norm.md` and `docs/curriculum/blueprints/math.real.metric-space.md` **are already authored** — the first instance in this corpus where BOTH named cross-link targets are simultaneously available. The P76 transfer probe above genuinely engages both: part (a) reuses `math.linalg.norm`'s specific axiom statements to justify each step of the induced-metric verification; part (b) reuses `math.real.metric-space`'s own named examples ($\\mathbb{R}^n$, $C([a,b])$) and asks the learner to identify the specific inducing norm for each, directly connecting this concept to both prerequisites' concrete content rather than treating either as merely background.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.normed-space.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

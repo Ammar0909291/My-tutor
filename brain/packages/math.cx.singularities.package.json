@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.singularities-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.singularities",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c7c0d0581ca188a4cc63003c162c4cfcefeb8703e803959a5995840d8c3dc68e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.singularities.md": "sha256:fb0debb866ff673ed90b2365a04f5c893642416ba8aa1265fcff296fae1b2087"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cx.singularities",
+    "name": "Singularities",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.analytic-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.singularities-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.singularities (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.singularities.md": "sha256:fb0debb866ff673ed90b2365a04f5c893642416ba8aa1265fcff296fae1b2087"
+      },
+      "contentHash": "sha256:22060415d5602315d7b805dffdb345ab95408df1eb907ba38909aad707855a38",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.singularities.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.singularities.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.singularities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.singularities\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.singularities.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.singularities.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.singularities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.singularities\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.singularities.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.singularities.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.singularities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.singularities\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.singularities/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.singularities",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **isolated singularity** of $f$ at $z_0$ as a point where $f$ is holomorphic on a punctured disk $0<|z-z_0|<r$ (holomorphic everywhere NEAR $z_0$, but not necessarily AT $z_0$ itself, where $f$ may be undefined or ill-behaved).\n- LO2: Classify an isolated singularity into exactly one of three types — **removable** ($f$ is bounded near $z_0$, and can be \"patched\" to become holomorphic there too), **pole** ($|f(z)|\\to\\infty$ as $z\\to z_0$), or **essential** (neither of the above — $f$'s behavior near $z_0$ is genuinely wild, with no limit at all, not even $\\infty$) — for a given function.\n- LO3: State and apply **Riemann's Removable Singularity Theorem** — an isolated singularity is removable **if and only if** $f$ is bounded near $z_0$ — as a practical TEST distinguishing removable singularities from the other two types, without needing to explicitly construct the patched extension.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.singularities",
+      "title": "SINGULARITY-TYPE-ASSUMED-FROM-SUPERFICIAL-FORM",
+      "content": "| MC-1 | SINGULARITY-TYPE-ASSUMED-FROM-SUPERFICIAL-FORM | Believing functions with a similarly-looking \"undefined at a point\" algebraic form (e.g. division by zero) must share the same singularity type, without checking actual limiting behavior | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.singularities",
+      "title": "POLE-AND-ESSENTIAL-SINGULARITY-CONFLATED",
+      "content": "| MC-2 | POLE-AND-ESSENTIAL-SINGULARITY-CONFLATED | Believing any singularity where $f$ \"blows up\" or behaves badly must be a pole, not distinguishing a genuine pole ($|f|\\to\\infty$ uniformly) from an essential singularity (wildly path-dependent behavior, no single limit even at infinity) | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.singularities",
+      "title": "REMOVABLE-SINGULARITY-REQUIRES-EXPLICIT-PATCH-VALUE",
+      "content": "| MC-3 | REMOVABLE-SINGULARITY-REQUIRES-EXPLICIT-PATCH-VALUE | Believing a singularity cannot be certified as removable until the specific patching value is explicitly computed, not recognizing Riemann's theorem allows certification via boundedness alone | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.singularities",
+      "title": "The Three Types, via Direct Limiting Behavior (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Three Types, via Direct Limiting Behavior (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.singularities",
+      "title": "Essential Singularities and the Full Three-Way Classification (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Essential Singularities and the Full Three-Way Classification (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.singularities",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.singularities",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Classify the singularity of $f(z)=\\frac{1-\\cos z}{z}$ at $z_0=0$ (hint: check boundedness using the known limit $\\lim_{z\\to0}\\frac{1-\\cos z}{z}$).\n  2. Classify the singularity of $g(z)=\\frac{1}{(z-2)^3}$ at $z_0=2$.\n  3. For $h(z)=\\sin(1/z)$ at $z_0=0$, evaluate the limiting behavior along the paths $z=\\frac{1}{n\\pi}\\to0$ (where $\\sin(1/z)=\\sin(n\\pi)=0$) and $z=\\frac{2}{(2n+1)\\pi}\\to0$ (where $\\sin(1/z)=\\pm1$), and use this to classify the singularity.\n  4. Explain why Riemann's theorem lets you certify a removable singularity WITHOUT explicitly finding the value that patches the function there.\n- **P76 (Transfer Probe, mode = independence)**: \"An electrical engineering model for a circuit's transfer function has a mathematical expression $T(s) = \\frac{s^2-4}{s-2}$ (where $s$ is a complex frequency variable), which appears undefined at $s=2$. (a) Using algebraic simplification (factoring the numerator) plus this lesson's boundedness test, determine whether $s=2$ is a removable singularity, a pole, or something else. (b) A colleague, working with a genuinely different transfer function $T_2(s)=\\frac{1}{(s-2)^2}$, claims 'since both functions have $(s-2)$ causing trouble in the denominator area, they must have the same type of singularity at $s=2$.' Using this lesson's distinction between superficial algebraic form and actual limiting behavior, explain why this claim is incorrect.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.singularities",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.analytic-functions` (holomorphic/analytic functions, complex differentiability, and the striking fact that holomorphic implies analytic in $\\mathbb{C}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.singularities/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.singularities",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-functions` (holomorphic/analytic functions and complex differentiability, the baseline behavior a singularity is a departure FROM).\n- **Unlocks**: `math.cx.laurent-series` (the Laurent series expansion around a singularity directly reveals and refines this concept's three-way classification via the series' negative-power terms), `math.cx.residue-theorem` (residues are computed at poles specifically, building directly on this concept's pole classification).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.singularities.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

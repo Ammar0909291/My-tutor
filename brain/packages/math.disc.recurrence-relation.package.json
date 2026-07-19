@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.recurrence-relation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.recurrence-relation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4929ab9b5fb9fad2125e750af0e0ca921d285b6ddcbbe9e276ca932688a1dc82",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.recurrence-relation.md": "sha256:de54e89aeb4bd76d9c5ddfd332a752595940327502565be010fae225a6ff1528"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.disc.recurrence-relation",
+    "name": "Recurrence Relation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.sequence",
+      "math.alg.polynomial"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.recurrence-relation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.recurrence-relation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.recurrence-relation.md": "sha256:de54e89aeb4bd76d9c5ddfd332a752595940327502565be010fae225a6ff1528"
+      },
+      "contentHash": "sha256:1826b7233a9e36cccc1178d844aae5747e620fef9f9834c71517a624f5ba2395",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.recurrence-relation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.recurrence-relation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.recurrence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.recurrence-relation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.recurrence-relation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.recurrence-relation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.recurrence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.recurrence-relation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.recurrence-relation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.recurrence-relation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.recurrence-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.recurrence-relation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.recurrence-relation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **recurrence relation** as an equation defining a sequence $a_n$ in terms of one or more earlier terms, requiring **initial conditions** to pin down a specific sequence, and evaluate the first several terms of a given recurrence directly (e.g. the Fibonacci recurrence $F_n=F_{n-1}+F_{n-2}$).\n- LO2: Solve a **linear recurrence with constant coefficients** in **closed form** via the **characteristic equation** method — for $a_n = c_1a_{n-1}+c_2a_{n-2}$, form the characteristic equation $x^2=c_1x+c_2$, solve for its roots, and construct the general solution as a combination of those roots raised to the $n$-th power, fitting constants to the initial conditions.\n- LO3: Correctly distinguish a recurrence relation's **order** (how many previous terms it references) from its **degree**, and recognize that the SAME closed-form technique (characteristic equation) generalizes to higher-order linear recurrences with repeated or complex roots, requiring adjusted solution forms in those cases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "DISTINCT-ROOTS-FORM-APPLIED-TO-REPEATED-ROOTS",
+      "content": "| MC-1 | DISTINCT-ROOTS-FORM-APPLIED-TO-REPEATED-ROOTS | Applying the distinct-roots closed-form template $Ar_1^n+Br_2^n$ directly to a repeated-root characteristic equation, without recognizing the collapse into an underdetermined single-constant form | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "INITIAL-CONDITIONS-OMITTED-AS-UNNECESSARY",
+      "content": "| MC-2 | INITIAL-CONDITIONS-OMITTED-AS-UNNECESSARY | Believing the recurrence relation alone (without stated initial conditions) fully determines a specific sequence, rather than recognizing infinitely many sequences can satisfy the same recurrence rule with different starting values | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "ORDER-CONFLATED-WITH-DEGREE",
+      "content": "| MC-3 | ORDER-CONFLATED-WITH-DEGREE | Treating a recurrence's \"order\" and its characteristic polynomial's \"degree\" as interchangeable terms for the identical concept, rather than recognizing them as describing different objects that happen to coincide in this simple linear case | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Recurrences and Evaluating Terms, via Fibonacci (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Recurrences and Evaluating Terms, via Fibonacci (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Repeated Roots Require a Different Form, and Order vs. Degree (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Repeated Roots Require a Different Form, and Order vs. Degree (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $a_n=3a_{n-1}-1$ with $a_0=2$, compute $a_1,a_2,a_3$ directly.\n  2. Solve $a_n=7a_{n-1}-12a_{n-2}$ with $a_0=1,a_1=6$ using the characteristic-equation method (distinct roots expected).\n  3. Solve $a_n=6a_{n-1}-9a_{n-2}$ with $a_0=2,a_1=3$ using the characteristic-equation method, checking carefully whether the roots are distinct or repeated before choosing a solution form.\n  4. Explain why the general solution form for a repeated root ($(A+Bn)r^n$) genuinely needs the extra factor of $n$, rather than just being a stylistic convention.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.de.ode`)**: \"Recall from your `math.de.ode` lesson that an ordinary differential equation involves an unknown function and its derivatives, with 'order' meaning the highest derivative present — directly analogous to this lesson's recurrence 'order' (how many previous discrete terms are referenced). (a) A discrete recurrence $a_n=5a_{n-1}-6a_{n-2}$ (Example 2) and a continuous second-order linear ODE with constant coefficients both use a strikingly similar 'characteristic equation' solsolution method — using this lesson's own characteristic-equation procedure, explain in your own words what role the DISCRETE step (from $a_{n-1}$ to $a_n$) plays here that the CONTINUOUS derivative plays in an ODE's own characteristic-equation method (you do not need ODE-solving details — a structural comparison is sufficient). (b) Explain why BOTH the discrete recurrence and (analogously) the continuous ODE would need an adjusted, repeated-root solution form in the special case their respective characteristic equations have a repeated root, rather than treating repeated roots as a rare edge case unique to one setting or the other.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.seq.sequence` (a sequence as an ordered list of values, function from $\\mathbb{N}$) and `math.alg.polynomial` (solving polynomial equations, needed for the characteristic equation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.recurrence-relation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.recurrence-relation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.seq.sequence` (the general notion of a sequence this concept's recurrence defines), `math.alg.polynomial` (solving the characteristic equation, a polynomial equation).\n- **Unlocks**: `math.disc.generating-functions` (generating functions are an alternative, often more powerful technique for solving recurrences, directly building on this concept's foundational setup).\n- **Cross-link**: KG lists `math.de.ode` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.de.ode.md` **is already authored** (confirmed: ODEs are defined with an \"order\" meaning the highest derivative present, directly paralleling this concept's own recurrence order). The P76 transfer probe above directly connects this concept's characteristic-equation method and repeated-root adjustment to the structurally analogous ODE method, treating the discrete-vs-continuous distinction as the key structural comparison point — the sixth instance in this corpus of a genuine, content-verified cross-link probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.recurrence-relation.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
