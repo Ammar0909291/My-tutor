@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.inverse-trig-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.inverse-trig",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b84a496a9bc1e206ce855e0fb41f79d768dc765a18a76bd6234191500d09f115",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.inverse-trig.md": "sha256:03e1d5dfc1a1b5e55b2c7c7b3837a8568eb65b11a64ab42814dd04512717499e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.inverse-trig",
+    "name": "Inverse Trigonometric Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.trig.trig-functions",
+      "math.func.inverse-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.inverse-trig-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.inverse-trig (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.inverse-trig.md": "sha256:03e1d5dfc1a1b5e55b2c7c7b3837a8568eb65b11a64ab42814dd04512717499e"
+      },
+      "contentHash": "sha256:4ea04f76327e14074e3008ea2b0427dbd5791423438cce13f1e71b930fad64e4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.inverse-trig.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.inverse-trig.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.inverse-trig\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.inverse-trig.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.inverse-trig.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.inverse-trig\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.inverse-trig.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.inverse-trig.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.inverse-trig\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.inverse-trig.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.inverse-trig.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.inverse-trig\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.inverse-trig/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that $\\sin(x)$, $\\cos(x)$, $\\tan(x)$ are NOT injective on their full natural domains (periodicity means each output value repeats infinitely often, per `math.func.injectivity`'s own failure criterion), and that $\\arcsin$, $\\arccos$, $\\arctan$ are defined by FIRST restricting each function's domain to a specific interval where it genuinely IS bijective — directly the trigonometric instance of `math.func.inverse-functions`' own domain-restriction requirement.\n- LO2: State the specific restricted domains and ranges: $\\arcsin$ (domain $[-1,1]$, range $[-\\pi/2,\\pi/2]$, restricting $\\sin$ there), $\\arccos$ (domain $[-1,1]$, range $[0,\\pi]$, restricting $\\cos$ there), $\\arctan$ (domain $\\mathbb{R}$, range $(-\\pi/2,\\pi/2)$, restricting $\\tan$ there) — and correctly evaluate each at standard values, always returning an answer strictly within the stated restricted range.\n- LO3: State the two \"undoing\" identities and their crucial ASYMMETRY: $\\sin(\\arcsin(x))=x$ holds for EVERY $x\\in[-1,1]$ (arcsin's whole domain), but $\\arcsin(\\sin(x))=x$ holds ONLY when $x\\in[-\\pi/2,\\pi/2]$ — a genuinely more restricted condition — directly refuting the assumption that both composition directions \"simply cancel\" with equal reliability.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "TRIG-FUNCTIONS-ASSUMED-INVERTIBLE-ON-FULL-DOMAIN",
+      "content": "| MC-1 | TRIG-FUNCTIONS-ASSUMED-INVERTIBLE-ON-FULL-DOMAIN | Believing sin, cos, or tan have straightforward inverse functions on their full natural domains, missing that periodicity makes them fail injectivity there, requiring domain restriction first | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "INVERSE-TRIG-COMPOSITION-ASSUMED-ALWAYS-RETURNS-ORIGINAL-INPUT",
+      "content": "| MC-2 | INVERSE-TRIG-COMPOSITION-ASSUMED-ALWAYS-RETURNS-ORIGINAL-INPUT | Believing arcsin(sin(x)) (or the arccos/arctan analogs) always equals x for any real x, missing that this holds only when x is already within the restricted range | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "THE-TWO-COMPOSITION-DIRECTIONS-ASSUMED-EQUALLY-RELIABLE",
+      "content": "| MC-3 | THE-TWO-COMPOSITION-DIRECTIONS-ASSUMED-EQUALLY-RELIABLE | Believing sin(arcsin(x))=x and arcsin(sin(x))=x are equally reliable identities holding under the same conditions, missing the genuine asymmetry between them | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "Restriction Is Required Before Inversion (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Restriction Is Required Before Inversion (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "The Output Is Always Confined to the Restricted Range (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Output Is Always Confined to the Restricted Range (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "The Two Identities Are Not Equally Reliable (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Two Identities Are Not Equally Reliable (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why $\\cos(x)$ is not injective on all of $\\mathbb{R}$, and state the domain restriction used to define $\\arccos$.\n  2. Compute $\\arccos(\\cos(2\\pi/3))$ and $\\arccos(\\cos(-\\pi/3))$, being careful about which lies within $\\arccos$'s range $[0,\\pi]$.\n  3. Compute $\\tan(\\arctan(1))$ and explain why this direction always works for any real number.\n  4. Compute $\\arctan(\\tan(3\\pi/4))$, and explain why the answer is NOT $3\\pi/4$, referencing $\\arctan$'s range $(-\\pi/2,\\pi/2)$.\n- **P76 (Transfer Probe, mode = independence)**: \"A surveyor measures the angle of elevation to a tower's top using $\\theta=\\arctan(\\text{height}/\\text{distance})$. (a) Explain why using $\\arctan$ here is appropriate — i.e., why the surveyor can trust the result is a genuine, well-defined angle, referencing the domain-restriction reasoning from this lesson. (b) A second surveyor, working with a different tower, computes $\\tan(\\theta)=1$ for some angle $\\theta$ measured directly in the field as $\\theta=3\\pi/4$ (an obtuse angle, from a different geometric setup). Explain why computing $\\arctan(\\tan(3\\pi/4))$ would NOT return $3\\pi/4$, and what the surveyor should actually expect this computation to return instead. (c) Explain why, by contrast, computing $\\tan(\\arctan(1))$ is always completely safe and reliably returns exactly $1$, no matter the context.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.trig.trig-functions` ($\\sin,\\cos,\\tan$ defined for all real $x$; periodicity, $\\sin(x+2\\pi)=\\sin(x)$; domain and range of each) and `math.func.inverse-functions` (a function must be bijective — restricting the domain if necessary — before a genuine inverse function exists; the general algebraic verification process for an inverse).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.trig.inverse-trig/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.inverse-trig",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.trig.trig-functions` (sin, cos, tan's definitions, periodicity, and domains/ranges this concept's restrictions are built from), `math.func.inverse-functions` (the general domain-restriction-then-invert procedure this concept applies specifically to trigonometric functions).\n- **Unlocks**: `math.trig.trig-equations` (solving trig equations often requires inverse trig functions to extract a specific solution angle), `math.calc.derivative-inverse-trig` (differentiates arcsin, arccos, arctan via implicit differentiation of the original trig equation).\n- **Cross-link**: KG lists `math.calc.derivative-inverse-trig` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into differentiating these inverse functions once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.inverse-trig.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

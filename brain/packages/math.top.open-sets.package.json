@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.open-sets-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.open-sets",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ce9e291fae986cba692c2c8d1c530d5af7ac8599b07c5267afe97ca274181958",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.open-sets.md": "sha256:dd3fa7505f9dbd1ffeeb1487dfa4948560200ffa0f423c8047121d9c67938091"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.open-sets",
+    "name": "Open and Closed Sets (Topology)",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.open-sets-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.open-sets (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.open-sets.md": "sha256:dd3fa7505f9dbd1ffeeb1487dfa4948560200ffa0f423c8047121d9c67938091"
+      },
+      "contentHash": "sha256:81d0cd9cca48e82cd23557a998d1c1f218e89f21b0962f392fc65541b0c28023",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.open-sets.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.open-sets.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.open-sets\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.open-sets.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.open-sets.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.open-sets\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.open-sets.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.open-sets.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.open-sets\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.open-sets.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.open-sets.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.open-sets"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.open-sets\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.open-sets/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.open-sets",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **open sets** simply as the ELEMENTS of a topology $\\tau$ (per `math.top.topological-space`'s own axioms) and **closed sets** as complements of open sets ($X\\setminus U$ for $U\\in\\tau$) — recognizing these definitions require NO reference to distance or metric balls at all, genuinely generalizing `math.real.open-sets`' metric-based definitions to any topological space, including non-metrizable ones.\n- LO2: Define the **interior** $\\text{int}(A)$ as the LARGEST open set contained in $A$, and the **closure** $\\text{cl}(A)$ as the SMALLEST closed set containing $A$ — and recognize that a NONEMPTY set can have EMPTY interior (no open set, other than $\\varnothing$, fits entirely inside it).\n- LO3: Define the **boundary** $\\partial A = \\text{cl}(A)\\cap\\text{cl}(A^c)$ (points that are limit points of both $A$ and its complement), verify this recovers the familiar \"two endpoints\" answer for an interval in $\\mathbb{R}$, and recognize that a set's boundary can be dramatically LARGER than intuition suggests — even the entire space.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.open-sets",
+      "title": "TOPOLOGICAL-CONCEPTS-ASSUMED-TO-NEED-A-METRIC",
+      "content": "| MC-1 | TOPOLOGICAL-CONCEPTS-ASSUMED-TO-NEED-A-METRIC | Believing interior, closure, and boundary can only be defined or computed using distance/metric balls, missing that they are defined purely from the topology's declared open/closed sets | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.open-sets",
+      "title": "NONEMPTY-SET-ASSUMED-NONEMPTY-INTERIOR",
+      "content": "| MC-2 | NONEMPTY-SET-ASSUMED-NONEMPTY-INTERIOR | Believing every nonempty set has a nonempty interior, missing that sets like single points (or dense-complement sets like ℚ in ℝ) can have entirely empty interior | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.open-sets",
+      "title": "BOUNDARY-ASSUMED-ALWAYS-THIN",
+      "content": "| MC-3 | BOUNDARY-ASSUMED-ALWAYS-THIN | Believing a set's boundary is always a small, thin collection of \"edge\" points like an interval's endpoints, missing that a set dense alongside a dense complement can have a boundary equal to the entire space | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.open-sets",
+      "title": "Open and Closed, No Metric Required (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Open and Closed, No Metric Required (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.open-sets",
+      "title": "A Nonempty Set Can Have Empty Interior (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Nonempty Set Can Have Empty Interior (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.open-sets",
+      "title": "Boundary Can Be the Whole Space (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Boundary Can Be the Whole Space (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.open-sets",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.open-sets",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $X=\\{a,b,c\\}$ with $\\tau=\\{\\varnothing,\\{a\\},\\{a,b\\},X\\}$, list all closed sets.\n  2. For the same $X,\\tau$, compute $\\text{int}(\\{a,c\\})$.\n  3. In $\\mathbb{R}$, compute $\\partial[0,3]$ (the boundary of the closed interval $[0,3]$), and check it matches the endpoint pattern from Example 3's $(2,5)$ case.\n  4. Explain why $\\partial\\mathbb{Q}=\\mathbb{R}$, referencing the density of both the rationals and the irrationals.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.real.open-sets`)**: \"Recall from `math.real.open-sets` that in a metric space, a set $U$ is open iff every point has an open ball fitting inside it, and closure was defined via limit points reachable by arbitrarily small balls. (a) Explain precisely how this lesson's purely topological definitions (open = element of $\\tau$; closed = complement of an open set) recover EXACTLY the same open and closed sets as `math.real.open-sets`' ball-based definitions, when $\\tau$ happens to be the metric topology generated by open balls. (b) That lesson's Example 3 showed $S=[0,1)$ is neither open nor closed. Using this lesson's interior/closure definitions, compute $\\text{int}(S)$ and $\\text{cl}(S)$, and confirm $S\\ne\\text{int}(S)$ and $S\\ne\\text{cl}(S)$ — exactly why $S$ is neither. (c) Explain why the fully general, metric-free definitions in this lesson are necessary in the first place, given `math.top.topological-space`'s own finding that some topologies (like the indiscrete topology) do not arise from any metric at all.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.open-sets",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (a topology $\\tau$ on $X$ is a collection of subsets — the ones DECLARED \"open\" — satisfying three axioms: $\\varnothing,X\\in\\tau$; arbitrary unions of members of $\\tau$ are in $\\tau$; FINITE intersections of members of $\\tau$ are in $\\tau$; openness is relative to the chosen $\\tau$, not an intrinsic property of a set; not every topology arises from a metric).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.open-sets/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.open-sets",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (the topology $\\tau$ and its three axioms this concept's open/closed definitions directly reuse).\n- **Unlocks**: `math.top.interior-closure` (a dedicated deeper treatment of the interior/closure operators this concept previews), `math.top.connectedness` (defined via the impossibility of splitting a space into two disjoint nonempty open sets, directly using this concept's open-set vocabulary).\n- **Cross-link (P76_mode = cross-link probe against `math.real.open-sets`, already authored)**: that concept's own Component 7 explicitly anticipated this connection (\"a future revision... once that concept is authored, may add a genuine cross-link probe\"); this blueprint's transfer probe fulfills exactly that anticipated connection, showing the metric-space treatment is the motivating special case of this concept's fully general, metric-free definitions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.open-sets.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
