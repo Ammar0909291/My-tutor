@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.confidence-interval-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.confidence-interval",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b246c43363c2b290cb056848bdfd521069fbd1dd696afa8cbe81ed702d27b16d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.confidence-interval.md": "sha256:b049582c7088b4e2de7b469921fee3439968a1b5b5b4fc5b1dcef944c0d93591"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.confidence-interval",
+    "name": "Confidence Interval",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.stats.sampling-distribution",
+      "math.prob.normal-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.confidence-interval-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.confidence-interval (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.confidence-interval.md": "sha256:b049582c7088b4e2de7b469921fee3439968a1b5b5b4fc5b1dcef944c0d93591"
+      },
+      "contentHash": "sha256:9e9361da34bcb6e84d3c3912a9fe7d5f53274232a4d06c27094791590a55b3cc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.confidence-interval.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.confidence-interval.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.confidence-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.confidence-interval\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.confidence-interval.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.confidence-interval.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.confidence-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.confidence-interval\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.confidence-interval.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.confidence-interval.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.confidence-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.confidence-interval\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.confidence-interval.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.confidence-interval.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.confidence-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.confidence-interval\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.confidence-interval/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the $95\\%$ confidence interval for $\\mu$ (known $\\sigma$) as $\\bar x\\pm1.96\\dfrac{\\sigma}{\\sqrt n}$, recognizing $1.96$ as the specific $z$-value from `math.prob.normal-distribution`'s standard normal that captures the middle $95\\%$ of area, and $\\dfrac{\\sigma}{\\sqrt n}$ as `math.stats.sampling-distribution`'s own standard error of $\\bar X$.\n- LO2: Interpret the confidence interval CORRECTLY via the repeated-sampling frequentist interpretation: BEFORE data is collected, $95\\%$ of intervals constructed this way (across many hypothetical samples) would contain $\\theta$ — and recognize that this is NOT the same as \"there is a $95\\%$ probability $\\theta$ lies in THIS particular already-computed interval.\"\n- LO3 (orientation level — full unknown-$\\sigma$ theory deferred): recognize, without full derivation, that when $\\sigma$ is UNKNOWN (the realistic case), the CI formula requires substituting the sample standard deviation $s$ and using a $t$-distribution critical value instead of $z=1.96$, since this substitution introduces extra uncertainty the normal-based formula does not account for.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "CI-FORMULA-ASSUMED-NEW-INDEPENDENT-CONSTANTS",
+      "content": "| MC-1 | CI-FORMULA-ASSUMED-NEW-INDEPENDENT-CONSTANTS | Believing the CI formula's $1.96$ and $\\sigma/\\sqrt n$ are new, independent constants, missing that they are exactly the standard normal's 95%-area z-value and the already-known standard error | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "CONFIDENCE-LEVEL-ASSUMED-PROBABILITY-OF-THIS-INTERVAL",
+      "content": "| MC-2 | CONFIDENCE-LEVEL-ASSUMED-PROBABILITY-OF-THIS-INTERVAL | Believing \"95% confidence\" means a 95% probability that $\\theta$ is in this specific, already-computed interval, missing that it describes the long-run success rate of the construction procedure | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "UNKNOWN-SIGMA-ASSUMED-TO-NEED-NO-ADJUSTMENT",
+      "content": "| MC-3 | UNKNOWN-SIGMA-ASSUMED-TO-NEED-NO-ADJUSTMENT | Believing substituting $s$ for unknown $\\sigma$ requires no other change to the CI formula, missing that this requires switching to a wider $t$-distribution critical value | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "The CI Formula Assembles Two Facts You Already Know (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The CI Formula Assembles Two Facts You Already Know (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "\"95% Confidence\" Describes the Procedure, Not This One Interval (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"\\\"95% Confidence\\\" Describes the Procedure, Not This One Interval (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "Not Knowing $\\sigma$ Genuinely Widens the Interval (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Not Knowing $\\\\sigma$ Genuinely Widens the Interval (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Construct the $95\\%$ CI for $\\mu$ given $n=36$, $\\bar x=100$, known $\\sigma=12$.\n  2. State, in your own words, the CORRECT repeated-sampling interpretation of your answer to problem 1, and explain in one sentence why \"95% probability $\\mu$ is in this interval\" is not the right interpretation.\n  3. Explain why substituting the sample standard deviation $s$ for $\\sigma$ (with no other change) would understate the interval's true uncertainty.\n  4. Without computing exact values, explain qualitatively why a $t$-based CI (unknown $\\sigma$) is wider than a $z$-based CI (known $\\sigma$) for the same sample.\n- **P76 (Transfer Probe, mode = independence)**: \"A researcher measures the mean reaction time of $n=49$ subjects, getting $\\bar x=250$ms with KNOWN population standard deviation $\\sigma=35$ms. (a) Construct the $95\\%$ confidence interval, identifying which of its two components comes from `math.prob.normal-distribution` and which from `math.stats.sampling-distribution`. (b) A colleague reports the interval and states 'there's a 95% chance the true mean reaction time is in this range' — correct this statement using the proper repeated-sampling interpretation. (c) Suppose instead $\\sigma$ were unknown and had to be estimated from the sample as $s=35$ms — explain what would need to change about the interval construction, and whether the resulting interval would be wider, narrower, or the same width as the known-$\\sigma$ interval from part (a).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.sampling-distribution` (the distribution of $\\bar X$ across samples, with $E[\\bar X]=\\mu$ and standard error $\\sigma/\\sqrt n$, approximately normal for large $n$ by the CLT) and `math.prob.normal-distribution` (the normal density, standard normal $Z$, and area/probability computations).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.stats.confidence-interval/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.confidence-interval",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.sampling-distribution` (the distribution of $\\bar X$, its mean $\\mu$, and standard error $\\sigma/\\sqrt n$, directly assembled into the CI) and `math.prob.normal-distribution` (the standard normal's $95\\%$-area $z$-value $1.96$, and the CLT-based normality of $\\bar X$).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.confidence-interval.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

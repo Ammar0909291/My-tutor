@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.cohomology-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.cohomology",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:df73f6f3eb3c3a35ef15f360b5ed430011f78af739edd85fcf3f247b463d09eb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.cohomology.md": "sha256:7bace9529952e1545c03d327f964e8ddfbf443c25549f978de21c8be4f7520c9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.cohomology",
+    "name": "Cohomology",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.45,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.top.homology"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.cohomology-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.cohomology (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.cohomology.md": "sha256:7bace9529952e1545c03d327f964e8ddfbf443c25549f978de21c8be4f7520c9"
+      },
+      "contentHash": "sha256:6480ca0d1c3d0a4c547dda336802671b543812e6c0e9ad4a0d3c892d1b66b950",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.cohomology.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.cohomology.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.cohomology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.cohomology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.cohomology.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.cohomology.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.cohomology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.cohomology\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.cohomology.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.cohomology.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.cohomology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.cohomology\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.cohomology.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.cohomology.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.cohomology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.cohomology\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.cohomology/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.cohomology",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **cohomology groups** $H^n(X)=\\mathrm{Hom}(H_n(X),\\mathbb{Z})$ (via the universal coefficient theorem, in the simplest case) as the DUAL construction to `math.top.homology`'s own $H_n(X)$ — homomorphisms FROM the homology groups TO $\\mathbb{Z}$, rather than the homology groups themselves.\n- LO2: Recognize the **cup product** as a genuinely NEW structure cohomology has that homology (as bare groups) lacks: $H^*(X)=\\bigoplus_nH^n(X)$ assembles into a RING, with multiplication given by the cup product $\\smile:H^p(X)\\times H^q(X)\\to H^{p+q}(X)$ — extra algebraic structure not visible in homology alone.\n- LO3 (orientation level — full de Rham theory deferred): recognize, without full derivation, that **de Rham cohomology** (built from closed/exact differential forms on a smooth manifold) is a DIFFERENT-LOOKING construction that de Rham's theorem shows is ISOMORPHIC to singular cohomology with real coefficients — the same invariant, computed by a genuinely different (analytic, not combinatorial) route.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.cohomology",
+      "title": "COHOMOLOGY-ASSUMED-SAME-AS-HOMOLOGY",
+      "content": "| MC-1 | COHOMOLOGY-ASSUMED-SAME-AS-HOMOLOGY | Believing $H^n(X)$ is just another name or notation for $H_n(X)$, missing that it is the dual group $\\mathrm{Hom}(H_n(X),\\mathbb{Z})$, a conceptually different construction | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.cohomology",
+      "title": "COHOMOLOGY-ASSUMED-NO-EXTRA-INFORMATION",
+      "content": "| MC-2 | COHOMOLOGY-ASSUMED-NO-EXTRA-INFORMATION | Believing cohomology's groups alone carry the same information as homology, presented differently, missing that the cup product gives genuinely new ring structure | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.cohomology",
+      "title": "DE-RHAM-ASSUMED-UNRELATED-INVARIANT",
+      "content": "| MC-3 | DE-RHAM-ASSUMED-UNRELATED-INVARIANT | Believing de Rham cohomology and singular cohomology are fundamentally different invariants that merely share a name, missing that de Rham's theorem proves them isomorphic | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.cohomology",
+      "title": "Cohomology Dualizes Homology, It Doesn't Redefine It (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cohomology Dualizes Homology, It Doesn't Redefine It (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.cohomology",
+      "title": "The Cup Product Is Genuinely New Structure, Not Automatic (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Cup Product Is Genuinely New Structure, Not Automatic (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.cohomology",
+      "title": "De Rham Cohomology Reaches the Same Answer By a Completely Different Method (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"De Rham Cohomology Reaches the Same Answer By a Completely Different Method (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.cohomology",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.cohomology",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the universal coefficient theorem's simplest (torsion-free) form relating $H^n(X)$ to $H_n(X)$.\n  2. For $X=S^2$ (the sphere), given $H_0(S^2)=\\mathbb{Z}$, $H_1(S^2)=0$, $H_2(S^2)=\\mathbb{Z}$, compute $H^0(S^2)$, $H^1(S^2)$, $H^2(S^2)$ via the torsion-free universal coefficient theorem.\n  3. Explain, citing the cup product, why cohomology carries strictly more information than the bare list of cohomology GROUPS alone.\n  4. Explain, without full proof, what de Rham's theorem asserts and why it is a nontrivial, noteworthy result (rather than an obvious restatement).\n- **P76 (Transfer Probe, mode = independence)**: \"Consider $X=T^2\\times S^1$ (a 3-torus-like space), whose cohomology ring $H^*(X)$ has generators $\\alpha,\\beta$ (from the $T^2$ factor, degree 1) and $\\gamma$ (from the $S^1$ factor, degree 1), with $\\alpha\\smile\\beta\\ne0$ but $\\alpha\\smile\\alpha=\\beta\\smile\\beta=\\gamma\\smile\\gamma=0$. (a) Explain why simply knowing the cohomology GROUPS $H^0,H^1,H^2,H^3$ (their ranks) would not distinguish this space's cup-product structure from a space with the same group ranks but a trivial (all-zero) cup product. (b) Explain, conceptually, why $H^1(X)$ being defined as $\\mathrm{Hom}(H_1(X),\\mathbb{Z})$ rather than simply 'being' $H_1(X)$ matters for setting up this dual pairing correctly. (c) If someone proposed computing this space's cohomology via de Rham's differential-forms approach instead of singular cohomology, explain why de Rham's theorem guarantees this alternative route would be legitimate and would agree with the singular computation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.cohomology",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.homology` (the homology groups $H_n(X)$, their functoriality and homotopy invariance, and computability via chain complexes).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.cohomology/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.cohomology",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.homology` (the homology groups $H_n(X)$, their functoriality and chain-complex computability, directly dualized here into cohomology).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.cohomology.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

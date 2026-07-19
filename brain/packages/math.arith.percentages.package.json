@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.percentages-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.percentages",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:08d6b82531ad31b0eb8d35729dce701eea02c0844d639fb99b8dbaaa63eab4b3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.percentages.md": "sha256:717e6619ece314baa326a0bf7a28d89ed659c89f5285bd02b94b0b97f7f5c5f1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.percentages",
+    "name": "Percentages",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.fractions",
+      "math.arith.decimals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.percentages-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.percentages (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.percentages.md": "sha256:717e6619ece314baa326a0bf7a28d89ed659c89f5285bd02b94b0b97f7f5c5f1"
+      },
+      "contentHash": "sha256:27412c119e53c9897ff4a42b021dc040254ce41288fbe9e746fc3f5744138eb2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.percentages.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentages.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentages"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentages\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.percentages.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentages.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentages"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentages\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.percentages.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentages.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentages"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentages\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.percentages.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentages.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentages"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentages\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.percentages/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.percentages",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $x\\%=\\dfrac{x}{100}$, recognizing a percentage as SIMPLY `math.arith.fractions`'s own $p/q$ notation with the denominator FIXED at $100$ — not a new kind of number, just a fraction with a standardized denominator — and convert freely between percentage, fraction, and `math.arith.decimals`'s decimal notation for the same value.\n- LO2: Compute \"$x\\%$ of $N$\" by MULTIPLYING $N$ by the fraction $x/100$ (equivalently, the decimal $x/100$), and apply this to solve everyday percentage problems (discounts, interest, proportions).\n- LO3 (orientation level — full percentage-change theory deferred): recognize, without full derivation, that percentage INCREASE/DECREASE problems (e.g. \"a price increases by 20%, then decreases by 20%\") do NOT simply cancel, because each percentage change is computed relative to a DIFFERENT base value — previewing the general percent-change formula.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.percentages",
+      "title": "PERCENT-ASSUMED-DIFFERENT-KIND-OF-NUMBER",
+      "content": "| MC-1 | PERCENT-ASSUMED-DIFFERENT-KIND-OF-NUMBER | Believing a percentage is a fundamentally different kind of number from a fraction or decimal, missing that $x\\%$ IS $x/100$, simply a fraction with a fixed denominator | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.percentages",
+      "title": "PERCENT-OF-ASSUMED-SPECIAL-PROCEDURE",
+      "content": "| MC-2 | PERCENT-OF-ASSUMED-SPECIAL-PROCEDURE | Believing \"percent of\" requires a genuinely different arithmetic procedure, missing that it is literally multiplication by the fraction $x/100$ | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.percentages",
+      "title": "SEQUENTIAL-PERCENT-CHANGES-ASSUMED-TO-CANCEL",
+      "content": "| MC-3 | SEQUENTIAL-PERCENT-CHANGES-ASSUMED-TO-CANCEL | Believing a percentage increase followed by an equal percentage decrease returns a quantity to its original value, missing that each change is computed relative to a different (shifting) base | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentages",
+      "title": "Percent Is Just a Fraction With Denominator 100 (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Percent Is Just a Fraction With Denominator 100 (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentages",
+      "title": "\"Percent Of\" Is Just Multiplication By a Fraction (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"\\\"Percent Of\\\" Is Just Multiplication By a Fraction (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentages",
+      "title": "Sequential Percentage Changes Use Different Bases (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Sequential Percentage Changes Use Different Bases (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentages",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.percentages",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Convert $60\\%$ to a simplified fraction and a decimal.\n  2. Compute $25\\%$ of $160$ via BOTH the decimal route and the fraction route, confirming both give the same answer.\n  3. A $\\$50$ item increases in price by $10\\%$, then decreases by $10\\%$. Compute the final price, and explain why it is not exactly $\\$50$.\n  4. Explain, in one sentence, why $x\\%$ is not a new kind of number distinct from fractions and decimals.\n- **P76 (Transfer Probe, mode = independence)**: \"A store advertises 'Save 30% today, then take an EXTRA 10% off at checkout!' (a) If an item originally costs $\\$200$, compute the price after the first $30\\%$ discount. (b) Compute the price after the additional $10\\%$ discount is applied to the ALREADY-discounted price. (c) A customer assumes this is 'basically a 40% discount' — evaluate this claim by comparing the actual final price to what a genuine flat $40\\%$ discount off the original $\\$200$ would give, and explain the discrepancy in terms of which base each percentage was computed against.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.percentages",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.fractions` ($p/q$ as a ratio of integers) and `math.arith.decimals` (place-value notation extending to the right of the decimal point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.percentages/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.percentages",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.fractions` ($p/q$ ratio notation, directly generalized here by fixing $q=100$) and `math.arith.decimals` (place-value notation, directly used for percentage-to-decimal conversion).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentages.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
