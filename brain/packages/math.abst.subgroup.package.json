@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.subgroup-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.subgroup",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:961c2af108aed33036c0003b7781c80b12333bc71c3e81820ec9d7ca3a0ceeba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.subgroup.md": "sha256:e98f2e079bce3d5e66e3e1bc4adbccd46f84aa322d349aea01c70bbd0a692ef0"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.abst.subgroup",
+    "name": "Subgroup",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.group-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.subgroup-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.subgroup (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.subgroup.md": "sha256:e98f2e079bce3d5e66e3e1bc4adbccd46f84aa322d349aea01c70bbd0a692ef0"
+      },
+      "contentHash": "sha256:b8ed968d4cfec714740196f34ea8271a75ac58c3aac866eeb272e85fb4773244",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.subgroup.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.subgroup.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.subgroup"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.subgroup\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.subgroup.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.subgroup.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.subgroup"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.subgroup\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.subgroup.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.subgroup.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.subgroup"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.subgroup\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.subgroup/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.subgroup",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **subgroup criterion**: $H\\leq G$ (H is a subgroup of G) iff $H$ is **non-empty**, **closed under the group operation**, and **closed under inverses** — and verify each condition explicitly for a given candidate subset $H$.\n- LO2: State and apply the **equivalent one-line criterion**: $H\\leq G$ iff $H$ is non-empty and $\\forall a,b\\in H, ab^{-1}\\in H$ — and explain why this single condition is logically equivalent to (encapsulates) the three separate conditions of LO1.\n- LO3: Identify the two **trivial subgroups** — $\\{e\\}$ (just the identity) and $G$ itself — present in EVERY group, and correctly distinguish these from **proper** (non-trivial) subgroups, verifying the subgroup criterion for a genuinely proper example.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.subgroup",
+      "title": "PROPER-SUBGROUP-TREATED-AS-NOT-A-REAL-SUBGROUP",
+      "content": "| MC-1 | PROPER-SUBGROUP-TREATED-AS-NOT-A-REAL-SUBGROUP | Confusing \"proper subgroup\" (a genuine, legitimate non-trivial subgroup) with \"not actually a subgroup,\" believing only the trivial subgroups $\\{e\\}$ and $G$ truly count | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.subgroup",
+      "title": "ASSOCIATIVITY-CHECKED-UNNECESSARILY",
+      "content": "| MC-2 | ASSOCIATIVITY-CHECKED-UNNECESSARILY | Attempting to separately verify associativity for a candidate subgroup, not recognizing it's automatically inherited from $G$ and requires no independent check | Minor |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.subgroup",
+      "title": "ONE-LINE-CRITERION-MISAPPLIED-WITHOUT-CORRECT-OPERATION-NOTATION",
+      "content": "| MC-3 | ONE-LINE-CRITERION-MISAPPLIED-WITHOUT-CORRECT-OPERATION-NOTATION | When applying the compact $ab^{-1}\\in H$ criterion in an ADDITIVE group (where the \"operation\" is $+$ and \"inverse\" is negation), failing to correctly translate the criterion to $a-b\\in H$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.subgroup",
+      "title": "The Three-Part Criterion, via a Familiar Group (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Three-Part Criterion, via a Familiar Group (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.subgroup",
+      "title": "Trivial vs. Proper Subgroups, and the One-Line Criterion's Derivation (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Trivial vs. Proper Subgroups, and the One-Line Criterion's Derivation (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.subgroup",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.subgroup",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify, using the three-part criterion, that $H=3\\mathbb{Z}=\\{\\ldots,-6,-3,0,3,6,\\ldots\\}$ is a subgroup of $(\\mathbb{Z},+)$.\n  2. Verify the same $H=3\\mathbb{Z}$ using the equivalent one-line criterion ($a-b\\in H$ for all $a,b\\in H$), confirming it gives the same conclusion.\n  3. In $G=(\\mathbb{Z}/8\\mathbb{Z},+)$, determine whether $H=\\{0,4\\}$ is a subgroup, checking all relevant conditions.\n  4. State the two trivial subgroups of $(\\mathbb{Z}/8\\mathbb{Z},+)$, and explain why the $H=\\{0,4\\}$ subgroup from problem 3 (assuming it checks out) is classified as \"proper\" rather than \"not a real subgroup.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A cryptographic protocol works within the group of integers modulo a large prime $p$ under multiplication, $(\\mathbb{Z}/p\\mathbb{Z})^*$. A specific security scheme relies on a smaller SUBGROUP $H$ of this larger group — a set of values closed under multiplication and inverses within the same modular arithmetic — chosen specifically because it's neither the trivial identity-only subgroup nor the entire group. (a) Explain, using this lesson's proper-vs-trivial distinction, why choosing a PROPER subgroup (neither trivial case) makes sense for a scheme that needs a subgroup smaller than the full group but with genuine internal structure (more than just the identity). (b) Explain what the protocol designers would need to verify (using this lesson's subgroup criterion) before trusting that their chosen set $H$ genuinely behaves as a self-contained algebraic structure under the group's operation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.subgroup",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.group-theory` (the group axioms: closure, associativity, identity, inverses; the concept of a group $(G,\\cdot)$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.subgroup/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.subgroup",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.group-theory` (the group axioms and structure this concept's subsets are checked against).\n- **Unlocks**: `math.abst.coset` (cosets are defined directly in terms of a subgroup $H$), `math.abst.normal-subgroup` (a further, stronger condition refining this concept's basic subgroup notion).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.subgroup.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

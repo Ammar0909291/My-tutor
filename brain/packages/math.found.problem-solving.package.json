@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.problem-solving-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.problem-solving",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ea99d673878939adde12cfdd344919f8af96e990bca7dadf0822fb3a00e5acc4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.problem-solving.md": "sha256:d7bd762a14dbeff3bd24d695cac40ca8c4517a62a0bc2231a8d396afc5366db8"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.problem-solving",
+    "name": "Mathematical Problem Solving",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.found.mathematical-thinking"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.problem-solving-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.problem-solving (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.problem-solving.md": "sha256:d7bd762a14dbeff3bd24d695cac40ca8c4517a62a0bc2231a8d396afc5366db8"
+      },
+      "contentHash": "sha256:c4c602abc08ea54e240387945174de73cc8aecba887ac2d88c6db12bb26abe13",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.problem-solving.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.problem-solving.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.problem-solving"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.problem-solving\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.problem-solving.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.problem-solving.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.problem-solving"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.problem-solving\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.problem-solving.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.problem-solving.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.problem-solving"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.problem-solving\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.problem-solving/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.problem-solving",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the strategy of **working backwards** — starting from the desired end state/goal and reasoning about what must have preceded it — to solve a problem where the forward path isn't obvious.\n- LO2: Apply the strategies of **drawing a diagram** (converting an abstract or verbal problem into a visual representation revealing hidden structure) and **reducing to a simpler case** (solving a small/special version of the problem first to find a pattern or method that generalizes).\n- LO3: Apply **systematic trial** (organized, exhaustive-but-efficient case-checking, as opposed to random guessing) to a problem, and correctly select WHICH strategy (or combination) is most appropriate for a GIVEN problem, recognizing that different problems call for different strategies.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.problem-solving",
+      "title": "SYSTEMATIC-TRIAL-TREATED-AS-RANDOM-GUESSING",
+      "content": "| MC-1 | SYSTEMATIC-TRIAL-TREATED-AS-RANDOM-GUESSING | Treating \"trial and error\" as unstructured, untracked random guessing, rather than a deliberately organized, trend-tracking search strategy | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.problem-solving",
+      "title": "SINGLE-STRATEGY-APPLIED-REGARDLESS-OF-PROBLEM-STRUCTURE",
+      "content": "| MC-2 | SINGLE-STRATEGY-APPLIED-REGARDLESS-OF-PROBLEM-STRUCTURE | Defaulting to one favored strategy (e.g. always trying systematic trial) regardless of whether a different strategy (e.g. working backwards) genuinely fits the problem's structure better | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.problem-solving",
+      "title": "WORKING-BACKWARDS-OPERATION-REVERSAL-ERROR",
+      "content": "| MC-3 | WORKING-BACKWARDS-OPERATION-REVERSAL-ERROR | When working backwards, incorrectly reversing an operation (e.g. adding instead of subtracting, or forgetting a squaring step has two possible square roots to consider) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.problem-solving",
+      "title": "Working Backwards and Simpler Cases, via a Physical Puzzle (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Working Backwards and Simpler Cases, via a Physical Puzzle (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.problem-solving",
+      "title": "Systematic Trial vs. Random Guessing, and Strategy Selection (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Systematic Trial vs. Random Guessing, and Strategy Selection (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.problem-solving",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.problem-solving",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. \"A number is tripled, then 4 is subtracted, then the result is squared, giving 64.\" Use working backwards to find the original number (note: consider both square roots of 64 when undoing the squaring step).\n  2. Using the simpler-cases strategy, find a formula for the number of handshakes among $n$ people at a party (each pair shakes hands exactly once), by first working out $n=3,4,5$ and identifying the pattern.\n  3. Using systematic trial, find two positive integers whose difference is 6 and whose product is minimized (organize your search rather than guessing randomly).\n  4. For each of the following problems, identify which strategy (working backwards, diagram, simpler cases, systematic trial) is the BEST first approach, and briefly justify: (a) \"A rope is folded in half 5 times — how many layers result?\" (b) \"Find the value of $x$ if reversing three described operations on $x$ gives 50.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A city planner needs to determine the minimum number of security cameras to cover every hallway intersection in a newly designed building, given a complex hallway layout described only in a text document (no map yet). (a) Explain why DRAWING A DIAGRAM of the hallway layout would likely be the most valuable first strategy here, rather than attempting to reason about camera placement directly from the text description. (b) Once a diagram exists, the actual number of hallways is very large (50+) — explain how REDUCING TO A SIMPLER CASE (e.g., working out the minimum-cameras pattern for a much smaller test layout with just 4-6 intersections first) could reveal a general placement principle applicable to the full building.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.problem-solving",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.mathematical-thinking` (the general disciplined cognitive approach of reasoning precisely and identifying patterns — this concept applies that general disposition through four SPECIFIC, nameable strategies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.problem-solving/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.problem-solving",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.mathematical-thinking` (the general disciplined reasoning disposition this concept channels into four specific, nameable strategies).\n- **Unlocks**: `math.found.proof` (constructing a mathematical proof draws directly on these problem-solving strategies — working backwards from a desired conclusion, reducing to base/simpler cases, as in induction).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.problem-solving.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
