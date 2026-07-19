@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.logarithm-properties-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.logarithm-properties",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb7bb7c2b6617bc26517ff4140d7d04b5dde62c2212711dc800271a12820c01e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.logarithm-properties.md": "sha256:41dd2b905cdb3ad8a9af1c35508fa603088af1bce44ffcca36714f269e18403d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.logarithm-properties",
+    "name": "Logarithm Properties",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.logarithm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.logarithm-properties-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.logarithm-properties (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.logarithm-properties.md": "sha256:41dd2b905cdb3ad8a9af1c35508fa603088af1bce44ffcca36714f269e18403d"
+      },
+      "contentHash": "sha256:9343fe1fde795b8cf5f56080623c1367287d2079282fcd1b7cdb961e8099fefc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithm-properties.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithm-properties.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithm-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithm-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithm-properties.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithm-properties.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithm-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithm-properties\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithm-properties.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithm-properties.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithm-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithm-properties\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithm-properties.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithm-properties.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithm-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithm-properties\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.logarithm-properties/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the **product rule** $\\log_a(xy)=\\log_ax+\\log_ay$ directly from `math.alg.logarithm`'s own inverse-of-exponentiation definition — recognizing it as inherited from the exponent LAW $a^{m+n}=a^m\\cdot a^n$, not an independently memorized fact.\n- LO2: Derive the **quotient rule** $\\log_a(x/y)=\\log_ax-\\log_ay$ and the **power rule** $\\log_a(x^r)=r\\log_ax$ by the SAME method — translating exponent laws into logarithm statements — and apply all three rules together to simplify a multi-term logarithmic expression.\n- LO3 (orientation level — full change-of-base derivation deferred): recognize, without full derivation, that these three rules let logarithmic expressions be manipulated ALGEBRAICALLY (expanding, combining, simplifying) much like polynomial expressions, previewing that a change-of-base formula exists to convert between different log bases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "PRODUCT-RULE-ASSUMED-INDEPENDENT-FACT",
+      "content": "| MC-1 | PRODUCT-RULE-ASSUMED-INDEPENDENT-FACT | Believing the product rule is an independent fact requiring separate memorization, missing that it is the exponent law $a^m\\cdot a^n=a^{m+n}$, translated via the logarithm's inverse relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "THREE-RULES-ASSUMED-UNRELATED-TECHNIQUES",
+      "content": "| MC-2 | THREE-RULES-ASSUMED-UNRELATED-TECHNIQUES | Believing the product, quotient, and power rules are three genuinely different techniques, missing that all three follow from the same exponent-law-translation principle | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "LOG-OF-SUM-ASSUMED-TO-SPLIT-LIKE-PRODUCT",
+      "content": "| MC-3 | LOG-OF-SUM-ASSUMED-TO-SPLIT-LIKE-PRODUCT | Believing $\\log_a(x+y)=\\log_ax+\\log_ay$ the same way the product rule splits $\\log_a(xy)$, missing that no such rule exists for sums inside the logarithm | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Every Log Rule Is an Exponent Law, Not a New Fact (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Every Log Rule Is an Exponent Law, Not a New Fact (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "All Three Rules Come From the Same Translation Principle (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"All Three Rules Come From the Same Translation Principle (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Logarithms of Sums Do NOT Simplify Like Products Do (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Logarithms of Sums Do NOT Simplify Like Products Do (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Derive $\\log_3(9\\cdot27)=\\log_39+\\log_327$ using the same exponent-translation method as Example 1.\n  2. Simplify $\\log_5(125/25)$ using the quotient rule, and verify directly.\n  3. Fully expand $\\log_a\\left(\\frac{x^3}{y\\cdot z^2}\\right)$ using all three rules.\n  4. Explain, with a numeric counterexample, why $\\log_a(x+y)\\ne\\log_ax+\\log_ay$ in general.\n- **P76 (Transfer Probe, mode = independence)**: \"The Richter scale for earthquake magnitude uses $M=\\log_{10}(I/I_0)$ where $I$ is intensity and $I_0$ is a reference intensity. (a) Using the quotient rule, rewrite $M$ as $\\log_{10}I-\\log_{10}I_0$. (b) If a second earthquake has intensity $100\\times$ the first, use the product/power rules to determine how much larger its Richter magnitude is. (c) A student claims that if intensity DOUBLES, magnitude also roughly doubles, reasoning '$\\log_{10}(2I)=2\\log_{10}I$' — identify and correct the error, citing the correct rule that actually applies to $\\log_{10}(2I)$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.logarithm` ($\\log_a(x)$ as the inverse of exponentiation: the exponent to which $a$ must be raised to give $x$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.logarithm-properties/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.logarithm-properties",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.logarithm` (the definition of $\\log_a(x)$ as the inverse of exponentiation, directly used to translate each exponent law into its corresponding logarithm rule).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithm-properties.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
