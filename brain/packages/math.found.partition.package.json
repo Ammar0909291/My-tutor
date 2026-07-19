@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.partition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.partition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:40ee385af77089ebd58df68d892e6efab1720eacb966ea2d1bff66e21e655e25",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.partition.md": "sha256:b1644be8b48e6ee6c46a50e25c7cbb2812edfabdf43efffc3a81b327414fa732"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.partition",
+    "name": "Partition",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.subset"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.partition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.partition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.partition.md": "sha256:b1644be8b48e6ee6c46a50e25c7cbb2812edfabdf43efffc3a81b327414fa732"
+      },
+      "contentHash": "sha256:5b66b27827494f1d4189e205948e040d9451bb13caeef970a236f47dbab6923b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.partition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partition.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partition.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partition.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partition.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partition.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.partition/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.partition",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **partition** of $A$ as a collection of subsets (using `math.found.subset`'s $\\subseteq$ relation) satisfying THREE conditions simultaneously: every subset is NONEMPTY, every pair of DISTINCT subsets is disjoint (shares no elements), and the UNION of all subsets equals $A$ exactly — and verify a given collection by checking all three.\n- LO2: Correctly identify a collection that fails EACH condition separately: one containing an empty subset (violates nonemptiness), one whose blocks overlap even though their union still covers $A$ (violates pairwise disjointness), and recognize these are genuinely DIFFERENT failure modes, not interchangeable.\n- LO3: Recognize that checking pairwise disjointness means checking EVERY pair of distinct subsets, not merely a convenient few — and connect this concept directly to `math.found.equivalence-relation`'s own Partition Theorem, which uses exactly this three-condition definition for the \"partition\" side of that theorem's two directions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.partition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.partition",
+      "title": "COVERING-CONFLATED-WITH-PARTITIONING",
+      "content": "| MC-1 | COVERING-CONFLATED-WITH-PARTITIONING | Believing a collection of subsets whose union covers the whole set is automatically a partition, missing the independent pairwise-disjointness requirement | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.partition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.partition",
+      "title": "EMPTY-BLOCK-ASSUMED-ALLOWED-IN-PARTITION",
+      "content": "| MC-2 | EMPTY-BLOCK-ASSUMED-ALLOWED-IN-PARTITION | Believing a partition can include an empty subset as one of its blocks, missing the explicit nonemptiness requirement | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.partition/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.partition",
+      "title": "PAIRWISE-DISJOINTNESS-CHECKED-BY-SAMPLING-PAIRS",
+      "content": "| MC-3 | PAIRWISE-DISJOINTNESS-CHECKED-BY-SAMPLING-PAIRS | Believing checking a few pairs of blocks for disjointness, without overlap, is sufficient to confirm the whole collection is pairwise disjoint | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.partition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partition",
+      "title": "Three Conditions, Checked Together (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Three Conditions, Checked Together (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.found.partition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partition",
+      "title": "Covering Is Not Partitioning (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Covering Is Not Partitioning (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.partition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partition",
+      "title": "An Empty Block Disqualifies, and Every Pair Must Be Checked (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"An Empty Block Disqualifies, and Every Pair Must Be Checked (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 13,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.found.partition/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partition",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.found.partition/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.partition",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify whether $\\{1,3,5\\},\\{2,4,6\\}$ is a partition of $A=\\{1,2,3,4,5,6\\}$, checking all three conditions.\n  2. Determine whether $\\{1,2\\},\\{2,3\\},\\{4,5,6\\}$ is a partition of $A=\\{1,2,3,4,5,6\\}$, identifying specifically which condition fails, if any.\n  3. Determine whether $\\{1,2,3\\},\\varnothing,\\{4,5,6\\}$ is a partition of $A=\\{1,2,3,4,5,6\\}$, identifying which condition fails.\n  4. For a collection of 4 blocks, state how many distinct pairs must be checked for pairwise disjointness, and explain why checking fewer is insufficient.\n- **P76 (Transfer Probe, mode = independence)**: \"A university divides its students into course sections, requiring that (i) no section is empty, (ii) no student is enrolled in two sections of the SAME course simultaneously, and (iii) every student in the course is assigned to some section. (a) Explain how these three university requirements correspond exactly to a partition's three conditions. (b) Suppose an administrative error causes one student to accidentally appear on two different sections' rosters for the same course — explain which partition condition this violates, and why the sections no longer form a genuine partition of the enrolled students. (c) Suppose instead a newly transferred student is not yet assigned to any section at all — explain which condition this violates.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.found.partition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.partition",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.subset` ($A\\subseteq B$ iff every element of $A$ is also in $B$; the empty set is a subset of every set, vacuously).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.partition/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.partition",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.subset` (the $\\subseteq$ relation this concept's blocks are built from).\n- **Unlocks**: `math.found.equivalence-relation` (already authored — see the production-order note below; that concept's own Partition Theorem uses exactly this three-condition definition on its \"partition\" side).\n- **Cross-link**: KG lists no cross-links for this concept.\n- **Production-order note**: `math.found.equivalence-relation` was authored earlier in this corpus (batch 102) than this concept, despite being this concept's own KG `unlocks` target — production order in this corpus follows the ROI-ranked topological schedule (gated only by `requires`, not `unlocks` order), matching the precedent already recorded for `math.alg.system-3var`/`math.linalg.row-reduction`, `math.calc.vector-fields`/`math.calc.line-integrals`, and `math.geom.dot-product`/`math.linalg.inner-product-space`. That concept's own Example 2 already worked through the relation-to-partition and partition-to-relation directions informally; this concept now supplies the precise three-condition checklist those informal arguments assumed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partition.md",
+        "startLine": 93,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.dual-space-functional-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.dual-space-functional",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e3893960877b40bcc96d63b2d40c4cbc48278775a37cc9ee3f4de2855db16b0a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.dual-space-functional.md": "sha256:43f2cacb2226c5c89a76c90971b7760670896e062fbde211e2b43717ac7cb33b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.dual-space-functional",
+    "name": "Dual Space",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.fnal.bounded-operator"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.dual-space-functional-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.dual-space-functional (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.dual-space-functional.md": "sha256:43f2cacb2226c5c89a76c90971b7760670896e062fbde211e2b43717ac7cb33b"
+      },
+      "contentHash": "sha256:0679e36a5a3a8dad4fbddbc0456086aace7a9275aa81dbe156e3056e313e6c1d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.dual-space-functional.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dual-space-functional"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dual-space-functional\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.dual-space-functional.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dual-space-functional"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dual-space-functional\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.dual-space-functional.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dual-space-functional"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dual-space-functional\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.dual-space-functional.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.dual-space-functional"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.dual-space-functional\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.dual-space-functional/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **dual space** $X^* = B(X,\\mathbb{K})$ — the special case of `math.fnal.bounded-operator`'s bounded operators where the TARGET is the scalar field $\\mathbb{K}$ ($\\mathbb{R}$ or $\\mathbb{C}$) itself, rather than a general normed space — recognizing a **functional** is precisely a bounded linear operator whose target is scalars, and compute the functional norm $\\|f\\|=\\sup_{\\|x\\|\\le1}|f(x)|$ directly, reusing that concept's own operator-norm machinery unchanged.\n- LO2: State that $X^*$ is ALWAYS a Banach space, REGARDLESS of whether $X$ itself is complete — since the scalar field $\\mathbb{K}$ is always complete, and `math.fnal.bounded-operator` already established $B(X,Y)$ is Banach whenever $Y$ is Banach, with no requirement on $X$'s own completeness.\n- LO3 (orientation level — full derivations beyond this corpus's current scope): state the canonical named dual-space identifications $(L^p)^*\\cong L^q$ (for conjugate exponents $1/p+1/q=1$) and $(C(K))^*=$ regular Borel measures (the Riesz Representation Theorem), and recognize **reflexivity** ($X\\cong X^{**}$) as a special, NOT universal, property — some spaces (like $L^p$ for $1<p<\\infty$) are reflexive, while others (like $L^1$) are famously NOT.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "FUNCTIONAL-ASSUMED-FUNDAMENTALLY-DIFFERENT-FROM-BOUNDED-OPERATOR",
+      "content": "| MC-1 | FUNCTIONAL-ASSUMED-FUNDAMENTALLY-DIFFERENT-FROM-BOUNDED-OPERATOR | Believing a functional is a fundamentally different kind of object requiring new machinery, missing that it is simply the special case of a bounded operator with scalar target | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "DUAL-SPACE-COMPLETENESS-ASSUMED-TO-REQUIRE-X-COMPLETE",
+      "content": "| MC-2 | DUAL-SPACE-COMPLETENESS-ASSUMED-TO-REQUIRE-X-COMPLETE | Believing X* can only be Banach if X itself is already complete, missing that X*'s completeness comes entirely from the scalar field's completeness, independent of X | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "EVERY-SPACE-ASSUMED-REFLEXIVE",
+      "content": "| MC-3 | EVERY-SPACE-ASSUMED-REFLEXIVE | Believing every normed or Banach space automatically satisfies X≅X**, missing that reflexivity is a special, non-universal property, with L¹ as a named counterexample | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "A Functional Is Just a Scalar-Valued Bounded Operator (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"A Functional Is Just a Scalar-Valued Bounded Operator (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "The Dual Space Is Always Banach (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Dual Space Is Always Banach (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "Reflexivity Is Special, Not Automatic (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Reflexivity Is Special, Not Automatic (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. On $\\mathbb{R}^3$, compute the norm of the functional $f(x,y,z)=2x-y+2z$, using the Cauchy-Schwarz approach from Example 1.\n  2. Explain why $X^*$ is guaranteed to be a Banach space even for an $X$ that is not itself complete, citing the specific fact from `math.fnal.bounded-operator` this relies on.\n  3. State the canonical identification $(L^p)^*\\cong L^q$ for $p=3$, giving the correct value of $q$.\n  4. Explain, using $L^1$ as an example, why reflexivity cannot be assumed automatically for every Banach space.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing system represents measured signals as elements of a function space $X$, and represents 'measurement devices' as bounded linear functionals in $X^*$ (each device outputs a single number for a given signal). (a) Explain, using this lesson's LO1, why every measurement device in this system automatically satisfies the same operator-norm bound $\\|f\\|=\\sup_{\\|x\\|\\le1}|f(x)|$ already familiar from bounded operators generally. (b) Suppose the engineers are unsure whether their signal space $X$ is 'complete' in the technical sense. Explain why this uncertainty does NOT threaten the completeness of the space of possible measurement devices, $X^*$, citing this lesson's LO2. (c) A researcher claims that since $X^*$ is always well-defined, the 'double-dual' space $X^{**}$ must always just recover the original signal space $X$. Using the $L^1$/$L^\\infty$ example from this lesson, explain why this claim is not generally true.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.bounded-operator` ($\\|T\\|=\\sup_{\\|x\\|\\le1}\\|Tx\\|<\\infty$; bounded iff continuous for linear maps; $B(X,Y)$ is a normed space, and a Banach space whenever $Y$ is Banach, regardless of $X$'s own completeness).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.dual-space-functional/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.dual-space-functional",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.bounded-operator` (the operator norm and $B(X,Y)$'s Banach-space-inheritance fact this concept directly specializes to $Y=\\mathbb{K}$).\n- **Unlocks**: `math.fnal.hahn-banach` (the Hahn-Banach theorem guarantees the existence of enough functionals in $X^*$ to separate points of $X$, a foundational tool built directly on this concept's dual space).\n- **Cross-link**: KG lists `math.linalg.dual-space` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into the finite-dimensional linear-algebra dual space once that entry exists — this concept's infinite-dimensional, norm-based treatment is a direct generalization of that finite-dimensional special case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.dual-space-functional.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.elimination-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.elimination-method",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:02fb0302e28f30971f204fde878318abb8461c79381234f5beb28cc2875905e1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.elimination-method.md": "sha256:c7ea31b62ba2f9d503015902dbffe9c8d80baa7893123fc4c834b8d4b007efe6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.elimination-method",
+    "name": "Elimination Method",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.system-linear-equations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.elimination-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.elimination-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.elimination-method.md": "sha256:c7ea31b62ba2f9d503015902dbffe9c8d80baa7893123fc4c834b8d4b007efe6"
+      },
+      "contentHash": "sha256:3d6eb7f6d070aadeafd082cc11daf23dc1c8dae1efba1c6e1958bedbb038f22a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.elimination-method.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.elimination-method.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.elimination-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.elimination-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.elimination-method.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.elimination-method.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.elimination-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.elimination-method\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.elimination-method.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.elimination-method.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.elimination-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.elimination-method\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.elimination-method.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.elimination-method.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.elimination-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.elimination-method\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.elimination-method/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Learning Objectives",
+      "content": "- LO1: Systematically apply elimination to a system whose coefficients are NOT already equal, opposite, or simple multiples of one another — find a common multiple of the target variable's two coefficients, multiply each equation by the appropriate scalar to align them, then add or subtract — directly extending `math.alg.system-linear-equations`' introductory treatment (which only handled the case where coefficients already matched).\n- LO2: Correctly multiply an ENTIRE equation by a constant (every term, on BOTH sides), recognizing this operation — along with adding a multiple of one equation to another — preserves the system's solution set exactly, and correctly avoid the execution error of scaling only part of an equation.\n- LO3: Recognize that \"multiply an equation by a constant\" and \"add a multiple of one equation to another\" are EXACTLY the row operations `math.linalg.row-reduction` will later formalize using matrix notation — this concept is the concrete, equation-based precursor to that more systematic, matrix-based method, not a separate or unrelated technique.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.elimination-method",
+      "title": "ELIMINATION-ASSUMED-ONLY-WORKS-FOR-SIMPLE-MULTIPLES",
+      "content": "| MC-1 | ELIMINATION-ASSUMED-ONLY-WORKS-FOR-SIMPLE-MULTIPLES | Believing elimination only works when one equation's coefficient is already a simple multiple of the other's, missing that finding a common multiple always makes elimination possible | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.elimination-method",
+      "title": "PARTIAL-EQUATION-SCALING",
+      "content": "| MC-2 | PARTIAL-EQUATION-SCALING | Multiplying only the term being eliminated (or another partial subset of terms) rather than the entire equation, silently changing the equation into a different, invalid one | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.elimination-method",
+      "title": "ELIMINATION-METHOD-TREATED-AS-UNRELATED-TO-ROW-OPERATIONS",
+      "content": "| MC-3 | ELIMINATION-METHOD-TREATED-AS-UNRELATED-TO-ROW-OPERATIONS | Believing elimination method is a separate, unrelated technique from the row operations used later in row reduction, missing that they are the exact same arithmetic in different notation | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Finding the Common Multiple (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Finding the Common Multiple (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Scale the Whole Equation, Every Term (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Scale the Whole Equation, Every Term (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Elimination Method Is Row Operations (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Elimination Method Is Row Operations (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Solve $2x+3y=8$ and $5x+2y=1$ using elimination, finding an appropriate common multiple for one variable's coefficients.\n  2. Explain, using a specific example, why scaling only one term of an equation (rather than every term) produces an invalid equation.\n  3. Rewrite the system from problem 1 as an augmented array and perform the same elimination steps using row notation.\n  4. Explain why `math.linalg.row-reduction`'s row operations are not a new technique to learn from scratch, referencing this lesson's own multiply-and-add operations.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.row-reduction`)**: \"Recall from `math.linalg.row-reduction` that row operations (scaling a row, adding a multiple of one row to another) are applied systematically, column by column, to reach row echelon form. (a) Using this lesson's Example 1, explain precisely how the two scaling-and-subtracting steps performed there correspond to specific row operations in that concept's framework. (b) That concept's own procedure works for systems with MANY more than 2 equations and variables — explain why the 'find a common multiple, then eliminate' idea from this lesson becomes harder to plan by hand as the number of variables grows, motivating that concept's systematic column-by-column approach instead. (c) Explain why a student who has mastered THIS lesson's elimination method has already learned the core arithmetic that concept needs — what genuinely NEW idea does that concept add on top of it?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.system-linear-equations` (a system of 2 linear equations; the three solution cases; elimination as one of two basic methods, introduced there only for the case where coefficients already match or are simple multiples).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.elimination-method/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.elimination-method",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.system-linear-equations` (the basic elimination case, and the three-solution-case framework this concept operates within).\n- **Unlocks**: `math.linalg.row-reduction` (already authored — see the production-order note below; that concept's systematic row operations are exactly this concept's multiply-and-add procedure, generalized to matrices).\n- **Cross-link (P76_mode = cross-link probe against `math.linalg.row-reduction`, already authored)**: the transfer probe explicitly connects this concept's equation-based elimination to that concept's row-based framework, previewing why a systematic column-by-column approach becomes necessary for larger systems.\n- **Production-order note**: `math.linalg.row-reduction` was authored earlier in this corpus (batch 88) than this concept, despite being this concept's own KG `unlocks` target — production order in this corpus follows the ROI-ranked topological schedule (gated only by `requires`, not `unlocks` order), matching the precedent already recorded for `math.alg.system-3var`/`math.linalg.row-reduction` and several other concepts this session.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.elimination-method.md",
+        "startLine": 94,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
