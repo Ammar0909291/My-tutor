@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.fourier-transform-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.fourier-transform",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d904d07202402f0ff5988fefdbf4c7050c0706a32f2122972fc8b1c83cad09ec",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.fourier-transform.md": "sha256:e549c978f87f0839fd04b655aa6896d9b04d93eab43f03d310d2627c895df9b2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.fourier-transform",
+    "name": "Fourier Transform (Functional Analysis)",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.fnal.hilbert-space",
+      "math.meas.l2-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.fourier-transform-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.fourier-transform (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.fourier-transform.md": "sha256:e549c978f87f0839fd04b655aa6896d9b04d93eab43f03d310d2627c895df9b2"
+      },
+      "contentHash": "sha256:4e34525b9cd7ef9c32c3d8fce7886c888045cb592a6475012f3e9afa48203446",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.fourier-transform.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.fourier-transform.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.fourier-transform\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.fourier-transform.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.fourier-transform.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.fourier-transform\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.fourier-transform.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.fourier-transform.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.fourier-transform\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.fourier-transform.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.fourier-transform.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.fourier-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.fourier-transform\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.fourier-transform/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Plancherel theorem** — the Fourier transform extends from $L^1\\cap L^2$ to a UNITARY operator on $L^2(\\mathbb{R})$, satisfying $\\|\\hat f\\|_2=\\|f\\|_2$ — and recognize this L² extension is a genuinely DIFFERENT construction from `math.de.fourier-transform`'s own $L^1$-based improper-integral formula, requiring extension by density rather than direct integration.\n- LO2: Apply the precise meaning of \"unitary\" — norm-PRESERVING, $\\|\\hat f\\|_2=\\|f\\|_2$ EXACTLY — a genuinely STRONGER property than mere invertibility/bijectivity.\n- LO3 *(orientation-level, given the research-level scope of this concept)*: Recognize the L² Fourier transform as the foundation of SPECTRAL THEORY for differential operators — the differentiation operator is DIAGONALIZED by the Fourier transform, directly extending `math.de.fourier-transform`'s own differentiation-to-multiplication property into genuine operator diagonalization via a Hilbert-space change of basis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "L2-TRANSFORM-CONFLATED-WITH-CLASSICAL-INTEGRAL-FORMULA",
+      "content": "| MC-1 | L2-TRANSFORM-CONFLATED-WITH-CLASSICAL-INTEGRAL-FORMULA | Believing the L² Fourier transform is the same construction as the L¹-based classical improper integral, missing that L² requires a genuinely different density-based extension | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "UNITARY-CONFLATED-WITH-INVERTIBLE",
+      "content": "| MC-2 | UNITARY-CONFLATED-WITH-INVERTIBLE | Believing \"unitary\" means the same thing as \"invertible\" or \"bijective,\" missing the stronger, exact norm-preservation requirement | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "DIAGONALIZATION-TREATED-AS-METAPHOR",
+      "content": "| MC-3 | DIAGONALIZATION-TREATED-AS-METAPHOR | Believing the Fourier-transform-diagonalizes-differentiation connection is a loose metaphor, missing that it is a precise fact about operator diagonalization via a Hilbert-space basis change | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "L² Extension Requires Density, Not Direct Integration (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"L² Extension Requires Density, Not Direct Integration (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Unitary Means Exact Norm Preservation, Not Just Bijectivity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Unitary Means Exact Norm Preservation, Not Just Bijectivity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Diagonalization Is a Precise Fact, Not a Metaphor (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Diagonalization Is a Precise Fact, Not a Metaphor (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine whether $f(t)=1/(1+t^2)$ is in $L^1\\cap L^2$, and explain what this implies about how its Fourier transform can be computed.\n  2. Determine whether $T(f)=f(\\cdot-1)$ (translation by 1) is unitary on $L^2(\\mathbb{R})$, checking norm preservation directly.\n  3. Explain why \"unitary\" is a strictly stronger requirement than \"bijective,\" using a specific bijective-but-not-unitary example.\n  4. Explain, in your own words, what it means for the Fourier transform to \"diagonalize\" the differentiation operator.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.de.fourier-transform` and `math.de.fourier-series`)**: \"A physicist working with quantum-mechanical wavefunctions in $L^2(\\mathbb{R})$ needs to solve a differential equation involving the momentum operator (proportional to $d/dx$), and uses the Fourier transform to convert it to an algebraic equation, exactly as in `math.de.fourier-transform`'s own differentiation property. (a) Using this lesson's diagonalization framing, explain why this technique works — what precisely is being diagonalized, and by what change of basis. (b) The physicist's wavefunction happens to not be absolutely integrable (only in $L^2$, not $L^1$). Explain, using this lesson's density-extension reasoning, why the Fourier transform can still be applied, even though the classical improper-integral definition from `math.de.fourier-transform` cannot be used directly. (c) A colleague argues 'since the Fourier transform is invertible, it must automatically preserve the wavefunction's total probability (proportional to its L² norm squared).' Explain specifically why invertibility ALONE would not guarantee this, and what additional property (unitarity) is actually doing the work.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.hilbert-space` (complete inner product spaces, orthonormal bases) and `math.meas.l2-space` (the $L^2$ inner product, orthonormal Fourier basis, Parseval's theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.fourier-transform/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.fourier-transform",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.hilbert-space` (the general inner-product-space/orthonormal-basis theory this concept's unitary-operator framing directly uses), `math.meas.l2-space` (the L² inner product, Fourier orthonormal basis, and Parseval's theorem this concept extends).\n- **Unlocks**: (none — KG lists no unlocks for this concept).\n- **Cross-link**: KG lists BOTH `math.de.fourier-transform` and `math.de.fourier-series` as cross-links — **both authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **cross-link probe**, directly connecting to `math.de.fourier-transform`'s own classical improper-integral formula and differentiation property (contrasted against the density-based L² extension and reframed as diagonalization), and to `math.de.fourier-series`'s discrete-frequency machinery (via `math.meas.l2-space`'s own orthonormal Fourier basis).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.fourier-transform.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

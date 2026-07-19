@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.quotient-group-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.quotient-group",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8dfe1a2d9b8970d8a2d9502ed625fc956fe8cde69be40d2d4e09cfa0516607af",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.quotient-group.md": "sha256:51ed14e93e04bd96abbb73e4e45fdcf7ac54fa7281ef51767027967ddf664532"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.quotient-group",
+    "name": "Quotient Group",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.normal-subgroup"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.quotient-group-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.quotient-group (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.quotient-group.md": "sha256:51ed14e93e04bd96abbb73e4e45fdcf7ac54fa7281ef51767027967ddf664532"
+      },
+      "contentHash": "sha256:53bb361312d8263ca4312e9ba649654f3f6acb19e9873f5cc6b5b20dfe59fc13",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-group.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-group.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-group\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-group.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-group.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-group\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-group.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-group.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-group\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-group.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-group.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-group\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.quotient-group/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the quotient group $G/N=\\{gN:g\\in G\\}$ with operation $(aN)(bN)=abN$ — DIRECTLY REUSING `math.abst.normal-subgroup`'s own $D_3$ example (the normal subgroup $H=\\{e,r,r^2\\}$) — and recognize the ELEMENTS of $G/N$ are the COSETS THEMSELVES (each a subset of $G$), not elements of $G$.\n- LO2: Apply the counting formula $|G/N|=[G:N]=|G|/|N|$ concretely, and identify the resulting quotient's own group structure.\n- LO3: Recognize the quotient \"collapses\" $N$ to the identity — and, contrasting directly with `math.abst.normal-subgroup`'s own non-normal $K=\\{e,s\\}$ example, recognize that the quotient construction genuinely REQUIRES normality: for a non-normal subgroup, the coset \"multiplication\" is provably ill-defined, not merely inconvenient.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.quotient-group",
+      "title": "QUOTIENT-ELEMENTS-ASSUMED-TO-BE-ELEMENTS-OF-G",
+      "content": "| MC-1 | QUOTIENT-ELEMENTS-ASSUMED-TO-BE-ELEMENTS-OF-G | Believing the elements of G/N are individual elements of G, missing that they are the cosets themselves, each a subset of G | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.quotient-group",
+      "title": "QUOTIENT-SIZE-COMPUTED-BY-SUBTRACTION",
+      "content": "| MC-2 | QUOTIENT-SIZE-COMPUTED-BY-SUBTRACTION | Believing |G/N| is computed by subtracting |N| from |G|, missing the correct division formula |G|/|N| | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.quotient-group",
+      "title": "QUOTIENT-CONSTRUCTION-ASSUMED-TO-WORK-FOR-ANY-SUBGROUP",
+      "content": "| MC-3 | QUOTIENT-CONSTRUCTION-ASSUMED-TO-WORK-FOR-ANY-SUBGROUP | Believing the quotient group construction applies to any subgroup regardless of normality, missing that non-normal subgroups make coset multiplication genuinely ill-defined | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Cosets Are the Elements, Not Members of G (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cosets Are the Elements, Not Members of G (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-group",
+      "title": "The Size Formula Divides, Producing a Genuine Group (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Size Formula Divides, Producing a Genuine Group (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Normality Is Required, Not Optional (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Normality Is Required, Not Optional (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. List the elements of $D_3/H$ explicitly as cosets (not individual group elements).\n  2. Verify $(H)(sH)=sH$ directly using representative multiplication.\n  3. Explain why $|D_3/H|=2$ follows from dividing, not subtracting, $|D_3|$ and $|H|$.\n  4. Explain why attempting to form \"$D_3/K$\" for the non-normal $K=\\{e,s\\}$ fails, referencing the specific conflicting-representatives computation.\n- **P76 (Transfer Probe, mode = independence)**: \"A student studying symmetry groups wants to construct the quotient of a group $G$ by a subgroup $M$ they've identified, without first checking whether $M$ is normal. (a) Explain what could go wrong if $M$ is not normal, using the D₃/K-style representative-conflict reasoning. (b) The student, after verifying $M$ IS normal, computes $|G/M|=|G|/|M|=4$ and concludes the quotient must be isomorphic to $\\mathbb{Z}/4$. Explain why this conclusion is not automatically justified, even though the size is correct (hint: consider what other groups of order 4 exist). (c) A colleague argues 'since the quotient collapses M down to a single element, the quotient group must literally be a subset of G with M's elements removed.' Explain specifically why this misunderstands what the quotient's elements actually are.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.normal-subgroup` ($N\\trianglelefteq G$ iff $gNg^{-1}=N$ for all $g$, equivalently $gN=Ng$; the concrete $D_3$ verification that $H=\\{e,r,r^2\\}$ is normal while $K=\\{e,s\\}$ is not, and that non-normality makes coset multiplication ill-defined).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-group/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.quotient-group",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.normal-subgroup` (the $D_3$ example, normality definition, and well-definedness verification this concept's construction directly reuses).\n- **Unlocks**: `math.abst.first-isomorphism-theorem` (relates quotient groups directly to homomorphism images, building on this concept's construction).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-group.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
