@@ -185,6 +185,7 @@
 }
 .path-node-label-current { color: var(--green); font-weight: 800; font-size: 11px; }
 .path-node-label-done { color: var(--ink-soft); opacity: 0.6; }
+.path-node-label-clickable { cursor: pointer; }
 .path-connector { width: 4px; height: 28px; background: var(--shadow); border-radius: 3px; margin: 4px 0; opacity: 0.7; }
 .path-connector.done { background: var(--yellow); opacity: 1; }
 

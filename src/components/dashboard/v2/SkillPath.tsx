@@ -23,23 +23,33 @@ export function SkillPath({ nodes, currentHref }: SkillPathProps) {
   return (
     <Card className={styles['path-card']}>
       <div className={styles.path}>
-        {nodes.map((node, i) => (
+        {nodes.map((node, i) => {
+          const isClickable = node.status === 'current' && !!currentHref
+          const handleClick = isClickable ? () => router.push(currentHref) : undefined
+          return (
           <Fragment key={node.id}>
             <div className={styles['path-node-wrap']}>
               <button
                 type="button"
                 className={`${styles['path-node']} ${STATUS_CLASS[node.status]}`}
                 disabled={node.status === 'locked'}
-                onClick={node.status === 'current' && currentHref ? () => router.push(currentHref) : undefined}
+                onClick={handleClick}
               >
                 {node.status !== 'done' && node.emoji}
               </button>
               {node.label && (
-                <span className={[
-                  styles['path-node-label'],
-                  node.status === 'current' ? styles['path-node-label-current'] : '',
-                  node.status === 'done' ? styles['path-node-label-done'] : '',
-                ].filter(Boolean).join(' ')}>
+                <span
+                  className={[
+                    styles['path-node-label'],
+                    node.status === 'current' ? styles['path-node-label-current'] : '',
+                    node.status === 'done' ? styles['path-node-label-done'] : '',
+                    isClickable ? styles['path-node-label-clickable'] : '',
+                  ].filter(Boolean).join(' ')}
+                  onClick={handleClick}
+                  role={isClickable ? 'button' : undefined}
+                  tabIndex={isClickable ? 0 : undefined}
+                  onKeyDown={isClickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') handleClick?.() } : undefined}
+                >
                   {node.label}
                 </span>
               )}
@@ -48,7 +58,8 @@ export function SkillPath({ nodes, currentHref }: SkillPathProps) {
               <div className={`${styles['path-connector']} ${node.status === 'done' ? styles.done : ''}`} />
             )}
           </Fragment>
-        ))}
+          )
+        })}
       </div>
     </Card>
   )
