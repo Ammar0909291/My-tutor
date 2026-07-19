@@ -103,9 +103,13 @@ export function findNextLesson(
 }
 
 /**
- * "Next Lesson" may only ever be opened once the current lesson is
- * completed AND the next lesson isn't gated by an unmet prerequisite —
- * never skip a locked lesson, and never jump ahead of Learning Progress.
+ * "Next Lesson" may be opened as soon as it exists and isn't gated by an
+ * unmet prerequisite — never skip a locked lesson. This intentionally does
+ * NOT require the current lesson to already be recorded as completed:
+ * [LESSON_COMPLETE] doesn't fire on every turn, and a student should still
+ * be able to move forward like turning a page. confirmLessonSwitch advances
+ * StudentProgress server-side (mastered=false, "skip") when the student
+ * confirms navigating forward without a recorded completion.
  */
 export function canAdvanceToNextLesson(
   currentLesson: CurriculumLesson | null,
@@ -113,6 +117,5 @@ export function canAdvanceToNextLesson(
   ctx: LessonLockContext,
 ): boolean {
   if (!currentLesson || !nextLesson) return false
-  if (!ctx.progress.completedLessons.includes(currentLesson.order)) return false
   return !computeLessonLockState(nextLesson, ctx).isLocked
 }

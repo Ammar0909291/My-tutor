@@ -22,7 +22,7 @@ import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { LessonNavigationPanel } from '@/components/learn/LessonNavigationPanel'
 import {
-  computeLessonLockState, findPreviousLesson, findNextLesson,
+  computeLessonLockState, canAdvanceToNextLesson, findPreviousLesson, findNextLesson,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
 } from '@/lib/curriculum/lessonNavigation'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
@@ -1683,14 +1683,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       return
     }
 
-    if (target.order < curriculumProgress.currentLesson || target.topicSlug) {
+    // Backward navigation (a genuinely earlier lesson) is always a review —
+    // the existing revision-restoration mechanism. Forward navigation must
+    // NEVER be routed here (that was the bug: `|| target.topicSlug` sent
+    // every KG lesson, including the very next one, into review mode).
+    if (target.order < curriculumProgress.currentLesson) {
       await startRevision(target)
       return
     }
 
+    // Forward navigation: if the current lesson hasn't been recorded as
+    // completed yet (e.g. [LESSON_COMPLETE] never fired this turn), record
+    // it now as a non-celebrated completion so curriculum progress actually
+    // advances — same mechanism "Skip Anyway" already uses, just silent
+    // here since the student is choosing to move on via the nav panel.
+    const priorOrder = target.order - 1
+    if (priorOrder >= 1 && !curriculumProgress.completedLessons.includes(priorOrder)) {
+      const priorLesson = curriculumLessons.find((l) => l.order === priorOrder)
+      if (priorLesson) {
+        await handleLessonComplete(priorOrder, priorLesson, false)
+      }
+    }
+
     await callLessonInit(sessionId, 'next', target)
     setActiveTab('chat')
-  }, [lessonSwitchDialog, sessionId, curriculumProgress, callLessonInit, startRevision])
+  }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, callLessonInit, startRevision, handleLessonComplete])
 
   // Open the next lesson. Only ever called when canAdvanceToNextLesson()
   // is true (current lesson completed + next lesson unlocked per
@@ -2011,6 +2028,44 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }
 
+  // Chat-typed navigation intents ("go next", "I finished this lesson",
+  // "next lesson", "previous lesson") must advance programmatically through
+  // the SAME navigation service the panel buttons use (callLessonInit /
+  // handleLessonComplete), not fall through to the LLM — the system prompt's
+  // NAVIGATION RULE tells Tutor Max to defer navigation to the UI, so if we
+  // don't intercept here the student is told to "use the panel" instead of
+  // actually moving forward.
+  const NEXT_INTENT_RE = /^(go\s*next|next\s*lesson|i\s*(?:am\s*)?(?:'m\s*)?(?:done|finished)(?:\s*with\s*this\s*lesson)?|i\s*finished\s*this\s*lesson|continue\s*(?:to\s*)?next\s*lesson|move\s*on|let'?s?\s*continue)\.?!?$/i
+  const PREV_INTENT_RE = /^(go\s*(back|previous)|previous\s*lesson|go\s*to\s*(the\s*)?(previous|last)\s*lesson|back\s*to\s*(the\s*)?(previous|last)\s*lesson)\.?!?$/i
+
+  async function handleNavigationIntent(text: string): Promise<boolean> {
+    const trimmed = text.trim()
+    if (NEXT_INTENT_RE.test(trimmed)) {
+      if (nextLessonData && canAdvanceToNextLesson(currentLessonData, nextLessonData, { progress: curriculumProgress, topicProgressMap, availableTopicSlugs })) {
+        setInput('')
+        clearDraft(`lesson_${subjectSlug}`)
+        if (textareaRef.current) textareaRef.current.style.height = 'auto'
+        const target = nextLessonData
+        const priorOrder = target.order - 1
+        if (priorOrder >= 1 && !curriculumProgress.completedLessons.includes(priorOrder)) {
+          const priorLesson = curriculumLessons.find((l) => l.order === priorOrder)
+          if (priorLesson) await handleLessonComplete(priorOrder, priorLesson, false)
+        }
+        await callLessonInit(sessionId!, 'next', target)
+        return true
+      }
+    } else if (PREV_INTENT_RE.test(trimmed)) {
+      if (previousLessonData) {
+        setInput('')
+        clearDraft(`lesson_${subjectSlug}`)
+        if (textareaRef.current) textareaRef.current.style.height = 'auto'
+        await startRevision(previousLessonData)
+        return true
+      }
+    }
+    return false
+  }
+
   // Send handler
   function handleSend() {
     if (isStreaming || !sessionId) return
@@ -2018,6 +2073,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
     if (selectedImage) { sendImageMessage(sessionId); return }
     const text = input.trim()
     if (!text && !attachedFile) return
+    if (!attachedFile) {
+      handleNavigationIntent(text).then((handled) => {
+        if (handled) return
+        let msg = text
+        setInput('')
+        clearDraft(`lesson_${subjectSlug}`)
+        if (textareaRef.current) textareaRef.current.style.height = 'auto'
+        const voiceSignal = pendingVoiceSignalRef.current
+        pendingVoiceSignalRef.current = null
+        sendMessage(sessionId, msg, true, voiceSignal ?? undefined)
+      })
+      return
+    }
     let msg = text
     if (attachedFile) {
       msg += (text ? '\n' : '') + `\`\`\`${attachedFile.language}\n${attachedFile.content}\n\`\`\``

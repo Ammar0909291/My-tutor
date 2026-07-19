@@ -114,14 +114,14 @@ describe('findNextLesson', () => {
 })
 
 describe('canAdvanceToNextLesson — never skip locked lessons', () => {
-  it('false when the current lesson is not yet completed', () => {
+  it('true when the current lesson is not yet completed but the next lesson is unlocked (students can move forward like a book; confirmLessonSwitch records the completion server-side)', () => {
     const current = lesson({ order: 3 })
     const next = lesson({ order: 4 })
     const ok = canAdvanceToNextLesson(current, next, {
       progress: progress({ completedLessons: [1, 2] }), // 3 not completed
       topicProgressMap: {}, availableTopicSlugs: ['phys.topic.4'],
     })
-    expect(ok).toBe(false)
+    expect(ok).toBe(true)
   })
 
   it('false when the next lesson is locked, even if current is completed', () => {
