@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.riemann-integral-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.riemann-integral",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5bfb6388d3e6ccb78f0526289f5f993d6f1305df9cea2ab0fb70c1a9aec7e52c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.riemann-integral.md": "sha256:3cbb372d5514e2fd467eaf872a3a0d08208be44a15c7b7d15a2b0fe64e86895f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.real.riemann-integral",
+    "name": "Riemann Integral (Rigorous)",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.continuity-rigorous",
+      "math.calc.definite-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.riemann-integral-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.riemann-integral (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.riemann-integral.md": "sha256:3cbb372d5514e2fd467eaf872a3a0d08208be44a15c7b7d15a2b0fe64e86895f"
+      },
+      "contentHash": "sha256:80f5eca898887cf91a836a62ef1f006ebb4f5e3f763e1105f2636744696c2575",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integral.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integral.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integral\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integral.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integral.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integral\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integral.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integral.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integral\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.riemann-integral/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **partition** $P$ of $[a,b]$, and the **upper and lower Darboux sums** $U(f,P)$ (using the SUPREMUM of $f$ on each subinterval) and $L(f,P)$ (using the INFIMUM), and compute both for a simple function and partition.\n- LO2: State the rigorous definition of **Riemann integrability**: $f$ is Riemann integrable on $[a,b]$ iff $\\inf_P U(f,P) = \\sup_P L(f,P)$ (the infimum over ALL partitions of the upper sums equals the supremum over all partitions of the lower sums) — and correctly interpret WHY this \"squeeze\" condition captures the informal idea of \"a well-defined area.\"\n- LO3: State (without full proof) the two foundational facts — **Riemann integrable functions are bounded** (a necessary condition, not automatic for unbounded functions), and **continuous functions ARE Riemann integrable** — and correctly identify a function that FAILS to be Riemann integrable (e.g. due to being unbounded, or via a genuinely oscillating discontinuity pattern).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.riemann-integral",
+      "title": "BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-INTEGRABILITY",
+      "content": "| MC-1 | BOUNDEDNESS-ASSUMED-SUFFICIENT-FOR-INTEGRABILITY | Believing a bounded function must automatically be Riemann integrable, rather than recognizing boundedness as necessary but not sufficient — the squeeze condition itself must be separately verified | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.riemann-integral",
+      "title": "UPPER-LOWER-SUMS-CONFUSED-WITH-SUP-INF-OVER-ALL-PARTITIONS",
+      "content": "| MC-2 | UPPER-LOWER-SUMS-CONFUSED-WITH-SUP-INF-OVER-ALL-PARTITIONS | Confusing $U(f,P)$/$L(f,P)$ (computed for one SPECIFIC partition) with $\\inf_P U(f,P)$/$\\sup_P L(f,P)$ (the best possible value across ALL partitions) — the definitions require the latter, a genuinely different (and generally harder-to-compute) quantity | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.riemann-integral",
+      "title": "FINER-PARTITION-ASSUMED-TO-ALWAYS-CLOSE-THE-GAP",
+      "content": "| MC-3 | FINER-PARTITION-ASSUMED-TO-ALWAYS-CLOSE-THE-GAP | Believing refining a partition always eventually closes the $U-L$ gap for ANY function, not recognizing some functions (like the Dirichlet function) maintain a persistent gap regardless of refinement | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Darboux Sums and the Squeezing Process (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Darboux Sums and the Squeezing Process (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Boundedness Is Necessary But Not Sufficient (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Boundedness Is Necessary But Not Sufficient (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $f(x)=x$ on $[0,4]$ with partition $P=\\{0,2,4\\}$, compute $U(f,P)$ and $L(f,P)$.\n  2. Refine the partition from problem 1 to $P'=\\{0,1,2,3,4\\}$ and recompute $U(f,P')$ and $L(f,P')$, confirming both bounds moved closer to the true value $\\int_0^4 x\\,dx=8$.\n  3. Explain why an unbounded function on $[a,b]$ (e.g. $f(x)=1/x$ near $x=0$ on $[0,1]$) cannot be Riemann integrable in the Darboux sense, connecting your answer to the definition of $U(f,P)$.\n  4. Explain precisely why the Dirichlet function's boundedness does NOT save it from failing to be Riemann integrable, using the specific values of $U(f,P)$ and $L(f,P)$ for any partition.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist modeling a genuinely continuous temperature profile $T(x)$ along a metal rod wants to compute total heat content via $\\int_0^L T(x)\\,dx$, confident this integral exists because temperature varies continuously with position. Separately, an engineer proposes a (hypothetical, not physically realistic) 'signal' function that takes one exact value at every rational-numbered position and a different exact value at every irrational-numbered position, and wants to integrate IT over an interval too. (a) Explain, using this lesson's continuity-implies-integrability fact, why the physicist's confidence in the temperature integral's EXISTENCE is well-justified. (b) Explain, using this lesson's Dirichlet-function analysis, why the engineer's proposed signal function's integral would NOT exist in the Riemann sense, even though the function itself is perfectly bounded — connecting your answer to the specific density-of-rationals-and-irrationals argument from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.continuity-rigorous` (the ε-δ definition of continuity, needed for the \"continuous implies integrable\" fact) and `math.calc.definite-integral` (the informal Riemann-sum-limit definition of the definite integral, which this concept makes fully rigorous).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integral/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.riemann-integral",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.continuity-rigorous` (the ε-δ continuity definition underlying the continuous-implies-integrable fact), `math.calc.definite-integral` (the informal Riemann-sum-limit definition this concept makes fully rigorous via the Darboux upper/lower sum squeeze).\n- **Unlocks**: `math.real.riemann-integrability` (a deeper characterization of exactly which functions are Riemann integrable, building on this concept's basic definition), `math.real.ftc-rigorous` (the rigorous Fundamental Theorem of Calculus, requiring this concept's precise integral definition).\n- **Cross-link**: KG lists `math.meas.lebesgue-integral` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.meas.lebesgue-integral.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's Dirichlet-function non-example directly to that concept's demonstration that the Lebesgue integral SUCCEEDS on exactly this function (since the rationals have Lebesgue measure zero) — one of the most celebrated illustrations of the Lebesgue integral's genuine generalization beyond Riemann integration.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integral.md",
+        "startLine": 98,
+        "endLine": 104
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

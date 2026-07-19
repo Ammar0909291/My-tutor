@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.coset-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.coset",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:13d61a25c4db24f34c0764679a5268867534271e5d83bfed53c682f809a4ad71",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.coset.md": "sha256:b1c436863a458828f015aae50b53db3d2f3377157e42b12a6a62afb79c8845c3"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.abst.coset",
+    "name": "Coset",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.subgroup"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.coset-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.coset (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.coset.md": "sha256:b1c436863a458828f015aae50b53db3d2f3377157e42b12a6a62afb79c8845c3"
+      },
+      "contentHash": "sha256:d684be017aaa0e2c13ec8e9d2f1ea8a09191e61819b11d0a8e55cca5b2a06ce8",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.coset.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.coset.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.coset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.coset\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.coset.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.coset.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.coset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.coset\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.coset.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.coset.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.coset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.coset\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.coset/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.coset",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **left coset** $aH=\\{ah : h\\in H\\}$ of a subgroup $H\\leq G$ by an element $a\\in G$, and compute specific cosets for a given group and subgroup.\n- LO2: State and apply the **coset equality criterion** — $aH=bH$ iff $a^{-1}b\\in H$ — and use it to determine whether two elements generate the same coset without listing out both cosets fully.\n- LO3: State that **distinct cosets partition $G$** (every element of $G$ lies in EXACTLY one coset) and that **all cosets have the same size** $|H|$, and use these facts to compute the **index** $[G:H]=|G|/|H|$ (the number of distinct cosets) for a finite group.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.coset/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.coset",
+      "title": "DIFFERENT-GENERATORS-ASSUMED-TO-GIVE-DIFFERENT-COSETS",
+      "content": "| MC-1 | DIFFERENT-GENERATORS-ASSUMED-TO-GIVE-DIFFERENT-COSETS | Believing two different elements of $G$ must generate different cosets, rather than checking the equality criterion $a^{-1}b\\in H$ (which can hold for seemingly unrelated elements) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.coset/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.coset",
+      "title": "ALL-GROUP-ELEMENTS-ASSUMED-TO-GENERATE-DISTINCT-COSETS",
+      "content": "| MC-2 | ALL-GROUP-ELEMENTS-ASSUMED-TO-GENERATE-DISTINCT-COSETS | Believing computing a coset for every single element of $G$ produces $|G|$ genuinely distinct cosets, rather than recognizing many generate repeats, with only $[G:H]$ genuinely distinct ones | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.abst.coset/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.coset",
+      "title": "LEFT-COSET-COMPUTED-WITH-WRONG-MULTIPLICATION-SIDE",
+      "content": "| MC-3 | LEFT-COSET-COMPUTED-WITH-WRONG-MULTIPLICATION-SIDE | Computing $Ha=\\{ha:h\\in H\\}$ (a right coset) when a LEFT coset $aH=\\{ah:h\\in H\\}$ was requested, or vice versa, in a non-abelian group where the two can genuinely differ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.abst.coset/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.coset",
+      "title": "Computing Cosets, via a Small Finite Group (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing Cosets, via a Small Finite Group (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.abst.coset/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.coset",
+      "title": "Partition, Equal Sizes, and Diminishing New Cosets (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Partition, Equal Sizes, and Diminishing New Cosets (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.abst.coset/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.coset",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.abst.coset/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.coset",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. In $G=(\\mathbb{Z}/8\\mathbb{Z},+)$ with $H=\\{0,4\\}$, compute the cosets $1+H$, $2+H$, and $3+H$.\n  2. Using the equality criterion, determine whether $3+H$ and $7+H$ are the same coset (using the same $H=\\{0,4\\}$ from problem 1).\n  3. List ALL distinct cosets of $H=\\{0,4\\}$ in $\\mathbb{Z}/8\\mathbb{Z}$, confirming they partition the full group, and compute the index $[G:H]$.\n  4. Explain why every coset of $H$ must have exactly the same number of elements as $H$ itself, using the bijection argument from this lesson.\n- **P76 (Transfer Probe, mode = independence)**: \"A scheduling system divides 12 employees into shift groups using a subgroup-like structure: employees are grouped so that two employees are in the 'same shift-equivalence class' exactly when their assigned start-time difference (mod 12 hours) lies in a specific reference set $H=\\{0,6\\}$ (meaning employees starting 6 hours apart share a class). (a) Using this lesson's coset structure, explain why this shift-grouping rule genuinely partitions all 12 employees into non-overlapping groups, with no employee left ungrouped and no employee belonging to two different groups simultaneously. (b) Compute how many distinct shift-groups this scheme produces (using the index formula), and explain why every group must contain exactly the same number of employees.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.abst.coset/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.coset",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.subgroup` (the subgroup criterion, and $H\\leq G$ as a subset that is itself a group).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.coset/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.coset",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.subgroup` (the subgroup $H\\leq G$ that cosets are defined relative to).\n- **Unlocks**: `math.abst.lagrange-theorem` (Lagrange's Theorem — $|H|$ divides $|G|$ — follows directly from this concept's partition-into-equal-size-blocks fact), `math.abst.normal-subgroup` (normal subgroups are defined via the coincidence of left and right cosets, building directly on this concept).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.coset.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
