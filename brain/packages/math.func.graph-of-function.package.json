@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.graph-of-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.graph-of-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2ddc698c4a56f8fe354bde7609ee93b287c9ff305939ad8ccb971b87e06770e6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.graph-of-function.md": "sha256:ec113558c5f465f4862e5ff0493322183e4d52fded498eb74e96a0f60de5835d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.func.graph-of-function",
+    "name": "Graph of a Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.func.function-concept",
+      "math.geom.coordinate-plane"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.graph-of-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.graph-of-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.graph-of-function.md": "sha256:ec113558c5f465f4862e5ff0493322183e4d52fded498eb74e96a0f60de5835d"
+      },
+      "contentHash": "sha256:252ba3994aa9c3bca14214e4c9d9bf8026c42c59a9a13a6c1cb1e6465a7c023f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.graph-of-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.graph-of-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.graph-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.graph-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.graph-of-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.graph-of-function.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.graph-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.graph-of-function\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.graph-of-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.graph-of-function.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.graph-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.graph-of-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.graph-of-function.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.graph-of-function.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.graph-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.graph-of-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.graph-of-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.graph-of-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **graph of $f$** as the SET of all points $(x,f(x))$ in `math.geom.coordinate-plane`'s own $\\mathbb{R}^2$ — recognizing this as a direct VISUALIZATION of `math.func.function-concept`'s own rule (each domain element maps to exactly one codomain element), plotted as ordered pairs.\n- LO2: Apply the **vertical line test** — a curve in the coordinate plane is the graph of SOME function if and only if every vertical line intersects it at MOST once — recognizing this test as a direct visual consequence of `math.func.function-concept`'s \"exactly one output per input\" requirement, not an arbitrary geometric rule.\n- LO3 (orientation level — full curve-sketching theory deferred): recognize, without full derivation, that a curve FAILING the vertical line test (like a circle) is not simply \"not a nice graph\" — it genuinely CANNOT be the graph of any single function $y=f(x)$, though it MAY be split into pieces (e.g. upper and lower semicircles) that each individually pass the test and ARE graphs of functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.graph-of-function",
+      "title": "GRAPH-ASSUMED-SEPARATE-OBJECT-FROM-FUNCTION",
+      "content": "| MC-1 | GRAPH-ASSUMED-SEPARATE-OBJECT-FROM-FUNCTION | Believing the graph is a separate geometric object distinct from the function's input-output pairs, missing that the graph IS precisely that set of pairs | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.graph-of-function",
+      "title": "VERTICAL-LINE-TEST-ASSUMED-ARBITRARY-CONVENTION",
+      "content": "| MC-2 | VERTICAL-LINE-TEST-ASSUMED-ARBITRARY-CONVENTION | Believing the vertical line test is an arbitrary geometric convention, missing that it directly encodes the function definition's \"one output per input\" requirement | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.graph-of-function",
+      "title": "FAILED-TEST-ASSUMED-ONE-FLAWED-FUNCTION",
+      "content": "| MC-3 | FAILED-TEST-ASSUMED-ONE-FLAWED-FUNCTION | Believing a curve failing the vertical line test represents one single function with a technical flaw, missing that it genuinely cannot be one function's graph, though it may split into several | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.graph-of-function",
+      "title": "The Graph Is Literally the Set of Input-Output Pairs (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Graph Is Literally the Set of Input-Output Pairs (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.graph-of-function",
+      "title": "The Vertical Line Test Directly Encodes \"One Output Per Input\" (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Vertical Line Test Directly Encodes \\\"One Output Per Input\\\" (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.graph-of-function",
+      "title": "Failing the Test Means Genuinely Two Functions, Not One Broken One (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Failing the Test Means Genuinely Two Functions, Not One Broken One (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.graph-of-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.graph-of-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. List the graph (as a set of pairs) for $f(x)=2x+1$ at $x=-2,-1,0,1,2$.\n  2. Apply the vertical line test to determine whether $y^2=x$ (for $x\\ge0$) represents a function of $x$, justifying your answer with a specific vertical line.\n  3. If a curve fails the vertical line test at $x=3$ (a vertical line there hits the curve twice), explain precisely what this implies about the original rule's validity as a function.\n  4. Explain how the curve $y^2=x$ from problem 2 could be split into two separate functions, each of which passes the vertical line test.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer plots sensor data as a curve in the coordinate plane representing pressure $y$ as it might relate to temperature $x$, and the curve happens to loop back on itself (like an ellipse) rather than tracing a simple increasing or decreasing path. (a) Explain how to use the vertical line test to determine whether this looping curve represents pressure as a genuine FUNCTION of temperature. (b) If the test fails, explain precisely why this means pressure cannot be validly modeled as a single function of temperature over that range, rather than merely being 'a complicated function.' (c) Propose, in general terms, how the engineer might split the looping curve into separate pieces, each of which could be modeled as its own valid function.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.graph-of-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.func.function-concept` (a rule assigning each domain element exactly one codomain element) and `math.geom.coordinate-plane` ($\\mathbb{R}^2$ with perpendicular axes, enabling algebraic representation of geometric objects).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.graph-of-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.graph-of-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.func.function-concept` (the rule assigning exactly one output per input, directly visualized by the graph) and `math.geom.coordinate-plane` ($\\mathbb{R}^2$, the space the graph is plotted in).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.graph-of-function.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
