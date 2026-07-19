@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.greens-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.greens-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3a92b59c02bcc0fdc8a868b934fdf7c3c07f6561b145cb5b32374fd2c93c5dae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.greens-function.md": "sha256:f6e7fff14f8aab7446cd6a7345f97b69bd9fe7e627e7de4249cad3e87f20079b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.greens-function",
+    "name": "Green's Function",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 9,
+    "prerequisites": [
+      "math.de.poisson-equation",
+      "math.de.ivp"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.greens-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.greens-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.greens-function.md": "sha256:f6e7fff14f8aab7446cd6a7345f97b69bd9fe7e627e7de4249cad3e87f20079b"
+      },
+      "contentHash": "sha256:6199937b04c596f249438ec8964bef9c4b232539d24dcb224a8eb37c9be50b55",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.greens-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.greens-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.greens-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.greens-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.greens-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.greens-function.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.greens-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.greens-function\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.greens-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.greens-function.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.greens-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.greens-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.greens-function.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.greens-function.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.greens-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.greens-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.greens-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.greens-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **Green's function** $G(x,\\xi)$ as the response of a linear differential operator $L$ to a unit point source at $x=\\xi$: $LG=\\delta(x-\\xi)$, and CONSTRUCT it directly for a simple boundary-value problem — via a piecewise ansatz satisfying each boundary condition separately, glued together with a specific derivative JUMP at $x=\\xi$ (the signature of a genuine point source, not an ordinary smooth solution) — directly fulfilling `math.de.poisson-equation`'s own point-source-then-superpose preview.\n- LO2: Apply the **superposition formula** $u(x)=\\int G(x,\\xi)f(\\xi)\\,d\\xi$ to construct the solution to the FULL nonhomogeneous equation $Lu=f$ from the Green's function alone, correctly distinguishing this from the mistaken belief that $G$ by itself (without integrating against $f$) already solves the general problem.\n- LO3 (orientation level, given research-tier scope): recognize that $G(x,\\xi)$ encodes the **boundary conditions** as well as the operator $L$ — a fixed $L$ with DIFFERENT boundary conditions produces a genuinely different Green's function — and recognize, without deriving, that the Dirac delta $\\delta(x-\\xi)$ is not an ordinary function but a genuine mathematical object (a distribution) requiring its own careful theory, deferred to `math.fnal.distributions`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.greens-function",
+      "title": "GREENS-FUNCTION-ASSUMED-SMOOTH-THROUGHOUT",
+      "content": "| MC-1 | GREENS-FUNCTION-ASSUMED-SMOOTH-THROUGHOUT | Believing the Green's function can be found as a single smooth formula across the whole interval, missing that the point source forces a genuine piecewise construction with a derivative jump at $x=\\xi$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.greens-function",
+      "title": "GREENS-FUNCTION-ALONE-ASSUMED-SUFFICIENT",
+      "content": "| MC-2 | GREENS-FUNCTION-ALONE-ASSUMED-SUFFICIENT | Believing that finding $G$ already solves the general nonhomogeneous equation $Lu=f$, missing that the superposition integral $\\int G(x,\\xi)f(\\xi)\\,d\\xi$ is the essential remaining step | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.greens-function",
+      "title": "GREENS-FUNCTION-ASSUMED-OPERATOR-ONLY",
+      "content": "| MC-3 | GREENS-FUNCTION-ASSUMED-OPERATOR-ONLY | Believing the Green's function depends only on the differential operator $L$, missing that it also encodes the specific boundary conditions, which genuinely change $G$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.greens-function",
+      "title": "The Jump Condition Is the Signature of a Point Source (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Jump Condition Is the Signature of a Point Source (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.greens-function",
+      "title": "$G$ Alone Does Not Solve the General Problem; the Integral Does (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$G$ Alone Does Not Solve the General Problem; the Integral Does (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.greens-function",
+      "title": "Changing Boundary Conditions Changes $G$, Even With the Same Operator (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Changing Boundary Conditions Changes $G$, Even With the Same Operator (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.greens-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.greens-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $G(x,\\xi)=x(1-\\xi)$ for $x\\le\\xi$ and $\\xi(1-x)$ for $x\\ge\\xi$, verify $G$ is continuous at $x=\\xi$ (check both pieces agree there).\n  2. Using the SAME $G$, solve $-u''=2$ (a different constant source) on $[0,1]$ with $u(0)=u(1)=0$ via the superposition integral, and verify your answer against the known exact solution $u(x)=x(1-x)$.\n  3. Explain why finding $G$ alone does not finish solving $Lu=f$ for a general source $f$, referencing the superposition integral.\n  4. Explain why changing the boundary conditions (while keeping the same differential operator $L$) produces a different Green's function, referencing Example 3's mixed-condition contrast.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models the deflection $u(x)$ of a beam under a distributed load $f(x)$, governed by $-u''=f(x)$ on $[0,2]$ with fixed ends $u(0)=u(2)=0$ (a different interval from this lesson's $[0,1]$). (a) Without fully deriving it, explain in general terms what two properties the Green's function $G(x,\\xi)$ for this new interval must satisfy (referencing the point-source equation and the boundary conditions). (b) If the engineer already has $G(x,\\xi)$ for this beam, explain precisely how they would use it to find the deflection under a specific load $f(x)=3$ (constant), referencing the superposition integral — and what would go wrong if they simply used $G(x,\\xi)$ itself as the answer without integrating against $f$. (c) A colleague claims that since the differential operator $-d^2/dx^2$ is the same as in this lesson's example, the Green's function must also be identical. Explain why this is incorrect, given the interval has changed from $[0,1]$ to $[0,2]$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.greens-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.poisson-equation` (the nonhomogeneous equation $\\nabla^2u=f$, and its own orientation-level preview of the Green's-function point-source-then-superpose strategy) and `math.de.ivp` (solving for unknown constants by imposing conditions simultaneously, and the general vs. particular solution distinction).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.greens-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.greens-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.poisson-equation` (whose own orientation-level LO3 previewed exactly the point-source-then-superpose strategy this concept develops in full) and `math.de.ivp` (the simultaneous-condition-solving technique this concept's piecewise construction directly reuses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.fnal.distributions`, checked via `ls docs/curriculum/blueprints/` at the time of authoring THIS blueprint and confirmed not yet authored. $P76_{mode}=$ **independence**. (Note: `math.fnal.distributions` is authored later in this same batch, and its own blueprint engages this concept as a genuine cross-link probe in the opposite direction, directly resolving the $\\delta$-is-not-an-ordinary-function concern this concept flags in LO3/Example 3.)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.greens-function.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
