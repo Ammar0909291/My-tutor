@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-homomorphism-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-homomorphism",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:baf2c7cc8e0899bfb0841ef5463be43e4aa8dbc6fc0e89b6ebb2181e7b070bb0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-homomorphism.md": "sha256:f531ff8bcc9a11c43962cc8e54f18c0cb151dcfa0537203829e3644b2b5cab6d"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.abst.group-homomorphism",
+    "name": "Group Homomorphism",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.group-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-homomorphism-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-homomorphism (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-homomorphism.md": "sha256:f531ff8bcc9a11c43962cc8e54f18c0cb151dcfa0537203829e3644b2b5cab6d"
+      },
+      "contentHash": "sha256:5a72468109001cab104926aa1c3f7e99db19af81739b17db85566253ef0846ef",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-homomorphism.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-homomorphism.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-homomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-homomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-homomorphism.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-homomorphism.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-homomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-homomorphism\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-homomorphism.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-homomorphism.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-homomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-homomorphism\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-homomorphism/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **group homomorphism** $\\varphi:G\\to H$ as a map satisfying $\\varphi(ab)=\\varphi(a)\\varphi(b)$ for all $a,b\\in G$ (using $G$'s operation on the left, $H$'s operation on the right), and verify this property directly for a given map.\n- LO2: Define the **kernel** $\\ker(\\varphi)=\\{g\\in G : \\varphi(g)=e_H\\}$ and the **image** $\\mathrm{im}(\\varphi)=\\{\\varphi(g):g\\in G\\}$, compute both for a specific homomorphism, and state (without full proof) that $\\ker(\\varphi)$ is always a **normal subgroup** of $G$ while $\\mathrm{im}(\\varphi)$ is always a subgroup of $H$.\n- LO3: Correctly verify that $\\varphi(e_G)=e_H$ and $\\varphi(g^{-1})=\\varphi(g)^{-1}$ are **automatic consequences** of the single defining property $\\varphi(ab)=\\varphi(a)\\varphi(b)$ — not separate conditions requiring independent verification — and use the kernel to determine whether a homomorphism is **injective** (trivial kernel $\\{e_G\\}$ iff injective).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "KERNEL-ASSUMED-TRIVIAL-WITHOUT-CHECKING",
+      "content": "| MC-1 | KERNEL-ASSUMED-TRIVIAL-WITHOUT-CHECKING | Believing the kernel automatically contains only the identity element, without directly computing which elements genuinely map to $e_H$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "AUTOMATIC-CONSEQUENCES-TREATED-AS-SEPARATE-AXIOMS",
+      "content": "| MC-2 | AUTOMATIC-CONSEQUENCES-TREATED-AS-SEPARATE-AXIOMS | Believing $\\varphi(e_G)=e_H$ and $\\varphi(g^{-1})=\\varphi(g)^{-1}$ are separate conditions that must be independently verified for each homomorphism, rather than automatic consequences of the single defining property | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "HOMOMORPHISM-ASSUMED-BIJECTIVE-BY-DEFAULT",
+      "content": "| MC-3 | HOMOMORPHISM-ASSUMED-BIJECTIVE-BY-DEFAULT | Believing every homomorphism is automatically bijective (both injective and surjective), rather than recognizing a homomorphism can be neither, either, or both | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "The Homomorphism Property, and Its Automatic Consequences (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Homomorphism Property, and Its Automatic Consequences (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "Kernel Determines Injectivity, Not Assumed Trivial (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Kernel Determines Injectivity, Not Assumed Trivial (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $\\varphi:(\\mathbb{Z},+)\\to(\\mathbb{Z}/4\\mathbb{Z},+)$, $\\varphi(n)=n\\bmod4$, verify $\\varphi(6+3)=\\varphi(6)+\\varphi(3)$ directly.\n  2. Find $\\ker(\\varphi)$ for the map in problem 1, and use it to determine whether $\\varphi$ is injective.\n  3. For $\\psi:(\\mathbb{R},+)\\to(\\mathbb{R}^+,\\times)$, $\\psi(x)=e^x$ (a homomorphism from additive reals to multiplicative positive reals), verify $\\psi(e_G)=e_H$ directly (i.e., confirm $\\psi(0)=1$).\n  4. Explain why $\\varphi(g^{-1})=\\varphi(g)^{-1}$ is an AUTOMATIC consequence of the homomorphism property, rather than something requiring separate verification for each homomorphism encountered.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.linear-map`)**: \"Recall from your `math.linalg.linear-map` lesson that a linear map $T:V\\to W$ satisfies $T(u+v)=T(u)+T(v)$ (additivity) and $T(cv)=cT(v)$ (homogeneity), and that this concept was described there as related to, but not fully explained as, a special case of a more general structure-preserving-map idea. (a) Using THIS lesson's group homomorphism definition, verify that $T$'s additivity property, $T(u+v)=T(u)+T(v)$, is EXACTLY the group homomorphism property $\\varphi(ab)=\\varphi(a)\\varphi(b)$, applied to the additive groups $(V,+)$ and $(W,+)$ specifically (i.e., a linear map's underlying additive structure makes it, in particular, a group homomorphism between the vector spaces' additive groups). (b) Explain what ADDITIONAL property (homogeneity, $T(cv)=cT(v)$) a linear map has that a general group homomorphism between $(V,+)$ and $(W,+)$ is NOT required to have — i.e., why every linear map is a group homomorphism (of the additive groups), but not every group homomorphism between two vector spaces' additive groups is necessarily a linear map.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.group-theory` (the group axioms; identity, inverses).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.group-homomorphism/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-homomorphism",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.group-theory` (the group axioms this concept's structure-preserving maps operate between).\n- **Unlocks**: `math.abst.group-isomorphism` (an isomorphism is a BIJECTIVE homomorphism — this concept's kernel/injectivity machinery is the direct prerequisite tool), `math.abst.first-isomorphism-theorem` (relates $\\ker(\\varphi)$, $\\mathrm{im}(\\varphi)$, and cosets in a single unifying structural theorem).\n- **Cross-link**: KG lists `math.linalg.linear-map` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.linalg.linear-map.md` **is already authored** (confirmed: additivity $T(u+v)=T(u)+T(v)$ and homogeneity $T(cv)=cT(v)$). The P76 transfer probe above directly requires the learner to recognize a linear map's additivity as exactly a group homomorphism property applied to the additive groups $(V,+),(W,+)$, and to articulate homogeneity as the genuinely ADDITIONAL structure a linear map carries beyond bare group homomorphism — closing the loop that `math.linalg.linear-map`'s own Teaching Notes left open (that blueprint noted this connection was not yet formally available since this concept wasn't authored at the time).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-homomorphism.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

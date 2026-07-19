@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.division-algorithm-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.division-algorithm",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8484fe4e1ff18ab236b97a0d7a6ad4ff4375618aeef5eee4ebbf697b0cb9b8f4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.division-algorithm.md": "sha256:75914a599e63d76a21ae924a5f2d2dd7f752f2c69c98a601024c6ac077f10a02"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.nt.division-algorithm",
+    "name": "Division Algorithm",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.well-ordering-principle",
+      "math.arith.division"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.division-algorithm-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.division-algorithm (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.division-algorithm.md": "sha256:75914a599e63d76a21ae924a5f2d2dd7f752f2c69c98a601024c6ac077f10a02"
+      },
+      "contentHash": "sha256:1659d6232724e786ebd16ff4a4ec3845118cd67ea84b424a7801ad1b7710ecda",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.division-algorithm.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.division-algorithm.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.division-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.division-algorithm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.division-algorithm.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.division-algorithm.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.division-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.division-algorithm\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.division-algorithm.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.division-algorithm.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.division-algorithm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.division-algorithm\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.division-algorithm/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Division Algorithm**: for integers $a$ and $b>0$, there **exist unique** integers $q$ (quotient) and $r$ (remainder) with $a=bq+r$ and $0\\leq r<b$ — and compute $q,r$ directly for given $a,b$, including when $a$ is **negative**.\n- LO2: Explain the **existence** proof strategy — using the Well-Ordering Principle to select the LEAST nonnegative value of $a-bq$ over all integers $q$ — and explain the **uniqueness** proof strategy — assuming two different valid $(q,r)$ pairs and deriving a contradiction.\n- LO3: Correctly apply the algorithm to **negative** dividends $a$, recognizing that the remainder $r$ must STILL satisfy $0\\leq r<b$ (never negative), which means the quotient $q$ for a negative $a$ is generally NOT simply the \"rounded-towards-zero\" division result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "TRUNCATED-DIVISION-ASSUMED-VALID-FOR-NEGATIVE-DIVIDENDS",
+      "content": "| MC-1 | TRUNCATED-DIVISION-ASSUMED-VALID-FOR-NEGATIVE-DIVIDENDS | Assuming ordinary rounded/truncated division (rounding towards zero) automatically satisfies the Division Algorithm's $0\\leq r<b$ constraint, especially for negative dividends, without checking or adjusting | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "UNIQUENESS-MISUNDERSTOOD-AS-NO-OTHER-ARITHMETIC-REPRESENTATION-EXISTS",
+      "content": "| MC-2 | UNIQUENESS-MISUNDERSTOOD-AS-NO-OTHER-ARITHMETIC-REPRESENTATION-EXISTS | Believing uniqueness means no OTHER equation of the form $a=bq+r$ can be written at all, rather than uniqueness specifically among representations satisfying the stated remainder bound $0\\leq r<b$ | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "REMAINDER-BOUND-CHECKED-ONLY-FOR-UPPER-LIMIT",
+      "content": "| MC-3 | REMAINDER-BOUND-CHECKED-ONLY-FOR-UPPER-LIMIT | Verifying $r<b$ but forgetting to also check $r\\geq0$ (or vice versa), treating the remainder constraint as a single-sided check rather than the full two-sided range | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Existence via Well-Ordering, Applied Concretely (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Existence via Well-Ordering, Applied Concretely (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Uniqueness, and the Negative-Dividend Correction (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Uniqueness, and the Negative-Dividend Correction (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find $q$ and $r$ for $a=83,b=9$, verifying $0\\leq r<9$.\n  2. Find $q$ and $r$ for $a=-23,b=4$, being careful to ensure $0\\leq r<4$ (not a negative remainder).\n  3. A student claims $-12=5(-2)+(-2)$ is a valid division-algorithm representation with $b=5$. Explain why this is incorrect, and find the correct $q,r$.\n  4. Explain, using the uniqueness proof's core argument, why $a=bq_1+r_1=bq_2+r_2$ with both remainders in $[0,b)$ forces $q_1=q_2$ (hint: consider what values $b(q_1-q_2)$ could possibly take, given the remainder bound).\n- **P76 (Transfer Probe, mode = independence)**: \"A cyclic scheduling system assigns tasks to one of 7 workers in rotation, using task number $a$ modulo 7 to determine the worker (worker number = remainder). The system occasionally processes a 'correction' task with a NEGATIVE task number (representing a retroactively-inserted earlier task, e.g. task number $-10$). (a) Using the Division Algorithm's correct negative-dividend handling (not naive rounded division), determine which worker (0 through 6) should be assigned task number $-10$. (b) Explain why simply computing $-10 \\div 7$ with ordinary calculator rounding-towards-zero would assign the WRONG worker, connecting your answer to this lesson's negative-dividend correction.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.well-ordering-principle` (every nonempty subset of $\\mathbb{N}$ has a least element — this concept's existence proof directly applies it) and `math.arith.division` (informal division, quotient and remainder for positive integers).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.division-algorithm/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.division-algorithm",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.well-ordering-principle` (the least-element guarantee this concept's existence proof directly invokes), `math.arith.division` (informal quotient/remainder, formalized rigorously here).\n- **Unlocks**: `math.nt.modular-arithmetic` (modular arithmetic is defined directly using this concept's remainder, extended to a full arithmetic system on residues).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.division-algorithm.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
