@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.riemann-zeta-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.riemann-zeta",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aaaca65d2ea4b2bc5963b17bab69d92d806cb712fd1433086eb84624a96feb99",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.riemann-zeta.md": "sha256:c7f7f2eb75e17a269b668761c60aa765431700c838b89f18232b85807460d693"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.riemann-zeta",
+    "name": "Riemann Zeta Function",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.5,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.cx.analytic-continuation",
+      "math.nt.prime-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.riemann-zeta-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.riemann-zeta (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.riemann-zeta.md": "sha256:c7f7f2eb75e17a269b668761c60aa765431700c838b89f18232b85807460d693"
+      },
+      "contentHash": "sha256:9e39e7dbd754f80f7177042c62506e4b09ee4734e73cad4cef9349fbdf157963",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-zeta.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-zeta.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-zeta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-zeta\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-zeta.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-zeta.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-zeta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-zeta\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-zeta.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-zeta.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-zeta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-zeta\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.riemann-zeta.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.riemann-zeta.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.riemann-zeta"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.riemann-zeta\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.riemann-zeta/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $\\zeta(s)=\\sum_{n=1}^\\infty n^{-s}$, recognize its convergence for $\\mathrm{Re}(s)>1$, and apply `math.cx.analytic-continuation` — directly citing that concept's own named application — to extend $\\zeta$ to all of $\\mathbb C\\setminus\\{1\\}$, with a **simple pole** at $s=1$ arising exactly because the defining series becomes the divergent harmonic series there.\n- LO2: State and interpret the **Euler product** $\\zeta(s)=\\prod_{p\\text{ prime}}(1-p^{-s})^{-1}$ for $\\mathrm{Re}(s)>1$, and explain — citing `math.nt.prime-distribution` — why this identity (a direct consequence of unique factorization) is the genuine analytic BRIDGE encoding prime-distribution information inside $\\zeta(s)$, not merely an alternate notation for the same sum.\n- LO3 (orientation level, given this concept's own unusually low MAMR and its role as a capstone survey): recognize the functional equation $\\xi(s)=\\xi(1-s)$ as a deep symmetry (without deriving it), and recognize the **Riemann Hypothesis** — all known nontrivial zeros of $\\zeta(s)$ have real part exactly $\\tfrac12$ — as a genuinely OPEN, unproven conjecture directly connected to the precision of the error term in `math.nt.prime-distribution`'s own Prime Number Theorem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "CONTINUATION-RESCUES-DIVERGENT-SERIES",
+      "content": "| MC-1 | CONTINUATION-RESCUES-DIVERGENT-SERIES | Believing the analytic continuation's finiteness elsewhere implies the original divergent series at $s=1$ secretly converges too, rather than recognizing the pole as an honest report of the series's genuine divergence there | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "EULER-PRODUCT-AS-MERE-NOTATION",
+      "content": "| MC-2 | EULER-PRODUCT-AS-MERE-NOTATION | Believing the Euler product is just a cosmetic rewriting of the same sum, missing that it is a genuine analytic bridge relying on unique factorization, connecting $\\zeta(s)$'s behavior to the distribution of primes | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "RIEMANN-HYPOTHESIS-ASSUMED-PROVEN",
+      "content": "| MC-3 | RIEMANN-HYPOTHESIS-ASSUMED-PROVEN | Believing the Riemann Hypothesis has already been proven, given its overwhelming numerical support, rather than recognizing it as a genuinely open, unproven conjecture | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "The Pole Exists Precisely Where the Series Breaks (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Pole Exists Precisely Where the Series Breaks (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "The Euler Product Is Unique Factorization Made Analytic (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Euler Product Is Unique Factorization Made Analytic (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "The Riemann Hypothesis Is Still Open (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Riemann Hypothesis Is Still Open (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why $\\zeta(2)=\\sum1/n^2$ converges but the defining series at $s=1$ does not, and what this implies about the type of singularity the continuation has at $s=1$.\n  2. Truncate the Euler product to the primes $2$, $3$, and $5$, and explain which integers' terms this truncated product reconstructs exactly.\n  3. Explain, referencing `math.nt.prime-distribution`'s own remark about the Prime Number Theorem's error term, why the Riemann Hypothesis is connected to how precisely $\\pi(x)$ approximates $x/\\ln x$.\n  4. Explain why \"$\\zeta(-1)=-1/12$\" is a statement about the analytically continued function, not a claim that the divergent sum $1+2+3+\\cdots$ literally equals $-1/12$.\n- **P76 (Transfer Probe, mode = independence)**: \"A student reads that $\\zeta(s)$ has 'trivial zeros' at $s=-2,-4,-6,\\dots$ (a fact not derived in this lesson) in addition to the nontrivial zeros in the critical strip. (a) Based on this lesson's distinction between the functional equation (proven) and the Riemann Hypothesis (conjectured), which category do you expect the trivial zeros' LOCATIONS to fall into — proven fact or open conjecture — and why might they be called 'trivial' if their existence is already fully understood? (b) Explain why the Riemann Hypothesis specifically concerns the NONTRIVIAL zeros (in the strip $0<\\mathrm{Re}(s)<1$) rather than all zeros of $\\zeta(s)$. (c) A classmate claims that because no counterexample to the Riemann Hypothesis has ever been found, it must be true. Explain, using this lesson's proven-vs-conjectured distinction, why this reasoning is not a valid mathematical proof.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.analytic-continuation` (extending a holomorphic function beyond its original domain by re-expanding its series, with the identity theorem guaranteeing uniqueness) and `math.nt.prime-distribution` (the prime-counting function $\\pi(x)$, the Prime Number Theorem $\\pi(x)\\sim x/\\ln x$, and its own remark that the theorem's error term is tied to deep, then-unnamed analytic number theory).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.riemann-zeta/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.riemann-zeta",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-continuation` (whose own named applications explicitly listed $\\zeta(s)$ as the most famous instance of the technique — this concept is the direct fulfillment of that forward reference) and `math.nt.prime-distribution` (whose own Component 8 parenthetical remark about the Prime Number Theorem's error term being \"closely tied to the Riemann Hypothesis\" is directly cited and explained here in LO3).\n- **Unlocks**: none listed in the KG for this concept, though `math.prob`/`math.nt`-adjacent deeper theory (the functional equation's derivation, the Riemann Hypothesis's implications) lies beyond this concept's own scope entirely.\n- **Cross-link**: KG lists `math.nt.riemann-hypothesis`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence** (consistent with `math.nt.prime-distribution`'s own prior documentation of this same unauthored target).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.riemann-zeta.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

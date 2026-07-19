@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.markov-chain-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.markov-chain",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:87a9f6070df76359063d616ea6e5fe631074bbd72c8785680b8930d2d7b67c76",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.markov-chain.md": "sha256:af8021ec68ef7b316a94a2aaca75c5d31cd4d190cacd53d431d32c0d0877a84b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.markov-chain",
+    "name": "Markov Chain",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.prob.conditional-probability",
+      "math.linalg.matrix-multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.markov-chain-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.markov-chain (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.markov-chain.md": "sha256:af8021ec68ef7b316a94a2aaca75c5d31cd4d190cacd53d431d32c0d0877a84b"
+      },
+      "contentHash": "sha256:383045ef35319b52574218ca7e1a7dd4d84c16bdbb66480a18ceb3bfb208ae83",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-chain.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-chain.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-chain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-chain\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-chain.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-chain.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-chain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-chain\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-chain.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-chain.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-chain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-chain\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.markov-chain.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.markov-chain.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.markov-chain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.markov-chain\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.markov-chain/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.markov-chain",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Markov property** precisely — $P(X_{n+1}=j\\mid X_0,\\dots,X_n)=P(X_{n+1}=j\\mid X_n)$ — using `math.prob.conditional-probability`'s own conditional notation directly, and correctly distinguish a genuine Markov chain (future depends ONLY on the current state) from a superficially similar sequence whose next value depends on MORE than just the current state.\n- LO2: Construct the **transition matrix** $P$ for a Markov chain ($P_{ij}=$ probability of moving from state $i$ to state $j$), and apply `math.linalg.matrix-multiplication` to compute MULTI-STEP transition probabilities — the probability of moving from state $i$ to state $j$ in exactly $n$ steps is the $(i,j)$ entry of $P^n$ — correctly rejecting the naive idea of simply scaling the one-step probability by $n$.\n- LO3 (orientation level — full treatment deferred to this concept's own KG-listed children): recognize that a Markov chain's LONG-RUN behavior — whether the state probabilities settle into a fixed **stationary distribution**, and whether that limit is the same regardless of starting state (**ergodicity**) — is a rich further question, deferred to `math.prob.transition-matrix`, `math.prob.stationary-distribution`, and `math.prob.ergodicity`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.markov-chain",
+      "title": "RECENCY-MISTAKEN-FOR-MARKOV",
+      "content": "| MC-1 | RECENCY-MISTAKEN-FOR-MARKOV | Believing a sequence is Markov as long as the recent past weighs most heavily on the next value, missing that Markov requires the CURRENT state ALONE to be fully sufficient, with no additional predictive power from earlier history | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.markov-chain",
+      "title": "MULTI-STEP-PROBABILITY-LINEARLY-SCALED",
+      "content": "| MC-2 | MULTI-STEP-PROBABILITY-LINEARLY-SCALED | Believing the $n$-step transition probability is simply $n$ times the one-step probability, missing that genuine matrix exponentiation $P^n$ is required | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.markov-chain",
+      "title": "LONG-RUN-BEHAVIOR-ASSUMED-START-DEPENDENT",
+      "content": "| MC-3 | LONG-RUN-BEHAVIOR-ASSUMED-START-DEPENDENT | Believing a Markov chain's long-run behavior must always depend on its starting state, missing that for well-behaved (ergodic) chains the starting state's influence washes out over time | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-chain",
+      "title": "The Markov Property Is a Strong Claim About Sufficiency, Not Recency (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Markov Property Is a Strong Claim About Sufficiency, Not Recency (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-chain",
+      "title": "Multi-Step Probabilities Require Matrix Powers, Not Linear Scaling (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multi-Step Probabilities Require Matrix Powers, Not Linear Scaling (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-chain",
+      "title": "The Starting State's Influence Can Wash Out Over Time (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Starting State's Influence Can Wash Out Over Time (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.markov-chain",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.markov-chain",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A sequence tracks a robot's position, where the next move depends only on the CURRENT square, not on how the robot got there. Explain why this satisfies the Markov property, using the formal conditional-probability statement.\n  2. For a 2-state chain with transition matrix $P=\\begin{pmatrix}0.5&0.5\\\\0.3&0.7\\end{pmatrix}$, compute the one-step and two-step transition probabilities from state $1$ to state $2$.\n  3. Explain why a sequence where the next value depends on the average of the last $5$ values is generally NOT Markov under the \"single most recent value\" state definition, and describe how the state could be redefined to restore the Markov property.\n  4. Explain, referencing this lesson's preview, what question a Markov chain's \"long-run behavior\" is asking, and why the starting state's influence might be expected to matter less and less over time.\n- **P76 (Transfer Probe, mode = independence)**: \"A company tracks customer subscription status month-to-month — Active, Paused, or Cancelled — where next month's status depends only on this month's status, not on earlier history. (a) Explain why this satisfies the Markov property, citing the formal definition. (b) Given a transition matrix $P$ where $P(\\text{Active}\\to\\text{Active})=0.9$, explain HOW you would compute the probability that a customer active this month is still active $3$ months from now, referencing matrix multiplication. (c) Explain why simply computing $0.9\\times3=2.7$ (or any other naive linear scaling of the one-step probability) would be an invalid way to answer part (b).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.markov-chain",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.conditional-probability` (the conditional probability notation $P(A\\mid B)$ and its interpretation) and `math.linalg.matrix-multiplication` (computing matrix products, including recognizing when $BA\\ne AB$ and when a product is undefined).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.markov-chain/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.markov-chain",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.conditional-probability` (the conditional notation this concept's Markov property statement directly reuses) and `math.linalg.matrix-multiplication` (the matrix-power computation underlying multi-step transition probabilities).\n- **Unlocks**: none listed in the KG for this concept, though its own KG-listed children (`math.prob.transition-matrix`, `math.prob.stationary-distribution`, `math.prob.ergodicity`) own the deeper long-run-behavior theory previewed at orientation level in LO3.\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.markov-chain.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
