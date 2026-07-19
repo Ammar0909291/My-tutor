@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.argument-principle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.argument-principle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e44b13ac2f83897c6ecfa40cf5079db7a57796c31ab9093bd60fc26b7e5c6f20",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.argument-principle.md": "sha256:4d0e087ae48ca91fbd26064944aaf9ad162de041a2ad1d20c1b21a4ca6e6fe71"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.argument-principle",
+    "name": "Argument Principle",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.residue-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.argument-principle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.argument-principle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.argument-principle.md": "sha256:4d0e087ae48ca91fbd26064944aaf9ad162de041a2ad1d20c1b21a4ca6e6fe71"
+      },
+      "contentHash": "sha256:1004ea105608c82fa96a937ac269d88357e682b26b08e038db0d2a28d4343a7c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.argument-principle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.argument-principle.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.argument-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.argument-principle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.argument-principle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.argument-principle.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.argument-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.argument-principle\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.argument-principle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.argument-principle.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.argument-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.argument-principle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.argument-principle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.argument-principle.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.argument-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.argument-principle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.argument-principle/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Learning Objectives",
+      "content": "- LO1: DERIVE the Argument Principle — $\\frac1{2\\pi i}\\oint_Cf'(z)/f(z)\\,dz=Z-P$ — as a direct APPLICATION of the Residue Theorem: showing $f'(z)/f(z)$ has simple poles exactly at $f$'s zeros and poles, with residue equal to the zero's multiplicity (positive) or the pole's order (negative).\n- LO2: Apply the Argument Principle to COUNT the zeros of a specific function inside a contour, correctly counting WITH MULTIPLICITY — a genuinely different count from the number of distinct zero locations.\n- LO3: Recognize the **winding number** interpretation — $\\frac1{2\\pi i}\\oint_Cf'(z)/f(z)\\,dz$ counts how many times $f(z)$ winds around the origin as $z$ traverses $C$ once — connecting the zero/pole-counting formula to a genuinely geometric, visualizable meaning.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.argument-principle",
+      "title": "ARGUMENT-PRINCIPLE-AS-INDEPENDENT-THEOREM",
+      "content": "| MC-1 | ARGUMENT-PRINCIPLE-AS-INDEPENDENT-THEOREM | Believing the Argument Principle is proven by an argument independent of the Residue Theorem, missing that it is directly derived by applying the Residue Theorem to f′/f | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.argument-principle",
+      "title": "ZEROS-POLES-COUNTED-BY-LOCATION-NOT-MULTIPLICITY",
+      "content": "| MC-2 | ZEROS-POLES-COUNTED-BY-LOCATION-NOT-MULTIPLICITY | Believing Z and P count the number of distinct zero/pole locations, missing that they count with multiplicity | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Z-MINUS-P-TREATED-AS-PURELY-ABSTRACT",
+      "content": "| MC-3 | Z-MINUS-P-TREATED-AS-PURELY-ABSTRACT | Believing Z−P is a purely abstract algebraic count with no geometric meaning, missing that it directly equals the winding number of f(z) around 0 | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.argument-principle",
+      "title": "The Formula Is Derived, Not Independently Postulated (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Is Derived, Not Independently Postulated (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Multiplicity Must Be Summed, Not Just Location Count (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiplicity Must Be Summed, Not Just Location Count (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Z − P Is the Winding Number, a Geometric Fact (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Z − P Is the Winding Number, a Geometric Fact (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Derive the residue of $f'/f$ at a pole of order $k$, mirroring Example 1's zero-of-order-$m$ derivation.\n  2. Compute $Z-P$ for $f(z)=(z-1)^2(z+1)^3/z$ over a contour enclosing all three points $z=1,-1,0$.\n  3. Explain why counting \"2 distinct zeros\" instead of \"5 total multiplicity\" would give the wrong answer for Example 2's function.\n  4. For $f(z)=z^3$ on $|z|=1$, state the winding number of $f(z)$ around $0$ and verify it matches $Z-P$.\n- **P76 (Transfer Probe, mode = independence)**: \"A control-systems engineer analyzes a transfer function $f(z)$ and uses the Argument Principle to count its zeros inside the unit circle (a standard stability-analysis technique). (a) Explain, using this lesson's Residue Theorem derivation, why the engineer can trust this formula without re-deriving stability theory from scratch each time. (b) The engineer's function has a zero of order $2$ inside the contour but reports 'one zero' in their initial analysis. Explain what error this represents and how the Argument Principle's formula would have caught it. (c) A colleague, plotting $f(z)$ as $z$ traverses the contour, observes the resulting curve visually winding around the origin twice, and asks whether this observation is merely a coincidental visual pattern or something the Argument Principle's formula directly predicts. Explain specifically why it is the latter.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.residue-theorem` ($\\oint_Cf(z)\\,dz=2\\pi i\\sum\\text{Res}(f,z_k)$, summing over poles enclosed by $C$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.argument-principle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.argument-principle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.residue-theorem` (the summation-over-enclosed-poles machinery this concept's formula is a direct application of).\n- **Unlocks**: `math.cx.rouche-theorem` (uses the Argument Principle's zero-counting directly to compare two functions' zero counts).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.argument-principle.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
