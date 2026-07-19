@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.rounding-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.rounding",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ce0bb3750f6d69e1a831bae273ca131077a63e9779405220102c6e9d85da14e4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.rounding.md": "sha256:04566d6608ff0cd155f06ceddd0505bc9841cc03d2b5db4fc7aff35174bf18fa"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.rounding",
+    "name": "Rounding",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.place-value",
+      "math.arith.decimals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.rounding-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.rounding (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.rounding.md": "sha256:04566d6608ff0cd155f06ceddd0505bc9841cc03d2b5db4fc7aff35174bf18fa"
+      },
+      "contentHash": "sha256:1e4af7782d80be954d80b6fd9eabbbc5c482a900909908aacba3fe125a6a3e0f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.rounding.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.rounding.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.rounding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.rounding\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.rounding.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.rounding.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.rounding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.rounding\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.rounding.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.rounding.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.rounding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.rounding\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.rounding.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.rounding.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.rounding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.rounding\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.rounding/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.rounding",
+      "title": "Learning Objectives",
+      "content": "- LO1: Round a number to a specified **decimal place** (e.g. nearest tenth, hundredth) by examining the digit immediately to the right of the target place: $5$ or greater rounds the target digit UP by one; less than $5$ leaves the target digit unchanged, with all digits to the right dropped (replaced by nothing, since they're past the decimal cutoff).\n- LO2: Round a number to a specified **number of significant figures**, correctly identifying which digits count as significant (nonzero digits always count; zeros between significant digits count; leading zeros never count; trailing zeros' significance depends on context) — directly refuting the misconception that \"number of significant figures\" and \"number of decimal places\" are the same concept.\n- LO3: Recognize that rounding is always a genuine **approximation** — the rounded value is, in general, NOT equal to the original number — and that repeated rounding across a multi-step calculation can **accumulate error**, directly refuting the misconception that rounding intermediate results in a calculation has no effect on the final answer's accuracy.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.rounding",
+      "title": "SIGNIFICANT-FIGURES-CONFLATED-WITH-DECIMAL-PLACES",
+      "content": "| MC-1 | SIGNIFICANT-FIGURES-CONFLATED-WITH-DECIMAL-PLACES | Treating \"round to N significant figures\" and \"round to N decimal places\" as the same instruction, missing that significant figures count from the first nonzero digit while decimal places count from the decimal point | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.rounding",
+      "title": "ROUNDING-INTERMEDIATE-RESULTS-ASSUMED-HARMLESS",
+      "content": "| MC-2 | ROUNDING-INTERMEDIATE-RESULTS-ASSUMED-HARMLESS | Assuming rounding values partway through a multi-step calculation has no meaningful effect on the final answer's accuracy, missing that rounding errors can accumulate across steps | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.rounding",
+      "title": "LEADING-ZEROS-COUNTED-AS-SIGNIFICANT",
+      "content": "| MC-3 | LEADING-ZEROS-COUNTED-AS-SIGNIFICANT | Incorrectly counting leading zeros (before the first nonzero digit) as significant figures, inflating the apparent precision of a small decimal number | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.rounding",
+      "title": "The Digit-to-the-Right Rule (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Digit-to-the-Right Rule (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.rounding",
+      "title": "Significant Figures Count Differently From Decimal Places (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Significant Figures Count Differently From Decimal Places (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.rounding",
+      "title": "Rounding Error Accumulates Across Steps (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Rounding Error Accumulates Across Steps (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.rounding",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.rounding",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Round $7.8652$ to the nearest thousandth, and separately to the nearest tenth, showing the digit-to-the-right check for each.\n  2. Round $0.020389$ to 3 significant figures, and explain which digits you excluded and why.\n  3. For the number $150.0$, state how many significant figures it has, and explain why the trailing zero after the decimal point counts (unlike a bare $150$ without a decimal point).\n  4. Compute $\\frac{1}{7}+\\frac{1}{7}+\\frac{1}{7}+\\frac{1}{7}+\\frac{1}{7}+\\frac{1}{7}+\\frac{1}{7}$ two ways: (a) exactly, recognizing it equals $1$; (b) by first rounding $1/7\\approx0.14$ to 2 decimal places and then summing seven copies. Compare the two results and explain the discrepancy.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.num.floating-point` is not yet authored; a future revision may add a genuine cross-link probe into how computers represent rounded/approximate decimal values once that entry exists)**: \"An accountant calculates a company's total quarterly revenue by adding up 90 daily sales figures, each individually rounded to the nearest dollar before being recorded. (a) Explain why the FINAL total, computed by summing these 90 already-rounded daily figures, might differ from the true total that would result from summing the exact (unrounded) daily figures. (b) Using the reasoning from Example 3, explain whether this discrepancy is likely to be larger or smaller with 90 rounded terms compared to just 3, and why. (c) Suggest a change to the accountant's process (referencing Component 3's discussion of when to round) that would reduce this accumulated rounding error, while still allowing individual daily figures to be reported to the nearest dollar for record-keeping.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.rounding",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.place-value` (the value of a digit depends on its position — ones, tens, tenths, hundredths, etc.) and `math.arith.decimals` (decimal notation as place-value extended to the right of the decimal point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.rounding/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.rounding",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.place-value` (the positional digit-value system rounding operates on), `math.arith.decimals` (the decimal-point notation rounding is applied within).\n- **Unlocks**: `math.arith.estimation` (rounding is the core mechanical tool estimation builds on), `math.arith.significant-figures` (this concept's LO2 previews the significant-figures counting rules that concept formalizes in depth).\n- **Cross-link**: KG lists `math.num.floating-point` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.num.floating-point.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into how computers internally represent rounded/approximate decimal values once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.rounding.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

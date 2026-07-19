@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.projection-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.projection",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d09f08764adcba69fbaae67553125eff40a345279e90a1fbc5e0475c40db0fba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.projection.md": "sha256:ffde2b62096c1dbdd47f3db73ee1f22505d5a69b786bdfd1ba32e0318b60a325"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.projection",
+    "name": "Orthogonal Projection",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.orthogonality",
+      "math.linalg.inner-product"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.projection-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.projection (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.projection.md": "sha256:ffde2b62096c1dbdd47f3db73ee1f22505d5a69b786bdfd1ba32e0318b60a325"
+      },
+      "contentHash": "sha256:dbedb816c3bcf5a6e984f14e0b4d4c27ac7477072494ef3b64138c8620820617",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.projection.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.projection.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.projection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.projection\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.projection.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.projection.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.projection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.projection\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.projection.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.projection.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.projection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.projection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.projection.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.projection.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.projection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.projection\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.projection/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.projection",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **orthogonal projection** of $v$ onto a subspace $W$, $\\text{proj}_W(v)$, as the **closest point in $W$ to $v$**, characterized by the defining property that the **residual** $v - \\text{proj}_W(v)$ is orthogonal to every vector in $W$.\n- LO2: Compute the projection onto a **single vector's span** (a line) using $\\text{proj}_u(v) = \\frac{v\\cdot u}{u\\cdot u}u$, and correctly recognize this as a scaled copy of $u$ (never $v$'s own direction), directly refuting the misconception that the projection formula's numerator/denominator ratio is somehow applied to $v$ itself.\n- LO3: Compute the projection onto a subspace with an **orthonormal basis** $\\{e_1,\\dots,e_k\\}$ via $\\text{proj}_W(v) = \\sum_i\\langle v,e_i\\rangle e_i$ (directly reusing `math.linalg.orthogonal-basis`'s coordinate-extraction formula), and explain why this sum-of-single-vector-projections formula requires the basis to be **orthogonal** (or orthonormal) — it does not work for a general, non-orthogonal basis of $W$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.projection",
+      "title": "PROJECTION-FORMULA-FINAL-MULTIPLICATION-MISAPPLIED",
+      "content": "| MC-1 | PROJECTION-FORMULA-FINAL-MULTIPLICATION-MISAPPLIED | Multiplying the scalar $\\frac{v\\cdot u}{u\\cdot u}$ by $v$ instead of $u$, producing a result that doesn't lie in the target subspace at all | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.projection",
+      "title": "SUM-OF-PROJECTIONS-FORMULA-OVERGENERALIZED-TO-NON-ORTHOGONAL-BASES",
+      "content": "| MC-2 | SUM-OF-PROJECTIONS-FORMULA-OVERGENERALIZED-TO-NON-ORTHOGONAL-BASES | Applying the sum-of-individual-projections shortcut to a non-orthogonal spanning set, missing that orthogonality is required to prevent interference between the individual projections | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.projection",
+      "title": "RESIDUAL-ORTHOGONALITY-CHECK-SKIPPED",
+      "content": "| MC-3 | RESIDUAL-ORTHOGONALITY-CHECK-SKIPPED | Computing a projection without verifying (or understanding how to verify) that the residual is genuinely orthogonal to the subspace, treating the formula as a black box rather than a characterized closest-point property | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.projection",
+      "title": "The Projection as Closest Point, Residual Perpendicular (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Projection as Closest Point, Residual Perpendicular (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.projection",
+      "title": "The Projection Lands Along u, Never Along v (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Projection Lands Along u, Never Along v (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.projection",
+      "title": "Summing Individual Projections Requires Orthogonality (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Summing Individual Projections Requires Orthogonality (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.projection",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.projection",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $u=(2,1)$ and $v=(3,6)$, compute $\\text{proj}_u(v)$, and verify the residual $v-\\text{proj}_u(v)$ is orthogonal to $u$.\n  2. For $u=(0,1,0)$ and $v=(5,7,2)$, compute $\\text{proj}_u(v)$, and confirm your answer is a scalar multiple of $u$, not of $v$.\n  3. Using the orthonormal basis $e_1=(1,0)$, $e_2=(0,1)$ for $W=\\mathbb{R}^2$ itself, compute $\\text{proj}_W(v)$ for $v=(6,9)$ via the sum formula, and explain why the answer should equal $v$ itself.\n  4. Explain, in your own words, why the sum-of-individual-projections formula for a subspace requires the basis vectors to be orthogonal, referencing Example 3's caveat.\n- **P76 (Transfer Probe, mode = independence)**: \"A data-compression engineer wants to approximate a high-dimensional data vector $v$ using only its 'shadow' on a lower-dimensional subspace $W$ spanned by an orthonormal set of 'feature directions' $e_1,\\dots,e_k$. (a) Explain why $\\text{proj}_W(v) = \\sum_i\\langle v,e_i\\rangle e_i$ gives the BEST possible approximation of $v$ within $W$, citing the closest-point/orthogonal-residual characterization from Component 3. (b) If the engineer's feature directions were NOT mutually orthogonal, explain what would go wrong with simply summing the individual projections onto each direction. (c) Explain, using the residual $v-\\text{proj}_W(v)$, what information about the original vector $v$ is LOST when compressing it down to just its projection onto $W$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.projection",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.orthogonality` (two vectors are orthogonal iff their dot product/inner product is zero, and orthogonal vectors are automatically linearly independent) and `math.linalg.inner-product` (the inner product $\\langle\\cdot,\\cdot\\rangle$ as a generalization of the dot product, inducing a norm).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.projection/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.projection",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.orthogonality` (the dot-product-zero orthogonality test this concept's defining residual property directly uses), `math.linalg.inner-product` (the general inner product $\\langle\\cdot,\\cdot\\rangle$ this concept's formulas are stated in terms of).\n- **Unlocks**: `math.linalg.least-squares` (least-squares approximation is defined directly as finding the orthogonal projection onto a subspace of achievable outcomes).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.projection.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
