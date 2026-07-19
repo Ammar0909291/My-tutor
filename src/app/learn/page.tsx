@@ -26,7 +26,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
         include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
       },
     },
-  }))
+  })).catch(() => null)
 
   if (!user?.onboardingCompleted) {
     if (user?.profile) {
@@ -119,7 +119,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
         select: { role: true, content: true, createdAt: true },
       },
     },
-  })) : []
+  })).catch(() => [] as any[]) : []
 
   let memoryContext: string | null = null
   let pastSessionsSummary: string | null = null
