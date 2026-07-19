@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  computeLessonLockState, canAdvanceToNextLesson,
+  computeLessonLockState,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
 } from '@/lib/curriculum/lessonNavigation'
 
@@ -59,7 +59,12 @@ export function LessonNavigationPanel({
 
   const currentBadge = statusBadge(currentLesson, ctx)
   const isCurrentCompleted = progress.completedLessons.includes(currentLesson.order)
-  const nextEnabled = !disabled && canAdvanceToNextLesson(currentLesson, nextLesson, ctx)
+  // Free navigation: Next is clickable whenever a next lesson exists, exactly
+  // like Previous always is — matches the explicit product decision that a
+  // learner may page between adjacent lessons freely. canAdvanceToNextLesson
+  // (the lock check) still computes nextState below purely for the
+  // informational "🔒 Locked" badge — it no longer disables the button.
+  const nextEnabled = !disabled && !!nextLesson
   const nextState = nextLesson ? computeLessonLockState(nextLesson, ctx) : null
   const nextLockedReason = nextLesson && nextState?.isLocked
     ? (isRu ? 'Заблокировано — выполните текущий урок и предпосылки'

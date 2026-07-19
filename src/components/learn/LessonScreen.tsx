@@ -22,7 +22,7 @@ import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { LessonNavigationPanel } from '@/components/learn/LessonNavigationPanel'
 import {
-  computeLessonLockState, canAdvanceToNextLesson, findPreviousLesson, findNextLesson,
+  computeLessonLockState, findPreviousLesson, findNextLesson,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
 } from '@/lib/curriculum/lessonNavigation'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
@@ -935,6 +935,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [expandedLockedTopic, setExpandedLockedTopic] = useState<string | null>(null)
   const [knowledgeMapOpen, setKnowledgeMapOpen] = useState(false)
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
+  const [navPanelOpen, setNavPanelOpen] = useState(false)
+  const navPanelCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [bookmarkedLessons, setBookmarkedLessons] = useState<Set<number>>(new Set())
   // Real cross-session minutes studied today (from StudySession rows written on
   // session end), fetched once on mount as the baseline for the "Today's Goal"
@@ -1805,11 +1807,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setActiveTab('chat')
   }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, callLessonInit, startRevision, handleLessonComplete])
 
-  // Open the next lesson. Only ever called when canAdvanceToNextLesson()
-  // is true (current lesson completed + next lesson unlocked per
-  // prerequisites) — the Lesson Navigation Panel disables the button
-  // otherwise, so this never skips a locked lesson. StudentProgress.
-  // currentLesson has already advanced server-side the moment the current
+  // Open the next lesson. Free navigation: the Lesson Navigation Panel's
+  // Next button is always enabled whenever a next lesson exists (matches
+  // Previous, which was never lock-gated either) — locking is informational
+  // only now (the "🔒 Locked" badge), not a navigation restriction.
+  // StudentProgress.currentLesson has already advanced server-side the
+  // moment the current
   // lesson was completed (handleLessonComplete's PATCH), and every chat
   // turn already re-resolves its active concept from that same live
   // currentLesson value (route.ts) — so this only needs to prompt Tutor
@@ -2137,7 +2140,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
   async function handleNavigationIntent(text: string): Promise<boolean> {
     const trimmed = text.trim()
     if (NEXT_INTENT_RE.test(trimmed)) {
-      if (nextLessonData && canAdvanceToNextLesson(currentLessonData, nextLessonData, { progress: curriculumProgress, topicProgressMap, availableTopicSlugs })) {
+      // Free navigation: matches the Lesson Navigation Panel's Next button,
+      // which is no longer gated by lock state (see LessonNavigationPanel.tsx).
+      if (nextLessonData) {
         setInput('')
         clearDraft(`lesson_${subjectSlug}`)
         if (textareaRef.current) textareaRef.current.style.height = 'auto'
@@ -3768,22 +3773,86 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {/* Lesson Navigation Panel — Previous / Current / Next, inside the
                 Tutor Max chat panel. Reuses curriculumLessons/curriculumProgress/
                 topicProgressMap/availableTopicSlugs already fetched above; no new
-                lesson state. */}
+                lesson state. Collapsed to a thin hover-reveal handle by default
+                so it stops permanently occupying vertical space above the chat.
+                Driven by React state (navPanelOpen), not pure CSS :hover: the
+                expanded overlay's real footprint extends below the handle's own
+                5px box, and a plain .group:hover collapses the instant the mouse
+                crosses from the (tiny) handle into the (taller) overlay below it
+                — verified live via Playwright, the CSS-only version was
+                unclickable. State + onMouseEnter/Leave on both the handle and
+                the overlay (so moving between them never closes it) is the
+                correct fix. A short close delay avoids flicker at the boundary.
+                Absolutely positioned so expanding it never pushes the chat
+                messages down (no layout jump). The collapsed handle itself is
+                pointer-events:none (purely decorative, aria-hidden) so it can
+                never block clicks to content behind/below it — only the open
+                overlay (when actually expanded) captures pointer events. */}
             {totalLessons > 0 && currentLessonData && (
-              <LessonNavigationPanel
-                previousLesson={previousLessonData}
-                currentLesson={currentLessonData}
-                nextLesson={nextLessonData}
-                totalLessons={totalLessons}
-                progress={curriculumProgress}
-                topicProgressMap={topicProgressMap}
-                availableTopicSlugs={availableTopicSlugs}
-                teachingLanguage={teachingLanguage}
-                disabled={isStreaming || !sessionId}
-                onPrevious={() => previousLessonData && requestLessonSwitch(previousLessonData)}
-                onCurrent={() => currentLessonData && requestLessonSwitch(currentLessonData)}
-                onNext={() => nextLessonData && requestLessonSwitch(nextLessonData)}
-              />
+              <div style={{ position: 'relative', flexShrink: 0, zIndex: 20 }}>
+                <div
+                  aria-hidden="true"
+                  data-testid="lesson-nav-handle"
+                  onMouseEnter={() => {
+                    if (navPanelCloseTimer.current) clearTimeout(navPanelCloseTimer.current)
+                    setNavPanelOpen(true)
+                  }}
+                  style={{
+                    height: 5, borderBottom: '1px solid var(--border-subtle)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    transition: 'opacity 150ms ease',
+                    opacity: navPanelOpen ? 0 : 0.6,
+                    // Kept as the hover trigger (default pointer-events) —
+                    // its footprint is a fixed, tiny 5px strip, not the
+                    // variable/taller expanded panel, so it never blocks
+                    // meaningfully more than the handle itself ever visually
+                    // occupies. The overlay below has its own pointer-events
+                    // toggle (auto only while open) so it never blocks chat
+                    // content while collapsed.
+                  }}
+                >
+                  <div style={{ width: 36, height: 3, borderRadius: 2, background: 'var(--border-default)' }} />
+                </div>
+                <div
+                  data-testid="lesson-nav-overlay"
+                  onMouseEnter={() => {
+                    if (navPanelCloseTimer.current) clearTimeout(navPanelCloseTimer.current)
+                    setNavPanelOpen(true)
+                  }}
+                  onMouseLeave={() => {
+                    navPanelCloseTimer.current = setTimeout(() => setNavPanelOpen(false), 250)
+                  }}
+                  onFocus={() => setNavPanelOpen(true)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setNavPanelOpen(false)
+                  }}
+                  style={{
+                    position: 'absolute', top: 0, left: 0, right: 0,
+                    background: 'var(--bg-surface)', borderBottom: '1px solid var(--border-subtle)',
+                    boxShadow: navPanelOpen ? '0 8px 16px rgba(0,0,0,0.18)' : 'none',
+                    overflow: 'hidden',
+                    maxHeight: navPanelOpen ? 120 : 5,
+                    opacity: navPanelOpen ? 1 : 0,
+                    pointerEvents: navPanelOpen ? 'auto' : 'none',
+                    transition: 'max-height 200ms ease, opacity 180ms ease, box-shadow 200ms ease',
+                  }}
+                >
+                  <LessonNavigationPanel
+                    previousLesson={previousLessonData}
+                    currentLesson={currentLessonData}
+                    nextLesson={nextLessonData}
+                    totalLessons={totalLessons}
+                    progress={curriculumProgress}
+                    topicProgressMap={topicProgressMap}
+                    availableTopicSlugs={availableTopicSlugs}
+                    teachingLanguage={teachingLanguage}
+                    disabled={isStreaming || !sessionId}
+                    onPrevious={() => previousLessonData && requestLessonSwitch(previousLessonData)}
+                    onCurrent={() => currentLessonData && requestLessonSwitch(currentLessonData)}
+                    onNext={() => nextLessonData && requestLessonSwitch(nextLessonData)}
+                  />
+                </div>
+              </div>
             )}
 
             {/* Insights Panel (Sprint P) */}
