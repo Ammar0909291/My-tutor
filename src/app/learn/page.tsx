@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db/prisma'
 import { withRetry } from '@/lib/db/withRetry'
+import { withTimeout } from '@/lib/net/timeout'
 import { LessonScreen } from '@/components/learn/LessonScreen'
 import { MessageRole } from '@prisma/client'
 import { t, type TranslationKey } from '@/lib/i18n'
@@ -18,7 +19,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
   const session = await auth()
   if (!session?.user?.id) redirect('/auth/login')
 
-  const user = await withRetry(() => prisma.user.findUnique({
+  const user = await withTimeout(withRetry(() => prisma.user.findUnique({
     where: { id: session.user.id },
     select: {
       onboardingCompleted: true,
@@ -26,7 +27,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
         include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
       },
     },
-  }))
+  })), 12000, 'learn-user')
 
   if (!user?.onboardingCompleted) {
     if (user?.profile) {
@@ -49,42 +50,49 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
     : undefined
   let primarySubject = requestedSubject ?? profile?.subjects[0]?.subject
 
-  // Auto-heal: profile has no subject linked — ensure subject exists then link it
+  // Auto-heal: profile has no subject linked — ensure subject exists then link it.
+  // Wrapped in try/catch: these calls have no individual timeout; a Neon cold-start
+  // hang here would throw directly to error.tsx. On any failure we redirect to
+  // onboarding (same outcome as if the profile were missing), never crash.
   if (profile && !primarySubject) {
-    let anySubject = await prisma.subject.findFirst()
-    if (!anySubject) {
-      anySubject = await prisma.subject.upsert({
-        where: { slug: 'python' },
+    try {
+      let anySubject = await withTimeout(prisma.subject.findFirst(), 8000, 'learn-heal-findSubject')
+      if (!anySubject) {
+        anySubject = await withTimeout(prisma.subject.upsert({
+          where: { slug: 'python' },
+          update: {},
+          create: { slug: 'python', name: 'Python', type: 'PYTHON' },
+        }), 8000, 'learn-heal-upsertSubject')
+      }
+
+      await withTimeout(prisma.profileSubject.upsert({
+        where: { profileId_subjectId: { profileId: profile.id, subjectId: anySubject.id } },
         update: {},
-        create: { slug: 'python', name: 'Python', type: 'PYTHON' },
-      })
-    }
+        create: { profileId: profile.id, subjectId: anySubject.id },
+      }), 8000, 'learn-heal-upsertProfileSubject')
 
-    await prisma.profileSubject.upsert({
-      where: { profileId_subjectId: { profileId: profile.id, subjectId: anySubject.id } },
-      update: {},
-      create: { profileId: profile.id, subjectId: anySubject.id },
-    })
+      const existingPath = await withTimeout(prisma.learningPath.findFirst({ where: { userId: session.user.id, subjectId: anySubject.id } }), 8000, 'learn-heal-findPath')
+      if (!existingPath) {
+        await withTimeout(prisma.learningPath.create({
+          data: {
+            userId: session.user.id, subjectId: anySubject.id,
+            title: `${anySubject.name} Course`,
+            curriculum: { generated: false, steps: [] },
+            totalSteps: 0, isActive: true,
+          },
+        }), 8000, 'learn-heal-createPath').catch(() => null)
+      }
 
-    const existingPath = await prisma.learningPath.findFirst({ where: { userId: session.user.id, subjectId: anySubject.id } })
-    if (!existingPath) {
-      await prisma.learningPath.create({
-        data: {
-          userId: session.user.id, subjectId: anySubject.id,
-          title: `${anySubject.name} Course`,
-          curriculum: { generated: false, steps: [] },
-          totalSteps: 0, isActive: true,
-        },
-      }).catch(() => null)
-    }
-
-    const refreshed = await prisma.profile.findUnique({
-      where: { userId: session.user.id },
-      include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
-    })
-    if (refreshed) {
-      profile = refreshed
-      primarySubject = refreshed.subjects[0]?.subject ?? anySubject
+      const refreshed = await withTimeout(prisma.profile.findUnique({
+        where: { userId: session.user.id },
+        include: { subjects: { include: { subject: true }, orderBy: { createdAt: 'asc' } } },
+      }), 8000, 'learn-heal-refreshProfile')
+      if (refreshed) {
+        profile = refreshed
+        primarySubject = refreshed.subjects[0]?.subject ?? anySubject
+      }
+    } catch {
+      redirect('/onboarding')
     }
   }
 
@@ -104,7 +112,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
       }).catch(() => null)
     : null
 
-  const pastSessions = resolvedSubject.id ? await withRetry(() => prisma.learnSession.findMany({
+  const pastSessions = resolvedSubject.id ? await withTimeout(withRetry(() => prisma.learnSession.findMany({
     where: {
       userId: session.user.id,
       subjectId: resolvedSubject.id,
@@ -119,7 +127,7 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
         select: { role: true, content: true, createdAt: true },
       },
     },
-  })) : []
+  })), 12000, 'learn-pastSessions') : []
 
   let memoryContext: string | null = null
   let pastSessionsSummary: string | null = null

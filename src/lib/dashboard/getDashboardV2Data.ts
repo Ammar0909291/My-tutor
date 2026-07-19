@@ -277,7 +277,7 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     },
   })).then((rows) => { console.log('[Q2 OK] studentProgress', rows.length); return rows }).catch((err: any) => {
     console.error('[FAILED Q2] studentProgress', err?.code, err?.message, err?.meta)
-    throw err
+    return []
   })
   console.log('[Q3] rank')
   const rankPromise = myWeeklyXP
