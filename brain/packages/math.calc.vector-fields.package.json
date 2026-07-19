@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.vector-fields-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.vector-fields",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ea53a7edb96a3dfed531410e35b1445c30150f89207a09807d669a6753f792c5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.vector-fields.md": "sha256:4eaf6220a27f536dbdaebb2dfe027c632af78d16b50a57eee203f76eddb1f6bc"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.vector-fields",
+    "name": "Vector Fields",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.gradient",
+      "math.geom.vectors-3d"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.vector-fields-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.vector-fields (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.vector-fields.md": "sha256:4eaf6220a27f536dbdaebb2dfe027c632af78d16b50a57eee203f76eddb1f6bc"
+      },
+      "contentHash": "sha256:9f719c153f07bf3cd8366ed4f8f01ae9595126008213c941c0511df412d2c0ec",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.vector-fields.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.vector-fields.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.vector-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.vector-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.vector-fields.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.vector-fields.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.vector-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.vector-fields\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.vector-fields.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.vector-fields.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.vector-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.vector-fields\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.vector-fields.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.vector-fields.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.vector-fields"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.vector-fields\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.vector-fields/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **vector field** $\\mathbf{F}(x,y,z)$ as an assignment of a vector (using `math.geom.vectors-3d`'s component-vector notation) to EVERY point in a region — and recognize that `math.calc.gradient`'s $\\nabla f$ is just ONE specific example of a vector field; most vector fields are NOT the gradient of any scalar function at all.\n- LO2: Define a **conservative** vector field as one for which $\\mathbf{F}=\\nabla f$ for some scalar **potential function** $f$, and state the key consequence — the Fundamental Theorem for Line Integrals — that for a conservative field, $\\int_C\\mathbf{F}\\cdot d\\mathbf{r} = f(\\text{endpoint})-f(\\text{start point})$, **path-independent**: finding $f$ directly proves the integral is the same for EVERY path between those two endpoints, without needing to test multiple paths.\n- LO3: Correctly distinguish conservative fields from genuinely **non-conservative** ones using the necessary condition $\\partial P/\\partial y=\\partial Q/\\partial x$ (for $\\mathbf{F}=(P,Q)$) and the signature fact that a non-conservative field's line integral around a CLOSED loop can be nonzero (unlike a conservative field's, which is always exactly $0$ around any closed loop) — recognizing that no potential function exists at all for a non-conservative field, so no shortcut is available and the integral must be computed directly by parametrization.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.vector-fields",
+      "title": "EVERY-VECTOR-FIELD-ASSUMED-CONSERVATIVE",
+      "content": "| MC-1 | EVERY-VECTOR-FIELD-ASSUMED-CONSERVATIVE | Believing every vector field is automatically the gradient of some scalar function, treating \"vector field\" and \"conservative vector field\" as synonymous | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.vector-fields",
+      "title": "PATH-INDEPENDENCE-ASSUMED-TO-NEED-MULTI-PATH-VERIFICATION",
+      "content": "| MC-2 | PATH-INDEPENDENCE-ASSUMED-TO-NEED-MULTI-PATH-VERIFICATION | Believing confirming path-independence requires computing the line integral along several different paths and checking they match, rather than recognizing a found potential function is a direct, complete proof | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.vector-fields",
+      "title": "APPROXIMATE-POTENTIAL-ASSUMED-AVAILABLE-FOR-NON-CONSERVATIVE-FIELDS",
+      "content": "| MC-3 | APPROXIMATE-POTENTIAL-ASSUMED-AVAILABLE-FOR-NON-CONSERVATIVE-FIELDS | Believing a field that fails the conservativeness test might still have some approximate or partial potential function usable as a shortcut, missing that no potential function exists at all in that case | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Not Every Vector Field Comes From a Gradient (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Not Every Vector Field Comes From a Gradient (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Finding a Potential Function Proves Path-Independence Directly (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Finding a Potential Function Proves Path-Independence Directly (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.vector-fields",
+      "title": "A Failed Test and a Nonzero Closed Loop (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Failed Test and a Nonzero Closed Loop (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that $\\mathbf{F}(x,y)=(3x^2y,x^3)$ is conservative by finding an explicit potential function $f$.\n  2. Using the potential function from problem 1, compute $\\int_C\\mathbf{F}\\cdot d\\mathbf{r}$ from $(0,0)$ to $(2,1)$, and explain why the specific path taken does not matter.\n  3. Apply the necessary condition $\\partial P/\\partial y=\\partial Q/\\partial x$ to $\\mathbf{F}(x,y)=(y,-x)$ and determine whether it could be conservative.\n  4. Explain why a nonzero line integral around a closed loop proves a vector field is NOT conservative, referencing what a conservative field's closed-loop integral would have to equal instead.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models the force field exerted by a spring system as $\\mathbf{F}(x,y)=(2x,2y)$, representing a restoring force pulling toward the origin. (a) Determine whether $\\mathbf{F}$ is conservative by finding a potential function (or showing one exists via the necessary condition). (b) If it is conservative, explain what the potential function physically represents in this spring context, and compute the work done moving from $(1,1)$ to $(3,0)$ using only the potential function's values at the endpoints. (c) A colleague argues that since the spring force clearly 'depends on position,' the work done must also depend on the exact path taken to get from one point to another. Using this lesson's Fundamental Theorem for Line Integrals, explain precisely why this is not the case for a conservative field like this one.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.gradient` ($\\nabla f = (\\partial f/\\partial x,\\partial f/\\partial y,\\ldots)$, pointing in the direction of steepest ascent, with magnitude equal to the maximum rate of change) and `math.geom.vectors-3d` (component vectors, dot products, magnitude).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.vector-fields/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.vector-fields",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.gradient` ($\\nabla f$, the specific vector-field construction this concept generalizes, and whose existence is exactly the conservativeness property), `math.geom.vectors-3d` (the component-vector notation used throughout).\n- **Unlocks**: `math.calc.line-integrals` (already authored — see the production-order note below; that concept's general parametrization-based method is exactly the \"no shortcut available\" fallback this concept's LO3 points to for non-conservative fields).\n- **Cross-link**: KG lists no cross-links for this concept.\n- **Production-order note**: `math.calc.line-integrals` was authored (batch 100, as a prerequisite for `math.calc.surface-integrals`) before this concept despite being this concept's own KG `unlocks` target — production order in this corpus follows the ROI-ranked topological schedule (gated only by `requires`, not `unlocks` order), matching the precedent already recorded for `math.alg.system-3var`/`math.linalg.row-reduction`. This blueprint's Core Explanation and Teaching Action A03 could therefore cite `math.calc.line-integrals`' actual authored method directly for the non-conservative fallback case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.vector-fields.md",
+        "startLine": 94,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

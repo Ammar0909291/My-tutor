@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.polynomial-ring-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.polynomial-ring",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2542610e5c9bcd2d5bdc66042eda45855d6411d4795dc416607956069950e379",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.polynomial-ring.md": "sha256:1f2ad6d4a9afc5c520159b79e27a7f400a750e058f557b35b0b2be9edf21ff4b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.polynomial-ring",
+    "name": "Polynomial Ring",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.abst.ring-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.polynomial-ring-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.polynomial-ring (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.polynomial-ring.md": "sha256:1f2ad6d4a9afc5c520159b79e27a7f400a750e058f557b35b0b2be9edf21ff4b"
+      },
+      "contentHash": "sha256:441e7e5d173205d7a2692a4212cc7db470dae1508f5a6ece4cf0fa1d568d47c4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.polynomial-ring.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.polynomial-ring.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.polynomial-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.polynomial-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.polynomial-ring.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.polynomial-ring.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.polynomial-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.polynomial-ring\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.polynomial-ring.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.polynomial-ring.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.polynomial-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.polynomial-ring\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.polynomial-ring.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.polynomial-ring.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.polynomial-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.polynomial-ring\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.polynomial-ring/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $R[x]$ — polynomials with coefficients drawn from an arbitrary ring $R$ (not just $\\mathbb{R}$), under standard polynomial addition and multiplication — as itself satisfying the ring axioms R1-R5 from `math.abst.ring-theory`, verified directly by reusing that concept's own axiom-checking procedure applied to $R[x]$'s two operations.\n- LO2: State that $F[x]$ (coefficients in a FIELD $F$) is a **Euclidean domain**, admitting a **polynomial division algorithm** (division with remainder, remainder's degree strictly less than the divisor's), and recognize that this depends CRITICALLY on $F$ being a field — a division that requires inverting a leading coefficient can fail entirely over a general ring $R$ that is not a field.\n- LO3 (orientation level — full ideal theory beyond this corpus's current scope): recognize that an **irreducible** polynomial in $F[x]$ generates a **maximal** ideal, illustrated concretely by $\\langle x^2+1\\rangle$ in $\\mathbb{R}[x]$ (whose quotient ring is exactly $\\mathbb{C}$), contrasted with a **reducible** polynomial's ideal, which is never maximal.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "POLYNOMIAL-RING-ASSUMED-TO-INHERIT-FIELD-PROPERTY",
+      "content": "| MC-1 | POLYNOMIAL-RING-ASSUMED-TO-INHERIT-FIELD-PROPERTY | Believing R[x] is automatically a field whenever R is a field, missing that x itself never has a multiplicative inverse in any polynomial ring | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "DIVISION-ALGORITHM-ASSUMED-TO-WORK-OVER-ANY-RING",
+      "content": "| MC-2 | DIVISION-ALGORITHM-ASSUMED-TO-WORK-OVER-ANY-RING | Believing the polynomial division algorithm (division with remainder) works over any ring R[x], missing that it specifically requires the coefficient ring to be a field, to invert leading coefficients | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "IRREDUCIBLE-IDEAL-ASSUMED-ONLY-PRIME-NOT-MAXIMAL",
+      "content": "| MC-3 | IRREDUCIBLE-IDEAL-ASSUMED-ONLY-PRIME-NOT-MAXIMAL | Treating \"irreducible polynomial generates a prime ideal\" as the complete fact, missing that in F[x] specifically, irreducible generates the stronger property of a maximal ideal | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "R[x] Is a Ring, Verified the Same Way as Always (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"R[x] Is a Ring, Verified the Same Way as Always (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "x Has No Inverse Even Over a Field, and Division Needs a Field (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"x Has No Inverse Even Over a Field, and Division Needs a Field (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 7,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "Irreducible Generates Maximal; Reducible Does Not (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Irreducible Generates Maximal; Reducible Does Not (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 14,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. In $(\\mathbb{Z}/5\\mathbb{Z})[x]$, compute $(2x+3)+(4x+4)$ and $(2x+3)(4x+4)$, reducing coefficients mod 5.\n  2. Explain why $x$ has no multiplicative inverse in $\\mathbb{R}[x]$, using the same degree argument as Example 2.\n  3. Attempt to divide $x^2+1$ by $3x$ in $\\mathbb{Z}[x]$, and explain why the division algorithm fails to produce an integer-coefficient quotient.\n  4. Is $x^2+4$ irreducible or reducible in $\\mathbb{R}[x]$? State whether the ideal it generates is maximal, and if reducible, name a larger ideal containing it.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.alg.polynomial`)**: \"Recall from `math.alg.polynomial` that real-coefficient polynomials are closed under addition, subtraction, and multiplication, forming a ring — and that a degree-$n$ polynomial has at most $n$ real roots. (a) Explain precisely how $R[x]$'s definition in this lesson generalizes that concept's real-coefficient polynomials to an arbitrary ring $R$, and what stays EXACTLY the same in the process (which operations, which closure properties). (b) That lesson's root-count theorem was stated specifically for real (or complex) coefficients. Explain why the argument that $x$ has no multiplicative inverse in $\\mathbb{Q}[x]$ (a degree-counting argument) would work identically for $\\mathbb{R}[x]$ or $\\mathbb{C}[x]$, but would need MORE care to state correctly over a general ring $R$ that is not a field or integral domain. (c) Using $\\mathbb{R}[x]/\\langle x^2+1\\rangle\\cong\\mathbb{C}$ from this lesson, explain in your own words how factoring by an irreducible polynomial's ideal can be seen as a natural extension of `math.alg.polynomial`'s own root-finding concerns — turning 'this polynomial has no real root' into 'this polynomial's ideal builds a new field where it DOES have a root.'\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.ring-theory` (a ring $(R,+,\\cdot)$ satisfies axioms R1 through R5 — $(R,+)$ an abelian group, $\\cdot$ closed and associative, and distributivity — with multiplicative identity, commutativity, and inverses all OPTIONAL extras, not definitional requirements).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.polynomial-ring/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.polynomial-ring",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.ring-theory` (the R1-R5 ring axioms this concept verifies directly for $R[x]$, and the ideal concept LO3 builds on).\n- **Unlocks**: `math.abst.euclidean-domain` (the general abstract structure that $F[x]$'s division algorithm, from LO2, is shown to be a specific instance of).\n- **Cross-link (P76_mode = cross-link probe against `math.alg.polynomial`, already authored)**: that concept's real-coefficient polynomials, closure under the three operations, and root-count theorem are directly cited as the concrete special case this concept's $R[x]$ generalizes, and its own root-related content is connected to LO3's irreducible-ideal/field-extension construction in the transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.polynomial-ring.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
