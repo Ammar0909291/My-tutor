@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.surface-integrals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.surface-integrals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:22edb63172ab46b9dc9225e10c8520ecfe5f3a4e7c47f788c1c94731dcca358a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.surface-integrals.md": "sha256:ff3c6827ce1033640bfe8d271ad45c8060498246a32548cfa4105e257c3b78be"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.surface-integrals",
+    "name": "Surface Integrals",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.double-integrals",
+      "math.calc.line-integrals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.surface-integrals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.surface-integrals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.surface-integrals.md": "sha256:ff3c6827ce1033640bfe8d271ad45c8060498246a32548cfa4105e257c3b78be"
+      },
+      "contentHash": "sha256:406be6bf53094224a6677691f9cac47f166769df56252ffeb53682837e552792",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-integrals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-integrals.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-integrals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-integrals.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-integrals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-integrals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-integrals.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-integrals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-integrals.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-integrals.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-integrals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.surface-integrals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Parametrize a surface $S$ via $\\mathbf{r}(x,y)=(x,y,f(x,y))$ (or more generally $\\mathbf{r}(u,v)$) and compute the **surface-area element** $dS = \\|\\mathbf{r}_x\\times\\mathbf{r}_y\\|\\,dx\\,dy$ — directly generalizing `math.calc.line-integrals`' arc-length element $ds=\\|\\mathbf{r}'(t)\\|\\,dt$ (a single tangent vector's magnitude) to TWO tangent vectors' cross product magnitude.\n- LO2: Compute a **scalar surface integral** $\\iint_S f\\,dS$ by substituting the parametrization and the $dS$ element, reducing to an ordinary double integral over the parameter domain $D$ — directly reusing `math.calc.double-integrals`' iterated-integral machinery, exactly paralleling `math.calc.line-integrals`' scalar case ($\\int_C f\\,ds$).\n- LO3: Compute a **vector surface integral (flux)** $\\iint_S \\mathbf{F}\\cdot d\\mathbf{S} = \\iint_D \\mathbf{F}(\\mathbf{r}(x,y))\\cdot(\\mathbf{r}_x\\times\\mathbf{r}_y)\\,dx\\,dy$ — recognizing that the vector surface element $d\\mathbf{S}=(\\mathbf{r}_x\\times\\mathbf{r}_y)\\,dx\\,dy$ already combines direction AND magnitude in one step (no separate unit-normal computation needed), and correctly handle **orientation**: reversing the surface's chosen normal direction flips the sign of the flux, exactly paralleling `math.calc.line-integrals`' path-reversal sign flip for vector line integrals.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "SURFACE-AREA-ELEMENT-FACTOR-OMITTED",
+      "content": "| MC-1 | SURFACE-AREA-ELEMENT-FACTOR-OMITTED | Treating dS as just dx dy, omitting the essential cross-product magnitude ‖r_x×r_y‖ that accounts for the surface's tilt | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "UNIT-NORMAL-COMPUTED-AS-SEPARATE-STEP",
+      "content": "| MC-2 | UNIT-NORMAL-COMPUTED-AS-SEPARATE-STEP | Believing flux requires first computing the unit normal n separately, then multiplying by dS, rather than dotting F directly into the combined vector element r_x×r_y | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "FLUX-ASSUMED-ORIENTATION-INDEPENDENT",
+      "content": "| MC-3 | FLUX-ASSUMED-ORIENTATION-INDEPENDENT | Believing flux, like the scalar surface integral, is unaffected by which way the surface's normal is oriented, missing that reversing orientation flips the flux's sign | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Two Tangent Vectors, One Cross Product (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Tangent Vectors, One Cross Product (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "The Cross-Product Magnitude Is Not Optional (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Cross-Product Magnitude Is Not Optional (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Flux Uses the Signed Cross Product Directly, and Orientation Flips Its Sign (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Flux Uses the Signed Cross Product Directly, and Orientation Flips Its Sign (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 13,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Parametrize the plane $z=2x+y$ over $D=[0,2]\\times[0,2]$ as $\\mathbf{r}(x,y)$, and compute $dS$.\n  2. Using the surface from problem 1, compute $\\iint_S 1\\,dS$ (its surface area).\n  3. Using the same surface, compute the flux of $\\mathbf{F}(x,y,z)=(1,0,0)$ through it, using $\\mathbf{r}_x\\times\\mathbf{r}_y$ directly (state which orientation you used).\n  4. Explain, in your own words, why the scalar surface integral $\\iint_S f\\,dS$ is unaffected by which way you orient the surface's normal, while the flux integral $\\iint_S\\mathbf{F}\\cdot d\\mathbf{S}$ is not.\n- **P76 (Transfer Probe, mode = independence)**: \"A solar panel is modeled as the planar surface $z=6-x-2y$ over the rectangular region $D=[0,2]\\times[0,3]$ (in meters), and sunlight is modeled as the uniform vector field $\\mathbf{F}=(0,0,I)$ for some intensity constant $I$ (representing straight-down sunlight). (a) Parametrize the panel and compute $dS$. (b) Compute the flux $\\iint_S\\mathbf{F}\\cdot d\\mathbf{S}$, representing total light energy captured, using the upward-pointing orientation. (c) Explain, physically, what it would mean if the panel's installer accidentally used the DOWNWARD-pointing orientation instead when computing this integral — would the total energy captured actually change, or just the computed number's sign, and why does this distinction matter when interpreting the result?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.double-integrals` (evaluating $\\iint_D g\\,dA$ as an iterated integral over a parameter domain $D$, including the lesson that a coordinate-conversion factor like polar's $r$ is essential, not optional) and `math.calc.line-integrals` (parametrizing a curve $\\mathbf{r}(t)$; the scalar integral $\\int_C f\\,ds$ with $ds=\\|\\mathbf{r}'(t)\\|\\,dt$; the vector integral $\\int_C\\mathbf{F}\\cdot d\\mathbf{r}$ with $d\\mathbf{r}=\\mathbf{r}'(t)\\,dt$ already combining direction and magnitude; and the scalar/vector distinction under path reversal).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.surface-integrals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.surface-integrals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.double-integrals` (the iterated-integral machinery over the parameter domain $D$ this concept's scalar case reduces to, plus the \"conversion factor is never optional\" lesson directly reused for $\\|\\mathbf{r}_x\\times\\mathbf{r}_y\\|$), `math.calc.line-integrals` (the one-tangent-vector arc-length element $ds$, the scalar/vector distinction, and the orientation-reversal sign-flip rule, all directly generalized here to two tangent vectors).\n- **Unlocks**: `math.calc.stokes-theorem` (relates a surface's flux of a curl field to a line integral around its boundary curve), `math.calc.divergence-theorem` (relates a closed surface's flux to a volume integral of divergence).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-integrals.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

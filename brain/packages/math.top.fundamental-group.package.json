@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.fundamental-group-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.fundamental-group",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3aaa1c6d69f90b70d0f487f17f79a7c025f7f6de859a7f56f27aad0ad5b7c78e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.fundamental-group.md": "sha256:d2caaf0606751e8f8bf38b1cd9c343c67ec462dbc432596c5f059c9ce326b118"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.fundamental-group",
+    "name": "Fundamental Group",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.top.homotopy",
+      "math.abst.group-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.fundamental-group-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.fundamental-group (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.fundamental-group.md": "sha256:d2caaf0606751e8f8bf38b1cd9c343c67ec462dbc432596c5f059c9ce326b118"
+      },
+      "contentHash": "sha256:d7d1463199b08077fef2ebdce4d649576b7442af98a61ad8142cc55616060090",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.fundamental-group.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.fundamental-group.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.fundamental-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.fundamental-group\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.fundamental-group.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.fundamental-group.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.fundamental-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.fundamental-group\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.fundamental-group.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.fundamental-group.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.fundamental-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.fundamental-group\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.fundamental-group.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.fundamental-group.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.fundamental-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.fundamental-group\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.fundamental-group/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **loop based at $x_0$** as a continuous map $\\gamma:[0,1]\\to X$ with $\\gamma(0)=\\gamma(1)=x_0$, and define $\\pi_1(X,x_0)$ as the set of **based homotopy classes** of such loops — refining `math.top.homotopy`'s general homotopy $H(x,t)$ with $H(x,0)=f(x)$, $H(x,1)=g(x)$ into the STRICTER requirement that, for loop homotopies, $H(0,t)=H(1,t)=x_0$ for **every** $t\\in[0,1]$ (every intermediate stage must ALSO be a loop based at $x_0$, not merely a map matching the right endpoints at $t=0,1$).\n- LO2: Define the **group operation** on $\\pi_1(X,x_0)$ as concatenation of loops, $(\\gamma_1\\ast\\gamma_2)(s) = \\gamma_1(2s)$ for $s\\le1/2$, $\\gamma_2(2s-1)$ for $s\\ge1/2$, with identity the constant loop $e(s)=x_0$ and inverse $\\gamma^{-1}(s)=\\gamma(1-s)$ (traversed backward) — and recognize that concatenation is associative only **up to based homotopy**, not as literal function equality, which is exactly why `math.abst.group-theory`'s axioms are stated for **homotopy classes** $[\\gamma]$, not for individual loops themselves.\n- LO3 (orientation level — full derivations deferred to `math.top.covering-space`, which this concept unlocks): state and apply the classical computed values $\\pi_1(S^1)\\cong\\mathbb{Z}$ (loops classified by winding number), $\\pi_1(S^n)=0$ for $n\\ge2$, and $\\pi_1(\\text{torus})\\cong\\mathbb{Z}^2$, and correctly interpret **simply connected** ($\\pi_1(X,x_0)=\\{e\\}$, the trivial group) as meaning specifically that every loop-detectable, 1-dimensional \"hole\" is absent — not that the space has no interesting topology of any kind at all.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.fundamental-group",
+      "title": "BASEPOINT-DRIFT-IN-LOOP-HOMOTOPY-OVERLOOKED",
+      "content": "| MC-1 | BASEPOINT-DRIFT-IN-LOOP-HOMOTOPY-OVERLOOKED | Believing any homotopy H satisfying the plain endpoint conditions H(s,0)=γ1(s), H(s,1)=γ2(s) is automatically a valid loop homotopy, without checking that H(0,t)=H(1,t)=x0 for every t | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.fundamental-group",
+      "title": "CONCATENATION-ASSOCIATIVITY-TREATED-AS-LITERAL-EQUALITY",
+      "content": "| MC-2 | CONCATENATION-ASSOCIATIVITY-TREATED-AS-LITERAL-EQUALITY | Believing (γ1∗γ2)∗γ3 and γ1∗(γ2∗γ3) must be the exact same function of s, missing that associativity in π1 holds only up to based homotopy, which is exactly why π1's elements are homotopy classes | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.fundamental-group",
+      "title": "SIMPLY-CONNECTED-OVERGENERALIZED-TO-NO-TOPOLOGY-AT-ALL",
+      "content": "| MC-3 | SIMPLY-CONNECTED-OVERGENERALIZED-TO-NO-TOPOLOGY-AT-ALL | Believing a trivial π1 (simply connected) means a space has no interesting topological structure at all, rather than specifically no loop-detectable 1-dimensional holes | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Loops, and the Stricter \"Stays-at-Basepoint\" Homotopy Condition (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Loops, and the Stricter \\\"Stays-at-Basepoint\\\" Homotopy Condition (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.fundamental-group",
+      "title": "A Homotopy That Drifts the Basepoint Is Not a Loop-Homotopy (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Homotopy That Drifts the Basepoint Is Not a Loop-Homotopy (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Associativity Up to Homotopy (Not Literal Equality), and What Simply Connected Really Means (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Associativity Up to Homotopy (Not Literal Equality), and What Simply Connected Really Means (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 23,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that $\\gamma(s) = (4\\sin(2\\pi s), 4\\sin^2(\\pi s))$ (or any loop of your own construction satisfying $\\gamma(0)=\\gamma(1)=(0,0)$) is a genuine loop based at the origin, and construct a based homotopy from it to the constant loop, checking the stricter condition explicitly.\n  2. Explain why $(\\gamma_1\\ast\\gamma_2)\\ast\\gamma_3$ and $\\gamma_1\\ast(\\gamma_2\\ast\\gamma_3)$ can be based-homotopic even though they are different functions of $s$ — what does this justify about defining $\\pi_1$'s elements as homotopy classes rather than individual loops?\n  3. State the value of $\\pi_1(S^1,x_0)$ and explain, informally, what the integer associated to a loop represents.\n  4. A space $Y$ is known to be simply connected. Explain why this does NOT, by itself, prove that $Y$ has no interesting topological structure whatsoever.\n- **P76 (Transfer Probe, mode = independence)**: \"A robot navigates a factory floor with several immovable support pillars (obstacles) it must go around. Model the floor as the plane with disks removed (one per pillar), and let $x_0$ be the robot's charging station. (a) Explain, in terms of loops based at $x_0$ and based homotopy, what it would mean for two different patrol routes (each a loop starting and ending at the charging station) to be considered 'the same' route from a topological point of view. (b) If the floor has exactly ONE pillar, explain informally why $\\pi_1$ of this floor is analogous to $\\pi_1(S^1)\\cong\\mathbb{Z}$, referencing the winding-number idea. (c) If the floor instead has TWO separate pillars, explain qualitatively (without deriving the full group) why you would expect MORE distinct loop classes than the one-pillar case, connecting this to the torus's $\\pi_1\\cong\\mathbb{Z}^2$ having two independent generators.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 23,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.homotopy` (two continuous maps $f,g:X\\to Y$ are homotopic via a continuous $H:X\\times[0,1]\\to Y$ with $H(x,0)=f(x)$, $H(x,1)=g(x)$; homotopy is an equivalence relation; checking continuity of the WHOLE map $H$, not just pointwise interpolation) and `math.abst.group-theory` (a group is a set with a binary operation satisfying closure, associativity, identity, and inverse axioms G1-G4).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.fundamental-group/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.fundamental-group",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.homotopy` (the plain homotopy $H(x,t)$ and endpoint conditions this concept strengthens into the based/loop-homotopy condition), `math.abst.group-theory` (the four group axioms G1-G4 this concept verifies hold for $\\pi_1(X,x_0)$ under concatenation, specifically at the level of homotopy classes).\n- **Unlocks**: `math.top.covering-space` (the machinery that actually PROVES the stated computed values like $\\pi_1(S^1)\\cong\\mathbb{Z}$, deferred here per the orientation-level treatment of LO3), `math.top.van-kampen` (a theorem for computing $\\pi_1$ of spaces built by gluing simpler pieces together).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.fundamental-group.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
