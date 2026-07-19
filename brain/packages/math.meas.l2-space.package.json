@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.l2-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.l2-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7aa28a756e46b8bb57ca54a53fd0ab72e98f16e8518db21d319e2d32f9dfcafc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.l2-space.md": "sha256:f8293a290bbcd768fcf906167124838b44455cc7e3c13d47c856d160f9d39189"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.meas.l2-space",
+    "name": "L² Space",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.meas.lp-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.l2-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.l2-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.l2-space.md": "sha256:f8293a290bbcd768fcf906167124838b44455cc7e3c13d47c856d160f9d39189"
+      },
+      "contentHash": "sha256:0cef4cff3c6b083d1b1c32b5f5bba561d721e9c5b0c49c8c42fbfa640f5a8c93",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.l2-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.l2-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.l2-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.l2-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.l2-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.l2-space.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.l2-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.l2-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.l2-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.l2-space.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.l2-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.l2-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.l2-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.l2-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.l2-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.l2-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.l2-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.l2-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the inner product $\\langle f,g\\rangle=\\int f\\bar g\\,d\\mu$ on $L^2(\\mu)$ and verify $L^2$ is a genuine Hilbert space (`math.fnal.hilbert-space`'s own \"complete inner product space\" definition) — recognizing $p=2$ is SPECIAL among the $L^p$ family: only $p=2$ admits this inner-product structure, verified via the parallelogram law holding for $L^2$ but failing for other $p$.\n- LO2: Apply orthonormal bases in $L^2$ to represent $f=\\sum\\langle f,e_n\\rangle e_n$ — recognizing this is the SAME Fourier decomposition already familiar from `math.de.fourier-transform`, now understood as genuine ORTHOGONAL PROJECTION in a Hilbert space, reusing `math.fnal.hilbert-space`'s own orthonormal-basis machinery.\n- LO3: Apply Parseval's theorem $\\sum|\\langle f,e_n\\rangle|^2=\\|f\\|^2$ concretely, recognizing it as the $L^2$ analogue of the Pythagorean theorem — a direct consequence of orthonormality and completeness, not an independent, unrelated fact about Fourier coefficients.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.l2-space",
+      "title": "ALL-LP-SPACES-ASSUMED-TO-HAVE-INNER-PRODUCTS",
+      "content": "| MC-1 | ALL-LP-SPACES-ASSUMED-TO-HAVE-INNER-PRODUCTS | Believing every Lᵖ space admits a natural inner product, missing that only p=2 has this special Hilbert-space structure | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.l2-space",
+      "title": "L2-FOURIER-SERIES-TREATED-AS-FORMAL-ANALOGY",
+      "content": "| MC-2 | L2-FOURIER-SERIES-TREATED-AS-FORMAL-ANALOGY | Believing Fourier series in L² are merely a formal analogy to calculus-level Fourier series, missing that they ARE the Hilbert-space orthonormal-basis expansion | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.l2-space",
+      "title": "PARSEVAL-TREATED-AS-INDEPENDENT-FACT",
+      "content": "| MC-3 | PARSEVAL-TREATED-AS-INDEPENDENT-FACT | Believing Parseval's theorem is an independent fact specific to Fourier coefficients, missing that it is the Pythagorean theorem generalized via orthonormality and completeness | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.l2-space",
+      "title": "Only p=2 Admits the Parallelogram Law (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Only p=2 Admits the Parallelogram Law (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.l2-space",
+      "title": "Fourier Series Are Orthogonal Projection, Not a Separate Technique (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Fourier Series Are Orthogonal Projection, Not a Separate Technique (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.l2-space",
+      "title": "Parseval Is the Pythagorean Theorem, Generalized (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Parseval Is the Pythagorean Theorem, Generalized (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.l2-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.l2-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify the parallelogram law for $f=x$, $g=x^2$ on $[0,1]$ with Lebesgue measure.\n  2. Verify $\\langle e_2,e_3\\rangle=0$ directly for $e_n(x)=e^{inx}/\\sqrt{2\\pi}$ on $[0,2\\pi]$.\n  3. Explain why Parseval's theorem is a consequence of completeness and orthonormality, rather than a fact specific to trigonometric functions.\n  4. Explain why $L^1$ and $L^\\infty$ do not admit a Hilbert-space structure, referencing the parallelogram law.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.fnal.hilbert-space` and `math.de.fourier-transform`)**: \"A signal-processing engineer represents an audio signal $f\\in L^2$ using its Fourier coefficients (from `math.de.fourier-transform`) and wants to verify the representation preserves the signal's total energy (proportional to $\\|f\\|_2^2$). (a) Using this lesson's Parseval's theorem, explain why summing the squared Fourier coefficients gives exactly this energy quantity, connecting it to the Pythagorean-theorem analogy. (b) A colleague, familiar with `math.fnal.hilbert-space`'s general orthonormal-basis theory but not with Fourier analysis specifically, asks whether Parseval's theorem here is a special result unique to trigonometric Fourier series, or a general Hilbert-space fact. Explain which, and why. (c) The colleague also wonders whether the same orthonormal-basis/Parseval framework would work equally well in $L^1$ instead of $L^2$, for simplicity. Explain specifically why this substitution would fail, referencing the parallelogram law.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.l2-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.lp-space` ($L^p=\\{f\\text{ measurable}:\\int|f|^p\\,d\\mu<\\infty\\}$, the norm $\\|f\\|_p$, completeness via Riesz-Fischer).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.l2-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.l2-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.lp-space` (the $L^p$ norm and completeness this concept's inner product and Hilbert-space status build directly on).\n- **Unlocks**: (none — KG lists no unlocks for this concept).\n- **Cross-link**: KG lists BOTH `math.fnal.hilbert-space` and `math.de.fourier-transform` as cross-links — **both authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **cross-link probe**, engaging directly with both: `math.fnal.hilbert-space`'s own orthonormal-basis and completeness machinery (LO1/LO2), and `math.de.fourier-transform`'s own frequency-decomposition content, now reframed as genuine orthogonal projection (LO2/LO3).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.l2-space.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
