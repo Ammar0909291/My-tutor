@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.curl-divergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.curl-divergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:27f9d466d471785ed055b934740a50244a3e82c6b898022127a7ddfa544a530c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.curl-divergence.md": "sha256:ac1d48cf313b8598678c8547ba41ee483827c70041a8dde562a4264eb4bada91"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.curl-divergence",
+    "name": "Curl and Divergence",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.vector-fields",
+      "math.calc.partial-derivatives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.curl-divergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.curl-divergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.curl-divergence.md": "sha256:ac1d48cf313b8598678c8547ba41ee483827c70041a8dde562a4264eb4bada91"
+      },
+      "contentHash": "sha256:d872303b43072535490825d436f74b65e8c8572ff1c79ff450c96afd564a89eb",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.curl-divergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curl-divergence.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curl-divergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curl-divergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.curl-divergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curl-divergence.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curl-divergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curl-divergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.curl-divergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curl-divergence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curl-divergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curl-divergence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.curl-divergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curl-divergence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curl-divergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curl-divergence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.curl-divergence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **divergence** $\\nabla\\cdot\\mathbf{F} = \\partial P/\\partial x+\\partial Q/\\partial y+\\partial R/\\partial z$ for $\\mathbf{F}=(P,Q,R)$ — a SCALAR quantity measuring outward flux density (net \"spreading out\" per unit volume) at a point — and compute it directly for a given field.\n- LO2: Define **curl** $\\nabla\\times\\mathbf{F}$ (the full 3D determinant formula) — a VECTOR quantity measuring rotational tendency — and compute it directly for a given field, recognizing that `math.calc.vector-fields`' own 2D conservativeness test ($\\partial P/\\partial y=\\partial Q/\\partial x$) is exactly the $z$-component of curl for a 2D field embedded in 3D as $(P,Q,0)$, not a separate, unrelated tool.\n- LO3: Correctly distinguish curl (VECTOR, rotation) from divergence (SCALAR, flux) as independent properties that can occur in any combination, and recognize that $\\nabla\\times\\mathbf{F}=0$ is **necessary but not always SUFFICIENT** for $\\mathbf{F}$ to be conservative — demonstrated by a classic field with zero curl everywhere on its domain, yet a nonzero closed-loop line integral, because its domain has a \"hole.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "CURL-AND-DIVERGENCE-CONFLATED",
+      "content": "| MC-1 | CURL-AND-DIVERGENCE-CONFLATED | Treating curl and divergence as measuring the same kind of thing, missing that divergence is a scalar (flux/spreading) while curl is a vector (rotation) — fundamentally different types of objects | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "CURL-DIVERGENCE-ASSUMED-CORRELATED",
+      "content": "| MC-2 | CURL-DIVERGENCE-ASSUMED-CORRELATED | Believing zero curl implies zero divergence (or vice versa), missing that the two properties are independent and can combine in any way | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "CURL-ZERO-ASSUMED-SUFFICIENT-FOR-CONSERVATIVE",
+      "content": "| MC-3 | CURL-ZERO-ASSUMED-SUFFICIENT-FOR-CONSERVATIVE | Believing curl F=0 always guarantees F is conservative, missing that this is necessary but not sufficient in general — a domain with a hole can produce zero curl everywhere yet a nonzero closed-loop integral | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Divergence: A Scalar Measuring Spreading (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Divergence: A Scalar Measuring Spreading (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Curl Is a Vector, a Fundamentally Different Kind of Object (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Curl Is a Vector, a Fundamentally Different Kind of Object (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 7,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Zero Curl Does Not Always Mean Conservative (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Zero Curl Does Not Always Mean Conservative (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 14,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the divergence of $\\mathbf{F}(x,y,z)=(x^2,y^2,z^2)$ at the point $(1,1,1)$.\n  2. Compute the curl of $\\mathbf{F}(x,y,z)=(y,-x,0)$, and state whether the result is a scalar or a vector.\n  3. Explain why curl's third component for a 2D field $(P,Q,0)$ is the exact same computation as `math.calc.vector-fields`' own conservativeness test.\n  4. Explain, using Example 3, why zero curl everywhere a field is defined does not automatically prove the field is conservative.\n- **P76 (Transfer Probe, mode = independence)**: \"A meteorologist models local wind patterns as a vector field $\\mathbf{F}(x,y,z)$ over a region. (a) Explain what a region of strongly positive divergence in this field would represent physically (referencing 'spreading' or 'source-like' behavior). (b) Separately, explain what a region of strong (nonzero) curl would represent physically (referencing rotation, like a developing vortex or storm system) — and explain why measuring curl tells the meteorologist nothing directly about whether that same region also has strong divergence. (c) Suppose the meteorologist finds curl is exactly zero throughout the entire mapped region, EXCEPT for one small excluded zone (a sensor malfunction with no data). Using this lesson's punctured-plane example, explain why the meteorologist should NOT conclude the wind field is free of all rotational effects without further investigating that excluded zone.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.vector-fields` (a vector field $\\mathbf{F}(x,y,z)$; conservative fields $\\mathbf{F}=\\nabla f$; path-independence; the 2D test $\\partial P/\\partial y=\\partial Q/\\partial x$ and the nonzero-closed-loop signature of non-conservativeness) and `math.calc.partial-derivatives` ($\\partial/\\partial x,\\partial/\\partial y,\\partial/\\partial z$, and computing them fluently).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.curl-divergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.curl-divergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.vector-fields` (the vector field concept, conservative fields, and the 2D test this concept's curl directly generalizes), `math.calc.partial-derivatives` (every partial derivative both divergence and curl are built from).\n- **Unlocks**: `math.calc.stokes-theorem` (relates a surface's flux of curl to a line integral around its boundary), `math.calc.divergence-theorem` (relates a closed surface's flux to a volume integral of divergence).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curl-divergence.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

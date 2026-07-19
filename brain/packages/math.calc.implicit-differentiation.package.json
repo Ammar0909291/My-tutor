@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.implicit-differentiation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.implicit-differentiation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:75e0fd8ed3d842bd5df1a8b9e55086a12f9e6bd7109008e7a980f10ec07c9424",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.implicit-differentiation.md": "sha256:7eccb3ea7bd71e26e194dab2b928c32fc000b99445bb8a2fa01bc0ae04c26a45"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.implicit-differentiation",
+    "name": "Implicit Differentiation",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.chain-rule"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.implicit-differentiation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.implicit-differentiation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.implicit-differentiation.md": "sha256:7eccb3ea7bd71e26e194dab2b928c32fc000b99445bb8a2fa01bc0ae04c26a45"
+      },
+      "contentHash": "sha256:16d0268a28ebde757505972defb85cefdb7ab9e27f61dc9e745d5fd14357d5a3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.implicit-differentiation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.implicit-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.implicit-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.implicit-differentiation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.implicit-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.implicit-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.implicit-differentiation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.implicit-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.implicit-differentiation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.implicit-differentiation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.implicit-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.implicit-differentiation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.implicit-differentiation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Differentiate both sides of an implicit equation in $x$ and $y$ with respect to $x$, treating $y$ as an (unspecified) function of $x$ — applying `math.calc.chain-rule` to EVERY $y$-term, since $d/dx[y^n] = n y^{n-1}\\cdot(dy/dx)$ by the chain rule with $y(x)$ as the inner function — and solve algebraically for $dy/dx$.\n- LO2: Recognize why implicit differentiation is genuinely necessary for equations that cannot be solved explicitly for $y$ as a function of $x$ in closed form (e.g. $x^3+y^3=6xy$), and successfully find $dy/dx$ directly, without ever solving for $y$ itself.\n- LO3: Correctly distinguish differentiating an $x$-term (ordinary power rule, no extra factor) from a $y$-term (chain-rule factor $dy/dx$ REQUIRED every time), and recognize that implicit differentiation remains the PREFERRED method even for equations that COULD be solved explicitly — since it avoids handling multiple branches (e.g. $\\pm$ cases) separately.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "CHAIN-RULE-FACTOR-OMITTED-ON-Y-TERMS",
+      "content": "| MC-1 | CHAIN-RULE-FACTOR-OMITTED-ON-Y-TERMS | Differentiating a y-term like y^2 as if it were an x-term, omitting the required chain-rule factor dy/dx | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "DY-DX-TERMS-NOT-COLLECTED-AND-ISOLATED",
+      "content": "| MC-2 | DY-DX-TERMS-NOT-COLLECTED-AND-ISOLATED | Leaving dy/dx terms scattered on both sides of the differentiated equation without collecting and algebraically isolating them, treating differentiation alone as the complete task | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "IMPLICIT-DIFFERENTIATION-TREATED-AS-LAST-RESORT-ONLY",
+      "content": "| MC-3 | IMPLICIT-DIFFERENTIATION-TREATED-AS-LAST-RESORT-ONLY | Believing implicit differentiation should only be used when an equation genuinely cannot be solved explicitly for y, missing that it is often the more efficient method even when explicit solving is possible | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Every y-Term Needs the Chain-Rule Factor (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Every y-Term Needs the Chain-Rule Factor (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Collecting and Solving for dy/dx (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Collecting and Solving for dy/dx (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Implicit Differentiation Beats Branch-by-Branch Work Even When Both Are Possible (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Implicit Differentiation Beats Branch-by-Branch Work Even When Both Are Possible (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find $dy/dx$ for $x^2+y^2=100$ using implicit differentiation.\n  2. Find $dy/dx$ for $x^3+y^3=9$, explicitly showing the chain-rule factor on the $y^3$ term.\n  3. Find $dy/dx$ for $xy+y^2=10$, showing the product-rule step on the $xy$ term and the full term-collection process.\n  4. Explain why implicit differentiation is used even for $x^2+y^2=100$ (problem 1), which could technically be solved explicitly for $y$ as two separate branches.\n- **P76 (Transfer Probe, mode = independence)**: \"An economist models a firm's production relationship between labor input $L$ and capital input $K$ using the implicit equation $L^{2}K + K^{2}L = 500$ (an equation that cannot be easily solved explicitly for $K$ as a function of $L$). (a) Use implicit differentiation to find $dK/dL$ directly from this equation, treating $K$ as a function of $L$. (b) Explain, in economic terms, what $dK/dL$ represents at a specific point on this relationship (how capital would need to change per unit change in labor to maintain the same production level). (c) A colleague suggests first trying to solve the equation explicitly for $K$ before differentiating, arguing this would be 'more rigorous.' Using this lesson's reasoning, explain why this suggestion is both harder (or impossible in closed form) and unnecessary.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.chain-rule` ($(f\\circ g)'(x)=f'(g(x))\\cdot g'(x)$; the outer derivative must be evaluated AT the inner function, not at $x$; the inner-derivative factor must never be omitted).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.implicit-differentiation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.implicit-differentiation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.chain-rule` (the outer-derivative/inner-derivative structure this concept applies to every y-term, and whose own inner-derivative-missing misconception directly transplants into this context as MC-1).\n- **Unlocks**: `math.calc.related-rates` (uses implicit differentiation with respect to time to relate multiple changing quantities), `math.calc.derivative-inverse-trig` (derives inverse trigonometric function derivatives via implicit differentiation of the original trig equation).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.implicit-differentiation.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

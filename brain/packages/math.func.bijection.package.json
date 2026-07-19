@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.bijection-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.bijection",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:49b922df6a21160b1be43e407e273ae7b3c2df059098cedfea23db8edb1fa8be",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.bijection.md": "sha256:6fc5832d2486e58c677d652af7356fe13492c5f2b92e486feaff2545d334e13e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.func.bijection",
+    "name": "Bijective Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.injectivity",
+      "math.func.surjectivity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.bijection-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.bijection (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.bijection.md": "sha256:6fc5832d2486e58c677d652af7356fe13492c5f2b92e486feaff2545d334e13e"
+      },
+      "contentHash": "sha256:7383dc3886aa1f155b9643b776415969b557acfc95c837cf6473a11abfa78df4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.bijection.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.bijection.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.bijection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.bijection\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.bijection.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.bijection.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.bijection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.bijection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.bijection.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.bijection.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.bijection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.bijection\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.bijection.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.bijection.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.bijection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.bijection\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.bijection/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.bijection",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a function as **bijective** exactly when it is BOTH injective (`math.func.injectivity`) AND surjective (`math.func.surjectivity`) simultaneously, and verify bijectivity by checking both properties directly, reusing each prerequisite's own established checking procedure.\n- LO2: Recognize the joint consequence of injective + surjective together — every codomain element has **EXACTLY ONE** preimage (surjectivity guarantees \"at least one,\" injectivity additionally rules out \"more than one\") — a genuinely stronger \"perfect pairing\" between domain and codomain than either property alone provides.\n- LO3: State that a function has a genuine **inverse function** if and only if it is bijective, and correctly show WHY: attempting to build an inverse for a non-injective function produces multiple outputs for some input (not a function at all), while attempting it for a non-surjective function leaves some inputs undefined (not a total function on the intended domain).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.func.bijection/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.bijection",
+      "title": "INJECTIVE-OR-SURJECTIVE-ASSUMED-SUFFICIENT-FOR-BIJECTIVE",
+      "content": "| MC-1 | INJECTIVE-OR-SURJECTIVE-ASSUMED-SUFFICIENT-FOR-BIJECTIVE | Believing injective alone (or surjective alone) is sufficient for bijectivity, or that one property automatically implies the other | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.func.bijection/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.bijection",
+      "title": "AT-LEAST-ONE-PREIMAGE-ASSUMED-SUFFICIENT-FOR-PERFECT-PAIRING",
+      "content": "| MC-2 | AT-LEAST-ONE-PREIMAGE-ASSUMED-SUFFICIENT-FOR-PERFECT-PAIRING | Believing surjectivity's \"at least one preimage per codomain element\" guarantee is enough for a perfect one-to-one correspondence, missing that bijection additionally requires \"at most one\" from injectivity | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.bijection/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.bijection",
+      "title": "INVERSE-RELATION-ASSUMED-ALWAYS-A-VALID-FUNCTION",
+      "content": "| MC-3 | INVERSE-RELATION-ASSUMED-ALWAYS-A-VALID-FUNCTION | Believing swapping a function's domain and codomain roles always produces a valid inverse function, regardless of whether the original function was bijective | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.bijection/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.bijection",
+      "title": "Checking Both Properties Together (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Checking Both Properties Together (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.func.bijection/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.bijection",
+      "title": "Neither Property Alone Is Enough (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Neither Property Alone Is Enough (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.func.bijection/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.bijection",
+      "title": "Exactly One Preimage, and Why the Inverse Construction Genuinely Fails Without Both Properties (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Exactly One Preimage, and Why the Inverse Construction Genuinely Fails Without Both Properties (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 13,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.func.bijection/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.bijection",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.func.bijection/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.bijection",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify $f:\\{1,2,3,4\\}\\to\\{w,x,y,z\\}$ with $f(1)=w,f(2)=x,f(3)=y,f(4)=z$ is bijective, checking both properties.\n  2. For $g:\\{1,2,3\\}\\to\\{p,q,r,s\\}$ with $g(1)=p,g(2)=q,g(3)=r$, determine which of injective/surjective holds and which fails, and state whether $g$ is bijective.\n  3. Construct the inverse function for problem 1's $f$, listing $f^{-1}$'s complete mapping.\n  4. Explain why attempting to construct an inverse for problem 2's $g$ would leave some codomain element's \"inverse value\" undefined, and name that element.\n- **P76 (Transfer Probe, mode = independence)**: \"A theater assigns each of its 100 numbered seats to exactly one ticket holder for a sold-out show, with every ticket holder assigned to exactly one seat and every seat assigned to exactly one ticket holder. (a) Explain why this seat-assignment function is bijective, referencing both required properties. (b) Explain what it would mean, physically, for the assignment to fail surjectivity (some seat left completely unassigned) versus failing injectivity (two ticket holders assigned to the exact same seat) — describe both failure scenarios concretely. (c) Explain why the theater could reliably use this assignment to look up 'which ticket holder is in seat 47' (i.e., use the inverse function) only because the original assignment is genuinely bijective, not merely because every seat happens to have someone in it.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.func.bijection/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.bijection",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.func.injectivity` ($f(a)=f(b)\\Rightarrow a=b$; different inputs give different outputs) and `math.func.surjectivity` (every codomain element has at least one preimage; range equals codomain).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.bijection/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.bijection",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.func.injectivity` (the \"no shared outputs\" property this concept combines with surjectivity), `math.func.surjectivity` (the \"every codomain element hit\" property this concept combines with injectivity).\n- **Unlocks**: `math.func.inverse-functions` (bijectivity is exactly the gatekeeping condition that concept's genuine inverse functions require, per LO3), `math.found.cardinality` (bijections are the standard tool for comparing the \"size\" of sets, including infinite ones).\n- **Cross-link**: KG lists `math.found.cardinality` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into cardinality comparison once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.bijection.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
