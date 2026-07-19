@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.alternating-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.alternating-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b89dd6046d792e6a90d9b8eee305666a5661518f0eeeadffee81e89795403ee8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.alternating-series.md": "sha256:df68d1bc6f686a58c8a93c5d103f8b878a11358754519c820221e4f6bc4a37ba"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.alternating-series",
+    "name": "Alternating Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.alternating-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.alternating-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.alternating-series.md": "sha256:df68d1bc6f686a58c8a93c5d103f8b878a11358754519c820221e4f6bc4a37ba"
+      },
+      "contentHash": "sha256:8c729c89c3099fc30840aa0f9082c308ff80f0cd187e0e1b30883cc617380dd2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.alternating-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.alternating-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.alternating-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.alternating-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.alternating-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.alternating-series.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.alternating-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.alternating-series\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.alternating-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.alternating-series.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.alternating-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.alternating-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.alternating-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.alternating-series.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.alternating-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.alternating-series\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.alternating-series/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.seq.alternating-series",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Leibniz alternating series test**: $\\sum(-1)^na_n$ converges if $\\{a_n\\}$ is POSITIVE, DECREASING, and tends to $0$ — recognizing this as a SPECIALIZED convergence test, distinct from `math.seq.series-convergence`'s own general partial-sum-convergence definition, tailored specifically to the alternating-sign structure.\n- LO2: Apply the test correctly by verifying ALL THREE conditions (positive, decreasing, $\\to0$) — recognizing that MISSING any one condition invalidates the test's conclusion, even if the series happens to converge for some other reason.\n- LO3 (orientation level — full error-bound derivation deferred): recognize, without full derivation, that for a CONVERGENT alternating series satisfying Leibniz's conditions, the partial sum's ERROR (difference from the true sum) is BOUNDED by the FIRST omitted term — previewing this practical error-estimation consequence without deriving it in full.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.alternating-series",
+      "title": "LEIBNIZ-TEST-ASSUMED-GENERAL-CONVERGENCE-DEFINITION",
+      "content": "| MC-1 | LEIBNIZ-TEST-ASSUMED-GENERAL-CONVERGENCE-DEFINITION | Believing the Leibniz test is simply the general partial-sum convergence definition restated, missing that it is a specialized tool for the alternating-sign structure specifically | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.alternating-series",
+      "title": "FAILED-CONDITION-ASSUMED-MERELY-INCONCLUSIVE",
+      "content": "| MC-2 | FAILED-CONDITION-ASSUMED-MERELY-INCONCLUSIVE | Believing a failed Leibniz condition only means the test is inconclusive, missing that in the \"terms not tending to zero\" failure mode, divergence is actually guaranteed | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.alternating-series",
+      "title": "ERROR-BOUND-ASSUMED-TO-NEED-MANY-EXTRA-TERMS",
+      "content": "| MC-3 | ERROR-BOUND-ASSUMED-TO-NEED-MANY-EXTRA-TERMS | Believing estimating a Leibniz-convergent series's truncation error requires computing many additional terms, missing that the single next omitted term already bounds the error | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.alternating-series",
+      "title": "The Leibniz Test Is a Specialized Tool For Alternating Series Specifically (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Leibniz Test Is a Specialized Tool For Alternating Series Specifically (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.alternating-series",
+      "title": "A Failed Condition Genuinely Signals Divergence Here, Not Just \"Test Inconclusive\" (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Failed Condition Genuinely Signals Divergence Here, Not Just \\\"Test Inconclusive\\\" (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.alternating-series",
+      "title": "The Error Bound Gives a Practical, Checkable Accuracy Estimate (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Error Bound Gives a Practical, Checkable Accuracy Estimate (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.alternating-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.alternating-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify all three Leibniz conditions for $\\sum(-1)^n\\frac{1}{n^2}$, and state the test's conclusion.\n  2. For $\\sum(-1)^n\\frac{2n}{3n+1}$, check whether the terms tend to $0$, and state what this implies about convergence.\n  3. For the convergent series $\\sum(-1)^{n+1}\\frac{1}{2^n}$, compute the partial sum through $n=3$ and identify the next omitted term as the error bound.\n  4. Explain, in one or two sentences, why the Leibniz test succeeding for an alternating series does not imply the corresponding series of absolute values also converges.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer approximates $\\pi/4$ using the alternating series $\\sum_{n=0}^\\infty\\frac{(-1)^n}{2n+1}=1-\\frac13+\\frac15-\\frac17+\\cdots$ (the Leibniz formula for $\\pi$). (a) Verify all three Leibniz conditions hold for this series. (b) If the engineer truncates after the term $\\frac{1}{9}$ (i.e., stops at $n=4$), state an upper bound on the error without computing the true value of $\\pi/4$. (c) Explain why the SAME accuracy-bounding technique would NOT apply if instead the engineer used the (divergent) series $\\sum\\frac{1}{2n+1}$ (all positive terms, no alternating sign) to try to approximate something — what specifically about the alternating structure makes the error bound available here.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.alternating-series",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.seq.series-convergence` (a series converges if its sequence of partial sums converges, with various tests for specific series types).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.seq.alternating-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.alternating-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.seq.series-convergence` (the general partial-sum convergence definition and the notion that various specialized tests exist, of which the Leibniz test is one).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.alternating-series.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

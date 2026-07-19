@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.ones-tens-hundreds-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.ones-tens-hundreds",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:69c72c976664c72c37d83cef014ee995ac06f076258b138c1345ca66db69e36d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md": "sha256:d1e8cfd1ca11dfcc4e1abc17c10cc646f94a729acc4972ca75201849f0df7593"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.ones-tens-hundreds",
+    "name": "Ones, Tens, Hundreds",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.arith.place-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.ones-tens-hundreds-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.ones-tens-hundreds (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md": "sha256:d1e8cfd1ca11dfcc4e1abc17c10cc646f94a729acc4972ca75201849f0df7593"
+      },
+      "contentHash": "sha256:19aaec24f0cc49d3daef1d1c89a41a09983ddbfdf5179f79910caeef44cd74d2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.ones-tens-hundreds.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ones-tens-hundreds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ones-tens-hundreds\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ones-tens-hundreds.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ones-tens-hundreds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ones-tens-hundreds\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ones-tens-hundreds.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ones-tens-hundreds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ones-tens-hundreds\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ones-tens-hundreds.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ones-tens-hundreds"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ones-tens-hundreds\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.ones-tens-hundreds/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify the **ones, tens, and hundreds** columns as the first three positions in `math.arith.place-value`'s own positional system, representing $10^0=1$, $10^1=10$, and $10^2=100$ respectively — recognizing these as the SAME general place-value idea, applied to its three smallest, most concrete positions.\n- LO2: Decompose a 3-digit number into its ones, tens, and hundreds parts (e.g. $347=3\\times100+4\\times10+7\\times1$), and conversely RECONSTRUCT a number from given ones/tens/hundreds counts.\n- LO3 (orientation level — full multi-digit arithmetic deferred): recognize, without full derivation, that CARRYING in addition (e.g. $8+7=15$, \"write $5$, carry $1$ ten\") is a direct consequence of the base-10 grouping — ten ones genuinely regroup into one ten, previewing how this same regrouping principle extends to tens-into-hundreds and beyond in multi-digit arithmetic.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "ONES-TENS-HUNDREDS-ASSUMED-SEPARATE-CONCEPTS",
+      "content": "| MC-1 | ONES-TENS-HUNDREDS-ASSUMED-SEPARATE-CONCEPTS | Believing ones, tens, and hundreds are three separate, unrelated concepts, missing that they are the first three instances of one general place-value pattern | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "ZERO-COLUMN-ASSUMED-OMITTABLE",
+      "content": "| MC-2 | ZERO-COLUMN-ASSUMED-OMITTABLE | Believing a column with a count of zero can be left out when reconstructing a number, missing that omitting it changes the number's actual value | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "CARRYING-ASSUMED-ARBITRARY-RULE",
+      "content": "| MC-3 | CARRYING-ASSUMED-ARBITRARY-RULE | Believing carrying in addition is an arbitrary procedural rule, missing that it is a direct, necessary consequence of ten ones genuinely equaling one ten | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Ones, Tens, Hundreds Are One Pattern's First Three Positions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Ones, Tens, Hundreds Are One Pattern's First Three Positions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Every Column's Count Must Be Accounted For, Even Zero (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Every Column's Count Must Be Accounted For, Even Zero (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Carrying Is Regrouping, Not an Arbitrary Rule (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Carrying Is Regrouping, Not an Arbitrary Rule (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Identify the ones, tens, and hundreds digit of $739$, and state each one's value as a power of $10$ times the digit.\n  2. Decompose $508$ into its hundreds/tens/ones parts, being careful with the zero.\n  3. Reconstruct the number described as \"$3$ hundreds, $0$ tens, $4$ ones,\" and explain why the zero cannot be omitted.\n  4. Add $36+29$ using explicit regrouping, showing how many ones carry into the tens column and why.\n- **P76 (Transfer Probe, mode = independence)**: \"A shopkeeper counts coins: $4$ bags of $100$ coins each, $6$ bags of $10$ coins each, and $8$ loose coins. (a) Determine the total number of coins by writing this as a 3-digit number, explicitly using the hundreds/tens/ones structure. (b) If the shopkeeper had instead counted $4$ bags of $100$, $0$ bags of $10$, and $8$ loose coins, explain why the total is NOT simply '48' and what the correct total actually is. (c) If the shopkeeper adds $7$ more loose coins to the original count (part a), explain — using the regrouping principle — what happens to the ones and tens counts, and why.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.place-value` (the general positional system, where a digit's value depends on its position, each position a power of $10$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.ones-tens-hundreds/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.ones-tens-hundreds",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.place-value` (the general positional system, of which ones/tens/hundreds are the first three concrete positions).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ones-tens-hundreds.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
