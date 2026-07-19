@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.ivp-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.ivp",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:77c3f987dd674af3bc8876b3fb07b4e39d762cb9e5247a703aec0281b9e5b8e4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.ivp.md": "sha256:19ecaec8f94f3059cc3e7b124c3d071b61018d83c95ba5c009b5f83ad551e1ec"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.ivp",
+    "name": "Initial Value Problem",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.de.ode",
+      "math.de.solution-types"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.ivp-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.ivp (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.ivp.md": "sha256:19ecaec8f94f3059cc3e7b124c3d071b61018d83c95ba5c009b5f83ad551e1ec"
+      },
+      "contentHash": "sha256:84720204a691028893485df5800c953b1b7d3bcba97447fdf9fda0a30f0d5473",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.ivp.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ivp.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ivp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ivp\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.ivp.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ivp.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ivp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ivp\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.ivp.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ivp.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ivp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ivp\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.ivp.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ivp.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ivp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ivp\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.ivp/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.ivp",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **Initial Value Problem (IVP)** as an ODE together with conditions specifying the value of the solution AND ITS DERIVATIVES at a SINGLE point (the initial point) — e.g. for a second-order ODE, both $y(x_0)$ and $y'(x_0)$ given at the SAME $x_0$ — directly extending `math.de.ode`'s own already-established general/particular solution framework.\n- LO2: Solve a complete IVP by first finding the general solution (per `math.de.ode`'s method), then using ALL the initial conditions AT THE SAME POINT to solve for every arbitrary constant simultaneously — correctly recognizing that for an $n$th-order ODE, exactly $n$ conditions (all at one point) are needed to pin down a unique particular solution.\n- LO3: Distinguish an IVP (all conditions at ONE point) from a boundary value problem (`math.de.bvp`'s own territory — conditions at TWO OR MORE distinct points) — directly refuting the misconception that \"conditions given\" always means the same solving procedure, when in fact the SAME number of conditions arranged at one point versus split across multiple points leads to genuinely different mathematical behavior (an IVP's solution, under smoothness conditions, is always guaranteed unique; a BVP's is not).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.ivp/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.ivp",
+      "title": "CONDITION-COUNT-ASSUMED-TO-DETERMINE-OUTCOME-REGARDLESS-OF-PLACEMENT",
+      "content": "| MC-1 | CONDITION-COUNT-ASSUMED-TO-DETERMINE-OUTCOME-REGARDLESS-OF-PLACEMENT | Believing the same number of conditions always leads to the same kind of solvability guarantee, regardless of whether they're placed at one point (IVP) or split across multiple points (BVP) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.de.ivp/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.ivp",
+      "title": "INITIAL-CONDITIONS-SOLVED-SEQUENTIALLY-INSTEAD-OF-SIMULTANEOUSLY",
+      "content": "| MC-2 | INITIAL-CONDITIONS-SOLVED-SEQUENTIALLY-INSTEAD-OF-SIMULTANEOUSLY | Attempting to solve for each arbitrary constant one at a time using only one condition per constant, rather than setting up and solving the full system of equations using all conditions together | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.de.ivp/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.ivp",
+      "title": "DERIVATIVE-CONDITIONS-OMITTED-FOR-HIGHER-ORDER-IVPS",
+      "content": "| MC-3 | DERIVATIVE-CONDITIONS-OMITTED-FOR-HIGHER-ORDER-IVPS | Forgetting that a higher-order IVP requires conditions on DERIVATIVES (not just the function value) at the initial point, e.g. providing only $y(x_0)$ for a second-order ODE without also providing $y'(x_0)$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.de.ivp/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ivp",
+      "title": "All Conditions at One Point, Defining the IVP (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"All Conditions at One Point, Defining the IVP (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.de.ivp/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ivp",
+      "title": "Solving the System Simultaneously (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Solving the System Simultaneously (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.de.ivp/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ivp",
+      "title": "IVP vs. BVP: Same Conditions Count, Different Placement, Different Guarantee (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"IVP vs. BVP: Same Conditions Count, Different Placement, Different Guarantee (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.de.ivp/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ivp",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.ivp/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.ivp",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Solve the IVP $y'-4y=0$, $y(0)=3$ (first-order — one condition, one constant).\n  2. Solve the IVP $y''-y=0$ (general solution $y=C_1e^x+C_2e^{-x}$) with $y(0)=2$, $y'(0)=0$.\n  3. Verify your solution to problem 2 satisfies both original conditions directly.\n  4. Explain, using Example 3's reasoning, why an IVP with $n$ conditions (for an $n$th-order ODE) is generally guaranteed a unique solution, while a BVP with the same number of conditions is not.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist models a falling object's height with the second-order ODE $y''=-9.8$ (constant gravitational acceleration), and knows the object's initial height $y(0)=100$ meters and initial velocity $y'(0)=0$ (dropped from rest). (a) Find the general solution of $y''=-9.8$ (integrate twice). (b) Set up and solve the IVP using both initial conditions, both anchored at $t=0$, to find the unique particular solution for $y(t)$. (c) Explain why this scenario is naturally modeled as an IVP (conditions at a single starting instant) rather than a BVP, and what would be different about the problem if instead the physicist knew the object's height at $t=0$ AND at some LATER time $t=5$ seconds, rather than its initial velocity.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.ivp/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.ivp",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.ode` (an ODE relates a function to its derivatives; general solution has $n$ arbitrary constants for order $n$; particular solutions fix them via conditions) and `math.de.solution-types` (the general/particular/singular solution taxonomy, and that singular solutions can exist outside the general-solution family entirely).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.ivp/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.ivp",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.ode` (the general/particular solution framework this concept's simultaneous-condition-solving directly extends), `math.de.solution-types` (the solution taxonomy, including the reminder that singular solutions can exist outside any IVP's reach if the ODE has one).\n- **Unlocks**: `math.de.existence-uniqueness` (the precise theorem guaranteeing an IVP's unique solution under smoothness conditions, previewed here informally).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ivp.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

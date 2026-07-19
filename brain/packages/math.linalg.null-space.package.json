@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.null-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.null-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0f071f18dc181c85969395241904955a191399fff7470f2dc29679adfbdc2d0b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.null-space.md": "sha256:b16ad1e5804f48743de50f4aff856b85f8e278e2cdc83db03df44eb0604d88e9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.null-space",
+    "name": "Null Space",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.subspace",
+      "math.linalg.row-echelon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.null-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.null-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.null-space.md": "sha256:b16ad1e5804f48743de50f4aff856b85f8e278e2cdc83db03df44eb0604d88e9"
+      },
+      "contentHash": "sha256:049a119e14a7874ed5116ee7ce1ee273ec80537f469fdf830a951603c69a6c20",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.null-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.null-space.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.null-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.null-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.null-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.null-space.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.null-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.null-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.null-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.null-space.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.null-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.null-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.null-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.null-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.null-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.null-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.null-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.null-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **null space** $N(A) = \\{x : Ax=0\\}$ — the set of all vectors $x$ that $A$ sends to the zero vector — and verify it is a genuine **subspace** of $\\mathbb{R}^n$ using the already-mastered 3-condition test (`math.linalg.subspace`): contains the zero vector, closed under addition, closed under scalar multiplication.\n- LO2: Find $N(A)$ concretely by row-reducing $A$ to RREF and **parameterizing the free variables** — directly reusing `math.linalg.row-echelon`'s own free/basic-variable framework — expressing the general solution as a linear combination of specific basis vectors, one per free variable.\n- LO3: Recognize the **nullity** (dimension of $N(A)$) as EXACTLY the number of free variables in $A$'s RREF, and correctly distinguish the **trivial null space** ($N(A)=\\{0\\}$ only, nullity $0$, occurring when there are NO free variables) from a genuinely **nontrivial null space** (nullity $\\ge1$) — directly refuting the misconception that the homogeneous system $Ax=0$ always has nontrivial (nonzero) solutions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.null-space",
+      "title": "HOMOGENEOUS-SYSTEM-ASSUMED-TO-ALWAYS-HAVE-NONTRIVIAL-SOLUTIONS",
+      "content": "| MC-1 | HOMOGENEOUS-SYSTEM-ASSUMED-TO-ALWAYS-HAVE-NONTRIVIAL-SOLUTIONS | Believing Ax=0 always has nonzero solutions, missing that a matrix with a pivot in every column (no free variables) has only the trivial solution x=0 | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.null-space",
+      "title": "SUBSPACE-VERIFICATION-STEP-SKIPPED-FOR-NULL-SPACE",
+      "content": "| MC-2 | SUBSPACE-VERIFICATION-STEP-SKIPPED-FOR-NULL-SPACE | Assuming N(A) is automatically a subspace without connecting this to the specific 3-condition test and the linearity of A that makes it so | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.null-space",
+      "title": "NULLITY-MISCOUNTED-FROM-RREF",
+      "content": "| MC-3 | NULLITY-MISCOUNTED-FROM-RREF | Incorrectly counting the number of free variables (hence the nullity) from a matrix's RREF, often by miscounting pivot columns | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.null-space",
+      "title": "Verifying N(A) Is a Subspace, Directly From Linearity (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Verifying N(A) Is a Subspace, Directly From Linearity (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.null-space",
+      "title": "Row-Reduce, Then Parameterize the Free Variables (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Row-Reduce, Then Parameterize the Free Variables (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.null-space",
+      "title": "Nullity Can Be Zero: The Trivial Null Space (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Nullity Can Be Zero: The Trivial Null Space (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.null-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.null-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that $x=(3,-1,1)$ satisfies $Ax=0$ for $A=\\begin{pmatrix}1&2&-1\\\\2&4&-2\\end{pmatrix}$ (i.e., confirm $x\\in N(A)$).\n  2. Find $N(A)$ for the same matrix $A$ from problem 1, by row-reducing and parameterizing the free variables, expressing your answer as a span.\n  3. Find $N(C)$ for $C=\\begin{pmatrix}2&0\\\\0&3\\end{pmatrix}$, and state whether it is trivial or nontrivial.\n  4. Explain, in your own words, why the null space of ANY matrix always contains at least the zero vector, but does not always contain anything else.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer analyzes a system of sensors described by a matrix equation $Ax=0$, where $x$ represents a combination of sensor readings that would produce a net signal of exactly zero (a 'blind spot' combination the system cannot detect). (a) Explain what it would mean, physically, if $N(A)$ turned out to be trivial (just $\\{0\\}$) for this sensor system. (b) Explain what it would mean, physically, if $N(A)$ turned out to be nontrivial (e.g. one-dimensional), in terms of the system having an actual 'blind spot' combination of sensor readings. (c) Describe, in general terms, how the engineer would find this blind-spot combination explicitly, referencing the row-reduction and free-variable procedure from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.null-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.subspace` (a subset $W$ of a vector space is a subspace iff it contains $0$ and is closed under addition and scalar multiplication) and `math.linalg.row-echelon` (RREF, pivot columns as basic variables, non-pivot columns as free variables, and parametrizing the general solution of a system with infinitely many solutions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.null-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.null-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.subspace` (the 3-condition subspace test this concept applies directly to $N(A)$), `math.linalg.row-echelon` (the RREF and free/basic-variable framework this concept's computation method directly reuses).\n- **Unlocks**: `math.linalg.rank-nullity` (the Rank-Nullity Theorem relates the nullity established here directly to the rank of $A$).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.null-space.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

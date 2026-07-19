@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.angle-pairs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.angle-pairs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ec8b3895632720bc8712f647d0f01d98e3c97610be27dfebb361e0dc450b887e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.angle-pairs.md": "sha256:90667608643b384f807ee42870f4c143c1434d160183034a8bd4eae5c4d2aed0"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.angle-pairs",
+    "name": "Angle Pairs",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.geom.angle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.angle-pairs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.angle-pairs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.angle-pairs.md": "sha256:90667608643b384f807ee42870f4c143c1434d160183034a8bd4eae5c4d2aed0"
+      },
+      "contentHash": "sha256:5428a00aad44a91ebfe8518eac64d4cf262aee82c5a1f65eb14a5d5dda594db5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-pairs.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-pairs.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-pairs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-pairs.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-pairs.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-pairs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-pairs.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-pairs.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-pairs\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-pairs.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-pairs.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-pairs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-pairs\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.angle-pairs/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **complementary** angles (two angles summing to $90°$) and **supplementary** angles (two angles summing to $180°$), and compute the missing angle in a pair given one angle's measure.\n- LO2: Identify **vertical angles** (the pair of angles directly opposite each other where two lines cross) and verify they are always EQUAL, and identify a **linear pair** (two ADJACENT angles formed on a straight line, which are always supplementary).\n- LO3: Distinguish **linear pair** from mere **supplementary**: every linear pair is supplementary, but NOT every pair of supplementary angles is a linear pair — directly refuting the misconception that \"supplementary\" and \"linear pair\" are interchangeable terms, when adjacency (sharing a vertex and a side, with no overlap) is an additional requirement for a linear pair specifically.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "SUPPLEMENTARY-CONFLATED-WITH-LINEAR-PAIR",
+      "content": "| MC-1 | SUPPLEMENTARY-CONFLATED-WITH-LINEAR-PAIR | Treating \"supplementary\" and \"linear pair\" as interchangeable terms, missing that linear pair requires the additional adjacency/straight-line configuration beyond just summing to 180° | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "VERTICAL-ANGLES-CONFUSED-WITH-ADJACENT-ANGLES",
+      "content": "| MC-2 | VERTICAL-ANGLES-CONFUSED-WITH-ADJACENT-ANGLES | Misidentifying which pair of angles formed by two intersecting lines are \"vertical\" (opposite, equal) versus \"adjacent\"/linear-pair (next to each other, supplementary) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "COMPLEMENTARY-AND-SUPPLEMENTARY-SUMS-CONFUSED",
+      "content": "| MC-3 | COMPLEMENTARY-AND-SUPPLEMENTARY-SUMS-CONFUSED | Mixing up which relationship (complementary vs. supplementary) corresponds to which target sum (90° vs. 180°) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Complementary and Supplementary: A Numerical Relationship (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Complementary and Supplementary: A Numerical Relationship (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Vertical Angles and Linear Pairs, Read Off One Diagram (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Vertical Angles and Linear Pairs, Read Off One Diagram (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Linear Pair Is Stricter Than Merely Supplementary (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Linear Pair Is Stricter Than Merely Supplementary (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. An angle measures $28°$. Find its complement and its supplement, showing both separately.\n  2. Two lines intersect, forming four angles. One angle measures $105°$. Find the measures of the other three angles, identifying which are vertical to it and which form a linear pair with it.\n  3. Give an example (described in words, no drawing required) of two supplementary angles that are NOT a linear pair.\n  4. Explain, in your own words, why every linear pair is supplementary, but not every supplementary pair is a linear pair.\n- **P76 (Transfer Probe, mode = independence)**: \"A carpenter is cutting a piece of molding to fit into a corner where two walls meet, forming an angle of $118°$ on one side of the cut. (a) If the carpenter needs the OTHER piece of molding (on the other side of the same straight cut line) to fit exactly into the remaining space to complete a straight edge, explain what angle that other piece needs, and whether this relationship is complementary, supplementary, or a linear pair specifically. (b) Now suppose the carpenter, working on an entirely different, unrelated corner elsewhere in the room, needs a separate piece cut to $62°$. Explain whether this $62°$ angle and the original $118°$ angle are supplementary, and whether they form a linear pair, justifying your answer using the adjacency requirement from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.angle` (an angle as the figure formed by two rays sharing a vertex, measured in degrees, with classifications acute/right/obtuse/straight/reflex).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.angle-pairs/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.angle-pairs",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.angle` (the angle definition and degree measurement this concept's pair relationships are built on).\n- **Unlocks**: `math.geom.parallel-lines` (the angle-pair relationships formed when a transversal crosses parallel lines directly build on vertical angles and linear pairs established here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-pairs.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
