@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.descriptive-statistics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.descriptive-statistics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4eadbe8bccc3baa98fd4f9041067fcfea918b6b4e92f74b5b9258152811c534b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.descriptive-statistics.md": "sha256:d716c191e6b48fa85a0d75250fb557be58908ad980055c81e4844f4c9bd0b50f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.stats.descriptive-statistics",
+    "name": "Descriptive Statistics",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.population-sample"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.descriptive-statistics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.descriptive-statistics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.descriptive-statistics.md": "sha256:d716c191e6b48fa85a0d75250fb557be58908ad980055c81e4844f4c9bd0b50f"
+      },
+      "contentHash": "sha256:bcd68c43bc12e5e8a24d7333aa597f5134e0b2c6e8cc78ffa0eac4a5343b4b50",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.descriptive-statistics.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.descriptive-statistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.descriptive-statistics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.descriptive-statistics.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.descriptive-statistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.descriptive-statistics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.descriptive-statistics.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.descriptive-statistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.descriptive-statistics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.descriptive-statistics/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the **mean**, **median**, and **standard deviation** of a small dataset, and correctly choose WHICH measure of center (mean vs. median) is more appropriate for a given dataset, particularly one with **outliers** or **skew**.\n- LO2: Construct and interpret a **histogram**, **boxplot**, and **scatterplot**, correctly matching each display type to the kind of data/relationship it's designed to show (distribution shape, five-number-summary spread, or two-variable relationship, respectively).\n- LO3: Correctly distinguish **descriptive** statistics (summarizing/displaying the DATA AT HAND) from **inferential** statistics (drawing conclusions about a broader POPULATION) — recognizing that descriptive statistics make NO claims beyond the specific dataset being summarized.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "MEAN-DEFAULTED-TO-WITHOUT-CHECKING-OUTLIERS",
+      "content": "| MC-1 | MEAN-DEFAULTED-TO-WITHOUT-CHECKING-OUTLIERS | Defaulting to the mean as the preferred measure of center without checking whether outliers or skew make the median more representative | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "DESCRIPTIVE-SAMPLE-STATISTIC-GENERALIZED-TO-POPULATION",
+      "content": "| MC-2 | DESCRIPTIVE-SAMPLE-STATISTIC-GENERALIZED-TO-POPULATION | Treating a descriptive statistic computed from sample/observed data as if it directly applies to the entire population, without recognizing this as an unjustified inferential leap | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "GRAPHICAL-DISPLAY-TYPE-MISMATCHED-TO-QUESTION",
+      "content": "| MC-3 | GRAPHICAL-DISPLAY-TYPE-MISMATCHED-TO-QUESTION | Choosing an inappropriate graphical display for the question at hand (e.g. a histogram to show a two-variable relationship, or a scatterplot to show single-variable distribution shape) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Computing Mean/Median/SD, and Constructing Displays (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing Mean/Median/SD, and Constructing Displays (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Descriptive vs. Inferential, and Outlier Sensitivity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Descriptive vs. Inferential, and Outlier Sensitivity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the mean and median for the dataset: 12, 15, 14, 13, 60. Explain which is more representative of \"typical,\" and why.\n  2. A city planner wants to see whether commute time relates to distance from downtown, using data from 100 residents. Identify which graphical display (histogram, boxplot, or scatterplot) is the appropriate tool, and explain why.\n  3. A dataset of 200 exam scores is summarized as \"mean = 78, standard deviation = 6.\" State what this pair of numbers tells you, and explain why a histogram would give ADDITIONAL information (like shape/skew) that these two numbers alone don't capture.\n  4. A poll of 40 shoppers at one store finds 25 prefer brand A. A student concludes \"most shoppers everywhere prefer brand A.\" Explain the specific overreach in this conclusion, distinguishing the descriptive fact from the inferential claim.\n- **P76 (Transfer Probe, mode = independence)**: \"A hospital records the wait times (in minutes) of 30 patients on a particular day: mostly clustered between 10-20 minutes, but three patients waited over 90 minutes due to emergencies bumping their appointments. (a) Explain, using this lesson's outlier-sensitivity distinction, why the MEDIAN wait time would give patients a more representative sense of 'typical' wait than the MEAN. (b) The hospital wants to visually compare this day's wait-time distribution against a previous month's data — identify which graphical display would best support this comparison, and explain why. (c) A hospital administrator states 'so all patients at this hospital typically wait around [the median] minutes' — using this lesson's descriptive-vs-inferential distinction, explain what additional claim this statement makes beyond what the single day's data alone supports.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.population-sample` (the population/sample distinction, and the general framing that sample data is used to learn about a population — descriptive statistics operate on whichever data is directly at hand, without yet making the inferential leap).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.stats.descriptive-statistics/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.descriptive-statistics",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.population-sample` (the population/sample framing this concept's data-summarization methods operate within, without yet making inferential claims).\n- **Unlocks**: `math.stats.sampling` (formal sampling methodology, building toward the inferential machinery this concept explicitly does NOT yet provide).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.descriptive-statistics.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

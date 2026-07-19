@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.radicals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.radicals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3d7f44af544e00da51f455ed04061f669ab1855ebfabccea56eca551a4a02668",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.radicals.md": "sha256:6fce50c73e70d184097f99d54bfd23cf15dd335210e84587f3229532c9721245"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.radicals",
+    "name": "Radical Expressions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.arith.square-roots",
+      "math.alg.exponent-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.radicals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.radicals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.radicals.md": "sha256:6fce50c73e70d184097f99d54bfd23cf15dd335210e84587f3229532c9721245"
+      },
+      "contentHash": "sha256:c3bd528dbc54f6e99bc4c022804e2c50ccb8c8718f77f28ac76763985685bb93",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.radicals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.radicals.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.radicals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.radicals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.radicals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.radicals.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.radicals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.radicals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.radicals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.radicals.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.radicals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.radicals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.radicals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.radicals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Simplify a radical expression $\\sqrt[n]{a}$ by **extracting perfect $n$-th powers** from under the radical (e.g. $\\sqrt{72}=\\sqrt{36\\times2}=6\\sqrt2$), using the product rule $\\sqrt[n]{xy}=\\sqrt[n]{x}\\sqrt[n]{y}$.\n- LO2: **Rationalize denominators** containing a radical — both the simple case (multiply by the same radical over itself) and the **binomial** case (multiply by the conjugate, using the difference-of-squares identity to eliminate the radical).\n- LO3: Correctly combine \"like radicals\" (same index AND same radicand) via addition/subtraction, and correctly recognize when two radical terms are NOT like radicals (different radicands or different indices) and therefore CANNOT be combined, even if they look superficially similar.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.radicals",
+      "title": "UNLIKE-RADICALS-COMBINED-INCORRECTLY",
+      "content": "| MC-1 | UNLIKE-RADICALS-COMBINED-INCORRECTLY | Attempting to combine radical terms with different radicands or different indices, treating any two radical expressions as automatically combinable | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.radicals",
+      "title": "RATIONALIZATION-SKIPPED-FOR-BINOMIAL-DENOMINATOR",
+      "content": "| MC-2 | RATIONALIZATION-SKIPPED-FOR-BINOMIAL-DENOMINATOR | When the denominator is a binomial containing a radical (e.g. $3+\\sqrt2$), multiplying by the SAME radical alone (as with a simple radical denominator) rather than by the conjugate, failing to eliminate the radical | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.radicals",
+      "title": "PERFECT-POWER-FACTOR-NOT-FULLY-EXTRACTED",
+      "content": "| MC-3 | PERFECT-POWER-FACTOR-NOT-FULLY-EXTRACTED | Extracting SOME perfect-power factor from a radicand but not the LARGEST one, leaving an incompletely simplified radical (e.g. simplifying $\\sqrt{72}$ to $2\\sqrt{18}$ instead of fully to $6\\sqrt2$) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.radicals",
+      "title": "Extracting Perfect Powers, via Visual Factor Trees (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Extracting Perfect Powers, via Visual Factor Trees (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.radicals",
+      "title": "Like Radicals Require BOTH Matching Index and Radicand (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Like Radicals Require BOTH Matching Index and Radicand (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.radicals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.radicals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Simplify $\\sqrt{500}$ and $\\sqrt[3]{128}$ by extracting perfect powers.\n  2. Rationalize $\\frac{7}{\\sqrt5}$.\n  3. Rationalize $\\frac{3}{4+\\sqrt2}$ using the conjugate technique.\n  4. Simplify $2\\sqrt5+3\\sqrt{20}-\\sqrt5$ (hint: one term needs simplifying via perfect-power extraction BEFORE checking which terms can combine).\n- **P76 (Transfer Probe, mode = independence)**: \"An architect calculating a structural diagonal brace length arrives at the expression $\\frac{10}{\\sqrt3+1}$ meters, and separately, a total material-length calculation adds together $2\\sqrt{18}$ meters and $3\\sqrt2$ meters of two different brace segments. (a) Rationalize the architect's first expression to remove the radical from the denominator, expressing the final answer in simplified form. (b) For the material-length sum, first simplify $2\\sqrt{18}$ by extracting its perfect-square factor, THEN determine whether it can now be combined with the $3\\sqrt2$ term, and compute the final simplified total length.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.radicals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.square-roots` (the square root, its nonnegative-output convention, and the extension to $n$-th roots) and `math.alg.exponent-rules` (rational/fractional exponents, which radicals directly restate: $\\sqrt[n]{a}=a^{1/n}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.alg.radicals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.radicals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.square-roots` (the square root and its extension to $n$-th roots), `math.alg.exponent-rules` (rational exponents, directly equivalent to radical notation).\n- **Unlocks**: `math.alg.radical-equations` (solving equations containing radicals builds directly on simplification fluency here), `math.alg.fractional-exponent` (the direct notational equivalence $\\sqrt[n]{a}=a^{1/n}$, building on this concept's radical manipulation skills).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radicals.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
