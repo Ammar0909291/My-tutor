@@ -1759,11 +1759,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, callLessonInit, startRevision])
 
   // Show a confirmation dialog before switching to any lesson (P0 UX).
-  // Locked lessons are silently rejected — the UI should never offer them.
+  // Free navigation: the Lesson Navigation Panel's Previous/Next buttons and
+  // the Learning Roadmap tree are no longer lock-gated in the UI (lock state
+  // is informational only, shown as a badge) — this function is the single
+  // shared switch path both call, so it must not silently reject a locked
+  // target anymore either. Previously it did (`if (state.isLocked) return`),
+  // which meant a button could be clickable while still doing nothing —
+  // exactly the "still locked" symptom this was fixed for.
   const requestLessonSwitch = useCallback((target: CurriculumLesson) => {
     const ctx = { progress: curriculumProgress, topicProgressMap, availableTopicSlugs }
     const state = computeLessonLockState(target, ctx)
-    if (state.isLocked) return
     const isRestart = target.order === curriculumProgress.currentLesson
     const isReview = !isRestart && (state.isCompleted || state.isMastered)
     setLessonSwitchDialog({ target, isReview, isRestart })
@@ -3213,13 +3218,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           <div key={lesson.order} style={{ marginBottom: 2 }}>
                             <div
                               onClick={() => {
-                                if (isLocked && lesson.topicSlug) {
-                                  setExpandedLockedTopic((prev) => prev === lesson.topicSlug ? null : lesson.topicSlug!)
-                                } else if (isCurrent) {
-                                  requestLessonSwitch(lesson)
-                                } else if (canNavigate) {
-                                  requestLessonSwitch(lesson)
-                                }
+                                // Free navigation: every lesson is switchable now
+                                // (requestLessonSwitch no longer rejects locked
+                                // targets — see its own comment). A locked row's
+                                // "why is this locked" detail is still available
+                                // via its dedicated info affordance below, not
+                                // gated behind the primary click anymore.
+                                requestLessonSwitch(lesson)
                               }}
                               style={{
                                 display: 'flex', alignItems: 'flex-start', gap: 6,
@@ -3334,10 +3339,22 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                       {t('skip_resume')}
                                     </button>
                                   )}
-                                  {isLocked && (
-                                    <span style={{ fontSize: 9, color: 'var(--text-dim)' }}>
+                                  {isLocked && lesson.topicSlug && (
+                                    <button
+                                      onClick={(e) => {
+                                        // Independent of the row's own onClick (now
+                                        // always navigates, see above) — this needs
+                                        // its own handler so "why is this locked"
+                                        // stays reachable without blocking navigation.
+                                        e.stopPropagation()
+                                        setExpandedLockedTopic((prev) => prev === lesson.topicSlug ? null : lesson.topicSlug!)
+                                      }}
+                                      style={{
+                                        fontSize: 9, color: 'var(--text-dim)', background: 'transparent',
+                                        border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit',
+                                      }}>
                                       {t('kg_prereqs_needed')} {isLockExpanded ? '▲' : '▼'}
-                                    </span>
+                                    </button>
                                   )}
                                 </div>
                               </div>
