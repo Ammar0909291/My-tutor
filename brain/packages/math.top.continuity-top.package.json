@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.continuity-top-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.continuity-top",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f3d5de37b916d998005eee678ea33d33b7b9c8fd37867d65090532d8edaf64d0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.continuity-top.md": "sha256:8bedc3073544aaf610921539407111e41af75c28370729993e7dc0dee0f7525e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.continuity-top",
+    "name": "Continuity (Topology)",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.continuity-top-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.continuity-top (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.continuity-top.md": "sha256:8bedc3073544aaf610921539407111e41af75c28370729993e7dc0dee0f7525e"
+      },
+      "contentHash": "sha256:bd2229264a4df1291a6465fbf4e56fc0bacdff78bfe2abfa8e398d718c470752",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.continuity-top.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.continuity-top.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.continuity-top"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.continuity-top\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.continuity-top.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.continuity-top.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.continuity-top"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.continuity-top\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.continuity-top.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.continuity-top.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.continuity-top"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.continuity-top\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.continuity-top.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.continuity-top.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.continuity-top"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.continuity-top\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.continuity-top/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.continuity-top",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $f:X\\to Y$ (between topological spaces) as **continuous** iff $f^{-1}(V)$ is open in $X$ for **every** open $V$ in $Y$ — carefully identifying that the condition is stated on the **preimage** of open sets, not the forward image, directly refuting the misconception that continuity means open sets map forward to open sets.\n- LO2: Verify that, for metric spaces specifically, this open-set definition is **equivalent** to the already-known ε-δ definition (`math.real.continuity-rigorous`) — recognizing the open-set definition as the more general formulation, valid even when no metric (hence no ε or δ) is available at all.\n- LO3: State and apply two structural consequences: **composition of continuous maps is continuous**, and **continuity is a topological property** (preserved under relabeling via a homeomorphism, and expressible without reference to any particular metric) — previewing `math.top.homeomorphism`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.continuity-top",
+      "title": "CONTINUITY-DEFINITION-DIRECTION-REVERSED",
+      "content": "| MC-1 | CONTINUITY-DEFINITION-DIRECTION-REVERSED | Believing continuity requires open sets to map FORWARD to open sets, rather than correctly requiring preimages of open sets to be open | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.continuity-top",
+      "title": "OPEN-SET-DEFINITION-TREATED-AS-MERE-REPHRASING",
+      "content": "| MC-2 | OPEN-SET-DEFINITION-TREATED-AS-MERE-REPHRASING | Treating the open-set definition as just a stylistic alternative to ε-δ with no independent value, missing that it is the only available definition in spaces lacking a metric | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.continuity-top",
+      "title": "COMPOSITION-CONTINUITY-RE-DERIVED-FROM-SCRATCH",
+      "content": "| MC-3 | COMPOSITION-CONTINUITY-RE-DERIVED-FROM-SCRATCH | Failing to invoke the composition rule directly, instead attempting to re-verify continuity of a composite function via ε-δ or preimages from first principles every time | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.continuity-top",
+      "title": "Continuity Runs on Preimages, Not Forward Images (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Continuity Runs on Preimages, Not Forward Images (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.continuity-top",
+      "title": "The Open-Set Definition Generalizes ε-δ, Doesn't Replace It (Primitive P03: Analogy Bridge)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Open-Set Definition Generalizes ε-δ, Doesn't Replace It (Primitive P03: Analogy Bridge)\",\"primitives\":[\"P03\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.continuity-top",
+      "title": "Composition and Topological Invariance (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composition and Topological Invariance (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.continuity-top",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.continuity-top",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Using the preimage definition, verify that $f(x)=3x$ is continuous by checking $f^{-1}((a,b))$ is open for a generic open interval $(a,b)$.\n  2. Give an example (it may reuse Example 1's constant function or invent a new one) of a continuous function that sends some open set forward to a non-open set, and explain why this does NOT contradict the definition of continuity.\n  3. Using `math.real.continuity-rigorous`'s ε-δ definition and this concept's open-set definition side by side, explain in your own words why they agree for metric spaces, referencing the open-ball-to-preimage translation from Example 2.\n  4. If $f$ and $g$ are both continuous, explain why you do not need to re-derive continuity of $g\\circ f$ from scratch, citing the composition rule directly.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.real.continuity-rigorous`)**: \"Recall from your `math.real.continuity-rigorous` lesson the ε-δ proof that $f(x)=3x-2$ is continuous at $a=5$, using $\\delta=\\varepsilon/3$. (a) Translate this into the open-set language of THIS lesson: for the open interval $V=(f(5)-\\varepsilon,f(5)+\\varepsilon)$, compute $f^{-1}(V)$ explicitly and confirm it matches the interval $(5-\\delta,5+\\delta)$ with $\\delta=\\varepsilon/3$ from that lesson. (b) That lesson emphasized that δ must be PRODUCED IN RESPONSE TO an arbitrary given ε, never chosen first — explain how this same logical order (arbitrary $V$ first, then find the matching open preimage) is built directly into THIS lesson's 'for every open $V$' phrasing. (c) Explain why, unlike that lesson's ε-δ definition, THIS lesson's open-set definition could in principle be applied to a space where 'distance' isn't even defined — using the topological-property idea from Component 3.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.continuity-top",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (a topology $\\tau$ on $X$ is a declared collection of \"open\" subsets satisfying the three closure axioms, and openness is relative to the chosen topology, never absolute) — this concept's continuity definition quantifies directly over $\\tau$'s declared open sets.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.continuity-top/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.continuity-top",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (the declared-open-sets framework, and the \"openness is relative, never absolute\" principle this concept's definition directly quantifies over).\n- **Unlocks**: `math.top.homeomorphism` (a homeomorphism is a continuous bijection with continuous inverse — directly building on, and named as, \"continuity is a topological property\" here).\n- **Cross-link**: KG lists `math.real.continuity-rigorous` as a cross-link — **verified authored** via `ls docs/curriculum/blueprints/math.real.continuity-rigorous.md` — so P76_mode = **cross-link probe**, directly reusing that blueprint's own $f(x)=3x-2$ at $a=5$ worked example as the transfer probe's anchor, per this corpus's established cross-link-probe convention.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.continuity-top.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

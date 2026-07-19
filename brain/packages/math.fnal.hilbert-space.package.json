@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.hilbert-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.hilbert-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0e955f843736c7869b6df255c11711f52dcd3fdb75e5b6868cae1c41b55d6b61",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.hilbert-space.md": "sha256:53b410764d6e3ab8779c597e3385559dceb1d9ed37f77015f1f26cef6081f8f6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.hilbert-space",
+    "name": "Hilbert Space",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.linalg.inner-product-space",
+      "math.fnal.banach-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.hilbert-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.hilbert-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.hilbert-space.md": "sha256:53b410764d6e3ab8779c597e3385559dceb1d9ed37f77015f1f26cef6081f8f6"
+      },
+      "contentHash": "sha256:71efad05e9a51167928473ecde0752a81213ea6f0a86d943909c7da422ca616d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.hilbert-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.hilbert-space.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.hilbert-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.hilbert-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.hilbert-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.hilbert-space.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.hilbert-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.hilbert-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.hilbert-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.hilbert-space.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.hilbert-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.hilbert-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.hilbert-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.hilbert-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.hilbert-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.hilbert-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.hilbert-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **Hilbert space** as exactly a **complete inner product space** — an inner product space $(V,\\langle\\cdot,\\cdot\\rangle)$ that is complete with respect to the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ the inner product induces — recognizing this as a direct combination of `math.linalg.inner-product-space` and completeness, exactly parallel to how `math.fnal.banach-space` combined normed-space-ness with completeness.\n- LO2: State the **Projection Theorem** (every closed convex subset of a Hilbert space has a unique nearest point to any given vector) at an orientation level, and recognize its role as the geometric heart of Hilbert space theory — the reason \"angle\" and \"distance\" reasoning from ordinary Euclidean geometry extends validly to infinite dimensions.\n- LO3: Recognize that **every Hilbert space is a Banach space** (since an inner product always induces a norm, and completeness carries over directly), but that the converse is **false** — not every Banach space's norm comes from an inner product — directly refuting the misconception that \"Hilbert space\" and \"Banach space\" are interchangeable labels for the same class of spaces.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "HILBERT-AND-BANACH-TREATED-AS-SYNONYMOUS",
+      "content": "| MC-1 | HILBERT-AND-BANACH-TREATED-AS-SYNONYMOUS | Assuming \"Hilbert space\" and \"Banach space\" refer to the same class of spaces, rather than recognizing Hilbert as the strictly smaller subclass whose norm specifically arises from an inner product | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "PROJECTION-THEOREM-UNIQUENESS-OVERLOOKED",
+      "content": "| MC-2 | PROJECTION-THEOREM-UNIQUENESS-OVERLOOKED | Recalling only that a nearest point EXISTS in the Projection Theorem, without recognizing uniqueness is an equally essential part of the guarantee | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "ALL-NORMS-ASSUMED-TO-ARISE-FROM-AN-INNER-PRODUCT",
+      "content": "| MC-3 | ALL-NORMS-ASSUMED-TO-ARISE-FROM-AN-INNER-PRODUCT | Assuming any norm on a vector space can be written as $\\sqrt{\\langle v,v\\rangle}$ for some inner product, rather than recognizing this as a special property some norms (like the sup-norm) provably lack | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Hilbert Space as a Direct Combination (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Hilbert Space as a Direct Combination (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "The Projection Theorem as Geometric Intuition, Rigorously Extended (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Projection Theorem as Geometric Intuition, Rigorously Extended (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Hilbert Is Strictly Smaller Than Banach (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Hilbert Is Strictly Smaller Than Banach (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the definition of a Hilbert space using only terms already defined in `math.linalg.inner-product-space` and `math.fnal.completeness` — no new symbols.\n  2. Explain why $\\mathbb{R}^n$ with the dot product is automatically both a Hilbert space and a Banach space, citing the specific implication (induced norm) that makes this automatic.\n  3. In your own words, describe what the Projection Theorem guarantees, using the plane-in-$\\mathbb{R}^3$ example, and explain why \"uniqueness\" of the nearest point is part of the guarantee, not just \"existence.\"\n  4. Explain why $(C([0,1]),\\|\\cdot\\|_\\infty)$ being a Banach space does NOT automatically make it a Hilbert space, referencing the fact that not every norm arises from an inner product.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.linalg.inner-product` — KG also lists `math.meas.l2-space` as a cross-link, but that concept is not yet authored; a future revision may add a second cross-link probe into the general $L^2$ function-space framework once that entry exists)**: \"Recall from your `math.linalg.inner-product` lesson that an inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to F$ is a positive-definite (real) symmetric or (complex) sesquilinear form, and that it induces a norm via $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. (a) Using that lesson's induced-norm formula together with THIS lesson's completeness requirement, explain precisely what additional condition an inner product space must satisfy to qualify as a Hilbert space. (b) That lesson stated the Cauchy-Schwarz inequality $|\\langle u,v\\rangle|\\le\\|u\\|\\|v\\|$ — explain why this inequality remains valid and useful in a Hilbert space specifically (not just in a general inner product space), given that Hilbert spaces are inner product spaces with one extra property layered on top. (c) Explain why every concrete example of an inner product space you worked with in that lesson (finite-dimensional, using the dot product or a weighted variant) was automatically a Hilbert space, connecting this to the general fact that all finite-dimensional inner product spaces are complete.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.inner-product-space` (a vector space equipped with an inner product $\\langle\\cdot,\\cdot\\rangle$, the Cauchy-Schwarz inequality, and the induced norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$) and `math.fnal.banach-space` (a complete normed vector space, and why completeness is load-bearing for functional analysis).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.hilbert-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.hilbert-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.inner-product-space` (the inner product and induced norm this concept adds completeness to), `math.fnal.banach-space` (the completeness property and the Hilbert-implies-Banach relationship this concept establishes).\n- **Unlocks**: `math.fnal.spectral-theory`, `math.fnal.riesz-representation` (the Riesz Representation Theorem, named directly in the KG description, is a major Hilbert-space-specific result).\n- **Cross-link**: KG lists two cross-links, of **mixed authored status**: `math.linalg.inner-product` is **authored** (verified via `ls`) — P76_mode = cross-link probe against it, directly reusing that blueprint's own inner-product/induced-norm/Cauchy-Schwarz content as the transfer probe's anchor. `math.meas.l2-space` is **not yet authored** — per this corpus's established mixed-cross-link-status convention, the probe engages only the authored target, with this note flagging the unauthored one for a future revision.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.hilbert-space.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
