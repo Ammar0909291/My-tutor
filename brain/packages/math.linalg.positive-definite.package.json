@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.positive-definite-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.positive-definite",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2fe266e084a99ec3537d47d155a4e1f4ee31a8b0c3cf4848f87f62ad5e33bff2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.positive-definite.md": "sha256:dd14d65c494549f2837c6dfdd45e80d038fa03e17eaac4ce4a9a02b19f942856"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.positive-definite",
+    "name": "Positive Definite Matrix",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.spectral-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.positive-definite-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.positive-definite (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.positive-definite.md": "sha256:dd14d65c494549f2837c6dfdd45e80d038fa03e17eaac4ce4a9a02b19f942856"
+      },
+      "contentHash": "sha256:68d14fef0fcb1baee32bb91da238e7b1aba09f16bbb902cbe0a0827024a03c01",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.positive-definite.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.positive-definite.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.positive-definite"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.positive-definite\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.positive-definite.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.positive-definite.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.positive-definite"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.positive-definite\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.positive-definite.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.positive-definite.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.positive-definite"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.positive-definite\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.positive-definite.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.positive-definite.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.positive-definite"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.positive-definite\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.positive-definite/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a symmetric matrix $A$ as **positive definite** via the quadratic-form condition $v^TAv>0$ for every nonzero vector $v$, and analyze what this condition means geometrically (the quadratic form never dips to zero or negative, except trivially at $v=0$).\n- LO2: Use the **eigenvalue characterization** — $A$ is positive definite iff EVERY eigenvalue is (strictly) positive — as the most practically usable test, directly reusing `math.linalg.spectral-theorem`'s factorization $A=Q\\Lambda Q^T$ to show why this equivalence holds.\n- LO3: Apply **Sylvester's criterion** (all leading principal minors are positive) as a THIRD equivalent test, and distinguish **positive semi-definite** (PSD: $v^TAv\\ge0$, allowing equality) from positive definite (strict inequality) — directly refuting the misconception that these two conditions are interchangeable, since a PSD matrix can have a zero eigenvalue where a genuinely positive-definite matrix cannot.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "POSITIVE-DEFINITE-AND-PSD-TREATED-AS-INTERCHANGEABLE",
+      "content": "| MC-1 | POSITIVE-DEFINITE-AND-PSD-TREATED-AS-INTERCHANGEABLE | Believing positive definite and positive semi-definite are the same condition, missing that a zero eigenvalue distinguishes them exactly at the strict/non-strict boundary | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "POSITIVE-DEFINITENESS-CHECKED-ON-NON-SYMMETRIC-MATRIX",
+      "content": "| MC-2 | POSITIVE-DEFINITENESS-CHECKED-ON-NON-SYMMETRIC-MATRIX | Attempting to apply the positive-definiteness eigenvalue test to a non-symmetric matrix, missing that the Spectral Theorem (and hence the entire eigenvalue-based equivalence) only applies to symmetric matrices | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "ONE-EIGENVALUE-CHECKED-INSTEAD-OF-ALL",
+      "content": "| MC-3 | ONE-EIGENVALUE-CHECKED-INSTEAD-OF-ALL | Concluding a matrix is positive definite after verifying only one or a few eigenvalues are positive, rather than confirming EVERY eigenvalue is positive | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "The Quadratic Form Condition, Verified Directly (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Quadratic Form Condition, Verified Directly (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "Deriving the Eigenvalue Test From the Spectral Theorem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deriving the Eigenvalue Test From the Spectral Theorem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "PSD vs. Positive Definite: The Zero-Eigenvalue Boundary (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"PSD vs. Positive Definite: The Zero-Eigenvalue Boundary (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify directly (via the quadratic form) that $A=\\begin{pmatrix}4&0\\\\0&1\\end{pmatrix}$ is positive definite.\n  2. Find the eigenvalues of $A=\\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$ and use the eigenvalue test to determine whether it is positive definite.\n  3. Determine whether $A=\\begin{pmatrix}2&2\\\\2&2\\end{pmatrix}$ is positive definite, positive semi-definite, or neither, finding its eigenvalues explicitly and identifying a specific nonzero $v$ where the quadratic form is zero (if applicable).\n  4. Using Sylvester's criterion (leading principal minors), verify whether $A=\\begin{pmatrix}2&1\\\\1&5\\end{pmatrix}$ is positive definite, showing both minors explicitly.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.opt.convex-function` is not yet authored; a future revision may add a genuine cross-link probe into the convexity-Hessian connection once that entry exists)**: \"An optimization algorithm checks the Hessian matrix $H$ (second-derivative matrix, guaranteed symmetric per `math.linalg.symmetric-matrix`'s own Hessian example) at a candidate point to determine whether it's a local minimum. (a) Explain, using the eigenvalue test, what condition on $H$'s eigenvalues would confirm the point is a genuine local minimum (rather than a maximum or saddle point). (b) If the algorithm instead finds $H$ has all eigenvalues $\\ge0$ but with one eigenvalue exactly zero, explain what this tells the algorithm about the point — is it definitely a strict local minimum, or is more information needed? (c) Explain why checking Sylvester's criterion (leading principal minors) might be computationally preferable to finding all of $H$'s eigenvalues explicitly, for a large Hessian matrix.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.spectral-theorem` (every symmetric matrix factors as $A=Q\\Lambda Q^T$ with $Q$ orthogonal and $\\Lambda$ the real diagonal matrix of eigenvalues).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.positive-definite/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.positive-definite",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.spectral-theorem` (the factorization $A=Q\\Lambda Q^T$ this concept's eigenvalue characterization is directly derived from).\n- **Unlocks**: `math.linalg.cholesky` (the Cholesky decomposition exists precisely for positive definite matrices).\n- **Cross-link**: KG lists `math.opt.convex-function` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.opt.convex-function.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the convexity-Hessian connection (a function is convex iff its Hessian is PSD everywhere) once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.positive-definite.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

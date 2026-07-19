@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.simple-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.simple-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:60e8aae72ca49c284deed760269f1aa885ef0719a6f9067d25093063addca213",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.simple-function.md": "sha256:302ce74a99d3e41648da00f9112378bc43c50ed468d04107586abc2e32ab72fc"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.meas.simple-function",
+    "name": "Simple Function",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.meas.measurable-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.simple-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.simple-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.simple-function.md": "sha256:302ce74a99d3e41648da00f9112378bc43c50ed468d04107586abc2e32ab72fc"
+      },
+      "contentHash": "sha256:b7abe32781386dd357911102a4b8019da0ebd73ca795befbf0c5d5160b63e106",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.simple-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.simple-function.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.simple-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.simple-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.simple-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.simple-function.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.simple-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.simple-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.simple-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.simple-function.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.simple-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.simple-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.simple-function.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.simple-function.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.simple-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.simple-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.simple-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.simple-function",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **simple function** $\\varphi = \\sum_{i=1}^n a_i\\mathbb{1}_{E_i}$ — a FINITE linear combination of indicator functions of measurable sets $E_i$ — and verify a given function is simple by identifying its finite range of values and the corresponding measurable \"level sets\" where each value is attained.\n- LO2: Compute the integral of a simple function DIRECTLY as the finite sum $\\int\\varphi\\,d\\mu = \\sum_i a_i\\mu(E_i)$ — no limiting process required — and correctly refuting the misconception that integrating even a simple function requires the full machinery of a limit, when in fact the finite-sum formula is exact and immediate.\n- LO3: State the **monotone approximation** theorem (every non-negative measurable function is the limit of an increasing sequence of simple functions) at a level sufficient to construct a SPECIFIC approximating sequence for a given function, recognizing simple functions as the essential building blocks the general Lebesgue integral is built from.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.simple-function",
+      "title": "SIMPLE-FUNCTION-INTEGRAL-ASSUMED-TO-NEED-A-LIMIT",
+      "content": "| MC-1 | SIMPLE-FUNCTION-INTEGRAL-ASSUMED-TO-NEED-A-LIMIT | Believing integrating a simple function requires a limiting process like the general Lebesgue integral, missing that the finite-sum formula is exact and immediate | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.simple-function",
+      "title": "SIMPLE-FUNCTION-VALUES-OR-LEVEL-SETS-MISIDENTIFIED",
+      "content": "| MC-2 | SIMPLE-FUNCTION-VALUES-OR-LEVEL-SETS-MISIDENTIFIED | Incorrectly identifying the distinct values a simple function takes, or misidentifying the measurable set where each value is attained (e.g. using the wrong interval boundaries) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.simple-function",
+      "title": "MONOTONE-APPROXIMATION-TREATED-AS-PURELY-ABSTRACT",
+      "content": "| MC-3 | MONOTONE-APPROXIMATION-TREATED-AS-PURELY-ABSTRACT | Accepting the monotone approximation theorem as an abstract existence claim without being able to construct or reason about a specific approximating sequence for a given function | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.simple-function",
+      "title": "Simple Functions as Finite Combinations of Indicators (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Simple Functions as Finite Combinations of Indicators (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.simple-function",
+      "title": "Integrating a Simple Function Is Just a Finite Sum (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Integrating a Simple Function Is Just a Finite Sum (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.simple-function",
+      "title": "Monotone Approximation, Made Concrete (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Monotone Approximation, Made Concrete (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.simple-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.simple-function",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that $\\psi(x) = 3$ for $x\\in[0,2)$, $\\psi(x)=-1$ for $x\\in[2,5]$ is a simple function, writing it explicitly in indicator-sum form.\n  2. Compute $\\int\\psi\\,d\\mu$ for the function in problem 1, using Lebesgue measure.\n  3. Construct the simple function $\\varphi_3$ (using 3 equal sub-intervals) approximating $f(x)=x$ on $[0,3]$ from below (using the infimum on each sub-interval), and compute $\\int\\varphi_3\\,d\\mu$.\n  4. Explain, in your own words, why the general Lebesgue integral is DEFINED in terms of simple-function integrals (via the monotone approximation theorem), rather than being defined some other way from scratch.\n- **P76 (Transfer Probe, mode = independence)**: \"A data analyst represents a histogram of measured data — a step function taking a few distinct 'bucket heights' over disjoint intervals of the measurement range — and wants to compute its total 'area' (analogous to a probability mass or total count, depending on context). (a) Explain why this histogram is precisely a simple function in the sense of this lesson. (b) Compute (in general symbolic terms, using bucket heights $a_i$ and bucket widths $\\mu(E_i)$) the formula for this histogram's total area, connecting it directly to this lesson's integral formula. (c) If the analyst instead had continuous, smoothly-varying data (not naturally step-shaped), explain how the monotone approximation idea from Example 3 would let them still compute a meaningful 'total area' by approximating the smooth data with increasingly fine step functions.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.simple-function",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.measurable-function` (a function is measurable iff preimages of measurable sets are measurable, and the Borel-measurability test via open sets).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.simple-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.simple-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.measurable-function` (the measurability condition each level set $E_i$ in a simple function's definition must satisfy).\n- **Unlocks**: `math.meas.lebesgue-integral` (defined directly via the monotone approximation of a general measurable function by simple functions, whose integrals this concept establishes as easy, exact finite sums).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.simple-function.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
