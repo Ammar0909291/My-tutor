@@ -32,14 +32,18 @@ export async function GET() {
   const session = await auth();
   if (!session?.user?.id) return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
 
-  const sessions = await prisma.learnSession.findMany({
-    where: { userId: session.user.id },
-    orderBy: { startedAt: "desc" },
-    take: 20,
-    include: { subject: { select: { name: true, slug: true } }, messages: { orderBy: { createdAt: "desc" }, take: 1 } },
-  });
+  try {
+    const sessions = await withTimeout(prisma.learnSession.findMany({
+      where: { userId: session.user.id },
+      orderBy: { startedAt: "desc" },
+      take: 20,
+      include: { subject: { select: { name: true, slug: true } }, messages: { orderBy: { createdAt: "desc" }, take: 1 } },
+    }), SESSION_DB_TIMEOUT_MS, 'sessions-list')
 
-  return NextResponse.json({ success: true, data: sessions });
+    return NextResponse.json({ success: true, data: sessions });
+  } catch {
+    return NextResponse.json({ success: false, error: 'Failed to load sessions' }, { status: 500 })
+  }
 }
 
 export async function POST(req: Request) {

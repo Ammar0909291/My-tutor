@@ -4,18 +4,15 @@
   "installCommand": "npm install",
   "regions": ["sin1"],
   "functions": {
-    "src/app/api/learn/chat/route.ts":          { "maxDuration": 60 },
-    "src/app/api/learn/run/route.ts":           { "maxDuration": 30 },
-    "src/app/api/curriculum/route.ts":          { "maxDuration": 60 },
-    "src/app/api/curriculum/progress/route.ts": { "maxDuration": 30 },
-    "src/app/api/sessions/end/route.ts":        { "maxDuration": 30 },
+    "src/app/api/learn/chat/route.ts":                    { "maxDuration": 60 },
+    "src/app/api/learn/lesson-init/route.ts":             { "maxDuration": 30 },
+    "src/app/api/learn/run/route.ts":                     { "maxDuration": 30 },
+    "src/app/api/curriculum/route.ts":                    { "maxDuration": 60 },
+    "src/app/api/curriculum/progress/route.ts":           { "maxDuration": 30 },
+    "src/app/api/sessions/end/route.ts":                  { "maxDuration": 30 },
     "src/app/api/sessions/[sessionId]/messages/route.ts": { "maxDuration": 60 },
-    "src/app/api/school/practice/generate/route.ts":   { "maxDuration": 30 },
-    "src/app/api/school/assessment/generate/route.ts": { "maxDuration": 30 },
-    "src/app/api/school/mock/generate/route.ts":        { "maxDuration": 30 },
-    "src/app/api/school/revision/route.ts":             { "maxDuration": 30 },
-    "src/app/api/final-assessment/generate/route.ts":   { "maxDuration": 30 },
-    "src/app/api/cron/evidence-report/route.ts":        { "maxDuration": 30 }
+    "src/app/api/final-assessment/generate/route.ts":     { "maxDuration": 30 },
+    "src/app/api/cron/evidence-report/route.ts":          { "maxDuration": 30 }
   },
   "crons": [
     {

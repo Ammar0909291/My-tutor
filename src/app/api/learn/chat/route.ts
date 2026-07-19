@@ -3037,23 +3037,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             workedExampleField = { currentWorkedExample: workedExampleUpdate }
           }
 
-          prisma.learnSession.update({
-            where: { id: sessionId },
-            data: {
-              contextSnapshot: {
-                ...(snapshot ?? {}),
-                ...(learnerProfHoisted?.preferredTeachingStyle.confidence !== 'low'
-                  ? { lastSuccessfulTeachingStyle: learnerProfHoisted!.preferredTeachingStyle.style }
-                  : {}),
-                ...(conceptChanged ? { currentConceptNodeId: newCurrentId, nextConceptNodeId: newNextId } : {}),
-                // Sprint CB: persist prereq gap only when high-confidence (avoid noisy writes)
-                ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
-                ...workedExampleField,
-                // W2-2 (ADR 09): persist lesson stage progress
-                ...(lessonStageProgressHoisted ? { lessonStageProgress: lessonStageProgressHoisted } : {}),
-              },
-            },
-          }).catch(() => {})
+          // Atomic JSONB merge: use PostgreSQL || operator so concurrent turns
+          // each add their own delta without overwriting each other's fields.
+          // This eliminates the read-modify-write race where two concurrent
+          // requests both spread the same stale snapshot and one loses its delta.
+          const schoolSnapshotDelta = {
+            ...(learnerProfHoisted?.preferredTeachingStyle.confidence !== 'low'
+              ? { lastSuccessfulTeachingStyle: learnerProfHoisted!.preferredTeachingStyle.style }
+              : {}),
+            ...(conceptChanged ? { currentConceptNodeId: newCurrentId, nextConceptNodeId: newNextId } : {}),
+            ...(prereqGapHoisted ? { lastPrerequisiteGap: prereqGapHoisted.missingPrereqId } : {}),
+            ...workedExampleField,
+            ...(lessonStageProgressHoisted ? { lessonStageProgress: lessonStageProgressHoisted } : {}),
+          }
+          prisma.$executeRaw`
+            UPDATE "LearnSession"
+            SET "contextSnapshot" = COALESCE("contextSnapshot", '{}'::jsonb) || ${JSON.stringify(schoolSnapshotDelta)}::jsonb
+            WHERE id = ${sessionId}
+          `.catch(() => {})
         }
       }
 
@@ -3229,20 +3230,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } catch { /* spine is strictly parallel — never affects the turn */ }
 
           if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0) {
-            prisma.learnSession.update({
-              where: { id: sessionId },
-              data: {
-                contextSnapshot: {
-                  ...(snapshot ?? {}),
-                  ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
-                  ...signalUpdate,
-                  ...placementUpdate,
-                  ...episodeUpdate,
-                  ...failureCountUpdate,
-                  ...conversationStateUpdate,
-                },
-              },
-            }).catch(() => {})
+            // Atomic JSONB merge (same pattern as the school snapshot above).
+            const libSnapshotDelta = {
+              ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
+              ...signalUpdate,
+              ...placementUpdate,
+              ...episodeUpdate,
+              ...failureCountUpdate,
+              ...conversationStateUpdate,
+            }
+            prisma.$executeRaw`
+              UPDATE "LearnSession"
+              SET "contextSnapshot" = COALESCE("contextSnapshot", '{}'::jsonb) || ${JSON.stringify(libSnapshotDelta)}::jsonb
+              WHERE id = ${sessionId}
+            `.catch(() => {})
           }
         } catch (err) {
           console.warn('[learn/chat] wave-0 library persist skipped:', err)
