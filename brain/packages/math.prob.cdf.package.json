@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.cdf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.cdf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bf3ee8a512656cc1f554bea4bb352a2fb68b39c45ffa9d93cb03b81bc8f52711",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.cdf.md": "sha256:e2f37a5b9a257d0600c4b11c29069e264cf21eeb7f1d1ec024e704849606430c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.cdf",
+    "name": "Cumulative Distribution Function",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.random-variable"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.cdf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.cdf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.cdf.md": "sha256:e2f37a5b9a257d0600c4b11c29069e264cf21eeb7f1d1ec024e704849606430c"
+      },
+      "contentHash": "sha256:cb155235e4acf95c688f41835c7e2ee773bc26e77113e6eb5b28ebabf8b04e77",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.cdf.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.cdf.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.cdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.cdf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.cdf.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.cdf.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.cdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.cdf\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.cdf.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.cdf.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.cdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.cdf\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.cdf.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.cdf.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.cdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.cdf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.cdf/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.cdf",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the CDF $F(x) = P(X\\le x)$ and state its three defining properties: **non-decreasing** ($x_1<x_2 \\Rightarrow F(x_1)\\le F(x_2)$), **right-continuous**, and the boundary limits $F(-\\infty)=0$, $F(\\infty)=1$.\n- LO2: Compute $F(x)$ for a discrete random variable by **summing** the PMF up to $x$, and for a continuous random variable by **integrating** the PDF up to $x$ — recognizing the CDF as the single unified object connecting both cases.\n- LO3: Use the CDF to compute probabilities of intervals, in particular $P(a<X\\le b) = F(b)-F(a)$, and correctly handle the strict-vs-non-strict inequality subtlety at endpoints (directly refuting the misconception that $P(X<b)$ and $P(X\\le b)$ are always equal).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.cdf",
+      "title": "STRICT-AND-NONSTRICT-INEQUALITY-CONFLATED",
+      "content": "| MC-1 | STRICT-AND-NONSTRICT-INEQUALITY-CONFLATED | Assuming $P(X<b)$ always equals $P(X\\le b)=F(b)$, missing that they differ whenever $X$ has positive probability of equaling $b$ exactly (the discrete/atom case) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.cdf",
+      "title": "CDF-COMPUTATION-METHOD-MISMATCHED-TO-RV-TYPE",
+      "content": "| MC-2 | CDF-COMPUTATION-METHOD-MISMATCHED-TO-RV-TYPE | Attempting to integrate a PMF or sum a PDF, instead of correctly matching summation to discrete random variables and integration to continuous ones | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.cdf",
+      "title": "CDF-ASSUMED-NON-DECREASING-VIOLATION-POSSIBLE",
+      "content": "| MC-3 | CDF-ASSUMED-NON-DECREASING-VIOLATION-POSSIBLE | Believing a computed \"CDF\" that decreases somewhere could still be valid, not recognizing non-decreasing is a hard requirement following directly from the definition | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.cdf",
+      "title": "The CDF as an Accumulated Probability (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The CDF as an Accumulated Probability (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.cdf",
+      "title": "Discrete Sum vs. Continuous Integral, Unified by One Formula (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Discrete Sum vs. Continuous Integral, Unified by One Formula (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.cdf",
+      "title": "Interval Probabilities and the Endpoint Subtlety (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Interval Probabilities and the Endpoint Subtlety (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.cdf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.cdf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A fair six-sided die roll $X$ has PMF $p(k)=1/6$ for $k=1,\\dots,6$. Write $F(3)$ and $F(3.5)$, and explain why they're equal.\n  2. $X$ is continuous with PDF $f(t)=2t$ for $0\\le t\\le1$ (and $0$ elsewhere). Find $F(x)$ for $0\\le x\\le1$, and use it to compute $P(0.25<X\\le0.75)$.\n  3. For the die roll in problem 1, compute $P(X<4)$ and $F(4)=P(X\\le4)$ separately, and explain why they differ.\n  4. Explain, in your own words, why a CDF must always be non-decreasing, using the definition $F(x)=P(X\\le x)$ directly (not just citing the property).\n- **P76 (Transfer Probe, mode = independence)**: \"A ride-sharing app models the wait time $X$ (in minutes) for a driver to arrive as a continuous random variable with CDF $F(x) = 1-e^{-x/5}$ for $x\\ge0$ (and $F(x)=0$ for $x<0$). (a) Verify $F(0)=0$ and explain what $\\lim_{x\\to\\infty}F(x)$ should equal, then confirm it from the formula. (b) Compute the probability a rider waits between 3 and 8 minutes, using $F$ directly. (c) A rider asks 'what's the chance I wait less than exactly 5 minutes, versus at most 5 minutes?' — explain why, for this continuous wait-time model, these two probabilities are equal, unlike the discrete die-roll case from the practice set.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.cdf",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.random-variable` (a random variable $X$ as a measurable function $\\Omega\\to\\mathbb{R}$, and the discrete-vs-continuous distinction) — the CDF is the accumulation-based description of that same random variable's distribution.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.cdf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.cdf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.random-variable` (the discrete/continuous distinction and the measurable-function definition of $X$ this concept accumulates probability over).\n- **Unlocks**: `math.prob.quantile` (quantiles are defined as the inverse of the CDF, directly building on the accumulation function taught here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.cdf.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

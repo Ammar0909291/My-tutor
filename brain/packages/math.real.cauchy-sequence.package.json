@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.cauchy-sequence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.cauchy-sequence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b536f44429fbaa7c92fea9a965489284939e78a1d61e01248eb59a3bca0ffd2a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.cauchy-sequence.md": "sha256:b670c435002700cc6d5a0887e6a48c318a2593b9803e766847ea4ba82dc30c74"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.cauchy-sequence",
+    "name": "Cauchy Sequence",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.real.convergence-sequences"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.cauchy-sequence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.cauchy-sequence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.cauchy-sequence.md": "sha256:b670c435002700cc6d5a0887e6a48c318a2593b9803e766847ea4ba82dc30c74"
+      },
+      "contentHash": "sha256:d6096b7ee27da1dab259d798450bf3213301af4839dc931a424656585cc99888",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.cauchy-sequence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.cauchy-sequence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.cauchy-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.cauchy-sequence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.cauchy-sequence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.cauchy-sequence.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.cauchy-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.cauchy-sequence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.cauchy-sequence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.cauchy-sequence.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.cauchy-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.cauchy-sequence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.cauchy-sequence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.cauchy-sequence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.cauchy-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.cauchy-sequence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.cauchy-sequence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Cauchy criterion precisely: a sequence $(a_n)$ is **Cauchy** iff $\\forall\\varepsilon>0,\\ \\exists N:\\ m,n>N \\Rightarrow |a_m-a_n|<\\varepsilon$ — a condition on the sequence's terms **relative to each other**, with no reference to any limit value $L$.\n- LO2: Explain why this is the crucial distinction from ordinary convergence ($a_n\\to L$): the Cauchy definition lets you certify that a sequence converges **without ever knowing or naming $L$** — directly refuting the misconception that you must find the limit first.\n- LO3: State and apply the Cauchy Criterion for $\\mathbb{R}$ (Cauchy $\\Leftrightarrow$ convergent, by completeness of $\\mathbb{R}$), and recognize that this equivalence is a genuinely special fact about $\\mathbb{R}$ (and $\\mathbb{R}^n$), not a universal property of every metric space — the reason this concept forward-links to completeness.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "LIMIT-REQUIRED-BEFORE-CAUCHY-CHECK",
+      "content": "| MC-1 | LIMIT-REQUIRED-BEFORE-CAUCHY-CHECK | Believing the sequence's limit must be known or found first, before the Cauchy condition can be checked, missing that Cauchy is defined purely in terms of the sequence's own terms | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "CAUCHY-CONVERGENT-EQUIVALENCE-TREATED-AS-UNIVERSAL",
+      "content": "| MC-2 | CAUCHY-CONVERGENT-EQUIVALENCE-TREATED-AS-UNIVERSAL | Treating \"Cauchy $\\Rightarrow$ convergent\" as a fact true in any set of numbers, rather than a special consequence of completeness (true in $\\mathbb{R}$, false in $\\mathbb{Q}$) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "CAUCHY-CONFUSED-WITH-CONSECUTIVE-TERMS-SHRINKING",
+      "content": "| MC-3 | CAUCHY-CONFUSED-WITH-CONSECUTIVE-TERMS-SHRINKING | Believing it suffices to check that consecutive terms $|a_{n+1}-a_n|$ shrink to $0$, rather than requiring ALL sufficiently late pairs $|a_m-a_n|$ to be small | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "The Cauchy Definition and Its Purpose (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Cauchy Definition and Its Purpose (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Certifying Convergence Without the Limit (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Certifying Convergence Without the Limit (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Completeness Is the Hidden Ingredient (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Completeness Is the Hidden Ingredient (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Using the $\\varepsilon$-$N$ definition, prove directly that $a_n = \\frac{n}{n+1}$ is Cauchy (without invoking its limit).\n  2. True or false, with justification: \"if I can show a sequence is Cauchy, I have thereby also shown it converges, and I still may not know the limit's value.\" \n  3. Explain, referencing Example 3, why \"Cauchy $\\Rightarrow$ convergent\" is a statement that depends on which set the sequence's terms and limit are drawn from, rather than being universally true.\n  4. A sequence $(b_n)$ of rational numbers is Cauchy but its limit is $\\pi$. Is $(b_n)$ convergent as a sequence of real numbers? Is it convergent as a sequence within $\\mathbb{Q}$? Justify both answers.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.fnal.completeness` is not yet authored; a future revision may add a genuine cross-link probe into the general metric-space completeness definition once that entry exists)**: \"A numerical algorithm generates successive approximations $x_1,x_2,x_3,\\dots$ to a solution, and you can prove $|x_{n+1}-x_n|\\le c\\cdot r^n$ for some constant $c$ and some $0<r<1$ (a shrinking-gap bound, similar in spirit to Example 2). Explain how this bound lets you conclude the sequence is Cauchy, and therefore — by the Cauchy Criterion for $\\mathbb{R}$ — that it converges, even before you can name the exact solution it converges to.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.convergence-sequences` (the rigorous $\\varepsilon$-$N$ definition of $a_n\\to L$, and the \"convergent $\\Rightarrow$ bounded\" property) — the Cauchy definition is built from the identical logical template, substituting \"terms close to each other\" for \"terms close to $L$.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.cauchy-sequence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.cauchy-sequence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.convergence-sequences` (the $\\varepsilon$-$N$ template this definition directly reuses, substituting inter-term distance for distance-to-limit).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists `math.fnal.completeness` as a cross-link, but that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.fnal.completeness.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into the general completeness-of-metric-spaces framing once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.cauchy-sequence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
