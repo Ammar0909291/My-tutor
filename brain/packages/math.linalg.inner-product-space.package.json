@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.inner-product-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.inner-product-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:31f267dca4965363faf6d270324824d252bdec722cf200d8cf81f9fe6f6fb41c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.inner-product-space.md": "sha256:be27bf1d6b519e7cdb3290173c67a3d914f708ff007d503b8b383fc3fad0609f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.linalg.inner-product-space",
+    "name": "Inner Product Space",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.inner-product",
+      "math.linalg.vector-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.inner-product-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.inner-product-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.inner-product-space.md": "sha256:be27bf1d6b519e7cdb3290173c67a3d914f708ff007d503b8b383fc3fad0609f"
+      },
+      "contentHash": "sha256:26488a0ec32b9e17baf4c2f33dbe1ba8a4fc24f43362804d799574313bffe489",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.inner-product-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.inner-product-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.inner-product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.inner-product-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.inner-product-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.inner-product-space.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.inner-product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.inner-product-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.inner-product-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.inner-product-space.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.inner-product-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.inner-product-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.inner-product-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **inner product space** as a vector space $V$ equipped with an inner product $\\langle\\cdot,\\cdot\\rangle$ (already introduced in `math.linalg.inner-product`), and state that this structure automatically INDUCES a norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$, making every inner product space a normed space.\n- LO2: State and apply the **Cauchy-Schwarz inequality**, $|\\langle u,v\\rangle|\\leq\\|u\\|\\|v\\|$, verifying it for specific vectors, and explain its geometric meaning (a bound on how large an inner product can be relative to the vectors' own lengths).\n- LO3: Recognize the hierarchy of structures this concept sits within — inner product space $\\Rightarrow$ normed space (via the induced norm) $\\Rightarrow$ metric space (via the further-induced metric) — and additionally recognize that a **complete** inner product space is specifically called a **Hilbert space**, a strictly stronger condition than merely being an inner product space.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "NORMED-SPACE-ASSUMED-TO-IMPLY-INNER-PRODUCT-SPACE",
+      "content": "| MC-1 | NORMED-SPACE-ASSUMED-TO-IMPLY-INNER-PRODUCT-SPACE | Believing the \"inner product space implies normed space\" implication reverses, i.e. that every valid norm must come from some inner product | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "HILBERT-SPACE-CONFLATED-WITH-INNER-PRODUCT-SPACE",
+      "content": "| MC-2 | HILBERT-SPACE-CONFLATED-WITH-INNER-PRODUCT-SPACE | Treating \"inner product space\" and \"Hilbert space\" as synonymous, not recognizing completeness as a genuinely additional, non-automatic requirement | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "CAUCHY-SCHWARZ-DIRECTION-REVERSED",
+      "content": "| MC-3 | CAUCHY-SCHWARZ-DIRECTION-REVERSED | Misremembering the Cauchy-Schwarz inequality's direction, believing $\\|u\\|\\|v\\|\\leq|\\langle u,v\\rangle|$ rather than the correct $|\\langle u,v\\rangle|\\leq\\|u\\|\\|v\\|$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "The Induced Norm and Cauchy-Schwarz (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Induced Norm and Cauchy-Schwarz (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "The Structure Hierarchy Is One-Directional, and Completeness as an Extra Condition (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Structure Hierarchy Is One-Directional, and Completeness as an Extra Condition (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $v=(3,0,4)$ in $\\mathbb{R}^3$, compute the induced norm $\\|v\\|$ from the inner product $\\langle v,v\\rangle$.\n  2. Verify Cauchy-Schwarz for $u=(2,1)$, $v=(1,3)$ in $\\mathbb{R}^2$, computing $\\langle u,v\\rangle$, $\\|u\\|$, $\\|v\\|$, and confirming the inequality holds.\n  3. Explain why the implication \"inner product space $\\Rightarrow$ normed space\" does not reverse, using the sup-norm example.\n  4. State the precise definition of a Hilbert space, and explain what ADDITIONAL condition (beyond being an inner product space) it requires.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing engineer represents audio signals as vectors in a function space, using the inner product $\\langle f,g\\rangle = \\int_a^b f(x)g(x)\\,dx$ to measure 'signal correlation.' (a) Using this lesson's induced-norm formula, express the 'signal energy' $\\|f\\|$ in terms of this integral inner product. (b) The engineer separately considers using the sup-norm $\\|f\\|_\\infty$ (peak signal amplitude) instead, for a different analysis purpose — using this lesson's structure-hierarchy discussion, explain why this peak-amplitude measure, while a perfectly valid norm, is NOT expected to arise from any inner product the way the energy-based norm in part (a) does.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.inner-product` (the inner product $\\langle u,v\\rangle$ as a positive-definite symmetric/sesquilinear form generalizing the dot product) and `math.linalg.vector-space` (the underlying vector-space structure).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.inner-product-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.inner-product-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.inner-product` (the inner product itself, generalizing the dot product), `math.linalg.vector-space` (the underlying vector-space structure).\n- **Unlocks**: `math.linalg.orthogonal-basis` (orthogonality, defined via $\\langle u,v\\rangle=0$, is a direct application of this concept's inner product structure), `math.linalg.gram-schmidt` (the Gram-Schmidt process constructs an orthogonal basis using exactly this concept's inner product and induced norm).\n- **Cross-link**: KG lists `math.fnal.hilbert-space` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.fnal.hilbert-space.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's completeness discussion (Component 3, Teaching Action A02) directly to that concept's full treatment of Hilbert spaces as complete inner product spaces.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.inner-product-space.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
