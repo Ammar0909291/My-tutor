@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.limits-at-infinity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.limits-at-infinity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1ce062107993d0a777993c836032adf33205abeeaedcf5db5d2f70c0d231e420",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.limits-at-infinity.md": "sha256:5abcf67a9bfd62a3ea2e5dfb48558a9435f39ed91e7eed9414fbc6fda1b587dd"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.limits-at-infinity",
+    "name": "Limits at Infinity",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.limits"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.limits-at-infinity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.limits-at-infinity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.limits-at-infinity.md": "sha256:5abcf67a9bfd62a3ea2e5dfb48558a9435f39ed91e7eed9414fbc6fda1b587dd"
+      },
+      "contentHash": "sha256:74367865dacd965130ea9361d8ff17c5a93b029ecaf767df4af2f6746667b426",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.limits-at-infinity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits-at-infinity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits-at-infinity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits-at-infinity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits-at-infinity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits-at-infinity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits-at-infinity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits-at-infinity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits-at-infinity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits-at-infinity.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits-at-infinity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits-at-infinity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.limits-at-infinity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Learning Objectives",
+      "content": "- LO1: Interpret $\\lim_{x\\to\\infty}f(x)=L$ as meaning $f(x)$ gets and stays arbitrarily close to $L$ as $x$ grows without bound (and similarly for $x\\to-\\infty$) — directly distinguishing this from an ordinary limit $\\lim_{x\\to a}f(x)$, where $x$ approaches a specific finite value.\n- LO2: Compute limits at infinity for rational functions by dividing numerator and denominator by the highest power of $x$ present in the denominator, then applying the fact that $1/x^n\\to0$ as $x\\to\\infty$ — directly refuting the misconception that a limit at infinity is evaluated by \"plugging in\" infinity as if it were an ordinary number.\n- LO3: Distinguish a limit at infinity ($x\\to\\infty$, describing END behavior as $x$ grows) from an infinite limit ($f(x)\\to\\infty$ as $x\\to a$, describing a vertical asymptote at a FINITE point $a$) — two entirely different phenomena that are easily conflated because both involve the symbol $\\infty$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "INFINITY-SUBSTITUTED-AS-A-NUMBER",
+      "content": "| MC-1 | INFINITY-SUBSTITUTED-AS-A-NUMBER | Attempting to evaluate a limit at infinity by directly substituting \"infinity\" into the formula, rather than using the divide-by-highest-power algebraic technique | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "LIMITS-AT-INFINITY-CONFLATED-WITH-INFINITE-LIMITS",
+      "content": "| MC-2 | LIMITS-AT-INFINITY-CONFLATED-WITH-INFINITE-LIMITS | Treating a limit at infinity (x growing without bound, typically a finite answer) as the same phenomenon as an infinite limit (output growing without bound at a finite input point) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "HIGHEST-POWER-DIVISION-APPLIED-TO-WRONG-TERM-COUNT",
+      "content": "| MC-3 | HIGHEST-POWER-DIVISION-APPLIED-TO-WRONG-TERM-COUNT | Dividing by the highest power of x in the NUMERATOR instead of the denominator, or by an incorrect power, leading to an incorrectly simplified (and wrong) limit | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "x Growing Without Bound, f(x) Settling Down (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"x Growing Without Bound, f(x) Settling Down (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Dividing by the Highest Power, Never \"Plugging In Infinity\" (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Dividing by the Highest Power, Never \\\"Plugging In Infinity\\\" (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Limits at Infinity vs. Infinite Limits: Not the Same Phenomenon (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Limits at Infinity vs. Infinite Limits: Not the Same Phenomenon (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\lim_{x\\to\\infty}\\frac{4x^3-2x}{x^3+7}$ using the divide-by-highest-power technique, showing every step.\n  2. Compute $\\lim_{x\\to\\infty}\\frac{5x+1}{2x^2-3}$ (note the denominator's higher degree here), and explain what happens to the limit when the denominator's degree exceeds the numerator's.\n  3. For $h(x)=\\frac{2}{x-5}$, find $\\lim_{x\\to\\infty}h(x)$ AND separately describe the behavior of $h(x)$ as $x\\to5$, explaining why these are two different questions about the same function.\n  4. A student computes $\\lim_{x\\to\\infty}\\frac{x^2+1}{x+1}$ by substituting a \"very large\" value and concludes the limit is some large finite number close to that substituted value. Explain what's incomplete about this reasoning, and correctly determine what actually happens to this limit as $x\\to\\infty$ (hint: compare the degrees of numerator and denominator).\n- **P76 (Transfer Probe, mode = independence)**: \"A company models its per-unit production cost as $C(x) = \\frac{1000+2x}{x}$, where $x$ is the number of units produced. (a) Find $\\lim_{x\\to\\infty}C(x)$ using the divide-by-highest-power technique, and interpret what this limit means for the company's per-unit cost as production scales up indefinitely. (b) Explain why this limit describes a HORIZONTAL asymptote of the cost function, using the terminology from this lesson. (c) If the company's model also has a different formula that blows up as $x$ approaches some small specific production level (e.g. representing a fixed setup cost divided by a vanishingly small batch size), explain why that separate behavior would be a VERTICAL asymptote, not a limit at infinity, even though both involve the word 'infinite' informally in conversation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.limits` (the ε-δ definition of $\\lim_{x\\to a}f(x)=L$, and the core idea that a limit describes approach, not the function's actual value at the point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.limits-at-infinity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.limits-at-infinity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.limits` (the ε-δ \"approach\" definition and the \"approach vs. arrival\" principle this concept extends to unbounded growth).\n- **Unlocks**: `math.func.horizontal-asymptote` (the horizontal asymptote $y=L$ is defined directly as the value a limit at infinity approaches, taught here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits-at-infinity.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d6a8de663faf6753945e92cff524a54a4e7557d0f137b8967757e24fc9822e5c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.distribution.md": "sha256:cc963132ba4cdca827e87b24c1b3191c6b09991145d44ae42736b913926d6814"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.distribution",
+    "name": "Probability Distribution",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.random-variable",
+      "math.prob.cdf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.distribution.md": "sha256:cc963132ba4cdca827e87b24c1b3191c6b09991145d44ae42736b913926d6814"
+      },
+      "contentHash": "sha256:2e979c7beb10348d9c4f267cecf93568a752d7e1d7924b9eb6151509c657824f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.distribution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.distribution.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.distribution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.distribution.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.distribution\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.distribution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.distribution.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.distribution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.distribution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.distribution.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.distribution\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.distribution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.distribution",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **probability distribution** of a random variable $X$ as its **complete** probabilistic description — everything needed to compute $P(X\\in A)$ for any set $A$ — equivalently specified by its CDF $F$, or (for a discrete $X$) its PMF, or (for a continuous $X$) its PDF.\n- LO2: Recognize that two random variables can share certain summary numbers (e.g. the same mean) while having genuinely **different distributions**, and correctly identify that only the FULL distribution (not a single summary statistic) constitutes a complete description — directly refuting the misconception that knowing a random variable's mean (or any single number) tells you its distribution.\n- LO3: Recognize **named distributions** (e.g. Binomial, Uniform, Normal — cited by name, not derived in depth here) as standard, reusable models for specific types of random phenomena, and explain why using a named distribution (once its assumptions are verified to fit a scenario) saves the work of deriving a distribution's properties from scratch.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.distribution",
+      "title": "SHARED-SUMMARY-STATISTIC-ASSUMED-TO-IMPLY-SHARED-DISTRIBUTION",
+      "content": "| MC-1 | SHARED-SUMMARY-STATISTIC-ASSUMED-TO-IMPLY-SHARED-DISTRIBUTION | Believing that if two random variables share a summary statistic (like the mean), they must have the same distribution | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.distribution",
+      "title": "NAMED-DISTRIBUTION-APPLIED-WITHOUT-VERIFYING-ASSUMPTIONS",
+      "content": "| MC-2 | NAMED-DISTRIBUTION-APPLIED-WITHOUT-VERIFYING-ASSUMPTIONS | Labeling a random variable with a named distribution (e.g. Binomial) based on surface resemblance, without checking that the defining assumptions (fixed trials, independence, constant probability, etc.) genuinely hold | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.distribution",
+      "title": "CDF-PMF-PDF-TREATED-AS-DIFFERENT-INFORMATION",
+      "content": "| MC-3 | CDF-PMF-PDF-TREATED-AS-DIFFERENT-INFORMATION | Believing the CDF, PMF, and PDF of the same random variable carry different or additional information relative to each other, rather than recognizing them as equivalent, interchangeable full specifications | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.distribution",
+      "title": "The Distribution as the Full Story, in Equivalent Forms (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Distribution as the Full Story, in Equivalent Forms (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.distribution",
+      "title": "A Shared Summary Number Doesn't Mean a Shared Distribution (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Shared Summary Number Doesn't Mean a Shared Distribution (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.distribution",
+      "title": "Named Distributions as Verified, Reusable Models (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Named Distributions as Verified, Reusable Models (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.distribution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.distribution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a random variable $Z$ with PMF $P(Z=0)=0.3$, $P(Z=1)=0.7$, write its CDF explicitly, and confirm both descriptions give the same answer for $P(Z\\le0.5)$.\n  2. Construct two DIFFERENT random variables (distinct distributions) that share the same mean of $10$, and identify one specific probability question (like Example 2's interval probability) that distinguishes them.\n  3. A survey collects the number of heads in 20 independent fair coin flips. Explain what specific assumptions must hold for this count to be modeled as a Binomial distribution, and verify they hold in this scenario.\n  4. Explain, in your own words, why \"the distribution\" of a random variable is a strictly richer piece of information than any single summary statistic (mean, median, or otherwise) computed from it.\n- **P76 (Transfer Probe, mode = independence)**: \"A city's daily high temperature over a year has an average (mean) of $70°F$. A different city, in a region with extreme seasonal swings, ALSO has a daily high temperature averaging $70°F$ over its year. (a) Explain why knowing both cities share the same mean temperature does not tell you whether their day-to-day temperature EXPERIENCES are similar. (b) Describe a specific question (analogous to Example 2's interval probability) a resident might ask that the shared mean cannot answer, but the full distribution could. (c) If a meteorologist wanted to model one of these cities' daily highs using a NAMED distribution (e.g. Normal), explain what they would need to verify first, rather than assuming the name applies just because temperatures are commonly modeled that way.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.distribution",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.random-variable` (a random variable $X$ as a measurable function $\\Omega\\to\\mathbb{R}$, discrete vs. continuous) and `math.prob.cdf` (the CDF $F(x)=P(X\\le x)$, unifying the discrete-sum and continuous-integral cases).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.distribution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.distribution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.random-variable` (the discrete/continuous distinction and measurable-function foundation this concept's complete description builds on), `math.prob.cdf` (the CDF as one of the equivalent full specifications of a distribution).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.distribution.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
