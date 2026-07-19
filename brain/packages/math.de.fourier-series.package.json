@@ -1,0 +1,281 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.fourier-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.fourier-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:52c17b52d959c159f69b87860bb3a3af30a46a5e0f9466a78dc17c032c6e25b6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.fourier-series.md": "sha256:ddc3778bc26950ca003a44ddf8c8865a5f1448d03d0177ce922f9b077f9dc4e0"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.de.fourier-series",
+    "name": "Fourier Series",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.de.bvp",
+      "math.calc.definite-integral",
+      "math.trig.trig-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.fourier-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.fourier-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.fourier-series.md": "sha256:ddc3778bc26950ca003a44ddf8c8865a5f1448d03d0177ce922f9b077f9dc4e0"
+      },
+      "contentHash": "sha256:37aa77afb4623a82b1af37527055b73b3308119dbadf3291c07018c93632ed15",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-series.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.fourier-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.fourier-series.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.fourier-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.fourier-series\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.fourier-series/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.fourier-series",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Fourier series** representation of a periodic function $f(x)=\\frac{a_0}{2}+\\sum_{n=1}^\\infty\\left(a_n\\cos\\frac{n\\pi x}{L}+b_n\\sin\\frac{n\\pi x}{L}\\right)$, and explain informally why representing a periodic function as a (possibly infinite) sum of simple sines and cosines is a natural, powerful idea.\n- LO2: Compute the Fourier coefficients $a_0,a_n,b_n$ using the **orthogonality integrals** ($\\int_{-L}^L\\cos\\frac{m\\pi x}{L}\\cos\\frac{n\\pi x}{L}\\,dx=0$ for $m\\neq n$, and similarly for sine pairs and mixed sine-cosine pairs) — for a simple given periodic function.\n- LO3: Correctly recognize which coefficients VANISH automatically based on the function's **symmetry** — an EVEN function has all $b_n=0$ (pure cosine series); an ODD function has all $a_n=0$ (pure sine series) — and use this to avoid unnecessary computation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-series",
+      "title": "SYMMETRY-SHORTCUT-NOT-CHECKED-FIRST",
+      "content": "| MC-1 | SYMMETRY-SHORTCUT-NOT-CHECKED-FIRST | Computing every Fourier coefficient via the full integral formula regardless of the function's symmetry, missing the opportunity to immediately conclude entire coefficient sets vanish | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-series",
+      "title": "A0-ASSUMED-TO-FOLLOW-SAME-VANISHING-RULE-AS-OTHER-EVEN-FUNCTION-COEFFICIENTS",
+      "content": "| MC-2 | A0-ASSUMED-TO-FOLLOW-SAME-VANISHING-RULE-AS-OTHER-EVEN-FUNCTION-COEFFICIENTS | Believing $a_0$ automatically vanishes for an even function the same way $b_n$ does for symmetry reasons, when $a_0$ (related to the function's average value) generally requires genuine computation regardless of even/odd symmetry | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.fourier-series",
+      "title": "ORTHOGONALITY-INTEGRAL-LIMITS-OR-PERIOD-MISMATCHED",
+      "content": "| MC-3 | ORTHOGONALITY-INTEGRAL-LIMITS-OR-PERIOD-MISMATCHED | Using incorrect integration limits or period-scaling factor (e.g. forgetting the $\\frac{n\\pi x}{L}$ argument's dependence on the specific half-period $L$) when setting up the coefficient integrals for a function with a period different from the standard $2\\pi$ example | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-series",
+      "title": "Building Complex Waves from Simple Sinusoids, and Orthogonality-Based Coefficient Extraction (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Building Complex Waves from Simple Sinusoids, and Orthogonality-Based Coefficient Extraction (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-series",
+      "title": "Symmetry Shortcuts, Even vs. Odd Functions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Symmetry Shortcuts, Even vs. Odd Functions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.fourier-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.fourier-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $f(x)=|x|$ on $(-\\pi,\\pi)$, determine (using symmetry, without computing any integral) whether $a_n$ or $b_n$ must all vanish.\n  2. Compute $a_0$ for $f(x)=x^2$ on $(-\\pi,\\pi)$ using the coefficient formula (note: $a_0$ requires actual computation even for an even function, since it's not automatically zero the way $b_n$ is).\n  3. For $f(x)=\\sin(3x)$ (already itself a pure sine term, period $2\\pi$), state its Fourier series directly by inspection, without computing any integrals (hint: what are the nonzero coefficients, and why is no further work needed?).\n  4. Explain why checking a function's symmetry BEFORE computing Fourier coefficients can save significant computational effort, using the $x^2$ example from this lesson.\n- **P76 (Transfer Probe, mode = independence)**: \"An audio engineer analyzes a musical tone's waveform (period $T$) by decomposing it into its Fourier series — the resulting coefficients directly correspond to the tone's 'harmonic content' (how much of each frequency multiple is present). (a) If the engineer's waveform happens to be symmetric in a way that makes it an ODD function (e.g. it looks identical when flipped both left-right and upside-down through the origin), explain what this immediately tells them about half of the coefficients, without needing to run any further computation. (b) Explain why, for a GENERIC recorded musical tone with no particular symmetry, the engineer generally cannot skip computing either set of coefficients, and must compute the full orthogonality-integral formulas for both.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.fourier-series",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.bvp` (boundary value problems, the context Fourier series classically arise from — solving BVPs for PDEs like the heat/wave equation), `math.calc.definite-integral` (computing the coefficient integrals), and `math.trig.trig-functions` (sine/cosine, their periodicity).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.fourier-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.fourier-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.bvp` (the boundary value problem context Fourier series classically arise from), `math.calc.definite-integral` (computing the coefficient integrals), `math.trig.trig-functions` (sine/cosine and their periodicity, the building blocks of the series).\n- **Unlocks**: `math.de.heat-equation` and `math.de.wave-equation` (both solved via Fourier series expansion of boundary/initial data), `math.de.fourier-transform` (the continuous generalization of this discrete-frequency series).\n- **Cross-link**: KG lists `math.fnal.fourier-transform` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.fnal.fourier-transform.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's discrete Fourier COEFFICIENTS (for periodic functions) directly to that concept's continuous Fourier TRANSFORM (for non-periodic functions), as the natural periodic-to-aperiodic generalization.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.fourier-series.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

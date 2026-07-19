@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.prime-number-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.prime-number-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:17d46e58ef3c392df2ce37c6cb6eca845d7b5b6dbd6b1f69b596f3e3e863164c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.prime-number-theorem.md": "sha256:fe6840b090c67e09cfa08e3738066f4573d7cf3c7c9bd57670a19eb8f5417cce"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.nt.prime-number-theorem",
+    "name": "Prime Number Theorem",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.nt.prime-distribution",
+      "math.cx.complex-integration"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.prime-number-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.prime-number-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.prime-number-theorem.md": "sha256:fe6840b090c67e09cfa08e3738066f4573d7cf3c7c9bd57670a19eb8f5417cce"
+      },
+      "contentHash": "sha256:1dad12b4517b9bbe4da3a10ed72dfe05a164a0595e45309d3cd0d4576a6bba7a",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.prime-number-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: Restate the Prime Number Theorem's asymptotic law $\\pi(x)\\sim x/\\log x$ (already established in `math.nt.prime-distribution`) and identify this concept's DISTINCT focus — not the statement itself, but the specific role **complex INTEGRATION** (contour integrals, as opposed to merely complex numbers or Dirichlet series in the abstract) plays in its proof.\n- LO2: Explain, at an orientation level, why the proof strategy uses a **contour integral of $\\zeta'(s)/\\zeta(s)$** (the logarithmic derivative of the zeta function) — this specific function has poles exactly at $\\zeta$'s zeros AND at $s=1$ (zeta's own pole), making it the natural object whose contour integral, via the residue-counting machinery `math.cx.complex-integration` establishes, can be shown to extract information about $\\pi(x)$.\n- LO3: Explain why the proof genuinely REQUIRES a **zero-free region** for $\\zeta(s)$ (a region, including the line $\\mathrm{Re}(s)=1$, where $\\zeta(s)\\neq0$) — correctly distinguishing this requirement from the Riemann Hypothesis itself (a MUCH stronger zero-location claim), and explain why the theorem's PROOF, unlike its bare STATEMENT, is inseparable from complex-analytic machinery.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "PNT-PROOF-ASSUMED-TO-REQUIRE-RIEMANN-HYPOTHESIS",
+      "content": "| MC-1 | PNT-PROOF-ASSUMED-TO-REQUIRE-RIEMANN-HYPOTHESIS | Believing the actual historical proof of the Prime Number Theorem required (or is equivalent to) proving the Riemann Hypothesis, rather than the much weaker, already-established zero-free-on-one-line fact | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "LOGARITHMIC-DERIVATIVE-POLE-LOCATION-MISUNDERSTOOD",
+      "content": "| MC-2 | LOGARITHMIC-DERIVATIVE-POLE-LOCATION-MISUNDERSTOOD | Not recognizing that a logarithmic derivative $f'(s)/f(s)$ has poles precisely at $f$'s own zeros (and poles), with residues equal to multiplicities — treating the pole locations as unrelated to $f$'s own zero structure | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "THIS-CONCEPT-TREATED-AS-DUPLICATING-PRIME-DISTRIBUTION-CONTENT",
+      "content": "| MC-3 | THIS-CONCEPT-TREATED-AS-DUPLICATING-PRIME-DISTRIBUTION-CONTENT | Not recognizing this concept's distinct focus (the complex-integration PROOF MECHANISM) as different from `math.nt.prime-distribution`'s focus (the asymptotic STATEMENT and its precise ratio-vs-difference meaning) | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "This Concept's Distinct Focus, and the Logarithmic Derivative (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"This Concept's Distinct Focus, and the Logarithmic Derivative (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "Zero-Free Region vs. Riemann Hypothesis, Precisely Distinguished (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Zero-Free Region vs. Riemann Hypothesis, Precisely Distinguished (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For the polynomial $q(s)=(s-3)^2(s+2)$, compute $q'(s)/q(s)$ via logarithmic differentiation, and identify each pole's location and the corresponding zero's multiplicity.\n  2. State precisely what the 1896 proof of the PNT required about $\\zeta(s)$'s zeros, and contrast this with what the Riemann Hypothesis additionally claims.\n  3. Explain, in your own words, why a contour integral (rather than a real-variable technique) is the natural tool for extracting information from $\\zeta(s)$'s zero locations.\n  4. A textbook states \"proving the PNT and proving RH are essentially the same problem.\" Identify what is imprecise about this claim, using this lesson's zero-free-region-vs-RH distinction.\n- **P76 (Transfer Probe, mode = independence)**: \"A mathematics history article claims: 'Hadamard and de la Vallée Poussin's 1896 proof of the Prime Number Theorem was a masterpiece of complex analysis because they had to fully map out the exact location of every one of the Riemann zeta function's infinitely many zeros.' (a) Using this lesson's precise account of what the 1896 proof actually required (a zero-free region on one specific line, not exact knowledge of every zero's location), identify what is factually imprecise about this description. (b) Explain what the article COULD accurately say instead, connecting the logarithmic-derivative-contour-integral strategy to what genuinely needed to be established.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.nt.prime-distribution` (the PNT's statement, $\\pi(x)\\sim x/\\log x$, and the precise ratio-vs-difference asymptotic meaning) and `math.cx.complex-integration` (the complex line integral $\\int_C f(z)\\,dz$, its computation via parametrization, and the Estimation Lemma bounding an integral's magnitude).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.prime-number-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.prime-distribution` (the PNT's statement and precise asymptotic meaning, which this concept does not re-derive but explicitly builds beyond), `math.cx.complex-integration` (the complex line integral and residue-adjacent machinery this concept's proof strategy directly employs).\n- **Unlocks**: none — this is a terminal node in the current Mathematics Knowledge Graph.\n- **Cross-link**: KG lists `math.cx.riemann-zeta` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.cx.riemann-zeta.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision, once that concept is authored, may add a genuine cross-link probe connecting this concept's logarithmic-derivative-contour-integral proof sketch directly to that concept's presumably fuller treatment of $\\zeta(s)$'s analytic continuation, functional equation, and zero-counting theory.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number-theorem.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

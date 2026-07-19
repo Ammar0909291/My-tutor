@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.bvp-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.bvp",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6f5d3617189863ba21d1abb50711c0007d04aebe7b7781a8b855e40e52ea59ae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.bvp.md": "sha256:3c4224a0893733f6388c7f09be35eb7b577e543efbff199f8becb583003ea705"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.de.bvp",
+    "name": "Boundary Value Problem",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.second-order-ode"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.bvp-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.bvp (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.bvp.md": "sha256:3c4224a0893733f6388c7f09be35eb7b577e543efbff199f8becb583003ea705"
+      },
+      "contentHash": "sha256:083b23f42d0326bed3f5daa7cee916140b4b8165fc0611fe429fc3999975fc10",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.bvp.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bvp.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bvp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bvp\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bvp.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bvp.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bvp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bvp\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.bvp.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.bvp.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.bvp"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.bvp\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.bvp/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.bvp",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **Boundary Value Problem (BVP)** as an ODE with conditions specified at **two or more distinct points** (e.g. $y(a)=\\alpha$, $y(b)=\\beta$ for $a\\neq b$), and correctly distinguish it from an **Initial Value Problem (IVP)** (all conditions given at a SINGLE point).\n- LO2: Explain that, unlike IVPs (where existence and uniqueness are generally guaranteed under mild conditions), a BVP's **solution behavior is fundamentally different** — a given BVP may have NO solution, a UNIQUE solution, or INFINITELY many solutions, and correctly determine which case a specific BVP falls into by solving the general solution and applying both boundary conditions.\n- LO3: Solve a simple BVP by first finding the ODE's **general solution** (with arbitrary constants), THEN applying BOTH boundary conditions as a system of equations to solve for the constants — recognizing that this differs procedurally from an IVP's sequential single-point condition application.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.bvp/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.bvp",
+      "title": "BVP-ASSUMED-TO-ALWAYS-HAVE-UNIQUE-SOLUTION",
+      "content": "| MC-1 | BVP-ASSUMED-TO-ALWAYS-HAVE-UNIQUE-SOLUTION | Believing a BVP, like an IVP, always has a unique solution once correctly set up and solved, rather than recognizing existence and uniqueness genuinely aren't guaranteed | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.de.bvp/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.bvp",
+      "title": "BOTH-BOUNDARY-CONDITIONS-NOT-APPLIED-SIMULTANEOUSLY",
+      "content": "| MC-2 | BOTH-BOUNDARY-CONDITIONS-NOT-APPLIED-SIMULTANEOUSLY | Solving for one constant using the first boundary condition alone, without correctly incorporating the second condition into a genuine system, potentially missing an inconsistency or a free parameter | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.bvp/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.bvp",
+      "title": "INFINITELY-MANY-SOLUTIONS-CASE-MISTAKEN-FOR-AN-ERROR",
+      "content": "| MC-3 | INFINITELY-MANY-SOLUTIONS-CASE-MISTAKEN-FOR-AN-ERROR | When a boundary condition is found to be automatically satisfied (imposing no genuine constraint), treating this as a computational mistake rather than correctly recognizing it as the genuine \"infinitely many solutions\" case | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.bvp/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bvp",
+      "title": "BVP vs. IVP, and Solving via General Solution Plus Both Conditions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"BVP vs. IVP, and Solving via General Solution Plus Both Conditions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.de.bvp/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bvp",
+      "title": "The Three Genuinely Different Outcomes, Same ODE (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Three Genuinely Different Outcomes, Same ODE (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.de.bvp/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.bvp",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.bvp/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.bvp",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Solve the BVP $y''+4y=0$, $y(0)=1$, $y(\\pi/4)=0$, and state whether it has no solution, a unique solution, or infinitely many.\n  2. Solve the BVP $y''+4y=0$, $y(0)=0$, $y(\\pi/2)=0$, and determine which of the three cases applies.\n  3. Solve the BVP $y''+4y=0$, $y(0)=0$, $y(\\pi/2)=1$, and determine which of the three cases applies.\n  4. Explain, using the linear-system analogy, why changing only ONE boundary condition (keeping the same ODE and the other condition fixed) can move a BVP from \"unique solution\" to \"no solution\" or \"infinitely many solutions.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A structural engineer models a beam's deflection using a second-order linear ODE, with boundary conditions specifying the deflection at both supported ends of the beam. (a) Using this lesson's three-case framework, explain what it would mean PHYSICALLY if the engineer's specific choice of end-supports and end-deflection values produced 'no solution' when solved as a BVP — what would this suggest about the physical setup being modeled? (b) Explain what it would mean physically if the BVP instead produced 'infinitely many solutions' — what would this suggest about whether the given boundary information is sufficient to pin down the beam's actual shape uniquely?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.bvp/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.bvp",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.second-order-ode` (the general second-order ODE and its solution methods, typically previously encountered with IVP-style single-point conditions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.bvp/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.bvp",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.second-order-ode` (the general second-order ODE and its solution methods, previously encountered with IVP-style conditions).\n- **Unlocks**: `math.de.sturm-liouville` (Sturm-Liouville theory studies a specific, richly-structured family of BVPs, building directly on this concept's foundational three-case framework).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.bvp.md",
+        "startLine": 93,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
