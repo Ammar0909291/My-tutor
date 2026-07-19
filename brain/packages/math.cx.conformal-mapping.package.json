@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.conformal-mapping-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.conformal-mapping",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d98a27f1834470069f8ce8f7949425de62b94c09ef291389d4d3f8f319a70ac3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.conformal-mapping.md": "sha256:775aa177c8c68eb7a0616e8d97ee4f2ba8acd1a18213379bac0b8add364f16d7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.conformal-mapping",
+    "name": "Conformal Mapping",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.cx.analytic-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.conformal-mapping-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.conformal-mapping (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.conformal-mapping.md": "sha256:775aa177c8c68eb7a0616e8d97ee4f2ba8acd1a18213379bac0b8add364f16d7"
+      },
+      "contentHash": "sha256:9f15bceaad008a138c12a498f05a828d9d19320f6848a7cbf601267a29f0fa75",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.conformal-mapping.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.conformal-mapping.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.conformal-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.conformal-mapping\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.conformal-mapping.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.conformal-mapping.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.conformal-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.conformal-mapping\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.conformal-mapping.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.conformal-mapping.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.conformal-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.conformal-mapping\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.conformal-mapping.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.conformal-mapping.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.conformal-mapping"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.conformal-mapping\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.conformal-mapping/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **conformal** (angle-preserving): a holomorphic function $f$ is conformal at $z_0$ wherever $f'(z_0)\\ne0$ — and recognize conformality genuinely FAILS at points where $f'(z_0)=0$, directly refuting the assumption that every holomorphic function is conformal everywhere on its domain.\n- LO2: Recognize that near a point where $f'(z_0)\\ne0$, the real Jacobian of $f$ (viewed as a map $\\mathbb{R}^2\\to\\mathbb{R}^2$) is genuinely a **rotation-dilation matrix** — of the special form $\\begin{pmatrix}a&-b\\\\b&a\\end{pmatrix}$ — a direct structural consequence of the Cauchy-Riemann equations, NOT true of an arbitrary real-differentiable map.\n- LO3: Recognize that conformal maps preserve ONLY angles between curves — they generally DISTORT lengths (by the locally varying scale factor $|f'(z)|$) and areas (by $|f'(z)|^2$) — directly refuting the assumption that a conformal map preserves distances or areas as well.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "HOLOMORPHIC-ASSUMED-CONFORMAL-EVERYWHERE",
+      "content": "| MC-1 | HOLOMORPHIC-ASSUMED-CONFORMAL-EVERYWHERE | Believing every holomorphic function is conformal at every point of its domain, missing that conformality specifically fails where f'=0 | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "CONFORMAL-JACOBIAN-ASSUMED-ARBITRARY",
+      "content": "| MC-2 | CONFORMAL-JACOBIAN-ASSUMED-ARBITRARY | Believing a conformal map's local Jacobian could be any arbitrary real 2x2 matrix, missing that holomorphy forces it into the specific rotation-dilation form | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "CONFORMAL-ASSUMED-TO-PRESERVE-LENGTHS-AND-AREAS",
+      "content": "| MC-3 | CONFORMAL-ASSUMED-TO-PRESERVE-LENGTHS-AND-AREAS | Believing a conformal map preserves distances or areas in addition to angles, missing that it generally distorts both, preserving only angles | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Conformality Fails Exactly Where f'=0 (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Conformality Fails Exactly Where f'=0 (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "The Jacobian Must Be a Rotation-Dilation Matrix (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Jacobian Must Be a Rotation-Dilation Matrix (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Angles Preserved, Lengths and Areas Are Not (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Angles Preserved, Lengths and Areas Are Not (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $f(z)=z^3$, find all points where conformality fails.\n  2. For $f(z)=e^z$, explain why this function is conformal at every point of $\\mathbb{C}$ (referencing $f'(z)=e^z$).\n  3. For $f(z)=z^2$ at $z_0=2$, compute the Jacobian and verify it has the rotation-dilation form, matching the expected scaling factor $|f'(2)|$.\n  4. Explain why a conformal map at a given point can still distort the area of a small region there, despite preserving all angles exactly.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer wants to solve a heat-flow (PDE) problem on an irregularly shaped metal plate by first mapping it conformally to a simple disc, solving the easier problem there, and mapping the solution back. (a) Explain why using a conformal map (rather than an arbitrary smooth map) is important for correctly transferring angle-dependent boundary conditions from the disc back to the original irregular plate. (b) The engineer's conformal map has a point where its derivative vanishes, right in the middle of the plate. Explain what practical problem this could cause for the mapping near that specific point. (c) The engineer notices that distances measured on the original plate don't match distances on the mapped disc, even far from any critical point. Explain why this is expected and not a sign of an error in the conformal map.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.analytic-functions` (holomorphic means complex-differentiable on an open set; holomorphic $\\iff$ analytic in $\\mathbb{C}$; the sharp single-point-vs-open-set distinction via $f(z)=|z|^2$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.conformal-mapping/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.conformal-mapping",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-functions` (holomorphic/analytic definitions this concept's conformality condition is built directly on top of).\n- **Unlocks**: `math.cx.riemann-mapping` (the Riemann Mapping Theorem guarantees a conformal map exists between any simply connected proper subset of $\\mathbb{C}$ and the unit disc — building directly on this concept's machinery).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.conformal-mapping.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

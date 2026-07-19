@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.equivalence-class-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.equivalence-class",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a3acea60fc37f499b2c7145f7a5b3f48ff5e53c4e0aa015775031a590a39cd05",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.equivalence-class.md": "sha256:6756a615ebfc27015f8e6e23bdb6772aade383a7db4915f18e5b53a7117bb20e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.equivalence-class",
+    "name": "Equivalence Class",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.equivalence-relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.equivalence-class-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.equivalence-class (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.equivalence-class.md": "sha256:6756a615ebfc27015f8e6e23bdb6772aade383a7db4915f18e5b53a7117bb20e"
+      },
+      "contentHash": "sha256:9741a7314496c47b50d011e5fe501453e320b9453b26fe7c3831540eafb6b969",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-class.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-class.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-class"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-class\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-class.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-class.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-class"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-class\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-class.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-class.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-class"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-class\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.equivalence-class.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.equivalence-class.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.equivalence-class"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.equivalence-class\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.equivalence-class/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **equivalence class** $[a]=\\{x\\in A : x\\sim a\\}$ for an equivalence relation $\\sim$ on $A$, compute a specific class directly, and recognize $a\\in[a]$ ALWAYS (guaranteed by reflexivity — `math.found.equivalence-relation`'s own first required property).\n- LO2: State and apply the criterion $[a]=[b]$ **iff** $a\\sim b$ — directly parallel to `math.abst.coset`'s own equality criterion — recognizing that two DIFFERENT elements can generate the identical class (as SETS), and that $[a]=[b]$ never requires $a=b$ literally.\n- LO3: Recognize that every element of $A$ belongs to exactly one DISTINCT equivalence class, and that the collection of distinct classes forms a genuine partition of $A$ per `math.found.partition`'s own three-condition definition — correctly distinguishing \"distinct classes\" from \"distinct representative names\" (a single class can be named by several different representative elements).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.equivalence-class",
+      "title": "SELF-MEMBERSHIP-IN-OWN-CLASS-DOUBTED",
+      "content": "| MC-1 | SELF-MEMBERSHIP-IN-OWN-CLASS-DOUBTED | Believing an element might not belong to its own equivalence class, missing the guaranteed self-membership from reflexivity | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.equivalence-class",
+      "title": "CLASS-EQUALITY-CONFUSED-WITH-ELEMENT-EQUALITY",
+      "content": "| MC-2 | CLASS-EQUALITY-CONFUSED-WITH-ELEMENT-EQUALITY | Believing [a]=[b] requires a and b to be the literal same element, missing that different related elements can generate the identical class | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.equivalence-class",
+      "title": "DISTINCT-CLASS-COUNT-ASSUMED-EQUAL-TO-ELEMENT-COUNT",
+      "content": "| MC-3 | DISTINCT-CLASS-COUNT-ASSUMED-EQUAL-TO-ELEMENT-COUNT | Believing the number of distinct equivalence classes must equal the number of elements in A, missing that several elements can share the same class | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Every Element Belongs to Its Own Class (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Every Element Belongs to Its Own Class (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Same Class, Different Representative Names (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Same Class, Different Representative Names (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Distinct Classes, Not Distinct Names (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Distinct Classes, Not Distinct Names (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\{1,2,3,4,5,6\\}$ and $R=\\{(a,b):a\\equiv b\\pmod3\\}$, compute $[1]$ and $[4]$, and state whether they are equal.\n  2. Using the same relation, list all genuinely distinct equivalence classes.\n  3. Explain why $a\\in[a]$ is guaranteed for any equivalence relation, citing the specific property responsible.\n  4. Explain why the number of distinct equivalence classes can be smaller than $|A|$, using problem 2's result as an example.\n- **P76 (Transfer Probe, mode = independence)**: \"A university groups students by declaring two students 'equivalent' if they have the same major. (a) Describe, in words, what the equivalence class of a specific student named Alex represents in this context. (b) Explain why two different students, say Alex and Priya, could have the exact same equivalence class, and what condition on Alex and Priya would guarantee this. (c) If the university has 500 students but only 12 different majors, explain what this tells you about the number of DISTINCT equivalence classes, versus the number of students.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.equivalence-relation` (reflexive + symmetric + transitive combined; the Partition Theorem in both directions; classes are always identical or disjoint, never partial).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.equivalence-class/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.equivalence-class",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.equivalence-relation` (the combined reflexive+symmetric+transitive property, and the Partition Theorem this concept's classes directly instantiate).\n- **Unlocks**: `math.nt.congruence` (congruence classes mod $n$ are the canonical number-theoretic instance of equivalence classes), `math.abst.quotient-group` (builds a new group structure directly on the set of equivalence classes).\n- **Cross-link**: KG lists `math.abst.quotient-group` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe into quotient-group construction once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.equivalence-class.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

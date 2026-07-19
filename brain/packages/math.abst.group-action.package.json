@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-action-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-action",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f6318e0f2d1acda7a9fc94504ee0c4884121e1e9b0a9861c852d41d4102be2f9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-action.md": "sha256:cff0286807954c912c6d9be36a6dd6dca8975e264481e4d41872f5cfb2650796"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.group-action",
+    "name": "Group Action",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.abst.group-theory",
+      "math.found.function-set-theoretic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-action-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-action (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-action.md": "sha256:cff0286807954c912c6d9be36a6dd6dca8975e264481e4d41872f5cfb2650796"
+      },
+      "contentHash": "sha256:97f54c3e2137e5d5826085e626e0f7654d275001ee5db1c34525e3beebd4d3d2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-action.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-action.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-action"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-action\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-action.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-action.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-action"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-action\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-action.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-action.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-action"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-action\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-action.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-action.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-action"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-action\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-action/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.group-action",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **group action** of $G$ on $X$ as a map $G\\times X\\to X$ (written $g\\cdot x$) satisfying BOTH: identity ($e\\cdot x=x$ for all $x$) and compatibility ($g\\cdot(h\\cdot x)=(gh)\\cdot x$ for all $g,h\\in G,x\\in X$) — and verify a specific map satisfies both axioms directly, reusing `math.found.function-set-theoretic`'s own verify-by-checking-cases procedure.\n- LO2: Define the **orbit** $Gx=\\{gx : g\\in G\\}$ (every place $x$ can be moved to) and the **stabilizer** $G_x=\\{g\\in G : gx=x\\}$ (every element that fixes $x$), compute both directly for a specific action, and verify $G_x$ is ALWAYS a genuine SUBGROUP of $G$ — not merely an arbitrary subset — reusing `math.abst.group-theory`'s own subgroup-verification framework.\n- LO3: State and numerically verify the **Orbit-Stabilizer theorem**, $|Gx|\\cdot|G_x|=|G|$ — recognizing orbit size and stabilizer size are NOT independent quantities; their product is forced to equal $|G|$ exactly, for the same group acting on any element.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-action",
+      "title": "ONLY-ONE-GROUP-ACTION-AXIOM-VERIFIED",
+      "content": "| MC-1 | ONLY-ONE-GROUP-ACTION-AXIOM-VERIFIED | Believing verifying only the identity axiom (or only compatibility) is sufficient to confirm a genuine group action, missing that BOTH must hold | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-action",
+      "title": "STABILIZER-ASSUMED-ARBITRARY-SUBSET",
+      "content": "| MC-2 | STABILIZER-ASSUMED-ARBITRARY-SUBSET | Believing the stabilizer G_x is just an arbitrary subset of G, missing that it is always guaranteed to be a genuine subgroup | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-action",
+      "title": "ORBIT-AND-STABILIZER-SIZES-ASSUMED-INDEPENDENT",
+      "content": "| MC-3 | ORBIT-AND-STABILIZER-SIZES-ASSUMED-INDEPENDENT | Believing orbit size and stabilizer size are independent, unrelated quantities, missing the Orbit-Stabilizer theorem's precise multiplicative constraint | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-action",
+      "title": "Both Axioms Must Be Verified (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Both Axioms Must Be Verified (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-action",
+      "title": "The Stabilizer Is Always a Genuine Subgroup (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Stabilizer Is Always a Genuine Subgroup (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-action",
+      "title": "Orbit and Stabilizer Sizes Are Linked, Not Independent (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Orbit and Stabilizer Sizes Are Linked, Not Independent (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-action",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-action",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For the same $D_3$ action on $\\{1,2,3\\}$, compute the orbit and stabilizer of vertex $2$.\n  2. Verify the Orbit-Stabilizer theorem numerically using your answer to problem 1.\n  3. Explain why the stabilizer of any element under a group action is guaranteed to contain the identity element.\n  4. Explain why a map satisfying only the identity axiom (but failing compatibility for some specific $g,h,x$) is not a genuine group action.\n- **P76 (Transfer Probe, mode = independence)**: \"A puzzle designer models a Rubik's-cube-like puzzle's set of possible moves as a group $G$ acting on the set $X$ of possible configurations. (a) Explain what the orbit of the solved configuration represents in this context (referencing which configurations are reachable). (b) Explain what the stabilizer of the solved configuration represents (referencing which move-sequences leave the solved state unchanged), and why this stabilizer is guaranteed to be a genuine subgroup of $G$, not just an arbitrary collection of moves. (c) If the puzzle designer discovers the orbit of the solved configuration is very large, explain, using the Orbit-Stabilizer theorem, what this implies about the size of the stabilizer, relative to $|G|$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-action",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.group-theory` (a group $(G,\\cdot)$ satisfying closure, associativity, identity, inverses; subgroup verification) and `math.found.function-set-theoretic` (verifying a relation is a genuine function by checking specific required properties).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.group-action/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-action",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.group-theory` (the group axioms and subgroup-verification framework this concept's stabilizer directly reuses), `math.found.function-set-theoretic` (the verify-by-checking-specific-cases procedure this concept's axiom verification directly reuses).\n- **Unlocks**: `math.abst.sylow-theorems` (uses group actions and the Orbit-Stabilizer theorem as core machinery).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-action.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
