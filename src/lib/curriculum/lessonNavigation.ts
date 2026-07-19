@@ -67,7 +67,15 @@ export function computeLessonLockState(lesson: CurriculumLesson, ctx: LessonLock
   const isMastered = topicData?.status === 'MASTERED'
   const isRevision = topicData?.status === 'REVISION'
   const isSkipped = topicData?.status === 'SKIPPED'
-  const isLocked = !isCompleted && !isCurrent && !isMastered && !isRevision && !isSkipped &&
+  // isPrevious excluded here deliberately: the numeric lesson counter
+  // (progress.currentLesson) can advance past a topic via the "skip"/
+  // soft-advance path (see canAdvanceToNextLesson) without ever writing a
+  // COMPLETED/MASTERED/REVISION TopicProgress row for it, so availableNodes
+  // (which is derived solely from those rows, see /api/topic-progress)
+  // can lag behind currentLesson. A lesson the student has already been
+  // moved past can never legitimately still be locked, regardless of
+  // whether its TopicProgress row exists yet.
+  const isLocked = !isCompleted && !isCurrent && !isPrevious && !isMastered && !isRevision && !isSkipped &&
     lesson.topicSlug !== undefined && !isKnownAvailable &&
     topicData?.status !== 'IN_PROGRESS' && topicData?.status !== 'MASTERED'
   return { isCompleted, isCurrent, isPrevious, isMastered, isRevision, isSkipped, isLocked }

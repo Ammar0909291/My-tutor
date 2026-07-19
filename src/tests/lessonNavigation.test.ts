@@ -48,6 +48,20 @@ describe('computeLessonLockState', () => {
     expect(state.isLocked).toBe(false)
   })
 
+  it('never locks a previous lesson even when its TopicProgress row was never written (currentLesson advanced via skip, so completedLessons/availableTopicSlugs lag behind) — production bug repro', () => {
+    const state = computeLessonLockState(lesson({ order: 2 }), {
+      // order 2 is < currentLesson (3) so isPrevious=true, but it's absent
+      // from BOTH completedLessons and availableTopicSlugs — the exact
+      // desync a "skip"/soft-advance produces.
+      progress: progress({ completedLessons: [1] }),
+      topicProgressMap: {},
+      availableTopicSlugs: [],
+    })
+    expect(state.isPrevious).toBe(true)
+    expect(state.isCompleted).toBe(false)
+    expect(state.isLocked).toBe(false)
+  })
+
   it('locks a future lesson whose topic is not yet in availableTopicSlugs', () => {
     const state = computeLessonLockState(lesson({ order: 5 }), {
       progress: progress({}), topicProgressMap: {}, availableTopicSlugs: ['phys.topic.4'],
