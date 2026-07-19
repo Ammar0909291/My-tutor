@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.significant-figures-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.significant-figures",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b92559a29ea2a1d0d62a0e677bc69816ed9c2f38714508162d7e5a16ccde196c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.significant-figures.md": "sha256:3d12ce14aeaf7ce61be39035635c0e362b75a67a3870c9014de69d167af292a6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.significant-figures",
+    "name": "Significant Figures",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.arith.rounding",
+      "math.arith.decimals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.significant-figures-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.significant-figures (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.significant-figures.md": "sha256:3d12ce14aeaf7ce61be39035635c0e362b75a67a3870c9014de69d167af292a6"
+      },
+      "contentHash": "sha256:88df7cc9637dd31cca77884d341f00a77506879312f2ec69e58233e0ea8f3fac",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.significant-figures.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.significant-figures.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.significant-figures\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.significant-figures.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.significant-figures.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.significant-figures\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.significant-figures.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.significant-figures.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.significant-figures\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.significant-figures.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.significant-figures.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.significant-figures\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.significant-figures/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the **multiplication/division rule**: when multiplying or dividing measured quantities, the result should be rounded to the SAME NUMBER of significant figures as the LEAST precise (fewest-significant-figure) input — directly reusing `math.arith.rounding`'s own sig-fig-counting rules (already mastered) as the tool for identifying \"least precise.\"\n- LO2: Apply the **addition/subtraction rule**: when adding or subtracting measured quantities, the result should be rounded to the SAME NUMBER OF DECIMAL PLACES as the least precise input (not the same number of SIGNIFICANT FIGURES) — directly refuting the misconception that the multiplication/division rule (matching sig-fig count) also applies to addition and subtraction.\n- LO3: Explain WHY these propagation rules exist: a calculated result **cannot be more precise than its least precise input** — recognizing that a calculator's many displayed digits do not manufacture genuine precision, and correctly rounding a final computed answer to reflect the true, honestly-supportable precision of the original measurements.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.significant-figures",
+      "title": "ADDITION-SUBTRACTION-RULE-CONFLATED-WITH-MULTIPLICATION-RULE",
+      "content": "| MC-1 | ADDITION-SUBTRACTION-RULE-CONFLATED-WITH-MULTIPLICATION-RULE | Applying the multiplication/division rule (match significant figures) to addition/subtraction, missing that addition/subtraction instead matches decimal places | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.significant-figures",
+      "title": "CALCULATOR-OUTPUT-REPORTED-WITHOUT-ROUNDING",
+      "content": "| MC-2 | CALCULATOR-OUTPUT-REPORTED-WITHOUT-ROUNDING | Reporting a calculated result with all the digits a calculator displays, without rounding to the appropriate number of significant figures based on the input precision | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.significant-figures",
+      "title": "LEAST-PRECISE-INPUT-MISIDENTIFIED",
+      "content": "| MC-3 | LEAST-PRECISE-INPUT-MISIDENTIFIED | Incorrectly identifying which input is \"least precise\" (fewest sig figs, or fewest decimal places, depending on the operation), often by miscounting sig figs using rules already established in `math.arith.rounding` | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Multiplication/Division: Match the Fewest Sig Figs (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Multiplication/Division: Match the Fewest Sig Figs (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Addition/Subtraction Uses a DIFFERENT Rule: Decimal Places (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Addition/Subtraction Uses a DIFFERENT Rule: Decimal Places (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Precision Cannot Be Manufactured by Calculation (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Precision Cannot Be Manufactured by Calculation (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Multiply $8.3$ (2 sig figs) by $2.456$ (4 sig figs), and round the result to the correct number of significant figures.\n  2. Add $56.2$ (1 decimal place) and $8.75$ (2 decimal places), and round the result to the correct number of decimal places.\n  3. A student computes $\\frac{15.0}{3.14159}$ and reports the calculator's full output, $4.774485...$. Round this to the correct number of significant figures, given $15.0$ has 3 sig figs.\n  4. Explain, in your own words, why the addition/subtraction rule uses decimal places while the multiplication/division rule uses significant figures — these are genuinely different counting systems, not the same rule applied twice.\n- **P76 (Transfer Probe, mode = independence — KG cross_link `math.num.floating-point` is not yet authored; a future revision may add a genuine cross-link probe into how computers represent and propagate rounding/precision limits in floating-point arithmetic once that entry exists)**: \"A chemist measures the mass of a sample as $12.34$ g and its volume as $5.6$ mL, and needs to compute its density (mass ÷ volume) to report in a lab notebook. (a) Determine how many significant figures the reported density should have, and explain which measurement determines this. (b) Compute the density and round it correctly. (c) If the chemist instead needed to compute the TOTAL mass of two samples, $12.34$ g and $5.6$ g, explain why the correct rounding rule for THIS operation (addition) is different from the density calculation's rule, and compute the correctly-rounded total mass.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.rounding` (the rounding procedure, and — critically — that concept's own already-established rules for COUNTING significant figures in a single number: nonzero digits always count, zeros between significant digits count, leading zeros never count, trailing zeros' significance depends on decimal-point context) and `math.arith.decimals` (decimal notation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.significant-figures/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.significant-figures",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.rounding` (the sig-fig-counting rules this concept directly reuses, without re-teaching, to identify the \"least precise\" input in a calculation), `math.arith.decimals` (the decimal notation these propagation rules are applied within).\n- **Unlocks**: `math.num.floating-point` (computer floating-point representation has its own precision limits, directly analogous to the significant-figure precision-tracking established here).\n- **Cross-link**: KG lists `math.num.floating-point` as both a requires-target relationship AND a cross-link (the KG lists it identically in both fields) — that concept is **not yet authored** in the corpus (checked via `ls docs/curriculum/blueprints/math.num.floating-point.md`, not found) — P76_mode = independence for this blueprint's transfer probe. A future revision may add a genuine cross-link probe into computer floating-point precision limits once that entry exists.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.significant-figures.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

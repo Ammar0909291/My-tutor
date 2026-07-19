@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.solution-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.solution-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fbedfe6a1d99d74cfa53f5a62e031a0b1fd334b3fb82e73bcb7cfcc612b235f1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.solution-types.md": "sha256:73ec1cc82aa8e40a17841d7911c2b33e486c64211e49a550c62cce73b68bc406"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.solution-types",
+    "name": "Types of Solutions",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.de.ode"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.solution-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.solution-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.solution-types.md": "sha256:73ec1cc82aa8e40a17841d7911c2b33e486c64211e49a550c62cce73b68bc406"
+      },
+      "contentHash": "sha256:f8217f0b27fb33364659d5c46100f47d899593f62753a294e0069108804e99bc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.solution-types.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.solution-types.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.solution-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.solution-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.solution-types.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.solution-types.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.solution-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.solution-types\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.solution-types.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.solution-types.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.solution-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.solution-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.solution-types.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.solution-types.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.solution-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.solution-types\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.solution-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.solution-types",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recall (directly reusing `math.de.ode`'s own already-established content, not re-deriving it) that a **general solution** of an $n$th-order ODE contains exactly $n$ arbitrary constants, and a **particular solution** fixes those constants via initial or boundary conditions.\n- LO2: Define a **singular solution** as a solution to the ODE that is genuinely NOT obtainable from the general solution for ANY choice of its constant(s) — a solution existing entirely OUTSIDE the general-solution family — and verify a specific singular solution by direct substitution into the ODE.\n- LO3: Explain WHY singular solutions arise: typically from a step in the general solution's derivation (e.g. separation of variables) that implicitly assumes some quantity is nonzero (to divide by it) — directly refuting the misconception that every solution to an ODE must be capturable by the general solution formula for some value of the constant(s).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.solution-types",
+      "title": "GENERAL-SOLUTION-ASSUMED-EXHAUSTIVE",
+      "content": "| MC-1 | GENERAL-SOLUTION-ASSUMED-EXHAUSTIVE | Believing every solution to an ODE must be obtainable from the general solution formula for some choice of the constant(s), missing that singular solutions genuinely lie outside this family | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.solution-types",
+      "title": "SINGULAR-SOLUTION-VERIFICATION-SKIPPED",
+      "content": "| MC-2 | SINGULAR-SOLUTION-VERIFICATION-SKIPPED | Asserting a candidate function is a singular solution without directly verifying it satisfies the original ODE by substitution | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.solution-types",
+      "title": "DIVISION-STEP-CAUSING-SINGULAR-SOLUTION-NOT-IDENTIFIED",
+      "content": "| MC-3 | DIVISION-STEP-CAUSING-SINGULAR-SOLUTION-NOT-IDENTIFIED | Being unable to trace a singular solution back to the specific step in the general solution's derivation (typically a division by a possibly-zero quantity) that excluded it | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.solution-types",
+      "title": "Recalling General and Particular Solutions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Recalling General and Particular Solutions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.solution-types",
+      "title": "A Genuine Singular Solution, Verified by Direct Substitution (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Genuine Singular Solution, Verified by Direct Substitution (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.solution-types",
+      "title": "Locating the Exact Gap: Division by a Possibly-Zero Quantity (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Locating the Exact Gap: Division by a Possibly-Zero Quantity (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.solution-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.solution-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the general solution of $y'=4x^3$ and find the particular solution satisfying $y(1)=2$.\n  2. For the ODE $y'=2\\sqrt{y}$ (separable), find the general solution via separation of variables.\n  3. Verify directly that $y\\equiv0$ satisfies $y'=2\\sqrt{y}$ from problem 2, and explain why it is (or isn't) obtainable from your general solution for any choice of the constant.\n  4. Identify the specific step in your separation-of-variables work from problem 2 where an implicit nonzero assumption was made, and explain how this connects to the singular solution you found in problem 3.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models a chemical reaction's concentration decay with the ODE $\\frac{dC}{dt} = -k\\,C^{1/2}$ (a common form for certain reaction orders), where $C(t)\\ge0$ is concentration and $k>0$ is a rate constant. (a) Solve this ODE via separation of variables to find the general solution. (b) Verify that $C(t)\\equiv0$ (the reaction has already fully completed, no reactant left) satisfies the original ODE. (c) Explain why $C(t)\\equiv0$ is a singular solution here, identifying the specific division step in part (a) responsible for excluding it from the general family, and explain why this makes physical sense (once concentration hits exactly zero, the reaction simply stays at zero forever — a genuinely different long-term behavior than any decaying-toward-zero curve in the general family).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.solution-types",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.ode` (an ODE relates an unknown function to its derivatives; the general solution has $n$ arbitrary constants for an $n$th-order equation; the particular solution fixes them via a condition like $y(x_0)$ — this concept's own MC-3 and worked examples already establish the general/particular distinction in full, which this concept directly reuses rather than re-teaching).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.solution-types/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.solution-types",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.ode` (the general/particular solution distinction this concept recalls briefly before introducing singular solutions as a third category).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.solution-types.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
