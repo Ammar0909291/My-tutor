@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.uniform-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.uniform-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f97dc7b8f784e113b162b752954c2e445ca35291af7b8602c4c2e5bdde355997",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.uniform-convergence.md": "sha256:8405245454d7490bc4bba9ec66a1461e3039740f6e0ba706aa89642f3efe18b2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.uniform-convergence",
+    "name": "Uniform Convergence",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.real.continuity-rigorous",
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.uniform-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.uniform-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.uniform-convergence.md": "sha256:8405245454d7490bc4bba9ec66a1461e3039740f6e0ba706aa89642f3efe18b2"
+      },
+      "contentHash": "sha256:833d6e617a35912b5687b9ac353e68b4ea1f21460b0d34397538b0abb25c4e45",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-convergence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-convergence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-convergence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-convergence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.uniform-convergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.uniform-convergence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.uniform-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.uniform-convergence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.uniform-convergence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **uniform convergence** $f_n\\to f$ on $E$ — $\\forall\\varepsilon>0\\ \\exists N: n>N\\Rightarrow\\sup_{x\\in E}|f_n(x)-f(x)|<\\varepsilon$ — and distinguish it from **pointwise** convergence (where the required $N$ may depend on $x$ itself): uniform convergence demands ONE $N$ that works simultaneously for EVERY $x\\in E$.\n- LO2: Apply the theorem \"a uniform limit of continuous functions is continuous,\" and identify a case where POINTWISE convergence of continuous functions fails to preserve continuity — recognizing uniform convergence as the genuinely stronger hypothesis actually required.\n- LO3: Apply the termwise integration and differentiation theorems, distinguishing their hypotheses: termwise integration requires only that $f_n\\to f$ **uniformly**, while termwise differentiation requires the stronger condition that the **derivatives** $f_n'$ **themselves** converge uniformly — a genuinely additional requirement, not automatically implied by uniform convergence of the $f_n$ alone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "POINTWISE-CONVERGENCE-CONFLATED-WITH-UNIFORM",
+      "content": "| MC-1 | POINTWISE-CONVERGENCE-CONFLATED-WITH-UNIFORM | Believing pointwise convergence at every point automatically implies uniform convergence, missing that uniform convergence requires a single N working for all points simultaneously | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "POINTWISE-LIMIT-OF-CONTINUOUS-ASSUMED-CONTINUOUS",
+      "content": "| MC-2 | POINTWISE-LIMIT-OF-CONTINUOUS-ASSUMED-CONTINUOUS | Believing the pointwise limit of a sequence of continuous functions must always be continuous, missing that only uniform convergence guarantees this | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "UNIFORM-CONVERGENCE-OF-FUNCTIONS-ASSUMED-SUFFICIENT-FOR-TERMWISE-DIFFERENTIATION",
+      "content": "| MC-3 | UNIFORM-CONVERGENCE-OF-FUNCTIONS-ASSUMED-SUFFICIENT-FOR-TERMWISE-DIFFERENTIATION | Believing uniform convergence of fₙ to f is sufficient to conclude fₙ' converges to f', missing that termwise differentiation requires the derivatives themselves to converge uniformly, a separate condition | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "One N for Every Point, Not a Different N Per Point (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"One N for Every Point, Not a Different N Per Point (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Pointwise Convergence Can Destroy Continuity (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pointwise Convergence Can Destroy Continuity (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Uniform Convergence of $f_n$ Does Not Give You Uniform Convergence of $f_n'$ (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Uniform Convergence of $f_n$ Does Not Give You Uniform Convergence of $f_n'$ (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Show that $f_n(x)=x/n$ converges uniformly to $0$ on $[0,1]$ by computing $\\sup_{x\\in[0,1]}|f_n(x)-0|$ directly.\n  2. Determine whether $h_n(x)=nx(1-x)^n$ converges uniformly on $[0,1]$ (compute the supremum distance as a function of $n$ and check whether it shrinks to $0$).\n  3. Explain, using the $x^n$ example, why the continuity-preservation theorem's hypothesis (uniform convergence) is genuinely necessary, not just a convenient technical condition.\n  4. Give a function sequence $f_n\\to f$ uniformly where you can still directly verify the derivatives do NOT converge uniformly (other than $\\sin(nx)/\\sqrt n$), and explain why termwise differentiation would be invalid there.\n- **P76 (Transfer Probe, mode = independence)**: \"A numerical analyst approximates a target function $f$ using a sequence of polynomial approximations $p_n$, and verifies $\\sup_{x\\in[0,1]}|p_n(x)-f(x)|\\to0$ (i.e., uniform convergence). (a) Using this lesson's theorem, explain what this immediately guarantees about $f$'s continuity, given that every $p_n$ is continuous. (b) The analyst wants to also approximate $f'$ using $p_n'$, and initially assumes this works automatically because $p_n\\to f$ uniformly. Using this lesson's distinction, explain what ADDITIONAL condition must be separately verified before concluding $p_n'\\to f'$. (c) A colleague argues 'since polynomials are about as well-behaved as functions get, uniform convergence of a polynomial sequence should be enough to guarantee everything, including termwise differentiation, automatically.' Using the $\\sin(nx)/\\sqrt n$-style reasoning from this lesson (even though that example isn't a polynomial), explain why smoothness of the individual functions does not exempt the analyst from separately checking the derivatives' uniform convergence.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.continuity-rigorous` (the $\\varepsilon$-$\\delta$ definition of continuity) and `math.seq.series-convergence` (sequence and series convergence, partial sums).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.uniform-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.uniform-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.continuity-rigorous` (the $\\varepsilon$-$\\delta$ continuity definition this concept's continuity-preservation theorem builds on), `math.seq.series-convergence` (sequence/series convergence machinery this concept's sup-norm definition extends).\n- **Unlocks**: `math.real.weierstrass-approximation` (uses uniform convergence directly — every continuous function on a closed interval is a UNIFORM limit of polynomials).\n- **Cross-link**: KG lists `math.de.fourier-convergence` as a cross-link — **not yet authored** (checked via `ls docs/curriculum/blueprints/` before setting P76_mode). $P76_{mode}=$ **independence**; a future revision may add a genuine cross-link transfer probe once that entry exists, connecting this concept's uniform-vs-pointwise distinction to the subtleties of Fourier series convergence (which is famously often only pointwise, or even weaker, without extra conditions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.uniform-convergence.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

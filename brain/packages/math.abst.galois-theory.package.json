@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.galois-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.galois-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0e3f63db0c93a513c493b4699ad152cd425bd541bbb4ff63a219c4e58eca322a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.galois-theory.md": "sha256:d8226877824a9551ccb91781dccb72b6a5472b81d716c9a1c4e8ad9fa2c6fc8f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.galois-theory",
+    "name": "Galois Theory",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.abst.algebraic-extension",
+      "math.abst.group-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.galois-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.galois-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.galois-theory.md": "sha256:d8226877824a9551ccb91781dccb72b6a5472b81d716c9a1c4e8ad9fa2c6fc8f"
+      },
+      "contentHash": "sha256:c1129fa5f3d24a08be6499d02caa5dd099e9bee913b82d6294944f9f3cbc0099",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-theory.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-theory.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-theory.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.galois-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.galois-theory.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.galois-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.galois-theory\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.galois-theory/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an $F$-automorphism of a field extension $K/F$ (a bijective RING homomorphism $K\\to K$ fixing every element of $F$) and the **Galois group** $\\text{Gal}(K/F)$ (all such automorphisms under composition, verified to be a genuine group), correctly distinguishing a valid $F$-automorphism from an arbitrary bijective relabeling of the extension's generators that fails to preserve the field operations.\n- LO2: State and verify, on one complete concrete example, the **Fundamental Theorem of Galois Theory** — a bijective, **inclusion-reversing** correspondence between intermediate fields of a Galois extension $K/F$ and subgroups of $\\text{Gal}(K/F)$: SMALLER subgroups correspond to LARGER intermediate fields, and vice versa.\n- LO3 *(orientation-level, given the research-level scope of this concept)*: Recognize that Galois theory resolves the classical \"solvability by radicals\" problem — a polynomial's roots always EXIST (guaranteed by the Fundamental Theorem of Algebra), but they can only be WRITTEN via a nested-radical formula (built from $+,-,\\times,\\div,\\sqrt[n]{\\ }$ applied to the coefficients) when the polynomial's Galois group is a SOLVABLE group — explaining, at a landmark-result level, why the general quintic has no radical formula (Abel–Ruffini), without deriving solvable-group theory in full.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.galois-theory",
+      "title": "GALOIS-AUTOMORPHISM-AS-ANY-RELABELING",
+      "content": "| MC-1 | GALOIS-AUTOMORPHISM-AS-ANY-RELABELING | Believing any bijective relabeling of an extension's generators defines a valid Galois group element, missing that it must be a genuine ring homomorphism preserving all algebraic relations | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.galois-theory",
+      "title": "GALOIS-CORRESPONDENCE-DIRECTION-PRESERVING",
+      "content": "| MC-2 | GALOIS-CORRESPONDENCE-DIRECTION-PRESERVING | Believing the Fundamental Theorem's correspondence between subgroups and intermediate fields is inclusion-PRESERVING (bigger subgroup ↔ bigger field), missing that it is inclusion-REVERSING | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.galois-theory",
+      "title": "UNSOLVABILITY-BY-RADICALS-CONFLATED-WITH-NONEXISTENCE-OF-ROOTS",
+      "content": "| MC-3 | UNSOLVABILITY-BY-RADICALS-CONFLATED-WITH-NONEXISTENCE-OF-ROOTS | Believing Abel–Ruffini's theorem (the general quintic has no radical formula) means the quintic's roots don't exist or can't be found at all, missing that it is specifically about formula-expressibility, not existence or numerical computability | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Automorphisms Must Preserve Structure, Not Just Relabel (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Automorphisms Must Preserve Structure, Not Just Relabel (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-theory",
+      "title": "The Correspondence Reverses Size (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Correspondence Reverses Size (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Roots Existing vs. Roots Being Expressible by a Formula (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Roots Existing vs. Roots Being Expressible by a Formula (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify directly that $\\tau:\\sqrt2\\mapsto\\sqrt2,\\sqrt3\\mapsto-\\sqrt3$ (fixing $\\mathbb{Q}$) preserves multiplicativity on the relation $(\\sqrt3)^2=3$.\n  2. State which subgroup of $\\text{Gal}(\\mathbb{Q}(\\sqrt2,\\sqrt3)/\\mathbb{Q})$ corresponds to the intermediate field $\\mathbb{Q}(\\sqrt2)$, and its order.\n  3. Explain, without computing anything new, why $|\\text{Gal}(K/\\mathbb{Q})|=4=[\\mathbb{Q}(\\sqrt2,\\sqrt3):\\mathbb{Q}]$ is not a coincidence for this particular (Galois) extension.\n  4. Explain the difference between \"the general quintic has no radical formula for its roots\" and \"the general quintic has no roots.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A student encounters the claim 'every polynomial equation can be solved using some formula involving roots, just like the quadratic formula.' (a) Using this lesson's roots-exist-vs-roots-expressible distinction, explain what is actually true and what is false about this claim for degree-5 polynomials. (b) The student then examines $\\mathbb{Q}(\\sqrt2,\\sqrt3)/\\mathbb{Q}$ and notices its Galois group has order 4, matching the extension's degree exactly, and asks whether this equality is guaranteed for EVERY field extension, or specifically for GALOIS extensions. Using this lesson's Fundamental Theorem framing, explain your answer. (c) A colleague claims 'since $S_5$ (the Galois group of the general quintic) has 120 elements, a large group, it should have \"enough room\" to be solvable, unlike smaller groups.' Explain, at the level of this lesson's landmark-result framing (without a full solvable-group proof), why group SIZE is not what determines solvability, referencing that $S_2,S_3,S_4$ (all smaller) ARE solvable while $S_5$ (larger) is not.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.algebraic-extension` (minimal polynomials; $[F(\\alpha):F]=\\deg(m_\\alpha)$; the Tower Law from `math.abst.field-extension`, including its own worked computation $[\\mathbb{Q}(\\sqrt2,\\sqrt3):\\mathbb{Q}]=4$) and `math.abst.group-theory` (group axioms; verifying a candidate structure is genuinely a group; group order and subgroups).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.galois-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.galois-theory",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.algebraic-extension` (minimal polynomials and the $[F(\\alpha):F]=\\deg(m_\\alpha)$ machinery, directly used to compute $[\\mathbb{Q}(\\sqrt2,\\sqrt3):\\mathbb{Q}]=4$ via the Tower Law from `math.abst.field-extension`), `math.abst.group-theory` (the group-axiom verification this concept applies to $\\text{Gal}(K/F)$, and the solvable-group concept invoked in LO3).\n- **Unlocks**: `math.abst.galois-group` (deepens the study of $\\text{Gal}(K/F)$ as an object in its own right, building directly on this concept's definition and Fundamental Theorem statement).\n- **Cross-link**: KG lists no cross_links for this concept (checked via `ls docs/curriculum/blueprints/` before setting P76_mode — none to check). $P76_{mode}=$ **independence**.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.galois-theory.md",
+        "startLine": 104,
+        "endLine": 110
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
