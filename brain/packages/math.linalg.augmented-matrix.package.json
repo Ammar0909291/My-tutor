@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.augmented-matrix-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.augmented-matrix",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4c7118eff6d21da5bfd576f5eed15e79a6fb5b2ebdb954b9d0072a49845f0ac7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.augmented-matrix.md": "sha256:ab7c8d6c7621d0e06306e550e5dac08325165d4c3dbfffe880acc60771abf484"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.augmented-matrix",
+    "name": "Augmented Matrix",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.linalg.linear-system"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.augmented-matrix-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.augmented-matrix (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.augmented-matrix.md": "sha256:ab7c8d6c7621d0e06306e550e5dac08325165d4c3dbfffe880acc60771abf484"
+      },
+      "contentHash": "sha256:e99806a4d5204518b631f97297abe974b18ac3e1d539acc04acd3c30911542f9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.augmented-matrix.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.augmented-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.augmented-matrix\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.augmented-matrix.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.augmented-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.augmented-matrix\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.augmented-matrix.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.augmented-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.augmented-matrix\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.augmented-matrix.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.augmented-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.augmented-matrix\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.augmented-matrix/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the **augmented matrix** $[A\\,|\\,b]$ for a linear system $Ax=b$ by appending the right-hand-side column $b$ to the coefficient matrix $A$, correctly separating coefficients (in $A$) from constants (in $b$) for each equation.\n- LO2: Explain why the augmented matrix is a **compact bookkeeping device**, not a new mathematical object with its own separate meaning — it packages exactly the same information as the original system of equations, in a form convenient for systematic row operations.\n- LO3: State that **row operations** performed on $[A\\,|\\,b]$ **preserve the solution set** of the underlying system — directly refuting the misconception that manipulating the augmented matrix's rows could accidentally change which values of the unknowns actually solve the system, provided only the three legal row operations (swap, scale by a nonzero constant, add a multiple of one row to another) are used.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "ROW-OPERATIONS-FEARED-TO-ALTER-SOLUTION-SET",
+      "content": "| MC-1 | ROW-OPERATIONS-FEARED-TO-ALTER-SOLUTION-SET | Believing legal row operations on an augmented matrix might accidentally change the underlying system's solution set, rather than recognizing they are guaranteed to preserve it | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "AUGMENTED-MATRIX-COLUMN-ORDER-MISALIGNED",
+      "content": "| MC-2 | AUGMENTED-MATRIX-COLUMN-ORDER-MISALIGNED | Placing a variable's coefficient in the wrong column (misaligning which column corresponds to which variable, especially when a variable is absent from an equation, e.g. a missing $x$ term should be recorded as $0$, not omitted) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "AUGMENTED-MATRIX-TREATED-AS-A-DIFFERENT-MATHEMATICAL-OBJECT",
+      "content": "| MC-3 | AUGMENTED-MATRIX-TREATED-AS-A-DIFFERENT-MATHEMATICAL-OBJECT | Treating the augmented matrix as introducing new mathematical content beyond the original system, rather than recognizing it as a pure notational repackaging of the same equations | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Building the Augmented Matrix Row by Row (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Building the Augmented Matrix Row by Row (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "The Matrix Is Bookkeeping, Not New Math (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Matrix Is Bookkeeping, Not New Math (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Row Operations Preserve the Solution Set (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Row Operations Preserve the Solution Set (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Write the augmented matrix for the system $x+2y-z=4$, $3y+z=5$, $2x-y=1$.\n  2. Given the augmented matrix $\\left(\\begin{array}{cc|c}1&2&5\\\\0&3&9\\end{array}\\right)$, write out the corresponding system of equations explicitly, with variable names restored.\n  3. Perform the row operation \"Row 1 $\\to$ 2$\\times$Row 1\" on $\\left(\\begin{array}{cc|c}1&2&5\\\\0&3&9\\end{array}\\right)$, and verify (by solving both the original and the new system) that the solution set is unchanged.\n  4. Explain, in your own words, why performing a row operation on an augmented matrix can never change the underlying system's solution set, referencing the equivalent equation-level operation each row operation corresponds to.\n- **P76 (Transfer Probe, mode = independence)**: \"A student is solving a system of 4 equations in 4 unknowns by hand, tracking their work using an augmented matrix. After several row operations, they arrive at a row that reads $\\left(\\begin{array}{cccc|c}0&0&0&5&10\\end{array}\\right)$. (a) Translate this row back into an equation, and solve for the corresponding variable. (b) Explain why the student can trust that this variable's value is correct for the ORIGINAL system, even though this specific row never appeared in the original augmented matrix. (c) A classmate suggests that using an augmented matrix is 'just for organization' and doesn't actually change how the algebra works underneath — explain whether this is an accurate description, using Component 3's bookkeeping-device framing.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.linear-system` (a system of $m$ linear equations in $n$ unknowns written in matrix form $Ax=b$, and the three possible outcomes: unique solution, no solution, or infinitely many solutions, governed by rank).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.linalg.augmented-matrix/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.augmented-matrix",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.linear-system` (the system $Ax=b$ this concept's augmented matrix directly packages).\n- **Unlocks**: `math.linalg.row-reduction` (the systematic process of applying row operations to $[A\\,|\\,b]$ to reach echelon form, built directly on this concept's construction and solution-preservation guarantee).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.augmented-matrix.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

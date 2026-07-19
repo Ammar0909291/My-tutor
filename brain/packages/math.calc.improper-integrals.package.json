@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.improper-integrals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.improper-integrals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6d53d4ae36a60e9de94cf300b978e5b664c3590b0caa409118f97eea48f0dbd1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.improper-integrals.md": "sha256:b9b128fe5bc05360a498e79d0d86d3be447fd0decf847aa8148a797561dc13c7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.improper-integrals",
+    "name": "Improper Integrals",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.definite-integral",
+      "math.calc.limits-at-infinity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.improper-integrals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.improper-integrals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.improper-integrals.md": "sha256:b9b128fe5bc05360a498e79d0d86d3be447fd0decf847aa8148a797561dc13c7"
+      },
+      "contentHash": "sha256:fc7aba299c4a384b6b9b09e5d3ea387a100333e7e36e33dc805d6565c5dfc854",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.improper-integrals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.improper-integrals.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.improper-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.improper-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.improper-integrals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.improper-integrals.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.improper-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.improper-integrals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.improper-integrals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.improper-integrals.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.improper-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.improper-integrals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.improper-integrals.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.improper-integrals.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.improper-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.improper-integrals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.improper-integrals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **improper integral with an infinite limit** (Type I), $\\int_a^\\infty f(x)\\,dx$, as $\\lim_{t\\to\\infty}\\int_a^t f(x)\\,dx$ — an ordinary (proper) definite integral (`math.calc.definite-integral`) up to a finite cutoff $t$, followed by a limit at infinity (`math.calc.limits-at-infinity`) as $t\\to\\infty$.\n- LO2: Define an **improper integral with a singularity** (Type II), where the integrand is unbounded at some point in $[a,b]$ (e.g. at an endpoint), as a limit approaching that point from the proper-integral side — and correctly identify a singularity requiring this treatment, directly refuting the misconception that an integral is only \"improper\" when infinity appears explicitly in the limits.\n- LO3: Determine whether an improper integral **converges** (the defining limit exists and is finite) or **diverges** (the limit fails to exist or is infinite), and correctly conclude that a divergent improper integral has **no numeric value** — refuting the misconception that every improper integral, having a well-defined-looking symbolic setup, must evaluate to some specific finite number.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "IMPROPRIETY-ASSUMED-TO-REQUIRE-INFINITE-LIMITS",
+      "content": "| MC-1 | IMPROPRIETY-ASSUMED-TO-REQUIRE-INFINITE-LIMITS | Believing an integral is only improper when infinity literally appears in its limits of integration, missing that a singularity in the integrand (even with finite limits) is an equally valid source of impropriety | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "IMPROPER-INTEGRAL-ASSUMED-TO-ALWAYS-CONVERGE",
+      "content": "| MC-2 | IMPROPER-INTEGRAL-ASSUMED-TO-ALWAYS-CONVERGE | Assuming every improper integral, since it is set up using valid rules, must evaluate to some specific finite number, missing that divergence (no value at all) is a genuine and common outcome requiring verification | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "SINGULARITY-LOCATION-OVERLOOKED-WITHIN-INTERVAL",
+      "content": "| MC-3 | SINGULARITY-LOCATION-OVERLOOKED-WITHIN-INTERVAL | Failing to notice a singularity occurring at an INTERIOR point of the interval of integration (not just at an endpoint), leading to an incorrect direct computation that ignores the blow-up | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Type I: Proper Integral, Then a Limit (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Type I: Proper Integral, Then a Limit (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Type II: A Singularity Doesn't Require Infinite Limits (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Type II: A Singularity Doesn't Require Infinite Limits (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Convergence Must Be Checked, Never Assumed (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Convergence Must Be Checked, Never Assumed (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Evaluate $\\int_1^\\infty \\frac{1}{x^3}\\,dx$, showing the proper-integral-then-limit process explicitly.\n  2. Evaluate $\\int_0^4 \\frac{1}{\\sqrt{4-x}}\\,dx$ (identify where the singularity is located first, before setting up the limit).\n  3. Evaluate $\\int_1^\\infty \\frac{1}{\\sqrt x}\\,dx$ and determine whether it converges or diverges, contrasting your result with Example 1's convergent case.\n  4. A student claims that $\\int_{-1}^{1}\\frac{1}{x}\\,dx$ can be computed directly as an ordinary definite integral, since both limits of integration are finite. Explain what's wrong with this claim, identifying the specific issue with the integrand.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist models the total energy radiated by a decaying process over ALL future time as $E = \\int_0^\\infty P_0 e^{-kt}\\,dt$, where $P_0,k>0$ are constants representing initial power and decay rate. (a) Set up and evaluate this improper integral using the proper-integral-then-limit process, expressing the total energy in terms of $P_0$ and $k$. (b) Explain, using the convergence-must-be-checked principle from Example 3's contrast, why the physicist cannot simply assume this integral converges just because it represents a physically sensible quantity (total radiated energy) — the convergence must still be verified mathematically. (c) If instead the power decayed as $P(t) = P_0/(1+t)$ rather than exponentially, explain (without necessarily completing the full computation) why you would suspect this integral might diverge, based on the pattern observed between Example 1 and Example 3's contrasting outcomes for $1/x^2$ versus $1/x$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.definite-integral` (the definite integral as a limit of Riemann sums, representing signed area, always producing a single well-defined real number for a proper integral over a finite interval with a bounded integrand) and `math.calc.limits-at-infinity` (computing $\\lim_{t\\to\\infty}g(t)$, and the distinction between limits at infinity and infinite limits at a finite point).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.improper-integrals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.improper-integrals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.definite-integral` (the proper integral this concept's limit is built from), `math.calc.limits-at-infinity` (the limit-at-infinity machinery directly reused for Type I improper integrals).\n- **Unlocks**: `math.seq.integral-test` (a series convergence test that directly compares a series to an improper integral, relying on the convergence/divergence distinction established here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.improper-integrals.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

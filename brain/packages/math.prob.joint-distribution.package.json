@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.joint-distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.joint-distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:72577910ee31fc41f1aa2e8c84bfda3cb36302472f78db7dd7ad8f57e109fd89",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.joint-distribution.md": "sha256:9d5a0d1e0930e8bcfec4e68ec6d2cbc5df0880c1ade37f17386de83359730fe0"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.joint-distribution",
+    "name": "Joint Distribution",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.prob.distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.joint-distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.joint-distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.joint-distribution.md": "sha256:9d5a0d1e0930e8bcfec4e68ec6d2cbc5df0880c1ade37f17386de83359730fe0"
+      },
+      "contentHash": "sha256:958a6dd4ee0bc908e367f65011277aadbd7bac204d3948f16b7c8016e3798d00",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.joint-distribution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.joint-distribution.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.joint-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.joint-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.joint-distribution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.joint-distribution.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.joint-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.joint-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.joint-distribution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.joint-distribution.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.joint-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.joint-distribution\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.joint-distribution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.joint-distribution.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.joint-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.joint-distribution\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.joint-distribution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **joint distribution** of a pair of random variables $(X,Y)$ via the joint CDF $F(x,y)=P(X\\le x, Y\\le y)$, extending `math.prob.distribution`'s single-variable framework by describing how $X$ and $Y$ behave **together**, not each in isolation.\n- LO2: Compute with the **joint PMF** $p(x,y)=P(X=x,Y=y)$ for discrete pairs, and the **joint PDF** $f(x,y)$ for continuous pairs (where $P((X,Y)\\in A) = \\iint_A f(x,y)\\,dx\\,dy$) — recognizing these as the joint analogues of the single-variable PMF/PDF.\n- LO3: Recover the **marginal distribution** of $X$ alone (or $Y$ alone) from a joint distribution — by summing (discrete) or integrating (continuous) the joint PMF/PDF over all values of the other variable — directly refuting the misconception that the marginal distribution of $X$ can be read off from the joint distribution without actually summing/integrating out $Y$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "MARGINAL-READ-DIRECTLY-FROM-JOINT-ENTRY",
+      "content": "| MC-1 | MARGINAL-READ-DIRECTLY-FROM-JOINT-ENTRY | Believing a marginal probability can be read directly from a single entry of the joint PMF/PDF, rather than requiring a genuine sum (discrete) or integral (continuous) across the other variable | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "JOINT-PDF-INTEGRATION-REGION-MISIDENTIFIED",
+      "content": "| MC-2 | JOINT-PDF-INTEGRATION-REGION-MISIDENTIFIED | Integrating a joint PDF over the wrong region (e.g. using constant bounds when the actual support is a non-rectangular region, like Example 3's triangle) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "JOINT-DISTRIBUTION-ASSUMED-DETERMINED-BY-MARGINALS-ALONE",
+      "content": "| MC-3 | JOINT-DISTRIBUTION-ASSUMED-DETERMINED-BY-MARGINALS-ALONE | Assuming the two marginal distributions of $X$ and $Y$ together fully determine the joint distribution, missing that the joint distribution can carry additional information (about the relationship between $X$ and $Y$) beyond what either marginal reveals | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Joint Distribution: Describing Two Variables Together (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Joint Distribution: Describing Two Variables Together (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Joint PMF/PDF as the Direct Two-Variable Analogue (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Joint PMF/PDF as the Direct Two-Variable Analogue (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Marginals Require Genuinely Summing/Integrating Out (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Marginals Require Genuinely Summing/Integrating Out (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Using the two-dice joint PMF from Example 1, compute $F(2,4) = P(X\\le2,Y\\le4)$ by directly counting the qualifying pairs.\n  2. Using the same joint PMF, find the marginal distribution of $Y$ alone (i.e., state $P(Y=y)$ for each $y=1,\\dots,6$), showing the summing-out process explicitly for at least one value.\n  3. For the joint PDF $f(x,y)=2$ on $0\\le x\\le y\\le1$ from Example 3, find the marginal PDF of $Y$, $f_Y(y) = \\int_0^y 2\\,dx$, and verify it integrates to $1$ over $[0,1]$.\n  4. Explain, in your own words, why the marginal PDF $f_X(x)=2(1-x)$ looks different from the joint PDF's constant value $f(x,y)=2$, even though the marginal is \"derived from\" the joint.\n- **P76 (Transfer Probe, mode = independence)**: \"A weather station records, for each day, both the amount of rainfall $X$ and the average temperature $Y$, with some known joint distribution $p(x,y)$ (discrete categories, say). (a) Explain what question the joint distribution $p(x,y)$ answers that neither the marginal distribution of $X$ alone nor the marginal distribution of $Y$ alone can answer by itself. (b) Describe, in words (no need to compute), the process of obtaining the marginal distribution of rainfall $X$ alone from this joint distribution. (c) A colleague claims: 'once you know the joint distribution, you already automatically know both marginals without any further work — they're just built in.' Explain what's importantly correct about this claim (the marginals ARE determined by the joint) and what's importantly misleading about it (recovering them still requires an explicit summation/integration step).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.distribution` (a distribution is the complete probabilistic description of a random variable, equivalently given by CDF/PMF/PDF, and a single summary statistic is never the whole story).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.prob.joint-distribution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.joint-distribution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.distribution` (the single-variable CDF/PMF/PDF framework this concept extends to pairs of random variables).\n- **Unlocks**: `math.prob.covariance` (which measures the relationship between $X$ and $Y$ using their joint distribution, directly building on the marginal-vs-joint distinction established here).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.joint-distribution.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
