@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.complex-integration-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.complex-integration",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3d6af195b58c281ba890d83a14f58097b8e90394c9f46b359c1ed216dc7f3b58",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.complex-integration.md": "sha256:237cc18dd257012295dd82c447b23512db868ca4b5ff809f98e01031d3d76b6a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cx.complex-integration",
+    "name": "Complex Line Integral",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.analytic-functions",
+      "math.calc.line-integrals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.complex-integration-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.complex-integration (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.complex-integration.md": "sha256:237cc18dd257012295dd82c447b23512db868ca4b5ff809f98e01031d3d76b6a"
+      },
+      "contentHash": "sha256:1eb8982badde9cbe233a0e69b873048dc537632d0a166a0fd866269cddcfdcd0",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-integration.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-integration.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-integration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-integration\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-integration.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-integration.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-integration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-integration\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-integration.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-integration.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-integration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-integration\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.complex-integration/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.complex-integration",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute a **complex line integral** $\\int_C f(z)\\,dz$ for a piecewise $C^1$ curve $\\gamma:[a,b]\\to\\mathbb{C}$, by substituting the parametrization: $\\int_C f(z)\\,dz = \\int_a^b f(\\gamma(t))\\gamma'(t)\\,dt$, reducing to an ordinary (complex-valued) single-variable integral.\n- LO2: State and apply the complex line integral's **linearity** ($\\int_C(af+bg)\\,dz = a\\int_Cf\\,dz+b\\int_Cg\\,dz$) and **reversal-of-path** property ($\\int_{-C}f\\,dz = -\\int_Cf\\,dz$), correctly recognizing these mirror the analogous properties of the real vector line integral already studied.\n- LO3: State and apply the **Estimation Lemma** ($|\\int_C f\\,dz| \\leq \\max_{z\\in C}|f(z)|\\cdot\\text{length}(C)$) as a practical BOUND on a complex integral's magnitude, without needing to compute the integral exactly — and correctly recognize this gives an upper bound only, not the integral's actual value.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-integration",
+      "title": "REVERSAL-PROPERTY-NOT-TRUSTED-AS-RELIABLE-SHORTCUT",
+      "content": "| MC-1 | REVERSAL-PROPERTY-NOT-TRUSTED-AS-RELIABLE-SHORTCUT | Treating the reversal-of-path property as needing independent re-verification each time rather than a proven, reliable shortcut always safe to apply directly | Minor |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-integration",
+      "title": "ESTIMATION-LEMMA-BOUND-MISTAKEN-FOR-EXACT-VALUE",
+      "content": "| MC-2 | ESTIMATION-LEMMA-BOUND-MISTAKEN-FOR-EXACT-VALUE | Believing the Estimation Lemma's upper bound IS the integral's actual value, rather than recognizing it only guarantees an upper limit that may or may not be tight | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-integration",
+      "title": "MAX-OF-F-ON-C-COMPUTED-INCORRECTLY",
+      "content": "| MC-3 | MAX-OF-F-ON-C-COMPUTED-INCORRECTLY | When applying the Estimation Lemma, incorrectly computing $\\max_{z\\in C}|f(z)|$ — e.g. evaluating $|f|$ at only the curve's endpoints rather than checking its behavior across the ENTIRE curve | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-integration",
+      "title": "Computing via Parametrization, Grounded in the Real Line Integral (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing via Parametrization, Grounded in the Real Line Integral (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-integration",
+      "title": "The Estimation Lemma as a Bound, Not an Exact Value (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Estimation Lemma as a Bound, Not an Exact Value (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-integration",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.complex-integration",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\int_C z\\,dz$ where $C$ is the straight segment from $0$ to $2i$.\n  2. Given $\\int_C f(z)\\,dz = 3-2i$ for some curve $C$, find $\\int_{-C}f(z)\\,dz$ using the reversal property.\n  3. Given $g,h$ with $\\int_C g\\,dz=1+i$ and $\\int_C h\\,dz=2-i$, find $\\int_C(3g-2h)\\,dz$ using linearity.\n  4. Use the Estimation Lemma to bound $\\left|\\int_C e^{iz}\\,dz\\right|$ where $C$ is the segment from $0$ to $2$ on the real axis (hint: find $\\max|e^{iz}|$ on this segment, and the segment's length).\n- **P76 (Transfer Probe, mode = cross-link probe against `math.calc.line-integrals`)**: \"Recall from your `math.calc.line-integrals` lesson that the VECTOR line integral $\\int_C\\mathbf{F}\\cdot d\\mathbf{r}$ flips sign under path reversal ($\\int_{-C}\\mathbf{F}\\cdot d\\mathbf{r}=-\\int_C\\mathbf{F}\\cdot d\\mathbf{r}$), while the SCALAR line integral $\\int_C f\\,ds$ does not, because $ds=\\|\\mathbf{r}'(t)\\|\\,dt$ is built from a norm (direction-independent) while $d\\mathbf{r}=\\mathbf{r}'(t)\\,dt$ retains the actual vector (direction-dependent). (a) Using this exact reasoning, explain why the complex line integral $\\int_C f(z)\\,dz$ — built from $dz=\\gamma'(t)\\,dt$ — behaves like the VECTOR case (flips sign under reversal) rather than the scalar case. (b) Is there an analogous 'complex SCALAR line integral' built from something like $|\\gamma'(t)|\\,dt$ (an arc-length-style element) that would NOT flip sign the way $\\int_C f\\,dz$ does? Explain briefly why such an object could in principle be defined (even though it's not the standard complex line integral this lesson focuses on), by direct analogy with the real scalar case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.complex-integration",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.analytic-functions` (holomorphic functions, complex differentiability) and `math.calc.line-integrals` (the real vector line integral $\\int_C\\mathbf{F}\\cdot d\\mathbf{r}$, its parametrization-based computation, linearity, and path-reversal sign-flip behavior — this concept directly generalizes those ideas to complex-valued integrands).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.complex-integration/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.complex-integration",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.analytic-functions` (holomorphic functions, the typical integrands this concept and its successor theorems concern), `math.calc.line-integrals` (the real vector line integral, whose parametrization-based computation, linearity, and reversal properties this concept directly generalizes).\n- **Unlocks**: `math.cx.cauchy-theorem` (Cauchy's Theorem, the foundational result of complex analysis, is stated directly in terms of this concept's complex line integral).\n- **Cross-link**: KG lists `math.calc.line-integrals` as a cross-link. Verified via directory listing that `docs/curriculum/blueprints/math.calc.line-integrals.md` **is already authored** (authored earlier in this same batch — confirmed: the scalar-vs-vector line integral distinction, with $ds$ built from a norm versus $d\\mathbf{r}$ retaining direction, and the corresponding reversal-behavior difference). The P76 transfer probe above directly requires the learner to transfer that exact scalar/vector structural reasoning to explain why the complex line integral behaves like the VECTOR case — the seventh instance in this corpus of a genuine, content-verified cross-link probe, and the first case where the cross-link target was authored earlier in the SAME batch as the referencing concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-integration.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

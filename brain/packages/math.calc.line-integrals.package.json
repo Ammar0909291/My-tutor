@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.line-integrals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.line-integrals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:10d56cf8e1cbba0100e2965f19c309e0e0c8581ba8128901ef0977a24629220f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.line-integrals.md": "sha256:b8faf1127ec55cd2cf248552b061369b8065e5b0fc6a41fac8e7758eb73c7bc1"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.line-integrals",
+    "name": "Line Integrals",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.parametric-curves",
+      "math.geom.vectors-3d"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.line-integrals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.line-integrals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.line-integrals.md": "sha256:b8faf1127ec55cd2cf248552b061369b8065e5b0fc6a41fac8e7758eb73c7bc1"
+      },
+      "contentHash": "sha256:891db860337274cbb68e0efed21815aeff95e4fca6d2aa7c8aff6c66d61c0520",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.line-integrals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.line-integrals.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.line-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.line-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.line-integrals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.line-integrals.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.line-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.line-integrals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.line-integrals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.line-integrals.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.line-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.line-integrals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.line-integrals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Set up and compute a **scalar line integral** $\\int_C f\\,ds$ — parametrize the curve $C$ via $\\mathbf{r}(t)$, use $ds=\\|\\mathbf{r}'(t)\\|\\,dt$, and reduce to an ordinary single-variable integral over the parameter $t$.\n- LO2: Set up and compute a **vector line integral** $\\int_C \\mathbf{F}\\cdot d\\mathbf{r}$ (representing work done by a force field $\\mathbf{F}$ along $C$) — parametrize, use $d\\mathbf{r}=\\mathbf{r}'(t)\\,dt$, and reduce to $\\int_a^b \\mathbf{F}(\\mathbf{r}(t))\\cdot\\mathbf{r}'(t)\\,dt$.\n- LO3: Correctly distinguish the two integral types' behavior under **path reversal**: the scalar line integral $\\int_C f\\,ds$ is UNCHANGED if the curve is traversed in reverse, while the vector line integral $\\int_C \\mathbf{F}\\cdot d\\mathbf{r}$ **changes sign** under reversal — reflecting the physical fact that work done depends on DIRECTION of travel, while arc-length-weighted totals do not.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.line-integrals",
+      "title": "BOTH-INTEGRAL-TYPES-ASSUMED-TO-FLIP-SIGN-UNDER-REVERSAL",
+      "content": "| MC-1 | BOTH-INTEGRAL-TYPES-ASSUMED-TO-FLIP-SIGN-UNDER-REVERSAL | Believing both the scalar and vector line integral flip sign under path reversal, rather than recognizing only the vector line integral does | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.line-integrals",
+      "title": "ARC-LENGTH-ELEMENT-CONFUSED-WITH-VECTOR-DIFFERENTIAL",
+      "content": "| MC-2 | ARC-LENGTH-ELEMENT-CONFUSED-WITH-VECTOR-DIFFERENTIAL | Confusing $ds=\\|\\mathbf{r}'(t)\\|\\,dt$ (a scalar, always positive) with $d\\mathbf{r}=\\mathbf{r}'(t)\\,dt$ (a vector, direction-dependent), applying the wrong substitution to the wrong integral type | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.line-integrals",
+      "title": "PARAMETRIZATION-DIRECTION-NOT-TRACKED-FOR-VECTOR-INTEGRALS",
+      "content": "| MC-3 | PARAMETRIZATION-DIRECTION-NOT-TRACKED-FOR-VECTOR-INTEGRALS | When computing a vector line integral, failing to correctly track which direction the chosen parametrization actually traces the curve, leading to an unintended sign error | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Setting Up Both Integral Types via Parametrization (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Setting Up Both Integral Types via Parametrization (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Path Reversal: Scalar Unchanged, Vector Flips Sign (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Path Reversal: Scalar Unchanged, Vector Flips Sign (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\int_C xy\\,ds$ where $C$ is the line segment from $(0,0)$ to $(1,2)$.\n  2. Compute the work done by $\\mathbf{F}(x,y)=(2x,y)$ along the same segment as problem 1.\n  3. Compute the work done by $\\mathbf{F}(x,y)=(2x,y)$ along the SAME segment but traversed in the reverse direction (from $(1,2)$ to $(0,0)$), and confirm the sign flips relative to problem 2's answer.\n  4. Explain, in your own words, why the scalar line integral would NOT flip sign for the same path reversal in problem 3, using this lesson's arc-length-vs-work distinction.\n- **P76 (Transfer Probe, mode = independence)**: \"A hiker walks along a mountain trail (a specific curve $C$), and a meteorologist wants to compute (a) the total accumulated temperature exposure, weighted by how far the hiker walked at each temperature (a scalar line integral of a temperature field along the trail), and separately (b) the total work done by a headwind force field pushing against the hiker throughout the hike (a vector line integral). (a) Explain why, if the hiker instead walked the EXACT same trail in reverse (returning the way they came), the temperature-exposure calculation would give the SAME total. (b) Explain why the headwind work calculation would NOT simply repeat the same value, and in fact should be expected to change (potentially even flip sign, if a pure headwind on the way out becomes a pure tailwind on the way back) — connecting your answer directly to this lesson's structural distinction between the two integral types.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.parametric-curves` (curves given by $x=f(t),y=g(t)$, or in vector form $\\mathbf{r}(t)$) and `math.geom.vectors-3d` (dot products, vector arithmetic in 3D).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.line-integrals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.line-integrals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.parametric-curves` (curves given by a parametrization $\\mathbf{r}(t)$, the essential setup tool for both integral types), `math.geom.vectors-3d` (dot products and vector arithmetic, needed for the vector line integral).\n- **Unlocks**: `math.calc.greens-theorem` (Green's Theorem directly relates a vector line integral around a closed curve to a double integral over the enclosed region, building immediately on this concept's vector line integral).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.line-integrals.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

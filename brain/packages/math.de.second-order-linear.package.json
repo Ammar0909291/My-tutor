@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.second-order-linear-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.second-order-linear",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:51f6c2b698e03b4974c6d3bb3cee31ee5b7857faa62e36c43a4a576a578a0807",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.second-order-linear.md": "sha256:d211e7f11c635ab50613e51dd0ee5a20aa2173591c242f4b666f712234dc354d"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.de.second-order-linear",
+    "name": "Second-Order Linear ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.de.second-order-ode",
+      "math.de.ode-linearity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.second-order-linear-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.second-order-linear (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.second-order-linear.md": "sha256:d211e7f11c635ab50613e51dd0ee5a20aa2173591c242f4b666f712234dc354d"
+      },
+      "contentHash": "sha256:eb1b755c4e5ce47f2cc357cbe55aa8a633247c896589796c4d84f96102de35c3",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-linear.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-linear.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-linear\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-linear.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-linear.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-linear\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-linear.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-linear.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-linear"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-linear\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.second-order-linear/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize the standard form of a **second-order linear ODE**, $y''+P(x)y'+Q(x)y=G(x)$, and correctly classify a given second-order ODE as linear (matching this form) using the linearity criterion already established.\n- LO2: Distinguish **homogeneous** ($G(x)=0$, so $y''+P(x)y'+Q(x)y=0$) from **nonhomogeneous** ($G(x)\\neq0$) second-order linear ODEs, and correctly identify which case a given equation falls into.\n- LO3: State and apply the **superposition principle** for the homogeneous case: if $y_1$ and $y_2$ are both solutions, then $c_1y_1+c_2y_2$ is ALSO a solution for any constants $c_1,c_2$ — and explain why this means the homogeneous solution set forms a **vector space**, while explicitly recognizing superposition FAILS for the nonhomogeneous case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.second-order-linear",
+      "title": "SUPERPOSITION-APPLIED-TO-NONHOMOGENEOUS-CASE",
+      "content": "| MC-1 | SUPERPOSITION-APPLIED-TO-NONHOMOGENEOUS-CASE | Believing the superposition principle (combinations of solutions are solutions) applies to nonhomogeneous linear ODEs the same way it applies to homogeneous ones | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.second-order-linear",
+      "title": "HOMOGENEOUS-NONHOMOGENEOUS-DETERMINED-BY-COEFFICIENT-STRUCTURE",
+      "content": "| MC-2 | HOMOGENEOUS-NONHOMOGENEOUS-DETERMINED-BY-COEFFICIENT-STRUCTURE | Determining homogeneous/nonhomogeneous status by looking at the complexity of $P(x)$ or $Q(x)$, rather than correctly checking only whether the right-hand side $G(x)$ is zero | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.second-order-linear",
+      "title": "SOLUTION-SET-VECTOR-SPACE-STATUS-ASSUMED-FOR-NONHOMOGENEOUS",
+      "content": "| MC-3 | SOLUTION-SET-VECTOR-SPACE-STATUS-ASSUMED-FOR-NONHOMOGENEOUS | Believing the solution set of a nonhomogeneous linear ODE also forms a vector space, not recognizing this structural fact is specific to the homogeneous case | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Standard Form, Homogeneous vs. Nonhomogeneous (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Standard Form, Homogeneous vs. Nonhomogeneous (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Superposition Is Strictly a Homogeneous Privilege (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Superposition Is Strictly a Homogeneous Privilege (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Classify $y''-2xy'+y=0$ as homogeneous or nonhomogeneous, identifying $P(x),Q(x),G(x)$.\n  2. Classify $x^2y''+y'-3y=x^3$ as homogeneous or nonhomogeneous, identifying $P(x),Q(x),G(x)$.\n  3. For the homogeneous equation $y''-4y=0$, verify that $y_1=e^{2x}$ and $y_2=e^{-2x}$ are both solutions, then verify that $5y_1-3y_2$ is also a solution.\n  4. For the nonhomogeneous equation $y''-4y=8$, verify that $y_1=-2$ is a particular solution, then check whether $3y_1$ is also a solution, explaining the result.\n- **P76 (Transfer Probe, mode = independence)**: \"A mechanical engineer models a vibrating beam's displacement using a second-order linear ODE. In the FREE-vibration case (no external forcing), the equation is homogeneous; when an external periodic force is applied, it becomes nonhomogeneous. (a) Explain, using this lesson's superposition principle, why an engineer analyzing free vibration can safely combine two known vibration-mode solutions (e.g. representing different frequencies) into new valid solutions by simple linear combination. (b) Explain why, once an external forcing term is added (nonhomogeneous case), the engineer CANNOT simply scale a known particular solution by an arbitrary constant and expect it to still satisfy the forced equation — connecting your answer directly to this lesson's demonstrated failure of superposition in the nonhomogeneous case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.second-order-ode` (the general second-order ODE, involving $y''$, standard form $y''+P(x)y'+Q(x)y=G(x)$) and `math.de.ode-linearity` (the general linearity criterion — coefficients depending only on $x$, no products or nonlinear functions of $y$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.second-order-linear/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.second-order-linear",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.second-order-ode` (the general second-order ODE and its standard form), `math.de.ode-linearity` (the linearity criterion this concept's standard form satisfies by construction).\n- **Unlocks**: `math.de.second-order-homogeneous` (a dedicated deep treatment of the homogeneous case's solution methods, building directly on this concept's superposition principle).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-linear.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
