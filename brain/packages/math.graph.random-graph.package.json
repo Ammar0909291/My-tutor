@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.random-graph-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.random-graph",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1bc0b854d296ff9d5a5b9d49b52c7d733df91c6b15ced0dd96beb72997f465f7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.random-graph.md": "sha256:2643e54e249ae221f8df4ba4ec6762ecc07de4bd5c088fd0cf10eb64216553c5"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.random-graph",
+    "name": "Random Graphs",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.graph.graph",
+      "math.prob.probability-axioms"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.random-graph-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.random-graph (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.random-graph.md": "sha256:2643e54e249ae221f8df4ba4ec6762ecc07de4bd5c088fd0cf10eb64216553c5"
+      },
+      "contentHash": "sha256:3b32b6a7f46cdaa88041230a23f339ba0155464caf5cb35ed16bb1ce88fa14a2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.random-graph.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.random-graph.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.random-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.random-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.random-graph.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.random-graph.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.random-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.random-graph\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.random-graph.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.random-graph.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.random-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.random-graph\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.random-graph.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.random-graph.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.random-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.random-graph\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.random-graph/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.random-graph",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **Erdős–Rényi model** $G(n,p)$: $n$ vertices, with EACH possible edge included INDEPENDENTLY with probability $p$ (reusing `math.prob.probability-axioms`'s own independence concept directly), and compute the **expected number of edges**, $E[\\#\\text{edges}]=\\binom n2p$, directly via linearity of expectation over all $\\binom n2$ possible edges.\n- LO2: Recognize a graph property (like \"having at least one edge,\" or \"being connected\") as itself governed by a **random variable** (reusing `math.prob.random-variable`'s own framework — whether the graph HAS the property is a $0/1$-valued outcome varying from one random draw to another), and correctly interpret \"asymptotically almost surely\" (a.a.s.) as the property's probability tending to $1$ as $n\\to\\infty$ — NOT that literally every single graph has it.\n- LO3 (orientation level — full derivation deferred, given research-tier scope): recognize the **threshold phenomenon** — many graph properties have a SHARP threshold $p^*(n)$ where the property suddenly flips from \"almost never\" to \"almost always\" as $p$ crosses $p^*$ — with the connectivity threshold $p^*=\\log(n)/n$ stated as the KG's own named example, without deriving it.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.random-graph",
+      "title": "EXPECTED-EDGE-COUNT-MISTAKEN-FOR-GUARANTEE",
+      "content": "| MC-1 | EXPECTED-EDGE-COUNT-MISTAKEN-FOR-GUARANTEE | Believing $E[\\#\\text{edges}]$ means every random draw of $G(n,p)$ has exactly that many edges, missing that it is only an average over many draws | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.random-graph",
+      "title": "AAS-MISTAKEN-FOR-UNIVERSAL-GUARANTEE",
+      "content": "| MC-2 | AAS-MISTAKEN-FOR-UNIVERSAL-GUARANTEE | Believing \"asymptotically almost surely\" means literally every graph for every $n$ has the property, missing that it describes a limiting probability as $n\\to\\infty$, with finite-$n$ exceptions genuinely possible | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.random-graph",
+      "title": "THRESHOLD-ASSUMED-GRADUAL",
+      "content": "| MC-3 | THRESHOLD-ASSUMED-GRADUAL | Believing the probability of a threshold property increases smoothly and gradually as $p$ increases, missing the sharp, sudden phase-transition nature of the threshold phenomenon | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.random-graph",
+      "title": "Expected Edge Count Is an Average, Not a Per-Graph Guarantee (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Expected Edge Count Is an Average, Not a Per-Graph Guarantee (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.random-graph",
+      "title": "A.a.s. Is a Limiting Probability, Not a Universal Guarantee (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A.a.s. Is a Limiting Probability, Not a Universal Guarantee (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.random-graph",
+      "title": "The Threshold Is Sharp, Not a Gradual Ramp (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Threshold Is Sharp, Not a Gradual Ramp (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.random-graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.random-graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $G(6,0.4)$, compute the expected number of edges directly (using $\\binom62$ and linearity of expectation).\n  2. Explain why a SPECIFIC random draw of $G(10,0.5)$ might have more or fewer edges than the expected value you would compute for it, referencing the difference between an average and a guarantee.\n  3. Explain what \"$G(n,p)$ is connected asymptotically almost surely\" means precisely, in terms of a limiting probability as $n\\to\\infty$ — and explain why this statement does NOT mean every single graph for every $n$ is connected.\n  4. Explain, in your own words, what makes the connectivity threshold $p=\\log(n)/n$ a \"sharp\" threshold rather than a gradual one.\n- **P76 (Transfer Probe, mode = cross-link probe, engaging `math.prob.random-variable`)**: \"A network engineer models a communication network with $n=100$ nodes as $G(100,p)$ for various values of $p$. (a) Using `math.prob.random-variable`'s framework, explain precisely what kind of random variable 'the number of edges in this network' is, and compute its expected value for $p=0.05$. (b) Explain why 'the network is connected' is ALSO a random variable (specifically, a $0/1$-valued one) under this model, even though for any SPECIFIC drawn network, connectivity is just a fixed yes/no fact about that one graph. (c) The connectivity threshold for $n=100$ is around $p^*=\\log(100)/100\\approx0.046$. Explain what this lesson's threshold-phenomenon discussion predicts about the network's connectivity probability if the engineer used $p=0.2$ (well above threshold) versus $p=0.01$ (well below threshold), without computing exact probabilities.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.random-graph",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.graph.graph` ($G=(V,E)$, vertices and edges, connectivity) and `math.prob.probability-axioms` (independence of events, and computing probabilities of independent combined events).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.random-graph/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.random-graph",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.graph.graph` (vertices, edges, and connectivity, the structural vocabulary this concept randomizes) and `math.prob.probability-axioms` (independence of events, the mechanism by which each edge is included).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.prob.random-variable`, verified authored via `ls docs/curriculum/blueprints/`. $P76_{mode}=$ **cross-link probe**, directly framing both the edge count and graph properties like connectivity as instances of that concept's own random-variable framework.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.random-graph.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

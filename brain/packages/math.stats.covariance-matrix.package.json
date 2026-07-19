@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.covariance-matrix-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.covariance-matrix",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1f3be22cb5051166084b4128b25edbbb1783bea108d5f434eea0f8b19fb952d6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.covariance-matrix.md": "sha256:5b4b6db51a9b16e89bd2cc118a0ab48a02c12275f6899476c92b27456d70ab59"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.covariance-matrix",
+    "name": "Covariance Matrix",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.covariance",
+      "math.linalg.matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.covariance-matrix-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.covariance-matrix (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.covariance-matrix.md": "sha256:5b4b6db51a9b16e89bd2cc118a0ab48a02c12275f6899476c92b27456d70ab59"
+      },
+      "contentHash": "sha256:34c259adb1e06d1597b8f74b1a8feab83484eee069d809b545f46c7b99171e6b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.covariance-matrix.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.covariance-matrix.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.covariance-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.covariance-matrix\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.covariance-matrix.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.covariance-matrix.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.covariance-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.covariance-matrix\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.covariance-matrix.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.covariance-matrix.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.covariance-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.covariance-matrix\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.covariance-matrix.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.covariance-matrix.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.covariance-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.covariance-matrix\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.covariance-matrix/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the covariance matrix $\\Sigma$ for a random vector $(X_1,\\dots,X_n)$: $\\Sigma_{ij}=\\mathrm{Cov}(X_i,X_j)$, directly reusing `math.prob.covariance`'s own definition — and recognize the DIAGONAL entries $\\Sigma_{ii}=\\mathrm{Cov}(X_i,X_i)=\\mathrm{Var}(X_i)$ as a SPECIAL CASE of the same covariance formula (covariance of a variable with itself), not a separately-defined quantity.\n- LO2: Verify $\\Sigma$ is SYMMETRIC ($\\Sigma_{ij}=\\Sigma_{ji}$, directly from $\\mathrm{Cov}(X_i,X_j)=\\mathrm{Cov}(X_j,X_i)$'s own commutativity) and construct a small covariance matrix explicitly from given variance/covariance values.\n- LO3 (cross-link probe, engaging `math.linalg.positive-definite`): recognize $\\Sigma$ is always POSITIVE SEMIDEFINITE — by showing $v^T\\Sigma v=\\mathrm{Var}(v^TX)\\ge0$ for any vector $v$ (since it is literally a variance, and variance is never negative) — a genuinely DERIVED fact, not a coincidental extra property to separately assume.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "DIAGONAL-TREATED-AS-SEPARATE-FORMULA",
+      "content": "| MC-1 | DIAGONAL-TREATED-AS-SEPARATE-FORMULA | Believing the diagonal entries of a covariance matrix require their own separate variance formula, missing that $\\mathrm{Var}(X_i)=\\mathrm{Cov}(X_i,X_i)$ is literally the same covariance formula | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "SYMMETRY-TREATED-AS-EXTRA-ASSUMPTION",
+      "content": "| MC-2 | SYMMETRY-TREATED-AS-EXTRA-ASSUMPTION | Believing Σ's symmetry is an extra convention imposed on the matrix, missing that it is forced automatically by covariance's own commutative definition | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "PSD-TREATED-AS-SEPARATE-PROPERTY-TO-CHECK",
+      "content": "| MC-3 | PSD-TREATED-AS-SEPARATE-PROPERTY-TO-CHECK | Believing positive semidefiniteness is a special extra property some covariance matrices might lack, missing that it is a derivable, automatic consequence of variance's own nonnegativity for EVERY covariance matrix | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "The Diagonal Is the Same Formula, Not a Separate Rule (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Diagonal Is the Same Formula, Not a Separate Rule (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Symmetry Is Forced by Covariance's Own Definition (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Symmetry Is Forced by Covariance's Own Definition (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Positive Semidefiniteness Is Derived, Not a Separate Property to Check (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Positive Semidefiniteness Is Derived, Not a Separate Property to Check (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a random vector $(X,Y)$ with $\\mathrm{Var}(X)=5$, $\\mathrm{Var}(Y)=2$, $\\mathrm{Cov}(X,Y)=-1$, construct the full covariance matrix $\\Sigma$.\n  2. Verify directly that your $\\Sigma$ from problem 1 is symmetric, explaining why this must always be true for any covariance matrix.\n  3. For your $\\Sigma$ from problem 1, compute $v^T\\Sigma v$ for $v=(1,1)$, and identify which random variable's variance this quantity represents.\n  4. Explain why every genuine covariance matrix must be positive semidefinite, referencing the connection between the quadratic form $v^T\\Sigma v$ and the variance of a linear combination.\n- **P76 (Transfer Probe, mode = cross-link probe, engaging `math.linalg.positive-definite`)**: \"A financial analyst models the returns of two stocks as a random vector $(R_1,R_2)$ with $\\mathrm{Var}(R_1)=0.04$, $\\mathrm{Var}(R_2)=0.09$, $\\mathrm{Cov}(R_1,R_2)=0.03$. (a) Construct the covariance matrix $\\Sigma$ for this random vector. (b) Using `math.linalg.positive-definite`'s eigenvalue test (or the determinant/trace shortcut for $2\\times2$ matrices), determine whether $\\Sigma$ is positive definite or merely positive semidefinite. (c) A portfolio holds $v_1$ shares of stock 1 and $v_2$ shares of stock 2; explain why $v^T\\Sigma v$ represents the VARIANCE of the portfolio's total return, and why this quantity can never be negative, referencing this lesson's derivation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.covariance` ($\\mathrm{Cov}(X,Y)=E[(X-\\mu_X)(Y-\\mu_Y)]$ and its commutativity) and `math.linalg.matrix` (matrix entries, symmetry, and quadratic forms $v^TAv$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.stats.covariance-matrix/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.covariance-matrix",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.covariance` ($\\mathrm{Cov}(X,Y)$'s definition and commutativity, which this concept's entire matrix construction directly reuses) and `math.linalg.matrix` (matrix entries, symmetry, and the quadratic form $v^TAv$).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.linalg.positive-definite`, verified authored via `ls docs/curriculum/blueprints/`. $P76_{mode}=$ **cross-link probe**, directly applying that concept's own $v^TAv\\ge0$ characterization to derive (not merely assert) that every covariance matrix is positive semidefinite.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.covariance-matrix.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
