@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.integration-by-parts-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.integration-by-parts",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8f96068dd86adbce3e66c0d51972a65a77f20538c0db4e4f1360d52d58d9858a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.integration-by-parts.md": "sha256:6dd072ece593d3f2e71bcf1ab1ec981b617866e7dca51ebab054a18f9504e088"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.integration-by-parts",
+    "name": "Integration by Parts",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.u-substitution",
+      "math.calc.product-rule"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.integration-by-parts-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.integration-by-parts (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.integration-by-parts.md": "sha256:6dd072ece593d3f2e71bcf1ab1ec981b617866e7dca51ebab054a18f9504e088"
+      },
+      "contentHash": "sha256:98ea7b79c450714a62d0d4b6f128e1b9d17297e29b3aabcb80aa774e333a5d6a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.integration-by-parts.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integration-by-parts.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integration-by-parts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integration-by-parts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.integration-by-parts.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integration-by-parts.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integration-by-parts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integration-by-parts\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.integration-by-parts.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integration-by-parts.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integration-by-parts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integration-by-parts\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.integration-by-parts.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.integration-by-parts.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.integration-by-parts"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.integration-by-parts\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.integration-by-parts/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Learning Objectives",
+      "content": "- LO1: Derive the **Integration by Parts** formula, $\\int u\\,dv = uv-\\int v\\,du$, directly from the Product Rule $(fg)'=f'g+fg'$ by integrating both sides — recognizing this technique as literally \"the Product Rule run in reverse,\" exactly parallel to how `math.calc.u-substitution` reverses the Chain Rule.\n- LO2: Apply the heuristic **\"LIATE\"** (or similar priority ordering — Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) to choose $u$ and $dv$ wisely for a product of two functions, and correctly recognize that a POOR choice of $u,dv$ can produce a new integral that is MORE complicated than the original, not less.\n- LO3: Apply Integration by Parts **repeatedly** (or set up a \"tabular\"/recursive pattern) when a single application leaves a new integral that itself requires the technique again — directly refuting the misconception that Integration by Parts always resolves an integral in exactly one application.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "U-DV-CHOICE-TREATED-AS-ARBITRARY",
+      "content": "| MC-1 | U-DV-CHOICE-TREATED-AS-ARBITRARY | Believing any valid split of the integrand into $u$ and $dv$ works equally well, missing that a poor choice can produce a new integral more complicated than the original | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "SINGLE-APPLICATION-ASSUMED-ALWAYS-SUFFICIENT",
+      "content": "| MC-2 | SINGLE-APPLICATION-ASSUMED-ALWAYS-SUFFICIENT | Assuming Integration by Parts always fully resolves an integral in exactly one application, missing that higher-degree polynomial factors typically require repeated application | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "DV-INTEGRATED-WITH-AN-UNNECESSARY-CONSTANT-OF-INTEGRATION",
+      "content": "| MC-3 | DV-INTEGRATED-WITH-AN-UNNECESSARY-CONSTANT-OF-INTEGRATION | Adding a \"+C\" when computing $v$ from $dv$ partway through the formula (before the final integral is fully evaluated), causing confusion or arithmetic errors in the remaining steps | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Deriving the Formula: The Product Rule Reversed (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the Formula: The Product Rule Reversed (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Choosing u and dv Wisely: LIATE and the Backfire Test (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Choosing u and dv Wisely: LIATE and the Backfire Test (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Repeated Application When One Pass Isn't Enough (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Repeated Application When One Pass Isn't Enough (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Evaluate $\\int x\\cos x\\,dx$ using Integration by Parts, showing your choice of $u,dv$ explicitly.\n  2. Attempt problem 1 with the OPPOSITE choice of $u,dv$ and show that the resulting integral is more complicated, confirming your original choice was the productive one.\n  3. Evaluate $\\int x^2\\sin x\\,dx$, recognizing that it will require two applications of the technique.\n  4. Evaluate $\\int \\ln x\\,dx$ (hint: even though this looks like it has only ONE factor, choosing $dv=dx$ and $u=\\ln x$ still applies the technique — work through this case explicitly).\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to evaluate $\\int x^3e^x\\,dx$ as part of a signal-processing calculation. (a) Set up the first application of Integration by Parts, choosing $u$ and $dv$ using the LIATE-style reasoning from this lesson. (b) Explain, before doing any further computation, how many TOTAL applications of the technique you expect to need, based on the pattern observed in Example 3 (where the polynomial's degree dropped by one each time). (c) Complete the full computation, reusing Example 3's own result ($\\int x^2e^x\\,dx = x^2e^x-2xe^x+2e^x+C$) as a building block rather than re-deriving it from scratch.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.u-substitution` (reversing the Chain Rule: $\\int f(g(x))g'(x)\\,dx = \\int f(u)\\,du$ with $u=g(x)$) and `math.calc.product-rule` ($(fg)'=f'g+fg'$, the differentiation rule this technique reverses).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.integration-by-parts/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.integration-by-parts",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.u-substitution` (the \"reverse a differentiation rule\" framing this technique directly parallels, now applied to the Product Rule instead of the Chain Rule), `math.calc.product-rule` ($(fg)'=f'g+fg'$, the exact rule this technique's formula is derived from).\n- **Unlocks**: `math.calc.reduction-formulas` (formulas that apply Integration by Parts repeatedly in a general, systematic pattern, building directly on LO3's repeated-application skill).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.integration-by-parts.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

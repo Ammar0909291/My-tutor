@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.double-integrals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.double-integrals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:da27a0a19490234b4ca7ba25d90d7d337195b1f22ab734cea3606d83f3480b06",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.double-integrals.md": "sha256:ee2e1d929fee1a6bb196048b1071e3252bcd7089432ed0f92214d4ca03e8338b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.double-integrals",
+    "name": "Double Integrals",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.multiple-integrals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.double-integrals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.double-integrals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.double-integrals.md": "sha256:ee2e1d929fee1a6bb196048b1071e3252bcd7089432ed0f92214d4ca03e8338b"
+      },
+      "contentHash": "sha256:7242f6e3efdd8abce29ca434e6c7e8693f18b2eb30b981003289ae371cfae178",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.double-integrals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.double-integrals.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.double-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.double-integrals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.double-integrals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.double-integrals.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.double-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.double-integrals\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.double-integrals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.double-integrals.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.double-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.double-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.double-integrals.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.double-integrals.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.double-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.double-integrals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.double-integrals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.double-integrals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize that the Cartesian iterated-integral machinery for $\\iint_D f(x,y)\\,dA$ (signed volume, Fubini's Theorem, variable bounds for non-rectangular regions) — already fully established in `math.calc.multiple-integrals` — carries over unchanged here; this concept's distinct focus is evaluating double integrals over regions that are AWKWARD in Cartesian coordinates but NATURAL in **polar coordinates**.\n- LO2: Convert a double integral to **polar coordinates** using $x=r\\cos\\theta$, $y=r\\sin\\theta$, and correctly apply the polar area element $dA = r\\,dr\\,d\\theta$ — directly refuting the misconception that the area element simply becomes $dr\\,d\\theta$ with no extra factor of $r$.\n- LO3: Correctly determine the $r$ and $\\theta$ bounds for a polar region (e.g. a disk, an annulus, or a circular sector) directly from the region's geometric description, rather than by attempting to translate Cartesian bounds mechanically.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.double-integrals",
+      "title": "POLAR-AREA-ELEMENT-FACTOR-R-OMITTED",
+      "content": "| MC-1 | POLAR-AREA-ELEMENT-FACTOR-R-OMITTED | Converting $dA$ to polar coordinates as $dr\\,d\\theta$, omitting the essential extra factor of $r$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.double-integrals",
+      "title": "POLAR-BOUNDS-DERIVED-BY-MECHANICAL-CARTESIAN-TRANSLATION",
+      "content": "| MC-2 | POLAR-BOUNDS-DERIVED-BY-MECHANICAL-CARTESIAN-TRANSLATION | Attempting to convert Cartesian bounds into polar bounds algebraically step by step, rather than reading the r and θ ranges directly from the region's natural geometric description | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.double-integrals",
+      "title": "CARTESIAN-TO-POLAR-SWITCH-APPLIED-UNNECESSARILY",
+      "content": "| MC-3 | CARTESIAN-TO-POLAR-SWITCH-APPLIED-UNNECESSARILY | Converting a double integral to polar coordinates even when the region and integrand are naturally suited to Cartesian coordinates, adding unnecessary complexity | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.double-integrals",
+      "title": "When Polar Beats Cartesian: An Integral Cartesian Can't Solve (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"When Polar Beats Cartesian: An Integral Cartesian Can't Solve (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.double-integrals",
+      "title": "The Polar Area Element Needs the Extra r (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Polar Area Element Needs the Extra r (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.double-integrals",
+      "title": "Reading Polar Bounds Directly From the Region's Shape (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Reading Polar Bounds Directly From the Region's Shape (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.double-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.double-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the area of the disk $x^2+y^2\\le9$ using a polar double integral, showing the factor of $r$ explicitly.\n  2. Compute $\\iint_D (x^2+y^2)\\,dA$ where $D$ is the disk $x^2+y^2\\le1$, converting to polar coordinates first.\n  3. State the $r$ and $\\theta$ bounds (no need to fully evaluate) for the region that is the upper half ($y\\ge0$) of the annulus between radius $2$ and radius $5$.\n  4. A student computes the area of a disk of radius $3$ using $\\int_0^{2\\pi}\\int_0^3 1\\,dr\\,d\\theta$ (omitting the factor of $r$) and gets $6\\pi$. Explain what's wrong with this computation and provide the correct area.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist needs to compute the total charge on a circular metal disk of radius $5$ cm, where the charge density at a point depends only on its distance from the center: $\\rho(x,y) = k/(1+x^2+y^2)$ for some constant $k$. (a) Explain why this integral, set up in Cartesian coordinates, would be difficult to evaluate directly, similar to Example 1's motivating case. (b) Convert the integral $\\iint_D \\rho(x,y)\\,dA$ to polar coordinates, including the correct area element, and state the resulting iterated integral with correct bounds for this disk. (c) Explain why simply writing the integrand in terms of $r$ (i.e. $k/(1+r^2)$) without ALSO including the extra factor of $r$ from $dA$ would give a physically incorrect total charge, referencing Example 2's area-computation evidence.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.double-integrals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.multiple-integrals` (the double integral as signed volume, iterated integration, Fubini's Theorem, and variable bounds for non-rectangular Cartesian regions — all directly reused, not re-taught, here).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.double-integrals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.double-integrals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.multiple-integrals` (the full Cartesian iterated-integral machinery — Fubini, variable bounds — this concept builds on without re-deriving, per the explicit division-of-labor note in Component 3).\n- **Unlocks**: `math.calc.triple-integrals` (extending the coordinate-system-choice principle established here — polar/cylindrical/spherical coordinates — to three dimensions).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.double-integrals.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

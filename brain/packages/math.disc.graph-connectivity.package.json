@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-connectivity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-connectivity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f256d3d7fb5f40dcce1c8bc78e26c8b89e89643a749dbf7ed70f46bc18fa1cb5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-connectivity.md": "sha256:dd77ad1484e59a28d5ec1fbf94db62e76058ea63fb857fd45243e808fcedea9f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-connectivity",
+    "name": "Graph Connectivity",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-connectivity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-connectivity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-connectivity.md": "sha256:dd77ad1484e59a28d5ec1fbf94db62e76058ea63fb857fd45243e808fcedea9f"
+      },
+      "contentHash": "sha256:90ee53d1d18f0de09fd1833c6109e115ef95eb5b8a4719a7786799f6ecae9623",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-connectivity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-connectivity.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-connectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-connectivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-connectivity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-connectivity.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-connectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-connectivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-connectivity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-connectivity.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-connectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-connectivity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-connectivity.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-connectivity.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-connectivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-connectivity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-connectivity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **path** (a sequence of DISTINCT vertices, each connected to the next by an edge) and a **cycle** (a closed path — starts and ends at the same vertex, with all other vertices distinct) — correctly distinguishing a path from a mere \"walk\" that might revisit vertices.\n- LO2: Determine whether an undirected graph is **connected** (a path exists between EVERY pair of vertices) by direct inspection or systematic search, and correctly identify a graph as disconnected the moment even ONE pair of vertices has no connecting path.\n- LO3: Distinguish **connected** (undirected graphs) from **strongly connected** (directed graphs, requiring a path from every vertex to every OTHER vertex in BOTH directions) — directly refuting the misconception that a directed graph where every vertex can reach at least one other vertex is automatically strongly connected.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "PARTIAL-REACHABILITY-ASSUMED-SUFFICIENT-FOR-STRONG-CONNECTIVITY",
+      "content": "| MC-1 | PARTIAL-REACHABILITY-ASSUMED-SUFFICIENT-FOR-STRONG-CONNECTIVITY | Believing that every vertex being able to reach SOME other vertex (in a directed graph) is sufficient for strong connectivity, missing that EVERY pair must be mutually reachable in both directions | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "PATH-DEFINITION-ALLOWS-REPEATED-VERTICES",
+      "content": "| MC-2 | PATH-DEFINITION-ALLOWS-REPEATED-VERTICES | Treating a sequence that revisits a vertex as a valid path, missing the distinctness requirement that separates a path from a general walk | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "CONNECTEDNESS-VERIFIED-BY-CHECKING-ONLY-A-FEW-PAIRS",
+      "content": "| MC-3 | CONNECTEDNESS-VERIFIED-BY-CHECKING-ONLY-A-FEW-PAIRS | Concluding a graph is connected after checking only a small sample of vertex pairs, rather than confirming (via systematic search) that literally every pair has a connecting path | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Paths, Cycles, and the Distinctness Requirement (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Paths, Cycles, and the Distinctness Requirement (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Connectedness: One Missing Pair Is Enough (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Connectedness: One Missing Pair Is Enough (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Strongly Connected Requires BOTH Directions, Every Pair (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Strongly Connected Requires BOTH Directions, Every Pair (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For a graph with vertices $\\{P,Q,R,S\\}$ and edges $P$-$Q$, $Q$-$R$, $R$-$S$, $S$-$P$, identify one path and one cycle, explicitly listing the vertex sequence for each.\n  2. For a graph with vertices $\\{A,B,C,D\\}$ and edges $A$-$B$, $C$-$D$ (only these two edges), determine whether the graph is connected, and justify your answer by identifying a specific unreachable pair if it is disconnected.\n  3. For the directed graph with edges $A\\to B$, $B\\to A$, $B\\to C$ (no edge from $C$ back to anywhere), determine whether it is strongly connected, identifying the specific pair that fails (if any).\n  4. Explain, in your own words, why \"every vertex can reach somewhere\" is a weaker condition than \"the graph is strongly connected,\" using Example 3's modified graph as your illustration.\n- **P76 (Transfer Probe, mode = independence)**: \"A city's one-way street network can be modeled as a directed graph, where vertices are intersections and directed edges are one-way streets. (a) Explain, in terms of connectivity, what it would mean for this street network to be 'strongly connected,' using the definition from this lesson. (b) Suppose a driver reports 'I can get from my house to the downtown area, and also to the airport, so this network must be strongly connected.' Explain what's missing from this reasoning, using the distinction highlighted in Example 3. (c) If city planners want to guarantee every location is reachable from every other location (in both directions), explain what specific property they need to verify about the ENTIRE directed graph, not just about a few sample routes.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph` (a graph $G=(V,E)$, vertices and edges, undirected vs. directed, and vertex degree).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.graph-connectivity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.graph-connectivity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph` (the vertex/edge structure, undirected vs. directed distinction, this concept's path/connectivity definitions are built on).\n- **Unlocks**: `math.disc.graph-trees` (a tree is a connected graph with no cycles, directly combining this concept's connectivity and cycle definitions), `math.disc.euler-hamiltonian` (Euler/Hamiltonian paths and circuits are specific path/cycle types requiring connectivity as a precondition).\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-connectivity.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
