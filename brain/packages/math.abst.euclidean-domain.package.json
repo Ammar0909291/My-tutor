@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.euclidean-domain-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.euclidean-domain",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c9a18b6b84684ce5ee8d7c27d84117a2efc0796f3b22a4278f5883acde6edec8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.euclidean-domain.md": "sha256:9dbce57ec16f5504b807361ec1756e8a8339219faa8a58bae564b3ca77de1107"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.euclidean-domain",
+    "name": "Euclidean Domain",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.polynomial-ring"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.euclidean-domain-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.euclidean-domain (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.euclidean-domain.md": "sha256:9dbce57ec16f5504b807361ec1756e8a8339219faa8a58bae564b3ca77de1107"
+      },
+      "contentHash": "sha256:c06613b62a21528e682420a0efa1cb4e8cf8bfb2a7046d2f644176f9f5cfaeb4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.euclidean-domain.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.euclidean-domain.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.euclidean-domain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.euclidean-domain\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.euclidean-domain.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.euclidean-domain.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.euclidean-domain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.euclidean-domain\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.euclidean-domain.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.euclidean-domain.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.euclidean-domain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.euclidean-domain\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.euclidean-domain.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.euclidean-domain.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.euclidean-domain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.euclidean-domain\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.euclidean-domain/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **Euclidean domain (ED)**: an integral domain $R$ equipped with a Euclidean norm $N:R\\setminus\\{0\\}\\to\\mathbb{N}_0$ such that for any $a,b\\in R$ with $b\\ne0$, there exist $q,r\\in R$ with $a=bq+r$ and EITHER $r=0$ OR $N(r)<N(b)$ — directly generalizing `math.abst.polynomial-ring`'s own division algorithm for $F[x]$ to an abstract framework covering both $\\mathbb{Z}$ and $F[x]$ as two different instances of the SAME general structure.\n- LO2: Verify $\\mathbb{Z}$ is a Euclidean domain with $N(a)=|a|$, and $F[x]$ is a Euclidean domain with $N(p)=\\deg(p)$ (matching `math.abst.polynomial-ring`'s own division algorithm exactly) — recognizing the specific norm function is DOMAIN-SPECIFIC (absolute value for $\\mathbb{Z}$, degree for $F[x]$), never a universal formula that applies unchanged everywhere.\n- LO3: State that in ANY Euclidean domain, the Euclidean Algorithm computes GCDs — directly generalizing `math.nt.euclidean-algorithm`'s own integer-specific replacement procedure to work in any Euclidean domain, using that domain's own division-with-remainder guarantee instead of ordinary integer division.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "EUCLIDEAN-DOMAIN-ASSUMED-SPECIFIC-TO-INTEGERS",
+      "content": "| MC-1 | EUCLIDEAN-DOMAIN-ASSUMED-SPECIFIC-TO-INTEGERS | Believing \"Euclidean domain\" specifically refers to the integers, missing that it is a general abstract framework with Z as just one instance among many | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "NORM-ASSUMED-UNIVERSAL-ACROSS-DOMAINS",
+      "content": "| MC-2 | NORM-ASSUMED-UNIVERSAL-ACROSS-DOMAINS | Believing the same norm formula (like absolute value or degree) works for verifying the Euclidean-domain property in any ring, missing that the norm is domain-specific | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "EUCLIDEAN-ALGORITHM-ASSUMED-SPECIFIC-TO-INTEGERS",
+      "content": "| MC-3 | EUCLIDEAN-ALGORITHM-ASSUMED-SPECIFIC-TO-INTEGERS | Believing the Euclidean Algorithm is a technique unique to integers, unable to generalize to other Euclidean domains like polynomial rings | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "One Abstract Framework, Two Different Norms (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"One Abstract Framework, Two Different Norms (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "The Norm Is Domain-Specific, Never Transplantable (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Norm Is Domain-Specific, Never Transplantable (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "The Euclidean Algorithm Generalizes Directly (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Euclidean Algorithm Generalizes Directly (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify $23=7(3)+2$ satisfies the Euclidean-domain property for $\\mathbb{Z}$ with $N=|\\cdot|$.\n  2. Divide $x^3+1$ by $x+1$ in $\\mathbb{R}[x]$, and verify the remainder's degree is smaller than the divisor's degree.\n  3. Explain why \"the norm formula for $\\mathbb{Z}$ is absolute value\" does not mean every Euclidean domain uses absolute value as its norm.\n  4. Compute $\\gcd(x^2-4,x-2)$ in $\\mathbb{R}[x]$ using the Euclidean Algorithm's replacement procedure.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.nt.euclidean-algorithm`)**: \"Recall from `math.nt.euclidean-algorithm` that computing $\\gcd(a,b)$ for integers works by repeatedly replacing $(a,b)$ with $(b,a\\bmod b)$ until the remainder is $0$, and that this works because $\\gcd(a,b)=\\gcd(b,a\\bmod b)$. (a) Explain precisely why this same identity, $\\gcd(a,b)=\\gcd(b,r)$ (where $r$ is the Euclidean-domain remainder), holds in ANY Euclidean domain, not just $\\mathbb{Z}$ — referencing the general division-with-remainder property from this lesson. (b) Explain what would need to change in that concept's own algorithm description to make it apply directly to $F[x]$ instead of $\\mathbb{Z}$. (c) Explain why the Euclidean Algorithm's guarantee of eventually terminating (reaching a remainder of exactly $0$) depends on the norm $N$ taking values in $\\mathbb{N}_0$ specifically — what would go wrong if $N$ could take arbitrarily small positive real values instead of whole numbers?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.abst.polynomial-ring` ($F[x]$'s division algorithm — division with remainder, $\\deg(r)<\\deg(b)$ — requiring $F$ to be a field).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.euclidean-domain/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.euclidean-domain",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.abst.polynomial-ring` (the $F[x]$ division algorithm this concept's LO1/LO2 directly generalize into the abstract framework).\n- **Unlocks**: `math.abst.pid` (every Euclidean domain is a principal ideal domain — this concept's division-with-remainder property is the key tool that fact relies on).\n- **Cross-link (P76_mode = cross-link probe against `math.nt.euclidean-algorithm`, already authored)**: the transfer probe explicitly connects this concept's abstract Euclidean-domain framework back to that concept's own integer-specific algorithm, generalizing its core identity $\\gcd(a,b)=\\gcd(b,r)$ to any Euclidean domain.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.euclidean-domain.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

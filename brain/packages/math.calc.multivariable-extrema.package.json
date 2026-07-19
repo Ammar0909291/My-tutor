@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.multivariable-extrema-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.multivariable-extrema",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c12eaf14130186331d1f7b3f2f2b6ca0a10b2d5582f0ae239a71ca554c960716",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.multivariable-extrema.md": "sha256:a08c07c0d223e90256af4f22a5cb6baa56c12778744185486a43aa02b80c2511"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.multivariable-extrema",
+    "name": "Multivariable Extrema",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.gradient",
+      "math.calc.higher-order-derivatives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.multivariable-extrema-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.multivariable-extrema (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.multivariable-extrema.md": "sha256:a08c07c0d223e90256af4f22a5cb6baa56c12778744185486a43aa02b80c2511"
+      },
+      "contentHash": "sha256:231e24fc07838aa411c6745e58e87232fa45f88d632bf85ccfbaab82710e238f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-extrema.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-extrema\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-extrema.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-extrema\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-extrema.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-extrema\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-extrema.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-extrema"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-extrema\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.multivariable-extrema/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "Learning Objectives",
+      "content": "- LO1: Find critical points via $\\nabla f=0$ and compute the Hessian discriminant $D=f_{xx}f_{yy}-f_{xy}^2$, correctly computing the mixed partial $f_{xy}$ using `math.calc.higher-order-derivatives`'s own procedure and Clairaut's theorem ($f_{xy}=f_{yx}$) to verify it.\n- LO2: Recognize that when $D=0$, the discriminant test is genuinely **INCONCLUSIVE** — it neither confirms nor denies a local extremum — and that direct examination of the function near the critical point (not a variant reading of the test) is required in that case.\n- LO3: Correctly classify a critical point using the FULL 2-variable behavior, not a single 1D cross-sectional slice — recognizing that a critical point can look like a minimum along one direction and a maximum along another (a saddle), and that only the complete discriminant test correctly distinguishes this from a genuine local extremum.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "D-EQUALS-ZERO-ASSUMED-CONCLUSIVE",
+      "content": "| MC-1 | D-EQUALS-ZERO-ASSUMED-CONCLUSIVE | Believing the Hessian discriminant test always gives a definitive classification, missing that D=0 is genuinely inconclusive and requires direct examination of the function | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "SINGLE-HESSIAN-ENTRY-CHECKED-ALONE",
+      "content": "| MC-2 | SINGLE-HESSIAN-ENTRY-CHECKED-ALONE | Believing checking only one diagonal Hessian entry (like f_xx) suffices to classify a critical point, missing that the mixed partial and the full discriminant D must be computed | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "SINGLE-DIRECTIONAL-SLICE-ASSUMED-SUFFICIENT",
+      "content": "| MC-3 | SINGLE-DIRECTIONAL-SLICE-ASSUMED-SUFFICIENT | Believing a critical point that looks like an extremum along one directional slice must be a genuine local extremum of the full function, missing that a saddle can look like a min or max along different single directions | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "Computing D With Clairaut's Theorem as a Check (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing D With Clairaut's Theorem as a Check (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "D=0 Means the Test Gives No Information (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"D=0 Means the Test Gives No Information (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "One Slice Can Be Misleading; the Full Test Isn't (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"One Slice Can Be Misleading; the Full Test Isn't (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 13,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find all critical points of $f(x,y)=x^2+y^2-2x+4y+5$ and classify each using the discriminant test.\n  2. For $f(x,y)=x^4-y^4$, compute the discriminant at $(0,0)$ and state whether the test is conclusive.\n  3. For $f(x,y)=y^2-x^2$, check the slices $y=0$ and $x=0$ separately, then classify the critical point at $(0,0)$ using the full discriminant test.\n  4. Explain why \"D=0\" should never be interpreted as weak or partial evidence for a local minimum or maximum.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models the stress on a metal plate as a function $f(x,y)$ of position, and wants to find all local stress minima and maxima. (a) Explain the two-step process (finding critical points, then classifying each) the engineer should follow. (b) At one critical point, the engineer computes $D=0$ exactly — explain why the engineer cannot conclude anything about this point from the discriminant test alone, and what they should do instead. (c) At another critical point, the engineer notices the stress appears to decrease in the x-direction but increase in the y-direction, right at that point. Using this lesson's saddle-point example, explain what kind of critical point this likely is, and why checking only the x-direction or only the y-direction would have been misleading.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 20,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.gradient` ($\\nabla f=(\\partial f/\\partial x,\\partial f/\\partial y)$) and `math.calc.higher-order-derivatives` (computing $f''$ by differentiating $f'$ again, never by squaring; second-order partials $f_{xx},f_{yy},f_{xy}$; Clairaut's theorem $f_{xy}=f_{yx}$ for continuous mixed partials).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-extrema/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.multivariable-extrema",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.gradient` ($\\nabla f$, this concept's stationary-point condition), `math.calc.higher-order-derivatives` (the second-order partials and Clairaut's theorem this concept's discriminant is built from).\n- **Unlocks**: `math.opt.lagrange-multipliers` (extends unconstrained extrema classification to constrained optimization problems).\n- **Cross-link (P76_mode = independence)**: KG lists `math.opt.lagrange-multipliers` as a cross-link — not yet authored (checked via `ls docs/curriculum/blueprints/`).\n- **Division-of-labor note**: `math.opt.unconstrained-optimization` (already authored, batch 100) owns the optimization-motivated framing of the identical $\\nabla f=0$/Hessian-discriminant machinery (why we search for minima, the local-vs-global caveat, the connection to gradient descent). This concept owns the direct calculus classification skill, specifically covering the $D=0$ inconclusive case and the single-slice caution — content that concept's own worked examples did not cover, avoiding duplication while both concepts remain individually complete.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-extrema.md",
+        "startLine": 95,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.sturm-liouville-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.sturm-liouville",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9cc1e250851942f0fb9864aa8314579a6ae00fb93131fc41b2cc160a23df0036",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.sturm-liouville.md": "sha256:f1e16c7955210e6e81a2cf20e68ee0deb84ded08af7811821223c228cad77878"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.sturm-liouville",
+    "name": "Sturm-Liouville Theory",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.de.second-order-linear",
+      "math.de.bvp",
+      "math.linalg.inner-product"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.sturm-liouville-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.sturm-liouville (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.sturm-liouville.md": "sha256:f1e16c7955210e6e81a2cf20e68ee0deb84ded08af7811821223c228cad77878"
+      },
+      "contentHash": "sha256:0bd48eb108c3b4e78068297788143c2b91efca76c02346c3903fe24609eda49d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.sturm-liouville.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.sturm-liouville.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.sturm-liouville"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.sturm-liouville\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.sturm-liouville.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.sturm-liouville.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.sturm-liouville"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.sturm-liouville\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.sturm-liouville.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.sturm-liouville.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.sturm-liouville"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.sturm-liouville\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.sturm-liouville.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.sturm-liouville.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.sturm-liouville"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.sturm-liouville\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.sturm-liouville/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the Sturm-Liouville problem $(p(x)y')'+q(x)y+\\lambda w(x)y=0$ on $[a,b]$ with boundary conditions — a specific second-order linear ODE (per `math.de.second-order-linear`'s standard form, in self-adjoint form) combined with a genuine BVP (per `math.de.bvp`'s two-point boundary conditions), where $\\lambda$ is treated as an unknown PARAMETER rather than a fixed given constant.\n- LO2: Recognize that MOST values of $\\lambda$ give ONLY the trivial solution $y=0$ (directly `math.de.bvp`'s own \"existence not guaranteed\" caution, applied per-$\\lambda$) — while special discrete **eigenvalues** $\\lambda_n$ admit a genuine nonzero **eigenfunction** $\\varphi_n$ — and compute both directly for the classic problem $y''+\\lambda y=0$ on $[0,\\pi]$, $y(0)=y(\\pi)=0$.\n- LO3: State that the eigenfunctions $\\varphi_n$ are ORTHOGONAL under the WEIGHTED inner product $\\langle f,g\\rangle=\\int_a^b f(x)g(x)w(x)\\,dx$ (directly generalizing `math.linalg.inner-product`'s own framework with an explicit weight function $w(x)$) and form a COMPLETE set in $L^2([a,b],w)$ — recognizing this as a concrete instance of `math.fnal.spectral-theory`'s own general Spectral Theorem for self-adjoint operators.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "STURM-LIOUVILLE-BVP-ASSUMED-SOLVABLE-FOR-EVERY-LAMBDA",
+      "content": "| MC-1 | STURM-LIOUVILLE-BVP-ASSUMED-SOLVABLE-FOR-EVERY-LAMBDA | Believing the Sturm-Liouville BVP has a genuine nonzero solution for every value of lambda, missing that only special discrete eigenvalues admit a nonzero eigenfunction | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "ORTHOGONALITY-ASSUMED-UNWEIGHTED",
+      "content": "| MC-2 | ORTHOGONALITY-ASSUMED-UNWEIGHTED | Believing eigenfunction orthogonality always uses the plain unweighted integral, missing that the general case requires including the weight function w(x) from the original equation | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "STURM-LIOUVILLE-TREATED-AS-ISOLATED-FROM-SPECTRAL-THEORY",
+      "content": "| MC-3 | STURM-LIOUVILLE-TREATED-AS-ISOLATED-FROM-SPECTRAL-THEORY | Believing the eigenfunction-completeness result is a special, isolated fact unique to this differential equation, missing its direct connection to the general Spectral Theorem for self-adjoint operators | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Most λ Give Only the Trivial Solution (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Most λ Give Only the Trivial Solution (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Orthogonality Uses the Weight Function w(x) (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Orthogonality Uses the Weight Function w(x) (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "This Is a Concrete Instance of the General Spectral Theorem (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"This Is a Concrete Instance of the General Spectral Theorem (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. For $y''+\\lambda y=0$ on $[0,\\pi]$, $y(0)=y(\\pi)=0$, verify $\\lambda=4$ is an eigenvalue and find its eigenfunction.\n  2. Verify $\\lambda=3$ (not a perfect square) gives only the trivial solution for the same BVP.\n  3. Compute $\\int_0^\\pi\\sin(2x)\\sin(3x)\\,dx$ and confirm it equals $0$, illustrating eigenfunction orthogonality.\n  4. Explain why the weight function $w(x)$ must be included in the orthogonality integral for a general Sturm-Liouville problem, even though it happens to equal $1$ in this lesson's main example.\n- **P76 (Transfer Probe, mode = cross-link probe against `math.fnal.spectral-theory`)**: \"Recall from `math.fnal.spectral-theory` that a self-adjoint bounded operator has real spectrum, and the general Spectral Theorem describes how such operators 'diagonalize' via a spectral measure or discrete eigenbasis. (a) Explain how the Sturm-Liouville differential operator $L[y]=-y''$ from this lesson, being self-adjoint with respect to the weighted inner product, is a direct concrete instance of that general self-adjoint framework. (b) Explain why the eigenvalues $\\lambda_n=n^2$ found in this lesson are all real and positive, connecting this to that concept's own self-adjoint-implies-real-spectrum guarantee. (c) Explain how this lesson's 'complete set of orthogonal eigenfunctions in $L^2([a,b],w)$' directly parallels that concept's own discussion of spectral decomposition, and why the Sturm-Liouville case is a genuinely SIMPLER instance (a discrete eigenvalue set, unlike the possibly-continuous spectrum that general theory allows for).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.second-order-linear` (standard form $y''+P(x)y'+Q(x)y=G(x)$; homogeneous vs. nonhomogeneous; superposition), `math.de.bvp` (a BVP's solution may be nonexistent, unique, or infinite, unlike an IVP), and `math.linalg.inner-product` (the inner product axioms; positive-definiteness must be checked explicitly, not assumed).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.sturm-liouville/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.sturm-liouville",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.second-order-linear` (the standard ODE form this concept's self-adjoint form is built from), `math.de.bvp` (the two-point boundary conditions and \"existence not guaranteed\" caution this concept applies per-$\\lambda$), `math.linalg.inner-product` (the inner product framework this concept's weighted version directly generalizes).\n- **Unlocks**: `math.de.eigenfunction-expansion` (expands general functions in terms of Sturm-Liouville eigenfunctions, directly using this concept's completeness result).\n- **Cross-link (P76_mode = cross-link probe against `math.fnal.spectral-theory`, already authored)**: the transfer probe explicitly connects this concept's concrete, fully computable eigenvalue problem to that concept's general self-adjoint-operator framework, framing Sturm-Liouville theory as a genuinely simpler special case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.sturm-liouville.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
