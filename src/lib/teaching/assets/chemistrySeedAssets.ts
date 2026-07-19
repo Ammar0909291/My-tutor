@@ -4850,6 +4850,511 @@ const KSPEQ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.bond.ionic-bonding ──────────────────────────────────────────────────
+const IONB = 'chem.bond.ionic-bonding'
+const IONB_SRC = 'docs/chemistry/kg/graph.json — chem.bond.ionic-bonding'
+
+const IONB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IONB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ionic bonding happens when the electronegativity difference between two atoms ' +
+      'is LARGE (>1.7 on the Pauling scale, roughly) — one atom essentially takes ' +
+      'electron(s) from the other. Metal atoms (low ionization energy — easy to lose ' +
+      'electrons) transfer electrons to nonmetal atoms (high electron affinity — eager ' +
+      'to gain electrons). Sodium (1 valence electron, wants to lose it to reach noble-gas ' +
+      'configuration) gives its electron to chlorine (7 valence electrons, wants one ' +
+      'more) — Na⁺ and Cl⁻ form, held together by ELECTROSTATIC ATTRACTION (opposite ' +
+      'charges attract). This isn\'t a "bond" between two specific atoms like covalent ' +
+      'bonding — it\'s a 3D LATTICE where each Na⁺ is surrounded by multiple Cl⁻ and ' +
+      'vice versa, all held by the same electrostatic force radiating in all directions. ' +
+      'This is why ionic compounds have HIGH melting points (breaking the lattice ' +
+      'requires overcoming attraction to MANY neighboring ions, not just one bond) and ' +
+      'conduct electricity only when MOLTEN or DISSOLVED (ions need to be free to move).',
+    targetedMisconceptions: [`${IONB}:MC1`],
+    source: `${IONB_SRC} — ionic bond formation, lattice structure, properties`,
+  },
+  {
+    conceptId: IONB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "NaCl is made of individual NaCl molecules, like water is made of H₂O ' +
+      'molecules." FALSE. NaCl doesn\'t exist as discrete molecules — it\'s an extended ' +
+      'CRYSTAL LATTICE where each Na⁺ ion is surrounded by 6 Cl⁻ neighbors (and vice ' +
+      'versa), continuing throughout the entire crystal. "NaCl" is the EMPIRICAL FORMULA ' +
+      '(simplest ratio, 1:1) representing the whole lattice, not a molecular formula for ' +
+      'an isolated unit. This is why ionic solids don\'t have a "molecular mass" in the ' +
+      'true sense — chemists use FORMULA MASS instead. Second trap: "Ionic bonding is ' +
+      '100% ionic and covalent bonding is 100% covalent — a clean binary distinction." ' +
+      'Real bonds exist on a SPECTRUM. Even "ionic" NaCl has some covalent character ' +
+      '(the electron isn\'t 100% transferred, there\'s slight electron sharing), and ' +
+      '"covalent" bonds between different elements have some ionic character (polar ' +
+      'covalent bonds, like H-Cl). Electronegativity difference is a continuous spectrum, ' +
+      'not a switch.',
+    targetedMisconceptions: [`${IONB}:MC1`, `${IONB}:MC2`],
+    source: `${IONB_SRC} — misconception: NaCl exists as discrete molecules; ionic/covalent is a binary distinction`,
+  },
+]
+
+const IONB_PROBES: SeedProbe[] = [
+  {
+    conceptId: IONB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does solid NaCl NOT conduct electricity, but molten NaCl (or NaCl dissolved in water) DOES conduct?',
+    choices: [
+      { text: 'In the solid lattice, ions are locked in fixed positions and cannot move to carry charge; melting or dissolving frees the ions to move and carry electrical current', isCorrect: true },
+      { text: 'Solid NaCl has no charged particles at all; charged ions only form when NaCl is melted or dissolved', isCorrect: false, misconceptionId: `${IONB}:MC3` },
+    ],
+    correctValue: 'Ion mobility, not ion existence, is the key',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${IONB}:MC3`],
+    source: `${IONB_SRC} — distractor targets "solid ionic compounds have no ions" misconception`,
+  },
+  {
+    conceptId: IONB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does NaCl exist as discrete "NaCl molecules," similar to how water exists as discrete H₂O molecules?',
+    choices: [
+      { text: 'No — NaCl is an extended 3D ionic lattice where each ion is surrounded by multiple oppositely charged neighbors; "NaCl" represents the simplest ratio (empirical formula), not an isolated molecular unit', isCorrect: true },
+      { text: 'Yes — like water, table salt is made of discrete NaCl molecular units bonded ionically', isCorrect: false, misconceptionId: `${IONB}:MC1` },
+    ],
+    correctValue: 'No — extended lattice, not discrete molecules',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${IONB}:MC1`],
+    source: `${IONB_SRC} — misconception: ionic compounds exist as discrete molecules like covalent compounds`,
+  },
+]
+
+// ─── chem.bond.covalent-bonding ──────────────────────────────────────────────
+const COVB = 'chem.bond.covalent-bonding'
+const COVB_SRC = 'docs/chemistry/kg/graph.json — chem.bond.covalent-bonding'
+
+const COVB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COVB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When electronegativity difference is SMALL (typically two nonmetals), neither ' +
+      'atom can fully pull electrons away from the other — instead they SHARE electron ' +
+      'pairs. Each shared pair counts toward BOTH atoms\' octets simultaneously. A ' +
+      'single bond shares 1 pair (2 electrons); double bond shares 2 pairs (4 electrons); ' +
+      'triple bond shares 3 pairs (6 electrons) — MORE shared pairs means SHORTER, ' +
+      'STRONGER bonds (triple bonds are shortest/strongest, single bonds longest/weakest ' +
+      'between the same two atom types). If electronegativity difference is small but ' +
+      'NONZERO (like C-H or O-H), the bond is POLAR COVALENT — electrons spend more time ' +
+      'near the more electronegative atom, creating partial charges (δ+ and δ−) without ' +
+      'full electron transfer. If the two atoms are IDENTICAL (like H-H or Cl-Cl), the ' +
+      'bond is perfectly NONPOLAR (equal sharing). Covalent compounds form discrete ' +
+      'MOLECULES (unlike ionic lattices) — this is why they typically have LOWER melting ' +
+      'points (you only need to overcome weaker intermolecular forces BETWEEN molecules, ' +
+      'not the strong bond WITHIN each molecule).',
+    targetedMisconceptions: [`${COVB}:MC1`],
+    source: `${COVB_SRC} — covalent bond formation, bond order, polar vs nonpolar covalent`,
+  },
+  {
+    conceptId: COVB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Critical trap: "Low melting point means covalent bonds are WEAK." FALSE — the ' +
+      'covalent bonds WITHIN a molecule (like the O-H bonds in water) are actually quite ' +
+      'strong (~460 kJ/mol for O-H). What melts at low temperature is breaking the ' +
+      'WEAKER intermolecular forces BETWEEN separate water molecules (hydrogen bonds, ' +
+      '~20 kJ/mol) — NOT the covalent bonds within each molecule. When ice melts or ' +
+      'water boils, the H₂O molecules stay intact (as covered in states-of-matter) — ' +
+      'only intermolecular attractions break. Confusing intramolecular (within, strong) ' +
+      'with intermolecular (between, weak) forces is one of the most common errors in ' +
+      'chemistry. Second trap: "Double bonds are twice as strong as single bonds, exactly." ' +
+      'Not exactly double — a C=C double bond (~610 kJ/mol) is stronger than a C-C single ' +
+      'bond (~350 kJ/mol) but LESS than double (~700 would be exactly double) because the ' +
+      'second bond (a π bond) is weaker than the first (a σ bond) due to less effective ' +
+      'orbital overlap.',
+    targetedMisconceptions: [`${COVB}:MC1`, `${COVB}:MC2`],
+    source: `${COVB_SRC} — misconception: low melting point = weak covalent bonds (confuses inter/intramolecular)`,
+  },
+]
+
+const COVB_PROBES: SeedProbe[] = [
+  {
+    conceptId: COVB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water (H₂O) has a relatively low boiling point (100°C) compared to many ionic compounds. Does this mean the O-H covalent bonds within water molecules are weak?',
+    choices: [
+      { text: 'No — the O-H covalent bonds are actually quite strong (~460 kJ/mol); boiling only breaks the much weaker hydrogen bonds BETWEEN separate water molecules, not the bonds within each molecule', isCorrect: true },
+      { text: 'Yes — the low boiling point directly indicates that O-H covalent bonds are weak', isCorrect: false, misconceptionId: `${COVB}:MC1` },
+    ],
+    correctValue: 'No — intermolecular forces (weak) break, not covalent bonds (strong)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COVB}:MC1`],
+    source: `${COVB_SRC} — distractor targets confusing boiling point with covalent bond strength`,
+  },
+  {
+    conceptId: COVB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A C-C single bond has energy ~350 kJ/mol. Is a C=C double bond exactly double that (~700 kJ/mol)?',
+    choices: [
+      { text: 'No — a C=C double bond is about 610 kJ/mol, stronger than single but less than exactly double, because the second (π) bond involves less effective orbital overlap than the first (σ) bond', isCorrect: true },
+      { text: 'Yes — bond energy scales exactly linearly with bond order (single, double, triple)', isCorrect: false, misconceptionId: `${COVB}:MC2` },
+    ],
+    correctValue: 'No — not exactly double (π bonds are weaker than σ)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COVB}:MC2`],
+    source: `${COVB_SRC} — misconception: bond energy scales exactly linearly with bond order`,
+  },
+]
+
+// ─── chem.bond.metallic-bonding ──────────────────────────────────────────────
+const METB = 'chem.bond.metallic-bonding'
+const METB_SRC = 'docs/chemistry/kg/graph.json — chem.bond.metallic-bonding'
+
+const METB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: METB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Metallic bonding is a THIRD kind of bonding, distinct from both ionic and ' +
+      'covalent. Picture a lattice of metal CATIONS sitting in a "sea" of DELOCALIZED ' +
+      'electrons — valence electrons aren\'t owned by any one atom, they flow freely ' +
+      'throughout the entire metal structure. This "electron sea" model explains ' +
+      'metals\' signature properties: ELECTRICAL CONDUCTIVITY (free electrons carry ' +
+      'charge easily, even in the solid state — unlike ionic solids which need melting), ' +
+      'THERMAL CONDUCTIVITY (mobile electrons transfer kinetic energy quickly), ' +
+      'MALLEABILITY/DUCTILITY (metal cations can slide past each other without breaking ' +
+      'bonds, since the electron sea just flows around them — unlike ionic crystals, ' +
+      'which SHATTER when layers shift because like-charged ions suddenly repel), and ' +
+      'METALLIC LUSTER (free electrons absorb and re-emit light at almost all ' +
+      'wavelengths). Bond STRENGTH varies with the number of delocalized electrons per ' +
+      'atom and ionic radius — this is why transition metals (multiple valence electrons) ' +
+      'tend to have higher melting points than alkali metals (just 1 valence electron).',
+    targetedMisconceptions: [`${METB}:MC1`],
+    source: `${METB_SRC} — electron sea model, metallic properties, malleability vs ionic brittleness`,
+  },
+  {
+    conceptId: METB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Metals conduct electricity because their atoms are packed close together, ' +
+      'letting electrons hop between them." Not quite — the KEY feature isn\'t proximity, ' +
+      'it\'s DELOCALIZATION. Metal valence electrons aren\'t bound to any specific atom ' +
+      'at all — they behave more like a fluid, free to move throughout the ENTIRE metal ' +
+      'structure in response to any electric field, without needing to "hop" between ' +
+      'discrete atomic sites one at a time. This is fundamentally different from, say, ' +
+      'semiconductors, where electrons DO have to jump between more localized states. ' +
+      'Second trap: "Metals and ionic compounds are both brittle since they\'re both ' +
+      'made of a lattice of ions/cations." FALSE — this is exactly where the two differ ' +
+      'most dramatically. When you deform a METAL lattice, cations slide past each other ' +
+      'and the electron sea simply flows to accommodate the new shape (malleable). When ' +
+      'you deform an IONIC lattice, ions of the SAME charge get forced next to each ' +
+      'other, causing violent repulsion and SHATTERING (brittle) — the electron sea is ' +
+      'what makes metals uniquely deformable.',
+    targetedMisconceptions: [`${METB}:MC1`, `${METB}:MC2`],
+    source: `${METB_SRC} — misconception: conductivity from proximity not delocalization; metals brittle like ionic solids`,
+  },
+]
+
+const METB_PROBES: SeedProbe[] = [
+  {
+    conceptId: METB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can a metal like copper be hammered into a new shape (malleable) while an ionic crystal like NaCl shatters when struck?',
+    choices: [
+      { text: 'In a metal, cations can slide past each other while the delocalized electron sea flows to accommodate the change; in NaCl, sliding forces like-charged ions adjacent, causing strong repulsion and fracture', isCorrect: true },
+      { text: 'Metal atoms are simply softer and weaker than ionic compounds', isCorrect: false, misconceptionId: `${METB}:MC2` },
+    ],
+    correctValue: 'Electron sea flows during deformation; ionic lattice fractures',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${METB}:MC2`],
+    source: `${METB_SRC} — distractor targets vague "metals are softer" rather than structural mechanism`,
+  },
+  {
+    conceptId: METB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What specifically allows metals to conduct electricity even as solids, unlike ionic compounds which require melting or dissolving?',
+    choices: [
+      { text: 'Metal valence electrons are fully DELOCALIZED (not bound to any specific atom) and free to flow throughout the entire structure, unlike ionic solids where charged ions are locked in fixed lattice positions', isCorrect: true },
+      { text: 'Metal atoms are simply packed closer together than ionic compounds, letting electrons hop between adjacent atoms', isCorrect: false, misconceptionId: `${METB}:MC1` },
+    ],
+    correctValue: 'Electron delocalization, not atomic proximity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${METB}:MC1`],
+    source: `${METB_SRC} — misconception: attributing metallic conductivity to proximity rather than delocalization`,
+  },
+]
+
+// ─── chem.redox.oxidation-state ──────────────────────────────────────────────
+const REDOX = 'chem.redox.oxidation-state'
+const REDOX_SRC = 'docs/chemistry/kg/graph.json — chem.redox.oxidation-state'
+
+const REDOX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REDOX,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Redox reactions involve electron transfer, tracked via oxidation state changes. ' +
+      'OXIDATION = increase in oxidation state (losing electrons, or "losing" them in the ' +
+      'bookkeeping sense). REDUCTION = decrease in oxidation state (gaining electrons). ' +
+      'Memory aid: OIL RIG (Oxidation Is Loss, Reduction Is Gain) — of electrons. These ' +
+      'ALWAYS happen together (you can\'t have one without the other) — if something is ' +
+      'oxidized, something else must be reduced, since electrons don\'t vanish, they ' +
+      'transfer. The species that GETS oxidized (loses electrons) is called the REDUCING ' +
+      'AGENT (it "causes" reduction in the other species by donating electrons). The ' +
+      'species that GETS reduced is the OXIDIZING AGENT. In Zn + Cu²⁺ → Zn²⁺ + Cu: Zn is ' +
+      'oxidized (0 → +2), so Zn is the reducing agent. Cu²⁺ is reduced (+2 → 0), so Cu²⁺ ' +
+      'is the oxidizing agent. This vocabulary trips people up constantly — the "agent" ' +
+      'label describes what CAUSES the change in the OTHER species, which is the opposite ' +
+      'of what happens to itself.',
+    targetedMisconceptions: [`${REDOX}:MC1`],
+    source: `${REDOX_SRC} — oxidation/reduction, OIL RIG, oxidizing/reducing agents`,
+  },
+  {
+    conceptId: REDOX,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The most common vocabulary trap in redox chemistry: "The oxidizing agent IS ' +
+      'oxidized." BACKWARDS — the oxidizing agent CAUSES oxidation (in something else) ' +
+      'by ACCEPTING electrons, which means the oxidizing agent itself is REDUCED. This is ' +
+      'genuinely counterintuitive vocabulary — "agent" describes the ROLE (what it does ' +
+      'to the OTHER substance), not what happens to itself. Memory trick: the oxidizing ' +
+      'agent gets REDUCED (opposite of its name); the reducing agent gets OXIDIZED ' +
+      '(opposite of its name). Second trap: "In every redox reaction, you need to see ' +
+      'obvious electron transfer, like ionic compounds forming." False for COVALENT ' +
+      'redox reactions — combustion (CH₄ + 2O₂ → CO₂ + 2H₂O) is a classic redox reaction, ' +
+      'but electrons are shared, not transferred wholesale. We STILL assign oxidation ' +
+      'states using electronegativity-based bookkeeping (carbon goes from −4 to +4, a ' +
+      'big oxidation) even though no ions are literally formed — the oxidation state ' +
+      'FRAMEWORK still applies to covalent bonds.',
+    targetedMisconceptions: [`${REDOX}:MC1`, `${REDOX}:MC2`],
+    source: `${REDOX_SRC} — misconception: oxidizing agent is itself oxidized; redox requires literal ion formation`,
+  },
+]
+
+const REDOX_PROBES: SeedProbe[] = [
+  {
+    conceptId: REDOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, Cu²⁺ is the oxidizing agent. What happens to Cu²⁺ itself?',
+    choices: [
+      { text: 'It is REDUCED (gains 2 electrons, oxidation state goes from +2 to 0) — the "oxidizing agent" causes oxidation in Zn while itself being reduced', isCorrect: true },
+      { text: 'It is oxidized, since it is called the "oxidizing" agent', isCorrect: false, misconceptionId: `${REDOX}:MC1` },
+    ],
+    correctValue: 'Cu²⁺ is reduced',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${REDOX}:MC1`],
+    source: `${REDOX_SRC} — distractor targets the classic "oxidizing agent is oxidized" vocabulary trap`,
+  },
+  {
+    conceptId: REDOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is CH₄ + 2O₂ → CO₂ + 2H₂O (combustion) a redox reaction, even though no discrete ions are formed and all bonds are covalent?',
+    choices: [
+      { text: 'Yes — oxidation states still change (carbon: −4→+4, oxygen: 0→−2), showing electron density shifts even in covalent bonds; redox applies to the oxidation-state framework, not just literal ion formation', isCorrect: true },
+      { text: 'No — redox reactions require actual electron transfer between separate ions, which doesn\'t happen in covalent combustion', isCorrect: false, misconceptionId: `${REDOX}:MC2` },
+    ],
+    correctValue: 'Yes — combustion is a redox reaction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDOX}:MC2`],
+    source: `${REDOX_SRC} — misconception: redox reactions require literal ionic electron transfer`,
+  },
+]
+
+// ─── chem.equil.weak-acid ────────────────────────────────────────────────────
+const WEAKAB = 'chem.equil.weak-acid'
+const WEAKAB_SRC = 'docs/chemistry/kg/graph.json — chem.equil.weak-acid'
+
+const WEAKAB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WEAKAB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Unlike strong acids (100% dissociated), weak acids only PARTIALLY dissociate: ' +
+      'HA ⇌ H⁺ + A⁻, governed by K_a = [H⁺][A⁻]/[HA]. A LARGER K_a means a STRONGER ' +
+      '(more dissociated) weak acid. For a simple weak acid problem, use the ICE table ' +
+      '(Initial-Change-Equilibrium) and the approximation [H⁺] ≈ √(K_a × C) when the ' +
+      'acid is weak enough that x (amount dissociated) is small compared to initial ' +
+      'concentration C — check this assumption holds (usually if K_a/C < 0.05, error is ' +
+      'under 5%). PERCENT DISSOCIATION = ([H⁺]/C) × 100% — INCREASES with DILUTION ' +
+      '(counterintuitively!) because Le Chatelier shifts the equilibrium toward MORE ' +
+      'dissociation as concentration drops (more "room" for the reaction to proceed ' +
+      'forward, even though absolute [H⁺] decreases). Weak bases work identically with ' +
+      'K_b: B + H₂O ⇌ BH⁺ + OH⁻. And K_a × K_b = K_w for a conjugate acid-base pair — a ' +
+      'powerful shortcut connecting the two.',
+    targetedMisconceptions: [`${WEAKAB}:MC1`],
+    source: `${WEAKAB_SRC} — Ka/Kb, ICE table method, percent dissociation, Ka×Kb=Kw`,
+  },
+  {
+    conceptId: WEAKAB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Diluting a weak acid decreases the PERCENT dissociation, just like diluting ' +
+      'anything makes it weaker." OPPOSITE for percent dissociation — while [H⁺] does ' +
+      'decrease in absolute terms upon dilution, the FRACTION of acid that dissociates ' +
+      'actually INCREASES (Le Chatelier: diluting shifts equilibrium toward MORE product ' +
+      'particles, i.e., more dissociation, since that side has more total dissolved ' +
+      'species). Don\'t confuse "more diluted, so less acidic overall" (true — pH still ' +
+      'rises with dilution) with "percent dissociation decreases" (false — percent ' +
+      'dissociation rises). Second trap: "Weak acid means low K_a means very little acid ' +
+      'reacts, period." K_a tells you the EQUILIBRIUM position, not whether a reaction ' +
+      'with a STRONG base will go to completion — weak acid + strong base reactions still ' +
+      'proceed essentially completely because the strong base consumes H⁺ as fast as it\'s ' +
+      'produced, continuously pulling the weak acid\'s equilibrium forward (Le Chatelier ' +
+      'again) until the weak acid is essentially fully neutralized.',
+    targetedMisconceptions: [`${WEAKAB}:MC1`, `${WEAKAB}:MC2`],
+    source: `${WEAKAB_SRC} — misconception: dilution decreases percent dissociation; Ka limits total reaction extent`,
+  },
+]
+
+const WEAKAB_PROBES: SeedProbe[] = [
+  {
+    conceptId: WEAKAB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When you dilute a weak acid solution with water, what happens to the PERCENT dissociation (not the absolute [H⁺])?',
+    choices: [
+      { text: 'It increases — Le Chatelier shifts equilibrium toward more dissociated species as concentration drops, even though the absolute [H⁺] decreases', isCorrect: true },
+      { text: 'It decreases — dilution always makes any process "weaker" including dissociation', isCorrect: false, misconceptionId: `${WEAKAB}:MC1` },
+    ],
+    correctValue: 'Percent dissociation increases',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WEAKAB}:MC1`],
+    source: `${WEAKAB_SRC} — distractor targets "dilution always decreases dissociation" misconception`,
+  },
+  {
+    conceptId: WEAKAB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A weak acid (small Ka) is titrated with a strong base (NaOH). Does the reaction go to completion despite the acid being "weak"?',
+    choices: [
+      { text: 'Yes — the strong base consumes H⁺ as fast as it forms, continuously pulling the weak acid\'s equilibrium forward via Le Chatelier, so the neutralization proceeds essentially to completion', isCorrect: true },
+      { text: 'No — a small Ka means the reaction can never proceed very far, regardless of what it\'s reacting with', isCorrect: false, misconceptionId: `${WEAKAB}:MC2` },
+    ],
+    correctValue: 'Yes — reaction goes essentially to completion',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${WEAKAB}:MC2`],
+    source: `${WEAKAB_SRC} — misconception: small Ka limits total reaction extent regardless of the other reactant`,
+  },
+]
+
+// ─── chem.equil.buffer ───────────────────────────────────────────────────────
+const BUFFER = 'chem.equil.buffer'
+const BUFFER_SRC = 'docs/chemistry/kg/graph.json — chem.equil.buffer'
+
+const BUFFER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BUFFER,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A buffer RESISTS pH change when small amounts of acid or base are added. It needs ' +
+      'BOTH a weak acid AND its conjugate base present together (like CH₃COOH + CH₃COO⁻, ' +
+      'or a weak base + its conjugate acid). Why does it work? Add acid (H⁺) → the ' +
+      'conjugate base (CH₃COO⁻) soaks it up: CH₃COO⁻ + H⁺ → CH₃COOH. Add base (OH⁻) → the ' +
+      'weak acid neutralizes it: CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O. Either way, the added ' +
+      'strong acid/base gets converted into the WEAK components already present, causing ' +
+      'only a small pH shift instead of a dramatic one. The HENDERSON-HASSELBALCH ' +
+      'equation calculates buffer pH directly: pH = pKa + log([A⁻]/[HA]) — when ' +
+      '[A⁻]=[HA] (equal amounts), pH = pKa exactly, which is the buffer\'s point of MAXIMUM ' +
+      'capacity (best resistance to pH change in both directions). BUFFER CAPACITY (how ' +
+      'much acid/base it can absorb before failing) depends on the ABSOLUTE concentrations ' +
+      'of the weak acid/base pair — more concentrated buffers resist more total addition, ' +
+      'even at the same pH.',
+    targetedMisconceptions: [`${BUFFER}:MC1`],
+    source: `${BUFFER_SRC} — buffer mechanism, Henderson-Hasselbalch, buffer capacity`,
+  },
+  {
+    conceptId: BUFFER,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A buffer keeps pH COMPLETELY constant no matter how much acid or base you ' +
+      'add." FALSE — buffers RESIST change but have a LIMITED capacity. Add enough strong ' +
+      'acid/base and you\'ll eventually consume ALL of one buffer component (say, all the ' +
+      'CH₃COO⁻ gets converted to CH₃COOH), at which point the buffer is "exhausted" and ' +
+      'pH will change rapidly with any further addition — just like an unbuffered ' +
+      'solution. This is why buffer capacity matters, not just buffer PRESENCE. Second ' +
+      'trap: "You can make a buffer from just a weak acid alone, without adding its ' +
+      'conjugate base." A weak acid ALONE (in water) is NOT a buffer — it only partially ' +
+      'dissociates, creating some conjugate base naturally, but this small self-generated ' +
+      'amount provides very poor buffering. A true buffer needs SIGNIFICANT quantities of ' +
+      'BOTH the weak acid AND its conjugate base together (usually made by adding a salt ' +
+      'of the conjugate base, like sodium acetate, to the weak acid solution).',
+    targetedMisconceptions: [`${BUFFER}:MC1`, `${BUFFER}:MC2`],
+    source: `${BUFFER_SRC} — misconception: buffers have unlimited capacity; weak acid alone is a buffer`,
+  },
+]
+
+const BUFFER_PROBES: SeedProbe[] = [
+  {
+    conceptId: BUFFER,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A CH₃COOH/CH₃COO⁻ buffer has all its CH₃COO⁻ converted to CH₃COOH after excessive strong acid addition. What happens if MORE strong acid is added?',
+    choices: [
+      { text: 'The pH will drop rapidly, just like adding acid to an unbuffered solution — the buffer is exhausted since the conjugate base component is gone', isCorrect: true },
+      { text: 'The pH will still stay roughly constant, since buffers resist pH change indefinitely regardless of how much acid is added', isCorrect: false, misconceptionId: `${BUFFER}:MC1` },
+    ],
+    correctValue: 'pH drops rapidly (buffer exhausted)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BUFFER}:MC1`],
+    source: `${BUFFER_SRC} — distractor targets "buffers resist pH change indefinitely" misconception`,
+  },
+  {
+    conceptId: BUFFER,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a solution containing ONLY acetic acid (CH₃COOH) dissolved in water, with nothing else added, a good buffer?',
+    choices: [
+      { text: 'No — a weak acid alone only partially self-dissociates, generating a very small amount of conjugate base naturally, which is insufficient for meaningful buffering; you need significant added conjugate base (e.g., sodium acetate) to make a true buffer', isCorrect: true },
+      { text: 'Yes — any weak acid solution automatically functions as a buffer since it partially dissociates into its conjugate base', isCorrect: false, misconceptionId: `${BUFFER}:MC2` },
+    ],
+    correctValue: 'No — needs significant added conjugate base',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BUFFER}:MC2`],
+    source: `${BUFFER_SRC} — misconception: any weak acid solution alone constitutes a buffer`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -4913,6 +5418,12 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...LECHAT_EXPLANATIONS,
   ...ACBASE_EXPLANATIONS,
   ...KSPEQ_EXPLANATIONS,
+  ...IONB_EXPLANATIONS,
+  ...COVB_EXPLANATIONS,
+  ...METB_EXPLANATIONS,
+  ...REDOX_EXPLANATIONS,
+  ...WEAKAB_EXPLANATIONS,
+  ...BUFFER_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -4976,4 +5487,10 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...LECHAT_PROBES,
   ...ACBASE_PROBES,
   ...KSPEQ_PROBES,
+  ...IONB_PROBES,
+  ...COVB_PROBES,
+  ...METB_PROBES,
+  ...REDOX_PROBES,
+  ...WEAKAB_PROBES,
+  ...BUFFER_PROBES,
 ]
