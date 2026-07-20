@@ -11900,6 +11900,185 @@ const ELIM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.hal.grignard ───────────────────────────────────────────────────────
+const GRIGNARD = 'chem.hal.grignard'
+const GRIGNARD_SRC = 'docs/chemistry/kg/graph.json — chem.hal.grignard'
+
+const GRIGNARD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GRIGNARD,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Grignard reagents (R-MgX, formed by reacting a haloalkane with magnesium metal in ' +
+      'dry ether) are among the most POWERFUL carbon nucleophiles in organic synthesis — ' +
+      'the C-Mg bond is highly POLARIZED (carbon is much more electronegative than ' +
+      'magnesium), making the carbon strongly NUCLEOPHILIC/CARBANION-like, essentially ' +
+      'acting as a source of "R⁻" for building new C-C bonds. This nucleophilic carbon ' +
+      'attacks electrophilic carbons — most commonly CARBONYL carbons (C=O in aldehydes/ ' +
+      'ketones/esters), adding across the double bond to form NEW alcohols after aqueous ' +
+      'workup: formaldehyde gives a PRIMARY alcohol, other aldehydes give SECONDARY ' +
+      'alcohols, ketones give TERTIARY alcohols — this is one of the most versatile methods ' +
+      'for building complex carbon skeletons and controlling alcohol substitution level. ' +
+      'CRITICAL PRACTICAL CONSTRAINT: Grignard reagents are extremely strong bases/ ' +
+      'nucleophiles and react violently, IMMEDIATELY and DESTRUCTIVELY, with ANY proton ' +
+      'source — water, alcohols, even the N-H of amines — which is why they must be ' +
+      'prepared and used under strictly ANHYDROUS (water-free) conditions; even trace ' +
+      'moisture destroys the reagent before it can perform its intended C-C bond-forming ' +
+      'reaction.',
+    targetedMisconceptions: [`${GRIGNARD}:MC1`],
+    source: `${GRIGNARD_SRC} — Grignard reagent formation, nucleophilic carbon, carbonyl addition, anhydrous requirement`,
+  },
+  {
+    conceptId: GRIGNARD,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Grignard reagents can be prepared or used in aqueous solution, as long as the ' +
+      'reaction is done carefully." DANGEROUSLY FALSE — this is one of the most important ' +
+      'practical safety/procedural facts in organic synthesis. Grignard reagents react ' +
+      'INSTANTLY and VIOLENTLY with water (R-MgX + H₂O → R-H + Mg(OH)X) — even trace ' +
+      'moisture in "dry" glassware or solvents destroys the reagent before it can be used ' +
+      'for its intended purpose, and larger amounts of water can cause a dangerously ' +
+      'vigorous, exothermic reaction. This is WHY Grignard preparations always specify ' +
+      '"anhydrous ether" and require rigorously dried glassware — this isn\'t excessive ' +
+      'caution, it\'s an absolute chemical necessity. Second trap: "You could use a ' +
+      'Grignard reagent to add to a carbonyl in the SAME molecule that also contains an ' +
+      '-OH or -NH group, without any complication." FALSE — the Grignard reagent would ' +
+      'react with (and be destroyed by) that acidic proton FIRST, before ever reaching the ' +
+      'intended carbonyl target — synthetic chemists must PROTECT such acidic groups ' +
+      '(temporarily convert them to unreactive protecting groups) before running a Grignard ' +
+      'reaction on a molecule containing both a carbonyl AND an acidic proton elsewhere.',
+    targetedMisconceptions: [`${GRIGNARD}:MC1`, `${GRIGNARD}:MC2`],
+    source: `${GRIGNARD_SRC} — misconception: Grignard reagents tolerate water/aqueous conditions; acidic protons elsewhere in the molecule cause no complication`,
+  },
+]
+
+const GRIGNARD_PROBES: SeedProbe[] = [
+  {
+    conceptId: GRIGNARD,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Why must Grignard reagent preparation and reactions be carried out under strictly anhydrous (water-free) conditions?',
+    choices: [
+      { text: 'Grignard reagents react instantly and violently with water (R-MgX + H2O → R-H + Mg(OH)X), destroying the reagent before it can perform its intended C-C bond-forming reaction; even trace moisture causes this destructive side reaction', isCorrect: true },
+      { text: 'Water simply slows down the Grignard reaction rate without causing any destructive side reaction, so anhydrous conditions are merely a precaution for efficiency, not necessity', isCorrect: false, misconceptionId: `${GRIGNARD}:MC1` },
+    ],
+    correctValue: 'Water destroys the Grignard reagent through a rapid protonation side reaction',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GRIGNARD}:MC1`],
+    source: `${GRIGNARD_SRC} — distractor targets underestimating water's destructive effect on Grignard reagents`,
+  },
+  {
+    conceptId: GRIGNARD,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A molecule contains both a ketone (target for Grignard addition) and a free -OH group elsewhere. Can you directly run a Grignard reaction on this molecule without any special preparation?',
+    choices: [
+      { text: 'No — the Grignard reagent would react with (and be destroyed by) the acidic -OH proton FIRST, before ever reaching the intended ketone; the -OH group must be protected (temporarily converted to an unreactive form) before running the Grignard reaction', isCorrect: true },
+      { text: 'Yes — Grignard reagents selectively react only with carbonyl groups and ignore any -OH groups present elsewhere in the same molecule', isCorrect: false, misconceptionId: `${GRIGNARD}:MC2` },
+    ],
+    correctValue: 'No — the acidic -OH must be protected first',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GRIGNARD}:MC2`],
+    source: `${GRIGNARD_SRC} — misconception: Grignard reagents selectively ignore other acidic groups in the same molecule`,
+  },
+]
+
+// ─── chem.sol.activity ───────────────────────────────────────────────────────
+const ACTIVITY = 'chem.sol.activity'
+const ACTIVITY_SRC = 'docs/chemistry/kg/graph.json — chem.sol.activity'
+
+const ACTIVITY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACTIVITY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Concentration (molarity/molality) is a convenient, measurable quantity, but for ' +
+      'RIGOROUS thermodynamic calculations (equilibrium constants, cell potentials via the ' +
+      'Nernst equation, all covered earlier), the TRUE relevant quantity is ACTIVITY (a) — ' +
+      'the "effective concentration" accounting for non-ideal interactions between ' +
+      'particles. Activity relates to concentration via: a = γc (γ = ACTIVITY COEFFICIENT, ' +
+      'a correction factor). For DILUTE, IDEAL solutions, γ≈1, so activity ≈ concentration ' +
+      '(this is why simpler introductory calculations can safely IGNORE the distinction). ' +
+      'But in CONCENTRATED solutions, especially with IONIC species, γ deviates ' +
+      'significantly from 1 because ions experience real ELECTROSTATIC interactions with ' +
+      'neighboring ions (attraction between oppositely-charged ions effectively "shields" ' +
+      'some of each ion\'s reactivity, typically making γ<1 — the ion behaves as if LESS ' +
+      'concentrated than its actual measured concentration suggests). This DEBYE-HÜCKEL ' +
+      'behavior explains why very precise electrochemical/equilibrium measurements at HIGH ' +
+      'concentrations don\'t perfectly match predictions using simple concentration values — ' +
+      'the deviation isn\'t experimental error, it\'s a genuine, quantifiable non-ideality ' +
+      'effect.',
+    targetedMisconceptions: [`${ACTIVITY}:MC1`],
+    source: `${ACTIVITY_SRC} — activity vs concentration, activity coefficient, Debye-Hückel behavior in concentrated ionic solutions`,
+  },
+  {
+    conceptId: ACTIVITY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Activity and concentration are just two different names for the exact same ' +
+      'quantity — using them interchangeably is always fine, in any solution." FALSE for ' +
+      'concentrated or ionic solutions — they DIVERGE meaningfully whenever interparticle ' +
+      'interactions become significant (concentrated solutions, or any solution with ' +
+      'charged species at moderate-to-high concentration). Using raw concentration instead ' +
+      'of true activity in precise thermodynamic calculations (like exact equilibrium ' +
+      'constants or Nernst equation predictions) introduces systematic error that grows ' +
+      'with concentration — this is exactly why introductory courses default to using ' +
+      'concentration (a reasonable APPROXIMATION for DILUTE solutions, γ≈1) while advanced ' +
+      'physical chemistry explicitly accounts for activity coefficients. Second trap: "A ' +
+      'deviation between predicted (concentration-based) and measured (activity-based) ' +
+      'results in a concentrated ionic solution experiment indicates something is WRONG ' +
+      'with the experiment or theory." FALSE — this deviation is an EXPECTED, ' +
+      'well-understood, quantifiable consequence of non-ideal solution behavior (interionic ' +
+      'electrostatic interactions), not a flaw — activity coefficients exist precisely to ' +
+      'correct for and predict this genuine physical effect.',
+    targetedMisconceptions: [`${ACTIVITY}:MC1`, `${ACTIVITY}:MC2`],
+    source: `${ACTIVITY_SRC} — misconception: activity and concentration are always interchangeable; deviation from ideal predictions indicates experimental error`,
+  },
+]
+
+const ACTIVITY_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACTIVITY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For a dilute solution (activity coefficient γ≈1), can you safely use concentration in place of activity for thermodynamic calculations? What about a concentrated ionic solution?',
+    choices: [
+      { text: 'Yes for dilute solutions (activity ≈ concentration when γ≈1); but for concentrated ionic solutions, γ deviates significantly from 1 due to interionic electrostatic interactions, so using raw concentration introduces meaningful systematic error', isCorrect: true },
+      { text: 'Activity and concentration are always identical quantities and can be used interchangeably in any solution, dilute or concentrated', isCorrect: false, misconceptionId: `${ACTIVITY}:MC1` },
+    ],
+    correctValue: 'Approximation valid only for dilute solutions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACTIVITY}:MC1`],
+    source: `${ACTIVITY_SRC} — distractor targets treating activity and concentration as universally interchangeable`,
+  },
+  {
+    conceptId: ACTIVITY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A precise electrochemistry experiment in a concentrated ionic solution shows a measured cell potential that deviates from the value predicted using simple concentrations in the Nernst equation. Does this deviation indicate an experimental error?',
+    choices: [
+      { text: 'No — this deviation is an expected, well-understood consequence of non-ideal solution behavior (interionic electrostatic interactions causing activity coefficients to differ from 1); using true activities instead of raw concentrations would resolve the discrepancy', isCorrect: true },
+      { text: 'Yes — any deviation from concentration-based predictions signals a flaw in either the experimental setup or the underlying theory', isCorrect: false, misconceptionId: `${ACTIVITY}:MC2` },
+    ],
+    correctValue: 'No — expected non-ideality, not an error',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACTIVITY}:MC2`],
+    source: `${ACTIVITY_SRC} — misconception: deviation from concentration-based thermodynamic predictions indicates experimental/theoretical error`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -12044,6 +12223,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ALCOH_EXPLANATIONS,
   ...ALKENE_EXPLANATIONS,
   ...ELIM_EXPLANATIONS,
+  ...GRIGNARD_EXPLANATIONS,
+  ...ACTIVITY_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -12188,4 +12369,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ALCOH_PROBES,
   ...ALKENE_PROBES,
   ...ELIM_PROBES,
+  ...GRIGNARD_PROBES,
+  ...ACTIVITY_PROBES,
 ]
