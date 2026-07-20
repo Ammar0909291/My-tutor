@@ -8613,6 +8613,277 @@ const AROM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.bond.intermolecular ────────────────────────────────────────────────
+const IMF = 'chem.bond.intermolecular'
+const IMF_SRC = 'docs/chemistry/kg/graph.json — chem.bond.intermolecular'
+
+const IMF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Intermolecular forces (IMFs) are the WEAK attractions BETWEEN separate molecules ' +
+      '(as distinguished from the strong covalent bonds WITHIN a molecule, covered ' +
+      'earlier). Three main types, in increasing strength: LONDON DISPERSION (present in ' +
+      'ALL molecules, even nonpolar ones — temporary fluctuating electron distributions ' +
+      'create momentary dipoles that induce matching dipoles in neighbors; STRENGTH ' +
+      'increases with molecular size/more electrons, since bigger electron clouds ' +
+      'fluctuate more). DIPOLE-DIPOLE (only in POLAR molecules — permanent partial charges ' +
+      'attract oppositely-charged ends of neighboring molecules, as covered in polar ' +
+      'molecules). HYDROGEN BONDING (a SPECIAL, particularly strong case of dipole-dipole, ' +
+      'requiring H bonded DIRECTLY to N, O, or F — these small, highly electronegative ' +
+      'atoms create an unusually concentrated, nearly-bare positive charge on the tiny ' +
+      'hydrogen, allowing exceptionally strong attraction to a lone pair on a neighboring ' +
+      'N/O/F). Hydrogen bonding explains water\'s anomalously high boiling point (100°C, ' +
+      'vs. the much lower boiling points of similarly-sized molecules like H₂S, which lacks ' +
+      'H-bonding) and ice\'s unusual property of being LESS dense than liquid water (the ' +
+      'rigid hydrogen-bonded lattice in ice holds molecules farther apart than the more ' +
+      'randomly-packed liquid).',
+    targetedMisconceptions: [`${IMF}:MC1`],
+    source: `${IMF_SRC} — London dispersion, dipole-dipole, hydrogen bonding, water anomalies`,
+  },
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "London dispersion forces are negligibly weak and don\'t matter much compared ' +
+      'to dipole-dipole or hydrogen bonding — only polar molecules have meaningful ' +
+      'intermolecular attraction." FALSE — while London forces ARE the weakest force ' +
+      '(per-interaction), they can become DOMINANT for large molecules with many ' +
+      'electrons. Iodine (I₂, nonpolar, only London forces) is a SOLID at room temperature, ' +
+      'while HCl (polar, has dipole-dipole PLUS London forces, but far fewer electrons) is ' +
+      'a GAS — the sheer number of electrons in I₂\'s large, polarizable electron cloud ' +
+      'gives it stronger overall intermolecular attraction than the smaller polar HCl ' +
+      'molecule, despite HCl having the "extra" dipole-dipole contribution. Molecular SIZE ' +
+      'can outweigh polarity type. Second trap: "Any molecule containing H, N, O, or F ' +
+      'atoms exhibits hydrogen bonding." FALSE — hydrogen bonding REQUIRES H bonded ' +
+      'DIRECTLY to N, O, or F (not merely present somewhere in the molecule). CH₃F ' +
+      '(fluoromethane) does NOT hydrogen bond significantly, because its hydrogens are ' +
+      'bonded to CARBON, not directly to the fluorine — the fluorine itself can still ' +
+      'accept a hydrogen bond FROM another molecule\'s O-H or N-H, but CH₃F\'s own hydrogens ' +
+      'can\'t DONATE one, since they\'re attached to carbon, a much less electronegative ' +
+      'atom.',
+    targetedMisconceptions: [`${IMF}:MC1`, `${IMF}:MC2`],
+    source: `${IMF_SRC} — misconception: London forces are always negligible; presence of H/N/O/F alone implies hydrogen bonding`,
+  },
+]
+
+const IMF_PROBES: SeedProbe[] = [
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Iodine (I₂, nonpolar) is a solid at room temperature, while HCl (polar) is a gas. Since HCl has dipole-dipole forces AND I₂ has only weaker London dispersion forces, why does I₂ have the higher effective intermolecular attraction?',
+    choices: [
+      { text: 'I₂\'s much larger, more polarizable electron cloud (many more electrons than HCl) gives it stronger London dispersion forces overall, outweighing HCl\'s smaller size despite HCl having the additional dipole-dipole contribution', isCorrect: true },
+      { text: 'This is impossible — polar molecules must always have stronger intermolecular forces than nonpolar molecules, regardless of size', isCorrect: false, misconceptionId: `${IMF}:MC1` },
+    ],
+    correctValue: 'Molecular size/electron count can outweigh polarity type',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IMF}:MC1`],
+    source: `${IMF_SRC} — distractor targets assuming polar always beats nonpolar in intermolecular force strength`,
+  },
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'CH₃F contains both carbon-bonded hydrogens and a fluorine atom. Does CH₃F exhibit hydrogen bonding as a hydrogen bond DONOR (using its own hydrogens)?',
+    choices: [
+      { text: 'No — hydrogen bonding as a donor requires H bonded DIRECTLY to N, O, or F; CH₃F\'s hydrogens are bonded to carbon, not fluorine, so they cannot donate a hydrogen bond, even though the fluorine could still ACCEPT one from another molecule', isCorrect: true },
+      { text: 'Yes — since the molecule contains both hydrogen and fluorine atoms somewhere, it automatically exhibits full hydrogen bonding behavior as both donor and acceptor', isCorrect: false, misconceptionId: `${IMF}:MC2` },
+    ],
+    correctValue: 'No — H must be directly bonded to N/O/F to donate a hydrogen bond',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IMF}:MC2`],
+    source: `${IMF_SRC} — misconception: mere presence of H and F anywhere in the molecule implies hydrogen bonding`,
+  },
+]
+
+// ─── chem.org.spectroscopy ───────────────────────────────────────────────────
+const ORGSPEC = 'chem.org.spectroscopy'
+const ORGSPEC_SRC = 'docs/chemistry/kg/graph.json — chem.org.spectroscopy'
+
+const ORGSPEC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Spectroscopy identifies molecular structure by studying how molecules interact ' +
+      'with electromagnetic radiation (building on the electromagnetic radiation and ' +
+      'atomic spectra concepts covered earlier, now applied to WHOLE MOLECULES rather ' +
+      'than isolated atoms). Three key organic techniques: IR (INFRARED) SPECTROSCOPY ' +
+      'detects BOND VIBRATIONS — specific functional groups absorb IR radiation at ' +
+      'CHARACTERISTIC frequencies as their bonds stretch/bend (O-H ~3200-3550 cm⁻¹, broad; ' +
+      'C=O ~1700 cm⁻¹, sharp; C≡C/C≡N ~2100-2260 cm⁻¹) — this identifies WHICH functional ' +
+      'groups are present, like a molecular fingerprint. NMR (NUCLEAR MAGNETIC RESONANCE) ' +
+      'detects the magnetic environment of specific nuclei (usually ¹H or ¹³C) — different ' +
+      'CHEMICAL ENVIRONMENTS (how shielded/deshielded a nucleus is by nearby electron ' +
+      'density) give different CHEMICAL SHIFTS, revealing the molecule\'s CONNECTIVITY and ' +
+      'symmetry (how many distinct types of hydrogen/carbon exist, and their relative ' +
+      'ratios via integration/peak splitting). MASS SPECTROMETRY fragments the molecule ' +
+      'and measures the mass-to-charge ratio of resulting pieces, revealing the MOLECULAR ' +
+      'MASS (from the parent/molecular ion peak) and structural clues from characteristic ' +
+      'fragmentation patterns. Together, these three techniques let chemists deduce a ' +
+      'complete unknown structure without ever needing to grow crystals for X-ray analysis.',
+    targetedMisconceptions: [`${ORGSPEC}:MC1`],
+    source: `${ORGSPEC_SRC} — IR spectroscopy (functional groups), NMR (connectivity), mass spectrometry (mass/fragments)`,
+  },
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "IR spectroscopy tells you the exact, complete structure of an unknown ' +
+      'molecule by itself." FALSE — IR primarily reveals WHICH FUNCTIONAL GROUPS are ' +
+      'present (a carbonyl? an O-H? a nitrile?), but does NOT directly tell you how those ' +
+      'groups are CONNECTED to the rest of the molecule, or the overall carbon skeleton. ' +
+      'For that, you typically need NMR (connectivity information) and mass spectrometry ' +
+      '(overall molecular mass and fragmentation pattern) as complementary techniques — ' +
+      'real structure determination almost always COMBINES multiple spectroscopic methods, ' +
+      'not relying on just one. Second trap: "A taller/more intense NMR peak always means ' +
+      'a more IMPORTANT or chemically reactive type of hydrogen." FALSE — NMR peak INTENSITY ' +
+      '(area/integration) is proportional to the NUMBER of equivalent hydrogens producing ' +
+      'that peak, NOT their chemical importance or reactivity. A tall peak simply means ' +
+      '"many hydrogens in this particular chemical environment" — like a CH₃ group\'s 3 ' +
+      'equivalent hydrogens giving a proportionally larger peak than a single OH hydrogen, ' +
+      'regardless of which is more chemically significant for the molecule\'s reactivity.',
+    targetedMisconceptions: [`${ORGSPEC}:MC1`, `${ORGSPEC}:MC2`],
+    source: `${ORGSPEC_SRC} — misconception: single technique gives complete structure; NMR peak height indicates chemical importance`,
+  },
+]
+
+const ORGSPEC_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'An IR spectrum shows a strong absorption at 1700 cm⁻¹ (indicating a C=O group is present). Can you determine the complete molecular structure from this IR data alone?',
+    choices: [
+      { text: 'No — IR primarily identifies which functional groups are present (here, a carbonyl), but not how they connect to the rest of the molecule; NMR and mass spectrometry are typically needed as complementary techniques for full structure determination', isCorrect: true },
+      { text: 'Yes — a single IR spectrum provides complete structural information sufficient to fully determine any unknown molecule', isCorrect: false, misconceptionId: `${ORGSPEC}:MC1` },
+    ],
+    correctValue: 'No — IR alone is insufficient for complete structure determination',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGSPEC}:MC1`],
+    source: `${ORGSPEC_SRC} — distractor targets over-relying on a single spectroscopic technique`,
+  },
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In an NMR spectrum, a CH₃ group\'s peak is roughly three times taller than an adjacent OH peak. Does this mean the CH₃ hydrogens are more chemically important or reactive than the OH hydrogen?',
+    choices: [
+      { text: 'No — NMR peak intensity (integration) is proportional to the NUMBER of equivalent hydrogens producing that peak (3 for CH₃ vs. 1 for OH), not their chemical importance or reactivity', isCorrect: true },
+      { text: 'Yes — a taller NMR peak always indicates a more chemically significant or reactive type of hydrogen in the molecule', isCorrect: false, misconceptionId: `${ORGSPEC}:MC2` },
+    ],
+    correctValue: 'No — peak height reflects hydrogen count, not importance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGSPEC}:MC2`],
+    source: `${ORGSPEC_SRC} — misconception: NMR peak height indicates chemical significance rather than hydrogen count`,
+  },
+]
+
+// ─── chem.org.purification ───────────────────────────────────────────────────
+const PURIF = 'chem.org.purification'
+const PURIF_SRC = 'docs/chemistry/kg/graph.json — chem.org.purification'
+
+const PURIF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PURIF,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organic purification techniques exploit PHYSICAL PROPERTY DIFFERENCES between a ' +
+      'desired compound and its impurities. DISTILLATION separates liquids by BOILING ' +
+      'POINT differences (simple distillation for widely-different boiling points; ' +
+      'fractional distillation, using a fractionating column with repeated ' +
+      'vaporization-condensation cycles, for CLOSE boiling points that simple distillation ' +
+      'can\'t cleanly separate). RECRYSTALLIZATION purifies SOLIDS by exploiting SOLUBILITY ' +
+      'differences at different temperatures: dissolve the impure solid in a HOT solvent ' +
+      '(where it\'s highly soluble), then cool SLOWLY — the desired compound crystallizes ' +
+      'out in pure form as solubility drops with temperature, while impurities (present in ' +
+      'much smaller amounts, below their own solubility limit) STAY dissolved in the ' +
+      'remaining liquid (the "mother liquor") and get filtered away. EXTRACTION (typically ' +
+      'liquid-liquid) separates compounds based on differential SOLUBILITY between two ' +
+      'immiscible solvents (like water and an organic solvent) — "like dissolves like" ' +
+      'means a compound partitions preferentially into whichever solvent better matches ' +
+      'its polarity. SUBLIMATION purifies solids that convert directly to vapor without ' +
+      'melting (like solid CO₂ or naphthalene), leaving non-subliming impurities behind.',
+    targetedMisconceptions: [`${PURIF}:MC1`],
+    source: `${PURIF_SRC} — distillation, recrystallization, extraction, sublimation techniques`,
+  },
+  {
+    conceptId: PURIF,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "In recrystallization, cooling the hot saturated solution as FAST as possible ' +
+      '(rapid cooling, like an ice bath) gives the purest, best crystals." Actually the ' +
+      'OPPOSITE is generally true for PURITY (though rapid cooling does give MORE crystal ' +
+      'mass/yield) — SLOW cooling allows crystals to form more SELECTIVELY and ORDERLY, ' +
+      'excluding impurities from the growing crystal lattice as it forms gradually. Rapid ' +
+      'cooling causes crystals to form too quickly and haphazardly, often TRAPPING ' +
+      'impurities within the crystal structure (occlusion) rather than leaving them ' +
+      'properly dissolved in the mother liquor. There\'s a genuine purity-vs-yield ' +
+      'trade-off: slow cooling maximizes purity but sacrifices some yield (product left in ' +
+      'solution); rapid cooling maximizes yield but risks lower purity. Second trap: ' +
+      '"Simple distillation can effectively separate any two liquids, regardless of how ' +
+      'close their boiling points are." FALSE — simple distillation only works well when ' +
+      'boiling points differ substantially (roughly >25°C apart); for CLOSE boiling points, ' +
+      'you need FRACTIONAL distillation\'s repeated vaporization-condensation cycles ' +
+      '(essentially many small simple distillations stacked together) to achieve adequate ' +
+      'separation.',
+    targetedMisconceptions: [`${PURIF}:MC1`, `${PURIF}:MC2`],
+    source: `${PURIF_SRC} — misconception: rapid cooling maximizes purity; simple distillation works for any boiling point difference`,
+  },
+]
+
+const PURIF_PROBES: SeedProbe[] = [
+  {
+    conceptId: PURIF,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'During recrystallization, does cooling the hot saturated solution as RAPIDLY as possible (e.g., using an ice bath) produce the PUREST crystals?',
+    choices: [
+      { text: 'No — rapid cooling increases crystal YIELD but tends to trap impurities within the rapidly-forming crystal structure (occlusion); SLOW cooling generally produces purer crystals by allowing selective, orderly crystal growth', isCorrect: true },
+      { text: 'Yes — the faster the solution cools, the purer and better-formed the resulting crystals will be', isCorrect: false, misconceptionId: `${PURIF}:MC1` },
+    ],
+    correctValue: 'No — slow cooling generally gives purer crystals (yield vs. purity trade-off)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PURIF}:MC1`],
+    source: `${PURIF_SRC} — distractor targets assuming rapid cooling maximizes both yield and purity simultaneously`,
+  },
+  {
+    conceptId: PURIF,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two liquids have boiling points only 3°C apart. Will simple distillation effectively separate them into pure components?',
+    choices: [
+      { text: 'No — simple distillation only works well for substantially different boiling points (roughly >25°C apart); such close boiling points require fractional distillation\'s repeated vaporization-condensation cycles for adequate separation', isCorrect: true },
+      { text: 'Yes — simple distillation can cleanly separate any two liquids regardless of how close their boiling points are', isCorrect: false, misconceptionId: `${PURIF}:MC2` },
+    ],
+    correctValue: 'No — fractional distillation is needed for close boiling points',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PURIF}:MC2`],
+    source: `${PURIF_SRC} — misconception: simple distillation is universally adequate regardless of boiling point closeness`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -8720,6 +8991,9 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...ISOM_EXPLANATIONS,
   ...ELECEFF_EXPLANATIONS,
   ...AROM_EXPLANATIONS,
+  ...IMF_EXPLANATIONS,
+  ...ORGSPEC_EXPLANATIONS,
+  ...PURIF_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -8827,4 +9101,7 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...ISOM_PROBES,
   ...ELECEFF_PROBES,
   ...AROM_PROBES,
+  ...IMF_PROBES,
+  ...ORGSPEC_PROBES,
+  ...PURIF_PROBES,
 ]
