@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.continued-fractions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.continued-fractions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6f9273ded3a7763628b0a60e76b92e1028fbff69139b4a7e698edf6f5a1ac152",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.continued-fractions.md": "sha256:cc8090d86c139c8b00a361968c410d539af9198d44a9cc9aab8fe4e57839d813"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.nt.continued-fractions",
+    "name": "Continued Fractions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.nt.euclidean-algorithm",
+      "math.seq.convergent"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.continued-fractions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.continued-fractions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.continued-fractions.md": "sha256:cc8090d86c139c8b00a361968c410d539af9198d44a9cc9aab8fe4e57839d813"
+      },
+      "contentHash": "sha256:b200b065c9ef76778abb80349488d3abe4bade2e389abf42c135703477e1048d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.continued-fractions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.continued-fractions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.continued-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.continued-fractions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.continued-fractions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.continued-fractions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.continued-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.continued-fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.continued-fractions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.continued-fractions.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.continued-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.continued-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.continued-fractions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.continued-fractions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.continued-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.continued-fractions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.continued-fractions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the continued fraction expansion $a_0+\\cfrac{1}{a_1+\\cfrac{1}{a_2+\\cdots}}$ of a RATIONAL number by REPEATEDLY applying `math.nt.euclidean-algorithm`'s own \"replace $(a,b)$ with $(b,a\\bmod b)$\" division process — recognizing the continued fraction algorithm as the Euclidean algorithm's steps, recorded as coefficients rather than merely computing a final GCD.\n- LO2: Recognize that a continued fraction TERMINATES if and only if the original number is RATIONAL — directly because `math.nt.euclidean-algorithm`'s repeated division process itself terminates in finitely many steps precisely for rational inputs (reaching remainder $0$), while an IRRATIONAL number's expansion continues forever.\n- LO3 (orientation level — full periodicity-theorem proof deferred): recognize, without full derivation, that QUADRATIC IRRATIONALS (numbers like $\\sqrt2$, roots of quadratics with integer coefficients) have EVENTUALLY PERIODIC continued fraction expansions — a genuinely surprising structural fact, connecting to `math.seq.convergent`'s own $\\varepsilon$-$N$ convergence machinery for making sense of what an infinite continued fraction actually CONVERGES to.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "CONTINUED-FRACTION-ASSUMED-SEPARATE-ALGORITHM",
+      "content": "| MC-1 | CONTINUED-FRACTION-ASSUMED-SEPARATE-ALGORITHM | Believing computing a continued fraction expansion is a separate algorithm unrelated to the Euclidean algorithm, missing that it records exactly the Euclidean algorithm's own discarded quotients | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "TERMINATION-ASSUMED-INDEPENDENT-OF-RATIONALITY",
+      "content": "| MC-2 | TERMINATION-ASSUMED-INDEPENDENT-OF-RATIONALITY | Believing a continued fraction could terminate for an irrational number or continue forever for a rational one, missing that termination and rationality are the exact same fact | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "PERIODICITY-ASSUMED-UNIVERSAL-FOR-IRRATIONALS",
+      "content": "| MC-3 | PERIODICITY-ASSUMED-UNIVERSAL-FOR-IRRATIONALS | Believing every irrational number's continued fraction expansion eventually becomes periodic, missing that periodicity is special to quadratic irrationals specifically | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Continued Fractions Record What the Euclidean Algorithm Discards (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Continued Fractions Record What the Euclidean Algorithm Discards (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Termination and Rationality Are the Same Fact, Viewed Two Ways (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Termination and Rationality Are the Same Fact, Viewed Two Ways (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Quadratic Irrationals' Periodicity Is a Genuinely Special, Non-Universal Structural Fact (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Quadratic Irrationals' Periodicity Is a Genuinely Special, Non-Universal Structural Fact (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the continued fraction expansion of $\\frac{43}{19}$, showing each Euclidean-algorithm division step alongside the recorded quotient.\n  2. Explain why your answer to problem 1 is guaranteed to terminate, citing the connection to the Euclidean algorithm.\n  3. Compute the first 3 coefficients of $\\sqrt3$'s continued fraction expansion (using $\\sqrt3=1+(\\sqrt3-1)$ as the starting point, then repeatedly taking reciprocals and floors).\n  4. Explain, without full proof, why $\\sqrt3$'s continued fraction expansion is expected to be eventually periodic, while a \"generic\" irrational number's expansion is not.\n- **P76 (Transfer Probe, mode = independence)**: \"A cryptographic algorithm relies on continued fraction expansions of rational approximations to break certain RSA-related weaknesses (the Wiener attack), specifically exploiting the FINITE, computable nature of a rational number's expansion. (a) Explain, citing the direct connection to the Euclidean algorithm, why a rational approximation's continued fraction expansion is guaranteed to be computable in finitely many steps. (b) If the underlying true value being approximated were actually irrational rather than rational, explain what would happen to the continued fraction computation, and why this matters for the algorithm's practical termination. (c) A colleague suggests that since $\\sqrt2$ has such a clean periodic pattern, ALL square roots of integers must have similarly simple periodic continued fractions — evaluate this claim, distinguishing which numbers this periodicity fact actually applies to.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.nt.euclidean-algorithm` (computing $\\gcd(a,b)$ by repeatedly replacing $(a,b)$ with $(b,a\\bmod b)$) and `math.seq.convergent` (the $\\varepsilon$-$N$ definition of a sequence converging to a limit $L$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.nt.continued-fractions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.continued-fractions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.nt.euclidean-algorithm` (the repeated-division process this concept's coefficients directly record) and `math.seq.convergent` (the $\\varepsilon$-$N$ convergence definition needed to make sense of an infinite continued fraction's convergents).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.continued-fractions.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

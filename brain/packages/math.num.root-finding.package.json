@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.root-finding-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.root-finding",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b9bfc15c3ee8516930d967191c0fd7770ff42f28f7647923114f95139dd03286",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.root-finding.md": "sha256:4301c2b4e76b8b13b54bf06382d0a98b5de22e30d88d364e17422313e6cbd404"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.num.root-finding",
+    "name": "Root-Finding Methods",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.continuity",
+      "math.real.ivt"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.root-finding-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.root-finding (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.root-finding.md": "sha256:4301c2b4e76b8b13b54bf06382d0a98b5de22e30d88d364e17422313e6cbd404"
+      },
+      "contentHash": "sha256:a79db2c9bd05edb3e058da0f904a13f3fe8d4fee93e68b32c23fb9b3fc027399",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.root-finding.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.root-finding.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.root-finding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.root-finding\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.root-finding.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.root-finding.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.root-finding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.root-finding\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.root-finding.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.root-finding.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.root-finding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.root-finding\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.root-finding.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.root-finding.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.root-finding"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.root-finding\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.root-finding/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.root-finding",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply BISECTION to locate a root: given a sign change confirmed by `math.real.ivt` (continuous $f$, $f(a)$ and $f(b)$ of opposite sign), repeatedly halve the interval, keeping whichever half retains the sign change — recognizing bisection as the DIRECT algorithmic realization of the existence guarantee IVT provides but does not itself compute.\n- LO2: Apply NEWTON'S METHOD ($x_{n+1}=x_n-f(x_n)/f'(x_n)$) and recognize its QUADRATIC convergence (roughly doubling correct digits each step) near a root — contrasted against bisection's much slower, though UNCONDITIONALLY guaranteed, convergence — and recognize Newton's method's own requirement of $f'$ and a sufficiently good starting guess as real, not merely theoretical, limitations.\n- LO3 (orientation level — full secant/Brent's-method derivation deferred): recognize, without full derivation, that the SECANT method achieves SUPERLINEAR convergence (faster than bisection, slower than Newton) WITHOUT requiring $f'$ at all (approximating the derivative via a difference quotient instead), and that Brent's method COMBINES bisection's guaranteed convergence with secant's speed for practical robustness.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.root-finding",
+      "title": "BISECTION-ASSUMED-UNRELATED-TO-IVT",
+      "content": "| MC-1 | BISECTION-ASSUMED-UNRELATED-TO-IVT | Believing bisection is an unrelated new algorithm disconnected from IVT, missing that it is directly IVT's existence guarantee applied repeatedly to shrinking intervals | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.root-finding",
+      "title": "NEWTONS-METHOD-ASSUMED-ALWAYS-SUCCEEDS",
+      "content": "| MC-2 | NEWTONS-METHOD-ASSUMED-ALWAYS-SUCCEEDS | Believing Newton's method's fast convergence means it will always succeed given any reasonable start, missing its genuine failure modes (bad start, vanishing derivative) | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.root-finding",
+      "title": "SECANT-ASSUMED-SAME-RATE-AS-NEWTON",
+      "content": "| MC-3 | SECANT-ASSUMED-SAME-RATE-AS-NEWTON | Believing the secant method achieves Newton's exact quadratic convergence rate without needing the derivative, missing that its derivative-free approximation costs some speed (superlinear, not quadratic) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.root-finding",
+      "title": "Bisection Is IVT's Existence Guarantee, Made Algorithmic (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Bisection Is IVT's Existence Guarantee, Made Algorithmic (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.root-finding",
+      "title": "Newton's Method's Speed Comes With Genuine Failure Modes (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Newton's Method's Speed Comes With Genuine Failure Modes (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.root-finding",
+      "title": "Secant Trades Newton's Derivative-Requirement for Somewhat Slower (But Still Fast) Convergence (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Secant Trades Newton's Derivative-Requirement for Somewhat Slower (But Still Fast) Convergence (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.root-finding",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.root-finding",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Perform 2 iterations of bisection for $f(x)=x^3-5$ on $[1,2]$, tracking which half-interval is retained each step.\n  2. Perform 2 iterations of Newton's method for $f(x)=x^3-5$ starting at $x_0=1.5$ (compute $f'(x)=3x^2$ first).\n  3. Explain what would go wrong if Newton's method were started at a point where $f'(x_0)=0$.\n  4. Explain, without full derivation, why the secant method's convergence rate is expected to be between bisection's and Newton's.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to find where a nonlinear stress function $f(x)=x^4-3x-2$ crosses zero in the interval $[1,2]$, but the exact derivative formula is unavailable due to noisy experimental data (only function VALUES can be measured, not derivatives). (a) Explain why Newton's method is not a good fit here, citing its specific requirement. (b) Propose using either bisection or the secant method instead, and explain the trade-off between them (guaranteed-but-slower vs. no-guarantee-but-typically-faster). (c) If the engineer's first bisection step accidentally used a starting interval where $f(1)$ and $f(2)$ do NOT have opposite signs, explain precisely what would go wrong and why bisection's guarantee would no longer apply.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.num.root-finding",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.continuity` ($f$ continuous at $a$ iff $\\lim_{x\\to a}f(x)=f(a)$) and `math.real.ivt` (the rigorous Intermediate Value Theorem: continuous $f$ on $[a,b]$ with $f(a)<c<f(b)$ guarantees some $x\\in(a,b)$ with $f(x)=c$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.root-finding/reference/1",
+      "kind": "reference",
+      "conceptId": "math.num.root-finding",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.continuity` (continuity, the hypothesis these methods' guarantees depend on) and `math.real.ivt` (the rigorous existence guarantee bisection directly algorithmizes).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.root-finding.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
