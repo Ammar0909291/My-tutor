@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.riemann-integrability-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.riemann-integrability",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:70fda100e32bd02c19e2f65d9a31a6beb5d875a9591e522535d383d4d4af68a3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.riemann-integrability.md": "sha256:ae327171ce30cc85caa41742753b6a47ff8bd6712852ccde8e28a3c5f59826a0"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.real.riemann-integrability",
+    "name": "Riemann Integrability",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.real.riemann-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.riemann-integrability-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.riemann-integrability (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.riemann-integrability.md": "sha256:ae327171ce30cc85caa41742753b6a47ff8bd6712852ccde8e28a3c5f59826a0"
+      },
+      "contentHash": "sha256:3afe76565814855184584116d67c15e350d4b9c096d96edc5eba717878cfab38",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integrability.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integrability.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integrability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integrability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integrability.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integrability.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integrability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integrability\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integrability.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integrability.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integrability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integrability\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.riemann-integrability.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.riemann-integrability.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.riemann-integrability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.riemann-integrability\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.riemann-integrability/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): State the Lebesgue criterion precisely — $f$ is Riemann integrable on $[a,b]$ iff $f$ is BOUNDED (`math.real.riemann-integral`'s own already-established necessary condition) AND its set of discontinuities has `math.meas.measure-zero`'s own measure-zero property — and correctly recognize this as the EXACT dividing line, sharper than either \"continuous everywhere\" (sufficient but not necessary) or \"bounded\" (necessary but not sufficient) alone.\n- LO2: Correctly re-diagnose `math.real.riemann-integral`'s own Dirichlet-function non-example using the Lebesgue criterion DIRECTLY — the Dirichlet function is discontinuous at EVERY point of $[0,1]$, so its discontinuity set is the WHOLE interval $[0,1]$, which has POSITIVE (not zero) measure — correctly explaining why the criterion correctly PREDICTS non-integrability, rather than merely re-confirming an already-known fact by a different route.\n- LO3: Exhibit a function with INFINITELY MANY discontinuities that IS Riemann integrable — using a function discontinuous at every point of $\\mathbb{Q}\\cap[0,1]$ (countably infinite, hence `math.meas.measure-zero`'s own measure-zero property applies directly) as the standard example — correctly contrasting it against the Dirichlet function's failure to demonstrate that \"infinitely many discontinuities\" alone does not determine integrability; only the discontinuity set's MEASURE does.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "LEBESGUE-CRITERION-ASSUMED-MERELY-SUFFICIENT",
+      "content": "| MC-1 | LEBESGUE-CRITERION-ASSUMED-MERELY-SUFFICIENT | Believing the Lebesgue criterion is just another sufficient condition for integrability, missing that it is the exact necessary-and-sufficient dividing line | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "LEBESGUE-CRITERION-DIRICHLET-PREDICTION-ASSUMED-COINCIDENTAL",
+      "content": "| MC-2 | LEBESGUE-CRITERION-DIRICHLET-PREDICTION-ASSUMED-COINCIDENTAL | Believing the criterion's correct prediction of the Dirichlet function's non-integrability is merely a coincidental match with the already-known result, missing that it is an independent, genuinely diagnostic mechanism | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "INFINITE-DISCONTINUITIES-ASSUMED-TO-RULE-OUT-INTEGRABILITY",
+      "content": "| MC-3 | INFINITE-DISCONTINUITIES-ASSUMED-TO-RULE-OUT-INTEGRABILITY | Believing having infinitely many discontinuities automatically rules out Riemann integrability, missing that countably infinite discontinuity sets have measure zero and remain compatible with integrability | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "The Lebesgue Criterion Is the Exact If-and-Only-If Dividing Line (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Lebesgue Criterion Is the Exact If-and-Only-If Dividing Line (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "The Criterion Correctly Diagnoses the Dirichlet Function's Failure, Not by Coincidence (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Criterion Correctly Diagnoses the Dirichlet Function's Failure, Not by Coincidence (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "It's the MEASURE of the Discontinuity Set, Not Its Cardinality, That Determines Integrability (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"It's the MEASURE of the Discontinuity Set, Not Its Cardinality, That Determines Integrability (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the Lebesgue criterion precisely, identifying which part is `math.real.riemann-integral`'s own already-known necessary condition and which part is genuinely new.\n  2. For $f(x)=1/x$ on $(0,1]$ (unbounded near 0), explain why the Lebesgue criterion's boundedness requirement alone already rules out integrability, without needing to examine the discontinuity set at all.\n  3. Compute the measure of the discontinuity set for a step function with 5 jump discontinuities, and confirm it predicts integrability.\n  4. Explain, in your own words, why \"infinitely many discontinuities\" is not by itself sufficient information to determine Riemann integrability.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.meas.measure-zero`)**: \"A numerical-analysis researcher is evaluating whether a piecewise-defined function $h$, built from countably many smooth pieces glued together with possible jumps at each of the countably many gluing points, can be safely numerically integrated via Riemann-sum-based methods. (a) Using the Lebesgue criterion, explain what TWO conditions the researcher needs to verify about $h$ to be confident it is Riemann integrable. (b) Using `math.meas.measure-zero`'s own already-established fact, explain why the countably many gluing points, by themselves, pose NO obstacle to integrability, regardless of how many there are. (c) If the researcher instead discovers $h$ is discontinuous on an entire subinterval (a set of positive measure, not just isolated points), explain why this WOULD genuinely threaten integrability, contrasting directly with the countable-gluing-points case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.riemann-integral` (upper/lower Darboux sums $U(f,P),L(f,P)$; $f$ integrable iff $\\inf U=\\sup L$; integrable functions are bounded; continuous functions are integrable; the Dirichlet function as a non-integrable example, discontinuous everywhere).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.riemann-integrability/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.riemann-integrability",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.riemann-integral` (Darboux sums, the boundedness-necessary and continuity-sufficient facts, and the Dirichlet function non-example this concept directly re-diagnoses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.meas.measure-zero`, checked via `ls docs/curriculum/blueprints/` and confirmed authored EARLIER IN THIS SAME BATCH (same-batch cross-link-enabling pattern). $P76_{mode}=$ **cross-link probe**, engaging `math.meas.measure-zero`'s own countable-sets-have-measure-zero fact directly in Component 3's derivation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.riemann-integrability.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

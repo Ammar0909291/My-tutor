@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.meas.measure-zero-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.meas.measure-zero",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:76451ccef9a33aee3a3608d16ad17d7561c446043a6db93df3fa6342b7b5b4c3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.meas.measure-zero.md": "sha256:feaa2277b8805cf5e9685862806f69dab9f62a7c899be0bad236e0a676932462"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.meas.measure-zero",
+    "name": "Measure Zero",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.meas.lebesgue-measure"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.meas.measure-zero-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.meas.measure-zero (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.meas.measure-zero.md": "sha256:feaa2277b8805cf5e9685862806f69dab9f62a7c899be0bad236e0a676932462"
+      },
+      "contentHash": "sha256:5f45afd03488757444426c61d76236d955c6a0fd7274e8e2c50472e4aba9568e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.meas.measure-zero.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure-zero.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure-zero"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure-zero\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measure-zero.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure-zero.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure-zero"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure-zero\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measure-zero.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure-zero.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure-zero"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure-zero\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.meas.measure-zero.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.meas.measure-zero.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.meas.measure-zero"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.meas.measure-zero\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.meas.measure-zero/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.meas.measure-zero",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the definition precisely — $E$ has measure zero iff $\\mu(E)=0$ (equivalently, for every $\\varepsilon>0$, $E$ can be covered by countably many intervals of total length $<\\varepsilon$) — and recognize `math.meas.lebesgue-measure`'s own already-established fact (countable sets have measure zero, verified there for $\\mathbb{Q}\\cap[0,1]$) as the FIRST, but not the ONLY, source of measure-zero sets.\n- LO2: Construct the Cantor set (via the standard iterative middle-thirds-removal process) and correctly verify it is UNCOUNTABLE (via a direct bijection argument with infinite ternary sequences avoiding the digit 1) YET has measure zero (via a direct limiting computation of the total length removed) — confirming `math.meas.lebesgue-measure`'s own countable-sets-have-measure-zero fact does NOT reverse: measure zero does NOT imply countable.\n- LO3: State and apply the \"almost everywhere\" (a.e.) terminology — a property holds a.e. if the set where it FAILS has measure zero — and correctly translate a specific a.e. statement (e.g., \"$f=g$ almost everywhere\") into precise measure-theoretic language, distinguishing it from the much stronger claim \"$f=g$ everywhere.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.meas.measure-zero",
+      "title": "MEASURE-ZERO-ASSUMED-EQUIVALENT-TO-COUNTABLE",
+      "content": "| MC-1 | MEASURE-ZERO-ASSUMED-EQUIVALENT-TO-COUNTABLE | Believing having measure zero is equivalent to being countable, missing that measure zero is strictly broader | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.meas.measure-zero",
+      "title": "UNCOUNTABLE-AND-MEASURE-ZERO-ASSUMED-CONTRADICTORY",
+      "content": "| MC-2 | UNCOUNTABLE-AND-MEASURE-ZERO-ASSUMED-CONTRADICTORY | Believing a set's uncountability contradicts it having measure zero, missing that the Cantor set genuinely, verifiably has both properties simultaneously | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.meas.measure-zero",
+      "title": "ALMOST-EVERYWHERE-TREATED-AS-INFORMAL-HAND-WAVE",
+      "content": "| MC-3 | ALMOST-EVERYWHERE-TREATED-AS-INFORMAL-HAND-WAVE | Treating \"almost everywhere\" as a loose, informal approximation to \"everywhere\" rather than a precise measure-zero condition on the exception set | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure-zero",
+      "title": "Countable Sets Are the FIRST Source of Measure Zero, Not the Whole Story (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Countable Sets Are the FIRST Source of Measure Zero, Not the Whole Story (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure-zero",
+      "title": "The Cantor Set Is Uncountable AND Measure Zero — Verified Both Ways (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Cantor Set Is Uncountable AND Measure Zero — Verified Both Ways (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure-zero",
+      "title": "\"Almost Everywhere\" Is a Genuinely Weaker Claim Than \"Everywhere\" (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"\\\"Almost Everywhere\\\" Is a Genuinely Weaker Claim Than \\\"Everywhere\\\" (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.meas.measure-zero",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.meas.measure-zero",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Explain why `math.meas.lebesgue-measure`'s own proof that countable sets have measure zero does NOT, by itself, tell you whether an uncountable set could also have measure zero.\n  2. Compute the total length remaining at stage 3 of the Cantor-set construction, and confirm it matches $(2/3)^3$.\n  3. Explain, using the ternary-expansion bijection, why the Cantor set is uncountable.\n  4. For $g(x)=x^2$ everywhere except $g(0)=5$, state precisely (using measure-zero language) why \"$g(x)=x^2$ almost everywhere\" is true.\n- **P76 (Transfer Probe, mode = independence — `math.real.riemann-integrability` not yet authored, pending future revision)**: \"A researcher studying function properties on $[0,1]$ has two candidate functions: Function A is discontinuous ONLY at the countably many rational points; Function B is discontinuous on the entire Cantor set. (a) Using this lesson's facts, explain why BOTH functions' discontinuity sets have measure zero, despite Function B's discontinuity set being uncountable while Function A's is merely countable. (b) Explain why simply counting the NUMBER of discontinuity points (finite, countable, or uncountable) is not by itself sufficient to determine whether the discontinuity set has measure zero, citing the Cantor set as the key counterexample to a naive 'more points means bigger measure' intuition. (c) State, using a.e. language, what it would mean for a property to hold 'almost everywhere except on the Cantor set,' and confirm this is a mathematically meaningful (nonvacuous but exception-tolerant) statement.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.meas.measure-zero",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.meas.lebesgue-measure` (outer measure $m^*$; the already-established fact that countable sets, including the dense rationals in $[0,1]$, have measure zero, verified via a shrinking-interval covering argument).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.meas.measure-zero/reference/1",
+      "kind": "reference",
+      "conceptId": "math.meas.measure-zero",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.meas.lebesgue-measure` (outer measure and the already-established countable-sets-have-measure-zero fact this concept extends).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.real.riemann-integrability`, checked via `ls docs/curriculum/blueprints/` — confirmed NOT YET authored at the time this blueprint was written. Per the established P76_mode rule, this blueprint uses **independence** mode. This concept is deliberately authored FIRST in this batch specifically so `math.real.riemann-integrability` (authored immediately after) CAN cross-link back to it — the established same-batch cross-link-enabling pattern.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.meas.measure-zero.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

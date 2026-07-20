@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.lagrange-multipliers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.lagrange-multipliers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ef08a48cde67d861dbc36d13a1167de50ba35834ff290f24991cb60057d86336",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md": "sha256:7c656bec6b1323e64ca06987dc69d0dd374f549fe6239d542711f0909fe3f28d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.opt.lagrange-multipliers",
+    "name": "Lagrange Multipliers",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.partial-derivatives",
+      "math.opt.unconstrained-optimization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.lagrange-multipliers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.lagrange-multipliers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md": "sha256:7c656bec6b1323e64ca06987dc69d0dd374f549fe6239d542711f0909fe3f28d"
+      },
+      "contentHash": "sha256:9860bef34d4b06d6dceb094b77c94c70959a2134c6bfe2d08a24af2b98438608",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.lagrange-multipliers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.lagrange-multipliers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.lagrange-multipliers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.lagrange-multipliers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.lagrange-multipliers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.lagrange-multipliers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.lagrange-multipliers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.lagrange-multipliers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.lagrange-multipliers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.lagrange-multipliers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.lagrange-multipliers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.lagrange-multipliers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.lagrange-multipliers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize that `math.opt.unconstrained-optimization`'s own condition $\\nabla f(x^*)=0$ is EXACTLY the SPECIAL CASE of this concept's condition $\\nabla f=\\lambda\\nabla g$ when there is NO constraint at all (equivalently, $\\lambda=0$ always works trivially, or the constraint gradient $\\nabla g$ plays no role) — and correctly explain WHY a constraint changes the optimality condition from \"$\\nabla f$ vanishes\" to \"$\\nabla f$ is merely PARALLEL to $\\nabla g$\" (not necessarily zero).\n- LO2: Derive the parallel-gradient condition $\\nabla f=\\lambda\\nabla g$ geometrically — at a constrained optimum, $\\nabla f$ CANNOT have any component tangent to the constraint curve $g=0$ (else moving along the curve would improve $f$ further, contradicting optimality), so $\\nabla f$ must point in the SAME (or opposite) direction as $\\nabla g$ (the constraint's own normal direction) — and correctly set up and solve the system $\\nabla f=\\lambda\\nabla g,g(x)=0$ ($n+1$ equations, $n+1$ unknowns) for a specific constrained optimization problem.\n- LO3: Correctly apply the method to a genuine applied problem (e.g. minimizing cost subject to a production constraint, or finding the closest point on a curve to a given point) — correctly identifying $f$ (the objective) and $g$ (the constraint) from a word problem, and correctly interpreting the solved value of $\\lambda$ as the RATE at which the optimal objective value would change per unit relaxation of the constraint (the \"shadow price\" interpretation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "LAGRANGE-CONDITION-ASSUMED-UNRELATED-TO-UNCONSTRAINED",
+      "content": "| MC-1 | LAGRANGE-CONDITION-ASSUMED-UNRELATED-TO-UNCONSTRAINED | Believing the constrained optimality condition $\\nabla f=\\lambda\\nabla g$ is completely unrelated to `math.opt.unconstrained-optimization`'s own $\\nabla f=0$ condition, missing the direct generalization relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "PARALLEL-GRADIENT-CONDITION-ASSUMED-ARBITRARY",
+      "content": "| MC-2 | PARALLEL-GRADIENT-CONDITION-ASSUMED-ARBITRARY | Believing the parallel-gradient condition is an arbitrary algebraic recipe with no deeper geometric meaning, missing its direct tangency interpretation | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "LAMBDA-ASSUMED-DISPOSABLE",
+      "content": "| MC-3 | LAMBDA-ASSUMED-DISPOSABLE | Believing the solved value of $\\lambda$ is a disposable intermediate algebraic quantity, missing its genuine shadow-price interpretation | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "The Parallel-Gradient Condition Reduces to `math.opt.unconstrained-optimization`'s Own $\\nabla f=0$ When Unconstrained (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Parallel-Gradient Condition Reduces to `math.opt.unconstrained-optimization`'s Own $\\\\nabla f=0$ When Unconstrained (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "At a Constrained Optimum, $\\nabla f$ Can Have No Tangential Component — Verified Geometrically (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"At a Constrained Optimum, $\\\\nabla f$ Can Have No Tangential Component — Verified Geometrically (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "$\\lambda$ Is Not Just an Algebra Byproduct — It's the Constraint's Shadow Price (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"$\\\\lambda$ Is Not Just an Algebra Byproduct — It's the Constraint's Shadow Price (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Minimize $f(x,y)=x^2+4y^2$ subject to $g(x,y)=x+y-3=0$, solving the full system for $(x,y,\\lambda)$.\n  2. Verify your answer to problem 1 geometrically by checking that the level curve of $f$ through your solution is tangent to the constraint line.\n  3. Explain why, if the constraint gradient $\\nabla g$ happened to be the zero vector at a candidate point, the method as stated would break down (this is a genuine edge case worth flagging, not covered in the main examples).\n  4. Interpret the sign and magnitude of a solved $\\lambda=-5$ in a cost-minimization context: does relaxing the constraint increase or decrease the minimum cost, and by approximately how much per unit relaxation?\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A farmer wants to minimize the total fencing perimeter $f(x,y)=2x+2y$ needed to enclose a rectangular field of dimensions $x\\times y$, subject to the constraint that the field's AREA must equal a fixed value: $g(x,y)=xy-A=0$ for some constant $A$. (a) Set up and solve the Lagrange multiplier system for this problem in terms of $A$, finding $x,y$, and $\\lambda$. (b) Using your solved $\\lambda$, explain what it would mean, in farming terms, if the farmer decided to enclose a SLIGHTLY larger area than $A$ — specifically, how the minimum required fencing would change. (c) Explain why `math.opt.unconstrained-optimization`'s own method (setting $\\nabla f=0$ directly) would NOT work for this problem on its own, without first incorporating the area constraint.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.partial-derivatives` ($\\partial f/\\partial x$, and the gradient $\\nabla f$ as the vector of partial derivatives) and `math.opt.unconstrained-optimization` (the necessary condition $\\nabla f(x^*)=0$ for an unconstrained local optimum; local vs. global optima).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.lagrange-multipliers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.opt.lagrange-multipliers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.partial-derivatives` (the gradient $\\nabla f$ this concept's optimality condition is built from) and `math.opt.unconstrained-optimization` (the $\\nabla f=0$ condition this concept's own condition directly generalizes).\n- **Unlocks**: `math.opt.kkt` (the Karush-Kuhn-Tucker conditions, generalizing this concept's equality-constraint method to INEQUALITY constraints).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.lagrange-multipliers.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
