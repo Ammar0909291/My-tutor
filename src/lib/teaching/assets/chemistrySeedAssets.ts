@@ -10030,6 +10030,185 @@ const ARENES_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.state.liquids ──────────────────────────────────────────────────────
+const LIQ = 'chem.state.liquids'
+const LIQ_SRC = 'docs/chemistry/kg/graph.json — chem.state.liquids'
+
+const LIQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LIQ,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Liquids sit between solids (fixed shape/volume) and gases (no fixed shape/volume) ' +
+      '— they have FIXED VOLUME but TAKE THE SHAPE of their container, because ' +
+      'intermolecular forces (covered earlier) are strong enough to hold particles close ' +
+      'together (fixed volume) but not strong enough to lock them in fixed positions (they ' +
+      'can flow past each other). Key liquid properties, all rooted in intermolecular ' +
+      'forces: VISCOSITY (resistance to flow) increases with stronger IMFs and larger/more ' +
+      'entangled molecules — honey (strong H-bonding, large molecules) flows much slower ' +
+      'than water. SURFACE TENSION (the "skin" effect allowing water striders to walk on ' +
+      'water, or droplets to bead up) arises because surface molecules have UNBALANCED ' +
+      'attractive forces (pulled inward/sideways by neighbors, with nothing pulling ' +
+      'outward from the missing "air-side" neighbors), creating a net inward pull that ' +
+      'minimizes surface area — stronger IMFs mean higher surface tension. VAPOR PRESSURE ' +
+      '(the pressure exerted by a liquid\'s own evaporated molecules in a closed container ' +
+      'at equilibrium) DECREASES with stronger IMFs (harder for molecules to escape into ' +
+      'the vapor phase) and INCREASES with temperature (more molecules have enough kinetic ' +
+      'energy to escape). A liquid BOILS when its vapor pressure equals the surrounding ' +
+      'atmospheric pressure — this is WHY water boils at a LOWER temperature at high ' +
+      'altitude (lower atmospheric pressure means vapor pressure reaches that lower target ' +
+      'sooner).',
+    targetedMisconceptions: [`${LIQ}:MC1`],
+    source: `${LIQ_SRC} — viscosity, surface tension, vapor pressure, boiling point-pressure relationship`,
+  },
+  {
+    conceptId: LIQ,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Water boils at a lower temperature at high altitude because there\'s less ' +
+      'gravity/oxygen up there, affecting the water molecules directly." FALSE — the real ' +
+      'reason is purely about PRESSURE: atmospheric pressure decreases with altitude, and ' +
+      'boiling occurs when vapor pressure EQUALS the surrounding atmospheric pressure. ' +
+      'Since atmospheric pressure is lower at altitude, the liquid\'s vapor pressure ' +
+      'reaches that (lower) target at a LOWER temperature, so boiling happens sooner ' +
+      '(at a lower temperature) — nothing to do with gravity or oxygen content directly ' +
+      'affecting the water. This is why pressure cookers work OPPOSITELY: they trap steam, ' +
+      'RAISING internal pressure above 1 atm, which requires HIGHER vapor pressure (hence ' +
+      'higher temperature) to boil — cooking food faster at superheated conditions. Second ' +
+      'trap: "Higher vapor pressure means a liquid is MORE stable/has stronger ' +
+      'intermolecular forces." BACKWARDS — HIGH vapor pressure indicates WEAK ' +
+      'intermolecular forces (molecules escape into vapor easily, like volatile ' +
+      'acetone/diethyl ether), while LOW vapor pressure indicates STRONG intermolecular ' +
+      'forces holding molecules firmly in the liquid (like water, or especially glycerol ' +
+      'with extensive hydrogen bonding).',
+    targetedMisconceptions: [`${LIQ}:MC1`, `${LIQ}:MC2`],
+    source: `${LIQ_SRC} — misconception: altitude boiling point change is about gravity/oxygen; high vapor pressure means strong IMFs`,
+  },
+]
+
+const LIQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: LIQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water boils at about 95°C on a high mountain, compared to 100°C at sea level. What causes this difference?',
+    choices: [
+      { text: 'Atmospheric pressure is lower at high altitude, so the liquid\'s vapor pressure reaches this (lower) target pressure at a lower temperature, causing boiling to occur sooner', isCorrect: true },
+      { text: 'There is less gravity and oxygen at high altitude, which directly affects the water molecules and lowers their boiling point', isCorrect: false, misconceptionId: `${LIQ}:MC1` },
+    ],
+    correctValue: 'Lower atmospheric pressure at altitude',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LIQ}:MC1`],
+    source: `${LIQ_SRC} — distractor targets attributing altitude boiling point effects to gravity/oxygen rather than pressure`,
+  },
+  {
+    conceptId: LIQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Diethyl ether has a much higher vapor pressure than glycerol at the same temperature. Does this mean diethyl ether has STRONGER intermolecular forces than glycerol?',
+    choices: [
+      { text: 'No — HIGH vapor pressure indicates WEAK intermolecular forces (molecules escape into vapor easily); glycerol\'s LOW vapor pressure reflects its strong, extensive hydrogen bonding holding molecules firmly in the liquid', isCorrect: true },
+      { text: 'Yes — higher vapor pressure always indicates stronger intermolecular forces between the liquid\'s molecules', isCorrect: false, misconceptionId: `${LIQ}:MC2` },
+    ],
+    correctValue: 'No — high vapor pressure indicates weak intermolecular forces',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LIQ}:MC2`],
+    source: `${LIQ_SRC} — misconception: high vapor pressure correlates with strong rather than weak intermolecular forces`,
+  },
+]
+
+// ─── chem.sblock.water ───────────────────────────────────────────────────────
+const WATER = 'chem.sblock.water'
+const WATER_SRC = 'docs/chemistry/kg/graph.json — chem.sblock.water'
+
+const WATER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WATER,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Water\'s unusual properties (covered partially in intermolecular forces and liquid ' +
+      'state) trace to its BENT geometry (VSEPR, 104.5°) and extensive HYDROGEN BONDING ' +
+      '(each water molecule can form up to 4 hydrogen bonds — 2 as donor via its 2 H atoms, ' +
+      '2 as acceptor via its 2 lone pairs — an unusually high, symmetric bonding capacity). ' +
+      'This gives water an ANOMALOUSLY HIGH boiling point, high specific heat capacity ' +
+      '(absorbs/releases lots of heat with small temperature change — moderates coastal ' +
+      'climates and living organisms\' internal temperature), and — most famously — LOWER ' +
+      'DENSITY AS A SOLID than as a liquid (ice floats!). This last property comes from ' +
+      'ice\'s rigid, OPEN hexagonal hydrogen-bonded lattice (each water molecule locked into ' +
+      '4 tetrahedral H-bonds, creating open channels), which is actually LESS densely ' +
+      'packed than the liquid, where molecules can move more freely and pack somewhat ' +
+      'closer together despite constantly breaking/reforming H-bonds. Water is also called ' +
+      'the "universal solvent" for its ability to dissolve many ionic and polar substances ' +
+      '(via ion-dipole and dipole-dipole/H-bonding interactions), essential for biological ' +
+      'chemistry and geological weathering processes.',
+    targetedMisconceptions: [`${WATER}:MC1`],
+    source: `${WATER_SRC} — water's hydrogen bonding capacity, anomalous properties, ice density anomaly`,
+  },
+  {
+    conceptId: WATER,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Ice floats because freezing generally makes substances less dense — this is ' +
+      'a NORMAL, common property shared by most materials." FALSE — water is actually a ' +
+      'striking EXCEPTION. Most substances become MORE dense when they freeze (solid ' +
+      'form packs particles tighter than the liquid, since thermal motion decreases and ' +
+      'particles settle into their most efficient packing). Water is one of the very FEW ' +
+      'common substances where the solid is LESS dense than the liquid — specifically ' +
+      'because ice\'s hydrogen-bonded hexagonal lattice REQUIRES an open, spacious ' +
+      'structure to satisfy every molecule\'s 4 tetrahedral hydrogen bonds simultaneously, ' +
+      'and this open structure is less efficiently packed than liquid water\'s more ' +
+      'disordered, somewhat closer arrangement. This anomaly is ecologically vital — if ice ' +
+      'sank (like most frozen solids), lakes/oceans would freeze from the BOTTOM up, ' +
+      'likely destroying aquatic ecosystems, rather than forming a protective insulating ' +
+      'surface layer while liquid water remains below for organisms to survive in.',
+    targetedMisconceptions: [`${WATER}:MC1`],
+    source: `${WATER_SRC} — misconception: solids being less dense than their liquid is a common/normal property (it's unusual)`,
+  },
+]
+
+const WATER_PROBES: SeedProbe[] = [
+  {
+    conceptId: WATER,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Ice is less dense than liquid water, which is why icebergs float. Is this a common property shared by most substances when they freeze?',
+    choices: [
+      { text: 'No — most substances become MORE dense when they freeze (solids typically pack tighter than liquids); water is a notable exception because ice\'s hydrogen-bonded lattice requires an open, spacious structure', isCorrect: true },
+      { text: 'Yes — solids are generally less dense than their liquid form for most common substances, and water is simply a typical example of this', isCorrect: false, misconceptionId: `${WATER}:MC1` },
+    ],
+    correctValue: 'No — water is an unusual exception to the general solid-denser-than-liquid rule',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WATER}:MC1`],
+    source: `${WATER_SRC} — distractor targets assuming ice's lower density is a typical/common property`,
+  },
+  {
+    conceptId: WATER,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How many hydrogen bonds can a single water molecule form simultaneously with its neighbors, and why is this significant?',
+    choices: [
+      { text: 'Up to 4 — 2 as a donor (via its 2 H atoms) and 2 as an acceptor (via its 2 lone pairs); this unusually high, symmetric bonding capacity is what gives ice its rigid, open hexagonal lattice structure', isCorrect: true },
+      { text: 'Only 1 — water can form just one hydrogen bond per molecule, similar to a typical alcohol', isCorrect: false },
+    ],
+    correctValue: 'Up to 4 hydrogen bonds per molecule',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${WATER_SRC} — water's 4-fold hydrogen bonding capacity as the structural basis for the ice lattice`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -10153,6 +10332,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...PETRO_EXPLANATIONS,
   ...CONFORM_EXPLANATIONS,
   ...ARENES_EXPLANATIONS,
+  ...LIQ_EXPLANATIONS,
+  ...WATER_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -10276,4 +10457,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...PETRO_PROBES,
   ...CONFORM_PROBES,
   ...ARENES_PROBES,
+  ...LIQ_PROBES,
+  ...WATER_PROBES,
 ]
