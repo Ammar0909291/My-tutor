@@ -8171,6 +8171,448 @@ const COORDNOM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.org.hybridization ──────────────────────────────────────────────────
+const ORGHYB = 'chem.org.hybridization'
+const ORGHYB_SRC = 'docs/chemistry/kg/graph.json — chem.org.hybridization'
+
+const ORGHYB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Building on the general hybridization concept: in organic chemistry, carbon\'s ' +
+      'hybridization state DIRECTLY determines a molecule\'s geometry, bond angles, and ' +
+      'reactivity pattern. sp³ CARBON (4 single bonds, tetrahedral, 109.5°) is found in ' +
+      'ALKANES (saturated hydrocarbons) — relatively unreactive, undergoes substitution ' +
+      'reactions. sp² CARBON (1 double bond + 2 single bonds, trigonal planar, 120°) is ' +
+      'found in ALKENES — the flat geometry and exposed π-electron cloud makes double ' +
+      'bonds significantly more reactive, readily undergoing ADDITION reactions (breaking ' +
+      'the weaker π bond while keeping the σ bond intact). sp CARBON (1 triple bond OR 2 ' +
+      'double bonds, linear, 180°) is found in ALKYNES — even MORE reactive due to two ' +
+      'exposed π bonds. A useful shortcut: count the GROUPS attached to a carbon (via ' +
+      'single, double, or triple bonds, treating each multiple bond as ONE group for this ' +
+      'purpose) — 4 groups = sp³, 3 groups = sp², 2 groups = sp — directly matching the ' +
+      'VSEPR electron-domain-counting logic covered earlier, just applied specifically to ' +
+      'carbon-centered organic structures.',
+    targetedMisconceptions: [`${ORGHYB}:MC1`],
+    source: `${ORGHYB_SRC} — carbon hybridization in alkanes/alkenes/alkynes, geometry-reactivity connection`,
+  },
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "A carbon with a double bond must be sp hybridized, since double bonds seem ' +
+      'more "special"/higher-energy than single bonds." FALSE — a carbon with exactly ONE ' +
+      'double bond (plus two single bonds, like in ethene\'s CH₂=CH₂) is sp² hybridized, ' +
+      'NOT sp. sp hybridization requires either a TRIPLE bond (one σ + two π, as in ' +
+      'ethyne HC≡CH) or TWO SEPARATE double bonds on the same carbon (as in an allene, ' +
+      'CH₂=C=CH₂, the central carbon). The rule is about counting total attached GROUPS, ' +
+      'not simply "does a double bond exist somewhere." Second trap: "All carbons in a ' +
+      'molecule must share the SAME hybridization state." FALSE — different carbons ' +
+      'within the SAME molecule can have DIFFERENT hybridizations depending on their ' +
+      'individual local bonding environment. For example, in CH₂=CH-CH₃ (propene), the ' +
+      'two double-bonded carbons are sp², while the terminal CH₃ carbon (all single bonds) ' +
+      'is sp³ — hybridization is assessed PER CARBON, not for the whole molecule at once.',
+    targetedMisconceptions: [`${ORGHYB}:MC1`, `${ORGHYB}:MC2`],
+    source: `${ORGHYB_SRC} — misconception: any double bond means sp hybridization; all carbons in a molecule share one hybridization`,
+  },
+]
+
+const ORGHYB_PROBES: SeedProbe[] = [
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the hybridization of the carbon atoms in ethene (CH₂=CH₂), which has one double bond per carbon?',
+    choices: [
+      { text: 'sp² — each carbon has 3 attached groups (2 H atoms + 1 double-bonded C, counting the double bond as one group), giving trigonal planar geometry', isCorrect: true },
+      { text: 'sp — any carbon involved in a double bond is automatically sp hybridized', isCorrect: false, misconceptionId: `${ORGHYB}:MC1` },
+    ],
+    correctValue: 'sp²',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ORGHYB}:MC1`],
+    source: `${ORGHYB_SRC} — distractor targets assuming any double bond implies sp hybridization`,
+  },
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In propene (CH₂=CH-CH₃), do all three carbon atoms share the exact same hybridization state?',
+    choices: [
+      { text: 'No — the two double-bonded carbons (CH₂= and =CH-) are sp² hybridized, while the terminal methyl carbon (-CH₃, all single bonds) is sp³ hybridized; hybridization is assessed per carbon based on its local bonding', isCorrect: true },
+      { text: 'Yes — every carbon in a single molecule must share the same overall hybridization state', isCorrect: false, misconceptionId: `${ORGHYB}:MC2` },
+    ],
+    correctValue: 'No — different carbons can have different hybridizations within one molecule',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGHYB}:MC2`],
+    source: `${ORGHYB_SRC} — misconception: assuming molecule-wide uniform hybridization rather than per-carbon assessment`,
+  },
+]
+
+// ─── chem.hyd.alkanes ─────────────────────────────────────────────────────────
+const ALKANE = 'chem.hyd.alkanes'
+const ALKANE_SRC = 'docs/chemistry/kg/graph.json — chem.hyd.alkanes'
+
+const ALKANE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alkanes (general formula CₙH₂ₙ₊₂) are SATURATED hydrocarbons — every carbon is sp³ ' +
+      'hybridized with 4 single bonds, "saturated" meaning no more hydrogen could possibly ' +
+      'be added (maximum hydrogen content for that carbon skeleton). Being made entirely ' +
+      'of strong, nonpolar C-C and C-H σ bonds, alkanes are RELATIVELY UNREACTIVE — they ' +
+      'don\'t readily undergo addition reactions (no π bond to attack) and resist most ' +
+      'common reagents. Their main reactions are COMBUSTION (burning completely in excess ' +
+      'oxygen: CₙH₂ₙ₊₂ + O₂ → CO₂ + H₂O + energy — the basis of most fossil fuel energy) and ' +
+      'FREE RADICAL HALOGENATION (reaction with Cl₂/Br₂ under UV light, via a chain ' +
+      'mechanism: initiation, propagation, termination — substituting one H for a halogen ' +
+      'atom). Physical properties follow chain length predictably: boiling point INCREASES ' +
+      'with chain length (more surface area for London dispersion forces, the ONLY ' +
+      'intermolecular force present, since alkanes are nonpolar). BRANCHING decreases ' +
+      'boiling point (a more compact, spherical shape has LESS surface contact area between ' +
+      'molecules than a long straight chain, weakening the dispersion forces).',
+    targetedMisconceptions: [`${ALKANE}:MC1`],
+    source: `${ALKANE_SRC} — alkane structure/saturation, combustion, free radical halogenation, boiling point trends`,
+  },
+  {
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Branching should INCREASE an alkane\'s boiling point, since more branches ' +
+      'means a bigger, heavier molecule with more atoms." FALSE — for ISOMERS (same ' +
+      'molecular formula, same total number of atoms), branching DECREASES boiling point, ' +
+      'not increases it. This is because branching makes the molecule\'s shape more ' +
+      'COMPACT/spherical rather than long and straight — and spherical shapes have LESS ' +
+      'surface-to-surface contact area between neighboring molecules than elongated ' +
+      'shapes, which weakens the (already weak) London dispersion forces holding molecules ' +
+      'together. n-pentane (straight chain, bp 36°C) boils higher than neopentane (highly ' +
+      'branched, same formula C₅H₁₂, bp 9.5°C) — SAME number of atoms, dramatically ' +
+      'different boiling point purely from shape/surface-area differences. Second trap: ' +
+      '"Alkanes are completely unreactive, essentially inert like noble gases." FALSE — ' +
+      'they combust readily (releasing enormous energy, which is precisely why they\'re ' +
+      'used as fuels) and undergo free radical halogenation — "relatively unreactive under ' +
+      'MILD conditions" is more accurate than "completely inert."',
+    targetedMisconceptions: [`${ALKANE}:MC1`, `${ALKANE}:MC2`],
+    source: `${ALKANE_SRC} — misconception: branching increases boiling point; alkanes are completely inert`,
+  },
+]
+
+const ALKANE_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'n-pentane (straight chain, C₅H₁₂) has a higher boiling point (36°C) than neopentane (highly branched, also C₅H₁₂, bp 9.5°C). Why, given they have the same molecular formula?',
+    choices: [
+      { text: 'Branching makes neopentane more compact/spherical, reducing surface contact area between molecules and weakening the London dispersion forces compared to the elongated straight-chain n-pentane', isCorrect: true },
+      { text: 'This must be an error — since both have the same formula (same mass), they should have identical boiling points', isCorrect: false, misconceptionId: `${ALKANE}:MC1` },
+    ],
+    correctValue: 'Branching reduces surface area, weakening dispersion forces',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKANE}:MC1`],
+    source: `${ALKANE_SRC} — distractor targets assuming same formula must mean same boiling point`,
+  },
+  {
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Alkanes are described as "relatively unreactive." Does this mean alkanes never undergo any chemical reactions at all?',
+    choices: [
+      { text: 'No — alkanes readily undergo combustion (releasing large amounts of energy, the basis for fossil fuel use) and free radical halogenation under UV light; "relatively unreactive" refers to resistance under mild conditions, not complete inertness', isCorrect: true },
+      { text: 'Yes — alkanes are essentially completely inert, like noble gases, and undergo no meaningful chemical reactions', isCorrect: false, misconceptionId: `${ALKANE}:MC2` },
+    ],
+    correctValue: 'No — alkanes combust and undergo radical halogenation',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ALKANE}:MC2`],
+    source: `${ALKANE_SRC} — misconception: alkanes are completely chemically inert`,
+  },
+]
+
+// ─── chem.org.isomerism ──────────────────────────────────────────────────────
+const ISOM = 'chem.org.isomerism'
+const ISOM_SRC = 'docs/chemistry/kg/graph.json — chem.org.isomerism'
+
+const ISOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Isomers share the SAME molecular formula but different structures — same "parts ' +
+      'list," different "assembly." Two major categories: STRUCTURAL (constitutional) ' +
+      'isomers differ in how atoms are CONNECTED (different bonding pattern entirely) — ' +
+      'chain isomers (different carbon skeleton branching, like n-butane vs. isobutane), ' +
+      'position isomers (same skeleton, functional group at a different position, like ' +
+      '1-propanol vs. 2-propanol), and functional group isomers (same formula, entirely ' +
+      'DIFFERENT functional group, like ethanol C₂H₆O vs. dimethyl ether C₂H₆O — an ' +
+      'alcohol and an ether with identical formula!). STEREOISOMERS have the SAME ' +
+      'connectivity but different 3D SPATIAL arrangement — GEOMETRIC (cis/trans, arising ' +
+      'from restricted rotation around double bonds, as covered in hybridization) and ' +
+      'OPTICAL isomers (non-superimposable mirror images, called ENANTIOMERS, arising from ' +
+      'a CHIRAL center — typically a carbon bonded to 4 DIFFERENT groups). Optical isomers ' +
+      'have IDENTICAL physical properties (melting point, boiling point, density) except ' +
+      'for how they rotate plane-polarized light (one rotates it clockwise/+, the mirror ' +
+      'image rotates it counterclockwise/− by the exact same amount) — this subtle ' +
+      'difference is CRUCIAL in biology/pharmacology, since enzymes are themselves chiral ' +
+      'and often interact very differently with each enantiomer.',
+    targetedMisconceptions: [`${ISOM}:MC1`],
+    source: `${ISOM_SRC} — structural isomerism types, stereoisomerism (geometric/optical), chirality`,
+  },
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Enantiomers (optical isomers/mirror images) are essentially identical ' +
+      'compounds with no real practical difference, since they have the same physical ' +
+      'properties (melting point, density, etc)." DANGEROUSLY FALSE in biological contexts ' +
+      '— while their bulk physical properties ARE identical, enantiomers can have WILDLY ' +
+      'different BIOLOGICAL effects, because biological receptors/enzymes are themselves ' +
+      'chiral and interact differently with each mirror-image form (like a right hand only ' +
+      'fitting comfortably into a right-handed glove, not a left one). The most notorious ' +
+      'historical example: thalidomide — one enantiomer was an effective sedative, while ' +
+      'the OTHER enantiomer caused severe birth defects. This real, tragic case is exactly ' +
+      'why modern pharmaceutical development must carefully test and often isolate ' +
+      'individual enantiomers, not just "the compound" generically. Second trap: "Cis/trans ' +
+      'isomers and optical isomers (enantiomers) are basically the same phenomenon, just ' +
+      'different names." FALSE — they arise from fundamentally different structural causes: ' +
+      'cis/trans comes from restricted ROTATION around a double bond (or ring), while ' +
+      'optical isomerism comes from a CHIRAL CENTER (asymmetric carbon) creating ' +
+      'non-superimposable mirror images — different mechanisms, different consequences.',
+    targetedMisconceptions: [`${ISOM}:MC1`, `${ISOM}:MC2`],
+    source: `${ISOM_SRC} — misconception: enantiomers have no practical difference; cis-trans and optical isomerism are equivalent`,
+  },
+]
+
+const ISOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two enantiomers of a drug have identical melting points, boiling points, and densities. Does this mean they will have identical effects when taken by a patient?',
+    choices: [
+      { text: 'Not necessarily — biological receptors and enzymes are chiral and can interact very differently with each enantiomer, potentially causing dramatically different biological effects (as tragically demonstrated by thalidomide)', isCorrect: true },
+      { text: 'Yes — since their physical properties are identical, their biological effects must also be identical', isCorrect: false, misconceptionId: `${ISOM}:MC1` },
+    ],
+    correctValue: 'Not necessarily — biological effects can differ dramatically',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISOM}:MC1`],
+    source: `${ISOM_SRC} — distractor targets assuming identical physical properties implies identical biological effects`,
+  },
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are cis/trans isomerism and optical isomerism (enantiomers) caused by the same underlying structural feature?',
+    choices: [
+      { text: 'No — cis/trans isomerism arises from restricted rotation around a double bond (or ring), while optical isomerism arises from a chiral center (asymmetric carbon bonded to four different groups) — fundamentally different mechanisms', isCorrect: true },
+      { text: 'Yes — both are simply different names for the same general phenomenon of stereoisomerism with no meaningful structural distinction', isCorrect: false, misconceptionId: `${ISOM}:MC2` },
+    ],
+    correctValue: 'No — different structural origins (double bond restriction vs. chirality)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISOM}:MC2`],
+    source: `${ISOM_SRC} — misconception: conflating cis-trans and optical isomerism as the same phenomenon`,
+  },
+]
+
+// ─── chem.org.electronic-effects ─────────────────────────────────────────────
+const ELECEFF = 'chem.org.electronic-effects'
+const ELECEFF_SRC = 'docs/chemistry/kg/graph.json — chem.org.electronic-effects'
+
+const ELECEFF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ELECEFF,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Organic reactivity is heavily shaped by how electron density shifts through a ' +
+      'molecule\'s bonds. INDUCTIVE EFFECT: electron density shifts through σ (single) ' +
+      'bonds due to electronegativity differences — a strongly electronegative atom (like ' +
+      'Cl in chloroacetic acid) PULLS electron density toward itself through the bond ' +
+      'chain (−I, electron-withdrawing), while electropositive groups PUSH electron ' +
+      'density away (+I, electron-donating, like alkyl groups). This effect WEAKENS ' +
+      'rapidly with distance (roughly halving every carbon away) since it works only ' +
+      'through direct bond-to-bond transmission. MESOMERIC (RESONANCE) EFFECT: electron ' +
+      'density shifts through π (multiple bond/conjugated) systems via delocalization — ' +
+      'groups that DONATE electron density into a π system are +M (like -NH₂, -OH ' +
+      'attached to a benzene ring, using their lone pair), while groups that WITHDRAW ' +
+      'electron density from a π system are −M (like -NO₂, -C=O, pulling density away via ' +
+      'resonance). Unlike the inductive effect, mesomeric effects DON\'T weaken with ' +
+      'distance in the same way — they operate through the WHOLE conjugated system ' +
+      'uniformly, following the resonance structures. Both effects work TOGETHER (and ' +
+      'sometimes in OPPOSING directions for the same substituent) to determine overall ' +
+      'reactivity and acidity/basicity.',
+    targetedMisconceptions: [`${ELECEFF}:MC1`],
+    source: `${ELECEFF_SRC} — inductive effect (σ, distance-dependent) vs mesomeric/resonance effect (π, delocalized)`,
+  },
+  {
+    conceptId: ELECEFF,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "The inductive and mesomeric effects always point in the SAME direction for ' +
+      'any given substituent, reinforcing each other." FALSE for several important groups ' +
+      '— the halogens (like -Cl attached to benzene) show a CLASSIC conflict: inductively, ' +
+      'Cl is electronegative and WITHDRAWS electron density (−I effect, as expected). But ' +
+      'mesomerically, Cl has lone pairs that can DONATE into the aromatic π system (+M ' +
+      'effect, via resonance) — the SAME atom pulling one way inductively while pushing ' +
+      'the other way mesomerically! For halogens on benzene, the +M effect typically ' +
+      'dominates for directing WHERE further reactions occur (ortho/para-directing), even ' +
+      'though the −I effect makes the ring overall slightly less reactive than unsubstituted ' +
+      'benzene — these are two SEPARATE questions (directing effect vs. overall ' +
+      'reactivity) that can have different answers. Second trap: "Inductive effects, being ' +
+      'through σ bonds, extend indefinitely with full strength throughout a molecule, no ' +
+      'matter how far." FALSE — inductive effects weaken RAPIDLY with distance (roughly ' +
+      'halving with each additional bond away from the electronegative group), becoming ' +
+      'essentially negligible beyond 2-3 bonds — this distance-decay is a KEY ' +
+      'distinguishing feature from the mesomeric effect, which doesn\'t decay the same way ' +
+      'within a conjugated system.',
+    targetedMisconceptions: [`${ELECEFF}:MC1`, `${ELECEFF}:MC2`],
+    source: `${ELECEFF_SRC} — misconception: inductive/mesomeric always align; inductive effect has no distance decay`,
+  },
+]
+
+const ELECEFF_PROBES: SeedProbe[] = [
+  {
+    conceptId: ELECEFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Chlorine attached to a benzene ring shows a −I (inductive, electron-withdrawing) effect but a +M (mesomeric, electron-donating) effect. Can the same substituent have effects pointing in opposite directions?',
+    choices: [
+      { text: 'Yes — chlorine is electronegative (withdraws density inductively through σ bonds) but also has lone pairs that can donate into the π system via resonance (+M); these are genuinely different mechanisms that can conflict for the same atom', isCorrect: true },
+      { text: 'No — a single substituent must have inductive and mesomeric effects that always point in the same, consistent direction', isCorrect: false, misconceptionId: `${ELECEFF}:MC1` },
+    ],
+    correctValue: 'Yes — the two effects can genuinely conflict',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ELECEFF}:MC1`],
+    source: `${ELECEFF_SRC} — distractor targets assuming inductive and mesomeric effects must always align`,
+  },
+  {
+    conceptId: ELECEFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the inductive effect of an electronegative substituent remain at full strength no matter how many carbons away you measure it in a chain?',
+    choices: [
+      { text: 'No — the inductive effect weakens rapidly with distance (roughly halving with each additional bond), becoming essentially negligible beyond 2-3 bonds from the electronegative group', isCorrect: true },
+      { text: 'Yes — inductive effects transmit through σ bonds at full, undiminished strength regardless of distance from the source', isCorrect: false, misconceptionId: `${ELECEFF}:MC2` },
+    ],
+    correctValue: 'No — inductive effect decays rapidly with distance',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELECEFF}:MC2`],
+    source: `${ELECEFF_SRC} — misconception: inductive effect has no distance dependence`,
+  },
+]
+
+// ─── chem.org.aromaticity ────────────────────────────────────────────────────
+const AROM = 'chem.org.aromaticity'
+const AROM_SRC = 'docs/chemistry/kg/graph.json — chem.org.aromaticity'
+
+const AROM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: AROM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Benzene (C₆H₆) puzzled chemists for decades — its structure seemed like it should ' +
+      'behave like a highly reactive triene (3 alternating double bonds), but it\'s ' +
+      'actually remarkably UNREACTIVE and stable (resists addition reactions that normal ' +
+      'alkenes undergo easily). The resolution: benzene isn\'t really alternating single ' +
+      'and double bonds at all — it\'s a RESONANCE HYBRID (as covered earlier) where all 6 ' +
+      'C-C bonds are IDENTICAL (bond length exactly between single and double), with 6 ' +
+      'delocalized π electrons spread evenly around the entire ring in a continuous ' +
+      'electron cloud above and below the ring plane. HÜCKEL\'S RULE formalizes when a ' +
+      'planar, fully conjugated ring gains this special "aromatic" stability: it must have ' +
+      '4n+2 π electrons (n = 0,1,2...) — giving 2, 6, 10, 14... So benzene\'s 6 π electrons ' +
+      '(n=1) qualifies. This extra stability (called RESONANCE/DELOCALIZATION ENERGY, ' +
+      'roughly 150 kJ/mol more stable than a hypothetical non-delocalized "cyclohexatriene") ' +
+      'is WHY benzene prefers SUBSTITUTION reactions (replacing one H, preserving the ' +
+      'stable ring) over ADDITION reactions (which would destroy the aromatic system) — ' +
+      'the opposite reactivity pattern from ordinary alkenes.',
+    targetedMisconceptions: [`${AROM}:MC1`],
+    source: `${AROM_SRC} — benzene structure, resonance hybrid, Hückel's rule (4n+2), substitution vs addition preference`,
+  },
+  {
+    conceptId: AROM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Benzene genuinely HAS alternating single and double bonds, just like the ' +
+      'simplified structure drawn in textbooks — three C=C double bonds and three C-C ' +
+      'single bonds fixed in specific positions." FALSE — as established with resonance ' +
+      'earlier, this drawing is a NOTATIONAL CONVENIENCE, not the true structure. The real ' +
+      'molecule has all 6 bonds EXACTLY IDENTICAL (measured bond length 139 pm, precisely ' +
+      'intermediate between typical single ~154pm and double ~134pm bonds) — there is NO ' +
+      'alternation in the actual physical structure; it\'s a single delocalized system, ' +
+      'often more accurately drawn as a hexagon with a circle inside representing the ' +
+      'delocalized π cloud. Second trap: "Any ring with alternating double bonds ' +
+      'automatically qualifies as aromatic and gains extra stability." FALSE — you must ' +
+      'satisfy ALL of Hückel\'s criteria: the ring must be PLANAR (allowing p-orbital ' +
+      'overlap), fully CONJUGATED (continuous ring of p orbitals, no sp³ carbons breaking ' +
+      'the cycle), AND have exactly 4n+2 π electrons. Cyclobutadiene (4 π electrons, which ' +
+      'is 4n with n=1, NOT 4n+2) is actually ANTIAROMATIC — destabilized rather than ' +
+      'stabilized, despite superficially "looking" similar to benzene with alternating ' +
+      'double bonds.',
+    targetedMisconceptions: [`${AROM}:MC1`, `${AROM}:MC2`],
+    source: `${AROM_SRC} — misconception: benzene has literal alternating bonds; any conjugated ring is automatically aromatic`,
+  },
+]
+
+const AROM_PROBES: SeedProbe[] = [
+  {
+    conceptId: AROM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'X-ray crystallography shows all six C-C bonds in benzene have IDENTICAL length (139 pm), intermediate between typical single and double bond lengths. What does this tell you about benzene\'s true structure?',
+    choices: [
+      { text: 'Benzene is a resonance hybrid with 6 delocalized π electrons spread evenly around the ring — it does NOT literally have alternating single and double bonds as sometimes drawn for convenience', isCorrect: true },
+      { text: 'This is a measurement artifact — benzene genuinely has three distinct double bonds and three distinct single bonds, just measured with imprecise instruments', isCorrect: false, misconceptionId: `${AROM}:MC1` },
+    ],
+    correctValue: 'Benzene has a delocalized, non-alternating structure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AROM}:MC1`],
+    source: `${AROM_SRC} — distractor targets insisting on literal alternating bonds despite structural evidence`,
+  },
+  {
+    conceptId: AROM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Cyclobutadiene has a ring with alternating double bonds, similar in appearance to benzene, but has only 4 π electrons (not 6). Is cyclobutadiene aromatic and extra-stable like benzene?',
+    choices: [
+      { text: 'No — 4 π electrons corresponds to 4n (n=1), not 4n+2, failing Hückel\'s rule; cyclobutadiene is actually ANTIAROMATIC (destabilized), despite superficially resembling benzene\'s alternating-bond appearance', isCorrect: true },
+      { text: 'Yes — any planar ring with alternating double bonds automatically qualifies as aromatic and gains extra stability, regardless of electron count', isCorrect: false, misconceptionId: `${AROM}:MC2` },
+    ],
+    correctValue: 'No — cyclobutadiene is antiaromatic (fails Hückel\'s rule)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AROM}:MC2`],
+    source: `${AROM_SRC} — misconception: superficial resemblance to benzene guarantees aromaticity`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -8273,6 +8715,11 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...AMORPH_EXPLANATIONS,
   ...WERNER_EXPLANATIONS,
   ...COORDNOM_EXPLANATIONS,
+  ...ORGHYB_EXPLANATIONS,
+  ...ALKANE_EXPLANATIONS,
+  ...ISOM_EXPLANATIONS,
+  ...ELECEFF_EXPLANATIONS,
+  ...AROM_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -8375,4 +8822,9 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...AMORPH_PROBES,
   ...WERNER_PROBES,
   ...COORDNOM_PROBES,
+  ...ORGHYB_PROBES,
+  ...ALKANE_PROBES,
+  ...ISOM_PROBES,
+  ...ELECEFF_PROBES,
+  ...AROM_PROBES,
 ]
