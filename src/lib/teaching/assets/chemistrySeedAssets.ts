@@ -9232,6 +9232,268 @@ const VOLUM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.coord.cft ───────────────────────────────────────────────────────────
+const CFT = 'chem.coord.cft'
+const CFT_SRC = 'docs/chemistry/kg/graph.json — chem.coord.cft'
+
+const CFT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CFT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Crystal Field Theory (CFT) explains transition metal complex COLOR and MAGNETISM by ' +
+      'treating ligands as simple point negative charges approaching the metal\'s d ' +
+      'orbitals. In a FREE metal ion, all 5 d orbitals have EQUAL energy (degenerate). But ' +
+      'when ligands approach in an OCTAHEDRAL arrangement (6 ligands along the x/y/z axes), ' +
+      'they REPEL electrons in d orbitals pointing directly AT them (dz², dx²−y² — these ' +
+      'orbitals lie ALONG the axes) more than orbitals pointing BETWEEN the axes (dxy, dxz, ' +
+      'dyz) — splitting the 5 orbitals into two energy groups: higher-energy e_g (2 ' +
+      'orbitals) and lower-energy t₂g (3 orbitals), separated by the CRYSTAL FIELD ' +
+      'SPLITTING ENERGY (Δ₀). This splitting is EXACTLY what causes color (as covered in ' +
+      'd-block general properties) — an electron absorbs a specific-energy photon to jump ' +
+      'from t₂g to e_g, and Δ₀\'s SIZE determines WHICH wavelength gets absorbed (hence ' +
+      'which color you see). Whether electrons fill orbitals to MINIMIZE pairing (HIGH ' +
+      'SPIN, small Δ₀, weak-field ligands) or fill the lower set FIRST before pairing ' +
+      '(LOW SPIN, large Δ₀, strong-field ligands) determines the complex\'s MAGNETIC ' +
+      'behavior — more unpaired electrons (high spin) means stronger paramagnetism.',
+    targetedMisconceptions: [`${CFT}:MC1`],
+    source: `${CFT_SRC} — crystal field splitting, eg/t2g orbitals, high spin vs low spin, color connection`,
+  },
+  {
+    conceptId: CFT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "All 5 d orbitals split into completely SEPARATE, individually distinct ' +
+      'energy levels — five different energies." FALSE for the octahedral case — they ' +
+      'split into just TWO energy groups: the higher e_g set (2 orbitals, dz² and dx²−y², ' +
+      'which happen to have the SAME energy as each other, both pointing along axes) and ' +
+      'the lower t₂g set (3 orbitals, dxy/dxz/dyz, also equal energy to each other, ' +
+      'pointing between axes) — not five separate levels. Second trap: "A larger crystal ' +
+      'field splitting (Δ₀) always means MORE unpaired electrons and stronger ' +
+      'paramagnetism." BACKWARDS — a LARGER Δ₀ (strong-field ligands like CN⁻) makes it ' +
+      'more energetically favorable to PAIR electrons in the lower t₂g set rather than pay ' +
+      'the large energy cost to promote them to e_g — this gives LOW SPIN (FEWER unpaired ' +
+      'electrons, weaker paramagnetism). A SMALLER Δ₀ (weak-field ligands like F⁻) makes ' +
+      'promotion to e_g relatively cheap compared to electron-pairing energy, favoring HIGH ' +
+      'SPIN (MORE unpaired electrons). Larger splitting favors PAIRING (low spin), not more ' +
+      'unpaired electrons.',
+    targetedMisconceptions: [`${CFT}:MC1`, `${CFT}:MC2`],
+    source: `${CFT_SRC} — misconception: five separate energy levels instead of two groups; larger Δ0 means more unpaired electrons`,
+  },
+]
+
+const CFT_PROBES: SeedProbe[] = [
+  {
+    conceptId: CFT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In an octahedral crystal field, how many distinct energy levels do the 5 d orbitals split into?',
+    choices: [
+      { text: '2 — a lower-energy t2g set (3 orbitals) and a higher-energy eg set (2 orbitals), not five separate individual energies', isCorrect: true },
+      { text: '5 — all five d orbitals become individually distinct in energy', isCorrect: false, misconceptionId: `${CFT}:MC1` },
+    ],
+    correctValue: '2 energy levels (t2g and eg)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CFT}:MC1`],
+    source: `${CFT_SRC} — distractor targets assuming all five d orbitals become individually distinct`,
+  },
+  {
+    conceptId: CFT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A strong-field ligand like CN⁻ produces a LARGE crystal field splitting (Δ₀). Does this result in MORE unpaired electrons (high spin) or FEWER unpaired electrons (low spin)?',
+    choices: [
+      { text: 'Fewer unpaired electrons (low spin) — the large Δ0 makes pairing electrons in the lower t2g set more favorable than paying the large energy cost to promote them to eg', isCorrect: true },
+      { text: 'More unpaired electrons (high spin) — larger splitting should push more electrons into the higher eg set, leaving them unpaired', isCorrect: false, misconceptionId: `${CFT}:MC2` },
+    ],
+    correctValue: 'Fewer unpaired electrons (low spin)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CFT}:MC2`],
+    source: `${CFT_SRC} — misconception: larger splitting energy leads to more unpaired electrons rather than pairing`,
+  },
+]
+
+// ─── chem.coord.bonding ──────────────────────────────────────────────────────
+const COORDBOND = 'chem.coord.bonding'
+const COORDBOND_SRC = 'docs/chemistry/kg/graph.json — chem.coord.bonding'
+
+const COORDBOND_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COORDBOND,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Beyond simple Crystal Field Theory (which treats ligands as point charges), a more ' +
+      'complete picture uses VALENCE BOND THEORY and MOLECULAR ORBITAL concepts to explain ' +
+      'coordination complex GEOMETRY and BONDING. The metal uses HYBRID ORBITALS (building ' +
+      'on hybridization covered earlier) to accept electron pairs from ligands via ' +
+      'coordinate bonds: d²sp³ or sp³d² hybridization gives OCTAHEDRAL geometry (6 ' +
+      'ligands), dsp² gives SQUARE PLANAR (4 ligands, common for d8 metals like Pt²⁺, Ni²⁺ ' +
+      'with strong-field ligands), sp³ gives TETRAHEDRAL (4 ligands, common for d10 or ' +
+      'weak-field cases). LIGAND FIELD THEORY extends Crystal Field Theory by ' +
+      'acknowledging that ligand-metal bonding has GENUINE COVALENT CHARACTER (some real ' +
+      'orbital overlap/sharing), not just pure electrostatic point-charge repulsion — this ' +
+      'more sophisticated model better explains the actual observed SPECTROCHEMICAL SERIES ' +
+      '(the experimentally-ranked order of ligands from weak-field to strong-field: I⁻ < ' +
+      'Br⁻ < Cl⁻ < F⁻ < H₂O < NH₃ < en < CN⁻ < CO), since pure electrostatics alone cannot ' +
+      'fully explain why some NEUTRAL ligands like CO produce STRONGER splitting than some ' +
+      'charged ones like Cl⁻.',
+    targetedMisconceptions: [`${COORDBOND}:MC1`],
+    source: `${COORDBOND_SRC} — hybridization in complexes, ligand field theory, spectrochemical series`,
+  },
+  {
+    conceptId: COORDBOND,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Since Crystal Field Theory treats ligands as pure point charges, a NEGATIVELY ' +
+      'CHARGED ligand (like Cl⁻) should always produce a STRONGER field (bigger splitting) ' +
+      'than a NEUTRAL ligand (like CO or NH₃), since charged species should interact more ' +
+      'strongly." FALSE — the actual experimental spectrochemical series shows NEUTRAL CO ' +
+      'is a much STRONGER-field ligand than charged Cl⁻, directly contradicting simple ' +
+      'point-charge electrostatic reasoning. This is precisely why pure Crystal Field ' +
+      'Theory is insufficient and Ligand Field Theory (acknowledging real covalent ' +
+      'orbital overlap, including π-backbonding where the metal donates electron density ' +
+      'BACK into empty ligand orbitals, as with CO) is needed for a fully accurate ' +
+      'picture. Second trap: "All 4-coordinate complexes have the same geometry (either ' +
+      'always tetrahedral or always square planar)." FALSE — geometry depends on the ' +
+      'metal\'s d-electron count AND the ligand field strength: d8 metals with STRONG-field ' +
+      'ligands favor SQUARE PLANAR (like [Ni(CN)₄]²⁻), while d10 metals or WEAK-field ' +
+      'ligands favor TETRAHEDRAL (like [NiCl₄]²⁻) — same coordination number (4), genuinely ' +
+      'different geometries depending on electronic configuration and ligand strength.',
+    targetedMisconceptions: [`${COORDBOND}:MC1`, `${COORDBOND}:MC2`],
+    source: `${COORDBOND_SRC} — misconception: charged ligands always split more than neutral ones; all 4-coordinate complexes share one geometry`,
+  },
+]
+
+const COORDBOND_PROBES: SeedProbe[] = [
+  {
+    conceptId: COORDBOND,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'CO (neutral) is a much STRONGER-field ligand than Cl⁻ (negatively charged), according to the experimental spectrochemical series. Does simple point-charge electrostatic reasoning (pure Crystal Field Theory) explain this?',
+    choices: [
+      { text: 'No — pure electrostatics would predict the charged Cl⁻ should interact more strongly; CO\'s stronger field arises from genuine covalent bonding effects like π-backbonding, which requires Ligand Field Theory (beyond simple CFT) to explain', isCorrect: true },
+      { text: 'Yes — charged ligands should always produce stronger crystal field splitting than neutral ligands, consistent with simple point-charge reasoning', isCorrect: false, misconceptionId: `${COORDBOND}:MC1` },
+    ],
+    correctValue: 'No — requires covalent bonding effects beyond simple CFT',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COORDBOND}:MC1`],
+    source: `${COORDBOND_SRC} — distractor targets assuming pure electrostatics fully explains the spectrochemical series`,
+  },
+  {
+    conceptId: COORDBOND,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Both [Ni(CN)4]2- and [NiCl4]2- have 4-coordinate nickel complexes. Must they have the SAME geometry (either both tetrahedral or both square planar)?',
+    choices: [
+      { text: 'No — [Ni(CN)4]2- (strong-field CN⁻ ligands) adopts square planar geometry, while [NiCl4]2- (weak-field Cl⁻ ligands) adopts tetrahedral geometry; geometry depends on both d-electron count and ligand field strength, not just coordination number', isCorrect: true },
+      { text: 'Yes — any complex with 4 ligands must adopt the same fixed geometry, whether tetrahedral or square planar, regardless of the specific ligands involved', isCorrect: false, misconceptionId: `${COORDBOND}:MC2` },
+    ],
+    correctValue: 'No — geometry depends on ligand field strength and d-electron count',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COORDBOND}:MC2`],
+    source: `${COORDBOND_SRC} — misconception: coordination number alone determines geometry regardless of ligand identity`,
+  },
+]
+
+// ─── chem.coord.applications ─────────────────────────────────────────────────
+const COORDAPP = 'chem.coord.applications'
+const COORDAPP_SRC = 'docs/chemistry/kg/graph.json — chem.coord.applications'
+
+const COORDAPP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COORDAPP,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Coordination chemistry isn\'t just theoretical — it underlies critical biological ' +
+      'and industrial processes. BIOLOGICAL: HEMOGLOBIN uses an Fe²⁺ center coordinated to ' +
+      'a porphyrin ring (4 nitrogen donors) plus a protein histidine (5th position) and ' +
+      'reversibly binds O₂ at the 6th position — the coordinate bond to O₂ must be strong ' +
+      'enough to hold oxygen but weak enough to RELEASE it in tissues (a delicately tuned ' +
+      'equilibrium). CHLOROPHYLL uses a similar porphyrin structure but with Mg²⁺ instead ' +
+      'of Fe²⁺, essential for capturing light energy in photosynthesis. VITAMIN B12 uses a ' +
+      'Co³⁺ center. INDUSTRIAL: EDTA (a hexadentate chelating ligand, binding through 6 ' +
+      'donor atoms simultaneously) is used to sequester unwanted metal ions — in water ' +
+      'softening, food preservation (binding trace metal ions that would otherwise catalyze ' +
+      'spoilage reactions), and treating heavy metal poisoning (chelation therapy, binding ' +
+      'toxic Pb²⁺ or Hg²⁺ for safe excretion). ELECTROPLATING uses coordination complexes ' +
+      'of the plating metal (like [Ag(CN)₂]⁻ for silver plating) to control deposition rate ' +
+      'and produce a smoother, more even metal coating than simple metal salts would allow.',
+    targetedMisconceptions: [`${COORDAPP}:MC1`],
+    source: `${COORDAPP_SRC} — hemoglobin/chlorophyll/B12 coordination, EDTA chelation, electroplating applications`,
+  },
+  {
+    conceptId: COORDAPP,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Since EDTA effectively removes/binds metal ions, a STRONGER binding affinity ' +
+      '(higher stability constant) is always better for every application." FALSE — the ' +
+      'OPTIMAL binding strength depends entirely on the APPLICATION\'s purpose. For heavy ' +
+      'metal chelation therapy, you want EDTA to bind toxic Pb²⁺/Hg²⁺ tightly enough to ' +
+      'safely remove them via excretion — but EDTA can ALSO bind essential biological metal ' +
+      'ions (like Ca²⁺, Zn²⁺) too strongly if not carefully dosed, potentially causing ' +
+      'harmful DEFICIENCIES of needed minerals — chelation therapy requires careful ' +
+      'medical control, not maximal binding strength applied indiscriminately. Second ' +
+      'trap: "Hemoglobin\'s oxygen binding should be as STRONG as possible for maximum ' +
+      'oxygen-carrying efficiency." FALSE — hemoglobin\'s Fe-O₂ coordinate bond is ' +
+      'deliberately TUNED to an intermediate strength: strong enough to pick up O₂ in the ' +
+      'lungs (high O₂ concentration) but weak enough to RELEASE it in tissues (lower O₂ ' +
+      'concentration, where it\'s needed) — if binding were maximally strong, hemoglobin ' +
+      'would hoard oxygen and never deliver it to tissues, which would be catastrophically ' +
+      'non-functional despite superficially seeming "better."',
+    targetedMisconceptions: [`${COORDAPP}:MC1`, `${COORDAPP}:MC2`],
+    source: `${COORDAPP_SRC} — misconception: stronger binding is always better; hemoglobin should bind O2 maximally strongly`,
+  },
+]
+
+const COORDAPP_PROBES: SeedProbe[] = [
+  {
+    conceptId: COORDAPP,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'In chelation therapy for heavy metal poisoning, is administering the MAXIMUM possible amount of a very strong chelating agent like EDTA always the safest, most effective approach?',
+    choices: [
+      { text: 'No — EDTA can also bind essential biological metal ions (like Ca2+, Zn2+) too strongly if overdosed, potentially causing harmful mineral deficiencies; careful medical dosing is required, not maximal binding applied indiscriminately', isCorrect: true },
+      { text: 'Yes — a stronger chelating agent in higher doses is always safer and more effective for removing toxic metals from the body', isCorrect: false, misconceptionId: `${COORDAPP}:MC1` },
+    ],
+    correctValue: 'No — overdosing risks depleting essential minerals too',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COORDAPP}:MC1`],
+    source: `${COORDAPP_SRC} — distractor targets assuming stronger/more chelation is unconditionally better`,
+  },
+  {
+    conceptId: COORDAPP,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Would hemoglobin function BETTER as an oxygen transporter if its Fe-O2 coordinate bond were as strong as possible?',
+    choices: [
+      { text: 'No — hemoglobin\'s binding strength is deliberately tuned to be strong enough to pick up O2 in the lungs but weak enough to release it in tissues; maximal binding strength would cause hemoglobin to hoard oxygen and never deliver it', isCorrect: true },
+      { text: 'Yes — maximizing the Fe-O2 bond strength would let hemoglobin carry and deliver oxygen more efficiently throughout the body', isCorrect: false, misconceptionId: `${COORDAPP}:MC2` },
+    ],
+    correctValue: 'No — an intermediate, tuned binding strength is essential for function',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COORDAPP}:MC2`],
+    source: `${COORDAPP_SRC} — misconception: maximizing binding strength always improves biological function`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -9346,6 +9608,9 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...DISPROP_EXPLANATIONS,
   ...REDOXTITR_EXPLANATIONS,
   ...VOLUM_EXPLANATIONS,
+  ...CFT_EXPLANATIONS,
+  ...COORDBOND_EXPLANATIONS,
+  ...COORDAPP_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -9460,4 +9725,7 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...DISPROP_PROBES,
   ...REDOXTITR_PROBES,
   ...VOLUM_PROBES,
+  ...CFT_PROBES,
+  ...COORDBOND_PROBES,
+  ...COORDAPP_PROBES,
 ]
