@@ -10919,6 +10919,186 @@ const POLYCYC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.hal.sn2 ────────────────────────────────────────────────────────────
+const SN2 = 'chem.hal.sn2'
+const SN2_SRC = 'docs/chemistry/kg/graph.json — chem.hal.sn2'
+
+const SN2_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SN2,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'SN2 (Substitution, Nucleophilic, Bimolecular) is a ONE-STEP, CONCERTED mechanism: ' +
+      'the nucleophile attacks the carbon from the SIDE OPPOSITE the leaving group ' +
+      '(backside attack) at the EXACT same moment the leaving group departs — bond-forming ' +
+      'and bond-breaking happen SIMULTANEOUSLY, no intermediate forms. This backside attack ' +
+      'geometry causes WALDEN INVERSION — the carbon\'s configuration flips like an umbrella ' +
+      'turning inside-out in a strong wind (if you started with a specific 3D arrangement, ' +
+      'you end with the MIRROR-IMAGE arrangement at that carbon). Since it\'s a SINGLE step ' +
+      'with BOTH nucleophile and substrate involved in the rate-determining transition ' +
+      'state, the rate law is SECOND ORDER OVERALL: rate = k[substrate][nucleophile] — ' +
+      'both concentrations affect rate. SN2 is favored by: PRIMARY substrates (least steric ' +
+      'hindrance blocking backside attack — tertiary substrates are essentially blocked), ' +
+      'STRONG nucleophiles (a good electron-pair donor drives the attack), and POLAR ' +
+      'APROTIC solvents (don\'t hydrogen-bond-cage the nucleophile, keeping it highly ' +
+      'reactive/"naked").',
+    targetedMisconceptions: [`${SN2}:MC1`],
+    source: `${SN2_SRC} — SN2 mechanism, backside attack, Walden inversion, second-order rate law, favoring conditions`,
+  },
+  {
+    conceptId: SN2,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "SN2 reactions proceed fastest with TERTIARY substrates, since tertiary ' +
+      'carbocations... wait, SN2 doesn\'t even form carbocations." Correcting the confused ' +
+      'premise directly: SN2 is STRONGLY DISFAVORED by tertiary substrates — the three ' +
+      'bulky alkyl groups create severe STERIC HINDRANCE blocking the nucleophile\'s ' +
+      'necessary backside approach (imagine trying to push through a door from behind when ' +
+      'three large obstacles surround the doorway) — SN2 works best on PRIMARY substrates ' +
+      '(least hindrance) and gets progressively slower through secondary to essentially ' +
+      'nonexistent for tertiary. This is the OPPOSITE preference from SN1 (which favors ' +
+      'tertiary, for reasons covered in that concept) — don\'t confuse the two mechanisms\' ' +
+      'substrate preferences. Second trap: "Since SN2 inverts stereochemistry, the PRODUCT ' +
+      'is always the mirror image (opposite optical rotation sign) of the STARTING ' +
+      'material." Not necessarily — inversion of CONFIGURATION (the actual 3D spatial ' +
+      'arrangement, R/S descriptor) doesn\'t always correspond to inverted ROTATION ' +
+      '(clockwise/counterclockwise light rotation, +/−) because the nucleophile and leaving ' +
+      'group often have different CIP priority rankings — configuration inversion and ' +
+      'rotation sign are related but not simply interchangeable concepts.',
+    targetedMisconceptions: [`${SN2}:MC1`, `${SN2}:MC2`],
+    source: `${SN2_SRC} — misconception: SN2 favors tertiary substrates; configuration inversion always means opposite optical rotation sign`,
+  },
+]
+
+const SN2_PROBES: SeedProbe[] = [
+  {
+    conceptId: SN2,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which substrate reacts FASTEST via the SN2 mechanism: a primary, secondary, or tertiary haloalkane?',
+    choices: [
+      { text: 'Primary — SN2 requires backside nucleophilic attack, and tertiary substrates are severely hindered by three bulky alkyl groups blocking this approach; primary substrates have the least steric hindrance', isCorrect: true },
+      { text: 'Tertiary — more alkyl groups should stabilize the transition state and speed up the reaction, similar to carbocation stability trends', isCorrect: false, misconceptionId: `${SN2}:MC1` },
+    ],
+    correctValue: 'Primary substrate reacts fastest via SN2',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SN2}:MC1`],
+    source: `${SN2_SRC} — distractor targets confusing SN2 substrate preference with carbocation-stability-based reasoning`,
+  },
+  {
+    conceptId: SN2,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An SN2 reaction inverts the spatial CONFIGURATION at the reacting carbon (Walden inversion). Does this always mean the product has the OPPOSITE optical rotation sign (+ to −, or − to +) compared to the starting material?',
+    choices: [
+      { text: 'Not necessarily — configuration inversion (the 3D spatial arrangement, R/S) and rotation sign (+/−) are related but distinct concepts; the nucleophile and leaving group often have different CIP priority rankings, so the relationship isn\'t automatic', isCorrect: true },
+      { text: 'Yes — inverting the spatial configuration always and directly causes the optical rotation sign to flip as well', isCorrect: false, misconceptionId: `${SN2}:MC2` },
+    ],
+    correctValue: 'Not necessarily — configuration and rotation sign are distinct',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SN2}:MC2`],
+    source: `${SN2_SRC} — misconception: configuration inversion automatically implies opposite optical rotation sign`,
+  },
+]
+
+// ─── chem.hal.sn1 ────────────────────────────────────────────────────────────
+const SN1 = 'chem.hal.sn1'
+const SN1_SRC = 'docs/chemistry/kg/graph.json — chem.hal.sn1'
+
+const SN1_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SN1,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'SN1 (Substitution, Nucleophilic, Unimolecular) is a TWO-STEP mechanism: STEP 1 ' +
+      '(SLOW, rate-determining) — the leaving group departs FIRST, forming a planar, sp² ' +
+      'CARBOCATION intermediate (building directly on the carbocation stability concept ' +
+      'covered earlier). STEP 2 (FAST) — the nucleophile attacks the flat carbocation from ' +
+      'EITHER face (no steric preference, since the carbocation is planar and open on both ' +
+      'sides). Because the rate-determining step (carbocation formation) involves ONLY the ' +
+      'substrate (the nucleophile isn\'t involved until the fast second step), the rate law ' +
+      'is FIRST ORDER: rate = k[substrate] — nucleophile CONCENTRATION doesn\'t affect ' +
+      'rate at all (a genuinely counterintuitive but experimentally verified fact). Since ' +
+      'the flat carbocation can be attacked from either face with roughly equal probability, ' +
+      'SN1 typically produces a RACEMIC MIXTURE (roughly 50:50 mix of both stereoisomers) ' +
+      'from a single stereochemically-pure starting material — a genuine LOSS of ' +
+      'stereochemical information, unlike SN2\'s clean, predictable inversion. SN1 is ' +
+      'favored by: TERTIARY substrates (most stable carbocation, per hyperconjugation/+I ' +
+      'donation), WEAK nucleophiles (since nucleophile strength doesn\'t matter for rate, ' +
+      'weak ones suffice), and POLAR PROTIC solvents (stabilize the carbocation and leaving ' +
+      'group via solvation).',
+    targetedMisconceptions: [`${SN1}:MC1`],
+    source: `${SN1_SRC} — SN1 mechanism, carbocation intermediate, first-order rate law, racemization, favoring conditions`,
+  },
+  {
+    conceptId: SN1,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Since the nucleophile is genuinely required for the SN1 reaction to complete ' +
+      '(it participates in step 2), increasing nucleophile CONCENTRATION should speed up ' +
+      'the overall reaction, just like it does for SN2." FALSE — this is the single most ' +
+      'counterintuitive fact about SN1: the RATE (how fast the reaction proceeds overall) ' +
+      'depends ONLY on substrate concentration, because the SLOW, rate-determining step ' +
+      '(carbocation formation) happens BEFORE the nucleophile ever gets involved. The ' +
+      'nucleophile IS necessary for the reaction to occur at all (you need SOME nucleophile ' +
+      'present), but its CONCENTRATION is irrelevant to the RATE — doubling nucleophile ' +
+      'concentration does NOT double the reaction rate, unlike SN2 where it absolutely ' +
+      'would. Rate-determining step logic, not overall stoichiometric requirement, governs ' +
+      'the rate law. Second trap: "SN1 always gives 100% racemization (exactly 50:50 ' +
+      'mixture) with zero exceptions." In practice, SN1 often gives PREDOMINANTLY racemic ' +
+      'product but not always PERFECTLY 50:50 — the leaving group can sometimes partially ' +
+      'shield one face of the carbocation immediately after departing (before fully ' +
+      'diffusing away, an "ion pair" effect), giving SLIGHT preference for INVERSION over ' +
+      'perfectly equal racemization — the idealized "planar carbocation, equal attack from ' +
+      'both faces" picture is a simplification, not always perfectly exact in practice.',
+    targetedMisconceptions: [`${SN1}:MC1`, `${SN1}:MC2`],
+    source: `${SN1_SRC} — misconception: nucleophile concentration affects SN1 rate; SN1 always gives exactly 50:50 racemization`,
+  },
+]
+
+const SN1_PROBES: SeedProbe[] = [
+  {
+    conceptId: SN1,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you double the concentration of the nucleophile in an SN1 reaction (keeping substrate concentration constant), what happens to the reaction rate?',
+    choices: [
+      { text: 'The rate stays essentially unchanged — SN1\'s rate-determining step (carbocation formation) involves only the substrate, so nucleophile concentration does not affect the overall rate, even though the nucleophile is required for the reaction to complete', isCorrect: true },
+      { text: 'The rate approximately doubles, since the nucleophile is a necessary reactant for the overall transformation', isCorrect: false, misconceptionId: `${SN1}:MC1` },
+    ],
+    correctValue: 'Rate is unaffected by nucleophile concentration',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SN1}:MC1`],
+    source: `${SN1_SRC} — distractor targets assuming a stoichiometrically required species must affect the rate law`,
+  },
+  {
+    conceptId: SN1,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does an SN1 reaction always produce EXACTLY a 50:50 racemic mixture, with zero exceptions?',
+    choices: [
+      { text: 'Not always exactly 50:50 — while SN1 typically gives predominantly racemic product, ion-pair effects (the leaving group partially shielding one face before fully diffusing away) can give a slight preference for inversion over perfectly equal racemization', isCorrect: true },
+      { text: 'Yes — the planar carbocation intermediate guarantees exactly equal attack from both faces in every SN1 reaction without exception', isCorrect: false, misconceptionId: `${SN1}:MC2` },
+    ],
+    correctValue: 'Not always exactly 50:50 — ion-pair effects can cause slight deviation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SN1}:MC2`],
+    source: `${SN1_SRC} — misconception: SN1 always produces perfectly exact 50:50 racemization without exception`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -11052,6 +11232,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...SOLIDPROP_EXPLANATIONS,
   ...REACTINT_EXPLANATIONS,
   ...POLYCYC_EXPLANATIONS,
+  ...SN2_EXPLANATIONS,
+  ...SN1_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -11185,4 +11367,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...SOLIDPROP_PROBES,
   ...REACTINT_PROBES,
   ...POLYCYC_PROBES,
+  ...SN2_PROBES,
+  ...SN1_PROBES,
 ]
