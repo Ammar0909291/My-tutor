@@ -12980,6 +12980,186 @@ const ADDPOLY_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.alc.epoxides ───────────────────────────────────────────────────────
+const EPOX = 'chem.alc.epoxides'
+const EPOX_SRC = 'docs/chemistry/kg/graph.json — chem.alc.epoxides'
+
+const EPOX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EPOX,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Epoxides are a special ether subtype (building on ethers covered earlier) — a ' +
+      'THREE-MEMBERED ring containing oxygen. Unlike ordinary ethers (chemically inert, as ' +
+      'covered earlier), epoxides are UNUSUALLY REACTIVE, specifically because the 3-membered ' +
+      'ring is under severe ANGLE STRAIN — the ring geometry forces bond angles near 60°, far ' +
+      'from carbon\'s preferred ~109.5° tetrahedral angle, storing substantial strain energy ' +
+      'that\'s RELEASED upon ring-opening. This makes epoxides excellent electrophiles: ' +
+      'nucleophiles readily attack a ring carbon, breaking the strained ring open (relieving ' +
+      'strain energy drives the reaction forward) and installing the nucleophile while leaving ' +
+      'an alkoxide/alcohol at the other carbon — a versatile way to introduce TWO new ' +
+      'functional groups (or one new group plus a retained -OH) across adjacent carbons in ' +
+      'one step. Under ACIDIC conditions, the nucleophile attacks the MORE substituted carbon ' +
+      '(more carbocation-like character develops there, similar logic to SN1/carbocation ' +
+      'stability covered earlier). Under BASIC conditions, the nucleophile attacks the LESS ' +
+      'hindered carbon (more SN2-like backside attack, favoring less steric hindrance, ' +
+      'connecting to the SN2 mechanism covered earlier) — the SAME epoxide gives DIFFERENT ' +
+      'regiochemistry depending on reaction conditions.',
+    targetedMisconceptions: [`${EPOX}:MC1`],
+    source: `${EPOX_SRC} — epoxide ring strain, nucleophilic ring-opening, acid vs base regiochemistry`,
+  },
+  {
+    conceptId: EPOX,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Epoxides should be just as chemically UNREACTIVE as ordinary ethers, since ' +
+      'they\'re both technically ether functional groups (R-O-R)." FALSE — this ignores the ' +
+      'crucial structural difference. Ordinary (acyclic) ethers have NO significant ring ' +
+      'strain (flexible, unstrained C-O-C angle near the normal preference), while epoxides\' ' +
+      'THREE-membered ring geometry forces bond angles far from ideal, storing substantial ' +
+      'strain energy that makes ring-opening thermodynamically favorable and hence the whole ' +
+      'molecule kinetically much MORE reactive than a typical ether — the SAME general ' +
+      'functional group class (ether) can have wildly different reactivity depending on ' +
+      'ring strain, a genuinely important structural nuance. Second trap: "The nucleophile ' +
+      'always attacks the SAME carbon of an unsymmetrical epoxide, regardless of whether the ' +
+      'reaction is run under acidic or basic conditions." FALSE — this is a genuinely useful ' +
+      'synthetic control point: acidic conditions favor attack at the MORE substituted carbon ' +
+      '(carbocation-like transition state), while basic conditions favor attack at the LESS ' +
+      'hindered carbon (SN2-like backside attack) — choosing acid vs. base conditions lets ' +
+      'chemists deliberately control WHICH regiochemical outcome (and hence which specific ' +
+      'product) forms from the same starting epoxide.',
+    targetedMisconceptions: [`${EPOX}:MC1`, `${EPOX}:MC2`],
+    source: `${EPOX_SRC} — misconception: epoxides are as unreactive as ordinary ethers; nucleophilic attack site is independent of acid/base conditions`,
+  },
+]
+
+const EPOX_PROBES: SeedProbe[] = [
+  {
+    conceptId: EPOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Both diethyl ether and ethylene oxide (an epoxide) are technically "ethers" (R-O-R functional group). Why is ethylene oxide dramatically more reactive?',
+    choices: [
+      { text: 'The epoxide\'s three-membered ring forces bond angles far from carbon\'s preferred ~109.5°, storing substantial angle strain energy that is released upon ring-opening, making it a much better electrophile than the strain-free, unreactive acyclic ether', isCorrect: true },
+      { text: 'This must be an error — any compound containing the ether functional group should show the same general level of chemical unreactivity regardless of ring structure', isCorrect: false, misconceptionId: `${EPOX}:MC1` },
+    ],
+    correctValue: 'Ring strain in the three-membered epoxide drives its unusual reactivity',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EPOX}:MC1`],
+    source: `${EPOX_SRC} — distractor targets assuming shared functional group class guarantees shared reactivity level`,
+  },
+  {
+    conceptId: EPOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Does a nucleophile attack the same carbon of an unsymmetrical epoxide regardless of whether the reaction is run under acidic or basic conditions?',
+    choices: [
+      { text: 'No — acidic conditions favor attack at the more substituted carbon (carbocation-like transition state), while basic conditions favor attack at the less hindered carbon (SN2-like backside attack); the two conditions give different regiochemical outcomes', isCorrect: true },
+      { text: 'Yes — the site of nucleophilic attack on an epoxide is fixed by the ring structure alone and does not depend on whether the conditions are acidic or basic', isCorrect: false, misconceptionId: `${EPOX}:MC2` },
+    ],
+    correctValue: 'No — acid/base conditions control which carbon is attacked',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EPOX}:MC2`],
+    source: `${EPOX_SRC} — misconception: epoxide ring-opening regiochemistry is independent of reaction conditions`,
+  },
+]
+
+// ─── chem.alc.protection ─────────────────────────────────────────────────────
+const PROTECT = 'chem.alc.protection'
+const PROTECT_SRC = 'docs/chemistry/kg/graph.json — chem.alc.protection'
+
+const PROTECT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PROTECT,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Complex multi-step organic synthesis often faces a genuine problem: a molecule may ' +
+      'contain MULTIPLE reactive functional groups, but a given reaction step needs to ' +
+      'transform only ONE of them selectively. PROTECTING GROUPS solve this by TEMPORARILY ' +
+      'converting a reactive group into an UNREACTIVE (protected) form before running the ' +
+      'target reaction elsewhere in the molecule, then REMOVING (deprotecting) it afterward ' +
+      'to restore the original functional group. The classic example (connecting directly ' +
+      'to Grignard chemistry covered earlier): if a molecule contains BOTH a carbonyl (target ' +
+      'for Grignard addition) AND a free -OH group, the Grignard reagent would react with/be ' +
+      'destroyed by the acidic -OH proton BEFORE ever reaching the intended carbonyl — so ' +
+      'chemists first PROTECT the -OH (commonly by converting it to a TMS ether or acetal, ' +
+      'both unreactive toward Grignard reagents), run the Grignard addition on the now- ' +
+      'unprotected carbonyl, then DEPROTECT (remove the protecting group, typically with mild ' +
+      'acid or fluoride treatment) to reveal the original -OH again. A GOOD protecting group ' +
+      'must satisfy three requirements: install easily and selectively, remain stable through ' +
+      'all subsequent reaction steps, and remove cleanly under conditions that DON\'T disturb ' +
+      'any other functional groups now present in the more complex molecule.',
+    targetedMisconceptions: [`${PROTECT}:MC1`],
+    source: `${PROTECT_SRC} — protecting group strategy, install/stable/remove requirements, Grignard/-OH conflict resolution`,
+  },
+  {
+    conceptId: PROTECT,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "Protecting groups PERMANENTLY change the molecule\'s structure — once ' +
+      'installed, the original functional group is essentially replaced with something new." ' +
+      'FALSE — protecting groups are, by design, ALWAYS meant to be REMOVED later, restoring ' +
+      'the EXACT original functional group. The entire point is temporary masking, not ' +
+      'permanent modification — a synthesis using a protecting group strategy still ends up ' +
+      'delivering the originally-intended target molecule with its original -OH (or other ' +
+      'group) intact, not a permanently altered structure. Second trap: "Any protecting group ' +
+      'can be used interchangeably for any functional group in any synthesis, since they all ' +
+      'serve the same general "temporarily hide this group" purpose." FALSE — protecting ' +
+      'group SELECTION is highly context-dependent: the chosen group must survive whatever ' +
+      'subsequent reaction conditions are planned (an acid-labile protecting group would be a ' +
+      'poor choice if a later step uses strong acid for an unrelated purpose) while still ' +
+      'being removable WITHOUT disturbing other groups present at that later stage — real ' +
+      'synthetic planning requires carefully matching the protecting group\'s stability/ ' +
+      'removal profile to the SPECIFIC sequence of reactions planned, not treating all ' +
+      'protecting groups as generically interchangeable.',
+    targetedMisconceptions: [`${PROTECT}:MC1`, `${PROTECT}:MC2`],
+    source: `${PROTECT_SRC} — misconception: protecting groups permanently alter the molecule; any protecting group works for any situation`,
+  },
+]
+
+const PROTECT_PROBES: SeedProbe[] = [
+  {
+    conceptId: PROTECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A synthesis protects a molecule\'s -OH group (converting it to a TMS ether) before running a Grignard reaction elsewhere, then deprotects it afterward. What is the final product\'s -OH status?',
+    choices: [
+      { text: 'The final product has the ORIGINAL -OH group restored — protecting groups are, by design, always meant to be removed later, restoring the exact original functional group, not permanently replacing it', isCorrect: true },
+      { text: 'The final product permanently retains the TMS ether instead of the original -OH, since the protecting group has become a fixed part of the structure', isCorrect: false, misconceptionId: `${PROTECT}:MC1` },
+    ],
+    correctValue: 'Original -OH group is restored after deprotection',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROTECT}:MC1`],
+    source: `${PROTECT_SRC} — distractor targets assuming protecting groups permanently alter the final product structure`,
+  },
+  {
+    conceptId: PROTECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Can any protecting group be used interchangeably for any functional group in any multi-step synthesis, since they all serve the same general "temporarily hide this group" purpose?',
+    choices: [
+      { text: 'No — protecting group selection is highly context-dependent; the chosen group must survive all subsequent planned reaction conditions while remaining removable without disturbing other groups present at that later stage', isCorrect: true },
+      { text: 'Yes — since all protecting groups serve the same general masking purpose, any protecting group can be substituted for another without affecting the synthesis outcome', isCorrect: false, misconceptionId: `${PROTECT}:MC2` },
+    ],
+    correctValue: 'No — protecting group choice must match the specific planned reaction sequence',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROTECT}:MC2`],
+    source: `${PROTECT_SRC} — misconception: protecting groups are generically interchangeable regardless of synthetic context`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -13136,6 +13316,8 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...AMINE_EXPLANATIONS,
   ...OSMOSIS_EXPLANATIONS,
   ...ADDPOLY_EXPLANATIONS,
+  ...EPOX_EXPLANATIONS,
+  ...PROTECT_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -13292,4 +13474,6 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...AMINE_PROBES,
   ...OSMOSIS_PROBES,
   ...ADDPOLY_PROBES,
+  ...EPOX_PROBES,
+  ...PROTECT_PROBES,
 ]
