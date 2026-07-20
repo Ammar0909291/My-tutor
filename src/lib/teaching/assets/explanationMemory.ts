@@ -18,11 +18,45 @@ import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
 
+// P0 (Explanation Memory serving metadata — observability only, ADR 13/14
+// aligned): `servingMode`/`exactGradeMatch`/`fallbackUsed`/`fallbackReason`
+// describe HOW a memory hit was reached — never a provider value (the
+// `provider` field on the chat response stays exactly 'memory' regardless
+// of mode). Derived purely from the two pickBest() calls already made below
+// (default threshold, then the pre-existing threshold=0 grade-band
+// fallback) — no new query, no new scoring, no new threshold, no change to
+// which asset is selected.
+export type ExplanationServingMode = 'exact_match' | 'grade_fallback' | 'confidence_fallback'
+export type ExplanationFallbackReason = 'none' | 'grade_band' | 'confidence'
+
 export interface ExplanationMatch {
   assetId: string
   content: string
   familyKind: string
   confidence: number
+  servingMode: ExplanationServingMode
+  exactGradeMatch: boolean
+  fallbackUsed: boolean
+  fallbackReason: ExplanationFallbackReason
+}
+
+// Classifies a pickBest() hit into the servingMode/fallbackReason taxonomy.
+// usedFallbackPath = true only when the result came from the threshold=0
+// grade-band fallback call (i.e. nothing cleared DEFAULT_CONFIDENCE_THRESHOLD
+// on the normal pass) — this is real, existing branching already in this
+// file; classification never influences which asset was picked.
+//
+// Any non-exact gradeBand is surfaced as a grade fallback regardless of
+// which pickBest() call reached it (the normal 65-point pass via the
+// HIGH<->ADULT bonus / adjacent-band +10, or the threshold=0 last-resort
+// branch) — from the requester's point of view both mean "you didn't get
+// content authored for your exact band." confidence_fallback is reserved
+// for the one remaining real case: gradeBand was exact but tags/quality
+// still left the score short of 65, so only the threshold=0 branch served it.
+function classify(exactGradeMatch: boolean, usedFallbackPath: boolean): { servingMode: ExplanationServingMode; fallbackUsed: boolean; fallbackReason: ExplanationFallbackReason } {
+  if (exactGradeMatch && !usedFallbackPath) return { servingMode: 'exact_match', fallbackUsed: false, fallbackReason: 'none' }
+  if (!exactGradeMatch) return { servingMode: 'grade_fallback', fallbackUsed: true, fallbackReason: 'grade_band' }
+  return { servingMode: 'confidence_fallback', fallbackUsed: true, fallbackReason: 'confidence' }
 }
 
 interface ExplanationCandidateRow extends MatchableAsset {
@@ -61,11 +95,14 @@ export async function findBestExplanation(
 
     const best = pickBest(state, rows, options)
     if (best) {
+      const meta = classify(best.exactGradeMatch, false)
       return {
         assetId: best.asset.assetId,
         content: best.asset.explanationAsset!.content,
         familyKind: best.asset.familyKind,
         confidence: best.confidence,
+        exactGradeMatch: best.exactGradeMatch,
+        ...meta,
       }
     }
 
@@ -78,15 +115,19 @@ export async function findBestExplanation(
     if (rows.length > 0) {
       const fallback = pickBest(state, rows, options, 0)
       if (fallback) {
+        const meta = classify(fallback.exactGradeMatch, true)
         console.log(
           `[explanationMemory] grade-band fallback: serving ${fallback.asset.assetId}` +
-          ` (score=${fallback.confidence}, state.gradeBand=${state.gradeBand})`
+          ` (score=${fallback.confidence}, state.gradeBand=${state.gradeBand})` +
+          ` servingMode=${meta.servingMode} fallbackReason=${meta.fallbackReason}`
         )
         return {
           assetId: fallback.asset.assetId,
           content: fallback.asset.explanationAsset!.content,
           familyKind: fallback.asset.familyKind,
           confidence: fallback.confidence,
+          exactGradeMatch: fallback.exactGradeMatch,
+          ...meta,
         }
       }
     }

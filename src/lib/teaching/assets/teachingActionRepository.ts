@@ -16,7 +16,7 @@ import { AssetFamily, AssetStatus, AuthorKind, ProbeDifficulty, GradeBand } from
 import type { ProbeKind, ProbeChoice } from './assetIdentity'
 import type { StudentState } from './studentState'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
-import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch } from './explanationMemory'
+import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch, type ExplanationServingMode, type ExplanationFallbackReason } from './explanationMemory'
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
 
@@ -186,6 +186,14 @@ export interface AssembledLesson {
   text: string
   usedAssetIds: string[]
   explanationConfidence: number
+  // P0 (Explanation Memory serving metadata — observability only): passed
+  // through verbatim from the explanation match; assembleLesson's own
+  // selection logic (explanation required, probe optional) is unchanged.
+  explanationAssetId: string
+  explanationServingMode: ExplanationServingMode
+  explanationExactGradeMatch: boolean
+  explanationFallbackUsed: boolean
+  explanationFallbackReason: ExplanationFallbackReason
 }
 
 /**
@@ -209,7 +217,14 @@ export async function assembleLesson(state: StudentState, options: MatchOptions 
     text += formatProbeAsFollowUp(probe)
   }
 
-  return { text, usedAssetIds, explanationConfidence: explanation.confidence }
+  return {
+    text, usedAssetIds, explanationConfidence: explanation.confidence,
+    explanationAssetId: explanation.assetId,
+    explanationServingMode: explanation.servingMode,
+    explanationExactGradeMatch: explanation.exactGradeMatch,
+    explanationFallbackUsed: explanation.fallbackUsed,
+    explanationFallbackReason: explanation.fallbackReason,
+  }
 }
 
 function formatProbeAsFollowUp(probe: ProbeMatch): string {

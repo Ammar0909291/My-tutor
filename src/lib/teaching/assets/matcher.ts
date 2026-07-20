@@ -112,17 +112,25 @@ export function scoreMatch(state: StudentState, asset: MatchableAsset, options: 
 /** Default bar for "suitable" — a match below this is treated as no match. */
 export const DEFAULT_CONFIDENCE_THRESHOLD = 65
 
+// Observability-only (P0 Explanation Memory serving metadata): does the
+// candidate's gradeBand exactly equal the requester's. Reads the same
+// GradeBand values scoreMatch already reads — never changes what scoreMatch
+// computes or what pickBest selects.
+function isExactGradeMatch(state: StudentState, asset: MatchableAsset): boolean {
+  return asset.gradeBand === state.gradeBand
+}
+
 export function pickBest<T extends MatchableAsset>(
   state: StudentState,
   candidates: T[],
   options: MatchOptions = {},
   threshold: number = DEFAULT_CONFIDENCE_THRESHOLD,
-): { asset: T; confidence: number } | null {
-  let best: { asset: T; confidence: number } | null = null
+): { asset: T; confidence: number; exactGradeMatch: boolean } | null {
+  let best: { asset: T; confidence: number; exactGradeMatch: boolean } | null = null
   for (const candidate of candidates) {
     const confidence = scoreMatch(state, candidate, options)
     if (confidence >= threshold && (!best || confidence > best.confidence)) {
-      best = { asset: candidate, confidence }
+      best = { asset: candidate, confidence, exactGradeMatch: isExactGradeMatch(state, candidate) }
     }
   }
   return best

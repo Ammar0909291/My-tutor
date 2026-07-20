@@ -2284,9 +2284,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // real evidence instead of requiring another guess (see the
       // "Sorry, I got cut off" investigation this was added for).
       let finishReason: string | null = 'n/a (memory-served)'
+      // P0 (Explanation Memory serving metadata — observability only, does
+      // NOT introduce new provider values; `provider` stays exactly one of
+      // memory/groq/yandex/fallback). Populated below for every turn —
+      // memory* fields describe HOW a memory hit was reached; for a
+      // non-memory turn they're null/false and memoryFallbackReasonCode
+      // captures WHY memory didn't serve at all (a superset of the
+      // memory-internal grade_band/confidence/none reasons: also
+      // disabled/no_concept/first_lesson/recovery_mode/no_asset/
+      // confidence_failed/lookup_error — mapped from the existing
+      // human-readable memoryFallbackReason string this route already
+      // computes above, never a second source of truth).
+      let memoryServingMode: string | null = null
+      let memoryConfidence: number | null = null
+      let memoryAssetId: string | null = null
+      let memoryConceptId: string | null = null
+      let memoryExactGradeMatch: boolean | null = null
+      let memoryFallbackUsed: boolean | null = null
+      let memoryFallbackReasonCode: string = 'none'
       if (assembled) {
         text = assembled.text
         provider = 'memory'
+        memoryServingMode = assembled.explanationServingMode
+        memoryConfidence = assembled.explanationConfidence
+        memoryAssetId = assembled.explanationAssetId
+        memoryConceptId = resolvedConceptId
+        memoryExactGradeMatch = assembled.explanationExactGradeMatch
+        memoryFallbackUsed = assembled.explanationFallbackUsed
+        memoryFallbackReasonCode = assembled.explanationFallbackReason
         // Structured provider log — visible in Vercel logs, never sent to
         // client. Proves Explanation Memory is being served without Groq.
         // Never silent: every field the P0 routing audit asked for, on
@@ -2300,9 +2325,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ` confidence=${assembled.explanationConfidence?.toFixed(3) ?? 'n/a'}` +
           ` fallback_reason=n/a` +
           ` groq_invoked=false` +
-          ` chars=${text.length}`
+          ` chars=${text.length}` +
+          ` memoryServingMode=${memoryServingMode}` +
+          ` memoryExactGradeMatch=${memoryExactGradeMatch}` +
+          ` memoryFallbackUsed=${memoryFallbackUsed}` +
+          ` memoryFallbackReason=${memoryFallbackReasonCode}`
         )
       } else {
+        // Maps the existing human-readable memoryFallbackReason string
+        // (computed earlier in this route, unchanged) onto a stable snake_
+        // case code for the new observability field — additive only, does
+        // not change what that string says or when it's set.
+        memoryFallbackReasonCode = memoryFallbackReason === 'Explanation Memory disabled (DISABLE_EXPLANATION_MEMORY)' ? 'disabled'
+          : memoryFallbackReason === 'No concept' ? 'no_concept'
+          : memoryFallbackReason === 'First lesson' ? 'first_lesson'
+          : memoryFallbackReason === 'Recovery mode' ? 'recovery_mode'
+          : memoryFallbackReason === 'No asset' ? 'no_asset'
+          : memoryFallbackReason === 'Confidence failed' ? 'confidence_failed'
+          : memoryFallbackReason === 'No asset (lookup error)' ? 'lookup_error'
+          : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
+          : 'no_asset'
         const routed = await routeAI(
           [...historyMessages, { role: 'user', content: message }],
           systemPrompt,
@@ -2336,7 +2378,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ` fallback_reason=${memoryFallbackReason ?? 'unknown (bug: reason not set)'}` +
           ` groq_invoked=true` +
           ` finish_reason=${finishReason}` +
-          ` chars=${text ? text.length : 0}`
+          ` chars=${text ? text.length : 0}` +
+          ` memoryServingMode=null memoryFallbackReason=${memoryFallbackReasonCode}`
         )
       }
 
@@ -3364,6 +3407,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       return NextResponse.json({
         success: true, text: cleanText, provider,
+        // P0 (Explanation Memory serving metadata — observability only).
+        // `provider` above is unchanged and remains the stable field
+        // (memory/groq/yandex/fallback); these describe HOW/WHY, never a
+        // new provider value.
+        memoryServingMode, memoryConfidence, memoryAssetId, memoryConceptId,
+        memoryExactGradeMatch, memoryFallbackUsed,
+        memoryFallbackReason: memoryFallbackReasonCode,
         visual: responseVisual ?? undefined, visualSpec: detectedVisualSpec ?? undefined,
         sceneSpec: detectedSceneSpec ?? undefined,
         dynamicVisualizationCode: dynamicVisualizationCode ?? undefined,
