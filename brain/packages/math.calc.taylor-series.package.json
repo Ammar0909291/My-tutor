@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.taylor-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.taylor-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7d44f8d5e1b07aae56549e21fe84043698f105c2ff93b718fd3cbff6213c2bb9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.taylor-series.md": "sha256:f793305785484b85c3e018141de6e340157ac63d09201d1486d1764f526b2227"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.taylor-series",
+    "name": "Taylor Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.power-series",
+      "math.calc.higher-order-derivatives",
+      "math.calc.linearization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.taylor-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.taylor-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.taylor-series.md": "sha256:f793305785484b85c3e018141de6e340157ac63d09201d1486d1764f526b2227"
+      },
+      "contentHash": "sha256:c4e1348a48014e95ddd70f0cd7727601e77d24141e53935bfda8bee5b9407d98",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-series.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-series\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-series.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-series.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-series\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.taylor-series/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize the Taylor series $f(x)=\\sum_{n=0}^\\infty\\frac{f^{(n)}(a)}{n!}(x-a)^n$ as `math.calc.linearization`'s own $L(x)=f(a)+f'(a)(x-a)$ EXTENDED — the linearization is EXACTLY the Taylor series's first two terms ($n=0,1$), with each additional term (using `math.calc.higher-order-derivatives`'s higher derivatives) adding a further correction that captures more of $f$'s curving-away behavior.\n- LO2: Compute a Taylor series for a specific function by systematically finding $f^{(n)}(a)$ for successive $n$, and recognize the result as a specific instance of `math.calc.power-series`'s own general $\\sum c_n(x-a)^n$ form, with coefficients $c_n=f^{(n)}(a)/n!$ determined by the function itself rather than chosen freely.\n- LO3 (orientation level — full remainder-term/convergence-proof deferred): recognize, without full derivation, that a Taylor series is only VALID (equal to $f(x)$) WITHIN its radius of convergence $R$ (from `math.calc.power-series`'s own convergence theory) — and that even a function with well-defined derivatives EVERYWHERE can have a Taylor series that fails to equal $f$ at some points, previewing that convergence of the series and equality to $f$ are related but genuinely distinct questions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.taylor-series",
+      "title": "TAYLOR-SERIES-ASSUMED-UNRELATED-TO-LINEARIZATION",
+      "content": "| MC-1 | TAYLOR-SERIES-ASSUMED-UNRELATED-TO-LINEARIZATION | Believing the Taylor series is an unrelated new concept, missing that it is linearization's own natural continuation with additional correction terms | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.taylor-series",
+      "title": "TAYLOR-COEFFICIENTS-ASSUMED-FREELY-CHOSEN",
+      "content": "| MC-2 | TAYLOR-COEFFICIENTS-ASSUMED-FREELY-CHOSEN | Believing Taylor coefficients can be freely chosen like general power series coefficients, missing that they are entirely determined by the function's own derivatives | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.taylor-series",
+      "title": "CONVERGENCE-ASSUMED-TO-GUARANTEE-EQUALITY-EVERYWHERE",
+      "content": "| MC-3 | CONVERGENCE-ASSUMED-TO-GUARANTEE-EQUALITY-EVERYWHERE | Believing a Taylor series always equals the function everywhere the function is defined, missing that agreement is guaranteed only within the radius of convergence | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Taylor Series Continues Linearization With More Correction Terms (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Taylor Series Continues Linearization With More Correction Terms (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Taylor Coefficients Are Forced By the Function, Not Freely Chosen (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Taylor Coefficients Are Forced By the Function, Not Freely Chosen (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Series Convergence and Equality to f Are Genuinely Different Questions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Series Convergence and Equality to f Are Genuinely Different Questions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the first three terms (through the quadratic term) of the Taylor series of $f(x)=\\sin x$ at $a=0$, and compare to `math.calc.linearization`'s own linear approximation.\n  2. Compute the Taylor series coefficients $c_n$ for $f(x)=\\frac{1}{1-x}$ at $a=0$ directly from the derivative formula $c_n=f^{(n)}(0)/n!$, and verify they match the geometric series $\\sum x^n$.\n  3. For $f(x)=\\ln(1+x)$'s Taylor series (radius of convergence $R=1$), determine whether the series is guaranteed to converge to $f(x)$ at $x=0.5$ and at $x=3$, explaining the difference.\n  4. Explain, in one or two sentences, why a Taylor series's coefficients are \"forced\" by the function rather than freely chosen, unlike a general power series.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer wants to approximate $f(x)=\\ln(1+x)$ for small perturbations $x$ near $0$ in a control system, and knows its Taylor series is $x-\\frac{x^2}{2}+\\frac{x^3}{3}-\\cdots$ with radius of convergence $R=1$. (a) Using only the first two terms (matching `math.calc.linearization`'s own linear approximation), estimate $f(0.05)$, and explain why this should be quite accurate given how close $0.05$ is to the center $a=0$. (b) Explain why using the SAME truncated series to estimate $f(5)$ would be far less justified, citing both the distance-from-center issue and the radius-of-convergence issue. (c) If the engineer needed accurate values for $x=5$, explain — citing the distinction between convergence and equality to $f$ — why simply adding more terms to the SAME series expansion (still centered at $a=0$) would not solve the problem, since $x=5$ lies outside $R=1$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.power-series` ($\\sum c_n(x-a)^n$, radius of convergence $R$), `math.calc.higher-order-derivatives` ($f''=(f')'$ and beyond), and `math.calc.linearization` ($L(x)=f(a)+f'(a)(x-a)$, the tangent-line approximation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.taylor-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.power-series` (the general $\\sum c_n(x-a)^n$ form and radius of convergence, directly specialized here) and `math.calc.higher-order-derivatives` (the successively higher derivatives supplying each Taylor coefficient) and `math.calc.linearization` ($L(x)=f(a)+f'(a)(x-a)$, the Taylor series's own first two terms).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-series.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

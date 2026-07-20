@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.quotient-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.quotient-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7b4fab13560739b7b7fa835f96ee848588e15d479a30a0e885df1a8e05113938",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.quotient-space.md": "sha256:6c28437957be2d99e7609615689cb794edb991e2b114a8d15d34b9a63ea75d38"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.quotient-space",
+    "name": "Quotient Space",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.top.topological-space",
+      "math.found.equivalence-relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.quotient-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.quotient-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.quotient-space.md": "sha256:6c28437957be2d99e7609615689cb794edb991e2b114a8d15d34b9a63ea75d38"
+      },
+      "contentHash": "sha256:6206e3f836f5ec6716054c812facf7872c01fe6de61835a7e9f922bb4f67b7f0",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.quotient-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.quotient-space.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.quotient-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.quotient-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.quotient-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.quotient-space.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.quotient-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.quotient-space\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.quotient-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.quotient-space.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.quotient-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.quotient-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.quotient-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.quotient-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.quotient-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.quotient-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.quotient-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.quotient-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the quotient topology on $Y$ (given a surjective $f:X\\to Y$) as the FINEST topology making $f$ continuous — a set $U\\subseteq Y$ is open iff $f^{-1}(U)$ is open in $X$ — recognizing this as building a NEW topological space FROM an existing one (`math.top.topological-space`'s own open-set axioms), governed by which subsets $f$ \"sees\" as open through its preimages.\n- LO2: Recognize $f$ as typically arising from `math.found.equivalence-relation`'s own equivalence classes: $Y=X/\\!\\sim$ (the set of equivalence classes) with $f(x)=[x]$ the natural quotient map — \"gluing together\" points identified by $\\sim$, and construct the CIRCLE $S^1=[0,1]/\\!\\sim$ (identifying $0\\sim1$) as a concrete instance.\n- LO3 (orientation level — full universal-property/algebraic-topology-connection deferred): recognize, without full derivation, that `math.abst.quotient-group`'s own $G/N$ construction is a STRUCTURAL ANALOGUE of this topological quotient — both \"collapse\" equivalent elements to a single point/class via a natural surjection, and both are characterized by a UNIVERSAL PROPERTY (finest/largest structure making the natural map well-behaved) — previewing that \"quotient\" is one recurring construction pattern across different mathematical categories, not independently invented each time.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.quotient-space",
+      "title": "QUOTIENT-TOPOLOGY-ASSUMED-FREELY-CHOSEN",
+      "content": "| MC-1 | QUOTIENT-TOPOLOGY-ASSUMED-FREELY-CHOSEN | Believing the quotient topology is chosen somewhat freely as long as it's a valid topology, missing that it is precisely determined by $f$'s preimages | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.quotient-space",
+      "title": "GLUING-ASSUMED-MERELY-INFORMAL",
+      "content": "| MC-2 | GLUING-ASSUMED-MERELY-INFORMAL | Believing \"gluing endpoints\" descriptions like the circle construction are only informal pictures, missing that they are fully precise equivalence-relation-based constructions | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.quotient-space",
+      "title": "QUOTIENT-TERMINOLOGY-ASSUMED-COINCIDENTAL",
+      "content": "| MC-3 | QUOTIENT-TERMINOLOGY-ASSUMED-COINCIDENTAL | Believing \"quotient\" in quotient space and quotient group is a coincidental shared word between unrelated constructions, missing the shared collapse-via-equivalence, universal-property pattern | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.quotient-space",
+      "title": "The Quotient Topology Is Defined by What f \"Sees\" Through Preimages (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Quotient Topology Is Defined by What f \\\"Sees\\\" Through Preimages (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.quotient-space",
+      "title": "The Circle Is a Fully Concrete, Specifiable Equivalence-Relation Quotient (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Circle Is a Fully Concrete, Specifiable Equivalence-Relation Quotient (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.quotient-space",
+      "title": "Quotient Groups and Quotient Spaces Share a Genuine Organizing Pattern (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Quotient Groups and Quotient Spaces Share a Genuine Organizing Pattern (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.quotient-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.quotient-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the precise condition for $U\\subseteq Y$ to be open in the quotient topology induced by $f:X\\to Y$.\n  2. Define an equivalence relation on the unit square $[0,1]\\times[0,1]$ that identifies opposite edges (both pairs), and state what familiar surface the resulting quotient space is (the torus).\n  3. Verify that \"identify $0$ and $1$ in $[0,1]$\" satisfies all three equivalence-relation properties (reflexive, symmetric, transitive).\n  4. Explain, in one or two sentences, the structural parallel between forming a quotient space and forming a quotient group.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.abst.quotient-group`)**: \"A topologist wants to construct the Möbius strip by taking a rectangle $[0,1]\\times[0,1]$ and identifying $(0,y)$ with $(1,1-y)$ for each $y$ (a 'twisted' gluing of one pair of opposite edges). (a) Explain why this identification defines a genuine equivalence relation on the rectangle, citing `math.found.equivalence-relation`'s three properties. (b) Describe, in terms of preimages under the natural quotient map, what it would mean for a set $U$ in the resulting quotient space to be open. (c) A student familiar with `math.abst.quotient-group`'s $G/N$ construction asks whether this topological gluing is 'the same kind of thing' as forming a quotient group — using the universal-property parallel from Example 3, explain in what sense they ARE structurally analogous, and in what sense they remain genuinely different constructions (different categories, different specific mechanisms).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.quotient-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (a set $X$ with open sets $\\tau$ satisfying the union/intersection axioms) and `math.found.equivalence-relation` (reflexive, symmetric, transitive; partitioning a set into equivalence classes).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.quotient-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.quotient-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (the open-set axioms this concept's quotient topology satisfies, built from $X$'s own topology) and `math.found.equivalence-relation` (the reflexive/symmetric/transitive relation typically underlying the quotient map $f$).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.abst.quotient-group`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.abst.quotient-group`'s own $G/N$ construction directly in Component 3's structural-parallel argument and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.quotient-space.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
