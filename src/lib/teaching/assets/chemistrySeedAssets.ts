@@ -7388,6 +7388,351 @@ const BONDH_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── chem.sblock.alkaline-earth ──────────────────────────────────────────────
+const ALKEARTH = 'chem.sblock.alkaline-earth'
+const ALKEARTH_SRC = 'docs/chemistry/kg/graph.json — chem.sblock.alkaline-earth'
+
+const ALKEARTH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ALKEARTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Alkaline earth metals (Group 2: Be, Mg, Ca, Sr, Ba) have 2 valence electrons, ' +
+      'forming +2 ions. They\'re LESS reactive than their Group 1 neighbors (same period) ' +
+      'because removing a SECOND electron (after the first) requires more energy — the ' +
+      'ion is becoming increasingly positive, holding remaining electrons more tightly. ' +
+      'But the same "reactivity increases down the group" trend from Group 1 still applies ' +
+      'here (same shielding logic): magnesium reacts with cold water only very slowly, ' +
+      'while barium reacts vigorously. BERYLLIUM is anomalous (small size, high charge ' +
+      'density) — it forms significantly COVALENT compounds rather than purely ionic ones ' +
+      '(BeCl₂ is covalent, unlike the ionic MgCl₂), similar to how lithium (Group 1\'s ' +
+      'smallest, most anomalous member) shows a "diagonal relationship" with magnesium. ' +
+      'Calcium and magnesium compounds are biologically essential (Ca²⁺ in bones/teeth and ' +
+      'muscle contraction signaling; Mg²⁺ at the center of chlorophyll, essential for ' +
+      'photosynthesis) and geologically abundant (limestone/CaCO₃, dolomite).',
+    targetedMisconceptions: [`${ALKEARTH}:MC1`],
+    source: `${ALKEARTH_SRC} — Group 2 properties, reactivity trends, beryllium anomaly, biological roles`,
+  },
+  {
+    conceptId: ALKEARTH,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Group 2 metals should be MORE reactive than Group 1 metals in the same ' +
+      'period, since they have more valence electrons to potentially lose/react with." ' +
+      'BACKWARDS — Group 2 metals are generally LESS reactive than their Group 1 ' +
+      'neighbors, because forming a +2 ion requires removing TWO electrons (the second ' +
+      'removal is always harder than the first, since you\'re pulling an electron away ' +
+      'from an already-positive ion with stronger effective attraction). "More valence ' +
+      'electrons" doesn\'t automatically mean "more reactive" — what matters is how EASILY ' +
+      'those electrons can be removed, and removing a second electron is inherently harder ' +
+      'than removing the first. Second trap: "All Group 2 elements form purely ionic ' +
+      'compounds, no exceptions, since they\'re metals." Beryllium is a notable exception — ' +
+      'its unusually small size and high charge density give it significant covalent ' +
+      'character in its compounds (like BeCl₂), distinguishing it from the more typically ' +
+      'ionic behavior of its heavier group-mates (MgCl₂, CaCl₂).',
+    targetedMisconceptions: [`${ALKEARTH}:MC1`, `${ALKEARTH}:MC2`],
+    source: `${ALKEARTH_SRC} — misconception: more valence electrons means more reactive; all Group 2 compounds are ionic`,
+  },
+]
+
+const ALKEARTH_PROBES: SeedProbe[] = [
+  {
+    conceptId: ALKEARTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Sodium (Group 1) is more reactive than magnesium (Group 2), even though magnesium has more valence electrons. Why?',
+    choices: [
+      { text: 'Magnesium must remove TWO electrons to form Mg²⁺, and removing the second electron requires significantly more energy than the first (since it\'s pulled from an already-positive ion) — reactivity depends on ease of electron removal, not electron count', isCorrect: true },
+      { text: 'This must be an error — having more valence electrons should always make an element more reactive', isCorrect: false, misconceptionId: `${ALKEARTH}:MC1` },
+    ],
+    correctValue: 'Removing the second electron is harder, reducing reactivity',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKEARTH}:MC1`],
+    source: `${ALKEARTH_SRC} — distractor targets assuming more valence electrons directly means more reactivity`,
+  },
+  {
+    conceptId: ALKEARTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is BeCl₂ (beryllium chloride) purely ionic, like typical Group 2 metal chlorides such as MgCl₂ and CaCl₂?',
+    choices: [
+      { text: 'No — beryllium\'s unusually small size and high charge density give BeCl₂ significant covalent character, unlike the more purely ionic chlorides of heavier Group 2 members', isCorrect: true },
+      { text: 'Yes — all Group 2 metal chlorides are purely ionic without exception, since they are all metals reacting with a nonmetal', isCorrect: false, misconceptionId: `${ALKEARTH}:MC2` },
+    ],
+    correctValue: 'No — BeCl₂ has significant covalent character',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKEARTH}:MC2`],
+    source: `${ALKEARTH_SRC} — misconception: all Group 2 metal halides are purely ionic without exception`,
+  },
+]
+
+// ─── chem.redox.activity-series ──────────────────────────────────────────────
+const ACTSER = 'chem.redox.activity-series'
+const ACTSER_SRC = 'docs/chemistry/kg/graph.json — chem.redox.activity-series'
+
+const ACTSER_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACTSER,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The activity series ranks metals by how readily they LOSE electrons (get ' +
+      'oxidized) — a practical, EXPERIMENTALLY-derived ordering closely related to ' +
+      'standard reduction potentials (E°, covered in electrochemical thermodynamics ' +
+      'earlier) but often taught as a simpler qualitative list: K > Na > Ca > Mg > Al > ' +
+      'Zn > Fe > Pb > (H) > Cu > Ag > Au. A metal HIGHER in the series will DISPLACE (via ' +
+      'a single-replacement reaction) any metal BELOW it from its salt solution: Zn + ' +
+      'CuSO₄ → ZnSO₄ + Cu (zinc, above copper, displaces it) — but copper CANNOT displace ' +
+      'zinc from ZnSO₄ (reverse never happens spontaneously). Metals ABOVE hydrogen react ' +
+      'with dilute acids to release H₂ gas (Zn + 2HCl → ZnCl₂ + H₂); metals BELOW hydrogen ' +
+      '(Cu, Ag, Au — the "noble metals") do NOT react with dilute acids this way, which is ' +
+      'exactly why gold and silver remain untarnished/unreactive for jewelry and why copper ' +
+      'pipes don\'t dissolve in typical household acidic conditions. This series is ' +
+      'essentially the same "electron-losing tendency" concept as reduction potentials, ' +
+      'presented as a memorizable practical ranking.',
+    targetedMisconceptions: [`${ACTSER}:MC1`],
+    source: `${ACTSER_SRC} — activity series, single displacement, reaction with acids`,
+  },
+  {
+    conceptId: ACTSER,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "Any metal can displace any other metal from solution — it just depends on ' +
+      'concentration or conditions, not a fixed hierarchy." FALSE for standard conditions ' +
+      '— the activity series reflects an inherent THERMODYNAMIC ordering (related to E° ' +
+      'values), and displacement genuinely only proceeds SPONTANEOUSLY in one direction ' +
+      '(higher displaces lower), not the reverse, regardless of concentration tweaks under ' +
+      'normal conditions. Copper metal placed in a zinc sulfate solution will NOT dissolve ' +
+      'to displace zinc, no matter how concentrated the solution or how long you wait — ' +
+      'the reaction is thermodynamically unfavorable in that direction (ΔG>0). Second ' +
+      'trap: "Metals below hydrogen in the activity series don\'t react with ANY acid, ' +
+      'ever." Not quite — they don\'t react with acids via simple H⁺ displacement (the ' +
+      'standard mechanism relevant here), but SOME (like copper, silver) CAN react with ' +
+      'strongly OXIDIZING acids (concentrated HNO₃, hot concentrated H₂SO₄) via a ' +
+      'completely different mechanism (the acid\'s anion, not H⁺, acts as the oxidizer) — ' +
+      'this is a genuinely different reaction pathway, not a contradiction of the activity ' +
+      'series\' basic H⁺-displacement rule.',
+    targetedMisconceptions: [`${ACTSER}:MC1`, `${ACTSER}:MC2`],
+    source: `${ACTSER_SRC} — misconception: displacement direction is flexible with conditions; below-H metals never react with any acid`,
+  },
+]
+
+const ACTSER_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACTSER,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A piece of copper metal is placed in a concentrated zinc sulfate (ZnSO₄) solution. Will copper displace zinc, dissolving into solution as Cu²⁺ while Zn metal deposits?',
+    choices: [
+      { text: 'No — zinc is above copper in the activity series, so copper cannot spontaneously displace zinc regardless of concentration; only the reverse (Zn displacing Cu²⁺) is thermodynamically favorable', isCorrect: true },
+      { text: 'Yes — if the zinc sulfate solution is concentrated enough, copper will displace zinc from solution', isCorrect: false, misconceptionId: `${ACTSER}:MC1` },
+    ],
+    correctValue: 'No — displacement only proceeds in one direction regardless of concentration',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACTSER}:MC1`],
+    source: `${ACTSER_SRC} — distractor targets assuming concentration can reverse the direction of spontaneous displacement`,
+  },
+  {
+    conceptId: ACTSER,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Copper is below hydrogen in the activity series and doesn\'t react with dilute HCl. Does this mean copper never reacts with ANY acid under any circumstances?',
+    choices: [
+      { text: 'No — copper doesn\'t react via the standard H⁺-displacement mechanism with dilute non-oxidizing acids, but it CAN react with strongly oxidizing acids (like concentrated HNO₃) via a completely different mechanism where the acid\'s anion acts as the oxidizer', isCorrect: true },
+      { text: 'Yes — being below hydrogen in the activity series means copper is completely unreactive toward every acid without exception', isCorrect: false, misconceptionId: `${ACTSER}:MC2` },
+    ],
+    correctValue: 'No — copper reacts with oxidizing acids via a different mechanism',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACTSER}:MC2`],
+    source: `${ACTSER_SRC} — misconception: below-hydrogen metals are universally unreactive with all acids`,
+  },
+]
+
+// ─── chem.bond.mo-theory ─────────────────────────────────────────────────────
+const MOTHY = 'chem.bond.mo-theory'
+const MOTHY_SRC = 'docs/chemistry/kg/graph.json — chem.bond.mo-theory'
+
+const MOTHY_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MOTHY,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Molecular Orbital (MO) Theory offers a MORE ACCURATE (though more complex) model ' +
+      'of bonding than simple Lewis structures/VSEPR by treating electrons as belonging to ' +
+      'the WHOLE MOLECULE, not localized bonds. When two atomic orbitals combine, they form ' +
+      'TWO molecular orbitals: a BONDING orbital (lower energy, electron density ' +
+      'concentrated BETWEEN nuclei, stabilizing) and an ANTIBONDING orbital (higher energy, ' +
+      'a node between nuclei, destabilizing — marked with an asterisk, σ*). Fill MOs from ' +
+      'lowest to highest energy (Aufbau again), and calculate BOND ORDER = ' +
+      '(bonding electrons − antibonding electrons)/2. Bond order 0 means the molecule ' +
+      'CANNOT exist stably (He₂ has bond order 0 — this is WHY helium doesn\'t form He₂, ' +
+      'something Lewis structures alone can\'t easily explain). MO theory correctly ' +
+      'predicts O₂\'s PARAMAGNETISM (weakly attracted to magnets, due to two unpaired ' +
+      'electrons in its π* antibonding orbitals) — a genuine experimental fact that simple ' +
+      'Lewis structures (which draw O₂ with all electrons paired) completely FAIL to ' +
+      'predict, making this a classic demonstration of MO theory\'s superior explanatory ' +
+      'power for certain molecules.',
+    targetedMisconceptions: [`${MOTHY}:MC1`],
+    source: `${MOTHY_SRC} — bonding/antibonding MOs, bond order, O2 paramagnetism as key evidence`,
+  },
+  {
+    conceptId: MOTHY,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Trap: "MO theory and Lewis structure/VSEPR theory are competing, contradictory ' +
+      'models — one must be simply wrong." Better framing: they\'re models at different ' +
+      'levels of SOPHISTICATION, each useful for different purposes. Lewis/VSEPR is ' +
+      'simpler, faster, and gets most everyday predictions right (molecular shape, basic ' +
+      'reactivity) — it\'s the right tool for routine work. MO theory is more accurate and ' +
+      'necessary when Lewis structures fail to explain real experimental observations (like ' +
+      'O₂\'s paramagnetism, or why He₂ doesn\'t exist despite each He atom "wanting" more ' +
+      'electrons). Choose the right tool for the question at hand — don\'t discard the ' +
+      'simpler model just because a more complex one exists; use the simpler one until it ' +
+      'demonstrably fails. Second trap: "A bond order of 0 just means a very weak bond, ' +
+      'still forms but barely." No — bond order 0 specifically means the molecule CANNOT ' +
+      'exist as a stable species — the bonding and antibonding contributions exactly ' +
+      'cancel, providing ZERO net stabilization over the two separate atoms, which is ' +
+      'exactly why He₂ genuinely doesn\'t form under normal conditions (not "forms weakly," ' +
+      'but doesn\'t form at all as a stable molecule).',
+    targetedMisconceptions: [`${MOTHY}:MC1`, `${MOTHY}:MC2`],
+    source: `${MOTHY_SRC} — misconception: MO and Lewis theories are contradictory rather than complementary; bond order 0 means "weak" not "nonexistent"`,
+  },
+]
+
+const MOTHY_PROBES: SeedProbe[] = [
+  {
+    conceptId: MOTHY,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A simple Lewis structure for O₂ draws all electrons as paired, predicting O₂ should NOT be attracted to a magnetic field. But O₂ IS experimentally paramagnetic (weakly magnetic). How does MO theory resolve this discrepancy?',
+    choices: [
+      { text: 'MO theory correctly places two electrons unpaired in O₂\'s π* antibonding orbitals, explaining the observed paramagnetism — something the simpler Lewis structure model fails to predict', isCorrect: true },
+      { text: 'This is an experimental error — O₂ cannot actually be paramagnetic if its Lewis structure shows all paired electrons', isCorrect: false, misconceptionId: `${MOTHY}:MC1` },
+    ],
+    correctValue: 'MO theory correctly predicts unpaired electrons (paramagnetism)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MOTHY}:MC1`],
+    source: `${MOTHY_SRC} — distractor targets dismissing experimental data that contradicts the simpler model`,
+  },
+  {
+    conceptId: MOTHY,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'MO theory calculates a bond order of 0 for He₂ (two helium atoms). Does this mean He₂ forms a very weak, barely-detectable bond?',
+    choices: [
+      { text: 'No — bond order 0 means the bonding and antibonding contributions exactly cancel, providing zero net stabilization; He₂ does not exist as a stable molecule under normal conditions, not merely "weakly"', isCorrect: true },
+      { text: 'Yes — bond order 0 simply indicates an unusually weak bond that still technically forms', isCorrect: false, misconceptionId: `${MOTHY}:MC2` },
+    ],
+    correctValue: 'No — bond order 0 means no stable molecule forms',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MOTHY}:MC2`],
+    source: `${MOTHY_SRC} — misconception: bond order 0 indicates a weak bond rather than no stable bond at all`,
+  },
+]
+
+// ─── chem.bond.polar-molecules ───────────────────────────────────────────────
+const POLARM = 'chem.bond.polar-molecules'
+const POLARM_SRC = 'docs/chemistry/kg/graph.json — chem.bond.polar-molecules'
+
+const POLARM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: POLARM,
+    subjectSlug: 'chemistry',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Building on bond parameters and VSEPR covered earlier: a molecule\'s overall ' +
+      'polarity requires combining BOTH bond polarity AND molecular geometry. The recipe: ' +
+      '(1) Determine if individual bonds are polar (electronegativity difference between ' +
+      'bonded atoms). (2) Determine the molecular geometry (VSEPR). (3) Vector-sum ALL bond ' +
+      'dipoles according to that geometry — if they cancel by symmetry, the molecule is ' +
+      'NONPOLAR overall (even with polar bonds); if they don\'t fully cancel, there\'s a NET ' +
+      'DIPOLE and the molecule is POLAR. Polar molecules have important CONSEQUENCES: they ' +
+      'experience DIPOLE-DIPOLE intermolecular forces (positive end of one molecule ' +
+      'attracts negative end of another), generally giving HIGHER boiling/melting points ' +
+      'than similarly-sized nonpolar molecules (weaker London-dispersion-only forces), ' +
+      'and they dissolve well in OTHER polar solvents (like dissolving like — connects to ' +
+      'the solution types concept). Polar molecules also align in an electric field (used ' +
+      'in microwave ovens: water\'s polarity lets microwaves rapidly flip/rotate water ' +
+      'molecules, generating frictional heat).',
+    targetedMisconceptions: [`${POLARM}:MC1`],
+    source: `${POLARM_SRC} — determining overall molecular polarity, consequences for physical properties`,
+  },
+  {
+    conceptId: POLARM,
+    subjectSlug: 'chemistry',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Trap: "You can determine a molecule\'s overall polarity just by counting how many ' +
+      'polar bonds it has — more polar bonds means more polar molecule, simple addition." ' +
+      'FALSE — as established with CO₂ vs. H₂O earlier, GEOMETRY determines whether bond ' +
+      'dipoles ADD or CANCEL. A molecule with MANY polar bonds arranged symmetrically ' +
+      '(CCl₄, CO₂, SF₆) can be completely nonpolar, while a molecule with just ONE or TWO ' +
+      'polar bonds arranged asymmetrically (HCl, H₂O) is clearly polar. Count of polar ' +
+      'bonds tells you nothing without knowing the geometric arrangement. Second trap: ' +
+      '"Nonpolar molecules have absolutely NO intermolecular attraction to each other." ' +
+      'FALSE — even perfectly nonpolar molecules (like N₂ or CH₄) experience LONDON ' +
+      'DISPERSION FORCES (temporary, fluctuating dipoles from momentary electron ' +
+      'distribution imbalances) — this is why nonpolar substances still condense into ' +
+      'liquids/solids at low enough temperature (liquid nitrogen exists!) rather than ' +
+      'remaining gases forever; the intermolecular force is just WEAKER than dipole-dipole ' +
+      'or hydrogen bonding, not absent entirely.',
+    targetedMisconceptions: [`${POLARM}:MC1`, `${POLARM}:MC2`],
+    source: `${POLARM_SRC} — misconception: polarity is determined by counting polar bonds; nonpolar means zero intermolecular force`,
+  },
+]
+
+const POLARM_PROBES: SeedProbe[] = [
+  {
+    conceptId: POLARM,
+    subjectSlug: 'chemistry',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'SF₆ has six polar S-F bonds (fluorine is very electronegative), while HCl has just one polar bond. Which molecule is actually polar overall?',
+    choices: [
+      { text: 'HCl — despite having far fewer polar bonds than SF₆, HCl\'s single bond dipole has nothing to cancel with, while SF₆\'s highly symmetric octahedral geometry causes all six dipoles to cancel exactly, making SF₆ nonpolar overall', isCorrect: true },
+      { text: 'SF₆ — since it has more polar bonds (six vs. one), it must be the more polar molecule overall', isCorrect: false, misconceptionId: `${POLARM}:MC1` },
+    ],
+    correctValue: 'HCl is polar; SF₆ is nonpolar despite having more polar bonds',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLARM}:MC1`],
+    source: `${POLARM_SRC} — distractor targets counting polar bonds instead of considering geometric cancellation`,
+  },
+  {
+    conceptId: POLARM,
+    subjectSlug: 'chemistry',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Nitrogen gas (N₂) is a completely nonpolar molecule. Does this mean N₂ molecules experience ZERO intermolecular attraction to each other, and should therefore never condense into a liquid?',
+    choices: [
+      { text: 'No — even nonpolar molecules experience London dispersion forces (temporary fluctuating dipoles), which is why liquid nitrogen exists at sufficiently low temperature; the intermolecular force is weaker than dipole-dipole, but not zero', isCorrect: true },
+      { text: 'Yes — nonpolar molecules by definition have zero intermolecular attraction and can never be liquefied under any conditions', isCorrect: false, misconceptionId: `${POLARM}:MC2` },
+    ],
+    correctValue: 'No — London dispersion forces still exist for nonpolar molecules',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLARM}:MC2`],
+    source: `${POLARM_SRC} — misconception: nonpolar molecules have zero intermolecular force`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
@@ -7481,6 +7826,10 @@ export const CHEMISTRY_EXPLANATIONS: SeedExplanation[] = [
   ...G18_EXPLANATIONS,
   ...REDBAL_EXPLANATIONS,
   ...BONDH_EXPLANATIONS,
+  ...ALKEARTH_EXPLANATIONS,
+  ...ACTSER_EXPLANATIONS,
+  ...MOTHY_EXPLANATIONS,
+  ...POLARM_EXPLANATIONS,
 ]
 
 export const CHEMISTRY_PROBES: SeedProbe[] = [
@@ -7574,4 +7923,8 @@ export const CHEMISTRY_PROBES: SeedProbe[] = [
   ...G18_PROBES,
   ...REDBAL_PROBES,
   ...BONDH_PROBES,
+  ...ALKEARTH_PROBES,
+  ...ACTSER_PROBES,
+  ...MOTHY_PROBES,
+  ...POLARM_PROBES,
 ]
