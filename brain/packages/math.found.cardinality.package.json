@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.cardinality-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.cardinality",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1b5f31f36ba19ab52e4233e7bd886b4791058bca69d3c8b9bcd73c21cbb945d4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.cardinality.md": "sha256:d1f0f8f4440910bb4e97c05f41f3002cb93cc9d91f35940dfd6bc94b7a16372f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.cardinality",
+    "name": "Cardinality",
+    "difficultyRaw": "developing",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.power-set",
+      "math.found.function-set-theoretic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.cardinality-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.cardinality (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.cardinality.md": "sha256:d1f0f8f4440910bb4e97c05f41f3002cb93cc9d91f35940dfd6bc94b7a16372f"
+      },
+      "contentHash": "sha256:5bee924eb3656ec36a5a964351f54d9198e01fb52dd5a6a27146b855d6a38b32",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.cardinality.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.cardinality.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.cardinality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.cardinality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.cardinality.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.cardinality.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.cardinality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.cardinality\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.cardinality.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.cardinality.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.cardinality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.cardinality\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.cardinality.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.cardinality.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.cardinality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.cardinality\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.cardinality/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.cardinality",
+      "title": "Learning Objectives",
+      "content": "- LO1 (cross-link objective): Recognize that \"two sets have the SAME cardinality\" is defined via a BIJECTION between them — directly reusing `math.found.function-set-theoretic`'s own injective+surjective definition of bijective — rather than by literally counting elements, and correctly verify a specific bijection between two small finite sets to confirm equal cardinality.\n- LO2: Apply the bijection-based definition to INFINITE sets, where literal counting is impossible, by exhibiting an explicit bijection between $\\mathbb{N}$ and a proper subset of itself (e.g. the even numbers) — and correctly interpret this as showing an infinite set CAN have the same cardinality as one of its own proper subsets, a genuinely counterintuitive fact that has no finite-set analogue.\n- LO3: Use `math.found.power-set`'s own $2^{|A|}$ counting result to motivate Cantor's diagonal argument informally: state (without full proof) that $|\\mathcal{P}(A)|>|A|$ for EVERY set $A$ (finite or infinite), and correctly verify this strict inequality using `math.found.power-set`'s own formula for a specific finite $A$, previewing why this guarantees infinitely many DIFFERENT sizes of infinity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.cardinality",
+      "title": "CARDINALITY-EQUALITY-ASSUMED-TO-BE-COUNTING",
+      "content": "| MC-1 | CARDINALITY-EQUALITY-ASSUMED-TO-BE-COUNTING | Believing \"same cardinality\" is fundamentally defined by counting elements and comparing numbers, missing that it is defined by bijection existence, which only happens to coincide with counting for finite sets | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.cardinality",
+      "title": "INFINITE-SET-ASSUMED-CANNOT-MATCH-PROPER-SUBSET",
+      "content": "| MC-2 | INFINITE-SET-ASSUMED-CANNOT-MATCH-PROPER-SUBSET | Believing (by over-extending finite-set intuition) that an infinite set can never be put in bijection with one of its own proper subsets | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.cardinality",
+      "title": "INFINITY-ASSUMED-SINGLE-SIZE",
+      "content": "| MC-3 | INFINITY-ASSUMED-SINGLE-SIZE | Believing there is only one (or a small fixed number of) size(s) of infinity, missing that the strict power-set inequality generates an unbounded hierarchy of distinct infinite cardinalities | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.cardinality",
+      "title": "Same Cardinality Means \"A Bijection Exists,\" Not \"Count and Compare\" (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Same Cardinality Means \\\"A Bijection Exists,\\\" Not \\\"Count and Compare\\\" (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.cardinality",
+      "title": "Infinite Sets Can Match Their Own Proper Subsets in Size (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Infinite Sets Can Match Their Own Proper Subsets in Size (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.cardinality",
+      "title": "The Power Set Is ALWAYS Strictly Bigger, Generating Infinitely Many Sizes of Infinity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Power Set Is ALWAYS Strictly Bigger, Generating Infinitely Many Sizes of Infinity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.cardinality",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.cardinality",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify (citing `math.found.function-set-theoretic`'s own definitions) that $f(x)=x+1$ is a bijection from $\\{1,2,3,4\\}$ to $\\{2,3,4,5\\}$, confirming both sets have the same cardinality.\n  2. Construct an explicit bijection between $\\mathbb{N}$ and the set of positive odd numbers, and verify it is injective and surjective.\n  3. Using `math.found.power-set`'s own formula, compute $|\\mathcal{P}(A)|$ for a set $A$ with 4 elements, and confirm the strict inequality $|\\mathcal{P}(A)|>|A|$.\n  4. Explain, in your own words, why \"an infinite set can be bijective with a proper subset of itself\" is impossible for finite sets but possible for infinite ones.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"A library is digitizing its infinite (hypothetically unbounded) catalog of book titles, and wants to assign each book a unique 'shelf code' drawn from the natural numbers $\\mathbb{N}$, while also wanting to reserve every EVEN-numbered code for a separate 'featured books' sub-catalog of the SAME total size as the full catalog. (a) Using this lesson's bijection-based definition of cardinality, explain why it is mathematically possible for the 'featured books' sub-catalog (using only even codes) to have the SAME cardinality as the entire catalog, even though it uses only half the available codes. (b) Contrast this directly with what would happen if the catalog were FINITE instead — explain concretely why the same reservation scheme would be impossible to make bijective with the full finite catalog. (c) If the library later wanted to catalog EVERY POSSIBLE SUBSET of collections of books (i.e., every possible reading list drawable from the catalog), explain, citing `math.found.power-set`'s own formula, why this new catalog is guaranteed to be strictly larger than the original book catalog, no matter how large the original already is.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.cardinality",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.power-set` (the power set $\\mathcal{P}(A)$ and its counting formula $|\\mathcal{P}(A)|=2^{|A|}$ for finite $A$) and `math.found.function-set-theoretic` (functions as relations; injective, surjective, and bijective classifications).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.cardinality/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.cardinality",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.power-set` (the $2^{|A|}$ counting formula this concept's strict-inequality argument directly reuses) and `math.found.function-set-theoretic` (the injective/surjective/bijective definitions this concept's same-cardinality definition is built on directly).\n- **Unlocks**: `math.found.countable-set` and `math.found.uncountable-set` (both classify sets using this concept's bijection-based cardinality definition, applied specifically against $\\mathbb{N}$).\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.cardinality.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.laplace-properties-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.laplace-properties",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cce82967e2a6aca72c02381bdb8c4a2772134953a21d59703d9c4f3e3a0acfd9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.laplace-properties.md": "sha256:107a6893a39940d81afd12df4b091c821441afd6f32b2d0b52d8e610bf673b0a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.laplace-properties",
+    "name": "Laplace Transform Properties",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.laplace-transform"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.laplace-properties-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.laplace-properties (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.laplace-properties.md": "sha256:107a6893a39940d81afd12df4b091c821441afd6f32b2d0b52d8e610bf673b0a"
+      },
+      "contentHash": "sha256:5a9096b30d08e9babe1713e4ee8bdfbf0fec31c9a7d117db19603ea1ab1efb1c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-properties.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-properties.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-properties.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-properties.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-properties\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-properties.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-properties.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-properties\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.laplace-properties.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.laplace-properties.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.laplace-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.laplace-properties\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.laplace-properties/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and prove LINEARITY, $\\mathcal{L}\\{af+bg\\}=a\\mathcal{L}\\{f\\}+b\\mathcal{L}\\{g\\}$, directly from the transform's integral definition (linearity of the integral itself), and correctly apply it to compute the transform of a combination of standard functions WITHOUT re-deriving each piece from the integral definition every time.\n- LO2: State and apply the FIRST shifting theorem, $\\mathcal{L}\\{e^{at}f(t)\\}(s)=F(s-a)$ — multiplying by an exponential in the $t$-domain corresponds to SHIFTING the transform's argument in the $s$-domain — proven directly from the integral definition, and correctly use it to compute transforms of functions like $e^{at}\\cos(bt)$ by combining it with an already-known standard transform.\n- LO3: State and apply the SECOND shifting theorem (involving the Heaviside step function $u(t-c)$): $\\mathcal{L}\\{f(t-c)u(t-c)\\}(s)=e^{-cs}F(s)$ — delaying a function in TIME corresponds to multiplying its transform by a decaying exponential in $s$ — and correctly distinguish it from the first shifting theorem (which shifts in $s$, not $t$) by applying each to an appropriately matched example.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-properties",
+      "title": "LINEARITY-ASSUMED-TO-REQUIRE-RE-DERIVATION",
+      "content": "| MC-1 | LINEARITY-ASSUMED-TO-REQUIRE-RE-DERIVATION | Believing applying linearity requires re-deriving each piece's transform from the defining integral, missing that already-known standard transforms can simply be combined directly | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-properties",
+      "title": "FIRST-SHIFTING-THEOREM-ASSUMED-TO-NEED-NEW-INTEGRAL",
+      "content": "| MC-2 | FIRST-SHIFTING-THEOREM-ASSUMED-TO-NEED-NEW-INTEGRAL | Believing computing $\\mathcal{L}\\{e^{at}f(t)\\}(s)$ requires evaluating a brand-new integral, missing the direct $s\\to s-a$ substitution mechanism | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.laplace-properties",
+      "title": "SHIFTING-THEOREMS-CONFLATED",
+      "content": "| MC-3 | SHIFTING-THEOREMS-CONFLATED | Believing the first and second shifting theorems produce the same kind of result (both argument-shifts, or both multiplicative factors), missing their genuinely different structural mechanisms | High |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Linearity Lets You Combine Known Transforms Without Re-Deriving (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Linearity Lets You Combine Known Transforms Without Re-Deriving (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-properties",
+      "title": "The First Shifting Theorem Replaces $s$ with $s-a$ in an Already-Known Transform (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The First Shifting Theorem Replaces $s$ with $s-a$ in an Already-Known Transform (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Shifting in Time (Theorem 2) Is NOT the Same as Shifting in $s$ (Theorem 1) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Shifting in Time (Theorem 2) Is NOT the Same as Shifting in $s$ (Theorem 1) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Using linearity and already-known standard transforms, find $\\mathcal{L}\\{4t^2-7e^{-t}\\}(s)$.\n  2. Using the first shifting theorem and the already-known $\\mathcal{L}\\{\\sin(t)\\}=\\frac1{s^2+1}$, find $\\mathcal{L}\\{e^{-2t}\\sin(t)\\}(s)$.\n  3. Using the second shifting theorem and the already-known $\\mathcal{L}\\{t\\}=\\frac1{s^2}$, find $\\mathcal{L}\\{(t-5)u(t-5)\\}(s)$.\n  4. Explain, in your own words, the structural difference between the first shifting theorem's result and the second shifting theorem's result.\n- **P76 (Transfer Probe, mode = independence — no cross-link target listed in the KG for this concept)**: \"An electrical engineer analyzes a circuit whose driving voltage is $v(t)=e^{-t}\\cos(3t)$ for $t\\ge0$ (a decaying oscillation), and separately, the same engineer models a SECOND circuit where an identical oscillation $\\cos(3(t-4))$ only switches on starting at $t=4$ (delayed, not decaying). (a) Using the first shifting theorem and an already-known standard transform, find $\\mathcal{L}\\{v(t)\\}(s)$ for the first circuit. (b) Using the second shifting theorem, find the Laplace transform of the second (delayed) circuit's driving signal $\\cos(3(t-4))u(t-4)$. (c) Explain precisely why these two scenarios — one an exponentially-decaying oscillation, the other a delayed pure oscillation — require genuinely different shifting theorems, rather than the same one applied twice.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.laplace-transform` (the transform $\\mathcal{L}\\{f\\}(s)=\\int_0^\\infty e^{-st}f(t)\\,dt$; the derivative rule $\\mathcal{L}\\{f'\\}(s)=sF(s)-f(0)$, already derived and verified there — reused, not re-derived, here).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.laplace-properties/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.laplace-properties",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.laplace-transform` (the transform's own integral definition and the already-derived derivative rule this concept's properties build directly on and reuse).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists none for this concept. $P76_{mode}=$ **independence** (no cross-link target to check).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.laplace-properties.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
