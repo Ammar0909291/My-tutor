@@ -1,0 +1,317 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.geometric-proof-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.geometric-proof",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a3d52354734f57901c11b2d9cba04f6f11cde89e5668749b5fbb0ccfe33884dd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.geometric-proof.md": "sha256:575e06359e0fabe301ba2212ce657c994b6539c57c06f523382a2cabb3f128a6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.geometric-proof",
+    "name": "Geometric Proof",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.found.proof",
+      "math.geom.congruent-triangles",
+      "math.geom.parallel-lines"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.geometric-proof-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.geometric-proof (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.geometric-proof.md": "sha256:575e06359e0fabe301ba2212ce657c994b6539c57c06f523382a2cabb3f128a6"
+      },
+      "contentHash": "sha256:23380934684aa595bc02ec09b094a9e43845fa7ff6456cfeeb7153f8a46be910",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-proof.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-proof.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-proof\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-proof.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-proof.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-proof\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-proof.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-proof.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-proof\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-proof.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-proof.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-proof\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.geometric-proof/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write a TWO-COLUMN proof (statement | justification, `math.found.proof`'s own general deductive structure, applied specifically to geometry) that establishes a geometric truth using previously-proved facts — specifically `math.geom.congruent-triangles`'s own SSS/SAS/ASA/AAS/HL criteria and `math.geom.parallel-lines`'s own angle relationships — as the JUSTIFICATIONS for each step.\n- LO2: Recognize that geometric proof CHAINS TOGETHER multiple already-established facts to reach a NEW conclusion — e.g. using `math.geom.parallel-lines`'s angle facts to establish the CONDITIONS a triangle-congruence criterion requires, then invoking that criterion to conclude congruence, then using the congruence to derive a FURTHER new fact — recognizing this multi-step chaining as the genuine work of proof, not merely restating one already-known theorem.\n- LO3 (orientation level — full paragraph-proof and indirect-proof techniques deferred): recognize, without full derivation, that a PARAGRAPH proof conveys the IDENTICAL logical content as a two-column proof, merely in continuous prose rather than tabular form — and that geometric proofs sometimes use INDIRECT reasoning (assume the conclusion false, derive a contradiction), previewing this as an alternative proof STRATEGY, not a different logical standard.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "JUSTIFICATION-COLUMN-ASSUMED-FORMALITY",
+      "content": "| MC-1 | JUSTIFICATION-COLUMN-ASSUMED-FORMALITY | Believing the justification column is mostly a formality where visually obvious statements need no specific backing, missing that every line requires a genuine, checkable justification | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "PROOF-ASSUMED-TO-END-AT-MAIN-CONCLUSION",
+      "content": "| MC-2 | PROOF-ASSUMED-TO-END-AT-MAIN-CONCLUSION | Believing a proof's work ends once the headline conclusion (like congruence) is established, missing that CPCTC can chain it forward to derive further new facts | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "PARAGRAPH-PROOF-ASSUMED-LESS-RIGOROUS",
+      "content": "| MC-3 | PARAGRAPH-PROOF-ASSUMED-LESS-RIGOROUS | Believing paragraph-form proofs are inherently less rigorous than two-column proofs, missing that they carry identical logical content in a different format | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Every Line of a Two-Column Proof Needs a Real Justification (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Every Line of a Two-Column Proof Needs a Real Justification (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Proof Chains Facts to Reach Genuinely New Conclusions (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Proof Chains Facts to Reach Genuinely New Conclusions (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Paragraph Proofs Have the Same Rigor; Indirect Proof Is a Different Valid Strategy (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Paragraph Proofs Have the Same Rigor; Indirect Proof Is a Different Valid Strategy (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Write a two-column proof that, given $\\angle A\\cong\\angle D$, $\\angle B\\cong\\angle E$, and $AB=DE$, $\\triangle ABC\\cong\\triangle DEF$ (identify which congruence criterion applies).\n  2. Using CPCTC, state one additional fact that follows from the congruence established in problem 1, that was not part of the original given information.\n  3. Rewrite your two-column proof from problem 1 as a paragraph proof, verifying every justification is still present.\n  4. Explain, in one or two sentences, why using an indirect proof strategy (assume the conclusion false, derive a contradiction) is not a lower standard of rigor than a direct proof.\n- **P76 (Transfer Probe, mode = independence)**: \"A student is asked to prove that the diagonals of a rectangle are equal in length, given only that a rectangle has four right angles and opposite sides parallel and equal (its defining properties from `math.geom.quadrilateral`). (a) Sketch a two-column proof strategy: identify which triangles you would compare, which congruence criterion (SSS, SAS, ASA, AAS, or HL) you would invoke, and what given/derived facts would justify using it. (b) Explain what additional fact, beyond the congruence itself, CPCTC would let you conclude, and why this is exactly the diagonal-equality result being sought. (c) A classmate claims 'writing this as a paragraph instead of a two-column table would make the proof less rigorous, since it's less formally organized' — evaluate this claim, citing Example 3's direct format comparison.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.proof` (a finite sequence of logically valid steps establishing truth with certainty, from axioms/prior results), `math.geom.congruent-triangles` (SSS, SAS, ASA, AAS, HL criteria), and `math.geom.parallel-lines` (corresponding/alternate-interior/co-interior angle relationships from a transversal).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-proof/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.geometric-proof",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.proof` (the general deductive-sequence structure this concept's two-column format makes explicit for geometry), `math.geom.congruent-triangles` (the SSS/SAS/ASA/AAS/HL criteria used as justifications), and `math.geom.parallel-lines` (the angle relationships used as justifications and to establish congruence criteria's hypotheses).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: none listed in the KG for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-proof.md",
+        "startLine": 102,
+        "endLine": 108
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

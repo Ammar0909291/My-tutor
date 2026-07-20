@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.wronskian-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.wronskian",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:85bebad72a28283641a7bf05b9b6af8e505cceec45b29c977497fa911f915c71",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.wronskian.md": "sha256:7aa772a4844e00a2977b95ab2022678fc76061ce0f9b2abebda4c1d9efa44bb0"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.wronskian",
+    "name": "Wronskian",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.de.second-order-homogeneous",
+      "math.linalg.determinant"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.wronskian-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.wronskian (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.wronskian.md": "sha256:7aa772a4844e00a2977b95ab2022678fc76061ce0f9b2abebda4c1d9efa44bb0"
+      },
+      "contentHash": "sha256:962993e3dd1551c325a4e9e7c219fbcff472a9cf80abff42e15ccbdb6f0ffac4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.wronskian.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wronskian.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wronskian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wronskian\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wronskian.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wronskian.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wronskian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wronskian\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wronskian.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wronskian.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wronskian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wronskian\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.wronskian.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.wronskian.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.wronskian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.wronskian\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.wronskian/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.de.wronskian",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize $W(y_1,y_2)=y_1y_2'-y_1'y_2$ as EXACTLY `math.linalg.determinant`'s own determinant formula, applied to the $2\\times2$ MATRIX $\\begin{pmatrix}y_1&y_2\\\\y_1'&y_2'\\end{pmatrix}$ — the Wronskian is not a separate new formula to memorize, but a determinant computation you already know, applied to a specifically constructed matrix of functions and their derivatives.\n- LO2: Recognize `math.de.second-order-homogeneous`'s own \"check the Wronskian at one point\" independence test as a DIRECT instance of `math.linalg.linear-independence`'s general definition — $c_1y_1+c_2y_2=0$ (with derivatives $c_1y_1'+c_2y_2'=0$) forcing $c_1=c_2=0$ is EXACTLY the linear-independence condition, and the Wronskian's nonvanishing is what guarantees this linear system has ONLY the trivial solution.\n- LO3 (orientation level — full Abel's theorem derivation deferred): recognize, without full derivation, Abel's theorem $W(x)=W(x_0)\\exp\\left(-\\int P\\,dx\\right)$ as a GENUINELY POWERFUL shortcut — the Wronskian's ENTIRE behavior (as a function of $x$) can be computed from the ODE's own coefficient $P(x)$ ALONE, without ever knowing $y_1,y_2$ explicitly, previewing why this makes the \"check one point suffices\" fact from `math.de.second-order-homogeneous` unsurprising: an exponential function is either NEVER zero or IDENTICALLY zero.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.wronskian",
+      "title": "WRONSKIAN-ASSUMED-INDEPENDENT-FORMULA",
+      "content": "| MC-1 | WRONSKIAN-ASSUMED-INDEPENDENT-FORMULA | Believing the Wronskian formula is an independent new formula unrelated to `math.linalg.determinant`'s own determinant computation, missing that it IS a $2\\times2$ determinant | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.wronskian",
+      "title": "WRONSKIAN-TEST-ASSUMED-AD-HOC",
+      "content": "| MC-2 | WRONSKIAN-TEST-ASSUMED-AD-HOC | Believing the Wronskian's role as an independence test is a separate, ad hoc fact specific to differential equations, missing that it directly IS `math.linalg.linear-independence`'s own condition | High |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.wronskian",
+      "title": "WRONSKIAN-FORM-ASSUMED-TO-REQUIRE-SOLVING-FIRST",
+      "content": "| MC-3 | WRONSKIAN-FORM-ASSUMED-TO-REQUIRE-SOLVING-FIRST | Believing computing the Wronskian's functional form always requires first solving the ODE explicitly, missing that Abel's theorem computes it directly from $P(x)$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wronskian",
+      "title": "The Wronskian Is a Determinant You Already Know How to Compute (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Wronskian Is a Determinant You Already Know How to Compute (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wronskian",
+      "title": "Wronskian Nonvanishing Is Linear Independence, Made Computable (Primitive P28: Conflict Evidence)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Wronskian Nonvanishing Is Linear Independence, Made Computable (Primitive P28: Conflict Evidence)\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wronskian",
+      "title": "Abel's Theorem Predicts the Wronskian Without Solving the ODE (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Abel's Theorem Predicts the Wronskian Without Solving the ODE (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.wronskian",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.wronskian",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute the Wronskian of $y_1=\\cos(2x)$, $y_2=\\sin(2x)$ as a $2\\times2$ determinant, showing the matrix explicitly.\n  2. Using your answer to problem 1, explain (citing `math.linalg.linear-independence`'s own condition) why $y_1,y_2$ are linearly independent.\n  3. For the ODE $y''+5y'+6y=0$ (so $P(x)=5$), use Abel's theorem to predict the Wronskian's functional form, given $W(0)=1$.\n  4. Explain, in one or two sentences, why Abel's theorem's exponential form directly explains why checking the Wronskian at just one point suffices.\n- **P76 (Transfer Probe, mode = cross-link probe engaging `math.linalg.linear-independence`)**: \"A control-systems engineer needs to verify that two candidate solutions $y_1,y_2$ to a homogeneous ODE $y''+P(x)y'+Q(x)y=0$ (with $P(x)=2x$) genuinely form a fundamental set, but the solutions themselves are only known numerically (not in closed form) except at $x=0$, where $W(0)=3$. (a) Using Abel's theorem, predict $W(x)$'s functional form for this ODE, without needing $y_1,y_2$'s explicit formulas. (b) Explain, citing `math.linalg.linear-independence`'s own condition and `math.linalg.determinant`'s invertibility criterion, why a nonzero Wronskian at $x=0$ genuinely certifies linear independence, not merely a suggestive numeric coincidence. (c) Explain why the engineer does NOT need to separately check the Wronskian at every other value of $x$ to be confident $y_1,y_2$ remain independent throughout the domain.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed primitive's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.wronskian",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.de.second-order-homogeneous` (the Wronskian's role as a one-point-suffices independence test, and the fundamental-set concept) and `math.linalg.determinant` (the determinant as a scalar function satisfying multilinearity/alternating/normalization, with $\\det(A)\\ne0$ iff $A$ invertible).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.de.wronskian/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.wronskian",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.de.second-order-homogeneous` (the Wronskian's already-established one-point-suffices independence test and fundamental-set concept, which this concept now explains and generalizes) and `math.linalg.determinant` (the general determinant/invertibility theory the Wronskian directly instantiates).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.linalg.linear-independence`, checked via `ls docs/curriculum/blueprints/` and confirmed ALREADY authored. $P76_{mode}=$ **cross-link probe**, engaging `math.linalg.linear-independence`'s own general condition directly in Component 3's derivation and the P76 transfer probe.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.wronskian.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
